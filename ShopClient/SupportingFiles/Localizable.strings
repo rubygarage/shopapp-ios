@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  ShopClient
+
+  Created by Evgeniy Antonov on 9/20/17.
+  Copyright © 2017 Evgeniy Antonov. All rights reserved.
+*/
+
+"Menu.Home" = "Home";
+"Menu.Categories" = "Categories";
+
+"Cell.LoadMore" = "Load more";
+
+"ControllerTitle.Home" = "Home";
+"ControllerTitle.LastArrivals" = "Last Arrivals";
+"ControllerTitle.NewInBlog" = "New in Blog";

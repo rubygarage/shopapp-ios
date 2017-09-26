@@ -1,0 +1,6 @@
+framework module MobileBuySDK {
+  umbrella header "Mobile-Buy-SDK-umbrella.h"
+
+  export *
+  module * { export * }
+}

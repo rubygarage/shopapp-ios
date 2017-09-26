@@ -1,0 +1,6 @@
+framework module UIScrollView_InfiniteScroll {
+  umbrella header "UIScrollView-InfiniteScroll-umbrella.h"
+
+  export *
+  module * { export * }
+}
