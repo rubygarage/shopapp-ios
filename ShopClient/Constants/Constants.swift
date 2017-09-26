@@ -20,6 +20,7 @@ struct ControllerIdentifier {
     static let policy = "PolicyControllerIdentifier"
     static let lastArrivals = "LastArrivalsControllerIdentifier"
     static let articlesList = "ArticlesListControllerIdentifier"
+    static let articleDetails = "ArticleDetailsControllerIdentifier"
 }
 
 struct ImageName {

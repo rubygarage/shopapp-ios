@@ -45,4 +45,8 @@ extension UIStoryboard {
     class func articlesList() -> UIStoryboard {
         return UIStoryboard(name: "ArticlesList", bundle: nil)
     }
+    
+    class func articleDetails() -> UIStoryboard {
+        return UIStoryboard(name: "ArticleDetails", bundle: nil)
+    }
 }

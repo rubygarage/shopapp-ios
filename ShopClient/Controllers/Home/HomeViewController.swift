@@ -110,7 +110,8 @@ class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTab
     // MARK: - HomeTableDelegateProtocol
     func didSelectArticle(at index: Int) {
         if index < newInBlogArticles.count {
-            // TODO:
+            let articleId = newInBlogArticles[index].id
+            pushArticleDetailsController(with: articleId)
         }
     }
     

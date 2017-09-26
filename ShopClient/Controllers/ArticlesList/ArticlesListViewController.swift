@@ -108,4 +108,10 @@ class ArticlesListViewController: UIViewController, ArticlesListTableDataSourceP
     }
     
     // MARK: - ArticlesListTableDelegateProtocol
+    func didSelectItem(at index: Int) {
+        if index < articles.count {
+            let articleId = articles[index].id
+            pushArticleDetailsController(with: articleId)
+        }
+    }
 }

@@ -39,6 +39,13 @@ extension UIViewController {
         navigationController?.pushViewController(policyController, animated: false)
     }
     
+    func pushArticleDetailsController(with articleId: String) {
+        let articleDetailsController = UIStoryboard.articleDetails().instantiateViewController(withIdentifier: ControllerIdentifier.articleDetails) as! ArticleDetailsViewController
+        articleDetailsController.articleId = articleId
+        
+        navigationController?.pushViewController(articleDetailsController, animated: true)
+    }
+    
     // MARK: - set
     func setCategoryController(with categoryId: String, title: String) {
         let categoryController = UIStoryboard.category().instantiateViewController(withIdentifier: ControllerIdentifier.category) as! CategoryViewController
