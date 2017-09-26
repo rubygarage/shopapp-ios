@@ -25,4 +25,5 @@ struct ControllerIdentifier {
 
 struct ImageName {
     static let home = "home"
+    static let sort = "sort"
 }

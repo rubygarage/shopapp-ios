@@ -23,6 +23,7 @@ class CategoryViewController: GridCollectionViewController {
     // MARK: - setup
     private func setupViews() {
         title = categoryTitle
+        addRightBarButton(with: ImageName.sort, action: #selector(CategoryViewController.sortTapHandler))
     }
     
     // MARK: - private
@@ -52,7 +53,12 @@ class CategoryViewController: GridCollectionViewController {
         }
     }
     
-    // MARK: - ovarriding
+    // MARK: - actions
+    func sortTapHandler() {
+        
+    }
+    
+    // MARK: - overriding
     override func pullToRefreshHandler() {
         paginationValue = nil
         loadRemoteData()

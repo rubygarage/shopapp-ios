@@ -79,6 +79,7 @@
 		61D5617A1F741B6200233DA3 /* ImagesCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D561771F741B6200233DA3 /* ImagesCarouselViewController.swift */; };
 		61D5617B1F741B6200233DA3 /* ImagesCarouselCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D561781F741B6200233DA3 /* ImagesCarouselCollectionDataSource.swift */; };
 		61D5617C1F741B6200233DA3 /* ImagesCarouselCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D561791F741B6200233DA3 /* ImagesCarouselCollectionDelegate.swift */; };
+		61D7A2861F7A9FBF00031093 /* UIViewControllerBarButtonItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D7A2851F7A9FBF00031093 /* UIViewControllerBarButtonItems.swift */; };
 		61DA4B881F614BBC00444F64 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DA4B871F614BBC00444F64 /* SearchViewController.swift */; };
 		61E4E6341F56C868001C6E01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4E6331F56C868001C6E01 /* AppDelegate.swift */; };
 		61E4E6391F56C868001C6E01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61E4E6371F56C868001C6E01 /* Main.storyboard */; };
@@ -175,6 +176,7 @@
 		61D561771F741B6200233DA3 /* ImagesCarouselViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesCarouselViewController.swift; sourceTree = "<group>"; };
 		61D561781F741B6200233DA3 /* ImagesCarouselCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesCarouselCollectionDataSource.swift; sourceTree = "<group>"; };
 		61D561791F741B6200233DA3 /* ImagesCarouselCollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesCarouselCollectionDelegate.swift; sourceTree = "<group>"; };
+		61D7A2851F7A9FBF00031093 /* UIViewControllerBarButtonItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerBarButtonItems.swift; sourceTree = "<group>"; };
 		61DA4B871F614BBC00444F64 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		61E4E6301F56C868001C6E01 /* ShopClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E4E6331F56C868001C6E01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 				61ED88E91F7112FD006BDA79 /* UIViewControllerImageViewer.swift */,
 				61CEAA6D1F5ED16E0016FBD7 /* UIViewControllerRoutes.swift */,
 				61FDBE441F6FD4C400E7C729 /* UIViewControllerSideMenu.swift */,
+				61D7A2851F7A9FBF00031093 /* UIViewControllerBarButtonItems.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -770,6 +773,7 @@
 				612C0DEF1F62FF72003F37BD /* ShopifyCategoryDetailsAdapter.swift in Sources */,
 				61CEAA661F5E982A0016FBD7 /* Constants.swift in Sources */,
 				614142C11F6AEF0400379BB9 /* HomeViewController.swift in Sources */,
+				61D7A2861F7A9FBF00031093 /* UIViewControllerBarButtonItems.swift in Sources */,
 				61ED88FB1F71721D006BDA79 /* GridCollectionDelegate.swift in Sources */,
 				612DE2591F6C3C1E00582B58 /* ShopifyArticleAdapter.swift in Sources */,
 				61FDBE4E1F6FE4EB00E7C729 /* MenuCategoryTableViewCell.swift in Sources */,
