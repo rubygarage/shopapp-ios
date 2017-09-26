@@ -7,13 +7,27 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ArticleDetailsViewController: UIViewController {
-    var articleId = String()
+    @IBOutlet weak var articleImageView: UIImageView!
+    @IBOutlet weak var articleTitleLabel: UILabel!
+    @IBOutlet weak var authorNameLabel: UILabel!
+    @IBOutlet weak var articleContentLabel: UILabel!
+    
+    var article: Article?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        populateViews()
+    }
+    
+    func populateViews() {
+        let imageUrl = URL(string: article?.image?.src ?? String())
+        articleImageView.sd_setImage(with: imageUrl)
+        articleTitleLabel.text = article?.title
+        authorNameLabel.text = article?.author?.fullName
+        articleContentLabel.text = article?.content
     }
 }
