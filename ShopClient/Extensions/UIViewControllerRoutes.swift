@@ -70,6 +70,18 @@ extension UIViewController {
         configureChildViewController(childController: detailImagesController, onView: onView)
     }
     
+    // MARK: - present
+    func showCategorySortingController(with items:[String], selectedItem: String, delegate: SortModalControllerProtocol?) {
+        let sortController = UIStoryboard.sortModal().instantiateViewController(withIdentifier: ControllerIdentifier.sortModal) as! SortModalViewController
+        sortController.sortItems = items
+        sortController.selectedSortItem = selectedItem
+        sortController.delegate = delegate
+        
+        sortController.modalPresentationStyle = .overCurrentContext
+        sortController.modalTransitionStyle = .crossDissolve
+        present(sortController, animated: true)
+    }
+    
     // MARK: - private
     private func pushController(with storyBoard: UIStoryboard, identifier: String, animated: Bool = true) {
         let controller = storyBoard.instantiateViewController(withIdentifier: identifier)

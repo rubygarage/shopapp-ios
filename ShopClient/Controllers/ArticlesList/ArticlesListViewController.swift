@@ -69,7 +69,6 @@ class ArticlesListViewController: UIViewController, ArticlesListTableDataSourceP
             }
             self?.canLoadMore = articles?.count ?? 0 == kItemsPerPage
             self?.stopLoadAnimating()
-//            self?.tableView.reloadData()
         }
     }
     

@@ -8,10 +8,11 @@
 
 import UIKit
 
-class CategoryViewController: GridCollectionViewController {
+class CategoryViewController: GridCollectionViewController, SortModalControllerProtocol {
     var categoryId = String()
     var categoryTitle = String()
     var category: Category?
+    var selectedSortingValue = SortingValue.createdAt
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,8 @@ class CategoryViewController: GridCollectionViewController {
     
     // MARK: - private
     private func loadRemoteData() {
-        ShopCoreAPI.shared.getCategoryDetails(id: categoryId, paginationValue: paginationValue) { [weak self] (result, error) in
+        let reverse = selectedSortingValue == .createdAt
+        ShopCoreAPI.shared.getCategoryDetails(id: categoryId, paginationValue: paginationValue, sortBy: selectedSortingValue, reverse: reverse) { [weak self] (result, error) in
             self?.stopLoadAnimating()
             if let category = result {
                 self?.updateData(category: category)
@@ -55,7 +57,8 @@ class CategoryViewController: GridCollectionViewController {
     
     // MARK: - actions
     func sortTapHandler() {
-        
+        let selectedValueString = SortingValue.allValues[selectedSortingValue.rawValue]
+        showCategorySortingController(with: SortingValue.allValues, selectedItem: selectedValueString, delegate: self)
     }
     
     // MARK: - overriding
@@ -67,5 +70,16 @@ class CategoryViewController: GridCollectionViewController {
     override func infinityScrollHandler() {
         paginationValue = products.last?.paginationValue
         loadRemoteData()
+    }
+    
+    // MARK: - SortModalControllerProtocol
+    func didSelect(item: String) {
+        if let index = SortingValue.allValues.index(of: item) {
+            selectedSortingValue = SortingValue(rawValue: index) ?? selectedSortingValue
+            paginationValue = nil
+            let indexPath = IndexPath(row: index, section: 0)
+            collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+            loadRemoteData()
+        }
     }
 }

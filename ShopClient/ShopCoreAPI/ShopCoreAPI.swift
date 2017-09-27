@@ -40,8 +40,8 @@ class ShopCoreAPI {
         shopAPI?.getCategoryList(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, reverse: reverse, callback: callback)
     }
     
-    func getCategoryDetails(id: String, perPage: Int = kItemsPerPage, paginationValue: Any? = nil, callback: @escaping ApiCallback<Category>) {
-        shopAPI?.getCategoryDetails(id: id, perPage: perPage, paginationValue: paginationValue, callback: callback)
+    func getCategoryDetails(id: String, perPage: Int = kItemsPerPage, paginationValue: Any? = nil, sortBy: SortingValue? = nil, reverse: Bool = false, callback: @escaping ApiCallback<Category>) {
+        shopAPI?.getCategoryDetails(id: id, perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, reverse: reverse, callback: callback)
     }
     
     func getArticleList(perPage: Int = kItemsPerPage, paginationValue: Any? = nil, sortBy: SortingValue? = nil, reverse: Bool = false, callback: @escaping ApiCallback<[Article]>) {
