@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ArticlesListTableDelegateProtocol {
-    // TODO:
+    func didSelectItem(at index: Int)
 }
 
 class ArticlesListTableDelegate: NSObject, UITableViewDelegate {
@@ -24,5 +24,9 @@ class ArticlesListTableDelegate: NSObject, UITableViewDelegate {
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return kRowHeightHomeSectionNewInBlog
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.didSelectItem(at: indexPath.row)
     }
 }
