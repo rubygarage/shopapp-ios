@@ -21,8 +21,10 @@ struct ControllerIdentifier {
     static let lastArrivals = "LastArrivalsControllerIdentifier"
     static let articlesList = "ArticlesListControllerIdentifier"
     static let articleDetails = "ArticleDetailsControllerIdentifier"
+    static let sortModal = "SortModalControllerIdentifier"
 }
 
 struct ImageName {
     static let home = "home"
+    static let sort = "sort"
 }

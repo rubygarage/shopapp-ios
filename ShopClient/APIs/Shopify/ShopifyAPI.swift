@@ -95,7 +95,7 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
     
     // MARK: - categories
     func getCategoryList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping ApiCallback<[Category]>) {
-        let query = categoryListQuery(perPage: perPage)
+        let query = categoryListQuery(perPage: perPage, after: paginationValue, sortBy: sortBy, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             let currencyCode = response?.shop.paymentSettings.currencyCode.rawValue ?? String()
             var categories = [Category]()
@@ -109,8 +109,8 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
         task?.resume()
     }
     
-    func getCategoryDetails(id: String, perPage: Int, paginationValue: Any?, callback: @escaping ApiCallback<Category>) {
-        let query = categoryDetailsQuery(id: id, perPage: perPage, after: paginationValue)
+    func getCategoryDetails(id: String, perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping ApiCallback<Category>) {
+        let query = categoryDetailsQuery(id: id, perPage: perPage, after: paginationValue, sortBy: sortBy, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             let categoryNode = response?.node as! Storefront.Collection
             let currencyCode = response?.shop.paymentSettings.currencyCode.rawValue ?? String()
@@ -136,18 +136,37 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
     }
     
     // MARK: - private
-    func productSortValue(for key: SortingValue) -> Storefront.ProductSortKeys {
-        switch key {
+    func productSortValue(for key: SortingValue?) -> Storefront.ProductSortKeys? {
+        if key == nil {
+            return nil
+        }
+        switch key! {
         case SortingValue.createdAt:
             return Storefront.ProductSortKeys.createdAt
+        case SortingValue.name:
+            return Storefront.ProductSortKeys.title
         default:
-            return Storefront.ProductSortKeys.id
+            return nil
+        }
+    }
+    
+    func productCollectionSortValue(for key: SortingValue?) -> Storefront.ProductCollectionSortKeys? {
+        if key == nil {
+            return nil
+        }
+        switch key! {
+        case SortingValue.createdAt:
+            return Storefront.ProductCollectionSortKeys.created
+        case SortingValue.name:
+            return Storefront.ProductCollectionSortKeys.title
+        default:
+            return nil
         }
     }
     
     // MARK: - queries building
     private func productsListQuery(with perPage: Int, after: Any?, searchPhrase: String?, sortBy: SortingValue?, reverse: Bool) -> Storefront.QueryRootQuery {
-        let sortKey = sortBy != nil ? productSortValue(for: sortBy!) : nil
+        let sortKey = productSortValue(for: sortBy)
         
         return Storefront.buildQuery { $0
             .shop { $0
@@ -175,18 +194,18 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
         })
     }
     
-    private func categoryListQuery(perPage: Int) -> Storefront.QueryRootQuery {
+    private func categoryListQuery(perPage: Int, after: Any?, sortBy: SortingValue?, reverse: Bool) -> Storefront.QueryRootQuery {
         return Storefront.buildQuery({ $0
             .shop({ $0
                 .paymentSettings({ $0
                     .currencyCode()
                 })
-                .collections(first: Int32(perPage), self.collectionConnectionQuery())
+                .collections(first: Int32(perPage), self.collectionConnectionQuery(perPage: perPage, after: after, sortBy: sortBy, reverse: reverse))
             })
         })
     }
     
-    private func categoryDetailsQuery(id: String, perPage: Int, after: Any?) -> Storefront.QueryRootQuery {
+    private func categoryDetailsQuery(id: String, perPage: Int, after: Any?, sortBy: SortingValue?, reverse: Bool) -> Storefront.QueryRootQuery {
         let nodeId = GraphQL.ID(rawValue: id)
         return Storefront.buildQuery { $0
             .shop({ $0
@@ -195,7 +214,7 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
                 })
             })
             .node(id: nodeId, { $0
-                .onCollection(subfields: self.collectionQuery(perPage: perPage, after: after))
+                .onCollection(subfields: self.collectionQuery(perPage: perPage, after: after, sortBy: sortBy, reverse: reverse))
             })
         }
     }
@@ -265,24 +284,25 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
         }
     }
     
-    private func collectionConnectionQuery() -> ((Storefront.CollectionConnectionQuery) -> ()) {
+    private func collectionConnectionQuery(perPage: Int, after: Any?, sortBy: SortingValue?, reverse: Bool) -> ((Storefront.CollectionConnectionQuery) -> ()) {
         return { (query: Storefront.CollectionConnectionQuery) in
             query.edges({ $0
                 .cursor()
-                .node(self.collectionQuery())
+                .node(self.collectionQuery(perPage: perPage, after: after, sortBy: sortBy, reverse: reverse))
             })
             
         }
     }
     
-    private func collectionQuery(perPage: Int = 0, after: Any? = nil) -> ((Storefront.CollectionQuery) -> ()) {
+    private func collectionQuery(perPage: Int = 0, after: Any? = nil, sortBy: SortingValue?, reverse: Bool) -> ((Storefront.CollectionQuery) -> ()) {
+        let sortKey = productCollectionSortValue(for: sortBy)
         return { (query: Storefront.CollectionQuery) in
             query.id()
             query.title()
             query.description()
             query.updatedAt()
             query.image(self.imageQuery())
-            query.products(first: Int32(perPage), after: after as? String, self.productConnectionQuery())
+            query.products(first: Int32(perPage), after: after as? String, sortKey: sortKey, reverse: reverse, self.productConnectionQuery())
             if perPage > 0 {
                 query.descriptionHtml()
             }

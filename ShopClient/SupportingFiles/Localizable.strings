@@ -14,3 +14,10 @@
 "ControllerTitle.Home" = "Home";
 "ControllerTitle.LastArrivals" = "Last Arrivals";
 "ControllerTitle.NewInBlog" = "New in Blog";
+
+"Label.SortBy" = "Sort by:";
+
+"Button.Sort" = "Sort";
+
+"SortingValue.Name" = "By name";
+"SortingValue.CreatedAt" = "By date";
