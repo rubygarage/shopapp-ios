@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Detail View Controller-->
+        <!--Product Details View Controller-->
         <scene sceneID="CQt-SF-VPC">
             <objects>
-                <viewController storyboardIdentifier="DetailControllerIdentifier" id="vhK-ei-bef" customClass="DetailViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductsDetailControllerIdentifier" id="vhK-ei-bef" customClass="ProductDetailsViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5Bi-oB-lMb"/>
                         <viewControllerLayoutGuide type="bottom" id="giN-Qj-SMN"/>

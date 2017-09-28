@@ -25,11 +25,11 @@ extension UIViewController {
     }
     
     func pushDetailController(with product: Product) {
-        let detaillController = UIStoryboard.productDetails().instantiateViewController(withIdentifier: ControllerIdentifier.detail) as! DetailViewController
-        detaillController.productId = product.id
-        detaillController.product = product
+        let productDetaillsController = UIStoryboard.productDetails().instantiateViewController(withIdentifier: ControllerIdentifier.productDetails) as! ProductDetailsViewController
+        productDetaillsController.productId = product.id
+        productDetaillsController.product = product
         
-        navigationController?.pushViewController(detaillController, animated: true)
+        navigationController?.pushViewController(productDetaillsController, animated: true)
     }
     
     func pushPolicyController(with policy: Policy) {

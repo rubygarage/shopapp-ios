@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, VariantsPickerProtocol, ImagesCarouselViewControllerProtocol {
+class ProductDetailsViewController: UIViewController, VariantsPickerProtocol, ImagesCarouselViewControllerProtocol {
     @IBOutlet weak var imagesContainerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
