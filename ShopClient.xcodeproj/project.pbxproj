@@ -28,9 +28,6 @@
 		6133392D1F6957AF0063A754 /* DetailsImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6133392B1F6957AF0063A754 /* DetailsImagesCollectionViewCell.swift */; };
 		6133392E1F6957AF0063A754 /* DetailsImagesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6133392C1F6957AF0063A754 /* DetailsImagesCollectionViewCell.xib */; };
 		613339331F695A820063A754 /* UIViewControllerChilds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613339321F695A820063A754 /* UIViewControllerChilds.swift */; };
-		614142BA1F6AAF6900379BB9 /* VariantsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614142B91F6AAF6900379BB9 /* VariantsPicker.swift */; };
-		614142BC1F6AB69A00379BB9 /* VariantPickerRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614142BB1F6AB69A00379BB9 /* VariantPickerRowView.swift */; };
-		614142BE1F6AB6A800379BB9 /* VariantPickerRowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 614142BD1F6AB6A800379BB9 /* VariantPickerRowView.xib */; };
 		614142C11F6AEF0400379BB9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614142C01F6AEF0400379BB9 /* HomeViewController.swift */; };
 		614142C51F6AF15B00379BB9 /* LastArrivalsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614142C31F6AF15B00379BB9 /* LastArrivalsTableViewCell.swift */; };
 		614142C61F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 614142C41F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib */; };
@@ -135,9 +132,6 @@
 		6133392B1F6957AF0063A754 /* DetailsImagesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsImagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		6133392C1F6957AF0063A754 /* DetailsImagesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailsImagesCollectionViewCell.xib; sourceTree = "<group>"; };
 		613339321F695A820063A754 /* UIViewControllerChilds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerChilds.swift; sourceTree = "<group>"; };
-		614142B91F6AAF6900379BB9 /* VariantsPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariantsPicker.swift; sourceTree = "<group>"; };
-		614142BB1F6AB69A00379BB9 /* VariantPickerRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariantPickerRowView.swift; sourceTree = "<group>"; };
-		614142BD1F6AB6A800379BB9 /* VariantPickerRowView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VariantPickerRowView.xib; sourceTree = "<group>"; };
 		614142C01F6AEF0400379BB9 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		614142C31F6AF15B00379BB9 /* LastArrivalsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastArrivalsTableViewCell.swift; sourceTree = "<group>"; };
 		614142C41F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LastArrivalsTableViewCell.xib; sourceTree = "<group>"; };
@@ -334,7 +328,6 @@
 				6180ABFC1F729CD1007768F2 /* MenuDefaultTableViewCell */,
 				61B5BEE21F75220A00E075B7 /* MenuImageTableViewCell */,
 				61AAB92D1F7BD05E00CD32D3 /* SortModalTableViewCell */,
-				614142B81F6AAF3100379BB9 /* VariantsPickerView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -354,16 +347,6 @@
 				6133392C1F6957AF0063A754 /* DetailsImagesCollectionViewCell.xib */,
 			);
 			path = DetailsImagesCollectionCell;
-			sourceTree = "<group>";
-		};
-		614142B81F6AAF3100379BB9 /* VariantsPickerView */ = {
-			isa = PBXGroup;
-			children = (
-				614142B91F6AAF6900379BB9 /* VariantsPicker.swift */,
-				614142BB1F6AB69A00379BB9 /* VariantPickerRowView.swift */,
-				614142BD1F6AB6A800379BB9 /* VariantPickerRowView.xib */,
-			);
-			path = VariantsPickerView;
 			sourceTree = "<group>";
 		};
 		614142BF1F6AEEEA00379BB9 /* Home */ = {
@@ -748,7 +731,6 @@
 				6106C6C81F7A40A600E87486 /* ArticleDetails.storyboard in Resources */,
 				61B5BEE11F7505F700E075B7 /* ArticleLoadMoreCell.xib in Resources */,
 				61E4E63E1F56C868001C6E01 /* LaunchScreen.storyboard in Resources */,
-				614142BE1F6AB6A800379BB9 /* VariantPickerRowView.xib in Resources */,
 				61E4E63B1F56C868001C6E01 /* Assets.xcassets in Resources */,
 				6180AC031F72CD14007768F2 /* Localizable.strings in Resources */,
 				61D561751F7419BD00233DA3 /* ImagesCarousel.storyboard in Resources */,
@@ -870,7 +852,6 @@
 				6152B1241F7914E800045A42 /* ArticlesListViewController.swift in Sources */,
 				614142C51F6AF15B00379BB9 /* LastArrivalsTableViewCell.swift in Sources */,
 				61B5BEE51F75223400E075B7 /* MenuImageTableViewCell.swift in Sources */,
-				614142BA1F6AAF6900379BB9 /* VariantsPicker.swift in Sources */,
 				61FDBE4A1F6FD71E00E7C729 /* MenuViewController.swift in Sources */,
 				61DA4B881F614BBC00444F64 /* SearchViewController.swift in Sources */,
 				61ED88F31F7170C9006BDA79 /* GridCollectionViewCell.swift in Sources */,
@@ -899,7 +880,6 @@
 				61934FBA1F62C76000A42853 /* ShopifyShopAdapter.swift in Sources */,
 				611EF3521F582A76001B8B9C /* Product.swift in Sources */,
 				61B5BEE01F7505F700E075B7 /* ArticleLoadMoreCell.swift in Sources */,
-				614142BC1F6AB69A00379BB9 /* VariantPickerRowView.swift in Sources */,
 				61ED88F91F71720B006BDA79 /* GridCollectionDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

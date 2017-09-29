@@ -8,18 +8,16 @@
 
 import UIKit
 
-class ProductDetailsViewController: UIViewController, VariantsPickerProtocol, ImagesCarouselViewControllerProtocol {
+class ProductDetailsViewController: UIViewController, ImagesCarouselViewControllerProtocol {
     @IBOutlet weak var imagesContainerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var variantsTextField: UITextField!
     @IBOutlet weak var optionsContainerView: UIView!
     
     var productId = String()
     var product: Product?
     var selectedVariant: ProductVariant?
-    var variantsPicker: VariantsPicker?
     var detailImagesController: ImagesCarouselViewController?
     var showingImageIndex = 0
 
@@ -46,18 +44,12 @@ class ProductDetailsViewController: UIViewController, VariantsPickerProtocol, Im
     
     private func populateViews() {
         if product != nil {
-            setupVariantsPickerView(with: product!)
             populateImages(with: product!)
             populateTitle(with: product!)
             populateDescription(with: product!)
             updateVariantViews()
             populateOptionsView()
         }
-    }
-    
-    private func setupVariantsPickerView(with product: Product) {
-        let variants = product.productDetails?.variants ?? [ProductVariant]()
-        variantsPicker = VariantsPicker(variants: variants, currency: product.currency, textField: variantsTextField, delegate: self)
     }
     
     private func populateImages(with product: Product) {
@@ -78,24 +70,12 @@ class ProductDetailsViewController: UIViewController, VariantsPickerProtocol, Im
         priceLabel.text = "\(selectedVariant?.price ?? String()) \(product?.currency ?? String())"
     }
     
-    private func populateVariantTitle() {
-        variantsTextField.text = selectedVariant?.title
-    }
-    
     private func updateVariantViews() {
         populatePrice()
-        populateVariantTitle()
     }
     
     private func populateOptionsView() {
         openProductOptionsController(onView: optionsContainerView)
-    }
-    
-    // MARK: - actions
-    @IBAction func variantsTapped(_ sender: UITapGestureRecognizer) {
-        if product?.productDetails?.variants?.count ?? 1 > 1 {
-            variantsTextField.becomeFirstResponder()
-        }
     }
     
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
