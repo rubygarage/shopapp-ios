@@ -70,6 +70,12 @@ extension UIViewController {
         configureChildViewController(childController: detailImagesController, onView: onView)
     }
     
+    func openProductOptionsController(onView: UIView) {
+        let optionsController = UIStoryboard.productOptions().instantiateViewController(withIdentifier: ControllerIdentifier.productOptions) as! ProductOptionsViewController
+        
+        configureChildViewController(childController: optionsController, onView: onView)
+    }
+    
     // MARK: - present
     func showCategorySortingController(with items:[String], selectedItem: String, delegate: SortModalControllerProtocol?) {
         let sortController = UIStoryboard.sortModal().instantiateViewController(withIdentifier: ControllerIdentifier.sortModal) as! SortModalViewController

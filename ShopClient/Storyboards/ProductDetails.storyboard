@@ -144,6 +144,13 @@
                                             <constraint firstItem="LjM-bx-JXc" firstAttribute="trailing" secondItem="5E4-4a-9iD" secondAttribute="trailing" constant="10" id="ycg-ZR-DFV"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vip-9b-SzM">
+                                        <rect key="frame" x="0.0" y="531" width="375" height="120"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="120" id="9bc-kC-Q4Y"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -151,8 +158,10 @@
                                     <constraint firstItem="yqU-43-yMg" firstAttribute="top" secondItem="EZc-Ym-7Cu" secondAttribute="bottom" id="2B4-vL-MdU"/>
                                     <constraint firstAttribute="trailing" secondItem="7v9-m0-YD1" secondAttribute="trailing" id="3n1-tD-Tf0"/>
                                     <constraint firstItem="I3B-zj-5cW" firstAttribute="top" secondItem="5bD-53-mHN" secondAttribute="top" id="7b4-7w-SIT"/>
+                                    <constraint firstAttribute="bottom" secondItem="vip-9b-SzM" secondAttribute="bottom" id="AWV-E8-a9s"/>
                                     <constraint firstItem="7v9-m0-YD1" firstAttribute="leading" secondItem="5bD-53-mHN" secondAttribute="leading" id="Gdd-eN-NeP"/>
                                     <constraint firstAttribute="trailing" secondItem="I3B-zj-5cW" secondAttribute="trailing" id="Hb5-4x-Kz6"/>
+                                    <constraint firstItem="vip-9b-SzM" firstAttribute="top" secondItem="yqU-43-yMg" secondAttribute="bottom" constant="0.5" id="Ph0-wh-L0I"/>
                                     <constraint firstAttribute="trailing" secondItem="EZc-Ym-7Cu" secondAttribute="trailing" id="ROU-Uo-sPB"/>
                                     <constraint firstItem="yqU-43-yMg" firstAttribute="leading" secondItem="5bD-53-mHN" secondAttribute="leading" id="YP7-of-qN7"/>
                                     <constraint firstItem="EZc-Ym-7Cu" firstAttribute="leading" secondItem="5bD-53-mHN" secondAttribute="leading" id="agC-Uk-Ezf"/>
@@ -160,8 +169,9 @@
                                     <constraint firstItem="EZc-Ym-7Cu" firstAttribute="top" secondItem="44y-wB-Q5r" secondAttribute="bottom" id="dbk-QG-JPY"/>
                                     <constraint firstAttribute="trailing" secondItem="yqU-43-yMg" secondAttribute="trailing" id="dgN-f4-ah2"/>
                                     <constraint firstItem="7v9-m0-YD1" firstAttribute="top" secondItem="I3B-zj-5cW" secondAttribute="bottom" id="do2-SE-o4u"/>
-                                    <constraint firstAttribute="bottom" secondItem="yqU-43-yMg" secondAttribute="bottom" id="g1n-oT-rQs"/>
                                     <constraint firstAttribute="trailing" secondItem="44y-wB-Q5r" secondAttribute="trailing" id="hE6-fd-283"/>
+                                    <constraint firstAttribute="trailing" secondItem="vip-9b-SzM" secondAttribute="trailing" id="n20-b9-Rnt"/>
+                                    <constraint firstItem="vip-9b-SzM" firstAttribute="leading" secondItem="5bD-53-mHN" secondAttribute="leading" id="ymt-XD-E0h"/>
                                     <constraint firstItem="44y-wB-Q5r" firstAttribute="top" secondItem="7v9-m0-YD1" secondAttribute="bottom" id="zbe-Dk-WjS"/>
                                 </constraints>
                             </scrollView>
@@ -179,6 +189,7 @@
                     <connections>
                         <outlet property="descriptionLabel" destination="O2Z-yf-xnS" id="Giu-vG-I0y"/>
                         <outlet property="imagesContainerView" destination="I3B-zj-5cW" id="srq-jy-ToB"/>
+                        <outlet property="optionsContainerView" destination="vip-9b-SzM" id="1bW-oV-ail"/>
                         <outlet property="priceLabel" destination="xEe-Pi-TGd" id="mQa-Bz-ZeB"/>
                         <outlet property="titleLabel" destination="A2q-cu-ZGH" id="ahS-WY-qf9"/>
                         <outlet property="variantsTextField" destination="5E4-4a-9iD" id="i7K-MI-Shl"/>

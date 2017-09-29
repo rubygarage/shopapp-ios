@@ -14,6 +14,7 @@ class ProductDetailsViewController: UIViewController, VariantsPickerProtocol, Im
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var variantsTextField: UITextField!
+    @IBOutlet weak var optionsContainerView: UIView!
     
     var productId = String()
     var product: Product?
@@ -50,6 +51,7 @@ class ProductDetailsViewController: UIViewController, VariantsPickerProtocol, Im
             populateTitle(with: product!)
             populateDescription(with: product!)
             updateVariantViews()
+            populateOptionsView()
         }
     }
     
@@ -83,6 +85,10 @@ class ProductDetailsViewController: UIViewController, VariantsPickerProtocol, Im
     private func updateVariantViews() {
         populatePrice()
         populateVariantTitle()
+    }
+    
+    private func populateOptionsView() {
+        openProductOptionsController(onView: optionsContainerView)
     }
     
     // MARK: - actions

@@ -22,6 +22,7 @@ struct ControllerIdentifier {
     static let articlesList = "ArticlesListControllerIdentifier"
     static let articleDetails = "ArticleDetailsControllerIdentifier"
     static let sortModal = "SortModalControllerIdentifier"
+    static let productOptions = "ProductOptionsControllerIdentifier"
 }
 
 struct ImageName {
