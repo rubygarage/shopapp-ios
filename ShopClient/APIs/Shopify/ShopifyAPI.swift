@@ -251,6 +251,7 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
             query.tags()
             query.images(first: imageCount, self.imageConnectionQuery())
             query.variants(first: variantsCount, self.variantConnectionQuery())
+            query.options(self.optionQuery())
         }
     }
     
@@ -354,6 +355,14 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
         return { (query: Storefront.BlogQuery) in
             query.id()
             query.title()
+        }
+    }
+    
+    private func optionQuery() -> ((Storefront.ProductOptionQuery) -> ()) {
+        return { (query: Storefront.ProductOptionQuery) in
+            query.id()
+            query.name()
+            query.values()
         }
     }
 }

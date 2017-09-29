@@ -11,4 +11,5 @@ import UIKit
 class ProductDetails: NSObject {
     var additionalDescription = String()
     var variants: [ProductVariant]?
+    var options: [ProductOption]?
 }
