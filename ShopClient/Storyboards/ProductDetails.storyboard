@@ -113,10 +113,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vip-9b-SzM">
-                                        <rect key="frame" x="0.0" y="430.5" width="375" height="120"/>
+                                        <rect key="frame" x="0.0" y="430.5" width="375" height="0.0"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="120" id="9bc-kC-Q4Y"/>
+                                            <constraint firstAttribute="height" id="9bc-kC-Q4Y"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -155,6 +155,7 @@
                         <outlet property="descriptionLabel" destination="O2Z-yf-xnS" id="Giu-vG-I0y"/>
                         <outlet property="imagesContainerView" destination="I3B-zj-5cW" id="srq-jy-ToB"/>
                         <outlet property="optionsContainerView" destination="vip-9b-SzM" id="1bW-oV-ail"/>
+                        <outlet property="optionsContainerViewHeightConstraint" destination="9bc-kC-Q4Y" id="GNA-tO-PFg"/>
                         <outlet property="priceLabel" destination="xEe-Pi-TGd" id="mQa-Bz-ZeB"/>
                         <outlet property="titleLabel" destination="A2q-cu-ZGH" id="ahS-WY-qf9"/>
                     </connections>

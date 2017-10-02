@@ -24,7 +24,7 @@ protocol ShopAPIProtocol {
     
     // MARK: - products
     func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping ApiCallback<[Product]>)
-    func getProduct(id: String, callback: @escaping ApiCallback<Product>)
+    func getProduct(id: String, options: [(name: String, value: String)], callback: @escaping ApiCallback<Product>)
     func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping ApiCallback<[Product]>)
     
     // MARK: - categories

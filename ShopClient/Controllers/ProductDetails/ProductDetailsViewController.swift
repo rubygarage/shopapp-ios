@@ -8,16 +8,17 @@
 
 import UIKit
 
-class ProductDetailsViewController: UIViewController, ImagesCarouselViewControllerProtocol {
+class ProductDetailsViewController: UIViewController, ImagesCarouselViewControllerProtocol, ProductOptionsControllerProtocol {
     @IBOutlet weak var imagesContainerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var optionsContainerView: UIView!
+    @IBOutlet weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
     
     var productId = String()
     var product: Product?
-    var selectedVariant: ProductVariant?
+    var selectedOptions = [(name: String, value: String)]()
     var detailImagesController: ImagesCarouselViewController?
     var showingImageIndex = 0
 
@@ -30,11 +31,15 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
     }
     
     func setupData() {
-        selectedVariant = product?.productDetails?.variants?.first
+        if let options = product?.productDetails?.options {
+            for option in options {
+                selectedOptions.append((name: option.name, value: option.values.first ?? String()))
+            }
+        }
     }
     
     private func loadRemoteData() {
-        ShopCoreAPI.shared.getProduct(id: productId) { [weak self] (product, error) in
+        ShopCoreAPI.shared.getProduct(id: productId, options: selectedOptions) { [weak self] (product, error) in
             if let productObject = product {
                 self?.product = productObject
                 self?.populateViews()
@@ -47,7 +52,7 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
             populateImages(with: product!)
             populateTitle(with: product!)
             populateDescription(with: product!)
-            updateVariantViews()
+            populatePrice()
             populateOptionsView()
         }
     }
@@ -67,15 +72,13 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
     }
     
     private func populatePrice() {
-        priceLabel.text = "\(selectedVariant?.price ?? String()) \(product?.currency ?? String())"
-    }
-    
-    private func updateVariantViews() {
-        populatePrice()
+        priceLabel.text = "\(product?.productDetails?.variantBySelectedOptions?.price ?? String()) \(product?.currency ?? String())"
     }
     
     private func populateOptionsView() {
-        openProductOptionsController(onView: optionsContainerView)
+        if let options = product?.productDetails?.options {
+            openProductOptionsController(with: options, delegate: self, onView: optionsContainerView)
+        }
     }
     
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
@@ -93,14 +96,13 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
         }
     }
     
-    // MARK: - VariantsPickerProtocol
-    func didSelect(index: Int) {
-        selectedVariant = product?.productDetails?.variants?[index]
-        updateVariantViews()
-    }
-    
     // MARK: - DetailImagesViewControllerProtocol
     func didShowImage(at index: Int) {
         showingImageIndex = index
+    }
+    
+    // MARK: - ProductOptionsControllerProtocol
+    func didCalculate(collectionViewHeight: CGFloat) {
+        optionsContainerViewHeightConstraint.constant = collectionViewHeight
     }
 }
