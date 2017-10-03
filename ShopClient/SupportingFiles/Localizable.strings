@@ -18,6 +18,7 @@
 "Label.SortBy" = "Sort by:";
 
 "Button.Sort" = "Sort";
+"Button.AddToCart" = "Add to cart";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";

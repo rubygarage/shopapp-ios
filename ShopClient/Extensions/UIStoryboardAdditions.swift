@@ -53,4 +53,8 @@ extension UIStoryboard {
     class func sortModal() -> UIStoryboard {
         return UIStoryboard(name: "SortModal", bundle: nil)
     }
+    
+    class func productOptions() -> UIStoryboard {
+        return UIStoryboard(name: "ProductOptions", bundle: nil)
+    }
 }

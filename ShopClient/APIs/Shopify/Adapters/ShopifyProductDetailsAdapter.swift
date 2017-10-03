@@ -21,5 +21,17 @@ class ShopifyProductDetailsAdapter: ProductDetails {
             }
         }
         variants = variantsArray
+        
+        if let variant = product?.variantBySelectedOptions {
+            variantBySelectedOptions = ShopifyProductVariantAdapter(productVariant: variant)
+        }
+        
+        var optionsArray = [ProductOption]()
+        if let options = product?.options {
+            for option in options {
+                optionsArray.append(ShopifyProductOptionAdapter(option: option))
+            }
+        }
+        options = optionsArray
     }
 }

@@ -24,8 +24,8 @@ class ShopCoreAPI {
         shopAPI?.getShopInfo(callback: callback)
     }
     
-    func getProduct(id: String, callback: @escaping ApiCallback<Product>) {
-        shopAPI?.getProduct(id: id, callback: callback)
+    func getProduct(id: String, options: [SelectedOption], callback: @escaping ApiCallback<Product>) {
+        shopAPI?.getProduct(id: id, options: options, callback: callback)
     }
     
     func getProductList(perPage: Int = kItemsPerPage, paginationValue: Any? = nil, sortBy: SortingValue? = nil, reverse: Bool = false, callback: @escaping ApiCallback<[Product]>) {

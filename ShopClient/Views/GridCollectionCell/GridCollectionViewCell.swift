@@ -9,7 +9,6 @@
 import UIKit
 import SDWebImage
 
-let kViewCornerRadius: CGFloat = 5
 let kShadowOpacity: Float = 0.5
 let kShadowRadius: CGFloat = 1.5
 

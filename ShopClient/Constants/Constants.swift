@@ -12,7 +12,7 @@ let kItemsPerPage = 10
 
 struct ControllerIdentifier {
     static let home = "HomeControllerIdentifier"
-    static let detail = "DetailControllerIdentifier"
+    static let productDetails = "ProductsDetailControllerIdentifier"
     static let imagesCarousel = "ImagesCarouselControllerIdentifier"
     static let menu = "MenuControllerIdentifier"
     static let search = "SearchControllerIdentifier"
@@ -22,9 +22,14 @@ struct ControllerIdentifier {
     static let articlesList = "ArticlesListControllerIdentifier"
     static let articleDetails = "ArticleDetailsControllerIdentifier"
     static let sortModal = "SortModalControllerIdentifier"
+    static let productOptions = "ProductOptionsControllerIdentifier"
 }
 
 struct ImageName {
     static let home = "home"
     static let sort = "sort"
+}
+
+struct CornerRadius {
+    static let defaultValue: CGFloat = 5
 }

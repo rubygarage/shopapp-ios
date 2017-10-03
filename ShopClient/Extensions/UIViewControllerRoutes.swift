@@ -25,11 +25,11 @@ extension UIViewController {
     }
     
     func pushDetailController(with product: Product) {
-        let detaillController = UIStoryboard.productDetails().instantiateViewController(withIdentifier: ControllerIdentifier.detail) as! DetailViewController
-        detaillController.productId = product.id
-        detaillController.product = product
+        let productDetaillsController = UIStoryboard.productDetails().instantiateViewController(withIdentifier: ControllerIdentifier.productDetails) as! ProductDetailsViewController
+        productDetaillsController.productId = product.id
+        productDetaillsController.product = product
         
-        navigationController?.pushViewController(detaillController, animated: true)
+        navigationController?.pushViewController(productDetaillsController, animated: true)
     }
     
     func pushPolicyController(with policy: Policy) {
@@ -68,6 +68,15 @@ extension UIViewController {
         detailImagesController.showingIndex = showingIndex
         
         configureChildViewController(childController: detailImagesController, onView: onView)
+    }
+    
+    func openProductOptionsController(with options: [ProductOption], selectedOptions: [SelectedOption], delegate: ProductOptionsControllerProtocol?, onView: UIView) {
+        let optionsController = UIStoryboard.productOptions().instantiateViewController(withIdentifier: ControllerIdentifier.productOptions) as! ProductOptionsViewController
+        optionsController.options = options
+        optionsController.selectedOptions = selectedOptions
+        optionsController.controllerDelegate = delegate
+        
+        configureChildViewController(childController: optionsController, onView: onView)
     }
     
     // MARK: - present
