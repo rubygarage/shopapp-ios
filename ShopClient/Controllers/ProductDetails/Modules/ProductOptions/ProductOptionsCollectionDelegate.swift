@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ProductOptionsCollectionDelegateProtocol {
-    // TODO:
+    func didSelectItem(at indexPath: IndexPath)
 }
 
 let kOptionsHeaderViewSize = CGSize(width: 0, height: 30)
@@ -26,5 +26,9 @@ class ProductOptionsCollectionDelegate: NSObject, UICollectionViewDelegate, UICo
     // MARK: - UICollectionViewDelegate
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return kOptionsHeaderViewSize
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.didSelectItem(at: indexPath)
     }
 }

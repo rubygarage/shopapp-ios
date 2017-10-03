@@ -12,6 +12,7 @@ let kOptionCellEstimatedSize = CGSize(width: 100, height: 31)
 
 protocol ProductOptionsControllerProtocol {
     func didCalculate(collectionViewHeight: CGFloat)
+    func didSelectOption(with name: String, value: String)
 }
 
 class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDataSourceProtocol, ProductOptionsCollectionDelegateProtocol {
@@ -19,6 +20,7 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
     @IBOutlet weak var collectionLayout: UICollectionViewFlowLayout!
     
     var options = [ProductOption]()
+    var selectedOptions = [SelectedOption]()
     var collectionDataSource: ProductOptionsCollectionDataSource?
     var collectionDelegate: ProductOptionsCollectionDelegate?
     var controllerDelegate: ProductOptionsControllerProtocol?
@@ -79,5 +81,21 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
         return String()
     }
     
+    func isItemSelected(at indexPath: IndexPath) -> Bool {
+        if indexPath.section < options.count {
+            let item = options[indexPath.section].values[indexPath.row]
+            let selectedItem = selectedOptions[indexPath.section].value
+            return item == selectedItem
+        }
+        return false
+    }
+    
     // MARK: - ProductOptionsCollectionDelegateProtocol
+    func didSelectItem(at indexPath: IndexPath) {
+        if indexPath.section < options.count {
+            let name = options[indexPath.section].name
+            let value = options[indexPath.section].values[indexPath.row]
+            controllerDelegate?.didSelectOption(with: name, value: value)
+        }
+    }
 }

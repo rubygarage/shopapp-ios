@@ -82,16 +82,16 @@
                                                     <constraint firstAttribute="height" constant="50" id="ANe-Av-f9P"/>
                                                     <constraint firstAttribute="width" constant="100" id="cp2-a7-R4o"/>
                                                 </constraints>
-                                                <state key="normal" title="Add to card"/>
+                                                <state key="normal" title="Add to cart"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Price Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="xEe-Pi-TGd">
-                                                <rect key="frame" x="20" y="33.5" width="96.5" height="23"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                                <rect key="frame" x="20" y="33" width="101.5" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <color key="textColor" red="0.4345703125" green="0.96321614580000003" blue="0.24338107640000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VCa-he-ygJ">
-                                                <rect key="frame" x="162.5" y="30" width="50" height="30"/>
+                                                <rect key="frame" x="185" y="30" width="50" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="KmP-g1-B2V"/>
                                                     <constraint firstAttribute="height" constant="30" id="Zg8-oF-yFv"/>
@@ -103,8 +103,8 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="VCa-he-ygJ" firstAttribute="centerX" secondItem="EZc-Ym-7Cu" secondAttribute="centerX" id="CHU-e3-e6e"/>
                                             <constraint firstItem="fou-uL-hAY" firstAttribute="centerY" secondItem="EZc-Ym-7Cu" secondAttribute="centerY" id="OcM-p4-Byy"/>
+                                            <constraint firstItem="fou-uL-hAY" firstAttribute="leading" secondItem="VCa-he-ygJ" secondAttribute="trailing" constant="20" id="SNP-P7-4HN"/>
                                             <constraint firstItem="xEe-Pi-TGd" firstAttribute="centerY" secondItem="EZc-Ym-7Cu" secondAttribute="centerY" id="jPS-mC-K3h"/>
                                             <constraint firstAttribute="height" constant="90" id="jbW-fR-Sys"/>
                                             <constraint firstAttribute="trailing" secondItem="fou-uL-hAY" secondAttribute="trailing" constant="20" id="plD-n8-vaF"/>
@@ -152,6 +152,7 @@
                         <viewLayoutGuide key="safeArea" id="ofp-S2-9Ho"/>
                     </view>
                     <connections>
+                        <outlet property="addToCartButton" destination="fou-uL-hAY" id="Fv3-Hw-N60"/>
                         <outlet property="descriptionLabel" destination="O2Z-yf-xnS" id="Giu-vG-I0y"/>
                         <outlet property="imagesContainerView" destination="I3B-zj-5cW" id="srq-jy-ToB"/>
                         <outlet property="optionsContainerView" destination="vip-9b-SzM" id="1bW-oV-ail"/>

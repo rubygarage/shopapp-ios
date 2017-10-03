@@ -24,7 +24,7 @@ class ShopCoreAPI {
         shopAPI?.getShopInfo(callback: callback)
     }
     
-    func getProduct(id: String, options: [(name: String, value: String)], callback: @escaping ApiCallback<Product>) {
+    func getProduct(id: String, options: [SelectedOption], callback: @escaping ApiCallback<Product>) {
         shopAPI?.getProduct(id: id, options: options, callback: callback)
     }
     

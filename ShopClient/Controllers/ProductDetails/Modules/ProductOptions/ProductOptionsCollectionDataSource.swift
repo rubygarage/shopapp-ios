@@ -13,6 +13,7 @@ protocol ProductOptionsCollectionDataSourceProtocol {
     func itemsCount(in optionIndex: Int) -> Int
     func item(at optionIndex: Int, valueIndex: Int) -> String
     func sectionTitle(for sectionIndex: Int) -> String
+    func isItemSelected(at indexPath: IndexPath) -> Bool
 }
 
 class ProductOptionsCollectionDataSource: NSObject, UICollectionViewDataSource {
@@ -36,7 +37,8 @@ class ProductOptionsCollectionDataSource: NSObject, UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductOptionCollectionViewCell.self), for: indexPath) as! ProductOptionCollectionViewCell
         let text = delegate?.item(at: indexPath.section, valueIndex: indexPath.row)
-        cell.configure(with: text, selected: true)
+        let selected = delegate?.isItemSelected(at: indexPath) ?? false
+        cell.configure(with: text, selected: selected)
         cell.contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
         
         return cell

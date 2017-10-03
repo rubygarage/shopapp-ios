@@ -67,7 +67,7 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
         task?.resume()
     }
     
-    func getProduct(id: String, options: [(name: String, value: String)], callback: @escaping ApiCallback<Product>) {
+    func getProduct(id: String, options: [SelectedOption], callback: @escaping ApiCallback<Product>) {
         let query = productDetailsQuery(id: id, options: options)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             let currencyCode = response?.shop.paymentSettings.currencyCode.rawValue ?? String()
@@ -179,7 +179,7 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
         }
     }
     
-    private func productDetailsQuery(id: String, options: [(name: String, value: String)]) -> Storefront.QueryRootQuery {
+    private func productDetailsQuery(id: String, options: [SelectedOption]) -> Storefront.QueryRootQuery {
         let nodeId = GraphQL.ID(rawValue: id)
         return Storefront.buildQuery({ $0
             .shop({ $0
@@ -236,7 +236,7 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
         }
     }
     
-    private func productQuery(additionalInfoNedded: Bool = false, options: [(name: String, value: String)]? = nil) -> ((Storefront.ProductQuery) -> ()) {
+    private func productQuery(additionalInfoNedded: Bool = false, options: [SelectedOption]? = nil) -> ((Storefront.ProductQuery) -> ()) {
         let imageCount = additionalInfoNedded ? kShopifyItemsMaxCount : 1
         let variantsCount = additionalInfoNedded ? kShopifyItemsMaxCount : 1
         var optionsInput = [Storefront.SelectedOptionInput]()

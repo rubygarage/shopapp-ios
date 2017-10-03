@@ -70,9 +70,10 @@ extension UIViewController {
         configureChildViewController(childController: detailImagesController, onView: onView)
     }
     
-    func openProductOptionsController(with options: [ProductOption], delegate: ProductOptionsControllerProtocol?, onView: UIView) {
+    func openProductOptionsController(with options: [ProductOption], selectedOptions: [SelectedOption], delegate: ProductOptionsControllerProtocol?, onView: UIView) {
         let optionsController = UIStoryboard.productOptions().instantiateViewController(withIdentifier: ControllerIdentifier.productOptions) as! ProductOptionsViewController
         optionsController.options = options
+        optionsController.selectedOptions = selectedOptions
         optionsController.controllerDelegate = delegate
         
         configureChildViewController(childController: optionsController, onView: onView)
