@@ -29,3 +29,7 @@ struct ImageName {
     static let home = "home"
     static let sort = "sort"
 }
+
+struct CornerRadius {
+    static let defaultValue: CGFloat = 5
+}

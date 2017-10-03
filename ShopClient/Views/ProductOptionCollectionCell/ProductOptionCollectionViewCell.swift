@@ -14,7 +14,7 @@ class ProductOptionCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        layer.cornerRadius = 5
+        layer.cornerRadius = CornerRadius.defaultValue
     }
     
     func configure(with text: String?, selected: Bool) {

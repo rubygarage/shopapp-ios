@@ -46,6 +46,7 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
     
     private func setupViews() {
         addToCartButton.setTitle(NSLocalizedString("Button.AddToCart", comment: String()), for: .normal)
+        addToCartButton.layer.cornerRadius = CornerRadius.defaultValue
     }
     
     private func populateViews() {
@@ -79,7 +80,9 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
     }
     
     private func populateAddToCartButton() {
-        // TODO:
+        let enabled = product?.productDetails?.variantBySelectedOptions != nil
+        addToCartButton.backgroundColor = enabled ? UIColor.blue : UIColor.lightGray
+        addToCartButton.isEnabled = enabled
     }
     
     private func populateOptionsView() {
