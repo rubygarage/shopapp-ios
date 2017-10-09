@@ -26,10 +26,9 @@ class SplashRouter: NSObject, SplashRoutingLogic, SplashDataPassing {
     
     // MARK: Routing
     func routeToHome() {
-        let appDelegate  = UIApplication.shared.delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let navigationController = appDelegate.window!.rootViewController as! UINavigationController
         let homeViewController = UIStoryboard.home().instantiateViewController(withIdentifier: ControllerIdentifier.home) as! HomeViewController
-        homeViewController.addMenuBarButton()
         navigateToHome(source: navigationController, destination: homeViewController)
     }
     

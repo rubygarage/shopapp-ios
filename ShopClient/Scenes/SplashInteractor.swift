@@ -13,21 +13,20 @@
 import UIKit
 
 protocol SplashBusinessLogic {
-    func loadShopInfo(request: Splash.Something.Request)
+    func loadShopInfo(request: Splash.Remote.Request)
 }
 
 protocol SplashDataStore {
-    //var name: String { get set }
 }
 
 class SplashInteractor: SplashBusinessLogic, SplashDataStore {
     var presenter: SplashPresentationLogic?
     var worker: SplashWorker?
     
-    func loadShopInfo(request: Splash.Something.Request) {
+    func loadShopInfo(request: Splash.Remote.Request) {
         worker = SplashWorker()
         worker?.loadShopInfo(callback: { [weak self] (shop, error) in
-            let response = Splash.Something.Response(shop: shop, error: error)
+            let response = Splash.Remote.Response(error: error)
             self?.presenter?.presentShopInfo(response: response)
         })
     }

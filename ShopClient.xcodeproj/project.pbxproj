@@ -45,6 +45,7 @@
 		614142D61F6BD70400379BB9 /* LastArrivalsTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614142D51F6BD70400379BB9 /* LastArrivalsTableDataSource.swift */; };
 		614142D81F6BD8B200379BB9 /* LastArrivalsTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614142D71F6BD8B200379BB9 /* LastArrivalsTableDelegate.swift */; };
 		614142DA1F6C266000379BB9 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614142D91F6C266000379BB9 /* Article.swift */; };
+		6141AAA91F8BDD8500F9019B /* UIViewControllerAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6141AAA81F8BDD8500F9019B /* UIViewControllerAlert.swift */; };
 		6152B1211F79149900045A42 /* ArticlesList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6152B1201F79149900045A42 /* ArticlesList.storyboard */; };
 		6152B1241F7914E800045A42 /* ArticlesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6152B1231F7914E800045A42 /* ArticlesListViewController.swift */; };
 		6152B1261F79181100045A42 /* ArticlesListTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6152B1251F79181100045A42 /* ArticlesListTableDataSource.swift */; };
@@ -162,6 +163,7 @@
 		614142D51F6BD70400379BB9 /* LastArrivalsTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastArrivalsTableDataSource.swift; sourceTree = "<group>"; };
 		614142D71F6BD8B200379BB9 /* LastArrivalsTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastArrivalsTableDelegate.swift; sourceTree = "<group>"; };
 		614142D91F6C266000379BB9 /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		6141AAA81F8BDD8500F9019B /* UIViewControllerAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerAlert.swift; sourceTree = "<group>"; };
 		6152B1201F79149900045A42 /* ArticlesList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArticlesList.storyboard; sourceTree = "<group>"; };
 		6152B1231F7914E800045A42 /* ArticlesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesListViewController.swift; sourceTree = "<group>"; };
 		6152B1251F79181100045A42 /* ArticlesListTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesListTableDataSource.swift; sourceTree = "<group>"; };
@@ -588,11 +590,12 @@
 			isa = PBXGroup;
 			children = (
 				61CEAA6B1F5ECFFE0016FBD7 /* UIStoryboardAdditions.swift */,
+				6141AAA81F8BDD8500F9019B /* UIViewControllerAlert.swift */,
+				61D7A2851F7A9FBF00031093 /* UIViewControllerBarButtonItems.swift */,
 				613339321F695A820063A754 /* UIViewControllerChilds.swift */,
 				61ED88E91F7112FD006BDA79 /* UIViewControllerImageViewer.swift */,
 				61CEAA6D1F5ED16E0016FBD7 /* UIViewControllerRoutes.swift */,
 				61FDBE441F6FD4C400E7C729 /* UIViewControllerSideMenu.swift */,
-				61D7A2851F7A9FBF00031093 /* UIViewControllerBarButtonItems.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -895,6 +898,7 @@
 				61ED88F71F7171F1006BDA79 /* GridCollectionViewController.swift in Sources */,
 				61934FA01F61A31700A42853 /* Shop.swift in Sources */,
 				61934FB81F62C76000A42853 /* ShopifyProductDetailsAdapter.swift in Sources */,
+				6141AAA91F8BDD8500F9019B /* UIViewControllerAlert.swift in Sources */,
 				61B94C0D1F82323800B6887C /* ProductOptionsCollectionDelegate.swift in Sources */,
 				6180AC051F72CF19007768F2 /* MenuTableDelegate.swift in Sources */,
 				612DE25B1F6C3F3C00582B58 /* ShopifyAuthorAdapter.swift in Sources */,

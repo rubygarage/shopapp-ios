@@ -15,10 +15,13 @@
 "ControllerTitle.LastArrivals" = "Last Arrivals";
 "ControllerTitle.NewInBlog" = "New in Blog";
 
+"Alert.Error" = "Error";
+
 "Label.SortBy" = "Sort by:";
 
 "Button.Sort" = "Sort";
 "Button.AddToCart" = "Add to cart";
+"Button.Ok" = "OK";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";

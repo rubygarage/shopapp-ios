@@ -13,14 +13,18 @@
 import UIKit
 
 protocol SplashPresentationLogic {
-    func presentShopInfo(response: Splash.Something.Response)
+    func presentShopInfo(response: Splash.Remote.Response)
 }
 
 class SplashPresenter: SplashPresentationLogic {
     weak var viewController: SplashDisplayLogic?
         
-    func presentShopInfo(response: Splash.Something.Response) {
-        let viewModel = Splash.Something.ViewModel(shop: response.shop, error: response.error)
-        viewController?.displayShopInfo(viewModel: viewModel)
+    func presentShopInfo(response: Splash.Remote.Response) {
+        if let error = response.error?.localizedDescription {
+            let viewModel = Splash.Remote.ViewModel(errorMessage: error)
+            viewController?.showErrorMessage(with: viewModel)
+        } else {
+            viewController?.navigateToHome()
+        }
     }
 }

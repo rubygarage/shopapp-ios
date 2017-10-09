@@ -13,7 +13,8 @@
 import UIKit
 
 protocol SplashDisplayLogic: class {
-    func displayShopInfo(viewModel: Splash.Something.ViewModel)
+    func navigateToHome()
+    func showErrorMessage(with viewModel: Splash.Remote.ViewModel)
 }
 
 class SplashViewController: UIViewController, SplashDisplayLogic {
@@ -52,11 +53,17 @@ class SplashViewController: UIViewController, SplashDisplayLogic {
     }
     
     func loadShopInfo() {
-        let request = Splash.Something.Request()
+        let request = Splash.Remote.Request()
         interactor?.loadShopInfo(request: request)
     }
     
-    func displayShopInfo(viewModel: Splash.Something.ViewModel) {
+    func navigateToHome() {
         router?.routeToHome()
+    }
+    
+    func showErrorMessage(with viewModel: Splash.Remote.ViewModel) {
+        showErrorAlert(with: viewModel.errorMessage) { [weak self] (action) in
+            self?.router?.routeToHome()
+        }
     }
 }

@@ -14,18 +14,16 @@ import UIKit
 
 enum Splash {
     // MARK: Use cases
-    enum Something {
+    enum Remote {
         struct Request {
         }
         
         struct Response {
-            var shop: Shop?
             var error: Error?
         }
         
         struct ViewModel {
-            var shop: Shop?
-            var error: Error?
+            var errorMessage: String?
         }
     }
 }
