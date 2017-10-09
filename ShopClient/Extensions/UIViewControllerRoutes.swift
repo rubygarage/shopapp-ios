@@ -56,7 +56,7 @@ extension UIViewController {
     }
     
     func setHomeController() {
-        let homeController = UIStoryboard.main().instantiateViewController(withIdentifier: ControllerIdentifier.home) as! HomeViewController
+        let homeController = UIStoryboard.home().instantiateViewController(withIdentifier: ControllerIdentifier.home) as! HomeViewController
         setController(with: homeController)
     }
     

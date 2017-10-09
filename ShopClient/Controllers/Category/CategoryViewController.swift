@@ -77,7 +77,7 @@ class CategoryViewController: GridCollectionViewController, SortModalControllerP
         if let index = SortingValue.allValues.index(of: item) {
             selectedSortingValue = SortingValue(rawValue: index) ?? selectedSortingValue
             paginationValue = nil
-            let indexPath = IndexPath(row: index, section: 0)
+            let indexPath = IndexPath(row: 0, section: 0)
             collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
             loadRemoteData()
         }

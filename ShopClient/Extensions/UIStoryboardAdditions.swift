@@ -10,8 +10,8 @@ import UIKit
 
 extension UIStoryboard {
     
-    class func main() -> UIStoryboard {
-        return UIStoryboard(name: "Main", bundle: nil)
+    class func home() -> UIStoryboard {
+        return UIStoryboard(name: "Home", bundle: nil)
     }
     
     class func menu() -> UIStoryboard {

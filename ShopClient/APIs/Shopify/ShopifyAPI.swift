@@ -9,8 +9,8 @@
 import UIKit
 import MobileBuySDK
 
-let kShopifyStorefrontAccessToken = "d7f152257fb5579dfb157bb718f0296c"
-let kShopifyStorefrontURL = "fckstore.myshopify.com"
+let kShopifyStorefrontAccessToken = "12a5873d85ff01cddea6261913ecf3e9"
+let kShopifyStorefrontURL = "storeshmor.myshopify.com"
 let kShopifyItemsMaxCount: Int32 = 250
 
 class ShopifyAPI: NSObject, ShopAPIProtocol {
