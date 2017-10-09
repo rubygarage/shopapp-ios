@@ -12,5 +12,6 @@ target 'ShopClient' do
   pod 'SideMenu', '~> 2.3'
   pod 'SKPhotoBrowser', '~> 4.1'
   pod 'TPKeyboardAvoiding', '~> 1.3'
+  pod 'MagicalRecord', '~> 2.3'
 
 end
