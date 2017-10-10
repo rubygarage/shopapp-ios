@@ -13,7 +13,7 @@ class ShopifyShopAdapter {
     class func loadShopInfo(with item: Storefront.Shop?, callback: @escaping ((_ shop: Shop?, _ error: Error?) -> ())) {
         MagicalRecord.save({ (context) in
             let shop = getShop(in: context)
-            updateShop(with: shop, remoteItem: item)
+            updateShop(with: shop, remoteItem: item, in: context)
         }) { (contextDidSave, error) in
             let shop = Shop.mr_findFirst()
             callback(shop, error)
@@ -28,29 +28,20 @@ class ShopifyShopAdapter {
         return shop
     }
     
-    private class func updateShop(with localItem: Shop?, remoteItem: Storefront.Shop?) {
+    private class func updateShop(with localItem: Shop?, remoteItem: Storefront.Shop?, in context: NSManagedObjectContext) {
         localItem?.name = remoteItem?.name
         localItem?.shopDescription = remoteItem?.description
-    }
-    
-    /*
-    init(shop: Storefront.Shop?) {
-        super.init()
         
-        name = shop?.name ?? String()
-        shopDescription = shop?.description ?? String()
-        
-        if let privacyPolicy = shop?.privacyPolicy {
-            self.privacyPolicy = ShopifyPolicyAdapter(shopPolicy: privacyPolicy)
+        if let privacyPolicy = remoteItem?.privacyPolicy {
+            localItem?.privacyPolicy = ShopifyPolicyAdapter.loadPolicy(with: privacyPolicy, in: context)
         }
         
-        if let refundPolicy = shop?.refundPolicy {
-            self.refundPolicy = ShopifyPolicyAdapter(shopPolicy: refundPolicy)
+        if let refundPolicy = remoteItem?.refundPolicy {
+            localItem?.refundPolicy = ShopifyPolicyAdapter.loadPolicy(with: refundPolicy, in: context)
         }
         
-        if let termsOfService = shop?.termsOfService {
-            self.termsOfService = ShopifyPolicyAdapter(shopPolicy: termsOfService)
+        if let termsOfService = remoteItem?.termsOfService {
+            localItem?.termsOfService = ShopifyPolicyAdapter.loadPolicy(with: termsOfService, in: context)
         }
     }
-    */
 }
