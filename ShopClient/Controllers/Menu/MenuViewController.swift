@@ -20,7 +20,8 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
         super.viewDidLoad()
 
         setupTableView()
-        loadRemoteData()
+        loadCategories()
+        loadShopInfo()
     }
     
     private func setupTableView() {
@@ -40,12 +41,11 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
         tableView.delegate = tableDelegate
     }
     
-    private func loadRemoteData() {
+    private func loadCategories() {
         ShopCoreAPI.shared.getCategoryList { [weak self] (categories, error) in
             if let items = categories {
                 self?.categories = items
                 self?.tableView.reloadSections([MenuSection.category.rawValue], with: .none)
-                self?.loadShopInfo()
             }
         }
     }
@@ -53,26 +53,16 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
     private func loadShopInfo() {
         let shop = Shop.mr_findFirst()
         
+        if let privacyPolicy = shop?.privacyPolicy {
+            policies.append(privacyPolicy)
+        }
         
-        ShopCoreAPI.shared.getShopInfo { [weak self] (result, error) in
-            if let shop = result {
-                
-                /*
-                if let privacyPolicy = shop.privacyPolicy {
-                    self?.policies.append(privacyPolicy)
-                }
-                
-                if let refundPolicy = shop.refundPolicy {
-                    self?.policies.append(refundPolicy)
-                }
-                
-                if let termsOfService = shop.termsOfService {
-                    self?.policies.append(termsOfService)
-                }
- */
-                
-                self?.tableView.reloadSections([MenuSection.policy.rawValue], with: .none)
-            }
+        if let refundPolicy = shop?.refundPolicy {
+            policies.append(refundPolicy)
+        }
+        
+        if let termsOfService = shop?.termsOfService {
+            policies.append(termsOfService)
         }
     }
     
