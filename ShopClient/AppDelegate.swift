@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MagicalRecord
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let shopAPI = ShopifyAPI()
         ShopCoreAPI.shared.setup(shopAPI: shopAPI)
+        
+        MagicalRecord.setupCoreDataStack()
         
         return true
     }

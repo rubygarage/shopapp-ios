@@ -51,9 +51,13 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
     }
     
     private func loadShopInfo() {
+        let shop = Shop.mr_findFirst()
+        
+        
         ShopCoreAPI.shared.getShopInfo { [weak self] (result, error) in
             if let shop = result {
                 
+                /*
                 if let privacyPolicy = shop.privacyPolicy {
                     self?.policies.append(privacyPolicy)
                 }
@@ -65,6 +69,7 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
                 if let termsOfService = shop.termsOfService {
                     self?.policies.append(termsOfService)
                 }
+ */
                 
                 self?.tableView.reloadSections([MenuSection.policy.rawValue], with: .none)
             }

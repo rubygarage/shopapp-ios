@@ -45,8 +45,9 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
         }
         
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
-            let shop = ShopifyShopAdapter(shop: response?.shop)
-            callback(shop, error)
+            ShopifyShopAdapter.loadShopInfo(with: response?.shop, callback: { (shop, error) in
+                callback(shop, error)
+            })
         })
         task?.resume()
     }
