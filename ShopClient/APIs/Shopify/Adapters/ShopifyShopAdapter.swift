@@ -8,23 +8,34 @@
 
 import MobileBuySDK
 
-class ShopifyShopAdapter: Shop {
-    init(shop: Storefront.Shop?) {
-        super.init()
-        
-        name = shop?.name ?? String()
-        shopDescription = shop?.description ?? String()
-        
-        if let privacyPolicy = shop?.privacyPolicy {
-            self.privacyPolicy = ShopifyPolicyAdapter(shopPolicy: privacyPolicy)
+extension Storefront.Shop: ShopEntityInterface {
+    var entityName: String? {
+        get {
+            return name
         }
-        
-        if let refundPolicy = shop?.refundPolicy {
-            self.refundPolicy = ShopifyPolicyAdapter(shopPolicy: refundPolicy)
+    }
+    
+    var entityDesription: String? {
+        get {
+            return description
         }
-        
-        if let termsOfService = shop?.termsOfService {
-            self.termsOfService = ShopifyPolicyAdapter(shopPolicy: termsOfService)
+    }
+    
+    var entityPrivacyPolicy: PolicyEntityInterface? {
+        get {
+            return privacyPolicy
+        }
+    }
+    
+    var entityRefundPolicy: PolicyEntityInterface? {
+        get {
+            return refundPolicy
+        }
+    }
+    
+    var entityTermsOfService: PolicyEntityInterface? {
+        get {
+            return termsOfService
         }
     }
 }

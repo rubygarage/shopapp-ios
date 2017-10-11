@@ -8,12 +8,22 @@
 
 import MobileBuySDK
 
-class ShopifyPolicyAdapter: Policy {
-    init(shopPolicy: Storefront.ShopPolicy) {
-        super.init()
-        
-        self.title = shopPolicy.title
-        self.body = shopPolicy.body
-        self.url = shopPolicy.url.absoluteString
+extension Storefront.ShopPolicy: PolicyEntityInterface {
+    var entityBody: String? {
+        get {
+            return body
+        }
+    }
+    
+    var entityTitle: String? {
+        get {
+            return title
+        }
+    }
+    
+    var entityUrl: String? {
+        get {
+            return url.absoluteString
+        }
     }
 }

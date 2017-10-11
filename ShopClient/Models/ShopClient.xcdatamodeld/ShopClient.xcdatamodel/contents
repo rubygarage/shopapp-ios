@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Policy" representedClassName="Policy" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="PrivacyPolicy" representedClassName="PrivacyPolicy" parentEntity="Policy" syncable="YES" codeGenerationType="class">
+        <relationship name="shop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shop" inverseName="privacyPolicy" inverseEntity="Shop" syncable="YES"/>
+    </entity>
+    <entity name="RefundPolicy" representedClassName="RefundPolicy" parentEntity="Policy" syncable="YES" codeGenerationType="class">
+        <relationship name="shop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shop" inverseName="refundPolicy" inverseEntity="Shop" syncable="YES"/>
+    </entity>
+    <entity name="Shop" representedClassName="Shop" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shopDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="privacyPolicy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PrivacyPolicy" inverseName="shop" inverseEntity="PrivacyPolicy" syncable="YES"/>
+        <relationship name="refundPolicy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RefundPolicy" inverseName="shop" inverseEntity="RefundPolicy" syncable="YES"/>
+        <relationship name="termsOfService" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TermsOfService" inverseName="shop" inverseEntity="TermsOfService" syncable="YES"/>
+    </entity>
+    <entity name="TermsOfService" representedClassName="TermsOfService" parentEntity="Policy" syncable="YES" codeGenerationType="class">
+        <relationship name="shop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shop" inverseName="termsOfService" inverseEntity="Shop" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Shop" positionX="-54" positionY="-9" width="128" height="120"/>
+        <element name="Policy" positionX="-54" positionY="9" width="128" height="90"/>
+        <element name="PrivacyPolicy" positionX="-45" positionY="36" width="128" height="60"/>
+        <element name="RefundPolicy" positionX="-27" positionY="45" width="128" height="60"/>
+        <element name="TermsOfService" positionX="-18" positionY="63" width="128" height="60"/>
+    </elements>
+</model>

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MagicalRecord
+import CoreStore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let shopAPI = ShopifyAPI()
         ShopCoreAPI.shared.setup(shopAPI: shopAPI)
+        
+        MagicalRecord.setupCoreDataStack()
+        do {
+            try CoreStore.addStorageAndWait()
+        } catch {
+            print(error.localizedDescription)
+        }
         
         return true
     }
