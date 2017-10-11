@@ -13,5 +13,6 @@ target 'ShopClient' do
   pod 'SKPhotoBrowser', '~> 4.1'
   pod 'TPKeyboardAvoiding', '~> 1.3'
   pod 'MagicalRecord', '~> 2.3'
+  pod 'CoreStore', :git => 'https://github.com/JohnEstropia/CoreStore.git', :branch => 'prototype/Swift_3_2'
 
 end

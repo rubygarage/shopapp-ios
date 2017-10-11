@@ -13,7 +13,7 @@ class ShopRepository {
     class func loadShopInfo(with item: ShopEntityInterface?, callback: @escaping ((_ shop: Shop?, _ error: Error?) -> ())) {
         MagicalRecord.save({ (context) in
             let shop = getShop(in: context)
-            updateShop(with: shop, remoteItem: item, in: context)
+            shop?.update(with: item, in: context)
         }) { (contextDidSave, error) in
             let shop = Shop.mr_findFirst()
             callback(shop, error)
@@ -32,21 +32,23 @@ class ShopRepository {
         }
         return shop
     }
-    
-    private class func updateShop(with localItem: Shop?, remoteItem: ShopEntityInterface?, in context: NSManagedObjectContext) {
-        localItem?.name = remoteItem?.entityName
-        localItem?.shopDescription = remoteItem?.entityDesription
+}
+
+internal extension Shop {
+    func update(with remoteItem: ShopEntityInterface?, in context: NSManagedObjectContext) {
+        name = remoteItem?.entityName
+        shopDescription = remoteItem?.entityDesription
         
-        if let privacyPolicy = remoteItem?.entityPrivacyPolicy {
-            localItem?.privacyPolicy = PolicyRepository.loadPolicy(with: privacyPolicy, in: context)
+        if let policy = remoteItem?.entityPrivacyPolicy {
+            privacyPolicy = PolicyRepository.loadPolicy(with: policy, in: context)
         }
         
-        if let refundPolicy = remoteItem?.entityRefundPolicy {
-            localItem?.refundPolicy = PolicyRepository.loadPolicy(with: refundPolicy, in: context)
+        if let policy = remoteItem?.entityRefundPolicy {
+            refundPolicy = PolicyRepository.loadPolicy(with: policy, in: context)
         }
         
-        if let termsOfService = remoteItem?.entityTermsOfService {
-            localItem?.termsOfService = PolicyRepository.loadPolicy(with: termsOfService, in: context)
+        if let terms = remoteItem?.entityTermsOfService {
+            termsOfService = PolicyRepository.loadPolicy(with: terms, in: context)
         }
     }
 }

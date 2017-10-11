@@ -82,8 +82,8 @@
 		61AAB9311F7BD07B00CD32D3 /* SortModalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61AAB92F1F7BD07B00CD32D3 /* SortModalTableViewCell.xib */; };
 		61AB83261F72E6F0009E7343 /* Policy.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61AB83251F72E6F0009E7343 /* Policy.storyboard */; };
 		61B279421F8E0B5300133770 /* ShopAPIModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B279411F8E0B5300133770 /* ShopAPIModelInterface.swift */; };
-		61B279451F8E0CD000133770 /* ShopRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B279441F8E0CD000133770 /* ShopRepository.swift */; };
-		61B279471F8E105900133770 /* PolicyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B279461F8E105900133770 /* PolicyRepository.swift */; };
+		61B2794F1F8E48C400133770 /* ShopRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B279441F8E0CD000133770 /* ShopRepository.swift */; };
+		61B279501F8E48C900133770 /* PolicyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B279461F8E105900133770 /* PolicyRepository.swift */; };
 		61B5BEDB1F75055000E075B7 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B5BED91F75055000E075B7 /* ArticleTableViewCell.swift */; };
 		61B5BEDC1F75055000E075B7 /* ArticleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61B5BEDA1F75055000E075B7 /* ArticleTableViewCell.xib */; };
 		61B5BEE01F7505F700E075B7 /* ArticleLoadMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B5BEDE1F7505F700E075B7 /* ArticleLoadMoreCell.swift */; };
@@ -204,6 +204,8 @@
 		61B279411F8E0B5300133770 /* ShopAPIModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAPIModelInterface.swift; sourceTree = "<group>"; };
 		61B279441F8E0CD000133770 /* ShopRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopRepository.swift; sourceTree = "<group>"; };
 		61B279461F8E105900133770 /* PolicyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyRepository.swift; sourceTree = "<group>"; };
+		61B279481F8E403E00133770 /* ShopRepositoryCoreStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopRepositoryCoreStore.swift; sourceTree = "<group>"; };
+		61B2794A1F8E44B600133770 /* PolicyRepositoryCoreStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyRepositoryCoreStore.swift; sourceTree = "<group>"; };
 		61B5BED91F75055000E075B7 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
 		61B5BEDA1F75055000E075B7 /* ArticleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleTableViewCell.xib; sourceTree = "<group>"; };
 		61B5BEDE1F7505F700E075B7 /* ArticleLoadMoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleLoadMoreCell.swift; sourceTree = "<group>"; };
@@ -568,7 +570,9 @@
 			isa = PBXGroup;
 			children = (
 				61B279441F8E0CD000133770 /* ShopRepository.swift */,
+				61B279481F8E403E00133770 /* ShopRepositoryCoreStore.swift */,
 				61B279461F8E105900133770 /* PolicyRepository.swift */,
+				61B2794A1F8E44B600133770 /* PolicyRepositoryCoreStore.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -880,6 +884,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ShopClient/Pods-ShopClient-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CoreStore/CoreStore.framework",
 				"${BUILT_PRODUCTS_DIR}/MagicalRecord/MagicalRecord.framework",
 				"${BUILT_PRODUCTS_DIR}/Mobile-Buy-SDK/MobileBuySDK.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -890,6 +895,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreStore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MobileBuySDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -919,7 +925,6 @@
 				61FDBE4E1F6FE4EB00E7C729 /* MenuCategoryTableViewCell.swift in Sources */,
 				61ED88EA1F7112FD006BDA79 /* UIViewControllerImageViewer.swift in Sources */,
 				611EF33E1F56CBB1001B8B9C /* ShopCoreAPI.swift in Sources */,
-				61B279451F8E0CD000133770 /* ShopRepository.swift in Sources */,
 				61ED88F71F7171F1006BDA79 /* GridCollectionViewController.swift in Sources */,
 				61934FB81F62C76000A42853 /* ShopifyProductDetailsAdapter.swift in Sources */,
 				6141AAA91F8BDD8500F9019B /* UIViewControllerAlert.swift in Sources */,
@@ -948,6 +953,7 @@
 				613339331F695A820063A754 /* UIViewControllerChilds.swift in Sources */,
 				6106C6C51F796E1900E87486 /* SearchViewControllerDelegate.swift in Sources */,
 				612C0DE91F62F7A2003F37BD /* Category.swift in Sources */,
+				61B2794F1F8E48C400133770 /* ShopRepository.swift in Sources */,
 				614142D61F6BD70400379BB9 /* LastArrivalsTableDataSource.swift in Sources */,
 				61CEAA631F5DBEA30016FBD7 /* ProductDetails.swift in Sources */,
 				61AAB9301F7BD07B00CD32D3 /* SortModalTableViewCell.swift in Sources */,
@@ -972,7 +978,6 @@
 				6180AC0A1F72D2D6007768F2 /* CategoryViewController.swift in Sources */,
 				61934FB41F62C73B00A42853 /* ShopifyPolicyAdapter.swift in Sources */,
 				61A507341F7E7A35004504EF /* ProductOptionsViewController.swift in Sources */,
-				61B279471F8E105900133770 /* PolicyRepository.swift in Sources */,
 				614142DA1F6C266000379BB9 /* Article.swift in Sources */,
 				612DE2571F6C3ADA00582B58 /* Author.swift in Sources */,
 				61FC3DA91F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift in Sources */,
@@ -993,6 +998,7 @@
 				6141AAB41F8BE7ED00F9019B /* SplashInteractor.swift in Sources */,
 				61934FBA1F62C76000A42853 /* ShopifyShopAdapter.swift in Sources */,
 				611EF3521F582A76001B8B9C /* Product.swift in Sources */,
+				61B279501F8E48C900133770 /* PolicyRepository.swift in Sources */,
 				61B5BEE01F7505F700E075B7 /* ArticleLoadMoreCell.swift in Sources */,
 				61ED88F91F71720B006BDA79 /* GridCollectionDataSource.swift in Sources */,
 			);

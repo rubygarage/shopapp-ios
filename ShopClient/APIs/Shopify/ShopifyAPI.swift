@@ -175,7 +175,7 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
                 .paymentSettings({ $0
                     .currencyCode()
                 })
-                .products(first: Int32(perPage), after: after as? String, sortKey: sortKey, reverse: reverse, query: searchPhrase, self.productConnectionQuery())
+                .products(first: Int32(perPage), after: after as? String, reverse: reverse, sortKey: sortKey, query: searchPhrase, self.productConnectionQuery())
             }
         }
     }
@@ -315,7 +315,7 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
             query.description()
             query.updatedAt()
             query.image(self.imageQuery())
-            query.products(first: Int32(perPage), after: after as? String, sortKey: sortKey, reverse: reverse, self.productConnectionQuery())
+            query.products(first: Int32(perPage), after: after as? String, reverse: reverse, sortKey: sortKey, self.productConnectionQuery())
             if perPage > 0 {
                 query.descriptionHtml()
             }
