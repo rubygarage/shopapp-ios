@@ -51,7 +51,7 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
     }
     
     private func loadShopInfo() {
-        let shop = Shop.mr_findFirst()
+        let shop = ShopRepository.getShop()
         
         if let privacyPolicy = shop?.privacyPolicy {
             policies.append(privacyPolicy)

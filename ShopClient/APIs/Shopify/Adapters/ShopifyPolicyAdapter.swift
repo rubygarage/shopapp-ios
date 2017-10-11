@@ -7,24 +7,23 @@
 //
 
 import MobileBuySDK
-import MagicalRecord
 
-class ShopifyPolicyAdapter {
-    class func loadPolicy<T: Policy>(with item: Storefront.ShopPolicy?, in context: NSManagedObjectContext) -> T? {
-        var policy = T.mr_findFirst(in: context)
-        if policy == nil {
-            policy = T.mr_createEntity(in: context)
+extension Storefront.ShopPolicy: PolicyEntityInterface {
+    var entityBody: String? {
+        get {
+            return body
         }
-        policy?.update(with: item)
-        
-        return policy
     }
-}
-
-internal extension Policy {
-    func update(with remoteItem: Storefront.ShopPolicy?) {
-        title = remoteItem?.title
-        body = remoteItem?.body
-        url = remoteItem?.url.absoluteString
+    
+    var entityTitle: String? {
+        get {
+            return title
+        }
+    }
+    
+    var entityUrl: String? {
+        get {
+            return url.absoluteString
+        }
     }
 }
