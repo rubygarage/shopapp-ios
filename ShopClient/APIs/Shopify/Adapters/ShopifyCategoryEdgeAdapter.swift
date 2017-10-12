@@ -8,7 +8,7 @@
 
 import MobileBuySDK
 
-extension Storefront.CollectionEdge: CategoryEdgeEntityInterface {
+extension Storefront.CollectionEdge: CategoryEntityInterface {
     var entityId: String {
         get {
             return node.id.rawValue
@@ -27,21 +27,27 @@ extension Storefront.CollectionEdge: CategoryEdgeEntityInterface {
         }
     }
     
+    var entityAdditionalDescription: String? {
+        get {
+            return nil
+        }
+    }
+    
     var entityUpdatedAt: Date? {
         get {
             return node.updatedAt
         }
     }
     
-    var entityPaginationValue: Any? {
-        get {
-            return cursor
-        }
-    }
-    
     var entityImage: ImageEntityInterface? {
         get {
             return node.image
+        }
+    }
+    
+    var entityPaginationValue: Any? {
+        get {
+            return cursor
         }
     }
 }

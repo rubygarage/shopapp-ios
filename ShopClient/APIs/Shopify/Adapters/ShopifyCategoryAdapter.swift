@@ -27,6 +27,12 @@ extension Storefront.Collection: CategoryEntityInterface {
         }
     }
     
+    var entityAdditionalDescription: String? {
+        get {
+            return descriptionHtml
+        }
+    }
+    
     var entityUpdatedAt: Date? {
         get {
             return updatedAt
@@ -36,6 +42,12 @@ extension Storefront.Collection: CategoryEntityInterface {
     var entityImage: ImageEntityInterface? {
         get {
             return image
+        }
+    }
+        
+    var entityPaginationValue: Any? {
+        get {
+            return nil
         }
     }
 }

@@ -20,7 +20,7 @@ class SplashWorker {
     }
     
     func loadCategories(callback: @escaping (_ categories: [Category]?, _ error: Error?) -> ()) {
-        ShopCoreAPI.shared.getCategoryList { [weak self] (categories, error) in
+        ShopCoreAPI.shared.getCategoryList(perPage: 0) { (categories, error) in
             callback(categories, error)
         }
     }

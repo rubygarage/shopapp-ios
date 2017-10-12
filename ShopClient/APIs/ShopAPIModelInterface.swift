@@ -26,11 +26,9 @@ protocol CategoryEntityInterface {
     var entityId: String { get }
     var entityTitle: String? { get }
     var entityCategoryDescription: String? { get }
+    var entityAdditionalDescription: String? { get }
     var entityUpdatedAt: Date? { get }
     var entityImage: ImageEntityInterface? { get }
-}
-
-protocol CategoryEdgeEntityInterface: CategoryEntityInterface {
     var entityPaginationValue: Any? { get }
 }
 

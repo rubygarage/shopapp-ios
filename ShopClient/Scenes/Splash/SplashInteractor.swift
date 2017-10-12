@@ -30,12 +30,9 @@ class SplashInteractor: SplashBusinessLogic, SplashDataStore {
             let response = Splash.Remote.Response(error: error)
             self?.presenter?.presentShopInfo(response: response)
         })
-        let response = Splash.Remote.Response()
-        presenter?.presentShopInfo(response: response)
     }
     
     func loadCategories(request: Splash.Remote.Request) {
-        worker = SplashWorker()
         worker?.loadCategories(callback: { [weak self] (categories, error) in
             let response = Splash.Remote.Response(error: error)
             self?.presenter?.presentCategories(response: response)
