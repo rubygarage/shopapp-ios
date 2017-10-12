@@ -99,13 +99,15 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
         let query = categoryListQuery(perPage: perPage, after: paginationValue, sortBy: sortBy, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             let currencyCode = response?.shop.paymentSettings.currencyCode.rawValue ?? String()
-            var categories = [Category]()
+            var categoriesArray = [Category]()
             if let categoryEdges = response?.shop.collections.edges {
-                for categoryEdge in categoryEdges {
-                    categories.append(ShopifyCategoryAdapter(category: categoryEdge.node, cursor: categoryEdge.cursor, currencyCode: currencyCode))
-                }
+                CategoryRepository.loadCategories(with: categoryEdges, currencyCode: currencyCode, callback: { (categories, error) in
+                    categoriesArray += categories ?? [Category]()
+                    callback(categoriesArray, error)
+                })
+            } else {
+                callback(categoriesArray, error)
             }
-            callback(categories, error)
         })
         task?.resume()
     }

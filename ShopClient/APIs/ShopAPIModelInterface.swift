@@ -21,3 +21,18 @@ protocol PolicyEntityInterface {
     var entityTitle: String? { get }
     var entityUrl: String? { get }
 }
+
+protocol CategoryEdgeEntityInterface {
+    var entityId: String { get }
+    var entityTitle: String? { get }
+    var entityCategoryDescription: String? { get }
+    var entityUpdatedAt: Date? { get }
+    var entityPaginationValue: Any? { get }
+    var image: ImageEntityInterface? { get }
+}
+
+protocol ImageEntityInterface {
+    var entityId: String? { get }
+    var entitySrc: String? { get }
+    var entityImageDescription: String? { get }
+}

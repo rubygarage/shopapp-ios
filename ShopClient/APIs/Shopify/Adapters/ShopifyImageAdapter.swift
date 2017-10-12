@@ -8,12 +8,22 @@
 
 import MobileBuySDK
 
-class ShopifyImageAdapter: Image {
-    init(image: Storefront.Image) {
-        super.init()
-        
-        self.id = image.id?.rawValue ?? String()
-        self.src = image.src.absoluteString
-        self.imageDescription = image.altText ?? String()
+extension Storefront.Image: ImageEntityInterface {
+    var entityId: String? {
+        get {
+            return id?.rawValue
+        }
+    }
+    
+    var entitySrc: String? {
+        get {
+            return src.absoluteString
+        }
+    }
+    
+    var entityImageDescription: String? {
+        get {
+            return altText
+        }
     }
 }

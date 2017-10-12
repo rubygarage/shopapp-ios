@@ -14,7 +14,7 @@ extension UIViewController {
         var images = [SKPhoto]()
         if let items = product.images {
             for item in items {
-                images.append(SKPhoto.photoWithImageURL(item.src))
+                images.append(SKPhoto.photoWithImageURL(item.src ?? String()))
             }
         }
         let browser = SKPhotoBrowser(photos: images)

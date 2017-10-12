@@ -69,7 +69,7 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
     private func openCategoryController(with index: Int) {
         if index < categories.count {
             let category = categories[index]
-            setCategoryController(with: category.id, title: category.title)
+            setCategoryController(with: category.id ?? String(), title: category.title ?? String())
         }
     }
     
