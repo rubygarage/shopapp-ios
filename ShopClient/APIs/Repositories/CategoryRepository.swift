@@ -24,6 +24,20 @@ class CategoryRepository {
         }
     }
     
+    class func loadCategory(with item: CategoryEntityInterface, currencyCode: String?, callback: @escaping ((_ category: Category?, _ error: Error?) -> ())) {
+        MagicalRecord.save({ (context) in
+            let category = Category.mr_findFirstOrCreate(byAttribute: "id", withValue: item.entityId, in: context)
+            category.update(with: item, currencyCode: currencyCode, in: context)
+        }) { (contextDidSave, error) in
+            let category = Category.mr_findFirst(byAttribute: "id", withValue: item.entityId)
+            callback(category, error)
+        }
+    }
+    
+    class func getCategories() -> [Category] {
+        return Category.mr_findAll() as? [Category] ?? [Category]()
+    }
+    
     class func getCategory(with id: String) -> Category? {
         return Category.mr_findFirst(byAttribute: "id", withValue: id)
     }
@@ -36,7 +50,17 @@ internal extension Category {
         categoryDescription = remoteItem?.entityCategoryDescription
         updatedAt = remoteItem?.entityUpdatedAt as NSDate?
         paginationValue = remoteItem?.entityPaginationValue as? NSObject
-        if let remoteImage = remoteItem?.image {
+        if let remoteImage = remoteItem?.entityImage {
+            image = ImageRepository.loadImage(with: remoteImage, in: context)
+        }
+    }
+    
+    func update(with remoteItem: CategoryEntityInterface?, currencyCode: String?, in context: NSManagedObjectContext) {
+        id = remoteItem?.entityId
+        title = remoteItem?.entityTitle
+        categoryDescription = remoteItem?.entityCategoryDescription
+        updatedAt = remoteItem?.entityUpdatedAt as NSDate?
+        if let remoteImage = remoteItem?.entityImage {
             image = ImageRepository.loadImage(with: remoteImage, in: context)
         }
     }

@@ -30,10 +30,10 @@ class CategoryViewController: GridCollectionViewController, SortModalControllerP
     // MARK: - private
     private func updateData(category: Category) {
         self.category = category
-        if let items = category.categoryDetails?.products {
-            updateProducts(products: items)
-            canLoadMore = products.count == kItemsPerPage
-        }
+//        if let items = category.categoryDetails?.products {
+//            updateProducts(products: items)
+//            canLoadMore = products.count == kItemsPerPage
+//        }
     }
     
     private func updateProducts(products: [Product]) {

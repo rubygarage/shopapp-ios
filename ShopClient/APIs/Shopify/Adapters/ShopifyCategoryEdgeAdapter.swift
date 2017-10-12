@@ -39,7 +39,7 @@ extension Storefront.CollectionEdge: CategoryEdgeEntityInterface {
         }
     }
     
-    var image: ImageEntityInterface? {
+    var entityImage: ImageEntityInterface? {
         get {
             return node.image
         }

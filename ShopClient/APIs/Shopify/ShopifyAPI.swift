@@ -117,8 +117,9 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             let categoryNode = response?.node as! Storefront.Collection
             let currencyCode = response?.shop.paymentSettings.currencyCode.rawValue ?? String()
-            let category = ShopifyCategoryAdapter(category: categoryNode, currencyCode: currencyCode, detailsNedded: true)
-            callback(category, error)
+            CategoryRepository.loadCategory(with: categoryNode, currencyCode: currencyCode, callback: { (category, error) in
+                callback(category, error)
+            })
         })
         task?.resume()
     }

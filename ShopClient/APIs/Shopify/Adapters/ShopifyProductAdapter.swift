@@ -26,10 +26,10 @@ class ShopifyProductAdapter: Product {
         productDetails = ShopifyProductDetailsAdapter(product: product)
         
         var imagesArray = [Image]()
-        let imageNodes = product.images.edges.map({ $0.node })
-        for imageNode in imageNodes {
-            imagesArray.append(ShopifyImageAdapter(image: imageNode))
-        }
+//        let imageNodes = product.images.edges.map({ $0.node })
+//        for imageNode in imageNodes {
+//            imagesArray.append(ShopifyImageAdapter(image: imageNode))
+//        }
         images = imagesArray
 
         if let productPrice = product.variants.edges.first?.node.price {

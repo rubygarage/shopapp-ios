@@ -14,6 +14,7 @@ import UIKit
 
 protocol SplashBusinessLogic {
     func loadShopInfo(request: Splash.Remote.Request)
+    func loadCategories(request: Splash.Remote.Request)
 }
 
 protocol SplashDataStore {
@@ -28,6 +29,16 @@ class SplashInteractor: SplashBusinessLogic, SplashDataStore {
         worker?.loadShopInfo(callback: { [weak self] (shop, error) in
             let response = Splash.Remote.Response(error: error)
             self?.presenter?.presentShopInfo(response: response)
+        })
+        let response = Splash.Remote.Response()
+        presenter?.presentShopInfo(response: response)
+    }
+    
+    func loadCategories(request: Splash.Remote.Request) {
+        worker = SplashWorker()
+        worker?.loadCategories(callback: { [weak self] (categories, error) in
+            let response = Splash.Remote.Response(error: error)
+            self?.presenter?.presentCategories(response: response)
         })
     }
 }

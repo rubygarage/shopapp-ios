@@ -20,8 +20,7 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
         super.viewDidLoad()
 
         setupTableView()
-        loadCategories()
-        loadShopInfo()
+        loadData()
     }
     
     private func setupTableView() {
@@ -41,16 +40,7 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
         tableView.delegate = tableDelegate
     }
     
-    private func loadCategories() {
-        ShopCoreAPI.shared.getCategoryList { [weak self] (categories, error) in
-            if let items = categories {
-                self?.categories = items
-                self?.tableView.reloadSections([MenuSection.category.rawValue], with: .none)
-            }
-        }
-    }
-    
-    private func loadShopInfo() {
+    private func loadData() {
         let shop = ShopRepository.getShop()
         
         if let privacyPolicy = shop?.privacyPolicy {
@@ -64,6 +54,8 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
         if let termsOfService = shop?.termsOfService {
             policies.append(termsOfService)
         }
+        
+        categories = CategoryRepository.getCategories()
     }
     
     private func openCategoryController(with index: Int) {

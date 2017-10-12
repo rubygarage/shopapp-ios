@@ -15,9 +15,10 @@ class ShopifyProductVariantAdapter: ProductVariant {
         self.id = productVariant.id.rawValue 
         self.title = productVariant.title
         self.price = String(describing: productVariant.price)
-        self.available = productVariant.availableForSale 
-        if let image = productVariant.image {
-            self.image = ShopifyImageAdapter(image: image)
-        }
+        self.available = productVariant.availableForSale
+        
+//        if let image = productVariant.image {
+//            self.image = ShopifyImageAdapter(image: image)
+//        }
     }
 }

@@ -11,6 +11,8 @@
 		6106C6C81F7A40A600E87486 /* ArticleDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6106C6C71F7A40A600E87486 /* ArticleDetails.storyboard */; };
 		6106C6CB1F7A40F400E87486 /* ArticleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6106C6CA1F7A40F400E87486 /* ArticleDetailsViewController.swift */; };
 		6107F0D91F8F8C7000547DA9 /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6107F0D81F8F8C7000547DA9 /* ImageRepository.swift */; };
+		6107F0DA1F8F948200547DA9 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611EF3511F582A76001B8B9C /* Product.swift */; };
+		6107F0DC1F8FA70C00547DA9 /* ShopifyCategoryAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6107F0DB1F8FA70C00547DA9 /* ShopifyCategoryAdapter.swift */; };
 		610873AB1F7D027200BF81CA /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610873A51F7D027200BF81CA /* ProductDetailsViewController.swift */; };
 		610A4F891F8E7F5500A56919 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610A4F881F8E7F5500A56919 /* CategoryRepository.swift */; };
 		61127A331F879C5C00565AB1 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61127A321F879C5C00565AB1 /* Splash.storyboard */; };
@@ -18,10 +20,8 @@
 		611EF33E1F56CBB1001B8B9C /* ShopCoreAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611EF33D1F56CBB1001B8B9C /* ShopCoreAPI.swift */; };
 		611EF3411F56CBE6001B8B9C /* ShopAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611EF3401F56CBE6001B8B9C /* ShopAPIProtocol.swift */; };
 		611EF3441F56DA2A001B8B9C /* ShopifyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611EF3431F56DA2A001B8B9C /* ShopifyAPI.swift */; };
-		611EF3521F582A76001B8B9C /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611EF3511F582A76001B8B9C /* Product.swift */; };
 		6124BCE31F73C2880099E879 /* PolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6124BCE21F73C2880099E879 /* PolicyViewController.swift */; };
 		612C0DEB1F62F8C5003F37BD /* ShopifyCategoryEdgeAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612C0DEA1F62F8C5003F37BD /* ShopifyCategoryEdgeAdapter.swift */; };
-		612C0DED1F62FF03003F37BD /* CategoryDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612C0DEC1F62FF03003F37BD /* CategoryDetails.swift */; };
 		612C0DEF1F62FF72003F37BD /* ShopifyCategoryDetailsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612C0DEE1F62FF72003F37BD /* ShopifyCategoryDetailsAdapter.swift */; };
 		612DE2571F6C3ADA00582B58 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612DE2561F6C3ADA00582B58 /* Author.swift */; };
 		612DE2591F6C3C1E00582B58 /* ShopifyArticleAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612DE2581F6C3C1E00582B58 /* ShopifyArticleAdapter.swift */; };
@@ -131,6 +131,7 @@
 		6106C6C71F7A40A600E87486 /* ArticleDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArticleDetails.storyboard; sourceTree = "<group>"; };
 		6106C6CA1F7A40F400E87486 /* ArticleDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsViewController.swift; sourceTree = "<group>"; };
 		6107F0D81F8F8C7000547DA9 /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
+		6107F0DB1F8FA70C00547DA9 /* ShopifyCategoryAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyCategoryAdapter.swift; sourceTree = "<group>"; };
 		610873A51F7D027200BF81CA /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		610A4F881F8E7F5500A56919 /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
 		61127A321F879C5C00565AB1 /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
@@ -513,6 +514,7 @@
 				612DE2581F6C3C1E00582B58 /* ShopifyArticleAdapter.swift */,
 				612DE25A1F6C3F3C00582B58 /* ShopifyAuthorAdapter.swift */,
 				612C0DEA1F62F8C5003F37BD /* ShopifyCategoryEdgeAdapter.swift */,
+				6107F0DB1F8FA70C00547DA9 /* ShopifyCategoryAdapter.swift */,
 				612C0DEE1F62FF72003F37BD /* ShopifyCategoryDetailsAdapter.swift */,
 				61934FAF1F62C04400A42853 /* ShopifyImageAdapter.swift */,
 				61A507261F7E64FF004504EF /* ShopifyOptionAdapter.swift */,
@@ -957,6 +959,7 @@
 				614142D61F6BD70400379BB9 /* LastArrivalsTableDataSource.swift in Sources */,
 				61CEAA631F5DBEA30016FBD7 /* ProductDetails.swift in Sources */,
 				61AAB9301F7BD07B00CD32D3 /* SortModalTableViewCell.swift in Sources */,
+				6107F0DA1F8F948200547DA9 /* Product.swift in Sources */,
 				61934FB91F62C76000A42853 /* ShopifyProductAdapter.swift in Sources */,
 				61CEAA6C1F5ECFFE0016FBD7 /* UIStoryboardAdditions.swift in Sources */,
 				6152B1281F791A1100045A42 /* ArticlesListTableDelegate.swift in Sources */,
@@ -974,6 +977,7 @@
 				614142D31F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.swift in Sources */,
 				6141AAB51F8BE7ED00F9019B /* SplashModels.swift in Sources */,
 				611B70EA1F7C19E20056BAF9 /* SortModalDelegate.swift in Sources */,
+				6107F0DC1F8FA70C00547DA9 /* ShopifyCategoryAdapter.swift in Sources */,
 				6152B1261F79181100045A42 /* ArticlesListTableDataSource.swift in Sources */,
 				6180AC0A1F72D2D6007768F2 /* CategoryViewController.swift in Sources */,
 				61934FB41F62C73B00A42853 /* ShopifyPolicyAdapter.swift in Sources */,
@@ -981,7 +985,6 @@
 				614142DA1F6C266000379BB9 /* Article.swift in Sources */,
 				612DE2571F6C3ADA00582B58 /* Author.swift in Sources */,
 				61FC3DA91F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift in Sources */,
-				612C0DED1F62FF03003F37BD /* CategoryDetails.swift in Sources */,
 				611EF3411F56CBE6001B8B9C /* ShopAPIProtocol.swift in Sources */,
 				612C0DEB1F62F8C5003F37BD /* ShopifyCategoryEdgeAdapter.swift in Sources */,
 				61FC3DAC1F7EB4E600DB0AD7 /* ProductOptionsCollectionDataSource.swift in Sources */,
@@ -997,7 +1000,6 @@
 				61A5072D1F7E79FB004504EF /* ImagesCarouselCollectionDelegate.swift in Sources */,
 				6141AAB41F8BE7ED00F9019B /* SplashInteractor.swift in Sources */,
 				61934FBA1F62C76000A42853 /* ShopifyShopAdapter.swift in Sources */,
-				611EF3521F582A76001B8B9C /* Product.swift in Sources */,
 				61B279501F8E48C900133770 /* PolicyRepository.swift in Sources */,
 				61B5BEE01F7505F700E075B7 /* ArticleLoadMoreCell.swift in Sources */,
 				61ED88F91F71720B006BDA79 /* GridCollectionDataSource.swift in Sources */,
