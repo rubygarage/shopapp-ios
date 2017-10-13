@@ -56,14 +56,13 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
     func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping ApiCallback<[Product]>) {
         let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: nil, sortBy: sortBy, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
-            let currencyCode = response?.shop.paymentSettings.currencyCode.rawValue ?? String()
-            var products = [Product]()
             if let edges = response?.shop.products.edges {
-                for edge in edges {
-                    products.append(ShopifyProductAdapter(product: edge.node, cursor: edge.cursor, currencyCode: currencyCode))
-                }
+                ProductRepository.loadProducts(with: edges, callback: { (products, error) in
+                    callback(products, error)
+                })
+            } else {
+                callback([Product](), nil)
             }
-            callback(products, error)
         })
         task?.resume()
     }
@@ -71,10 +70,10 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
     func getProduct(id: String, options: [SelectedOption], callback: @escaping ApiCallback<Product>) {
         let query = productDetailsQuery(id: id, options: options)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
-            let currencyCode = response?.shop.paymentSettings.currencyCode.rawValue ?? String()
             let productNode = response?.node as! Storefront.Product
-            let product = ShopifyProductAdapter(product: productNode, cursor: nil, currencyCode: currencyCode)
-            callback(product, error)
+            ProductRepository.loadProduct(with: productNode, callback: { (product, error) in
+                callback(product, error)
+            })
         })
         task?.resume()
     }
@@ -82,14 +81,12 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
     func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping ApiCallback<[Product]>) {
         let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: searchQuery, sortBy: nil, reverse: false)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
-            var products = [Product]()
-            let currencyCode = response?.shop.paymentSettings.currencyCode.rawValue ?? String()
             if let edges = response?.shop.products.edges {
-                for edge in edges {
-                    products.append(ShopifyProductAdapter(product: edge.node, cursor: edge.cursor, currencyCode: currencyCode))
-                }
+                ProductRepository.loadProducts(with: edges, callback: { (products, error) in
+                    callback(products, error)
+                })
             }
-            callback(products, error)
+            callback([Product](), error)
         })
         task?.resume()
     }
@@ -99,14 +96,12 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
         let query = categoryListQuery(perPage: perPage, after: paginationValue, sortBy: sortBy, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             let currencyCode = response?.shop.paymentSettings.currencyCode.rawValue ?? String()
-            var categoriesArray = [Category]()
             if let categoryEdges = response?.shop.collections.edges {
                 CategoryRepository.loadCategories(with: categoryEdges, currencyCode: currencyCode, callback: { (categories, error) in
-                    categoriesArray += categories ?? [Category]()
-                    callback(categoriesArray, error)
+                    callback(categories, error)
                 })
             } else {
-                callback(categoriesArray, error)
+                callback([Category](), error)
             }
         })
         task?.resume()

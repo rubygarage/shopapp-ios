@@ -8,12 +8,22 @@
 
 import MobileBuySDK
 
-class ShopifyProductOptionAdapter: ProductOption {
-    init(option: Storefront.ProductOption) {
-        super.init()
-        
-        id = option.id.rawValue
-        name = option.name
-        values = option.values
+extension Storefront.ProductOption: ProductOptionEntityInterface {
+    var entityId: String {
+        get {
+            return id.rawValue
+        }
+    }
+    
+    var entityName: String {
+        get {
+            return name
+        }
+    }
+    
+    var entityValues: [String] {
+        get {
+            return values
+        }
     }
 }

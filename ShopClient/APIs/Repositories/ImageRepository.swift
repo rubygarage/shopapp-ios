@@ -16,6 +16,16 @@ class ImageRepository {
         
         return image
     }
+    
+    class func loadImages(with items: [ImageEntityInterface], in context: NSManagedObjectContext) -> [Image] {
+        for imageInterface in items {
+            let image = Image.mr_findFirstOrCreate(byAttribute: "id", withValue: imageInterface.entityId, in: context)
+            image.update(with: imageInterface)
+        }
+        let imagesIds = items.map({ $0.entityId })
+        let predicate = NSPredicate(format: "id IN %@", imagesIds)
+        return Image.mr_findAll(with: predicate, in: context) as? [Image] ?? [Image]()
+    }
 }
 
 internal extension Image {

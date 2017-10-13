@@ -8,6 +8,7 @@
 
 import UIKit
 
+/*
 class ProductVariant: NSObject {
     var id: String?
     var title: String?
@@ -15,3 +16,4 @@ class ProductVariant: NSObject {
     var available = false
     var image: Image?
 }
+ */

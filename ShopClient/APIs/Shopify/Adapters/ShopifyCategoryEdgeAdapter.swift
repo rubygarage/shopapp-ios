@@ -50,6 +50,12 @@ extension Storefront.CollectionEdge: CategoryEntityInterface {
             return cursor
         }
     }
+    
+    var entityProducts: [ProductEntityInterface]? {
+        get {
+            return nil
+        }
+    }
 }
 
 /*

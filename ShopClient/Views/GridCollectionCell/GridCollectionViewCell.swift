@@ -28,7 +28,7 @@ class GridCollectionViewCell: UICollectionViewCell {
     }
 
     public func configure(with item: Product) {
-        let imageUrl = URL(string: item.images?.first?.src ?? String())
+        let imageUrl = URL(string: item.imagesArray?.first?.src ?? String())
         productImageView.sd_setImage(with: imageUrl, completed: nil)
         titleLabel.text = item.title
         priceLabel.text = "\(item.price) \(item.currency)"

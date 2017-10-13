@@ -8,6 +8,7 @@
 
 import MobileBuySDK
 
+/*
 class ShopifyProductVariantAdapter: ProductVariant {
     init(productVariant: Storefront.ProductVariant ) {
         super.init()
@@ -22,3 +23,4 @@ class ShopifyProductVariantAdapter: ProductVariant {
 //        }
     }
 }
+ */

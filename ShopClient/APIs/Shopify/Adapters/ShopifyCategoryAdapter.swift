@@ -50,4 +50,10 @@ extension Storefront.Collection: CategoryEntityInterface {
             return nil
         }
     }
+    
+    var entityProducts: [ProductEntityInterface]? {
+        get {
+            return products.edges.map({ $0.node })
+        }
+    }
 }

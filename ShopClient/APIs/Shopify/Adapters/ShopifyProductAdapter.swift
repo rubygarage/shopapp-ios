@@ -8,6 +8,93 @@
 
 import MobileBuySDK
 
+extension Storefront.Product: ProductEntityInterface {
+    var entityId: String {
+        get {
+            return id.rawValue
+        }
+    }
+    
+    var entityTitle: String? {
+        get {
+            return title
+        }
+    }
+    
+    var entityProductDescription: String? {
+        get {
+            return description
+        }
+    }
+    
+    var entityCurrency: String? {
+        get  {
+            return nil
+        }
+    }
+    
+    var entityPrice: String? {
+        get  {
+            return String(describing: variants.edges.first?.node.price)
+        }
+    }
+    
+    var entityDiscount: String? {
+        get  {
+            return nil
+        }
+    }
+    
+    var entityImages: [ImageEntityInterface]? {
+        get  {
+            return images.edges.map({ $0.node })
+        }
+    }
+    
+    var entityType: String? {
+        get  {
+            return productType
+        }
+    }
+    
+    var entityVendor: String? {
+        get  {
+            return vendor
+        }
+    }
+    
+    var entityCreatedAt: Date? {
+        get  {
+            return createdAt
+        }
+    }
+    
+    var entityUpdatedAt: Date? {
+        get  {
+            return updatedAt
+        }
+    }
+    
+    var entityTags: [String]? {
+        get  {
+            return tags
+        }
+    }
+    
+    var entityPaginationValue: String? {
+        get  {
+            return nil
+        }
+    }
+    
+    var entityAdditionalDescription: String? {
+        get {
+            return descriptionHtml
+        }
+    }
+}
+
+/*
 class ShopifyProductAdapter: Product {
     init(product: Storefront.Product, cursor: String? = nil, currencyCode: String) {
         super.init()
@@ -37,3 +124,4 @@ class ShopifyProductAdapter: Product {
         }
     }
 }
+ */

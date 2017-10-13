@@ -61,7 +61,7 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
     func itemsCount(in optionIndex: Int) -> Int {
         if optionIndex < options.count {
             let option = options[optionIndex]
-            return option.values.count
+            return option.valuesArray.count
         }
         return 0
     }
@@ -69,21 +69,21 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
     func item(at optionIndex: Int, valueIndex: Int) -> String {
         if optionIndex < options.count {
             let option = options[optionIndex]
-            return option.values[valueIndex]
+            return option.valuesArray[valueIndex]
         }
         return String()
     }
     
     func sectionTitle(for sectionIndex: Int) -> String {
         if sectionIndex < options.count {
-            return options[sectionIndex].name
+            return options[sectionIndex].name ?? String()
         }
         return String()
     }
     
     func isItemSelected(at indexPath: IndexPath) -> Bool {
         if indexPath.section < options.count {
-            let item = options[indexPath.section].values[indexPath.row]
+            let item = options[indexPath.section].valuesArray[indexPath.row]
             let selectedItem = selectedOptions[indexPath.section].value
             return item == selectedItem
         }
@@ -93,8 +93,8 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
     // MARK: - ProductOptionsCollectionDelegateProtocol
     func didSelectItem(at indexPath: IndexPath) {
         if indexPath.section < options.count {
-            let name = options[indexPath.section].name
-            let value = options[indexPath.section].values[indexPath.row]
+            let name = options[indexPath.section].name ?? String()
+            let value = options[indexPath.section].valuesArray[indexPath.row]
             controllerDelegate?.didSelectOption(with: name, value: value)
         }
     }

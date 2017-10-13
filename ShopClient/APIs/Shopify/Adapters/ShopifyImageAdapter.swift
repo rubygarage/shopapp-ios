@@ -9,9 +9,9 @@
 import MobileBuySDK
 
 extension Storefront.Image: ImageEntityInterface {
-    var entityId: String? {
+    var entityId: String {
         get {
-            return id?.rawValue
+            return id?.rawValue ?? String()
         }
     }
     

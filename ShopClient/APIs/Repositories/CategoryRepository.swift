@@ -56,5 +56,8 @@ internal extension Category {
         if let remoteImage = remoteItem?.entityImage {
             image = ImageRepository.loadImage(with: remoteImage, in: context)
         }
+        if let remoteProducts = remoteItem?.entityProducts {
+            addToProducts(NSSet(array: ProductRepository.loadProducts(with: remoteProducts, in: context)))
+        }
     }
 }

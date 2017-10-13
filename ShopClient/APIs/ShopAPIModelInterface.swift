@@ -30,10 +30,34 @@ protocol CategoryEntityInterface {
     var entityUpdatedAt: Date? { get }
     var entityImage: ImageEntityInterface? { get }
     var entityPaginationValue: Any? { get }
+    var entityProducts: [ProductEntityInterface]? { get }
 }
 
 protocol ImageEntityInterface {
-    var entityId: String? { get }
+    var entityId: String { get }
     var entitySrc: String? { get }
     var entityImageDescription: String? { get }
+}
+
+protocol ProductEntityInterface {
+    var entityId: String { get }
+    var entityTitle: String? { get }
+    var entityProductDescription: String? { get }
+    var entityCurrency: String? { get }
+    var entityPrice: String? { get }
+    var entityDiscount: String? { get }
+    var entityImages: [ImageEntityInterface]? { get }
+    var entityType: String? { get }
+    var entityVendor: String? { get }
+    var entityCreatedAt: Date? { get }
+    var entityUpdatedAt: Date? { get }
+    var entityTags: [String]? { get }
+    var entityPaginationValue: String? { get }
+    var entityAdditionalDescription: String? { get }
+}
+
+protocol ProductOptionEntityInterface {
+    var entityId: String { get }
+    var entityName: String { get }
+    var entityValues: [String] { get }
 }
