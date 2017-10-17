@@ -56,6 +56,7 @@ protocol ProductEntityInterface {
     var entityAdditionalDescription: String? { get }
     var entityVariants: [ProductVariantEntityEnterface]? { get }
     var entityOptions: [ProductOptionEntityInterface]? { get }
+    var entityVariantBySelectedOptions: ProductVariantEntityEnterface? { get }
 }
 
 protocol ProductOptionEntityInterface {

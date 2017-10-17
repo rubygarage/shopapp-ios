@@ -10,7 +10,6 @@ import MagicalRecord
 
 class ProductVariantRepository {
     class func loadVariants(with items: [ProductVariantEntityEnterface], in context: NSManagedObjectContext) -> [ProductVariant] {
-        
         for variantInterface in items {
             let variant = ProductVariant.mr_findFirstOrCreate(byAttribute: "id", withValue: variantInterface.entityId, in: context)
             variant.update(with: variantInterface, in: context)
@@ -18,6 +17,12 @@ class ProductVariantRepository {
         let variantsIds = items.map({ $0.entityId })
         let predicate = NSPredicate(format: "id IN %@", variantsIds)
         return ProductVariant.mr_findAll(with: predicate, in: context) as? [ProductVariant] ?? [ProductVariant]()
+    }
+    
+    class func loadVariant(with item: ProductVariantEntityEnterface, in context: NSManagedObjectContext) -> ProductVariant {
+        let variant = ProductVariant.mr_findFirstOrCreate(byAttribute: "id", withValue: item.entityId, in: context)
+        variant.update(with: item, in: context)
+        return variant
     }
 }
 

@@ -18,6 +18,7 @@ class LastArrivalsCollectionViewCell: UICollectionViewCell {
         let imageUrl = URL(string: item.imagesArray?.first?.src ?? String())
         productImageView.sd_setImage(with: imageUrl)
         titleLabel.text = item.title
-        priceLabel.text = "\(item.lowestPrice) \(item.currency ?? String())"
+        let localizedString = NSLocalizedString("Label.PriceFrom", comment: String())
+        priceLabel.text = String.localizedStringWithFormat(localizedString, item.lowestPrice, item.currency)
     }
 }

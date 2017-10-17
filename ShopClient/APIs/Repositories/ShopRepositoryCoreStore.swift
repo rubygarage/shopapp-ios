@@ -43,15 +43,12 @@ internal extension Shop {
     func update(with remoteItem: ShopEntityInterface?, transaction: AsynchronousDataTransaction) {
         name = remoteItem?.entityName
         shopDescription = remoteItem?.entityDesription
-        
         if let policy = remoteItem?.entityPrivacyPolicy {
             privacyPolicy = PolicyRepositoryCoreStore.loadPolicy(with: policy, transaction: transaction)
         }
-        
         if let policy = remoteItem?.entityRefundPolicy {
             refundPolicy = PolicyRepositoryCoreStore.loadPolicy(with: policy, transaction: transaction)
         }
-        
         if let terms = remoteItem?.entityTermsOfService {
             termsOfService = PolicyRepositoryCoreStore.loadPolicy(with: terms, transaction: transaction)
         }

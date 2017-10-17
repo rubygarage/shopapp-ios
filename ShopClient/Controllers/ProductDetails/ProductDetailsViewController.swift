@@ -37,6 +37,12 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
     
     // MARK: - setup
     func setupData() {
+        if selectedOptions.count == 0 {
+            setupSelectedOptions()
+        }
+    }
+    
+    private func setupSelectedOptions() {
         if let options = product?.optionsArray {
             for option in options {
                 selectedOptions.append((name: option.name ?? String(), value: option.valuesArray.first ?? String()))

@@ -15,7 +15,6 @@ class PolicyRepositoryCoreStore {
             policy = transaction.create(Into<T>())
         }
         policy?.update(with: item)
-        
         return policy
     }
 }

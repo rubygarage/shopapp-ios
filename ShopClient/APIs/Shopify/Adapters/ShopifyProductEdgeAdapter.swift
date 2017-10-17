@@ -95,6 +95,12 @@ extension Storefront.ProductEdge: ProductEntityInterface {
     
     var entityOptions: [ProductOptionEntityInterface]? {
         get {
+            return node.options
+        }
+    }
+    
+    var entityVariantBySelectedOptions: ProductVariantEntityEnterface? {
+        get {
             return nil
         }
     }

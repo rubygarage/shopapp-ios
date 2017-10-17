@@ -98,4 +98,10 @@ extension Storefront.Product: ProductEntityInterface {
             return options
         }
     }
+    
+    var entityVariantBySelectedOptions: ProductVariantEntityEnterface? {
+        get {
+            return variantBySelectedOptions
+        }
+    }
 }

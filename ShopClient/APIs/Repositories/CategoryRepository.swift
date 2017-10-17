@@ -11,12 +11,7 @@ import MagicalRecord
 class CategoryRepository {
     // MARK: - public    
     class func loadCategories(with items: [CategoryEntityInterface], callback: @escaping ((_ categories: [Category]?, _ error: Error?) -> ())) {
-        MagicalRecord.save({ (context) in
-            for categoryInterface in items {
-                let category = Category.mr_findFirstOrCreate(byAttribute: "id", withValue: categoryInterface.entityId, in: context)
-                category.update(with: categoryInterface, in: context)
-            }
-        }) { (contextDidSave, error) in
+        updateCategory(with: items) { (error) in
             let categoriesIds = items.map({ $0.entityId })
             let predicate = NSPredicate(format: "id IN %@", categoriesIds)
             let categories = Category.mr_findAll(with: predicate) as? [Category]
@@ -25,10 +20,7 @@ class CategoryRepository {
     }
     
     class func loadCategory(with item: CategoryEntityInterface, callback: @escaping ((_ category: Category?, _ error: Error?) -> ())) {
-        MagicalRecord.save({ (context) in
-            let category = Category.mr_findFirstOrCreate(byAttribute: "id", withValue: item.entityId, in: context)
-            category.update(with: item, in: context)
-        }) { (contextDidSave, error) in
+        updateCategory(with: [item]) { (error) in
             let category = Category.mr_findFirst(byAttribute: "id", withValue: item.entityId)
             callback(category, error)
         }
@@ -40,6 +32,18 @@ class CategoryRepository {
     
     class func getCategory(with id: String) -> Category? {
         return Category.mr_findFirst(byAttribute: "id", withValue: id)
+    }
+    
+    // MARK: - private
+    private class func updateCategory(with items: [CategoryEntityInterface], callback: @escaping ((_ error: Error?) -> ())) {
+        MagicalRecord.save({ (context) in
+            for categoryInterface in items {
+                let category = Category.mr_findFirstOrCreate(byAttribute: "id", withValue: categoryInterface.entityId, in: context)
+                category.update(with: categoryInterface, in: context)
+            }
+        }) { (contextDidSave, error) in
+            callback(error)
+        }
     }
 }
 

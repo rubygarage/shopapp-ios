@@ -25,3 +25,5 @@
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";
+
+"Label.PriceFrom" = "From %@ %@";

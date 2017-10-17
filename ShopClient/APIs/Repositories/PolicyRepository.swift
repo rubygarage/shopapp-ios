@@ -15,7 +15,6 @@ class PolicyRepository {
             policy = T.mr_createEntity(in: context)
         }
         policy?.update(with: item)
-        
         return policy
     }
 }

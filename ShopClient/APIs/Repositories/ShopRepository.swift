@@ -39,15 +39,12 @@ internal extension Shop {
         name = remoteItem?.entityName
         shopDescription = remoteItem?.entityDesription
         currency = remoteItem?.entityCurrency
-        
         if let policy = remoteItem?.entityPrivacyPolicy {
             privacyPolicy = PolicyRepository.loadPolicy(with: policy, in: context)
         }
-        
         if let policy = remoteItem?.entityRefundPolicy {
             refundPolicy = PolicyRepository.loadPolicy(with: policy, in: context)
         }
-        
         if let terms = remoteItem?.entityTermsOfService {
             termsOfService = PolicyRepository.loadPolicy(with: terms, in: context)
         }

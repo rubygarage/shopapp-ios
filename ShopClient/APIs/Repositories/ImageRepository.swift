@@ -13,7 +13,6 @@ class ImageRepository {
         let imageIdValue = item?.entityId ?? String()
         let image = Image.mr_findFirstOrCreate(byAttribute: "id", withValue: imageIdValue, in: context)
         image.update(with: item)
-        
         return image
     }
     

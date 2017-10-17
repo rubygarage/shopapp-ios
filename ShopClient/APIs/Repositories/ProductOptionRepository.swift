@@ -10,7 +10,6 @@ import MagicalRecord
 
 class ProductOptionRepository {
     class func loadOptions(with items: [ProductOptionEntityInterface], in context: NSManagedObjectContext) -> [ProductOption] {
-        
         for optionInterface in items {
             let option = ProductOption.mr_findFirstOrCreate(byAttribute: "id", withValue: optionInterface.entityId, in: context)
             option.update(with: optionInterface, in: context)
