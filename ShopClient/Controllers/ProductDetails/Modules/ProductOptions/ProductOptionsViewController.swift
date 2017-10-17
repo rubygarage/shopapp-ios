@@ -82,7 +82,7 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
     }
     
     func isItemSelected(at indexPath: IndexPath) -> Bool {
-        if indexPath.section < options.count {
+        if indexPath.section < options.count && indexPath.section < selectedOptions.count {
             let item = options[indexPath.section].valuesArray[indexPath.row]
             let selectedItem = selectedOptions[indexPath.section].value
             return item == selectedItem

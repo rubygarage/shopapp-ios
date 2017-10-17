@@ -241,7 +241,10 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
             query.images(first: imageCount, self.imageConnectionQuery())
             query.variants(first: variantsCount, self.variantConnectionQuery())
             query.variantBySelectedOptions(selectedOptions: optionsInput, self.productVariantQuery())
-            query.options(self.optionQuery())
+            if additionalInfoNedded {
+                query.options(self.optionQuery())
+            }
+//            query.options(self.optionQuery())
         }
     }
     

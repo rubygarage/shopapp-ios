@@ -96,6 +96,7 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
         ShopCoreAPI.shared.getProduct(id: productId, options: selectedOptions) { [weak self] (product, error) in
             if let productObject = product {
                 self?.product = productObject
+                self?.setupData()
                 self?.populateViews()
             }
         }

@@ -92,4 +92,10 @@ extension Storefront.Product: ProductEntityInterface {
             return variants.edges.map({ $0.node })
         }
     }
+    
+    var entityOptions: [ProductOptionEntityInterface]? {
+        get {
+            return options
+        }
+    }
 }

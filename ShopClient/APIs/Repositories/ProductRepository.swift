@@ -62,5 +62,8 @@ internal extension Product {
         if let remoteVariants = remoteItem?.entityVariants {
             variants = NSSet(array: ProductVariantRepository.loadVariants(with: remoteVariants, in: context))
         }
+        if let remoteOptions = remoteItem?.entityOptions {
+            options = NSSet(array: ProductOptionRepository.loadOptions(with: remoteOptions, in: context))
+        }
     }
 }
