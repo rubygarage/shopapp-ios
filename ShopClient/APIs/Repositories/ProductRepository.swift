@@ -33,12 +33,13 @@ class ProductRepository {
         }
     }
     
-    class func loadProduct(with item: ProductEntityInterface?, callback: ((_ product: Product?, _ error: Error?) -> ())) {
+    class func loadProduct(with item: ProductEntityInterface?, callback: @escaping ((_ product: Product?, _ error: Error?) -> ())) {
         MagicalRecord.save({ (context) in
             let product = Product.mr_findFirstOrCreate(byAttribute: "id", withValue: item?.entityId ?? String(), in: context)
             product.update(with: item, in: context)
         }) { (contextDidSave, error) in
-            return Product.mr_findFirst(byAttribute: "id", withValue: item?.entityId ?? String())
+            let product = Product.mr_findFirst(byAttribute: "id", withValue: item?.entityId ?? String())
+            callback(product, error)
         }
     }
 }
@@ -48,12 +49,9 @@ internal extension Product {
         id = remoteItem?.entityId
         title = remoteItem?.entityTitle
         productDescription = remoteItem?.entityProductDescription
-        currency = remoteItem?.entityCurrency
-        price = remoteItem?.entityPrice
         discount = remoteItem?.entityDiscount
         if let remoteImages = remoteItem?.entityImages {
-            images = nil
-            addToImages(NSSet(array: ImageRepository.loadImages(with: remoteImages, in: context)))
+            images = NSSet(array: ImageRepository.loadImages(with: remoteImages, in: context))
         }
         type = remoteItem?.entityType
         vendor = remoteItem?.entityVendor
@@ -61,5 +59,8 @@ internal extension Product {
         updatedAt = remoteItem?.entityUpdatedAt as NSDate?
         tags = remoteItem?.entityTags as NSObject?
         paginationValue = remoteItem?.entityPaginationValue as NSObject?
+        if let remoteVariants = remoteItem?.entityVariants {
+            variants = NSSet(array: ProductVariantRepository.loadVariants(with: remoteVariants, in: context))
+        }
     }
 }

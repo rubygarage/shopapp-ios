@@ -21,6 +21,12 @@ extension Storefront.Shop: ShopEntityInterface {
         }
     }
     
+    var entityCurrency: String? {
+        get {
+            return paymentSettings.currencyCode.rawValue
+        }
+    }
+    
     var entityPrivacyPolicy: PolicyEntityInterface? {
         get {
             return privacyPolicy

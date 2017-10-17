@@ -41,6 +41,9 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
                 .privacyPolicy(policyQuery())
                 .refundPolicy(policyQuery())
                 .termsOfService(policyQuery())
+                .paymentSettings({ $0
+                    .currencyCode()
+                })
             }
         }
         
@@ -95,9 +98,8 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
     func getCategoryList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping ApiCallback<[Category]>) {
         let query = categoryListQuery(perPage: perPage, after: paginationValue, sortBy: sortBy, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
-            let currencyCode = response?.shop.paymentSettings.currencyCode.rawValue ?? String()
             if let categoryEdges = response?.shop.collections.edges {
-                CategoryRepository.loadCategories(with: categoryEdges, currencyCode: currencyCode, callback: { (categories, error) in
+                CategoryRepository.loadCategories(with: categoryEdges, callback: { (categories, error) in
                     callback(categories, error)
                 })
             } else {
@@ -111,8 +113,7 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
         let query = categoryDetailsQuery(id: id, perPage: perPage, after: paginationValue, sortBy: sortBy, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             let categoryNode = response?.node as! Storefront.Collection
-            let currencyCode = response?.shop.paymentSettings.currencyCode.rawValue ?? String()
-            CategoryRepository.loadCategory(with: categoryNode, currencyCode: currencyCode, callback: { (category, error) in
+            CategoryRepository.loadCategory(with: categoryNode, callback: { (category, error) in
                 callback(category, error)
             })
         })
@@ -170,9 +171,6 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
         return Storefront.buildQuery { $0
             .shop { $0
                 .name()
-                .paymentSettings({ $0
-                    .currencyCode()
-                })
                 .products(first: Int32(perPage), after: after as? String, reverse: reverse, sortKey: sortKey, query: searchPhrase, self.productConnectionQuery())
             }
         }
@@ -181,12 +179,6 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
     private func productDetailsQuery(id: String, options: [SelectedOption]) -> Storefront.QueryRootQuery {
         let nodeId = GraphQL.ID(rawValue: id)
         return Storefront.buildQuery({ $0
-            .shop({ $0
-                .name()
-                .paymentSettings({ $0
-                    .currencyCode()
-                })
-            })
             .node(id: nodeId, { $0
                 .onProduct(subfields: self.productQuery(additionalInfoNedded: true, options: options))
             })
@@ -196,9 +188,6 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
     private func categoryListQuery(perPage: Int, after: Any?, sortBy: SortingValue?, reverse: Bool) -> Storefront.QueryRootQuery {
         return Storefront.buildQuery({ $0
             .shop({ $0
-                .paymentSettings({ $0
-                    .currencyCode()
-                })
                 .collections(first: Int32(perPage), self.collectionConnectionQuery(perPage: perPage, after: after, sortBy: sortBy, reverse: reverse))
             })
         })
@@ -207,11 +196,6 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
     private func categoryDetailsQuery(id: String, perPage: Int, after: Any?, sortBy: SortingValue?, reverse: Bool) -> Storefront.QueryRootQuery {
         let nodeId = GraphQL.ID(rawValue: id)
         return Storefront.buildQuery { $0
-            .shop({ $0
-                .paymentSettings({ $0
-                    .currencyCode()
-                })
-            })
             .node(id: nodeId, { $0
                 .onCollection(subfields: self.collectionQuery(perPage: perPage, after: after, sortBy: sortBy, reverse: reverse))
             })

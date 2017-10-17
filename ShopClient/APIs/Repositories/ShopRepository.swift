@@ -38,6 +38,7 @@ internal extension Shop {
     func update(with remoteItem: ShopEntityInterface?, in context: NSManagedObjectContext) {
         name = remoteItem?.entityName
         shopDescription = remoteItem?.entityDesription
+        currency = remoteItem?.entityCurrency
         
         if let policy = remoteItem?.entityPrivacyPolicy {
             privacyPolicy = PolicyRepository.loadPolicy(with: policy, in: context)

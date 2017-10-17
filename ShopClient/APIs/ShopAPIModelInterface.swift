@@ -11,6 +11,7 @@ import Foundation
 protocol ShopEntityInterface {
     var entityName: String? { get }
     var entityDesription: String? { get }
+    var entityCurrency: String? { get }
     var entityPrivacyPolicy: PolicyEntityInterface? { get }
     var entityRefundPolicy: PolicyEntityInterface? { get }
     var entityTermsOfService: PolicyEntityInterface? { get }
@@ -44,7 +45,6 @@ protocol ProductEntityInterface {
     var entityTitle: String? { get }
     var entityProductDescription: String? { get }
     var entityCurrency: String? { get }
-    var entityPrice: String? { get }
     var entityDiscount: String? { get }
     var entityImages: [ImageEntityInterface]? { get }
     var entityType: String? { get }
@@ -54,10 +54,19 @@ protocol ProductEntityInterface {
     var entityTags: [String]? { get }
     var entityPaginationValue: String? { get }
     var entityAdditionalDescription: String? { get }
+    var entityVariants: [ProductVariantEntityEnterface]? { get }
 }
 
 protocol ProductOptionEntityInterface {
     var entityId: String { get }
     var entityName: String { get }
     var entityValues: [String] { get }
+}
+
+protocol ProductVariantEntityEnterface {
+    var entityId: String { get }
+    var entityTitle: String? { get }
+    var entityPrice: String? { get }
+    var entityAvailable: Bool { get }
+    var entityImage: ImageEntityInterface? { get }
 }

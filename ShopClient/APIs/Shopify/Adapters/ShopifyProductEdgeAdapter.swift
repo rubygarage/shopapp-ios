@@ -33,12 +33,6 @@ extension Storefront.ProductEdge: ProductEntityInterface {
         }
     }
     
-    var entityPrice: String? {
-        get  {
-            return String(describing: node.variants.edges.first?.node.price)
-        }
-    }
-    
     var entityDiscount: String? {
         get  {
             return nil
@@ -90,6 +84,12 @@ extension Storefront.ProductEdge: ProductEntityInterface {
     var entityAdditionalDescription: String? {
         get {
             return nil
+        }
+    }
+    
+    var entityVariants: [ProductVariantEntityEnterface]? {
+        get {
+            return node.variants.edges.map({ $0.node })
         }
     }
 }

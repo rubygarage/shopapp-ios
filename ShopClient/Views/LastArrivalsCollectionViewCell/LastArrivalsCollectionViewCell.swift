@@ -18,6 +18,6 @@ class LastArrivalsCollectionViewCell: UICollectionViewCell {
         let imageUrl = URL(string: item.imagesArray?.first?.src ?? String())
         productImageView.sd_setImage(with: imageUrl)
         titleLabel.text = item.title
-        priceLabel.text = "\(item.price) \(item.currency)"
+        priceLabel.text = "\(item.lowestPrice) \(item.currency ?? String())"
     }
 }

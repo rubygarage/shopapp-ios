@@ -10,11 +10,11 @@ import MagicalRecord
 
 class CategoryRepository {
     // MARK: - public    
-    class func loadCategories(with items: [CategoryEntityInterface], currencyCode: String?, callback: @escaping ((_ categories: [Category]?, _ error: Error?) -> ())) {
+    class func loadCategories(with items: [CategoryEntityInterface], callback: @escaping ((_ categories: [Category]?, _ error: Error?) -> ())) {
         MagicalRecord.save({ (context) in
             for categoryInterface in items {
                 let category = Category.mr_findFirstOrCreate(byAttribute: "id", withValue: categoryInterface.entityId, in: context)
-                category.update(with: categoryInterface, currencyCode: currencyCode, in: context)
+                category.update(with: categoryInterface, in: context)
             }
         }) { (contextDidSave, error) in
             let categoriesIds = items.map({ $0.entityId })
@@ -24,10 +24,10 @@ class CategoryRepository {
         }
     }
     
-    class func loadCategory(with item: CategoryEntityInterface, currencyCode: String?, callback: @escaping ((_ category: Category?, _ error: Error?) -> ())) {
+    class func loadCategory(with item: CategoryEntityInterface, callback: @escaping ((_ category: Category?, _ error: Error?) -> ())) {
         MagicalRecord.save({ (context) in
             let category = Category.mr_findFirstOrCreate(byAttribute: "id", withValue: item.entityId, in: context)
-            category.update(with: item, currencyCode: currencyCode, in: context)
+            category.update(with: item, in: context)
         }) { (contextDidSave, error) in
             let category = Category.mr_findFirst(byAttribute: "id", withValue: item.entityId)
             callback(category, error)
@@ -44,7 +44,7 @@ class CategoryRepository {
 }
 
 internal extension Category {
-    func update(with remoteItem: CategoryEntityInterface?, currencyCode: String?, in context: NSManagedObjectContext) {
+    func update(with remoteItem: CategoryEntityInterface?, in context: NSManagedObjectContext) {
         id = remoteItem?.entityId
         title = remoteItem?.entityTitle
         categoryDescription = remoteItem?.entityCategoryDescription

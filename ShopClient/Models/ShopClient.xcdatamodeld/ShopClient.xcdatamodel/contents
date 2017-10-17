@@ -29,11 +29,9 @@
     <entity name="Product" representedClassName="Product" syncable="YES" codeGenerationType="class">
         <attribute name="additionalDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="currency" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="discount" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="paginationValue" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="productDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tags" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -55,7 +53,7 @@
     <entity name="ProductVariant" representedClassName="ProductVariant" syncable="YES" codeGenerationType="class">
         <attribute name="available" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
-        <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="productVariant" inverseEntity="Image" syncable="YES"/>
         <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Product" inverseName="variants" inverseEntity="Product" syncable="YES"/>
@@ -65,6 +63,7 @@
         <relationship name="shop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shop" inverseName="refundPolicy" inverseEntity="Shop" syncable="YES"/>
     </entity>
     <entity name="Shop" representedClassName="Shop" syncable="YES" codeGenerationType="class">
+        <attribute name="currency" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shopDescription" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="privacyPolicy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PrivacyPolicy" inverseName="shop" inverseEntity="PrivacyPolicy" syncable="YES"/>
@@ -79,11 +78,11 @@
         <element name="Image" positionX="-45" positionY="72" width="128" height="135"/>
         <element name="Policy" positionX="-54" positionY="9" width="128" height="90"/>
         <element name="PrivacyPolicy" positionX="-45" positionY="36" width="128" height="60"/>
-        <element name="Product" positionX="-36" positionY="99" width="128" height="315"/>
+        <element name="Product" positionX="-36" positionY="99" width="128" height="285"/>
         <element name="ProductOption" positionX="-36" positionY="144" width="128" height="105"/>
         <element name="ProductVariant" positionX="-36" positionY="144" width="128" height="150"/>
         <element name="RefundPolicy" positionX="-27" positionY="45" width="128" height="60"/>
-        <element name="Shop" positionX="-54" positionY="-9" width="128" height="120"/>
+        <element name="Shop" positionX="-54" positionY="-9" width="128" height="135"/>
         <element name="TermsOfService" positionX="-18" positionY="63" width="128" height="60"/>
     </elements>
 </model>
