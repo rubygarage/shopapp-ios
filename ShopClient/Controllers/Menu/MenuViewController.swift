@@ -15,10 +15,12 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
     var policies = [Policy]()
     var tableDataSource: MenuTableDataSource?
     var tableDelegate: MenuTableDelegate?
+    var repository: Repository?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        repository = MagicalRecordRepository()
         setupTableView()
         loadData()
     }
@@ -41,7 +43,7 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
     }
     
     private func loadData() {
-        let shop = ShopRepository.getShop()
+        let shop = repository?.getShop()
         
         if let privacyPolicy = shop?.privacyPolicy {
             policies.append(privacyPolicy)
@@ -55,7 +57,7 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
             policies.append(termsOfService)
         }
         
-        categories = CategoryRepository.getCategories()
+        categories = repository?.getCategories() ?? [Category]()
     }
     
     private func openCategoryController(with index: Int) {

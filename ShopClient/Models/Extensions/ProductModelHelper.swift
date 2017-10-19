@@ -6,8 +6,6 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
-
 extension Product {
     var imagesArray: [Image]? {
         get {
