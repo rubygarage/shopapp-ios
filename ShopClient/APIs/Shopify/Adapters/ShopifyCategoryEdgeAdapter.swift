@@ -2,58 +2,58 @@
 //  ShopifyCategoryAdapter.swift
 //  ShopClient
 //
-//  Created by Evgeniy Antonov on 10/12/17.
+//  Created by Evgeniy Antonov on 9/8/17.
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
 import MobileBuySDK
 
-extension Storefront.Collection: CategoryEntityInterface {
+extension Storefront.CollectionEdge: CategoryEntityInterface {
     var entityId: String {
         get {
-            return id.rawValue
+            return node.id.rawValue
         }
     }
     
     var entityTitle: String? {
         get {
-            return title
+            return node.title
         }
     }
     
     var entityCategoryDescription: String? {
         get {
-            return description
+            return node.description
         }
     }
     
     var entityAdditionalDescription: String? {
         get {
-            return descriptionHtml
+            return nil
         }
     }
     
     var entityUpdatedAt: Date? {
         get {
-            return updatedAt
+            return node.updatedAt
         }
     }
     
     var entityImage: ImageEntityInterface? {
         get {
-            return image
+            return node.image
         }
     }
-        
+    
     var entityPaginationValue: Any? {
         get {
-            return nil
+            return cursor
         }
     }
     
     var entityProducts: [ProductEntityInterface]? {
         get {
-            return products.edges.map({ $0.node })
+            return nil
         }
     }
 }

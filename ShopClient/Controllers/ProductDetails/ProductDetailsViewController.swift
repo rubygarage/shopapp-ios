@@ -37,9 +37,15 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
     
     // MARK: - setup
     func setupData() {
-        if let options = product?.productDetails?.options {
+        if selectedOptions.count == 0 {
+            setupSelectedOptions()
+        }
+    }
+    
+    private func setupSelectedOptions() {
+        if let options = product?.optionsArray {
             for option in options {
-                selectedOptions.append((name: option.name, value: option.values.first ?? String()))
+                selectedOptions.append((name: option.name ?? String(), value: option.valuesArray.first ?? String()))
             }
         }
     }
@@ -61,7 +67,7 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
     }
     
     private func populateImages(with product: Product) {
-        if let images = product.images {
+        if let images = product.imagesArray {
             openImagesCarouselChildController(with: images, delegate: self, showingIndex: showingImageIndex, onView: imagesContainerView)
         }
     }
@@ -75,18 +81,18 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
     }
     
     private func populatePrice() {
-        priceLabel.text = "\(product?.productDetails?.variantBySelectedOptions?.price ?? String()) \(product?.currency ?? String())"
-        priceLabel.isHidden = product?.productDetails?.variantBySelectedOptions == nil
+        priceLabel.text = "\(product?.variantBySelectedOptions?.price ?? String()) \(product?.currency ?? String())"
+        priceLabel.isHidden = product?.variantBySelectedOptions == nil
     }
     
     private func populateAddToCartButton() {
-        let enabled = product?.productDetails?.variantBySelectedOptions != nil
+        let enabled = product?.variantBySelectedOptions != nil
         addToCartButton.backgroundColor = enabled ? UIColor.blue : UIColor.lightGray
         addToCartButton.isEnabled = enabled
     }
     
     private func populateOptionsView() {
-        if let options = product?.productDetails?.options {
+        if let options = product?.optionsArray {
             openProductOptionsController(with: options, selectedOptions: selectedOptions, delegate: self, onView: optionsContainerView)
         }
     }
@@ -96,6 +102,7 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
         ShopCoreAPI.shared.getProduct(id: productId, options: selectedOptions) { [weak self] (product, error) in
             if let productObject = product {
                 self?.product = productObject
+                self?.setupData()
                 self?.populateViews()
             }
         }

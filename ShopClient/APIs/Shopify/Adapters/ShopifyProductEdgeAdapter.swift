@@ -1,29 +1,29 @@
 //
-//  ShopifyProductAdapter.swift
+//  ShopifyProductEdgeAdapter.swift
 //  ShopClient
 //
-//  Created by Evgeniy Antonov on 8/31/17.
+//  Created by Evgeniy Antonov on 10/13/17.
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
 import MobileBuySDK
 
-extension Storefront.Product: ProductEntityInterface {
+extension Storefront.ProductEdge: ProductEntityInterface {
     var entityId: String {
         get {
-            return id.rawValue
+            return node.id.rawValue
         }
     }
     
     var entityTitle: String? {
         get {
-            return title
+            return node.title
         }
     }
     
     var entityProductDescription: String? {
         get {
-            return description
+            return node.description
         }
     }
     
@@ -41,67 +41,67 @@ extension Storefront.Product: ProductEntityInterface {
     
     var entityImages: [ImageEntityInterface]? {
         get  {
-            return images.edges.map({ $0.node })
+            return node.images.edges.map({ $0.node })
         }
     }
     
     var entityType: String? {
         get  {
-            return productType
+            return node.productType
         }
     }
     
     var entityVendor: String? {
         get  {
-            return vendor
+            return node.vendor
         }
     }
     
     var entityCreatedAt: Date? {
         get  {
-            return createdAt
+            return node.createdAt
         }
     }
     
     var entityUpdatedAt: Date? {
         get  {
-            return updatedAt
+            return node.updatedAt
         }
     }
     
     var entityTags: [String]? {
         get  {
-            return tags
+            return node.tags
         }
     }
     
     var entityPaginationValue: String? {
         get  {
-            return nil
+            return cursor
         }
     }
     
     var entityAdditionalDescription: String? {
         get {
-            return descriptionHtml
+            return nil
         }
     }
     
     var entityVariants: [ProductVariantEntityEnterface]? {
         get {
-            return variants.edges.map({ $0.node })
+            return node.variants.edges.map({ $0.node })
         }
     }
     
     var entityOptions: [ProductOptionEntityInterface]? {
         get {
-            return options
+            return node.options
         }
     }
     
     var entityVariantBySelectedOptions: ProductVariantEntityEnterface? {
         get {
-            return variantBySelectedOptions
+            return nil
         }
     }
 }

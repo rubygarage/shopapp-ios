@@ -8,16 +8,34 @@
 
 import MobileBuySDK
 
-class ShopifyProductVariantAdapter: ProductVariant {
-    init(productVariant: Storefront.ProductVariant ) {
-        super.init()
-        
-        self.id = productVariant.id.rawValue 
-        self.title = productVariant.title
-        self.price = String(describing: productVariant.price)
-        self.available = productVariant.availableForSale 
-        if let image = productVariant.image {
-            self.image = ShopifyImageAdapter(image: image)
+extension Storefront.ProductVariant: ProductVariantEntityEnterface {
+    var entityId: String {
+        get {
+            return id.rawValue
+        }
+    }
+    
+    var entityTitle: String? {
+        get {
+            return title
+        }
+    }
+    
+    var entityPrice: String? {
+        get {
+            return price.description
+        }
+    }
+    
+    var entityAvailable: Bool {
+        get {
+            return availableForSale
+        }
+    }
+    
+    var entityImage: ImageEntityInterface? {
+        get {
+            return image
         }
     }
 }

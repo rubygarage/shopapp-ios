@@ -15,9 +15,10 @@ class ShopifyArticleAdapter: Article {
         id = article.id.rawValue
         title = article.title
         content = article.content
-        if let image = article.image {
-            self.image = ShopifyImageAdapter(image: image)
-        }
+        
+//        if let image = article.image {
+//            self.image = ShopifyImageAdapter(image: image)
+//        }
         
         author = ShopifyAuthorAdapter(author: article.author)
         tags = article.tags

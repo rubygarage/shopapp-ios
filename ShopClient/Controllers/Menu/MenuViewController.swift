@@ -15,13 +15,14 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
     var policies = [Policy]()
     var tableDataSource: MenuTableDataSource?
     var tableDelegate: MenuTableDelegate?
+    var repository: Repository?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        repository = MagicalRecordRepository()
         setupTableView()
-        loadCategories()
-        loadShopInfo()
+        loadData()
     }
     
     private func setupTableView() {
@@ -41,17 +42,8 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
         tableView.delegate = tableDelegate
     }
     
-    private func loadCategories() {
-        ShopCoreAPI.shared.getCategoryList { [weak self] (categories, error) in
-            if let items = categories {
-                self?.categories = items
-                self?.tableView.reloadSections([MenuSection.category.rawValue], with: .none)
-            }
-        }
-    }
-    
-    private func loadShopInfo() {
-        let shop = ShopRepository.getShop()
+    private func loadData() {
+        let shop = repository?.getShop()
         
         if let privacyPolicy = shop?.privacyPolicy {
             policies.append(privacyPolicy)
@@ -64,12 +56,14 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
         if let termsOfService = shop?.termsOfService {
             policies.append(termsOfService)
         }
+        
+        categories = repository?.getCategories() ?? [Category]()
     }
     
     private func openCategoryController(with index: Int) {
         if index < categories.count {
             let category = categories[index]
-            setCategoryController(with: category.id, title: category.title)
+            setCategoryController(with: category.id ?? String(), title: category.title ?? String())
         }
     }
     
