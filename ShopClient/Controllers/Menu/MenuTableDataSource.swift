@@ -16,7 +16,7 @@ enum MenuSection: Int {
 
 protocol MenuTableDataSourceProtocol {
     func numberOfCategories() -> Int
-    func category(for index: Int) -> Category?
+    func category(for index: Int) -> CategoryEntity?
     func numberOfPolicies() -> Int
     func policyTitle(for index: Int) -> String?
 }

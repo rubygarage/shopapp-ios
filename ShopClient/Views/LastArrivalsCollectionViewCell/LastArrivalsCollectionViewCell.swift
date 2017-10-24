@@ -14,7 +14,7 @@ class LastArrivalsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     
-    func configure(with item: Product) {
+    func configure(with item: ProductEntity) {
         let imageUrl = URL(string: item.imagesArray?.first?.src ?? String())
         productImageView.sd_setImage(with: imageUrl)
         titleLabel.text = item.title

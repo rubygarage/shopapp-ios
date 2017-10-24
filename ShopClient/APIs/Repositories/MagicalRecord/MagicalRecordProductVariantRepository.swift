@@ -9,24 +9,24 @@
 import MagicalRecord
 
 extension MagicalRecordRepository {
-    func loadVariants(with items: [ProductVariantEntityEnterface], in context: NSManagedObjectContext) -> [ProductVariant] {
+    func loadVariants(with items: [ProductVariantEntityEnterface], in context: NSManagedObjectContext) -> [ProductVariantEntity] {
         for variantInterface in items {
-            let variant = ProductVariant.mr_findFirstOrCreate(byAttribute: "id", withValue: variantInterface.entityId, in: context)
+            let variant = ProductVariantEntity.mr_findFirstOrCreate(byAttribute: "id", withValue: variantInterface.entityId, in: context)
             update(variant: variant, with: variantInterface, in: context)
         }
         let variantsIds = items.map({ $0.entityId })
         let predicate = NSPredicate(format: "id IN %@", variantsIds)
-        return ProductVariant.mr_findAll(with: predicate, in: context) as? [ProductVariant] ?? [ProductVariant]()
+        return ProductVariantEntity.mr_findAll(with: predicate, in: context) as? [ProductVariantEntity] ?? [ProductVariantEntity]()
     }
     
-    func loadVariant(with item: ProductVariantEntityEnterface, in context: NSManagedObjectContext) -> ProductVariant {
-        let variant = ProductVariant.mr_findFirstOrCreate(byAttribute: "id", withValue: item.entityId, in: context)
+    func loadVariant(with item: ProductVariantEntityEnterface, in context: NSManagedObjectContext) -> ProductVariantEntity {
+        let variant = ProductVariantEntity.mr_findFirstOrCreate(byAttribute: "id", withValue: item.entityId, in: context)
         update(variant: variant, with: item, in: context)
         return variant
     }
     
     // MARK: - private
-    private func update(variant: ProductVariant, with remoteItem: ProductVariantEntityEnterface?, in context: NSManagedObjectContext) {
+    private func update(variant: ProductVariantEntity, with remoteItem: ProductVariantEntityEnterface?, in context: NSManagedObjectContext) {
         variant.id = remoteItem?.entityId
         variant.title = remoteItem?.entityTitle
         variant.price = remoteItem?.entityPrice

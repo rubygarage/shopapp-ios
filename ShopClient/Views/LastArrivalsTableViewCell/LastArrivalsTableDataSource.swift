@@ -11,7 +11,7 @@ import UIKit
 protocol LastArrivalsTableDataSourceProtocol {
     func numberOfSections() -> Int
     func numberOfProducts() -> Int
-    func item(for index: Int) -> Product
+    func item(for index: Int) -> ProductEntity
 }
 
 class LastArrivalsTableDataSource: NSObject, UICollectionViewDataSource {

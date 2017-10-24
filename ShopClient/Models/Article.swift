@@ -12,7 +12,7 @@ class Article: NSObject {
     var id = String()
     var title = String()
     var content = String()
-    var image: Image?
+    var image: ImageEntity?
     var author: Author?
     var tags: [String]?
     var blogId = String()

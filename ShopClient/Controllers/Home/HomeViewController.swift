@@ -14,7 +14,7 @@ class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTab
     var dataSource: HomeTableDataSource?
     var delegate: HomeTableDelegate?
     
-    var lastArrivalsProducts = [Product]()
+    var lastArrivalsProducts = [ProductEntity]()
     var newInBlogArticles = [Article]()
     
     override func viewDidLoad() {
@@ -85,7 +85,7 @@ class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTab
     }
     
     // MARK: - HomeTableDataSourceProtocol
-    func lastArrivalsObjects() -> [Product] {
+    func lastArrivalsObjects() -> [ProductEntity] {
         return lastArrivalsProducts
     }
     

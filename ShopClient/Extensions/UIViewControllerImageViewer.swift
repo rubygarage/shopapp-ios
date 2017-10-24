@@ -10,7 +10,7 @@ import UIKit
 import SKPhotoBrowser
 
 extension UIViewController {
-    func pushImageViewer(with product: Product, initialIndex: Int) {
+    func pushImageViewer(with product: ProductEntity, initialIndex: Int) {
         var images = [SKPhoto]()
         if let items = product.imagesArray {
             for item in items {

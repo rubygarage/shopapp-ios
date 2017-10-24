@@ -9,37 +9,37 @@
 import MagicalRecord
 
 extension MagicalRecordRepository {
-    func loadProducts(with items: [ProductEntityInterface], callback: @escaping ((_ products: [Product]?, _ error: Error?) -> ())) {
+    func loadProducts(with items: [ProductEntityInterface], callback: @escaping ((_ products: [ProductEntity]?, _ error: Error?) -> ())) {
         updateProducts(with: items) { (error) in
             let productsIds = items.map({ $0.entityId })
             let predicate = NSPredicate(format: "id IN %@", productsIds)
-            let products = Product.mr_findAll(with: predicate) as? [Product]
+            let products = ProductEntity.mr_findAll(with: predicate) as? [ProductEntity]
             callback(products, error)
         }
     }
     
-    func loadProduct(with item: ProductEntityInterface, callback: @escaping ((_ product: Product?, _ error: Error?) -> ())) {
+    func loadProduct(with item: ProductEntityInterface, callback: @escaping ((_ product: ProductEntity?, _ error: Error?) -> ())) {
         updateProducts(with: [item]) { (error) in
-            let product = Product.mr_findFirst(byAttribute: "id", withValue: item.entityId)
+            let product = ProductEntity.mr_findFirst(byAttribute: "id", withValue: item.entityId)
             callback(product, error)
         }
     }
     
-    func loadProducts(with items: [ProductEntityInterface], in context: NSManagedObjectContext) -> [Product] {
+    func loadProducts(with items: [ProductEntityInterface], in context: NSManagedObjectContext) -> [ProductEntity] {
         for productInterface in items {
-            let product = Product.mr_findFirstOrCreate(byAttribute: "id", withValue: productInterface.entityId, in: context)
+            let product = ProductEntity.mr_findFirstOrCreate(byAttribute: "id", withValue: productInterface.entityId, in: context)
             update(product: product, with: productInterface, in: context)
         }
         let productsIds = items.map({ $0.entityId })
         let predicate = NSPredicate(format: "id IN %@", productsIds)
-        return Product.mr_findAll(with: predicate, in: context) as? [Product] ?? [Product]()
+        return ProductEntity.mr_findAll(with: predicate, in: context) as? [ProductEntity] ?? [ProductEntity]()
     }
     
     // MARK: - private
     private func updateProducts(with items: [ProductEntityInterface], callback: @escaping ((_ error: Error?) -> ())) {
         MagicalRecord.save({ [weak self] (context) in
             for productInterface in items {
-                let product = Product.mr_findFirstOrCreate(byAttribute: "id", withValue: productInterface.entityId, in: context)
+                let product = ProductEntity.mr_findFirstOrCreate(byAttribute: "id", withValue: productInterface.entityId, in: context)
                 self?.update(product: product, with: productInterface, in: context)
             }
         }) { (contextDidSave, error) in
@@ -47,7 +47,7 @@ extension MagicalRecordRepository {
         }
     }
     
-    private func update(product: Product, with remoteItem: ProductEntityInterface?, in context: NSManagedObjectContext) {
+    private func update(product: ProductEntity, with remoteItem: ProductEntityInterface?, in context: NSManagedObjectContext) {
         product.id = remoteItem?.entityId
         product.title = remoteItem?.entityTitle
         product.productDescription = remoteItem?.entityProductDescription

@@ -12,6 +12,10 @@
 		6106C6CB1F7A40F400E87486 /* ArticleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6106C6CA1F7A40F400E87486 /* ArticleDetailsViewController.swift */; };
 		6107F0DC1F8FA70C00547DA9 /* ShopifyCategoryAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6107F0DB1F8FA70C00547DA9 /* ShopifyCategoryAdapter.swift */; };
 		610873AB1F7D027200BF81CA /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610873A51F7D027200BF81CA /* ProductDetailsViewController.swift */; };
+		610A91341F9E27F200424369 /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610A91331F9E27F200424369 /* DAO.swift */; };
+		610A91381F9E294600424369 /* APIInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610A91371F9E294600424369 /* APIInterface.swift */; };
+		610A913B1F9E298600424369 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610A913A1F9E298600424369 /* API.swift */; };
+		610A91401F9E34F000424369 /* ShopifyShopAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610A913F1F9E34F000424369 /* ShopifyShopAdapter.swift */; };
 		61127A331F879C5C00565AB1 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61127A321F879C5C00565AB1 /* Splash.storyboard */; };
 		611B70EA1F7C19E20056BAF9 /* SortModalDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611B70E91F7C19E20056BAF9 /* SortModalDelegate.swift */; };
 		611EF33E1F56CBB1001B8B9C /* ShopCoreAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611EF33D1F56CBB1001B8B9C /* ShopCoreAPI.swift */; };
@@ -27,6 +31,10 @@
 		6133392D1F6957AF0063A754 /* DetailsImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6133392B1F6957AF0063A754 /* DetailsImagesCollectionViewCell.swift */; };
 		6133392E1F6957AF0063A754 /* DetailsImagesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6133392C1F6957AF0063A754 /* DetailsImagesCollectionViewCell.xib */; };
 		613339331F695A820063A754 /* UIViewControllerChilds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613339321F695A820063A754 /* UIViewControllerChilds.swift */; };
+		6137EDFC1F9E02240040C004 /* ShopDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6137EDFB1F9E02240040C004 /* ShopDAO.swift */; };
+		6137EE041F9E19D90040C004 /* RepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6137EE031F9E19D90040C004 /* RepositoryInterface.swift */; };
+		6137EE061F9E19F80040C004 /* ShopRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6137EE051F9E19F80040C004 /* ShopRepositoryInterface.swift */; };
+		6137EE081F9E1A4E0040C004 /* ShopRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6137EE071F9E1A4E0040C004 /* ShopRepository.swift */; };
 		614142C11F6AEF0400379BB9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614142C01F6AEF0400379BB9 /* HomeViewController.swift */; };
 		614142C51F6AF15B00379BB9 /* LastArrivalsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614142C31F6AF15B00379BB9 /* LastArrivalsTableViewCell.swift */; };
 		614142C61F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 614142C41F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib */; };
@@ -62,11 +70,13 @@
 		6180AC051F72CF19007768F2 /* MenuTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6180AC041F72CF19007768F2 /* MenuTableDelegate.swift */; };
 		6180AC071F72D266007768F2 /* Category.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6180AC061F72D266007768F2 /* Category.storyboard */; };
 		6180AC0A1F72D2D6007768F2 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6180AC091F72D2D6007768F2 /* CategoryViewController.swift */; };
+		618A43811F9F491E0066F053 /* RepositoryRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618A43801F9F491E0066F053 /* RepositoryRepo.swift */; };
+		618A43831F9F4EF90066F053 /* PolicyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618A43821F9F4EF90066F053 /* PolicyObject.swift */; };
+		618A43851F9F4F340066F053 /* ShopifyPolicyAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618A43841F9F4F340066F053 /* ShopifyPolicyAdapter.swift */; };
+		618A43871F9F56930066F053 /* ShopDAOInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618A43861F9F56930066F053 /* ShopDAOInterface.swift */; };
 		61934FB01F62C04400A42853 /* ShopifyImageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61934FAF1F62C04400A42853 /* ShopifyImageAdapter.swift */; };
 		61934FB21F62C49900A42853 /* ShopifyProductVariantAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61934FB11F62C49900A42853 /* ShopifyProductVariantAdapter.swift */; };
-		61934FB41F62C73B00A42853 /* ShopifyPolicyAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61934FB31F62C73B00A42853 /* ShopifyPolicyAdapter.swift */; };
 		61934FB91F62C76000A42853 /* ShopifyProductAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61934FB61F62C76000A42853 /* ShopifyProductAdapter.swift */; };
-		61934FBA1F62C76000A42853 /* ShopifyShopAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61934FB71F62C76000A42853 /* ShopifyShopAdapter.swift */; };
 		61A507271F7E64FF004504EF /* ShopifyOptionAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A507261F7E64FF004504EF /* ShopifyOptionAdapter.swift */; };
 		61A5072D1F7E79FB004504EF /* ImagesCarouselCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A5072A1F7E79FB004504EF /* ImagesCarouselCollectionDelegate.swift */; };
 		61A5072E1F7E79FB004504EF /* ImagesCarouselCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A5072B1F7E79FB004504EF /* ImagesCarouselCollectionDataSource.swift */; };
@@ -79,6 +89,8 @@
 		61AAB9301F7BD07B00CD32D3 /* SortModalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AAB92E1F7BD07B00CD32D3 /* SortModalTableViewCell.swift */; };
 		61AAB9311F7BD07B00CD32D3 /* SortModalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61AAB92F1F7BD07B00CD32D3 /* SortModalTableViewCell.xib */; };
 		61AB83261F72E6F0009E7343 /* Policy.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61AB83251F72E6F0009E7343 /* Policy.storyboard */; };
+		61AFA3F31F9DFCE7004B9D53 /* DAOInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AFA3F21F9DFCE7004B9D53 /* DAOInterface.swift */; };
+		61AFA3F61F9DFECC004B9D53 /* ShopObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AFA3F51F9DFECC004B9D53 /* ShopObject.swift */; };
 		61B0A4E71F90BD0000C58DF5 /* ShopifyProductEdgeAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B0A4E61F90BD0000C58DF5 /* ShopifyProductEdgeAdapter.swift */; };
 		61B0A4EA1F90DB2100C58DF5 /* ProductModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B0A4E91F90DB2100C58DF5 /* ProductModelHelper.swift */; };
 		61B279421F8E0B5300133770 /* ShopAPIModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B279411F8E0B5300133770 /* ShopAPIModelInterface.swift */; };
@@ -104,7 +116,7 @@
 		61E4E6391F56C868001C6E01 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61E4E6371F56C868001C6E01 /* Home.storyboard */; };
 		61E4E63B1F56C868001C6E01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61E4E63A1F56C868001C6E01 /* Assets.xcassets */; };
 		61E4E63E1F56C868001C6E01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61E4E63C1F56C868001C6E01 /* LaunchScreen.storyboard */; };
-		61E553DA1F98DAF600EF39F6 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E553D91F98DAF600EF39F6 /* Repository.swift */; };
+		61E553DA1F98DAF600EF39F6 /* RepositoryP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E553D91F98DAF600EF39F6 /* RepositoryP.swift */; };
 		61E553DD1F98DB8C00EF39F6 /* MagicalRecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E553DC1F98DB8C00EF39F6 /* MagicalRecordRepository.swift */; };
 		61E553DF1F98DBC700EF39F6 /* MagicalRecordShopRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E553DE1F98DBC700EF39F6 /* MagicalRecordShopRepository.swift */; };
 		61E553E11F98E3E700EF39F6 /* MagicalRecordCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E553E01F98E3E700EF39F6 /* MagicalRecordCategoryRepository.swift */; };
@@ -135,6 +147,10 @@
 		6106C6CA1F7A40F400E87486 /* ArticleDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsViewController.swift; sourceTree = "<group>"; };
 		6107F0DB1F8FA70C00547DA9 /* ShopifyCategoryAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyCategoryAdapter.swift; sourceTree = "<group>"; };
 		610873A51F7D027200BF81CA /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
+		610A91331F9E27F200424369 /* DAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
+		610A91371F9E294600424369 /* APIInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIInterface.swift; sourceTree = "<group>"; };
+		610A913A1F9E298600424369 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		610A913F1F9E34F000424369 /* ShopifyShopAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyShopAdapter.swift; sourceTree = "<group>"; };
 		61127A321F879C5C00565AB1 /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		611B70E91F7C19E20056BAF9 /* SortModalDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalDelegate.swift; sourceTree = "<group>"; };
 		611EF33D1F56CBB1001B8B9C /* ShopCoreAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopCoreAPI.swift; sourceTree = "<group>"; };
@@ -150,6 +166,10 @@
 		6133392B1F6957AF0063A754 /* DetailsImagesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsImagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		6133392C1F6957AF0063A754 /* DetailsImagesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailsImagesCollectionViewCell.xib; sourceTree = "<group>"; };
 		613339321F695A820063A754 /* UIViewControllerChilds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerChilds.swift; sourceTree = "<group>"; };
+		6137EDFB1F9E02240040C004 /* ShopDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDAO.swift; sourceTree = "<group>"; };
+		6137EE031F9E19D90040C004 /* RepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryInterface.swift; sourceTree = "<group>"; };
+		6137EE051F9E19F80040C004 /* ShopRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopRepositoryInterface.swift; sourceTree = "<group>"; };
+		6137EE071F9E1A4E0040C004 /* ShopRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopRepository.swift; sourceTree = "<group>"; };
 		614142C01F6AEF0400379BB9 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		614142C31F6AF15B00379BB9 /* LastArrivalsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastArrivalsTableViewCell.swift; sourceTree = "<group>"; };
 		614142C41F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LastArrivalsTableViewCell.xib; sourceTree = "<group>"; };
@@ -185,6 +205,10 @@
 		6180AC041F72CF19007768F2 /* MenuTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableDelegate.swift; sourceTree = "<group>"; };
 		6180AC061F72D266007768F2 /* Category.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Category.storyboard; sourceTree = "<group>"; };
 		6180AC091F72D2D6007768F2 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		618A43801F9F491E0066F053 /* RepositoryRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryRepo.swift; sourceTree = "<group>"; };
+		618A43821F9F4EF90066F053 /* PolicyObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyObject.swift; sourceTree = "<group>"; };
+		618A43841F9F4F340066F053 /* ShopifyPolicyAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyPolicyAdapter.swift; sourceTree = "<group>"; };
+		618A43861F9F56930066F053 /* ShopDAOInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDAOInterface.swift; sourceTree = "<group>"; };
 		61934FAF1F62C04400A42853 /* ShopifyImageAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopifyImageAdapter.swift; sourceTree = "<group>"; };
 		61934FB11F62C49900A42853 /* ShopifyProductVariantAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopifyProductVariantAdapter.swift; sourceTree = "<group>"; };
 		61934FB31F62C73B00A42853 /* ShopifyPolicyAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopifyPolicyAdapter.swift; sourceTree = "<group>"; };
@@ -202,6 +226,8 @@
 		61AAB92E1F7BD07B00CD32D3 /* SortModalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalTableViewCell.swift; sourceTree = "<group>"; };
 		61AAB92F1F7BD07B00CD32D3 /* SortModalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SortModalTableViewCell.xib; sourceTree = "<group>"; };
 		61AB83251F72E6F0009E7343 /* Policy.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Policy.storyboard; sourceTree = "<group>"; };
+		61AFA3F21F9DFCE7004B9D53 /* DAOInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOInterface.swift; sourceTree = "<group>"; };
+		61AFA3F51F9DFECC004B9D53 /* ShopObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopObject.swift; sourceTree = "<group>"; };
 		61B0A4E61F90BD0000C58DF5 /* ShopifyProductEdgeAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyProductEdgeAdapter.swift; sourceTree = "<group>"; };
 		61B0A4E91F90DB2100C58DF5 /* ProductModelHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModelHelper.swift; sourceTree = "<group>"; };
 		61B279411F8E0B5300133770 /* ShopAPIModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAPIModelInterface.swift; sourceTree = "<group>"; };
@@ -231,7 +257,7 @@
 		61E4E63A1F56C868001C6E01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		61E4E63D1F56C868001C6E01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61E4E63F1F56C868001C6E01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		61E553D91F98DAF600EF39F6 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		61E553D91F98DAF600EF39F6 /* RepositoryP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryP.swift; sourceTree = "<group>"; };
 		61E553DC1F98DB8C00EF39F6 /* MagicalRecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicalRecordRepository.swift; sourceTree = "<group>"; };
 		61E553DE1F98DBC700EF39F6 /* MagicalRecordShopRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicalRecordShopRepository.swift; sourceTree = "<group>"; };
 		61E553E01F98E3E700EF39F6 /* MagicalRecordCategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicalRecordCategoryRepository.swift; sourceTree = "<group>"; };
@@ -290,6 +316,41 @@
 				61A507321F7E7A35004504EF /* ProductOptions */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		610A91351F9E292400424369 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				610A91361F9E292B00424369 /* Interface */,
+				610A91391F9E296700424369 /* Shopify */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		610A91361F9E292B00424369 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				610A91371F9E294600424369 /* APIInterface.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		610A91391F9E296700424369 /* Shopify */ = {
+			isa = PBXGroup;
+			children = (
+				610A913E1F9E34D400424369 /* Adapters */,
+				610A913A1F9E298600424369 /* API.swift */,
+			);
+			path = Shopify;
+			sourceTree = "<group>";
+		};
+		610A913E1F9E34D400424369 /* Adapters */ = {
+			isa = PBXGroup;
+			children = (
+				610A913F1F9E34F000424369 /* ShopifyShopAdapter.swift */,
+				618A43841F9F4F340066F053 /* ShopifyPolicyAdapter.swift */,
+			);
+			path = Adapters;
 			sourceTree = "<group>";
 		};
 		61127A251F879B3200565AB1 /* Scenes */ = {
@@ -391,6 +452,42 @@
 				6133392C1F6957AF0063A754 /* DetailsImagesCollectionViewCell.xib */,
 			);
 			path = DetailsImagesCollectionCell;
+			sourceTree = "<group>";
+		};
+		6137EDFA1F9E01EA0040C004 /* MagicalRecord */ = {
+			isa = PBXGroup;
+			children = (
+				610A91331F9E27F200424369 /* DAO.swift */,
+				6137EDFB1F9E02240040C004 /* ShopDAO.swift */,
+			);
+			path = MagicalRecord;
+			sourceTree = "<group>";
+		};
+		6137EE001F9E19460040C004 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				6137EE021F9E19B70040C004 /* Implementations */,
+				6137EE011F9E19B00040C004 /* Interfaces */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		6137EE011F9E19B00040C004 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				6137EE031F9E19D90040C004 /* RepositoryInterface.swift */,
+				6137EE051F9E19F80040C004 /* ShopRepositoryInterface.swift */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		6137EE021F9E19B70040C004 /* Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				618A43801F9F491E0066F053 /* RepositoryRepo.swift */,
+				6137EE071F9E1A4E0040C004 /* ShopRepository.swift */,
+			);
+			path = Implementations;
 			sourceTree = "<group>";
 		};
 		614142BF1F6AEEEA00379BB9 /* Home */ = {
@@ -575,6 +672,44 @@
 			path = SortModalTableViewCell;
 			sourceTree = "<group>";
 		};
+		61AFA3F01F9DFBD6004B9D53 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				610A91351F9E292400424369 /* API */,
+				61AFA3F11F9DFBE8004B9D53 /* DAO */,
+				61AFA3F41F9DFE50004B9D53 /* Models */,
+				6137EE001F9E19460040C004 /* Repositories */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		61AFA3F11F9DFBE8004B9D53 /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				61AFA3F71F9DFF4B004B9D53 /* Interface */,
+				6137EDFA1F9E01EA0040C004 /* MagicalRecord */,
+			);
+			path = DAO;
+			sourceTree = "<group>";
+		};
+		61AFA3F41F9DFE50004B9D53 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				61AFA3F51F9DFECC004B9D53 /* ShopObject.swift */,
+				618A43821F9F4EF90066F053 /* PolicyObject.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		61AFA3F71F9DFF4B004B9D53 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				61AFA3F21F9DFCE7004B9D53 /* DAOInterface.swift */,
+				618A43861F9F56930066F053 /* ShopDAOInterface.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
 		61B0A4E81F90DB0D00C58DF5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -588,8 +723,8 @@
 		61B279431F8E0CA600133770 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				6149479D1F99024700FA3B03 /* CoreStore */,
 				61E553D81F98DAA900EF39F6 /* Interfaces */,
+				6149479D1F99024700FA3B03 /* CoreStore */,
 				61E553DB1F98DB6D00EF39F6 /* MagicalRecord */,
 			);
 			path = Repositories;
@@ -675,11 +810,12 @@
 			isa = PBXGroup;
 			children = (
 				61E4E6331F56C868001C6E01 /* AppDelegate.swift */,
-				611EF33F1F56CBC7001B8B9C /* APIs */,
-				61CEAA6A1F5ECFD10016FBD7 /* Extensions */,
 				61CEAA641F5E98110016FBD7 /* Constants */,
 				611EF3591F5956A3001B8B9C /* Controllers */,
+				61CEAA6A1F5ECFD10016FBD7 /* Extensions */,
 				611EF3501F5829AB001B8B9C /* Models */,
+				611EF33F1F56CBC7001B8B9C /* APIs */,
+				61AFA3F01F9DFBD6004B9D53 /* Repository */,
 				61127A251F879B3200565AB1 /* Scenes */,
 				611EF33C1F56CB81001B8B9C /* ShopCoreAPI */,
 				6180AC011F72CCFA007768F2 /* SupportingFiles */,
@@ -694,7 +830,7 @@
 		61E553D81F98DAA900EF39F6 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				61E553D91F98DAF600EF39F6 /* Repository.swift */,
+				61E553D91F98DAF600EF39F6 /* RepositoryP.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -959,6 +1095,7 @@
 			files = (
 				61CEAA661F5E982A0016FBD7 /* Constants.swift in Sources */,
 				614142C11F6AEF0400379BB9 /* HomeViewController.swift in Sources */,
+				618A43851F9F4F340066F053 /* ShopifyPolicyAdapter.swift in Sources */,
 				61D7A2861F7A9FBF00031093 /* UIViewControllerBarButtonItems.swift in Sources */,
 				61ED88FB1F71721D006BDA79 /* GridCollectionDelegate.swift in Sources */,
 				612DE2591F6C3C1E00582B58 /* ShopifyArticleAdapter.swift in Sources */,
@@ -971,6 +1108,7 @@
 				61B94C0D1F82323800B6887C /* ProductOptionsCollectionDelegate.swift in Sources */,
 				6180AC051F72CF19007768F2 /* MenuTableDelegate.swift in Sources */,
 				612DE25B1F6C3F3C00582B58 /* ShopifyAuthorAdapter.swift in Sources */,
+				6137EDFC1F9E02240040C004 /* ShopDAO.swift in Sources */,
 				61B0A4EA1F90DB2100C58DF5 /* ProductModelHelper.swift in Sources */,
 				61AAB92C1F7BCF1000CD32D3 /* SortModalDataSource.swift in Sources */,
 				61534F301F73EE5E00F24189 /* LastArrivalsViewController.swift in Sources */,
@@ -992,13 +1130,14 @@
 				61534F271F73E24F00F24189 /* LastArrivalsLoadMoreCell.swift in Sources */,
 				613339331F695A820063A754 /* UIViewControllerChilds.swift in Sources */,
 				6106C6C51F796E1900E87486 /* SearchViewControllerDelegate.swift in Sources */,
-				61E553DA1F98DAF600EF39F6 /* Repository.swift in Sources */,
+				61E553DA1F98DAF600EF39F6 /* RepositoryP.swift in Sources */,
 				614142D61F6BD70400379BB9 /* LastArrivalsTableDataSource.swift in Sources */,
 				61AAB9301F7BD07B00CD32D3 /* SortModalTableViewCell.swift in Sources */,
 				61D472891F90DF6000D7B36E /* CategoryModelHelper.swift in Sources */,
 				61934FB91F62C76000A42853 /* ShopifyProductAdapter.swift in Sources */,
 				61D4728B1F90DFE300D7B36E /* ProductOptionModelHelper.swift in Sources */,
 				61CEAA6C1F5ECFFE0016FBD7 /* UIStoryboardAdditions.swift in Sources */,
+				618A43871F9F56930066F053 /* ShopDAOInterface.swift in Sources */,
 				614947981F98F5DA00FA3B03 /* MagicalRecordProductRepository.swift in Sources */,
 				6152B1281F791A1100045A42 /* ArticlesListTableDelegate.swift in Sources */,
 				611EF3441F56DA2A001B8B9C /* ShopifyAPI.swift in Sources */,
@@ -1006,6 +1145,7 @@
 				614142C51F6AF15B00379BB9 /* LastArrivalsTableViewCell.swift in Sources */,
 				6141AAB11F8BE7ED00F9019B /* SplashViewController.swift in Sources */,
 				61B5BEE51F75223400E075B7 /* MenuImageTableViewCell.swift in Sources */,
+				6137EE081F9E1A4E0040C004 /* ShopRepository.swift in Sources */,
 				61FDBE4A1F6FD71E00E7C729 /* MenuViewController.swift in Sources */,
 				61B0A4E71F90BD0000C58DF5 /* ShopifyProductEdgeAdapter.swift in Sources */,
 				6141AAB61F8BE7ED00F9019B /* SplashPresenter.swift in Sources */,
@@ -1018,15 +1158,18 @@
 				6141AAB51F8BE7ED00F9019B /* SplashModels.swift in Sources */,
 				611B70EA1F7C19E20056BAF9 /* SortModalDelegate.swift in Sources */,
 				6107F0DC1F8FA70C00547DA9 /* ShopifyCategoryAdapter.swift in Sources */,
+				618A43831F9F4EF90066F053 /* PolicyObject.swift in Sources */,
 				6152B1261F79181100045A42 /* ArticlesListTableDataSource.swift in Sources */,
 				6180AC0A1F72D2D6007768F2 /* CategoryViewController.swift in Sources */,
-				61934FB41F62C73B00A42853 /* ShopifyPolicyAdapter.swift in Sources */,
+				61AFA3F61F9DFECC004B9D53 /* ShopObject.swift in Sources */,
 				61A507341F7E7A35004504EF /* ProductOptionsViewController.swift in Sources */,
 				614142DA1F6C266000379BB9 /* Article.swift in Sources */,
 				612DE2571F6C3ADA00582B58 /* Author.swift in Sources */,
+				618A43811F9F491E0066F053 /* RepositoryRepo.swift in Sources */,
 				61FC3DA91F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift in Sources */,
 				611EF3411F56CBE6001B8B9C /* ShopAPIProtocol.swift in Sources */,
 				612C0DEB1F62F8C5003F37BD /* ShopifyCategoryEdgeAdapter.swift in Sources */,
+				610A91401F9E34F000424369 /* ShopifyShopAdapter.swift in Sources */,
 				61FC3DAC1F7EB4E600DB0AD7 /* ProductOptionsCollectionDataSource.swift in Sources */,
 				6180ABFF1F729CF7007768F2 /* MenuDefaultTableViewCell.swift in Sources */,
 				6149479C1F99006F00FA3B03 /* MagicalRecordImageRepository.swift in Sources */,
@@ -1038,10 +1181,15 @@
 				61315EB11F98EAE800B92817 /* MagicalRecordProductOptionRepository.swift in Sources */,
 				614142D81F6BD8B200379BB9 /* LastArrivalsTableDelegate.swift in Sources */,
 				614142C81F6AF24E00379BB9 /* HomeTableDataSource.swift in Sources */,
+				61AFA3F31F9DFCE7004B9D53 /* DAOInterface.swift in Sources */,
+				6137EE061F9E19F80040C004 /* ShopRepositoryInterface.swift in Sources */,
 				61CEAA6E1F5ED16E0016FBD7 /* UIViewControllerRoutes.swift in Sources */,
+				610A913B1F9E298600424369 /* API.swift in Sources */,
 				61A5072D1F7E79FB004504EF /* ImagesCarouselCollectionDelegate.swift in Sources */,
+				610A91381F9E294600424369 /* APIInterface.swift in Sources */,
 				6141AAB41F8BE7ED00F9019B /* SplashInteractor.swift in Sources */,
-				61934FBA1F62C76000A42853 /* ShopifyShopAdapter.swift in Sources */,
+				610A91341F9E27F200424369 /* DAO.swift in Sources */,
+				6137EE041F9E19D90040C004 /* RepositoryInterface.swift in Sources */,
 				61B5BEE01F7505F700E075B7 /* ArticleLoadMoreCell.swift in Sources */,
 				6149479A1F98FD7300FA3B03 /* MagicalRecordProductVariantRepository.swift in Sources */,
 				61ED88F91F71720B006BDA79 /* GridCollectionDataSource.swift in Sources */,

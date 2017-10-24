@@ -11,8 +11,8 @@ import UIKit
 class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTableDelegateProtocol {
     @IBOutlet weak var tableView: UITableView!
     
-    var categories = [Category]()
-    var policies = [Policy]()
+    var categories = [CategoryEntity]()
+    var policies = [PolicyEntity]()
     var tableDataSource: MenuTableDataSource?
     var tableDelegate: MenuTableDelegate?
     var repository: Repository?
@@ -57,7 +57,7 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
             policies.append(termsOfService)
         }
         
-        categories = repository?.getCategories() ?? [Category]()
+        categories = repository?.getCategories() ?? [CategoryEntity]()
     }
     
     private func openCategoryController(with index: Int) {
@@ -79,7 +79,7 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
         return categories.count
     }
     
-    func category(for index: Int) -> Category? {
+    func category(for index: Int) -> CategoryEntity? {
         if index < categories.count {
             return categories[index]
         }

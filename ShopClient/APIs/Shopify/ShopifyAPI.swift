@@ -9,9 +9,9 @@
 import UIKit
 import MobileBuySDK
 
-let kShopifyStorefrontAccessToken = "afc80014a08846feaf590e1db92e74b6"
-let kShopifyStorefrontURL = "xpohstore.myshopify.com"
-let kShopifyItemsMaxCount: Int32 = 250
+//let kShopifyStorefrontAccessToken = "afc80014a08846feaf590e1db92e74b6"
+//let kShopifyStorefrontURL = "xpohstore.myshopify.com"
+//let kShopifyItemsMaxCount: Int32 = 250
 
 class ShopifyAPI: NSObject, ShopAPIProtocol {
     var client: Graph.Client?
@@ -33,31 +33,8 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
     
     // MARK: - ShopAPIProtocol
     
-    // MARK: - shop info
-    func getShopInfo(callback: @escaping ApiCallback<Shop>) {
-        let query = Storefront.buildQuery { $0
-            .shop { $0
-                .name()
-                .description()
-                .privacyPolicy(policyQuery())
-                .refundPolicy(policyQuery())
-                .termsOfService(policyQuery())
-                .paymentSettings({ $0
-                    .currencyCode()
-                })
-            }
-        }
-        
-        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
-            self?.repository?.loadShopInfo(with: response?.shop, callback: { (shop, error) in
-                callback(shop, error)
-            })
-        })
-        task?.resume()
-    }
-    
     // MARK: - products
-    func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping ApiCallback<[Product]>) {
+    func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping ApiCallback<[ProductEntity]>) {
         let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: nil, sortBy: sortBy, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             if let edges = response?.shop.products.edges {
@@ -65,13 +42,13 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
                     callback(products, error)
                 })
             } else {
-                callback([Product](), nil)
+                callback([ProductEntity](), nil)
             }
         })
         task?.resume()
     }
     
-    func getProduct(id: String, options: [SelectedOption], callback: @escaping ApiCallback<Product>) {
+    func getProduct(id: String, options: [SelectedOption], callback: @escaping ApiCallback<ProductEntity>) {
         let query = productDetailsQuery(id: id, options: options)
         let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             let productNode = response?.node as! Storefront.Product
@@ -82,7 +59,7 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
         task?.resume()
     }
     
-    func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping ApiCallback<[Product]>) {
+    func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping ApiCallback<[ProductEntity]>) {
         let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: searchQuery, sortBy: nil, reverse: false)
         let task = client?.queryGraphWith(query, completionHandler: {  [weak self] (response, error) in
             if let edges = response?.shop.products.edges {
@@ -90,13 +67,13 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
                     callback(products, error)
                 })
             }
-            callback([Product](), error)
+            callback([ProductEntity](), error)
         })
         task?.resume()
     }
     
     // MARK: - categories
-    func getCategoryList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping ApiCallback<[Category]>) {
+    func getCategoryList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping ApiCallback<[CategoryEntity]>) {
         let query = categoryListQuery(perPage: perPage, after: paginationValue, sortBy: sortBy, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             if let categoryEdges = response?.shop.collections.edges {
@@ -104,13 +81,13 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
                     callback(categories, error)
                 })
             } else {
-                callback([Category](), error)
+                callback([CategoryEntity](), error)
             }
         })
         task?.resume()
     }
     
-    func getCategoryDetails(id: String, perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping ApiCallback<Category>) {
+    func getCategoryDetails(id: String, perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping ApiCallback<CategoryEntity>) {
         let query = categoryDetailsQuery(id: id, perPage: perPage, after: paginationValue, sortBy: sortBy, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             let categoryNode = response?.node as! Storefront.Collection
@@ -146,8 +123,6 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
             return Storefront.ProductSortKeys.createdAt
         case SortingValue.name:
             return Storefront.ProductSortKeys.title
-        default:
-            return nil
         }
     }
     
@@ -160,8 +135,6 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
             return Storefront.ProductCollectionSortKeys.created
         case SortingValue.name:
             return Storefront.ProductCollectionSortKeys.title
-        default:
-            return nil
         }
     }
     

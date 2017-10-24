@@ -6,7 +6,7 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-extension ProductOption {
+extension ProductOptionEntity {
     var valuesArray: [String] {
         get {
             return values as? [String] ?? [String]()

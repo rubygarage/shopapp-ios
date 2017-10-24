@@ -19,28 +19,24 @@ class ShopCoreAPI {
         self.shopAPI = shopAPI
     }
     
-    // MARK: - user methods
-    func getShopInfo(callback: @escaping ApiCallback<Shop>) {
-        shopAPI?.getShopInfo(callback: callback)
-    }
-    
-    func getProduct(id: String, options: [SelectedOption], callback: @escaping ApiCallback<Product>) {
+    // MARK: - user methods    
+    func getProduct(id: String, options: [SelectedOption], callback: @escaping ApiCallback<ProductEntity>) {
         shopAPI?.getProduct(id: id, options: options, callback: callback)
     }
     
-    func getProductList(perPage: Int = kItemsPerPage, paginationValue: Any? = nil, sortBy: SortingValue? = nil, reverse: Bool = false, callback: @escaping ApiCallback<[Product]>) {
+    func getProductList(perPage: Int = kItemsPerPage, paginationValue: Any? = nil, sortBy: SortingValue? = nil, reverse: Bool = false, callback: @escaping ApiCallback<[ProductEntity]>) {
         shopAPI?.getProductList(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, reverse: reverse, callback: callback)
     }
     
-    func searchProducts(perPage: Int = kItemsPerPage, paginationValue: Any? = nil, searchQuery: String, callback: @escaping ApiCallback<[Product]>) {
+    func searchProducts(perPage: Int = kItemsPerPage, paginationValue: Any? = nil, searchQuery: String, callback: @escaping ApiCallback<[ProductEntity]>) {
         shopAPI?.searchProducts(perPage: perPage, paginationValue: paginationValue, searchQuery: searchQuery, callback: callback)
     }
     
-    func getCategoryList(perPage: Int = kItemsPerPage, paginationValue: Any? = nil, sortBy: SortingValue? = nil, reverse: Bool = false, callback: @escaping ApiCallback<[Category]>) {
+    func getCategoryList(perPage: Int = kItemsPerPage, paginationValue: Any? = nil, sortBy: SortingValue? = nil, reverse: Bool = false, callback: @escaping ApiCallback<[CategoryEntity]>) {
         shopAPI?.getCategoryList(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, reverse: reverse, callback: callback)
     }
     
-    func getCategoryDetails(id: String, perPage: Int = kItemsPerPage, paginationValue: Any? = nil, sortBy: SortingValue? = nil, reverse: Bool = false, callback: @escaping ApiCallback<Category>) {
+    func getCategoryDetails(id: String, perPage: Int = kItemsPerPage, paginationValue: Any? = nil, sortBy: SortingValue? = nil, reverse: Bool = false, callback: @escaping ApiCallback<CategoryEntity>) {
         shopAPI?.getCategoryDetails(id: id, perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, reverse: reverse, callback: callback)
     }
     

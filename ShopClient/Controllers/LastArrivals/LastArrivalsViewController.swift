@@ -34,7 +34,7 @@ class LastArrivalsViewController: GridCollectionViewController {
     }
     
     // MARK: - private
-    private func updateProducts(products: [Product]) {
+    private func updateProducts(products: [ProductEntity]) {
         if paginationValue == nil {
             self.products.removeAll()
         }

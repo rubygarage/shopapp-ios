@@ -9,31 +9,31 @@
 import MagicalRecord
 
 extension MagicalRecordRepository {
-    func loadShopInfo(with item: ShopEntityInterface?, callback: @escaping ((_ shop: Shop?, _ error: Error?) -> ())) {
+    func loadShopInfo(with item: ShopEntityInterface?, callback: @escaping ((_ shop: ShopEntity?, _ error: Error?) -> ())) {
         MagicalRecord.save({ [weak self] (context) in
             if let shop = self?.getShop(in: context) {
                 self?.update(shop: shop, with: item, in: context)
             }
         }) { (contextDidSave, error) in
-            let shop = Shop.mr_findFirst()
+            let shop = ShopEntity.mr_findFirst()
             callback(shop, error)
         }
     }
     
-    func getShop() -> Shop? {
-        return Shop.mr_findFirst()
+    func getShop() -> ShopEntity? {
+        return ShopEntity.mr_findFirst()
     }
     
     // MARK: - private
-    private func getShop(in context: NSManagedObjectContext) -> Shop? {
-        var shop = Shop.mr_findFirst(in: context)
+    private func getShop(in context: NSManagedObjectContext) -> ShopEntity? {
+        var shop = ShopEntity.mr_findFirst(in: context)
         if shop == nil {
-            shop = Shop.mr_createEntity(in: context)
+            shop = ShopEntity.mr_createEntity(in: context)
         }
         return shop
     }
     
-    private func update(shop: Shop, with remoteItem: ShopEntityInterface?, in context: NSManagedObjectContext) {
+    private func update(shop: ShopEntity, with remoteItem: ShopEntityInterface?, in context: NSManagedObjectContext) {
         shop.name = remoteItem?.entityName
         shop.shopDescription = remoteItem?.entityDesription
         shop.currency = remoteItem?.entityCurrency

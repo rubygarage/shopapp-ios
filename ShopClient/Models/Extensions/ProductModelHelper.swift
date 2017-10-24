@@ -6,23 +6,23 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-extension Product {
-    var imagesArray: [Image]? {
+extension ProductEntity {
+    var imagesArray: [ImageEntity]? {
         get {
-            let imagesObjects = images?.allObjects as? [Image]
+            let imagesObjects = images?.allObjects as? [ImageEntity]
             return imagesObjects?.sorted(by: { $0.id ?? String() < $1.id ?? String() })
         }
     }
     
-    var optionsArray: [ProductOption]? {
+    var optionsArray: [ProductOptionEntity]? {
         get {
-            return options?.allObjects as? [ProductOption]
+            return options?.allObjects as? [ProductOptionEntity]
         }
     }
     
-    var variantsArray: [ProductVariant]? {
+    var variantsArray: [ProductVariantEntity]? {
         get {
-            return variants?.allObjects as? [ProductVariant]
+            return variants?.allObjects as? [ProductVariantEntity]
         }
     }
     
@@ -34,7 +34,7 @@ extension Product {
     
     var currency: String {
         get {
-            return Shop.mr_findFirst()?.currency ?? String()
+            return ShopEntity.mr_findFirst()?.currency ?? String()
         }
     }
 }

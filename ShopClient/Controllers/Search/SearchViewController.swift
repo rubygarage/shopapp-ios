@@ -57,7 +57,7 @@ class SearchViewController: GridCollectionViewController, SearchViewControllerDe
         }
     }
     
-    private func updateProducts(products: [Product], needToClear: Bool) {
+    private func updateProducts(products: [ProductEntity], needToClear: Bool) {
         if needToClear {
             self.products.removeAll()
         }

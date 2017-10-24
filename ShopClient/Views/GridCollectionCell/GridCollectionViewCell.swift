@@ -27,7 +27,7 @@ class GridCollectionViewCell: UICollectionViewCell {
         detailsView.layer.shadowRadius = kShadowRadius
     }
 
-    public func configure(with item: Product) {
+    public func configure(with item: ProductEntity) {
         let imageUrl = URL(string: item.imagesArray?.first?.src ?? String())
         productImageView.sd_setImage(with: imageUrl, completed: nil)
         titleLabel.text = item.title

@@ -6,10 +6,10 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-extension Category {
-    var productsArray: [Product]? {
+extension CategoryEntity {
+    var productsArray: [ProductEntity]? {
         get {
-            return products?.allObjects as? [Product]
+            return products?.allObjects as? [ProductEntity]
         }
     }
 }

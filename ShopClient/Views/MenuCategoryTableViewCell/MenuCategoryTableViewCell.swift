@@ -19,7 +19,7 @@ class MenuCategoryTableViewCell: UITableViewCell {
         selectionStyle = .none
     }
     
-    func configure(with category: Category?) {
+    func configure(with category: CategoryEntity?) {
         let imageUrl = URL(string: category?.image?.src ?? String())
         categoryImageView.sd_setImage(with: imageUrl)
         titleLabel.text = category?.title

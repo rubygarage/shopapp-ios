@@ -19,7 +19,7 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionLayout: UICollectionViewFlowLayout!
     
-    var options = [ProductOption]()
+    var options = [ProductOptionEntity]()
     var selectedOptions = [SelectedOption]()
     var collectionDataSource: ProductOptionsCollectionDataSource?
     var collectionDelegate: ProductOptionsCollectionDelegate?

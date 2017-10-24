@@ -10,7 +10,7 @@ import UIKit
 
 protocol ImagesCarouselCollectionDataSourceProtocol {
     func numberOfItems() -> Int
-    func item(for index: Int) -> Image
+    func item(for index: Int) -> ImageEntity
 }
 
 class ImagesCarouselCollectionDataSource: NSObject, UICollectionViewDataSource {

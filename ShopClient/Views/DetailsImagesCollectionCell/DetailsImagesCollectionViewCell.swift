@@ -11,7 +11,7 @@ import UIKit
 class DetailsImagesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productImageView: UIImageView!
 
-    public func configure(with image: Image) {
+    public func configure(with image: ImageEntity) {
         let imageUrl = URL(string: image.src ?? String())
         productImageView.sd_setImage(with: imageUrl, completed: nil)
     }

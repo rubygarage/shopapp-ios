@@ -11,7 +11,7 @@ import UIKit
 class CategoryViewController: GridCollectionViewController, SortModalControllerProtocol {
     var categoryId = String()
     var categoryTitle = String()
-    var category: Category?
+    var category: CategoryEntity?
     var selectedSortingValue = SortingValue.createdAt
     
     override func viewDidLoad() {
@@ -28,7 +28,7 @@ class CategoryViewController: GridCollectionViewController, SortModalControllerP
     }
     
     // MARK: - private
-    private func updateData(category: Category) {
+    private func updateData(category: CategoryEntity) {
         self.category = category
         if let items = category.productsArray {
             updateProducts(products: items)
@@ -36,7 +36,7 @@ class CategoryViewController: GridCollectionViewController, SortModalControllerP
         }
     }
     
-    private func updateProducts(products: [Product]) {
+    private func updateProducts(products: [ProductEntity]) {
         if paginationValue == nil {
             self.products.removeAll()
         }

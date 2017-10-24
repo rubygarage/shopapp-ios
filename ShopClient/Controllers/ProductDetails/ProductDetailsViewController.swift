@@ -20,7 +20,7 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
     @IBOutlet weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
     
     var productId = String()
-    var product: Product?
+    var product: ProductEntity?
     var selectedOptions = [SelectedOption]()
     var detailImagesController: ImagesCarouselViewController?
     var showingImageIndex = 0
@@ -66,17 +66,17 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
         }
     }
     
-    private func populateImages(with product: Product) {
+    private func populateImages(with product: ProductEntity) {
         if let images = product.imagesArray {
             openImagesCarouselChildController(with: images, delegate: self, showingIndex: showingImageIndex, onView: imagesContainerView)
         }
     }
     
-    private func populateTitle(with product: Product) {
+    private func populateTitle(with product: ProductEntity) {
         titleLabel.text = product.title
     }
     
-    private func populateDescription(with product: Product) {
+    private func populateDescription(with product: ProductEntity) {
         descriptionLabel.text = product.productDescription
     }
     

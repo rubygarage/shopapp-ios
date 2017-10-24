@@ -16,7 +16,7 @@ class ImagesCarouselViewController: UIViewController, ImagesCarouselCollectionDa
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     
-    var images = [Image]()
+    var images = [ImageEntity]()
     var controllerDelegate: ImagesCarouselViewControllerProtocol?
     var dataSource: ImagesCarouselCollectionDataSource?
     var delegate: ImagesCarouselCollectionDelegate?
@@ -66,7 +66,7 @@ class ImagesCarouselViewController: UIViewController, ImagesCarouselCollectionDa
         return images.count
     }
     
-    func item(for index: Int) -> Image {
+    func item(for index: Int) -> ImageEntity {
         return images[index]
     }
     

@@ -28,7 +28,7 @@ class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableDataSourcePro
     var delegate: LastArrivalsTableDelegate?
     var cellDelegate: LastArrivalsCellDelegate?
     
-    var products = [Product]()
+    var products = [ProductEntity]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -50,7 +50,7 @@ class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableDataSourcePro
         collectionView.delegate = delegate
     }
     
-    func configure(with products: [Product]?, cellDelegate: LastArrivalsCellDelegate?) {
+    func configure(with products: [ProductEntity]?, cellDelegate: LastArrivalsCellDelegate?) {
         if let items = products {
             self.products = items
             collectionView.reloadData()
@@ -67,7 +67,7 @@ class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableDataSourcePro
         return products.count
     }
     
-    func item(for index: Int) -> Product {
+    func item(for index: Int) -> ProductEntity {
         return products[index]
     }
     

@@ -24,7 +24,7 @@ extension UIViewController {
         pushController(with: UIStoryboard.articlesList(), identifier: ControllerIdentifier.articlesList)
     }
     
-    func pushDetailController(with product: Product) {
+    func pushDetailController(with product: ProductEntity) {
         let productDetaillsController = UIStoryboard.productDetails().instantiateViewController(withIdentifier: ControllerIdentifier.productDetails) as! ProductDetailsViewController
         productDetaillsController.productId = product.id ?? String()
         productDetaillsController.product = product
@@ -32,7 +32,7 @@ extension UIViewController {
         navigationController?.pushViewController(productDetaillsController, animated: true)
     }
     
-    func pushPolicyController(with policy: Policy) {
+    func pushPolicyController(with policy: PolicyEntity) {
         let policyController = UIStoryboard.policy().instantiateViewController(withIdentifier: ControllerIdentifier.policy) as! PolicyViewController
         policyController.policy = policy
 
@@ -61,7 +61,7 @@ extension UIViewController {
     }
     
     // MARK: - open as child
-    func openImagesCarouselChildController(with images: [Image], delegate: ImagesCarouselViewControllerProtocol?, showingIndex: Int, onView: UIView) {
+    func openImagesCarouselChildController(with images: [ImageEntity], delegate: ImagesCarouselViewControllerProtocol?, showingIndex: Int, onView: UIView) {
         let detailImagesController = UIStoryboard.imagesCarousel().instantiateViewController(withIdentifier: ControllerIdentifier.imagesCarousel) as! ImagesCarouselViewController
         detailImagesController.images = images
         detailImagesController.controllerDelegate = delegate
@@ -70,7 +70,7 @@ extension UIViewController {
         configureChildViewController(childController: detailImagesController, onView: onView)
     }
     
-    func openProductOptionsController(with options: [ProductOption], selectedOptions: [SelectedOption], delegate: ProductOptionsControllerProtocol?, onView: UIView) {
+    func openProductOptionsController(with options: [ProductOptionEntity], selectedOptions: [SelectedOption], delegate: ProductOptionsControllerProtocol?, onView: UIView) {
         let optionsController = UIStoryboard.productOptions().instantiateViewController(withIdentifier: ControllerIdentifier.productOptions) as! ProductOptionsViewController
         optionsController.options = options
         optionsController.selectedOptions = selectedOptions

@@ -9,35 +9,35 @@
 import MagicalRecord
 
 extension MagicalRecordRepository {
-    func loadCategories(with items: [CategoryEntityInterface], callback: @escaping ((_ categories: [Category]?, _ error: Error?) -> ())) {
+    func loadCategories(with items: [CategoryEntityInterface], callback: @escaping ((_ categories: [CategoryEntity]?, _ error: Error?) -> ())) {
         updateCategory(with: items) { (error) in
             let categoriesIds = items.map({ $0.entityId })
             let predicate = NSPredicate(format: "id IN %@", categoriesIds)
-            let categories = Category.mr_findAll(with: predicate) as? [Category]
+            let categories = CategoryEntity.mr_findAll(with: predicate) as? [CategoryEntity]
             callback(categories, error)
         }
     }
     
-    func loadCategory(with item: CategoryEntityInterface, callback: @escaping ((_ category: Category?, _ error: Error?) -> ())) {
+    func loadCategory(with item: CategoryEntityInterface, callback: @escaping ((_ category: CategoryEntity?, _ error: Error?) -> ())) {
         updateCategory(with: [item]) { (error) in
-            let category = Category.mr_findFirst(byAttribute: "id", withValue: item.entityId)
+            let category = CategoryEntity.mr_findFirst(byAttribute: "id", withValue: item.entityId)
             callback(category, error)
         }
     }
     
-    func getCategories() -> [Category]? {
-        return Category.mr_findAll() as? [Category]
+    func getCategories() -> [CategoryEntity]? {
+        return CategoryEntity.mr_findAll() as? [CategoryEntity]
     }
     
-    func getCategory(with id: String) -> Category? {
-        return Category.mr_findFirst(byAttribute: "id", withValue: id)
+    func getCategory(with id: String) -> CategoryEntity? {
+        return CategoryEntity.mr_findFirst(byAttribute: "id", withValue: id)
     }
     
     // MARK: - private
     private func updateCategory(with items: [CategoryEntityInterface], callback: @escaping ((_ error: Error?) -> ())) {
         MagicalRecord.save({ [weak self] (context) in
             for categoryInterface in items {
-                let category = Category.mr_findFirstOrCreate(byAttribute: "id", withValue: categoryInterface.entityId, in: context)
+                let category = CategoryEntity.mr_findFirstOrCreate(byAttribute: "id", withValue: categoryInterface.entityId, in: context)
                 self?.update(category: category, with: categoryInterface, in: context)
             }
         }) { (contextDidSave, error) in
@@ -45,7 +45,7 @@ extension MagicalRecordRepository {
         }
     }
     
-    private func update(category: Category, with remoteItem: CategoryEntityInterface?, in context: NSManagedObjectContext) {
+    private func update(category: CategoryEntity, with remoteItem: CategoryEntityInterface?, in context: NSManagedObjectContext) {
         category.id = remoteItem?.entityId
         category.title = remoteItem?.entityTitle
         category.categoryDescription = remoteItem?.entityCategoryDescription
