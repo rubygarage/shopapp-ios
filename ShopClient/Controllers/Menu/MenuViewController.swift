@@ -15,12 +15,10 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
     var policies = [Policy]()
     var tableDataSource: MenuTableDataSource?
     var tableDelegate: MenuTableDelegate?
-    var repository: Repository?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        repository = MagicalRecordRepository()
         setupTableView()
         loadData()
     }
@@ -43,27 +41,36 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
     }
     
     private func loadData() {
-        let shop = repository?.getShop()
-        
-        if let privacyPolicy = shop?.privacyPolicy {
-            policies.append(privacyPolicy)
+        Repository.shared.getShop { [weak self] (shop, error) in
+            if let privacyPolicy = shop?.privacyPolicy {
+                self?.policies.append(privacyPolicy)
+            }
+            
+            if let refundPolicy = shop?.refundPolicy {
+                self?.policies.append(refundPolicy)
+            }
+            
+            if let termsOfService = shop?.termsOfService {
+                self?.policies.append(termsOfService)
+            }
+            
+            self?.loadCategories()
         }
-        
-        if let refundPolicy = shop?.refundPolicy {
-            policies.append(refundPolicy)
+    }
+    
+    private func loadCategories() {
+        Repository.shared.getCategoryList { [weak self] (categories, error) in
+            if let categories = categories {
+                self?.categories = categories
+                self?.tableView.reloadData()
+            }
         }
-        
-        if let termsOfService = shop?.termsOfService {
-            policies.append(termsOfService)
-        }
-        
-        categories = repository?.getCategories() ?? [Category]()
     }
     
     private func openCategoryController(with index: Int) {
         if index < categories.count {
             let category = categories[index]
-            setCategoryController(with: category.id ?? String(), title: category.title ?? String())
+            setCategoryController(with: category.id, title: category.title ?? String())
         }
     }
     

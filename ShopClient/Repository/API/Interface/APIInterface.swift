@@ -1,0 +1,34 @@
+//
+//  APIInterface.swift
+//  ShopClient
+//
+//  Created by Evgeniy Antonov on 10/23/17.
+//  Copyright © 2017 Evgeniy Antonov. All rights reserved.
+//
+
+import Foundation
+
+enum SortingValue: Int {
+    case createdAt
+    case name
+    
+    static let allValues = [NSLocalizedString("SortingValue.CreatedAt", comment: String()),
+                            NSLocalizedString("SortingValue.Name", comment: String())]
+}
+
+protocol APIInterface {
+    // MARK: - shop
+    func getShopInfo(callback: @escaping RepoCallback<Shop>)
+    
+    // MARK: - products
+    func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Product]>)
+    func getProduct(id: String, options: [SelectedOption], callback: @escaping RepoCallback<Product>)
+    func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping RepoCallback<[Product]>)
+    
+    // MARK: - categories
+    func getCategoryList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Category]>)
+    func getCategoryDetails(id: String, perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<Category>)
+    
+    // MARK: - articles
+    func getArticleList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Article]>)
+}

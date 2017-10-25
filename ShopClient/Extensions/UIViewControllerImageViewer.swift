@@ -12,7 +12,7 @@ import SKPhotoBrowser
 extension UIViewController {
     func pushImageViewer(with product: Product, initialIndex: Int) {
         var images = [SKPhoto]()
-        if let items = product.imagesArray {
+        if let items = product.images {
             for item in items {
                 images.append(SKPhoto.photoWithImageURL(item.src ?? String()))
             }

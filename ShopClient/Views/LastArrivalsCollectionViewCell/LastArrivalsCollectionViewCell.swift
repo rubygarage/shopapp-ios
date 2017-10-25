@@ -15,10 +15,10 @@ class LastArrivalsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     
     func configure(with item: Product) {
-        let imageUrl = URL(string: item.imagesArray?.first?.src ?? String())
+        let imageUrl = URL(string: item.images?.first?.src ?? String())
         productImageView.sd_setImage(with: imageUrl)
         titleLabel.text = item.title
         let localizedString = NSLocalizedString("Label.PriceFrom", comment: String())
-        priceLabel.text = String.localizedStringWithFormat(localizedString, item.lowestPrice, item.currency)
+        priceLabel.text = String.localizedStringWithFormat(localizedString, item.lowestPrice, item.currency ?? String())
     }
 }

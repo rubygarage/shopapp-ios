@@ -30,7 +30,7 @@ class CategoryViewController: GridCollectionViewController, SortModalControllerP
     // MARK: - private
     private func updateData(category: Category) {
         self.category = category
-        if let items = category.productsArray {
+        if let items = category.products {
             updateProducts(products: items)
             canLoadMore = products.count == kItemsPerPage
         }
@@ -46,7 +46,7 @@ class CategoryViewController: GridCollectionViewController, SortModalControllerP
     // MARK: - private
     private func loadRemoteData() {
         let reverse = selectedSortingValue == .createdAt
-        ShopCoreAPI.shared.getCategoryDetails(id: categoryId, paginationValue: paginationValue, sortBy: selectedSortingValue, reverse: reverse) { [weak self] (result, error) in
+        Repository.shared.getCategoryDetails(id: categoryId, paginationValue: paginationValue, sortBy: selectedSortingValue, reverse: reverse) { [weak self] (result, error) in
             self?.stopLoadAnimating()
             if let category = result {
                 self?.updateData(category: category)

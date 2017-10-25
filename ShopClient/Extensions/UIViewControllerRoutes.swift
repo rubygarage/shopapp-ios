@@ -26,7 +26,7 @@ extension UIViewController {
     
     func pushDetailController(with product: Product) {
         let productDetaillsController = UIStoryboard.productDetails().instantiateViewController(withIdentifier: ControllerIdentifier.productDetails) as! ProductDetailsViewController
-        productDetaillsController.productId = product.id ?? String()
+        productDetaillsController.productId = product.id 
         productDetaillsController.product = product
         
         navigationController?.pushViewController(productDetaillsController, animated: true)

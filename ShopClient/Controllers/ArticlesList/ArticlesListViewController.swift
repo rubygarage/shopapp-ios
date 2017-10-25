@@ -62,7 +62,7 @@ class ArticlesListViewController: UIViewController, ArticlesListTableDataSourceP
     }
     
     private func loadRemoteData() {
-        ShopCoreAPI.shared.getArticleList(paginationValue: paginationValue, sortBy: SortingValue.createdAt, reverse: true) { [weak self] (articles, error) in
+        Repository.shared.getArticleList(paginationValue: paginationValue, sortBy: SortingValue.createdAt, reverse: true) { [weak self] (articles, error) in
             if let articles = articles {
                 self?.updateArticles(with: articles)
                 self?.tableView.reloadData()
