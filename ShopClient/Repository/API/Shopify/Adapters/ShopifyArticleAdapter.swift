@@ -38,8 +38,6 @@ extension Article {
         blogTitle = item?.blog.title
         publishedAt = item?.publishedAt
         url = item?.url.absoluteString
-        if let image = item?.image {
-            self.image = Image(with: image)
-        }
+        image = Image(with: item?.image)
     }
 }

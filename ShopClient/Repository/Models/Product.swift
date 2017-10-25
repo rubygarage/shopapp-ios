@@ -12,7 +12,7 @@ class Product: NSObject {
     var id = String()
     var title: String?
     var productDescription: String?
-    var currency = String() // TODO:
+    var currency: String?
     var discount: String?
     var images: [Image]?
     var type: String?

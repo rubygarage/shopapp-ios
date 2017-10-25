@@ -32,6 +32,6 @@ class GridCollectionViewCell: UICollectionViewCell {
         productImageView.sd_setImage(with: imageUrl, completed: nil)
         titleLabel.text = item.title
         let localizedString = NSLocalizedString("Label.PriceFrom", comment: String())
-        priceLabel.text = String.localizedStringWithFormat(localizedString, item.lowestPrice, item.currency)
+        priceLabel.text = String.localizedStringWithFormat(localizedString, item.lowestPrice, item.currency ?? String())
     }
 }

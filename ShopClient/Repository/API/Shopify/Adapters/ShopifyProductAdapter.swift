@@ -9,31 +9,31 @@
 import MobileBuySDK
 
 extension Product {
-    convenience init?(with item: Storefront.Product?) {
+    convenience init?(with item: Storefront.Product?, currencyValue: String?) {
         if item == nil {
             return nil
         }
         self.init()
         
-        update(with: item)
+        update(with: item, currencyValue: currencyValue)
     }
     
-    convenience init?(with item: Storefront.ProductEdge?) {
+    convenience init?(with item: Storefront.ProductEdge?, currencyValue: String?) {
         if item == nil {
             return nil
         }
         self.init()
         
-        update(with: item?.node)
+        update(with: item?.node, currencyValue: currencyValue)
         paginationValue = item?.cursor
     }
     
-    private func update(with item: Storefront.Product?) {
+    private func update(with item: Storefront.Product?, currencyValue: String?) {
         id = item?.id.rawValue ?? String()
         title = item?.title
         productDescription = item?.description
-        currency = String() // TODO:
-        discount = String() // TODO:
+        currency = currencyValue
+        discount = String()
         type = item?.productType
         vendor = item?.vendor
         createdAt = item?.createdAt

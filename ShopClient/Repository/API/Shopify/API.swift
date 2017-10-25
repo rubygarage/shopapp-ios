@@ -39,9 +39,7 @@ class API: NSObject, APIInterface {
                 .privacyPolicy(policyQuery())
                 .refundPolicy(policyQuery())
                 .termsOfService(policyQuery())
-                .paymentSettings({ $0
-                    .currencyCode()
-                })
+                .paymentSettings(self.paymentSettingsQuery())
             }
         }
         
@@ -57,9 +55,10 @@ class API: NSObject, APIInterface {
         let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: nil, sortBy: sortBy, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             var products = [Product]()
+            let currency = response?.shop.paymentSettings.currencyCode.rawValue
             if let edges = response?.shop.products.edges {
                 for edge in edges {
-                    if let product = Product(with: edge) {
+                    if let product = Product(with: edge, currencyValue: currency) {
                         products.append(product)
                     }
                 }
@@ -73,7 +72,8 @@ class API: NSObject, APIInterface {
         let query = productDetailsQuery(id: id, options: options)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             let productNode = response?.node as! Storefront.Product
-            let productObject = Product(with: productNode)
+            let currency = response?.shop.paymentSettings.currencyCode.rawValue
+            let productObject = Product(with: productNode, currencyValue: currency)
             callback(productObject, error)
         })
         task?.resume()
@@ -83,9 +83,10 @@ class API: NSObject, APIInterface {
         let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: searchQuery, sortBy: nil, reverse: false)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             var products = [Product]()
+            let currency = response?.shop.paymentSettings.currencyCode.rawValue
             if let edges = response?.shop.products.edges {
                 for edge in edges {
-                    if let product = Product(with: edge) {
+                    if let product = Product(with: edge, currencyValue: currency) {
                         products.append(product)
                     }
                 }
@@ -100,9 +101,10 @@ class API: NSObject, APIInterface {
         let query = categoryListQuery(perPage: perPage, after: paginationValue, sortBy: sortBy, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             var categories = [Category]()
+            let currency = response?.shop.paymentSettings.currencyCode.rawValue
             if let categoryEdges = response?.shop.collections.edges {
                 for categoryEdge in categoryEdges {
-                    if let category = Category(with: categoryEdge) {
+                    if let category = Category(with: categoryEdge, currencyValue: currency) {
                         categories.append(category)
                     }
                 }
@@ -116,7 +118,8 @@ class API: NSObject, APIInterface {
         let query = categoryDetailsQuery(id: id, perPage: perPage, after: paginationValue, sortBy: sortBy, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             let categoryNode = response?.node as! Storefront.Collection
-            let category = Category(with: categoryNode)
+            let currency = response?.shop.paymentSettings.currencyCode.rawValue
+            let category = Category(with: categoryNode, currencyValue: currency)
             callback(category, error)
         })
         task?.resume()
@@ -171,6 +174,7 @@ class API: NSObject, APIInterface {
         return Storefront.buildQuery { $0
             .shop { $0
                 .name()
+                .paymentSettings(self.paymentSettingsQuery())
                 .products(first: Int32(perPage), after: after as? String, reverse: reverse, sortKey: sortKey, query: searchPhrase, self.productConnectionQuery())
             }
         }
@@ -179,6 +183,9 @@ class API: NSObject, APIInterface {
     private func productDetailsQuery(id: String, options: [SelectedOption]) -> Storefront.QueryRootQuery {
         let nodeId = GraphQL.ID(rawValue: id)
         return Storefront.buildQuery({ $0
+            .shop({ $0
+                .paymentSettings(self.paymentSettingsQuery())
+            })
             .node(id: nodeId, { $0
                 .onProduct(subfields: self.productQuery(additionalInfoNedded: true, options: options))
             })
@@ -188,6 +195,7 @@ class API: NSObject, APIInterface {
     private func categoryListQuery(perPage: Int, after: Any?, sortBy: SortingValue?, reverse: Bool) -> Storefront.QueryRootQuery {
         return Storefront.buildQuery({ $0
             .shop({ $0
+                .paymentSettings(self.paymentSettingsQuery())
                 .collections(first: Int32(perPage), self.collectionConnectionQuery(perPage: perPage, after: after, sortBy: sortBy, reverse: reverse))
             })
         })
@@ -196,6 +204,9 @@ class API: NSObject, APIInterface {
     private func categoryDetailsQuery(id: String, perPage: Int, after: Any?, sortBy: SortingValue?, reverse: Bool) -> Storefront.QueryRootQuery {
         let nodeId = GraphQL.ID(rawValue: id)
         return Storefront.buildQuery { $0
+            .shop({ $0
+                .paymentSettings(self.paymentSettingsQuery())
+            })
             .node(id: nodeId, { $0
                 .onCollection(subfields: self.collectionQuery(perPage: perPage, after: after, sortBy: sortBy, reverse: reverse))
             })
@@ -357,6 +368,12 @@ class API: NSObject, APIInterface {
             query.id()
             query.name()
             query.values()
+        }
+    }
+    
+    private func paymentSettingsQuery() -> (Storefront.PaymentSettingsQuery) -> () {
+        return { (query: Storefront.PaymentSettingsQuery) in
+            query.currencyCode()
         }
     }
 }
