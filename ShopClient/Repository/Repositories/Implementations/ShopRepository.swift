@@ -7,7 +7,7 @@
 //
 
 extension RepositoryRepo {
-    func getShop(callback: @escaping RepoCallback<ShopObject>) {
+    func getShop(callback: @escaping RepoCallback<Shop>) {
         APICore?.getShopInfo(callback: callback)
     }
 }

@@ -13,14 +13,14 @@
 import UIKit
 
 class SplashWorker {
-    func loadShopInfo(callback: @escaping (_ shop: ShopObject?, _ error: Error?) -> ()) {
+    func loadShopInfo(callback: @escaping (_ shop: Shop?, _ error: Error?) -> ()) {
         RepositoryRepo.shared.getShop(callback: { (shopObject, error) in
             callback(shopObject, error)
         })
     }
     
-    func loadCategories(callback: @escaping (_ categories: [CategoryEntity]?, _ error: Error?) -> ()) {
-        ShopCoreAPI.shared.getCategoryList(perPage: 0) { (categories, error) in
+    func loadCategories(callback: @escaping (_ categories: [Category]?, _ error: Error?) -> ()) {
+        RepositoryRepo.shared.getCategoryList(perPage: 0) { (categories, error) in
             callback(categories, error)
         }
     }

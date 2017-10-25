@@ -14,7 +14,7 @@ class GridCollectionViewController: UIViewController, GridCollectionDataSourcePr
     
     var collectionDataSource: GridCollectionDataSource?
     var collectionDelegate: GridCollectionDelegate?
-    var products = [ProductEntity]()
+    var products = [Product]()
     var refreshControl: UIRefreshControl?
     var paginationValue: Any?
     var canLoadMore = true
@@ -79,7 +79,7 @@ class GridCollectionViewController: UIViewController, GridCollectionDataSourcePr
         return products.count
     }
     
-    func item(for indexPath: IndexPath) -> ProductEntity {
+    func item(for indexPath: IndexPath) -> Product {
         return products[indexPath.row]
     }
     

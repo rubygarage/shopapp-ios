@@ -8,7 +8,7 @@
 
 import MobileBuySDK
 
-extension ShopObject {
+extension Shop {
     convenience init?(shopObject: Storefront.Shop?) {
         if shopObject == nil {
             return nil
@@ -17,8 +17,8 @@ extension ShopObject {
         
         name = shopObject?.name ?? String()
         shopDescription = shopObject?.description
-        privacyPolicy = PolicyObject(policyObject: shopObject?.privacyPolicy)
-        refundPolicy = PolicyObject(policyObject: shopObject?.refundPolicy)
-        termsOfService = PolicyObject(policyObject: shopObject?.termsOfService)
+        privacyPolicy = Policy(policyObject: shopObject?.privacyPolicy)
+        refundPolicy = Policy(policyObject: shopObject?.refundPolicy)
+        termsOfService = Policy(policyObject: shopObject?.termsOfService)
     }
 }

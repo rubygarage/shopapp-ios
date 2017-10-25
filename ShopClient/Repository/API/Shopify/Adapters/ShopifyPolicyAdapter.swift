@@ -8,7 +8,7 @@
 
 import MobileBuySDK
 
-extension PolicyObject {
+extension Policy {
     convenience init?(policyObject: Storefront.ShopPolicy?) {
         if policyObject == nil {
             return nil

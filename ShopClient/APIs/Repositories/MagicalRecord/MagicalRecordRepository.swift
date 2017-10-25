@@ -8,5 +8,5 @@
 
 import MagicalRecord
 
-class MagicalRecordRepository: NSObject, Repository {
+class MagicalRecordRepository: NSObject {
 }

@@ -14,7 +14,6 @@ let kShopifyItemsMaxCount: Int32 = 250
 
 class API: NSObject, APIInterface {
     var client: Graph.Client?
-    var repository: Repository?
     
     override init() {
         super.init()
@@ -27,13 +26,12 @@ class API: NSObject, APIInterface {
             shopDomain: kShopifyStorefrontURL,
             apiKey: kShopifyStorefrontAccessToken
         )
-        repository = MagicalRecordRepository()
     }
     
     // MARK: - APIInterface
     
     // MARK: - shop info
-    func getShopInfo(callback: @escaping RepoCallback<ShopObject>) {
+    func getShopInfo(callback: @escaping RepoCallback<Shop>) {
         let query = Storefront.buildQuery { $0
             .shop { $0
                 .name()
@@ -48,79 +46,84 @@ class API: NSObject, APIInterface {
         }
         
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
-            let shopObject = ShopObject(shopObject: response?.shop)
+            let shopObject = Shop(shopObject: response?.shop)
             callback(shopObject, error)
         })
         task?.resume()
     }
     
     // MARK: - products
-    func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping ApiCallback<[ProductEntity]>) {
+    func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Product]>) {
         let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: nil, sortBy: sortBy, reverse: reverse)
-        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
+        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
+            var products = [Product]()
             if let edges = response?.shop.products.edges {
-                self?.repository?.loadProducts(with: edges, callback: { (products, error) in
-                    callback(products, error)
-                })
-            } else {
-                callback([ProductEntity](), nil)
+                for edge in edges {
+                    if let product = Product(with: edge) {
+                        products.append(product)
+                    }
+                }
             }
+            callback(products, error)
         })
         task?.resume()
     }
     
-    func getProduct(id: String, options: [SelectedOption], callback: @escaping ApiCallback<ProductEntity>) {
+    func getProduct(id: String, options: [SelectedOption], callback: @escaping RepoCallback<Product>) {
         let query = productDetailsQuery(id: id, options: options)
-        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
+        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             let productNode = response?.node as! Storefront.Product
-            self?.repository?.loadProduct(with: productNode, callback: { (product, error) in
-                callback(product, error)
-            })
+            let productObject = Product(with: productNode)
+            callback(productObject, error)
         })
         task?.resume()
     }
     
-    func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping ApiCallback<[ProductEntity]>) {
+    func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping RepoCallback<[Product]>) {
         let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: searchQuery, sortBy: nil, reverse: false)
-        let task = client?.queryGraphWith(query, completionHandler: {  [weak self] (response, error) in
+        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
+            var products = [Product]()
             if let edges = response?.shop.products.edges {
-                self?.repository?.loadProducts(with: edges, callback: { (products, error) in
-                    callback(products, error)
-                })
+                for edge in edges {
+                    if let product = Product(with: edge) {
+                        products.append(product)
+                    }
+                }
             }
-            callback([ProductEntity](), error)
+            callback(products, error)
         })
         task?.resume()
     }
     
     // MARK: - categories
-    func getCategoryList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping ApiCallback<[CategoryEntity]>) {
+    func getCategoryList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Category]>) {
         let query = categoryListQuery(perPage: perPage, after: paginationValue, sortBy: sortBy, reverse: reverse)
-        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
+        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
+            var categories = [Category]()
             if let categoryEdges = response?.shop.collections.edges {
-                self?.repository?.loadCategories(with: categoryEdges, callback: { (categories, error) in
-                    callback(categories, error)
-                })
-            } else {
-                callback([CategoryEntity](), error)
+                for categoryEdge in categoryEdges {
+                    if let category = Category(with: categoryEdge) {
+                        categories.append(category)
+                    }
+                }
             }
+            callback(categories, error)
         })
         task?.resume()
     }
     
-    func getCategoryDetails(id: String, perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping ApiCallback<CategoryEntity>) {
+    func getCategoryDetails(id: String, perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<Category>) {
         let query = categoryDetailsQuery(id: id, perPage: perPage, after: paginationValue, sortBy: sortBy, reverse: reverse)
-        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
+        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             let categoryNode = response?.node as! Storefront.Collection
-            self?.repository?.loadCategory(with: categoryNode, callback: { (category, error) in
-                callback(category, error)
-            })
+            let category = Category(with: categoryNode)
+            callback(category, error)
         })
         task?.resume()
     }
     
     // MARK: - articles
-    func getArticleList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping ApiCallback<[Article]>) {
+    func getArticleList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Article]>) {
         let query = articleListQuery(perPage: perPage, after: paginationValue, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             var articles = [Article]()

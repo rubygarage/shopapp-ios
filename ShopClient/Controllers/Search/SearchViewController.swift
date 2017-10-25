@@ -47,7 +47,7 @@ class SearchViewController: GridCollectionViewController, SearchViewControllerDe
     }
     
     private func loadRemoteData() {
-        ShopCoreAPI.shared.searchProducts(paginationValue: paginationValue, searchQuery: searchPhrase) { [weak self] (products, error) in
+        RepositoryRepo.shared.searchProducts(paginationValue: paginationValue, searchQuery: searchPhrase) { [weak self] (products, error) in
             if let productsArray = products {
                 self?.updateProducts(products: productsArray, needToClear: self?.paginationValue == nil)
             }
@@ -57,7 +57,7 @@ class SearchViewController: GridCollectionViewController, SearchViewControllerDe
         }
     }
     
-    private func updateProducts(products: [ProductEntity], needToClear: Bool) {
+    private func updateProducts(products: [Product], needToClear: Bool) {
         if needToClear {
             self.products.removeAll()
         }

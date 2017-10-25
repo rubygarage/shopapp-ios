@@ -7,5 +7,5 @@
 //
 
 protocol ShopRepositoryInterface {
-    func getShop(callback: @escaping RepoCallback<ShopObject>)
+    func getShop(callback: @escaping RepoCallback<Shop>)
 }

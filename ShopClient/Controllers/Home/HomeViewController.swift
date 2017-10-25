@@ -14,7 +14,7 @@ class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTab
     var dataSource: HomeTableDataSource?
     var delegate: HomeTableDelegate?
     
-    var lastArrivalsProducts = [ProductEntity]()
+    var lastArrivalsProducts = [Product]()
     var newInBlogArticles = [Article]()
     
     override func viewDidLoad() {
@@ -59,7 +59,7 @@ class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTab
     }
     
     private func loadRemoteData() {
-        ShopCoreAPI.shared.getProductList(sortBy: SortingValue.createdAt, reverse: true) { [weak self] (products, error) in
+        RepositoryRepo.shared.getProductList(sortBy: SortingValue.createdAt, reverse: true) { [weak self] (products, error) in
             if let items = products {
                 self?.lastArrivalsProducts = items
                 self?.loadArticles()
@@ -85,7 +85,7 @@ class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTab
     }
     
     // MARK: - HomeTableDataSourceProtocol
-    func lastArrivalsObjects() -> [ProductEntity] {
+    func lastArrivalsObjects() -> [Product] {
         return lastArrivalsProducts
     }
     

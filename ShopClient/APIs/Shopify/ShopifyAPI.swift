@@ -33,45 +33,6 @@ class ShopifyAPI: NSObject, ShopAPIProtocol {
     
     // MARK: - ShopAPIProtocol
     
-    // MARK: - products
-    func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping ApiCallback<[ProductEntity]>) {
-        let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: nil, sortBy: sortBy, reverse: reverse)
-        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
-            if let edges = response?.shop.products.edges {
-                self?.repository?.loadProducts(with: edges, callback: { (products, error) in
-                    callback(products, error)
-                })
-            } else {
-                callback([ProductEntity](), nil)
-            }
-        })
-        task?.resume()
-    }
-    
-    func getProduct(id: String, options: [SelectedOption], callback: @escaping ApiCallback<ProductEntity>) {
-        let query = productDetailsQuery(id: id, options: options)
-        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
-            let productNode = response?.node as! Storefront.Product
-            self?.repository?.loadProduct(with: productNode, callback: { (product, error) in
-                callback(product, error)
-            })
-        })
-        task?.resume()
-    }
-    
-    func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping ApiCallback<[ProductEntity]>) {
-        let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: searchQuery, sortBy: nil, reverse: false)
-        let task = client?.queryGraphWith(query, completionHandler: {  [weak self] (response, error) in
-            if let edges = response?.shop.products.edges {
-                self?.repository?.loadProducts(with: edges, callback: { (products, error) in
-                    callback(products, error)
-                })
-            }
-            callback([ProductEntity](), error)
-        })
-        task?.resume()
-    }
-    
     // MARK: - categories
     func getCategoryList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping ApiCallback<[CategoryEntity]>) {
         let query = categoryListQuery(perPage: perPage, after: paginationValue, sortBy: sortBy, reverse: reverse)

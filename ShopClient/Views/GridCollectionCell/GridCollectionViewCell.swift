@@ -27,8 +27,8 @@ class GridCollectionViewCell: UICollectionViewCell {
         detailsView.layer.shadowRadius = kShadowRadius
     }
 
-    public func configure(with item: ProductEntity) {
-        let imageUrl = URL(string: item.imagesArray?.first?.src ?? String())
+    public func configure(with item: Product) {
+        let imageUrl = URL(string: item.images?.first?.src ?? String())
         productImageView.sd_setImage(with: imageUrl, completed: nil)
         titleLabel.text = item.title
         let localizedString = NSLocalizedString("Label.PriceFrom", comment: String())

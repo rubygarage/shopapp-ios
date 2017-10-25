@@ -9,7 +9,7 @@
 import MagicalRecord
 
 extension DAO {
-    func save(shopObject: ShopObject, callback: @escaping () -> ()) {
+    func save(shopObject: Shop, callback: @escaping () -> ()) {
         MagicalRecord.save({ [weak self] (context) in
             if let shop = self?.getShop(in: context) {
                 self?.update(shop: shop, with: shopObject)
@@ -28,7 +28,7 @@ extension DAO {
         return shop
     }
     
-    private func update(shop: ShopEntity, with item: ShopObject) {
+    private func update(shop: ShopEntity, with item: Shop) {
         shop.name = item.name
         shop.shopDescription = item.shopDescription
     }

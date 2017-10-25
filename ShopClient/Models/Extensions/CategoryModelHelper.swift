@@ -7,9 +7,9 @@
 //
 
 extension CategoryEntity {
-    var productsArray: [ProductEntity]? {
+    var productsArray: [Product]? {
         get {
-            return products?.allObjects as? [ProductEntity]
+            return products?.allObjects as? [Product]
         }
     }
 }

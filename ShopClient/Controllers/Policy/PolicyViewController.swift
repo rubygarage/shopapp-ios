@@ -12,7 +12,7 @@ import WebKit
 class PolicyViewController: UIViewController {
     @IBOutlet weak var webView: UIWebView!
     
-    var policy: PolicyEntity?
+    var policy: Policy?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,7 +10,7 @@ import UIKit
 
 protocol GridCollectionDataSourceProtocol {
     func numberOfItems() -> Int
-    func item(for indexPath: IndexPath) -> ProductEntity
+    func item(for indexPath: IndexPath) -> Product
 }
 
 class GridCollectionDataSource: NSObject, UICollectionViewDataSource {

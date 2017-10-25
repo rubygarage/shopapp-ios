@@ -20,7 +20,7 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
     @IBOutlet weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
     
     var productId = String()
-    var product: ProductEntity?
+    var product: Product?
     var selectedOptions = [SelectedOption]()
     var detailImagesController: ImagesCarouselViewController?
     var showingImageIndex = 0
@@ -43,9 +43,9 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
     }
     
     private func setupSelectedOptions() {
-        if let options = product?.optionsArray {
+        if let options = product?.options {
             for option in options {
-                selectedOptions.append((name: option.name ?? String(), value: option.valuesArray.first ?? String()))
+                selectedOptions.append((name: option.name ?? String(), value: option.values?.first ?? String()))
             }
         }
     }
@@ -66,17 +66,17 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
         }
     }
     
-    private func populateImages(with product: ProductEntity) {
-        if let images = product.imagesArray {
+    private func populateImages(with product: Product) {
+        if let images = product.images {
             openImagesCarouselChildController(with: images, delegate: self, showingIndex: showingImageIndex, onView: imagesContainerView)
         }
     }
     
-    private func populateTitle(with product: ProductEntity) {
+    private func populateTitle(with product: Product) {
         titleLabel.text = product.title
     }
     
-    private func populateDescription(with product: ProductEntity) {
+    private func populateDescription(with product: Product) {
         descriptionLabel.text = product.productDescription
     }
     
@@ -92,14 +92,14 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
     }
     
     private func populateOptionsView() {
-        if let options = product?.optionsArray {
+        if let options = product?.options {
             openProductOptionsController(with: options, selectedOptions: selectedOptions, delegate: self, onView: optionsContainerView)
         }
     }
     
     // MARK: - remote
     private func loadRemoteData() {
-        ShopCoreAPI.shared.getProduct(id: productId, options: selectedOptions) { [weak self] (product, error) in
+        RepositoryRepo.shared.getProduct(id: productId, options: selectedOptions) { [weak self] (product, error) in
             if let productObject = product {
                 self?.product = productObject
                 self?.setupData()

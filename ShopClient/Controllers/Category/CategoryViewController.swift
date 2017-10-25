@@ -11,7 +11,7 @@ import UIKit
 class CategoryViewController: GridCollectionViewController, SortModalControllerProtocol {
     var categoryId = String()
     var categoryTitle = String()
-    var category: CategoryEntity?
+    var category: Category?
     var selectedSortingValue = SortingValue.createdAt
     
     override func viewDidLoad() {
@@ -28,15 +28,15 @@ class CategoryViewController: GridCollectionViewController, SortModalControllerP
     }
     
     // MARK: - private
-    private func updateData(category: CategoryEntity) {
+    private func updateData(category: Category) {
         self.category = category
-        if let items = category.productsArray {
+        if let items = category.products {
             updateProducts(products: items)
             canLoadMore = products.count == kItemsPerPage
         }
     }
     
-    private func updateProducts(products: [ProductEntity]) {
+    private func updateProducts(products: [Product]) {
         if paginationValue == nil {
             self.products.removeAll()
         }
@@ -46,7 +46,7 @@ class CategoryViewController: GridCollectionViewController, SortModalControllerP
     // MARK: - private
     private func loadRemoteData() {
         let reverse = selectedSortingValue == .createdAt
-        ShopCoreAPI.shared.getCategoryDetails(id: categoryId, paginationValue: paginationValue, sortBy: selectedSortingValue, reverse: reverse) { [weak self] (result, error) in
+        RepositoryRepo.shared.getCategoryDetails(id: categoryId, paginationValue: paginationValue, sortBy: selectedSortingValue, reverse: reverse) { [weak self] (result, error) in
             self?.stopLoadAnimating()
             if let category = result {
                 self?.updateData(category: category)

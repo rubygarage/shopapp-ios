@@ -2,17 +2,17 @@
 //  Article.swift
 //  ShopClient
 //
-//  Created by Evgeniy Antonov on 9/15/17.
+//  Created by Evgeniy Antonov on 10/24/17.
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class Article: NSObject {
     var id = String()
     var title = String()
     var content = String()
-    var image: ImageEntity?
+    var image: Image?
     var author: Author?
     var tags: [String]?
     var blogId = String()

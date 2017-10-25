@@ -6,9 +6,9 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class PolicyObject: NSObject {
+class Policy: NSObject {
     var title: String?
     var body: String?
     var url: String?

@@ -6,12 +6,12 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class ShopObject: NSObject {
+class Shop: NSObject {
     var name = String()
     var shopDescription: String?
-    var privacyPolicy: PolicyObject?
-    var refundPolicy: PolicyObject?
-    var termsOfService: PolicyObject?
+    var privacyPolicy: Policy?
+    var refundPolicy: Policy?
+    var termsOfService: Policy?
 }

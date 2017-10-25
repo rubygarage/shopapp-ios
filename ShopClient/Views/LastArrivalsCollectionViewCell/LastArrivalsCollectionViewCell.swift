@@ -14,8 +14,8 @@ class LastArrivalsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     
-    func configure(with item: ProductEntity) {
-        let imageUrl = URL(string: item.imagesArray?.first?.src ?? String())
+    func configure(with item: Product) {
+        let imageUrl = URL(string: item.images?.first?.src ?? String())
         productImageView.sd_setImage(with: imageUrl)
         titleLabel.text = item.title
         let localizedString = NSLocalizedString("Label.PriceFrom", comment: String())

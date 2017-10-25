@@ -2,11 +2,11 @@
 //  Author.swift
 //  ShopClient
 //
-//  Created by Evgeniy Antonov on 9/15/17.
+//  Created by Evgeniy Antonov on 10/24/17.
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class Author: NSObject {
     var firstName = String()

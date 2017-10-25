@@ -15,7 +15,7 @@ enum HomeSection: Int {
 }
 
 protocol HomeTableDataSourceProtocol {
-    func lastArrivalsObjects() -> [ProductEntity]
+    func lastArrivalsObjects() -> [Product]
     func didSelectProduct(at index: Int)
     func articlesCount() -> Int
     func article(at index: Int) -> Article?
