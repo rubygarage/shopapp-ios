@@ -69,7 +69,7 @@ class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTab
     }
     
     private func loadArticles() {
-        ShopCoreAPI.shared.getArticleList(reverse: true) { [weak self] (result, error) in
+        RepositoryRepo.shared.getArticleList(reverse: true) { [weak self] (result, error) in
             if let articles = result {
                 self?.newInBlogArticles = articles
                 self?.tableView.reloadData()

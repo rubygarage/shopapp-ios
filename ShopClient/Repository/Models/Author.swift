@@ -9,9 +9,9 @@
 import Foundation
 
 class Author: NSObject {
-    var firstName = String()
-    var lastName = String()
-    var fullName = String()
-    var email = String()
+    var firstName: String?
+    var lastName: String?
+    var fullName: String?
+    var email: String?
     var bio: String?
 }

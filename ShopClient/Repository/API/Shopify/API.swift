@@ -129,7 +129,9 @@ class API: NSObject, APIInterface {
             var articles = [Article]()
             if let articleEdges = response?.shop.articles.edges {
                 for articleEdge in articleEdges {
-                    articles.append(ShopifyArticleAdapter(article: articleEdge.node, cursor: articleEdge.cursor))
+                    if let article = Article(with: articleEdge) {
+                        articles.append(article)
+                    }
                 }
             }
             callback(articles, error)

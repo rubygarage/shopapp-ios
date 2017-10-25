@@ -10,14 +10,14 @@ import Foundation
 
 class Article: NSObject {
     var id = String()
-    var title = String()
-    var content = String()
+    var title: String?
+    var content: String?
     var image: Image?
     var author: Author?
     var tags: [String]?
-    var blogId = String()
-    var blogTitle = String()
-    var publishedAt = Date()
-    var url = String()
+    var blogId: String?
+    var blogTitle: String?
+    var publishedAt: Date?
+    var url: String?
     var paginationValue: String?
 }
