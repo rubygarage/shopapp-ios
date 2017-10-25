@@ -6,7 +6,7 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-extension RepositoryRepo {
+extension Repository {
     func getShop(callback: @escaping RepoCallback<Shop>) {
         APICore?.getShopInfo(callback: callback)
     }

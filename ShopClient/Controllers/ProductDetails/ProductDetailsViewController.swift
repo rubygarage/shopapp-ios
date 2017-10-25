@@ -99,7 +99,7 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
     
     // MARK: - remote
     private func loadRemoteData() {
-        RepositoryRepo.shared.getProduct(id: productId, options: selectedOptions) { [weak self] (product, error) in
+        Repository.shared.getProduct(id: productId, options: selectedOptions) { [weak self] (product, error) in
             if let productObject = product {
                 self?.product = productObject
                 self?.setupData()

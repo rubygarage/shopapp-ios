@@ -47,7 +47,7 @@ class SearchViewController: GridCollectionViewController, SearchViewControllerDe
     }
     
     private func loadRemoteData() {
-        RepositoryRepo.shared.searchProducts(paginationValue: paginationValue, searchQuery: searchPhrase) { [weak self] (products, error) in
+        Repository.shared.searchProducts(paginationValue: paginationValue, searchQuery: searchPhrase) { [weak self] (products, error) in
             if let productsArray = products {
                 self?.updateProducts(products: productsArray, needToClear: self?.paginationValue == nil)
             }

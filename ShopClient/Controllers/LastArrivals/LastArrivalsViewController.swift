@@ -23,7 +23,7 @@ class LastArrivalsViewController: GridCollectionViewController {
     
     // MARK: - remote
     private func loadRemoteData() {
-        RepositoryRepo.shared.getProductList(perPage: kItemsPerPage, paginationValue: paginationValue, sortBy: SortingValue.createdAt, reverse: true) { [weak self] (products, error) in
+        Repository.shared.getProductList(perPage: kItemsPerPage, paginationValue: paginationValue, sortBy: SortingValue.createdAt, reverse: true) { [weak self] (products, error) in
             if let productsArray = products {
                 self?.updateProducts(products: productsArray)
             }

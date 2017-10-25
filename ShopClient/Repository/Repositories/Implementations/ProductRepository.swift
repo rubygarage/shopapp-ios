@@ -6,7 +6,7 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-extension RepositoryRepo {
+extension Repository {
     func getProductList(perPage: Int = kItemsPerPage, paginationValue: Any? = nil, sortBy: SortingValue? = nil, reverse: Bool = false, callback: @escaping RepoCallback<[Product]>) {
         APICore?.getProductList(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, reverse: reverse, callback: callback)
     }

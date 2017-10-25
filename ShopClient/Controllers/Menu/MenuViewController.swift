@@ -41,7 +41,7 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
     }
     
     private func loadData() {
-        RepositoryRepo.shared.getShop { [weak self] (shop, error) in
+        Repository.shared.getShop { [weak self] (shop, error) in
             if let privacyPolicy = shop?.privacyPolicy {
                 self?.policies.append(privacyPolicy)
             }
@@ -59,7 +59,7 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
     }
     
     private func loadCategories() {
-        RepositoryRepo.shared.getCategoryList { [weak self] (categories, error) in
+        Repository.shared.getCategoryList { [weak self] (categories, error) in
             if let categories = categories {
                 self?.categories = categories
                 self?.tableView.reloadData()

@@ -10,8 +10,8 @@ import UIKit
 
 typealias RepoCallback<T> = (_ result: T?, _ error: Error?) -> ()
 
-class RepositoryRepo: NSObject, RepositoryInterface {
-    static let shared = RepositoryRepo()
+class Repository: NSObject, RepositoryInterface {
+    static let shared = Repository()
     var APICore: APIInterface?
     var DAOCore: DAOInterface?
     

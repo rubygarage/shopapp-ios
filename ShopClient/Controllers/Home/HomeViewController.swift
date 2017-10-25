@@ -59,7 +59,7 @@ class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTab
     }
     
     private func loadRemoteData() {
-        RepositoryRepo.shared.getProductList(sortBy: SortingValue.createdAt, reverse: true) { [weak self] (products, error) in
+        Repository.shared.getProductList(sortBy: SortingValue.createdAt, reverse: true) { [weak self] (products, error) in
             if let items = products {
                 self?.lastArrivalsProducts = items
                 self?.loadArticles()
@@ -69,7 +69,7 @@ class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTab
     }
     
     private func loadArticles() {
-        RepositoryRepo.shared.getArticleList(reverse: true) { [weak self] (result, error) in
+        Repository.shared.getArticleList(reverse: true) { [weak self] (result, error) in
             if let articles = result {
                 self?.newInBlogArticles = articles
                 self?.tableView.reloadData()

@@ -46,7 +46,7 @@ class CategoryViewController: GridCollectionViewController, SortModalControllerP
     // MARK: - private
     private func loadRemoteData() {
         let reverse = selectedSortingValue == .createdAt
-        RepositoryRepo.shared.getCategoryDetails(id: categoryId, paginationValue: paginationValue, sortBy: selectedSortingValue, reverse: reverse) { [weak self] (result, error) in
+        Repository.shared.getCategoryDetails(id: categoryId, paginationValue: paginationValue, sortBy: selectedSortingValue, reverse: reverse) { [weak self] (result, error) in
             self?.stopLoadAnimating()
             if let category = result {
                 self?.updateData(category: category)

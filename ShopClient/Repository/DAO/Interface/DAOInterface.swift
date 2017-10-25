@@ -6,7 +6,4 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-protocol DAOInterface: ShopDAOInterface {
-    // MARK: - shop
-//    func save(shopObject: ShopObject, callback: @escaping () -> ())
-}
+protocol DAOInterface: ShopDAOInterface {}
