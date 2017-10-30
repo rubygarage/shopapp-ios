@@ -9,16 +9,37 @@
 import RxSwift
 
 struct SplashViewModel {
-    var success = Variable<Bool>(false)
+    var isD = Variable<Bool>(false)
     
-    var loadData: AnyObserver<Void> {
-        return AnyObserver { event in
-            self.loadRemoteData()
-        }
+    var data: Single<(Shop?, [Category]?)> {
+        return Single.zip(shop(), categories())
     }
     
-    // MARK: - private
-    private func loadRemoteData() {
-        
+    private func shop() -> Single<Shop?> {
+        return Single.create(subscribe: { (single) in
+            Repository.shared.getShop(callback: { (shop, error) in
+                if let error = error {
+                    single(.error(error))
+                }
+                if let shop = shop {
+                    single(.success(shop))
+                }
+            })
+            return Disposables.create()
+        })
+    }
+    
+    private func categories() -> Single<[Category]?> {
+        return Single.create(subscribe: { (single) in
+            Repository.shared.getCategoryList(callback: { (categories, error) in
+                if let error = error {
+                    single(.error(error))
+                }
+                if let categories = categories {
+                    single(.success(categories))
+                }
+            })
+            return Disposables.create()
+        })
     }
 }
