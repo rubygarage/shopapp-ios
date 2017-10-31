@@ -9,13 +9,11 @@
 import RxSwift
 
 struct SplashViewModel {
-    var isD = Variable<Bool>(false)
-    
     var data: Single<(Shop?, [Category]?)> {
-        return Single.zip(shop(), categories())
+        return Single.zip(shop, categories)
     }
     
-    private func shop() -> Single<Shop?> {
+    private var shop: Single<Shop?> {
         return Single.create(subscribe: { (single) in
             Repository.shared.getShop(callback: { (shop, error) in
                 if let error = error {
@@ -29,7 +27,7 @@ struct SplashViewModel {
         })
     }
     
-    private func categories() -> Single<[Category]?> {
+    private var categories: Single<[Category]?> {
         return Single.create(subscribe: { (single) in
             Repository.shared.getCategoryList(callback: { (categories, error) in
                 if let error = error {
