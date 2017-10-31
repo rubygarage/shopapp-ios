@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate {
     @IBOutlet weak var tableView: UITableView!
+    
+    private var homeViewModel = HomeViewModel()
+    private var disposeBag = DisposeBag()
     
     var dataSource: HomeTableDataSource?
     var delegate: HomeTableDelegate?
@@ -25,7 +30,7 @@ class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTab
         addMenuBarButton()
         addSearchButton()
         setupTableView()
-        loadRemoteData()
+        loadData()
     }
     
     private func setupTitle() {
@@ -58,23 +63,18 @@ class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTab
         pushSearchController()
     }
     
-    private func loadRemoteData() {
-        Repository.shared.getProductList(sortBy: SortingValue.createdAt, reverse: true) { [weak self] (products, error) in
+    private func loadData() {
+        homeViewModel.data.subscribe(onSuccess: { [weak self] (products, articles) in
             if let items = products {
                 self?.lastArrivalsProducts = items
-                self?.loadArticles()
-                self?.tableView.reloadSections([0], with: .none)
             }
-        }
-    }
-    
-    private func loadArticles() {
-        Repository.shared.getArticleList(reverse: true) { [weak self] (result, error) in
-            if let articles = result {
-                self?.newInBlogArticles = articles
-                self?.tableView.reloadData()
+            if let items = articles {
+                self?.newInBlogArticles = items
             }
-        }
+            self?.tableView.reloadData()
+        }, onError: { [weak self] (error) in
+            self?.showErrorAlert(with: error.localizedDescription)
+        }).disposed(by: disposeBag)
     }
     
     // MARK: - override

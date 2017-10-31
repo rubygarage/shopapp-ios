@@ -7,12 +7,18 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTableDelegateProtocol {
     @IBOutlet weak var tableView: UITableView!
     
+    private var menuViewModel = MenuViewModel()
+    private var disposeBag = DisposeBag()
+    
     var categories = [Category]()
     var policies = [Policy]()
+    
     var tableDataSource: MenuTableDataSource?
     var tableDelegate: MenuTableDelegate?
 
@@ -41,29 +47,26 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
     }
     
     private func loadData() {
-        Repository.shared.getShop { [weak self] (shop, error) in
-            if let privacyPolicy = shop?.privacyPolicy {
-                self?.policies.append(privacyPolicy)
-            }
-            
-            if let refundPolicy = shop?.refundPolicy {
-                self?.policies.append(refundPolicy)
-            }
-            
-            if let termsOfService = shop?.termsOfService {
-                self?.policies.append(termsOfService)
-            }
-            
-            self?.loadCategories()
-        }
+        menuViewModel.data.subscribe(onSuccess: { [weak self] (shop, categories) in
+            self?.processResponse(with: shop, categoriesItems: categories)
+            self?.tableView.reloadData()
+        }, onError: { [weak self] (error) in
+            self?.showErrorAlert(with: error.localizedDescription)
+        }).disposed(by: disposeBag)
     }
     
-    private func loadCategories() {
-        Repository.shared.getCategoryList { [weak self] (categories, error) in
-            if let categories = categories {
-                self?.categories = categories
-                self?.tableView.reloadData()
-            }
+    private func processResponse(with shopItem: Shop?, categoriesItems: [Category]?) {
+        if let privacyPolicy = shopItem?.privacyPolicy {
+            policies.append(privacyPolicy)
+        }
+        if let refundPolicy = shopItem?.refundPolicy {
+            policies.append(refundPolicy)
+        }
+        if let termsOfService = shopItem?.termsOfService {
+            policies.append(termsOfService)
+        }
+        if let categoriesItems = categoriesItems {
+            categories = categoriesItems
         }
     }
     

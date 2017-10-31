@@ -4,6 +4,9 @@ PODS:
     - MagicalRecord/Core (= 2.3.2)
   - MagicalRecord/Core (2.3.2)
   - Mobile-Buy-SDK (3.1.1)
+  - RxCocoa (4.0.0):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.0.0)
   - SDWebImage (4.1.2):
     - SDWebImage/Core (= 4.1.2)
   - SDWebImage/Core (4.1.2)
@@ -16,6 +19,8 @@ DEPENDENCIES:
   - CoreStore (from `https://github.com/JohnEstropia/CoreStore.git`, branch `prototype/Swift_3_2`)
   - MagicalRecord (~> 2.3)
   - Mobile-Buy-SDK (~> 3.0)
+  - RxCocoa (~> 4.0)
+  - RxSwift (~> 4.0)
   - SDWebImage (~> 4.1)
   - SideMenu (~> 2.3)
   - SKPhotoBrowser (~> 4.1)
@@ -36,12 +41,14 @@ SPEC CHECKSUMS:
   CoreStore: 1a7cce39a92ead86de8a3dc3dedb696e1f9b881e
   MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
   Mobile-Buy-SDK: c1a82cfd1a302b41e07e95616216bab6f5e1bca0
+  RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
+  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   SDWebImage: cb6f9f266a9977741efcbc21e618e8be3734c774
   SideMenu: 2ea1a015d14ffb96110af43fe3232d995943e726
   SKPhotoBrowser: aa02de50f56d80fac23f543e40847af6b360e4b3
   TPKeyboardAvoiding: 0d6af20e95e2850f4c621841225b59ec7d8dd852
   UIScrollView-InfiniteScroll: c132d6d5851daff229ab4a1060ccf70a05a051c9
 
-PODFILE CHECKSUM: 0302c27d25c0cf29fb8012837a67d7c0e3448a21
+PODFILE CHECKSUM: 97873a8bc4126a7fc3bebb7c0cb3935ccd34891d
 
 COCOAPODS: 1.3.1

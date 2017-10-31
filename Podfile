@@ -14,5 +14,9 @@ target 'ShopClient' do
   pod 'TPKeyboardAvoiding', '~> 1.3'
   pod 'CoreStore', :git => 'https://github.com/JohnEstropia/CoreStore.git', :branch => 'prototype/Swift_3_2'
   pod 'MagicalRecord', '~> 2.3'
+  
+  # Architecture
+  pod 'RxSwift', '~> 4.0'
+  pod 'RxCocoa', '~> 4.0'
 
 end
