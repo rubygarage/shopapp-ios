@@ -13,10 +13,12 @@ import RxCocoa
 class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTableDelegateProtocol {
     @IBOutlet weak var tableView: UITableView!
     
-    var menuViewModel = MenuViewModel()
-    var disposeBag = DisposeBag()
+    private var menuViewModel = MenuViewModel()
+    private var disposeBag = DisposeBag()
+    
     var categories = [Category]()
     var policies = [Policy]()
+    
     var tableDataSource: MenuTableDataSource?
     var tableDelegate: MenuTableDelegate?
 

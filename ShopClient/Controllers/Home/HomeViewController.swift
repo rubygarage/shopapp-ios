@@ -13,8 +13,8 @@ import RxCocoa
 class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     
-    var homeViewModel = HomeViewModel()
-    var disposeBag = DisposeBag()
+    private var homeViewModel = HomeViewModel()
+    private var disposeBag = DisposeBag()
     
     var dataSource: HomeTableDataSource?
     var delegate: HomeTableDelegate?
