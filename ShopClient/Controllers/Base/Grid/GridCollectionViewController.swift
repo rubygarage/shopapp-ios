@@ -9,23 +9,17 @@
 import UIKit
 import UIScrollView_InfiniteScroll
 
-class GridCollectionViewController: UIViewController, GridCollectionDataSourceProtocol, GridCollectionDelegateProtocol {
-    @IBOutlet weak var collectionView: UICollectionView!
+class GridCollectionViewController: BaseCollectionViewController, GridCollectionDataSourceProtocol, GridCollectionDelegateProtocol {
     
     var collectionDataSource: GridCollectionDataSource?
     var collectionDelegate: GridCollectionDelegate?
     var products = [Product]()
-    var refreshControl: UIRefreshControl?
-    var paginationValue: Any?
-    var canLoadMore = true
     
     // MARK: - view controller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupCollectionView()
-        setupPullToRefresh()
-        setupInfinityScroll()
     }
     
     // MARK: - setup
@@ -38,35 +32,6 @@ class GridCollectionViewController: UIViewController, GridCollectionDataSourcePr
         
         collectionDelegate = GridCollectionDelegate(delegate: self)
         collectionView.delegate = collectionDelegate
-    }
-    
-    private func setupPullToRefresh() {
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(GridCollectionViewController.pullToRefreshHandler), for: UIControlEvents.valueChanged)
-        collectionView.refreshControl = refreshControl
-    }
-    
-    private func setupInfinityScroll() {
-        collectionView.setShouldShowInfiniteScrollHandler { [weak self] (collectionView) -> Bool in
-            return self?.canLoadMore ?? false
-        }
-        collectionView.addInfiniteScroll { [weak self] (collectionView) in
-            self?.infinityScrollHandler()
-        }
-    }
-    
-    public func stopLoadAnimating() {
-        refreshControl?.endRefreshing()
-        collectionView.finishInfiniteScroll()
-    }
-    
-    // MARK: - methods to override
-    public func pullToRefreshHandler() {
-        assert(false, "'pulltoRefreshHandler' method not implemented")
-    }
-    
-    public func infinityScrollHandler() {
-        assert(false, "'infinityScrollHandler' method not implemented")
     }
     
     // MARK: - override

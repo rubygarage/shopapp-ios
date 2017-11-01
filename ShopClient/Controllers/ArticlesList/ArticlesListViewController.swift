@@ -8,16 +8,11 @@
 
 import UIKit
 
-class ArticlesListViewController: UIViewController, ArticlesListTableDataSourceProtocol, ArticlesListTableDelegateProtocol {
-    @IBOutlet weak var tableView: UITableView!
-    
+class ArticlesListViewController: BaseTableViewController, ArticlesListTableDataSourceProtocol, ArticlesListTableDelegateProtocol {
     var tableDataSource: ArticlesListTableDataSource?
     var tableDelegate: ArticlesListTableDelegate?
     
     var articles = [Article]()
-    var paginationValue: Any?
-    var canLoadMore = true
-    var refreshControl: UIRefreshControl?
     
     // MARK: - view controller lifecycle
     override func viewDidLoad() {
@@ -25,8 +20,6 @@ class ArticlesListViewController: UIViewController, ArticlesListTableDataSourceP
 
         setupViews()
         setupTableView()
-        setupPullToRefresh()
-        setupInfinityScroll()
         loadRemoteData()
     }
     
@@ -44,21 +37,6 @@ class ArticlesListViewController: UIViewController, ArticlesListTableDataSourceP
         
         tableDelegate = ArticlesListTableDelegate(delegate: self)
         tableView.delegate = tableDelegate
-    }
-    
-    private func setupPullToRefresh() {
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(ArticlesListViewController.pullToRefreshHandler), for: UIControlEvents.valueChanged)
-        tableView.refreshControl = refreshControl
-    }
-    
-    private func setupInfinityScroll() {
-        tableView.setShouldShowInfiniteScrollHandler { [weak self] (tableView) -> Bool in
-            return self?.canLoadMore ?? false
-        }
-        tableView.addInfiniteScroll { [weak self] (tableView) in
-            self?.infinityScrollHandler()
-        }
     }
     
     private func loadRemoteData() {
@@ -79,19 +57,14 @@ class ArticlesListViewController: UIViewController, ArticlesListTableDataSourceP
         articles += items
     }
     
-    @objc private func pullToRefreshHandler() {
+    override func pullToRefreshHandler() {
         paginationValue = nil
         loadRemoteData()
     }
     
-    public func infinityScrollHandler() {
+    override func infinityScrollHandler() {
         paginationValue = articles.last?.paginationValue
         loadRemoteData()
-    }
-    
-    private func stopLoadAnimating() {
-        refreshControl?.endRefreshing()
-        tableView.finishInfiniteScroll()
     }
     
     // MARK: - ArticlesListTableDataSourceProtocol
