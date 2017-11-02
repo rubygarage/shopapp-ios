@@ -10,11 +10,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate {
+class HomeViewController: BaseViewController, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     private var homeViewModel = HomeViewModel()
-    private var disposeBag = DisposeBag()
     
     var dataSource: HomeTableDataSource?
     var delegate: HomeTableDelegate?
@@ -122,5 +121,10 @@ class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTab
     // MARK: - LastArrivalsCellDelegate
     func didTapLastArrivalsLoadMore() {
         pushLastArrivalsController()
+    }
+    
+    // MARK: - view model
+    override func viewModel() -> BaseViewModel {
+        return homeViewModel
     }
 }

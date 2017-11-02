@@ -8,8 +8,8 @@
 
 import MobileBuySDK
 
-let kShopifyStorefrontAccessToken = "afc80014a08846feaf590e1db92e74b6"
-let kShopifyStorefrontURL = "xpohstore.myshopify.com"
+let kShopifyStorefrontAccessToken = "677af790376ae84213f7ea1ed56f11ca"
+let kShopifyStorefrontURL = "lalkastore.myshopify.com"
 let kShopifyItemsMaxCount: Int32 = 250
 
 class API: NSObject, APIInterface {

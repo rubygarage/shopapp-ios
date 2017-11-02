@@ -8,9 +8,14 @@
 
 import RxSwift
 
-struct HomeViewModel {
+class HomeViewModel: BaseViewModel {
     var data: Single<([Product]?, [Article]?)> {
-        return Single.zip(lastArrivalsProducts, articles)
+        state.onNext((.loading, nil))
+        return Single.zip(lastArrivalsProducts, articles).do(onNext: { [weak self] _ in
+            self?.state.onNext((.content, nil))
+        }, onError: { [weak self] (error) in
+            self?.state.onNext((.error, error))
+        })
     }
     
     private var lastArrivalsProducts: Single<[Product]?> {

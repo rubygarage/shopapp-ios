@@ -8,9 +8,14 @@
 
 import RxSwift
 
-struct MenuViewModel {
+class MenuViewModel: BaseViewModel {
     var data: Single<(Shop?, [Category]?)> {
-        return Single.zip(shop, categories)
+        state.onNext((.loading, nil))
+        return Single.zip(shop, categories).do(onNext: { [weak self] _ in
+            self?.state.onNext((.content, nil))
+            }, onError: { [weak self] (error) in
+                self?.state.onNext((.error, error))
+        })
     }
     
     private var shop: Single<Shop?> {

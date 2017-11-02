@@ -10,11 +10,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTableDelegateProtocol {
+class MenuViewController: BaseViewController, MenuTableDataSourceProtocol, MenuTableDelegateProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     private var menuViewModel = MenuViewModel()
-    private var disposeBag = DisposeBag()
     
     var categories = [Category]()
     var policies = [Policy]()
@@ -116,5 +115,10 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
         } else if indexPath.section == MenuSection.policy.rawValue {
             openPolicyController(with: indexPath.row)
         }
+    }
+    
+    // MARK: - view model
+    override func viewModel() -> BaseViewModel {
+        return menuViewModel
     }
 }
