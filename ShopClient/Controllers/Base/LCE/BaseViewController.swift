@@ -16,13 +16,22 @@ enum ViewState: Int {
     case error
 }
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController, ErrorViewProtocol {
     var disposeBag = DisposeBag()
+    var loadingView = LoadingView()
+    var errorView = ErrorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupViews()
         subscribeViewState()
+    }
+    
+    private func setupViews() {
+        loadingView.frame = view.frame
+        errorView.frame = view.frame
+        errorView.delegate = self
     }
     
     private func subscribeViewState() {
@@ -46,15 +55,19 @@ class BaseViewController: UIViewController {
     }
     
     private func setLoadingState() {
-        
+        errorView.removeFromSuperview()
+        view.addSubview(loadingView)
     }
     
     private func setContentState() {
-        
+        errorView.removeFromSuperview()
+        loadingView.removeFromSuperview()
     }
     
     private func setErrorState(with error: Error?) {
-        
+        loadingView.removeFromSuperview()
+        errorView.error = error
+        view.addSubview(errorView)
     }
     
     // MARK: - method to override

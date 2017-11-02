@@ -71,8 +71,6 @@ class HomeViewController: BaseViewController, HomeTableDataSourceProtocol, HomeT
                 self?.newInBlogArticles = items
             }
             self?.tableView.reloadData()
-        }, onError: { [weak self] (error) in
-            self?.showErrorAlert(with: error.localizedDescription)
         }).disposed(by: disposeBag)
     }
     
@@ -126,5 +124,10 @@ class HomeViewController: BaseViewController, HomeTableDataSourceProtocol, HomeT
     // MARK: - view model
     override func viewModel() -> BaseViewModel {
         return homeViewModel
+    }
+    
+    // MARK: - ErrorViewProtocol
+    func didTapTryAgain() {
+        loadData()
     }
 }
