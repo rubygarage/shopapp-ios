@@ -28,7 +28,7 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
         title = NSLocalizedString("ControllerTitle.NewInBlog", comment: String())
     }
     
-    func setupViewModel() {
+    private func setupViewModel() {
         viewModel?.items.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.stopLoadAnimating()
