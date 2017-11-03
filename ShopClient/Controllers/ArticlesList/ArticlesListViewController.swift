@@ -18,8 +18,9 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
         super.viewDidLoad()
 
         setupViews()
-        setupViewModel()
         setupTableView()
+        setupViewModel()
+        loadData()
     }
     
     // MARK: - setup
@@ -33,8 +34,10 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
                 self?.stopLoadAnimating()
                 self?.tableView.reloadData()
             })
-            .disposed(by: disposeBag)
-        
+            .disposed(by: disposeBag)        
+    }
+    
+    private func loadData() {
         viewModel.reloadData()
     }
     

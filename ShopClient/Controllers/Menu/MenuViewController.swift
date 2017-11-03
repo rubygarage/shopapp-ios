@@ -10,10 +10,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class MenuViewController: BaseViewController<BaseViewModel>, MenuTableDataSourceProtocol, MenuTableDelegateProtocol {
+class MenuViewController: BaseViewController<MenuViewModel>, MenuTableDataSourceProtocol, MenuTableDelegateProtocol {
     @IBOutlet weak var tableView: UITableView!
-    
-    private var menuViewModel = MenuViewModel()
     
     var categories = [Category]()
     var policies = [Policy]()
@@ -22,6 +20,7 @@ class MenuViewController: BaseViewController<BaseViewModel>, MenuTableDataSource
     var tableDelegate: MenuTableDelegate?
 
     override func viewDidLoad() {
+        viewModel = MenuViewModel()
         super.viewDidLoad()
         
         setupTableView()
@@ -46,7 +45,7 @@ class MenuViewController: BaseViewController<BaseViewModel>, MenuTableDataSource
     }
     
     private func loadData() {
-        menuViewModel.data.subscribe(onSuccess: { [weak self] (shop, categories) in
+        viewModel.data.subscribe(onSuccess: { [weak self] (shop, categories) in
             self?.processResponse(with: shop, categoriesItems: categories)
             self?.tableView.reloadData()
         }, onError: { [weak self] (error) in
@@ -116,9 +115,4 @@ class MenuViewController: BaseViewController<BaseViewModel>, MenuTableDataSource
             openPolicyController(with: indexPath.row)
         }
     }
-    
-    // MARK: - view model
-//    override func viewModel() -> BaseViewModel {
-//        return menuViewModel
-//    }
 }

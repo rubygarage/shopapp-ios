@@ -32,7 +32,6 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     private func setupTitle() {
-//        viewModel = HomeViewModel()
         title = NSLocalizedString("ControllerTitle.Home", comment: String())
     }
     
@@ -120,11 +119,6 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     func didTapLastArrivalsLoadMore() {
         pushLastArrivalsController()
     }
-    
-    // MARK: - view model
-//    override func viewModel() -> BaseViewModel {
-//        return homeViewModel
-//    }
     
     // MARK: - ErrorViewProtocol
     func didTapTryAgain() {

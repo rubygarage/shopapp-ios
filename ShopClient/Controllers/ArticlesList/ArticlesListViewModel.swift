@@ -9,6 +9,7 @@
 import RxSwift
 
 class ArticlesListViewModel: BaseTableViewModel {
+//    var items = PublishSubject<[Article]>()
     var items = Variable<[Article]>([Article]())
     
     public func reloadData() {
@@ -22,12 +23,14 @@ class ArticlesListViewModel: BaseTableViewModel {
     }
     
     private func loadRemoteData() {
+        state.onNext((state: .loading, error: nil))
         Repository.shared.getArticleList(paginationValue: paginationValue, sortBy: SortingValue.createdAt, reverse: true) { [weak self] (articles, error) in
             if let error = error {
-                self?.state.onNext((.error, error))
+                self?.state.onNext((state: .error, error: error))
             }
             if let articles = articles {
                 self?.updateArticles(with: articles)
+                self?.state.onNext((state: .content, error: nil))
             }
             self?.canLoadMore = articles?.count ?? 0 == kItemsPerPage
         }
