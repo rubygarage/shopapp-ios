@@ -8,10 +8,14 @@
 
 import UIKit
 
-class BasePaginationViewController: BaseViewController {
+class BasePaginationViewController<T: BasePaginationViewModel>: BaseViewController<T> {
     var paginationValue: Any?
     var canLoadMore = true
     var refreshControl: UIRefreshControl?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
     // MARK: - methods to override
     public func pullToRefreshHandler() {

@@ -16,7 +16,8 @@ enum ViewState: Int {
     case error
 }
 
-class BaseViewController: UIViewController, ErrorViewProtocol {
+class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol {
+    var viewModel: T!
     var disposeBag = DisposeBag()
     var loadingView = LoadingView()
     var errorView = ErrorView()
@@ -35,7 +36,7 @@ class BaseViewController: UIViewController, ErrorViewProtocol {
     }
     
     private func subscribeViewState() {
-        viewModel().state.subscribe(onNext: { [weak self] viewState in
+        viewModel.state.subscribe(onNext: { [weak self] viewState in
             self?.set(state: viewState.state, error: viewState.error)
         }).disposed(by: disposeBag)
     }
@@ -68,10 +69,5 @@ class BaseViewController: UIViewController, ErrorViewProtocol {
         loadingView.removeFromSuperview()
         errorView.error = error
         view.addSubview(errorView)
-    }
-    
-    // MARK: - method to override
-    public func viewModel() -> BaseViewModel {
-        assert(false, "'viewModel method not implemented'")
     }
 }

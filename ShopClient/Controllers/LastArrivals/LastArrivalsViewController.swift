@@ -8,9 +8,10 @@
 
 import UIKit
 
-class LastArrivalsViewController: GridCollectionViewController {
+class LastArrivalsViewController: GridCollectionViewController<LastArrivalsViewModel> {
 
     override func viewDidLoad() {
+        viewModel = LastArrivalsViewModel()
         super.viewDidLoad()
 
         setupViews()

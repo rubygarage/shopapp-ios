@@ -9,7 +9,7 @@
 import UIKit
 import UIScrollView_InfiniteScroll
 
-class GridCollectionViewController: BaseCollectionViewController, GridCollectionDataSourceProtocol, GridCollectionDelegateProtocol {
+class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionViewController<T>, GridCollectionDataSourceProtocol, GridCollectionDelegateProtocol {
     
     var collectionDataSource: GridCollectionDataSource?
     var collectionDelegate: GridCollectionDelegate?

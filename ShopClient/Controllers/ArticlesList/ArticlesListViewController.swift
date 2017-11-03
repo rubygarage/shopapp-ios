@@ -8,24 +8,34 @@
 
 import UIKit
 
-class ArticlesListViewController: BaseTableViewController, ArticlesListTableDataSourceProtocol, ArticlesListTableDelegateProtocol {
+class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>, ArticlesListTableDataSourceProtocol, ArticlesListTableDelegateProtocol {
     var tableDataSource: ArticlesListTableDataSource?
     var tableDelegate: ArticlesListTableDelegate?
     
-    var articles = [Article]()
-    
     // MARK: - view controller lifecycle
     override func viewDidLoad() {
+        viewModel = ArticlesListViewModel()
         super.viewDidLoad()
 
         setupViews()
+        setupViewModel()
         setupTableView()
-        loadRemoteData()
     }
     
     // MARK: - setup
     private func setupViews() {
         title = NSLocalizedString("ControllerTitle.NewInBlog", comment: String())
+    }
+    
+    func setupViewModel() {
+        viewModel?.items.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.stopLoadAnimating()
+                self?.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.reloadData()
     }
     
     private func setupTableView() {
@@ -39,50 +49,30 @@ class ArticlesListViewController: BaseTableViewController, ArticlesListTableData
         tableView.delegate = tableDelegate
     }
     
-    private func loadRemoteData() {
-        Repository.shared.getArticleList(paginationValue: paginationValue, sortBy: SortingValue.createdAt, reverse: true) { [weak self] (articles, error) in
-            if let articles = articles {
-                self?.updateArticles(with: articles)
-                self?.tableView.reloadData()
-            }
-            self?.canLoadMore = articles?.count ?? 0 == kItemsPerPage
-            self?.stopLoadAnimating()
-        }
-    }
-    
-    private func updateArticles(with items: [Article]) {
-        if paginationValue == nil {
-            articles.removeAll()
-        }
-        articles += items
-    }
-    
     override func pullToRefreshHandler() {
-        paginationValue = nil
-        loadRemoteData()
+        viewModel.reloadData()
     }
     
     override func infinityScrollHandler() {
-        paginationValue = articles.last?.paginationValue
-        loadRemoteData()
+        viewModel.loadNextPage()
     }
     
     // MARK: - ArticlesListTableDataSourceProtocol
     func articlesCount() -> Int {
-        return articles.count
+        return viewModel.items.value.count
     }
     
     func article(at index: Int) -> Article? {
-        if index < articles.count {
-            return articles[index]
+        if index < viewModel.items.value.count {
+            return viewModel.items.value[index]
         }
         return nil
     }
     
     // MARK: - ArticlesListTableDelegateProtocol
     func didSelectItem(at index: Int) {
-        if index < articles.count {
-            let article = articles[index]
+        if index < viewModel.items.value.count {
+            let article = viewModel.items.value[index]
             pushArticleDetailsController(with: article)
         }
     }

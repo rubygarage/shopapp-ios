@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class MenuViewController: BaseViewController, MenuTableDataSourceProtocol, MenuTableDelegateProtocol {
+class MenuViewController: BaseViewController<BaseViewModel>, MenuTableDataSourceProtocol, MenuTableDelegateProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     private var menuViewModel = MenuViewModel()
@@ -118,7 +118,7 @@ class MenuViewController: BaseViewController, MenuTableDataSourceProtocol, MenuT
     }
     
     // MARK: - view model
-    override func viewModel() -> BaseViewModel {
-        return menuViewModel
-    }
+//    override func viewModel() -> BaseViewModel {
+//        return menuViewModel
+//    }
 }

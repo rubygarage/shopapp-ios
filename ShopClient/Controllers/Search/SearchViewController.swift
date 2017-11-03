@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: GridCollectionViewController, SearchViewControllerDelegateProtocol {
+class SearchViewController: GridCollectionViewController<SearchViewModel>, SearchViewControllerDelegateProtocol {
     
     var searchController: UISearchController?
     var searchControllerDelegate: SearchViewControllerDelegate?
@@ -16,6 +16,7 @@ class SearchViewController: GridCollectionViewController, SearchViewControllerDe
     var searchPhrase = String()
     
     override func viewDidLoad() {
+        viewModel = SearchViewModel()
         super.viewDidLoad()
         
         setupSearchBar()

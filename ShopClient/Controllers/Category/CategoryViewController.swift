@@ -8,13 +8,14 @@
 
 import UIKit
 
-class CategoryViewController: GridCollectionViewController, SortModalControllerProtocol {
+class CategoryViewController: GridCollectionViewController<CategoryViewModel>, SortModalControllerProtocol {
     var categoryId = String()
     var categoryTitle = String()
     var category: Category?
     var selectedSortingValue = SortingValue.createdAt
     
     override func viewDidLoad() {
+        viewModel = CategoryViewModel()
         super.viewDidLoad()
         
         setupViews()

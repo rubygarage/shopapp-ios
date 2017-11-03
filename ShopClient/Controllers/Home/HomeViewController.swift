@@ -10,10 +10,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class HomeViewController: BaseViewController, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate {
+class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate {
     @IBOutlet weak var tableView: UITableView!
-    
-    private var homeViewModel = HomeViewModel()
     
     var dataSource: HomeTableDataSource?
     var delegate: HomeTableDelegate?
@@ -22,6 +20,7 @@ class HomeViewController: BaseViewController, HomeTableDataSourceProtocol, HomeT
     var newInBlogArticles = [Article]()
     
     override func viewDidLoad() {
+        viewModel = HomeViewModel()
         super.viewDidLoad()
         
         setupTitle()
@@ -33,6 +32,7 @@ class HomeViewController: BaseViewController, HomeTableDataSourceProtocol, HomeT
     }
     
     private func setupTitle() {
+//        viewModel = HomeViewModel()
         title = NSLocalizedString("ControllerTitle.Home", comment: String())
     }
     
@@ -63,7 +63,7 @@ class HomeViewController: BaseViewController, HomeTableDataSourceProtocol, HomeT
     }
     
     private func loadData() {
-        homeViewModel.data.subscribe(onSuccess: { [weak self] (products, articles) in
+        viewModel.data.subscribe(onSuccess: { [weak self] (products, articles) in
             if let items = products {
                 self?.lastArrivalsProducts = items
             }
@@ -122,9 +122,9 @@ class HomeViewController: BaseViewController, HomeTableDataSourceProtocol, HomeT
     }
     
     // MARK: - view model
-    override func viewModel() -> BaseViewModel {
-        return homeViewModel
-    }
+//    override func viewModel() -> BaseViewModel {
+//        return homeViewModel
+//    }
     
     // MARK: - ErrorViewProtocol
     func didTapTryAgain() {
