@@ -68,8 +68,8 @@ class API: NSObject, APIInterface {
         task?.resume()
     }
     
-    func getProduct(id: String, options: [SelectedOption], callback: @escaping RepoCallback<Product>) {
-        let query = productDetailsQuery(id: id, options: options)
+    func getProduct(id: String, callback: @escaping RepoCallback<Product>) {
+        let query = productDetailsQuery(id: id)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             let productNode = response?.node as! Storefront.Product
             let currency = response?.shop.paymentSettings.currencyCode.rawValue
@@ -180,14 +180,14 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func productDetailsQuery(id: String, options: [SelectedOption]) -> Storefront.QueryRootQuery {
+    private func productDetailsQuery(id: String) -> Storefront.QueryRootQuery {
         let nodeId = GraphQL.ID(rawValue: id)
         return Storefront.buildQuery({ $0
             .shop({ $0
                 .paymentSettings(self.paymentSettingsQuery())
             })
             .node(id: nodeId, { $0
-                .onProduct(subfields: self.productQuery(additionalInfoNedded: true, options: options))
+                .onProduct(subfields: self.productQuery(additionalInfoNedded: true))
             })
         })
     }
@@ -230,15 +230,10 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func productQuery(additionalInfoNedded: Bool = false, options: [SelectedOption]? = nil) -> ((Storefront.ProductQuery) -> ()) {
+    private func productQuery(additionalInfoNedded: Bool = false) -> ((Storefront.ProductQuery) -> ()) {
         let imageCount = additionalInfoNedded ? kShopifyItemsMaxCount : 1
         let variantsCount = additionalInfoNedded ? kShopifyItemsMaxCount : 1
-        var optionsInput = [Storefront.SelectedOptionInput]()
-        if let options = options {
-            for option in options {
-                optionsInput.append(Storefront.SelectedOptionInput(name: option.name, value: option.value))
-            }
-        }
+        
         return { (query: Storefront.ProductQuery) in
             query.id()
             query.title()
@@ -251,7 +246,6 @@ class API: NSObject, APIInterface {
             query.tags()
             query.images(first: imageCount, self.imageConnectionQuery())
             query.variants(first: variantsCount, self.variantConnectionQuery())
-            query.variantBySelectedOptions(selectedOptions: optionsInput, self.productVariantQuery())
             query.options(self.optionQuery())
         }
     }
@@ -287,6 +281,7 @@ class API: NSObject, APIInterface {
             query.price()
             query.availableForSale()
             query.image(self.imageQuery())
+            query.selectedOptions(self.selectedOptionQuery())
         }
     }
     
@@ -376,6 +371,13 @@ class API: NSObject, APIInterface {
     private func paymentSettingsQuery() -> (Storefront.PaymentSettingsQuery) -> () {
         return { (query: Storefront.PaymentSettingsQuery) in
             query.currencyCode()
+        }
+    }
+    
+    private func selectedOptionQuery() -> (Storefront.SelectedOptionQuery) -> () {
+        return { (query: Storefront.SelectedOptionQuery) in
+            query.name()
+            query.value()
         }
     }
 }

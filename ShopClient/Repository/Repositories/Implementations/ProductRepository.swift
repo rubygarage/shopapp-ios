@@ -11,8 +11,8 @@ extension Repository {
         APICore?.getProductList(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, reverse: reverse, callback: callback)
     }
     
-    func getProduct(id: String, options: [SelectedOption], callback: @escaping RepoCallback<Product>) {
-        APICore?.getProduct(id: id, options: options, callback: callback)
+    func getProduct(id: String, callback: @escaping RepoCallback<Product>) {
+        APICore?.getProduct(id: id, callback: callback)
     }
     
     func searchProducts(perPage: Int = kItemsPerPage, paginationValue: Any? = nil, searchQuery: String, callback: @escaping RepoCallback<[Product]>) {

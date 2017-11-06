@@ -24,7 +24,6 @@ class Product: NSObject {
     var additionalDescription: String?
     var variants: [ProductVariant]?
     var options: [ProductOption]?
-    var variantBySelectedOptions: ProductVariant?
     
     // MARK: - additional
     var lowestPrice: String {

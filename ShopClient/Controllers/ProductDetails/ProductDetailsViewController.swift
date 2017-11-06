@@ -81,14 +81,14 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
     }
     
     private func populatePrice() {
-        priceLabel.text = "\(product?.variantBySelectedOptions?.price ?? String()) \(product?.currency ?? String())"
-        priceLabel.isHidden = product?.variantBySelectedOptions == nil
+//        priceLabel.text = "\(product?.variantBySelectedOptions?.price ?? String()) \(product?.currency ?? String())"
+//        priceLabel.isHidden = product?.variantBySelectedOptions == nil
     }
     
     private func populateAddToCartButton() {
-        let enabled = product?.variantBySelectedOptions != nil
-        addToCartButton.backgroundColor = enabled ? UIColor.blue : UIColor.lightGray
-        addToCartButton.isEnabled = enabled
+//        let enabled = product?.variantBySelectedOptions != nil
+//        addToCartButton.backgroundColor = enabled ? UIColor.blue : UIColor.lightGray
+//        addToCartButton.isEnabled = enabled
     }
     
     private func populateOptionsView() {
@@ -99,7 +99,7 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
     
     // MARK: - remote
     private func loadRemoteData() {
-        Repository.shared.getProduct(id: productId, options: selectedOptions) { [weak self] (product, error) in
+        Repository.shared.getProduct(id: productId) { [weak self] (product, error) in
             if let productObject = product {
                 self?.product = productObject
                 self?.setupData()
