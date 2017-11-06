@@ -24,6 +24,7 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
     var selectedOptions = [SelectedOption]()
     var detailImagesController: ImagesCarouselViewController?
     var showingImageIndex = 0
+    var selectedVariant: ProductVariant?
 
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -31,12 +32,12 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
 
         setupData()
         setupViews()
-        populateViews()
         loadRemoteData()
     }
     
     // MARK: - setup
     func setupData() {
+        selectedVariant = product?.variants?.first
         if selectedOptions.count == 0 {
             setupSelectedOptions()
         }
@@ -80,15 +81,21 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
         descriptionLabel.text = product.productDescription
     }
     
+    private func updateOptionsViews() {
+        populatePrice()
+        populateAddToCartButton()
+        populateOptionsView()
+    }
+    
     private func populatePrice() {
-//        priceLabel.text = "\(product?.variantBySelectedOptions?.price ?? String()) \(product?.currency ?? String())"
-//        priceLabel.isHidden = product?.variantBySelectedOptions == nil
+        priceLabel.text = "\(selectedVariant?.price ?? String()) \(product?.currency ?? String())"
+        priceLabel.isHidden = selectedVariant?.available == nil
     }
     
     private func populateAddToCartButton() {
-//        let enabled = product?.variantBySelectedOptions != nil
-//        addToCartButton.backgroundColor = enabled ? UIColor.blue : UIColor.lightGray
-//        addToCartButton.isEnabled = enabled
+        let enabled = selectedVariant != nil
+        addToCartButton.backgroundColor = enabled ? UIColor.blue : UIColor.lightGray
+        addToCartButton.isEnabled = enabled
     }
     
     private func populateOptionsView() {
@@ -139,6 +146,24 @@ class ProductDetailsViewController: UIViewController, ImagesCarouselViewControll
         if let index = selectedOptionsNames.index(of: name) {
             selectedOptions[index].value = value
         }
-        loadRemoteData()
+        if let variants = product?.variants {
+            findVariant(variants: variants)
+        }
+    }
+    
+    private func findVariant(variants: [ProductVariant]) {
+        let selectedOptionsNames = selectedOptions.map({ $0.name })
+        let selectedOptionsNValues = selectedOptions.map({ $0.value })
+        
+        for variant in variants {
+            let variantNames = variant.selectedOptions?.map({ $0.name }) ?? [String()]
+            let variantValues = variant.selectedOptions?.map({ $0.value }) ?? [String()]
+            
+            if selectedOptionsNames == variantNames && selectedOptionsNValues == variantValues {
+                selectedVariant = variant
+                updateOptionsViews()
+                break
+            }
+        }
     }
 }
