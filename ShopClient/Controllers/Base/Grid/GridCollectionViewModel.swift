@@ -10,4 +10,11 @@ import RxSwift
 
 class GridCollectionViewModel: BaseCollectionViewModel {
     var products = Variable<[Product]>([Product]())
+    
+    func updateProducts(products: [Product]) {
+        if paginationValue == nil {
+            self.products.value.removeAll()
+        }
+        self.products.value += products
+    }
 }

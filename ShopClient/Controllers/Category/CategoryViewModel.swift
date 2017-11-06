@@ -44,11 +44,4 @@ class CategoryViewModel: GridCollectionViewModel {
             canLoadMore = products.value.count == kItemsPerPage
         }
     }
-    
-    private func updateProducts(products: [Product]) {
-        if paginationValue == nil {
-            self.products.value.removeAll()
-        }
-        self.products.value += products
-    }
 }

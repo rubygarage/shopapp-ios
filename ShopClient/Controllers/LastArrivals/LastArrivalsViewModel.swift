@@ -32,11 +32,4 @@ class LastArrivalsViewModel: GridCollectionViewModel {
             self?.canLoadMore = products?.count ?? 0 == kItemsPerPage
         }
     }
-    
-    private func updateProducts(products: [Product]) {
-        if paginationValue == nil {
-            self.products.value.removeAll()
-        }
-        self.products.value += products
-    }
 }
