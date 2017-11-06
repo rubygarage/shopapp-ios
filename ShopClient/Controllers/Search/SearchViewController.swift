@@ -13,14 +13,13 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     var searchController: UISearchController?
     var searchControllerDelegate: SearchViewControllerDelegate?
     
-    var searchPhrase = String()
-    
     override func viewDidLoad() {
         viewModel = SearchViewModel()
         super.viewDidLoad()
         
         setupSearchBar()
-        reloadRemoteData()
+        setupViewModel()
+        loadData()
     }
     
     private func setupSearchBar() {
@@ -37,46 +36,34 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         definesPresentationContext = true
     }
     
-    private func reloadRemoteData() {
-        viewModel.paginationValue = nil
-        loadRemoteData()
+    private func setupViewModel() {
+        searchController?.searchBar.rx.text.map({ $0 ?? String() })
+            .bind(to: viewModel.searchPhrase)
+            .disposed(by: disposeBag)
+        
+        viewModel.products.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.stopLoadAnimating()
+                self?.collectionView.reloadData()
+            })
+            .disposed(by: disposeBag)
     }
     
-    private func loadNextPage() {
-        viewModel.paginationValue = viewModel.products.value.last?.paginationValue
-        loadRemoteData()
-    }
-    
-    private func loadRemoteData() {
-        Repository.shared.searchProducts(paginationValue: viewModel.paginationValue, searchQuery: searchPhrase) { [weak self] (products, error) in
-            if let productsArray = products {
-                self?.updateProducts(products: productsArray, needToClear: self?.viewModel.paginationValue == nil)
-            }
-            self?.viewModel.canLoadMore = products?.count ?? 0 == kItemsPerPage
-            self?.stopLoadAnimating()
-            self?.collectionView.reloadData()
-        }
-    }
-    
-    private func updateProducts(products: [Product], needToClear: Bool) {
-        if needToClear {
-            self.viewModel.products.value.removeAll()
-        }
-        self.viewModel.products.value += products
+    private func loadData() {
+        viewModel.reloadData()
     }
     
     // MARK: - overriding
     override func pullToRefreshHandler() {
-        reloadRemoteData()
+        viewModel.reloadData()
     }
     
     override func infinityScrollHandler() {
-        loadNextPage()
+        viewModel.loadNextPage()
     }
     
     // MARK: - SearchViewControllerDelegateProtocol
-    func didTapSearch(with text: String) {
-        searchPhrase = text
-        loadRemoteData()
+    func didTapSearch() {
+        viewModel.reloadData()
     }
 }

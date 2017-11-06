@@ -17,6 +17,7 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel>, S
         
         setupViews()
         setupViewModel()
+        loadData()
     }
     
     // MARK: - setup
@@ -33,7 +34,9 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel>, S
                 self?.collectionView.reloadData()
             })
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func loadData() {
         viewModel.reloadData()
     }
     
