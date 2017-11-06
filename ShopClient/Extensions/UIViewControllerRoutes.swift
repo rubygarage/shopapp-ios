@@ -50,7 +50,7 @@ extension UIViewController {
     func setCategoryController(with categoryId: String, title: String) {
         let categoryController = UIStoryboard.category().instantiateViewController(withIdentifier: ControllerIdentifier.category) as! CategoryViewController
         categoryController.categoryId = categoryId
-        categoryController.categoryTitle = title
+        categoryController.title = title
         
         setController(with: categoryController)
     }

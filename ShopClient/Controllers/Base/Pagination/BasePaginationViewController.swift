@@ -9,8 +9,6 @@
 import UIKit
 
 class BasePaginationViewController<T: BasePaginationViewModel>: BaseViewController<T> {
-    var paginationValue: Any?
-    var canLoadMore = true
     var refreshControl: UIRefreshControl?
     
     override func viewDidLoad() {

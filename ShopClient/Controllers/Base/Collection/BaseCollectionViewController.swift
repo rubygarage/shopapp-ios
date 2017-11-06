@@ -26,7 +26,7 @@ class BaseCollectionViewController<T: BaseCollectionViewModel>: BasePaginationVi
     
     private func setupInfinityScroll() {
         collectionView.setShouldShowInfiniteScrollHandler { [weak self] (collectionView) -> Bool in
-            return self?.canLoadMore ?? false
+            return self?.viewModel.canLoadMore ?? false
         }
         collectionView.addInfiniteScroll { [weak self] (collectionView) in
             self?.infinityScrollHandler()

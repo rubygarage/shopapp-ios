@@ -24,11 +24,11 @@ class LastArrivalsViewController: GridCollectionViewController<LastArrivalsViewM
     
     // MARK: - remote
     private func loadRemoteData() {
-        Repository.shared.getProductList(perPage: kItemsPerPage, paginationValue: paginationValue, sortBy: SortingValue.createdAt, reverse: true) { [weak self] (products, error) in
+        Repository.shared.getProductList(perPage: kItemsPerPage, paginationValue: viewModel.paginationValue, sortBy: SortingValue.createdAt, reverse: true) { [weak self] (products, error) in
             if let productsArray = products {
                 self?.updateProducts(products: productsArray)
             }
-            self?.canLoadMore = products?.count ?? 0 == kItemsPerPage
+            self?.viewModel.canLoadMore = products?.count ?? 0 == kItemsPerPage
             self?.stopLoadAnimating()
             self?.collectionView.reloadData()
         }
@@ -36,20 +36,20 @@ class LastArrivalsViewController: GridCollectionViewController<LastArrivalsViewM
     
     // MARK: - private
     private func updateProducts(products: [Product]) {
-        if paginationValue == nil {
-            self.products.removeAll()
+        if viewModel.paginationValue == nil {
+            self.viewModel.products.value.removeAll()
         }
-        self.products += products
+        self.viewModel.products.value += products
     }
     
     // MARK: - ovarriding
     override func pullToRefreshHandler() {
-        paginationValue = nil
+        viewModel.paginationValue = nil
         loadRemoteData()
     }
     
     override func infinityScrollHandler() {
-        paginationValue = products.last?.paginationValue
+        viewModel.paginationValue = viewModel.products.value.last?.paginationValue
         loadRemoteData()
     }
 }

@@ -38,21 +38,21 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     }
     
     private func reloadRemoteData() {
-        paginationValue = nil
+        viewModel.paginationValue = nil
         loadRemoteData()
     }
     
     private func loadNextPage() {
-        paginationValue = products.last?.paginationValue
+        viewModel.paginationValue = viewModel.products.value.last?.paginationValue
         loadRemoteData()
     }
     
     private func loadRemoteData() {
-        Repository.shared.searchProducts(paginationValue: paginationValue, searchQuery: searchPhrase) { [weak self] (products, error) in
+        Repository.shared.searchProducts(paginationValue: viewModel.paginationValue, searchQuery: searchPhrase) { [weak self] (products, error) in
             if let productsArray = products {
-                self?.updateProducts(products: productsArray, needToClear: self?.paginationValue == nil)
+                self?.updateProducts(products: productsArray, needToClear: self?.viewModel.paginationValue == nil)
             }
-            self?.canLoadMore = products?.count ?? 0 == kItemsPerPage
+            self?.viewModel.canLoadMore = products?.count ?? 0 == kItemsPerPage
             self?.stopLoadAnimating()
             self?.collectionView.reloadData()
         }
@@ -60,9 +60,9 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     
     private func updateProducts(products: [Product], needToClear: Bool) {
         if needToClear {
-            self.products.removeAll()
+            self.viewModel.products.value.removeAll()
         }
-        self.products += products
+        self.viewModel.products.value += products
     }
     
     // MARK: - overriding

@@ -9,7 +9,6 @@
 import RxSwift
 
 class ArticlesListViewModel: BaseTableViewModel {
-//    var items = PublishSubject<[Article]>()
     var items = Variable<[Article]>([Article]())
     
     public func reloadData() {

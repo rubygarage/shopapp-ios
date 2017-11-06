@@ -6,8 +6,8 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 class GridCollectionViewModel: BaseCollectionViewModel {
-    // TODO:
+    var products = Variable<[Product]>([Product]())
 }

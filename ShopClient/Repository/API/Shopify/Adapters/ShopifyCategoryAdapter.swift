@@ -15,7 +15,7 @@ extension Category {
         }
         self.init()
         
-        update(with: item, currencyValue: currencyValue)
+        update(with: item, currencyValue: currencyValue, productsListNeeded: true)
         additionalDescription = item?.descriptionHtml
     }
     
@@ -29,16 +29,22 @@ extension Category {
         paginationValue = item?.cursor
     }
     
-    private func update(with item: Storefront.Collection?, currencyValue: String?) {
+    private func update(with item: Storefront.Collection?, currencyValue: String?, productsListNeeded: Bool = false) {
         id = item?.id.rawValue ?? String()
         title = item?.title
         categoryDescription = item?.description
         image = Image(with: item?.image)
         updatedAt = item?.updatedAt
-        if let productsNodes = item?.products.edges.map({ $0.node }) {
+        if productsListNeeded {
+            updateCategoryProducts(with: item, currencyValue: currencyValue)
+        }
+    }
+    
+    private func updateCategoryProducts(with item: Storefront.Collection?, currencyValue: String?) {
+        if let productsEdges = item?.products.edges {
             var productsArray = [Product]()
-            for productNode in productsNodes {
-                if let product = Product(with: productNode, currencyValue: currencyValue) {
+            for productEdge in productsEdges {
+                if let product = Product(with: productEdge, currencyValue: currencyValue) {
                     productsArray.append(product)
                 }
             }
