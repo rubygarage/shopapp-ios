@@ -208,7 +208,7 @@ class API: NSObject, APIInterface {
                 .paymentSettings(self.paymentSettingsQuery())
             })
             .node(id: nodeId, { $0
-                .onCollection(subfields: self.collectionQuery(perPage: perPage, after: after, sortBy: sortBy, reverse: reverse))
+                .onCollection(subfields: self.collectionQuery(perPage: perPage, after: after, sortBy: sortBy, reverse: reverse, productsNeeded: true))
             })
         }
     }
@@ -300,7 +300,7 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func collectionQuery(perPage: Int = 0, after: Any? = nil, sortBy: SortingValue?, reverse: Bool) -> ((Storefront.CollectionQuery) -> ()) {
+    private func collectionQuery(perPage: Int = 0, after: Any? = nil, sortBy: SortingValue?, reverse: Bool, productsNeeded: Bool = false) -> ((Storefront.CollectionQuery) -> ()) {
         let sortKey = productCollectionSortValue(for: sortBy)
         return { (query: Storefront.CollectionQuery) in
             query.id()
@@ -308,7 +308,9 @@ class API: NSObject, APIInterface {
             query.description()
             query.updatedAt()
             query.image(self.imageQuery())
-            query.products(first: Int32(perPage), after: after as? String, reverse: reverse, sortKey: sortKey, self.productConnectionQuery())
+            if productsNeeded {
+                query.products(first: Int32(perPage), after: after as? String, reverse: reverse, sortKey: sortKey, self.productConnectionQuery())
+            }
             if perPage > 0 {
                 query.descriptionHtml()
             }
