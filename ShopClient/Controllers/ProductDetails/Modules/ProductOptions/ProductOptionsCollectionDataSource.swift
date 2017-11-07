@@ -27,7 +27,8 @@ class ProductOptionsCollectionDataSource: NSObject, UICollectionViewDataSource {
     
     // MARK: - UICollectionViewDataSource
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return delegate?.optionsCount() ?? 0
+        let optionsCount = delegate?.optionsCount() ?? 0
+        return optionsCount > 1 ? optionsCount : 0
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
