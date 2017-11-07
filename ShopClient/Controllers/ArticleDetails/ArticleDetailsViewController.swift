@@ -9,25 +9,36 @@
 import UIKit
 import SDWebImage
 
-class ArticleDetailsViewController: UIViewController {
+class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel> {
     @IBOutlet weak var articleImageView: UIImageView!
     @IBOutlet weak var articleTitleLabel: UILabel!
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var articleContentLabel: UILabel!
     
-    var article: Article?
+    var articleId: String!
     
     override func viewDidLoad() {
+        viewModel = ArticleDetailsViewModel()
         super.viewDidLoad()
 
-        populateViews()
+        setupViewModel()
     }
     
-    func populateViews() {
-        let imageUrl = URL(string: article?.image?.src ?? String())
+    private func setupViewModel() {
+        viewModel.articleId = articleId
+        
+        viewModel.data
+            .subscribe(onSuccess: { [weak self] (article) in
+                self?.populateViews(with: article)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func populateViews(with article: Article) {
+        let imageUrl = URL(string: article.image?.src ?? String())
         articleImageView.sd_setImage(with: imageUrl)
-        articleTitleLabel.text = article?.title
-        authorNameLabel.text = article?.author?.fullName
-        articleContentLabel.text = article?.content
+        articleTitleLabel.text = article.title
+        authorNameLabel.text = article.author?.fullName
+        articleContentLabel.text = article.content
     }
 }

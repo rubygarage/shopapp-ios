@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseTableViewController: BasePaginationViewController {
+class BaseTableViewController<T: BasePaginationViewModel>: BasePaginationViewController<T> {
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -26,7 +26,7 @@ class BaseTableViewController: BasePaginationViewController {
     
     private func setupInfinityScroll() {
         tableView.setShouldShowInfiniteScrollHandler { [weak self] (tableView) -> Bool in
-            return self?.canLoadMore ?? false
+            return self?.viewModel.canLoadMore ?? false
         }
         tableView.addInfiniteScroll { [weak self] (tableView) in
             self?.infinityScrollHandler()

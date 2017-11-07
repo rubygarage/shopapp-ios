@@ -7,11 +7,18 @@ target 'ShopClient' do
 
   # Pods for ShopClient
   pod 'Mobile-Buy-SDK', '~> 3.0'
+  
+  # UI
   pod 'SDWebImage', '~> 4.1'
+  pod 'MBProgressHUD', '~> 1.0'
   pod 'UIScrollView-InfiniteScroll', '~> 1.0'
-  pod 'SideMenu', '~> 2.3'
   pod 'SKPhotoBrowser', '~> 4.1'
   pod 'TPKeyboardAvoiding', '~> 1.3'
+  
+  # Menu
+  pod 'SideMenu', '~> 2.3'
+  
+  # Database
   pod 'CoreStore', :git => 'https://github.com/JohnEstropia/CoreStore.git', :branch => 'prototype/Swift_3_2'
   pod 'MagicalRecord', '~> 2.3'
   

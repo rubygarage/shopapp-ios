@@ -8,78 +8,60 @@
 
 import UIKit
 
-class CategoryViewController: GridCollectionViewController, SortModalControllerProtocol {
-    var categoryId = String()
-    var categoryTitle = String()
-    var category: Category?
-    var selectedSortingValue = SortingValue.createdAt
+class CategoryViewController: GridCollectionViewController<CategoryViewModel>, SortModalControllerProtocol {
+    var categoryId: String!
     
     override func viewDidLoad() {
+        viewModel = CategoryViewModel()
         super.viewDidLoad()
         
         setupViews()
-        loadRemoteData()
+        setupViewModel()
+        loadData()
     }
     
     // MARK: - setup
     private func setupViews() {
-        title = categoryTitle
         addRightBarButton(with: ImageName.sort, action: #selector(CategoryViewController.sortTapHandler))
     }
     
-    // MARK: - private
-    private func updateData(category: Category) {
-        self.category = category
-        if let items = category.products {
-            updateProducts(products: items)
-            canLoadMore = products.count == kItemsPerPage
-        }
-    }
-    
-    private func updateProducts(products: [Product]) {
-        if paginationValue == nil {
-            self.products.removeAll()
-        }
-        self.products += products
-    }
-    
-    // MARK: - private
-    private func loadRemoteData() {
-        let reverse = selectedSortingValue == .createdAt
-        Repository.shared.getCategoryDetails(id: categoryId, paginationValue: paginationValue, sortBy: selectedSortingValue, reverse: reverse) { [weak self] (result, error) in
-            self?.stopLoadAnimating()
-            if let category = result {
-                self?.updateData(category: category)
+    private func setupViewModel() {
+        viewModel.categoryId = categoryId
+        
+        viewModel.products.asObservable()
+            .subscribe(onNext: { [weak self] products in
+                self?.stopLoadAnimating()
                 self?.collectionView.reloadData()
-            }
-        }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func loadData() {
+        viewModel.reloadData()
     }
     
     // MARK: - actions
     func sortTapHandler() {
-        let selectedValueString = SortingValue.allValues[selectedSortingValue.rawValue]
+        let selectedValueString = SortingValue.allValues[viewModel.selectedSortingValue.rawValue]
         showCategorySortingController(with: SortingValue.allValues, selectedItem: selectedValueString, delegate: self)
     }
     
     // MARK: - overriding
     override func pullToRefreshHandler() {
-        paginationValue = nil
-        loadRemoteData()
+        viewModel.reloadData()
     }
     
     override func infinityScrollHandler() {
-        paginationValue = products.last?.paginationValue
-        loadRemoteData()
+        viewModel.loadNextPage()
     }
     
     // MARK: - SortModalControllerProtocol
     func didSelect(item: String) {
         if let index = SortingValue.allValues.index(of: item) {
-            selectedSortingValue = SortingValue(rawValue: index) ?? selectedSortingValue
-            paginationValue = nil
+            viewModel.selectedSortingValue = SortingValue(rawValue: index) ?? viewModel.selectedSortingValue
             let indexPath = IndexPath(row: 0, section: 0)
             collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-            loadRemoteData()
+            viewModel.reloadData()
         }
     }
 }

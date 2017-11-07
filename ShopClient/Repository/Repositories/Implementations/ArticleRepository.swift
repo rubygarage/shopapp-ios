@@ -12,4 +12,8 @@ extension Repository: ArticleRepositoryInterface {
     func getArticleList(perPage: Int = kItemsPerPage, paginationValue: Any? = nil, sortBy: SortingValue? = nil, reverse: Bool = false, callback: @escaping RepoCallback<[Article]>) {
         APICore?.getArticleList(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, reverse: reverse, callback: callback)
     }
+    
+    func getArticle(id: String, callback: @escaping RepoCallback<Article>) {
+        APICore?.getArticle(id: id, callback: callback)
+    }
 }

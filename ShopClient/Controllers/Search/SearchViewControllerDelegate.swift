@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SearchViewControllerDelegateProtocol {
-    func didTapSearch(with text: String)
+    func didTapSearch()
 }
 
 class SearchViewControllerDelegate: NSObject, UISearchBarDelegate {
@@ -23,8 +23,6 @@ class SearchViewControllerDelegate: NSObject, UISearchBarDelegate {
     
     // MARK: - UISearchBarDelegate
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let searchText = searchBar.text {
-            delegate?.didTapSearch(with: searchText)
-        }
+        delegate?.didTapSearch()
     }
 }

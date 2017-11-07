@@ -10,19 +10,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTableDelegateProtocol {
+class MenuViewController: BaseViewController<MenuViewModel>, MenuTableDataSourceProtocol, MenuTableDelegateProtocol {
     @IBOutlet weak var tableView: UITableView!
-    
-    private var menuViewModel = MenuViewModel()
-    private var disposeBag = DisposeBag()
-    
-    var categories = [Category]()
-    var policies = [Policy]()
     
     var tableDataSource: MenuTableDataSource?
     var tableDelegate: MenuTableDelegate?
 
     override func viewDidLoad() {
+        viewModel = MenuViewModel()
         super.viewDidLoad()
         
         setupTableView()
@@ -47,62 +42,46 @@ class MenuViewController: UIViewController, MenuTableDataSourceProtocol, MenuTab
     }
     
     private func loadData() {
-        menuViewModel.data.subscribe(onSuccess: { [weak self] (shop, categories) in
-            self?.processResponse(with: shop, categoriesItems: categories)
+        viewModel.data.subscribe(onSuccess: { [weak self] _ in
             self?.tableView.reloadData()
         }, onError: { [weak self] (error) in
             self?.showErrorAlert(with: error.localizedDescription)
         }).disposed(by: disposeBag)
     }
     
-    private func processResponse(with shopItem: Shop?, categoriesItems: [Category]?) {
-        if let privacyPolicy = shopItem?.privacyPolicy {
-            policies.append(privacyPolicy)
-        }
-        if let refundPolicy = shopItem?.refundPolicy {
-            policies.append(refundPolicy)
-        }
-        if let termsOfService = shopItem?.termsOfService {
-            policies.append(termsOfService)
-        }
-        if let categoriesItems = categoriesItems {
-            categories = categoriesItems
-        }
-    }
-    
     private func openCategoryController(with index: Int) {
-        if index < categories.count {
-            let category = categories[index]
+        if index < viewModel.categories.value.count {
+            let category = viewModel.categories.value[index]
             setCategoryController(with: category.id, title: category.title ?? String())
         }
     }
     
     private func openPolicyController(with index: Int) {
-        if index < policies.count {
-            let policy = policies[index]
+        if index < viewModel.policies.value.count {
+            let policy = viewModel.policies.value[index]
             pushPolicyController(with: policy)
         }
     }
     
     // MARK: - MenuTableDataSourceProtocol
     func numberOfCategories() -> Int {
-        return categories.count
+        return viewModel.categories.value.count
     }
     
     func category(for index: Int) -> Category? {
-        if index < categories.count {
-            return categories[index]
+        if index < viewModel.categories.value.count {
+            return viewModel.categories.value[index]
         }
         return nil
     }
     
     func numberOfPolicies() -> Int {
-        return policies.count
+        return viewModel.policies.value.count
     }
     
     func policyTitle(for index: Int) -> String? {
-        if index < policies.count {
-            return policies[index].title
+        if index < viewModel.policies.value.count {
+            return viewModel.policies.value[index].title
         }
         return nil
     }

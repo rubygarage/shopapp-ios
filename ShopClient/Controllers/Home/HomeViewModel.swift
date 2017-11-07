@@ -8,12 +8,26 @@
 
 import RxSwift
 
-struct HomeViewModel {
+class HomeViewModel: BaseViewModel {
+    var lastArrivalsProducts = Variable<[Product]>([Product]())
+    var newInBlogArticles = Variable<[Article]>([Article]())
+    
     var data: Single<([Product]?, [Article]?)> {
-        return Single.zip(lastArrivalsProducts, articles)
+        state.onNext((.loading, nil))
+        return Single.zip(productsSingle, articlesSingle).do(onNext: { [weak self] (products, articles) in
+            if let products = products {
+                self?.lastArrivalsProducts.value = products
+            }
+            if let articles = articles {
+                self?.newInBlogArticles.value = articles
+            }
+            self?.state.onNext((.content, nil))
+        }, onError: { [weak self] (error) in
+            self?.state.onNext((.error, error))
+        })
     }
     
-    private var lastArrivalsProducts: Single<[Product]?> {
+    private var productsSingle: Single<[Product]?> {
         return Single.create(subscribe: { (single) in
             Repository.shared.getProductList(sortBy: SortingValue.createdAt, reverse: true, callback: { (products, error) in
                 if let error = error {
@@ -27,7 +41,7 @@ struct HomeViewModel {
         })
     }
     
-    private var articles: Single<[Article]?> {
+    private var articlesSingle: Single<[Article]?> {
         return Single.create(subscribe: { (single) in
             Repository.shared.getArticleList(reverse: true, callback: { (articles, error) in
                 if let error = error {

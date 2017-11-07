@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseCollectionViewController: BasePaginationViewController {
+class BaseCollectionViewController<T: BasePaginationViewModel>: BasePaginationViewController<T> {
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -26,7 +26,7 @@ class BaseCollectionViewController: BasePaginationViewController {
     
     private func setupInfinityScroll() {
         collectionView.setShouldShowInfiniteScrollHandler { [weak self] (collectionView) -> Bool in
-            return self?.canLoadMore ?? false
+            return self?.viewModel.canLoadMore ?? false
         }
         collectionView.addInfiniteScroll { [weak self] (collectionView) in
             self?.infinityScrollHandler()

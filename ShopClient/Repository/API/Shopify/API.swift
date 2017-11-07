@@ -8,8 +8,8 @@
 
 import MobileBuySDK
 
-let kShopifyStorefrontAccessToken = "afc80014a08846feaf590e1db92e74b6"
-let kShopifyStorefrontURL = "xpohstore.myshopify.com"
+let kShopifyStorefrontAccessToken = "677af790376ae84213f7ea1ed56f11ca"
+let kShopifyStorefrontURL = "lalkastore.myshopify.com"
 let kShopifyItemsMaxCount: Int32 = 250
 
 class API: NSObject, APIInterface {
@@ -68,8 +68,8 @@ class API: NSObject, APIInterface {
         task?.resume()
     }
     
-    func getProduct(id: String, options: [SelectedOption], callback: @escaping RepoCallback<Product>) {
-        let query = productDetailsQuery(id: id, options: options)
+    func getProduct(id: String, callback: @escaping RepoCallback<Product>) {
+        let query = productDetailsQuery(id: id)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             let productNode = response?.node as! Storefront.Product
             let currency = response?.shop.paymentSettings.currencyCode.rawValue
@@ -142,6 +142,20 @@ class API: NSObject, APIInterface {
         task?.resume()
     }
     
+    func getArticle(id: String, callback: @escaping RepoCallback<Article>) {
+        let query = articleRootQuery(id: id)
+        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
+            if let articleNode = response?.node as? Storefront.Article {
+                let article = Article(with: articleNode)
+                callback(article, nil)
+            }
+            if let error = error {
+                callback(nil, error)
+            }
+        })
+        task?.resume()
+    }
+    
     // MARK: - private
     func productSortValue(for key: SortingValue?) -> Storefront.ProductSortKeys? {
         if key == nil {
@@ -180,14 +194,14 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func productDetailsQuery(id: String, options: [SelectedOption]) -> Storefront.QueryRootQuery {
+    private func productDetailsQuery(id: String) -> Storefront.QueryRootQuery {
         let nodeId = GraphQL.ID(rawValue: id)
         return Storefront.buildQuery({ $0
             .shop({ $0
                 .paymentSettings(self.paymentSettingsQuery())
             })
             .node(id: nodeId, { $0
-                .onProduct(subfields: self.productQuery(additionalInfoNedded: true, options: options))
+                .onProduct(subfields: self.productQuery(additionalInfoNedded: true))
             })
         })
     }
@@ -208,7 +222,7 @@ class API: NSObject, APIInterface {
                 .paymentSettings(self.paymentSettingsQuery())
             })
             .node(id: nodeId, { $0
-                .onCollection(subfields: self.collectionQuery(perPage: perPage, after: after, sortBy: sortBy, reverse: reverse))
+                .onCollection(subfields: self.collectionQuery(perPage: perPage, after: after, sortBy: sortBy, reverse: reverse, productsNeeded: true))
             })
         }
     }
@@ -221,6 +235,16 @@ class API: NSObject, APIInterface {
         })
     }
     
+    private func articleRootQuery(id: String) -> (Storefront.QueryRootQuery) {
+        let nodeId = GraphQL.ID(rawValue: id)
+        return Storefront.buildQuery({ $0
+            .node(id: nodeId, { $0
+                .onArticle(subfields: self.articleQuery())
+            })
+        })
+    }
+    
+    // MARK: - subqueries
     private func productConnectionQuery() -> ((Storefront.ProductConnectionQuery) -> ()) {
         return { (query: Storefront.ProductConnectionQuery) in
             query.edges({ $0
@@ -230,15 +254,10 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func productQuery(additionalInfoNedded: Bool = false, options: [SelectedOption]? = nil) -> ((Storefront.ProductQuery) -> ()) {
+    private func productQuery(additionalInfoNedded: Bool = false) -> ((Storefront.ProductQuery) -> ()) {
         let imageCount = additionalInfoNedded ? kShopifyItemsMaxCount : 1
         let variantsCount = additionalInfoNedded ? kShopifyItemsMaxCount : 1
-        var optionsInput = [Storefront.SelectedOptionInput]()
-        if let options = options {
-            for option in options {
-                optionsInput.append(Storefront.SelectedOptionInput(name: option.name, value: option.value))
-            }
-        }
+        
         return { (query: Storefront.ProductQuery) in
             query.id()
             query.title()
@@ -251,7 +270,6 @@ class API: NSObject, APIInterface {
             query.tags()
             query.images(first: imageCount, self.imageConnectionQuery())
             query.variants(first: variantsCount, self.variantConnectionQuery())
-            query.variantBySelectedOptions(selectedOptions: optionsInput, self.productVariantQuery())
             query.options(self.optionQuery())
         }
     }
@@ -287,6 +305,7 @@ class API: NSObject, APIInterface {
             query.price()
             query.availableForSale()
             query.image(self.imageQuery())
+            query.selectedOptions(self.selectedOptionQuery())
         }
     }
     
@@ -300,7 +319,7 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func collectionQuery(perPage: Int = 0, after: Any? = nil, sortBy: SortingValue?, reverse: Bool) -> ((Storefront.CollectionQuery) -> ()) {
+    private func collectionQuery(perPage: Int = 0, after: Any? = nil, sortBy: SortingValue?, reverse: Bool, productsNeeded: Bool = false) -> ((Storefront.CollectionQuery) -> ()) {
         let sortKey = productCollectionSortValue(for: sortBy)
         return { (query: Storefront.CollectionQuery) in
             query.id()
@@ -308,7 +327,9 @@ class API: NSObject, APIInterface {
             query.description()
             query.updatedAt()
             query.image(self.imageQuery())
-            query.products(first: Int32(perPage), after: after as? String, reverse: reverse, sortKey: sortKey, self.productConnectionQuery())
+            if productsNeeded {
+                query.products(first: Int32(perPage), after: after as? String, reverse: reverse, sortKey: sortKey, self.productConnectionQuery())
+            }
             if perPage > 0 {
                 query.descriptionHtml()
             }
@@ -374,6 +395,13 @@ class API: NSObject, APIInterface {
     private func paymentSettingsQuery() -> (Storefront.PaymentSettingsQuery) -> () {
         return { (query: Storefront.PaymentSettingsQuery) in
             query.currencyCode()
+        }
+    }
+    
+    private func selectedOptionQuery() -> (Storefront.SelectedOptionQuery) -> () {
+        return { (query: Storefront.SelectedOptionQuery) in
+            query.name()
+            query.value()
         }
     }
 }

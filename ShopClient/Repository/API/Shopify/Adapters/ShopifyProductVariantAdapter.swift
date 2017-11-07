@@ -20,5 +20,14 @@ extension ProductVariant {
         price = item?.price.description
         available = item?.availableForSale ?? false
         image = Image(with: item?.image)
+        if let selectedOptionsObjects = item?.selectedOptions {
+            var selectedOptionsArray = [VariantOption]()
+            for selectedOption in selectedOptionsObjects {
+                if let variantOption = VariantOption(variantObject: selectedOption) {
+                    selectedOptionsArray.append(variantOption)
+                }
+            }
+            selectedOptions = selectedOptionsArray
+        }
     }
 }

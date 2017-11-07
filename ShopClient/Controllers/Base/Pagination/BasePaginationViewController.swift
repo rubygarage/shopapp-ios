@@ -8,9 +8,7 @@
 
 import UIKit
 
-class BasePaginationViewController: UIViewController {
-    var paginationValue: Any?
-    var canLoadMore = true
+class BasePaginationViewController<T: BasePaginationViewModel>: BaseViewController<T> {
     var refreshControl: UIRefreshControl?
     
     // MARK: - methods to override

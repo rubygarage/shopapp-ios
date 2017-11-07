@@ -68,8 +68,5 @@ extension Product {
             }
             options = optionsArray
         }
-        if let variantBySelOpts = item?.variantBySelectedOptions {
-            self.variantBySelectedOptions = ProductVariant(with: variantBySelOpts)
-        }
     }
 }

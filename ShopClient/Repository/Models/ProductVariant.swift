@@ -14,5 +14,5 @@ class ProductVariant: NSObject {
     var price: String?
     var available: Bool = false
     var image: Image?
-    var selectedOptions: [ProductOption]?
+    var selectedOptions: [VariantOption]?
 }

@@ -10,19 +10,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate {
+class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate {
     @IBOutlet weak var tableView: UITableView!
-    
-    private var homeViewModel = HomeViewModel()
-    private var disposeBag = DisposeBag()
     
     var dataSource: HomeTableDataSource?
     var delegate: HomeTableDelegate?
     
-    var lastArrivalsProducts = [Product]()
-    var newInBlogArticles = [Article]()
-    
     override func viewDidLoad() {
+        viewModel = HomeViewModel()
         super.viewDidLoad()
         
         setupTitle()
@@ -64,16 +59,8 @@ class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTab
     }
     
     private func loadData() {
-        homeViewModel.data.subscribe(onSuccess: { [weak self] (products, articles) in
-            if let items = products {
-                self?.lastArrivalsProducts = items
-            }
-            if let items = articles {
-                self?.newInBlogArticles = items
-            }
+        viewModel.data.subscribe(onSuccess: { [weak self] _ in
             self?.tableView.reloadData()
-        }, onError: { [weak self] (error) in
-            self?.showErrorAlert(with: error.localizedDescription)
         }).disposed(by: disposeBag)
     }
     
@@ -86,32 +73,32 @@ class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTab
     
     // MARK: - HomeTableDataSourceProtocol
     func lastArrivalsObjects() -> [Product] {
-        return lastArrivalsProducts
+        return viewModel.lastArrivalsProducts.value
     }
     
     func didSelectProduct(at index: Int) {
-        if index < lastArrivalsProducts.count {
-            let selectedProduct = lastArrivalsProducts[index]
+        if index < viewModel.lastArrivalsProducts.value.count {
+            let selectedProduct = viewModel.lastArrivalsProducts.value[index]
             pushDetailController(with: selectedProduct)
         }
     }
     
     func articlesCount() -> Int {
-        return newInBlogArticles.count
+        return viewModel.newInBlogArticles.value.count
     }
     
     func article(at index: Int) -> Article? {
-        if index < newInBlogArticles.count {
-            return newInBlogArticles[index]
+        if index < viewModel.newInBlogArticles.value.count {
+            return viewModel.newInBlogArticles.value[index]
         }
         return nil
     }
     
     // MARK: - HomeTableDelegateProtocol
     func didSelectArticle(at index: Int) {
-        if index < newInBlogArticles.count {
-            let article = newInBlogArticles[index]
-            pushArticleDetailsController(with: article)
+        if index < viewModel.newInBlogArticles.value.count {
+            let article = viewModel.newInBlogArticles.value[index]
+            pushArticleDetailsController(with: article.id)
         }
     }
     
@@ -122,5 +109,10 @@ class HomeViewController: UIViewController, HomeTableDataSourceProtocol, HomeTab
     // MARK: - LastArrivalsCellDelegate
     func didTapLastArrivalsLoadMore() {
         pushLastArrivalsController()
+    }
+    
+    // MARK: - ErrorViewProtocol
+    func didTapTryAgain() {
+        loadData()
     }
 }

@@ -27,7 +27,6 @@ extension UIViewController {
     func pushDetailController(with product: Product) {
         let productDetaillsController = UIStoryboard.productDetails().instantiateViewController(withIdentifier: ControllerIdentifier.productDetails) as! ProductDetailsViewController
         productDetaillsController.productId = product.id 
-        productDetaillsController.product = product
         
         navigationController?.pushViewController(productDetaillsController, animated: true)
     }
@@ -39,9 +38,9 @@ extension UIViewController {
         navigationController?.pushViewController(policyController, animated: false)
     }
     
-    func pushArticleDetailsController(with article: Article?) {
+    func pushArticleDetailsController(with articleId: String) {
         let articleDetailsController = UIStoryboard.articleDetails().instantiateViewController(withIdentifier: ControllerIdentifier.articleDetails) as! ArticleDetailsViewController
-        articleDetailsController.article = article
+        articleDetailsController.articleId = articleId
         
         navigationController?.pushViewController(articleDetailsController, animated: true)
     }
@@ -50,7 +49,7 @@ extension UIViewController {
     func setCategoryController(with categoryId: String, title: String) {
         let categoryController = UIStoryboard.category().instantiateViewController(withIdentifier: ControllerIdentifier.category) as! CategoryViewController
         categoryController.categoryId = categoryId
-        categoryController.categoryTitle = title
+        categoryController.title = title
         
         setController(with: categoryController)
     }

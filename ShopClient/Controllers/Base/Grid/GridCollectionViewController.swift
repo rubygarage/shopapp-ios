@@ -9,11 +9,10 @@
 import UIKit
 import UIScrollView_InfiniteScroll
 
-class GridCollectionViewController: BaseCollectionViewController, GridCollectionDataSourceProtocol, GridCollectionDelegateProtocol {
+class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionViewController<T>, GridCollectionDataSourceProtocol, GridCollectionDelegateProtocol {
     
     var collectionDataSource: GridCollectionDataSource?
     var collectionDelegate: GridCollectionDelegate?
-    var products = [Product]()
     
     // MARK: - view controller lifecycle
     override func viewDidLoad() {
@@ -41,17 +40,17 @@ class GridCollectionViewController: BaseCollectionViewController, GridCollection
     
     // MARK: - GridCollectionDataSourceProtocol
     func numberOfItems() -> Int {
-        return products.count
+        return viewModel.products.value.count
     }
     
     func item(for indexPath: IndexPath) -> Product {
-        return products[indexPath.row]
+        return viewModel.products.value[indexPath.row]
     }
     
     // MARK: - GridCollectionDelegateProtocol
     func didSelectItem(at index: Int) {
-        if index < products.count {
-            let product = products[index]
+        if index < viewModel.products.value.count {
+            let product = viewModel.products.value[index]
             pushDetailController(with: product)
         }
     }
