@@ -38,9 +38,9 @@ extension UIViewController {
         navigationController?.pushViewController(policyController, animated: false)
     }
     
-    func pushArticleDetailsController(with article: Article?) {
+    func pushArticleDetailsController(with articleId: String) {
         let articleDetailsController = UIStoryboard.articleDetails().instantiateViewController(withIdentifier: ControllerIdentifier.articleDetails) as! ArticleDetailsViewController
-        articleDetailsController.article = article
+        articleDetailsController.articleId = articleId
         
         navigationController?.pushViewController(articleDetailsController, animated: true)
     }

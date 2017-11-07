@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseTableViewController<T: BaseTableViewModel>: BasePaginationViewController<T> {
+class BaseTableViewController<T: BasePaginationViewModel>: BasePaginationViewController<T> {
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {

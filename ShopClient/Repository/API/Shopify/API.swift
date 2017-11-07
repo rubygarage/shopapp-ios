@@ -142,6 +142,16 @@ class API: NSObject, APIInterface {
         task?.resume()
     }
     
+    func getArticle(id: String, callback: @escaping RepoCallback<Article>) {
+        let query = articleRootQuery(id: id)
+        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
+            let articleNode = response?.node as! Storefront.Article
+            let article = Article(with: articleNode)
+            callback(article, error)
+        })
+        task?.resume()
+    }
+    
     // MARK: - private
     func productSortValue(for key: SortingValue?) -> Storefront.ProductSortKeys? {
         if key == nil {
@@ -221,6 +231,16 @@ class API: NSObject, APIInterface {
         })
     }
     
+    private func articleRootQuery(id: String) -> (Storefront.QueryRootQuery) {
+        let nodeId = GraphQL.ID(rawValue: id)
+        return Storefront.buildQuery({ $0
+            .node(id: nodeId, { $0
+                .onArticle(subfields: self.articleQuery())
+            })
+        })
+    }
+    
+    // MARK: - subqueries
     private func productConnectionQuery() -> ((Storefront.ProductConnectionQuery) -> ()) {
         return { (query: Storefront.ProductConnectionQuery) in
             query.edges({ $0

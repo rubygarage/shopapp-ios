@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseCollectionViewController<T: BaseCollectionViewModel>: BasePaginationViewController<T> {
+class BaseCollectionViewController<T: BasePaginationViewModel>: BasePaginationViewController<T> {
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {

@@ -76,7 +76,7 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
     func didSelectItem(at index: Int) {
         if index < viewModel.items.value.count {
             let article = viewModel.items.value[index]
-            pushArticleDetailsController(with: article)
+            pushArticleDetailsController(with: article.id)
         }
     }
 }

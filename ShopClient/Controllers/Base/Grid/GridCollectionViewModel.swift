@@ -8,7 +8,7 @@
 
 import RxSwift
 
-class GridCollectionViewModel: BaseCollectionViewModel {
+class GridCollectionViewModel: BasePaginationViewModel {
     var products = Variable<[Product]>([Product]())
     
     func updateProducts(products: [Product]) {

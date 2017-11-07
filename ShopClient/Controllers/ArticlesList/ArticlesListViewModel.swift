@@ -8,7 +8,7 @@
 
 import RxSwift
 
-class ArticlesListViewModel: BaseTableViewModel {
+class ArticlesListViewModel: BasePaginationViewModel {
     var items = Variable<[Article]>([Article]())
     
     public func reloadData() {

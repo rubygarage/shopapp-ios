@@ -98,7 +98,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     func didSelectArticle(at index: Int) {
         if index < viewModel.newInBlogArticles.value.count {
             let article = viewModel.newInBlogArticles.value[index]
-            pushArticleDetailsController(with: article)
+            pushArticleDetailsController(with: article.id)
         }
     }
     
