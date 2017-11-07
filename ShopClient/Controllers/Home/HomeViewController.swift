@@ -23,7 +23,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         setupTitle()
         setupSideMenu()
         addMenuBarButton()
-        addSearchButton()
+        updateBarItems()
         setupTableView()
         loadData()
     }
@@ -49,13 +49,13 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         tableView.delegate = delegate
     }
     
-    private func addSearchButton() {
-        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(HomeViewController.seachButtonHandler))
-        navigationItem.rightBarButtonItem = searchButton
-    }
-    
-    @objc private func seachButtonHandler() {
-        pushSearchController()
+    private func updateBarItems() {
+        if let cartButton = cartBarItem() {
+            navigationItem.rightBarButtonItems = [cartButton, searchBarItem()]
+        } else {
+            navigationItem.rightBarButtonItem = searchBarItem()
+        }
+        
     }
     
     private func loadData() {
