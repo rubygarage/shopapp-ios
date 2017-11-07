@@ -9,16 +9,20 @@
 import RxSwift
 
 class MenuViewModel: BaseViewModel {
+    var categories = Variable<[Category]>([Category]())
+    var policies = Variable<[Policy]>([Policy]())
+    
     var data: Single<(Shop?, [Category]?)> {
         state.onNext((.loading, nil))
-        return Single.zip(shop, categories).do(onNext: { [weak self] _ in
+        return Single.zip(shopSingle, categoriesSingle).do(onNext: { [weak self] (shop, categories) in
+            self?.processResponse(with: shop, categoriesItems: categories)
             self?.state.onNext((.content, nil))
             }, onError: { [weak self] (error) in
                 self?.state.onNext((.error, error))
         })
     }
     
-    private var shop: Single<Shop?> {
+    private var shopSingle: Single<Shop?> {
         return Single.create(subscribe: { (single) in
             Repository.shared.getShop(callback: { (shop, error) in
                 if let error = error {
@@ -32,7 +36,7 @@ class MenuViewModel: BaseViewModel {
         })
     }
     
-    private var categories: Single<[Category]?> {
+    private var categoriesSingle: Single<[Category]?> {
         return Single.create(subscribe: { (single) in
             Repository.shared.getCategoryList(callback: { (categories, error) in
                 if let error = error {
@@ -44,5 +48,20 @@ class MenuViewModel: BaseViewModel {
             })
             return Disposables.create()
         })
+    }
+    
+    private func processResponse(with shopItem: Shop?, categoriesItems: [Category]?) {
+        if let privacyPolicy = shopItem?.privacyPolicy {
+            policies.value.append(privacyPolicy)
+        }
+        if let refundPolicy = shopItem?.refundPolicy {
+            policies.value.append(refundPolicy)
+        }
+        if let termsOfService = shopItem?.termsOfService {
+            policies.value.append(termsOfService)
+        }
+        if let categoriesItems = categoriesItems {
+            categories.value = categoriesItems
+        }
     }
 }
