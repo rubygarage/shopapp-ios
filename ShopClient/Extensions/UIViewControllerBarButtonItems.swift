@@ -8,18 +8,19 @@
 
 import UIKit
 
+let kCustomBarItemWidth: CGFloat = 32
+
 extension UIViewController {
     public func searchBarItem() -> UIBarButtonItem {
         return UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(self.seachButtonHandler))
     }
     
     public func cartBarItem() -> UIBarButtonItem? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        view.backgroundColor = UIColor.red
-        view.isUserInteractionEnabled = false
+        let cartView = CartButtonView(frame: CGRect(x: 0, y: 0, width: kCustomBarItemWidth, height: kCustomBarItemWidth))
+        cartView.isUserInteractionEnabled = false
         
-        let button = UIButton(frame: view.frame)
-        button.addSubview(view)
+        let button = UIButton(frame: cartView.frame)
+        button.addSubview(cartView)
         button.addTarget(self, action: #selector(self.cartButtonHandler), for: .touchUpInside)
         
         return UIBarButtonItem(customView: button)
