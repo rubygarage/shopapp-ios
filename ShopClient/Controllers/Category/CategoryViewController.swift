@@ -9,7 +9,7 @@
 import UIKit
 
 class CategoryViewController: GridCollectionViewController<CategoryViewModel>, SortModalControllerProtocol {
-    var categoryId = String()
+    var categoryId: String!
     
     override func viewDidLoad() {
         viewModel = CategoryViewModel()

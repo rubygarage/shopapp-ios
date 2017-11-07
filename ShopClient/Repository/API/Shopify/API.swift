@@ -145,9 +145,13 @@ class API: NSObject, APIInterface {
     func getArticle(id: String, callback: @escaping RepoCallback<Article>) {
         let query = articleRootQuery(id: id)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
-            let articleNode = response?.node as! Storefront.Article
-            let article = Article(with: articleNode)
-            callback(article, error)
+            if let articleNode = response?.node as? Storefront.Article {
+                let article = Article(with: articleNode)
+                callback(article, nil)
+            }
+            if let error = error {
+                callback(nil, error)
+            }
         })
         task?.resume()
     }

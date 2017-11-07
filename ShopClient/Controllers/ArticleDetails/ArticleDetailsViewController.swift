@@ -15,7 +15,7 @@ class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel> 
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var articleContentLabel: UILabel!
     
-    var articleId = String()
+    var articleId: String!
     
     override func viewDidLoad() {
         viewModel = ArticleDetailsViewModel()

@@ -14,7 +14,7 @@ class ProductDetailsViewModel: BaseViewModel {
     var product = Variable<Product?>(nil)
     var selectedVariant = PublishSubject<SelectedVariant>()
     
-    var productId = String()
+    var productId: String!
     var productOptions = [ProductOption]()
     var selectedOptions = [SelectedOption]()
     var currency: String?

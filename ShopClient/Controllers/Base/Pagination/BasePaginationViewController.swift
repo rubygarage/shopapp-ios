@@ -11,10 +11,6 @@ import UIKit
 class BasePaginationViewController<T: BasePaginationViewModel>: BaseViewController<T> {
     var refreshControl: UIRefreshControl?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     // MARK: - methods to override
     public func pullToRefreshHandler() {
         assert(false, "'pulltoRefreshHandler' method not implemented")

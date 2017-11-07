@@ -19,7 +19,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     @IBOutlet weak var optionsContainerView: UIView!
     @IBOutlet weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
     
-    var productId = String()
+    var productId: String!
     var detailImagesController: ImagesCarouselViewController?
     var showingImageIndex = 0
 

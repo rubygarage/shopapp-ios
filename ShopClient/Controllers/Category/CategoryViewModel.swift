@@ -9,7 +9,7 @@
 import RxSwift
 
 class CategoryViewModel: GridCollectionViewModel {
-    var categoryId = String()
+    var categoryId: String!
     var selectedSortingValue = SortingValue.createdAt
     
     public func reloadData() {
