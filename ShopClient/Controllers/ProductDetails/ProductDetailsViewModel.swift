@@ -8,7 +8,7 @@
 
 import RxSwift
 
-typealias SelectedVariant = (variant: ProductVariant, allOptions: [ProductOption], selectedOptions: [SelectedOption], currency: String)
+typealias SelectedVariant = (variant: ProductVariant?, allOptions: [ProductOption], selectedOptions: [SelectedOption], currency: String)
 
 class ProductDetailsViewModel: BaseViewModel {
     var product = Variable<Product?>(nil)
@@ -72,12 +72,13 @@ class ProductDetailsViewModel: BaseViewModel {
             
             if selectedOptionsNames == variantNames && selectedOptionsNValues == variantValues {
                 updateSelectedVariant(variant: variant)
-                break
+                return
             }
         }
+        updateSelectedVariant(variant: nil)
     }
     
-    private func updateSelectedVariant(variant: ProductVariant) {
+    private func updateSelectedVariant(variant: ProductVariant?) {
         if let allOptions = product.value?.options, let currency = product.value?.currency {
             let result = SelectedVariant(variant: variant, allOptions: allOptions, selectedOptions: selectedOptions, currency: currency)
             selectedVariant.onNext(result)

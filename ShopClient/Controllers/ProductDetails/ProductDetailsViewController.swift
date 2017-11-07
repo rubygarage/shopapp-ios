@@ -87,13 +87,13 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         descriptionLabel.text = product.productDescription
     }
     
-    private func populatePrice(variant: ProductVariant) {
-        priceLabel.text = "\(variant.price ?? String()) \(viewModel.currency ?? String())"
-        priceLabel.isHidden = !variant.available
+    private func populatePrice(variant: ProductVariant?) {
+        priceLabel.text = "\(variant?.price ?? String()) \(viewModel.currency ?? String())"
+        priceLabel.isHidden = variant == nil
     }
     
-    private func populateAddToCartButton(variant: ProductVariant) {
-        let enabled = variant.available
+    private func populateAddToCartButton(variant: ProductVariant?) {
+        let enabled = variant != nil
         addToCartButton.backgroundColor = enabled ? UIColor.blue : UIColor.lightGray
         addToCartButton.isEnabled = enabled
     }
