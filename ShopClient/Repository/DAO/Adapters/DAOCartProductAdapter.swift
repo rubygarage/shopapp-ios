@@ -22,4 +22,17 @@ extension CartProduct {
         currency = product?.currency
         quantity = productQuantity
     }
+    
+    convenience init?(with item: CartProductEntity?) {
+        if item == nil {
+            return nil
+        }
+        self.init()
+        
+        productId = item?.productId
+        productTitle = item?.productTitle
+//        productVariant = item?.productVariant
+        currency = item?.currency
+        quantity = Int(item?.quantity ?? 1)
+    }
 }

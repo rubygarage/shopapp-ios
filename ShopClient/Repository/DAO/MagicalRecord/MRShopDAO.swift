@@ -8,7 +8,7 @@
 
 import MagicalRecord
 
-extension DAO {
+extension DAOMagicalRecord {
     func save(shopObject: Shop, callback: @escaping () -> ()) {
         MagicalRecord.save({ [weak self] (context) in
             if let shop = self?.getShop(in: context) {

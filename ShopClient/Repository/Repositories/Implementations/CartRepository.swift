@@ -10,7 +10,7 @@ import Foundation
 
 extension Repository: CartRepositoryInterface {
     func getCartProductList(callback: @escaping RepoCallback<[CartProduct]>) {
-        DAOCore?.getCartProductList(callback: callback)
+        callback(DAOCore?.getCartProductList(), nil)
     }
     
     func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<CartProduct>) {

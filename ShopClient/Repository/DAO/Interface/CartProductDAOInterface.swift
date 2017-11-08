@@ -7,6 +7,6 @@
 //
 
 protocol CartProductDAOInterface {
-    func getCartProductList(callback: @escaping RepoCallback<[CartProduct]>)
+    func getCartProductList() -> [CartProduct]
     func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<CartProduct>)
 }
