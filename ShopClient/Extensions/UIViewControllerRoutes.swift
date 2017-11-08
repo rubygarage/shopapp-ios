@@ -24,6 +24,10 @@ extension UIViewController {
         pushController(with: UIStoryboard.articlesList(), identifier: ControllerIdentifier.articlesList)
     }
     
+    func pushCartViewController() {
+        pushController(with: UIStoryboard.cart(), identifier: ControllerIdentifier.cart)
+    }
+    
     func pushDetailController(with product: Product) {
         let productDetaillsController = UIStoryboard.productDetails().instantiateViewController(withIdentifier: ControllerIdentifier.productDetails) as! ProductDetailsViewController
         productDetaillsController.productId = product.id 

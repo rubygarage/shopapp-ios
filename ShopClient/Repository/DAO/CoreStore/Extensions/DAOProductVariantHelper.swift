@@ -16,7 +16,7 @@ extension ProductVariantEntity {
         available = item?.available ?? false
         
         if let imageItem = item?.image {
-            print("img yes")
+            // TODO:
         }
     }
 }

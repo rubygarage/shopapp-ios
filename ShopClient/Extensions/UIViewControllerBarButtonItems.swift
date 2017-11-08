@@ -44,6 +44,6 @@ extension UIViewController {
     }
     
     @objc private func cartButtonHandler() {
-        // TODO:
+        pushCartViewController()
     }
 }
