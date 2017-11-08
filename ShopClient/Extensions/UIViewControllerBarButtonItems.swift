@@ -15,7 +15,7 @@ extension UIViewController {
         return UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(self.seachButtonHandler))
     }
     
-    public func cartBarItem() -> UIBarButtonItem? {
+    public func cartBarItem() -> UIBarButtonItem {
         let cartView = CartButtonView(frame: CGRect(x: 0, y: 0, width: kCustomBarItemWidth, height: kCustomBarItemWidth))
         cartView.isUserInteractionEnabled = false
         
@@ -30,12 +30,6 @@ extension UIViewController {
         let image = UIImage(named: imageName)
         let barButton = UIBarButtonItem(image: image, style: .plain, target: self, action: action)
         navigationItem.rightBarButtonItem = barButton
-    }
-    
-    public func addCartBarButtonIfNeeded(action: Selector?) {
-        if let cartButton = cartBarItem() {
-            navigationItem.backBarButtonItem = cartButton
-        }
     }
     
     // MARK: - actions

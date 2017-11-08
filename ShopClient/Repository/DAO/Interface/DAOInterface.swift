@@ -6,4 +6,4 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-protocol DAOInterface: ShopDAOInterface {}
+protocol DAOInterface: ShopDAOInterface, CartProductDAOInterface {}

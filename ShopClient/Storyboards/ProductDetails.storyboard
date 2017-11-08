@@ -86,6 +86,9 @@
                                                 <state key="normal" title="Add to cart">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="addToProductTapped:" destination="vhK-ei-bef" eventType="touchUpInside" id="Lb4-it-mmt"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Price Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="xEe-Pi-TGd">
                                                 <rect key="frame" x="20" y="33" width="101.5" height="24"/>
@@ -161,6 +164,7 @@
                         <outlet property="optionsContainerView" destination="vip-9b-SzM" id="1bW-oV-ail"/>
                         <outlet property="optionsContainerViewHeightConstraint" destination="9bc-kC-Q4Y" id="GNA-tO-PFg"/>
                         <outlet property="priceLabel" destination="xEe-Pi-TGd" id="mQa-Bz-ZeB"/>
+                        <outlet property="quantityTextField" destination="VCa-he-ygJ" id="9uO-QY-Wla"/>
                         <outlet property="titleLabel" destination="A2q-cu-ZGH" id="ahS-WY-qf9"/>
                     </connections>
                 </viewController>

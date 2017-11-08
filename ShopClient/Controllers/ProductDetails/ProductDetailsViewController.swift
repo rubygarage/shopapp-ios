@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 typealias SelectedOption = (name: String, value: String)
 
@@ -15,6 +17,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var quantityTextField: UITextField!
     @IBOutlet weak var addToCartButton: UIButton!
     @IBOutlet weak var optionsContainerView: UIView!
     @IBOutlet weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
@@ -41,6 +44,10 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     private func setupViewModel() {
         viewModel.productId = productId
+        
+        quantityTextField.rx.text.map { Int($0 ?? String()) ?? 1 }
+            .bind(to: viewModel.quantity)
+            .disposed(by: disposeBag)
         
         viewModel.product.asObservable()
             .subscribe(onNext: { [weak self] product in
@@ -107,6 +114,14 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         if let product = viewModel.product.value {
             pushImageViewer(with: product, initialIndex: showingImageIndex)
         }
+    }
+    
+    @IBAction func addToProductTapped(_ sender: UIButton) {
+        viewModel.addToCart
+            .subscribe(onNext: { success in
+                print("ddddddd")
+            })
+            .disposed(by: disposeBag)
     }
     
     // MARK: - DetailImagesViewControllerProtocol

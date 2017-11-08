@@ -13,31 +13,15 @@ typealias SelectedVariant = (variant: ProductVariant?, allOptions: [ProductOptio
 class ProductDetailsViewModel: BaseViewModel {
     var product = Variable<Product?>(nil)
     var selectedVariant = PublishSubject<SelectedVariant>()
+    var quantity = Variable<Int>(1)
     
     var productId: String!
     var productOptions = [ProductOption]()
     var selectedOptions = [SelectedOption]()
+    var selectedProductVariant: ProductVariant?
     var currency: String?
-    
-    private func setupData(product: Product) {
-        if selectedOptions.count == 0 {
-            setupSelectedOptions(product: product)
-        }
-        currency = product.currency
-        if let variant = product.variants?.first, let allOptions = product.options, let currency = product.currency {
-            let result = SelectedVariant(variant: variant, allOptions: allOptions, selectedOptions: selectedOptions, currency: currency)
-            selectedVariant.onNext(result)
-        }
-    }
-    
-    private func setupSelectedOptions(product: Product) {
-        if let options = product.options {
-            for option in options {
-                selectedOptions.append((name: option.name ?? String(), value: option.values?.first ?? String()))
-            }
-        }
-    }
-    
+
+    // MARK: - public
     public func loadData() {
         state.onNext((state: .loading, error: nil))
         Repository.shared.getProduct(id: productId) { [weak self] (product, error) in
@@ -62,6 +46,44 @@ class ProductDetailsViewModel: BaseViewModel {
         }
     }
     
+    public var addToCart: Observable<Bool> {
+        return Observable.create({ [weak self] event in
+            let productQuantity = self?.quantity.value ?? 1
+            if let cartProduct = CartProduct(with: self?.product.value, productQuantity: productQuantity, variant: self?.selectedProductVariant) {
+                Repository.shared.addCartProduct(cartProduct: cartProduct, callback: { (cartProduct, error) in
+                    let success = cartProduct != nil && error == nil
+                    event.onNext(success)
+                })
+            } else {
+                event.onNext(false)
+            }
+            return Disposables.create()
+        })
+    }
+    
+    // MARK: - private
+    private func setupData(product: Product) {
+        if selectedOptions.count == 0 {
+            setupSelectedOptions(product: product)
+        }
+        if selectedProductVariant == nil {
+            selectedProductVariant = product.variants?.first
+        }
+        currency = product.currency
+        if let variant = product.variants?.first, let allOptions = product.options, let currency = product.currency {
+            let result = SelectedVariant(variant: variant, allOptions: allOptions, selectedOptions: selectedOptions, currency: currency)
+            selectedVariant.onNext(result)
+        }
+    }
+    
+    private func setupSelectedOptions(product: Product) {
+        if let options = product.options {
+            for option in options {
+                selectedOptions.append((name: option.name ?? String(), value: option.values?.first ?? String()))
+            }
+        }
+    }
+    
     private func findVariant(variants: [ProductVariant]) {
         let selectedOptionsNames = selectedOptions.map({ $0.name })
         let selectedOptionsNValues = selectedOptions.map({ $0.value })
@@ -79,6 +101,7 @@ class ProductDetailsViewModel: BaseViewModel {
     }
     
     private func updateSelectedVariant(variant: ProductVariant?) {
+        selectedProductVariant = variant
         if let allOptions = product.value?.options, let currency = product.value?.currency {
             let result = SelectedVariant(variant: variant, allOptions: allOptions, selectedOptions: selectedOptions, currency: currency)
             selectedVariant.onNext(result)

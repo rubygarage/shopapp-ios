@@ -50,12 +50,21 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     private func updateBarItems() {
-        if let cartButton = cartBarItem() {
-            navigationItem.rightBarButtonItems = [cartButton, searchBarItem()]
-        } else {
-            navigationItem.rightBarButtonItem = searchBarItem()
+        Repository.shared.getCartProductList { [weak self] (products, error) in
+            if products?.count ?? 0 > 0 {
+                self?.populateSearchCartBarItems()
+            } else {
+                self?.populateSearchBarItem()
+            }
         }
-        
+    }
+    
+    private func populateSearchBarItem() {
+        navigationItem.rightBarButtonItem = searchBarItem()
+    }
+    
+    private func populateSearchCartBarItems() {
+        navigationItem.rightBarButtonItems = [cartBarItem(), searchBarItem()]
     }
     
     private func loadData() {
