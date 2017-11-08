@@ -22,6 +22,21 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         loadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupBarItems()
+    }
+    
+    private func setupBarItems() {
+        Repository.shared.getCartProductList { [weak self] (products, error) in
+            let cartItemsCount = products?.count ?? 0
+            if cartItemsCount > 0 {
+                self?.navigationItem.rightBarButtonItem = self?.cartBarItem(with: cartItemsCount)
+            }
+        }
+    }
+    
     private func setupSearchBar() {
         searchController = UISearchController(searchResultsController: nil)
         

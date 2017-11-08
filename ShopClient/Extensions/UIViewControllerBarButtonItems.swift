@@ -15,9 +15,10 @@ extension UIViewController {
         return UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(self.seachButtonHandler))
     }
     
-    public func cartBarItem() -> UIBarButtonItem {
+    public func cartBarItem(with cartItemsCount: Int) -> UIBarButtonItem {
         let cartView = CartButtonView(frame: CGRect(x: 0, y: 0, width: kCustomBarItemWidth, height: kCustomBarItemWidth))
         cartView.isUserInteractionEnabled = false
+        cartView.itemsCount = cartItemsCount
         
         let button = UIButton(frame: cartView.frame)
         button.addSubview(cartView)
@@ -26,7 +27,12 @@ extension UIViewController {
         return UIBarButtonItem(customView: button)
     }
     
-    public func addRightBarButton(with imageName: String, action: Selector?) {
+    public func sortBarItem(with action: Selector) -> UIBarButtonItem {
+        let image = UIImage(named: ImageName.sort)
+        return UIBarButtonItem(image: image, style: .plain, target: self, action: action)
+    }
+    
+    private func addRightBarButton(with imageName: String, action: Selector?) {
         let image = UIImage(named: imageName)
         let barButton = UIBarButtonItem(image: image, style: .plain, target: self, action: action)
         navigationItem.rightBarButtonItem = barButton

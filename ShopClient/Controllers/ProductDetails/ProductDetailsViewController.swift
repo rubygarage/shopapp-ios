@@ -32,6 +32,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         super.viewDidLoad()
 
         setupViews()
+        setupBarItemsIfNeeded()
         setupViewModel()
         loadData()
     }
@@ -109,6 +110,15 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         openProductOptionsController(with: allOptions, selectedOptions: selectedOptions, delegate: self, onView: optionsContainerView)
     }
     
+    private func setupBarItemsIfNeeded() {
+        Repository.shared.getCartProductList { [weak self] (cartProducts, _) in
+            let cartItemsCount = cartProducts?.count ?? 0
+            if cartItemsCount > 0 {
+                self?.navigationItem.rightBarButtonItem = self?.cartBarItem(with: cartItemsCount)
+            }
+        }
+    }
+    
     // MARK: - actions
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
         if let product = viewModel.product.value {
@@ -118,8 +128,10 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     @IBAction func addToProductTapped(_ sender: UIButton) {
         viewModel.addToCart
-            .subscribe(onNext: { success in
-                print("ddddddd")
+            .subscribe(onNext: { [weak self] success in
+                if success {
+                    self?.setupBarItemsIfNeeded()
+                }
             })
             .disposed(by: disposeBag)
     }
