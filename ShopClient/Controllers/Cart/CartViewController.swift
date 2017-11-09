@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol {
+class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol, CartTableCellProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     var dataSource: CartTableDataSource?
@@ -57,5 +57,10 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
             return viewModel.data.value[index]
         }
         return nil
+    }
+    
+    // MARK: - CartTableCellProtocol
+    func didTapRemove(with item: CartProduct) {
+        viewModel.remove(cartProduct: item)
     }
 }

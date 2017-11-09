@@ -74,6 +74,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="removeTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="awl-ML-Sro"/>
+                        </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>

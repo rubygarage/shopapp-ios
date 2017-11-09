@@ -32,9 +32,14 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         super.viewDidLoad()
 
         setupViews()
-        setupBarItemsIfNeeded()
         setupViewModel()
         loadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupBarItemsIfNeeded()
     }
     
     // MARK: - setup
@@ -113,9 +118,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     private func setupBarItemsIfNeeded() {
         Repository.shared.getCartProductList { [weak self] (cartProducts, _) in
             let cartItemsCount = cartProducts?.count ?? 0
-            if cartItemsCount > 0 {
-                self?.navigationItem.rightBarButtonItem = self?.cartBarItem(with: cartItemsCount)
-            }
+            self?.navigationItem.rightBarButtonItem = cartItemsCount > 0 ? self?.cartBarItem(with: cartItemsCount) : nil
         }
     }
     

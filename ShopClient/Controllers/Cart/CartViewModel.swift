@@ -23,4 +23,23 @@ class CartViewModel: BaseViewModel {
             }
         }
     }
+    
+    public func remove(cartProduct: CartProduct) {
+        state.onNext((state: .loading, error: nil))
+        Repository.shared.deleteProductFromCart(with: cartProduct.productVariant?.id) { [weak self] (success, error) in
+            if let error = error {
+                self?.state.onNext((state: .error, error: error))
+            }
+            if let success = success {
+                self?.state.onNext((state: .content, error: nil))
+                success ? self?.removeFromData(with: cartProduct) : ()
+            }
+        }
+    }
+    
+    private func removeFromData(with item: CartProduct) {
+        if let index = data.value.index(of: item) {
+            data.value.remove(at: index)
+        }
+    }
 }

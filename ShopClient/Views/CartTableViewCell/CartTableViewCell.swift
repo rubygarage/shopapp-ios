@@ -9,6 +9,10 @@
 import UIKit
 import SDWebImage
 
+protocol CartTableCellProtocol {
+    func didTapRemove(with item: CartProduct)
+}
+
 class CartTableViewCell: UITableViewCell {
     @IBOutlet weak var backgroundShadowView: UIView!
     @IBOutlet weak var variantImageView: UIImageView!
@@ -18,6 +22,9 @@ class CartTableViewCell: UITableViewCell {
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var pricePerOneItemLabel: UILabel!
     @IBOutlet weak var removeButton: UIButton!
+    
+    var cartProduct: CartProduct?
+    var delegate: CartTableCellProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,7 +40,9 @@ class CartTableViewCell: UITableViewCell {
         removeButton.setTitle(NSLocalizedString("Button.Remove", comment: String()), for: .normal)
     }
     
-    public func configure(with item: CartProduct?) {
+    public func configure(with item: CartProduct?, delegate: CartTableCellProtocol?) {
+        cartProduct = item
+        self.delegate = delegate
         populateImageView(with: item)
         populateTitle(with: item)
         populateQuantity(with: item)
@@ -75,6 +84,13 @@ class CartTableViewCell: UITableViewCell {
             pricePerOneItemLabel.text = String.localizedStringWithFormat(localizedString, price, currency)
         } else {
             pricePerOneItemLabel.text = nil
+        }
+    }
+    
+    // MARK: - actions
+    @IBAction func removeTapped(_ sender: UIButton) {
+        if let cartProduct = cartProduct {
+            delegate?.didTapRemove(with: cartProduct)
         }
     }
 }

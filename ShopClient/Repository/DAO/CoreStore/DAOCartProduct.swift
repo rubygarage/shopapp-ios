@@ -31,4 +31,24 @@ extension DAO {
             }
         }
     }
+    
+    func deleteProductFromCart(with productVariantId: String?, callback: @escaping RepoCallback<Bool>) {
+        let variantId = productVariantId ?? String()
+        let predicate = NSPredicate(format: "productVariant.id == %@", variantId)
+        CoreStore.perform(asynchronous: { (transaction) in
+            let item: CartProductEntity? = transaction.fetchOne(From<CartProductEntity>(), Where(predicate))
+            transaction.delete(item)
+        }) { (result) in
+            switch result {
+            case .success:
+                callback(true, nil)
+            case .failure(let error):
+                callback(false, error)
+            }
+        }
+    }
+    
+    func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<CartProduct>) {
+        // TODO:
+    }
 }

@@ -14,9 +14,9 @@ protocol CartTableDataSourceProtocol {
 }
 
 class CartTableDataSource: NSObject, UITableViewDataSource {
-    var delegate: CartTableDataSourceProtocol?
+    var delegate: (CartTableDataSourceProtocol & CartTableCellProtocol)?
     
-    init(delegate: CartTableDataSourceProtocol?) {
+    init(delegate: (CartTableDataSourceProtocol & CartTableCellProtocol)?) {
         super.init()
         
         self.delegate = delegate
@@ -29,7 +29,7 @@ class CartTableDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CartTableViewCell.self), for: indexPath) as! CartTableViewCell
-        cell.configure(with: delegate?.item(for: indexPath.row))
+        cell.configure(with: delegate?.item(for: indexPath.row), delegate: delegate)
         
         return cell
     }
