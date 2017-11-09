@@ -15,9 +15,7 @@ extension DAO {
     }
     
     func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<CartProduct>) {
-        let variantId = cartProduct.productVariant?.id ?? String()
-        let predicate = NSPredicate(format: "productVariant.id == %@", variantId)
-        
+        let predicate = getPredicate(with: cartProduct.productVariant?.id)
         CoreStore.perform(asynchronous: { (transaction) in
             let item: CartProductEntity? = transaction.fetchOrCreate(predicate: predicate)
             item?.update(with: cartProduct, transaction: transaction)
@@ -33,8 +31,7 @@ extension DAO {
     }
     
     func deleteProductFromCart(with productVariantId: String?, callback: @escaping RepoCallback<Bool>) {
-        let variantId = productVariantId ?? String()
-        let predicate = NSPredicate(format: "productVariant.id == %@", variantId)
+        let predicate = getPredicate(with: productVariantId)
         CoreStore.perform(asynchronous: { (transaction) in
             let item: CartProductEntity? = transaction.fetchOne(From<CartProductEntity>(), Where(predicate))
             transaction.delete(item)
@@ -49,6 +46,23 @@ extension DAO {
     }
     
     func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<CartProduct>) {
-        // TODO:
+        let predicate = getPredicate(with: productVariantId)
+        CoreStore.perform(asynchronous: { (transaction) in
+            let item: CartProductEntity? = transaction.fetchOrCreate(predicate: predicate)
+            item?.quantity = Int16(quantity)
+        }) { (result) in
+            switch result {
+            case .success:
+                let item = CoreStore.fetchOne(From<CartProductEntity>(), Where(predicate))
+                callback(CartProduct(with: item), nil)
+            case .failure(let error):
+                callback(nil, error)
+            }
+        }
+    }
+    
+    func getPredicate(with productVariantId: String?) -> NSPredicate {
+        let variantId = productVariantId ?? String()
+        return NSPredicate(format: "productVariant.id == %@", variantId)
     }
 }

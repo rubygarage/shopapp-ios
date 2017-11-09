@@ -11,6 +11,7 @@ import SDWebImage
 
 protocol CartTableCellProtocol {
     func didTapRemove(with item: CartProduct)
+    func didUpdate(cartProduct: CartProduct, quantity: Int)
 }
 
 class CartTableViewCell: UITableViewCell {
@@ -91,6 +92,14 @@ class CartTableViewCell: UITableViewCell {
     @IBAction func removeTapped(_ sender: UIButton) {
         if let cartProduct = cartProduct {
             delegate?.didTapRemove(with: cartProduct)
+        }
+    }
+    
+    @IBAction func quantityEditingDidEnd(_ sender: UITextField) {
+        if let cartProduct = cartProduct {
+            let quantityString = sender.text ?? String()
+            let quantity = (quantityString as NSString).integerValue
+            delegate?.didUpdate(cartProduct: cartProduct, quantity: quantity)
         }
     }
 }

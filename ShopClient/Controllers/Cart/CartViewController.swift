@@ -63,4 +63,8 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     func didTapRemove(with item: CartProduct) {
         viewModel.remove(cartProduct: item)
     }
+    
+    func didUpdate(cartProduct: CartProduct, quantity: Int) {
+        viewModel.update(cartProduct: cartProduct, quantity: quantity)
+    }
 }

@@ -53,7 +53,10 @@
                         </constraints>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
+                        <connections>
+                            <action selector="quantityEditingDidEnd:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="uw5-vw-5u3"/>
+                        </connections>
                     </textField>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Total price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bek-VO-0z8">
                         <rect key="frame" x="198" y="36.5" width="233" height="19.5"/>
