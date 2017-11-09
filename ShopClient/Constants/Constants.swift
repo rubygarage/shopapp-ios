@@ -34,3 +34,10 @@ struct ImageName {
 struct CornerRadius {
     static let defaultValue: CGFloat = 5
 }
+
+struct Layer {
+    static let shadowColor = UIColor.lightGray.cgColor
+    static let shadowOpacity: Float = 0.5
+    static let shadowOffset = CGSize.zero
+    static let shadowRadius: CGFloat = 1.5
+}

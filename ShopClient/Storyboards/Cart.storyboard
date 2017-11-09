@@ -17,13 +17,28 @@
                     <view key="view" contentMode="scaleToFill" id="mUl-ZH-WIt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lLs-T9-IC2">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="lLs-T9-IC2" firstAttribute="top" secondItem="mUl-ZH-WIt" secondAttribute="top" id="5s9-wW-95E"/>
+                            <constraint firstItem="lLs-T9-IC2" firstAttribute="bottom" secondItem="dhu-1e-IeK" secondAttribute="bottom" id="LVl-at-hJU"/>
+                            <constraint firstItem="lLs-T9-IC2" firstAttribute="trailing" secondItem="dhu-1e-IeK" secondAttribute="trailing" id="eeR-Ze-LCe"/>
+                            <constraint firstItem="lLs-T9-IC2" firstAttribute="leading" secondItem="dhu-1e-IeK" secondAttribute="leading" id="guO-Jg-KJ6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="dhu-1e-IeK"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="lLs-T9-IC2" id="44f-tA-enS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t74-vG-ojN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-143" y="115"/>
+            <point key="canvasLocation" x="-143.19999999999999" y="114.69265367316342"/>
         </scene>
     </scenes>
 </document>
