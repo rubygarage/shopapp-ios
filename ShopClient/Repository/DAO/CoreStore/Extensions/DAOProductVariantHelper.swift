@@ -16,7 +16,10 @@ extension ProductVariantEntity {
         available = item?.available ?? false
         
         if let imageItem = item?.image {
-            // TODO:
+            let predicate = NSPredicate(format: "id = %@", imageItem.id)
+            let imageEntity: ImageEntity? = transaction.fetchOrCreate(predicate: predicate)
+            imageEntity?.update(with: imageItem)
+            image = imageEntity
         }
     }
 }

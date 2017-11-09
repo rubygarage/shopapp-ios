@@ -140,6 +140,9 @@
 		61E4E6391F56C868001C6E01 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61E4E6371F56C868001C6E01 /* Home.storyboard */; };
 		61E4E63B1F56C868001C6E01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61E4E63A1F56C868001C6E01 /* Assets.xcassets */; };
 		61E4E63E1F56C868001C6E01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61E4E63C1F56C868001C6E01 /* LaunchScreen.storyboard */; };
+		61E76E1B1FB46C0200AE5FB4 /* DAOImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E76E1A1FB46C0200AE5FB4 /* DAOImageHelper.swift */; };
+		61E76E1D1FB46F1200AE5FB4 /* DAOProductVariantAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E76E1C1FB46F1200AE5FB4 /* DAOProductVariantAdapter.swift */; };
+		61E76E1F1FB4704900AE5FB4 /* DAOImageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E76E1E1FB4704900AE5FB4 /* DAOImageAdapter.swift */; };
 		61E8A21F1FAC93560092EDC1 /* ArticlesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E8A21E1FAC93560092EDC1 /* ArticlesListViewModel.swift */; };
 		61E8A2211FAC99F50092EDC1 /* BasePaginationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E8A2201FAC99F50092EDC1 /* BasePaginationViewModel.swift */; };
 		61ED88EA1F7112FD006BDA79 /* UIViewControllerImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ED88E91F7112FD006BDA79 /* UIViewControllerImageViewer.swift */; };
@@ -299,6 +302,9 @@
 		61E4E63A1F56C868001C6E01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		61E4E63D1F56C868001C6E01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61E4E63F1F56C868001C6E01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		61E76E1A1FB46C0200AE5FB4 /* DAOImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOImageHelper.swift; sourceTree = "<group>"; };
+		61E76E1C1FB46F1200AE5FB4 /* DAOProductVariantAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOProductVariantAdapter.swift; sourceTree = "<group>"; };
+		61E76E1E1FB4704900AE5FB4 /* DAOImageAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOImageAdapter.swift; sourceTree = "<group>"; };
 		61E8A21E1FAC93560092EDC1 /* ArticlesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesListViewModel.swift; sourceTree = "<group>"; };
 		61E8A2201FAC99F50092EDC1 /* BasePaginationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePaginationViewModel.swift; sourceTree = "<group>"; };
 		61ED88E91F7112FD006BDA79 /* UIViewControllerImageViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerImageViewer.swift; sourceTree = "<group>"; };
@@ -669,6 +675,8 @@
 			isa = PBXGroup;
 			children = (
 				618819B31FB3085600FECDCC /* DAOCartProductAdapter.swift */,
+				61E76E1C1FB46F1200AE5FB4 /* DAOProductVariantAdapter.swift */,
+				61E76E1E1FB4704900AE5FB4 /* DAOImageAdapter.swift */,
 			);
 			path = Adapters;
 			sourceTree = "<group>";
@@ -811,6 +819,7 @@
 			children = (
 				61C95E9A1FB3482300543B40 /* DAOCartProductHelper.swift */,
 				61C95E9C1FB34B9F00543B40 /* DAOProductVariantHelper.swift */,
+				61E76E1A1FB46C0200AE5FB4 /* DAOImageHelper.swift */,
 				61C95E9E1FB3540B00543B40 /* CoreStoreTransaction.swift */,
 			);
 			path = Extensions;
@@ -1220,9 +1229,11 @@
 				6131D2451FB33F7D008330C0 /* DAO.swift in Sources */,
 				61CEAA6C1F5ECFFE0016FBD7 /* UIStoryboardAdditions.swift in Sources */,
 				6133DAD21FB21A6F00156971 /* CartButtonView.swift in Sources */,
+				61E76E1B1FB46C0200AE5FB4 /* DAOImageHelper.swift in Sources */,
 				618A43871F9F56930066F053 /* ShopDAOInterface.swift in Sources */,
 				6152B1281F791A1100045A42 /* ArticlesListTableDelegate.swift in Sources */,
 				6152B1241F7914E800045A42 /* ArticlesListViewController.swift in Sources */,
+				61E76E1F1FB4704900AE5FB4 /* DAOImageAdapter.swift in Sources */,
 				614142C51F6AF15B00379BB9 /* LastArrivalsTableViewCell.swift in Sources */,
 				6133DAD61FB2240A00156971 /* CartRepositoryInterface.swift in Sources */,
 				61B5BEE51F75223400E075B7 /* MenuImageTableViewCell.swift in Sources */,
@@ -1266,6 +1277,7 @@
 				61CEAA6E1F5ED16E0016FBD7 /* UIViewControllerRoutes.swift in Sources */,
 				6119F2F51FA9EA1F00564859 /* BaseTableViewController.swift in Sources */,
 				610A913B1F9E298600424369 /* API.swift in Sources */,
+				61E76E1D1FB46F1200AE5FB4 /* DAOProductVariantAdapter.swift in Sources */,
 				61A5072D1F7E79FB004504EF /* ImagesCarouselCollectionDelegate.swift in Sources */,
 				61BF1EA81FAB397D0098B9AA /* BaseViewModel.swift in Sources */,
 				610A91381F9E294600424369 /* APIInterface.swift in Sources */,

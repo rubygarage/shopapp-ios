@@ -6,7 +6,7 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 extension CartProduct {
     convenience init?(with product: Product?, productQuantity: Int, variant: ProductVariant?) {
@@ -31,7 +31,7 @@ extension CartProduct {
         
         productId = item?.productId
         productTitle = item?.productTitle
-//        productVariant = item?.productVariant
+        productVariant = ProductVariant(with: item?.productVariant)
         currency = item?.currency
         quantity = Int(item?.quantity ?? 1)
     }
