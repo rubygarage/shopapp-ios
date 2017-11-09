@@ -14,7 +14,10 @@ protocol CartTableCellProtocol {
     func didUpdate(cartProduct: CartProduct, quantity: Int)
 }
 
-class CartTableViewCell: UITableViewCell {
+let kCartProductQuantityMin = 1
+let kCartProductQuantityMax = 999
+
+class CartTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var backgroundShadowView: UIView!
     @IBOutlet weak var variantImageView: UIImageView!
     @IBOutlet weak var variantTitleLabel: UILabel!
@@ -39,6 +42,7 @@ class CartTableViewCell: UITableViewCell {
         backgroundShadowView.addShadow()
         quantityLabel.text = NSLocalizedString("Label.Quantity", comment: String())
         removeButton.setTitle(NSLocalizedString("Button.Remove", comment: String()), for: .normal)
+        quantityTextField.delegate = self
     }
     
     public func configure(with item: CartProduct?, delegate: CartTableCellProtocol?) {
@@ -99,7 +103,23 @@ class CartTableViewCell: UITableViewCell {
         if let cartProduct = cartProduct {
             let quantityString = sender.text ?? String()
             let quantity = (quantityString as NSString).integerValue
-            delegate?.didUpdate(cartProduct: cartProduct, quantity: quantity)
+            let checkedQuantity = check(quantity: quantity)
+            delegate?.didUpdate(cartProduct: cartProduct, quantity: checkedQuantity)
         }
+    }
+    
+    // MARK: - private
+    private func check(quantity: Int) -> Int {
+        if quantity < kCartProductQuantityMin {
+            return kCartProductQuantityMin
+        }
+        return quantity
+    }
+    
+    // MARK: - UITextFieldDelegate
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let formattedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
+        let formattedQuantity = (formattedText as NSString?)?.integerValue ?? 0
+        return formattedQuantity <= kCartProductQuantityMax
     }
 }
