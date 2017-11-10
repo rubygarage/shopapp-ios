@@ -19,7 +19,7 @@ enum ViewState: Int {
 
 class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol {
     var viewModel: T!
-    var disposeBag = DisposeBag()
+    let disposeBag = DisposeBag()
     var loadingView = LoadingView()
     var errorView = ErrorView()
     

@@ -63,6 +63,16 @@ extension UIViewController {
         setController(with: homeController)
     }
     
+    func setAccountController() {
+        let accountController = UIStoryboard.account().instantiateViewController(withIdentifier: ControllerIdentifier.account) as! AccountViewController
+        setController(with: accountController)
+    }
+    
+    func setAuthController() {
+        let authController = UIStoryboard.auth().instantiateViewController(withIdentifier: ControllerIdentifier.auth) as! UITabBarController
+        setController(with: authController)
+    }
+    
     // MARK: - open as child
     func openImagesCarouselChildController(with images: [Image], delegate: ImagesCarouselViewControllerProtocol?, showingIndex: Int, onView: UIView) {
         let detailImagesController = UIStoryboard.imagesCarousel().instantiateViewController(withIdentifier: ControllerIdentifier.imagesCarousel) as! ImagesCarouselViewController

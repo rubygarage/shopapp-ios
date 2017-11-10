@@ -12,6 +12,7 @@ enum MenuSection: Int {
     case home
     case category
     case policy
+    case account
 }
 
 protocol MenuTableDataSourceProtocol {
@@ -21,7 +22,7 @@ protocol MenuTableDataSourceProtocol {
     func policyTitle(for index: Int) -> String?
 }
 
-let kMenuNumberOfSections = 3
+let kMenuNumberOfSections = 4
 
 class MenuTableDataSource: NSObject, UITableViewDataSource {
     var delegate: MenuTableDataSourceProtocol?
@@ -43,6 +44,8 @@ class MenuTableDataSource: NSObject, UITableViewDataSource {
             return delegate?.numberOfCategories() ?? 0
         case MenuSection.policy.rawValue:
             return delegate?.numberOfPolicies() ?? 0
+        case MenuSection.account.rawValue:
+            return 1
         default:
             return 0
         }
@@ -54,6 +57,8 @@ class MenuTableDataSource: NSObject, UITableViewDataSource {
             return menuImageCell(with: tableView, indexPath: indexPath)
         case MenuSection.category.rawValue:
             return menuCategoryCell(with: tableView, indexPath: indexPath)
+        case MenuSection.account.rawValue:
+            return menuAccountCell(with: tableView, indexPath: indexPath)
         default:
             return menuDefaultCell(with: tableView, indexPath: indexPath)
         }
@@ -82,6 +87,13 @@ class MenuTableDataSource: NSObject, UITableViewDataSource {
     private func menuImageCell(with tableView: UITableView, indexPath: IndexPath) -> MenuImageTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MenuImageTableViewCell.self), for: indexPath) as! MenuImageTableViewCell
         cell.configure(with: NSLocalizedString("Menu.Home", comment: String()), imageName: ImageName.home)
+        
+        return cell
+    }
+    
+    private func menuAccountCell(with tableView: UITableView, indexPath: IndexPath) -> MenuAccountTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MenuAccountTableViewCell.self), for: indexPath) as! MenuAccountTableViewCell
+        cell.configure()
         
         return cell
     }
