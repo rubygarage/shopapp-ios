@@ -17,8 +17,14 @@ extension DAO {
     func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<CartProduct>) {
         let predicate = getPredicate(with: cartProduct.productVariant?.id)
         CoreStore.perform(asynchronous: { (transaction) in
-            let item: CartProductEntity? = transaction.fetchOrCreate(predicate: predicate)
-            item?.update(with: cartProduct, transaction: transaction)
+            var item = transaction.fetchOne(From<CartProductEntity>(), Where(predicate))
+            if item != nil {
+                let itemQuantity = item?.quantity ?? 0
+                item?.quantity = itemQuantity + Int16(cartProduct.quantity)
+            } else {
+                item = transaction.create(Into<CartProductEntity>())
+                item?.update(with: cartProduct, transaction: transaction)
+            }
         }) { (result) in
             switch result {
             case .success:
