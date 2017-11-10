@@ -52,8 +52,15 @@
                                                 <rect key="frame" x="30" y="250" width="315" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                             </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vbq-kQ-DRa">
+                                                <rect key="frame" x="50" y="340" width="275" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="M5A-Ch-mVi"/>
+                                                </constraints>
+                                                <state key="normal" title="SignUp"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -66,9 +73,12 @@
                                             <constraint firstItem="wAV-Rg-wAe" firstAttribute="trailing" secondItem="7Bn-98-OIF" secondAttribute="trailing" id="HvD-66-SSZ"/>
                                             <constraint firstItem="7Bn-98-OIF" firstAttribute="leading" secondItem="kO4-zg-9q5" secondAttribute="leading" id="Pbk-AX-eyX"/>
                                             <constraint firstItem="7Bn-98-OIF" firstAttribute="top" secondItem="12f-BW-vFJ" secondAttribute="bottom" constant="30" id="Ux5-to-kD9"/>
+                                            <constraint firstAttribute="trailing" secondItem="Vbq-kQ-DRa" secondAttribute="trailing" constant="50" id="VvA-ku-8om"/>
                                             <constraint firstItem="kO4-zg-9q5" firstAttribute="leading" secondItem="iS7-v9-0ef" secondAttribute="leading" constant="30" id="WOv-Gy-taR"/>
+                                            <constraint firstItem="Vbq-kQ-DRa" firstAttribute="top" secondItem="wAV-Rg-wAe" secondAttribute="bottom" constant="60" id="XT7-Rp-hQP"/>
                                             <constraint firstItem="TKC-yR-r3E" firstAttribute="trailing" secondItem="kO4-zg-9q5" secondAttribute="trailing" id="gqA-fh-2TH"/>
                                             <constraint firstItem="wAV-Rg-wAe" firstAttribute="top" secondItem="7Bn-98-OIF" secondAttribute="bottom" constant="30" id="jqn-Z5-hky"/>
+                                            <constraint firstItem="Vbq-kQ-DRa" firstAttribute="leading" secondItem="iS7-v9-0ef" secondAttribute="leading" constant="50" id="t3p-Hw-FeA"/>
                                             <constraint firstAttribute="trailing" secondItem="kO4-zg-9q5" secondAttribute="trailing" constant="30" id="tbz-67-xBh"/>
                                             <constraint firstItem="wAV-Rg-wAe" firstAttribute="leading" secondItem="7Bn-98-OIF" secondAttribute="leading" id="unq-rJ-7iK"/>
                                             <constraint firstItem="TKC-yR-r3E" firstAttribute="top" secondItem="12f-BW-vFJ" secondAttribute="top" id="w6I-Cu-lKz"/>
@@ -95,6 +105,14 @@
                         <viewLayoutGuide key="safeArea" id="FZD-Kx-4dZ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Sign Up" id="BO0-W2-yJI"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="kO4-zg-9q5" id="8GF-YR-CfS"/>
+                        <outlet property="firstNameTextField" destination="12f-BW-vFJ" id="lcx-ww-HCc"/>
+                        <outlet property="lastNameTextField" destination="TKC-yR-r3E" id="RfN-BV-Szj"/>
+                        <outlet property="passwordTextField" destination="7Bn-98-OIF" id="hc3-tm-cGj"/>
+                        <outlet property="phoneTextField" destination="wAV-Rg-wAe" id="udM-Gz-mad"/>
+                        <outlet property="signUpButton" destination="Vbq-kQ-DRa" id="z26-Vw-yko"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nOH-mY-nfH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
