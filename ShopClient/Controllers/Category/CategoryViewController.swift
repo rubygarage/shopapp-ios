@@ -15,14 +15,34 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel>, S
         viewModel = CategoryViewModel()
         super.viewDidLoad()
         
-        setupViews()
         setupViewModel()
         loadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupBarItems()
+    }
+    
     // MARK: - setup
-    private func setupViews() {
-        addRightBarButton(with: ImageName.sort, action: #selector(CategoryViewController.sortTapHandler))
+    private func setupBarItems() {
+        Repository.shared.getCartProductList { [weak self] (products, error) in
+            let cartItemsCount = products?.count ?? 0
+            if cartItemsCount > 0 {
+                self?.populateSortCartBarItems(cartItemsCount: cartItemsCount)
+            } else {
+                self?.populateSortBarItem()
+            }
+        }
+    }
+    
+    private func populateSortBarItem() {
+        navigationItem.rightBarButtonItem = searchBarItem()
+    }
+    
+    private func populateSortCartBarItems(cartItemsCount: Int) {
+        navigationItem.rightBarButtonItems = [cartBarItem(with: cartItemsCount), searchBarItem()]
     }
     
     private func setupViewModel() {

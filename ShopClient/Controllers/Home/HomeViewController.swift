@@ -23,9 +23,14 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         setupTitle()
         setupSideMenu()
         addMenuBarButton()
-        addSearchButton()
         setupTableView()
         loadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupBarItems()
     }
     
     private func setupTitle() {
@@ -49,13 +54,23 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         tableView.delegate = delegate
     }
     
-    private func addSearchButton() {
-        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(HomeViewController.seachButtonHandler))
-        navigationItem.rightBarButtonItem = searchButton
+    private func setupBarItems() {
+        Repository.shared.getCartProductList { [weak self] (products, error) in
+            let cartItemsCount = products?.count ?? 0
+            if cartItemsCount > 0 {
+                self?.populateSearchCartBarItems(cartItemsCount: cartItemsCount)
+            } else {
+                self?.populateSearchBarItem()
+            }
+        }
     }
     
-    @objc private func seachButtonHandler() {
-        pushSearchController()
+    private func populateSearchBarItem() {
+        navigationItem.rightBarButtonItem = searchBarItem()
+    }
+    
+    private func populateSearchCartBarItems(cartItemsCount: Int) {
+        navigationItem.rightBarButtonItems = [cartBarItem(with: cartItemsCount), searchBarItem()]
     }
     
     private func loadData() {

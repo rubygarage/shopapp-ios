@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 typealias SelectedOption = (name: String, value: String)
 
@@ -15,6 +17,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var quantityTextField: UITextField!
     @IBOutlet weak var addToCartButton: UIButton!
     @IBOutlet weak var optionsContainerView: UIView!
     @IBOutlet weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
@@ -22,6 +25,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     var productId: String!
     var detailImagesController: ImagesCarouselViewController?
     var showingImageIndex = 0
+    var productAddedToCart = false
 
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -33,6 +37,12 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         loadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupBarItemsIfNeeded()
+    }
+    
     // MARK: - setup
     private func setupViews() {
         addToCartButton.setTitle(NSLocalizedString("Button.AddToCart", comment: String()), for: .normal)
@@ -41,6 +51,10 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     private func setupViewModel() {
         viewModel.productId = productId
+        
+        quantityTextField.rx.text.map { Int($0 ?? String()) ?? 1 }
+            .bind(to: viewModel.quantity)
+            .disposed(by: disposeBag)
         
         viewModel.product.asObservable()
             .subscribe(onNext: { [weak self] product in
@@ -93,19 +107,56 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     }
     
     private func populateAddToCartButton(variant: ProductVariant?) {
-        let enabled = variant != nil
-        addToCartButton.backgroundColor = enabled ? UIColor.blue : UIColor.lightGray
-        addToCartButton.isEnabled = enabled
+        if !productAddedToCart {
+            let enabled = variant != nil
+            addToCartButton.backgroundColor = enabled ? UIColor.blue : UIColor.lightGray
+            addToCartButton.isEnabled = enabled
+        }
     }
     
     private func populateOptionsView(allOptions: [ProductOption], selectedOptions: [SelectedOption]) {
         openProductOptionsController(with: allOptions, selectedOptions: selectedOptions, delegate: self, onView: optionsContainerView)
     }
     
+    private func setupBarItemsIfNeeded() {
+        Repository.shared.getCartProductList { [weak self] (cartProducts, _) in
+            let cartItemsCount = cartProducts?.count ?? 0
+            self?.navigationItem.rightBarButtonItem = cartItemsCount > 0 ? self?.cartBarItem(with: cartItemsCount) : nil
+        }
+    }
+    
+    private func updateAddToCartButton() {
+        productAddedToCart = true
+        self.addToCartButton.setTitle(NSLocalizedString("Button.AddedToCart", comment: String()), for: .normal)
+    }
+    
+    private func addProductToCart() {
+        viewModel.addToCart
+            .subscribe(onNext: { [weak self] success in
+                if success {
+                    self?.setupBarItemsIfNeeded()
+                    self?.updateAddToCartButton()
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func openCartController() {
+        pushCartViewController()
+    }
+    
     // MARK: - actions
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
         if let product = viewModel.product.value {
             pushImageViewer(with: product, initialIndex: showingImageIndex)
+        }
+    }
+    
+    @IBAction func addToProductTapped(_ sender: UIButton) {
+        if productAddedToCart {
+            openCartController()
+        } else {
+            addProductToCart()
         }
     }
     

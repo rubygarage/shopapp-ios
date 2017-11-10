@@ -23,6 +23,7 @@ struct ControllerIdentifier {
     static let articleDetails = "ArticleDetailsControllerIdentifier"
     static let sortModal = "SortModalControllerIdentifier"
     static let productOptions = "ProductOptionsControllerIdentifier"
+    static let cart = "CartControllerIdetifier"
 }
 
 struct ImageName {
@@ -32,4 +33,11 @@ struct ImageName {
 
 struct CornerRadius {
     static let defaultValue: CGFloat = 5
+}
+
+struct Layer {
+    static let shadowColor = UIColor.lightGray.cgColor
+    static let shadowOpacity: Float = 0.5
+    static let shadowOffset = CGSize.zero
+    static let shadowRadius: CGFloat = 1.5
 }

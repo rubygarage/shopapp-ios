@@ -6,4 +6,4 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-protocol RepositoryInterface: ShopRepositoryInterface, ProductRepositoryInterface, CategoryRepositoryInterface, ArticleRepositoryInterface {}
+protocol RepositoryInterface: ShopRepositoryInterface, ProductRepositoryInterface, CategoryRepositoryInterface, ArticleRepositoryInterface, CartRepositoryInterface {}

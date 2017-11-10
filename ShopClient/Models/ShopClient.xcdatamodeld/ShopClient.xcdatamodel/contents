@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13241" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CartProductEntity" representedClassName="CartProductEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="currency" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="productVariant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductVariantEntity" inverseName="cartProduct" inverseEntity="ProductVariantEntity" syncable="YES"/>
+    </entity>
     <entity name="CategoryEntity" representedClassName="CategoryEntity" syncable="YES" codeGenerationType="class">
         <attribute name="additionalDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="categoryDescription" optional="YES" attributeType="String" syncable="YES"/>
@@ -55,6 +62,7 @@
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="price" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="cartProduct" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CartProductEntity" inverseName="productVariant" inverseEntity="CartProductEntity" syncable="YES"/>
         <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ImageEntity" inverseName="productVariant" inverseEntity="ImageEntity" syncable="YES"/>
         <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductEntity" inverseName="variants" inverseEntity="ProductEntity" syncable="YES"/>
         <relationship name="productBySelectedOptions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductEntity" inverseName="variantBySelectedOptions" inverseEntity="ProductEntity" syncable="YES"/>
@@ -74,15 +82,16 @@
         <relationship name="shop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ShopEntity" inverseName="termsOfService" inverseEntity="ShopEntity" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CategoryEntity" positionX="-18" positionY="72" width="128" height="165"/>
-        <element name="ImageEntity" positionX="-45" positionY="72" width="128" height="135"/>
-        <element name="PolicyEntity" positionX="-54" positionY="9" width="128" height="90"/>
-        <element name="PrivacyPolicyEntity" positionX="-45" positionY="36" width="128" height="60"/>
-        <element name="ProductEntity" positionX="-36" positionY="99" width="128" height="285"/>
-        <element name="ProductOptionEntity" positionX="-36" positionY="144" width="128" height="105"/>
-        <element name="ProductVariantEntity" positionX="-36" positionY="144" width="128" height="150"/>
-        <element name="RefundPolicyEntity" positionX="-27" positionY="45" width="128" height="60"/>
         <element name="ShopEntity" positionX="-54" positionY="-9" width="128" height="135"/>
         <element name="TermsOfServiceEntity" positionX="-18" positionY="63" width="128" height="60"/>
+        <element name="RefundPolicyEntity" positionX="-36" positionY="45" width="128" height="60"/>
+        <element name="ProductVariantEntity" positionX="-27" positionY="27" width="128" height="165"/>
+        <element name="ProductOptionEntity" positionX="-18" positionY="54" width="128" height="105"/>
+        <element name="ProductEntity" positionX="-9" positionY="9" width="128" height="285"/>
+        <element name="PrivacyPolicyEntity" positionX="0" positionY="162" width="128" height="60"/>
+        <element name="PolicyEntity" positionX="18" positionY="153" width="128" height="90"/>
+        <element name="ImageEntity" positionX="36" positionY="162" width="128" height="135"/>
+        <element name="CategoryEntity" positionX="-9" positionY="81" width="128" height="165"/>
+        <element name="CartProductEntity" positionX="0" positionY="135" width="128" height="120"/>
     </elements>
 </model>

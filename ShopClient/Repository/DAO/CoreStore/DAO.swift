@@ -1,11 +1,11 @@
 //
-//  DAO.swift
+//  DaoCoreStore.swift
 //  ShopClient
 //
-//  Created by Evgeniy Antonov on 10/23/17.
+//  Created by Evgeniy Antonov on 11/8/17.
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class DAO: NSObject, DAOInterface {}

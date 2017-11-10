@@ -20,7 +20,6 @@ target 'ShopClient' do
   
   # Database
   pod 'CoreStore', :git => 'https://github.com/JohnEstropia/CoreStore.git', :branch => 'prototype/Swift_3_2'
-  pod 'MagicalRecord', '~> 2.3'
   
   # Architecture
   pod 'RxSwift', '~> 4.0'

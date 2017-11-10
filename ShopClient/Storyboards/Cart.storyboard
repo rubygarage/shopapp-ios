@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Cart View Controller-->
+        <scene sceneID="8tu-u2-jlD">
+            <objects>
+                <viewController storyboardIdentifier="CartControllerIdetifier" id="epH-u5-E99" customClass="CartViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mUl-ZH-WIt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lLs-T9-IC2" customClass="TPKeyboardAvoidingTableView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="lLs-T9-IC2" firstAttribute="trailing" secondItem="dhu-1e-IeK" secondAttribute="trailing" id="5xE-hu-mmD"/>
+                            <constraint firstItem="lLs-T9-IC2" firstAttribute="bottom" secondItem="dhu-1e-IeK" secondAttribute="bottom" id="IR0-CQ-cRW"/>
+                            <constraint firstItem="lLs-T9-IC2" firstAttribute="leading" secondItem="dhu-1e-IeK" secondAttribute="leading" id="fq2-vX-eXS"/>
+                            <constraint firstItem="lLs-T9-IC2" firstAttribute="top" secondItem="mUl-ZH-WIt" secondAttribute="top" id="nuy-3g-zus"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dhu-1e-IeK"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="lLs-T9-IC2" id="44f-tA-enS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t74-vG-ojN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-143.19999999999999" y="114.69265367316342"/>
+        </scene>
+    </scenes>
+</document>

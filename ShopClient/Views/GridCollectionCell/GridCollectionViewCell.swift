@@ -9,9 +9,6 @@
 import UIKit
 import SDWebImage
 
-let kShadowOpacity: Float = 0.5
-let kShadowRadius: CGFloat = 1.5
-
 class GridCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var detailsView: UIView!
     @IBOutlet weak var productImageView: UIImageView!
@@ -21,10 +18,7 @@ class GridCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        detailsView.layer.shadowColor = UIColor.lightGray.cgColor
-        detailsView.layer.shadowOpacity = kShadowOpacity
-        detailsView.layer.shadowOffset = CGSize.zero
-        detailsView.layer.shadowRadius = kShadowRadius
+        detailsView.addShadow()
     }
 
     public func configure(with item: Product) {

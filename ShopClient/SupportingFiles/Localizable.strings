@@ -14,6 +14,7 @@
 "ControllerTitle.Home" = "Home";
 "ControllerTitle.LastArrivals" = "Last Arrivals";
 "ControllerTitle.NewInBlog" = "New in Blog";
+"ControllerTitle.Cart" = "Cart";
 
 "Alert.Error" = "Error";
 
@@ -21,9 +22,13 @@
 
 "Button.Sort" = "Sort";
 "Button.AddToCart" = "Add to cart";
+"Button.AddedToCart" = "Added to cart";
 "Button.Ok" = "OK";
+"Button.Remove" = "Remove";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";
 
 "Label.PriceFrom" = "From %@ %@";
+"Label.Quantity" = "Quantity:";
+"Label.PriceEach" = "%@ %@ each";
