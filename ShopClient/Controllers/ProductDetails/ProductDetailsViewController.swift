@@ -25,6 +25,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     var productId: String!
     var detailImagesController: ImagesCarouselViewController?
     var showingImageIndex = 0
+    var productAddedToCart = false
 
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -106,9 +107,11 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     }
     
     private func populateAddToCartButton(variant: ProductVariant?) {
-        let enabled = variant != nil
-        addToCartButton.backgroundColor = enabled ? UIColor.blue : UIColor.lightGray
-        addToCartButton.isEnabled = enabled
+        if !productAddedToCart {
+            let enabled = variant != nil
+            addToCartButton.backgroundColor = enabled ? UIColor.blue : UIColor.lightGray
+            addToCartButton.isEnabled = enabled
+        }
     }
     
     private func populateOptionsView(allOptions: [ProductOption], selectedOptions: [SelectedOption]) {
@@ -122,6 +125,26 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         }
     }
     
+    private func updateAddToCartButton() {
+        productAddedToCart = true
+        self.addToCartButton.setTitle(NSLocalizedString("Button.AddedToCart", comment: String()), for: .normal)
+    }
+    
+    private func addProductToCart() {
+        viewModel.addToCart
+            .subscribe(onNext: { [weak self] success in
+                if success {
+                    self?.setupBarItemsIfNeeded()
+                    self?.updateAddToCartButton()
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func openCartController() {
+        pushCartViewController()
+    }
+    
     // MARK: - actions
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
         if let product = viewModel.product.value {
@@ -130,13 +153,11 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     }
     
     @IBAction func addToProductTapped(_ sender: UIButton) {
-        viewModel.addToCart
-            .subscribe(onNext: { [weak self] success in
-                if success {
-                    self?.setupBarItemsIfNeeded()
-                }
-            })
-            .disposed(by: disposeBag)
+        if productAddedToCart {
+            openCartController()
+        } else {
+            addProductToCart()
+        }
     }
     
     // MARK: - DetailImagesViewControllerProtocol
