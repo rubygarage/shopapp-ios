@@ -24,5 +24,8 @@ target 'ShopClient' do
   # Architecture
   pod 'RxSwift', '~> 4.0'
   pod 'RxCocoa', '~> 4.0'
+  
+  # Secutity
+  pod 'KeychainSwift', '~> 10.0'
 
 end

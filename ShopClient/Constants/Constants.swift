@@ -43,3 +43,10 @@ struct Layer {
     static let shadowOffset = CGSize.zero
     static let shadowRadius: CGFloat = 1.5
 }
+
+struct SessionData {
+    static let keyPrefix = "SessionDataIdentifier"
+    static let accessToken = "AccessToken"
+    static let expiryDate = "ExpiryDate"
+    static let email = "Email"
+}

@@ -1213,6 +1213,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ShopClient/Pods-ShopClient-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CoreStore/CoreStore.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Mobile-Buy-SDK/MobileBuySDK.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -1226,6 +1227,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreStore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MobileBuySDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",

@@ -32,8 +32,15 @@ class SignUpViewModel: BaseViewModel {
     }
     
     private func signUp() {
+        state.onNext((.loading, nil))
         Repository.shared.signUp(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), password: passwordText.value, phone: phoneText.value.orNil(), callback: { [weak self] (success, error) in
-            self?.signInSuccess.value = success ?? false
+            if let success = success {
+                self?.signInSuccess.value = success
+                self?.state.onNext((.content, nil))
+            }
+            if let error = error {
+                self?.state.onNext((.error, error))
+            }
         })
     }
 }

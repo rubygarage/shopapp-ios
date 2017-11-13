@@ -7,6 +7,7 @@
 //
 
 import MobileBuySDK
+import KeychainSwift
 
 let kShopifyStorefrontAccessToken = "677af790376ae84213f7ea1ed56f11ca"
 let kShopifyStorefrontURL = "lalkastore.myshopify.com"
@@ -160,7 +161,6 @@ class API: NSObject, APIInterface {
         let query = signUpQuery(email: email, password: password, firstName: firstName, lastName: lastName, phone: phone)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
             if let _ = response?.customerCreate?.customer {
-//                let customer = Customer(with: customerNode)
                 self?.getToken(with: email, password: password, callback: callback)
             }
             if let error = response?.customerCreate?.userErrors.first {
@@ -175,7 +175,8 @@ class API: NSObject, APIInterface {
         let query = tokenQuery(email: email, password: password)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (mutation, error) in
             if let token = mutation?.customerAccessTokenCreate?.customerAccessToken {
-                self?.save(token: token, callback: callback)
+                self?.saveSessionData(with: token, email: email)
+                callback(true, nil)
             }
             if let error = mutation?.customerAccessTokenCreate?.userErrors.first {
                 // TODO:
@@ -184,8 +185,12 @@ class API: NSObject, APIInterface {
         task?.resume()
     }
     
-    private func save(token: Storefront.CustomerAccessToken, callback: @escaping RepoCallback<Bool>) {
-        print("save token")
+    private func saveSessionData(with token: Storefront.CustomerAccessToken, email: String) {
+        let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
+        keyChain.set(token.accessToken, forKey: SessionData.accessToken)
+        keyChain.set(email, forKey: SessionData.email)
+        let expiryString = String(describing: token.expiresAt.timeIntervalSinceNow)
+        keyChain.set(expiryString, forKey: SessionData.expiryDate)
     }
     
     func productSortValue(for key: SortingValue?) -> Storefront.ProductSortKeys? {
