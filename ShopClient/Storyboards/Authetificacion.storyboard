@@ -62,7 +62,7 @@
                                                 <state key="normal" title="SignUp"/>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="TKC-yR-r3E" firstAttribute="leading" secondItem="12f-BW-vFJ" secondAttribute="trailing" constant="30" id="3jt-tQ-0uW"/>
                                             <constraint firstItem="kO4-zg-9q5" firstAttribute="top" secondItem="iS7-v9-0ef" secondAttribute="top" constant="70" id="9xU-iv-VzZ"/>
@@ -95,7 +95,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="rLs-XD-4fB" firstAttribute="leading" secondItem="FZD-Kx-4dZ" secondAttribute="leading" id="6tT-sm-UvA"/>
                             <constraint firstItem="FZD-Kx-4dZ" firstAttribute="trailing" secondItem="rLs-XD-4fB" secondAttribute="trailing" id="afI-v3-kUu"/>
@@ -125,7 +125,7 @@
                     <view key="view" contentMode="scaleToFill" id="SlY-rX-7ba">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="v1X-ay-ZcU"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Sign In" id="FR8-NN-Bnv"/>

@@ -156,6 +156,19 @@ class API: NSObject, APIInterface {
         task?.resume()
     }
     
+    func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, callback: @escaping RepoCallback<Bool>) {
+        let query = signUpQuery(email: email, password: password, firstName: firstName, lastName: lastName, phone: phone)
+        let task = client?.mutateGraphWith(query, completionHandler: { (response, error) in
+            if let customerNode = response?.customerCreate?.customer {
+                print("sss")
+            }
+            if let error = response?.customerCreate?.userErrors.first {
+                print("eee")
+            }
+        })
+        task?.resume()
+    }
+    
     // MARK: - private
     func productSortValue(for key: SortingValue?) -> Storefront.ProductSortKeys? {
         if key == nil {
@@ -402,6 +415,35 @@ class API: NSObject, APIInterface {
         return { (query: Storefront.SelectedOptionQuery) in
             query.name()
             query.value()
+        }
+    }
+    
+    private func signUpQuery(email: String, password: String, firstName: String?, lastName: String?, phone: String?) -> Storefront.MutationQuery {
+        let input = Storefront.CustomerCreateInput.create(email: email, password: password)
+        input.firstName = Input<String>(orNull: firstName)
+        input.lastName = Input<String>(orNull: lastName)
+        input.phone = Input<String>(orNull: phone)
+        return Storefront.buildMutation({ $0
+            .customerCreate(input: input, { $0
+                .customer(self.customerQuery())
+                .userErrors(self.errorQuery())
+            })
+        })
+    }
+    
+    private func customerQuery() -> (Storefront.CustomerQuery) -> ()  {
+        return { (query: Storefront.CustomerQuery) in
+            query.email()
+            query.firstName()
+            query.lastName()
+            query.phone()
+        }
+    }
+    
+    private func errorQuery() -> (Storefront.UserErrorQuery) -> () {
+        return { (query: Storefront.UserErrorQuery) in
+            query.message()
+            query.field()
         }
     }
 }

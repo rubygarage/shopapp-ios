@@ -21,7 +21,12 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
         viewModel = SignUpViewModel()
         super.viewDidLoad()
 
+        setupViews()
         setupViewModel()
+    }
+    
+    private func setupViews() {
+        self.tabBarController?.navigationItem.title = NSLocalizedString("ControllerTitle.SignUp", comment: String())
     }
     
     private func setupViewModel() {
@@ -45,9 +50,21 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
             .bind(to: viewModel.phoneText)
             .disposed(by: disposeBag)
         
+        signUpButton.rx.tap
+            .bind(to: viewModel.signUpPressed)
+            .disposed(by: disposeBag)
+        
         viewModel.isValid
             .subscribe(onNext: { [weak self] isValid in
                 self?.signUpButton.isEnabled = isValid
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.signInSuccess.asObservable()
+            .subscribe(onNext: { [weak self] success in
+                if success {
+                    self?.setHomeController()
+                }
             })
             .disposed(by: disposeBag)
     }
