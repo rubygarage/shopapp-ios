@@ -22,7 +22,7 @@ protocol MenuTableDataSourceProtocol {
     func policyTitle(for index: Int) -> String?
 }
 
-let kMenuNumberOfSections = 4
+private let kMenuNumberOfSections = 4
 
 class MenuTableDataSource: NSObject, UITableViewDataSource {
     var delegate: MenuTableDataSourceProtocol?
@@ -92,8 +92,6 @@ class MenuTableDataSource: NSObject, UITableViewDataSource {
     }
     
     private func menuAccountCell(with tableView: UITableView, indexPath: IndexPath) -> MenuAccountTableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MenuAccountTableViewCell.self), for: indexPath) as! MenuAccountTableViewCell
-        
-        return cell
+        return tableView.dequeueReusableCell(withIdentifier: String(describing: MenuAccountTableViewCell.self), for: indexPath) as! MenuAccountTableViewCell        
     }
 }

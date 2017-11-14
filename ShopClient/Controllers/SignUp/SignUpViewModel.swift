@@ -8,7 +8,7 @@
 
 import RxSwift
 
-let kPasswordCharactersCountMin = 6
+private let kPasswordCharactersCountMin = 6
 
 class SignUpViewModel: BaseViewModel {
     var emailText = Variable<String>(String())
@@ -42,17 +42,5 @@ class SignUpViewModel: BaseViewModel {
                 self?.state.onNext((.error, error))
             }
         })
-    }
-}
-
-internal extension String {
-    func isValidAsEmais() -> Bool {
-        let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
-        return emailPredicate.evaluate(with: self)
-    }
-    
-    func orNil() -> String? {
-        return self.isEmpty ? nil : self
     }
 }

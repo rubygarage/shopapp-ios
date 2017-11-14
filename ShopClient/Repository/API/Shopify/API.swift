@@ -486,7 +486,6 @@ class API: NSObject, APIInterface {
     
     // MARK: - session data
     private func saveSessionData(with token: Storefront.CustomerAccessToken, email: String) {
-        UserDefaults.standard.set(true, forKey: SessionData.userDefaultsLoggedIn)
         let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
         keyChain.set(token.accessToken, forKey: SessionData.accessToken)
         keyChain.set(email, forKey: SessionData.email)
@@ -498,7 +497,7 @@ class API: NSObject, APIInterface {
         let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
         if let _ = keyChain.get(SessionData.accessToken), let expiryDate = keyChain.get(SessionData.expiryDate), let _ = keyChain.get(SessionData.email) {
             let date = Date(timeIntervalSinceNow: TimeInterval(expiryDate)!)
-            return date > Date() && UserDefaults.standard.bool(forKey: SessionData.userDefaultsLoggedIn)
+            return date > Date()
         }
         return false
     }
