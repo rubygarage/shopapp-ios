@@ -33,3 +33,5 @@
 "Label.PriceFrom" = "From %@ %@";
 "Label.Quantity" = "Quantity:";
 "Label.PriceEach" = "%@ %@ each";
+
+"Error.Unknown" = "Unknown error";

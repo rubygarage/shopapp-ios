@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias RepoCallback<T> = (_ result: T?, _ error: Error?) -> ()
+typealias RepoCallback<T> = (_ result: T?, _ error: RepoError?) -> ()
 
 class Repository: NSObject, RepositoryInterface {
     static let shared = Repository()

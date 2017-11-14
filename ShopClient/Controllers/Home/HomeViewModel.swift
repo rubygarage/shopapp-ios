@@ -23,7 +23,7 @@ class HomeViewModel: BaseViewModel {
             }
             self?.state.onNext((.content, nil))
         }, onError: { [weak self] (error) in
-            self?.state.onNext((.error, error))
+            self?.state.onNext((.error, (RepoError(with: error))))
         })
     }
     

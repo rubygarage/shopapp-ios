@@ -18,7 +18,7 @@ class MenuViewModel: BaseViewModel {
             self?.processResponse(with: shop, categoriesItems: categories)
             self?.state.onNext((.content, nil))
             }, onError: { [weak self] (error) in
-                self?.state.onNext((.error, error))
+                self?.state.onNext((.error, (RepoError(with: error))))
         })
     }
     

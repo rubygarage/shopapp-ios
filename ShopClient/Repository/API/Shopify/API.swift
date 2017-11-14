@@ -46,6 +46,7 @@ class API: NSObject, APIInterface {
         
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             let shopObject = Shop(shopObject: response?.shop)
+            let error = RepoError(with: error)
             callback(shopObject, error)
         })
         task?.resume()
@@ -64,7 +65,7 @@ class API: NSObject, APIInterface {
                     }
                 }
             }
-            callback(products, error)
+            callback(products, RepoError(with: error))
         })
         task?.resume()
     }
@@ -75,7 +76,7 @@ class API: NSObject, APIInterface {
             let productNode = response?.node as! Storefront.Product
             let currency = response?.shop.paymentSettings.currencyCode.rawValue
             let productObject = Product(with: productNode, currencyValue: currency)
-            callback(productObject, error)
+            callback(productObject, RepoError(with: error))
         })
         task?.resume()
     }
@@ -92,7 +93,7 @@ class API: NSObject, APIInterface {
                     }
                 }
             }
-            callback(products, error)
+            callback(products, RepoError(with: error))
         })
         task?.resume()
     }
@@ -110,7 +111,7 @@ class API: NSObject, APIInterface {
                     }
                 }
             }
-            callback(categories, error)
+            callback(categories, RepoError(with: error))
         })
         task?.resume()
     }
@@ -121,7 +122,7 @@ class API: NSObject, APIInterface {
             let categoryNode = response?.node as! Storefront.Collection
             let currency = response?.shop.paymentSettings.currencyCode.rawValue
             let category = Category(with: categoryNode, currencyValue: currency)
-            callback(category, error)
+            callback(category, RepoError(with: error))
         })
         task?.resume()
     }
@@ -138,7 +139,7 @@ class API: NSObject, APIInterface {
                     }
                 }
             }
-            callback(articles, error)
+            callback(articles, RepoError(with: error))
         })
         task?.resume()
     }
@@ -151,7 +152,7 @@ class API: NSObject, APIInterface {
                 callback(article, nil)
             }
             if let error = error {
-                callback(nil, error)
+                callback(nil, RepoError(with: error))
             }
         })
         task?.resume()
@@ -162,12 +163,22 @@ class API: NSObject, APIInterface {
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
             if let _ = response?.customerCreate?.customer {
                 self?.getToken(with: email, password: password, callback: callback)
-            }
-            if let error = response?.customerCreate?.userErrors.first {
-                print("eee")
+            } else if let responseError = response?.customerCreate?.userErrors.first {
+                callback(false, RepoError(with: responseError))
+            } else {
+                callback(false, RepoError())
             }
         })
         task?.resume()
+    }
+    
+    func isLoggedIn() -> Bool {
+        let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
+        if let _ = keyChain.get(SessionData.accessToken), let expiryDate = keyChain.get(SessionData.expiryDate), let _ = keyChain.get(SessionData.email) {
+            let date = Date(timeIntervalSinceNow: TimeInterval(expiryDate)!)
+            return date > Date()
+        }
+        return false
     }
     
     // MARK: - private
@@ -177,9 +188,10 @@ class API: NSObject, APIInterface {
             if let token = mutation?.customerAccessTokenCreate?.customerAccessToken {
                 self?.saveSessionData(with: token, email: email)
                 callback(true, nil)
-            }
-            if let error = mutation?.customerAccessTokenCreate?.userErrors.first {
-                // TODO:
+            } else if let error = mutation?.customerAccessTokenCreate?.userErrors.first {
+                callback(false, RepoError(with: error))
+            } else {
+                callback(false, RepoError())
             }
         })
         task?.resume()

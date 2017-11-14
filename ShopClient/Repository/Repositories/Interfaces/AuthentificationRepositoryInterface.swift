@@ -8,4 +8,5 @@
 
 protocol AuthentificationRepositoryInterface {
     func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, callback: @escaping RepoCallback<Bool>)
+    func isLoggedIn() -> Bool
 }

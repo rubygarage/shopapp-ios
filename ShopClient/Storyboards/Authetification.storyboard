@@ -104,7 +104,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FZD-Kx-4dZ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Sign Up" id="BO0-W2-yJI"/>
+                    <tabBarItem key="tabBarItem" title="Sign Up" image="tabbar_sign_up" id="BO0-W2-yJI"/>
                     <connections>
                         <outlet property="emailTextField" destination="kO4-zg-9q5" id="8GF-YR-CfS"/>
                         <outlet property="firstNameTextField" destination="12f-BW-vFJ" id="lcx-ww-HCc"/>
@@ -128,7 +128,7 @@
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="v1X-ay-ZcU"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Sign In" id="FR8-NN-Bnv"/>
+                    <tabBarItem key="tabBarItem" title="Sign In" image="tabbar_login" id="FR8-NN-Bnv"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1jq-Tv-9Jc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -153,4 +153,8 @@
             <point key="canvasLocation" x="-692" y="-90"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="tabbar_login" width="40" height="40"/>
+        <image name="tabbar_sign_up" width="40" height="40"/>
+    </resources>
 </document>

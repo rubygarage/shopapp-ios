@@ -12,4 +12,8 @@ extension Repository: AuthentificationRepositoryInterface {
     func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, callback: @escaping RepoCallback<Bool>) {
         APICore?.signUp(with: email, firstName: firstName, lastName: lastName, password: password, phone: phone, callback: callback)
     }
+    
+    func isLoggedIn() -> Bool {
+        return APICore?.isLoggedIn() ?? false
+    }
 }

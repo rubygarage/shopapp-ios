@@ -67,6 +67,6 @@ extension UIStoryboard {
     }
     
     class func auth() -> UIStoryboard {
-        return UIStoryboard(name: "Authetificacion", bundle: nil)
+        return UIStoryboard(name: "Authetification", bundle: nil)
     }
 }

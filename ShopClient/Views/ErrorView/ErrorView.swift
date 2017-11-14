@@ -18,7 +18,7 @@ class ErrorView: UIView {
     @IBOutlet weak var tryAgainButton: UIButton!
     
     var delegate: ErrorViewProtocol?
-    var error: Error? {
+    var error: RepoError? {
         didSet {
             updateUI()
         }
@@ -45,7 +45,7 @@ class ErrorView: UIView {
     }
     
     private func updateUI() {
-        errorTextLabel.text = error?.localizedDescription
+        errorTextLabel.text = error?.errorMessage
     }
     
     // MARK: - actions

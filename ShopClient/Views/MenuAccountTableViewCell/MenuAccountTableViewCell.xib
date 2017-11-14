@@ -26,9 +26,9 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tp0-jw-Hvt">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account_icon" translatesAutoresizingMaskIntoConstraints="NO" id="tp0-jw-Hvt">
                         <rect key="frame" x="15" y="15" width="53.5" height="53.5"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="tp0-jw-Hvt" secondAttribute="height" multiplier="1:1" id="MNM-Yz-c5K"/>
                         </constraints>
@@ -52,4 +52,7 @@
             <point key="canvasLocation" x="68.5" y="76"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="account_icon" width="50" height="50"/>
+    </resources>
 </document>
