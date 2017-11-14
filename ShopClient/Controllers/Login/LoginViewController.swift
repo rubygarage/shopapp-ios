@@ -51,8 +51,10 @@ class LoginViewController: BaseViewController<LoginViewModel> {
             .disposed(by: disposeBag)
         
         viewModel.loginSuccess.asObservable()
-            .subscribe(onNext: { success in
-                print("ddddd")
+            .subscribe(onNext: { [weak self] success in
+                if success {
+                    self?.setHomeController()
+                }
             })
             .disposed(by: disposeBag)
     }

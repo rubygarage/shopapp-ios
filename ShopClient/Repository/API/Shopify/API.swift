@@ -9,9 +9,9 @@
 import MobileBuySDK
 import KeychainSwift
 
-let kShopifyStorefrontAccessToken = "677af790376ae84213f7ea1ed56f11ca"
-let kShopifyStorefrontURL = "lalkastore.myshopify.com"
-let kShopifyItemsMaxCount: Int32 = 250
+private let kShopifyStorefrontAccessToken = "677af790376ae84213f7ea1ed56f11ca"
+private let kShopifyStorefrontURL = "lalkastore.myshopify.com"
+private let kShopifyItemsMaxCount: Int32 = 250
 
 class API: NSObject, APIInterface {
     var client: Graph.Client?
@@ -158,6 +158,7 @@ class API: NSObject, APIInterface {
         task?.resume()
     }
     
+    // MARK: - authentification
     func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, callback: @escaping RepoCallback<Bool>) {
         let query = signUpQuery(email: email, password: password, firstName: firstName, lastName: lastName, phone: phone)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
@@ -172,14 +173,12 @@ class API: NSObject, APIInterface {
         task?.resume()
     }
     
-    // MARK: - private
-    private func getToken(with email: String, password: String, callback: @escaping RepoCallback<Bool>) {
+    func login(with email: String, password: String, callback: @escaping RepoCallback<Bool>) {
         let query = tokenQuery(email: email, password: password)
-        let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (mutation, error) in
-            if let token = mutation?.customerAccessTokenCreate?.customerAccessToken {
-                self?.saveSessionData(with: token, email: email)
-                callback(true, nil)
-            } else if let error = mutation?.customerAccessTokenCreate?.userErrors.first {
+        let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
+            if let token = response?.customerAccessTokenCreate?.customerAccessToken {
+                self?.getCustomer(with: token, email: email, callback: callback)
+            } else if let error = response?.customerAccessTokenCreate?.userErrors.first {
                 callback(false, RepoError(with: error))
             } else {
                 callback(false, RepoError())
@@ -188,7 +187,36 @@ class API: NSObject, APIInterface {
         task?.resume()
     }
     
+    // MARK: - private
+    private func getToken(with email: String, password: String, callback: @escaping RepoCallback<Bool>) {
+        let query = tokenQuery(email: email, password: password)
+        let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
+            if let token = response?.customerAccessTokenCreate?.customerAccessToken {
+                self?.saveSessionData(with: token, email: email)
+                callback(true, nil)
+            } else if let error = response?.customerAccessTokenCreate?.userErrors.first {
+                callback(false, RepoError(with: error))
+            } else {
+                callback(false, RepoError())
+            }
+        })
+        task?.resume()
+    }
     
+    private func getCustomer(with token: Storefront.CustomerAccessToken, email: String, callback: @escaping RepoCallback<Bool>) {
+        let query = customerQuery(with: token.accessToken)
+        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
+            if let _ = response?.customer {
+                self?.saveSessionData(with: token, email: email)
+                callback(true, nil)
+            } else if let responseError = error {
+                callback(false, RepoError(with: responseError))
+            } else {
+                callback(false, RepoError())
+            }
+        })
+        task?.resume()
+    }
     
     func productSortValue(for key: SortingValue?) -> Storefront.ProductSortKeys? {
         if key == nil {
@@ -482,6 +510,12 @@ class API: NSObject, APIInterface {
             query.accessToken()
             query.expiresAt()
         }
+    }
+    
+    private func customerQuery(with accessToken: String) -> Storefront.QueryRootQuery {
+        return Storefront.buildQuery({ $0
+            .customer(customerAccessToken: accessToken, self.customerQuery())
+        })
     }
     
     // MARK: - session data

@@ -29,6 +29,15 @@ class LoginViewModel: BaseViewModel {
     }
     
     private func login() {
-        // TODO:
+        state.onNext((.loading, nil))
+        Repository.shared.login(with: emailText.value, password: passwordText.value) {[weak self] (success, error) in
+            if let success = success {
+                self?.loginSuccess.value = success
+                self?.state.onNext((.content, nil))
+            }
+            if let error = error {
+                self?.state.onNext((.error, error))
+            }
+        }
     }
 }
