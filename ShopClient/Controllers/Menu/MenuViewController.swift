@@ -34,6 +34,9 @@ class MenuViewController: BaseViewController<MenuViewModel>, MenuTableDataSource
         let menuImageNib = UINib(nibName: String(describing: MenuImageTableViewCell.self), bundle: nil)
         tableView.register(menuImageNib, forCellReuseIdentifier: String(describing: MenuImageTableViewCell.self))
         
+        let menuAccountNib = UINib(nibName: String(describing: MenuAccountTableViewCell.self), bundle: nil)
+        tableView.register(menuAccountNib, forCellReuseIdentifier: String(describing: MenuAccountTableViewCell.self))
+        
         tableDataSource = MenuTableDataSource(delegate: self)
         tableView.dataSource = tableDataSource
         
@@ -94,6 +97,16 @@ class MenuViewController: BaseViewController<MenuViewModel>, MenuTableDataSource
             openCategoryController(with: indexPath.row)
         } else if indexPath.section == MenuSection.policy.rawValue {
             openPolicyController(with: indexPath.row)
+        } else if indexPath.section == MenuSection.account.rawValue {
+            openMenuItem()
+        }
+    }
+    
+    private func openMenuItem() {
+        if Repository.shared.isLoggedIn() {
+            setAccountController()
+        } else {
+            setAuthController()
         }
     }
 }

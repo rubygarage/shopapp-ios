@@ -18,8 +18,9 @@ enum ViewState: Int {
 }
 
 class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol {
+    let disposeBag = DisposeBag()
+    
     var viewModel: T!
-    var disposeBag = DisposeBag()
     var loadingView = LoadingView()
     var errorView = ErrorView()
     
@@ -42,7 +43,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
         }).disposed(by: disposeBag)
     }
     
-    private func set(state: ViewState, error: Error? = nil) {
+    private func set(state: ViewState, error: RepoError? = nil) {
         switch state {
         case .content:
             setContentState()
@@ -66,7 +67,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
         loadingView.removeFromSuperview()
     }
     
-    private func setErrorState(with error: Error?) {
+    private func setErrorState(with error: RepoError?) {
         loadingView.removeFromSuperview()
         errorView.error = error
         view.addSubview(errorView)

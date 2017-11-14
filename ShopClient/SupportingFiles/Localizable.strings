@@ -15,6 +15,7 @@
 "ControllerTitle.LastArrivals" = "Last Arrivals";
 "ControllerTitle.NewInBlog" = "New in Blog";
 "ControllerTitle.Cart" = "Cart";
+"ControllerTitle.SignUp" = "Sign Up";
 
 "Alert.Error" = "Error";
 
@@ -32,3 +33,5 @@
 "Label.PriceFrom" = "From %@ %@";
 "Label.Quantity" = "Quantity:";
 "Label.PriceEach" = "%@ %@ each";
+
+"Error.Unknown" = "Unknown error";

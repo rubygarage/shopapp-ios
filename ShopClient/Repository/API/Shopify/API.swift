@@ -7,6 +7,7 @@
 //
 
 import MobileBuySDK
+import KeychainSwift
 
 let kShopifyStorefrontAccessToken = "677af790376ae84213f7ea1ed56f11ca"
 let kShopifyStorefrontURL = "lalkastore.myshopify.com"
@@ -45,6 +46,7 @@ class API: NSObject, APIInterface {
         
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             let shopObject = Shop(shopObject: response?.shop)
+            let error = RepoError(with: error)
             callback(shopObject, error)
         })
         task?.resume()
@@ -63,7 +65,7 @@ class API: NSObject, APIInterface {
                     }
                 }
             }
-            callback(products, error)
+            callback(products, RepoError(with: error))
         })
         task?.resume()
     }
@@ -74,7 +76,7 @@ class API: NSObject, APIInterface {
             let productNode = response?.node as! Storefront.Product
             let currency = response?.shop.paymentSettings.currencyCode.rawValue
             let productObject = Product(with: productNode, currencyValue: currency)
-            callback(productObject, error)
+            callback(productObject, RepoError(with: error))
         })
         task?.resume()
     }
@@ -91,7 +93,7 @@ class API: NSObject, APIInterface {
                     }
                 }
             }
-            callback(products, error)
+            callback(products, RepoError(with: error))
         })
         task?.resume()
     }
@@ -109,7 +111,7 @@ class API: NSObject, APIInterface {
                     }
                 }
             }
-            callback(categories, error)
+            callback(categories, RepoError(with: error))
         })
         task?.resume()
     }
@@ -120,7 +122,7 @@ class API: NSObject, APIInterface {
             let categoryNode = response?.node as! Storefront.Collection
             let currency = response?.shop.paymentSettings.currencyCode.rawValue
             let category = Category(with: categoryNode, currencyValue: currency)
-            callback(category, error)
+            callback(category, RepoError(with: error))
         })
         task?.resume()
     }
@@ -137,7 +139,7 @@ class API: NSObject, APIInterface {
                     }
                 }
             }
-            callback(articles, error)
+            callback(articles, RepoError(with: error))
         })
         task?.resume()
     }
@@ -150,13 +152,44 @@ class API: NSObject, APIInterface {
                 callback(article, nil)
             }
             if let error = error {
-                callback(nil, error)
+                callback(nil, RepoError(with: error))
+            }
+        })
+        task?.resume()
+    }
+    
+    func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, callback: @escaping RepoCallback<Bool>) {
+        let query = signUpQuery(email: email, password: password, firstName: firstName, lastName: lastName, phone: phone)
+        let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
+            if let _ = response?.customerCreate?.customer {
+                self?.getToken(with: email, password: password, callback: callback)
+            } else if let responseError = response?.customerCreate?.userErrors.first {
+                callback(false, RepoError(with: responseError))
+            } else {
+                callback(false, RepoError())
             }
         })
         task?.resume()
     }
     
     // MARK: - private
+    private func getToken(with email: String, password: String, callback: @escaping RepoCallback<Bool>) {
+        let query = tokenQuery(email: email, password: password)
+        let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (mutation, error) in
+            if let token = mutation?.customerAccessTokenCreate?.customerAccessToken {
+                self?.saveSessionData(with: token, email: email)
+                callback(true, nil)
+            } else if let error = mutation?.customerAccessTokenCreate?.userErrors.first {
+                callback(false, RepoError(with: error))
+            } else {
+                callback(false, RepoError())
+            }
+        })
+        task?.resume()
+    }
+    
+    
+    
     func productSortValue(for key: SortingValue?) -> Storefront.ProductSortKeys? {
         if key == nil {
             return nil
@@ -403,5 +436,69 @@ class API: NSObject, APIInterface {
             query.name()
             query.value()
         }
+    }
+    
+    private func signUpQuery(email: String, password: String, firstName: String?, lastName: String?, phone: String?) -> Storefront.MutationQuery {
+        let input = Storefront.CustomerCreateInput.create(email: email, password: password)
+        input.firstName = Input<String>(orNull: firstName)
+        input.lastName = Input<String>(orNull: lastName)
+        input.phone = Input<String>(orNull: phone)
+        return Storefront.buildMutation({ $0
+            .customerCreate(input: input, { $0
+                .customer(self.customerQuery())
+                .userErrors(self.userErrorQuery())
+            })
+        })
+    }
+    
+    private func customerQuery() -> (Storefront.CustomerQuery) -> ()  {
+        return { (query: Storefront.CustomerQuery) in
+            query.email()
+            query.firstName()
+            query.lastName()
+            query.phone()
+        }
+    }
+    
+    private func userErrorQuery() -> (Storefront.UserErrorQuery) -> () {
+        return { (query: Storefront.UserErrorQuery) in
+            query.message()
+            query.field()
+        }
+    }
+    
+    private func tokenQuery(email: String, password: String) -> Storefront.MutationQuery {
+        let input = Storefront.CustomerAccessTokenCreateInput.create(email: email, password: password)
+        return Storefront.buildMutation({ $0
+            .customerAccessTokenCreate(input: input, { $0
+                .customerAccessToken(self.accessTokenQuery())
+                .userErrors(self.userErrorQuery())
+            })
+        })
+    }
+    
+    private func accessTokenQuery() -> (Storefront.CustomerAccessTokenQuery) -> () {
+        return { (query) in
+            query.accessToken()
+            query.expiresAt()
+        }
+    }
+    
+    // MARK: - session data
+    private func saveSessionData(with token: Storefront.CustomerAccessToken, email: String) {
+        let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
+        keyChain.set(token.accessToken, forKey: SessionData.accessToken)
+        keyChain.set(email, forKey: SessionData.email)
+        let expiryString = String(describing: token.expiresAt.timeIntervalSinceNow)
+        keyChain.set(expiryString, forKey: SessionData.expiryDate)
+    }
+    
+    func isLoggedIn() -> Bool {
+        let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
+        if let _ = keyChain.get(SessionData.accessToken), let expiryDate = keyChain.get(SessionData.expiryDate), let _ = keyChain.get(SessionData.email) {
+            let date = Date(timeIntervalSinceNow: TimeInterval(expiryDate)!)
+            return date > Date()
+        }
+        return false
     }
 }

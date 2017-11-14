@@ -24,6 +24,8 @@ struct ControllerIdentifier {
     static let sortModal = "SortModalControllerIdentifier"
     static let productOptions = "ProductOptionsControllerIdentifier"
     static let cart = "CartControllerIdetifier"
+    static let account = "AccountControllerIdentifier"
+    static let auth = "AuthrntificationControllerIdentifier"
 }
 
 struct ImageName {
@@ -40,4 +42,11 @@ struct Layer {
     static let shadowOpacity: Float = 0.5
     static let shadowOffset = CGSize.zero
     static let shadowRadius: CGFloat = 1.5
+}
+
+struct SessionData {
+    static let keyPrefix = "SessionDataIdentifier"
+    static let accessToken = "AccessToken"
+    static let expiryDate = "ExpiryDate"
+    static let email = "Email"
 }

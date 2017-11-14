@@ -31,7 +31,7 @@ extension DAO {
                 let item = CoreStore.fetchOne(From<CartProductEntity>(), Where(predicate))
                 callback(CartProduct(with: item), nil)
             case .failure(let error):
-                callback(nil, error)
+                callback(nil, RepoError(with: error))
             }
         }
     }
@@ -46,7 +46,7 @@ extension DAO {
             case .success:
                 callback(true, nil)
             case .failure(let error):
-                callback(false, error)
+                callback(false, RepoError(with: error))
             }
         }
     }
@@ -62,7 +62,7 @@ extension DAO {
                 let item = CoreStore.fetchOne(From<CartProductEntity>(), Where(predicate))
                 callback(CartProduct(with: item), nil)
             case .failure(let error):
-                callback(nil, error)
+                callback(nil, RepoError(with: error))
             }
         }
     }

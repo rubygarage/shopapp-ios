@@ -32,4 +32,8 @@ protocol APIInterface {
     // MARK: - articles
     func getArticleList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Article]>)
     func getArticle(id: String, callback: @escaping RepoCallback<Article>)
+    
+    // MARK: - authentification
+    func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, callback: @escaping RepoCallback<Bool>)
+    func isLoggedIn() -> Bool
 }
