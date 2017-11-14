@@ -163,7 +163,10 @@ class API: NSObject, APIInterface {
         let query = signUpQuery(email: email, password: password, firstName: firstName, lastName: lastName, phone: phone)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
             if let _ = response?.customerCreate?.customer {
-                self?.getToken(with: email, password: password, callback: callback)
+                self?.getToken(with: email, password: password, callback: { (token, error) in
+                    let success = token != nil
+                    callback(success, RepoError(with: error))
+                })
             } else if let responseError = response?.customerCreate?.userErrors.first {
                 callback(false, RepoError(with: responseError))
             } else {
@@ -174,30 +177,26 @@ class API: NSObject, APIInterface {
     }
     
     func login(with email: String, password: String, callback: @escaping RepoCallback<Bool>) {
-        let query = tokenQuery(email: email, password: password)
-        let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
-            if let token = response?.customerAccessTokenCreate?.customerAccessToken {
+        getToken(with: email, password: password) { [weak self] (token, error) in
+            if let token = token {
                 self?.getCustomer(with: token, email: email, callback: callback)
-            } else if let error = response?.customerAccessTokenCreate?.userErrors.first {
-                callback(false, RepoError(with: error))
-            } else {
-                callback(false, RepoError())
+            } else if let error = error {
+                callback(false, error)
             }
-        })
-        task?.resume()
+        }
     }
     
     // MARK: - private
-    private func getToken(with email: String, password: String, callback: @escaping RepoCallback<Bool>) {
+    private func getToken(with email: String, password: String, callback: @escaping (_ token: Storefront.CustomerAccessToken?, _ error: RepoError?) -> ()) {
         let query = tokenQuery(email: email, password: password)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
             if let token = response?.customerAccessTokenCreate?.customerAccessToken {
                 self?.saveSessionData(with: token, email: email)
-                callback(true, nil)
+                callback(token, nil)
             } else if let error = response?.customerAccessTokenCreate?.userErrors.first {
-                callback(false, RepoError(with: error))
+                callback(nil, RepoError(with: error))
             } else {
-                callback(false, RepoError())
+                callback(nil, RepoError())
             }
         })
         task?.resume()
