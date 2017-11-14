@@ -172,15 +172,6 @@ class API: NSObject, APIInterface {
         task?.resume()
     }
     
-    func isLoggedIn() -> Bool {
-        let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
-        if let _ = keyChain.get(SessionData.accessToken), let expiryDate = keyChain.get(SessionData.expiryDate), let _ = keyChain.get(SessionData.email) {
-            let date = Date(timeIntervalSinceNow: TimeInterval(expiryDate)!)
-            return date > Date()
-        }
-        return false
-    }
-    
     // MARK: - private
     private func getToken(with email: String, password: String, callback: @escaping RepoCallback<Bool>) {
         let query = tokenQuery(email: email, password: password)
@@ -197,13 +188,7 @@ class API: NSObject, APIInterface {
         task?.resume()
     }
     
-    private func saveSessionData(with token: Storefront.CustomerAccessToken, email: String) {
-        let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
-        keyChain.set(token.accessToken, forKey: SessionData.accessToken)
-        keyChain.set(email, forKey: SessionData.email)
-        let expiryString = String(describing: token.expiresAt.timeIntervalSinceNow)
-        keyChain.set(expiryString, forKey: SessionData.expiryDate)
-    }
+    
     
     func productSortValue(for key: SortingValue?) -> Storefront.ProductSortKeys? {
         if key == nil {
@@ -497,5 +482,24 @@ class API: NSObject, APIInterface {
             query.accessToken()
             query.expiresAt()
         }
+    }
+    
+    // MARK: - session data
+    private func saveSessionData(with token: Storefront.CustomerAccessToken, email: String) {
+        UserDefaults.standard.set(true, forKey: SessionData.userDefaultsLoggedIn)
+        let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
+        keyChain.set(token.accessToken, forKey: SessionData.accessToken)
+        keyChain.set(email, forKey: SessionData.email)
+        let expiryString = String(describing: token.expiresAt.timeIntervalSinceNow)
+        keyChain.set(expiryString, forKey: SessionData.expiryDate)
+    }
+    
+    func isLoggedIn() -> Bool {
+        let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
+        if let _ = keyChain.get(SessionData.accessToken), let expiryDate = keyChain.get(SessionData.expiryDate), let _ = keyChain.get(SessionData.email) {
+            let date = Date(timeIntervalSinceNow: TimeInterval(expiryDate)!)
+            return date > Date() && UserDefaults.standard.bool(forKey: SessionData.userDefaultsLoggedIn)
+        }
+        return false
     }
 }

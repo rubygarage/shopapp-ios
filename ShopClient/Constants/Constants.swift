@@ -49,4 +49,5 @@ struct SessionData {
     static let accessToken = "AccessToken"
     static let expiryDate = "ExpiryDate"
     static let email = "Email"
+    static let userDefaultsLoggedIn = "UserLoggedIn"
 }
