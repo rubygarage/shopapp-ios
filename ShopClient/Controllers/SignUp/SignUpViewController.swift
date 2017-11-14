@@ -21,11 +21,16 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
         viewModel = SignUpViewModel()
         super.viewDidLoad()
 
-        setupViews()
         setupViewModel()
     }
     
-    private func setupViews() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        populateTitle()
+    }
+    
+    private func populateTitle() {
         self.tabBarController?.navigationItem.title = NSLocalizedString("ControllerTitle.SignUp", comment: String())
     }
     

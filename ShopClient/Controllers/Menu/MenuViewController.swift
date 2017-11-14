@@ -98,7 +98,8 @@ class MenuViewController: BaseViewController<MenuViewModel>, MenuTableDataSource
         } else if indexPath.section == MenuSection.policy.rawValue {
             openPolicyController(with: indexPath.row)
         } else if indexPath.section == MenuSection.account.rawValue {
-            openMenuItem()
+//            openMenuItem()
+            setAuthController()
         }
     }
     
