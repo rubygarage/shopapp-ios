@@ -9,14 +9,5 @@
 import UIKit
 
 class MenuAccountTableViewCell: UITableViewCell {
-    @IBOutlet weak var accountImageView: UIImageView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-    func configure() {
-        // TODO:
-    }
 }

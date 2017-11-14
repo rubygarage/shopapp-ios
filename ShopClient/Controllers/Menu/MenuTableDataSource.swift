@@ -93,7 +93,6 @@ class MenuTableDataSource: NSObject, UITableViewDataSource {
     
     private func menuAccountCell(with tableView: UITableView, indexPath: IndexPath) -> MenuAccountTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MenuAccountTableViewCell.self), for: indexPath) as! MenuAccountTableViewCell
-        cell.configure()
         
         return cell
     }
