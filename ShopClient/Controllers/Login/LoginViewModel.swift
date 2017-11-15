@@ -8,17 +8,15 @@
 
 import RxSwift
 
-private let kPasswordCharactersCountMin = 6
-
 class LoginViewModel: BaseViewModel {
-    var emailText = Variable<String>(String())
-    var passwordText = Variable<String>(String())
+    var emailText = Variable<String>("")
+    var passwordText = Variable<String>("")
     
     var loginSuccess = Variable<Bool>(false)
     
     var isValid: Observable<Bool> {
         return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { email, password in
-            email.isValidAsEmais() && password.characters.count >= kPasswordCharactersCountMin
+            email.isValidAsEmais() && password.isValidAsPassword()
         }
     }
     
