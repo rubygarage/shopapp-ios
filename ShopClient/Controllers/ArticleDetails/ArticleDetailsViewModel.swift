@@ -12,15 +12,15 @@ class ArticleDetailsViewModel: BaseViewModel {
     var articleId: String!
     
     var data: Single<Article> {
-        state.onNext((state: .loading, error: nil))
+        state.onNext(.loading)
         return Single.create(subscribe: { (single) in
             Repository.shared.getArticle(id: self.articleId, callback: { [weak self] (article, error) in
                 if let error = error {
-                    self?.state.onNext((state: .error, error: error))
+                    self?.state.onNext(.error(error))
                 }
                 if let article = article {
                     single(.success(article))
-                    self?.state.onNext((state: .content, error: nil))
+                    self?.state.onNext(.content)
                 }
             })
             return Disposables.create()

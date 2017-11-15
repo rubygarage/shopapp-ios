@@ -8,8 +8,6 @@
 
 import RxSwift
 
-typealias ViewStateResult = (state: ViewState, error: RepoError?)
-
 class BaseViewModel {
-    var state = PublishSubject<ViewStateResult>()
+    var state = PublishSubject<ViewState>()
 }

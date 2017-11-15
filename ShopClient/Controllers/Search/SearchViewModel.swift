@@ -22,14 +22,14 @@ class SearchViewModel: GridCollectionViewModel {
     }
     
     private func loadRemoteData() {
-        state.onNext((state: .loading, error: nil))
+        state.onNext(.loading)
         Repository.shared.searchProducts(paginationValue: paginationValue, searchQuery: searchPhrase.value) { [weak self] (products, error) in
             if let error = error {
-                self?.state.onNext((state: .error, error: error))
+                self?.state.onNext(.error(error))
             }
             if let productsArray = products {
                 self?.updateProducts(products: productsArray)
-                self?.state.onNext((state: .content, error: nil))
+                self?.state.onNext(.content)
             }
             self?.canLoadMore = products?.count ?? 0 == kItemsPerPage
         }

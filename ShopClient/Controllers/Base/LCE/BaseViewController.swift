@@ -11,10 +11,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-enum ViewState: Int {
+enum ViewState {
     case loading
     case content
-    case error
+    case error(RepoError?)
 }
 
 class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol {
@@ -38,17 +38,17 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
     }
     
     private func subscribeViewState() {
-        viewModel.state.subscribe(onNext: { [weak self] viewState in
-            self?.set(state: viewState.state, error: viewState.error)
+        viewModel.state.subscribe(onNext: { [weak self] result in
+            self?.set(state: result)
         }).disposed(by: disposeBag)
     }
     
-    private func set(state: ViewState, error: RepoError? = nil) {
+    private func set(state: ViewState) {
         switch state {
         case .content:
             setContentState()
             break
-        case .error:
+        case .error(let error):
             setErrorState(with: error)
             break
         default:

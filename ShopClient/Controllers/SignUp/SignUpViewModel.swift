@@ -30,14 +30,14 @@ class SignUpViewModel: BaseViewModel {
     }
     
     private func signUp() {
-        state.onNext((.loading, nil))
+        state.onNext(.loading)
         Repository.shared.signUp(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), password: passwordText.value, phone: phoneText.value.orNil(), callback: { [weak self] (success, error) in
             if let success = success {
                 self?.signInSuccess.value = success
-                self?.state.onNext((.content, nil))
+                self?.state.onNext(.content)
             }
             if let error = error {
-                self?.state.onNext((.error, error))
+                self?.state.onNext(.error(error))
             }
         })
     }

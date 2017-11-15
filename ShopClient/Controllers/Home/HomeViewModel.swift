@@ -13,7 +13,7 @@ class HomeViewModel: BaseViewModel {
     var newInBlogArticles = Variable<[Article]>([Article]())
     
     var data: Single<([Product]?, [Article]?)> {
-        state.onNext((.loading, nil))
+        state.onNext(.loading)
         return Single.zip(productsSingle, articlesSingle).do(onNext: { [weak self] (products, articles) in
             if let products = products {
                 self?.lastArrivalsProducts.value = products
@@ -21,9 +21,9 @@ class HomeViewModel: BaseViewModel {
             if let articles = articles {
                 self?.newInBlogArticles.value = articles
             }
-            self?.state.onNext((.content, nil))
+            self?.state.onNext(.content)
         }, onError: { [weak self] (error) in
-            self?.state.onNext((.error, (RepoError(with: error))))
+            self?.state.onNext(.error(RepoError(with: error)))
         })
     }
     
