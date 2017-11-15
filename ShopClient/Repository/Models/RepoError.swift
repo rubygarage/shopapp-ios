@@ -22,3 +22,7 @@ class RepoError: Error {
         }
     }
 }
+
+class CriticalError: RepoError {}
+class NonCriticalError: RepoError {}
+class ContentError: RepoError {}
