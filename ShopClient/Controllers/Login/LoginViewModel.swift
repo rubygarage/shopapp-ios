@@ -1,21 +1,18 @@
 //
-//  SignUpViewModel.swift
+//  LoginViewModel.swift
 //  ShopClient
 //
-//  Created by Evgeniy Antonov on 11/10/17.
+//  Created by Evgeniy Antonov on 11/14/17.
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
 import RxSwift
 
-class SignUpViewModel: BaseViewModel {
+class LoginViewModel: BaseViewModel {
     var emailText = Variable<String>("")
-    var firstNameText = Variable<String>("")
-    var lastNameText = Variable<String>("")
     var passwordText = Variable<String>("")
-    var phoneText = Variable<String>("")
     
-    var signInSuccess = Variable<Bool>(false)
+    var loginSuccess = Variable<Bool>(false)
     
     var isValid: Observable<Bool> {
         return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { email, password in
@@ -23,22 +20,22 @@ class SignUpViewModel: BaseViewModel {
         }
     }
     
-    var signUpPressed: AnyObserver<()> {
+    var loginPressed: AnyObserver<()> {
         return AnyObserver { [weak self] event in
-            self?.signUp()
+            self?.login()
         }
     }
     
-    private func signUp() {
+    private func login() {
         state.onNext((.loading, nil))
-        Repository.shared.signUp(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), password: passwordText.value, phone: phoneText.value.orNil(), callback: { [weak self] (success, error) in
+        Repository.shared.login(with: emailText.value, password: passwordText.value) { [weak self] (success, error) in
             if let success = success {
-                self?.signInSuccess.value = success
+                self?.loginSuccess.value = success
                 self?.state.onNext((.content, nil))
             }
             if let error = error {
                 self?.state.onNext((.error, error))
             }
-        })
+        }
     }
 }

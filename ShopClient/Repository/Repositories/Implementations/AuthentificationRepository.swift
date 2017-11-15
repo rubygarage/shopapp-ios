@@ -13,6 +13,10 @@ extension Repository: AuthentificationRepositoryInterface {
         APICore?.signUp(with: email, firstName: firstName, lastName: lastName, password: password, phone: phone, callback: callback)
     }
     
+    func login(with email: String, password: String, callback: @escaping RepoCallback<Bool>) {
+        APICore?.login(with: email, password: password, callback: callback)
+    }
+    
     func isLoggedIn() -> Bool {
         return APICore?.isLoggedIn() ?? false
     }

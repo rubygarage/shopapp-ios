@@ -121,18 +121,80 @@
         <!--Sign In-->
         <scene sceneID="KQ9-K5-gaM">
             <objects>
-                <viewController id="eBU-Qt-4YT" sceneMemberID="viewController">
+                <viewController id="eBU-Qt-4YT" customClass="LoginViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SlY-rX-7ba">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c9b-cW-AtH" customClass="TPKeyboardAvoidingScrollView">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nPc-6z-aDR">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="598"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email (required)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gFo-Ya-VI1">
+                                                <rect key="frame" x="30" y="150" width="315" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password (required)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i4h-iG-7zZ">
+                                                <rect key="frame" x="30" y="210" width="315" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doN-k3-0QK">
+                                                <rect key="frame" x="50" y="300" width="275" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="8Xk-2G-Fsh"/>
+                                                </constraints>
+                                                <state key="normal" title="Login"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="doN-k3-0QK" firstAttribute="leading" secondItem="nPc-6z-aDR" secondAttribute="leading" constant="50" id="3f8-8H-jd2"/>
+                                            <constraint firstItem="gFo-Ya-VI1" firstAttribute="leading" secondItem="nPc-6z-aDR" secondAttribute="leading" constant="30" id="D0S-JY-Dgg"/>
+                                            <constraint firstItem="i4h-iG-7zZ" firstAttribute="top" secondItem="gFo-Ya-VI1" secondAttribute="bottom" constant="30" id="PUO-9t-RgP"/>
+                                            <constraint firstItem="doN-k3-0QK" firstAttribute="top" secondItem="i4h-iG-7zZ" secondAttribute="bottom" constant="60" id="UIN-gi-h6K"/>
+                                            <constraint firstAttribute="trailing" secondItem="gFo-Ya-VI1" secondAttribute="trailing" constant="30" id="Ygr-pM-Rrq"/>
+                                            <constraint firstItem="i4h-iG-7zZ" firstAttribute="leading" secondItem="gFo-Ya-VI1" secondAttribute="leading" id="cQl-4Q-dPd"/>
+                                            <constraint firstAttribute="trailing" secondItem="doN-k3-0QK" secondAttribute="trailing" constant="50" id="dDw-Fp-LPg"/>
+                                            <constraint firstItem="i4h-iG-7zZ" firstAttribute="trailing" secondItem="gFo-Ya-VI1" secondAttribute="trailing" id="fnR-Ll-R8B"/>
+                                            <constraint firstItem="gFo-Ya-VI1" firstAttribute="top" secondItem="nPc-6z-aDR" secondAttribute="top" constant="150" id="hq8-fs-K5U"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="nPc-6z-aDR" secondAttribute="trailing" id="Jz2-cM-YOO"/>
+                                    <constraint firstItem="nPc-6z-aDR" firstAttribute="top" secondItem="c9b-cW-AtH" secondAttribute="top" id="VZD-LG-bnn"/>
+                                    <constraint firstItem="nPc-6z-aDR" firstAttribute="leading" secondItem="c9b-cW-AtH" secondAttribute="leading" id="cd3-UB-ztB"/>
+                                    <constraint firstItem="nPc-6z-aDR" firstAttribute="height" secondItem="c9b-cW-AtH" secondAttribute="height" id="fUV-y9-maK"/>
+                                    <constraint firstAttribute="bottom" secondItem="nPc-6z-aDR" secondAttribute="bottom" id="io6-Vc-5k9"/>
+                                    <constraint firstItem="nPc-6z-aDR" firstAttribute="width" secondItem="c9b-cW-AtH" secondAttribute="width" id="tjF-u7-rG8"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="c9b-cW-AtH" firstAttribute="top" secondItem="v1X-ay-ZcU" secondAttribute="top" id="2fu-ro-HLF"/>
+                            <constraint firstItem="c9b-cW-AtH" firstAttribute="trailing" secondItem="v1X-ay-ZcU" secondAttribute="trailing" id="J6E-oP-Xve"/>
+                            <constraint firstItem="v1X-ay-ZcU" firstAttribute="bottom" secondItem="c9b-cW-AtH" secondAttribute="bottom" id="f4h-I7-dy6"/>
+                            <constraint firstItem="c9b-cW-AtH" firstAttribute="leading" secondItem="v1X-ay-ZcU" secondAttribute="leading" id="iEc-xT-fa9"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="v1X-ay-ZcU"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Sign In" image="tabbar_login" id="FR8-NN-Bnv"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="gFo-Ya-VI1" id="jjl-cB-WVs"/>
+                        <outlet property="loginButton" destination="doN-k3-0QK" id="neE-Rz-asW"/>
+                        <outlet property="passwordTextField" destination="i4h-iG-7zZ" id="Qwp-Sm-V2m"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1jq-Tv-9Jc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="260" y="-421"/>
+            <point key="canvasLocation" x="260" y="-421.43928035982015"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="QxJ-LK-a1i">

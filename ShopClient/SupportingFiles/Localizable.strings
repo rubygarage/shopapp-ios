@@ -16,6 +16,7 @@
 "ControllerTitle.NewInBlog" = "New in Blog";
 "ControllerTitle.Cart" = "Cart";
 "ControllerTitle.SignUp" = "Sign Up";
+"ControllerTitle.Login" = "Login";
 
 "Alert.Error" = "Error";
 
