@@ -38,8 +38,8 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
     }
     
     private func subscribeViewState() {
-        viewModel.state.subscribe(onNext: { [weak self] result in
-            self?.set(state: result)
+        viewModel.state.subscribe(onNext: { [weak self] state in
+            self?.set(state: state)
         }).disposed(by: disposeBag)
     }
     
@@ -68,6 +68,13 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
     }
     
     private func setErrorState(with error: RepoError?) {
+        
+        if error is CriticalError {
+            print("critical")
+        } else {
+            print("def")
+        }
+        
         loadingView.removeFromSuperview()
         errorView.error = error
         view.addSubview(errorView)

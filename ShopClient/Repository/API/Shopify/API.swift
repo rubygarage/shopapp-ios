@@ -9,8 +9,8 @@
 import MobileBuySDK
 import KeychainSwift
 
-private let kShopifyStorefrontAccessToken = "677af790376ae84213f7ea1ed56f11ca"
-private let kShopifyStorefrontURL = "lalkastore.myshopify.com"
+private let kShopifyStorefrontAccessToken = "b7ec986195fe87de18cb74a09b81ea1d"
+private let kShopifyStorefrontURL = "fosox.myshopify.com"
 private let kShopifyItemsMaxCount: Int32 = 250
 
 class API: NSObject, APIInterface {
@@ -44,9 +44,9 @@ class API: NSObject, APIInterface {
             }
         }
         
-        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
+        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             let shopObject = Shop(shopObject: response?.shop)
-            let error = RepoError(with: error)
+            let error = self?.processError(with: error)
             callback(shopObject, error)
         })
         task?.resume()
@@ -55,7 +55,7 @@ class API: NSObject, APIInterface {
     // MARK: - products
     func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Product]>) {
         let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: nil, sortBy: sortBy, reverse: reverse)
-        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
+        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             var products = [Product]()
             let currency = response?.shop.paymentSettings.currencyCode.rawValue
             if let edges = response?.shop.products.edges {
@@ -65,25 +65,27 @@ class API: NSObject, APIInterface {
                     }
                 }
             }
-            callback(products, RepoError(with: error))
+            let responseError = self?.processError(with: error)
+            callback(products, responseError)
         })
         task?.resume()
     }
     
     func getProduct(id: String, callback: @escaping RepoCallback<Product>) {
         let query = productDetailsQuery(id: id)
-        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
-            let productNode = response?.node as! Storefront.Product
+        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
+            let productNode = response?.node as? Storefront.Product
             let currency = response?.shop.paymentSettings.currencyCode.rawValue
             let productObject = Product(with: productNode, currencyValue: currency)
-            callback(productObject, RepoError(with: error))
+            let responseError = self?.processError(with: error)
+            callback(productObject, responseError)
         })
         task?.resume()
     }
     
     func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping RepoCallback<[Product]>) {
         let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: searchQuery, sortBy: nil, reverse: false)
-        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
+        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             var products = [Product]()
             let currency = response?.shop.paymentSettings.currencyCode.rawValue
             if let edges = response?.shop.products.edges {
@@ -93,7 +95,8 @@ class API: NSObject, APIInterface {
                     }
                 }
             }
-            callback(products, RepoError(with: error))
+            let responseError = self?.processError(with: error)
+            callback(products, responseError)
         })
         task?.resume()
     }
@@ -101,7 +104,7 @@ class API: NSObject, APIInterface {
     // MARK: - categories
     func getCategoryList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Category]>) {
         let query = categoryListQuery(perPage: perPage, after: paginationValue, sortBy: sortBy, reverse: reverse)
-        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
+        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             var categories = [Category]()
             let currency = response?.shop.paymentSettings.currencyCode.rawValue
             if let categoryEdges = response?.shop.collections.edges {
@@ -111,18 +114,20 @@ class API: NSObject, APIInterface {
                     }
                 }
             }
-            callback(categories, RepoError(with: error))
+            let responseError = self?.processError(with: error)
+            callback(categories, responseError)
         })
         task?.resume()
     }
     
     func getCategoryDetails(id: String, perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<Category>) {
         let query = categoryDetailsQuery(id: id, perPage: perPage, after: paginationValue, sortBy: sortBy, reverse: reverse)
-        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
+        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             let categoryNode = response?.node as! Storefront.Collection
             let currency = response?.shop.paymentSettings.currencyCode.rawValue
             let category = Category(with: categoryNode, currencyValue: currency)
-            callback(category, RepoError(with: error))
+            let responseError = self?.processError(with: error)
+            callback(category, responseError)
         })
         task?.resume()
     }
@@ -130,7 +135,7 @@ class API: NSObject, APIInterface {
     // MARK: - articles
     func getArticleList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Article]>) {
         let query = articleListQuery(perPage: perPage, after: paginationValue, reverse: reverse)
-        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
+        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             var articles = [Article]()
             if let articleEdges = response?.shop.articles.edges {
                 for articleEdge in articleEdges {
@@ -139,21 +144,18 @@ class API: NSObject, APIInterface {
                     }
                 }
             }
-            callback(articles, RepoError(with: error))
+            let responseError = self?.processError(with: error)
+            callback(articles, responseError)
         })
         task?.resume()
     }
     
     func getArticle(id: String, callback: @escaping RepoCallback<Article>) {
         let query = articleRootQuery(id: id)
-        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
-            if let articleNode = response?.node as? Storefront.Article {
-                let article = Article(with: articleNode)
-                callback(article, nil)
-            }
-            if let error = error {
-                callback(nil, RepoError(with: error))
-            }
+        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
+            let article = Article(with: response?.node as? Storefront.Article)
+            let responseError = self?.processError(with: error)
+            callback(article, responseError)
         })
         task?.resume()
     }
@@ -168,9 +170,10 @@ class API: NSObject, APIInterface {
                     callback(success, RepoError(with: error))
                 })
             } else if let responseError = response?.customerCreate?.userErrors.first {
-                callback(false, RepoError(with: responseError))
+                let error = self?.processError(with: responseError)
+                callback(false, error)
             } else {
-                callback(false, RepoError())
+                callback(false, RepoError()) // TODO:
             }
         })
         task?.resume()
@@ -194,9 +197,10 @@ class API: NSObject, APIInterface {
                 self?.saveSessionData(with: token, email: email)
                 callback(token, nil)
             } else if let error = response?.customerAccessTokenCreate?.userErrors.first {
-                callback(nil, RepoError(with: error))
+                let responseError = self?.processError(with: error)
+                callback(nil, responseError)
             } else {
-                callback(nil, RepoError())
+                callback(nil, RepoError()) // TODO:
             }
         })
         task?.resume()
@@ -533,5 +537,17 @@ class API: NSObject, APIInterface {
             return date > Date()
         }
         return false
+    }
+    
+    // MARK: - error handling
+    private func processError(with error: Graph.QueryError?) -> RepoError? {
+        print()
+        let resultError = RepoError(with: error)
+        return resultError
+    }
+    
+    private func processError(with error: Storefront.UserError?) -> RepoError? {
+        print()
+        return RepoError(with: error)
     }
 }

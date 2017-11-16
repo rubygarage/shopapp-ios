@@ -23,7 +23,8 @@ class HomeViewModel: BaseViewModel {
             }
             self?.state.onNext(.content)
         }, onError: { [weak self] (error) in
-            self?.state.onNext(.error(RepoError(with: error)))
+            let castedError = error as! RepoError
+            self?.state.onNext(.error(castedError))
         })
     }
     

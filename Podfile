@@ -19,8 +19,8 @@ target 'ShopClient' do
   pod 'SideMenu', '~> 2.3'
   
   # Database
-  pod 'CoreStore', :git => 'https://github.com/JohnEstropia/CoreStore.git', :branch => 'prototype/Swift_3_2'
-  
+  pod 'CoreStore', '~> 4.2'
+
   # Architecture
   pod 'RxSwift', '~> 4.0'
   pod 'RxCocoa', '~> 4.0'

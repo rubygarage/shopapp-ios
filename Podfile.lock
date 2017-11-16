@@ -1,5 +1,5 @@
 PODS:
-  - CoreStore (4.1.3)
+  - CoreStore (4.2.3)
   - KeychainSwift (10.0.0)
   - MBProgressHUD (1.0.0)
   - Mobile-Buy-SDK (3.1.1)
@@ -15,7 +15,7 @@ PODS:
   - UIScrollView-InfiniteScroll (1.0.2)
 
 DEPENDENCIES:
-  - CoreStore (from `https://github.com/JohnEstropia/CoreStore.git`, branch `prototype/Swift_3_2`)
+  - CoreStore (~> 4.2)
   - KeychainSwift (~> 10.0)
   - MBProgressHUD (~> 1.0)
   - Mobile-Buy-SDK (~> 3.0)
@@ -27,18 +27,8 @@ DEPENDENCIES:
   - TPKeyboardAvoiding (~> 1.3)
   - UIScrollView-InfiniteScroll (~> 1.0)
 
-EXTERNAL SOURCES:
-  CoreStore:
-    :branch: prototype/Swift_3_2
-    :git: https://github.com/JohnEstropia/CoreStore.git
-
-CHECKOUT OPTIONS:
-  CoreStore:
-    :commit: b4117eeb028facf83fee0828882d84fb9c1c354d
-    :git: https://github.com/JohnEstropia/CoreStore.git
-
 SPEC CHECKSUMS:
-  CoreStore: 1a7cce39a92ead86de8a3dc3dedb696e1f9b881e
+  CoreStore: ae8ead0cce4d8120d9f353f9dbc12482b1584b2e
   KeychainSwift: f9f7910449a0c0fd2cabc889121530dd2c477c33
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Mobile-Buy-SDK: c1a82cfd1a302b41e07e95616216bab6f5e1bca0
@@ -50,6 +40,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: 0d6af20e95e2850f4c621841225b59ec7d8dd852
   UIScrollView-InfiniteScroll: c132d6d5851daff229ab4a1060ccf70a05a051c9
 
-PODFILE CHECKSUM: 2ecf4f1c5c29927ef27cc60a6eadf3621a83f4ae
+PODFILE CHECKSUM: ac97fa4a9ac485b9a63f1b2edb25a2490c817085
 
 COCOAPODS: 1.3.1
