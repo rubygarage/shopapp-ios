@@ -12,7 +12,7 @@ class ArticleDetailsViewModel: BaseViewModel {
     var articleId: String!
     
     var data: Single<Article> {
-        state.onNext(.loading)
+        state.onNext(.loading(showHud: true))
         return Single.create(subscribe: { (single) in
             Repository.shared.getArticle(id: self.articleId, callback: { [weak self] (article, error) in
                 if let error = error {

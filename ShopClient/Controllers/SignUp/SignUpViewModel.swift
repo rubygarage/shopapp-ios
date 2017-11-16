@@ -30,7 +30,7 @@ class SignUpViewModel: BaseViewModel {
     }
     
     private func signUp() {
-        state.onNext(.loading)
+        state.onNext(.loading(showHud: true))
         Repository.shared.signUp(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), password: passwordText.value, phone: phoneText.value.orNil(), callback: { [weak self] (success, error) in
             if let success = success {
                 self?.signInSuccess.value = success

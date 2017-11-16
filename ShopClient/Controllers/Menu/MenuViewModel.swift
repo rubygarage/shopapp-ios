@@ -13,7 +13,7 @@ class MenuViewModel: BaseViewModel {
     var policies = Variable<[Policy]>([Policy]())
     
     var data: Single<(Shop?, [Category]?)> {
-        state.onNext(.loading)
+        state.onNext(.loading(showHud: false))
         return Single.zip(shopSingle, categoriesSingle).do(onNext: { [weak self] (shop, categories) in
             self?.processResponse(with: shop, categoriesItems: categories)
             self?.state.onNext(.content)

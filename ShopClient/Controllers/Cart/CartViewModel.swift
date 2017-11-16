@@ -13,7 +13,7 @@ class CartViewModel: BaseViewModel {
     
     // MARK: - public
     public func loadData() {
-        state.onNext(.loading)
+        state.onNext(.loading(showHud: true))
         Repository.shared.getCartProductList { [weak self] (cartProducts, error) in
             if let error = error {
                 self?.state.onNext(.error(error))
@@ -26,7 +26,7 @@ class CartViewModel: BaseViewModel {
     }
     
     public func remove(cartProduct: CartProduct) {
-        state.onNext(.loading)
+        state.onNext(.loading(showHud: true))
         Repository.shared.deleteProductFromCart(with: cartProduct.productVariant?.id) { [weak self] (success, error) in
             if let error = error {
                 self?.state.onNext(.error(error))
@@ -39,7 +39,7 @@ class CartViewModel: BaseViewModel {
     }
     
     public func update(cartProduct: CartProduct, quantity: Int) {
-        state.onNext(.loading)
+        state.onNext(.loading(showHud: true))
         Repository.shared.changeCartProductQuantity(with: cartProduct.productVariant?.id, quantity: quantity) { [weak self] (_, error) in
             if let error = error {
                 self?.state.onNext(.error(error))

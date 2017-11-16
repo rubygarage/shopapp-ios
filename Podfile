@@ -14,6 +14,7 @@ target 'ShopClient' do
   pod 'UIScrollView-InfiniteScroll', '~> 1.0'
   pod 'SKPhotoBrowser', '~> 4.1'
   pod 'TPKeyboardAvoiding', '~> 1.3'
+  pod 'Toaster', '~> 2.1'
   
   # Menu
   pod 'SideMenu', '~> 2.3'

@@ -27,7 +27,7 @@ class LoginViewModel: BaseViewModel {
     }
     
     private func login() {
-        state.onNext(.loading)
+        state.onNext(.loading(showHud: true))
         Repository.shared.login(with: emailText.value, password: passwordText.value) { [weak self] (success, error) in
             if let success = success {
                 self?.loginSuccess.value = success

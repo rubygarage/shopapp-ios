@@ -23,7 +23,7 @@ class ProductDetailsViewModel: BaseViewModel {
 
     // MARK: - public
     public func loadData() {
-        state.onNext(.loading)
+        state.onNext(.loading(showHud: true))
         Repository.shared.getProduct(id: productId) { [weak self] (product, error) in
             if let error = error {
                 self?.state.onNext(.error(error))

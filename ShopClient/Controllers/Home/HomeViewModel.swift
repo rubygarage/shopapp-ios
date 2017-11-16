@@ -13,7 +13,7 @@ class HomeViewModel: BaseViewModel {
     var newInBlogArticles = Variable<[Article]>([Article]())
     
     var data: Single<([Product]?, [Article]?)> {
-        state.onNext(.loading)
+        state.onNext(.loading(showHud: true))
         return Single.zip(productsSingle, articlesSingle).do(onNext: { [weak self] (products, articles) in
             if let products = products {
                 self?.lastArrivalsProducts.value = products

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -43,13 +43,13 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password (required)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Bn-98-OIF">
-                                                <rect key="frame" x="30" y="190" width="315" height="30"/>
+                                                <rect key="frame" x="30" y="250" width="315" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wAV-Rg-wAe">
-                                                <rect key="frame" x="30" y="250" width="315" height="30"/>
+                                                <rect key="frame" x="30" y="190" width="315" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
@@ -68,16 +68,16 @@
                                             <constraint firstItem="kO4-zg-9q5" firstAttribute="top" secondItem="iS7-v9-0ef" secondAttribute="top" constant="70" id="9xU-iv-VzZ"/>
                                             <constraint firstItem="12f-BW-vFJ" firstAttribute="top" secondItem="kO4-zg-9q5" secondAttribute="bottom" constant="30" id="Aed-pE-MQN"/>
                                             <constraint firstItem="12f-BW-vFJ" firstAttribute="width" secondItem="TKC-yR-r3E" secondAttribute="width" id="Ap5-cA-L2A"/>
+                                            <constraint firstItem="7Bn-98-OIF" firstAttribute="top" secondItem="wAV-Rg-wAe" secondAttribute="bottom" constant="30" id="Apn-da-DDM"/>
                                             <constraint firstItem="7Bn-98-OIF" firstAttribute="trailing" secondItem="kO4-zg-9q5" secondAttribute="trailing" id="D74-6g-grQ"/>
                                             <constraint firstItem="12f-BW-vFJ" firstAttribute="leading" secondItem="kO4-zg-9q5" secondAttribute="leading" id="ERc-51-eeb"/>
                                             <constraint firstItem="wAV-Rg-wAe" firstAttribute="trailing" secondItem="7Bn-98-OIF" secondAttribute="trailing" id="HvD-66-SSZ"/>
                                             <constraint firstItem="7Bn-98-OIF" firstAttribute="leading" secondItem="kO4-zg-9q5" secondAttribute="leading" id="Pbk-AX-eyX"/>
-                                            <constraint firstItem="7Bn-98-OIF" firstAttribute="top" secondItem="12f-BW-vFJ" secondAttribute="bottom" constant="30" id="Ux5-to-kD9"/>
                                             <constraint firstAttribute="trailing" secondItem="Vbq-kQ-DRa" secondAttribute="trailing" constant="50" id="VvA-ku-8om"/>
                                             <constraint firstItem="kO4-zg-9q5" firstAttribute="leading" secondItem="iS7-v9-0ef" secondAttribute="leading" constant="30" id="WOv-Gy-taR"/>
-                                            <constraint firstItem="Vbq-kQ-DRa" firstAttribute="top" secondItem="wAV-Rg-wAe" secondAttribute="bottom" constant="60" id="XT7-Rp-hQP"/>
+                                            <constraint firstItem="Vbq-kQ-DRa" firstAttribute="top" secondItem="7Bn-98-OIF" secondAttribute="bottom" constant="60" id="d38-d4-RWU"/>
                                             <constraint firstItem="TKC-yR-r3E" firstAttribute="trailing" secondItem="kO4-zg-9q5" secondAttribute="trailing" id="gqA-fh-2TH"/>
-                                            <constraint firstItem="wAV-Rg-wAe" firstAttribute="top" secondItem="7Bn-98-OIF" secondAttribute="bottom" constant="30" id="jqn-Z5-hky"/>
+                                            <constraint firstItem="wAV-Rg-wAe" firstAttribute="top" secondItem="12f-BW-vFJ" secondAttribute="bottom" constant="30" id="jaL-y4-twO"/>
                                             <constraint firstItem="Vbq-kQ-DRa" firstAttribute="leading" secondItem="iS7-v9-0ef" secondAttribute="leading" constant="50" id="t3p-Hw-FeA"/>
                                             <constraint firstAttribute="trailing" secondItem="kO4-zg-9q5" secondAttribute="trailing" constant="30" id="tbz-67-xBh"/>
                                             <constraint firstItem="wAV-Rg-wAe" firstAttribute="leading" secondItem="7Bn-98-OIF" secondAttribute="leading" id="unq-rJ-7iK"/>
@@ -142,7 +142,7 @@
                                                 <rect key="frame" x="30" y="210" width="315" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doN-k3-0QK">
                                                 <rect key="frame" x="50" y="300" width="275" height="50"/>
