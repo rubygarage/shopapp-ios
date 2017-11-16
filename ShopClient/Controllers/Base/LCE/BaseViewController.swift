@@ -68,15 +68,34 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
     }
     
     private func setErrorState(with error: RepoError?) {
-        
-        if error is CriticalError {
-            print("critical")
-        } else {
-            print("def")
-        }
-        
         loadingView.removeFromSuperview()
-        errorView.error = error
+        if error is CriticalError {
+            process(criticalError: error as? CriticalError)
+        } else if error is NonCriticalError {
+            process(nonCriticalError: error as? NonCriticalError)
+        } else if error is ContentError {
+            process(contentError: error as? ContentError)
+        } else {
+            process(defaultError: error)
+        }
+    }
+    
+    private func process(criticalError: CriticalError?) {
+        print("critical")
+        // TODO: go to home & toast
+    }
+    
+    private func process(nonCriticalError: NonCriticalError?) {
+        print("non critical")
+        // TODO: toast
+    }
+    
+    private func process(contentError: ContentError?) {
+        errorView.error = contentError
         view.addSubview(errorView)
+    }
+    
+    private func process(defaultError: RepoError?) {
+        // TODO:
     }
 }

@@ -50,3 +50,9 @@ struct SessionData {
     static let expiryDate = "ExpiryDate"
     static let email = "Email"
 }
+
+struct StatusCode {
+    static let forbidden = 403
+    static let unauthorized = 401
+    static let notFound = 404
+}

@@ -6,7 +6,7 @@ target 'ShopClient' do
   use_frameworks!
 
   # Pods for ShopClient
-  pod 'Mobile-Buy-SDK', '~> 3.0'
+  pod 'Mobile-Buy-SDK', '~> 3.1'
   
   # UI
   pod 'SDWebImage', '~> 4.1'

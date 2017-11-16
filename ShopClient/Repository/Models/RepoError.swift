@@ -23,6 +23,22 @@ class RepoError: Error {
     }
 }
 
-class CriticalError: RepoError {}
+class CriticalError: RepoError {
+    init?(with error: Error?, statusCode: Int?) {
+        super.init(with: error)
+        
+        if let code = statusCode {
+            self.statusCode = code
+        }
+    }
+    
+    init?(with error: Error?, message: String?) {
+        super.init(with: error)
+        
+        if let errorMessage = message {
+            self.errorMessage = errorMessage
+        }
+    }
+}
 class NonCriticalError: RepoError {}
 class ContentError: RepoError {}

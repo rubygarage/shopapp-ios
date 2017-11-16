@@ -46,7 +46,7 @@ class API: NSObject, APIInterface {
         
         let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             let shopObject = Shop(shopObject: response?.shop)
-            let error = self?.processError(with: error)
+            let error = self?.process(error: error)
             callback(shopObject, error)
         })
         task?.resume()
@@ -65,7 +65,7 @@ class API: NSObject, APIInterface {
                     }
                 }
             }
-            let responseError = self?.processError(with: error)
+            let responseError = self?.process(error: error)
             callback(products, responseError)
         })
         task?.resume()
@@ -77,7 +77,7 @@ class API: NSObject, APIInterface {
             let productNode = response?.node as? Storefront.Product
             let currency = response?.shop.paymentSettings.currencyCode.rawValue
             let productObject = Product(with: productNode, currencyValue: currency)
-            let responseError = self?.processError(with: error)
+            let responseError = self?.process(error: error)
             callback(productObject, responseError)
         })
         task?.resume()
@@ -95,7 +95,7 @@ class API: NSObject, APIInterface {
                     }
                 }
             }
-            let responseError = self?.processError(with: error)
+            let responseError = self?.process(error: error)
             callback(products, responseError)
         })
         task?.resume()
@@ -114,7 +114,7 @@ class API: NSObject, APIInterface {
                     }
                 }
             }
-            let responseError = self?.processError(with: error)
+            let responseError = self?.process(error: error)
             callback(categories, responseError)
         })
         task?.resume()
@@ -126,7 +126,7 @@ class API: NSObject, APIInterface {
             let categoryNode = response?.node as! Storefront.Collection
             let currency = response?.shop.paymentSettings.currencyCode.rawValue
             let category = Category(with: categoryNode, currencyValue: currency)
-            let responseError = self?.processError(with: error)
+            let responseError = self?.process(error: error)
             callback(category, responseError)
         })
         task?.resume()
@@ -144,7 +144,7 @@ class API: NSObject, APIInterface {
                     }
                 }
             }
-            let responseError = self?.processError(with: error)
+            let responseError = self?.process(error: error)
             callback(articles, responseError)
         })
         task?.resume()
@@ -154,7 +154,7 @@ class API: NSObject, APIInterface {
         let query = articleRootQuery(id: id)
         let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             let article = Article(with: response?.node as? Storefront.Article)
-            let responseError = self?.processError(with: error)
+            let responseError = self?.process(error: error)
             callback(article, responseError)
         })
         task?.resume()
@@ -170,10 +170,10 @@ class API: NSObject, APIInterface {
                     callback(success, RepoError(with: error))
                 })
             } else if let responseError = response?.customerCreate?.userErrors.first {
-                let error = self?.processError(with: responseError)
+                let error = self?.process(error: responseError)
                 callback(false, error)
             } else {
-                callback(false, RepoError()) // TODO:
+                callback(false, NonCriticalError())
             }
         })
         task?.resume()
@@ -197,10 +197,10 @@ class API: NSObject, APIInterface {
                 self?.saveSessionData(with: token, email: email)
                 callback(token, nil)
             } else if let error = response?.customerAccessTokenCreate?.userErrors.first {
-                let responseError = self?.processError(with: error)
+                let responseError = self?.process(error: error)
                 callback(nil, responseError)
             } else {
-                callback(nil, RepoError()) // TODO:
+                callback(nil, NonCriticalError())
             }
         })
         task?.resume()
@@ -540,14 +540,23 @@ class API: NSObject, APIInterface {
     }
     
     // MARK: - error handling
-    private func processError(with error: Graph.QueryError?) -> RepoError? {
-        print()
-        let resultError = RepoError(with: error)
-        return resultError
+    private func process(error: Graph.QueryError?) -> RepoError? {
+        if let error = error, case .invalidQuery(let reasons) = error {
+            return CriticalError(with: error, message: reasons.first?.message)
+        }
+        
+        if let error = error, case .http(let statusCode) = error {
+            return process(statusCode: statusCode, error: error)
+        }
+        
+        return RepoError(with: error)
     }
     
-    private func processError(with error: Storefront.UserError?) -> RepoError? {
-        print()
-        return RepoError(with: error)
+    private func process(error: Storefront.UserError?) -> RepoError? {
+        return NonCriticalError(with: error)
+    }
+    
+    private func process(statusCode: Int, error: Error) -> RepoError? {
+        return CriticalError(with: error, statusCode: statusCode)
     }
 }
