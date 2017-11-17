@@ -21,8 +21,6 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         super.viewDidLoad()
         
         setupTitle()
-        setupSideMenu()
-        addMenuBarButton()
         setupTableView()
         loadData()
     }
@@ -30,7 +28,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setupBarItems()
+        updateBarItems()
     }
     
     private func setupTitle() {
@@ -54,7 +52,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         tableView.delegate = delegate
     }
     
-    private func setupBarItems() {
+    private func addRightBarItems() {
         Repository.shared.getCartProductList { [weak self] (products, error) in
             let cartItemsCount = products?.count ?? 0
             if cartItemsCount > 0 {
@@ -73,9 +71,19 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         navigationItem.rightBarButtonItems = [cartBarItem(with: cartItemsCount), searchBarItem()]
     }
     
+    private func updateBarItems() {
+        let barItemsVisible = viewModel.lastArrivalsProducts.value.count > 0 && viewModel.newInBlogArticles.value.count > 0
+        if barItemsVisible {
+            addMenuBarButton()
+            addRightBarItems()
+        }
+    }
+    
     private func loadData() {
-        viewModel.data.subscribe(onSuccess: { [weak self] _ in
+        viewModel.data.subscribe(onSuccess: { [weak self] (products, articles) in
             self?.tableView.reloadData()
+            self?.updateBarItems()
+            self?.setupSideMenu()
         }).disposed(by: disposeBag)
     }
     

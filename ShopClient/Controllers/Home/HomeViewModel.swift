@@ -11,7 +11,7 @@ import RxSwift
 class HomeViewModel: BaseViewModel {
     var lastArrivalsProducts = Variable<[Product]>([Product]())
     var newInBlogArticles = Variable<[Article]>([Article]())
-    
+
     var data: Single<([Product]?, [Article]?)> {
         state.onNext(.loading(showHud: true))
         return Single.zip(productsSingle, articlesSingle).do(onNext: { [weak self] (products, articles) in

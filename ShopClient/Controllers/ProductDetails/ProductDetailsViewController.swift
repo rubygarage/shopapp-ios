@@ -173,4 +173,9 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     func didSelectOption(with name: String, value: String) {
         viewModel.selectOption(with: name, value: value)
     }
+    
+    // MARK: - ErrorViewProtocol
+    func didTapTryAgain() {
+        loadData()
+    }
 }

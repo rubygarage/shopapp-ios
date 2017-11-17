@@ -84,4 +84,9 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel>, S
             viewModel.reloadData()
         }
     }
+    
+    // MARK: - ErrorViewProtocol
+    func didTapTryAgain() {
+        loadData()
+    }
 }
