@@ -27,14 +27,20 @@ class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel> 
     
     private func setupViewModel() {
         viewModel.articleId = articleId
-    }
-    
-    private func loadData() {
+        
+        errorView.tryAgainButton.rx.tap
+            .bind(to: viewModel.loadData)
+            .disposed(by: disposeBag)
+        
         viewModel.data
-            .subscribe(onSuccess: { [weak self] (article) in
+            .subscribe(onNext: { [weak self] article in
                 self?.populateViews(with: article)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func loadData() {
+        viewModel.loadArticle()
     }
     
     private func populateViews(with article: Article) {
@@ -43,10 +49,5 @@ class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel> 
         articleTitleLabel.text = article.title
         authorNameLabel.text = article.author?.fullName
         articleContentLabel.text = article.content
-    }
-    
-    // MARK: - ErrorViewProtocol
-    func didTapTryAgain() {
-        loadData()
     }
 }
