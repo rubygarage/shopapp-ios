@@ -16,7 +16,7 @@ class CartViewModel: BaseViewModel {
         state.onNext(.loading(showHud: true))
         Repository.shared.getCartProductList { [weak self] (cartProducts, error) in
             if let error = error {
-                self?.state.onNext(.error(error))
+                self?.state.onNext(.error(error: error))
             }
             if let products = cartProducts {
                 self?.data.value = products
@@ -29,7 +29,7 @@ class CartViewModel: BaseViewModel {
         state.onNext(.loading(showHud: true))
         Repository.shared.deleteProductFromCart(with: cartProduct.productVariant?.id) { [weak self] (success, error) in
             if let error = error {
-                self?.state.onNext(.error(error))
+                self?.state.onNext(.error(error: error))
             }
             if let success = success {
                 self?.state.onNext(.content)
@@ -42,7 +42,7 @@ class CartViewModel: BaseViewModel {
         state.onNext(.loading(showHud: true))
         Repository.shared.changeCartProductQuantity(with: cartProduct.productVariant?.id, quantity: quantity) { [weak self] (_, error) in
             if let error = error {
-                self?.state.onNext(.error(error))
+                self?.state.onNext(.error(error: error))
             } else {
                 self?.state.onNext(.content)
                 self?.loadData()

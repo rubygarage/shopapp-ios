@@ -42,3 +42,10 @@ class CriticalError: RepoError {
 }
 class NonCriticalError: RepoError {}
 class ContentError: RepoError {}
+class NetworkError: RepoError {
+    override init() {
+        super.init()
+        
+        errorMessage = NSLocalizedString("Error.NoConnection", comment: String())
+    }
+}

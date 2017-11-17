@@ -26,7 +26,7 @@ class ArticlesListViewModel: BasePaginationViewModel {
         state.onNext(.loading(showHud: showHud))
         Repository.shared.getArticleList(paginationValue: paginationValue, sortBy: SortingValue.createdAt, reverse: true) { [weak self] (articles, error) in
             if let error = error {
-                self?.state.onNext(.error(error))
+                self?.state.onNext(.error(error: error))
             }
             if let articles = articles {
                 self?.updateArticles(with: articles)

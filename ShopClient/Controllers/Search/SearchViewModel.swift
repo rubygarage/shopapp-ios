@@ -25,7 +25,7 @@ class SearchViewModel: GridCollectionViewModel {
         state.onNext(.loading(showHud: true))
         Repository.shared.searchProducts(paginationValue: paginationValue, searchQuery: searchPhrase.value) { [weak self] (products, error) in
             if let error = error {
-                self?.state.onNext(.error(error))
+                self?.state.onNext(.error(error: error))
             }
             if let productsArray = products {
                 self?.updateProducts(products: productsArray)

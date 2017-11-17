@@ -37,7 +37,7 @@ class SignUpViewModel: BaseViewModel {
                 self?.state.onNext(.content)
             }
             if let error = error {
-                self?.state.onNext(.error(error))
+                self?.state.onNext(.error(error: error))
             }
         })
     }

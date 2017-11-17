@@ -49,7 +49,7 @@ class API: NSObject, APIInterface {
             let error = self?.process(error: error)
             callback(shopObject, error)
         })
-        task?.resume()
+        run(task: task, callback: callback)
     }
     
     // MARK: - products
@@ -68,7 +68,7 @@ class API: NSObject, APIInterface {
             let responseError = self?.process(error: error)
             callback(products, responseError)
         })
-        task?.resume()
+        run(task: task, callback: callback)
     }
     
     func getProduct(id: String, callback: @escaping RepoCallback<Product>) {
@@ -80,7 +80,7 @@ class API: NSObject, APIInterface {
             let responseError = self?.process(error: error)
             callback(productObject, responseError)
         })
-        task?.resume()
+        run(task: task, callback: callback)
     }
     
     func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping RepoCallback<[Product]>) {
@@ -98,7 +98,7 @@ class API: NSObject, APIInterface {
             let responseError = self?.process(error: error)
             callback(products, responseError)
         })
-        task?.resume()
+        run(task: task, callback: callback)
     }
     
     // MARK: - categories
@@ -117,7 +117,7 @@ class API: NSObject, APIInterface {
             let responseError = self?.process(error: error)
             callback(categories, responseError)
         })
-        task?.resume()
+        run(task: task, callback: callback)
     }
     
     func getCategoryDetails(id: String, perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<Category>) {
@@ -129,7 +129,7 @@ class API: NSObject, APIInterface {
             let responseError = self?.process(error: error)
             callback(category, responseError)
         })
-        task?.resume()
+        run(task: task, callback: callback)
     }
     
     // MARK: - articles
@@ -147,7 +147,7 @@ class API: NSObject, APIInterface {
             let responseError = self?.process(error: error)
             callback(articles, responseError)
         })
-        task?.resume()
+        run(task: task, callback: callback)
     }
     
     func getArticle(id: String, callback: @escaping RepoCallback<Article>) {
@@ -157,7 +157,7 @@ class API: NSObject, APIInterface {
             let responseError = self?.process(error: error)
             callback(article, responseError)
         })
-        task?.resume()
+        run(task: task, callback: callback)
     }
     
     // MARK: - authentification
@@ -173,10 +173,10 @@ class API: NSObject, APIInterface {
                 let error = self?.process(error: responseError)
                 callback(false, error)
             } else {
-                callback(false, NonCriticalError())
+                callback(false, ContentError())
             }
         })
-        task?.resume()
+        run(task: task, callback: callback)
     }
     
     func login(with email: String, password: String, callback: @escaping RepoCallback<Bool>) {
@@ -200,10 +200,10 @@ class API: NSObject, APIInterface {
                 let responseError = self?.process(error: error)
                 callback(nil, responseError)
             } else {
-                callback(nil, NonCriticalError())
+                callback(nil, ContentError())
             }
         })
-        task?.resume()
+        run(task: task, callback: callback)
     }
     
     private func getCustomer(with token: Storefront.CustomerAccessToken, email: String, callback: @escaping RepoCallback<Bool>) {
@@ -218,9 +218,10 @@ class API: NSObject, APIInterface {
                 callback(false, RepoError())
             }
         })
-        task?.resume()
+        run(task: task, callback: callback)
     }
     
+    // MARK: - sorting
     func productSortValue(for key: SortingValue?) -> Storefront.ProductSortKeys? {
         if key == nil {
             return nil
@@ -537,6 +538,15 @@ class API: NSObject, APIInterface {
             return date > Date()
         }
         return false
+    }
+    
+    // MARK: - check connection network
+    private func run<T>(task: Task?, callback: RepoCallback<T>) {
+        if ReachabilityNetwork.hasConnection() {
+            task?.resume()
+        } else {
+            callback(nil, NetworkError())
+        }
     }
     
     // MARK: - error handling

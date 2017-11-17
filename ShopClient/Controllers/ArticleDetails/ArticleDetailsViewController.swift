@@ -22,11 +22,14 @@ class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel> 
         super.viewDidLoad()
 
         setupViewModel()
+        loadData()
     }
     
     private func setupViewModel() {
         viewModel.articleId = articleId
-        
+    }
+    
+    private func loadData() {
         viewModel.data
             .subscribe(onSuccess: { [weak self] (article) in
                 self?.populateViews(with: article)
@@ -40,5 +43,10 @@ class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel> 
         articleTitleLabel.text = article.title
         authorNameLabel.text = article.author?.fullName
         articleContentLabel.text = article.content
+    }
+    
+    // MARK: - ErrorViewProtocol
+    func didTapTryAgain() {
+        loadData()
     }
 }

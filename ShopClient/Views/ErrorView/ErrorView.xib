@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,6 +14,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ErrorView" customModule="ShopClient" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="SCZ-sd-Vsk"/>
+                <outlet property="errorImageView" destination="aXQ-jJ-eL2" id="msw-RU-8Gr"/>
                 <outlet property="errorTextLabel" destination="T0m-Dg-Z0e" id="XiZ-Vz-PqR"/>
                 <outlet property="tryAgainButton" destination="VSi-2c-9yV" id="HBI-o4-dch"/>
             </connections>
@@ -38,14 +40,24 @@
                         <action selector="tryAgainTapped:" destination="-1" eventType="touchUpInside" id="tM7-8C-a6e"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="connection_off" translatesAutoresizingMaskIntoConstraints="NO" id="aXQ-jJ-eL2">
+                    <rect key="frame" x="97" y="30" width="154.5" height="154.5"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="aXQ-jJ-eL2" secondAttribute="height" multiplier="1:1" id="KZG-Zn-71J"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="VSi-2c-9yV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="9Vr-8Y-zLN"/>
+                <constraint firstItem="aXQ-jJ-eL2" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="A4E-LW-txA"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="T0m-Dg-Z0e" secondAttribute="trailing" constant="30" id="Fai-f0-vjJ"/>
                 <constraint firstItem="T0m-Dg-Z0e" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="RDj-ga-uBM"/>
                 <constraint firstItem="VSi-2c-9yV" firstAttribute="top" secondItem="T0m-Dg-Z0e" secondAttribute="bottom" constant="20" id="jbC-PB-SrH"/>
+                <constraint firstItem="T0m-Dg-Z0e" firstAttribute="top" secondItem="aXQ-jJ-eL2" secondAttribute="bottom" constant="30" id="oFn-IO-94b"/>
                 <constraint firstItem="T0m-Dg-Z0e" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qyp-8u-jIQ"/>
+                <constraint firstItem="aXQ-jJ-eL2" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="rYD-Aq-I41"/>
                 <constraint firstItem="T0m-Dg-Z0e" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="w7n-NS-dmG"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -53,4 +65,7 @@
             <point key="canvasLocation" x="20" y="-55"/>
         </view>
     </objects>
+    <resources>
+        <image name="connection_off" width="200" height="157"/>
+    </resources>
 </document>

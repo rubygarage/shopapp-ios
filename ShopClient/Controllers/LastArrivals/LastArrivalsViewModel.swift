@@ -24,7 +24,7 @@ class LastArrivalsViewModel: GridCollectionViewModel {
         state.onNext(.loading(showHud: showHud))
         Repository.shared.getProductList(paginationValue: paginationValue, sortBy: SortingValue.createdAt, reverse: true) { [weak self] (products, error) in
             if let error = error {
-                self?.state.onNext(.error(error))
+                self?.state.onNext(.error(error: error))
             }
             if let productsArray = products {
                 self?.updateProducts(products: productsArray)

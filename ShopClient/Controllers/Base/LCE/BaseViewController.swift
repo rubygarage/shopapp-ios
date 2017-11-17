@@ -15,7 +15,7 @@ import Toaster
 enum ViewState {
     case loading(showHud: Bool)
     case content
-    case error(RepoError?)
+    case error(error: RepoError?)
 }
 
 private let kToastBottomOffset: CGFloat = 80
@@ -82,6 +82,8 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
             process(nonCriticalError: error as? NonCriticalError)
         } else if error is ContentError {
             process(contentError: error as? ContentError)
+        } else if error is NetworkError {
+            process(networkError: error as? NetworkError)
         } else {
             process(defaultError: error)
         }
@@ -104,6 +106,12 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
     private func process(contentError: ContentError?) {
         loadingView.removeFromSuperview()
         errorView.error = contentError
+        view.addSubview(errorView)
+    }
+    
+    private func process(networkError: NetworkError?) {
+        loadingView.removeFromSuperview()
+        errorView.error = networkError
         view.addSubview(errorView)
     }
     

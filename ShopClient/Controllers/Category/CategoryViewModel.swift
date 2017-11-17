@@ -28,7 +28,7 @@ class CategoryViewModel: GridCollectionViewModel {
         let reverse = selectedSortingValue == .createdAt
         Repository.shared.getCategoryDetails(id: categoryId, paginationValue: paginationValue, sortBy: selectedSortingValue, reverse: reverse) { [weak self] (result, error) in
             if let error = error {
-                self?.state.onNext(.error(error))
+                self?.state.onNext(.error(error: error))
             }
             if let category = result {
                 self?.updateData(category: category)

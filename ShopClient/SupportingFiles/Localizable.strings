@@ -36,3 +36,4 @@
 "Label.PriceEach" = "%@ %@ each";
 
 "Error.Unknown" = "Unknown error";
+"Error.NoConnection" = "Check internet connection";

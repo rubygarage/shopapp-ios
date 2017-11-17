@@ -16,7 +16,7 @@ class ArticleDetailsViewModel: BaseViewModel {
         return Single.create(subscribe: { (single) in
             Repository.shared.getArticle(id: self.articleId, callback: { [weak self] (article, error) in
                 if let error = error {
-                    self?.state.onNext(.error(error))
+                    self?.state.onNext(.error(error: error))
                 }
                 if let article = article {
                     single(.success(article))

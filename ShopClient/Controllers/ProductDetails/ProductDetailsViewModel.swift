@@ -26,7 +26,7 @@ class ProductDetailsViewModel: BaseViewModel {
         state.onNext(.loading(showHud: true))
         Repository.shared.getProduct(id: productId) { [weak self] (product, error) in
             if let error = error {
-                self?.state.onNext(.error(error))
+                self?.state.onNext(.error(error: error))
             }
             if let productObject = product {
                 self?.setupData(product: productObject)
