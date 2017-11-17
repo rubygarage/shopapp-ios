@@ -96,8 +96,7 @@ class MenuViewController: BaseViewController<MenuViewModel>, MenuTableDataSource
         } else if indexPath.section == MenuSection.policy.rawValue {
             openPolicyController(with: indexPath.row)
         } else if indexPath.section == MenuSection.account.rawValue {
-//            Repository.shared.isLoggedIn() ? setAccountController() : setAuthController()
-            setAuthController()
+            Repository.shared.isLoggedIn() ? setAccountController() : setAuthController()
         }
     }
 }
