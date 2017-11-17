@@ -55,9 +55,10 @@
                                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vbq-kQ-DRa">
-                                                <rect key="frame" x="50" y="340" width="275" height="50"/>
+                                                <rect key="frame" x="152.5" y="340" width="70" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="M5A-Ch-mVi"/>
+                                                    <constraint firstAttribute="width" constant="70" id="hB3-VF-bR2"/>
                                                 </constraints>
                                                 <state key="normal" title="SignUp"/>
                                             </button>
@@ -73,12 +74,11 @@
                                             <constraint firstItem="12f-BW-vFJ" firstAttribute="leading" secondItem="kO4-zg-9q5" secondAttribute="leading" id="ERc-51-eeb"/>
                                             <constraint firstItem="wAV-Rg-wAe" firstAttribute="trailing" secondItem="7Bn-98-OIF" secondAttribute="trailing" id="HvD-66-SSZ"/>
                                             <constraint firstItem="7Bn-98-OIF" firstAttribute="leading" secondItem="kO4-zg-9q5" secondAttribute="leading" id="Pbk-AX-eyX"/>
-                                            <constraint firstAttribute="trailing" secondItem="Vbq-kQ-DRa" secondAttribute="trailing" constant="50" id="VvA-ku-8om"/>
                                             <constraint firstItem="kO4-zg-9q5" firstAttribute="leading" secondItem="iS7-v9-0ef" secondAttribute="leading" constant="30" id="WOv-Gy-taR"/>
                                             <constraint firstItem="Vbq-kQ-DRa" firstAttribute="top" secondItem="7Bn-98-OIF" secondAttribute="bottom" constant="60" id="d38-d4-RWU"/>
                                             <constraint firstItem="TKC-yR-r3E" firstAttribute="trailing" secondItem="kO4-zg-9q5" secondAttribute="trailing" id="gqA-fh-2TH"/>
+                                            <constraint firstItem="Vbq-kQ-DRa" firstAttribute="centerX" secondItem="iS7-v9-0ef" secondAttribute="centerX" id="hSs-U6-Uoi"/>
                                             <constraint firstItem="wAV-Rg-wAe" firstAttribute="top" secondItem="12f-BW-vFJ" secondAttribute="bottom" constant="30" id="jaL-y4-twO"/>
-                                            <constraint firstItem="Vbq-kQ-DRa" firstAttribute="leading" secondItem="iS7-v9-0ef" secondAttribute="leading" constant="50" id="t3p-Hw-FeA"/>
                                             <constraint firstAttribute="trailing" secondItem="kO4-zg-9q5" secondAttribute="trailing" constant="30" id="tbz-67-xBh"/>
                                             <constraint firstItem="wAV-Rg-wAe" firstAttribute="leading" secondItem="7Bn-98-OIF" secondAttribute="leading" id="unq-rJ-7iK"/>
                                             <constraint firstItem="TKC-yR-r3E" firstAttribute="top" secondItem="12f-BW-vFJ" secondAttribute="top" id="w6I-Cu-lKz"/>
@@ -145,24 +145,24 @@
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doN-k3-0QK">
-                                                <rect key="frame" x="50" y="300" width="275" height="50"/>
+                                                <rect key="frame" x="152.5" y="300" width="70" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="8Xk-2G-Fsh"/>
+                                                    <constraint firstAttribute="width" constant="70" id="fcS-D2-pVm"/>
                                                 </constraints>
                                                 <state key="normal" title="Login"/>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="doN-k3-0QK" firstAttribute="leading" secondItem="nPc-6z-aDR" secondAttribute="leading" constant="50" id="3f8-8H-jd2"/>
                                             <constraint firstItem="gFo-Ya-VI1" firstAttribute="leading" secondItem="nPc-6z-aDR" secondAttribute="leading" constant="30" id="D0S-JY-Dgg"/>
                                             <constraint firstItem="i4h-iG-7zZ" firstAttribute="top" secondItem="gFo-Ya-VI1" secondAttribute="bottom" constant="30" id="PUO-9t-RgP"/>
                                             <constraint firstItem="doN-k3-0QK" firstAttribute="top" secondItem="i4h-iG-7zZ" secondAttribute="bottom" constant="60" id="UIN-gi-h6K"/>
                                             <constraint firstAttribute="trailing" secondItem="gFo-Ya-VI1" secondAttribute="trailing" constant="30" id="Ygr-pM-Rrq"/>
                                             <constraint firstItem="i4h-iG-7zZ" firstAttribute="leading" secondItem="gFo-Ya-VI1" secondAttribute="leading" id="cQl-4Q-dPd"/>
-                                            <constraint firstAttribute="trailing" secondItem="doN-k3-0QK" secondAttribute="trailing" constant="50" id="dDw-Fp-LPg"/>
                                             <constraint firstItem="i4h-iG-7zZ" firstAttribute="trailing" secondItem="gFo-Ya-VI1" secondAttribute="trailing" id="fnR-Ll-R8B"/>
                                             <constraint firstItem="gFo-Ya-VI1" firstAttribute="top" secondItem="nPc-6z-aDR" secondAttribute="top" constant="150" id="hq8-fs-K5U"/>
+                                            <constraint firstItem="doN-k3-0QK" firstAttribute="centerX" secondItem="nPc-6z-aDR" secondAttribute="centerX" id="y89-bV-NLq"/>
                                         </constraints>
                                     </view>
                                 </subviews>
