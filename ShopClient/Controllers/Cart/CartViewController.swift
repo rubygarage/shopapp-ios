@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol, CartTableDelegateProtocol, CartTableCellProtocol {
+class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol, CartTableDelegateProtocol, CartTableCellProtocol, CartFooterProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     var tableDataSource: CartTableDataSource?
@@ -83,6 +83,11 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     
     func didUpdate(cartProduct: CartProduct, quantity: Int) {
         viewModel.update(cartProduct: cartProduct, quantity: quantity)
+    }
+    
+    // MARK: - CartFooterProtocol
+    func didTapProceed() {
+        // TODO:
     }
     
     // MARK: - ErrorViewProtocol

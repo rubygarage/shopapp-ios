@@ -31,6 +31,9 @@
                     </constraints>
                     <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                     <state key="normal" title="Procced"/>
+                    <connections>
+                        <action selector="proceedTapped:" destination="-1" eventType="touchUpInside" id="Yad-Tg-YW0"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="y9J-YB-coE">
                     <rect key="frame" x="10" y="15" width="42" height="21"/>

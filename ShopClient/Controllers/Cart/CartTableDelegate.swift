@@ -17,9 +17,9 @@ protocol CartTableDelegateProtocol {
 }
 
 class CartTableDelegate: NSObject, UITableViewDelegate {
-    var delegate: CartTableDelegateProtocol?
+    var delegate: (CartTableDelegateProtocol & CartFooterProtocol)?
     
-    init(delegate: CartTableDelegateProtocol?) {
+    init(delegate: (CartTableDelegateProtocol & CartFooterProtocol)?) {
         super.init()
         
         self.delegate = delegate
@@ -31,7 +31,7 @@ class CartTableDelegate: NSObject, UITableViewDelegate {
         let totalPrice: Float = delegate?.totalPrice() ?? 0
         let currency = delegate?.currency() ?? String()
         
-        return CartFooterView(productsCounts: productsCount, totalPrice: totalPrice, currency: currency)
+        return CartFooterView(productsCounts: productsCount, totalPrice: totalPrice, currency: currency, delegate: delegate)
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

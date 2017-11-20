@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CartFooterProtocol {
-    // TODO:
+    func didTapProceed()
 }
 
 class CartFooterView: UIView {
@@ -18,10 +18,13 @@ class CartFooterView: UIView {
     @IBOutlet weak var orderTotalLabel: UILabel!
     @IBOutlet weak var totalPriceLabel: UILabel!
     
-    init(productsCounts: Int, totalPrice: Float, currency: String) {
+    var delegate: CartFooterProtocol?
+    
+    init(productsCounts: Int, totalPrice: Float, currency: String, delegate: CartFooterProtocol?) {
         super.init(frame: CGRect.zero)
         
         commonInit()
+        self.delegate = delegate
         populateViews(with: productsCounts, totalPrice: totalPrice, currency: currency)
     }
     
@@ -41,7 +44,17 @@ class CartFooterView: UIView {
     }
     
     private func populateViews(with productsCount: Int, totalPrice: Float, currency: String) {
-        orderTotalLabel.text = "O t\(productsCount)"
+        let format = NSLocalizedString("OrdersCount", comment: String())
+        let message = String.localizedStringWithFormat(format, productsCount)
+        
+        orderTotalLabel.text = message
+        
+//        orderTotalLabel.text = "O t\(productsCount)"
         totalPriceLabel.text = "\(totalPrice) \(currency)"
+    }
+    
+    // MARK: - actions
+    @IBAction func proceedTapped(_ sender: UIButton) {
+        delegate?.didTapProceed()
     }
 }
