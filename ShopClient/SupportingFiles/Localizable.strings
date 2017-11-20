@@ -17,6 +17,7 @@
 "ControllerTitle.Cart" = "Cart";
 "ControllerTitle.SignUp" = "Sign Up";
 "ControllerTitle.Login" = "Login";
+"ControllerTitle.Checkout" = "Checkout";
 
 "Alert.Error" = "Error";
 

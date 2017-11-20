@@ -28,6 +28,10 @@ extension UIViewController {
         pushController(with: UIStoryboard.cart(), identifier: ControllerIdentifier.cart)
     }
     
+    func pushCheckoutController() {
+        pushController(with: UIStoryboard.checkout(), identifier: ControllerIdentifier.checkout)
+    }
+    
     func pushDetailController(with product: Product) {
         let productDetaillsController = UIStoryboard.productDetails().instantiateViewController(withIdentifier: ControllerIdentifier.productDetails) as! ProductDetailsViewController
         productDetaillsController.productId = product.id 

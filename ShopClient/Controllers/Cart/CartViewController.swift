@@ -87,7 +87,7 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     
     // MARK: - CartFooterProtocol
     func didTapProceed() {
-        // TODO:
+        pushCheckoutController()
     }
     
     // MARK: - ErrorViewProtocol

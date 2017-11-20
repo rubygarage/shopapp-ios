@@ -45,11 +45,7 @@ class CartFooterView: UIView {
     
     private func populateViews(with productsCount: Int, totalPrice: Float, currency: String) {
         let format = NSLocalizedString("OrdersCount", comment: String())
-        let message = String.localizedStringWithFormat(format, productsCount)
-        
-        orderTotalLabel.text = message
-        
-//        orderTotalLabel.text = "O t\(productsCount)"
+        orderTotalLabel.text = String.localizedStringWithFormat(format, productsCount)
         totalPriceLabel.text = "\(totalPrice) \(currency)"
     }
     
