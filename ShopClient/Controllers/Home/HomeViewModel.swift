@@ -13,15 +13,17 @@ class HomeViewModel: BaseViewModel {
     
     public func loadData(with disposeBag: DisposeBag) {
         state.onNext(.loading(showHud: true))
-        Single.zip(productsSingle, articlesSingle).do().subscribe(onSuccess: { [weak self] (products, articles) in
-            if let products = products, let articles = articles {
-                self?.data.value = (products, articles)
+        Single.zip(productsSingle, articlesSingle).do()
+            .subscribe(onSuccess: { [weak self] (products, articles) in
+                if let products = products, let articles = articles {
+                    self?.data.value = (products, articles)
+                }
+                self?.state.onNext(.content)
+            }) { [weak self] (error) in
+                let castedError = error as! RepoError
+                self?.state.onNext(.error(error: castedError))
             }
-            self?.state.onNext(.content)
-        }) { [weak self] (error) in
-            let castedError = error as! RepoError
-            self?.state.onNext(.error(error: castedError))
-        }.disposed(by: disposeBag)
+            .disposed(by: disposeBag)
     }
     
     private var productsSingle: Single<[Product]?> {
