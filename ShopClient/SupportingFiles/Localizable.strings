@@ -27,6 +27,7 @@
 "Button.AddedToCart" = "Added to cart";
 "Button.Ok" = "OK";
 "Button.Remove" = "Remove";
+"Button.Proceed" = "Proceed to checkout";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";

@@ -8,10 +8,11 @@
 
 import UIKit
 
-class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol, CartTableCellProtocol {
+class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol, CartTableDelegateProtocol, CartTableCellProtocol {
     @IBOutlet weak var tableView: UITableView!
     
-    var dataSource: CartTableDataSource?
+    var tableDataSource: CartTableDataSource?
+    var tableDelegate: CartTableDelegate?
     
     override func viewDidLoad() {
         viewModel = CartViewModel()
@@ -31,8 +32,11 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
         let cartCellNib = UINib(nibName: String(describing: CartTableViewCell.self), bundle: nil)
         tableView.register(cartCellNib, forCellReuseIdentifier: String(describing: CartTableViewCell.self))
         
-        dataSource = CartTableDataSource(delegate: self)
-        tableView.dataSource = dataSource
+        tableDataSource = CartTableDataSource(delegate: self)
+        tableView.dataSource = tableDataSource
+        
+        tableDelegate = CartTableDelegate(delegate: self)
+        tableView.delegate = tableDelegate
     }
     
     private func setupViewModel() {
@@ -57,6 +61,19 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
             return viewModel.data.value[index]
         }
         return nil
+    }
+    
+    // MARK: - CartTableDelegateProtocol
+    func totalPrice() -> Float {
+        var price: Float = 0
+        for cartProduct in viewModel.data.value {
+            price += Float(cartProduct.quantity) * (Float(cartProduct.productVariant?.price ?? String()) ?? 1)
+        }
+        return price
+    }
+    
+    func currency() -> String {
+        return viewModel.data.value.first?.currency ?? String()
     }
     
     // MARK: - CartTableCellProtocol
