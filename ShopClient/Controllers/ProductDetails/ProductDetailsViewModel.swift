@@ -23,15 +23,15 @@ class ProductDetailsViewModel: BaseViewModel {
 
     // MARK: - public
     public func loadData() {
-        state.onNext((state: .loading, error: nil))
+        state.onNext(.loading(showHud: true))
         Repository.shared.getProduct(id: productId) { [weak self] (product, error) in
             if let error = error {
-                self?.state.onNext((state: .error, error: error))
+                self?.state.onNext(.error(error: error))
             }
             if let productObject = product {
                 self?.setupData(product: productObject)
                 self?.product.value = productObject
-                self?.state.onNext((state: .content, error: nil))
+                self?.state.onNext(.content)
             }
         }
     }

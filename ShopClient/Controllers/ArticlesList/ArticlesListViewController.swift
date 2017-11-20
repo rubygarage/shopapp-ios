@@ -79,4 +79,9 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
             pushArticleDetailsController(with: article.id)
         }
     }
+    
+    // MARK: - ErrorViewProtocol
+    func didTapTryAgain() {
+        loadData()
+    }
 }

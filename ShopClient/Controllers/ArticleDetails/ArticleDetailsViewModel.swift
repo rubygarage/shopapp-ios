@@ -9,21 +9,26 @@
 import RxSwift
 
 class ArticleDetailsViewModel: BaseViewModel {
+    var data = PublishSubject<Article>()
+    
     var articleId: String!
     
-    var data: Single<Article> {
-        state.onNext((state: .loading, error: nil))
-        return Single.create(subscribe: { (single) in
-            Repository.shared.getArticle(id: self.articleId, callback: { [weak self] (article, error) in
-                if let error = error {
-                    self?.state.onNext((state: .error, error: error))
-                }
-                if let article = article {
-                    single(.success(article))
-                    self?.state.onNext((state: .content, error: nil))
-                }
-            })
-            return Disposables.create()
+    var loadData: AnyObserver<()> {
+        return AnyObserver { [weak self] event in
+            self?.loadArticle()
+        }
+    }
+    
+    func loadArticle() {
+        state.onNext(.loading(showHud: true))
+        Repository.shared.getArticle(id: self.articleId, callback: { [weak self] (article, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            }
+            if let article = article {
+                self?.data.onNext(article)
+                self?.state.onNext(.content)
+            }
         })
     }
 }

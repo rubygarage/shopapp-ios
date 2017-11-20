@@ -8,23 +8,22 @@
 
 import RxSwift
 
-class HomeViewModel: BaseViewModel {
-    var lastArrivalsProducts = Variable<[Product]>([Product]())
-    var newInBlogArticles = Variable<[Article]>([Article]())
+class HomeViewModel: BaseViewModel {    
+    var data = Variable<(products: [Product], articles: [Article])>(products: [Product](), articles: [Article]())
     
-    var data: Single<([Product]?, [Article]?)> {
-        state.onNext((.loading, nil))
-        return Single.zip(productsSingle, articlesSingle).do(onNext: { [weak self] (products, articles) in
-            if let products = products {
-                self?.lastArrivalsProducts.value = products
+    public func loadData(with disposeBag: DisposeBag) {
+        state.onNext(.loading(showHud: true))
+        Single.zip(productsSingle, articlesSingle).do()
+            .subscribe(onSuccess: { [weak self] (products, articles) in
+                if let products = products, let articles = articles {
+                    self?.data.value = (products, articles)
+                }
+                self?.state.onNext(.content)
+            }) { [weak self] (error) in
+                let castedError = error as! RepoError
+                self?.state.onNext(.error(error: castedError))
             }
-            if let articles = articles {
-                self?.newInBlogArticles.value = articles
-            }
-            self?.state.onNext((.content, nil))
-        }, onError: { [weak self] (error) in
-            self?.state.onNext((.error, (RepoError(with: error))))
-        })
+            .disposed(by: disposeBag)
     }
     
     private var productsSingle: Single<[Product]?> {

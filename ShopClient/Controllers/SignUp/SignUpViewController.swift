@@ -59,6 +59,12 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
             .bind(to: viewModel.signUpPressed)
             .disposed(by: disposeBag)
         
+        signUpButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.isValid
             .subscribe(onNext: { [weak self] isValid in
                 self?.signUpButton.isEnabled = isValid

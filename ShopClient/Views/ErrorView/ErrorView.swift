@@ -15,6 +15,7 @@ import UIKit
 class ErrorView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var errorTextLabel: UILabel!
+    @IBOutlet weak var errorImageView: UIImageView!
     @IBOutlet weak var tryAgainButton: UIButton!
     
     var delegate: ErrorViewProtocol?
@@ -45,6 +46,7 @@ class ErrorView: UIView {
     }
     
     private func updateUI() {
+        errorImageView.isHidden = error is NetworkError == false
         errorTextLabel.text = error?.errorMessage
     }
     

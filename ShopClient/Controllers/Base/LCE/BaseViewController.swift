@@ -10,12 +10,16 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Toaster
 
-enum ViewState: Int {
-    case loading
+enum ViewState {
+    case loading(showHud: Bool)
     case content
-    case error
+    case error(error: RepoError?)
 }
+
+private let kToastBottomOffset: CGFloat = 80
+private let kToastDuration: TimeInterval = 3
 
 class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol {
     let disposeBag = DisposeBag()
@@ -35,31 +39,35 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
         loadingView.frame = view.frame
         errorView.frame = view.frame
         errorView.delegate = self
+        
+        ToastView.appearance().bottomOffsetPortrait = kToastBottomOffset
     }
     
     private func subscribeViewState() {
-        viewModel.state.subscribe(onNext: { [weak self] viewState in
-            self?.set(state: viewState.state, error: viewState.error)
+        viewModel.state.subscribe(onNext: { [weak self] state in
+            self?.set(state: state)
         }).disposed(by: disposeBag)
     }
     
-    private func set(state: ViewState, error: RepoError? = nil) {
+    private func set(state: ViewState) {
         switch state {
         case .content:
             setContentState()
             break
-        case .error:
+        case .error(let error):
             setErrorState(with: error)
             break
-        default:
-            setLoadingState()
+        case .loading(let showHud):
+            setLoadingState(showHud: showHud)
             break
         }
     }
     
-    private func setLoadingState() {
+    private func setLoadingState(showHud: Bool) {
         errorView.removeFromSuperview()
-        view.addSubview(loadingView)
+        if showHud {
+            view.addSubview(loadingView)
+        }
     }
     
     private func setContentState() {
@@ -68,8 +76,51 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
     }
     
     private func setErrorState(with error: RepoError?) {
+        if error is CriticalError {
+            process(criticalError: error as? CriticalError)
+        } else if error is NonCriticalError {
+            process(nonCriticalError: error as? NonCriticalError)
+        } else if error is ContentError {
+            process(contentError: error as? ContentError)
+        } else if error is NetworkError {
+            process(networkError: error as? NetworkError)
+        } else {
+            process(defaultError: error)
+        }
+    }
+    
+    private func process(criticalError: CriticalError?) {
+        showToast(with: criticalError?.errorMessage)
+        if self is HomeViewController == false {
+            setHomeController()
+        } else {
+            loadingView.removeFromSuperview()
+        }
+    }
+    
+    private func process(nonCriticalError: NonCriticalError?) {
         loadingView.removeFromSuperview()
-        errorView.error = error
+        showToast(with: nonCriticalError?.errorMessage)
+    }
+    
+    private func process(contentError: ContentError?) {
+        loadingView.removeFromSuperview()
+        errorView.error = contentError
         view.addSubview(errorView)
+    }
+    
+    private func process(networkError: NetworkError?) {
+        loadingView.removeFromSuperview()
+        errorView.error = networkError
+        view.addSubview(errorView)
+    }
+    
+    private func process(defaultError: RepoError?) {
+        loadingView.removeFromSuperview()
+    }
+    
+    private func showToast(with message: String?) {
+        let toast = Toast(text: message, duration: kToastDuration)
+        toast.show()
     }
 }

@@ -44,6 +44,12 @@ class LoginViewController: BaseViewController<LoginViewModel> {
             .bind(to: viewModel.loginPressed)
             .disposed(by: disposeBag)
         
+        loginButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.isValid
             .subscribe(onNext: { [weak self] isValid in
                 self?.loginButton.isEnabled = isValid

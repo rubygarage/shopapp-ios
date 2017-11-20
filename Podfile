@@ -6,7 +6,7 @@ target 'ShopClient' do
   use_frameworks!
 
   # Pods for ShopClient
-  pod 'Mobile-Buy-SDK', '~> 3.0'
+  pod 'Mobile-Buy-SDK', '~> 3.1'
   
   # UI
   pod 'SDWebImage', '~> 4.1'
@@ -14,13 +14,14 @@ target 'ShopClient' do
   pod 'UIScrollView-InfiniteScroll', '~> 1.0'
   pod 'SKPhotoBrowser', '~> 4.1'
   pod 'TPKeyboardAvoiding', '~> 1.3'
+  pod 'Toaster', '~> 2.1'
   
   # Menu
   pod 'SideMenu', '~> 2.3'
   
   # Database
-  pod 'CoreStore', :git => 'https://github.com/JohnEstropia/CoreStore.git', :branch => 'prototype/Swift_3_2'
-  
+  pod 'CoreStore', '~> 4.2'
+
   # Architecture
   pod 'RxSwift', '~> 4.0'
   pod 'RxCocoa', '~> 4.0'

@@ -23,15 +23,16 @@ class CategoryViewModel: GridCollectionViewModel {
     }
     
     private func loadRemoteData() {
-        state.onNext((state: .loading, error: nil))
+        let showHud = products.value.count == 0
+        state.onNext(.loading(showHud: showHud))
         let reverse = selectedSortingValue == .createdAt
         Repository.shared.getCategoryDetails(id: categoryId, paginationValue: paginationValue, sortBy: selectedSortingValue, reverse: reverse) { [weak self] (result, error) in
             if let error = error {
-                self?.state.onNext((state: .error, error: error))
+                self?.state.onNext(.error(error: error))
             }
             if let category = result {
                 self?.updateData(category: category)
-                self?.state.onNext((state: .content, error: nil))
+                self?.state.onNext(.content)
             }
             self?.canLoadMore = result?.products?.count ?? 0 == kItemsPerPage
         }

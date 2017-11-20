@@ -13,38 +13,38 @@ class CartViewModel: BaseViewModel {
     
     // MARK: - public
     public func loadData() {
-        state.onNext((state: .loading, error: nil))
+        state.onNext(.loading(showHud: true))
         Repository.shared.getCartProductList { [weak self] (cartProducts, error) in
             if let error = error {
-                self?.state.onNext((state: .error, error: error))
+                self?.state.onNext(.error(error: error))
             }
             if let products = cartProducts {
                 self?.data.value = products
-                self?.state.onNext((state: .content, error: nil))
+                self?.state.onNext(.content)
             }
         }
     }
     
     public func remove(cartProduct: CartProduct) {
-        state.onNext((state: .loading, error: nil))
+        state.onNext(.loading(showHud: true))
         Repository.shared.deleteProductFromCart(with: cartProduct.productVariant?.id) { [weak self] (success, error) in
             if let error = error {
-                self?.state.onNext((state: .error, error: error))
+                self?.state.onNext(.error(error: error))
             }
             if let success = success {
-                self?.state.onNext((state: .content, error: nil))
+                self?.state.onNext(.content)
                 success ? self?.removeFromData(with: cartProduct) : ()
             }
         }
     }
     
     public func update(cartProduct: CartProduct, quantity: Int) {
-        state.onNext((state: .loading, error: nil))
+        state.onNext(.loading(showHud: true))
         Repository.shared.changeCartProductQuantity(with: cartProduct.productVariant?.id, quantity: quantity) { [weak self] (_, error) in
             if let error = error {
-                self?.state.onNext((state: .error, error: error))
+                self?.state.onNext(.error(error: error))
             } else {
-                self?.state.onNext((state: .content, error: nil))
+                self?.state.onNext(.content)
                 self?.loadData()
             }
         }

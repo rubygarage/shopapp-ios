@@ -47,8 +47,6 @@ class MenuViewController: BaseViewController<MenuViewModel>, MenuTableDataSource
     private func loadData() {
         viewModel.data.subscribe(onSuccess: { [weak self] _ in
             self?.tableView.reloadData()
-        }, onError: { [weak self] (error) in
-            self?.showErrorAlert(with: error.localizedDescription)
         }).disposed(by: disposeBag)
     }
     

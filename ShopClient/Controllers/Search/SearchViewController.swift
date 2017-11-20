@@ -81,4 +81,9 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     func didTapSearch() {
         viewModel.reloadData()
     }
+    
+    // MARK: - ErrorViewProtocol
+    func didTapTryAgain() {
+        loadData()
+    }
 }

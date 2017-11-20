@@ -45,4 +45,9 @@ class LastArrivalsViewController: GridCollectionViewController<LastArrivalsViewM
     override func infinityScrollHandler() {
         viewModel.loadNextPage()
     }
+    
+    // MARK: - ErrorViewProtocol
+    func didTapTryAgain() {
+        loadData()
+    }
 }

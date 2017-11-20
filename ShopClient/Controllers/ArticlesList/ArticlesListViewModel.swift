@@ -22,14 +22,15 @@ class ArticlesListViewModel: BasePaginationViewModel {
     }
     
     private func loadRemoteData() {
-        state.onNext((state: .loading, error: nil))
+        let showHud = items.value.count == 0
+        state.onNext(.loading(showHud: showHud))
         Repository.shared.getArticleList(paginationValue: paginationValue, sortBy: SortingValue.createdAt, reverse: true) { [weak self] (articles, error) in
             if let error = error {
-                self?.state.onNext((state: .error, error: error))
+                self?.state.onNext(.error(error: error))
             }
             if let articles = articles {
                 self?.updateArticles(with: articles)
-                self?.state.onNext((state: .content, error: nil))
+                self?.state.onNext(.content)
             }
             self?.canLoadMore = articles?.count ?? 0 == kItemsPerPage
         }

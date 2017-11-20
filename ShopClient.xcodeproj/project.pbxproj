@@ -152,6 +152,7 @@
 		61D561751F7419BD00233DA3 /* ImagesCarousel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61D561741F7419BD00233DA3 /* ImagesCarousel.storyboard */; };
 		61D7A2861F7A9FBF00031093 /* UIViewControllerBarButtonItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D7A2851F7A9FBF00031093 /* UIViewControllerBarButtonItems.swift */; };
 		61DA4B881F614BBC00444F64 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DA4B871F614BBC00444F64 /* SearchViewController.swift */; };
+		61E47F2B1FBDE8FD00EA4449 /* ReachabilityNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E47F2A1FBDE8FD00EA4449 /* ReachabilityNetwork.swift */; };
 		61E4E6341F56C868001C6E01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4E6331F56C868001C6E01 /* AppDelegate.swift */; };
 		61E4E6391F56C868001C6E01 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61E4E6371F56C868001C6E01 /* Home.storyboard */; };
 		61E4E63B1F56C868001C6E01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61E4E63A1F56C868001C6E01 /* Assets.xcassets */; };
@@ -331,6 +332,7 @@
 		61D561741F7419BD00233DA3 /* ImagesCarousel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImagesCarousel.storyboard; sourceTree = "<group>"; };
 		61D7A2851F7A9FBF00031093 /* UIViewControllerBarButtonItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerBarButtonItems.swift; sourceTree = "<group>"; };
 		61DA4B871F614BBC00444F64 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		61E47F2A1FBDE8FD00EA4449 /* ReachabilityNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityNetwork.swift; sourceTree = "<group>"; };
 		61E4E6301F56C868001C6E01 /* ShopClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E4E6331F56C868001C6E01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61E4E6381F56C868001C6E01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
@@ -955,6 +957,14 @@
 			path = CartButtonView;
 			sourceTree = "<group>";
 		};
+		61E47F291FBDE8D500EA4449 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				61E47F2A1FBDE8FD00EA4449 /* ReachabilityNetwork.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		61E4E6271F56C868001C6E01 = {
 			isa = PBXGroup;
 			children = (
@@ -980,6 +990,7 @@
 				61CEAA641F5E98110016FBD7 /* Constants */,
 				611EF3591F5956A3001B8B9C /* Controllers */,
 				61CEAA6A1F5ECFD10016FBD7 /* Extensions */,
+				61E47F291FBDE8D500EA4449 /* Helpers */,
 				611EF3501F5829AB001B8B9C /* Models */,
 				61AFA3F01F9DFBD6004B9D53 /* Repository */,
 				6180AC011F72CCFA007768F2 /* SupportingFiles */,
@@ -1115,6 +1126,7 @@
 				TargetAttributes = {
 					61E4E62F1F56C868001C6E01 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = J5BJ6M865W;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1234,6 +1246,7 @@
 				"${BUILT_PRODUCTS_DIR}/SKPhotoBrowser/SKPhotoBrowser.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
+				"${BUILT_PRODUCTS_DIR}/Toaster/Toaster.framework",
 				"${BUILT_PRODUCTS_DIR}/UIScrollView-InfiniteScroll/UIScrollView_InfiniteScroll.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1248,6 +1261,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SKPhotoBrowser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toaster.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIScrollView_InfiniteScroll.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1303,6 +1317,7 @@
 				61E8A2211FAC99F50092EDC1 /* BasePaginationViewModel.swift in Sources */,
 				61B94C101F82409300B6887C /* ProductOptionHeaderView.swift in Sources */,
 				6106C6CB1F7A40F400E87486 /* ArticleDetailsViewController.swift in Sources */,
+				61E47F2B1FBDE8FD00EA4449 /* ReachabilityNetwork.swift in Sources */,
 				6196CF9E1F9F9E5600F823AD /* Author.swift in Sources */,
 				6196CF881F9F8AF200F823AD /* ProductRepositoryInterface.swift in Sources */,
 				615A976F1FA0998400C6095D /* ShopifyProductOptionAdapter.swift in Sources */,
@@ -1524,6 +1539,7 @@
 			baseConfigurationReference = 38B8C07405420E82AD6AAA3E /* Pods-ShopClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = J5BJ6M865W;
 				INFOPLIST_FILE = ShopClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = RG.ShopClient;
@@ -1537,6 +1553,7 @@
 			baseConfigurationReference = 10BBCCE808D12F6C873F9215 /* Pods-ShopClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = J5BJ6M865W;
 				INFOPLIST_FILE = ShopClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = RG.ShopClient;
