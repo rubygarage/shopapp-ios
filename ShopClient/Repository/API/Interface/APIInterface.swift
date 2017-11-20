@@ -37,4 +37,7 @@ protocol APIInterface {
     func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, callback: @escaping RepoCallback<Bool>)
     func login(with email: String, password: String, callback: @escaping RepoCallback<Bool>)
     func isLoggedIn() -> Bool
+    
+    // MARK: - checkout
+    func getCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Bool>)
 }

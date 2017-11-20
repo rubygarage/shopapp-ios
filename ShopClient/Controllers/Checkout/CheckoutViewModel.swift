@@ -9,5 +9,20 @@
 import UIKit
 
 class CheckoutViewModel: BaseViewModel {
-
+    public func createCheckout() {
+        Repository.shared.getCartProductList { [weak self] (cartProducts, error) in
+            if let error = error {
+//                self?.state.
+            }
+            if let products = cartProducts {
+                self?.check(cartProducts: products)
+            }
+        }
+    }
+    
+    private func check(cartProducts: [CartProduct]) {
+        Repository.shared.getCheckout(cartProducts: cartProducts) { (success, error) in
+            print()
+        }
+    }
 }
