@@ -29,6 +29,9 @@
 "Button.Ok" = "OK";
 "Button.Remove" = "Remove";
 "Button.Proceed" = "Proceed to checkout";
+"Button.PaymentMethodWebsite" = "Pay on our website";
+"Button.PaymentMethodCard" = "Pay by card";
+"Button.PaymentMethodApplePay" = "Apple Pay";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";
@@ -36,6 +39,10 @@
 "Label.PriceFrom" = "From %@ %@";
 "Label.Quantity" = "Quantity:";
 "Label.PriceEach" = "%@ %@ each";
+"Label.SelectPaymentMethod" = "Please select a Payment Method";
+"Label.PaymentMethodWebsite" = "Use the card to pay for on our website";
+"Label.PaymentMethodCard" = "Use the card to pay for on our app";
+"Label.PaymentMethodApplePay" = "You can use any credit or debit card in you AppleID account (including your cards in Apple Pay) for quick, easy checkout";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

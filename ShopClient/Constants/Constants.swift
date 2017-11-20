@@ -41,8 +41,8 @@ struct CornerRadius {
 struct Layer {
     static let shadowColor = UIColor.lightGray.cgColor
     static let shadowOpacity: Float = 0.5
-    static let shadowOffset = CGSize.zero
-    static let shadowRadius: CGFloat = 1.5
+    static let shadowOffset = CGSize(width: 0, height: 1)
+    static let shadowRadius: CGFloat = 1
 }
 
 struct SessionData {
