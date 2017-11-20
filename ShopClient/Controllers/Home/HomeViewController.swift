@@ -22,6 +22,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         
         setupTitle()
         setupTableView()
+        setupViewModel()
         loadData()
     }
     
@@ -72,19 +73,23 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     private func updateBarItems() {
-        let barItemsVisible = viewModel.lastArrivalsProducts.value.count > 0 && viewModel.newInBlogArticles.value.count > 0
+        let barItemsVisible = viewModel.data.value.products.count > 0 && viewModel.data.value.articles.count > 0
         if barItemsVisible {
             addMenuBarButton()
             addRightBarItems()
         }
     }
     
-    private func loadData() {
-        viewModel.data.subscribe(onSuccess: { [weak self] (products, articles) in
+    private func setupViewModel() {
+        viewModel.data.asObservable().subscribe(onNext: { [weak self] _ in
             self?.tableView.reloadData()
             self?.updateBarItems()
             self?.setupSideMenu()
         }).disposed(by: disposeBag)
+    }
+    
+    private func loadData() {
+        viewModel.loadData(with: disposeBag)
     }
     
     // MARK: - override
@@ -96,31 +101,31 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     
     // MARK: - HomeTableDataSourceProtocol
     func lastArrivalsObjects() -> [Product] {
-        return viewModel.lastArrivalsProducts.value
+        return viewModel.data.value.products
     }
     
     func didSelectProduct(at index: Int) {
-        if index < viewModel.lastArrivalsProducts.value.count {
-            let selectedProduct = viewModel.lastArrivalsProducts.value[index]
+        if index < viewModel.data.value.products.count {
+            let selectedProduct = viewModel.data.value.products[index]
             pushDetailController(with: selectedProduct)
         }
     }
     
     func articlesCount() -> Int {
-        return viewModel.newInBlogArticles.value.count
+        return viewModel.data.value.articles.count
     }
     
     func article(at index: Int) -> Article? {
-        if index < viewModel.newInBlogArticles.value.count {
-            return viewModel.newInBlogArticles.value[index]
+        if index < viewModel.data.value.articles.count {
+            return viewModel.data.value.articles[index]
         }
         return nil
     }
     
     // MARK: - HomeTableDelegateProtocol
     func didSelectArticle(at index: Int) {
-        if index < viewModel.newInBlogArticles.value.count {
-            let article = viewModel.newInBlogArticles.value[index]
+        if index < viewModel.data.value.articles.count {
+            let article = viewModel.data.value.articles[index]
             pushArticleDetailsController(with: article.id)
         }
     }
@@ -136,6 +141,6 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     
     // MARK: - ErrorViewProtocol
     func didTapTryAgain() {
-        loadData()
+        viewModel.loadData(with: disposeBag)
     }
 }
