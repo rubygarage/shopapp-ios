@@ -190,12 +190,13 @@ class API: NSObject, APIInterface {
     }
     
     // MARK: - checkout
-    func getCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Bool>) {
+    func getCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
         let email = sessionData().email
         let query = checkoutQuery(email: email, cartProducts: cartProducts)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
             if let checkout = response?.checkoutCreate?.checkout {
-                print()
+                let checkoutItem = Checkout(with: checkout)
+                callback(checkoutItem, nil)
             } else if let error = response?.checkoutCreate?.userErrors.first {
                 let responseError = self?.process(error: error)
                 callback(nil, responseError)

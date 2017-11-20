@@ -39,5 +39,5 @@ protocol APIInterface {
     func isLoggedIn() -> Bool
     
     // MARK: - checkout
-    func getCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Bool>)
+    func getCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>)
 }

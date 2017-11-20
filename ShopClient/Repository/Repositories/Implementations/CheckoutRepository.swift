@@ -9,7 +9,7 @@
 import Foundation
 
 extension Repository {
-    func getCheckout(cartProducts: [CartProduct], callback: @escaping (Bool?, RepoError?) -> ()) {
+    func getCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
         APICore?.getCheckout(cartProducts: cartProducts, callback: callback)
     }
 }

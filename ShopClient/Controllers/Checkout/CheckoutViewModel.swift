@@ -6,23 +6,32 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import UIKit
+import RxSwift
 
 class CheckoutViewModel: BaseViewModel {
-    public func createCheckout() {
+    var checkout: Checkout?
+    
+    public func loadData() {
+        state.onNext(.loading(showHud: true))
         Repository.shared.getCartProductList { [weak self] (cartProducts, error) in
             if let error = error {
-//                self?.state.
+                self?.state.onNext(.error(error: error))
             }
             if let products = cartProducts {
-                self?.check(cartProducts: products)
+                self?.createCheckout(cartProducts: products)
             }
         }
     }
     
-    private func check(cartProducts: [CartProduct]) {
-        Repository.shared.getCheckout(cartProducts: cartProducts) { (success, error) in
-            print()
+    private func createCheckout(cartProducts: [CartProduct]) {
+        Repository.shared.getCheckout(cartProducts: cartProducts) { [weak self] (checkout, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            }
+            if let checkout = checkout {
+                self?.checkout = checkout
+                self?.state.onNext(.content)
+            }
         }
     }
 }

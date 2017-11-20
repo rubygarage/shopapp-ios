@@ -26,7 +26,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel> {
 
         setupViews()
         populateViews()
-        setupViewModel()
         loadData()
     }
     
@@ -50,11 +49,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel> {
         paymentByApplePayButton.setTitle(NSLocalizedString("Button.PaymentMethodApplePay", comment: String()), for: .normal)
     }
     
-    private func setupViewModel() {
-        // TODO:
-    }
-    
     private func loadData() {
-        viewModel.createCheckout()
+        viewModel.loadData()
     }
 }

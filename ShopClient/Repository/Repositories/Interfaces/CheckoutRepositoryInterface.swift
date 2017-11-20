@@ -7,5 +7,5 @@
 //
 
 protocol CheckoutRepositoryInterface {
-    func getCheckout(cartProducts: [CartProduct], callback: @escaping (Bool?, RepoError?) -> ())
+    func getCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>)
 }
