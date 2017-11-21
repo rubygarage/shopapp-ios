@@ -53,6 +53,19 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel> {
         viewModel.loadData(with: disposeBag)
     }
     
+    private func openBrowserIfNeeded(with link: URL) {
+        if UIApplication.shared.canOpenURL(link) {
+            UIApplication.shared.open(link, options: [:])
+        }
+    }
+    
+    // MARK: - actions
+    @IBAction func payWebsiteTapped(_ sender: UIButton) {
+        if let link = URL(string: viewModel.checkout?.webUrl ?? String()) {
+            openBrowserIfNeeded(with: link)
+        }
+    }
+    
     // MARK: - ErrorViewProtocol
     func didTapTryAgain() {
         viewModel.loadData(with: disposeBag)
