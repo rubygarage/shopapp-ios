@@ -51,11 +51,8 @@ class CartViewModel: BaseViewModel {
     }
     
     public func calculateTotalPrice() -> Float {
-        var price: Float = 0
-        for cartProduct in data.value {
-            price += Float(cartProduct.quantity) * (Float(cartProduct.productVariant?.price ?? String()) ?? 1)
-        }
-        return price
+        let allPrices = data.value.map({ Float($0.quantity) * (Float($0.productVariant?.price ?? String()) ?? 1) })
+        return allPrices.reduce(0, +)
     }
     
     // MARK: - private
