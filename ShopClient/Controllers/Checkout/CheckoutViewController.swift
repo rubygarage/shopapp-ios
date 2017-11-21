@@ -50,6 +50,11 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel> {
     }
     
     private func loadData() {
-        viewModel.loadData()
+        viewModel.loadData(with: disposeBag)
+    }
+    
+    // MARK: - ErrorViewProtocol
+    func didTapTryAgain() {
+        viewModel.loadData(with: disposeBag)
     }
 }
