@@ -8,10 +8,11 @@
 
 import UIKit
 
-class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol, CartTableCellProtocol {
+class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol, CartTableDelegateProtocol, CartTableCellProtocol, CartFooterProtocol {
     @IBOutlet weak var tableView: UITableView!
     
-    var dataSource: CartTableDataSource?
+    var tableDataSource: CartTableDataSource?
+    var tableDelegate: CartTableDelegate?
     
     override func viewDidLoad() {
         viewModel = CartViewModel()
@@ -31,8 +32,11 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
         let cartCellNib = UINib(nibName: String(describing: CartTableViewCell.self), bundle: nil)
         tableView.register(cartCellNib, forCellReuseIdentifier: String(describing: CartTableViewCell.self))
         
-        dataSource = CartTableDataSource(delegate: self)
-        tableView.dataSource = dataSource
+        tableDataSource = CartTableDataSource(delegate: self)
+        tableView.dataSource = tableDataSource
+        
+        tableDelegate = CartTableDelegate(delegate: self)
+        tableView.delegate = tableDelegate
     }
     
     private func setupViewModel() {
@@ -59,6 +63,15 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
         return nil
     }
     
+    // MARK: - CartTableDelegateProtocol
+    func totalPrice() -> Float {
+        return viewModel.calculateTotalPrice()
+    }
+    
+    func currency() -> String {
+        return viewModel.data.value.first?.currency ?? String()
+    }
+    
     // MARK: - CartTableCellProtocol
     func didTapRemove(with item: CartProduct) {
         viewModel.remove(cartProduct: item)
@@ -66,6 +79,11 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     
     func didUpdate(cartProduct: CartProduct, quantity: Int) {
         viewModel.update(cartProduct: cartProduct, quantity: quantity)
+    }
+    
+    // MARK: - CartFooterProtocol
+    func didTapProceed() {
+        pushCheckoutController()
     }
     
     // MARK: - ErrorViewProtocol

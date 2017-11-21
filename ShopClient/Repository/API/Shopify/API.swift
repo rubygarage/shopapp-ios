@@ -189,6 +189,24 @@ class API: NSObject, APIInterface {
         }
     }
     
+    // MARK: - checkout
+    func getCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
+        let email = sessionData().email
+        let query = checkoutQuery(email: email, cartProducts: cartProducts)
+        let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
+            if let checkout = response?.checkoutCreate?.checkout {
+                let checkoutItem = Checkout(with: checkout)
+                callback(checkoutItem, nil)
+            } else if let error = response?.checkoutCreate?.userErrors.first {
+                let responseError = self?.process(error: error)
+                callback(nil, responseError)
+            } else {
+                callback(nil, ContentError())
+            }
+        })
+        run(task: task, callback: callback)
+    }
+    
     // MARK: - private
     private func getToken(with email: String, password: String, callback: @escaping (_ token: Storefront.CustomerAccessToken?, _ error: RepoError?) -> ()) {
         let query = tokenQuery(email: email, password: password)
@@ -522,6 +540,43 @@ class API: NSObject, APIInterface {
         })
     }
     
+    private func checkoutQuery(email: String?, cartProducts: [CartProduct]) -> Storefront.MutationQuery {
+        return Storefront.buildMutation({ $0
+            .checkoutCreate(input: self.checkoutInput(email: email, cartProducts: cartProducts), self.checkoutCreatePayloadQuery())
+        })
+    }
+    
+    private func checkoutInput(email: String?, cartProducts: [CartProduct]) -> Storefront.CheckoutCreateInput {
+        let checkout = Storefront.CheckoutCreateInput.create()
+        checkout.email = Input<String>(orNull: email)
+        checkout.lineItems = Input<[Storefront.CheckoutLineItemInput]>(orNull: checkoutLineItemInput(cartProducts: cartProducts))
+        
+        return checkout
+    }
+    
+    private func checkoutLineItemInput(cartProducts: [CartProduct]) -> [Storefront.CheckoutLineItemInput] {
+        var inputs = [Storefront.CheckoutLineItemInput]()
+        for product in cartProducts {
+            let productId = GraphQL.ID.init(rawValue: product.productVariant?.id ?? String())
+            inputs.append(Storefront.CheckoutLineItemInput.create(quantity: Int32(product.quantity), variantId: productId))
+        }
+        return inputs
+    }
+    
+    private func checkoutCreatePayloadQuery() -> (Storefront.CheckoutCreatePayloadQuery) -> () {
+        return { (query) in
+            query.checkout(self.checkoutQuery())
+            query.userErrors(self.userErrorQuery())
+        }
+    }
+    
+    private func checkoutQuery() -> (Storefront.CheckoutQuery) -> () {
+        return { (query) in
+            query.id()
+            query.webUrl()
+        }
+    }
+    
     // MARK: - session data
     private func saveSessionData(with token: Storefront.CustomerAccessToken, email: String) {
         let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
@@ -529,6 +584,17 @@ class API: NSObject, APIInterface {
         keyChain.set(email, forKey: SessionData.email)
         let expiryString = String(describing: token.expiresAt.timeIntervalSinceNow)
         keyChain.set(expiryString, forKey: SessionData.expiryDate)
+    }
+    
+    private func sessionData() -> (token: String?, email: String?, expiryDate: Date?) {
+        let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
+        let token = keyChain.get(SessionData.accessToken)
+        let email = keyChain.get(SessionData.email)
+        let expiryDateString = keyChain.get(SessionData.expiryDate) ?? String()
+        let expiryDateTimeInterval = TimeInterval(expiryDateString)
+        let expiryDate = Date(timeIntervalSinceNow: expiryDateTimeInterval!)
+        
+        return (token, email, expiryDate)
     }
     
     func isLoggedIn() -> Bool {
