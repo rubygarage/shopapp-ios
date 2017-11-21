@@ -65,11 +65,7 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     
     // MARK: - CartTableDelegateProtocol
     func totalPrice() -> Float {
-        var price: Float = 0
-        for cartProduct in viewModel.data.value {
-            price += Float(cartProduct.quantity) * (Float(cartProduct.productVariant?.price ?? String()) ?? 1)
-        }
-        return price
+        return viewModel.calculateTotalPrice()
     }
     
     func currency() -> String {

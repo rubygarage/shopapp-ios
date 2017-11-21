@@ -50,6 +50,14 @@ class CartViewModel: BaseViewModel {
         }
     }
     
+    public func calculateTotalPrice() -> Float {
+        var price: Float = 0
+        for cartProduct in data.value {
+            price += Float(cartProduct.quantity) * (Float(cartProduct.productVariant?.price ?? String()) ?? 1)
+        }
+        return price
+    }
+    
     // MARK: - private
     private func removeFromData(with item: CartProduct) {
         if let index = data.value.index(of: item) {
