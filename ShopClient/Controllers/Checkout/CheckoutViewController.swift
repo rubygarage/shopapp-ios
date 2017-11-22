@@ -60,8 +60,12 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CardValidat
     }
     
     // MARK: - CardValidationViewProtocol
-    func didCardFilled(with card: Card?, errorString: String?) {
-        print()
+    func didCardFilled(with card: CreditCard?, errorMessage: String?) {
+        if let card = card {
+            // TODO:
+        } else if let error = errorMessage {
+            showToast(with: error)
+        }
     }
     
     private func openBrowserIfNeeded(with link: URL) {

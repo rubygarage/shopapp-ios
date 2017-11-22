@@ -10,7 +10,7 @@ import UIKit
 import MFCard
 
 protocol CardValidationViewProtocol {
-    func didCardFilled(with card: Card?, errorString: String?)
+    func didCardFilled(with card: CreditCard?, errorMessage: String?)
 }
 
 class CardValidationView: NSObject, MFCardDelegate {
@@ -34,7 +34,8 @@ class CardValidationView: NSObject, MFCardDelegate {
     
     // MARK: - MFCardDelegate
     func cardDoneButtonClicked(_ card: Card?, error: String?) {
-        delegate?.didCardFilled(with: card, errorString: error)
+        let creditCard = CreditCard(with: card)
+        delegate?.didCardFilled(with: creditCard, errorMessage: error)
     }
     
     func cardTypeDidIdentify(_ cardType: String) {

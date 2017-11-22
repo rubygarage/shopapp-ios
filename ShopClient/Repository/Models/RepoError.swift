@@ -21,6 +21,10 @@ class RepoError: Error {
             return nil
         }
     }
+    
+    init(with mesage: String) {
+        errorMessage = mesage
+    }
 }
 
 class CriticalError: RepoError {

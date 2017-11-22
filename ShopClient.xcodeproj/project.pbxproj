@@ -121,6 +121,8 @@
 		6196CF9C1F9F9E1D00F823AD /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196CF9B1F9F9E1D00F823AD /* Article.swift */; };
 		6196CF9E1F9F9E5600F823AD /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196CF9D1F9F9E5600F823AD /* Author.swift */; };
 		61A1D4331FC57FD900E1B673 /* CardValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A1D4321FC57FD900E1B673 /* CardValidationView.swift */; };
+		61A1D4351FC5877D00E1B673 /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A1D4341FC5877D00E1B673 /* CreditCard.swift */; };
+		61A1D4381FC5892200E1B673 /* CreditCardAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A1D4371FC5892200E1B673 /* CreditCardAdapter.swift */; };
 		61A2AC731FACC2B2005FAD54 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A2AC721FACC2B2005FAD54 /* SearchViewModel.swift */; };
 		61A5072D1F7E79FB004504EF /* ImagesCarouselCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A5072A1F7E79FB004504EF /* ImagesCarouselCollectionDelegate.swift */; };
 		61A5072E1F7E79FB004504EF /* ImagesCarouselCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A5072B1F7E79FB004504EF /* ImagesCarouselCollectionDataSource.swift */; };
@@ -316,6 +318,8 @@
 		6196CF9B1F9F9E1D00F823AD /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		6196CF9D1F9F9E5600F823AD /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
 		61A1D4321FC57FD900E1B673 /* CardValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardValidationView.swift; sourceTree = "<group>"; };
+		61A1D4341FC5877D00E1B673 /* CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCard.swift; sourceTree = "<group>"; };
+		61A1D4371FC5892200E1B673 /* CreditCardAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardAdapter.swift; sourceTree = "<group>"; };
 		61A2AC721FACC2B2005FAD54 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		61A5072A1F7E79FB004504EF /* ImagesCarouselCollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesCarouselCollectionDelegate.swift; sourceTree = "<group>"; };
 		61A5072B1F7E79FB004504EF /* ImagesCarouselCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesCarouselCollectionDataSource.swift; sourceTree = "<group>"; };
@@ -520,6 +524,7 @@
 			isa = PBXGroup;
 			children = (
 				6141AAB71F8BE92700F9019B /* ShopClient.xcdatamodeld */,
+				61A1D4341FC5877D00E1B673 /* CreditCard.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -820,8 +825,17 @@
 			isa = PBXGroup;
 			children = (
 				61A1D4321FC57FD900E1B673 /* CardValidationView.swift */,
+				61A1D4361FC5890100E1B673 /* Adapters */,
 			);
 			path = CardValidationView;
+			sourceTree = "<group>";
+		};
+		61A1D4361FC5890100E1B673 /* Adapters */ = {
+			isa = PBXGroup;
+			children = (
+				61A1D4371FC5892200E1B673 /* CreditCardAdapter.swift */,
+			);
+			path = Adapters;
 			sourceTree = "<group>";
 		};
 		61A507291F7E79FB004504EF /* ImagesCarousel */ = {
@@ -1374,6 +1388,7 @@
 				617DE18A1FB5F1F0004EEF9A /* SignUpViewController.swift in Sources */,
 				61C2ABC51FBB240A00A1E170 /* LoginViewModel.swift in Sources */,
 				61C2ABC01FBB10C600A1E170 /* StringValidator.swift in Sources */,
+				61A1D4381FC5892200E1B673 /* CreditCardAdapter.swift in Sources */,
 				61FDBE4E1F6FE4EB00E7C729 /* MenuCategoryTableViewCell.swift in Sources */,
 				61C2ABBE1FBAEC7800A1E170 /* ShopifyRepoErrorAdapter.swift in Sources */,
 				6118DF261FB496070044A519 /* UIViewShadow.swift in Sources */,
@@ -1486,6 +1501,7 @@
 				614142C81F6AF24E00379BB9 /* HomeTableDataSource.swift in Sources */,
 				61BF1EB21FAB59980098B9AA /* ErrorView.swift in Sources */,
 				61E76E231FB471DB00AE5FB4 /* CartTableViewCell.swift in Sources */,
+				61A1D4351FC5877D00E1B673 /* CreditCard.swift in Sources */,
 				6120F2F61FC31BB700CBD724 /* CheckoutViewController.swift in Sources */,
 				61AFA3F31F9DFCE7004B9D53 /* DAOInterface.swift in Sources */,
 				6137EE061F9E19F80040C004 /* ShopRepositoryInterface.swift in Sources */,
