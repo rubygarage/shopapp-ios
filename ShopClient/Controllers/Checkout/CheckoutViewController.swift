@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MFCard
 
-class CheckoutViewController: BaseViewController<CheckoutViewModel> {
+class CheckoutViewController: BaseViewController<CheckoutViewModel>, CardValidationViewProtocol {
     @IBOutlet weak var paymentMethodLabel: UILabel!
     @IBOutlet weak var paymentByWebsiteView: UIView!
     @IBOutlet weak var paymentByWebsiteLabel: UILabel!
@@ -51,6 +52,16 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel> {
     
     private func loadData() {
         viewModel.loadData(with: disposeBag)
+    }
+    @IBAction func paymentCardTapped(_ sender: UIButton) {
+        let cardView = CardValidationView(delegate: self)
+        cardView.show()
+//        showCardValidationController()
+    }
+    
+    // MARK: - CardValidationViewProtocol
+    func didCardFilled(with card: Card?, errorString: String?) {
+        print()
     }
     
     private func openBrowserIfNeeded(with link: URL) {

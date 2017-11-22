@@ -27,6 +27,7 @@
 "Button.AddToCart" = "Add to cart";
 "Button.AddedToCart" = "Added to cart";
 "Button.Ok" = "OK";
+"Button.Cancel" = "Cancel";
 "Button.Remove" = "Remove";
 "Button.Proceed" = "Proceed to checkout";
 "Button.PaymentMethodWebsite" = "Pay on our website";

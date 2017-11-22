@@ -77,6 +77,9 @@
                                                 <rect key="frame" x="225" y="59.5" width="90" height="28"/>
                                                 <inset key="contentEdgeInsets" minX="15" minY="5" maxX="15" maxY="5"/>
                                                 <state key="normal" title="Pay card"/>
+                                                <connections>
+                                                    <action selector="paymentCardTapped:" destination="vln-mE-VVc" eventType="touchUpInside" id="Kmv-eJ-ces"/>
+                                                </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="payCard" translatesAutoresizingMaskIntoConstraints="NO" id="trD-Fu-E8M">
                                                 <rect key="frame" x="195" y="58.5" width="30" height="30"/>

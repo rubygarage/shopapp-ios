@@ -108,6 +108,11 @@ extension UIViewController {
         present(sortController, animated: true)
     }
     
+    func showCardValidationController() {
+        let cardValidationController = UIStoryboard.cardValidation().instantiateViewController(withIdentifier: ControllerIdentifier.cardValidation)
+        present(cardValidationController, animated: true)
+    }
+    
     // MARK: - private
     private func pushController(with storyBoard: UIStoryboard, identifier: String, animated: Bool = true) {
         let controller = storyBoard.instantiateViewController(withIdentifier: identifier)
