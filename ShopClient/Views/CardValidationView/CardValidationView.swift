@@ -22,6 +22,7 @@ class CardValidationView: NSObject, MFCardDelegate {
         self.delegate = delegate
     }
     
+    // MARK: - public
     public func show() {
         if let viewController = self.delegate {
             var cardView : MFCardView
@@ -32,13 +33,23 @@ class CardValidationView: NSObject, MFCardDelegate {
         }
     }
     
+    // MARK: - private
+    private func validate(card: Card) {
+        let errorMessage = CardValidator.validate(card: card)
+        let creditCard = errorMessage == nil ? CreditCard(with: card) : nil
+        delegate?.didCardFilled(with: creditCard, errorMessage: errorMessage)
+    }
+    
     // MARK: - MFCardDelegate
     func cardDoneButtonClicked(_ card: Card?, error: String?) {
-        let creditCard = CreditCard(with: card)
-        delegate?.didCardFilled(with: creditCard, errorMessage: error)
+        if let errorMessage = error {
+            delegate?.didCardFilled(with: nil, errorMessage: errorMessage)
+        } else if let creditCard = card {
+            validate(card: creditCard)
+        }
     }
     
     func cardTypeDidIdentify(_ cardType: String) {
-        print()
+        // required method
     }
 }

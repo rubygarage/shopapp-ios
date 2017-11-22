@@ -47,3 +47,6 @@
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";
+"Error.InvalidCardNumber" = "Invalid card number";
+"Error.InvalidHolderName" = "Invalid holder name";
+"Error.InvalidExpiresDate" = "Invalid expires date";

@@ -135,6 +135,7 @@
 		61AAB9301F7BD07B00CD32D3 /* SortModalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AAB92E1F7BD07B00CD32D3 /* SortModalTableViewCell.swift */; };
 		61AAB9311F7BD07B00CD32D3 /* SortModalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61AAB92F1F7BD07B00CD32D3 /* SortModalTableViewCell.xib */; };
 		61AB83261F72E6F0009E7343 /* Policy.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61AB83251F72E6F0009E7343 /* Policy.storyboard */; };
+		61AC44311FC5A7E60020544A /* CardValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AC44301FC5A7E60020544A /* CardValidator.swift */; };
 		61AFA3F31F9DFCE7004B9D53 /* DAOInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AFA3F21F9DFCE7004B9D53 /* DAOInterface.swift */; };
 		61AFA3F61F9DFECC004B9D53 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AFA3F51F9DFECC004B9D53 /* Shop.swift */; };
 		61B5BEDB1F75055000E075B7 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B5BED91F75055000E075B7 /* ArticleTableViewCell.swift */; };
@@ -332,6 +333,7 @@
 		61AAB92E1F7BD07B00CD32D3 /* SortModalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalTableViewCell.swift; sourceTree = "<group>"; };
 		61AAB92F1F7BD07B00CD32D3 /* SortModalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SortModalTableViewCell.xib; sourceTree = "<group>"; };
 		61AB83251F72E6F0009E7343 /* Policy.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Policy.storyboard; sourceTree = "<group>"; };
+		61AC44301FC5A7E60020544A /* CardValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardValidator.swift; sourceTree = "<group>"; };
 		61AFA3F21F9DFCE7004B9D53 /* DAOInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOInterface.swift; sourceTree = "<group>"; };
 		61AFA3F51F9DFECC004B9D53 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 		61B5BED91F75055000E075B7 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
@@ -1052,6 +1054,7 @@
 			isa = PBXGroup;
 			children = (
 				61E47F2A1FBDE8FD00EA4449 /* ReachabilityNetwork.swift */,
+				61AC44301FC5A7E60020544A /* CardValidator.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1388,6 +1391,7 @@
 				617DE18A1FB5F1F0004EEF9A /* SignUpViewController.swift in Sources */,
 				61C2ABC51FBB240A00A1E170 /* LoginViewModel.swift in Sources */,
 				61C2ABC01FBB10C600A1E170 /* StringValidator.swift in Sources */,
+				61AC44311FC5A7E60020544A /* CardValidator.swift in Sources */,
 				61A1D4381FC5892200E1B673 /* CreditCardAdapter.swift in Sources */,
 				61FDBE4E1F6FE4EB00E7C729 /* MenuCategoryTableViewCell.swift in Sources */,
 				61C2ABBE1FBAEC7800A1E170 /* ShopifyRepoErrorAdapter.swift in Sources */,

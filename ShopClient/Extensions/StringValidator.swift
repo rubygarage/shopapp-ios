@@ -18,7 +18,7 @@ internal extension String {
     }
     
     func isValidAsPassword() -> Bool {
-        return self.characters.count >= kPasswordCharactersCountMin
+        return self.count >= kPasswordCharactersCountMin
     }
     
     func orNil() -> String? {

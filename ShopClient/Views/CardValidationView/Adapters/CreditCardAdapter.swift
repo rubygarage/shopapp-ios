@@ -16,9 +16,9 @@ extension CreditCard {
         }
         self.init()
         
-        let names = card?.name?.components(separatedBy: " ")
-        firstName = names?.first
-        lastName = names?.last
+        let names = card?.name?.split(separator: " ", maxSplits: 1)
+        firstName = String(describing: names?.first)
+        lastName = String(describing: names?.last)
         cardNumber = card?.number
         expireMonth = card?.month?.rawValue
         expireYear = card?.year

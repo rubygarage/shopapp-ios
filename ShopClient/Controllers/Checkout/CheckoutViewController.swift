@@ -53,20 +53,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CardValidat
     private func loadData() {
         viewModel.loadData(with: disposeBag)
     }
-    @IBAction func paymentCardTapped(_ sender: UIButton) {
-        let cardView = CardValidationView(delegate: self)
-        cardView.show()
-//        showCardValidationController()
-    }
-    
-    // MARK: - CardValidationViewProtocol
-    func didCardFilled(with card: CreditCard?, errorMessage: String?) {
-        if let card = card {
-            // TODO:
-        } else if let error = errorMessage {
-            showToast(with: error)
-        }
-    }
     
     private func openBrowserIfNeeded(with link: URL) {
         if UIApplication.shared.canOpenURL(link) {
@@ -78,6 +64,21 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CardValidat
     @IBAction func payWebsiteTapped(_ sender: UIButton) {
         if let link = URL(string: viewModel.checkout?.webUrl ?? String()) {
             openBrowserIfNeeded(with: link)
+        }
+    }
+    
+    @IBAction func paymentCardTapped(_ sender: UIButton) {
+        let cardView = CardValidationView(delegate: self)
+        cardView.show()
+        //        showCardValidationController()
+    }
+    
+    // MARK: - CardValidationViewProtocol
+    func didCardFilled(with card: CreditCard?, errorMessage: String?) {
+        if let card = card {
+            // TODO:
+        } else if let error = errorMessage {
+            showToast(with: error)
         }
     }
     
