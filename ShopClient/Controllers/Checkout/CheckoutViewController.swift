@@ -75,8 +75,8 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CardValidat
     
     // MARK: - CardValidationViewProtocol
     func didCardFilled(with card: CreditCard?, errorMessage: String?) {
-        if let card = card {
-            // TODO:
+        if let creditCard = card {
+            viewModel.payByCard(with: creditCard)
         } else if let error = errorMessage {
             showToast(with: error)
         }

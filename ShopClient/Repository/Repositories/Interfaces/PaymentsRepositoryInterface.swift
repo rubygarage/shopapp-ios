@@ -1,11 +1,12 @@
 //
-//  CheckoutRepositoryInterface.swift
+//  PaymentsRepositoryInterface.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 11/20/17.
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-protocol CheckoutRepositoryInterface {
+protocol PaymentsRepositoryInterface {
     func getCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>)
+    func payByCard(with card: CreditCard, url: String, callback: @escaping RepoCallback<String>)
 }

@@ -9,10 +9,10 @@
 import Foundation
 
 class CreditCard: NSObject {
-    var firstName: String?
-    var lastName: String?
-    var cardNumber: String?
-    var expireMonth: String?
-    var expireYear: String?
-    var verificationCode: String?
+    var firstName = String()
+    var lastName = String()
+    var cardNumber = String()
+    var expireMonth = String()
+    var expireYear = String()
+    var verificationCode = String()
 }

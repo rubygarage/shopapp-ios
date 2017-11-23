@@ -19,9 +19,9 @@ extension CreditCard {
         let names = card?.name?.split(separator: " ", maxSplits: 1)
         firstName = String(describing: names?.first)
         lastName = String(describing: names?.last)
-        cardNumber = card?.number
-        expireMonth = card?.month?.rawValue
-        expireYear = card?.year
-        verificationCode = card?.cvc
+        cardNumber = card?.number ?? String()
+        expireMonth = card?.month?.rawValue ?? String()
+        expireYear = card?.year ?? String()
+        verificationCode = card?.cvc ?? String()
     }
 }

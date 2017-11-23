@@ -189,7 +189,7 @@ class API: NSObject, APIInterface {
         }
     }
     
-    // MARK: - checkout
+    // MARK: - payments
     func getCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
         let email = sessionData().email
         let query = checkoutQuery(email: email, cartProducts: cartProducts)
@@ -207,7 +207,44 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
+    func payByCard(with card: CreditCard, url: String, callback: @escaping RepoCallback<String>) {
+        getCardVaultUrl { [weak self] (cardVaultUrl, error) in
+            if let url = cardVaultUrl {
+                self?.pay(with: card, cardVaultUrl: url, callback: callback)
+            }
+            if let error = error {
+                callback(nil, ContentError(with: error))
+            }
+        }
+    }
+    
     // MARK: - private
+    private func getCardVaultUrl(callback: @escaping (_ cardVaultUrl: URL?, _ error: Error?) -> ()) {
+        let query = Storefront.buildQuery { $0
+            .shop { $0
+                .paymentSettings({ $0
+                    .cardVaultUrl()
+                })
+            }
+        }
+        
+        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
+            let cardVaultUrl = response?.shop.paymentSettings.cardVaultUrl
+            callback(cardVaultUrl, error)
+        })
+        run(task: task, callback: callback)
+    }
+    
+    private func pay(with card: CreditCard, cardVaultUrl: URL, callback: @escaping RepoCallback<String>) {
+        let creditCard = Card.CreditCard(firstName: card.firstName, lastName: card.lastName, number: card.cardNumber, expiryMonth: card.expireMonth, expiryYear: card.expireYear, verificationCode: card.verificationCode)
+        let cardClient = Card.Client.init()
+        
+        let task = cardClient.vault(creditCard, to: cardVaultUrl) { (token, error) in
+            print()
+        }
+        run(task: task, callback: callback)
+    }
+    
     private func getToken(with email: String, password: String, callback: @escaping (_ token: Storefront.CustomerAccessToken?, _ error: RepoError?) -> ()) {
         let query = tokenQuery(email: email, password: password)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in

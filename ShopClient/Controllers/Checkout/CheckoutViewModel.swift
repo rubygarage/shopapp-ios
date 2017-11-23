@@ -11,6 +11,7 @@ import RxSwift
 class CheckoutViewModel: BaseViewModel {
     var checkout: Checkout?
     
+    // MARK: - public
     public func loadData(with disposeBag: DisposeBag) {
         state.onNext(.loading(showHud: true))
         createCheckout.subscribe(onSuccess: { [weak self] (checkout) in
@@ -22,6 +23,13 @@ class CheckoutViewModel: BaseViewModel {
         }.disposed(by: disposeBag)
     }
     
+    public func payByCard(with card: CreditCard) {
+        Repository.shared.payByCard(with: card, url: checkout?.webUrl ?? String()) { (str, error) in
+            print()
+        }
+    }
+    
+    // MARK: - private
     private var getProductList: Single<[CartProduct]> {
         return Single.create(subscribe: { (event) in
             Repository.shared.getCartProductList { (cartProducts, error) in
