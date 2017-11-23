@@ -220,14 +220,7 @@ class API: NSObject, APIInterface {
     
     // MARK: - private
     private func getCardVaultUrl(callback: @escaping (_ cardVaultUrl: URL?, _ error: Error?) -> ()) {
-        let query = Storefront.buildQuery { $0
-            .shop { $0
-                .paymentSettings({ $0
-                    .cardVaultUrl()
-                })
-            }
-        }
-        
+        let query = cardVaultUrlQuery()
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             let cardVaultUrl = response?.shop.paymentSettings.cardVaultUrl
             callback(cardVaultUrl, error)
@@ -252,21 +245,12 @@ class API: NSObject, APIInterface {
     
     private func updateShipingAddress(checkoutId: String, cardVaultToken: String, callback: @escaping RepoCallback<Bool>) {
         let billingAddress = Storefront.MailingAddressInput.create(address1: Input<String>(orNull: "test1@i.ua"), address2: Input<String>(orNull: "test2@i.ua"), city: Input<String>(orNull: "Dnipro"), company: Input<String>(orNull: "Company"), country: Input<String>(orNull: "Ukraine"), firstName: Input<String>(orNull: "FirstName"), lastName: Input<String>(orNull: "LastName"), phone: Input<String>(orNull: "+380998887766"), zip: Input<String>(orNull: "49000"))
-        let checkout = GraphQL.ID.init(rawValue: checkoutId)
+        let checkoutGraphQLId = GraphQL.ID.init(rawValue: checkoutId)
         
-        let query = Storefront.buildMutation { $0
-            .checkoutShippingAddressUpdate(shippingAddress: billingAddress, checkoutId: checkout, { $0
-                .checkout({ $0
-                    .ready()
-                    .shippingLine({ $0
-                        .price()
-                    })
-                })
-            })
-        }
+        let query = updateShipingAddressQuery(billingAddress: billingAddress, checkoutId: checkoutGraphQLId)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
             if let _ = response {
-                self?.getShippingRates(checkoutId: checkoutId, cardVaultToken: cardVaultToken, callback: callback)
+                self?.getShippingRates(checkoutId: checkoutGraphQLId, cardVaultToken: cardVaultToken, callback: callback)
             }
             if let responseError = ContentError(with: error) {
                 callback(false, responseError)
@@ -275,26 +259,11 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
-    private func getShippingRates(checkoutId: String, cardVaultToken: String, callback: @escaping RepoCallback<Bool>) {
-        let checkout = GraphQL.ID.init(rawValue: checkoutId)
-        let query = Storefront.buildQuery { $0
-            .node(id: checkout) { $0
-                .onCheckout { $0
-                    .id()
-                    .availableShippingRates { $0
-                        .ready()
-                        .shippingRates { $0
-                            .handle()
-                            .price()
-                            .title()
-                        }
-                    }
-                }
-            }
-        }
+    private func getShippingRates(checkoutId: GraphQL.ID, cardVaultToken: String, callback: @escaping RepoCallback<Bool>) {
+        let query = getShipingRatesQuery(checkoutId: checkoutId)
         let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             if let shippingRateHandle = (response?.node as? Storefront.Checkout)?.availableShippingRates?.shippingRates?.first?.handle {
-                self?.updateShipingLine(checkoutId: checkoutId, cardVaultToken: cardVaultToken, shippingRateHandle: shippingRateHandle, callback: callback)
+                self?.updateShipingLine(checkoutId: checkoutId, cardVaultToken: cardVaultToken, shipingRateHandle: shippingRateHandle, callback: callback)
             }
             if let responseError = ContentError(with: error) {
                 callback(false, responseError)
@@ -304,14 +273,8 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
-    private func updateShipingLine(checkoutId: String, cardVaultToken: String, shippingRateHandle: String, callback: @escaping RepoCallback<Bool>) {
-        let checkout = GraphQL.ID.init(rawValue: checkoutId)
-        let query = Storefront.buildMutation { $0
-            .checkoutShippingLineUpdate(checkoutId: checkout, shippingRateHandle: shippingRateHandle, { $0
-                .checkout(self.checkoutQuery())
-                .userErrors(self.userErrorQuery())
-            })
-        }
+    private func updateShipingLine(checkoutId: GraphQL.ID, cardVaultToken: String, shipingRateHandle: String, callback: @escaping RepoCallback<Bool>) {
+        let query = updateShipingLineQuery(checkoutId: checkoutId, shipingRateHandle: shipingRateHandle)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
             if let _ = response {
                 self?.completePay(checkoutId: checkoutId, cardVaultToken: cardVaultToken, callback: callback)
@@ -323,27 +286,14 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
-    private func completePay(checkoutId: String, cardVaultToken: String, callback: @escaping RepoCallback<Bool>) {
+    private func completePay(checkoutId: GraphQL.ID, cardVaultToken: String, callback: @escaping RepoCallback<Bool>) {
         let billingAddress = Storefront.MailingAddressInput.create(address1: Input<String>(orNull: "test1@i.ua"), address2: Input<String>(orNull: "test2@i.ua"), city: Input<String>(orNull: "Dnipro"), company: Input<String>(orNull: "Company"), country: Input<String>(orNull: "Ukraine"), firstName: Input<String>(orNull: "FirstName"), lastName: Input<String>(orNull: "LastName"), phone: Input<String>(orNull: "+380998887766"), zip: Input<String>(orNull: "49000"))
         
         let amount = Decimal(65)
-        let idempotencyKey = checkoutId // TODO:
-        let creditCardPaymentInput = Storefront.CreditCardPaymentInput.create(amount: amount, idempotencyKey: idempotencyKey, billingAddress: billingAddress, vaultId: cardVaultToken)
-        let checkout = GraphQL.ID.init(rawValue: checkoutId)
+        let idempotencyKey = checkoutId.rawValue // TODO:
+        let paymentInput = Storefront.CreditCardPaymentInput.create(amount: amount, idempotencyKey: idempotencyKey, billingAddress: billingAddress, vaultId: cardVaultToken)
         
-        let query = Storefront.buildMutation { $0
-            .checkoutCompleteWithCreditCard(checkoutId: checkout, payment: creditCardPaymentInput, { $0
-                .payment({ $0
-                    .ready()
-                    .errorMessage()
-                })
-                .checkout({ $0
-                    .ready()
-                })
-                .userErrors(self.userErrorQuery())
-            })
-        }
-    
+        let query = completePayQuery(checkoutId: checkoutId, paymentInput: paymentInput)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
             let mutation = response?.checkoutCompleteWithCreditCard
             if let checkout = mutation?.checkout, let payment = mutation?.payment {
@@ -352,9 +302,8 @@ class API: NSObject, APIInterface {
             } else if let error = response?.checkoutCompleteWithCreditCard?.userErrors.first {
                 let responseError = self?.process(error: error)
                 callback(nil, responseError)
-            }
-            if let responseError = ContentError(with: error) {
-                callback(false, responseError)
+            } else {
+                callback(false, ContentError(with: error))
             }
         })
         run(task: task, callback: callback)
@@ -470,174 +419,13 @@ class API: NSObject, APIInterface {
         })
     }
     
-    private func articleRootQuery(id: String) -> (Storefront.QueryRootQuery) {
+    private func articleRootQuery(id: String) -> Storefront.QueryRootQuery {
         let nodeId = GraphQL.ID(rawValue: id)
         return Storefront.buildQuery({ $0
             .node(id: nodeId, { $0
                 .onArticle(subfields: self.articleQuery())
             })
         })
-    }
-    
-    // MARK: - subqueries
-    private func productConnectionQuery() -> ((Storefront.ProductConnectionQuery) -> ()) {
-        return { (query: Storefront.ProductConnectionQuery) in
-            query.edges({ $0
-                .cursor()
-                .node(self.productQuery())
-            })
-        }
-    }
-    
-    private func productQuery(additionalInfoNedded: Bool = false) -> ((Storefront.ProductQuery) -> ()) {
-        let imageCount = additionalInfoNedded ? kShopifyItemsMaxCount : 1
-        let variantsCount = additionalInfoNedded ? kShopifyItemsMaxCount : 1
-        
-        return { (query: Storefront.ProductQuery) in
-            query.id()
-            query.title()
-            query.description()
-            query.descriptionHtml()
-            query.vendor()
-            query.productType()
-            query.createdAt()
-            query.updatedAt()
-            query.tags()
-            query.images(first: imageCount, self.imageConnectionQuery())
-            query.variants(first: variantsCount, self.variantConnectionQuery())
-            query.options(self.optionQuery())
-        }
-    }
-    
-    private func imageConnectionQuery() -> ((Storefront.ImageConnectionQuery) -> ()) {
-        return { (query: Storefront.ImageConnectionQuery) in
-            query.edges({ $0
-                .node(self.imageQuery())
-            })
-        }
-    }
-    
-    private func imageQuery() -> ((Storefront.ImageQuery) -> ()) {
-        return { (query: Storefront.ImageQuery) in
-            query.id()
-            query.src()
-            query.altText()
-        }
-    }
-    
-    private func variantConnectionQuery() -> ((Storefront.ProductVariantConnectionQuery) -> ()) {
-        return { (query: Storefront.ProductVariantConnectionQuery) in
-            query.edges({ $0
-                .node(self.productVariantQuery())
-            })
-        }
-    }
-    
-    private func productVariantQuery() -> ((Storefront.ProductVariantQuery) -> ()) {
-        return { (query: Storefront.ProductVariantQuery) in
-            query.id()
-            query.title()
-            query.price()
-            query.availableForSale()
-            query.image(self.imageQuery())
-            query.selectedOptions(self.selectedOptionQuery())
-        }
-    }
-    
-    private func collectionConnectionQuery(perPage: Int, after: Any?, sortBy: SortingValue?, reverse: Bool) -> ((Storefront.CollectionConnectionQuery) -> ()) {
-        return { (query: Storefront.CollectionConnectionQuery) in
-            query.edges({ $0
-                .cursor()
-                .node(self.collectionQuery(perPage: perPage, after: after, sortBy: sortBy, reverse: reverse))
-            })
-            
-        }
-    }
-    
-    private func collectionQuery(perPage: Int = 0, after: Any? = nil, sortBy: SortingValue?, reverse: Bool, productsNeeded: Bool = false) -> ((Storefront.CollectionQuery) -> ()) {
-        let sortKey = productCollectionSortValue(for: sortBy)
-        return { (query: Storefront.CollectionQuery) in
-            query.id()
-            query.title()
-            query.description()
-            query.updatedAt()
-            query.image(self.imageQuery())
-            if productsNeeded {
-                query.products(first: Int32(perPage), after: after as? String, reverse: reverse, sortKey: sortKey, self.productConnectionQuery())
-            }
-            if perPage > 0 {
-                query.descriptionHtml()
-            }
-        }
-    }
-    
-    private func policyQuery() -> ((Storefront.ShopPolicyQuery) -> ()) {
-        return { (query: Storefront.ShopPolicyQuery) in
-            query.title()
-            query.body()
-            query.url()
-        }
-    }
-    
-    private func articleConnectionQuery() -> ((Storefront.ArticleConnectionQuery) -> ()) {
-        return { (query: Storefront.ArticleConnectionQuery) in
-            query.edges({ $0
-                .node(self.articleQuery())
-                .cursor()
-            })
-        }
-    }
-    
-    private func articleQuery() -> ((Storefront.ArticleQuery) -> ()) {
-        return { (query: Storefront.ArticleQuery) in
-            query.id()
-            query.title()
-            query.content()
-            query.image(self.imageQuery())
-            query.author(self.authorQuery())
-            query.tags()
-            query.blog(self.blogQuery())
-            query.publishedAt()
-            query.url()
-        }
-    }
-    
-    private func authorQuery() -> ((Storefront.ArticleAuthorQuery) -> ()) {
-        return { (query: Storefront.ArticleAuthorQuery) in
-            query.firstName()
-            query.lastName()
-            query.name()
-            query.email()
-            query.bio()
-        }
-    }
-    
-    private func blogQuery() -> ((Storefront.BlogQuery) -> ()) {
-        return { (query: Storefront.BlogQuery) in
-            query.id()
-            query.title()
-        }
-    }
-    
-    private func optionQuery() -> ((Storefront.ProductOptionQuery) -> ()) {
-        return { (query: Storefront.ProductOptionQuery) in
-            query.id()
-            query.name()
-            query.values()
-        }
-    }
-    
-    private func paymentSettingsQuery() -> (Storefront.PaymentSettingsQuery) -> () {
-        return { (query: Storefront.PaymentSettingsQuery) in
-            query.currencyCode()
-        }
-    }
-    
-    private func selectedOptionQuery() -> (Storefront.SelectedOptionQuery) -> () {
-        return { (query: Storefront.SelectedOptionQuery) in
-            query.name()
-            query.value()
-        }
     }
     
     private func signUpQuery(email: String, password: String, firstName: String?, lastName: String?, phone: String?) -> Storefront.MutationQuery {
@@ -653,22 +441,6 @@ class API: NSObject, APIInterface {
         })
     }
     
-    private func customerQuery() -> (Storefront.CustomerQuery) -> ()  {
-        return { (query: Storefront.CustomerQuery) in
-            query.email()
-            query.firstName()
-            query.lastName()
-            query.phone()
-        }
-    }
-    
-    private func userErrorQuery() -> (Storefront.UserErrorQuery) -> () {
-        return { (query: Storefront.UserErrorQuery) in
-            query.message()
-            query.field()
-        }
-    }
-    
     private func tokenQuery(email: String, password: String) -> Storefront.MutationQuery {
         let input = Storefront.CustomerAccessTokenCreateInput.create(email: email, password: password)
         return Storefront.buildMutation({ $0
@@ -677,13 +449,6 @@ class API: NSObject, APIInterface {
                 .userErrors(self.userErrorQuery())
             })
         })
-    }
-    
-    private func accessTokenQuery() -> (Storefront.CustomerAccessTokenQuery) -> () {
-        return { (query) in
-            query.accessToken()
-            query.expiresAt()
-        }
     }
     
     private func customerQuery(with accessToken: String) -> Storefront.QueryRootQuery {
@@ -713,6 +478,253 @@ class API: NSObject, APIInterface {
             inputs.append(Storefront.CheckoutLineItemInput.create(quantity: Int32(product.quantity), variantId: productId))
         }
         return inputs
+    }
+    
+    private func cardVaultUrlQuery() -> Storefront.QueryRootQuery {
+        return Storefront.buildQuery({ $0
+            .shop { $0
+                .paymentSettings({ $0
+                    .cardVaultUrl()
+                })
+            }
+        })
+    }
+    
+    private func updateShipingAddressQuery(billingAddress: Storefront.MailingAddressInput, checkoutId: GraphQL.ID) -> Storefront.MutationQuery {
+        return Storefront.buildMutation { $0
+            .checkoutShippingAddressUpdate(shippingAddress: billingAddress, checkoutId: checkoutId, { $0
+                .checkout({ $0
+                    .ready()
+                    .shippingLine({ $0
+                        .price()
+                    })
+                })
+            })
+        }
+    }
+    
+    private func getShipingRatesQuery(checkoutId: GraphQL.ID) -> Storefront.QueryRootQuery {
+        return Storefront.buildQuery { $0
+            .node(id: checkoutId) { $0
+                .onCheckout { $0
+                    .id()
+                    .availableShippingRates { $0
+                        .ready()
+                        .shippingRates { $0
+                            .handle()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func updateShipingLineQuery(checkoutId: GraphQL.ID, shipingRateHandle: String) -> Storefront.MutationQuery {
+        return Storefront.buildMutation { $0
+            .checkoutShippingLineUpdate(checkoutId: checkoutId, shippingRateHandle: shipingRateHandle, { $0
+                .checkout(self.checkoutQuery())
+                .userErrors(self.userErrorQuery())
+            })
+        }
+    }
+    
+    private func completePayQuery(checkoutId: GraphQL.ID, paymentInput: Storefront.CreditCardPaymentInput) -> Storefront.MutationQuery {
+        return Storefront.buildMutation { $0
+            .checkoutCompleteWithCreditCard(checkoutId: checkoutId, payment: paymentInput, { $0
+                .payment({ $0
+                    .ready()
+                    .errorMessage()
+                })
+                .checkout({ $0
+                    .ready()
+                })
+                .userErrors(self.userErrorQuery())
+            })
+        }
+    }
+    
+    // MARK: - subqueries
+    private func productConnectionQuery() -> (Storefront.ProductConnectionQuery) -> () {
+        return { (query: Storefront.ProductConnectionQuery) in
+            query.edges({ $0
+                .cursor()
+                .node(self.productQuery())
+            })
+        }
+    }
+    
+    private func productQuery(additionalInfoNedded: Bool = false) -> (Storefront.ProductQuery) -> () {
+        let imageCount = additionalInfoNedded ? kShopifyItemsMaxCount : 1
+        let variantsCount = additionalInfoNedded ? kShopifyItemsMaxCount : 1
+        
+        return { (query: Storefront.ProductQuery) in
+            query.id()
+            query.title()
+            query.description()
+            query.descriptionHtml()
+            query.vendor()
+            query.productType()
+            query.createdAt()
+            query.updatedAt()
+            query.tags()
+            query.images(first: imageCount, self.imageConnectionQuery())
+            query.variants(first: variantsCount, self.variantConnectionQuery())
+            query.options(self.optionQuery())
+        }
+    }
+    
+    private func imageConnectionQuery() -> (Storefront.ImageConnectionQuery) -> () {
+        return { (query: Storefront.ImageConnectionQuery) in
+            query.edges({ $0
+                .node(self.imageQuery())
+            })
+        }
+    }
+    
+    private func imageQuery() -> (Storefront.ImageQuery) -> () {
+        return { (query: Storefront.ImageQuery) in
+            query.id()
+            query.src()
+            query.altText()
+        }
+    }
+    
+    private func variantConnectionQuery() -> (Storefront.ProductVariantConnectionQuery) -> () {
+        return { (query: Storefront.ProductVariantConnectionQuery) in
+            query.edges({ $0
+                .node(self.productVariantQuery())
+            })
+        }
+    }
+    
+    private func productVariantQuery() -> (Storefront.ProductVariantQuery) -> () {
+        return { (query: Storefront.ProductVariantQuery) in
+            query.id()
+            query.title()
+            query.price()
+            query.availableForSale()
+            query.image(self.imageQuery())
+            query.selectedOptions(self.selectedOptionQuery())
+        }
+    }
+    
+    private func collectionConnectionQuery(perPage: Int, after: Any?, sortBy: SortingValue?, reverse: Bool) -> (Storefront.CollectionConnectionQuery) -> () {
+        return { (query: Storefront.CollectionConnectionQuery) in
+            query.edges({ $0
+                .cursor()
+                .node(self.collectionQuery(perPage: perPage, after: after, sortBy: sortBy, reverse: reverse))
+            })
+            
+        }
+    }
+    
+    private func collectionQuery(perPage: Int = 0, after: Any? = nil, sortBy: SortingValue?, reverse: Bool, productsNeeded: Bool = false) -> (Storefront.CollectionQuery) -> () {
+        let sortKey = productCollectionSortValue(for: sortBy)
+        return { (query: Storefront.CollectionQuery) in
+            query.id()
+            query.title()
+            query.description()
+            query.updatedAt()
+            query.image(self.imageQuery())
+            if productsNeeded {
+                query.products(first: Int32(perPage), after: after as? String, reverse: reverse, sortKey: sortKey, self.productConnectionQuery())
+            }
+            if perPage > 0 {
+                query.descriptionHtml()
+            }
+        }
+    }
+    
+    private func policyQuery() -> (Storefront.ShopPolicyQuery) -> () {
+        return { (query: Storefront.ShopPolicyQuery) in
+            query.title()
+            query.body()
+            query.url()
+        }
+    }
+    
+    private func articleConnectionQuery() -> (Storefront.ArticleConnectionQuery) -> () {
+        return { (query: Storefront.ArticleConnectionQuery) in
+            query.edges({ $0
+                .node(self.articleQuery())
+                .cursor()
+            })
+        }
+    }
+    
+    private func articleQuery() -> (Storefront.ArticleQuery) -> () {
+        return { (query: Storefront.ArticleQuery) in
+            query.id()
+            query.title()
+            query.content()
+            query.image(self.imageQuery())
+            query.author(self.authorQuery())
+            query.tags()
+            query.blog(self.blogQuery())
+            query.publishedAt()
+            query.url()
+        }
+    }
+    
+    private func authorQuery() -> (Storefront.ArticleAuthorQuery) -> () {
+        return { (query: Storefront.ArticleAuthorQuery) in
+            query.firstName()
+            query.lastName()
+            query.name()
+            query.email()
+            query.bio()
+        }
+    }
+    
+    private func blogQuery() -> (Storefront.BlogQuery) -> () {
+        return { (query: Storefront.BlogQuery) in
+            query.id()
+            query.title()
+        }
+    }
+    
+    private func optionQuery() -> (Storefront.ProductOptionQuery) -> () {
+        return { (query: Storefront.ProductOptionQuery) in
+            query.id()
+            query.name()
+            query.values()
+        }
+    }
+    
+    private func paymentSettingsQuery() -> (Storefront.PaymentSettingsQuery) -> () {
+        return { (query: Storefront.PaymentSettingsQuery) in
+            query.currencyCode()
+        }
+    }
+    
+    private func selectedOptionQuery() -> (Storefront.SelectedOptionQuery) -> () {
+        return { (query: Storefront.SelectedOptionQuery) in
+            query.name()
+            query.value()
+        }
+    }
+    
+    private func customerQuery() -> (Storefront.CustomerQuery) -> ()  {
+        return { (query: Storefront.CustomerQuery) in
+            query.email()
+            query.firstName()
+            query.lastName()
+            query.phone()
+        }
+    }
+    
+    private func userErrorQuery() -> (Storefront.UserErrorQuery) -> () {
+        return { (query: Storefront.UserErrorQuery) in
+            query.message()
+            query.field()
+        }
+    }
+    
+    private func accessTokenQuery() -> (Storefront.CustomerAccessTokenQuery) -> () {
+        return { (query) in
+            query.accessToken()
+            query.expiresAt()
+        }
     }
     
     private func checkoutCreatePayloadQuery() -> (Storefront.CheckoutCreatePayloadQuery) -> () {

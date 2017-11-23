@@ -10,7 +10,7 @@ import RxSwift
 
 class CheckoutViewModel: BaseViewModel {
     var checkout: Checkout?
-    var paymentSuccess: PublishSubject<Bool>(false)
+    var paymentSuccess = PublishSubject<Bool>()
     
     // MARK: - public
     public func loadData(with disposeBag: DisposeBag) {

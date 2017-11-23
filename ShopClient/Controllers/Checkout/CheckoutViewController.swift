@@ -27,6 +27,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CardValidat
 
         setupViews()
         populateViews()
+        setupViewModel()
         loadData()
     }
     
@@ -48,6 +49,15 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CardValidat
         
         paymentByApplePayLabel.text = NSLocalizedString("Label.PaymentMethodApplePay", comment: String())
         paymentByApplePayButton.setTitle(NSLocalizedString("Button.PaymentMethodApplePay", comment: String()), for: .normal)
+    }
+    
+    private func setupViewModel() {
+        viewModel.paymentSuccess
+            .subscribe(onNext: { success in
+                print(success)
+                // TODO:
+            })
+            .disposed(by: disposeBag)
     }
     
     private func loadData() {
