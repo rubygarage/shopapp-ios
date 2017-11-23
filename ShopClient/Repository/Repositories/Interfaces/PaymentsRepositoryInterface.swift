@@ -8,5 +8,5 @@
 
 protocol PaymentsRepositoryInterface {
     func getCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>)
-    func payByCard(with card: CreditCard, url: String, callback: @escaping RepoCallback<String>)
+    func payByCard(with card: CreditCard, checkout: Checkout, callback: @escaping RepoCallback<Bool>)
 }

@@ -10,6 +10,7 @@ import RxSwift
 
 class CheckoutViewModel: BaseViewModel {
     var checkout: Checkout?
+    var paymentSuccess: PublishSubject<Bool>(false)
     
     // MARK: - public
     public func loadData(with disposeBag: DisposeBag) {
@@ -24,8 +25,17 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     public func payByCard(with card: CreditCard) {
-        Repository.shared.payByCard(with: card, url: checkout?.webUrl ?? String()) { (str, error) in
-            print()
+        if let checkout = checkout {
+            state.onNext(.loading(showHud: true))
+            Repository.shared.payByCard(with: card, checkout: checkout) { [weak self] (success, error) in
+                if let error = error {
+                    self?.state.onNext(.error(error: error))
+                }
+                if let success = success  {
+                    self?.state.onNext(.content)
+                    self?.paymentSuccess.onNext(success)
+                }
+            }
         }
     }
     

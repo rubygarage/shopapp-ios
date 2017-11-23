@@ -13,7 +13,7 @@ extension Repository {
         APICore?.getCheckout(cartProducts: cartProducts, callback: callback)
     }
     
-    func payByCard(with card: CreditCard, url: String, callback: @escaping RepoCallback<String>) {
-        APICore?.payByCard(with: card, url: url, callback: callback)
+    func payByCard(with card: CreditCard, checkout: Checkout, callback: @escaping RepoCallback<Bool>) {
+        APICore?.payByCard(with: card, checkout: checkout, callback: callback)
     }
 }
