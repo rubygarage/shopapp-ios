@@ -18,6 +18,7 @@
 "ControllerTitle.SignUp" = "Sign Up";
 "ControllerTitle.Login" = "Login";
 "ControllerTitle.Checkout" = "Checkout";
+"ControllerTitle.BillingAddress" = "Billing Address";
 
 "Alert.Error" = "Error";
 
@@ -33,6 +34,7 @@
 "Button.PaymentMethodWebsite" = "Pay on our website";
 "Button.PaymentMethodCard" = "Pay by card";
 "Button.PaymentMethodApplePay" = "Apple Pay";
+"Button.PaymentAddressViewContinue" = "Continue to shipping method";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";

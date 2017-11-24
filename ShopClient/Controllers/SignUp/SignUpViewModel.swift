@@ -19,7 +19,7 @@ class SignUpViewModel: BaseViewModel {
     
     var isValid: Observable<Bool> {
         return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { email, password in
-            email.isValidAsEmais() && password.isValidAsPassword()
+            email.isValidAsEmail() && password.isValidAsPassword()
         }
     }
     

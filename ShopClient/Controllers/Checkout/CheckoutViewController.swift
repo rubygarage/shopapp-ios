@@ -78,15 +78,19 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CardValidat
     }
     
     @IBAction func paymentCardTapped(_ sender: UIButton) {
-        let cardView = CardValidationView(delegate: self)
-        cardView.show()
-        //        showCardValidationController()
+//        let cardView = CardValidationView(delegate: self)
+//        cardView.show()
+        
+        // ************
+        showCardValidationController()
     }
     
     // MARK: - CardValidationViewProtocol
     func didCardFilled(with card: CreditCard?, errorMessage: String?) {
         if let creditCard = card {
             viewModel.payByCard(with: creditCard)
+            // TODO: show billing address view
+//            showCardValidationController()
         } else if let error = errorMessage {
             showToast(with: error)
         }

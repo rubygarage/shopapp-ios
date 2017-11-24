@@ -109,7 +109,7 @@ extension UIViewController {
     }
     
     func showCardValidationController() {
-        let cardValidationController = UIStoryboard.cardValidation().instantiateViewController(withIdentifier: ControllerIdentifier.cardValidation)
+        let cardValidationController = UIStoryboard.billingAddress().instantiateViewController(withIdentifier: ControllerIdentifier.billingAddress)
         present(cardValidationController, animated: true)
     }
     
