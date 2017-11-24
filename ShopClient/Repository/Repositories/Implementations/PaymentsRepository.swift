@@ -16,4 +16,8 @@ extension Repository {
     func payByCard(with card: CreditCard, checkout: Checkout, callback: @escaping RepoCallback<Bool>) {
         APICore?.payByCard(with: card, checkout: checkout, callback: callback)
     }
+    
+    func getShipingRates(with checkout: Checkout, address: Address, callback: @escaping RepoCallback<[ShipingRate]>) {
+        APICore?.getShipingRates(with: checkout, address: address, callback: callback)
+    }
 }

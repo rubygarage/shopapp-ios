@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Billing Address View Controller-->
+        <!--Address View Controller-->
         <scene sceneID="1Iq-t9-u1x">
             <objects>
-                <viewController storyboardIdentifier="BillingAddressControllerIdentifier" id="5Zy-Un-NAd" customClass="BillingAddressViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddressControllerIdentifier" id="5Zy-Un-NAd" customClass="AddressViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l80-5Q-6Zj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

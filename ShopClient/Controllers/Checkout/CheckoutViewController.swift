@@ -9,7 +9,7 @@
 import UIKit
 import MFCard
 
-class CheckoutViewController: BaseViewController<CheckoutViewModel>, CardValidationViewProtocol {
+class CheckoutViewController: BaseViewController<CheckoutViewModel>, AddressViewProtocol, CardValidationViewProtocol {
     @IBOutlet weak var paymentMethodLabel: UILabel!
     @IBOutlet weak var paymentByWebsiteView: UIView!
     @IBOutlet weak var paymentByWebsiteLabel: UILabel!
@@ -78,11 +78,19 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CardValidat
     }
     
     @IBAction func paymentCardTapped(_ sender: UIButton) {
-//        let cardView = CardValidationView(delegate: self)
-//        cardView.show()
+        showAddressController(with: self)
+    }
+    
+    // MARK: - AddressViewProtocol
+    func didFilled(address: Address) {
+        viewModel.getShipingRates(with: address)
         
-        // ************
-        showCardValidationController()
+        // TODO: getShipingRates(checkoutId, email, address)
+        /*
+         after getting rates use
+         //        let cardView = CardValidationView(delegate: self)
+         //        cardView.show()
+         */
     }
     
     // MARK: - CardValidationViewProtocol
@@ -95,6 +103,8 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CardValidat
             showToast(with: error)
         }
     }
+    
+    
     
     // MARK: - ErrorViewProtocol
     func didTapTryAgain() {

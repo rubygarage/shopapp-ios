@@ -108,9 +108,10 @@ extension UIViewController {
         present(sortController, animated: true)
     }
     
-    func showCardValidationController() {
-        let cardValidationController = UIStoryboard.billingAddress().instantiateViewController(withIdentifier: ControllerIdentifier.billingAddress)
-        present(cardValidationController, animated: true)
+    func showAddressController(with delegate: AddressViewProtocol?) {
+        let addressController = UIStoryboard.address().instantiateViewController(withIdentifier: ControllerIdentifier.address) as! AddressViewController
+        addressController.delegate = delegate
+        present(addressController, animated: true)
     }
     
     // MARK: - private

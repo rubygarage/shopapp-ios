@@ -39,6 +39,14 @@ class CheckoutViewModel: BaseViewModel {
         }
     }
     
+    public func getShipingRates(with address: Address) {
+        if let checkout = checkout {
+            Repository.shared.getShipingRates(with: checkout, address: address, callback: { (rates, error) in
+                print("d")
+            })
+        }
+    }
+    
     // MARK: - private
     private var getProductList: Single<[CartProduct]> {
         return Single.create(subscribe: { (event) in

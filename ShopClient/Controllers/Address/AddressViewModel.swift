@@ -8,7 +8,7 @@
 
 import RxSwift
 
-class BillingAddressViewModel: BaseViewModel {
+class AddressViewModel: BaseViewModel {
     var emailText = Variable<String>("")
     var firstNameText = Variable<String>("")
     var lastNameText = Variable<String>("")
@@ -18,8 +18,7 @@ class BillingAddressViewModel: BaseViewModel {
     var zipText = Variable<String>("")
     var phoneText = Variable<String>("")
     
-    
-    var requiredTextFields: [Observable<String>] {
+    private var requiredTextFields: [Observable<String>] {
         get {
             return [emailText, firstNameText, lastNameText, addressText, cityText, countryText, zipText].map({ $0.asObservable() })
         }
@@ -34,6 +33,20 @@ class BillingAddressViewModel: BaseViewModel {
         })
     }
  
+    public func getAddress() -> Address {
+        let address = Address()
+        address.email = emailText.value
+        address.firstName = firstNameText.value
+        address.lastName = lastNameText.value
+        address.address = addressText.value
+        address.city = cityText.value
+        address.country = countryText.value
+        address.zip = zipText.value
+        address.phone = phoneText.value.isEmpty ? nil : phoneText.value
+        
+        return address
+    }
+    
     /*
     var isValid: Observable<Bool> {
         return Observable.combineLatest(emailText.asObservable(), firstNameText.asObservable(), lastNameText.asObservable(), addressText.asObservable(), cityText.asObservable(), countryText.asObservable(), zipText.asObservable(), phoneText.asObservable()) { email, firstName, lastName, address, city, country, zip, phone in

@@ -8,7 +8,11 @@
 
 import RxSwift
 
-class BillingAddressViewController: BaseViewController<BillingAddressViewModel> {
+protocol AddressViewProtocol {
+    func didFilled(address: Address)
+}
+
+class AddressViewController: BaseViewController<AddressViewModel> {
     @IBOutlet weak var controllerTitleLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
@@ -21,8 +25,10 @@ class BillingAddressViewController: BaseViewController<BillingAddressViewModel> 
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     
+    var delegate: AddressViewProtocol?
+    
     override func viewDidLoad() {
-        viewModel = BillingAddressViewModel()
+        viewModel = AddressViewModel()
         super.viewDidLoad()
 
         setupViews()
@@ -81,6 +87,8 @@ class BillingAddressViewController: BaseViewController<BillingAddressViewModel> 
     }
     
     @IBAction func nextButtonTapped(_ sender: UIButton) {
-        // TODO:
+        let address = viewModel.getAddress()
+        delegate?.didFilled(address: address)
+        dismiss(animated: true)
     }
 }
