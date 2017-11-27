@@ -207,22 +207,40 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
-    func payByCard(with card: CreditCard, checkout: Checkout, callback: @escaping RepoCallback<Bool>) {
-        getCardVaultUrl { [weak self] (cardVaultUrl, error) in
-            if let url = cardVaultUrl {
-                self?.pay(with: card, checkout: checkout, cardVaultUrl: url, callback: callback)
-            }
-            if let error = error {
-                callback(nil, ContentError(with: error))
-            }
-        }
-    }
-    
     func getShipingRates(with checkout: Checkout, address: Address, callback: @escaping RepoCallback<[ShipingRate]>) {
         let billingAddress = Storefront.MailingAddressInput.create()
         billingAddress.update(with: address)
         let checkoutId = GraphQL.ID.init(rawValue: checkout.id)
         updateShipingAddress(checkoutId: checkoutId, billingAddress: billingAddress, callback: callback)
+    }
+    
+    func updateCheckout(with rate: ShipingRate, checkout: Checkout, callback: @escaping RepoCallback<Bool>) {
+        let checkoutId = GraphQL.ID.init(rawValue: checkout.id)
+        let query = updateShipingLineQuery(checkoutId: checkoutId, shipingRateHandle: rate.handle)
+        let task = client?.mutateGraphWith(query, completionHandler: { (response, error) in
+            if let _ = response {
+                callback(true, nil)
+            } else if let responseError = ContentError(with: error) {
+                callback(false, responseError)
+            } else {
+                callback(false, ContentError())
+            }
+        })
+        run(task: task, callback: callback)
+    }
+    
+    func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, callback: @escaping RepoCallback<Bool>) {
+        let query = cardVaultUrlQuery()
+        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
+            if let responseError = ContentError(with: error) {
+                callback(false, responseError)
+            }
+            if let cardVaultUrl = response?.shop.paymentSettings.cardVaultUrl {
+                let checkoutId = GraphQL.ID(rawValue: checkout.id)
+                self?.pay(with: card, checkoutId: checkoutId, cardVaultUrl: cardVaultUrl, address: billingAddress, callback: callback)
+            }
+        })
+        run(task: task, callback: callback)
     }
     
     // MARK: - private
@@ -258,35 +276,13 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
-    private func updateShipingLine(checkoutId: GraphQL.ID, cardVaultToken: String, shipingRateHandle: String, billingAddress: Storefront.MailingAddressInput, callback: @escaping RepoCallback<Bool>) {
-        let query = updateShipingLineQuery(checkoutId: checkoutId, shipingRateHandle: shipingRateHandle)
-        let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
-            if let _ = response {
-                self?.completePay(checkoutId: checkoutId, cardVaultToken: cardVaultToken, billingAddress: billingAddress, callback: callback)
-            }
-            if let responseError = ContentError(with: error) {
-                callback(false, responseError)
-            }
-        })
-        run(task: task, callback: callback)
-    }
-    
-    private func getCardVaultUrl(callback: @escaping (_ cardVaultUrl: URL?, _ error: Error?) -> ()) {
-        let query = cardVaultUrlQuery()
-        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
-            let cardVaultUrl = response?.shop.paymentSettings.cardVaultUrl
-            callback(cardVaultUrl, error)
-        })
-        run(task: task, callback: callback)
-    }
-    
-    private func pay(with card: CreditCard, checkout: Checkout, cardVaultUrl: URL, callback: @escaping RepoCallback<Bool>) {
+    private func pay(with card: CreditCard, checkoutId: GraphQL.ID, cardVaultUrl: URL, address: Address, callback: @escaping RepoCallback<Bool>) {
         let creditCard = Card.CreditCard(firstName: card.firstName, lastName: card.lastName, number: card.cardNumber, expiryMonth: card.expireMonth, expiryYear: card.expireYear, verificationCode: card.verificationCode)
         let cardClient = Card.Client.init()
         
         let task = cardClient.vault(creditCard, to: cardVaultUrl) { [weak self] (token, error) in
             if let token = token {
-//                self?.updateShipingAddress(checkoutId: checkout.id, cardVaultToken: token, callback: callback)
+                self?.completePay(checkoutId: checkoutId, cardVaultToken: token, address: address, callback: callback)
             }
             if let responseError = ContentError(with: error) {
                 callback(false, responseError)
@@ -295,9 +291,11 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
-    private func completePay(checkoutId: GraphQL.ID, cardVaultToken: String, billingAddress: Storefront.MailingAddressInput, callback: @escaping RepoCallback<Bool>) {
+    private func completePay(checkoutId: GraphQL.ID, cardVaultToken: String, address: Address, callback: @escaping RepoCallback<Bool>) {
         let amount = Decimal(65)
         let idempotencyKey = checkoutId.rawValue // TODO:
+        let billingAddress = Storefront.MailingAddressInput.create()
+        billingAddress.update(with: address)
         let paymentInput = Storefront.CreditCardPaymentInput.create(amount: amount, idempotencyKey: idempotencyKey, billingAddress: billingAddress, vaultId: cardVaultToken)
         
         let query = completePayQuery(checkoutId: checkoutId, paymentInput: paymentInput)

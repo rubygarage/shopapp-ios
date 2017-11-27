@@ -58,6 +58,23 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, AddressView
                 // TODO:
             })
             .disposed(by: disposeBag)
+        
+        viewModel.availableRates.asObservable()
+            .subscribe(onNext: { [weak self] rates in
+                if rates.count > 0 {
+                    self?.showAvailableRatesView(with: rates)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.rateUpdatingSuccess
+            .subscribe(onNext: { [weak self] success in
+                if success {
+                    let cardView = CardValidationView(delegate: self)
+                    cardView.show()
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     private func loadData() {
@@ -96,18 +113,27 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, AddressView
     // MARK: - CardValidationViewProtocol
     func didCardFilled(with card: CreditCard?, errorMessage: String?) {
         if let creditCard = card {
-            viewModel.payByCard(with: creditCard)
-            // TODO: show billing address view
-//            showCardValidationController()
+            viewModel.pay(with: creditCard)
         } else if let error = errorMessage {
             showToast(with: error)
         }
     }
     
-    
-    
     // MARK: - ErrorViewProtocol
     func didTapTryAgain() {
         viewModel.loadData(with: disposeBag)
+    }
+}
+
+internal extension CheckoutViewController {
+    func showAvailableRatesView(with rates: [ShipingRate]) {
+        let title = NSLocalizedString("Alert.ChooseShipingRate", comment: String())
+        let buttons = rates.map({ $0.title ?? String() })
+        let cancel = NSLocalizedString("Button.Cancel", comment: String())
+        showActionSheet(with: title, buttons: buttons, cancel: cancel) { [weak self] (index) in
+            if index < rates.count {
+                self?.viewModel.updateCheckout(with: rates[index])
+            }
+        }
     }
 }

@@ -13,11 +13,15 @@ extension Repository {
         APICore?.getCheckout(cartProducts: cartProducts, callback: callback)
     }
     
-    func payByCard(with card: CreditCard, checkout: Checkout, callback: @escaping RepoCallback<Bool>) {
-        APICore?.payByCard(with: card, checkout: checkout, callback: callback)
-    }
-    
     func getShipingRates(with checkout: Checkout, address: Address, callback: @escaping RepoCallback<[ShipingRate]>) {
         APICore?.getShipingRates(with: checkout, address: address, callback: callback)
+    }
+    
+    func updateCheckout(with rate: ShipingRate, checkout: Checkout, callback: @escaping RepoCallback<Bool>) {
+        APICore?.updateCheckout(with: rate, checkout: checkout, callback: callback)
+    }
+    
+    func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, callback: @escaping RepoCallback<Bool>) {
+        APICore?.pay(with: card, checkout: checkout, billingAddress: billingAddress, callback: callback)
     }
 }

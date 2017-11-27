@@ -21,6 +21,7 @@
 "ControllerTitle.BillingAddress" = "Billing Address";
 
 "Alert.Error" = "Error";
+"Alert.ChooseShipingRate" = "Choose shiping rate";
 
 "Label.SortBy" = "Sort by:";
 

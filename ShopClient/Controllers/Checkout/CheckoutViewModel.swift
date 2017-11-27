@@ -11,6 +11,10 @@ import RxSwift
 class CheckoutViewModel: BaseViewModel {
     var checkout: Checkout?
     var paymentSuccess = PublishSubject<Bool>()
+    var availableRates = Variable<[ShipingRate]>([ShipingRate]())
+    var rateUpdatingSuccess = PublishSubject<Bool>()
+    
+    var billingAddress: Address!
     
     // MARK: - public
     public func loadData(with disposeBag: DisposeBag) {
@@ -24,26 +28,49 @@ class CheckoutViewModel: BaseViewModel {
         }.disposed(by: disposeBag)
     }
     
-    public func payByCard(with card: CreditCard) {
+    public func getShipingRates(with address: Address) {
+        billingAddress = address
         if let checkout = checkout {
             state.onNext(.loading(showHud: true))
-            Repository.shared.payByCard(with: card, checkout: checkout) { [weak self] (success, error) in
+            Repository.shared.getShipingRates(with: checkout, address: address, callback: { [weak self] (rates, error) in
                 if let error = error {
                     self?.state.onNext(.error(error: error))
                 }
-                if let success = success  {
+                if let rates = rates {
                     self?.state.onNext(.content)
-                    self?.paymentSuccess.onNext(success)
+                    self?.availableRates.value = rates
+                }
+            })
+        }
+    }
+    
+    public func updateCheckout(with rate: ShipingRate) {
+        if let checkout = checkout {
+            state.onNext(.loading(showHud: true))
+            Repository.shared.updateCheckout(with: rate, checkout: checkout) { [weak self] (success, error) in
+                if let error = error {
+                    self?.state.onNext(.error(error: error))
+                }
+                if let success = success {
+                    self?.state.onNext(.content)
+                    self?.rateUpdatingSuccess.onNext(success)
                 }
             }
         }
     }
     
-    public func getShipingRates(with address: Address) {
+    public func pay(with card: CreditCard) {
         if let checkout = checkout {
-            Repository.shared.getShipingRates(with: checkout, address: address, callback: { (rates, error) in
-                print("d")
-            })
+            state.onNext(.loading(showHud: true))
+            Repository.shared.pay(with: card, checkout: checkout, billingAddress: billingAddress) { [weak self] (success, error) in
+                if let error = error {
+                    self?.state.onNext(.error(error: error))
+                }
+                if let success = success {
+                    self?.state.onNext(.content)
+                    self?.paymentSuccess.onNext(success)
+                }
+            }
         }
     }
     
