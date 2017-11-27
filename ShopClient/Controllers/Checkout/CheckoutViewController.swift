@@ -70,8 +70,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, AddressView
         viewModel.rateUpdatingSuccess
             .subscribe(onNext: { [weak self] success in
                 if success {
-                    let cardView = CardValidationView(delegate: self)
-                    cardView.show()
+                    self?.showPriceInfoAlert()
                 }
             })
             .disposed(by: disposeBag)
@@ -101,13 +100,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, AddressView
     // MARK: - AddressViewProtocol
     func didFilled(address: Address) {
         viewModel.getShipingRates(with: address)
-        
-        // TODO: getShipingRates(checkoutId, email, address)
-        /*
-         after getting rates use
-         //        let cardView = CardValidationView(delegate: self)
-         //        cardView.show()
-         */
     }
     
     // MARK: - CardValidationViewProtocol
@@ -133,6 +125,25 @@ internal extension CheckoutViewController {
         showActionSheet(with: title, buttons: buttons, cancel: cancel) { [weak self] (index) in
             if index < rates.count {
                 self?.viewModel.updateCheckout(with: rates[index])
+            }
+        }
+    }
+    
+    func showPriceInfoAlert() {
+        let title = NSLocalizedString("Alert.PriceInfo", comment: String())
+        let submit = NSLocalizedString("Button.Continue", comment: String())
+        
+        let totalPrice = ((viewModel.checkout?.totalPrice?.description ?? String()) as NSString).floatValue
+        let productsPrice = ((viewModel.checkout?.subtotalPrice?.description ?? String()) as NSString).floatValue
+        let taxPrice = ((viewModel.checkout?.totalTax?.description ?? String()) as NSString).floatValue
+        let deliveryPrice = totalPrice - productsPrice
+        
+        let localizedString = NSLocalizedString("Label.PriceInfo", comment: String())
+        let message = String.localizedStringWithFormat(localizedString, productsPrice, deliveryPrice, taxPrice, totalPrice)
+        showAlert(with: title, message: message, submit: submit) { (index) in
+            if index == .submit {
+                let cardView = CardValidationView(delegate: self)
+                cardView.show()
             }
         }
     }

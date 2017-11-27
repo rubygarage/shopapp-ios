@@ -17,7 +17,7 @@ extension Repository {
         APICore?.getShipingRates(with: checkout, address: address, callback: callback)
     }
     
-    func updateCheckout(with rate: ShipingRate, checkout: Checkout, callback: @escaping RepoCallback<Bool>) {
+    func updateCheckout(with rate: ShipingRate, checkout: Checkout, callback: @escaping RepoCallback<Checkout>) {
         APICore?.updateCheckout(with: rate, checkout: checkout, callback: callback)
     }
     

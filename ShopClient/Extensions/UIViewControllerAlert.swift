@@ -8,13 +8,25 @@
 
 import UIKit
 
+enum AlertButtonIndex: Int {
+    case submit = 0
+    case cancel = 1
+}
+
 typealias ButtonClosure = (_ buttonIndex: Int) -> ()
+typealias AlertClosure = (AlertButtonIndex) -> ()
 
 extension UIViewController {
     // MARK: - public
-    public func showErrorAlert(with message: String?, handler: ((UIAlertAction) -> Void)? = nil) {
+    func showErrorAlert(with message: String?, handler: AlertClosure? = nil) {
         let title = NSLocalizedString("Alert.Error", comment: String())
-        showAlertController(with: title, message: message, handler: handler)
+        let cancel = NSLocalizedString("Button.Ok", comment: String())
+        showAlertController(with: title, message: message, cancel: cancel, handler: handler)
+    }
+    
+    func showAlert(with title: String?, message: String?, submit: String, handler: @escaping AlertClosure) {
+        let cancel = NSLocalizedString("Button.Cancel", comment: String())
+        showAlertController(with: title, message: message, submit: submit, cancel: cancel, handler: handler)
     }
     
     func showActionSheet(with title: String?, message: String? = nil, buttons: [String], destructive: String? = nil, cancel: String, handle: @escaping ButtonClosure) {
@@ -22,11 +34,19 @@ extension UIViewController {
     }
     
     // MARK: - private
-    private func showAlertController(with title: String?, message: String?, handler: ((UIAlertAction) -> Void)?) {
+    private func showAlertController(with title: String?, message: String?, submit: String? = nil, cancel: String, handler: AlertClosure?) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let cancelTitle = NSLocalizedString("Button.Ok", comment: String())
-        let cancelAction = UIAlertAction(title: cancelTitle, style: .default, handler: handler)
+        
+        let cancelAction = UIAlertAction(title: cancel, style: .default) { (action) in
+            handler?(.cancel)
+        }
         alertController.addAction(cancelAction)
+        if submit != nil {
+            let submitAction = UIAlertAction(title: submit, style: .default, handler: { (action) in
+                handler?(.submit)
+            })
+            alertController.addAction(submitAction)
+        }
         present(alertController, animated: true)
     }
     

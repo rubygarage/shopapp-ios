@@ -47,13 +47,14 @@ class CheckoutViewModel: BaseViewModel {
     public func updateCheckout(with rate: ShipingRate) {
         if let checkout = checkout {
             state.onNext(.loading(showHud: true))
-            Repository.shared.updateCheckout(with: rate, checkout: checkout) { [weak self] (success, error) in
+            Repository.shared.updateCheckout(with: rate, checkout: checkout) { [weak self] (checkout, error) in
                 if let error = error {
                     self?.state.onNext(.error(error: error))
                 }
-                if let success = success {
+                if let checkout = checkout {
+                    self?.checkout = checkout
                     self?.state.onNext(.content)
-                    self?.rateUpdatingSuccess.onNext(success)
+                    self?.rateUpdatingSuccess.onNext(true)
                 }
             }
         }

@@ -22,6 +22,7 @@
 
 "Alert.Error" = "Error";
 "Alert.ChooseShipingRate" = "Choose shiping rate";
+"Alert.PriceInfo" = "Price info";
 
 "Label.SortBy" = "Sort by:";
 
@@ -36,6 +37,7 @@
 "Button.PaymentMethodCard" = "Pay by card";
 "Button.PaymentMethodApplePay" = "Apple Pay";
 "Button.PaymentAddressViewContinue" = "Continue to shipping method";
+"Button.Continue" = "Continue";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";
@@ -47,6 +49,7 @@
 "Label.PaymentMethodWebsite" = "Use the card to pay for on our website";
 "Label.PaymentMethodCard" = "Use the card to pay for on our app";
 "Label.PaymentMethodApplePay" = "You can use any credit or debit card in you AppleID account (including your cards in Apple Pay) for quick, easy checkout";
+"Label.PriceInfo" = "Price of products: %.2f\nPrice of delivery: %.2f\nTotal tax: %.2f\nTotal price: %.2f";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

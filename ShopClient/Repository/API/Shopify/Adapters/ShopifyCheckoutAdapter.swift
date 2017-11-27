@@ -9,10 +9,16 @@
 import MobileBuySDK
 
 extension Checkout {
-    convenience init(with item: Storefront.Checkout) {
+    convenience init?(with item: Storefront.Checkout?) {
+        if item == nil {
+            return nil
+        }
         self.init()
         
-        id = item.id.rawValue
-        webUrl = item.webUrl.absoluteString
+        id = item?.id.rawValue ?? String()
+        webUrl = item?.webUrl.absoluteString
+        subtotalPrice = item?.subtotalPrice
+        totalPrice = item?.totalPrice
+        totalTax = item?.totalTax
     }
 }
