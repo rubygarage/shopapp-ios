@@ -10,7 +10,7 @@ import RxSwift
 
 class CheckoutViewModel: BaseViewModel {
     var paymentSuccess = PublishSubject<Bool>()
-    var availableRates = Variable<[ShipingRate]>([ShipingRate]())
+    var availableRates = Variable<[ShippingRate]>([ShippingRate]())
     var rateUpdatingSuccess = PublishSubject<Bool>()
     
     var checkout: Checkout?
@@ -29,11 +29,11 @@ class CheckoutViewModel: BaseViewModel {
         }.disposed(by: disposeBag)
     }
     
-    public func getShipingRates(with address: Address) {
+    public func getShippingRates(with address: Address) {
         billingAddress = address
         if let checkout = checkout {
             state.onNext(.loading(showHud: true))
-            Repository.shared.getShipingRates(with: checkout, address: address, callback: { [weak self] (rates, error) in
+            Repository.shared.getShippingRates(with: checkout, address: address, callback: { [weak self] (rates, error) in
                 if let error = error {
                     self?.state.onNext(.error(error: error))
                 }
@@ -45,7 +45,7 @@ class CheckoutViewModel: BaseViewModel {
         }
     }
     
-    public func updateCheckout(with rate: ShipingRate) {
+    public func updateCheckout(with rate: ShippingRate) {
         if let checkout = checkout {
             state.onNext(.loading(showHud: true))
             Repository.shared.updateCheckout(with: rate, checkout: checkout) { [weak self] (checkout, error) in

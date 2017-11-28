@@ -1,5 +1,5 @@
 //
-//  ShipingRate.swift
+//  ShippingRate.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 11/24/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ShipingRate: NSObject {
+class ShippingRate: NSObject {
     var title: String?
     var price: String?
     var handle = String()

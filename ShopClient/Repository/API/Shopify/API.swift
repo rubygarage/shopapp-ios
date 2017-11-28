@@ -207,16 +207,16 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
-    func getShipingRates(with checkout: Checkout, address: Address, callback: @escaping RepoCallback<[ShipingRate]>) {
+    func getShippingRates(with checkout: Checkout, address: Address, callback: @escaping RepoCallback<[ShippingRate]>) {
         let billingAddress = Storefront.MailingAddressInput.create()
         billingAddress.update(with: address)
         let checkoutId = GraphQL.ID.init(rawValue: checkout.id)
-        updateShipingAddress(checkoutId: checkoutId, billingAddress: billingAddress, callback: callback)
+        updateShippingAddress(checkoutId: checkoutId, billingAddress: billingAddress, callback: callback)
     }
     
-    func updateCheckout(with rate: ShipingRate, checkout: Checkout, callback: @escaping RepoCallback<Checkout>) {
+    func updateCheckout(with rate: ShippingRate, checkout: Checkout, callback: @escaping RepoCallback<Checkout>) {
         let checkoutId = GraphQL.ID.init(rawValue: checkout.id)
-        let query = updateShipingLineQuery(checkoutId: checkoutId, shipingRateHandle: rate.handle)
+        let query = updateShippingLineQuery(checkoutId: checkoutId, shippingRateHandle: rate.handle)
         let task = client?.mutateGraphWith(query, completionHandler: { (response, error) in
             if let checkout = Checkout(with: response?.checkoutShippingLineUpdate?.checkout) {
                 callback(checkout, nil)
@@ -243,8 +243,8 @@ class API: NSObject, APIInterface {
     }
     
     // MARK: - private
-    private func updateShipingAddress(checkoutId: GraphQL.ID, billingAddress: Storefront.MailingAddressInput, callback: @escaping RepoCallback<[ShipingRate]>) {
-        let query = updateShipingAddressQuery(billingAddress: billingAddress, checkoutId: checkoutId)
+    private func updateShippingAddress(checkoutId: GraphQL.ID, billingAddress: Storefront.MailingAddressInput, callback: @escaping RepoCallback<[ShippingRate]>) {
+        let query = updateShippingAddressQuery(billingAddress: billingAddress, checkoutId: checkoutId)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
             if let _ = response {
                 self?.getShippingRates(checkoutId: checkoutId, billingAddress: billingAddress, callback: callback)
@@ -256,13 +256,13 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
-    private func getShippingRates(checkoutId: GraphQL.ID, billingAddress: Storefront.MailingAddressInput, callback: @escaping RepoCallback<[ShipingRate]>) {
-        let query = getShipingRatesQuery(checkoutId: checkoutId)
+    private func getShippingRates(checkoutId: GraphQL.ID, billingAddress: Storefront.MailingAddressInput, callback: @escaping RepoCallback<[ShippingRate]>) {
+        let query = getShippingRatesQuery(checkoutId: checkoutId)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
-            if let shipingRates = (response?.node as? Storefront.Checkout)?.availableShippingRates?.shippingRates {
-                var rates = [ShipingRate]()
-                for shipingRate in shipingRates {
-                    if let rate = ShipingRate(with: shipingRate) {
+            if let shippingRates = (response?.node as? Storefront.Checkout)?.availableShippingRates?.shippingRates {
+                var rates = [ShippingRate]()
+                for shippingRate in shippingRates {
+                    if let rate = ShippingRate(with: shippingRate) {
                         rates.append(rate)
                     }
                 }
@@ -495,7 +495,7 @@ class API: NSObject, APIInterface {
         })
     }
     
-    private func updateShipingAddressQuery(billingAddress: Storefront.MailingAddressInput, checkoutId: GraphQL.ID) -> Storefront.MutationQuery {
+    private func updateShippingAddressQuery(billingAddress: Storefront.MailingAddressInput, checkoutId: GraphQL.ID) -> Storefront.MutationQuery {
         return Storefront.buildMutation { $0
             .checkoutShippingAddressUpdate(shippingAddress: billingAddress, checkoutId: checkoutId, { $0
                 .checkout({ $0
@@ -508,7 +508,7 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func getShipingRatesQuery(checkoutId: GraphQL.ID) -> Storefront.QueryRootQuery {
+    private func getShippingRatesQuery(checkoutId: GraphQL.ID) -> Storefront.QueryRootQuery {
         return Storefront.buildQuery { $0
             .node(id: checkoutId) { $0
                 .onCheckout { $0
@@ -526,9 +526,9 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func updateShipingLineQuery(checkoutId: GraphQL.ID, shipingRateHandle: String) -> Storefront.MutationQuery {
+    private func updateShippingLineQuery(checkoutId: GraphQL.ID, shippingRateHandle: String) -> Storefront.MutationQuery {
         return Storefront.buildMutation { $0
-            .checkoutShippingLineUpdate(checkoutId: checkoutId, shippingRateHandle: shipingRateHandle, { $0
+            .checkoutShippingLineUpdate(checkoutId: checkoutId, shippingRateHandle: shippingRateHandle, { $0
                 .checkout(self.checkoutQuery())
                 .userErrors(self.userErrorQuery())
             })

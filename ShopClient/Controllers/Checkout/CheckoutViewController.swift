@@ -54,7 +54,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, AddressView
     private func setupViewModel() {
         viewModel.paymentSuccess
             .subscribe(onNext: { success in
-                print(success)
                 // TODO:
             })
             .disposed(by: disposeBag)
@@ -99,7 +98,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, AddressView
     
     // MARK: - AddressViewProtocol
     func didFilled(address: Address) {
-        viewModel.getShipingRates(with: address)
+        viewModel.getShippingRates(with: address)
     }
     
     // MARK: - CardValidationViewProtocol
@@ -118,8 +117,8 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, AddressView
 }
 
 internal extension CheckoutViewController {
-    func showAvailableRatesView(with rates: [ShipingRate]) {
-        let title = NSLocalizedString("Alert.ChooseShipingRate", comment: String())
+    func showAvailableRatesView(with rates: [ShippingRate]) {
+        let title = NSLocalizedString("Alert.ChooseShippingRate", comment: String())
         let currency = viewModel.currency ?? String()
         let buttons = rates.map({ item -> String in
             let title = item.title ?? String()
