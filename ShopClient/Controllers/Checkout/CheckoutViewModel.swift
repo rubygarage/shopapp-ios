@@ -9,11 +9,12 @@
 import RxSwift
 
 class CheckoutViewModel: BaseViewModel {
-    var checkout: Checkout?
     var paymentSuccess = PublishSubject<Bool>()
     var availableRates = Variable<[ShipingRate]>([ShipingRate]())
     var rateUpdatingSuccess = PublishSubject<Bool>()
     
+    var checkout: Checkout?
+    var currency: String?
     var billingAddress: Address!
     
     // MARK: - public
@@ -78,11 +79,12 @@ class CheckoutViewModel: BaseViewModel {
     // MARK: - private
     private var getProductList: Single<[CartProduct]> {
         return Single.create(subscribe: { (event) in
-            Repository.shared.getCartProductList { (cartProducts, error) in
+            Repository.shared.getCartProductList { [weak self] (cartProducts, error) in
                 if let error = error {
                     event(.error(error))
                 }
                 if let products = cartProducts {
+                    self?.currency = cartProducts?.first?.currency
                     event(.success(products))
                 }
             }

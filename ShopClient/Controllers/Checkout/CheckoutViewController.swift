@@ -137,9 +137,23 @@ internal extension CheckoutViewController {
         let productsPrice = ((viewModel.checkout?.subtotalPrice?.description ?? String()) as NSString).floatValue
         let taxPrice = ((viewModel.checkout?.totalTax?.description ?? String()) as NSString).floatValue
         let deliveryPrice = totalPrice - productsPrice
+        let currency = viewModel.currency ?? String()
         
-        let localizedString = NSLocalizedString("Label.PriceInfo", comment: String())
-        let message = String.localizedStringWithFormat(localizedString, productsPrice, deliveryPrice, taxPrice, totalPrice)
+        let productsPriceSubstring = NSLocalizedString("Label.PriceOfProducts", comment: String())
+        let productsPriceString = String.localizedStringWithFormat(productsPriceSubstring, productsPrice, currency)
+        
+        let deliveryPriceSubstring = NSLocalizedString("Label.PriceOfDelivery", comment: String())
+        let deiveryPriceString = String.localizedStringWithFormat(deliveryPriceSubstring, deliveryPrice, currency)
+        
+        let totalTaxSubstring = NSLocalizedString("Label.TotalTax", comment: String())
+        let totalTaxString = String.localizedStringWithFormat(totalTaxSubstring, taxPrice, currency)
+        
+        let totalPriceSubstring = NSLocalizedString("Label.TotalPrice", comment: String())
+        let totalPriceString = String.localizedStringWithFormat(totalPriceSubstring, totalPrice, currency)
+        
+        let priceInfoLocalizedString = NSLocalizedString("Label.PriceInfo", comment: String())
+        
+        let message = String.localizedStringWithFormat(priceInfoLocalizedString, productsPriceString, deiveryPriceString, totalTaxString, totalPriceString)
         showAlert(with: title, message: message, submit: submit) { (index) in
             if index == .submit {
                 let cardView = CardValidationView(delegate: self)
