@@ -120,7 +120,12 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, AddressView
 internal extension CheckoutViewController {
     func showAvailableRatesView(with rates: [ShipingRate]) {
         let title = NSLocalizedString("Alert.ChooseShipingRate", comment: String())
-        let buttons = rates.map({ $0.title ?? String() })
+        let currency = viewModel.currency ?? String()
+        let buttons = rates.map({ item -> String in
+            let title = item.title ?? String()
+            let price = item.price ?? String()
+            return "\(title) (\(price) \(currency))"
+        })
         let cancel = NSLocalizedString("Button.Cancel", comment: String())
         showActionSheet(with: title, buttons: buttons, cancel: cancel) { [weak self] (index) in
             if index < rates.count {
