@@ -18,6 +18,7 @@
 "ControllerTitle.SignUp" = "Sign Up";
 "ControllerTitle.Login" = "Login";
 "ControllerTitle.Checkout" = "Checkout";
+"ControllerTitle.ShippingAddress" = "Shipping Address";
 "ControllerTitle.BillingAddress" = "Billing Address";
 
 "Alert.Error" = "Error";
@@ -54,6 +55,7 @@
 "Label.TotalTax" = "Total tax: %.2f %@";
 "Label.TotalPrice" = "Total price: %.2f %@";
 "Label.PriceInfo" = "%@\n%@\n%@\n%@";
+"Label.SameAsShippingAddress" = "Same as shipping address";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

@@ -9,7 +9,7 @@
 import UIKit
 import MFCard
 
-class CheckoutViewController: BaseViewController<CheckoutViewModel>, AddressViewProtocol, CardValidationViewProtocol {
+class CheckoutViewController: BaseViewController<CheckoutViewModel>, AddressViewProtocol, CardValidationViewProtocol, BillingAddressViewProtocol {
     @IBOutlet weak var paymentMethodLabel: UILabel!
     @IBOutlet weak var paymentByWebsiteView: UIView!
     @IBOutlet weak var paymentByWebsiteLabel: UILabel!
@@ -104,10 +104,16 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, AddressView
     // MARK: - CardValidationViewProtocol
     func didCardFilled(with card: CreditCard?, errorMessage: String?) {
         if let creditCard = card {
-            viewModel.pay(with: creditCard)
+            viewModel.creditCard = creditCard
+            showBillingAddressController(with: viewModel.shippingAddress, delegate: self)
         } else if let error = errorMessage {
             showToast(with: error)
         }
+    }
+    
+    // MARK: - BillingAddressViewProtocol
+    func didFilled(billingAddress: Address) {
+        viewModel.completePay()
     }
     
     // MARK: - ErrorViewProtocol

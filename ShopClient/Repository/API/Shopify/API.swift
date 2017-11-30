@@ -9,8 +9,8 @@
 import MobileBuySDK
 import KeychainSwift
 
-private let kShopifyStorefrontAccessToken = "b7ec986195fe87de18cb74a09b81ea1d"
-private let kShopifyStorefrontURL = "fosox.myshopify.com"
+private let kShopifyStorefrontAccessToken = "98fb98180b7f5987f1fff84416d3a697"
+private let kShopifyStorefrontURL = "lubitax.myshopify.com"
 private let kShopifyItemsMaxCount: Int32 = 250
 
 class API: NSObject, APIInterface {
@@ -208,10 +208,10 @@ class API: NSObject, APIInterface {
     }
     
     func getShippingRates(with checkout: Checkout, address: Address, callback: @escaping RepoCallback<[ShippingRate]>) {
-        let billingAddress = Storefront.MailingAddressInput.create()
-        billingAddress.update(with: address)
+        let shippingAddress = Storefront.MailingAddressInput.create()
+        shippingAddress.update(with: address)
         let checkoutId = GraphQL.ID.init(rawValue: checkout.id)
-        updateShippingAddress(checkoutId: checkoutId, billingAddress: billingAddress, callback: callback)
+        updateShippingAddress(checkoutId: checkoutId, shippingAddress: shippingAddress, callback: callback)
     }
     
     func updateCheckout(with rate: ShippingRate, checkout: Checkout, callback: @escaping RepoCallback<Checkout>) {
@@ -243,11 +243,11 @@ class API: NSObject, APIInterface {
     }
     
     // MARK: - private
-    private func updateShippingAddress(checkoutId: GraphQL.ID, billingAddress: Storefront.MailingAddressInput, callback: @escaping RepoCallback<[ShippingRate]>) {
-        let query = updateShippingAddressQuery(billingAddress: billingAddress, checkoutId: checkoutId)
+    private func updateShippingAddress(checkoutId: GraphQL.ID, shippingAddress: Storefront.MailingAddressInput, callback: @escaping RepoCallback<[ShippingRate]>) {
+        let query = updateShippingAddressQuery(shippingAddress: shippingAddress, checkoutId: checkoutId)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
             if let _ = response {
-                self?.getShippingRates(checkoutId: checkoutId, billingAddress: billingAddress, callback: callback)
+                self?.getShippingRates(checkoutId: checkoutId, callback: callback)
             }
             if let responseError = ContentError(with: error) {
                 callback(nil, responseError)
@@ -256,7 +256,7 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
-    private func getShippingRates(checkoutId: GraphQL.ID, billingAddress: Storefront.MailingAddressInput, callback: @escaping RepoCallback<[ShippingRate]>) {
+    private func getShippingRates(checkoutId: GraphQL.ID, callback: @escaping RepoCallback<[ShippingRate]>) {
         let query = getShippingRatesQuery(checkoutId: checkoutId)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
             if let shippingRates = (response?.node as? Storefront.Checkout)?.availableShippingRates?.shippingRates {
@@ -495,9 +495,9 @@ class API: NSObject, APIInterface {
         })
     }
     
-    private func updateShippingAddressQuery(billingAddress: Storefront.MailingAddressInput, checkoutId: GraphQL.ID) -> Storefront.MutationQuery {
+    private func updateShippingAddressQuery(shippingAddress: Storefront.MailingAddressInput, checkoutId: GraphQL.ID) -> Storefront.MutationQuery {
         return Storefront.buildMutation { $0
-            .checkoutShippingAddressUpdate(shippingAddress: billingAddress, checkoutId: checkoutId, { $0
+            .checkoutShippingAddressUpdate(shippingAddress: shippingAddress, checkoutId: checkoutId, { $0
                 .checkout({ $0
                     .ready()
                     .shippingLine({ $0
@@ -765,8 +765,8 @@ class API: NSObject, APIInterface {
         let token = keyChain.get(SessionData.accessToken)
         let email = keyChain.get(SessionData.email)
         let expiryDateString = keyChain.get(SessionData.expiryDate) ?? String()
-        let expiryDateTimeInterval = TimeInterval(expiryDateString)
-        let expiryDate = Date(timeIntervalSinceNow: expiryDateTimeInterval!)
+        let expiryDateTimeInterval = TimeInterval(expiryDateString) ?? TimeInterval()
+        let expiryDate = Date(timeIntervalSinceNow: expiryDateTimeInterval)
         
         return (token, email, expiryDate)
     }

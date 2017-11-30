@@ -2,20 +2,22 @@
 //  BillingAddressViewController.swift
 //  ShopClient
 //
-//  Created by Evgeniy Antonov on 11/21/17.
+//  Created by Evgeniy Antonov on 11/28/17.
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
 import RxSwift
 
-protocol AddressViewProtocol {
-    func didFilled(address: Address)
+protocol BillingAddressViewProtocol {
+    func didFilled(billingAddress: Address)
 }
 
-class AddressViewController: BaseViewController<AddressViewModel> {
+class BillingAddressViewController: BaseViewController<BillingAddressViewModel> {
     @IBOutlet weak var controllerTitleLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var useSameAddressLabel: UILabel!
+    @IBOutlet weak var useSameAddressSwitch: UISwitch!
+    @IBOutlet weak var addressView: UIView!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
@@ -25,10 +27,17 @@ class AddressViewController: BaseViewController<AddressViewModel> {
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     
-    var delegate: AddressViewProtocol?
+    var textFields: [UITextField] {
+        get {
+            return [firstNameTextField, lastNameTextField, addressTextField, cityTextField, countryTextField, zipTextField, phoneTextField]
+        }
+    }
+    var delegate: BillingAddressViewProtocol?
+    var preloadedAddress: Address!
     
     override func viewDidLoad() {
-        viewModel = AddressViewModel()
+        viewModel = BillingAddressViewModel()
+        viewModel.preloadedAddress = preloadedAddress
         super.viewDidLoad()
 
         setupViews()
@@ -36,16 +45,13 @@ class AddressViewController: BaseViewController<AddressViewModel> {
     }
     
     private func setupViews() {
-        controllerTitleLabel.text = NSLocalizedString("ControllerTitle.ShippingAddress", comment: String())
+        controllerTitleLabel.text = NSLocalizedString("ControllerTitle.BillingAddress", comment: String())
         cancelButton.setTitle(NSLocalizedString("Button.Cancel", comment: String()), for: .normal)
+        useSameAddressLabel.text = NSLocalizedString("Label.SameAsShippingAddress", comment: String())
         nextButton.setTitle(NSLocalizedString("Button.PaymentAddressViewContinue", comment: String()), for: .normal)
     }
     
-    private func setupViewModel() {
-        emailTextField.rx.text.map({ $0 ?? String() })
-            .bind(to: viewModel.emailText)
-            .disposed(by: disposeBag)
-        
+    private func setupViewModel() {        
         firstNameTextField.rx.text.map({ $0 ?? String() })
             .bind(to: viewModel.firstNameText)
             .disposed(by: disposeBag)
@@ -79,6 +85,32 @@ class AddressViewController: BaseViewController<AddressViewModel> {
                 self?.nextButton.isEnabled = isValid
             })
             .disposed(by: disposeBag)
+        
+        useSameAddressSwitch.rx.isOn
+            .bind(to: viewModel.useSameAddressChanged)
+            .disposed(by: disposeBag)
+        
+        viewModel.useSameAddress.asObservable()
+            .subscribe(onNext: { [weak self] useSameAddress in
+                self?.textFields.forEach({ $0.isEnabled = !useSameAddress })
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.usedAddress.asObservable()
+            .subscribe(onNext: { [weak self] address in
+                self?.updateTextFields(with: address)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func updateTextFields(with address: Address?) {
+        firstNameTextField.text = address?.firstName
+        lastNameTextField.text = address?.lastName
+        addressTextField.text = address?.address
+        cityTextField.text = address?.city
+        countryTextField.text = address?.country
+        zipTextField.text = address?.zip
+        phoneTextField.text = address?.phone
     }
     
     // MARK: - actions
@@ -88,7 +120,7 @@ class AddressViewController: BaseViewController<AddressViewModel> {
     
     @IBAction func nextButtonTapped(_ sender: UIButton) {
         let address = viewModel.getAddress()
-        delegate?.didFilled(address: address)
+        delegate?.didFilled(billingAddress: address)
         dismiss(animated: true)
     }
 }

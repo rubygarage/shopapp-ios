@@ -26,7 +26,7 @@ class AddressViewModel: BaseViewModel {
     
     var isValid: Observable<Bool> {
         return Observable.combineLatest(requiredTextFields, { (textFields) in
-            let allNotEmpty = textFields.map({ $0.isEmpty == false }).filter({ $0 == false }).count == 0 // or .filter({ $0 == true }).count == textFields.count
+            let allNotEmpty = textFields.map({ $0.isEmpty == false }).filter({ $0 == false }).count == 0
             let emailIndex = textFields.index(of: self.emailText.value) ?? 0
             let validEmail = textFields[emailIndex].isValidAsEmail()
             return allNotEmpty && validEmail
@@ -46,14 +46,4 @@ class AddressViewModel: BaseViewModel {
         
         return address
     }
-    
-    /*
-    var isValid: Observable<Bool> {
-        return Observable.combineLatest(emailText.asObservable(), firstNameText.asObservable(), lastNameText.asObservable(), addressText.asObservable(), cityText.asObservable(), countryText.asObservable(), zipText.asObservable(), phoneText.asObservable()) { email, firstName, lastName, address, city, country, zip, phone in
-            
-            // TODO:
-            return true
-        }
-    }
- */
 }

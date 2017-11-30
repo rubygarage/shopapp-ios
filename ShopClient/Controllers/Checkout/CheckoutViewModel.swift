@@ -15,7 +15,8 @@ class CheckoutViewModel: BaseViewModel {
     
     var checkout: Checkout?
     var currency: String?
-    var billingAddress: Address!
+    var shippingAddress: Address!
+    var creditCard: CreditCard!
     
     // MARK: - public
     public func loadData(with disposeBag: DisposeBag) {
@@ -30,7 +31,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     public func getShippingRates(with address: Address) {
-        billingAddress = address
+        shippingAddress = address
         if let checkout = checkout {
             state.onNext(.loading(showHud: true))
             Repository.shared.getShippingRates(with: checkout, address: address, callback: { [weak self] (rates, error) in
@@ -61,10 +62,10 @@ class CheckoutViewModel: BaseViewModel {
         }
     }
     
-    public func pay(with card: CreditCard) {
+    public func completePay() {
         if let checkout = checkout {
             state.onNext(.loading(showHud: true))
-            Repository.shared.pay(with: card, checkout: checkout, billingAddress: billingAddress) { [weak self] (success, error) in
+            Repository.shared.pay(with: creditCard, checkout: checkout, billingAddress: shippingAddress) { [weak self] (success, error) in
                 if let error = error {
                     self?.state.onNext(.error(error: error))
                 }
