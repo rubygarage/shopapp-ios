@@ -11,4 +11,7 @@ import Foundation
 class Checkout: NSObject {
     var id = String()
     var webUrl: String?
+    var subtotalPrice: Decimal?
+    var totalPrice: Decimal?
+    var totalTax: Decimal?
 }

@@ -9,8 +9,16 @@
 import RxSwift
 
 class CheckoutViewModel: BaseViewModel {
-    var checkout: Checkout?
+    var paymentSuccess = PublishSubject<Bool>()
+    var availableRates = Variable<[ShippingRate]>([ShippingRate]())
+    var rateUpdatingSuccess = PublishSubject<Bool>()
     
+    var checkout: Checkout?
+    var currency: String?
+    var shippingAddress: Address!
+    var creditCard: CreditCard!
+    
+    // MARK: - public
     public func loadData(with disposeBag: DisposeBag) {
         state.onNext(.loading(showHud: true))
         createCheckout.subscribe(onSuccess: { [weak self] (checkout) in
@@ -22,13 +30,62 @@ class CheckoutViewModel: BaseViewModel {
         }.disposed(by: disposeBag)
     }
     
+    public func getShippingRates(with address: Address) {
+        shippingAddress = address
+        if let checkout = checkout {
+            state.onNext(.loading(showHud: true))
+            Repository.shared.getShippingRates(with: checkout, address: address, callback: { [weak self] (rates, error) in
+                if let error = error {
+                    self?.state.onNext(.error(error: error))
+                }
+                if let rates = rates {
+                    self?.state.onNext(.content)
+                    self?.availableRates.value = rates
+                }
+            })
+        }
+    }
+    
+    public func updateCheckout(with rate: ShippingRate) {
+        if let checkout = checkout {
+            state.onNext(.loading(showHud: true))
+            Repository.shared.updateCheckout(with: rate, checkout: checkout) { [weak self] (checkout, error) in
+                if let error = error {
+                    self?.state.onNext(.error(error: error))
+                }
+                if let checkout = checkout {
+                    self?.checkout = checkout
+                    self?.state.onNext(.content)
+                    self?.rateUpdatingSuccess.onNext(true)
+                }
+            }
+        }
+    }
+    
+    public func completePay() {
+        if let checkout = checkout {
+            state.onNext(.loading(showHud: true))
+            Repository.shared.pay(with: creditCard, checkout: checkout, billingAddress: shippingAddress) { [weak self] (success, error) in
+                if let error = error {
+                    self?.state.onNext(.error(error: error))
+                }
+                if let success = success {
+                    self?.state.onNext(.content)
+                    self?.paymentSuccess.onNext(success)
+                }
+            }
+        }
+    }
+    
+    // MARK: - private
     private var getProductList: Single<[CartProduct]> {
         return Single.create(subscribe: { (event) in
-            Repository.shared.getCartProductList { (cartProducts, error) in
+            Repository.shared.getCartProductList { [weak self] (cartProducts, error) in
                 if let error = error {
                     event(.error(error))
                 }
                 if let products = cartProducts {
+                    self?.currency = cartProducts?.first?.currency
                     event(.success(products))
                 }
             }

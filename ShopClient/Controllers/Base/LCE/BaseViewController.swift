@@ -119,7 +119,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
         loadingView.removeFromSuperview()
     }
     
-    private func showToast(with message: String?) {
+    func showToast(with message: String?) {
         let toast = Toast(text: message, duration: kToastDuration)
         toast.show()
     }

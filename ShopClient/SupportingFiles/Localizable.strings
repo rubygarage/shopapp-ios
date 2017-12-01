@@ -18,8 +18,12 @@
 "ControllerTitle.SignUp" = "Sign Up";
 "ControllerTitle.Login" = "Login";
 "ControllerTitle.Checkout" = "Checkout";
+"ControllerTitle.ShippingAddress" = "Shipping Address";
+"ControllerTitle.BillingAddress" = "Billing Address";
 
 "Alert.Error" = "Error";
+"Alert.ChooseShippingRate" = "Choose shipping rate";
+"Alert.PriceInfo" = "Price info";
 
 "Label.SortBy" = "Sort by:";
 
@@ -27,11 +31,14 @@
 "Button.AddToCart" = "Add to cart";
 "Button.AddedToCart" = "Added to cart";
 "Button.Ok" = "OK";
+"Button.Cancel" = "Cancel";
 "Button.Remove" = "Remove";
 "Button.Proceed" = "Proceed to checkout";
 "Button.PaymentMethodWebsite" = "Pay on our website";
 "Button.PaymentMethodCard" = "Pay by card";
 "Button.PaymentMethodApplePay" = "Apple Pay";
+"Button.PaymentAddressViewContinue" = "Continue to shipping method";
+"Button.Continue" = "Continue";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";
@@ -43,6 +50,15 @@
 "Label.PaymentMethodWebsite" = "Use the card to pay for on our website";
 "Label.PaymentMethodCard" = "Use the card to pay for on our app";
 "Label.PaymentMethodApplePay" = "You can use any credit or debit card in you AppleID account (including your cards in Apple Pay) for quick, easy checkout";
+"Label.PriceOfProducts" = "Price of products: %.2f %@";
+"Label.PriceOfDelivery" = "Price of delivery: %.2f %@";
+"Label.TotalTax" = "Total tax: %.2f %@";
+"Label.TotalPrice" = "Total price: %.2f %@";
+"Label.PriceInfo" = "%@\n%@\n%@\n%@";
+"Label.SameAsShippingAddress" = "Same as shipping address";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";
+"Error.InvalidCardNumber" = "Invalid card number";
+"Error.InvalidHolderName" = "Invalid holder name";
+"Error.InvalidExpiresDate" = "Invalid expires date";

@@ -108,6 +108,19 @@ extension UIViewController {
         present(sortController, animated: true)
     }
     
+    func showAddressController(with delegate: AddressViewProtocol?) {
+        let addressController = UIStoryboard.address().instantiateViewController(withIdentifier: ControllerIdentifier.address) as! AddressViewController
+        addressController.delegate = delegate
+        present(addressController, animated: true)
+    }
+    
+    func showBillingAddressController(with preloadedAddress: Address, delegate: BillingAddressViewProtocol?) {
+        let billingAddressController = UIStoryboard.billingAddress().instantiateViewController(withIdentifier: ControllerIdentifier.billingAddress) as! BillingAddressViewController
+        billingAddressController.preloadedAddress = preloadedAddress
+        billingAddressController.delegate = delegate
+        present(billingAddressController, animated: true)
+    }
+    
     // MARK: - private
     private func pushController(with storyBoard: UIStoryboard, identifier: String, animated: Bool = true) {
         let controller = storyBoard.instantiateViewController(withIdentifier: identifier)

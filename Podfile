@@ -28,5 +28,8 @@ target 'ShopClient' do
   
   # Secutity
   pod 'KeychainSwift', '~> 10.0'
+  
+  # Payment
+  pod 'MFCard', '~> 1.2'
 
 end

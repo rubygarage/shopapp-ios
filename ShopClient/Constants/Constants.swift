@@ -27,6 +27,8 @@ struct ControllerIdentifier {
     static let account = "AccountControllerIdentifier"
     static let auth = "AuthrntificationControllerIdentifier"
     static let checkout = "CheckoutControllerIdentifier"
+    static let address = "AddressControllerIdentifier"
+    static let billingAddress = "BillingAddressControllerIdentifier"
 }
 
 struct ImageName {

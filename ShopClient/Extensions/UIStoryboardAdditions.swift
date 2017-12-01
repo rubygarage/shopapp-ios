@@ -73,4 +73,12 @@ extension UIStoryboard {
     class func checkout() -> UIStoryboard {
         return UIStoryboard(name: "Checkout", bundle: nil)
     }
+    
+    class func address() -> UIStoryboard {
+        return UIStoryboard(name: "Address", bundle: nil)
+    }
+    
+    class func billingAddress() -> UIStoryboard {
+        return UIStoryboard(name: "BillingAddress", bundle: nil)
+    }
 }

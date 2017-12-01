@@ -32,6 +32,7 @@ extension UIViewController {
         return UIBarButtonItem(image: image, style: .plain, target: self, action: action)
     }
     
+    // MARK: - private
     private func addRightBarButton(with imageName: String, action: Selector?) {
         let image = UIImage(named: imageName)
         let barButton = UIBarButtonItem(image: image, style: .plain, target: self, action: action)
