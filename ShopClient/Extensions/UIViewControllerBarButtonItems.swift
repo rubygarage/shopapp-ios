@@ -10,12 +10,18 @@ import UIKit
 
 let kCustomBarItemWidth: CGFloat = 32
 
-extension UIViewController {
-    public func searchBarItem() -> UIBarButtonItem {
-        return UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(self.seachButtonHandler))
+extension UIViewController {    
+    public func addCartBarButton(with itemsCount: Int) {
+        navigationItem.rightBarButtonItem = cartBarItem(with: itemsCount)
     }
     
-    public func cartBarItem(with cartItemsCount: Int) -> UIBarButtonItem {
+    public func sortBarItem(with action: Selector) -> UIBarButtonItem {
+        let image = UIImage(named: ImageName.sort)
+        return UIBarButtonItem(image: image, style: .plain, target: self, action: action)
+    }
+    
+    // MARK: - private
+    private func cartBarItem(with cartItemsCount: Int) -> UIBarButtonItem {
         let cartView = CartButtonView(frame: CGRect(x: 0, y: 0, width: kCustomBarItemWidth, height: kCustomBarItemWidth))
         cartView.isUserInteractionEnabled = false
         cartView.itemsCount = cartItemsCount
@@ -27,12 +33,6 @@ extension UIViewController {
         return UIBarButtonItem(customView: button)
     }
     
-    public func sortBarItem(with action: Selector) -> UIBarButtonItem {
-        let image = UIImage(named: ImageName.sort)
-        return UIBarButtonItem(image: image, style: .plain, target: self, action: action)
-    }
-    
-    // MARK: - private
     private func addRightBarButton(with imageName: String, action: Selector?) {
         let image = UIImage(named: imageName)
         let barButton = UIBarButtonItem(image: image, style: .plain, target: self, action: action)

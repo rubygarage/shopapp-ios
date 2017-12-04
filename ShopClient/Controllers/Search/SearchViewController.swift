@@ -31,9 +31,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     private func setupBarItems() {
         Repository.shared.getCartProductList { [weak self] (products, error) in
             let cartItemsCount = products?.count ?? 0
-            if cartItemsCount > 0 {
-                self?.navigationItem.rightBarButtonItem = self?.cartBarItem(with: cartItemsCount)
-            }
+            self?.addCartBarButton(with: cartItemsCount)
         }
     }
     

@@ -12,6 +12,7 @@
 "Cell.LoadMore" = "Load more";
 
 "ControllerTitle.Home" = "Home";
+"ControllerTitle.Account" = "My Account";
 "ControllerTitle.LastArrivals" = "Last Arrivals";
 "ControllerTitle.NewInBlog" = "New in Blog";
 "ControllerTitle.Cart" = "Cart";

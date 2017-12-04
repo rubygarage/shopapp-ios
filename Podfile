@@ -16,9 +16,6 @@ target 'ShopClient' do
   pod 'TPKeyboardAvoiding', '~> 1.3'
   pod 'Toaster', '~> 2.1'
   
-  # Menu
-  pod 'SideMenu', '~> 2.3'
-  
   # Database
   pod 'CoreStore', '~> 4.2'
 

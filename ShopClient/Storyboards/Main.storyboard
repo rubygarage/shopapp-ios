@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Qv2-21-Axr">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Search Navigation View Controller-->
+        <scene sceneID="zWh-et-pqg">
+            <objects>
+                <navigationController id="AG2-b3-ccw" customClass="SearchNavigationViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="search_default" selectedImage="search_selected" id="FPJ-pv-Dgm">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Csw-0V-gnp">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c6F-JW-anl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="572" y="400"/>
+        </scene>
+        <!--Home Navigation View Controller-->
+        <scene sceneID="3Uz-0p-3qX">
+            <objects>
+                <navigationController id="YLa-73-ZOy" customClass="HomeNavigationViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="home_default" selectedImage="home_selected" id="GjZ-1A-Wfr">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oyn-tg-Cys">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lta-io-bI3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-271" y="400"/>
+        </scene>
+        <!--Account Navigation View Controller-->
+        <scene sceneID="uXi-mh-2TU">
+            <objects>
+                <navigationController id="gHs-Lg-Zge" customClass="AccountNavigationViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="account_default" selectedImage="account_selected" id="7bs-n0-ADc">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="g5Z-8O-d0r">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LMM-g9-hnQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1401" y="400"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="SSE-4a-hOW">
+            <objects>
+                <tabBarController id="Qv2-21-Axr" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="o2p-3s-0Ln">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" cocoaTouchSystemColor="darkTextColor"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="YLa-73-ZOy" kind="relationship" relationship="viewControllers" id="BMg-i4-dLY"/>
+                        <segue destination="AG2-b3-ccw" kind="relationship" relationship="viewControllers" id="63f-tV-adJ"/>
+                        <segue destination="gHs-Lg-Zge" kind="relationship" relationship="viewControllers" id="Yma-yE-lFc"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fUu-Yy-WYO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="572" y="-394"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="account_default" width="20" height="19"/>
+        <image name="account_selected" width="20" height="19"/>
+        <image name="home_default" width="23" height="21"/>
+        <image name="home_selected" width="23" height="21"/>
+        <image name="search_default" width="27" height="21"/>
+        <image name="search_selected" width="27" height="21"/>
+    </resources>
+</document>

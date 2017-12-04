@@ -20,7 +20,6 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         viewModel = HomeViewModel()
         super.viewDidLoad()
         
-        setupTitle()
         setupTableView()
         setupViewModel()
         loadData()
@@ -29,11 +28,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        updateBarItems()
-    }
-    
-    private func setupTitle() {
-        title = NSLocalizedString("ControllerTitle.Home", comment: String())
+        updateCartBarItem()
     }
     
     private func setupTableView() {
@@ -53,38 +48,17 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         tableView.delegate = delegate
     }
     
-    private func addRightBarItems() {
+    private func updateCartBarItem() {
         Repository.shared.getCartProductList { [weak self] (products, error) in
             let cartItemsCount = products?.count ?? 0
-            if cartItemsCount > 0 {
-                self?.populateSearchCartBarItems(cartItemsCount: cartItemsCount)
-            } else {
-                self?.populateSearchBarItem()
-            }
-        }
-    }
-    
-    private func populateSearchBarItem() {
-        navigationItem.rightBarButtonItem = searchBarItem()
-    }
-    
-    private func populateSearchCartBarItems(cartItemsCount: Int) {
-        navigationItem.rightBarButtonItems = [cartBarItem(with: cartItemsCount), searchBarItem()]
-    }
-    
-    private func updateBarItems() {
-        let barItemsVisible = viewModel.data.value.products.count > 0 && viewModel.data.value.articles.count > 0
-        if barItemsVisible {
-            addMenuBarButton()
-            addRightBarItems()
+            self?.addCartBarButton(with: cartItemsCount)
         }
     }
     
     private func setupViewModel() {
         viewModel.data.asObservable().subscribe(onNext: { [weak self] _ in
             self?.tableView.reloadData()
-            self?.updateBarItems()
-            self?.setupSideMenu()
+            self?.updateCartBarItem()
         }).disposed(by: disposeBag)
     }
     
