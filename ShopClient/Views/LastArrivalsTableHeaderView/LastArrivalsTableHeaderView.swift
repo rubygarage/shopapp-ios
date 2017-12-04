@@ -14,7 +14,8 @@ protocol LastArrivalsSeeAllProtocol {
 
 class LastArrivalsTableHeaderView: UIView {
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var seeAllLabel: UILabel!
+    @IBOutlet weak var latestArravalsLabel: UILabel!
+    @IBOutlet weak var seeAllButton: UIButton!
     
     var delegate: LastArrivalsSeeAllProtocol?
     
@@ -41,6 +42,12 @@ class LastArrivalsTableHeaderView: UIView {
     }
     
     private func populateViews() {
-//        seeAllLabel.text = N
+        latestArravalsLabel.text = NSLocalizedString("Label.LatestArrivals", comment: String())
+        seeAllButton.setTitle(NSLocalizedString("Button.SeeAll", comment: String()), for: .normal)
+    }
+    
+    // MARK: - actions
+    @IBAction func seeAllTapped(_ sender: UIButton) {
+        delegate?.didTapSeeAllLastArrivals()
     }
 }

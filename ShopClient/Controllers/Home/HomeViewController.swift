@@ -72,13 +72,6 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         viewModel.loadData(with: disposeBag)
     }
     
-    // MARK: - override
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        tableView.reloadData()
-    }
-    
     // MARK: - HomeTableDataSourceProtocol
     func lastArrivalsObjects() -> [Product] {
         return viewModel.data.value.products

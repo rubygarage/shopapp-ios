@@ -33,11 +33,6 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
         collectionView.delegate = collectionDelegate
     }
     
-    // MARK: - override
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        collectionView.reloadData()
-    }
-    
     // MARK: - GridCollectionDataSourceProtocol
     func numberOfItems() -> Int {
         return viewModel.products.value.count

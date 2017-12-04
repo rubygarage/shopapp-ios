@@ -571,7 +571,6 @@
 		611EF35D1F5957B6001B8B9C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6157D43C1FD5B9060041F0B5 /* LastArrivalsTableHeaderView */,
 				61B5BEDD1F7505DE00E075B7 /* ArticleLoadMoreCell */,
 				61B5BED81F75055000E075B7 /* ArticleTableViewCell */,
 				61A1D4311FC57FB700E1B673 /* CardValidationView */,
@@ -582,6 +581,7 @@
 				61BF1EAE1FAB597C0098B9AA /* ErrorView */,
 				61ED88F01F7170C9006BDA79 /* GridCollectionCell */,
 				614142D01F6BD28D00379BB9 /* LastArrivalsCollectionViewCell */,
+				6157D43C1FD5B9060041F0B5 /* LastArrivalsTableHeaderView */,
 				614142C21F6AF14300379BB9 /* LastArrivalsTableViewCell */,
 				61BF1EA91FAB56C00098B9AA /* LoadingView */,
 				617DE17C1FB5DC05004EEF9A /* MenuAccountTableViewCell */,
@@ -1144,8 +1144,8 @@
 				61E47F291FBDE8D500EA4449 /* Helpers */,
 				611EF3501F5829AB001B8B9C /* Models */,
 				61AFA3F01F9DFBD6004B9D53 /* Repository */,
-				6180AC011F72CCFA007768F2 /* SupportingFiles */,
 				614142DB1F6C322400379BB9 /* Storyboards */,
+				6180AC011F72CCFA007768F2 /* SupportingFiles */,
 				611EF35D1F5957B6001B8B9C /* Views */,
 				61E4E63A1F56C868001C6E01 /* Assets.xcassets */,
 				61E4E63F1F56C868001C6E01 /* Info.plist */,

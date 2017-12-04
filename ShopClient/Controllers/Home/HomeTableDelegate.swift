@@ -16,6 +16,7 @@ protocol HomeTableDelegateProtocol {
 let kRowHeightHomeSectionLastArrivals: CGFloat = 200
 let kRowHeightHomeSectionNewInBlog: CGFloat = 150
 let kRowHeightHomeSectionLoadMore: CGFloat = 50
+let kHeaderHeightHomeSectionLastArrivals: CGFloat = 80
 
 class HomeTableDelegate: NSObject, UITableViewDelegate {
     var delegate: (HomeTableDelegateProtocol & LastArrivalsSeeAllProtocol)?
@@ -43,6 +44,15 @@ class HomeTableDelegate: NSObject, UITableViewDelegate {
             return kRowHeightHomeSectionNewInBlog
         case HomeSection.loadMore.rawValue:
             return kRowHeightHomeSectionLoadMore
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case HomeSection.lastArrivals.rawValue:
+            return kHeaderHeightHomeSectionLastArrivals
         default:
             return 0
         }

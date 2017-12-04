@@ -6,10 +6,7 @@
   Copyright © 2017 Evgeniy Antonov. All rights reserved.
 */
 
-"Menu.Home" = "Home";
-"Menu.Categories" = "Categories";
-
-"ControllerTitle.Home" = "Home";
+"ControllerTitle.Home" = "Shop";
 "ControllerTitle.Account" = "My Account";
 "ControllerTitle.LastArrivals" = "Last Arrivals";
 "ControllerTitle.NewInBlog" = "New in Blog";
@@ -38,6 +35,7 @@
 "Button.PaymentMethodApplePay" = "Apple Pay";
 "Button.PaymentAddressViewContinue" = "Continue to shipping method";
 "Button.Continue" = "Continue";
+"Button.SeeAll" = "See All";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";
@@ -55,6 +53,7 @@
 "Label.TotalPrice" = "Total price: %.2f %@";
 "Label.PriceInfo" = "%@\n%@\n%@\n%@";
 "Label.SameAsShippingAddress" = "Same as shipping address";
+"Label.LatestArrivals" = "Latest Arrivals";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";
