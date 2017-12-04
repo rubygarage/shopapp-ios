@@ -9,8 +9,6 @@
 "Menu.Home" = "Home";
 "Menu.Categories" = "Categories";
 
-"Cell.LoadMore" = "Load more";
-
 "ControllerTitle.Home" = "Home";
 "ControllerTitle.Account" = "My Account";
 "ControllerTitle.LastArrivals" = "Last Arrivals";

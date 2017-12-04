@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate {
+class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, LastArrivalsSeeAllProtocol {    
     @IBOutlet weak var tableView: UITableView!
     
     var dataSource: HomeTableDataSource?
@@ -114,8 +114,8 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         pushArticlesListController()
     }
     
-    // MARK: - LastArrivalsCellDelegate
-    func didTapLastArrivalsLoadMore() {
+    // MARK: - LastArrivalsSeeAllProtocol
+    func didTapSeeAllLastArrivals() {
         pushLastArrivalsController()
     }
     

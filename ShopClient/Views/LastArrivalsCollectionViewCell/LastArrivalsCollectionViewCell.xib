@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,34 +13,34 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LastArrivalsCollectionViewCell" id="gTV-IL-0wX" customClass="LastArrivalsCollectionViewCell" customModule="ShopClient" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="197" height="186"/>
+            <rect key="frame" x="0.0" y="0.0" width="197" height="217"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="197" height="186"/>
+                <rect key="frame" x="0.0" y="0.0" width="197" height="217"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TeE-rF-pdi" userLabel="Background View">
-                        <rect key="frame" x="3" y="3" width="191" height="180"/>
+                        <rect key="frame" x="3" y="3" width="191" height="211"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="niM-A2-hHZ">
-                                <rect key="frame" x="0.0" y="0.0" width="191" height="107.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="191" height="117"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="niM-A2-hHZ" secondAttribute="height" multiplier="16:9" id="s0m-Oy-AsW"/>
+                                    <constraint firstAttribute="width" secondItem="niM-A2-hHZ" secondAttribute="height" multiplier="196:120" id="s0m-Oy-AsW"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pq8-kf-Ifu">
-                                <rect key="frame" x="0.0" y="108" width="191" height="72"/>
+                                <rect key="frame" x="0.0" y="117.5" width="191" height="93.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Title Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="DwX-RO-H81">
-                                        <rect key="frame" x="5" y="15" width="181" height="18"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Title Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="DwX-RO-H81">
+                                        <rect key="frame" x="5" y="30" width="181" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="rJU-jO-tUM">
-                                        <rect key="frame" x="5" y="48" width="181" height="18"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" red="0.4345703125" green="0.96321614580000003" blue="0.24338107640000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="rJU-jO-tUM">
+                                        <rect key="frame" x="5" y="52" width="181" height="16"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -48,14 +48,14 @@
                                 <constraints>
                                     <constraint firstItem="rJU-jO-tUM" firstAttribute="leading" secondItem="pq8-kf-Ifu" secondAttribute="leading" constant="5" id="Ian-bA-MGS"/>
                                     <constraint firstAttribute="trailing" secondItem="rJU-jO-tUM" secondAttribute="trailing" constant="5" id="Otv-xC-m9H"/>
-                                    <constraint firstItem="rJU-jO-tUM" firstAttribute="top" secondItem="DwX-RO-H81" secondAttribute="bottom" constant="15" id="PTa-Z3-57D"/>
-                                    <constraint firstItem="DwX-RO-H81" firstAttribute="top" secondItem="pq8-kf-Ifu" secondAttribute="top" constant="15" id="RcM-ug-4sL"/>
+                                    <constraint firstItem="rJU-jO-tUM" firstAttribute="top" secondItem="DwX-RO-H81" secondAttribute="bottom" constant="6" id="PTa-Z3-57D"/>
+                                    <constraint firstItem="DwX-RO-H81" firstAttribute="top" secondItem="pq8-kf-Ifu" secondAttribute="top" constant="30" id="RcM-ug-4sL"/>
                                     <constraint firstItem="DwX-RO-H81" firstAttribute="leading" secondItem="pq8-kf-Ifu" secondAttribute="leading" constant="5" id="m7w-6C-JjB"/>
                                     <constraint firstAttribute="trailing" secondItem="DwX-RO-H81" secondAttribute="trailing" constant="5" id="pw7-fE-LRS"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="niM-A2-hHZ" secondAttribute="trailing" id="3Ak-FT-vrC"/>
                             <constraint firstItem="pq8-kf-Ifu" firstAttribute="leading" secondItem="TeE-rF-pdi" secondAttribute="leading" id="7sT-ht-vVE"/>
@@ -68,20 +68,20 @@
                     </view>
                 </subviews>
             </view>
-            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="TeE-rF-pdi" secondAttribute="trailing" constant="3" id="0Dg-7P-N3i"/>
                 <constraint firstAttribute="bottom" secondItem="TeE-rF-pdi" secondAttribute="bottom" constant="3" id="8E6-uy-u72"/>
                 <constraint firstItem="TeE-rF-pdi" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="3" id="THb-P3-a04"/>
                 <constraint firstItem="TeE-rF-pdi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="3" id="TJL-WO-tYA"/>
             </constraints>
-            <size key="customSize" width="197" height="186"/>
+            <size key="customSize" width="197" height="217"/>
             <connections>
                 <outlet property="priceLabel" destination="rJU-jO-tUM" id="ZfD-JU-bJa"/>
                 <outlet property="productImageView" destination="niM-A2-hHZ" id="Yju-8S-QjP"/>
                 <outlet property="titleLabel" destination="DwX-RO-H81" id="lRt-SA-6Yr"/>
             </connections>
-            <point key="canvasLocation" x="17.5" y="1"/>
+            <point key="canvasLocation" x="17.5" y="16.5"/>
         </collectionViewCell>
     </objects>
 </document>
