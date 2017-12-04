@@ -40,7 +40,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setupBarItemsIfNeeded()
+        updateCartBarItem()
     }
     
     // MARK: - setup
@@ -118,10 +118,10 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         openProductOptionsController(with: allOptions, selectedOptions: selectedOptions, delegate: self, onView: optionsContainerView)
     }
     
-    private func setupBarItemsIfNeeded() {
+    private func updateCartBarItem() {
         Repository.shared.getCartProductList { [weak self] (cartProducts, _) in
             let cartItemsCount = cartProducts?.count ?? 0
-            self?.navigationItem.rightBarButtonItem = cartItemsCount > 0 ? self?.cartBarItem(with: cartItemsCount) : nil
+            self?.addCartBarButton(with: cartItemsCount)
         }
     }
     
@@ -134,7 +134,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         viewModel.addToCart
             .subscribe(onNext: { [weak self] success in
                 if success {
-                    self?.setupBarItemsIfNeeded()
+                    self?.updateCartBarItem()
                     self?.updateAddToCartButton()
                 }
             })

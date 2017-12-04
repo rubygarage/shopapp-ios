@@ -8,7 +8,7 @@
 
 import UIKit
 
-let kItemsCountViewCornerRadius: CGFloat = 5
+let kItemsCountViewCornerRadius: CGFloat = 7
 
 class CartButtonView: UIView {
     @IBOutlet private var contentView: UIView!
@@ -49,5 +49,7 @@ class CartButtonView: UIView {
     
     private func populateViews() {
         itemsCountLabel.text = "\(itemsCount)"
+        itemsCountLabel.isHidden = itemsCount == 0
+        itemsCountBackgroundView.isHidden = itemsCount == 0
     }
 }

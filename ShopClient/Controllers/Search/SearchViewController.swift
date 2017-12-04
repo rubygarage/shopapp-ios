@@ -17,7 +17,6 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         viewModel = SearchViewModel()
         super.viewDidLoad()
         
-        setupSearchBar()
         setupViewModel()
         loadData()
     }
@@ -25,15 +24,18 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        updateNavigationBar()
+    }
+    
+    private func updateNavigationBar() {
+        setupSearchBar()
         setupBarItems()
     }
     
     private func setupBarItems() {
         Repository.shared.getCartProductList { [weak self] (products, error) in
             let cartItemsCount = products?.count ?? 0
-            if cartItemsCount > 0 {
-                self?.navigationItem.rightBarButtonItem = self?.cartBarItem(with: cartItemsCount)
-            }
+            self?.addCartBarButton(with: cartItemsCount)
         }
     }
     
@@ -46,7 +48,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         searchController?.hidesNavigationBarDuringPresentation = false
         searchController?.dimsBackgroundDuringPresentation = false
         
-        navigationItem.titleView = searchController?.searchBar
+        tabBarController?.navigationItem.titleView = searchController?.searchBar
         
         definesPresentationContext = true
     }

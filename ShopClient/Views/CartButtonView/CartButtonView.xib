@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,17 +22,20 @@
             <rect key="frame" x="0.0" y="0.0" width="99" height="83"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart" translatesAutoresizingMaskIntoConstraints="NO" id="IH1-8q-VFK">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart" translatesAutoresizingMaskIntoConstraints="NO" id="IH1-8q-VFK">
                     <rect key="frame" x="5" y="5" width="89" height="73"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rmw-rF-nSR">
-                    <rect key="frame" x="88.5" y="68" width="10.5" height="15"/>
-                    <color key="backgroundColor" red="1" green="0.48508230386315532" blue="0.22979093949661533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <rect key="frame" x="85.5" y="5" width="14" height="14"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="14" id="k0G-mV-ZDM"/>
+                    </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="svw-Ly-gPe">
-                    <rect key="frame" x="91" y="70.5" width="5.5" height="10"/>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="8"/>
-                    <nil key="textColor"/>
+                    <rect key="frame" x="89" y="6" width="7" height="12"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
@@ -40,13 +43,13 @@
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="IH1-8q-VFK" secondAttribute="trailing" constant="5" id="1MR-tP-Der"/>
                 <constraint firstItem="IH1-8q-VFK" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="5" id="6EI-DN-cZw"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="svw-Ly-gPe" secondAttribute="trailing" constant="2.5" id="DU3-vw-m7g"/>
-                <constraint firstItem="rmw-rF-nSR" firstAttribute="width" secondItem="svw-Ly-gPe" secondAttribute="width" constant="5" id="Hlx-0H-G2i"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="svw-Ly-gPe" secondAttribute="bottom" constant="2.5" id="J9s-hP-N19"/>
-                <constraint firstItem="rmw-rF-nSR" firstAttribute="height" secondItem="svw-Ly-gPe" secondAttribute="height" constant="5" id="LQp-1S-Qq5"/>
+                <constraint firstItem="svw-Ly-gPe" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="6" id="DBQ-za-7i2"/>
+                <constraint firstItem="rmw-rF-nSR" firstAttribute="width" secondItem="svw-Ly-gPe" secondAttribute="width" constant="7" id="Hlx-0H-G2i"/>
+                <constraint firstItem="rmw-rF-nSR" firstAttribute="height" secondItem="svw-Ly-gPe" secondAttribute="height" constant="2" id="LQp-1S-Qq5"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="IH1-8q-VFK" secondAttribute="bottom" constant="5" id="PeI-pB-DN7"/>
                 <constraint firstItem="rmw-rF-nSR" firstAttribute="centerY" secondItem="svw-Ly-gPe" secondAttribute="centerY" id="QBV-3t-8nz"/>
                 <constraint firstItem="IH1-8q-VFK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="5" id="XOW-fZ-Wx1"/>
+                <constraint firstItem="svw-Ly-gPe" firstAttribute="leading" secondItem="IH1-8q-VFK" secondAttribute="trailing" constant="-5" id="rVl-nS-8WL"/>
                 <constraint firstItem="rmw-rF-nSR" firstAttribute="centerX" secondItem="svw-Ly-gPe" secondAttribute="centerX" id="rwV-6q-NKd"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -55,6 +58,6 @@
         </view>
     </objects>
     <resources>
-        <image name="cart" width="30" height="30"/>
+        <image name="cart" width="23" height="20"/>
     </resources>
 </document>

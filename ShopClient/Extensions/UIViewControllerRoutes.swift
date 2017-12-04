@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SideMenu
 
 extension UIViewController {
     
@@ -52,29 +51,12 @@ extension UIViewController {
         
         navigationController?.pushViewController(articleDetailsController, animated: true)
     }
-    
+
     // MARK: - set
-    func setCategoryController(with categoryId: String, title: String) {
-        let categoryController = UIStoryboard.category().instantiateViewController(withIdentifier: ControllerIdentifier.category) as! CategoryViewController
-        categoryController.categoryId = categoryId
-        categoryController.title = title
-        
-        setController(with: categoryController)
-    }
-    
     func setHomeController() {
-        let homeController = UIStoryboard.home().instantiateViewController(withIdentifier: ControllerIdentifier.home) as! HomeViewController
-        setController(with: homeController)
-    }
-    
-    func setAccountController() {
-        let accountController = UIStoryboard.account().instantiateViewController(withIdentifier: ControllerIdentifier.account) as! AccountViewController
-        setController(with: accountController)
-    }
-    
-    func setAuthController() {
-        let authController = UIStoryboard.auth().instantiateViewController(withIdentifier: ControllerIdentifier.auth) as! UITabBarController
-        setController(with: authController)
+        let appDelegate  = UIApplication.shared.delegate as! AppDelegate
+        let tabbarController = appDelegate.window!.rootViewController as! UITabBarController
+        tabbarController.selectedIndex = 0
     }
     
     // MARK: - open as child
@@ -125,15 +107,5 @@ extension UIViewController {
     private func pushController(with storyBoard: UIStoryboard, identifier: String, animated: Bool = true) {
         let controller = storyBoard.instantiateViewController(withIdentifier: identifier)
         navigationController?.pushViewController(controller, animated: true)
-    }
-    
-    private func setController(with controller: UIViewController) {
-        controller.addMenuBarButton()
-        
-        let appDelegate  = UIApplication.shared.delegate as! AppDelegate
-        let navigationController = appDelegate.window!.rootViewController as! UINavigationController
-        navigationController.setViewControllers([controller], animated: false)
-        
-        SideMenuManager.menuLeftNavigationController?.dismiss(animated: true)
     }
 }

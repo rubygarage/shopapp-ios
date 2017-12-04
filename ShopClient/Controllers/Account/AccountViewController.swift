@@ -9,5 +9,14 @@
 import UIKit
 
 class AccountViewController: UIViewController {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateNavigationBar()
+    }
     
+    private func updateNavigationBar() {
+        tabBarController?.navigationItem.titleView = nil
+        tabBarController?.title = NSLocalizedString("ControllerTitle.Account", comment: String())
+    }
 }
