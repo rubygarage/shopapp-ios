@@ -28,6 +28,12 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        updateNavigationBar()
+    }
+    
+    private func updateNavigationBar() {
+        tabBarController?.navigationItem.titleView = nil
+        tabBarController?.title = NSLocalizedString("ControllerTitle.Home", comment: String())
         updateCartBarItem()
     }
     

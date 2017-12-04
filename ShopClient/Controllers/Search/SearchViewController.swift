@@ -17,7 +17,6 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         viewModel = SearchViewModel()
         super.viewDidLoad()
         
-        setupSearchBar()
         setupViewModel()
         loadData()
     }
@@ -25,6 +24,11 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        updateNavigationBar()
+    }
+    
+    private func updateNavigationBar() {
+        setupSearchBar()
         setupBarItems()
     }
     
@@ -44,7 +48,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         searchController?.hidesNavigationBarDuringPresentation = false
         searchController?.dimsBackgroundDuringPresentation = false
         
-        navigationItem.titleView = searchController?.searchBar
+        tabBarController?.navigationItem.titleView = searchController?.searchBar
         
         definesPresentationContext = true
     }
