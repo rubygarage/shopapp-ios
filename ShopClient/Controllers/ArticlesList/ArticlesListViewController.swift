@@ -25,7 +25,7 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
     
     // MARK: - setup
     private func setupViews() {
-        title = NSLocalizedString("ControllerTitle.NewInBlog", comment: String())
+        title = NSLocalizedString("ControllerTitle.BlogPosts", comment: String())
     }
     
     private func setupViewModel() {

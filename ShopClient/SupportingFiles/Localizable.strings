@@ -8,8 +8,8 @@
 
 "ControllerTitle.Home" = "Shop";
 "ControllerTitle.Account" = "My Account";
-"ControllerTitle.LastArrivals" = "Last Arrivals";
-"ControllerTitle.NewInBlog" = "New in Blog";
+"ControllerTitle.LatestArrivals" = "Latest Arrivals";
+"ControllerTitle.BlogPosts" = "Blog Posts";
 "ControllerTitle.Cart" = "Cart";
 "ControllerTitle.SignUp" = "Sign Up";
 "ControllerTitle.Login" = "Login";

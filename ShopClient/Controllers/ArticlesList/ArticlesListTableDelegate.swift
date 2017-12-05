@@ -25,4 +25,8 @@ class ArticlesListTableDelegate: NSObject, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.didSelectItem(at: indexPath.row)
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 20
+    }
 }

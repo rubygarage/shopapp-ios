@@ -21,7 +21,7 @@ class LastArrivalsViewController: GridCollectionViewController<LastArrivalsViewM
     
     // MARK: - private
     private func setupViews() {
-        title = NSLocalizedString("ControllerTitle.LastArrivals", comment: String())
+        title = NSLocalizedString("ControllerTitle.LatestArrivals", comment: String())
     }
     
     private func setupViewModel() {

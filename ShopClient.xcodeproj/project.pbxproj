@@ -733,8 +733,8 @@
 			children = (
 				6152B1231F7914E800045A42 /* ArticlesListViewController.swift */,
 				61E8A21E1FAC93560092EDC1 /* ArticlesListViewModel.swift */,
-				6152B1271F791A1100045A42 /* ArticlesListTableDelegate.swift */,
 				6152B1251F79181100045A42 /* ArticlesListTableDataSource.swift */,
+				6152B1271F791A1100045A42 /* ArticlesListTableDelegate.swift */,
 			);
 			path = ArticlesList;
 			sourceTree = "<group>";

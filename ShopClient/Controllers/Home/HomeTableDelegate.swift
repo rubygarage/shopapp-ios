@@ -12,7 +12,7 @@ protocol HomeTableDelegateProtocol {
     func didSelectArticle(at index: Int)
 }
 
-let kHeaderHeightHome: CGFloat = 75
+private let kHeaderHeight: CGFloat = 75
 
 class HomeTableDelegate: NSObject, UITableViewDelegate {
     var delegate: (HomeTableDelegateProtocol & LastArrivalsHeaderViewProtocol & ArticlesHeaderViewProtocol)?
@@ -31,7 +31,7 @@ class HomeTableDelegate: NSObject, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return kHeaderHeightHome
+        return kHeaderHeight
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
