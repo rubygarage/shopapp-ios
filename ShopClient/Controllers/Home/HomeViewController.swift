@@ -50,6 +50,9 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         
         delegate = HomeTableDelegate(delegate: self)
         tableView.delegate = delegate
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 120
     }
     
     private func updateCartBarItem() {

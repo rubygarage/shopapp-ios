@@ -26,15 +26,15 @@
                     <rect key="frame" x="0.0" y="20" width="424" height="68"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnu-20-hmA">
-                            <rect key="frame" x="16" y="26" width="311" height="16"/>
+                            <rect key="frame" x="16" y="26" width="310" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JfV-dF-CMc">
-                            <rect key="frame" x="337" y="21" width="81" height="26"/>
+                            <rect key="frame" x="336" y="21" width="82" height="26"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                             <inset key="contentEdgeInsets" minX="24" minY="5" maxX="10" maxY="5"/>
                             <inset key="titleEdgeInsets" minX="-16" minY="0.0" maxX="16" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="-2" maxY="0.0"/>

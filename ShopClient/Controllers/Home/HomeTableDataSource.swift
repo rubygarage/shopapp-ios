@@ -77,7 +77,9 @@ class HomeTableDataSource: NSObject, UITableViewDataSource {
     
     private func newInBlogCell(with tableView: UITableView, indexPath: IndexPath) -> ArticleTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ArticleTableViewCell.self), for: indexPath) as! ArticleTableViewCell
-        cell.configure(with: delegate?.article(at: indexPath.row))
+        let article = delegate?.article(at: indexPath.row)
+        let separatorHidden = indexPath.row == ((delegate?.articlesCount() ?? 0) - 1)
+        cell.configure(with: article, separatorHidden: separatorHidden)
         
         return cell
     }
