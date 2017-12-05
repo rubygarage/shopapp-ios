@@ -13,15 +13,15 @@ protocol HomeTableDelegateProtocol {
     func didTapLoadMore()
 }
 
+let kRowHeightHomeSectionLastArrivals: CGFloat = 200
 let kRowHeightHomeSectionNewInBlog: CGFloat = 150
 let kRowHeightHomeSectionLoadMore: CGFloat = 50
-let kLastArrivalsNumberOfColumnPortrait: CGFloat = 2
-let kLastArrivalsNumberOfColumnLandscape: CGFloat = 4
+let kHeaderHeightHomeSectionLastArrivals: CGFloat = 80
 
 class HomeTableDelegate: NSObject, UITableViewDelegate {
-    var delegate: HomeTableDelegateProtocol?
+    var delegate: (HomeTableDelegateProtocol & LastArrivalsSeeAllProtocol)?
     
-    init(delegate: HomeTableDelegateProtocol) {
+    init(delegate: (HomeTableDelegateProtocol & LastArrivalsSeeAllProtocol)?) {
         super.init()
         
         self.delegate = delegate
@@ -39,15 +39,31 @@ class HomeTableDelegate: NSObject, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case HomeSection.lastArrivals.rawValue:
-            let screenWidth = UIScreen.main.bounds.size.width
-            let numberOfColumn: CGFloat = UIDevice.current.orientation.isPortrait ? kLastArrivalsNumberOfColumnPortrait : kLastArrivalsNumberOfColumnLandscape
-            return screenWidth / numberOfColumn
+            return kRowHeightHomeSectionLastArrivals
         case HomeSection.newInBlog.rawValue:
             return kRowHeightHomeSectionNewInBlog
         case HomeSection.loadMore.rawValue:
             return kRowHeightHomeSectionLoadMore
         default:
             return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case HomeSection.lastArrivals.rawValue:
+            return kHeaderHeightHomeSectionLastArrivals
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch section {
+        case HomeSection.lastArrivals.rawValue:
+            return LastArrivalsTableHeaderView(delegate: delegate)
+        default:
+            return nil
         }
     }
 }

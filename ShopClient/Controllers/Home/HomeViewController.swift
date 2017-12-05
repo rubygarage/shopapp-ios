@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate {
+class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, LastArrivalsSeeAllProtocol {    
     @IBOutlet weak var tableView: UITableView!
     
     var dataSource: HomeTableDataSource?
@@ -72,13 +72,6 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         viewModel.loadData(with: disposeBag)
     }
     
-    // MARK: - override
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        tableView.reloadData()
-    }
-    
     // MARK: - HomeTableDataSourceProtocol
     func lastArrivalsObjects() -> [Product] {
         return viewModel.data.value.products
@@ -114,8 +107,8 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         pushArticlesListController()
     }
     
-    // MARK: - LastArrivalsCellDelegate
-    func didTapLastArrivalsLoadMore() {
+    // MARK: - LastArrivalsSeeAllProtocol
+    func didTapSeeAllLastArrivals() {
         pushLastArrivalsController()
     }
     

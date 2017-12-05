@@ -10,16 +10,9 @@ import UIKit
 
 protocol LastArrivalsCellDelegate {
     func didSelectProduct(at index: Int)
-    func didTapLastArrivalsLoadMore()
 }
 
-enum LastArrivalsSection: Int {
-    case product
-    case loadMore
-}
-
-let kLastArrivalsNumberOfSectionsDefault = 1
-let kLastArrivalsNumberOfSectionsWithLoadMore = 2
+private let kLastArrivalsNumberOfSections = 1
 
 class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableDataSourceProtocol, LastArrivalsTableDelegateProtocol {
     @IBOutlet weak var collectionView: UICollectionView!
@@ -40,9 +33,6 @@ class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableDataSourcePro
         let nib = UINib(nibName: String(describing: LastArrivalsCollectionViewCell.self), bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: String(describing: LastArrivalsCollectionViewCell.self))
         
-        let lastArrivalsLoadMoreNib = UINib(nibName: String(describing: LastArrivalsLoadMoreCell.self), bundle: nil)
-        collectionView.register(lastArrivalsLoadMoreNib, forCellWithReuseIdentifier: String(describing: LastArrivalsLoadMoreCell.self))
-        
         dataSource = LastArrivalsTableDataSource(delegate: self)
         collectionView.dataSource = dataSource
         
@@ -60,7 +50,7 @@ class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableDataSourcePro
     
     // MARK: - LastArrivalsTableDataSourceProtocol
     func numberOfSections() -> Int {
-        return products.count < kItemsPerPage ? kLastArrivalsNumberOfSectionsDefault : kLastArrivalsNumberOfSectionsWithLoadMore
+        return kLastArrivalsNumberOfSections
     }
     
     func numberOfProducts() -> Int {
@@ -74,9 +64,5 @@ class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableDataSourcePro
     // MARK: - LastArrivalsTableDelegateProtocol
     func didSelectItem(at index: Int) {
         cellDelegate?.didSelectProduct(at: index)
-    }
-    
-    func didTapLoadMore() {
-        cellDelegate?.didTapLastArrivalsLoadMore()
     }
 }

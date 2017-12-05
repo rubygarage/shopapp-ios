@@ -8,9 +8,10 @@
 
 import UIKit
 
+let kLastArrivalsTableCellSize = CGSize(width: 200, height: 215)
+
 protocol LastArrivalsTableDelegateProtocol {
     func didSelectItem(at index: Int)
-    func didTapLoadMore()
 }
 
 let kLastArrivalsLoadMoreWidth: CGFloat = 100
@@ -26,26 +27,11 @@ class LastArrivalsTableDelegate: NSObject, UICollectionViewDelegate, UICollectio
     
     // MARK: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == LastArrivalsSection.product.rawValue {
-            delegate?.didSelectItem(at: indexPath.row)
-        } else {
-            delegate?.didTapLoadMore()
-        }
+        delegate?.didSelectItem(at: indexPath.row)
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let screenWidth = UIScreen.main.bounds.size.width
-        let numberOfColumn: CGFloat = UIDevice.current.orientation.isPortrait ? kLastArrivalsNumberOfColumnPortrait : kLastArrivalsNumberOfColumnLandscape
-        let cellWidth = screenWidth / numberOfColumn
-        
-        switch indexPath.section {
-        case LastArrivalsSection.product.rawValue:
-            return CGSize(width: cellWidth, height: cellWidth)
-        case LastArrivalsSection.loadMore.rawValue:
-            return CGSize(width: kLastArrivalsLoadMoreWidth, height: cellWidth)
-        default:
-            return CGSize.zero
-        }
+        return kLastArrivalsTableCellSize
     }
 }

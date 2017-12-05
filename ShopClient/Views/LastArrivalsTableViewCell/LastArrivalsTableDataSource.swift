@@ -29,14 +29,11 @@ class LastArrivalsTableDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == LastArrivalsSection.product.rawValue ? delegate?.numberOfProducts() ?? 0 : 1
+        return delegate?.numberOfProducts() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == LastArrivalsSection.product.rawValue {
-            return lastArrivalsCell(collectionView: collectionView, indexPath: indexPath)
-        }
-        return loadMoreCell(collectionView: collectionView, indexPath: indexPath)
+        return lastArrivalsCell(collectionView: collectionView, indexPath: indexPath)
     }
     
     // MARK: - private
@@ -47,10 +44,5 @@ class LastArrivalsTableDataSource: NSObject, UICollectionViewDataSource {
         cell.configure(with: item!)
         
         return cell
-    }
-    
-    private func loadMoreCell(collectionView: UICollectionView, indexPath: IndexPath) -> LastArrivalsLoadMoreCell {
-        let reuseIdentifier = String(describing: LastArrivalsLoadMoreCell.self)
-        return collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LastArrivalsLoadMoreCell
     }
 }

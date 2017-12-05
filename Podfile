@@ -12,7 +12,7 @@ target 'ShopClient' do
   pod 'SDWebImage', '~> 4.1'
   pod 'MBProgressHUD', '~> 1.0'
   pod 'UIScrollView-InfiniteScroll', '~> 1.0'
-  pod 'SKPhotoBrowser', '~> 4.1'
+  pod 'SKPhotoBrowser', '~> 5.0'
   pod 'TPKeyboardAvoiding', '~> 1.3'
   pod 'Toaster', '~> 2.1'
   
