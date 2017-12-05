@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreStore
+import SKPhotoBrowser
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

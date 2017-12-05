@@ -10,9 +10,9 @@ PODS:
   - SDWebImage (4.2.2):
     - SDWebImage/Core (= 4.2.2)
   - SDWebImage/Core (4.2.2)
-  - SKPhotoBrowser (4.1.1)
+  - SKPhotoBrowser (5.0.0)
   - Toaster (2.1.1)
-  - TPKeyboardAvoiding (1.3.1)
+  - TPKeyboardAvoiding (1.3.2)
   - UIScrollView-InfiniteScroll (1.0.2)
 
 DEPENDENCIES:
@@ -24,7 +24,7 @@ DEPENDENCIES:
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
   - SDWebImage (~> 4.1)
-  - SKPhotoBrowser (~> 4.1)
+  - SKPhotoBrowser (~> 5.0)
   - Toaster (~> 2.1)
   - TPKeyboardAvoiding (~> 1.3)
   - UIScrollView-InfiniteScroll (~> 1.0)
@@ -38,11 +38,11 @@ SPEC CHECKSUMS:
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
-  SKPhotoBrowser: aa02de50f56d80fac23f543e40847af6b360e4b3
+  SKPhotoBrowser: fe936f878955a568c726bf05d14e1d2717d91ce0
   Toaster: a6c9532de1ded8105e77376f7dffeb2e12b46dbb
-  TPKeyboardAvoiding: 0d6af20e95e2850f4c621841225b59ec7d8dd852
+  TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
   UIScrollView-InfiniteScroll: c132d6d5851daff229ab4a1060ccf70a05a051c9
 
-PODFILE CHECKSUM: 5adbee06f3e4cca0baec1f54aab4517dc4964b26
+PODFILE CHECKSUM: 4b369f420f8ebd1bdb5d71cd9be812bb42b80506
 
 COCOAPODS: 1.3.1
