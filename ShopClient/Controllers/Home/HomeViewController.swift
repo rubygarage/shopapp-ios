@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, LastArrivalsHeaderViewProtocol, ArticlesHeaderViewProtocol {
+class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, HomeHeaderViewProtocol {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -101,14 +101,14 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         }
     }
     
-    // MARK: - LastArrivalsSeeAllProtocol
-    func didTapSeeAllLastArrivals() {
-        pushLastArrivalsController()
-    }
-    
-    // MARK: - ArticlesHeaderViewProtocol
-    func didTapSeeAllblogPosts() {
-        pushArticlesListController()
+    // MARK: - HomeHeaderViewProtocol
+    func didTapSeeAll(type: HomeTableViewType) {
+        switch type {
+        case .latestArrivals:
+            pushLastArrivalsController()
+        case .blogPosts:
+            pushArticlesListController()
+        }
     }
     
     // MARK: - ErrorViewProtocol
