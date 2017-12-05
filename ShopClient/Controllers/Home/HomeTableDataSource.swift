@@ -11,7 +11,6 @@ import UIKit
 enum HomeSection: Int {
     case lastArrivals
     case newInBlog
-    case loadMore
 }
 
 protocol HomeTableDataSourceProtocol {
@@ -44,8 +43,6 @@ class HomeTableDataSource: NSObject, UITableViewDataSource {
             return 1
         case HomeSection.newInBlog.rawValue:
             return delegate?.articlesCount() ?? 0
-        case HomeSection.loadMore.rawValue:
-            return delegate?.articlesCount() ?? 0 == kItemsPerPage ? 1 : 0
         default:
             return 0
         }
@@ -55,8 +52,6 @@ class HomeTableDataSource: NSObject, UITableViewDataSource {
         switch indexPath.section {
         case HomeSection.newInBlog.rawValue:
             return newInBlogCell(with: tableView, indexPath: indexPath)
-        case HomeSection.loadMore.rawValue:
-            return loadMoreCell(with: tableView, indexPath: indexPath)
         default:
             return lastArrivalsCell(with: tableView, indexPath: indexPath)
         }
@@ -86,9 +81,5 @@ class HomeTableDataSource: NSObject, UITableViewDataSource {
         cell.configure(with: delegate?.article(at: indexPath.row))
         
         return cell
-    }
-    
-    private func loadMoreCell(with tableView: UITableView, indexPath: IndexPath) -> ArticleLoadMoreCell {
-        return tableView.dequeueReusableCell(withIdentifier: String(describing: ArticleLoadMoreCell.self), for: indexPath) as! ArticleLoadMoreCell
     }
 }

@@ -54,6 +54,7 @@
 "Label.PriceInfo" = "%@\n%@\n%@\n%@";
 "Label.SameAsShippingAddress" = "Same as shipping address";
 "Label.LatestArrivals" = "Latest Arrivals";
+"Label.BlogPosts" = "Blog Posts";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

@@ -10,18 +10,16 @@ import UIKit
 
 protocol HomeTableDelegateProtocol {
     func didSelectArticle(at index: Int)
-    func didTapLoadMore()
 }
 
 let kRowHeightHomeSectionLastArrivals: CGFloat = 200
 let kRowHeightHomeSectionNewInBlog: CGFloat = 150
-let kRowHeightHomeSectionLoadMore: CGFloat = 50
-let kHeaderHeightHomeSectionLastArrivals: CGFloat = 80
+let kHeaderHeightHome: CGFloat = 75
 
 class HomeTableDelegate: NSObject, UITableViewDelegate {
-    var delegate: (HomeTableDelegateProtocol & LastArrivalsSeeAllProtocol)?
+    var delegate: (HomeTableDelegateProtocol & LastArrivalsHeaderViewProtocol & ArticlesHeaderViewProtocol)?
     
-    init(delegate: (HomeTableDelegateProtocol & LastArrivalsSeeAllProtocol)?) {
+    init(delegate: (HomeTableDelegateProtocol & LastArrivalsHeaderViewProtocol & ArticlesHeaderViewProtocol)?) {
         super.init()
         
         self.delegate = delegate
@@ -31,8 +29,6 @@ class HomeTableDelegate: NSObject, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == HomeSection.newInBlog.rawValue {
             delegate?.didSelectArticle(at: indexPath.row)
-        } else if indexPath.section == HomeSection.loadMore.rawValue {
-            delegate?.didTapLoadMore()
         }
     }
     
@@ -42,20 +38,13 @@ class HomeTableDelegate: NSObject, UITableViewDelegate {
             return kRowHeightHomeSectionLastArrivals
         case HomeSection.newInBlog.rawValue:
             return kRowHeightHomeSectionNewInBlog
-        case HomeSection.loadMore.rawValue:
-            return kRowHeightHomeSectionLoadMore
         default:
             return 0
         }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case HomeSection.lastArrivals.rawValue:
-            return kHeaderHeightHomeSectionLastArrivals
-        default:
-            return 0
-        }
+        return kHeaderHeightHome
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -63,7 +52,7 @@ class HomeTableDelegate: NSObject, UITableViewDelegate {
         case HomeSection.lastArrivals.rawValue:
             return LastArrivalsTableHeaderView(delegate: delegate)
         default:
-            return nil
+            return ArticlesTableHeaderView(delegate: delegate)
         }
     }
 }
