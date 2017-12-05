@@ -12,7 +12,7 @@ protocol LastArrivalsCellDelegate {
     func didSelectProduct(at index: Int)
 }
 
-let kLastArrivalsNumberOfSections = 1
+private let kLastArrivalsNumberOfSections = 1
 
 class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableDataSourceProtocol, LastArrivalsTableDelegateProtocol {
     @IBOutlet weak var collectionView: UICollectionView!
