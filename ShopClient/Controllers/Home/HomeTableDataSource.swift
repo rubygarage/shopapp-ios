@@ -20,9 +20,6 @@ protocol HomeTableDataSourceProtocol {
     func article(at index: Int) -> Article?
 }
 
-let kNumberOfSectionsDefault = 2
-let kNumberOfSectionsWithLoadMoreSection = 3
-
 class HomeTableDataSource: NSObject, UITableViewDataSource {
     var delegate: (HomeTableDataSourceProtocol & LastArrivalsCellDelegate)?
     
@@ -34,7 +31,9 @@ class HomeTableDataSource: NSObject, UITableViewDataSource {
     
     // MARK: - UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return delegate?.articlesCount() ?? 0 == kItemsPerPage ? kNumberOfSectionsWithLoadMoreSection : kNumberOfSectionsDefault
+        let lastArrivalsSectionCount = delegate?.lastArrivalsObjects().count ?? 0 > 0 ? 1 : 0
+        let articlesSectionCount = delegate?.articlesCount() ?? 0 > 0 ? 1 : 0
+        return lastArrivalsSectionCount + articlesSectionCount
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

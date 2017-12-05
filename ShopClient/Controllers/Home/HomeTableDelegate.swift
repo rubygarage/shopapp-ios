@@ -47,6 +47,10 @@ class HomeTableDelegate: NSObject, UITableViewDelegate {
         return kHeaderHeightHome
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return TableView.headerFooterMinHeight
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case HomeSection.lastArrivals.rawValue:

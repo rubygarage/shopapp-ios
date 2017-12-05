@@ -45,4 +45,9 @@ class ArticlesTableHeaderView: UIView {
         blogPostsLabel.text = NSLocalizedString("Label.BlogPosts", comment: String())
         seeAllButton.setTitle(NSLocalizedString("Button.SeeAll", comment: String()), for: .normal)
     }
+    
+    // MARK: - actions
+    @IBAction func seeAllTapped(_ sender: UIButton) {
+        delegate?.didTapSeeAllblogPosts()
+    }
 }
