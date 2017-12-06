@@ -8,9 +8,8 @@
 
 import UIKit
 
-let kGridNumberOfColumnPortrait: CGFloat = 2
-let kGridNumberOfColumnLandscape: CGFloat = 3
-let kCellImageRatio: CGFloat = 16 / 9
+private let kGridNumberOfColumns: CGFloat = 2
+private let kCellImageRatio: CGFloat = 16 / 9
 
 protocol GridCollectionDelegateProtocol {
     func didSelectItem(at index: Int)
@@ -32,10 +31,8 @@ class GridCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionVi
     
     // MARK: - UICollectionViewDelegateFlowLayout
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         let screenWidth = UIScreen.main.bounds.size.width
-        let numberOfColumn: CGFloat = UIDevice.current.orientation.isPortrait ? kGridNumberOfColumnPortrait : kGridNumberOfColumnLandscape
-        let cellWidth = screenWidth / numberOfColumn
+        let cellWidth = screenWidth / kGridNumberOfColumns
         
         return CGSize(width: cellWidth, height: cellWidth)
     }
