@@ -12,8 +12,6 @@ protocol ArticlesListTableDelegateProtocol {
     func didSelectItem(at index: Int)
 }
 
-private let kHeaderHeight: CGFloat = 20
-
 class ArticlesListTableDelegate: NSObject, UITableViewDelegate {
     var delegate: ArticlesListTableDelegateProtocol?
     
@@ -29,6 +27,10 @@ class ArticlesListTableDelegate: NSObject, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return kHeaderHeight
+        return TableView.headerFooterDefaultHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return TableView.headerFooterDefaultHeight
     }
 }

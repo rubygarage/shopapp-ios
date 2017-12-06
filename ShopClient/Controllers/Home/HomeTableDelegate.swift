@@ -36,7 +36,7 @@ class HomeTableDelegate: NSObject, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return TableView.headerFooterMinHeight
+        return section == HomeSection.newInBlog.rawValue ? TableView.headerFooterDefaultHeight : TableView.headerFooterMinHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
