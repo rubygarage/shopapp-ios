@@ -29,7 +29,9 @@ class ArticlesListTableDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ArticleTableViewCell.self), for: indexPath) as! ArticleTableViewCell
-        cell.configure(with: delegate?.article(at: indexPath.row))
+        let article = delegate?.article(at: indexPath.row)
+        let separatorHidden = indexPath.row == ((delegate?.articlesCount() ?? 0) - 1)
+        cell.configure(with: article, separatorHidden: separatorHidden)
         
         return cell
     }

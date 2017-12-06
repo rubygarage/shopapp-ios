@@ -10,18 +10,15 @@ import UIKit
 
 protocol HomeTableDelegateProtocol {
     func didSelectArticle(at index: Int)
-    func didTapLoadMore()
 }
 
-let kRowHeightHomeSectionLastArrivals: CGFloat = 200
-let kRowHeightHomeSectionNewInBlog: CGFloat = 150
-let kRowHeightHomeSectionLoadMore: CGFloat = 50
-let kHeaderHeightHomeSectionLastArrivals: CGFloat = 80
+private let kHeaderHeightDefault: CGFloat = 75
+private let kHeaderHeightFirstSection: CGFloat = 80
 
 class HomeTableDelegate: NSObject, UITableViewDelegate {
-    var delegate: (HomeTableDelegateProtocol & LastArrivalsSeeAllProtocol)?
+    var delegate: (HomeTableDelegateProtocol & HomeHeaderViewProtocol)?
     
-    init(delegate: (HomeTableDelegateProtocol & LastArrivalsSeeAllProtocol)?) {
+    init(delegate: (HomeTableDelegateProtocol & HomeHeaderViewProtocol)?) {
         super.init()
         
         self.delegate = delegate
@@ -31,39 +28,23 @@ class HomeTableDelegate: NSObject, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == HomeSection.newInBlog.rawValue {
             delegate?.didSelectArticle(at: indexPath.row)
-        } else if indexPath.section == HomeSection.loadMore.rawValue {
-            delegate?.didTapLoadMore()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
-        case HomeSection.lastArrivals.rawValue:
-            return kRowHeightHomeSectionLastArrivals
-        case HomeSection.newInBlog.rawValue:
-            return kRowHeightHomeSectionNewInBlog
-        case HomeSection.loadMore.rawValue:
-            return kRowHeightHomeSectionLoadMore
-        default:
-            return 0
         }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case HomeSection.lastArrivals.rawValue:
-            return kHeaderHeightHomeSectionLastArrivals
-        default:
-            return 0
-        }
+        return section == HomeSection.lastArrivals.rawValue ? kHeaderHeightFirstSection : kHeaderHeightDefault
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == HomeSection.newInBlog.rawValue ? TableView.headerFooterDefaultHeight : TableView.headerFooterMinHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case HomeSection.lastArrivals.rawValue:
-            return LastArrivalsTableHeaderView(delegate: delegate)
+            return HomeTableHeaderView(delegate: delegate, type: .latestArrivals)
         default:
-            return nil
+            return HomeTableHeaderView(delegate: delegate, type: .blogPosts)
         }
     }
 }

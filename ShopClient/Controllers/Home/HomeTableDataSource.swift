@@ -11,7 +11,6 @@ import UIKit
 enum HomeSection: Int {
     case lastArrivals
     case newInBlog
-    case loadMore
 }
 
 protocol HomeTableDataSourceProtocol {
@@ -20,9 +19,6 @@ protocol HomeTableDataSourceProtocol {
     func articlesCount() -> Int
     func article(at index: Int) -> Article?
 }
-
-let kNumberOfSectionsDefault = 2
-let kNumberOfSectionsWithLoadMoreSection = 3
 
 class HomeTableDataSource: NSObject, UITableViewDataSource {
     var delegate: (HomeTableDataSourceProtocol & LastArrivalsCellDelegate)?
@@ -35,7 +31,9 @@ class HomeTableDataSource: NSObject, UITableViewDataSource {
     
     // MARK: - UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return delegate?.articlesCount() ?? 0 == kItemsPerPage ? kNumberOfSectionsWithLoadMoreSection : kNumberOfSectionsDefault
+        let lastArrivalsSectionCount = delegate?.lastArrivalsObjects().count ?? 0 > 0 ? 1 : 0
+        let articlesSectionCount = delegate?.articlesCount() ?? 0 > 0 ? 1 : 0
+        return lastArrivalsSectionCount + articlesSectionCount
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,8 +42,6 @@ class HomeTableDataSource: NSObject, UITableViewDataSource {
             return 1
         case HomeSection.newInBlog.rawValue:
             return delegate?.articlesCount() ?? 0
-        case HomeSection.loadMore.rawValue:
-            return delegate?.articlesCount() ?? 0 == kItemsPerPage ? 1 : 0
         default:
             return 0
         }
@@ -55,8 +51,6 @@ class HomeTableDataSource: NSObject, UITableViewDataSource {
         switch indexPath.section {
         case HomeSection.newInBlog.rawValue:
             return newInBlogCell(with: tableView, indexPath: indexPath)
-        case HomeSection.loadMore.rawValue:
-            return loadMoreCell(with: tableView, indexPath: indexPath)
         default:
             return lastArrivalsCell(with: tableView, indexPath: indexPath)
         }
@@ -83,12 +77,10 @@ class HomeTableDataSource: NSObject, UITableViewDataSource {
     
     private func newInBlogCell(with tableView: UITableView, indexPath: IndexPath) -> ArticleTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ArticleTableViewCell.self), for: indexPath) as! ArticleTableViewCell
-        cell.configure(with: delegate?.article(at: indexPath.row))
+        let article = delegate?.article(at: indexPath.row)
+        let separatorHidden = indexPath.row == ((delegate?.articlesCount() ?? 0) - 1)
+        cell.configure(with: article, separatorHidden: separatorHidden)
         
         return cell
-    }
-    
-    private func loadMoreCell(with tableView: UITableView, indexPath: IndexPath) -> ArticleLoadMoreCell {
-        return tableView.dequeueReusableCell(withIdentifier: String(describing: ArticleLoadMoreCell.self), for: indexPath) as! ArticleLoadMoreCell
     }
 }

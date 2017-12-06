@@ -21,12 +21,16 @@ class ArticlesListTableDelegate: NSObject, UITableViewDelegate {
         self.delegate = delegate
     }
     
-    // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return kRowHeightHomeSectionNewInBlog
-    }
-    
+    // MARK: - UITableViewDelegate    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.didSelectItem(at: indexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return TableView.headerFooterDefaultHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return TableView.headerFooterDefaultHeight
     }
 }

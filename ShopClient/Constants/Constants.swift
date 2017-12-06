@@ -59,3 +59,8 @@ struct StatusCode {
     static let unauthorized = 401
     static let notFound = 404
 }
+
+struct TableView {
+    static let headerFooterMinHeight: CGFloat = 0.001
+    static let headerFooterDefaultHeight: CGFloat = 20
+}

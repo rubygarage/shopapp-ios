@@ -10,7 +10,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, LastArrivalsSeeAllProtocol {    
+class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, HomeHeaderViewProtocol {
+    
     @IBOutlet weak var tableView: UITableView!
     
     var dataSource: HomeTableDataSource?
@@ -43,10 +44,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         
         let newInBlogNib = UINib(nibName: String(describing: ArticleTableViewCell.self), bundle: nil)
         tableView.register(newInBlogNib, forCellReuseIdentifier: String(describing: ArticleTableViewCell.self))
-        
-        let newInBlogLoadMoreNib = UINib(nibName: String(describing: ArticleLoadMoreCell.self), bundle: nil)
-        tableView.register(newInBlogLoadMoreNib, forCellReuseIdentifier: String(describing: ArticleLoadMoreCell.self))
-        
+                
         dataSource = HomeTableDataSource(delegate: self)
         tableView.dataSource = dataSource
         
@@ -103,13 +101,14 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         }
     }
     
-    func didTapLoadMore() {
-        pushArticlesListController()
-    }
-    
-    // MARK: - LastArrivalsSeeAllProtocol
-    func didTapSeeAllLastArrivals() {
-        pushLastArrivalsController()
+    // MARK: - HomeHeaderViewProtocol
+    func didTapSeeAll(type: HomeTableViewType) {
+        switch type {
+        case .latestArrivals:
+            pushLastArrivalsController()
+        case .blogPosts:
+            pushArticlesListController()
+        }
     }
     
     // MARK: - ErrorViewProtocol
