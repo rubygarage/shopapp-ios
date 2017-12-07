@@ -17,17 +17,32 @@
                     <view key="view" contentMode="scaleToFill" id="F2Q-Z4-0C3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" estimatedRowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2Pu-Xh-P6C">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="2Pu-Xh-P6C" firstAttribute="top" secondItem="F2Q-Z4-0C3" secondAttribute="top" id="Gzn-iz-Drm"/>
+                            <constraint firstItem="2Pu-Xh-P6C" firstAttribute="bottom" secondItem="5ud-G8-czQ" secondAttribute="bottom" id="Kic-zl-y68"/>
+                            <constraint firstItem="2Pu-Xh-P6C" firstAttribute="trailing" secondItem="5ud-G8-czQ" secondAttribute="trailing" id="TyI-Zk-HH7"/>
+                            <constraint firstItem="2Pu-Xh-P6C" firstAttribute="leading" secondItem="5ud-G8-czQ" secondAttribute="leading" id="bA5-Qz-LHF"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5ud-G8-czQ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="account_default" selectedImage="account_selected" id="oQe-qM-avp">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="2Pu-Xh-P6C" id="GaJ-2H-IBE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIy-lA-im1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="300" y="161"/>
+            <point key="canvasLocation" x="300" y="160.56971514242881"/>
         </scene>
     </scenes>
     <resources>

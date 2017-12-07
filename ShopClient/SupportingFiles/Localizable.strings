@@ -36,6 +36,9 @@
 "Button.PaymentAddressViewContinue" = "Continue to shipping method";
 "Button.Continue" = "Continue";
 "Button.SeeAll" = "See All";
+"Button.PrivacyPolicy" = "Privacy Policy";
+"Button.RefundPolicy" = "Refund Policy";
+"Button.TermsOfService" = "Terms of Service";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";

@@ -14,10 +14,6 @@ extension UIStoryboard {
         return UIStoryboard(name: "Home", bundle: nil)
     }
     
-    class func menu() -> UIStoryboard {
-        return UIStoryboard(name: "Menu", bundle: nil)
-    }
-    
     class func productDetails() -> UIStoryboard {
         return UIStoryboard(name: "ProductDetails", bundle: nil)
     }
