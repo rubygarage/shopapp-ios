@@ -42,7 +42,7 @@ extension UIViewController {
         let policyController = UIStoryboard.policy().instantiateViewController(withIdentifier: ControllerIdentifier.policy) as! PolicyViewController
         policyController.policy = policy
 
-        navigationController?.pushViewController(policyController, animated: false)
+        navigationController?.pushViewController(policyController, animated: true)
     }
     
     func pushArticleDetailsController(with articleId: String) {

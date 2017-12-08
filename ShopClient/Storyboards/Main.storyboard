@@ -14,10 +14,11 @@
             <objects>
                 <tabBarController id="Qv2-21-Axr" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="eM5-UX-kd0"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="o2p-3s-0Ln">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="o2p-3s-0Ln">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="selectedImageTintColor" cocoaTouchSystemColor="darkTextColor"/>
                     </tabBar>
                     <connections>
@@ -70,7 +71,7 @@
         <scene sceneID="JuU-1k-kUo">
             <objects>
                 <navigationController id="1sa-pe-94c" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QYI-UU-1uj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="QYI-UU-1uj">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

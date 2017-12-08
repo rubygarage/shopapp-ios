@@ -11,7 +11,6 @@ import RxSwift
 import RxCocoa
 
 class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, HomeHeaderViewProtocol {
-    
     @IBOutlet weak var tableView: UITableView!
     
     var dataSource: HomeTableDataSource?
@@ -60,10 +59,12 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     private func setupViewModel() {
-        viewModel.data.asObservable().subscribe(onNext: { [weak self] _ in
-            self?.tableView.reloadData()
-            self?.updateCartBarItem()
-        }).disposed(by: disposeBag)
+        viewModel.data.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.tableView.reloadData()
+                self?.updateCartBarItem()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func loadData() {

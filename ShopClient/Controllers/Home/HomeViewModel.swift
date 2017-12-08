@@ -8,7 +8,7 @@
 
 import RxSwift
 
-class HomeViewModel: BaseViewModel {    
+class HomeViewModel: BaseViewModel {
     var data = Variable<(products: [Product], articles: [Article])>(products: [Product](), articles: [Article]())
     
     public func loadData(with disposeBag: DisposeBag) {
@@ -20,7 +20,7 @@ class HomeViewModel: BaseViewModel {
                 }
                 self?.state.onNext(.content)
             }) { [weak self] (error) in
-                let castedError = error as! RepoError
+                let castedError = error as? RepoError
                 self?.state.onNext(.error(error: castedError))
             }
             .disposed(by: disposeBag)
