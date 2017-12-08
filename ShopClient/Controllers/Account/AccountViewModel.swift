@@ -43,6 +43,7 @@ class AccountViewModel: BaseViewModel {
         return Single.create(subscribe: { single in
             if Repository.shared.isLoggedIn() {
                 // TODO: get customer
+                single(.success(nil)) // remove
             } else {
                 single(.success(nil))
             }

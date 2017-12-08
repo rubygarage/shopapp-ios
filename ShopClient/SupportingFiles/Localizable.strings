@@ -67,3 +67,6 @@
 "Error.InvalidCardNumber" = "Invalid card number";
 "Error.InvalidHolderName" = "Invalid holder name";
 "Error.InvalidExpiresDate" = "Invalid expires date";
+
+"Placeholder.Email" = "Email*";
+"Placeholder.Password" = "Password*";

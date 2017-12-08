@@ -9,10 +9,9 @@
 import RxSwift
 
 class SignInViewController: BaseViewController<SignInViewModel> {
-    
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var emailTextFieldView: InputTextFieldView!
+    @IBOutlet weak var passwordTextFieldView: InputTextFieldView!
+    @IBOutlet weak var signInButton: BlackButton!
     
     override func viewDidLoad() {
         viewModel = SignInViewModel()
@@ -24,27 +23,27 @@ class SignInViewController: BaseViewController<SignInViewModel> {
     
     private func setupViews() {
         addCloseButton()
-        populateTitle()
-    }
-    
-    private func populateTitle() {
         title = NSLocalizedString("ControllerTitle.SignIn", comment: String())
+        emailTextFieldView.textField.placeholder = NSLocalizedString("Placeholder.Email", comment: String()).uppercased()
+        passwordTextFieldView.textField.placeholder = NSLocalizedString("Placeholder.Password", comment: String()).uppercased()
+        signInButton.setTitle(NSLocalizedString("Button.SignIn", comment: String()).uppercased(), for: .normal)
     }
     
     private func setupViewModel() {
-        emailTextField.rx.text.map({ $0 ?? String() })
+        emailTextFieldView.textField
+            .rx.text.map({ $0 ?? String() })
             .bind(to: viewModel.emailText)
             .disposed(by: disposeBag)
         
-        passwordTextField.rx.text.map({ $0 ?? String() })
+        passwordTextFieldView.textField.rx.text.map({ $0 ?? String() })
             .bind(to: viewModel.passwordText)
             .disposed(by: disposeBag)
         
-        loginButton.rx.tap
+        signInButton.rx.tap
             .bind(to: viewModel.loginPressed)
             .disposed(by: disposeBag)
         
-        loginButton.rx.tap
+        signInButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 self?.view.endEditing(true)
             })
@@ -52,7 +51,7 @@ class SignInViewController: BaseViewController<SignInViewModel> {
         
         viewModel.isValid
             .subscribe(onNext: { [weak self] isValid in
-                self?.loginButton.isEnabled = isValid
+                self?.signInButton.isEnabled = isValid
             })
             .disposed(by: disposeBag)
         
