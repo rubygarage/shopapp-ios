@@ -81,4 +81,11 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     }
     
     // MARK: - AccountNotLoggedHeaderProtocol
+    func didTapSignIn() {
+        // TODO:
+    }
+    
+    func didTapCreateNewAccount() {
+        // TODO:
+    }
 }

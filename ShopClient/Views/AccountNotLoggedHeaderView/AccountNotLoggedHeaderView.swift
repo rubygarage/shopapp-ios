@@ -9,7 +9,8 @@
 import UIKit
 
 protocol AccountNotLoggedHeaderProtocol {
-    
+    func didTapSignIn()
+    func didTapCreateNewAccount()
 }
 
 class AccountNotLoggedHeaderView: UIView, UnderlinedButtonProtocol {
@@ -48,6 +49,15 @@ class AccountNotLoggedHeaderView: UIView, UnderlinedButtonProtocol {
         signInLabel.text = NSLocalizedString("Label.SignInToShop", comment: String())
         createNewAccountButton.setTitle(NSLocalizedString("Button.CreateNewAccount", comment: String()).uppercased(), for: .normal)
         createNewAccountButton.delegate = self
+    }
+    
+    // MARK: - actions
+    @IBAction func signInTapped(_ sender: BlackButton) {
+        headerDelegate.didTapSignIn()
+    }
+    
+    @IBAction func createNewAccountTapped(_ sender: UnderlinedButton) {
+        headerDelegate.didTapCreateNewAccount()
     }
     
     // MARK: - UnderlinedButtonProtocol
