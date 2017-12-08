@@ -10,12 +10,13 @@ import UIKit
 
 protocol AccountTableDelegateProtocol {
     func didSelectItem(at index: Int)
+    func customer() -> Customer?
 }
 
 class AccountTableDelegate: NSObject, UITableViewDelegate {
-    var delegate: AccountTableDelegateProtocol!
+    var delegate: (AccountTableDelegateProtocol & AccountNotLoggedHeaderProtocol)!
     
-    init(delegate: AccountTableDelegateProtocol) {
+    init(delegate: (AccountTableDelegateProtocol & AccountNotLoggedHeaderProtocol)) {
         super.init()
         
         self.delegate = delegate
@@ -23,5 +24,9 @@ class AccountTableDelegate: NSObject, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.didSelectItem(at: indexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return delegate.customer() != nil ? UIView() : AccountNotLoggedHeaderView(delegate: delegate)
     }
 }

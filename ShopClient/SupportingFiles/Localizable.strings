@@ -39,6 +39,8 @@
 "Button.PrivacyPolicy" = "Privacy Policy";
 "Button.RefundPolicy" = "Refund Policy";
 "Button.TermsOfService" = "Terms of Service";
+"Button.SignIn" = "Sign In";
+"Button.CreateNewAccount" = "Create New Account";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";
@@ -58,6 +60,7 @@
 "Label.SameAsShippingAddress" = "Same as shipping address";
 "Label.LatestArrivals" = "Latest Arrivals";
 "Label.BlogPosts" = "Blog Posts";
+"Label.SignInToShop" = "Sign In to shop and view orders";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

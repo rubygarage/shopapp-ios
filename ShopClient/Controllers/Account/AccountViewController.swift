@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountViewController: BaseViewController<AccountViewModel>, AccountTableDataSourceProtocol, AccountTableDelegateProtocol {
+class AccountViewController: BaseViewController<AccountViewModel>, AccountTableDataSourceProtocol, AccountTableDelegateProtocol, AccountNotLoggedHeaderProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     var tableDataSource: AccountTableDataSource!
@@ -75,4 +75,10 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
             pushPolicyController(with: policy)
         }
     }
+    
+    func customer() -> Customer? {
+        return viewModel.customer.value
+    }
+    
+    // MARK: - AccountNotLoggedHeaderProtocol
 }
