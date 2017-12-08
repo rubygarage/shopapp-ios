@@ -1,5 +1,5 @@
 //
-//  LoginViewModel.swift
+//  SignInViewModel.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 11/14/17.
@@ -8,7 +8,7 @@
 
 import RxSwift
 
-class LoginViewModel: BaseViewModel {
+class SignInViewModel: BaseViewModel {
     var emailText = Variable<String>("")
     var passwordText = Variable<String>("")
     

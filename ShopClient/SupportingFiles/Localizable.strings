@@ -11,8 +11,8 @@
 "ControllerTitle.LatestArrivals" = "Latest Arrivals";
 "ControllerTitle.BlogPosts" = "Blog Posts";
 "ControllerTitle.Cart" = "Cart";
+"ControllerTitle.SignIn" = "Sign In";
 "ControllerTitle.SignUp" = "Sign Up";
-"ControllerTitle.Login" = "Login";
 "ControllerTitle.Checkout" = "Checkout";
 "ControllerTitle.ShippingAddress" = "Shipping Address";
 "ControllerTitle.BillingAddress" = "Billing Address";

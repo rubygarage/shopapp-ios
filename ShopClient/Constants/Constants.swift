@@ -29,11 +29,13 @@ struct ControllerIdentifier {
     static let checkout = "CheckoutControllerIdentifier"
     static let address = "AddressControllerIdentifier"
     static let billingAddress = "BillingAddressControllerIdentifier"
+    static let signIn = "SignInControllerIdentifier"
 }
 
 struct ImageName {
     static let home = "home"
     static let sort = "sort"
+    static let close = "arrow_left"
 }
 
 struct CornerRadius {

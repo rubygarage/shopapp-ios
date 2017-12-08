@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  SignInViewController.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 11/14/17.
@@ -8,27 +8,27 @@
 
 import RxSwift
 
-class LoginViewController: BaseViewController<LoginViewModel> {
+class SignInViewController: BaseViewController<SignInViewModel> {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
-        viewModel = LoginViewModel()
+        viewModel = SignInViewModel()
         super.viewDidLoad()
         
+        setupViews()
         setupViewModel()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    private func setupViews() {
+        addCloseButton()
         populateTitle()
     }
     
     private func populateTitle() {
-        self.tabBarController?.navigationItem.title = NSLocalizedString("ControllerTitle.Login", comment: String())
+        title = NSLocalizedString("ControllerTitle.SignIn", comment: String())
     }
     
     private func setupViewModel() {
