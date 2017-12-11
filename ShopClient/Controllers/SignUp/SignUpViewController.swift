@@ -9,49 +9,50 @@
 import RxSwift
 
 class SignUpViewController: BaseViewController<SignUpViewModel> {
-
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var firstNameTextField: UITextField!
-    @IBOutlet weak var lastNameTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var phoneTextField: UITextField!
-    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var emailTextFieldView: InputTextFieldView!
+    @IBOutlet weak var nameTextFieldView: InputTextFieldView!
+    @IBOutlet weak var lastNameTextFieldView: InputTextFieldView!
+    @IBOutlet weak var phoneTextFieldView: InputTextFieldView!
+    @IBOutlet weak var passwordTextFieldView: InputTextFieldView!
+    @IBOutlet weak var signUpButton: BlackButton!
     
     override func viewDidLoad() {
         viewModel = SignUpViewModel()
         super.viewDidLoad()
 
+        setupViews()
         setupViewModel()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        populateTitle()
-    }
-    
-    private func populateTitle() {
-        self.tabBarController?.navigationItem.title = NSLocalizedString("ControllerTitle.SignUp", comment: String())
+    private func setupViews() {
+        addCloseButton()
+        title = NSLocalizedString("ControllerTitle.SignUp", comment: String())
+        emailTextFieldView.textField.placeholder = NSLocalizedString("Placeholder.Email", comment: String()).uppercased()
+        nameTextFieldView.textField.placeholder = NSLocalizedString("Placeholder.Name", comment: String()).uppercased()
+        lastNameTextFieldView.textField.placeholder = NSLocalizedString("Placeholder.LastName", comment: String()).uppercased()
+        phoneTextFieldView.textField.placeholder = NSLocalizedString("Placeholder.PhoneNumber", comment: String()).uppercased()
+        passwordTextFieldView.textField.placeholder = NSLocalizedString("Placeholder.CreatePassword", comment: String()).uppercased()
+        signUpButton.setTitle(NSLocalizedString("Button.SignUp", comment: String()).uppercased(), for: .normal)
     }
     
     private func setupViewModel() {
-        emailTextField.rx.text.map({ $0 ?? String() })
+        emailTextFieldView.textField.rx.text.map({ $0 ?? String() })
             .bind(to: viewModel.emailText)
             .disposed(by: disposeBag)
         
-        firstNameTextField.rx.text.map({ $0 ?? String() })
+        nameTextFieldView.textField.rx.text.map({ $0 ?? String() })
             .bind(to: viewModel.firstNameText)
             .disposed(by: disposeBag)
         
-        lastNameTextField.rx.text.map({ $0 ?? String() })
+        lastNameTextFieldView.textField.rx.text.map({ $0 ?? String() })
             .bind(to: viewModel.lastNameText)
             .disposed(by: disposeBag)
         
-        passwordTextField.rx.text.map({ $0 ?? String() })
+        passwordTextFieldView.textField.rx.text.map({ $0 ?? String() })
             .bind(to: viewModel.passwordText)
             .disposed(by: disposeBag)
         
-        phoneTextField.rx.text.map({ $0 ?? String() })
+        phoneTextFieldView.textField.rx.text.map({ $0 ?? String() })
             .bind(to: viewModel.phoneText)
             .disposed(by: disposeBag)
         

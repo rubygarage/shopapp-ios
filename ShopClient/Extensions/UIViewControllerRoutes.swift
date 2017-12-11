@@ -110,6 +110,12 @@ extension UIViewController {
         present(navigationController, animated: true)
     }
     
+    func showSignUpController() {
+        let signUpController = UIStoryboard.auth().instantiateViewController(withIdentifier: ControllerIdentifier.signUp) as! SignUpViewController
+        let navigationController = NavigationController(rootViewController: signUpController)
+        present(navigationController, animated: true)
+    }
+    
     // MARK: - private
     private func pushController(with storyBoard: UIStoryboard, identifier: String, animated: Bool = true) {
         let controller = storyBoard.instantiateViewController(withIdentifier: identifier)

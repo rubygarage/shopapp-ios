@@ -86,7 +86,7 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     }
     
     func didTapCreateNewAccount() {
-        // TODO:
+        showSignUpController()
     }
     
     // MARK: - AccountLoggedHeaderProtocol
