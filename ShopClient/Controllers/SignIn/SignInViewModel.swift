@@ -11,18 +11,38 @@ import RxSwift
 class SignInViewModel: BaseViewModel {
     var emailText = Variable<String>("")
     var passwordText = Variable<String>("")
-    
+    var emailErrorMessage = PublishSubject<String>()
+    var passwordErrorMessage = PublishSubject<String>()
     var loginSuccess = Variable<Bool>(false)
     
-    var isValid: Observable<Bool> {
+    var signInButtonEnabled: Observable<Bool> {
         return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { email, password in
-            email.isValidAsEmail() && password.isValidAsPassword()
+            email.hasAtLeastOneSymbol() && password.hasAtLeastOneSymbol()
         }
     }
     
     var loginPressed: AnyObserver<()> {
         return AnyObserver { [weak self] event in
-            self?.login()
+            self?.checkCresentials()
+        }
+    }
+    
+    private func checkCresentials() {
+        if emailText.value.isValidAsEmail() && passwordText.value.isValidAsPassword() {
+            login()
+        } else {
+            processErrorsIfNeeded()
+        }
+    }
+    
+    private func processErrorsIfNeeded() {
+        if emailText.value.isValidAsEmail() == false {
+            let errorMessage = NSLocalizedString("Error.InvalidEmail", comment: String())
+            emailErrorMessage.onNext(errorMessage)
+        }
+        if passwordText.value.isValidAsPassword() == false {
+            let errorMessage = NSLocalizedString("Error.InvalidPassword", comment: String())
+            passwordErrorMessage.onNext(errorMessage)
         }
     }
     

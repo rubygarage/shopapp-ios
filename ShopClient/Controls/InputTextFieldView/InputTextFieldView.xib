@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InputTextField" customModule="ShopClient" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="vfE-Ua-dpU"/>
+                <outlet property="errorMesageLabel" destination="tpe-ay-ykK" id="IEP-Sr-QtP"/>
                 <outlet property="textField" destination="ROM-R5-qtb" id="iES-i7-V60"/>
                 <outlet property="underlineView" destination="9uj-kk-0sc" id="vsT-fJ-h32"/>
                 <outlet property="underlineViewHeightConstraint" destination="4L3-oc-idu" id="vnx-zq-BWw"/>
@@ -23,13 +24,6 @@
             <rect key="frame" x="0.0" y="0.0" width="436" height="135"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9uj-kk-0sc">
-                    <rect key="frame" x="0.0" y="81" width="436" height="1"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="4L3-oc-idu"/>
-                    </constraints>
-                </view>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Place" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ROM-R5-qtb">
                     <rect key="frame" x="0.0" y="59" width="436" height="16"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -42,13 +36,29 @@
                         <action selector="editingDidEnd:" destination="-1" eventType="editingDidEnd" id="T6N-fN-oiL"/>
                     </connections>
                 </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9uj-kk-0sc">
+                    <rect key="frame" x="0.0" y="81" width="436" height="1"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="4L3-oc-idu"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpe-ay-ykK">
+                    <rect key="frame" x="0.0" y="85" width="436" height="13.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <constraints>
                 <constraint firstItem="ROM-R5-qtb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="CUP-xs-pjr"/>
                 <constraint firstItem="9uj-kk-0sc" firstAttribute="top" secondItem="ROM-R5-qtb" secondAttribute="bottom" constant="6" id="Niu-9d-Igv"/>
                 <constraint firstItem="9uj-kk-0sc" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="THU-lm-d5p"/>
                 <constraint firstItem="ROM-R5-qtb" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="l4v-a4-ocW"/>
+                <constraint firstItem="tpe-ay-ykK" firstAttribute="top" secondItem="9uj-kk-0sc" secondAttribute="bottom" constant="3" id="mG4-yn-sxH"/>
                 <constraint firstItem="9uj-kk-0sc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ngJ-xy-yiQ"/>
+                <constraint firstItem="tpe-ay-ykK" firstAttribute="trailing" secondItem="9uj-kk-0sc" secondAttribute="trailing" id="xX8-zE-HUT"/>
+                <constraint firstItem="tpe-ay-ykK" firstAttribute="leading" secondItem="9uj-kk-0sc" secondAttribute="leading" id="yHH-YN-8dE"/>
                 <constraint firstItem="ROM-R5-qtb" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="zWz-HN-H9e"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

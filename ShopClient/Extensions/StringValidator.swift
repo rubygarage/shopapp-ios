@@ -24,4 +24,8 @@ internal extension String {
     func orNil() -> String? {
         return self.isEmpty ? nil : self
     }
+    
+    func hasAtLeastOneSymbol() -> Bool {
+        return self.count >= 1
+    }
 }

@@ -39,8 +39,16 @@ class SignInViewController: BaseViewController<SignInViewModel> {
             .bind(to: viewModel.passwordText)
             .disposed(by: disposeBag)
         
-        signInButton.rx.tap
-            .bind(to: viewModel.loginPressed)
+        viewModel.emailErrorMessage
+            .subscribe(onNext: { [weak self] errorMessage in
+                self?.emailTextFieldView.errorMessage = errorMessage
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.passwordErrorMessage
+            .subscribe(onNext: { [weak self] errorMessage in
+                self?.passwordTextFieldView.errorMessage = errorMessage
+            })
             .disposed(by: disposeBag)
         
         signInButton.rx.tap
@@ -49,9 +57,13 @@ class SignInViewController: BaseViewController<SignInViewModel> {
             })
             .disposed(by: disposeBag)
         
-        viewModel.isValid
-            .subscribe(onNext: { [weak self] isValid in
-                self?.signInButton.isEnabled = isValid
+        signInButton.rx.tap
+            .bind(to: viewModel.loginPressed)
+            .disposed(by: disposeBag)
+        
+        viewModel.signInButtonEnabled
+            .subscribe(onNext: { [weak self] enabled in
+                self?.signInButton.isEnabled = enabled
             })
             .disposed(by: disposeBag)
         

@@ -18,15 +18,25 @@ private let kUnderlineViewAlphaDefault: CGFloat = 0.2
 private let kUnderlineViewAlphaHighlighted: CGFloat = 1
 private let kUnderlineViewHeightDefault: CGFloat = 1
 private let kUnderlineViewHeightHighlighted: CGFloat = 2
+private let kErrorColor = UIColor(displayP3Red: 0.89, green: 0.31, blue: 0.31, alpha: 1)
 
 class InputTextFieldView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var underlineView: UIView!
     @IBOutlet weak var underlineViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var errorMesageLabel: UILabel!
     
     var state: InputTextFieldViewState = .normal {
         didSet {
+            updateUI()
+        }
+    }
+    
+    var errorMessage: String? {
+        didSet {
+            state = .error
+            errorMesageLabel.text = errorMessage
             updateUI()
         }
     }
@@ -55,11 +65,14 @@ class InputTextFieldView: UIView {
     
     private func setupViews() {
         backgroundColor = UIColor.clear
+        errorMesageLabel.textColor = kErrorColor
     }
     
     private func updateUI() {
         underlineView.alpha = state == .normal ? kUnderlineViewAlphaDefault : kUnderlineViewAlphaHighlighted
         underlineViewHeightConstraint.constant = state == .normal ? kUnderlineViewHeightDefault : kUnderlineViewHeightHighlighted
+        underlineView.backgroundColor = state == .error ? kErrorColor : UIColor.black
+        errorMesageLabel.isHidden = state != .error
     }
     
     // MARK: - actions
