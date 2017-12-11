@@ -182,10 +182,19 @@ class API: NSObject, APIInterface {
     func login(with email: String, password: String, callback: @escaping RepoCallback<Bool>) {
         getToken(with: email, password: password) { [weak self] (token, error) in
             if let token = token {
-                self?.getCustomer(with: token, email: email, callback: callback)
+                self?.saveSessionData(with: token, email: email)
+                callback(true, nil)
             } else if let error = error {
                 callback(false, error)
             }
+        }
+    }
+    
+    func getCustomer(callback: @escaping RepoCallback<Customer>) {
+        if let token = sessionData().token, let email = sessionData().email {
+            getCustomer(with: token, email: email, callback: callback)
+        } else {
+            print("ffff")
         }
     }
     
@@ -330,16 +339,15 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
-    private func getCustomer(with token: Storefront.CustomerAccessToken, email: String, callback: @escaping RepoCallback<Bool>) {
-        let query = customerQuery(with: token.accessToken)
-        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
-            if let _ = response?.customer {
-                self?.saveSessionData(with: token, email: email)
-                callback(true, nil)
+    private func getCustomer(with token: String, email: String, callback: @escaping RepoCallback<Customer>) {
+        let query = customerQuery(with: token)
+        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
+            if let customer = Customer(with: response?.customer) {
+                callback(customer, nil)
             } else if let responseError = error {
-                callback(false, RepoError(with: responseError))
+                callback(nil, RepoError(with: responseError))
             } else {
-                callback(false, RepoError())
+                callback(nil, RepoError())
             }
         })
         run(task: task, callback: callback)

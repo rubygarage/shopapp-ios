@@ -9,12 +9,15 @@
 import MobileBuySDK
 
 extension Customer {
-    convenience init?(with item: Storefront.Customer) {
+    convenience init?(with item: Storefront.Customer?) {
+        if item == nil {
+            return nil
+        }
         self.init()
         
-        email = item.email ?? String()
-        firstName = item.firstName
-        lastName = item.lastName
-        phone = item.phone
+        email = item?.email ?? String()
+        firstName = item?.firstName
+        lastName = item?.lastName
+        phone = item?.phone
     }
 }

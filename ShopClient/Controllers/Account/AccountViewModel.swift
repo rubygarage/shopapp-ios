@@ -40,9 +40,9 @@ class AccountViewModel: BaseViewModel {
     }
     
     private var customerSingle: Single<Customer?> {
-        return Single.create(subscribe: { single in
+        return Single.create(subscribe: { [weak self] single in
             if Repository.shared.isLoggedIn() {
-                // TODO: get customer
+                self?.getCustomer(event: single)
             } else {
                 single(.success(nil))
             }
@@ -65,6 +65,17 @@ class AccountViewModel: BaseViewModel {
         
         if let customer = customerItem {
             self.customer.value = customer
+        }
+    }
+    
+    private func getCustomer(event: @escaping (SingleEvent<Customer?>) -> ()) {
+        Repository.shared.getCustomer { (customer, error) in
+            if let error = error {
+                event(.error(error))
+            }
+            if let customer = customer {
+                event(.success(customer))
+            }
         }
     }
 }
