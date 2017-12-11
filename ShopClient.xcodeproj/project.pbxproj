@@ -63,6 +63,8 @@
 		61393A721FACC1430020C345 /* GridCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393A711FACC1430020C345 /* GridCollectionViewModel.swift */; };
 		61393A761FACC1AA0020C345 /* LastArrivalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393A751FACC1AA0020C345 /* LastArrivalsViewModel.swift */; };
 		61393A781FACC2450020C345 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61393A771FACC2450020C345 /* CategoryViewModel.swift */; };
+		6140A97B1FDEC5FC000C893E /* AccountLoggedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6140A97A1FDEC5FC000C893E /* AccountLoggedHeaderView.swift */; };
+		6140A97D1FDEC605000C893E /* AccountLoggedHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6140A97C1FDEC605000C893E /* AccountLoggedHeaderView.xib */; };
 		614142C11F6AEF0400379BB9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614142C01F6AEF0400379BB9 /* HomeViewController.swift */; };
 		614142C51F6AF15B00379BB9 /* LastArrivalsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614142C31F6AF15B00379BB9 /* LastArrivalsTableViewCell.swift */; };
 		614142C61F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 614142C41F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib */; };
@@ -264,6 +266,8 @@
 		61393A711FACC1430020C345 /* GridCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewModel.swift; sourceTree = "<group>"; };
 		61393A751FACC1AA0020C345 /* LastArrivalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastArrivalsViewModel.swift; sourceTree = "<group>"; };
 		61393A771FACC2450020C345 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		6140A97A1FDEC5FC000C893E /* AccountLoggedHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLoggedHeaderView.swift; sourceTree = "<group>"; };
+		6140A97C1FDEC605000C893E /* AccountLoggedHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountLoggedHeaderView.xib; sourceTree = "<group>"; };
 		614142C01F6AEF0400379BB9 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		614142C31F6AF15B00379BB9 /* LastArrivalsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastArrivalsTableViewCell.swift; sourceTree = "<group>"; };
 		614142C41F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LastArrivalsTableViewCell.xib; sourceTree = "<group>"; };
@@ -576,6 +580,7 @@
 		611EF35D1F5957B6001B8B9C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6140A9791FDEC5EA000C893E /* AccountLoggedHeaderView */,
 				61836C191FD97A93000A6BA6 /* AccountNotLoggedHeaderView */,
 				611947821FD95A59008BE9C6 /* AccountTableViewCell */,
 				61B5BED81F75055000E075B7 /* ArticleTableViewCell */,
@@ -679,6 +684,15 @@
 				6137EE071F9E1A4E0040C004 /* ShopRepository.swift */,
 			);
 			path = Implementations;
+			sourceTree = "<group>";
+		};
+		6140A9791FDEC5EA000C893E /* AccountLoggedHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				6140A97A1FDEC5FC000C893E /* AccountLoggedHeaderView.swift */,
+				6140A97C1FDEC605000C893E /* AccountLoggedHeaderView.xib */,
+			);
+			path = AccountLoggedHeaderView;
 			sourceTree = "<group>";
 		};
 		614142BF1F6AEEEA00379BB9 /* Home */ = {
@@ -1288,6 +1302,7 @@
 				61B5BEDC1F75055000E075B7 /* ArticleTableViewCell.xib in Resources */,
 				614142C61F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib in Resources */,
 				61A507361F7E7A50004504EF /* ProductOptions.storyboard in Resources */,
+				6140A97D1FDEC605000C893E /* AccountLoggedHeaderView.xib in Resources */,
 				6133DAD41FB21A7900156971 /* CartButtonView.xib in Resources */,
 				61FC3DAA1F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.xib in Resources */,
 				61836C631FDAD071000A6BA6 /* InputTextFieldView.xib in Resources */,
@@ -1465,6 +1480,7 @@
 				617000E41FAA031E00DB898C /* BaseViewController.swift in Sources */,
 				614142CA1F6AF26300379BB9 /* HomeTableDelegate.swift in Sources */,
 				614C561D1FC8628E00857116 /* Address.swift in Sources */,
+				6140A97B1FDEC5FC000C893E /* AccountLoggedHeaderView.swift in Sources */,
 				61836C231FD98D48000A6BA6 /* BlackButton.swift in Sources */,
 				6141AAB91F8BE92700F9019B /* ShopClient.xcdatamodeld in Sources */,
 				611947881FD95ED4008BE9C6 /* AccountTableDataSource.swift in Sources */,

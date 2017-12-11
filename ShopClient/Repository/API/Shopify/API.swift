@@ -194,7 +194,7 @@ class API: NSObject, APIInterface {
         if let token = sessionData().token, let email = sessionData().email {
             getCustomer(with: token, email: email, callback: callback)
         } else {
-            print("ffff")
+            callback(nil, ContentError())
         }
     }
     

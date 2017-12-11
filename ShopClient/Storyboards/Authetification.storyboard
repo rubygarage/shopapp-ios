@@ -13,7 +13,7 @@
         <!--Sign Up-->
         <scene sceneID="Wpc-kl-hHp">
             <objects>
-                <viewController id="Cdv-6p-ycO" customClass="SignUpViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpControllerIdentifier" id="Cdv-6p-ycO" customClass="SignUpViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TmJ-7y-lEE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
