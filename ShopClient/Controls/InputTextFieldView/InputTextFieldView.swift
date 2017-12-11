@@ -42,6 +42,12 @@ class InputTextFieldView: UIView {
         }
     }
     
+    var placeholder: String? {
+        didSet {
+            textField?.attributedPlaceholder = NSAttributedString(string: placeholder ?? String(), attributes: [NSForegroundColorAttributeName: UIColor.black])
+        }
+    }
+    
     @IBInspectable
     var isSecure: Bool = false {
         didSet {

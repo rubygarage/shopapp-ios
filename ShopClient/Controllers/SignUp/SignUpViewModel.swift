@@ -14,18 +14,38 @@ class SignUpViewModel: BaseViewModel {
     var lastNameText = Variable<String>("")
     var passwordText = Variable<String>("")
     var phoneText = Variable<String>("")
-    
+    var emailErrorMessage = PublishSubject<String>()
+    var passwordErrorMessage = PublishSubject<String>()
     var signInSuccess = Variable<Bool>(false)
     
-    var isValid: Observable<Bool> {
+    var signUpButtonEnabled: Observable<Bool> {
         return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { email, password in
-            email.isValidAsEmail() && password.isValidAsPassword()
+            email.hasAtLeastOneSymbol() && password.hasAtLeastOneSymbol()
         }
     }
     
     var signUpPressed: AnyObserver<()> {
         return AnyObserver { [weak self] event in
-            self?.signUp()
+            self?.checkCresentials()
+        }
+    }
+    
+    private func checkCresentials() {
+        if emailText.value.isValidAsEmail() && passwordText.value.isValidAsPassword() {
+            signUp()
+        } else {
+            processErrorsIfNeeded()
+        }
+    }
+    
+    private func processErrorsIfNeeded() {
+        if emailText.value.isValidAsEmail() == false {
+            let errorMessage = NSLocalizedString("Error.InvalidEmail", comment: String())
+            emailErrorMessage.onNext(errorMessage)
+        }
+        if passwordText.value.isValidAsPassword() == false {
+            let errorMessage = NSLocalizedString("Error.InvalidPassword", comment: String())
+            passwordErrorMessage.onNext(errorMessage)
         }
     }
     

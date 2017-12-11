@@ -27,11 +27,11 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
     private func setupViews() {
         addCloseButton()
         title = NSLocalizedString("ControllerTitle.SignUp", comment: String())
-        emailTextFieldView.textField.placeholder = NSLocalizedString("Placeholder.Email", comment: String()).uppercased()
-        nameTextFieldView.textField.placeholder = NSLocalizedString("Placeholder.Name", comment: String()).uppercased()
-        lastNameTextFieldView.textField.placeholder = NSLocalizedString("Placeholder.LastName", comment: String()).uppercased()
-        phoneTextFieldView.textField.placeholder = NSLocalizedString("Placeholder.PhoneNumber", comment: String()).uppercased()
-        passwordTextFieldView.textField.placeholder = NSLocalizedString("Placeholder.CreatePassword", comment: String()).uppercased()
+        emailTextFieldView.placeholder = NSLocalizedString("Placeholder.Email", comment: String()).uppercased()
+        nameTextFieldView.placeholder = NSLocalizedString("Placeholder.Name", comment: String()).uppercased()
+        lastNameTextFieldView.placeholder = NSLocalizedString("Placeholder.LastName", comment: String()).uppercased()
+        phoneTextFieldView.placeholder = NSLocalizedString("Placeholder.PhoneNumber", comment: String()).uppercased()
+        passwordTextFieldView.placeholder = NSLocalizedString("Placeholder.CreatePassword", comment: String()).uppercased()
         signUpButton.setTitle(NSLocalizedString("Button.SignUp", comment: String()).uppercased(), for: .normal)
     }
     
@@ -56,8 +56,16 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
             .bind(to: viewModel.phoneText)
             .disposed(by: disposeBag)
         
-        signUpButton.rx.tap
-            .bind(to: viewModel.signUpPressed)
+        viewModel.emailErrorMessage
+            .subscribe(onNext: { [weak self] errorMessage in
+                self?.emailTextFieldView.errorMessage = errorMessage
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.passwordErrorMessage
+            .subscribe(onNext: { [weak self] errorMessage in
+                self?.passwordTextFieldView.errorMessage = errorMessage
+            })
             .disposed(by: disposeBag)
         
         signUpButton.rx.tap
@@ -66,9 +74,13 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
             })
             .disposed(by: disposeBag)
         
-        viewModel.isValid
-            .subscribe(onNext: { [weak self] isValid in
-                self?.signUpButton.isEnabled = isValid
+        signUpButton.rx.tap
+            .bind(to: viewModel.signUpPressed)
+            .disposed(by: disposeBag)
+        
+        viewModel.signUpButtonEnabled
+            .subscribe(onNext: { [weak self] enabled in
+                self?.signUpButton.isEnabled = enabled
             })
             .disposed(by: disposeBag)
         
