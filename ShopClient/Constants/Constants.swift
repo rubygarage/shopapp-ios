@@ -35,7 +35,7 @@ struct ControllerIdentifier {
 struct ImageName {
     static let home = "home"
     static let sort = "sort"
-    static let close = "arrow_left"
+    static let close = "cross"
 }
 
 struct CornerRadius {
