@@ -11,8 +11,8 @@
 "ControllerTitle.LatestArrivals" = "Latest Arrivals";
 "ControllerTitle.BlogPosts" = "Blog Posts";
 "ControllerTitle.Cart" = "Cart";
+"ControllerTitle.SignIn" = "Sign In";
 "ControllerTitle.SignUp" = "Sign Up";
-"ControllerTitle.Login" = "Login";
 "ControllerTitle.Checkout" = "Checkout";
 "ControllerTitle.ShippingAddress" = "Shipping Address";
 "ControllerTitle.BillingAddress" = "Billing Address";
@@ -20,8 +20,6 @@
 "Alert.Error" = "Error";
 "Alert.ChooseShippingRate" = "Choose shipping rate";
 "Alert.PriceInfo" = "Price info";
-
-"Label.SortBy" = "Sort by:";
 
 "Button.Sort" = "Sort";
 "Button.AddToCart" = "Add to cart";
@@ -61,9 +59,15 @@
 "Label.LatestArrivals" = "Latest Arrivals";
 "Label.BlogPosts" = "Blog Posts";
 "Label.SignInToShop" = "Sign In to shop and view orders";
+"Label.SortBy" = "Sort by:";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";
 "Error.InvalidCardNumber" = "Invalid card number";
 "Error.InvalidHolderName" = "Invalid holder name";
 "Error.InvalidExpiresDate" = "Invalid expires date";
+"Error.InvalidEmail" = "Please enter correct email address";
+"Error.InvalidPassword" = "Please enter correct password";
+
+"Placeholder.Email" = "Email*";
+"Placeholder.Password" = "Password*";

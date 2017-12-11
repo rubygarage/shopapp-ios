@@ -19,6 +19,10 @@ extension UIViewController {
         }
     }
     
+    public func addCloseButton() {
+        navigationItem.rightBarButtonItem = closeButton()
+    }
+    
     public func sortBarItem(with action: Selector) -> UIBarButtonItem {
         let image = UIImage(named: ImageName.sort)
         return UIBarButtonItem(image: image, style: .plain, target: self, action: action)
@@ -37,6 +41,11 @@ extension UIViewController {
         return UIBarButtonItem(customView: button)
     }
     
+    private func closeButton() -> UIBarButtonItem {
+        let image = UIImage(named: ImageName.close)
+        return UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(self.closeButtonHandler))
+    }
+    
     private func addRightBarButton(with imageName: String, action: Selector?) {
         let image = UIImage(named: imageName)
         let barButton = UIBarButtonItem(image: image, style: .plain, target: self, action: action)
@@ -50,5 +59,9 @@ extension UIViewController {
     
     @objc private func cartButtonHandler() {
         pushCartViewController()
+    }
+    
+    @objc private func closeButtonHandler() {
+        dismiss(animated: true)
     }
 }
