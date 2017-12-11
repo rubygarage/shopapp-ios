@@ -27,9 +27,7 @@ class InputTextFieldView: UIView {
     @IBOutlet weak var underlineViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var errorMesageLabel: UILabel!
     @IBOutlet weak var showPasswordButton: UIButton!
-    
-    private var isTextSecure: Bool = false
-    
+        
     var state: InputTextFieldViewState = .normal {
         didSet {
             updateUI()

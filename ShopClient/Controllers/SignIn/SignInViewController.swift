@@ -30,8 +30,7 @@ class SignInViewController: BaseViewController<SignInViewModel> {
     }
     
     private func setupViewModel() {
-        emailTextFieldView.textField
-            .rx.text.map({ $0 ?? String() })
+        emailTextFieldView.textField.rx.text.map({ $0 ?? String() })
             .bind(to: viewModel.emailText)
             .disposed(by: disposeBag)
         
