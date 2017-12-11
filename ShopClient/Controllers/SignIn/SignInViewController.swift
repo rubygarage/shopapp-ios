@@ -68,9 +68,9 @@ class SignInViewController: BaseViewController<SignInViewModel> {
             .disposed(by: disposeBag)
         
         viewModel.loginSuccess.asObservable()
-            .subscribe(onNext: { [weak self] success in
+            .subscribe(onNext: { success in
                 if success {
-                    self?.setHomeController()
+                    // TODO:
                 }
             })
             .disposed(by: disposeBag)

@@ -133,18 +133,24 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8zH-Jb-Seq" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="45" y="43" width="285" height="47"/>
+                                                <rect key="frame" x="35" y="43" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="47" id="mHE-bA-QoH"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSecure" value="NO"/>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPJ-AW-RDX" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="45" y="110" width="285" height="47"/>
+                                                <rect key="frame" x="35" y="110" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="47" id="RO5-cC-Nay"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSecure" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ns-Ag-vra" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="210" width="285" height="50"/>
@@ -160,9 +166,9 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="8zH-Jb-Seq" firstAttribute="leading" secondItem="nPc-6z-aDR" secondAttribute="leading" constant="45" id="PIX-xK-wLU"/>
+                                            <constraint firstItem="8zH-Jb-Seq" firstAttribute="leading" secondItem="nPc-6z-aDR" secondAttribute="leading" constant="35" id="PIX-xK-wLU"/>
                                             <constraint firstAttribute="trailing" secondItem="5ns-Ag-vra" secondAttribute="trailing" constant="45" id="SLJ-IM-Oa4"/>
-                                            <constraint firstAttribute="trailing" secondItem="8zH-Jb-Seq" secondAttribute="trailing" constant="45" id="XWg-XU-Svb"/>
+                                            <constraint firstAttribute="trailing" secondItem="8zH-Jb-Seq" secondAttribute="trailing" constant="35" id="XWg-XU-Svb"/>
                                             <constraint firstItem="vPJ-AW-RDX" firstAttribute="leading" secondItem="8zH-Jb-Seq" secondAttribute="leading" id="Z0e-L5-0aT"/>
                                             <constraint firstItem="vPJ-AW-RDX" firstAttribute="trailing" secondItem="8zH-Jb-Seq" secondAttribute="trailing" id="equ-FV-krQ"/>
                                             <constraint firstItem="8zH-Jb-Seq" firstAttribute="top" secondItem="nPc-6z-aDR" secondAttribute="top" constant="43" id="hbW-e3-Ju3"/>

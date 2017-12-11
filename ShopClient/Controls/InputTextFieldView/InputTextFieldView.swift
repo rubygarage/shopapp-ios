@@ -26,6 +26,9 @@ class InputTextFieldView: UIView {
     @IBOutlet weak var underlineView: UIView!
     @IBOutlet weak var underlineViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var errorMesageLabel: UILabel!
+    @IBOutlet weak var showPasswordButton: UIButton!
+    
+    private var isTextSecure: Bool = false
     
     var state: InputTextFieldViewState = .normal {
         didSet {
@@ -41,6 +44,15 @@ class InputTextFieldView: UIView {
         }
     }
     
+    @IBInspectable
+    var isSecure: Bool = false {
+        didSet {
+            textField?.isSecureTextEntry = isSecure
+            showPasswordButton?.isHidden = !isSecure
+        }
+    }
+    
+    // MARK: - initialization
     init() {
         super.init(frame: CGRect.zero)
         
@@ -66,6 +78,7 @@ class InputTextFieldView: UIView {
     private func setupViews() {
         backgroundColor = UIColor.clear
         errorMesageLabel.textColor = kErrorColor
+        textField.isSecureTextEntry = isSecure
     }
     
     private func updateUI() {
@@ -88,5 +101,10 @@ class InputTextFieldView: UIView {
         if state != .highlighted {
             state = .highlighted
         }
+    }
+    
+    @IBAction func showPasswordTapped(_ sender: UIButton) {
+        showPasswordButton.isSelected = !showPasswordButton.isSelected
+        textField?.isSecureTextEntry = !showPasswordButton.isSelected
     }
 }
