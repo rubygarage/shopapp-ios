@@ -7,9 +7,26 @@
 //
 
 import UIKit
+import AvatarImageView
 
 protocol AccountLoggedHeaderProtocol {
     func didTapMyOrders()
+}
+
+private let kAvatarTextSizeFactor: CGFloat = 0.4
+
+struct CustomerImageConfig: AvatarImageViewConfiguration {
+    let shape: Shape = .circle
+    let bgColor: UIColor? = UIColor.black
+    let textSizeFactor: CGFloat = kAvatarTextSizeFactor
+}
+
+struct CustomerImageDataSource: AvatarImageViewDataSource {
+    var name: String
+    
+    init(customerName: String) {
+        name = customerName
+    }
 }
 
 class AccountLoggedHeaderView: UIView {
@@ -17,6 +34,11 @@ class AccountLoggedHeaderView: UIView {
     @IBOutlet weak var myOrdersButton: UIButton!
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var customerNameLabel: UILabel!
+    @IBOutlet weak var customerImageView: AvatarImageView! {
+        didSet {
+            customerImageView.configuration = CustomerImageConfig()
+        }
+    }
     
     var headerDelegate: AccountLoggedHeaderProtocol!
     
@@ -49,7 +71,9 @@ class AccountLoggedHeaderView: UIView {
     }
     
     private func populateViews(customer: Customer) {
-        customerNameLabel.text = "\(customer.firstName ?? String()) \(customer.lastName ?? String())"
+        let customerName = "\(customer.firstName ?? String()) \(customer.lastName ?? String())"
+        customerNameLabel.text = customerName
+        customerImageView.dataSource = CustomerImageDataSource(customerName: customerName)
     }
     
     // MARK: - actions

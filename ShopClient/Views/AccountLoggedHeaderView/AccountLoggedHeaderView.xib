@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountLoggedHeaderView" customModule="ShopClient" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="pax-J0-TBt"/>
+                <outlet property="customerImageView" destination="NGO-zl-TiJ" id="NII-80-Hkf"/>
                 <outlet property="customerNameLabel" destination="0qI-g8-usP" id="vgs-Ej-gSr"/>
                 <outlet property="myOrdersButton" destination="yKi-KC-Gg9" id="tln-Q2-7tz"/>
                 <outlet property="welcomeLabel" destination="lyh-ON-oNS" id="mqg-0E-hEk"/>
@@ -45,9 +46,8 @@
                         <constraint firstAttribute="width" constant="6" id="fVr-Ta-u7z"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NGO-zl-TiJ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NGO-zl-TiJ" customClass="AvatarImageView" customModule="AvatarImageView">
                     <rect key="frame" x="16" y="25" width="60" height="60"/>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="7dD-RB-dfd"/>
                         <constraint firstAttribute="height" constant="60" id="Aab-3F-raJ"/>
