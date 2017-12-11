@@ -103,8 +103,9 @@ extension UIViewController {
         present(billingAddressController, animated: true)
     }
     
-    func showSignInController() {
+    func showSignInController(delegate: SignInViewModelProtocol) {
         let signInController = UIStoryboard.auth().instantiateViewController(withIdentifier: ControllerIdentifier.signIn) as! SignInViewController
+        signInController.delegate = delegate
         let navigationController = NavigationController(rootViewController: signInController)
         present(navigationController, animated: true)
     }
