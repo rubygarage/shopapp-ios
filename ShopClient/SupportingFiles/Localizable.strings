@@ -38,6 +38,7 @@
 "Button.RefundPolicy" = "Refund Policy";
 "Button.TermsOfService" = "Terms of Service";
 "Button.SignIn" = "Sign In";
+"Button.SignUp" = "Sign Up";
 "Button.CreateNewAccount" = "Create New Account";
 "Button.MyOrders" = "My Orders";
 
@@ -74,3 +75,7 @@
 
 "Placeholder.Email" = "Email*";
 "Placeholder.Password" = "Password*";
+"Placeholder.Name" = "Name";
+"Placeholder.LastName" = "Last Name";
+"Placeholder.PhoneNumber" = "Phone number";
+"Placeholder.CreatePassword" = "Create a Password*";

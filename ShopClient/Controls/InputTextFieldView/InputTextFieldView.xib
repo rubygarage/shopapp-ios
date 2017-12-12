@@ -12,7 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
             <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="boolean" keyPath="isSecure" value="NO"/>
+                <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
+                    <integer key="value" value="0"/>
+                </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="vfE-Ua-dpU"/>

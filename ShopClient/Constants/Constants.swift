@@ -30,6 +30,7 @@ struct ControllerIdentifier {
     static let address = "AddressControllerIdentifier"
     static let billingAddress = "BillingAddressControllerIdentifier"
     static let signIn = "SignInControllerIdentifier"
+    static let signUp = "SignUpControllerIdentifier"
 }
 
 struct ImageName {

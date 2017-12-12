@@ -13,7 +13,7 @@ class SignInViewController: BaseViewController<SignInViewModel> {
     @IBOutlet weak var passwordTextFieldView: InputTextFieldView!
     @IBOutlet weak var signInButton: BlackButton!
     
-    var delegate: SignInViewModelProtocol!
+    var delegate: AuthenticationProtocol!
     
     override func viewDidLoad() {
         viewModel = SignInViewModel()
@@ -27,8 +27,8 @@ class SignInViewController: BaseViewController<SignInViewModel> {
     private func setupViews() {
         addCloseButton()
         title = NSLocalizedString("ControllerTitle.SignIn", comment: String())
-        emailTextFieldView.textField.placeholder = NSLocalizedString("Placeholder.Email", comment: String()).uppercased()
-        passwordTextFieldView.textField.placeholder = NSLocalizedString("Placeholder.Password", comment: String()).uppercased()
+        emailTextFieldView.placeholder = NSLocalizedString("Placeholder.Email", comment: String()).uppercased()
+        passwordTextFieldView.placeholder = NSLocalizedString("Placeholder.Password", comment: String()).uppercased()
         signInButton.setTitle(NSLocalizedString("Button.SignIn", comment: String()).uppercased(), for: .normal)
     }
     
@@ -69,7 +69,7 @@ class SignInViewController: BaseViewController<SignInViewModel> {
             })
             .disposed(by: disposeBag)
         
-        viewModel.loginSuccess.asObservable()
+        viewModel.signInSuccess.asObservable()
             .subscribe(onNext: { [weak self] success in
                 if success {
                     self?.dismiss(animated: true)

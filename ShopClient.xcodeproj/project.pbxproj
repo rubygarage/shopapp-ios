@@ -158,6 +158,7 @@
 		61B94C0D1F82323800B6887C /* ProductOptionsCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B94C0C1F82323800B6887C /* ProductOptionsCollectionDelegate.swift */; };
 		61B94C101F82409300B6887C /* ProductOptionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B94C0E1F82409300B6887C /* ProductOptionHeaderView.swift */; };
 		61B94C111F82409300B6887C /* ProductOptionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61B94C0F1F82409300B6887C /* ProductOptionHeaderView.xib */; };
+		61BA57071FDFF98C00BF1586 /* AuthProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BA57061FDFF98C00BF1586 /* AuthProtocol.swift */; };
 		61BF1EA81FAB397D0098B9AA /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF1EA71FAB397D0098B9AA /* BaseViewModel.swift */; };
 		61BF1EAB1FAB56D90098B9AA /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF1EAA1FAB56D90098B9AA /* LoadingView.swift */; };
 		61BF1EAD1FAB56E40098B9AA /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61BF1EAC1FAB56E40098B9AA /* LoadingView.xib */; };
@@ -361,6 +362,7 @@
 		61B94C0C1F82323800B6887C /* ProductOptionsCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductOptionsCollectionDelegate.swift; sourceTree = "<group>"; };
 		61B94C0E1F82409300B6887C /* ProductOptionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductOptionHeaderView.swift; sourceTree = "<group>"; };
 		61B94C0F1F82409300B6887C /* ProductOptionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductOptionHeaderView.xib; sourceTree = "<group>"; };
+		61BA57061FDFF98C00BF1586 /* AuthProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProtocol.swift; sourceTree = "<group>"; };
 		61BF1EA71FAB397D0098B9AA /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		61BF1EAA1FAB56D90098B9AA /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		61BF1EAC1FAB56E40098B9AA /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
@@ -556,6 +558,7 @@
 		611EF3591F5956A3001B8B9C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				61BA57041FDFF94800BF1586 /* Authentification */,
 				617DE1831FB5E9C1004EEF9A /* Account */,
 				610424281FC477B300EFEFDA /* Address */,
 				6106C6C91F7A40DF00E87486 /* ArticleDetails */,
@@ -569,8 +572,6 @@
 				61534F2E1F73EE5E00F24189 /* LastArrivals */,
 				6124BCE11F73C2880099E879 /* Policy */,
 				610873A41F7D027200BF81CA /* ProductDetails */,
-				61C2ABC11FBB23AC00A1E170 /* SignIn */,
-				617DE1881FB5F1DB004EEF9A /* SignUp */,
 				61AAB9261F7BC10600CD32D3 /* SortModal */,
 				61DA4B861F614B9F00444F64 /* Search */,
 			);
@@ -1016,6 +1017,24 @@
 			path = ArticleTableViewCell;
 			sourceTree = "<group>";
 		};
+		61BA57041FDFF94800BF1586 /* Authentification */ = {
+			isa = PBXGroup;
+			children = (
+				61BA57051FDFF96500BF1586 /* Protocols */,
+				61C2ABC11FBB23AC00A1E170 /* SignIn */,
+				617DE1881FB5F1DB004EEF9A /* SignUp */,
+			);
+			path = Authentification;
+			sourceTree = "<group>";
+		};
+		61BA57051FDFF96500BF1586 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				61BA57061FDFF98C00BF1586 /* AuthProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		61BF1EA91FAB56C00098B9AA /* LoadingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1434,6 +1453,7 @@
 				61C2ABC01FBB10C600A1E170 /* StringValidator.swift in Sources */,
 				61AC44311FC5A7E60020544A /* CardValidator.swift in Sources */,
 				61A1D4381FC5892200E1B673 /* CreditCardAdapter.swift in Sources */,
+				61BA57071FDFF98C00BF1586 /* AuthProtocol.swift in Sources */,
 				61C2ABBE1FBAEC7800A1E170 /* ShopifyRepoErrorAdapter.swift in Sources */,
 				6118DF261FB496070044A519 /* UIViewShadow.swift in Sources */,
 				617E541A1FC8954C00130719 /* ShippingRate.swift in Sources */,
