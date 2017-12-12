@@ -40,6 +40,7 @@
 "Button.SignUp" = "Sign Up";
 "Button.CreateNewAccount" = "Create New Account";
 "Button.MyOrders" = "My Orders";
+"Button.StartShopping" = "Start Shopping";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";
@@ -63,6 +64,7 @@
 "Label.SortBy" = "Sort by:";
 "Label.Welcome" = "Welcome";
 "Label.CustomerName" = "%@ %@";
+"Label.YourCartIsEmpty" = "Your cart is empty :(";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

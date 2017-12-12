@@ -20,7 +20,7 @@ class CartViewModel: BaseViewModel {
             }
             if let products = cartProducts {
                 self?.data.value = products
-                self?.state.onNext(.content)
+                products.count > 0 ? self?.state.onNext(.content) : self?.state.onNext(.empty)
             }
         }
     }
@@ -32,8 +32,8 @@ class CartViewModel: BaseViewModel {
                 self?.state.onNext(.error(error: error))
             }
             if let success = success {
-                self?.state.onNext(.content)
                 success ? self?.removeFromData(with: cartProduct) : ()
+                self?.data.value.count ?? 0 > 0 ? self?.state.onNext(.content) : self?.state.onNext(.empty)
             }
         }
     }

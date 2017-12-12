@@ -16,6 +16,7 @@ enum ViewState {
     case loading(showHud: Bool)
     case content
     case error(error: RepoError?)
+    case empty
 }
 
 private let kToastBottomOffset: CGFloat = 80
@@ -27,6 +28,13 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
     var viewModel: T!
     var loadingView = LoadingView()
     var errorView = ErrorView()
+    var emptyDataView: UIView {
+        get {
+            let view = UIView()
+            view.backgroundColor = UIColor.red
+            return view
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,11 +68,15 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
         case .loading(let showHud):
             setLoadingState(showHud: showHud)
             break
+        case .empty:
+            setEmptyState()
+            break
         }
     }
     
     private func setLoadingState(showHud: Bool) {
         errorView.removeFromSuperview()
+        emptyDataView.removeFromSuperview()
         if showHud {
             view.addSubview(loadingView)
         }
@@ -73,6 +85,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
     private func setContentState() {
         errorView.removeFromSuperview()
         loadingView.removeFromSuperview()
+        emptyDataView.removeFromSuperview()
     }
     
     private func setErrorState(with error: RepoError?) {
@@ -87,6 +100,12 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
         } else {
             process(defaultError: error)
         }
+    }
+    
+    private func setEmptyState() {
+        errorView.removeFromSuperview()
+        loadingView.removeFromSuperview()
+        view.addSubview(emptyDataView)
     }
     
     private func process(criticalError: CriticalError?) {

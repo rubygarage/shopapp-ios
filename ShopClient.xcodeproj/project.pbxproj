@@ -159,6 +159,8 @@
 		61B94C101F82409300B6887C /* ProductOptionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B94C0E1F82409300B6887C /* ProductOptionHeaderView.swift */; };
 		61B94C111F82409300B6887C /* ProductOptionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61B94C0F1F82409300B6887C /* ProductOptionHeaderView.xib */; };
 		61BA57071FDFF98C00BF1586 /* AuthProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BA57061FDFF98C00BF1586 /* AuthProtocol.swift */; };
+		61BA570A1FE040D900BF1586 /* CartEmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BA57091FE040D900BF1586 /* CartEmptyDataView.swift */; };
+		61BA570E1FE040FB00BF1586 /* CartEmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61BA570D1FE040FB00BF1586 /* CartEmptyDataView.xib */; };
 		61BF1EA81FAB397D0098B9AA /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF1EA71FAB397D0098B9AA /* BaseViewModel.swift */; };
 		61BF1EAB1FAB56D90098B9AA /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF1EAA1FAB56D90098B9AA /* LoadingView.swift */; };
 		61BF1EAD1FAB56E40098B9AA /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61BF1EAC1FAB56E40098B9AA /* LoadingView.xib */; };
@@ -363,6 +365,8 @@
 		61B94C0E1F82409300B6887C /* ProductOptionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductOptionHeaderView.swift; sourceTree = "<group>"; };
 		61B94C0F1F82409300B6887C /* ProductOptionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductOptionHeaderView.xib; sourceTree = "<group>"; };
 		61BA57061FDFF98C00BF1586 /* AuthProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProtocol.swift; sourceTree = "<group>"; };
+		61BA57091FE040D900BF1586 /* CartEmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartEmptyDataView.swift; sourceTree = "<group>"; };
+		61BA570D1FE040FB00BF1586 /* CartEmptyDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartEmptyDataView.xib; sourceTree = "<group>"; };
 		61BF1EA71FAB397D0098B9AA /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		61BF1EAA1FAB56D90098B9AA /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		61BF1EAC1FAB56E40098B9AA /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
@@ -588,6 +592,7 @@
 				61A1D4311FC57FB700E1B673 /* CardValidationView */,
 				61E266611FB21A1600A274E5 /* CartButtonView */,
 				61719B991FC2FC9F007B6ED0 /* CartHeaderView */,
+				61BA57081FE0409200BF1586 /* CartEmptyDataView */,
 				61E76E201FB4719400AE5FB4 /* CartTableViewCell */,
 				6133392A1F69578D0063A754 /* DetailsImagesCollectionCell */,
 				61BF1EAE1FAB597C0098B9AA /* ErrorView */,
@@ -1035,6 +1040,15 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		61BA57081FE0409200BF1586 /* CartEmptyDataView */ = {
+			isa = PBXGroup;
+			children = (
+				61BA57091FE040D900BF1586 /* CartEmptyDataView.swift */,
+				61BA570D1FE040FB00BF1586 /* CartEmptyDataView.xib */,
+			);
+			path = CartEmptyDataView;
+			sourceTree = "<group>";
+		};
 		61BF1EA91FAB56C00098B9AA /* LoadingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1307,6 +1321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				61534F2A1F73EC2F00F24189 /* LastArrivals.storyboard in Resources */,
+				61BA570E1FE040FB00BF1586 /* CartEmptyDataView.xib in Resources */,
 				61AAB9311F7BD07B00CD32D3 /* SortModalTableViewCell.xib in Resources */,
 				6180AC071F72D266007768F2 /* Category.storyboard in Resources */,
 				61BF1EAD1FAB56E40098B9AA /* LoadingView.xib in Resources */,
@@ -1555,6 +1570,7 @@
 				61B5BEDB1F75055000E075B7 /* ArticleTableViewCell.swift in Sources */,
 				61393A721FACC1430020C345 /* GridCollectionViewModel.swift in Sources */,
 				61E4E6341F56C868001C6E01 /* AppDelegate.swift in Sources */,
+				61BA570A1FE040D900BF1586 /* CartEmptyDataView.swift in Sources */,
 				6131D2381FB31395008330C0 /* CartProductDAOInterface.swift in Sources */,
 				6196CF901F9F929200F823AD /* Category.swift in Sources */,
 				6120F2FE1FC3487E00CBD724 /* Checkout.swift in Sources */,
