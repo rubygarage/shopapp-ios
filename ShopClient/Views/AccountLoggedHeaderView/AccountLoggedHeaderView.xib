@@ -21,7 +21,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="389" height="200"/>
+            <rect key="frame" x="0.0" y="0.0" width="389" height="184"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yKi-KC-Gg9">
@@ -75,6 +75,7 @@
                 <constraint firstItem="0Qg-XR-G8j" firstAttribute="centerY" secondItem="yKi-KC-Gg9" secondAttribute="centerY" id="UVM-Bv-vpD"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="0Qg-XR-G8j" secondAttribute="trailing" constant="16" id="Wlr-d9-Vbq"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="0qI-g8-usP" secondAttribute="trailing" constant="20" id="alb-Vu-vwD"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="yKi-KC-Gg9" secondAttribute="bottom" constant="15" id="gVD-JR-P2E"/>
                 <constraint firstItem="0qI-g8-usP" firstAttribute="leading" secondItem="NGO-zl-TiJ" secondAttribute="trailing" constant="13" id="jBa-ly-glA"/>
                 <constraint firstItem="yKi-KC-Gg9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="k8z-IN-2jw"/>
                 <constraint firstItem="yKi-KC-Gg9" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="lAQ-15-I6x"/>
@@ -84,7 +85,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="40.5" y="-179"/>
+            <point key="canvasLocation" x="59.5" y="-183"/>
         </view>
     </objects>
     <resources>

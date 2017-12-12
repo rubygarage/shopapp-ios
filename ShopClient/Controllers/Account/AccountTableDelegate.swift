@@ -13,9 +13,6 @@ protocol AccountTableDelegateProtocol {
     func customer() -> Customer?
 }
 
-private let kHeaderHeightLogged: CGFloat = 184
-private let kHeaderHeightNotLogged: CGFloat = 179
-
 class AccountTableDelegate: NSObject, UITableViewDelegate {
     var delegate: (AccountTableDelegateProtocol & AccountNotLoggedHeaderProtocol & AccountLoggedHeaderProtocol)!
     
@@ -27,10 +24,6 @@ class AccountTableDelegate: NSObject, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.didSelectItem(at: indexPath.row)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return delegate.customer() != nil ? kHeaderHeightLogged : kHeaderHeightNotLogged
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
