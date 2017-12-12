@@ -14,6 +14,13 @@ enum InputTextFieldViewState {
     case error
 }
 
+enum InputTextFieldViewKeybordType: Int {
+    case email
+    case password
+    case name
+    case phone
+}
+
 private let kUnderlineViewAlphaDefault: CGFloat = 0.2
 private let kUnderlineViewAlphaHighlighted: CGFloat = 1
 private let kUnderlineViewHeightDefault: CGFloat = 1
@@ -27,7 +34,16 @@ class InputTextFieldView: UIView {
     @IBOutlet weak var underlineViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var errorMesageLabel: UILabel!
     @IBOutlet weak var showPasswordButton: UIButton!
-        
+    
+    @IBInspectable var keyboardType: Int = InputTextFieldViewKeybordType.name.rawValue {
+        didSet {
+            setupKeyboardType(with: keyboardType)
+            setupKeyboardSecureTextEntry(with: keyboardType)
+            setupKeyboardCapitalization(with: keyboardType)
+            setupKeyboardCorrection(with: keyboardType)
+        }
+    }
+    
     var state: InputTextFieldViewState = .normal {
         didSet {
             updateUI()
@@ -45,14 +61,6 @@ class InputTextFieldView: UIView {
     var placeholder: String? {
         didSet {
             textField?.attributedPlaceholder = NSAttributedString(string: placeholder ?? String(), attributes: [NSForegroundColorAttributeName: UIColor.black])
-        }
-    }
-    
-    @IBInspectable
-    var isSecure: Bool = false {
-        didSet {
-            textField?.isSecureTextEntry = isSecure
-            showPasswordButton?.isHidden = !isSecure
         }
     }
     
@@ -82,7 +90,6 @@ class InputTextFieldView: UIView {
     private func setupViews() {
         backgroundColor = UIColor.clear
         errorMesageLabel.textColor = kErrorColor
-        textField.isSecureTextEntry = isSecure
     }
     
     private func updateUI() {
@@ -90,6 +97,36 @@ class InputTextFieldView: UIView {
         underlineViewHeightConstraint.constant = state == .normal ? kUnderlineViewHeightDefault : kUnderlineViewHeightHighlighted
         underlineView.backgroundColor = state == .error ? kErrorColor : UIColor.black
         errorMesageLabel.isHidden = state != .error
+    }
+    
+    private func setupKeyboardType(with type: Int) {
+        let type: UIKeyboardType
+        switch keyboardType {
+        case InputTextFieldViewKeybordType.email.rawValue:
+            type = .emailAddress
+            break
+        case InputTextFieldViewKeybordType.phone.rawValue:
+            type = .phonePad
+            break
+        default:
+            type = .default
+            break
+        }
+        textField?.keyboardType = type
+    }
+    
+    private func setupKeyboardCapitalization(with type: Int) {
+        textField?.autocapitalizationType = type == InputTextFieldViewKeybordType.name.rawValue ? .words : .none
+    }
+    
+    private func setupKeyboardCorrection(with type: Int) {
+        textField?.autocorrectionType = type == InputTextFieldViewKeybordType.name.rawValue ? .yes : .no
+    }
+    
+    private func setupKeyboardSecureTextEntry(with type: Int) {
+        let secure = type == InputTextFieldViewKeybordType.password.rawValue
+        textField?.isSecureTextEntry = secure
+        showPasswordButton?.isHidden = !secure
     }
     
     // MARK: - actions
