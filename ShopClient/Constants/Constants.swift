@@ -35,7 +35,7 @@ struct ControllerIdentifier {
 struct ImageName {
     static let home = "home"
     static let sort = "sort"
-    static let close = "arrow_left"
+    static let close = "cross"
 }
 
 struct CornerRadius {
@@ -65,4 +65,5 @@ struct StatusCode {
 struct TableView {
     static let headerFooterMinHeight: CGFloat = 0.001
     static let headerFooterDefaultHeight: CGFloat = 20
+    static let homeContentInsets = UIEdgeInsetsMake(10, 0, 15, 0)
 }

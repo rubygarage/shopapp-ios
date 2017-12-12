@@ -20,4 +20,8 @@ extension Repository: AuthentificationRepositoryInterface {
     func isLoggedIn() -> Bool {
         return APICore?.isLoggedIn() ?? false
     }
+    
+    func getCustomer(callback: @escaping RepoCallback<Customer>) {
+        APICore?.getCustomer(callback: callback)
+    }
 }

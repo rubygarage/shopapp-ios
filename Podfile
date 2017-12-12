@@ -15,6 +15,7 @@ target 'ShopClient' do
   pod 'SKPhotoBrowser', '~> 5.0'
   pod 'TPKeyboardAvoiding', '~> 1.3'
   pod 'Toaster', '~> 2.1'
+  pod 'AvatarImageView', '~> 2.1'
   
   # Database
   pod 'CoreStore', '~> 4.2'

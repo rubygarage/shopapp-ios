@@ -39,6 +39,7 @@
 "Button.TermsOfService" = "Terms of Service";
 "Button.SignIn" = "Sign In";
 "Button.CreateNewAccount" = "Create New Account";
+"Button.MyOrders" = "My Orders";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";
@@ -60,6 +61,8 @@
 "Label.BlogPosts" = "Blog Posts";
 "Label.SignInToShop" = "Sign In to shop and view orders";
 "Label.SortBy" = "Sort by:";
+"Label.Welcome" = "Welcome";
+"Label.CustomerName" = "%@ %@";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

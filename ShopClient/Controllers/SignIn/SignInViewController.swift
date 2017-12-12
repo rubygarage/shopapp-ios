@@ -13,8 +13,11 @@ class SignInViewController: BaseViewController<SignInViewModel> {
     @IBOutlet weak var passwordTextFieldView: InputTextFieldView!
     @IBOutlet weak var signInButton: BlackButton!
     
+    var delegate: SignInViewModelProtocol!
+    
     override func viewDidLoad() {
         viewModel = SignInViewModel()
+        viewModel.delegate = delegate
         super.viewDidLoad()
         
         setupViews()
@@ -67,9 +70,9 @@ class SignInViewController: BaseViewController<SignInViewModel> {
             .disposed(by: disposeBag)
         
         viewModel.loginSuccess.asObservable()
-            .subscribe(onNext: { success in
+            .subscribe(onNext: { [weak self] success in
                 if success {
-                    // TODO:
+                    self?.dismiss(animated: true)
                 }
             })
             .disposed(by: disposeBag)

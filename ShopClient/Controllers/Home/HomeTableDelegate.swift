@@ -12,9 +12,6 @@ protocol HomeTableDelegateProtocol {
     func didSelectArticle(at index: Int)
 }
 
-private let kHeaderHeightDefault: CGFloat = 75
-private let kHeaderHeightFirstSection: CGFloat = 80
-
 class HomeTableDelegate: NSObject, UITableViewDelegate {
     var delegate: (HomeTableDelegateProtocol & HomeHeaderViewProtocol)?
     
@@ -31,14 +28,6 @@ class HomeTableDelegate: NSObject, UITableViewDelegate {
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == HomeSection.lastArrivals.rawValue ? kHeaderHeightFirstSection : kHeaderHeightDefault
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == HomeSection.newInBlog.rawValue ? TableView.headerFooterDefaultHeight : TableView.headerFooterMinHeight
-    }
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case HomeSection.lastArrivals.rawValue:
@@ -46,5 +35,9 @@ class HomeTableDelegate: NSObject, UITableViewDelegate {
         default:
             return HomeTableHeaderView(delegate: delegate, type: .blogPosts)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
     }
 }
