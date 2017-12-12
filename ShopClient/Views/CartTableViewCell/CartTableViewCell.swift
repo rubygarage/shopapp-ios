@@ -14,18 +14,18 @@ protocol CartTableCellProtocol {
     func didUpdate(cartProduct: CartProduct, quantity: Int)
 }
 
-let kCartProductQuantityMin = 1
-let kCartProductQuantityMax = 999
+private let kCartProductQuantityMin = 1
+private let kCartProductQuantityMax = 999
+private let kQuantityUnderlineColorDefault = UIColor(displayP3Red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
 
 class CartTableViewCell: UITableViewCell, UITextFieldDelegate {
-    @IBOutlet weak var backgroundShadowView: UIView!
     @IBOutlet weak var variantImageView: UIImageView!
     @IBOutlet weak var variantTitleLabel: UILabel!
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var quantityTextField: UITextField!
+    @IBOutlet weak var quantityUnderlineView: UIView!
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var pricePerOneItemLabel: UILabel!
-    @IBOutlet weak var removeButton: UIButton!
     
     var cartProduct: CartProduct?
     var delegate: CartTableCellProtocol?
@@ -39,9 +39,7 @@ class CartTableViewCell: UITableViewCell, UITextFieldDelegate {
     private func setup() {
         selectionStyle = .none
         
-        backgroundShadowView.addShadow()
         quantityLabel.text = NSLocalizedString("Label.Quantity", comment: String())
-        removeButton.setTitle(NSLocalizedString("Button.Remove", comment: String()), for: .normal)
         quantityTextField.delegate = self
     }
     
@@ -98,8 +96,12 @@ class CartTableViewCell: UITableViewCell, UITextFieldDelegate {
             delegate?.didTapRemove(with: cartProduct)
         }
     }
+    @IBAction func quantityEditingDidBegin(_ sender: UITextField) {
+        quantityUnderlineView.backgroundColor = UIColor.black
+    }
     
     @IBAction func quantityEditingDidEnd(_ sender: UITextField) {
+        quantityUnderlineView.backgroundColor = kQuantityUnderlineColorDefault
         if let cartProduct = cartProduct {
             let quantityString = sender.text ?? String()
             let quantity = (quantityString as NSString).integerValue

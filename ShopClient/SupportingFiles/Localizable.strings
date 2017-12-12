@@ -10,7 +10,7 @@
 "ControllerTitle.Account" = "My Account";
 "ControllerTitle.LatestArrivals" = "Latest Arrivals";
 "ControllerTitle.BlogPosts" = "Blog Posts";
-"ControllerTitle.Cart" = "Cart";
+"ControllerTitle.Cart" = "My Cart";
 "ControllerTitle.SignIn" = "Sign In";
 "ControllerTitle.SignUp" = "Sign Up";
 "ControllerTitle.Checkout" = "Checkout";
@@ -26,7 +26,6 @@
 "Button.AddedToCart" = "Added to cart";
 "Button.Ok" = "OK";
 "Button.Cancel" = "Cancel";
-"Button.Remove" = "Remove";
 "Button.Proceed" = "Proceed to checkout";
 "Button.PaymentMethodWebsite" = "Pay on our website";
 "Button.PaymentMethodCard" = "Pay by card";
@@ -46,7 +45,7 @@
 "SortingValue.CreatedAt" = "By date";
 
 "Label.PriceFrom" = "From %@ %@";
-"Label.Quantity" = "Quantity:";
+"Label.Quantity" = "QTY:";
 "Label.PriceEach" = "%@ %@ each";
 "Label.SelectPaymentMethod" = "Please select a Payment Method";
 "Label.PaymentMethodWebsite" = "Use the card to pay for on our website";
