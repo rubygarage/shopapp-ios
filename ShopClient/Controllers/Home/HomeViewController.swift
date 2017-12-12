@@ -49,6 +49,8 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         
         delegate = HomeTableDelegate(delegate: self)
         tableView.delegate = delegate
+        
+        tableView?.contentInset = TableView.homeContentInsets
     }
     
     private func updateCartBarItem() {

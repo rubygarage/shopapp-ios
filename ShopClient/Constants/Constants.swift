@@ -65,4 +65,5 @@ struct StatusCode {
 struct TableView {
     static let headerFooterMinHeight: CGFloat = 0.001
     static let headerFooterDefaultHeight: CGFloat = 20
+    static let homeContentInsets = UIEdgeInsetsMake(10, 0, 15, 0)
 }
