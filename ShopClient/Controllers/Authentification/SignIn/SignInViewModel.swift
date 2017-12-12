@@ -8,10 +8,6 @@
 
 import RxSwift
 
-protocol SignInViewModelProtocol {
-    func didSignedIn()
-}
-
 class SignInViewModel: BaseViewModel {
     var emailText = Variable<String>("")
     var passwordText = Variable<String>("")
@@ -19,7 +15,7 @@ class SignInViewModel: BaseViewModel {
     var passwordErrorMessage = PublishSubject<String>()
     var signInSuccess = Variable<Bool>(false)
     
-    var delegate: SignInViewModelProtocol!
+    var delegate: AuthenticationProtocol!
     
     var signInButtonEnabled: Observable<Bool> {
         return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { email, password in
@@ -67,7 +63,7 @@ class SignInViewModel: BaseViewModel {
     
     private func notifyAboutSignInResult(success: Bool) {
         if success {
-            delegate?.didSignedIn()
+            delegate?.didAuthorize()
         }
         signInSuccess.value = success
     }
