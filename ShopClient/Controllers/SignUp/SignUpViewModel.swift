@@ -8,6 +8,10 @@
 
 import RxSwift
 
+protocol SignUpViewModelProtocol {
+    func didSignedUp()
+}
+
 class SignUpViewModel: BaseViewModel {
     var emailText = Variable<String>("")
     var firstNameText = Variable<String>("")
@@ -16,7 +20,9 @@ class SignUpViewModel: BaseViewModel {
     var phoneText = Variable<String>("")
     var emailErrorMessage = PublishSubject<String>()
     var passwordErrorMessage = PublishSubject<String>()
-    var signInSuccess = Variable<Bool>(false)
+    var signUpSuccess = Variable<Bool>(false)
+    
+    var delegate: SignUpViewModelProtocol!
     
     var signUpButtonEnabled: Observable<Bool> {
         return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { email, password in
@@ -53,12 +59,19 @@ class SignUpViewModel: BaseViewModel {
         state.onNext(.loading(showHud: true))
         Repository.shared.signUp(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), password: passwordText.value, phone: phoneText.value.orNil(), callback: { [weak self] (success, error) in
             if let success = success {
-                self?.signInSuccess.value = success
+                self?.notifyAboutSignUpResult(success: success)
                 self?.state.onNext(.content)
             }
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }
         })
+    }
+    
+    private func notifyAboutSignUpResult(success: Bool) {
+        if success {
+            delegate?.didSignedUp()
+        }
+        signUpSuccess.value = success
     }
 }

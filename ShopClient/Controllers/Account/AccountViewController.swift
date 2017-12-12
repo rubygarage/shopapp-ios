@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountViewController: BaseViewController<AccountViewModel>, AccountTableDataSourceProtocol, AccountTableDelegateProtocol, AccountNotLoggedHeaderProtocol, AccountLoggedHeaderProtocol, SignInViewModelProtocol {
+class AccountViewController: BaseViewController<AccountViewModel>, AccountTableDataSourceProtocol, AccountTableDelegateProtocol, AccountNotLoggedHeaderProtocol, AccountLoggedHeaderProtocol, SignInViewModelProtocol, SignUpViewModelProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     var tableDataSource: AccountTableDataSource!
@@ -86,7 +86,7 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     }
     
     func didTapCreateNewAccount() {
-        showSignUpController()
+        showSignUpController(delegate: self)
     }
     
     // MARK: - AccountLoggedHeaderProtocol
@@ -96,6 +96,11 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     
     // MARK: - SignInViewModelProtocol
     func didSignedIn() {
+        loadData()
+    }
+    
+    // MARK: - SignUpViewModelProtocol
+    func didSignedUp() {
         loadData()
     }
 }

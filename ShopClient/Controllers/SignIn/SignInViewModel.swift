@@ -17,7 +17,7 @@ class SignInViewModel: BaseViewModel {
     var passwordText = Variable<String>("")
     var emailErrorMessage = PublishSubject<String>()
     var passwordErrorMessage = PublishSubject<String>()
-    var loginSuccess = Variable<Bool>(false)
+    var signInSuccess = Variable<Bool>(false)
     
     var delegate: SignInViewModelProtocol!
     
@@ -35,7 +35,7 @@ class SignInViewModel: BaseViewModel {
     
     private func checkCresentials() {
         if emailText.value.isValidAsEmail() && passwordText.value.isValidAsPassword() {
-            login()
+            signIn()
         } else {
             processErrorsIfNeeded()
         }
@@ -52,11 +52,11 @@ class SignInViewModel: BaseViewModel {
         }
     }
     
-    private func login() {
+    private func signIn() {
         state.onNext(.loading(showHud: true))
         Repository.shared.login(with: emailText.value, password: passwordText.value) { [weak self] (success, error) in
             if let success = success {
-                self?.notifyAboutLoginResult(success: success)
+                self?.notifyAboutSignInResult(success: success)
                 self?.state.onNext(.content)
             }
             if let error = error {
@@ -65,10 +65,10 @@ class SignInViewModel: BaseViewModel {
         }
     }
     
-    private func notifyAboutLoginResult(success: Bool) {
+    private func notifyAboutSignInResult(success: Bool) {
         if success {
             delegate?.didSignedIn()
         }
-        loginSuccess.value = success
+        signInSuccess.value = success
     }
 }

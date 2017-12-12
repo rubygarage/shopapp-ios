@@ -55,8 +55,9 @@ extension UIViewController {
     // MARK: - set
     func setHomeController() {
         let appDelegate  = UIApplication.shared.delegate as! AppDelegate
-        let tabbarController = appDelegate.window!.rootViewController as! UITabBarController
-        tabbarController.selectedIndex = 0
+        let navigationController = appDelegate.window?.rootViewController as? NavigationController
+        let tabbarController = navigationController?.viewControllers.first as? UITabBarController
+        tabbarController?.selectedIndex = 0
     }
     
     // MARK: - open as child
@@ -110,8 +111,9 @@ extension UIViewController {
         present(navigationController, animated: true)
     }
     
-    func showSignUpController() {
+    func showSignUpController(delegate: SignUpViewModelProtocol) {
         let signUpController = UIStoryboard.auth().instantiateViewController(withIdentifier: ControllerIdentifier.signUp) as! SignUpViewController
+        signUpController.delegate = delegate
         let navigationController = NavigationController(rootViewController: signUpController)
         present(navigationController, animated: true)
     }

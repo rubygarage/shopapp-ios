@@ -42,7 +42,8 @@ class AccountViewModel: BaseViewModel {
     private var customerSingle: Single<Customer?> {
         return Single.create(subscribe: { [weak self] single in
             if Repository.shared.isLoggedIn() {
-                self?.getCustomer(event: single)
+//                self?.getCustomer(event: single)
+                single(.success(nil))
             } else {
                 single(.success(nil))
             }
