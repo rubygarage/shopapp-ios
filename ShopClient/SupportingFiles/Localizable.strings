@@ -62,6 +62,7 @@
 "Label.SignInToShop" = "Sign In to shop and view orders";
 "Label.SortBy" = "Sort by:";
 "Label.Welcome" = "Welcome";
+"Label.CustomerName" = "%@ %@";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";
