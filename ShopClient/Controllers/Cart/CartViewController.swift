@@ -8,8 +8,9 @@
 
 import UIKit
 
-class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol, CartTableDelegateProtocol, CartTableCellProtocol, CartFooterProtocol {
+class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol, CartTableDelegateProtocol, CartTableCellProtocol {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var checkoutButton: UIButton!
     
     var tableDataSource: CartTableDataSource?
     var tableDelegate: CartTableDelegate?
@@ -18,14 +19,16 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
         viewModel = CartViewModel()
         super.viewDidLoad()
 
-        setupTitle()
+        setupViews()
         setupTableView()
         setupViewModel()
         loadData()
     }
     
-    private func setupTitle() {
+    private func setupViews() {
         title = NSLocalizedString("ControllerTitle.Cart", comment: String())
+        checkoutButton.setTitle(NSLocalizedString("Button.Checkout", comment: String()).uppercased(), for: .normal)
+        addCloseButton()
     }
     
     private func setupTableView() {
@@ -49,6 +52,11 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     
     private func loadData() {
         viewModel.loadData()
+    }
+    
+    // MARK: - actions
+    @IBAction func checkoutTapped(_ sender: UIButton) {
+        pushCheckoutController()
     }
     
     // MARK: - CartTableDataSourceProtocol
@@ -79,11 +87,6 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     
     func didUpdate(cartProduct: CartProduct, quantity: Int) {
         viewModel.update(cartProduct: cartProduct, quantity: quantity)
-    }
-    
-    // MARK: - CartFooterProtocol
-    func didTapProceed() {
-        pushCheckoutController()
     }
     
     // MARK: - ErrorViewProtocol

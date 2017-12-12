@@ -142,7 +142,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     }
     
     private func openCartController() {
-        pushCartViewController()
+        showCartController()
     }
     
     // MARK: - actions

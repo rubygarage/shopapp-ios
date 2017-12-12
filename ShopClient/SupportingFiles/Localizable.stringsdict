@@ -13,9 +13,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>Order total (%d item)</string>
+			<string>%d item: Total</string>
 			<key>other</key>
-			<string>Order total (%d items)</string>
+			<string>%d items: Total</string>
 		</dict>
 	</dict>
 </dict>

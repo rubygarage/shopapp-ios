@@ -26,7 +26,7 @@
 "Button.AddedToCart" = "Added to cart";
 "Button.Ok" = "OK";
 "Button.Cancel" = "Cancel";
-"Button.Proceed" = "Proceed to checkout";
+"Button.Checkout" = "Checkout";
 "Button.PaymentMethodWebsite" = "Pay on our website";
 "Button.PaymentMethodCard" = "Pay by card";
 "Button.PaymentMethodApplePay" = "Apple Pay";
