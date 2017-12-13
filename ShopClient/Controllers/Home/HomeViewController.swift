@@ -41,6 +41,9 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         let lastArrivalsNib = UINib(nibName: String(describing: LastArrivalsTableViewCell.self), bundle: nil)
         tableView.register(lastArrivalsNib, forCellReuseIdentifier: String(describing: LastArrivalsTableViewCell.self))
         
+        let popularNib = UINib(nibName: String(describing: PopularTableViewCell.self), bundle: nil)
+        tableView.register(popularNib, forCellReuseIdentifier: String(describing: PopularTableViewCell.self))
+        
         let newInBlogNib = UINib(nibName: String(describing: ArticleTableViewCell.self), bundle: nil)
         tableView.register(newInBlogNib, forCellReuseIdentifier: String(describing: ArticleTableViewCell.self))
                 
@@ -78,11 +81,8 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         return viewModel.data.value.latestProducts
     }
     
-    func didSelectProduct(at index: Int) {
-        if index < viewModel.data.value.latestProducts.count {
-            let selectedProduct = viewModel.data.value.latestProducts[index]
-            pushDetailController(with: selectedProduct)
-        }
+    func popularObjects() -> [Product] {
+        return viewModel.data.value.popularProducts
     }
     
     func articlesCount() -> Int {
@@ -104,11 +104,22 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         }
     }
     
+    // MARK: - LastArrivalsCellDelegate
+    func didSelectLastArrivalsProduct(at index: Int) {
+        if index < viewModel.data.value.latestProducts.count {
+            let selectedProduct = viewModel.data.value.latestProducts[index]
+            pushDetailController(with: selectedProduct)
+        }
+    }
+    
     // MARK: - HomeHeaderViewProtocol
     func didTapSeeAll(type: HomeTableViewType) {
         switch type {
         case .latestArrivals:
             pushLastArrivalsController()
+        case .popular:
+        // TODO:
+            break
         case .blogPosts:
             pushArticlesListController()
         }

@@ -161,6 +161,8 @@
 		61BA57071FDFF98C00BF1586 /* AuthProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BA57061FDFF98C00BF1586 /* AuthProtocol.swift */; };
 		61BA570A1FE040D900BF1586 /* CartEmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BA57091FE040D900BF1586 /* CartEmptyDataView.swift */; };
 		61BA570E1FE040FB00BF1586 /* CartEmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61BA570D1FE040FB00BF1586 /* CartEmptyDataView.xib */; };
+		61BA58C61FE14A9F00BF1586 /* PopularTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BA58C41FE14A9F00BF1586 /* PopularTableViewCell.swift */; };
+		61BA58C71FE14A9F00BF1586 /* PopularTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61BA58C51FE14A9F00BF1586 /* PopularTableViewCell.xib */; };
 		61BF1EA81FAB397D0098B9AA /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF1EA71FAB397D0098B9AA /* BaseViewModel.swift */; };
 		61BF1EAB1FAB56D90098B9AA /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF1EAA1FAB56D90098B9AA /* LoadingView.swift */; };
 		61BF1EAD1FAB56E40098B9AA /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61BF1EAC1FAB56E40098B9AA /* LoadingView.xib */; };
@@ -367,6 +369,8 @@
 		61BA57061FDFF98C00BF1586 /* AuthProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProtocol.swift; sourceTree = "<group>"; };
 		61BA57091FE040D900BF1586 /* CartEmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartEmptyDataView.swift; sourceTree = "<group>"; };
 		61BA570D1FE040FB00BF1586 /* CartEmptyDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartEmptyDataView.xib; sourceTree = "<group>"; };
+		61BA58C41FE14A9F00BF1586 /* PopularTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTableViewCell.swift; sourceTree = "<group>"; };
+		61BA58C51FE14A9F00BF1586 /* PopularTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopularTableViewCell.xib; sourceTree = "<group>"; };
 		61BF1EA71FAB397D0098B9AA /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		61BF1EAA1FAB56D90098B9AA /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		61BF1EAC1FAB56E40098B9AA /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
@@ -601,6 +605,7 @@
 				614142D01F6BD28D00379BB9 /* LastArrivalsCollectionViewCell */,
 				614142C21F6AF14300379BB9 /* LastArrivalsTableViewCell */,
 				61BF1EA91FAB56C00098B9AA /* LoadingView */,
+				61BA58C31FE14A7500BF1586 /* PopularTableViewCell */,
 				61FC3DA61F7EB41900DB0AD7 /* ProductOptionCollectionCell */,
 				61AAB92D1F7BD05E00CD32D3 /* SortModalTableViewCell */,
 			);
@@ -1049,6 +1054,15 @@
 			path = CartEmptyDataView;
 			sourceTree = "<group>";
 		};
+		61BA58C31FE14A7500BF1586 /* PopularTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				61BA58C41FE14A9F00BF1586 /* PopularTableViewCell.swift */,
+				61BA58C51FE14A9F00BF1586 /* PopularTableViewCell.xib */,
+			);
+			path = PopularTableViewCell;
+			sourceTree = "<group>";
+		};
 		61BF1EA91FAB56C00098B9AA /* LoadingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1355,6 +1369,7 @@
 				61B94C111F82409300B6887C /* ProductOptionHeaderView.xib in Resources */,
 				61AB83261F72E6F0009E7343 /* Policy.storyboard in Resources */,
 				61ED88EC1F7169F1006BDA79 /* Search.storyboard in Resources */,
+				61BA58C71FE14A9F00BF1586 /* PopularTableViewCell.xib in Resources */,
 				61719B9D1FC2FCEE007B6ED0 /* CartHeaderView.xib in Resources */,
 				61719B9F1FC306FA007B6ED0 /* Localizable.stringsdict in Resources */,
 				61D561731F7418D000233DA3 /* ProductDetails.storyboard in Resources */,
@@ -1540,6 +1555,7 @@
 				61E76E1F1FB4704900AE5FB4 /* DAOImageAdapter.swift in Sources */,
 				614142C51F6AF15B00379BB9 /* LastArrivalsTableViewCell.swift in Sources */,
 				6133DAD61FB2240A00156971 /* CartRepositoryInterface.swift in Sources */,
+				61BA58C61FE14A9F00BF1586 /* PopularTableViewCell.swift in Sources */,
 				6137EE081F9E1A4E0040C004 /* ShopRepository.swift in Sources */,
 				6196CF981F9F9A2200F823AD /* ProductVariant.swift in Sources */,
 				61DA4B881F614BBC00444F64 /* SearchViewController.swift in Sources */,

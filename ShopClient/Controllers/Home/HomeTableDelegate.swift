@@ -32,6 +32,8 @@ class HomeTableDelegate: NSObject, UITableViewDelegate {
         switch section {
         case HomeSection.lastArrivals.rawValue:
             return HomeTableHeaderView(delegate: delegate, type: .latestArrivals)
+        case HomeSection.popular.rawValue:
+            return HomeTableHeaderView(delegate: delegate, type: .popular)
         default:
             return HomeTableHeaderView(delegate: delegate, type: .blogPosts)
         }

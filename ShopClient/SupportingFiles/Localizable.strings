@@ -60,6 +60,7 @@
 "Label.PriceInfo" = "%@\n%@\n%@\n%@";
 "Label.SameAsShippingAddress" = "Same as shipping address";
 "Label.LatestArrivals" = "Latest Arrivals";
+"Label.Popular" = "Popular";
 "Label.BlogPosts" = "Blog Posts";
 "Label.SignInToShop" = "Sign In to shop and view orders";
 "Label.SortBy" = "Sort by:";
