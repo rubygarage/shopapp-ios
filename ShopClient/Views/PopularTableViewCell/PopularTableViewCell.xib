@@ -18,10 +18,35 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="432" height="224.5"/>
                 <autoresizingMask key="autoresizingMask"/>
-                <color key="backgroundColor" red="0.0" green="0.69852120539999996" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <subviews>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Jhs-cT-NEd">
+                        <rect key="frame" x="0.0" y="0.0" width="432" height="225"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="225" id="AeF-rZ-rWd"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="tAo-BU-MKv">
+                            <size key="itemSize" width="150" height="150"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                </subviews>
+                <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Jhs-cT-NEd" secondAttribute="bottom" id="LPi-7e-QI8"/>
+                    <constraint firstItem="Jhs-cT-NEd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="QQ2-V4-c9z"/>
+                    <constraint firstAttribute="trailing" secondItem="Jhs-cT-NEd" secondAttribute="trailing" id="coX-j8-qr3"/>
+                    <constraint firstItem="Jhs-cT-NEd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="yj3-BW-UKl"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="-104" y="-9"/>
+            <connections>
+                <outlet property="collectionView" destination="Jhs-cT-NEd" id="sBS-4C-Psb"/>
+                <outlet property="collectionViewHeightConstraint" destination="AeF-rZ-rWd" id="jL6-Pl-hsb"/>
+            </connections>
+            <point key="canvasLocation" x="-104" y="-9.5"/>
         </tableViewCell>
     </objects>
 </document>

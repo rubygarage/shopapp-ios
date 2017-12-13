@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, HomeHeaderViewProtocol {
+class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, PopularCellDelegate, HomeHeaderViewProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     var dataSource: HomeTableDataSource?
@@ -106,8 +106,17 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     
     // MARK: - LastArrivalsCellDelegate
     func didSelectLastArrivalsProduct(at index: Int) {
-        if index < viewModel.data.value.latestProducts.count {
-            let selectedProduct = viewModel.data.value.latestProducts[index]
+        openProductDetails(with: viewModel.data.value.latestProducts, index: index)
+    }
+    
+    // MARK: - PopularCellDelegate
+    func didSelectPopularProduct(at index: Int) {
+        openProductDetails(with: viewModel.data.value.popularProducts, index: index)
+    }
+    
+    private func openProductDetails(with products: [Product], index: Int) {
+        if index < products.count {
+            let selectedProduct = products[index]
             pushDetailController(with: selectedProduct)
         }
     }

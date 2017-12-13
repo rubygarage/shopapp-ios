@@ -121,6 +121,8 @@
 		618A43871F9F56930066F053 /* ShopDAOInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618A43861F9F56930066F053 /* ShopDAOInterface.swift */; };
 		618A43891F9F850A0066F053 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618A43881F9F850A0066F053 /* Product.swift */; };
 		618A438B1F9F85F20066F053 /* ShopifyProductAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618A438A1F9F85F20066F053 /* ShopifyProductAdapter.swift */; };
+		618B4D3F1FE151F00001F68D /* PopularTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B4D3E1FE151F00001F68D /* PopularTableDataSource.swift */; };
+		618B4D411FE164630001F68D /* PopularTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B4D401FE164630001F68D /* PopularTableDelegate.swift */; };
 		61903DF21FB0A60100DA0C96 /* VariantOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61903DF11FB0A60100DA0C96 /* VariantOption.swift */; };
 		61903DF41FB0A69900DA0C96 /* ShopifyVariantOptionAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61903DF31FB0A69900DA0C96 /* ShopifyVariantOptionAdapter.swift */; };
 		6196CF881F9F8AF200F823AD /* ProductRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196CF871F9F8AF200F823AD /* ProductRepositoryInterface.swift */; };
@@ -329,6 +331,8 @@
 		618A43861F9F56930066F053 /* ShopDAOInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDAOInterface.swift; sourceTree = "<group>"; };
 		618A43881F9F850A0066F053 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		618A438A1F9F85F20066F053 /* ShopifyProductAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyProductAdapter.swift; sourceTree = "<group>"; };
+		618B4D3E1FE151F00001F68D /* PopularTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTableDataSource.swift; sourceTree = "<group>"; };
+		618B4D401FE164630001F68D /* PopularTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTableDelegate.swift; sourceTree = "<group>"; };
 		61903DF11FB0A60100DA0C96 /* VariantOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantOption.swift; sourceTree = "<group>"; };
 		61903DF31FB0A69900DA0C96 /* ShopifyVariantOptionAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyVariantOptionAdapter.swift; sourceTree = "<group>"; };
 		6196CF871F9F8AF200F823AD /* ProductRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRepositoryInterface.swift; sourceTree = "<group>"; };
@@ -1059,6 +1063,8 @@
 			children = (
 				61BA58C41FE14A9F00BF1586 /* PopularTableViewCell.swift */,
 				61BA58C51FE14A9F00BF1586 /* PopularTableViewCell.xib */,
+				618B4D3E1FE151F00001F68D /* PopularTableDataSource.swift */,
+				618B4D401FE164630001F68D /* PopularTableDelegate.swift */,
 			);
 			path = PopularTableViewCell;
 			sourceTree = "<group>";
@@ -1527,6 +1533,7 @@
 				61AAB9281F7BC11C00CD32D3 /* SortModalViewController.swift in Sources */,
 				6133392D1F6957AF0063A754 /* DetailsImagesCollectionViewCell.swift in Sources */,
 				6196CF941F9F96C800F823AD /* ArticleRepository.swift in Sources */,
+				618B4D411FE164630001F68D /* PopularTableDelegate.swift in Sources */,
 				6120F2FA1FC33A4B00CBD724 /* PaymentsRepositoryInterface.swift in Sources */,
 				61719B9B1FC2FCE5007B6ED0 /* CartHeaderView.swift in Sources */,
 				617000E41FAA031E00DB898C /* BaseViewController.swift in Sources */,
@@ -1552,6 +1559,7 @@
 				618A43871F9F56930066F053 /* ShopDAOInterface.swift in Sources */,
 				6152B1281F791A1100045A42 /* ArticlesListTableDelegate.swift in Sources */,
 				6152B1241F7914E800045A42 /* ArticlesListViewController.swift in Sources */,
+				618B4D3F1FE151F00001F68D /* PopularTableDataSource.swift in Sources */,
 				61E76E1F1FB4704900AE5FB4 /* DAOImageAdapter.swift in Sources */,
 				614142C51F6AF15B00379BB9 /* LastArrivalsTableViewCell.swift in Sources */,
 				6133DAD61FB2240A00156971 /* CartRepositoryInterface.swift in Sources */,

@@ -22,9 +22,9 @@ protocol HomeTableDataSourceProtocol {
 }
 
 class HomeTableDataSource: NSObject, UITableViewDataSource {
-    var delegate: (HomeTableDataSourceProtocol & LastArrivalsCellDelegate)?
+    var delegate: (HomeTableDataSourceProtocol & LastArrivalsCellDelegate & PopularCellDelegate)?
     
-    init(delegate: (HomeTableDataSourceProtocol & LastArrivalsCellDelegate)?) {
+    init(delegate: (HomeTableDataSourceProtocol & LastArrivalsCellDelegate & PopularCellDelegate)?) {
         super.init()
         
         self.delegate = delegate
@@ -72,6 +72,7 @@ class HomeTableDataSource: NSObject, UITableViewDataSource {
     
     private func popularCell(with tableView: UITableView, indexPath: IndexPath) -> PopularTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PopularTableViewCell.self), for: indexPath) as! PopularTableViewCell
+        cell.configure(with: delegate?.popularObjects(), cellDelegate: self.delegate)
         
         return cell
     }
