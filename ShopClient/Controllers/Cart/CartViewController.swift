@@ -8,12 +8,16 @@
 
 import UIKit
 
-class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol, CartTableDelegateProtocol, CartTableCellProtocol {
+class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol, CartTableDelegateProtocol, CartTableCellProtocol, CartEmptyDataViewProtocol {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var checkoutButton: UIButton!
     
     var tableDataSource: CartTableDataSource?
     var tableDelegate: CartTableDelegate?
+    
+    override var emptyDataView: UIView {
+        return CartEmptyDataView(frame: view.frame, delegate: self)
+    }
     
     override func viewDidLoad() {
         viewModel = CartViewModel()
@@ -92,5 +96,11 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     // MARK: - ErrorViewProtocol
     func didTapTryAgain() {
         loadData()
+    }
+    
+    // MARK: - CartEmptyDataViewProtocol
+    func didTapStartShopping() {
+        setHomeController()
+        dismiss(animated: true)
     }
 }
