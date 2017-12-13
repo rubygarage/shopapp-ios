@@ -30,9 +30,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
     var errorView = ErrorView()
     var emptyDataView: UIView {
         get {
-            let view = UIView()
-            view.backgroundColor = UIColor.red
-            return view
+            return UIView()
         }
     }
     
