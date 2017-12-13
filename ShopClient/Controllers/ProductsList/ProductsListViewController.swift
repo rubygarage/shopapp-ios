@@ -1,5 +1,5 @@
 //
-//  LastArrivalsViewController.swift
+//  ProductsListViewController.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 9/21/17.
@@ -8,22 +8,19 @@
 
 import UIKit
 
-class LastArrivalsViewController: GridCollectionViewController<LastArrivalsViewModel> {
-
+class ProductsListViewController: GridCollectionViewController<ProductsListViewModel> {
+    var sortingValue: SortingValue!
+    
     override func viewDidLoad() {
-        viewModel = LastArrivalsViewModel()
+        viewModel = ProductsListViewModel()
+        viewModel.sortingValue = sortingValue
         super.viewDidLoad()
 
-        setupViews()
         setupViewModel()
         loadData()
     }
     
     // MARK: - private
-    private func setupViews() {
-        title = NSLocalizedString("ControllerTitle.LatestArrivals", comment: String())
-    }
-    
     private func setupViewModel() {
         viewModel.products.asObservable()
             .subscribe(onNext: { [weak self] _ in

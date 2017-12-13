@@ -18,7 +18,7 @@ struct ControllerIdentifier {
     static let search = "SearchControllerIdentifier"
     static let category = "CategoryControllerIdentifier"
     static let policy = "PolicyControllerIdentifier"
-    static let lastArrivals = "LastArrivalsControllerIdentifier"
+    static let productsList = "ProductsListControllerIdentifier"
     static let articlesList = "ArticlesListControllerIdentifier"
     static let articleDetails = "ArticleDetailsControllerIdentifier"
     static let sortModal = "SortModalControllerIdentifier"

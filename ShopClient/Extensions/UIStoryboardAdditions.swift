@@ -30,8 +30,8 @@ extension UIStoryboard {
         return UIStoryboard(name: "Policy", bundle: nil)
     }
     
-    class func lastArrivals() -> UIStoryboard {
-        return UIStoryboard(name: "LastArrivals", bundle: nil)
+    class func productsList() -> UIStoryboard {
+        return UIStoryboard(name: "ProductsList", bundle: nil)
     }
     
     class func imagesCarousel() -> UIStoryboard {

@@ -125,10 +125,11 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     func didTapSeeAll(type: HomeTableViewType) {
         switch type {
         case .latestArrivals:
-            pushLastArrivalsController()
+            let title = NSLocalizedString("ControllerTitle.LatestArrivals", comment: String())
+            pushProductsListController(with: title, sortingValue: .createdAt)
         case .popular:
-        // TODO:
-            break
+            let title = NSLocalizedString("ControllerTitle.Popular", comment: String())
+            pushProductsListController(with: title, sortingValue: .popular)
         case .blogPosts:
             pushArticlesListController()
         }

@@ -15,10 +15,6 @@ extension UIViewController {
         pushController(with: UIStoryboard.search(), identifier: ControllerIdentifier.search)
     }
     
-    func pushLastArrivalsController() {
-        pushController(with: UIStoryboard.lastArrivals(), identifier: ControllerIdentifier.lastArrivals)
-    }
-    
     func pushArticlesListController() {
         pushController(with: UIStoryboard.articlesList(), identifier: ControllerIdentifier.articlesList)
     }
@@ -46,6 +42,13 @@ extension UIViewController {
         articleDetailsController.articleId = articleId
         
         navigationController?.pushViewController(articleDetailsController, animated: true)
+    }
+    
+    func pushProductsListController(with title: String? = nil, sortingValue: SortingValue) {
+        let productsListController = UIStoryboard.productsList().instantiateViewController(withIdentifier: ControllerIdentifier.productsList) as! ProductsListViewController
+        productsListController.title = title
+        productsListController.sortingValue = sortingValue
+        pushController(with: UIStoryboard.productsList(), identifier: ControllerIdentifier.productsList)
     }
 
     // MARK: - set
