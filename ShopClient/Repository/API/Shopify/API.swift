@@ -363,6 +363,8 @@ class API: NSObject, APIInterface {
             return Storefront.ProductSortKeys.createdAt
         case SortingValue.name:
             return Storefront.ProductSortKeys.title
+        case SortingValue.popular:
+            return Storefront.ProductSortKeys.relevance
         }
     }
     
@@ -375,6 +377,8 @@ class API: NSObject, APIInterface {
             return Storefront.ProductCollectionSortKeys.created
         case SortingValue.name:
             return Storefront.ProductCollectionSortKeys.title
+        case SortingValue.popular:
+            return Storefront.ProductCollectionSortKeys.relevance
         }
     }
     

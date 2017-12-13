@@ -75,12 +75,12 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     
     // MARK: - HomeTableDataSourceProtocol
     func lastArrivalsObjects() -> [Product] {
-        return viewModel.data.value.products
+        return viewModel.data.value.latestProducts
     }
     
     func didSelectProduct(at index: Int) {
-        if index < viewModel.data.value.products.count {
-            let selectedProduct = viewModel.data.value.products[index]
+        if index < viewModel.data.value.latestProducts.count {
+            let selectedProduct = viewModel.data.value.latestProducts[index]
             pushDetailController(with: selectedProduct)
         }
     }
