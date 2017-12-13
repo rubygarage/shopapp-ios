@@ -20,7 +20,7 @@ class CartViewModel: BaseViewModel {
             }
             if let products = cartProducts {
                 self?.data.value = products
-                products.count > 0 ? self?.state.onNext(.content) : self?.state.onNext(.empty)
+                self?.updateSuccessState(with: products.count)
             }
         }
     }
@@ -33,7 +33,7 @@ class CartViewModel: BaseViewModel {
             }
             if let success = success {
                 success ? self?.removeFromData(with: cartProduct) : ()
-                self?.data.value.count ?? 0 > 0 ? self?.state.onNext(.content) : self?.state.onNext(.empty)
+                self?.updateSuccessState(with: self?.data.value.count)
             }
         }
     }
@@ -59,6 +59,14 @@ class CartViewModel: BaseViewModel {
     private func removeFromData(with item: CartProduct) {
         if let index = data.value.index(of: item) {
             data.value.remove(at: index)
+        }
+    }
+    
+    private func updateSuccessState(with itemsCount: Int?) {
+        if let count = itemsCount, count > 0 {
+            state.onNext(.content)
+        } else {
+            state.onNext(.empty)
         }
     }
 }
