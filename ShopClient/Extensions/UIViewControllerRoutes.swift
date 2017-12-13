@@ -48,7 +48,8 @@ extension UIViewController {
         let productsListController = UIStoryboard.productsList().instantiateViewController(withIdentifier: ControllerIdentifier.productsList) as! ProductsListViewController
         productsListController.title = title
         productsListController.sortingValue = sortingValue
-        pushController(with: UIStoryboard.productsList(), identifier: ControllerIdentifier.productsList)
+        
+        navigationController?.pushViewController(productsListController, animated: true)
     }
 
     // MARK: - set

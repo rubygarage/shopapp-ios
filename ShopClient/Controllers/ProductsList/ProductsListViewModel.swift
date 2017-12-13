@@ -24,7 +24,8 @@ class ProductsListViewModel: GridCollectionViewModel {
     private func loadRemoteData() {
         let showHud = products.value.count == 0
         state.onNext(.loading(showHud: showHud))
-        Repository.shared.getProductList(paginationValue: paginationValue, sortBy: sortingValue) { [weak self] (products, error) in
+        let reverse = sortingValue == .createdAt
+        Repository.shared.getProductList(paginationValue: paginationValue, sortBy: sortingValue, reverse: reverse) { [weak self] (products, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }

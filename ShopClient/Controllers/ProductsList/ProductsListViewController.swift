@@ -13,7 +13,6 @@ class ProductsListViewController: GridCollectionViewController<ProductsListViewM
     
     override func viewDidLoad() {
         viewModel = ProductsListViewModel()
-        viewModel.sortingValue = sortingValue
         super.viewDidLoad()
 
         setupViewModel()
@@ -22,6 +21,8 @@ class ProductsListViewController: GridCollectionViewController<ProductsListViewM
     
     // MARK: - private
     private func setupViewModel() {
+        viewModel.sortingValue = sortingValue
+        
         viewModel.products.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.stopLoadAnimating()
