@@ -58,7 +58,7 @@ extension UIViewController {
     }
     
     @objc private func cartButtonHandler() {
-        pushCartViewController()
+        showCartController()
     }
     
     @objc private func closeButtonHandler() {

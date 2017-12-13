@@ -23,10 +23,6 @@ extension UIViewController {
         pushController(with: UIStoryboard.articlesList(), identifier: ControllerIdentifier.articlesList)
     }
     
-    func pushCartViewController() {
-        pushController(with: UIStoryboard.cart(), identifier: ControllerIdentifier.cart)
-    }
-    
     func pushCheckoutController() {
         pushController(with: UIStoryboard.checkout(), identifier: ControllerIdentifier.checkout)
     }
@@ -115,6 +111,12 @@ extension UIViewController {
         let signUpController = UIStoryboard.auth().instantiateViewController(withIdentifier: ControllerIdentifier.signUp) as! SignUpViewController
         signUpController.delegate = delegate
         let navigationController = NavigationController(rootViewController: signUpController)
+        present(navigationController, animated: true)
+    }
+    
+    func showCartController() {
+        let cartController = UIStoryboard.cart().instantiateViewController(withIdentifier: ControllerIdentifier.cart)
+        let navigationController = NavigationController(rootViewController: cartController)
         present(navigationController, animated: true)
     }
     

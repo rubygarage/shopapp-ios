@@ -37,6 +37,7 @@ struct ImageName {
     static let home = "home"
     static let sort = "sort"
     static let close = "cross"
+    static let back = "arrow_left"
 }
 
 struct CornerRadius {
