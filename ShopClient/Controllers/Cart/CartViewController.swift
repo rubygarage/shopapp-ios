@@ -101,5 +101,6 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     // MARK: - CartEmptyDataViewProtocol
     func didTapStartShopping() {
         setHomeController()
+        dismiss(animated: true)
     }
 }

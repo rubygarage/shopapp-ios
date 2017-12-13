@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,20 +24,20 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart_empty" translatesAutoresizingMaskIntoConstraints="NO" id="loJ-UQ-4R1">
-                    <rect key="frame" x="127" y="124.5" width="130" height="119"/>
+                    <rect key="frame" x="127" y="185" width="130" height="119"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="119" id="JDE-fg-dzP"/>
                         <constraint firstAttribute="width" constant="130" id="lqD-Sz-RRA"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your cart is empty" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqK-N2-Wld">
-                    <rect key="frame" x="16" y="293.5" width="353" height="16"/>
+                    <rect key="frame" x="16" y="354" width="353" height="16"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GMK-i1-6MW">
-                    <rect key="frame" x="45" y="329.5" width="295" height="50"/>
+                    <rect key="frame" x="45" y="390" width="295" height="50"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="Npb-AT-gYd"/>
@@ -56,7 +57,7 @@
                 <constraint firstItem="GMK-i1-6MW" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="45" id="4uY-HY-7fI"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="qqK-N2-Wld" secondAttribute="trailing" constant="16" id="9vU-9b-Xwp"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="GMK-i1-6MW" secondAttribute="trailing" constant="45" id="DqQ-iq-HnC"/>
-                <constraint firstItem="qqK-N2-Wld" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="NiP-zT-Dcf"/>
+                <constraint firstItem="qqK-N2-Wld" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="1.2" id="NiP-zT-Dcf"/>
                 <constraint firstItem="qqK-N2-Wld" firstAttribute="top" secondItem="loJ-UQ-4R1" secondAttribute="bottom" constant="50" id="W3M-Ub-OfG"/>
                 <constraint firstItem="GMK-i1-6MW" firstAttribute="top" secondItem="qqK-N2-Wld" secondAttribute="bottom" constant="20" id="ao5-vS-KQB"/>
                 <constraint firstItem="qqK-N2-Wld" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="yTn-9D-lEs"/>
