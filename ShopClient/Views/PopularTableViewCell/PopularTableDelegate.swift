@@ -8,8 +8,6 @@
 
 import UIKit
 
-private let kPopularSectionNumberOfColumns: CGFloat = 2
-
 protocol PopularTableDelegateProtocol {
     func didSelectItem(at index: Int)
 }
@@ -29,10 +27,7 @@ class PopularTableDelegate: NSObject, UICollectionViewDelegate, UICollectionView
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let screenWidth = UIScreen.main.bounds.size.width
-        let cellWidth = screenWidth / kPopularSectionNumberOfColumns
-        
-        return CGSize(width: cellWidth, height: cellWidth)
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {        
+        return GridCollectionViewCell.cellSize
     }
 }

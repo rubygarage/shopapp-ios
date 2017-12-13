@@ -26,14 +26,14 @@
                             <constraint firstAttribute="height" constant="225" id="AeF-rZ-rWd"/>
                         </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="tAo-BU-MKv">
-                            <size key="itemSize" width="150" height="150"/>
+                            <size key="itemSize" width="180" height="200"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
                 </subviews>
-                <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="Jhs-cT-NEd" secondAttribute="bottom" id="LPi-7e-QI8"/>
                     <constraint firstItem="Jhs-cT-NEd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="QQ2-V4-c9z"/>

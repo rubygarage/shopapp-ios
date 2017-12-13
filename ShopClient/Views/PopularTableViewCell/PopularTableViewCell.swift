@@ -24,6 +24,7 @@ class PopularTableViewCell: UITableViewCell, PopularTableDataSourceProtocol, Pop
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        selectionStyle = .none
         setupCollectionView()
     }
     
@@ -47,11 +48,13 @@ class PopularTableViewCell: UITableViewCell, PopularTableDataSourceProtocol, Pop
         
         delegate = PopularTableDelegate(delegate: self)
         collectionView.delegate = delegate
+        
+        collectionView.contentInset = GridCollectionViewCell.collectionViewInsets
     }
     
     private func updateCollectionViewHeight() {
-        let screenWidth = UIScreen.main.bounds.size.width
-        self.collectionViewHeightConstraint.constant = self.products.count > 2 ? screenWidth : screenWidth / 2
+        let cellHeight = GridCollectionViewCell.cellSize.height
+        self.collectionViewHeightConstraint.constant = self.products.count > 2 ? cellHeight * 2 : cellHeight
     }
     
     // MARK: - PopularTableDataSourceProtocol

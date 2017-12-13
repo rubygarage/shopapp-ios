@@ -30,10 +30,7 @@ class GridCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionVi
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let screenWidth = UIScreen.main.bounds.size.width
-        let cellWidth = screenWidth / kGridNumberOfColumns
-        
-        return CGSize(width: cellWidth, height: cellWidth)
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {        
+        return GridCollectionViewCell.cellSize
     }
 }
