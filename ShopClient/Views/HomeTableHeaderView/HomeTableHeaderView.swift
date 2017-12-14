@@ -14,6 +14,7 @@ protocol HomeHeaderViewProtocol {
 
 enum HomeTableViewType {
     case latestArrivals
+    case popular
     case blogPosts
 }
 
@@ -52,6 +53,8 @@ class HomeTableHeaderView: UIView {
         switch headerViewType {
         case .latestArrivals:
             sectionTitleLabel.text = NSLocalizedString("Label.LatestArrivals", comment: String())
+        case .popular:
+            sectionTitleLabel.text = NSLocalizedString("Label.Popular", comment: String())
         case .blogPosts:
             sectionTitleLabel.text = NSLocalizedString("Label.BlogPosts", comment: String())
         }

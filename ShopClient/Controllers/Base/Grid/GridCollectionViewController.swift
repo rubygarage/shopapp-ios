@@ -31,6 +31,8 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
         
         collectionDelegate = GridCollectionDelegate(delegate: self)
         collectionView.delegate = collectionDelegate
+        
+        collectionView.contentInset = GridCollectionViewCell.collectionViewInsets
     }
     
     // MARK: - GridCollectionDataSourceProtocol

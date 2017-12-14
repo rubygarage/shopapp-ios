@@ -9,7 +9,7 @@
 import UIKit
 
 protocol LastArrivalsCellDelegate {
-    func didSelectProduct(at index: Int)
+    func didSelectLastArrivalsProduct(at index: Int)
 }
 
 private let kLastArrivalsNumberOfSections = 1
@@ -63,6 +63,6 @@ class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableDataSourcePro
     
     // MARK: - LastArrivalsTableDelegateProtocol
     func didSelectItem(at index: Int) {
-        cellDelegate?.didSelectProduct(at: index)
+        cellDelegate?.didSelectLastArrivalsProduct(at: index)
     }
 }

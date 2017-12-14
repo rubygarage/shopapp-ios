@@ -10,20 +10,21 @@ import UIKit
 
 enum HomeSection: Int {
     case lastArrivals
+    case popular
     case newInBlog
 }
 
 protocol HomeTableDataSourceProtocol {
     func lastArrivalsObjects() -> [Product]
-    func didSelectProduct(at index: Int)
+    func popularObjects() -> [Product]
     func articlesCount() -> Int
     func article(at index: Int) -> Article?
 }
 
 class HomeTableDataSource: NSObject, UITableViewDataSource {
-    var delegate: (HomeTableDataSourceProtocol & LastArrivalsCellDelegate)?
+    var delegate: (HomeTableDataSourceProtocol & LastArrivalsCellDelegate & PopularCellDelegate)?
     
-    init(delegate: (HomeTableDataSourceProtocol & LastArrivalsCellDelegate)?) {
+    init(delegate: (HomeTableDataSourceProtocol & LastArrivalsCellDelegate & PopularCellDelegate)?) {
         super.init()
         
         self.delegate = delegate
@@ -31,17 +32,22 @@ class HomeTableDataSource: NSObject, UITableViewDataSource {
     
     // MARK: - UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        let lastArrivalsSectionCount = delegate?.lastArrivalsObjects().count ?? 0 > 0 ? 1 : 0
-        let articlesSectionCount = delegate?.articlesCount() ?? 0 > 0 ? 1 : 0
-        return lastArrivalsSectionCount + articlesSectionCount
+        guard let delegate = delegate else { return 0 }
+        let lastArrivalsSectionCount = delegate.lastArrivalsObjects().isEmpty ? 0 : 1
+        let popularSectionCount = delegate.popularObjects().isEmpty ? 0 : 1
+        let articlesSectionCount = delegate.articlesCount() > 0 ? 1 : 0
+        return lastArrivalsSectionCount + popularSectionCount + articlesSectionCount
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case HomeSection.lastArrivals.rawValue:
             return 1
+        case HomeSection.popular.rawValue:
+            return 1
         case HomeSection.newInBlog.rawValue:
-            return delegate?.articlesCount() ?? 0
+            guard let delegate = delegate else { return 0 }
+            return delegate.articlesCount()
         default:
             return 0
         }
@@ -51,19 +57,10 @@ class HomeTableDataSource: NSObject, UITableViewDataSource {
         switch indexPath.section {
         case HomeSection.newInBlog.rawValue:
             return newInBlogCell(with: tableView, indexPath: indexPath)
+        case HomeSection.popular.rawValue:
+            return popularCell(with: tableView, indexPath: indexPath)
         default:
             return lastArrivalsCell(with: tableView, indexPath: indexPath)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case HomeSection.lastArrivals.rawValue:
-            return NSLocalizedString("ControllerTitle.LastArrivals", comment: String())
-        case HomeSection.newInBlog.rawValue:
-            return delegate?.articlesCount() ?? 0 > 0 ? NSLocalizedString("ControllerTitle.NewInBlog", comment: String()) : nil
-        default:
-            return nil
         }
     }
     
@@ -71,6 +68,13 @@ class HomeTableDataSource: NSObject, UITableViewDataSource {
     private func lastArrivalsCell(with tableView: UITableView, indexPath: IndexPath) -> LastArrivalsTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: LastArrivalsTableViewCell.self), for: indexPath) as! LastArrivalsTableViewCell
         cell.configure(with: delegate?.lastArrivalsObjects(), cellDelegate: self.delegate)
+        
+        return cell
+    }
+    
+    private func popularCell(with tableView: UITableView, indexPath: IndexPath) -> PopularTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PopularTableViewCell.self), for: indexPath) as! PopularTableViewCell
+        cell.configure(with: delegate?.popularObjects(), cellDelegate: self.delegate)
         
         return cell
     }

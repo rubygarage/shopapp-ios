@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, HomeHeaderViewProtocol {
+class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, PopularCellDelegate, HomeHeaderViewProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     var dataSource: HomeTableDataSource?
@@ -40,6 +40,9 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     private func setupTableView() {
         let lastArrivalsNib = UINib(nibName: String(describing: LastArrivalsTableViewCell.self), bundle: nil)
         tableView.register(lastArrivalsNib, forCellReuseIdentifier: String(describing: LastArrivalsTableViewCell.self))
+        
+        let popularNib = UINib(nibName: String(describing: PopularTableViewCell.self), bundle: nil)
+        tableView.register(popularNib, forCellReuseIdentifier: String(describing: PopularTableViewCell.self))
         
         let newInBlogNib = UINib(nibName: String(describing: ArticleTableViewCell.self), bundle: nil)
         tableView.register(newInBlogNib, forCellReuseIdentifier: String(describing: ArticleTableViewCell.self))
@@ -75,14 +78,11 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     
     // MARK: - HomeTableDataSourceProtocol
     func lastArrivalsObjects() -> [Product] {
-        return viewModel.data.value.products
+        return viewModel.data.value.latestProducts
     }
     
-    func didSelectProduct(at index: Int) {
-        if index < viewModel.data.value.products.count {
-            let selectedProduct = viewModel.data.value.products[index]
-            pushDetailController(with: selectedProduct)
-        }
+    func popularObjects() -> [Product] {
+        return viewModel.data.value.popularProducts
     }
     
     func articlesCount() -> Int {
@@ -104,11 +104,32 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         }
     }
     
+    // MARK: - LastArrivalsCellDelegate
+    func didSelectLastArrivalsProduct(at index: Int) {
+        openProductDetails(with: viewModel.data.value.latestProducts, index: index)
+    }
+    
+    // MARK: - PopularCellDelegate
+    func didSelectPopularProduct(at index: Int) {
+        openProductDetails(with: viewModel.data.value.popularProducts, index: index)
+    }
+    
+    private func openProductDetails(with products: [Product], index: Int) {
+        if index < products.count {
+            let selectedProduct = products[index]
+            pushDetailController(with: selectedProduct)
+        }
+    }
+    
     // MARK: - HomeHeaderViewProtocol
     func didTapSeeAll(type: HomeTableViewType) {
         switch type {
         case .latestArrivals:
-            pushLastArrivalsController()
+            let title = NSLocalizedString("ControllerTitle.LatestArrivals", comment: String())
+            pushProductsListController(with: title, sortingValue: .createdAt)
+        case .popular:
+            let title = NSLocalizedString("ControllerTitle.Popular", comment: String())
+            pushProductsListController(with: title, sortingValue: .popular)
         case .blogPosts:
             pushArticlesListController()
         }

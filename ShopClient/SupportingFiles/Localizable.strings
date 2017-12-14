@@ -10,6 +10,7 @@
 "ControllerTitle.Account" = "My Account";
 "ControllerTitle.LatestArrivals" = "Latest Arrivals";
 "ControllerTitle.BlogPosts" = "Blog Posts";
+"ControllerTitle.Popular" = "Popular";
 "ControllerTitle.Cart" = "My Cart";
 "ControllerTitle.SignIn" = "Sign In";
 "ControllerTitle.SignUp" = "Sign Up";
@@ -44,6 +45,7 @@
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";
+"SortingValue.Popular" = "By popularity";
 
 "Label.PriceFrom" = "From %@ %@";
 "Label.Quantity" = "QTY:";
@@ -59,6 +61,7 @@
 "Label.PriceInfo" = "%@\n%@\n%@\n%@";
 "Label.SameAsShippingAddress" = "Same as shipping address";
 "Label.LatestArrivals" = "Latest Arrivals";
+"Label.Popular" = "Popular";
 "Label.BlogPosts" = "Blog Posts";
 "Label.SignInToShop" = "Sign In to shop and view orders";
 "Label.SortBy" = "Sort by:";

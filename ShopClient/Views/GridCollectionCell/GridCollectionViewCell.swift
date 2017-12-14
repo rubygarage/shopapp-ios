@@ -9,17 +9,15 @@
 import UIKit
 import SDWebImage
 
+private let kNumberOfColumns: CGFloat = 2
+private let kCollectionViewMargin: CGFloat = 7
+private let kCellRatio: CGFloat = 210 / 185
+
 class GridCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var detailsView: UIView!
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        detailsView.addShadow()
-    }
 
     public func configure(with item: Product) {
         let imageUrl = URL(string: item.images?.first?.src ?? String())
@@ -27,5 +25,20 @@ class GridCollectionViewCell: UICollectionViewCell {
         titleLabel.text = item.title
         let localizedString = NSLocalizedString("Label.PriceFrom", comment: String())
         priceLabel.text = String.localizedStringWithFormat(localizedString, item.lowestPrice, item.currency ?? String())
+    }
+}
+
+extension GridCollectionViewCell {
+    class var cellSize: CGSize {
+        let screenWidth = UIScreen.main.bounds.size.width
+        let collectionViewWidth = screenWidth - 2 * kCollectionViewMargin
+        let cellWidth = collectionViewWidth / kNumberOfColumns
+        let cellHeight = Float(cellWidth * kCellRatio)
+        let roundedCellheight = CGFloat(lroundf(cellHeight))
+        return CGSize(width: cellWidth, height: roundedCellheight)
+    }
+    
+    class var collectionViewInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: kCollectionViewMargin, bottom: 0, right: kCollectionViewMargin)
     }
 }
