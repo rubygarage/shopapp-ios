@@ -8,9 +8,9 @@
 
 import UIKit
 import SDWebImage
+import SwipeCellKit
 
 protocol CartTableCellProtocol {
-    func didTapRemove(with item: CartProduct)
     func didUpdate(cartProduct: CartProduct, quantity: Int)
 }
 
@@ -18,7 +18,7 @@ private let kCartProductQuantityMin = 1
 private let kCartProductQuantityMax = 999
 private let kQuantityUnderlineColorDefault = UIColor(displayP3Red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
 
-class CartTableViewCell: UITableViewCell, UITextFieldDelegate {
+class CartTableViewCell: SwipeTableViewCell, UITextFieldDelegate {
     @IBOutlet weak var variantImageView: UIImageView!
     @IBOutlet weak var variantTitleLabel: UILabel!
     @IBOutlet weak var quantityLabel: UILabel!
@@ -28,7 +28,7 @@ class CartTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var pricePerOneItemLabel: UILabel!
     
     var cartProduct: CartProduct?
-    var delegate: CartTableCellProtocol?
+    var cellDelegate: CartTableCellProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,8 +43,9 @@ class CartTableViewCell: UITableViewCell, UITextFieldDelegate {
         quantityTextField.delegate = self
     }
     
-    public func configure(with item: CartProduct?, delegate: CartTableCellProtocol?) {
+    public func configure(with item: CartProduct?, delegate: (CartTableCellProtocol & SwipeTableViewCellDelegate)?) {
         cartProduct = item
+        cellDelegate = delegate
         self.delegate = delegate
         populateImageView(with: item)
         populateTitle(with: item)
@@ -91,11 +92,6 @@ class CartTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     // MARK: - actions
-    @IBAction func removeTapped(_ sender: UIButton) {
-        if let cartProduct = cartProduct {
-            delegate?.didTapRemove(with: cartProduct)
-        }
-    }
     @IBAction func quantityEditingDidBegin(_ sender: UITextField) {
         quantityUnderlineView.backgroundColor = UIColor.black
     }
@@ -106,7 +102,7 @@ class CartTableViewCell: UITableViewCell, UITextFieldDelegate {
             let quantityString = sender.text ?? String()
             let quantity = (quantityString as NSString).integerValue
             let checkedQuantity = check(quantity: quantity)
-            delegate?.didUpdate(cartProduct: cartProduct, quantity: checkedQuantity)
+            cellDelegate?.didUpdate(cartProduct: cartProduct, quantity: checkedQuantity)
         }
     }
     

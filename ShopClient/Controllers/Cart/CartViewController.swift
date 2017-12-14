@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol, CartTableDelegateProtocol, CartTableCellProtocol, CartEmptyDataViewProtocol {
+class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol, CartTableDelegateProtocol, CartTableCellProtocol, CartEmptyDataViewProtocol, SwipeTableViewCellDelegate {
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var checkoutButton: UIButton!
     
@@ -85,22 +87,34 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     }
     
     // MARK: - CartTableCellProtocol
-    func didTapRemove(with item: CartProduct) {
-        viewModel.remove(cartProduct: item)
-    }
-    
     func didUpdate(cartProduct: CartProduct, quantity: Int) {
         viewModel.update(cartProduct: cartProduct, quantity: quantity)
     }
     
-    // MARK: - ErrorViewProtocol
-    func didTapTryAgain() {
-        loadData()
+    // MARK: - SwipeTableViewCellDelegate
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+        let title = NSLocalizedString("Button.Remove", comment: String())
+        let deleteAction = SwipeAction(style: .destructive, title: title) { [weak self] (action, indexPath) in
+            self?.viewModel.removeCardProduct(at: indexPath.row)
+        }
+        deleteAction.backgroundColor = TableView.removeActionBackgroundColor
+        deleteAction.image = #imageLiteral(resourceName: "trash")
+        deleteAction.font = TableView.removeActionFont
+        deleteAction.textColor = UIColor.black
+        deleteAction.hidesWhenSelected = true
+        
+        return [deleteAction]
     }
     
     // MARK: - CartEmptyDataViewProtocol
     func didTapStartShopping() {
         setHomeController()
         dismiss(animated: true)
+    }
+    
+    // MARK: - ErrorViewProtocol
+    func didTapTryAgain() {
+        loadData()
     }
 }
