@@ -25,7 +25,8 @@ class CartViewModel: BaseViewModel {
         }
     }
     
-    public func remove(cartProduct: CartProduct) {
+    public func removeCardProduct(at index: Int) {
+        let cartProduct = data.value[index]
         state.onNext(.loading(showHud: true))
         Repository.shared.deleteProductFromCart(with: cartProduct.productVariant?.id) { [weak self] (success, error) in
             if let error = error {

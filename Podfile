@@ -16,6 +16,7 @@ target 'ShopClient' do
   pod 'TPKeyboardAvoiding', '~> 1.3'
   pod 'Toaster', '~> 2.1'
   pod 'AvatarImageView', '~> 2.1'
+  pod 'SwipeCellKit', '~> 2.0'
   
   # Database
   pod 'CoreStore', '~> 4.2'

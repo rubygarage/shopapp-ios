@@ -42,6 +42,7 @@
 "Button.CreateNewAccount" = "Create New Account";
 "Button.MyOrders" = "My Orders";
 "Button.StartShopping" = "Start Shopping";
+"Button.Remove" = "Remove";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";
