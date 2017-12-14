@@ -32,9 +32,10 @@ class HomeTableDataSource: NSObject, UITableViewDataSource {
     
     // MARK: - UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        let lastArrivalsSectionCount = delegate?.lastArrivalsObjects().count ?? 0 > 0 ? 1 : 0
-        let popularSectionCount = delegate?.popularObjects().count ?? 0 > 0 ? 1 : 0
-        let articlesSectionCount = delegate?.articlesCount() ?? 0 > 0 ? 1 : 0
+        guard let delegate = delegate else { return 0 }
+        let lastArrivalsSectionCount = delegate.lastArrivalsObjects().isEmpty ? 0 : 1
+        let popularSectionCount = delegate.popularObjects().isEmpty ? 0 : 1
+        let articlesSectionCount = delegate.articlesCount() > 0 ? 1 : 0
         return lastArrivalsSectionCount + popularSectionCount + articlesSectionCount
     }
     
@@ -45,7 +46,8 @@ class HomeTableDataSource: NSObject, UITableViewDataSource {
         case HomeSection.popular.rawValue:
             return 1
         case HomeSection.newInBlog.rawValue:
-            return delegate?.articlesCount() ?? 0
+            guard let delegate = delegate else { return 0 }
+            return delegate.articlesCount()
         default:
             return 0
         }
