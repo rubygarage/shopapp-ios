@@ -17,6 +17,7 @@ target 'ShopClient' do
   pod 'Toaster', '~> 2.1'
   pod 'AvatarImageView', '~> 2.1'
   pod 'SwipeCellKit', '~> 2.0'
+  pod 'UIImage+Additions', '~> 2.1'
   
   # Database
   pod 'CoreStore', '~> 4.2'

@@ -12,6 +12,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     
     var searchController: UISearchController?
     var searchControllerDelegate: SearchViewControllerDelegate?
+    let titleView = SearchTitleView()
     
     override func viewDidLoad() {
         viewModel = SearchViewModel()
@@ -25,11 +26,24 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         super.viewWillAppear(animated)
         
         updateNavigationBar()
+        
+        tabBarController?.navigationController?.removeShadow()
+        tabBarController?.navigationController?.navigationBar.barTintColor = UIColor.backgroundDefault
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        tabBarController?.navigationController?.addShadow()
+        tabBarController?.navigationController?.navigationBar.barTintColor = UIColor.white
     }
     
     private func updateNavigationBar() {
-        setupSearchBar()
-        setupBarItems()
+//        setupSearchBar()
+//        setupBarItems()
+        tabBarController?.navigationItem.rightBarButtonItem = nil
+        
+        tabBarController?.navigationItem.titleView = titleView
     }
     
     private func setupBarItems() {

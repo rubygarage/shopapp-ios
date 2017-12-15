@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchTitleView" customModule="ShopClient" customModuleProvider="target">
+            <connections>
+                <outlet property="backButton" destination="Xfu-WH-a1H" id="cMu-hE-Mqy"/>
+                <outlet property="cartButton" destination="zC5-bR-me3" id="H9b-0P-yYP"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="0T5-CA-rtx"/>
+                <outlet property="searchTextField" destination="JgY-Vb-rAM" id="D6c-ZJ-PYO"/>
+                <outlet property="underLineView" destination="5Ab-xH-1Xy" id="w0m-we-MNW"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="350" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eEb-OC-fAH">
+                    <rect key="frame" x="40" y="0.0" width="270" height="40"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JgY-Vb-rAM">
+                            <rect key="frame" x="0.0" y="0.0" width="270" height="40"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="searchTextFieldEditingDidBegin:" destination="-1" eventType="editingDidBegin" id="ICM-VO-GFO"/>
+                                <action selector="searchTextFieldEditingDidEnd:" destination="-1" eventType="editingDidEnd" id="WjK-Ht-DbL"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="JgY-Vb-rAM" firstAttribute="top" secondItem="eEb-OC-fAH" secondAttribute="top" id="4yT-hC-fSD"/>
+                        <constraint firstItem="JgY-Vb-rAM" firstAttribute="leading" secondItem="eEb-OC-fAH" secondAttribute="leading" priority="750" id="SpN-9t-Fec"/>
+                        <constraint firstAttribute="trailing" secondItem="JgY-Vb-rAM" secondAttribute="trailing" id="WDt-3Q-f2P"/>
+                        <constraint firstAttribute="height" constant="40" id="aal-rw-LIq"/>
+                        <constraint firstAttribute="bottom" secondItem="JgY-Vb-rAM" secondAttribute="bottom" id="k1b-wI-iq0"/>
+                    </constraints>
+                </view>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xfu-WH-a1H">
+                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="GGV-9g-Zxn"/>
+                        <constraint firstAttribute="width" constant="40" id="WK2-0M-3wR"/>
+                    </constraints>
+                    <state key="normal" image="arrow_left"/>
+                    <connections>
+                        <action selector="backButtonTapped:" destination="-1" eventType="touchUpInside" id="8gw-M4-zj2"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zC5-bR-me3">
+                    <rect key="frame" x="310" y="0.0" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="JYI-Yk-nbC"/>
+                        <constraint firstAttribute="width" constant="40" id="ZpJ-c0-sBb"/>
+                    </constraints>
+                    <state key="normal" image="cart"/>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ab-xH-1Xy">
+                    <rect key="frame" x="40" y="40" width="270" height="1"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="WT9-Vm-d8j"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="Xfu-WH-a1H" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="3FG-7A-uk1"/>
+                <constraint firstItem="zC5-bR-me3" firstAttribute="leading" secondItem="eEb-OC-fAH" secondAttribute="trailing" priority="750" id="3nh-3M-2RH"/>
+                <constraint firstItem="eEb-OC-fAH" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Lgb-Dk-Jw3"/>
+                <constraint firstItem="Xfu-WH-a1H" firstAttribute="centerY" secondItem="JgY-Vb-rAM" secondAttribute="centerY" id="Rmm-xb-aGW"/>
+                <constraint firstItem="5Ab-xH-1Xy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="750" constant="40" id="ftg-td-fVt"/>
+                <constraint firstAttribute="trailing" secondItem="5Ab-xH-1Xy" secondAttribute="trailing" priority="750" constant="40" id="h5p-pt-Hro"/>
+                <constraint firstItem="eEb-OC-fAH" firstAttribute="leading" secondItem="Xfu-WH-a1H" secondAttribute="trailing" priority="750" id="lik-Xz-i6l"/>
+                <constraint firstItem="zC5-bR-me3" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="mhN-aX-Vvw"/>
+                <constraint firstItem="5Ab-xH-1Xy" firstAttribute="top" secondItem="eEb-OC-fAH" secondAttribute="bottom" id="uHh-DH-CzH"/>
+                <constraint firstItem="zC5-bR-me3" firstAttribute="centerY" secondItem="JgY-Vb-rAM" secondAttribute="centerY" id="ycy-SU-8Y4"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="68" y="-220"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="arrow_left" width="20" height="20"/>
+        <image name="cart" width="23" height="20"/>
+    </resources>
+</document>
