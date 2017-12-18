@@ -14,6 +14,10 @@ enum SearchState {
 }
 
 private let kAnimationDuration: TimeInterval = 0.3
+private let kPlaceholderColorDefault = UIColor.black.withAlphaComponent(0.5)
+private let kUnderlineMarginDefault: CGFloat = 55
+private let kUnderlineMarginLeft: CGFloat = 40
+private let kUnderlineMarginRight: CGFloat = 10
 
 class SearchTitleView: UIView, UITextFieldDelegate {
     @IBOutlet var contentView: UIView!
@@ -21,6 +25,8 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     @IBOutlet weak var underLineView: UIView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var cartButton: UIButton!
+    @IBOutlet weak var underlineLeftMargin: NSLayoutConstraint!
+    @IBOutlet weak var underlineRightMargin: NSLayoutConstraint!
     
     var state: SearchState = .default {
         didSet {
@@ -57,14 +63,15 @@ class SearchTitleView: UIView, UITextFieldDelegate {
         let animationDuration = animated ? kAnimationDuration : 0
         UIView.transition(with: contentView, duration: animationDuration, options: .transitionCrossDissolve, animations: {
             self.searchTextField.attributedPlaceholder = self.state == .default ? self.attributedPlaceholderDefault() : self.attributedPlaceholderSelected()
-            self.underLineView.backgroundColor = self.state == .editing ? UIColor.black : UIColor.underlineDefault
-            self.backButton.isHidden = self.state == .default
-            self.cartButton.isHidden = self.state == .editing
             self.searchTextField.textAlignment = self.state == .editing ? .left : .center
         })
         
         UIView.animate(withDuration: kAnimationDuration) {
-//            self.underLineView.backgroundColor = self.state == .editing ? UIColor.black : UIColor.underlineDefault
+            self.underLineView.backgroundColor = self.state == .editing ? UIColor.black : UIColor.underlineDefault
+            self.underlineLeftMargin.constant = self.state == .editing ? kUnderlineMarginLeft : kUnderlineMarginDefault
+            self.underlineRightMargin.constant = self.state == .editing ? kUnderlineMarginRight : kUnderlineMarginDefault
+            self.backButton.isHidden = self.state == .default
+            self.cartButton.isHidden = self.state == .editing
             self.layoutIfNeeded()
         }
     }
@@ -84,7 +91,7 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     
     private func attributedPlaceholderSelected() -> NSAttributedString {
         let placeholder = NSLocalizedString("Placeholder.Search", comment: String())
-        return NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: UIColor.black.withAlphaComponent(0.5)])
+        return NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: kPlaceholderColorDefault])
     }
     
     // MARK: - actions
