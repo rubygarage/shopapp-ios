@@ -13,6 +13,27 @@ class AccountViewModel: BaseViewModel {
     var customer = Variable<Customer?>(nil)
     
     public func loadCustomer() {
+        if Repository.shared.isLoggedIn() {
+            getCustomer()
+        }
+    }
+    
+    public func loadPolicies() {
+        Repository.shared.getShop { [weak self] (shop, error) in
+            self?.processResponse(with: shop)
+        }
+    }
+    
+    public func logout() {
+        Repository.shared.logout { [weak self] (success, error) in
+            if let success = success, success == true {
+                self?.customer.value = nil
+            }
+        }
+    }
+    
+    // MARK: - private
+    private func getCustomer() {
         state.onNext(.loading(showHud: true))
         Repository.shared.getCustomer { [weak self] (customer, error) in
             if let error = error {
@@ -22,12 +43,6 @@ class AccountViewModel: BaseViewModel {
                 self?.customer.value = customer
                 self?.state.onNext(.content)
             }
-        }
-    }
-    
-    public func loadPolicies() {
-        Repository.shared.getShop { [weak self] (shop, error) in
-            self?.processResponse(with: shop)
         }
     }
     

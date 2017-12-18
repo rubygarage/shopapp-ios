@@ -17,6 +17,10 @@ extension Repository: AuthentificationRepositoryInterface {
         APICore?.login(with: email, password: password, callback: callback)
     }
     
+    func logout(callback: RepoCallback<Bool>) {
+        APICore?.logout(callback: callback)
+    }
+    
     func isLoggedIn() -> Bool {
         return APICore?.isLoggedIn() ?? false
     }

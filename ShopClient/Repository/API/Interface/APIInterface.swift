@@ -38,6 +38,7 @@ protocol APIInterface {
     // MARK: - authentification
     func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, callback: @escaping RepoCallback<Bool>)
     func login(with email: String, password: String, callback: @escaping RepoCallback<Bool>)
+    func logout(callback: RepoCallback<Bool>)
     func isLoggedIn() -> Bool
     func getCustomer(callback: @escaping RepoCallback<Customer>)
     
