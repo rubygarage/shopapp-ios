@@ -53,14 +53,15 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
             .disposed(by: disposeBag)
         
         viewModel.customer.asObservable()
-            .subscribe(onNext: { (customer) in
-                print()
+            .subscribe(onNext: { [weak self] _ in
+                self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
     
     private func loadData() {
-        viewModel.loadData(with: disposeBag)
+        viewModel.loadCustomer()
+        viewModel.loadPolicies()
     }
     
     // MARK: - AccountTableDataSourceProtocol
