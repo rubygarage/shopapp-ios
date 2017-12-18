@@ -39,6 +39,11 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     private func updateNavigationBar() {
         tabBarController?.navigationItem.rightBarButtonItem = nil
         tabBarController?.navigationItem.titleView = titleView
+        
+        Repository.shared.getCartProductList { [weak self] (products, error) in
+            let cartItemsCount = products?.count ?? 0
+            self?.titleView.cartItemsCount = cartItemsCount
+        }
     }
     
     private func setupViews() {
@@ -74,6 +79,10 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     // MARK: - SearchTitleViewProtocol
     func didTapSearch() {
         viewModel.reloadData()
+    }
+    
+    func didTapCart() {
+        showCartController()
     }
     
     // MARK: - ErrorViewProtocol

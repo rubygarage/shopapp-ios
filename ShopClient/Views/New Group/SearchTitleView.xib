@@ -13,7 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchTitleView" customModule="ShopClient" customModuleProvider="target">
             <connections>
                 <outlet property="backButton" destination="Xfu-WH-a1H" id="cMu-hE-Mqy"/>
-                <outlet property="cartButton" destination="zC5-bR-me3" id="H9b-0P-yYP"/>
+                <outlet property="cartButtonView" destination="Tio-2b-Alh" id="jcB-tC-VF8"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="0T5-CA-rtx"/>
                 <outlet property="searchTextField" destination="JgY-Vb-rAM" id="D6c-ZJ-PYO"/>
                 <outlet property="underLineView" destination="5Ab-xH-1Xy" id="w0m-we-MNW"/>
@@ -27,10 +27,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eEb-OC-fAH">
-                    <rect key="frame" x="40" y="0.0" width="270" height="40"/>
+                    <rect key="frame" x="40" y="0.0" width="273" height="40"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JgY-Vb-rAM">
-                            <rect key="frame" x="0.0" y="0.0" width="270" height="40"/>
+                            <rect key="frame" x="0.0" y="1" width="273" height="39"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
@@ -42,7 +42,7 @@
                     </subviews>
                     <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="JgY-Vb-rAM" firstAttribute="top" secondItem="eEb-OC-fAH" secondAttribute="top" id="4yT-hC-fSD"/>
+                        <constraint firstItem="JgY-Vb-rAM" firstAttribute="top" secondItem="eEb-OC-fAH" secondAttribute="top" constant="1" id="4yT-hC-fSD"/>
                         <constraint firstItem="JgY-Vb-rAM" firstAttribute="leading" secondItem="eEb-OC-fAH" secondAttribute="leading" priority="750" id="SpN-9t-Fec"/>
                         <constraint firstAttribute="trailing" secondItem="JgY-Vb-rAM" secondAttribute="trailing" id="WDt-3Q-f2P"/>
                         <constraint firstAttribute="height" constant="40" id="aal-rw-LIq"/>
@@ -50,7 +50,7 @@
                     </constraints>
                 </view>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xfu-WH-a1H">
-                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                    <rect key="frame" x="0.0" y="0.5" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="GGV-9g-Zxn"/>
                         <constraint firstAttribute="width" constant="40" id="WK2-0M-3wR"/>
@@ -60,14 +60,13 @@
                         <action selector="backButtonTapped:" destination="-1" eventType="touchUpInside" id="8gw-M4-zj2"/>
                     </connections>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zC5-bR-me3">
-                    <rect key="frame" x="310" y="0.0" width="40" height="40"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tio-2b-Alh">
+                    <rect key="frame" x="313" y="4.5" width="32" height="32"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="JYI-Yk-nbC"/>
-                        <constraint firstAttribute="width" constant="40" id="ZpJ-c0-sBb"/>
+                        <constraint firstAttribute="width" constant="32" id="1zh-RK-vza"/>
+                        <constraint firstAttribute="height" constant="32" id="thK-sL-nJn"/>
                     </constraints>
-                    <state key="normal" image="cart"/>
-                </button>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ab-xH-1Xy">
                     <rect key="frame" x="50" y="40" width="250" height="1"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -78,16 +77,16 @@
             </subviews>
             <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="Tio-2b-Alh" firstAttribute="centerY" secondItem="JgY-Vb-rAM" secondAttribute="centerY" id="1V6-Yl-3E5"/>
                 <constraint firstItem="Xfu-WH-a1H" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="3FG-7A-uk1"/>
-                <constraint firstItem="zC5-bR-me3" firstAttribute="leading" secondItem="eEb-OC-fAH" secondAttribute="trailing" priority="750" id="3nh-3M-2RH"/>
+                <constraint firstItem="Tio-2b-Alh" firstAttribute="leading" secondItem="eEb-OC-fAH" secondAttribute="trailing" id="H0f-ab-PBW"/>
                 <constraint firstItem="eEb-OC-fAH" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Lgb-Dk-Jw3"/>
                 <constraint firstItem="Xfu-WH-a1H" firstAttribute="centerY" secondItem="JgY-Vb-rAM" secondAttribute="centerY" id="Rmm-xb-aGW"/>
                 <constraint firstItem="5Ab-xH-1Xy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="750" constant="50" id="ftg-td-fVt"/>
                 <constraint firstAttribute="trailing" secondItem="5Ab-xH-1Xy" secondAttribute="trailing" priority="750" constant="50" id="h5p-pt-Hro"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Tio-2b-Alh" secondAttribute="trailing" constant="5" id="jK9-A4-vfv"/>
                 <constraint firstItem="eEb-OC-fAH" firstAttribute="leading" secondItem="Xfu-WH-a1H" secondAttribute="trailing" priority="750" id="lik-Xz-i6l"/>
-                <constraint firstItem="zC5-bR-me3" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="mhN-aX-Vvw"/>
                 <constraint firstItem="5Ab-xH-1Xy" firstAttribute="top" secondItem="eEb-OC-fAH" secondAttribute="bottom" id="uHh-DH-CzH"/>
-                <constraint firstItem="zC5-bR-me3" firstAttribute="centerY" secondItem="JgY-Vb-rAM" secondAttribute="centerY" id="ycy-SU-8Y4"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -96,6 +95,5 @@
     </objects>
     <resources>
         <image name="arrow_left" width="20" height="20"/>
-        <image name="cart" width="23" height="20"/>
     </resources>
 </document>

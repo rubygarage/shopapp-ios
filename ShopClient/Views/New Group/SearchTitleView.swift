@@ -15,6 +15,7 @@ enum SearchState {
 
 protocol SearchTitleViewProtocol {
     func didTapSearch()
+    func didTapCart()
 }
 
 private let kAnimationDuration: TimeInterval = 0.3
@@ -22,13 +23,14 @@ private let kPlaceholderColorDefault = UIColor.black.withAlphaComponent(0.5)
 private let kUnderlineMarginDefault: CGFloat = 55
 private let kUnderlineMarginLeft: CGFloat = 40
 private let kUnderlineMarginRight: CGFloat = 10
+private let kBarItemWidth: CGFloat = 32
 
 class SearchTitleView: UIView, UITextFieldDelegate {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var underLineView: UIView!
     @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var cartButton: UIButton!
+    @IBOutlet weak var cartButtonView: UIView!
     @IBOutlet weak var underlineLeftMargin: NSLayoutConstraint!
     @IBOutlet weak var underlineRightMargin: NSLayoutConstraint!
     
@@ -37,6 +39,12 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     var state: SearchState = .default {
         didSet {
             updateViews(animated: true)
+        }
+    }
+    
+    var cartItemsCount: Int = 0 {
+        didSet {
+            updateCartBarItem(with: cartItemsCount)
         }
     }
     
@@ -63,7 +71,16 @@ class SearchTitleView: UIView, UITextFieldDelegate {
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        setupViews()
+    }
+    
+    private func setupViews() {
         searchTextField.delegate = self
+    }
+    
+    private func updateCartBarItem(with cartItemsCount: Int) {
+        cartButtonView.subviews.forEach({ $0.removeFromSuperview() })
+        cartButtonView.addSubview(cartBarItem(with: cartItemsCount))
     }
     
     private func updateViews(animated: Bool) {
@@ -78,7 +95,7 @@ class SearchTitleView: UIView, UITextFieldDelegate {
             self.underlineLeftMargin.constant = self.state == .editing ? kUnderlineMarginLeft : kUnderlineMarginDefault
             self.underlineRightMargin.constant = self.state == .editing ? kUnderlineMarginRight : kUnderlineMarginDefault
             self.backButton.isHidden = self.state == .default
-            self.cartButton.isHidden = self.state == .editing
+            self.cartButtonView.isHidden = self.state == .editing
             self.layoutIfNeeded()
         }
     }
@@ -123,5 +140,23 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         delegate?.didTapSearch()
         return true
+    }
+}
+
+internal extension SearchTitleView {
+    func cartBarItem(with cartItemsCount: Int) -> UIButton {
+        let cartView = CartButtonView(frame: CGRect(x: 0, y: 0, width: kBarItemWidth, height: kBarItemWidth))
+        cartView.isUserInteractionEnabled = false
+        cartView.itemsCount = cartItemsCount
+        
+        let button = UIButton(frame: cartView.frame)
+        button.addSubview(cartView)
+        button.addTarget(self, action: #selector(self.cartButtonHandler), for: .touchUpInside)
+        
+        return button
+    }
+    
+    @objc private func cartButtonHandler() {
+        delegate?.didTapCart()
     }
 }
