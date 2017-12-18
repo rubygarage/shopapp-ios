@@ -33,7 +33,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="270" height="40"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
                             <connections>
                                 <action selector="searchTextFieldEditingDidBegin:" destination="-1" eventType="editingDidBegin" id="ICM-VO-GFO"/>
                                 <action selector="searchTextFieldEditingDidEnd:" destination="-1" eventType="editingDidEnd" id="WjK-Ht-DbL"/>

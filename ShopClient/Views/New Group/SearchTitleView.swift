@@ -13,6 +13,10 @@ enum SearchState {
     case editing
 }
 
+protocol SearchTitleViewProtocol {
+    func didTapSearch()
+}
+
 private let kAnimationDuration: TimeInterval = 0.3
 private let kPlaceholderColorDefault = UIColor.black.withAlphaComponent(0.5)
 private let kUnderlineMarginDefault: CGFloat = 55
@@ -27,6 +31,8 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     @IBOutlet weak var cartButton: UIButton!
     @IBOutlet weak var underlineLeftMargin: NSLayoutConstraint!
     @IBOutlet weak var underlineRightMargin: NSLayoutConstraint!
+    
+    var delegate: SearchTitleViewProtocol?
     
     var state: SearchState = .default {
         didSet {
@@ -57,6 +63,7 @@ class SearchTitleView: UIView, UITextFieldDelegate {
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        searchTextField.delegate = self
     }
     
     private func updateViews(animated: Bool) {
@@ -85,7 +92,6 @@ class SearchTitleView: UIView, UITextFieldDelegate {
         textAttachment.bounds = CGRect(x: 0, y: deltaY, width: #imageLiteral(resourceName: "search").size.width, height: #imageLiteral(resourceName: "search").size.height)
         let attrStringWithImage = NSAttributedString(attachment: textAttachment)
         attributedPlaceholder.replaceCharacters(in: NSMakeRange(0, 0), with: attrStringWithImage)
-        
         return attributedPlaceholder
     }
     
@@ -111,5 +117,11 @@ class SearchTitleView: UIView, UITextFieldDelegate {
         if let touch = touches.first, touch.view != searchTextField {
             searchTextField.endEditing(true)
         }
+    }
+    
+    // MARK: - UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        delegate?.didTapSearch()
+        return true
     }
 }

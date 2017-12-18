@@ -8,16 +8,14 @@
 
 import UIKit
 
-class SearchViewController: GridCollectionViewController<SearchViewModel>, SearchViewControllerDelegateProtocol {
-    
-    var searchController: UISearchController?
-    var searchControllerDelegate: SearchViewControllerDelegate?
+class SearchViewController: GridCollectionViewController<SearchViewModel>, SearchTitleViewProtocol {
     let titleView = SearchTitleView()
     
     override func viewDidLoad() {
         viewModel = SearchViewModel()
         super.viewDidLoad()
         
+        setupViews()
         setupViewModel()
         loadData()
     }
@@ -39,36 +37,16 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     }
     
     private func updateNavigationBar() {
-//        setupSearchBar()
-//        setupBarItems()
         tabBarController?.navigationItem.rightBarButtonItem = nil
-        
         tabBarController?.navigationItem.titleView = titleView
     }
     
-    private func setupBarItems() {
-        Repository.shared.getCartProductList { [weak self] (products, error) in
-            let cartItemsCount = products?.count ?? 0
-            self?.addCartBarButton(with: cartItemsCount)
-        }
-    }
-    
-    private func setupSearchBar() {
-        searchController = UISearchController(searchResultsController: nil)
-        
-        searchControllerDelegate = SearchViewControllerDelegate(delegate: self)
-        searchController?.searchBar.delegate = searchControllerDelegate
-        
-        searchController?.hidesNavigationBarDuringPresentation = false
-        searchController?.dimsBackgroundDuringPresentation = false
-        
-        tabBarController?.navigationItem.titleView = searchController?.searchBar
-        
-        definesPresentationContext = true
+    private func setupViews() {
+        titleView.delegate = self
     }
     
     private func setupViewModel() {
-        searchController?.searchBar.rx.text.map({ $0 ?? String() })
+        titleView.searchTextField.rx.text.map({ $0 ?? String() })
             .bind(to: viewModel.searchPhrase)
             .disposed(by: disposeBag)
         
@@ -93,7 +71,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         viewModel.loadNextPage()
     }
     
-    // MARK: - SearchViewControllerDelegateProtocol
+    // MARK: - SearchTitleViewProtocol
     func didTapSearch() {
         viewModel.reloadData()
     }
