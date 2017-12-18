@@ -8,7 +8,7 @@
 
 import UIKit
 
-let kCustomBarItemWidth: CGFloat = 32
+private let kCustomBarItemWidth: CGFloat = 32
 
 extension UIViewController {    
     public func addCartBarButton(with itemsCount: Int) {
@@ -19,13 +19,18 @@ extension UIViewController {
         }
     }
     
+    public func addBackButtonIfNeeded() {
+        if navigationController?.viewControllers.first != self && tabBarController == nil {
+            navigationItem.leftBarButtonItem = backButton()
+        }
+    }
+    
     public func addCloseButton() {
         navigationItem.rightBarButtonItem = closeButton()
     }
     
     public func sortBarItem(with action: Selector) -> UIBarButtonItem {
-        let image = UIImage(named: ImageName.sort)
-        return UIBarButtonItem(image: image, style: .plain, target: self, action: action)
+        return UIBarButtonItem(image: #imageLiteral(resourceName: "sort"), style: .plain, target: self, action: action)
     }
     
     // MARK: - private
@@ -41,15 +46,12 @@ extension UIViewController {
         return UIBarButtonItem(customView: button)
     }
     
-    private func closeButton() -> UIBarButtonItem {
-        let image = UIImage(named: ImageName.close)
-        return UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(self.closeButtonHandler))
+    private func backButton() -> UIBarButtonItem {
+        return UIBarButtonItem(image: #imageLiteral(resourceName: "arrow_left"), style: .plain, target: self, action: #selector(self.backButtonHandler))
     }
     
-    private func addRightBarButton(with imageName: String, action: Selector?) {
-        let image = UIImage(named: imageName)
-        let barButton = UIBarButtonItem(image: image, style: .plain, target: self, action: action)
-        navigationItem.rightBarButtonItem = barButton
+    private func closeButton() -> UIBarButtonItem {
+        return UIBarButtonItem(image: #imageLiteral(resourceName: "cross"), style: .plain, target: self, action: #selector(self.closeButtonHandler))
     }
     
     // MARK: - actions
@@ -59,6 +61,10 @@ extension UIViewController {
     
     @objc private func cartButtonHandler() {
         showCartController()
+    }
+    
+    @objc private func backButtonHandler() {
+        navigationController?.popViewController(animated: true)
     }
     
     @objc private func closeButtonHandler() {

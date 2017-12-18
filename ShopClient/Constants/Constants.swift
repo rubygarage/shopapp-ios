@@ -33,13 +33,6 @@ struct ControllerIdentifier {
     static let signUp = "SignUpControllerIdentifier"
 }
 
-struct ImageName {
-    static let home = "home"
-    static let sort = "sort"
-    static let close = "cross"
-    static let back = "arrow_left"
-}
-
 struct CornerRadius {
     static let defaultValue: CGFloat = 5
 }
@@ -68,6 +61,6 @@ struct TableView {
     static let headerFooterMinHeight: CGFloat = 0.001
     static let headerFooterDefaultHeight: CGFloat = 20
     static let homeContentInsets = UIEdgeInsetsMake(10, 0, 15, 0)
-    static let removeActionBackgroundColor = UIColor(displayP3Red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
+    static let removeActionBackgroundColor = UIColor.backgroundDefault
     static let removeActionFont = UIFont.systemFont(ofSize: 12)
 }

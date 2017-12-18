@@ -12,7 +12,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="SSE-4a-hOW">
             <objects>
-                <tabBarController id="Qv2-21-Axr" sceneMemberID="viewController">
+                <tabBarController id="Qv2-21-Axr" customClass="TabBarController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="eM5-UX-kd0"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="o2p-3s-0Ln">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>

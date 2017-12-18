@@ -22,7 +22,8 @@ class SearchViewModel: GridCollectionViewModel {
     }
     
     private func loadRemoteData() {
-        state.onNext(.loading(showHud: true))
+        let showHud = products.value.count == 0
+        state.onNext(.loading(showHud: showHud))
         Repository.shared.searchProducts(paginationValue: paginationValue, searchQuery: searchPhrase.value) { [weak self] (products, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))

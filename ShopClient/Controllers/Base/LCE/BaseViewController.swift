@@ -42,10 +42,10 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
     }
     
     private func setupViews() {
+        addBackButtonIfNeeded()
         loadingView.frame = view.frame
         errorView.frame = view.frame
         errorView.delegate = self
-        
         ToastView.appearance().bottomOffsetPortrait = kToastBottomOffset
     }
     
