@@ -33,6 +33,7 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     @IBOutlet weak var cartButtonView: UIView!
     @IBOutlet weak var underlineLeftMargin: NSLayoutConstraint!
     @IBOutlet weak var underlineRightMargin: NSLayoutConstraint!
+    @IBOutlet weak var clearButton: UIButton!
     
     var delegate: SearchTitleViewProtocol?
     
@@ -57,6 +58,7 @@ class SearchTitleView: UIView, UITextFieldDelegate {
         
         commonInit()
         updateViews(animated: false)
+        updateClearButtonIfNeeded()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -64,6 +66,7 @@ class SearchTitleView: UIView, UITextFieldDelegate {
         
         commonInit()
         updateViews(animated: false)
+        updateClearButtonIfNeeded()
     }
     
     private func commonInit() {
@@ -76,6 +79,7 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     
     private func setupViews() {
         searchTextField.delegate = self
+        clearButton.setTitle(NSLocalizedString("Button.Clear", comment: String()), for: .normal)
     }
     
     private func updateCartBarItem(with cartItemsCount: Int) {
@@ -117,17 +121,37 @@ class SearchTitleView: UIView, UITextFieldDelegate {
         return NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: kPlaceholderColorDefault])
     }
     
+    private func updateClearButtonIfNeeded() {
+        let text = searchTextField.text ?? String()
+        let clearButtonHidden = !(text.isEmpty == false && state == .editing)
+        if clearButton.isHidden != clearButtonHidden {
+            UIView.transition(with: contentView, duration: kAnimationDuration, options: .transitionCrossDissolve, animations: {
+                self.clearButton.isHidden = clearButtonHidden
+            })
+        }
+    }
+    
     // MARK: - actions
     @IBAction func searchTextFieldEditingDidBegin(_ sender: UITextField) {
         state = .editing
+        updateClearButtonIfNeeded()
     }
     
     @IBAction func searchTextFieldEditingDidEnd(_ sender: UITextField) {
         state = .default
+        updateClearButtonIfNeeded()
+    }
+    
+    @IBAction func searchTextFieldEditingChanged(_ sender: UITextField) {
+        updateClearButtonIfNeeded()
     }
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
         endEditing(true)
+    }
+    
+    @IBAction func clearButtonTapped(_ sender: UIButton) {
+        searchTextField.text = nil
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
