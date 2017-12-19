@@ -10,6 +10,7 @@ import RxSwift
 
 class SearchViewModel: GridCollectionViewModel {
     var searchPhrase = Variable<String>(String())
+    var categories = PublishSubject<[Category]>()
     
     public func reloadData() {
         paginationValue = nil
@@ -19,6 +20,23 @@ class SearchViewModel: GridCollectionViewModel {
     public func loadNextPage() {
         paginationValue = products.value.last?.paginationValue
         loadRemoteData()
+    }
+    
+    public func loadCategories() {
+        state.onNext(.loading(showHud: true))
+        Repository.shared.getCategoryList { [weak self] (catogories, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            }
+            if let categories = catogories {
+                self?.categories.onNext(categories)
+                self?.state.onNext(.content)
+            }
+        }
+    }
+    
+    public func clearResult() {
+        products.value.removeAll()
     }
     
     private func loadRemoteData() {

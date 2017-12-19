@@ -9,6 +9,8 @@
 import UIKit
 
 class SearchViewController: GridCollectionViewController<SearchViewModel>, SearchTitleViewProtocol {
+    @IBOutlet weak var categoriesCollectionView: UICollectionView!
+    
     let titleView = SearchTitleView()
     
     override func viewDidLoad() {
@@ -17,7 +19,8 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         
         setupViews()
         setupViewModel()
-        loadData()
+        loadCategories()
+        collectionView.keyboardDismissMode = .onDrag
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,12 +62,29 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
             .subscribe(onNext: { [weak self] _ in
                 self?.stopLoadAnimating()
                 self?.collectionView.reloadData()
+                self?.updateCollectionViewsIfNeeded(categoriesViewHidden: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.categories
+            .subscribe(onNext: { [weak self] _ in
+                self?.categoriesCollectionView.reloadData()
+                self?.updateCollectionViewsIfNeeded(categoriesViewHidden: false)
             })
             .disposed(by: disposeBag)
     }
     
+    private func loadCategories() {
+        viewModel.loadCategories()
+    }
+    
     private func loadData() {
         viewModel.reloadData()
+    }
+    
+    private func updateCollectionViewsIfNeeded(categoriesViewHidden: Bool) {
+        categoriesCollectionView.isHidden = categoriesViewHidden
+        collectionView.isHidden = !categoriesViewHidden
     }
     
     // MARK: - overriding
@@ -76,6 +96,11 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         viewModel.loadNextPage()
     }
     
+    override func didSelectItem(at index: Int) {
+        titleView.endEditing(true)
+        super.didSelectItem(at: index)
+    }
+    
     // MARK: - SearchTitleViewProtocol
     func didTapSearch() {
         viewModel.reloadData()
@@ -83,6 +108,15 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     
     func didTapCart() {
         showCartController()
+    }
+    
+    func didTapBack() {
+        viewModel.clearResult()
+        updateCollectionViewsIfNeeded(categoriesViewHidden: false)
+    }
+    
+    func didStartEditing() {
+        updateCollectionViewsIfNeeded(categoriesViewHidden: true)
     }
     
     // MARK: - ErrorViewProtocol
