@@ -13,6 +13,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     
     let titleView = SearchTitleView()
     var categoriesDataSource: SearchCollectionDataSource!
+    var categoriesDelegate: SearchCollectionDelegate!
     
     override func viewDidLoad() {
         viewModel = SearchViewModel()
@@ -58,6 +59,11 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         
         categoriesDataSource = SearchCollectionDataSource(delegate: self)
         categoriesCollectionView.dataSource = categoriesDataSource
+        
+        categoriesDelegate = SearchCollectionDelegate()
+        categoriesCollectionView.delegate = categoriesDelegate
+        
+        categoriesCollectionView.contentInset = CategoryCollectionViewCell.collectionViewInsets
     }
     
     private func setupViewModel() {

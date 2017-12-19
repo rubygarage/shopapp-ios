@@ -38,7 +38,7 @@
                                     <constraint firstItem="5xs-6L-FXy" firstAttribute="centerX" secondItem="osU-Xw-LDX" secondAttribute="centerX" id="YKM-n3-qa3"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jmy-HN-r2b">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jmy-HN-r2b">
                                 <rect key="frame" x="0.0" y="86" width="208" height="86"/>
                             </imageView>
                         </subviews>
