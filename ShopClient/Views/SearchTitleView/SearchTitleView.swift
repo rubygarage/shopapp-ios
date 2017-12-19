@@ -16,6 +16,8 @@ enum SearchState {
 protocol SearchTitleViewProtocol {
     func didTapSearch()
     func didTapCart()
+    func didTapBack()
+    func didStartEditing()
 }
 
 private let kAnimationDuration: TimeInterval = 0.3
@@ -135,6 +137,7 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     @IBAction func searchTextFieldEditingDidBegin(_ sender: UITextField) {
         state = .editing
         updateClearButtonIfNeeded()
+        delegate?.didStartEditing()
     }
     
     @IBAction func searchTextFieldEditingDidEnd(_ sender: UITextField) {
@@ -148,10 +151,13 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
         endEditing(true)
+        searchTextField.text = nil
+        delegate?.didTapBack()
     }
     
     @IBAction func clearButtonTapped(_ sender: UIButton) {
         searchTextField.text = nil
+        updateClearButtonIfNeeded()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
