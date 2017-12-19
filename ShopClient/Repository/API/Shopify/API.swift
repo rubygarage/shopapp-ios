@@ -190,6 +190,11 @@ class API: NSObject, APIInterface {
         }
     }
     
+    func logout(callback: RepoCallback<Bool>) {
+        removeSessionData()
+        callback(true, nil)
+    }
+    
     func getCustomer(callback: @escaping RepoCallback<Customer>) {
         if let token = sessionData().token, let email = sessionData().email {
             getCustomer(with: token, email: email, callback: callback)
@@ -781,6 +786,11 @@ class API: NSObject, APIInterface {
         let expiryDate = Date(timeIntervalSinceNow: expiryDateTimeInterval)
         
         return (token, email, expiryDate)
+    }
+    
+    private func removeSessionData() {
+        let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
+        keyChain.clear()
     }
     
     func isLoggedIn() -> Bool {

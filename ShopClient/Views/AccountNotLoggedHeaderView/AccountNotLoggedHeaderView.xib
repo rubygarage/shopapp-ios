@@ -43,8 +43,8 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kd-ki-Xoh" customClass="UnderlinedButton" customModule="ShopClient" customModuleProvider="target">
-                    <rect key="frame" x="159" y="130" width="57" height="25"/>
-                    <fontDescription key="fontDescription" name=".SFNSText" family=".SF NS Text" pointSize="12"/>
+                    <rect key="frame" x="157" y="130" width="61" height="25"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                     <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                     <state key="normal" title="Button">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -54,7 +54,7 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pLH-tW-YR9">
-                    <rect key="frame" x="169" y="155" width="37" height="1"/>
+                    <rect key="frame" x="167" y="155" width="41" height="1"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="pfM-CE-ywT"/>

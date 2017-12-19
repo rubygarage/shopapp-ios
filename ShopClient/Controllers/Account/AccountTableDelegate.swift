@@ -14,9 +14,9 @@ protocol AccountTableDelegateProtocol {
 }
 
 class AccountTableDelegate: NSObject, UITableViewDelegate {
-    var delegate: (AccountTableDelegateProtocol & AccountNotLoggedHeaderProtocol & AccountLoggedHeaderProtocol)!
+    var delegate: (AccountTableDelegateProtocol & AccountNotLoggedHeaderProtocol & AccountLoggedHeaderProtocol & AccountFooterViewProtocol)!
     
-    init(delegate: (AccountTableDelegateProtocol & AccountNotLoggedHeaderProtocol & AccountLoggedHeaderProtocol)) {
+    init(delegate: (AccountTableDelegateProtocol & AccountNotLoggedHeaderProtocol & AccountLoggedHeaderProtocol & AccountFooterViewProtocol)) {
         super.init()
         
         self.delegate = delegate
@@ -32,5 +32,9 @@ class AccountTableDelegate: NSObject, UITableViewDelegate {
         } else {
             return AccountNotLoggedHeaderView(delegate: delegate)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return delegate?.customer() == nil ? UIView() : AccountFooterView(delegate: delegate)
     }
 }

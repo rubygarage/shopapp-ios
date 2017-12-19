@@ -12,45 +12,41 @@ class AccountViewModel: BaseViewModel {
     var policies = Variable<[Policy]>([Policy]())
     var customer = Variable<Customer?>(nil)
     
-    public func loadData(with disposeBag: DisposeBag) {
-        state.onNext(.loading(showHud: true))
-        Single.zip(shopSingle, customerSingle).do()
-            .subscribe(onSuccess: { [weak self] (shop, customer) in
-                self?.processResponse(with: shop, customerItem: customer)
-                self?.state.onNext(.content)
-            }, onError: { [weak self] (error) in
-                let castedError = error as? RepoError
-                self?.state.onNext(.error(error: castedError))
-            })
-        .disposed(by: disposeBag)
-    }
-
-    private var shopSingle: Single<Shop?> {
-        return Single.create(subscribe: { (single) in
-            Repository.shared.getShop(callback: { (shop, error) in
-                if let error = error {
-                    single(.error(error))
-                }
-                if let shop = shop {
-                    single(.success(shop))
-                }
-            })
-            return Disposables.create()
-        })
+    public func loadCustomer() {
+        if Repository.shared.isLoggedIn() {
+            getCustomer()
+        }
     }
     
-    private var customerSingle: Single<Customer?> {
-        return Single.create(subscribe: { [weak self] single in
-            if Repository.shared.isLoggedIn() {
-                self?.getCustomer(event: single)
-            } else {
-                single(.success(nil))
+    public func loadPolicies() {
+        Repository.shared.getShop { [weak self] (shop, error) in
+            self?.processResponse(with: shop)
+        }
+    }
+    
+    public func logout() {
+        Repository.shared.logout { [weak self] (success, error) in
+            if let success = success, success == true {
+                self?.customer.value = nil
             }
-            return Disposables.create()
-        })
+        }
     }
     
-    private func processResponse(with shopItem: Shop?, customerItem: Customer?) {
+    // MARK: - private
+    private func getCustomer() {
+        state.onNext(.loading(showHud: true))
+        Repository.shared.getCustomer { [weak self] (customer, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            }
+            if let customer = customer {
+                self?.customer.value = customer
+                self?.state.onNext(.content)
+            }
+        }
+    }
+    
+    private func processResponse(with shopItem: Shop?) {
         var policiesItems = [Policy]()
         if let privacyPolicy = shopItem?.privacyPolicy {
             policiesItems.append(privacyPolicy)
@@ -62,20 +58,5 @@ class AccountViewModel: BaseViewModel {
             policiesItems.append(termsOfService)
         }
         policies.value = policiesItems
-        
-        if let customer = customerItem {
-            self.customer.value = customer
-        }
-    }
-    
-    private func getCustomer(event: @escaping (SingleEvent<Customer?>) -> ()) {
-        Repository.shared.getCustomer { (customer, error) in
-            if let error = error {
-                event(.error(error))
-            }
-            if let customer = customer {
-                event(.success(customer))
-            }
-        }
     }
 }

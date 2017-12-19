@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountViewController: BaseViewController<AccountViewModel>, AccountTableDataSourceProtocol, AccountTableDelegateProtocol, AccountNotLoggedHeaderProtocol, AccountLoggedHeaderProtocol, AuthenticationProtocol {
+class AccountViewController: BaseViewController<AccountViewModel>, AccountTableDataSourceProtocol, AccountTableDelegateProtocol, AccountNotLoggedHeaderProtocol, AccountLoggedHeaderProtocol, AccountFooterViewProtocol, AuthenticationProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     var tableDataSource: AccountTableDataSource!
@@ -53,14 +53,15 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
             .disposed(by: disposeBag)
         
         viewModel.customer.asObservable()
-            .subscribe(onNext: { (customer) in
-                print()
+            .subscribe(onNext: { [weak self] customer in
+                self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
     
     private func loadData() {
-        viewModel.loadData(with: disposeBag)
+        viewModel.loadCustomer()
+        viewModel.loadPolicies()
     }
     
     // MARK: - AccountTableDataSourceProtocol
@@ -92,6 +93,11 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     // MARK: - AccountLoggedHeaderProtocol
     func didTapMyOrders() {
         // TODO:
+    }
+    
+    // MARK: - AccountFooterViewProtocol
+    func didTapLogout() {
+        viewModel.logout()
     }
     
     // MARK: - AuthenticationProtocol

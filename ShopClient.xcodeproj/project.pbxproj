@@ -127,6 +127,8 @@
 		618B4D501FE2ECE20001F68D /* NavigationControllerShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B4D4F1FE2ECE20001F68D /* NavigationControllerShadow.swift */; };
 		618B4D531FE2EF2E0001F68D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B4D521FE2EF2E0001F68D /* TabBarController.swift */; };
 		618B4D551FE2F3900001F68D /* UIColorCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B4D541FE2F3900001F68D /* UIColorCustom.swift */; };
+		618DDFCC1FE7ED3E00315364 /* AccountFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618DDFCB1FE7ED3E00315364 /* AccountFooterView.swift */; };
+		618DDFCE1FE7ED4500315364 /* AccountFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 618DDFCD1FE7ED4500315364 /* AccountFooterView.xib */; };
 		61903DF21FB0A60100DA0C96 /* VariantOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61903DF11FB0A60100DA0C96 /* VariantOption.swift */; };
 		61903DF41FB0A69900DA0C96 /* ShopifyVariantOptionAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61903DF31FB0A69900DA0C96 /* ShopifyVariantOptionAdapter.swift */; };
 		6196CF881F9F8AF200F823AD /* ProductRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196CF871F9F8AF200F823AD /* ProductRepositoryInterface.swift */; };
@@ -341,6 +343,8 @@
 		618B4D4F1FE2ECE20001F68D /* NavigationControllerShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerShadow.swift; sourceTree = "<group>"; };
 		618B4D521FE2EF2E0001F68D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		618B4D541FE2F3900001F68D /* UIColorCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorCustom.swift; sourceTree = "<group>"; };
+		618DDFCB1FE7ED3E00315364 /* AccountFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFooterView.swift; sourceTree = "<group>"; };
+		618DDFCD1FE7ED4500315364 /* AccountFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountFooterView.xib; sourceTree = "<group>"; };
 		61903DF11FB0A60100DA0C96 /* VariantOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantOption.swift; sourceTree = "<group>"; };
 		61903DF31FB0A69900DA0C96 /* ShopifyVariantOptionAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyVariantOptionAdapter.swift; sourceTree = "<group>"; };
 		6196CF871F9F8AF200F823AD /* ProductRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRepositoryInterface.swift; sourceTree = "<group>"; };
@@ -601,6 +605,7 @@
 		611EF35D1F5957B6001B8B9C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				618DDFCA1FE7ECD300315364 /* AccountFooterView */,
 				6140A9791FDEC5EA000C893E /* AccountLoggedHeaderView */,
 				61836C191FD97A93000A6BA6 /* AccountNotLoggedHeaderView */,
 				611947821FD95A59008BE9C6 /* AccountTableViewCell */,
@@ -940,6 +945,15 @@
 			);
 			name = TabBar;
 			path = "New Group";
+			sourceTree = "<group>";
+		};
+		618DDFCA1FE7ECD300315364 /* AccountFooterView */ = {
+			isa = PBXGroup;
+			children = (
+				618DDFCB1FE7ED3E00315364 /* AccountFooterView.swift */,
+				618DDFCD1FE7ED4500315364 /* AccountFooterView.xib */,
+			);
+			path = AccountFooterView;
 			sourceTree = "<group>";
 		};
 		61A1D4311FC57FB700E1B673 /* CardValidationView */ = {
@@ -1383,6 +1397,7 @@
 				61BF1EB01FAB598C0098B9AA /* ErrorView.xib in Resources */,
 				6165E9661FCDDA39006DE8A5 /* BillingAddress.storyboard in Resources */,
 				61D561751F7419BD00233DA3 /* ImagesCarousel.storyboard in Resources */,
+				618DDFCE1FE7ED4500315364 /* AccountFooterView.xib in Resources */,
 				61B5BEDC1F75055000E075B7 /* ArticleTableViewCell.xib in Resources */,
 				614142C61F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib in Resources */,
 				61A507361F7E7A50004504EF /* ProductOptions.storyboard in Resources */,
@@ -1666,6 +1681,7 @@
 				615A976D1FA0974400C6095D /* ShopifyProductVariantAdapter.swift in Sources */,
 				6137EE041F9E19D90040C004 /* RepositoryInterface.swift in Sources */,
 				61C2ABC31FBB23D500A1E170 /* SignInViewController.swift in Sources */,
+				618DDFCC1FE7ED3E00315364 /* AccountFooterView.swift in Sources */,
 				615A97711FA09EAB00C6095D /* ShopifyCategoryAdapter.swift in Sources */,
 				61A1D4331FC57FD900E1B673 /* CardValidationView.swift in Sources */,
 				61BF1EAB1FAB56D90098B9AA /* LoadingView.swift in Sources */,
