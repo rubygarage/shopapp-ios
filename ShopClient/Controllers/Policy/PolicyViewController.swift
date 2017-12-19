@@ -9,28 +9,27 @@
 import UIKit
 import WebKit
 
+private let kTextViewContentInsets = UIEdgeInsetsMake(28, 16, 28, 16)
+
 class PolicyViewController: UIViewController {
-    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var policyTextView: UITextView!
     
     var policy: Policy?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupViews()
         populateViews()
+    }
+    
+    private func setupViews() {
+        addBackButtonIfNeeded()
+        policyTextView.contentInset = kTextViewContentInsets
     }
     
     private func populateViews() {
         title = policy?.title
-        if let url = policy?.url {
-            populateWebView(urlString: url)
-        }
-    }
-    
-    private func populateWebView(urlString: String) {
-        if let url = URL(string: urlString) {
-            let request = URLRequest(url: url)
-            webView.loadRequest(request)
-        }
+        policyTextView.text = policy?.body
     }
 }
