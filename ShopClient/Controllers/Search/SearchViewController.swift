@@ -8,6 +8,8 @@
 
 import UIKit
 
+private let kAnimationDuration: TimeInterval = 0.3
+
 class SearchViewController: GridCollectionViewController<SearchViewModel>, SearchTitleViewProtocol, SearchCollectionDataSourceProtocol {
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
     
@@ -96,8 +98,12 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     }
     
     private func updateCollectionViewsIfNeeded(categoriesViewHidden: Bool) {
-        categoriesCollectionView.isHidden = categoriesViewHidden
-        collectionView.isHidden = !categoriesViewHidden
+        if categoriesCollectionView.isHidden != categoriesViewHidden {
+            UIView.transition(with: view, duration: kAnimationDuration, options: .transitionCrossDissolve, animations: {
+                self.categoriesCollectionView.isHidden = categoriesViewHidden
+                self.collectionView.isHidden = !categoriesViewHidden
+            })
+        }
     }
     
     // MARK: - overriding
