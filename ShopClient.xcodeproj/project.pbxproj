@@ -161,6 +161,7 @@
 		61AAB9311F7BD07B00CD32D3 /* SortModalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61AAB92F1F7BD07B00CD32D3 /* SortModalTableViewCell.xib */; };
 		61AB83261F72E6F0009E7343 /* Policy.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61AB83251F72E6F0009E7343 /* Policy.storyboard */; };
 		61AC44311FC5A7E60020544A /* CardValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AC44301FC5A7E60020544A /* CardValidator.swift */; };
+		61AE67031FE95034007229DA /* SearchCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE67021FE95034007229DA /* SearchCollectionDataSource.swift */; };
 		61AFA3F31F9DFCE7004B9D53 /* DAOInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AFA3F21F9DFCE7004B9D53 /* DAOInterface.swift */; };
 		61AFA3F61F9DFECC004B9D53 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AFA3F51F9DFECC004B9D53 /* Shop.swift */; };
 		61B5BEDB1F75055000E075B7 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B5BED91F75055000E075B7 /* ArticleTableViewCell.swift */; };
@@ -379,6 +380,7 @@
 		61AAB92F1F7BD07B00CD32D3 /* SortModalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SortModalTableViewCell.xib; sourceTree = "<group>"; };
 		61AB83251F72E6F0009E7343 /* Policy.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Policy.storyboard; sourceTree = "<group>"; };
 		61AC44301FC5A7E60020544A /* CardValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardValidator.swift; sourceTree = "<group>"; };
+		61AE67021FE95034007229DA /* SearchCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionDataSource.swift; sourceTree = "<group>"; };
 		61AFA3F21F9DFCE7004B9D53 /* DAOInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOInterface.swift; sourceTree = "<group>"; };
 		61AFA3F51F9DFECC004B9D53 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 		61B5BED91F75055000E075B7 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
@@ -600,8 +602,8 @@
 				6124BCE11F73C2880099E879 /* Policy */,
 				610873A41F7D027200BF81CA /* ProductDetails */,
 				61534F2E1F73EE5E00F24189 /* ProductsList */,
-				61AAB9261F7BC10600CD32D3 /* SortModal */,
 				61DA4B861F614B9F00444F64 /* Search */,
+				61AAB9261F7BC10600CD32D3 /* SortModal */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1203,6 +1205,7 @@
 			children = (
 				61DA4B871F614BBC00444F64 /* SearchViewController.swift */,
 				61A2AC721FACC2B2005FAD54 /* SearchViewModel.swift */,
+				61AE67021FE95034007229DA /* SearchCollectionDataSource.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -1565,6 +1568,7 @@
 				610FAAEA1FB619D2000D89CA /* AuthentificationRepository.swift in Sources */,
 				61C95E9D1FB34B9F00543B40 /* DAOProductVariantHelper.swift in Sources */,
 				6131D2491FB34563008330C0 /* DAOShop.swift in Sources */,
+				61AE67031FE95034007229DA /* SearchCollectionDataSource.swift in Sources */,
 				615A976B1FA0907900C6095D /* ShopifyImageAdapter.swift in Sources */,
 				61ED88F71F7171F1006BDA79 /* GridCollectionViewController.swift in Sources */,
 				6141AAA91F8BDD8500F9019B /* UIViewControllerAlert.swift in Sources */,

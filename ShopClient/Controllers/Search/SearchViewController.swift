@@ -8,10 +8,11 @@
 
 import UIKit
 
-class SearchViewController: GridCollectionViewController<SearchViewModel>, SearchTitleViewProtocol {
+class SearchViewController: GridCollectionViewController<SearchViewModel>, SearchTitleViewProtocol, SearchCollectionDataSourceProtocol {
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
     
     let titleView = SearchTitleView()
+    var categoriesDataSource: SearchCollectionDataSource!
     
     override func viewDidLoad() {
         viewModel = SearchViewModel()
@@ -51,6 +52,12 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     
     private func setupViews() {
         titleView.delegate = self
+        
+        let nib = UINib(nibName: String(describing: CategoryCollectionViewCell.self), bundle: nil)
+        categoriesCollectionView.register(nib, forCellWithReuseIdentifier: String(describing: CategoryCollectionViewCell.self))
+        
+        categoriesDataSource = SearchCollectionDataSource(delegate: self)
+        categoriesCollectionView.dataSource = categoriesDataSource
     }
     
     private func setupViewModel() {
@@ -66,7 +73,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
             })
             .disposed(by: disposeBag)
         
-        viewModel.categories
+        viewModel.categories.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.categoriesCollectionView.reloadData()
                 self?.updateCollectionViewsIfNeeded(categoriesViewHidden: false)
@@ -117,6 +124,15 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     
     func didStartEditing() {
         updateCollectionViewsIfNeeded(categoriesViewHidden: true)
+    }
+    
+    // MARK: - SearchCollectionDataSourceProtocol
+    func categoriesCount() -> Int {
+        return viewModel.categoriesCount()
+    }
+    
+    func category(at index: Int) -> Category {
+        return viewModel.category(at: index)
     }
     
     // MARK: - ErrorViewProtocol
