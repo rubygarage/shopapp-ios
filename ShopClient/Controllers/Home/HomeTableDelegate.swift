@@ -13,9 +13,9 @@ protocol HomeTableDelegateProtocol {
 }
 
 class HomeTableDelegate: NSObject, UITableViewDelegate {
-    var delegate: (HomeTableDelegateProtocol & HomeHeaderViewProtocol)?
+    var delegate: (HomeTableDelegateProtocol & SeeAllHeaderViewProtocol)?
     
-    init(delegate: (HomeTableDelegateProtocol & HomeHeaderViewProtocol)?) {
+    init(delegate: (HomeTableDelegateProtocol & SeeAllHeaderViewProtocol)?) {
         super.init()
         
         self.delegate = delegate
@@ -31,11 +31,11 @@ class HomeTableDelegate: NSObject, UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case HomeSection.lastArrivals.rawValue:
-            return HomeTableHeaderView(delegate: delegate, type: .latestArrivals)
+            return SeeAllTableHeaderView(delegate: delegate, type: .latestArrivals)
         case HomeSection.popular.rawValue:
-            return HomeTableHeaderView(delegate: delegate, type: .popular)
+            return SeeAllTableHeaderView(delegate: delegate, type: .popular)
         default:
-            return HomeTableHeaderView(delegate: delegate, type: .blogPosts)
+            return SeeAllTableHeaderView(delegate: delegate, type: .blogPosts)
         }
     }
     

@@ -8,30 +8,33 @@
 
 import UIKit
 
-protocol HomeHeaderViewProtocol {
-    func didTapSeeAll(type: HomeTableViewType)
+protocol SeeAllHeaderViewProtocol {
+    func didTapSeeAll(type: ViewType)
 }
 
-enum HomeTableViewType {
+enum ViewType {
     case latestArrivals
     case popular
     case blogPosts
+    case myCart
 }
 
-class HomeTableHeaderView: UIView {
+class SeeAllTableHeaderView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var sectionTitleLabel: UILabel!
     @IBOutlet weak var seeAllButton: UIButton!
+    @IBOutlet weak var separatprHeightConstraint: NSLayoutConstraint!
     
-    private var delegate: HomeHeaderViewProtocol?
-    private var headerViewType = HomeTableViewType.latestArrivals
+    private var delegate: SeeAllHeaderViewProtocol?
+    private var headerViewType = ViewType.latestArrivals
     
-    init(delegate: HomeHeaderViewProtocol?, type: HomeTableViewType) {
+    init(delegate: SeeAllHeaderViewProtocol?, type: ViewType, separatorVisible: Bool = false) {
         super.init(frame: CGRect.zero)
         
         self.delegate = delegate
         headerViewType = type
         commonInit()
+        setupConstraints(separatorVisible: separatorVisible)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,12 +44,16 @@ class HomeTableHeaderView: UIView {
     }
     
     private func commonInit() {
-        Bundle.main.loadNibNamed(String(describing: HomeTableHeaderView.self), owner: self)
+        Bundle.main.loadNibNamed(String(describing: SeeAllTableHeaderView.self), owner: self)
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         populateViews()
+    }
+    
+    private func setupConstraints(separatorVisible: Bool) {
+        separatprHeightConstraint.constant = separatorVisible ? 1 : 0
     }
     
     private func populateViews() {
@@ -57,6 +64,8 @@ class HomeTableHeaderView: UIView {
             sectionTitleLabel.text = NSLocalizedString("Label.Popular", comment: String())
         case .blogPosts:
             sectionTitleLabel.text = NSLocalizedString("Label.BlogPosts", comment: String())
+        case .myCart:
+            sectionTitleLabel.text = NSLocalizedString("Label.MyCart", comment: String())
         }
         seeAllButton.setTitle(NSLocalizedString("Button.SeeAll", comment: String()), for: .normal)
     }
