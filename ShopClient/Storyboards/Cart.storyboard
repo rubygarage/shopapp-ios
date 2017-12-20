@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="597"/>
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zX9-nM-Tb7">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zX9-nM-Tb7" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -33,7 +33,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="checkoutTapped:" destination="epH-u5-E99" eventType="touchUpInside" id="zpG-jb-bWa"/>
+                                    <action selector="checkoutTapped:" destination="epH-u5-E99" eventType="touchUpInside" id="cnU-VX-b7y"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -50,7 +50,7 @@
                         <viewLayoutGuide key="safeArea" id="dhu-1e-IeK"/>
                     </view>
                     <connections>
-                        <outlet property="checkoutButton" destination="zX9-nM-Tb7" id="X8y-RZ-h8l"/>
+                        <outlet property="checkoutButton" destination="zX9-nM-Tb7" id="ZCy-1U-cye"/>
                         <outlet property="tableView" destination="lLs-T9-IC2" id="44f-tA-enS"/>
                     </connections>
                 </viewController>

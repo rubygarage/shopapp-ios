@@ -33,6 +33,9 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
         let cartNib = UINib(nibName: String(describing: CheckoutCartTableViewCell.self), bundle: nil)
         tableView?.register(cartNib, forCellReuseIdentifier: String(describing: CheckoutCartTableViewCell.self))
         
+        let shippingAddressNib = UINib(nibName: String(describing: CheckoutShippingAddressAddTableCell.self), bundle: nil)
+        tableView.register(shippingAddressNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressAddTableCell.self))
+        
         tableDataSource = CheckoutTableDataSource(delegate: self)
         tableView?.dataSource = tableDataSource
         

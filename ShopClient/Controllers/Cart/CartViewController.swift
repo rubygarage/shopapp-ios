@@ -12,7 +12,7 @@ import SwipeCellKit
 class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol, CartTableDelegateProtocol, CartTableCellProtocol, CartEmptyDataViewProtocol, SwipeTableViewCellDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var checkoutButton: UIButton!
+    @IBOutlet weak var checkoutButton: BlackButton!
     
     var tableDataSource: CartTableDataSource?
     var tableDelegate: CartTableDelegate?
@@ -61,7 +61,8 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     }
     
     // MARK: - actions
-    @IBAction func checkoutTapped(_ sender: UIButton) {
+    
+    @IBAction func checkoutTapped(_ sender: BlackButton) {
         showCheckoutController()
     }
     

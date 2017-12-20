@@ -10,8 +10,9 @@ import RxSwift
 
 enum CheckoutSection: Int {
     case cart
+    case shippingAddress
     
-    static let allValues = [cart]
+    static let allValues = [cart, shippingAddress]
 }
 
 class CheckoutViewModel: BaseViewModel {

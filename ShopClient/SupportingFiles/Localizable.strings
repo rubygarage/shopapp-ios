@@ -42,6 +42,7 @@
 "Button.StartShopping" = "Start Shopping";
 "Button.Remove" = "Remove";
 "Button.Clear" = "Clear";
+"Button.AddNewAddress" = "Add new Address";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";
