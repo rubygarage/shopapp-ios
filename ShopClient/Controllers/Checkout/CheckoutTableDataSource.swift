@@ -1,5 +1,5 @@
 //
-//  CheckoutNewTableDataSource.swift
+//  CheckoutTableDataSource.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 12/20/17.
@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol CheckoutNewTableDataSourceProtocol {
+protocol CheckoutTableDataSourceProtocol {
     func cartProducts() -> [CartProduct]
 }
 
-class CheckoutNewTableDataSource: NSObject, UITableViewDataSource {
-    var delegate: CheckoutNewTableDataSourceProtocol!
+class CheckoutTableDataSource: NSObject, UITableViewDataSource {
+    var delegate: CheckoutTableDataSourceProtocol!
     
-    init(delegate: CheckoutNewTableDataSourceProtocol) {
+    init(delegate: CheckoutTableDataSourceProtocol) {
         super.init()
         
         self.delegate = delegate

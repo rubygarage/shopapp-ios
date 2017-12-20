@@ -1,5 +1,5 @@
 //
-//  CheckoutNewTableDelegate.swift
+//  CheckoutTableDelegate.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 12/20/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CheckoutNewTableDelegate: NSObject, UITableViewDelegate {
+class CheckoutTableDelegate: NSObject, UITableViewDelegate {
     var delegate: SeeAllHeaderViewProtocol!
     
     init(delegate: SeeAllHeaderViewProtocol) {

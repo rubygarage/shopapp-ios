@@ -19,10 +19,6 @@ extension UIViewController {
         pushController(with: UIStoryboard.articlesList(), identifier: ControllerIdentifier.articlesList)
     }
     
-    func pushCheckoutController() {
-        pushController(with: UIStoryboard.checkout(), identifier: ControllerIdentifier.checkout)
-    }
-    
     func pushDetailController(with product: Product) {
         let productDetaillsController = UIStoryboard.productDetails().instantiateViewController(withIdentifier: ControllerIdentifier.productDetails) as! ProductDetailsViewController
         productDetaillsController.productId = product.id 
@@ -121,8 +117,8 @@ extension UIViewController {
         showNavigationController(with: cartController)
     }
     
-    func showCheckoutNewController() {
-        let checkoutController = UIStoryboard.checkoutNew().instantiateViewController(withIdentifier: ControllerIdentifier.checkoutNew)
+    func showCheckoutController() {
+        let checkoutController = UIStoryboard.checkout().instantiateViewController(withIdentifier: ControllerIdentifier.checkout)
         showNavigationController(with: checkoutController)
     }
     
