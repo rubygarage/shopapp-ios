@@ -9,9 +9,15 @@
 import UIKit
 
 class CheckoutNewTableDelegate: NSObject, UITableViewDelegate {
+    var delegate: SeeAllHeaderViewProtocol!
     
+    init(delegate: SeeAllHeaderViewProtocol) {
+        super.init()
+        
+        self.delegate = delegate
+    }
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return UIView()
+        return SeeAllTableHeaderView(delegate: delegate, type: .myCart, separatorVisible: true)
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, PopularCellDelegate, HomeHeaderViewProtocol {
+class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, PopularCellDelegate, SeeAllHeaderViewProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     var dataSource: HomeTableDataSource?
@@ -39,21 +39,21 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     
     private func setupTableView() {
         let lastArrivalsNib = UINib(nibName: String(describing: LastArrivalsTableViewCell.self), bundle: nil)
-        tableView.register(lastArrivalsNib, forCellReuseIdentifier: String(describing: LastArrivalsTableViewCell.self))
+        tableView?.register(lastArrivalsNib, forCellReuseIdentifier: String(describing: LastArrivalsTableViewCell.self))
         
         let popularNib = UINib(nibName: String(describing: PopularTableViewCell.self), bundle: nil)
-        tableView.register(popularNib, forCellReuseIdentifier: String(describing: PopularTableViewCell.self))
+        tableView?.register(popularNib, forCellReuseIdentifier: String(describing: PopularTableViewCell.self))
         
         let newInBlogNib = UINib(nibName: String(describing: ArticleTableViewCell.self), bundle: nil)
-        tableView.register(newInBlogNib, forCellReuseIdentifier: String(describing: ArticleTableViewCell.self))
+        tableView?.register(newInBlogNib, forCellReuseIdentifier: String(describing: ArticleTableViewCell.self))
                 
         dataSource = HomeTableDataSource(delegate: self)
-        tableView.dataSource = dataSource
+        tableView?.dataSource = dataSource
         
         delegate = HomeTableDelegate(delegate: self)
-        tableView.delegate = delegate
+        tableView?.delegate = delegate
         
-        tableView?.contentInset = TableView.homeContentInsets
+        tableView?.contentInset = TableView.defaultContentInsets
     }
     
     private func updateCartBarItem() {
@@ -121,8 +121,8 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         }
     }
     
-    // MARK: - HomeHeaderViewProtocol
-    func didTapSeeAll(type: HomeTableViewType) {
+    // MARK: - SeeAllHeaderViewProtocol
+    func didTapSeeAll(type: ViewType) {
         switch type {
         case .latestArrivals:
             let title = NSLocalizedString("ControllerTitle.LatestArrivals", comment: String())
@@ -132,6 +132,8 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
             pushProductsListController(with: title, sortingValue: .popular)
         case .blogPosts:
             pushArticlesListController()
+        default:
+            return
         }
     }
     
