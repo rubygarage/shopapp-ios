@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTableDataSourceProtocol, SeeAllHeaderViewProtocol {
+class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTableDataSourceProtocol, SeeAllHeaderViewProtocol, CheckoutShippingAddressAddCellProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     var tableDataSource: CheckoutTableDataSource!
@@ -62,8 +62,13 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
         return viewModel.cartItems.value
     }
     
+    // MARK: - CheckoutShippingAddressAddCellProtocol
+    func didTapAddNewAddress() {
+        // TODO:
+    }
+    
     // MARK: - SeeAllHeaderViewProtocol
-    func didTapSeeAll(type: ViewType) {
+    func didTapSeeAll(type: SeeAllViewType) {
         if type == .myCart {
             // TODO:
         }

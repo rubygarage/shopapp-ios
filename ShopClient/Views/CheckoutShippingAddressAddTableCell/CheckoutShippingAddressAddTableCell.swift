@@ -8,8 +8,14 @@
 
 import UIKit
 
+protocol CheckoutShippingAddressAddCellProtocol {
+    func didTapAddNewAddress()
+}
+
 class CheckoutShippingAddressAddTableCell: UITableViewCell {
     @IBOutlet weak var addNewAddressButton: BlackButton!
+    
+    var delegate: CheckoutShippingAddressAddCellProtocol!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -18,7 +24,18 @@ class CheckoutShippingAddressAddTableCell: UITableViewCell {
         setupViews()
     }
     
+    func configure(with delegate: CheckoutShippingAddressAddCellProtocol) {
+        
+        self.delegate = delegate
+    }
+    
+    // MARK: - setup
     private func setupViews() {
         addNewAddressButton.setTitle(NSLocalizedString("Button.AddNewAddress", comment: String()).uppercased(), for: .normal)
+    }
+    
+    // MARK: - actions
+    @IBAction func addNewAddressTapped(_ sender: BlackButton) {
+        delegate.didTapAddNewAddress()
     }
 }

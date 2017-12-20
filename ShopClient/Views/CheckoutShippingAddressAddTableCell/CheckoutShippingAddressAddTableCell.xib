@@ -29,6 +29,9 @@
                         <state key="normal" title="Button">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
+                        <connections>
+                            <action selector="addNewAddressTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="mWD-u5-gga"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

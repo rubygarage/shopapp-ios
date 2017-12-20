@@ -18,6 +18,13 @@ class CheckoutTableDelegate: NSObject, UITableViewDelegate {
     }
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return SeeAllTableHeaderView(delegate: delegate, type: .myCart, separatorVisible: true)
+        switch section {
+        case CheckoutSection.cart.rawValue:
+            return SeeAllTableHeaderView(delegate: delegate, type: .myCart, separatorVisible: true)
+        case CheckoutSection.shippingAddress.rawValue:
+            return BoldTitleTableHeaderView(type: .shippingAddress)
+        default:
+            return nil
+        }
     }
 }

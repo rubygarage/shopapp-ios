@@ -61,7 +61,6 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     }
     
     // MARK: - actions
-    
     @IBAction func checkoutTapped(_ sender: BlackButton) {
         showCheckoutController()
     }
