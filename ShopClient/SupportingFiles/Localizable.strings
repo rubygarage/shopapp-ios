@@ -44,6 +44,7 @@
 "Button.MyOrders" = "My Orders";
 "Button.StartShopping" = "Start Shopping";
 "Button.Remove" = "Remove";
+"Button.Clear" = "Clear";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";

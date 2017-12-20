@@ -8,8 +8,14 @@
 
 import UIKit
 
-class SearchViewController: GridCollectionViewController<SearchViewModel>, SearchTitleViewProtocol {
+private let kAnimationDuration: TimeInterval = 0.3
+
+class SearchViewController: GridCollectionViewController<SearchViewModel>, SearchTitleViewProtocol, SearchCollectionDataSourceProtocol {
+    @IBOutlet weak var categoriesCollectionView: UICollectionView!
+    
     let titleView = SearchTitleView()
+    var categoriesDataSource: SearchCollectionDataSource!
+    var categoriesDelegate: SearchCollectionDelegate!
     
     override func viewDidLoad() {
         viewModel = SearchViewModel()
@@ -17,7 +23,8 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         
         setupViews()
         setupViewModel()
-        loadData()
+        loadCategories()
+        collectionView.keyboardDismissMode = .onDrag
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +55,17 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     
     private func setupViews() {
         titleView.delegate = self
+        
+        let nib = UINib(nibName: String(describing: CategoryCollectionViewCell.self), bundle: nil)
+        categoriesCollectionView.register(nib, forCellWithReuseIdentifier: String(describing: CategoryCollectionViewCell.self))
+        
+        categoriesDataSource = SearchCollectionDataSource(delegate: self)
+        categoriesCollectionView.dataSource = categoriesDataSource
+        
+        categoriesDelegate = SearchCollectionDelegate()
+        categoriesCollectionView.delegate = categoriesDelegate
+        
+        categoriesCollectionView.contentInset = CategoryCollectionViewCell.collectionViewInsets
     }
     
     private func setupViewModel() {
@@ -59,12 +77,33 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
             .subscribe(onNext: { [weak self] _ in
                 self?.stopLoadAnimating()
                 self?.collectionView.reloadData()
+                self?.updateCollectionViewsIfNeeded(categoriesViewHidden: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.categories.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.categoriesCollectionView.reloadData()
+                self?.updateCollectionViewsIfNeeded(categoriesViewHidden: false)
             })
             .disposed(by: disposeBag)
     }
     
+    private func loadCategories() {
+        viewModel.loadCategories()
+    }
+    
     private func loadData() {
         viewModel.reloadData()
+    }
+    
+    private func updateCollectionViewsIfNeeded(categoriesViewHidden: Bool) {
+        if categoriesCollectionView.isHidden != categoriesViewHidden {
+            UIView.transition(with: view, duration: kAnimationDuration, options: .transitionCrossDissolve, animations: {
+                self.categoriesCollectionView.isHidden = categoriesViewHidden
+                self.collectionView.isHidden = !categoriesViewHidden
+            })
+        }
     }
     
     // MARK: - overriding
@@ -76,6 +115,11 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         viewModel.loadNextPage()
     }
     
+    override func didSelectItem(at index: Int) {
+        titleView.endEditing(true)
+        super.didSelectItem(at: index)
+    }
+    
     // MARK: - SearchTitleViewProtocol
     func didTapSearch() {
         viewModel.reloadData()
@@ -83,6 +127,24 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     
     func didTapCart() {
         showCartController()
+    }
+    
+    func didTapBack() {
+        viewModel.clearResult()
+        updateCollectionViewsIfNeeded(categoriesViewHidden: false)
+    }
+    
+    func didStartEditing() {
+        updateCollectionViewsIfNeeded(categoriesViewHidden: true)
+    }
+    
+    // MARK: - SearchCollectionDataSourceProtocol
+    func categoriesCount() -> Int {
+        return viewModel.categoriesCount()
+    }
+    
+    func category(at index: Int) -> Category {
+        return viewModel.category(at: index)
     }
     
     // MARK: - ErrorViewProtocol

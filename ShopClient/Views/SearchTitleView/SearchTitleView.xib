@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="backButton" destination="Xfu-WH-a1H" id="cMu-hE-Mqy"/>
                 <outlet property="cartButtonView" destination="Tio-2b-Alh" id="jcB-tC-VF8"/>
+                <outlet property="clearButton" destination="C7k-ft-Fxc" id="Dbc-RI-6W7"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="0T5-CA-rtx"/>
                 <outlet property="searchTextField" destination="JgY-Vb-rAM" id="D6c-ZJ-PYO"/>
                 <outlet property="underLineView" destination="5Ab-xH-1Xy" id="w0m-we-MNW"/>
@@ -35,6 +36,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
                             <connections>
+                                <action selector="searchTextFieldEditingChanged:" destination="-1" eventType="editingChanged" id="dJe-0x-1Vv"/>
                                 <action selector="searchTextFieldEditingDidBegin:" destination="-1" eventType="editingDidBegin" id="ICM-VO-GFO"/>
                                 <action selector="searchTextFieldEditingDidEnd:" destination="-1" eventType="editingDidEnd" id="WjK-Ht-DbL"/>
                             </connections>
@@ -60,6 +62,20 @@
                         <action selector="backButtonTapped:" destination="-1" eventType="touchUpInside" id="8gw-M4-zj2"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7k-ft-Fxc">
+                    <rect key="frame" x="298" y="4.5" width="52" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="68m-Vc-bCK"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                    <state key="normal" title="Clear">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="clearButtonTapped:" destination="-1" eventType="touchUpInside" id="NRs-X5-LKt"/>
+                    </connections>
+                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tio-2b-Alh">
                     <rect key="frame" x="313" y="4.5" width="32" height="32"/>
                     <constraints>
@@ -82,8 +98,10 @@
                 <constraint firstItem="Tio-2b-Alh" firstAttribute="leading" secondItem="eEb-OC-fAH" secondAttribute="trailing" id="H0f-ab-PBW"/>
                 <constraint firstItem="eEb-OC-fAH" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Lgb-Dk-Jw3"/>
                 <constraint firstItem="Xfu-WH-a1H" firstAttribute="centerY" secondItem="JgY-Vb-rAM" secondAttribute="centerY" id="Rmm-xb-aGW"/>
+                <constraint firstItem="C7k-ft-Fxc" firstAttribute="centerY" secondItem="JgY-Vb-rAM" secondAttribute="centerY" id="e87-uj-6BY"/>
                 <constraint firstItem="5Ab-xH-1Xy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="750" constant="50" id="ftg-td-fVt"/>
                 <constraint firstAttribute="trailing" secondItem="5Ab-xH-1Xy" secondAttribute="trailing" priority="750" constant="50" id="h5p-pt-Hro"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="C7k-ft-Fxc" secondAttribute="trailing" id="j2N-ih-8m3"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Tio-2b-Alh" secondAttribute="trailing" constant="5" id="jK9-A4-vfv"/>
                 <constraint firstItem="eEb-OC-fAH" firstAttribute="leading" secondItem="Xfu-WH-a1H" secondAttribute="trailing" priority="750" id="lik-Xz-i6l"/>
                 <constraint firstItem="5Ab-xH-1Xy" firstAttribute="top" secondItem="eEb-OC-fAH" secondAttribute="bottom" id="uHh-DH-CzH"/>
