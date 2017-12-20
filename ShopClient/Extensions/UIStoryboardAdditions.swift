@@ -70,6 +70,10 @@ extension UIStoryboard {
         return UIStoryboard(name: "Checkout", bundle: nil)
     }
     
+    class func checkoutNew() -> UIStoryboard {
+        return UIStoryboard(name: "CheckoutNew", bundle: nil)
+    }
+    
     class func address() -> UIStoryboard {
         return UIStoryboard(name: "Address", bundle: nil)
     }

@@ -107,26 +107,33 @@ extension UIViewController {
     func showSignInController(delegate: AuthenticationProtocol) {
         let signInController = UIStoryboard.auth().instantiateViewController(withIdentifier: ControllerIdentifier.signIn) as! SignInViewController
         signInController.delegate = delegate
-        let navigationController = NavigationController(rootViewController: signInController)
-        present(navigationController, animated: true)
+        showNavigationController(with: signInController)
     }
     
     func showSignUpController(delegate: AuthenticationProtocol) {
         let signUpController = UIStoryboard.auth().instantiateViewController(withIdentifier: ControllerIdentifier.signUp) as! SignUpViewController
         signUpController.delegate = delegate
-        let navigationController = NavigationController(rootViewController: signUpController)
-        present(navigationController, animated: true)
+        showNavigationController(with: signUpController)
     }
     
     func showCartController() {
         let cartController = UIStoryboard.cart().instantiateViewController(withIdentifier: ControllerIdentifier.cart)
-        let navigationController = NavigationController(rootViewController: cartController)
-        present(navigationController, animated: true)
+        showNavigationController(with: cartController)
+    }
+    
+    func showCheckoutNewController() {
+        let checkoutController = UIStoryboard.checkoutNew().instantiateViewController(withIdentifier: ControllerIdentifier.checkoutNew)
+        showNavigationController(with: checkoutController)
     }
     
     // MARK: - private
     private func pushController(with storyBoard: UIStoryboard, identifier: String, animated: Bool = true) {
         let controller = storyBoard.instantiateViewController(withIdentifier: identifier)
         navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    private func showNavigationController(with rootController: UIViewController) {
+        let navigationController = NavigationController(rootViewController: rootController)
+        present(navigationController, animated: true)
     }
 }
