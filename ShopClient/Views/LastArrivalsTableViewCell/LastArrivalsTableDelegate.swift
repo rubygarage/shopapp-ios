@@ -8,13 +8,11 @@
 
 import UIKit
 
-let kLastArrivalsTableCellSize = CGSize(width: 200, height: 215)
-
 protocol LastArrivalsTableDelegateProtocol {
     func didSelectItem(at index: Int)
 }
 
-let kLastArrivalsLoadMoreWidth: CGFloat = 100
+private let kLastArrivalsTableCellSize = CGSize(width: 200, height: 215)
 
 class LastArrivalsTableDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     var delegate: LastArrivalsTableDelegateProtocol?
