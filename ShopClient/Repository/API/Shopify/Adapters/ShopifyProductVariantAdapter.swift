@@ -9,7 +9,7 @@
 import MobileBuySDK
 
 extension ProductVariant {
-    convenience init?(with item: Storefront.ProductVariant?) {
+    convenience init?(with item: Storefront.ProductVariant?, productImage: Storefront.Image?) {
         if item == nil {
             return nil
         }
@@ -19,7 +19,7 @@ extension ProductVariant {
         title = item?.title
         price = item?.price.description
         available = item?.availableForSale ?? false
-        image = Image(with: item?.image)
+        image = Image(with: item?.image) ?? Image(with: productImage)
         if let selectedOptionsObjects = item?.selectedOptions {
             var selectedOptionsArray = [VariantOption]()
             for selectedOption in selectedOptionsObjects {
