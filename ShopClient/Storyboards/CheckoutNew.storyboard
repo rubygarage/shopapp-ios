@@ -17,9 +17,24 @@
                     <view key="view" contentMode="scaleToFill" id="iHH-Hu-qii">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="pyA-b5-EGg">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pyA-b5-EGg" firstAttribute="bottom" secondItem="4Jr-sw-EUI" secondAttribute="bottom" id="Wrs-B6-K3H"/>
+                            <constraint firstItem="pyA-b5-EGg" firstAttribute="top" secondItem="4Jr-sw-EUI" secondAttribute="top" id="Zv5-aj-0Nd"/>
+                            <constraint firstItem="pyA-b5-EGg" firstAttribute="leading" secondItem="4Jr-sw-EUI" secondAttribute="leading" id="kxC-Hd-SRK"/>
+                            <constraint firstItem="pyA-b5-EGg" firstAttribute="trailing" secondItem="4Jr-sw-EUI" secondAttribute="trailing" id="rlC-ne-3RB"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="4Jr-sw-EUI"/>
                     </view>
+                    <connections>
+                        <outlet property="tableVew" destination="pyA-b5-EGg" id="UFW-nt-TTp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWy-vV-BzK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
