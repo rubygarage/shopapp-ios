@@ -48,8 +48,9 @@ extension UIViewController {
         navigationController?.pushViewController(productsListController, animated: true)
     }
     
-    func pushAddressController(with delegate: AddressViewProtocol?) {
+    func pushAddressController(with checkoutId: String, delegate: AddressViewProtocol?) {
         let addressController = UIStoryboard.address().instantiateViewController(withIdentifier: ControllerIdentifier.address) as! AddressViewController
+        addressController.checkoutId = checkoutId
         addressController.delegate = delegate
         
         navigationController?.pushViewController(addressController, animated: true)

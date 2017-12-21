@@ -13,8 +13,10 @@ class Address: NSObject {
     var firstName = String()
     var lastName = String()
     var address = String()
+    var secondAddress = String()
     var city = String()
     var country = String()
+    var state = String()
     var zip = String()
     var phone: String?
 }

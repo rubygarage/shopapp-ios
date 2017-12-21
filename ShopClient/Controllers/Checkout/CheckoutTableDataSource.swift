@@ -10,6 +10,7 @@ import UIKit
 
 protocol CheckoutTableDataSourceProtocol {
     func cartProducts() -> [CartProduct]
+    func shippingAddress() -> Address?
 }
 
 class CheckoutTableDataSource: NSObject, UITableViewDataSource {
@@ -42,15 +43,28 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     }
     
     // MARK: - private
-    func cartCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutCartTableViewCell {
+    private func cartCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutCartTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutCartTableViewCell.self), for: indexPath) as! CheckoutCartTableViewCell
         cell.configure(with: delegate.cartProducts())
         return cell
     }
     
-    func shippingAddressCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingAddressAddTableCell {
+    private func shippingAddressCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        if let shippingAddress = delegate.shippingAddress() {
+            return shippingAddressEditCell(with: tableView, indexPath: indexPath)
+        } else {
+            return shippingAddressAddCell(with: tableView, indexPath: indexPath)
+        }
+    }
+    
+    private func shippingAddressAddCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingAddressAddTableCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingAddressAddTableCell.self), for: indexPath) as! CheckoutShippingAddressAddTableCell
         cell.configure(with: delegate)
+        return cell
+    }
+    
+    private func shippingAddressEditCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingAddressEditTableCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self), for: indexPath) as! CheckoutShippingAddressEditTableCell
         return cell
     }
 }

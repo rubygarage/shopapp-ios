@@ -14,4 +14,5 @@ class Checkout: NSObject {
     var subtotalPrice: Decimal?
     var totalPrice: Decimal?
     var totalTax: Decimal?
+    var shippingAddress: Address?
 }

@@ -20,5 +20,6 @@ extension Checkout {
         subtotalPrice = item?.subtotalPrice
         totalPrice = item?.totalPrice
         totalTax = item?.totalTax
+//        shippingAddress = Address()
     }
 }

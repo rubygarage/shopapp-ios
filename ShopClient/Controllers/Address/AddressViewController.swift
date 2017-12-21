@@ -26,6 +26,7 @@ class AddressViewController: BaseViewController<AddressViewModel> {
     @IBOutlet weak var checkboxTitleLabel: UILabel!
     
     var delegate: AddressViewProtocol?
+    var checkoutId: String!
     
     override func viewDidLoad() {
         viewModel = AddressViewModel()
@@ -52,6 +53,8 @@ class AddressViewController: BaseViewController<AddressViewModel> {
     }
     
     private func setupViewModel() {
+        viewModel.checkoutId = checkoutId
+        
         countryTextFieldView.textField.rx.text.map({ $0 ?? String() })
             .bind(to: viewModel.countryText)
             .disposed(by: disposeBag)
@@ -89,13 +92,20 @@ class AddressViewController: BaseViewController<AddressViewModel> {
             .disposed(by: disposeBag)
         
         viewModel.isAddressValid
-            .subscribe(onNext: { [weak self] isValid in
+            .subscribe(onNext: { [weak self] (isValid) in
                 self?.submitButton.isEnabled = isValid
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.shippingAddressAdded
+            .subscribe(onNext: { success in
+                // TODO:
             })
             .disposed(by: disposeBag)
         
         submitButton.rx.tap
             .bind(to: viewModel.submitTapped)
             .disposed(by: disposeBag)
+        
     }
 }

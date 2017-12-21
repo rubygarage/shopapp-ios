@@ -18,6 +18,9 @@ class AddressViewModel: BaseViewModel {
     var stateText = Variable<String>("")
     var zipText = Variable<String>("")
     var phoneText = Variable<String>("")
+    var shippingAddressAdded = PublishSubject<Bool>()
+    
+    var checkoutId: String!
     
     private var requiredTextFields: [Observable<String>] {
         get {
@@ -38,22 +41,30 @@ class AddressViewModel: BaseViewModel {
     }
     
     private func submitAction() {
-        // TODO:
+        state.onNext(.loading(showHud: true))
+        Repository.shared.updateShippingAddress(with: checkoutId, address: getAddress()) { [weak self] (result, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            }
+            if let success = result {
+                self?.shippingAddressAdded.onNext(success)
+                self?.state.onNext(.content)
+            }
+        }
     }
  
-    /*
     public func getAddress() -> Address {
         let address = Address()
-        address.email = emailText.value
+        address.country = countryText.value
         address.firstName = firstNameText.value
         address.lastName = lastNameText.value
         address.address = addressText.value
+        address.secondAddress = addressOptionalText.value
         address.city = cityText.value
-        address.country = countryText.value
+        address.state = stateText.value
         address.zip = zipText.value
         address.phone = phoneText.value.isEmpty ? nil : phoneText.value
         
         return address
     }
- */
 }

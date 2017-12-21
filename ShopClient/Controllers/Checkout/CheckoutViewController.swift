@@ -33,8 +33,11 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
         let cartNib = UINib(nibName: String(describing: CheckoutCartTableViewCell.self), bundle: nil)
         tableView?.register(cartNib, forCellReuseIdentifier: String(describing: CheckoutCartTableViewCell.self))
         
-        let shippingAddressNib = UINib(nibName: String(describing: CheckoutShippingAddressAddTableCell.self), bundle: nil)
-        tableView.register(shippingAddressNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressAddTableCell.self))
+        let shippingAddressAddNib = UINib(nibName: String(describing: CheckoutShippingAddressAddTableCell.self), bundle: nil)
+        tableView.register(shippingAddressAddNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressAddTableCell.self))
+        
+        let shippingAddressEditNib = UINib(nibName: String(describing: CheckoutShippingAddressEditTableCell.self), bundle: nil)
+        tableView.register(shippingAddressEditNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self))
         
         tableDataSource = CheckoutTableDataSource(delegate: self)
         tableView?.dataSource = tableDataSource
@@ -62,9 +65,15 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
         return viewModel.cartItems
     }
     
+    func shippingAddress() -> Address? {
+        return viewModel.checkout.value?.shippingAddress
+    }
+    
     // MARK: - CheckoutShippingAddressAddCellProtocol
     func didTapAddNewAddress() {
-        pushAddressController(with: self)
+        if let checkoutId = viewModel.checkout.value?.id {
+            pushAddressController(with: checkoutId, delegate: self)
+        }
     }
     
     // MARK: - AddressViewProtocol

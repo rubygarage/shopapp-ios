@@ -13,8 +13,12 @@ extension Repository {
         APICore?.getCheckout(cartProducts: cartProducts, callback: callback)
     }
     
-    func getShippingRates(with checkout: Checkout, address: Address, callback: @escaping RepoCallback<[ShippingRate]>) {
-        APICore?.getShippingRates(with: checkout, address: address, callback: callback)
+    func updateShippingAddress(with checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>) {
+        APICore?.updateShippingAddress(with: checkoutId, address: address, callback: callback)
+    }
+    
+    func getShippingRates(with checkoutId: String, callback: @escaping RepoCallback<[ShippingRate]>) {
+        APICore?.getShippingRates(with: checkoutId, callback: callback)
     }
     
     func updateCheckout(with rate: ShippingRate, checkout: Checkout, callback: @escaping RepoCallback<Checkout>) {
