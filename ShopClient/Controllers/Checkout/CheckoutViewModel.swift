@@ -16,18 +16,50 @@ enum CheckoutSection: Int {
 }
 
 class CheckoutViewModel: BaseViewModel {
-    var cartItems = Variable<[CartProduct]>([CartProduct]())
+    var cartItems = [CartProduct]()
+    var checkout = Variable<Checkout?>(nil)
     
-    public func loadData() {
+    public func loadData(with disposeBag: DisposeBag) {
         state.onNext(.loading(showHud: true))
-        Repository.shared.getCartProductList { [weak self] (result, error) in
-            if let error = error {
-                self?.state.onNext(.error(error: error))
-            }
-            if let cartItems = result {
-                self?.cartItems.value = cartItems
-                self?.state.onNext(.content)
-            }
+        checkoutSingle.subscribe(onSuccess: { [weak self] (checkout) in
+            self?.checkout.value = checkout
+            self?.state.onNext(.content)
+        }) { [weak self] (error) in
+            let castedError = error as? RepoError
+            self?.state.onNext(.error(error: castedError))
         }
+        .disposed(by: disposeBag)
+    }
+    
+    // MARK: - private
+    private var cartItemsSingle: Single<[CartProduct]> {
+        return Single.create(subscribe: { (event) in
+            Repository.shared.getCartProductList(callback: { [weak self] (result, error) in
+                if let error = error {
+                    event(.error(error))
+                }
+                if let items = result {
+                    self?.cartItems = items
+                    event(.success(items))
+                }
+            })
+            return Disposables.create()
+        })
+    }
+    
+    private var checkoutSingle: Single<Checkout> {
+        return cartItemsSingle.flatMap({ (cartItems) in
+            Single.create(subscribe: { (event) in
+                Repository.shared.getCheckout(cartProducts: cartItems, callback: { (checkout, error) in
+                    if let error = error {
+                        event(.error(error))
+                    }
+                    if let checkout = checkout {
+                        event(.success(checkout))
+                    }
+                })
+                return Disposables.create()
+            })
+        })
     }
 }

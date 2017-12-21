@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTableDataSourceProtocol, SeeAllHeaderViewProtocol, CheckoutShippingAddressAddCellProtocol {
+class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTableDataSourceProtocol, SeeAllHeaderViewProtocol, CheckoutShippingAddressAddCellProtocol, AddressViewProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     var tableDataSource: CheckoutTableDataSource!
@@ -46,24 +46,29 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
     }
     
     private func setupViewModel() {
-        viewModel.cartItems.asObservable()
-            .subscribe(onNext: { [weak self] _ in
+        viewModel.checkout.asObservable()
+            .subscribe(onNext: { [weak self] (checkout) in
                 self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
     
     private func loadData() {
-        viewModel.loadData()
+        viewModel.loadData(with: disposeBag)
     }
     
     // MARK: - CheckoutTableDataSourceProtocol
     func cartProducts() -> [CartProduct] {
-        return viewModel.cartItems.value
+        return viewModel.cartItems
     }
     
     // MARK: - CheckoutShippingAddressAddCellProtocol
     func didTapAddNewAddress() {
+        pushAddressController(with: self)
+    }
+    
+    // MARK: - AddressViewProtocol
+    func didFilled(address: Address) {
         // TODO:
     }
     

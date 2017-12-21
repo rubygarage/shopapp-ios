@@ -31,10 +31,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Place" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ROM-R5-qtb">
-                    <rect key="frame" x="10" y="25.5" width="416" height="16"/>
+                    <rect key="frame" x="10" y="26.5" width="416" height="15"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
                         <action selector="editingChanged:" destination="-1" eventType="editingChanged" id="YRJ-3P-NvJ"/>
@@ -56,7 +56,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zaT-ur-DyI">
-                    <rect key="frame" x="390" y="17.5" width="46" height="32"/>
+                    <rect key="frame" x="390" y="18" width="46" height="32"/>
                     <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                     <state key="normal" image="show_password_default"/>
                     <state key="selected" image="show_password_selected"/>

@@ -15,7 +15,7 @@
 "ControllerTitle.SignIn" = "Sign In";
 "ControllerTitle.SignUp" = "Sign Up";
 "ControllerTitle.Checkout" = "Checkout";
-"ControllerTitle.ShippingAddress" = "Shipping Address";
+"ControllerTitle.AddNewAddress" = "Add New Address";
 "ControllerTitle.BillingAddress" = "Billing Address";
 
 "Alert.Error" = "Error";
@@ -43,6 +43,7 @@
 "Button.Remove" = "Remove";
 "Button.Clear" = "Clear";
 "Button.AddNewAddress" = "Add new Address";
+"Button.Submit" = "Submit";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";
@@ -67,6 +68,7 @@
 "Label.Welcome" = "Welcome";
 "Label.CustomerName" = "%@ %@";
 "Label.YourCartIsEmpty" = "Your cart is empty :(";
+"Label.DefaultShippingAddress" = "Default shipping address";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";
@@ -83,3 +85,10 @@
 "Placeholder.PhoneNumber" = "Phone number";
 "Placeholder.CreatePassword" = "Create a Password*";
 "Placeholder.Search" = "Search";
+"Placeholder.Country" = "Country";
+"Placeholder.Address" = "Address";
+"Placeholder.AddressOptional" = "Address 2 (optional)";
+"Placeholder.City" = "City";
+"Placeholder.State" = "State";
+"Placeholder.ZipCode" = "Zip Code";
+"Placeholder.PhoneNumber" = "Phone Number";

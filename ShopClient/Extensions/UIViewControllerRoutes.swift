@@ -47,6 +47,13 @@ extension UIViewController {
         
         navigationController?.pushViewController(productsListController, animated: true)
     }
+    
+    func pushAddressController(with delegate: AddressViewProtocol?) {
+        let addressController = UIStoryboard.address().instantiateViewController(withIdentifier: ControllerIdentifier.address) as! AddressViewController
+        addressController.delegate = delegate
+        
+        navigationController?.pushViewController(addressController, animated: true)
+    }
 
     // MARK: - set
     func setHomeController() {
@@ -85,12 +92,6 @@ extension UIViewController {
         sortController.modalPresentationStyle = .overCurrentContext
         sortController.modalTransitionStyle = .crossDissolve
         present(sortController, animated: true)
-    }
-    
-    func showAddressController(with delegate: AddressViewProtocol?) {
-        let addressController = UIStoryboard.address().instantiateViewController(withIdentifier: ControllerIdentifier.address) as! AddressViewController
-        addressController.delegate = delegate
-        present(addressController, animated: true)
     }
     
     func showBillingAddressController(with preloadedAddress: Address, delegate: BillingAddressViewProtocol?) {

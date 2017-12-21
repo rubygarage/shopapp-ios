@@ -205,8 +205,7 @@ class API: NSObject, APIInterface {
     
     // MARK: - payments
     func getCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
-        let email = sessionData().email
-        let query = checkoutQuery(email: email, cartProducts: cartProducts)
+        let query = checkoutQuery(cartProducts: cartProducts)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
             if let checkout = response?.checkoutCreate?.checkout {
                 let checkoutItem = Checkout(with: checkout)
@@ -479,15 +478,14 @@ class API: NSObject, APIInterface {
         })
     }
     
-    private func checkoutQuery(email: String?, cartProducts: [CartProduct]) -> Storefront.MutationQuery {
+    private func checkoutQuery(cartProducts: [CartProduct]) -> Storefront.MutationQuery {
         return Storefront.buildMutation({ $0
-            .checkoutCreate(input: self.checkoutInput(email: email, cartProducts: cartProducts), self.checkoutCreatePayloadQuery())
+            .checkoutCreate(input: self.checkoutInput(cartProducts: cartProducts), self.checkoutCreatePayloadQuery())
         })
     }
     
-    private func checkoutInput(email: String?, cartProducts: [CartProduct]) -> Storefront.CheckoutCreateInput {
+    private func checkoutInput(cartProducts: [CartProduct]) -> Storefront.CheckoutCreateInput {
         let checkout = Storefront.CheckoutCreateInput.create()
-        checkout.email = Input<String>(orNull: email)
         checkout.lineItems = Input<[Storefront.CheckoutLineItemInput]>(orNull: checkoutLineItemInput(cartProducts: cartProducts))
         
         return checkout
