@@ -55,16 +55,16 @@ class AddressViewModel: BaseViewModel {
  
     public func getAddress() -> Address {
         let address = Address()
-        address.country = countryText.value
-        address.firstName = firstNameText.value
-        address.lastName = lastNameText.value
-        address.address = addressText.value
-        address.secondAddress = addressOptionalText.value
-        address.city = cityText.value
-        address.state = stateText.value
-        address.zip = zipText.value
-        address.phone = phoneText.value.isEmpty ? nil : phoneText.value
-        
+        address.country = countryText.value.trimmingCharacters(in: .whitespaces)
+        address.firstName = firstNameText.value.trimmingCharacters(in: .whitespaces)
+        address.lastName = lastNameText.value.trimmingCharacters(in: .whitespaces)
+        address.address = addressText.value.trimmingCharacters(in: .whitespaces)
+        address.secondAddress = addressOptionalText.value.trimmingCharacters(in: .whitespaces)
+        address.city = cityText.value.trimmingCharacters(in: .whitespaces)
+        address.state = stateText.value.trimmingCharacters(in: .whitespaces)
+        address.zip = zipText.value.trimmingCharacters(in: .whitespaces)
+        address.phone = phoneText.value.trimmingCharacters(in: .whitespaces)
+
         return address
     }
 }
