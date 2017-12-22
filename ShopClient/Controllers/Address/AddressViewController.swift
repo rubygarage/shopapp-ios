@@ -9,7 +9,7 @@
 import RxSwift
 
 protocol AddressViewProtocol {
-    func didFilled(address: Address)
+    func didUpdatedShippingAddress()
 }
 
 class AddressViewController: BaseViewController<AddressViewModel> {
@@ -98,8 +98,9 @@ class AddressViewController: BaseViewController<AddressViewModel> {
             .disposed(by: disposeBag)
         
         viewModel.shippingAddressAdded
-            .subscribe(onNext: { success in
-                // TODO:
+            .subscribe(onNext: { [weak self] (success) in
+                self?.delegate?.didUpdatedShippingAddress()
+                self?.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
         

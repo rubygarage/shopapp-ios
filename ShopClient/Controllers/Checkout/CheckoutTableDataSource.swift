@@ -51,7 +51,7 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     
     private func shippingAddressCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         if let shippingAddress = delegate.shippingAddress() {
-            return shippingAddressEditCell(with: tableView, indexPath: indexPath)
+            return shippingAddressEditCell(with: tableView, indexPath: indexPath, address: shippingAddress)
         } else {
             return shippingAddressAddCell(with: tableView, indexPath: indexPath)
         }
@@ -63,8 +63,9 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
         return cell
     }
     
-    private func shippingAddressEditCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingAddressEditTableCell {
+    private func shippingAddressEditCell(with tableView: UITableView, indexPath: IndexPath, address: Address) -> CheckoutShippingAddressEditTableCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self), for: indexPath) as! CheckoutShippingAddressEditTableCell
+        cell.configure(with: address)
         return cell
     }
 }

@@ -31,6 +31,19 @@ class CheckoutViewModel: BaseViewModel {
         .disposed(by: disposeBag)
     }
     
+    public func getCheckout() {
+        let checkoutId = checkout.value?.id ?? String()
+        Repository.shared.getCheckout(with: checkoutId) { [weak self] (result, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            }
+            if let checkout = result {
+                self?.checkout.value = checkout
+                self?.state.onNext(.content)
+            }
+        }
+    }
+    
     // MARK: - private
     private var cartItemsSingle: Single<[CartProduct]> {
         return Single.create(subscribe: { (event) in
@@ -50,7 +63,7 @@ class CheckoutViewModel: BaseViewModel {
     private var checkoutSingle: Single<Checkout> {
         return cartItemsSingle.flatMap({ (cartItems) in
             Single.create(subscribe: { (event) in
-                Repository.shared.getCheckout(cartProducts: cartItems, callback: { (checkout, error) in
+                Repository.shared.createCheckout(cartProducts: cartItems, callback: { (checkout, error) in
                     if let error = error {
                         event(.error(error))
                     }

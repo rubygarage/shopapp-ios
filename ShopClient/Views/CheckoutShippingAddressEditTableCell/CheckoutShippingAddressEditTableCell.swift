@@ -12,6 +12,16 @@ class CheckoutShippingAddressEditTableCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        selectionStyle = .none
+    }
+    
+    func configure(with address: Address) {
+        populateViews(with: address)
+    }
+    
+    // MARK: - private
+    private func populateViews(with address: Address) {
+        
     }
 }

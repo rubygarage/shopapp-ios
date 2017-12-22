@@ -77,8 +77,8 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
     }
     
     // MARK: - AddressViewProtocol
-    func didFilled(address: Address) {
-        // TODO:
+    func didUpdatedShippingAddress() {
+        viewModel.getCheckout()
     }
     
     // MARK: - SeeAllHeaderViewProtocol

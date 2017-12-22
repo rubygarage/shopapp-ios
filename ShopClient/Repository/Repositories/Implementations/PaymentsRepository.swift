@@ -9,8 +9,12 @@
 import Foundation
 
 extension Repository {
-    func getCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
-        APICore?.getCheckout(cartProducts: cartProducts, callback: callback)
+    func createCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
+        APICore?.createCheckout(cartProducts: cartProducts, callback: callback)
+    }
+    
+    func getCheckout(with checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
+        APICore?.getCheckout(with: checkoutId, callback: callback)
     }
     
     func updateShippingAddress(with checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>) {

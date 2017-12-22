@@ -25,7 +25,6 @@ class CheckoutShippingAddressAddTableCell: UITableViewCell {
     }
     
     func configure(with delegate: CheckoutShippingAddressAddCellProtocol) {
-        
         self.delegate = delegate
     }
     

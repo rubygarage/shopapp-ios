@@ -204,13 +204,28 @@ class API: NSObject, APIInterface {
     }
     
     // MARK: - payments
-    func getCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
-        let query = checkoutQuery(cartProducts: cartProducts)
+    func createCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
+        let query = checkoutCreateQuery(cartProducts: cartProducts)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
             if let checkout = response?.checkoutCreate?.checkout {
                 let checkoutItem = Checkout(with: checkout)
                 callback(checkoutItem, nil)
             } else if let error = response?.checkoutCreate?.userErrors.first {
+                let responseError = self?.process(error: error)
+                callback(nil, responseError)
+            } else {
+                callback(nil, ContentError())
+            }
+        })
+        run(task: task, callback: callback)
+    }
+    
+    func getCheckout(with checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
+        let query = checkoutGetQuery(with: checkoutId)
+        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
+            if let checkout = Checkout(with: response?.node as? Storefront.Checkout) {
+                callback(checkout, nil)
+            } else if let error = error {
                 let responseError = self?.process(error: error)
                 callback(nil, responseError)
             } else {
@@ -494,16 +509,24 @@ class API: NSObject, APIInterface {
         })
     }
     
-    private func checkoutQuery(cartProducts: [CartProduct]) -> Storefront.MutationQuery {
+    private func checkoutCreateQuery(cartProducts: [CartProduct]) -> Storefront.MutationQuery {
         return Storefront.buildMutation({ $0
             .checkoutCreate(input: self.checkoutInput(cartProducts: cartProducts), self.checkoutCreatePayloadQuery())
+        })
+    }
+    
+    private func checkoutGetQuery(with checkoutId: String) -> Storefront.QueryRootQuery {
+        let id = GraphQL.ID.init(rawValue: checkoutId)
+        return Storefront.buildQuery({ $0
+            .node(id: id, { $0
+                .onCheckout(subfields: self.checkoutQuery())
+            })
         })
     }
     
     private func checkoutInput(cartProducts: [CartProduct]) -> Storefront.CheckoutCreateInput {
         let checkout = Storefront.CheckoutCreateInput.create()
         checkout.lineItems = Input<[Storefront.CheckoutLineItemInput]>(orNull: checkoutLineItemInput(cartProducts: cartProducts))
-        
         return checkout
     }
     
