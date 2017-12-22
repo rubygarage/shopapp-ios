@@ -9,11 +9,16 @@
 import UIKit
 
 class CheckoutShippingAddressEditTableCell: UITableViewCell {
-
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         selectionStyle = .none
+        setupViews()
     }
     
     func configure(with address: Address) {
@@ -21,7 +26,13 @@ class CheckoutShippingAddressEditTableCell: UITableViewCell {
     }
     
     // MARK: - private
+    private func setupViews() {
+        editButton.setTitle(NSLocalizedString("Button.Edit", comment: String()).uppercased(), for: .normal)
+    }
+    
     private func populateViews(with address: Address) {
-        
+        nameLabel.text = address.fullname
+        addressLabel.text = address.fullAddress
+        phoneLabel.text = address.phone
     }
 }

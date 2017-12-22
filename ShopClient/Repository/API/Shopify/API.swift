@@ -888,6 +888,7 @@ class API: NSObject, APIInterface {
 internal extension Storefront.MailingAddressInput {
     func update(with address: Address) {
         address1 = Input<String>(orNull: address.address)
+        address2 = Input<String>(orNull: address.secondAddress)
         city = Input<String>(orNull: address.city)
         country = Input<String>(orNull: address.country)
         firstName = Input<String>(orNull: address.firstName)

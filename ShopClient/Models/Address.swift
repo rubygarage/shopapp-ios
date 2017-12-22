@@ -18,4 +18,24 @@ class Address: NSObject {
     var state: String?
     var zip: String?
     var phone: String?
+    
+    var fullname: String {
+        return "\(firstName ?? String()) \(lastName ?? String())"
+    }
+    
+    var fullAddress: String {
+        var result = String()
+        for addressPart in [address, secondAddress, city, zip, country] {
+            if let text = addressPart {
+                result += result.isEmpty ? text : text.asPart()
+            }
+        }
+        return result
+    }
+}
+
+internal extension String {
+    func asPart() -> String {
+        return ", \(self)"
+    }
 }
