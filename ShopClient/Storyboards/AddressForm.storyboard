@@ -135,14 +135,16 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="El3-8Q-w4C" userLabel="Checkbox View">
                                                 <rect key="frame" x="35" y="616" width="305" height="24"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWI-19-6h5" customClass="CheckboxButton" customModule="ShopClient" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWI-19-6h5" customClass="CheckboxButton" customModule="ShopClient" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="24" id="rZM-Is-ZPl"/>
                                                             <constraint firstAttribute="height" constant="24" id="vwC-ei-dRS"/>
                                                         </constraints>
-                                                        <state key="normal" title="D"/>
-                                                        <state key="selected" title="S"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="selected" image="check">
+                                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b16-N0-mi9">
                                                         <rect key="frame" x="34" y="4" width="261" height="16"/>
@@ -250,4 +252,7 @@
             <point key="canvasLocation" x="448.80000000000001" y="-109.74512743628186"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="check" width="14" height="11"/>
+    </resources>
 </document>
