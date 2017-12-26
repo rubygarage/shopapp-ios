@@ -67,7 +67,8 @@
 "Label.SignInToShop" = "Sign In to shop and view orders";
 "Label.SortBy" = "Sort by:";
 "Label.Welcome" = "Welcome";
-"Label.CustomerName" = "%@ %@";
+"Label.FullName" = "%@ %@";
+"Label.Phone" = "Tel: %@";
 "Label.YourCartIsEmpty" = "Your cart is empty :(";
 "Label.DefaultShippingAddress" = "Default shipping address";
 

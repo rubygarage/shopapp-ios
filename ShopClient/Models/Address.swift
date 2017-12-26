@@ -20,7 +20,8 @@ class Address: NSObject {
     var phone: String?
     
     var fullname: String {
-        return "\(firstName ?? String()) \(lastName ?? String())"
+        let customerNameLocalized = NSLocalizedString("Label.FullName", comment: String())
+        return String.localizedStringWithFormat(customerNameLocalized, firstName ?? String(), lastName ?? String())
     }
     
     var fullAddress: String {

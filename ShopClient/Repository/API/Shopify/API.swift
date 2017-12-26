@@ -771,6 +771,8 @@ class API: NSObject, APIInterface {
             query.firstName()
             query.lastName()
             query.phone()
+            query.defaultAddress(self.mailingAddressQuery())
+            query.addresses(first: kShopifyItemsMaxCount, self.mailingAddressConnectionQuery())
         }
     }
     
@@ -802,11 +804,23 @@ class API: NSObject, APIInterface {
             query.subtotalPrice()
             query.totalPrice()
             query.totalTax()
-            query.shippingAddress(self.shippingAddressQuery())
+            query.shippingAddress(self.mailingAddressQuery())
         }
     }
     
-    private func shippingAddressQuery() -> (Storefront.MailingAddressQuery) -> () {
+    private func mailingAddressConnectionQuery() -> (Storefront.MailingAddressConnectionQuery) -> () {
+        return { (query) in
+            query.edges(self.mailingAddressEdgeQuery())
+        }
+    }
+    
+    private func mailingAddressEdgeQuery() -> (Storefront.MailingAddressEdgeQuery) -> () {
+        return { (query) in
+            query.node(self.mailingAddressQuery())
+        }
+    }
+    
+    private func mailingAddressQuery() -> (Storefront.MailingAddressQuery) -> () {
         return { (query) in
             query.country()
             query.firstName()

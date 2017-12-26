@@ -23,7 +23,7 @@ class CheckoutViewModel: BaseViewModel {
         state.onNext(.loading(showHud: true))
         checkoutSingle.subscribe(onSuccess: { [weak self] (checkout) in
             self?.checkout.value = checkout
-            self?.state.onNext(.content)
+            self?.getCustomer()
         }) { [weak self] (error) in
             let castedError = error as? RepoError
             self?.state.onNext(.error(error: castedError))
@@ -74,5 +74,15 @@ class CheckoutViewModel: BaseViewModel {
                 return Disposables.create()
             })
         })
+    }
+    
+    private func getCustomer() {
+        Repository.shared.getCustomer { [weak self] (result, error) in
+            if let customer = result {
+                print("ssss")
+            } else {
+                self?.state.onNext(.content)
+            }
+        }
     }
 }

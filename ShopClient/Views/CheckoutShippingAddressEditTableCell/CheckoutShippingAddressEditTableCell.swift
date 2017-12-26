@@ -33,6 +33,11 @@ class CheckoutShippingAddressEditTableCell: UITableViewCell {
     private func populateViews(with address: Address) {
         nameLabel.text = address.fullname
         addressLabel.text = address.fullAddress
-        phoneLabel.text = address.phone
+        if let phoneText = address.phone {
+            let customerNameLocalized = NSLocalizedString("Label.Phone", comment: String())
+            phoneLabel.text = String.localizedStringWithFormat(customerNameLocalized, phoneText)
+        } else {
+            phoneLabel.text = nil
+        }
     }
 }

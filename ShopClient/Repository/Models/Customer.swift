@@ -15,9 +15,7 @@ class Customer: NSObject {
     var phone: String?
     
     var fullname: String {
-        get {
-            let customerNameLocalized = NSLocalizedString("Label.CustomerName", comment: String())
-            return String.localizedStringWithFormat(customerNameLocalized, firstName ?? String(), lastName ?? String())
-        }
+        let customerNameLocalized = NSLocalizedString("Label.FullName", comment: String())
+        return String.localizedStringWithFormat(customerNameLocalized, firstName ?? String(), lastName ?? String())
     }
 }
