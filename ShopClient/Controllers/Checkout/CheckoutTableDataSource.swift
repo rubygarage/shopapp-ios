@@ -14,9 +14,9 @@ protocol CheckoutTableDataSourceProtocol {
 }
 
 class CheckoutTableDataSource: NSObject, UITableViewDataSource {
-    var delegate: (CheckoutTableDataSourceProtocol & CheckoutShippingAddressAddCellProtocol)!
+    var delegate: (CheckoutTableDataSourceProtocol & CheckoutShippingAddressAddCellProtocol & CheckoutShippingAddressEditCellProtocol)!
     
-    init(delegate: CheckoutTableDataSourceProtocol & CheckoutShippingAddressAddCellProtocol) {
+    init(delegate: CheckoutTableDataSourceProtocol & CheckoutShippingAddressAddCellProtocol & CheckoutShippingAddressEditCellProtocol) {
         super.init()
         
         self.delegate = delegate
@@ -65,7 +65,7 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     
     private func shippingAddressEditCell(with tableView: UITableView, indexPath: IndexPath, address: Address) -> CheckoutShippingAddressEditTableCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self), for: indexPath) as! CheckoutShippingAddressEditTableCell
-        cell.configure(with: address)
+        cell.configure(with: address, delegate: delegate)
         return cell
     }
 }

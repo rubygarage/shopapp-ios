@@ -1,5 +1,5 @@
 //
-//  BillingAddressViewController.swift
+//  AddressFormViewController.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 11/21/17.
@@ -8,11 +8,11 @@
 
 import RxSwift
 
-protocol AddressViewProtocol {
+protocol AddressFormViewProtocol {
     func didUpdatedShippingAddress()
 }
 
-class AddressViewController: BaseViewController<AddressViewModel> {
+class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     @IBOutlet weak var countryTextFieldView: InputTextFieldView!
     @IBOutlet weak var nameTextFieldView: InputTextFieldView!
     @IBOutlet weak var lastNameTextFieldView: InputTextFieldView!
@@ -25,11 +25,11 @@ class AddressViewController: BaseViewController<AddressViewModel> {
     @IBOutlet weak var submitButton: BlackButton!
     @IBOutlet weak var checkboxTitleLabel: UILabel!
     
-    var delegate: AddressViewProtocol?
+    var delegate: AddressFormViewProtocol?
     var checkoutId: String!
     
     override func viewDidLoad() {
-        viewModel = AddressViewModel()
+        viewModel = AddressFormViewModel()
         super.viewDidLoad()
 
         setupViews()

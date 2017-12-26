@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol CheckoutShippingAddressEditCellProtocol {
+    func didTapEdit()
+}
+
 class CheckoutShippingAddressEditTableCell: UITableViewCell {
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
+    
+    var delegate: CheckoutShippingAddressEditCellProtocol!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,7 +27,8 @@ class CheckoutShippingAddressEditTableCell: UITableViewCell {
         setupViews()
     }
     
-    func configure(with address: Address) {
+    func configure(with address: Address, delegate: CheckoutShippingAddressEditCellProtocol) {
+        self.delegate = delegate
         populateViews(with: address)
     }
     
@@ -40,4 +47,10 @@ class CheckoutShippingAddressEditTableCell: UITableViewCell {
             phoneLabel.text = nil
         }
     }
+    
+    // MARK: - actions
+    @IBAction func editTapped(_ sender: UIButton) {
+        delegate.didTapEdit()
+    }
+    
 }

@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		610424271FC477A900EFEFDA /* Address.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 610424261FC477A900EFEFDA /* Address.storyboard */; };
-		6104242A1FC477D100EFEFDA /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610424291FC477D100EFEFDA /* AddressViewController.swift */; };
-		6104242C1FC477F000EFEFDA /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6104242B1FC477F000EFEFDA /* AddressViewModel.swift */; };
+		610424271FC477A900EFEFDA /* AddressForm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 610424261FC477A900EFEFDA /* AddressForm.storyboard */; };
+		6104242A1FC477D100EFEFDA /* AddressFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610424291FC477D100EFEFDA /* AddressFormViewController.swift */; };
+		6104242C1FC477F000EFEFDA /* AddressFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6104242B1FC477F000EFEFDA /* AddressFormViewModel.swift */; };
 		6106C6C81F7A40A600E87486 /* ArticleDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6106C6C71F7A40A600E87486 /* ArticleDetails.storyboard */; };
 		6106C6CB1F7A40F400E87486 /* ArticleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6106C6CA1F7A40F400E87486 /* ArticleDetailsViewController.swift */; };
 		610873AB1F7D027200BF81CA /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610873A51F7D027200BF81CA /* ProductDetailsViewController.swift */; };
@@ -242,9 +242,9 @@
 /* Begin PBXFileReference section */
 		10BBCCE808D12F6C873F9215 /* Pods-ShopClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShopClient/Pods-ShopClient.release.xcconfig"; sourceTree = "<group>"; };
 		38B8C07405420E82AD6AAA3E /* Pods-ShopClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShopClient/Pods-ShopClient.debug.xcconfig"; sourceTree = "<group>"; };
-		610424261FC477A900EFEFDA /* Address.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Address.storyboard; sourceTree = "<group>"; };
-		610424291FC477D100EFEFDA /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
-		6104242B1FC477F000EFEFDA /* AddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
+		610424261FC477A900EFEFDA /* AddressForm.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddressForm.storyboard; sourceTree = "<group>"; };
+		610424291FC477D100EFEFDA /* AddressFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressFormViewController.swift; sourceTree = "<group>"; };
+		6104242B1FC477F000EFEFDA /* AddressFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressFormViewModel.swift; sourceTree = "<group>"; };
 		6106C6C71F7A40A600E87486 /* ArticleDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArticleDetails.storyboard; sourceTree = "<group>"; };
 		6106C6CA1F7A40F400E87486 /* ArticleDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsViewController.swift; sourceTree = "<group>"; };
 		610873A51F7D027200BF81CA /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
@@ -490,13 +490,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		610424281FC477B300EFEFDA /* Address */ = {
+		610424281FC477B300EFEFDA /* AddressForm */ = {
 			isa = PBXGroup;
 			children = (
-				610424291FC477D100EFEFDA /* AddressViewController.swift */,
-				6104242B1FC477F000EFEFDA /* AddressViewModel.swift */,
+				610424291FC477D100EFEFDA /* AddressFormViewController.swift */,
+				6104242B1FC477F000EFEFDA /* AddressFormViewModel.swift */,
 			);
-			path = Address;
+			path = AddressForm;
 			sourceTree = "<group>";
 		};
 		6106C6C91F7A40DF00E87486 /* ArticleDetails */ = {
@@ -625,7 +625,7 @@
 			children = (
 				61BA57041FDFF94800BF1586 /* Authentification */,
 				617DE1831FB5E9C1004EEF9A /* Account */,
-				610424281FC477B300EFEFDA /* Address */,
+				610424281FC477B300EFEFDA /* AddressForm */,
 				6106C6C91F7A40DF00E87486 /* ArticleDetails */,
 				6152B1221F7914DB00045A42 /* ArticlesList */,
 				61ED88ED1F716F57006BDA79 /* Base */,
@@ -835,7 +835,7 @@
 			isa = PBXGroup;
 			children = (
 				617DE1811FB5E9B4004EEF9A /* Account.storyboard */,
-				610424261FC477A900EFEFDA /* Address.storyboard */,
+				610424261FC477A900EFEFDA /* AddressForm.storyboard */,
 				6106C6C71F7A40A600E87486 /* ArticleDetails.storyboard */,
 				6152B1201F79149900045A42 /* ArticlesList.storyboard */,
 				617DE1861FB5EFFB004EEF9A /* Authetification.storyboard */,
@@ -1532,7 +1532,7 @@
 				613258631FD6EA5500513854 /* SeeAllTableHeaderView.xib in Resources */,
 				61236D531FEA83F500D64198 /* CheckoutCartCollectionCell.xib in Resources */,
 				61AAB92A1F7BC1F700CD32D3 /* SortModal.storyboard in Resources */,
-				610424271FC477A900EFEFDA /* Address.storyboard in Resources */,
+				610424271FC477A900EFEFDA /* AddressForm.storyboard in Resources */,
 				614142D41F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.xib in Resources */,
 				617DE1871FB5EFFB004EEF9A /* Authetification.storyboard in Resources */,
 				61836C1D1FD97AD6000A6BA6 /* AccountNotLoggedHeaderView.xib in Resources */,
@@ -1652,7 +1652,7 @@
 				61D7A2861F7A9FBF00031093 /* UIViewControllerBarButtonItems.swift in Sources */,
 				611947851FD95A80008BE9C6 /* AccountTableViewCell.swift in Sources */,
 				61C95EA41FB38FC500543B40 /* CartViewController.swift in Sources */,
-				6104242C1FC477F000EFEFDA /* AddressViewModel.swift in Sources */,
+				6104242C1FC477F000EFEFDA /* AddressFormViewModel.swift in Sources */,
 				611947811FD87540008BE9C6 /* AccountViewModel.swift in Sources */,
 				61E8A21F1FAC93560092EDC1 /* ArticlesListViewModel.swift in Sources */,
 				61ED88FB1F71721D006BDA79 /* GridCollectionDelegate.swift in Sources */,
@@ -1726,7 +1726,7 @@
 				613339331F695A820063A754 /* UIViewControllerChilds.swift in Sources */,
 				61087CAC1FB0BC9200D774BB /* ProductDetailsViewModel.swift in Sources */,
 				614142D61F6BD70400379BB9 /* LastArrivalsTableDataSource.swift in Sources */,
-				6104242A1FC477D100EFEFDA /* AddressViewController.swift in Sources */,
+				6104242A1FC477D100EFEFDA /* AddressFormViewController.swift in Sources */,
 				61AAB9301F7BD07B00CD32D3 /* SortModalTableViewCell.swift in Sources */,
 				61B6141F1FEAC94E00A4FB82 /* CheckoutViewModel.swift in Sources */,
 				615A97751FA0AF0000C6095D /* ShopifyAuthorAdapter.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTableDataSourceProtocol, SeeAllHeaderViewProtocol, CheckoutShippingAddressAddCellProtocol, AddressViewProtocol {
+class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTableDataSourceProtocol, SeeAllHeaderViewProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, AddressFormViewProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     var tableDataSource: CheckoutTableDataSource!
@@ -72,11 +72,16 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
     // MARK: - CheckoutShippingAddressAddCellProtocol
     func didTapAddNewAddress() {
         if let checkoutId = viewModel.checkout.value?.id {
-            pushAddressController(with: checkoutId, delegate: self)
+            pushAddressFormController(with: checkoutId, delegate: self)
         }
     }
     
-    // MARK: - AddressViewProtocol
+    // MARK: - CheckoutShippingAddressEditCellProtocol
+    func didTapEdit() {
+        // TODO:
+    }
+    
+    // MARK: - AddressFormViewProtocol
     func didUpdatedShippingAddress() {
         viewModel.getCheckout()
     }

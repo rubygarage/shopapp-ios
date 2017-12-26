@@ -1,5 +1,5 @@
 //
-//  CardValidationViewModel.swift
+//  AddressFormViewModel.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 11/21/17.
@@ -8,7 +8,7 @@
 
 import RxSwift
 
-class AddressViewModel: BaseViewModel {
+class AddressFormViewModel: BaseViewModel {
     var countryText = Variable<String>("")
     var firstNameText = Variable<String>("")
     var lastNameText = Variable<String>("")

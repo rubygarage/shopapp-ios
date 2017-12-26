@@ -48,12 +48,12 @@ extension UIViewController {
         navigationController?.pushViewController(productsListController, animated: true)
     }
     
-    func pushAddressController(with checkoutId: String, delegate: AddressViewProtocol?) {
-        let addressController = UIStoryboard.address().instantiateViewController(withIdentifier: ControllerIdentifier.address) as! AddressViewController
-        addressController.checkoutId = checkoutId
-        addressController.delegate = delegate
+    func pushAddressFormController(with checkoutId: String, delegate: AddressFormViewProtocol?) {
+        let addressFormController = UIStoryboard.addressForm().instantiateViewController(withIdentifier: ControllerIdentifier.addressForm) as! AddressFormViewController
+        addressFormController.checkoutId = checkoutId
+        addressFormController.delegate = delegate
         
-        navigationController?.pushViewController(addressController, animated: true)
+        navigationController?.pushViewController(addressFormController, animated: true)
     }
 
     // MARK: - set

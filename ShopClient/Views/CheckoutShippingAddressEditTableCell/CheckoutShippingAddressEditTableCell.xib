@@ -33,6 +33,9 @@
                         <state key="normal" title="Edit">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
+                        <connections>
+                            <action selector="editTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="IYK-VP-6ub"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Address Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oeV-of-kde">
                         <rect key="frame" x="16" y="40" width="292" height="14.5"/>
