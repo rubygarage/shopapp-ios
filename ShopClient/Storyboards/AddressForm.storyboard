@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -136,13 +135,15 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="El3-8Q-w4C" userLabel="Checkbox View">
                                                 <rect key="frame" x="35" y="616" width="305" height="24"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezP-xg-iAy">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWI-19-6h5" customClass="CheckboxButton" customModule="ShopClient" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" secondItem="ezP-xg-iAy" secondAttribute="height" multiplier="1:1" id="JPH-8T-M4f"/>
+                                                            <constraint firstAttribute="width" constant="24" id="rZM-Is-ZPl"/>
+                                                            <constraint firstAttribute="height" constant="24" id="vwC-ei-dRS"/>
                                                         </constraints>
-                                                    </view>
+                                                        <state key="normal" title="D"/>
+                                                        <state key="selected" title="S"/>
+                                                    </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b16-N0-mi9">
                                                         <rect key="frame" x="34" y="4" width="261" height="16"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -152,12 +153,11 @@
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstItem="b16-N0-mi9" firstAttribute="leading" secondItem="ezP-xg-iAy" secondAttribute="trailing" constant="10" id="2Qs-hJ-PUm"/>
-                                                    <constraint firstItem="ezP-xg-iAy" firstAttribute="leading" secondItem="El3-8Q-w4C" secondAttribute="leading" id="8cJ-HJ-IcE"/>
+                                                    <constraint firstItem="b16-N0-mi9" firstAttribute="leading" secondItem="lWI-19-6h5" secondAttribute="trailing" constant="10" id="6Lo-LY-wGU"/>
                                                     <constraint firstItem="b16-N0-mi9" firstAttribute="centerY" secondItem="El3-8Q-w4C" secondAttribute="centerY" id="AN2-wB-qAu"/>
+                                                    <constraint firstItem="lWI-19-6h5" firstAttribute="leading" secondItem="El3-8Q-w4C" secondAttribute="leading" id="CqE-oC-11m"/>
+                                                    <constraint firstItem="lWI-19-6h5" firstAttribute="centerY" secondItem="El3-8Q-w4C" secondAttribute="centerY" id="MNI-Vh-gqA"/>
                                                     <constraint firstAttribute="height" constant="24" id="aJd-cD-J6u"/>
-                                                    <constraint firstAttribute="bottom" secondItem="ezP-xg-iAy" secondAttribute="bottom" id="l8B-Ez-Gsf"/>
-                                                    <constraint firstItem="ezP-xg-iAy" firstAttribute="top" secondItem="El3-8Q-w4C" secondAttribute="top" id="qED-4G-LNL"/>
                                                     <constraint firstAttribute="trailing" secondItem="b16-N0-mi9" secondAttribute="trailing" constant="10" id="s9m-bl-DkW"/>
                                                 </constraints>
                                             </view>
@@ -236,6 +236,7 @@
                         <outlet property="checkboxTitleLabel" destination="b16-N0-mi9" id="OtH-o4-mrd"/>
                         <outlet property="cityTextFieldView" destination="DhK-ro-F2h" id="rtk-Sv-mdH"/>
                         <outlet property="countryTextFieldView" destination="ZIe-rT-Va1" id="kx4-4i-s5c"/>
+                        <outlet property="defaultAddressButton" destination="lWI-19-6h5" id="NQI-UQ-Rca"/>
                         <outlet property="lastNameTextFieldView" destination="zuy-HC-Bm4" id="LI8-Xv-6ci"/>
                         <outlet property="nameTextFieldView" destination="QDz-U5-w8h" id="y9g-gL-ucy"/>
                         <outlet property="phoneTextFieldView" destination="gqR-Ka-YWC" id="jlI-NY-dT3"/>

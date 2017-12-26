@@ -19,6 +19,7 @@ class AddressFormViewModel: BaseViewModel {
     var zipText = Variable<String>("")
     var phoneText = Variable<String>("")
     var shippingAddressAdded = PublishSubject<Bool>()
+    var useDefaultShippingAddress = Variable<Bool>(false)
     
     var checkoutId: String!
     
@@ -40,17 +41,45 @@ class AddressFormViewModel: BaseViewModel {
         }
     }
     
+    var useDefaultAddressTapped: AnyObserver<()> {
+        return AnyObserver { [weak self] event in
+            self?.updateCheckbox()
+        }
+    }
+    
     private func submitAction() {
         state.onNext(.loading(showHud: true))
         Repository.shared.updateShippingAddress(with: checkoutId, address: getAddress()) { [weak self] (result, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }
-            if let success = result {
-                self?.shippingAddressAdded.onNext(success)
-                self?.state.onNext(.content)
+            if let _ = result {
+                self?.updateCustomerDefaultAddressIfNeeded()
             }
         }
+    }
+    
+    private func updateCustomerDefaultAddressIfNeeded() {
+        if useDefaultShippingAddress.value {
+            updateCustomerDefaultAddress()
+        } else {
+            notifyAboutChanges()
+        }
+    }
+    
+    private func updateCustomerDefaultAddress() {
+        Repository.shared.updateCustomerDefaultAddress(with: getAddress()) { [weak self] (success, error) in
+            self?.notifyAboutChanges()
+        }
+    }
+    
+    private func notifyAboutChanges() {
+        shippingAddressAdded.onNext(true)
+        state.onNext(.content)
+    }
+    
+    private func updateCheckbox() {
+        useDefaultShippingAddress.value = !useDefaultShippingAddress.value
     }
  
     public func getAddress() -> Address {

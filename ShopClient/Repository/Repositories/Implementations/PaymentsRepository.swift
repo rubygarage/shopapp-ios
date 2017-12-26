@@ -21,6 +21,10 @@ extension Repository {
         APICore?.updateShippingAddress(with: checkoutId, address: address, callback: callback)
     }
     
+    func updateCustomerDefaultAddress(with address: Address, callback: @escaping RepoCallback<Bool>) {
+        APICore?.updateCustomerDefaultAddress(with: address, callback: callback)
+    }
+    
     func getShippingRates(with checkoutId: String, callback: @escaping RepoCallback<[ShippingRate]>) {
         APICore?.getShippingRates(with: checkoutId, callback: callback)
     }

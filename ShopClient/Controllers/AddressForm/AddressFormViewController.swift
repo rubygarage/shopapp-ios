@@ -23,6 +23,7 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     @IBOutlet weak var zipCodeTextFieldView: InputTextFieldView!
     @IBOutlet weak var phoneTextFieldView: InputTextFieldView!
     @IBOutlet weak var submitButton: BlackButton!
+    @IBOutlet weak var defaultAddressButton: CheckboxButton!
     @IBOutlet weak var checkboxTitleLabel: UILabel!
     
     var delegate: AddressFormViewProtocol?
@@ -98,7 +99,7 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
             .disposed(by: disposeBag)
         
         viewModel.shippingAddressAdded
-            .subscribe(onNext: { [weak self] (success) in
+            .subscribe(onNext: { [weak self] _ in
                 self?.delegate?.didUpdatedShippingAddress()
                 self?.navigationController?.popViewController(animated: true)
             })
@@ -108,5 +109,14 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
             .bind(to: viewModel.submitTapped)
             .disposed(by: disposeBag)
         
+        viewModel.useDefaultShippingAddress.asObservable()
+            .subscribe(onNext: { [weak self] (selected) in
+                self?.defaultAddressButton.isSelected = selected
+            })
+            .disposed(by: disposeBag)
+        
+        defaultAddressButton.rx.tap
+            .bind(to: viewModel.useDefaultAddressTapped)
+            .disposed(by: disposeBag)
     }
 }
