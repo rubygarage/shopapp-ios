@@ -77,12 +77,19 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     private func getCustomer() {
-        Repository.shared.getCustomer { [weak self] (result, error) in
-            if let customer = result {
-                print("ssss")
+        Repository.shared.getCustomer { [weak self] (customer, error) in
+            if let address = customer?.defaultAddress {
+                self?.updateCheckoutShippingAddress(with: address)
             } else {
                 self?.state.onNext(.content)
             }
+        }
+    }
+    
+    private func updateCheckoutShippingAddress(with address: Address) {
+        let checkoutId = checkout.value?.id ?? String()
+        Repository.shared.updateShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
+            self?.getCheckout()
         }
     }
 }

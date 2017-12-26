@@ -19,5 +19,6 @@ extension Customer {
         firstName = item?.firstName
         lastName = item?.lastName
         phone = item?.phone
+        defaultAddress = Address(with: item?.defaultAddress)
     }
 }
