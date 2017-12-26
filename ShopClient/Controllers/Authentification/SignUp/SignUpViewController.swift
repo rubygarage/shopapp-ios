@@ -7,14 +7,16 @@
 //
 
 import RxSwift
+import TTTAttributedLabel
 
-class SignUpViewController: BaseViewController<SignUpViewModel> {
+class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLabelDelegate {
     @IBOutlet weak var emailTextFieldView: InputTextFieldView!
     @IBOutlet weak var nameTextFieldView: InputTextFieldView!
     @IBOutlet weak var lastNameTextFieldView: InputTextFieldView!
     @IBOutlet weak var phoneTextFieldView: InputTextFieldView!
     @IBOutlet weak var passwordTextFieldView: InputTextFieldView!
     @IBOutlet weak var signUpButton: BlackButton!
+    @IBOutlet weak var acceptPoliciesLabel: TTTAttributedLabel!
     
     var delegate: AuthenticationProtocol!
     
@@ -36,6 +38,11 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
         phoneTextFieldView.placeholder = NSLocalizedString("Placeholder.PhoneNumber", comment: String()).uppercased()
         passwordTextFieldView.placeholder = NSLocalizedString("Placeholder.CreatePassword", comment: String()).uppercased()
         signUpButton.setTitle(NSLocalizedString("Button.SignUp", comment: String()).uppercased(), for: .normal)
+        
+        let text = NSLocalizedString("Label.AcceptPoliciesAttributed", comment: String())
+        let privacyPolicy = NSLocalizedString("Label.Range.PrivacyPolicy", comment: String())
+        let termsOfService = NSLocalizedString("Label.Range.TermsOfService", comment: String())
+        acceptPoliciesLabel.setup(with: text, links: [privacyPolicy, termsOfService], delegate: self)
     }
     
     private func setupViewModel() {
@@ -94,5 +101,17 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
                 }
             })
             .disposed(by: disposeBag)
+    }
+    
+    // MARK: - TTTAttributedLabelDelegate
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        let privacyPolicy = NSLocalizedString("Label.Range.PrivacyPolicy", comment: String()).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
+        let termsOfService = NSLocalizedString("Label.Range.TermsOfService", comment: String()).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
+        
+        if url.absoluteString == privacyPolicy {
+            // TODO:
+        } else if url.absoluteString == termsOfService{
+            // TODO:
+        }
     }
 }

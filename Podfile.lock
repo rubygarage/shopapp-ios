@@ -15,6 +15,7 @@ PODS:
   - SwipeCellKit (2.0.0)
   - Toaster (2.1.1)
   - TPKeyboardAvoiding (1.3.2)
+  - TTTAttributedLabel (2.0.0)
   - UIImage+Additions (2.1.4)
   - UIScrollView-InfiniteScroll (1.0.2)
 
@@ -32,6 +33,7 @@ DEPENDENCIES:
   - SwipeCellKit (~> 2.0)
   - Toaster (~> 2.1)
   - TPKeyboardAvoiding (~> 1.3)
+  - TTTAttributedLabel (~> 2.0)
   - UIImage+Additions (~> 2.1)
   - UIScrollView-InfiniteScroll (~> 1.0)
 
@@ -49,9 +51,10 @@ SPEC CHECKSUMS:
   SwipeCellKit: 349c61ffde96ac3ae51c2691a03e421b5b29ee98
   Toaster: a6c9532de1ded8105e77376f7dffeb2e12b46dbb
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
+  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UIImage+Additions: da531911c34e298b46b567a28df03bb098af1389
   UIScrollView-InfiniteScroll: c132d6d5851daff229ab4a1060ccf70a05a051c9
 
-PODFILE CHECKSUM: 16313341039647e1635a950fde65d6ab73c81c30
+PODFILE CHECKSUM: 642f804a46c898464bef430fdabd5efd3b0e2cfc
 
 COCOAPODS: 1.3.1
