@@ -111,6 +111,9 @@
 		616CA6601FF2A0CF00FF14E2 /* CheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616CA65C1FF2A0CE00FF14E2 /* CheckoutViewModel.swift */; };
 		616CA6611FF2A0CF00FF14E2 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616CA65D1FF2A0CE00FF14E2 /* CheckoutViewController.swift */; };
 		616CA6631FF2A2D900FF14E2 /* TTTAttributedLabelLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616CA6621FF2A2D900FF14E2 /* TTTAttributedLabelLinks.swift */; };
+		616CA6651FF3BA7100FF14E2 /* AddressList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 616CA6641FF3BA7100FF14E2 /* AddressList.storyboard */; };
+		616CA6681FF3BA9D00FF14E2 /* AddressListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616CA6671FF3BA9D00FF14E2 /* AddressListViewController.swift */; };
+		616CA66A1FF3BAB800FF14E2 /* AddressListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616CA6691FF3BAB800FF14E2 /* AddressListViewModel.swift */; };
 		617000E41FAA031E00DB898C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617000E31FAA031E00DB898C /* BaseViewController.swift */; };
 		61719B981FC2FAEB007B6ED0 /* CartTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61719B971FC2FAEB007B6ED0 /* CartTableDelegate.swift */; };
 		61719B9B1FC2FCE5007B6ED0 /* CartHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61719B9A1FC2FCE5007B6ED0 /* CartHeaderView.swift */; };
@@ -353,6 +356,9 @@
 		616CA65C1FF2A0CE00FF14E2 /* CheckoutViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewModel.swift; sourceTree = "<group>"; };
 		616CA65D1FF2A0CE00FF14E2 /* CheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		616CA6621FF2A2D900FF14E2 /* TTTAttributedLabelLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTTAttributedLabelLinks.swift; sourceTree = "<group>"; };
+		616CA6641FF3BA7100FF14E2 /* AddressList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddressList.storyboard; sourceTree = "<group>"; };
+		616CA6671FF3BA9D00FF14E2 /* AddressListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListViewController.swift; sourceTree = "<group>"; };
+		616CA6691FF3BAB800FF14E2 /* AddressListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListViewModel.swift; sourceTree = "<group>"; };
 		617000E31FAA031E00DB898C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		61719B971FC2FAEB007B6ED0 /* CartTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableDelegate.swift; sourceTree = "<group>"; };
 		61719B9A1FC2FCE5007B6ED0 /* CartHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartHeaderView.swift; sourceTree = "<group>"; };
@@ -787,6 +793,7 @@
 			isa = PBXGroup;
 			children = (
 				610424281FC477B300EFEFDA /* AddressForm */,
+				616CA6661FF3BA8300FF14E2 /* AddressList */,
 				6106C6C91F7A40DF00E87486 /* ArticleDetails */,
 				6152B1221F7914DB00045A42 /* ArticlesList */,
 				61ED88ED1F716F57006BDA79 /* Base */,
@@ -987,6 +994,7 @@
 			isa = PBXGroup;
 			children = (
 				610424261FC477A900EFEFDA /* AddressForm.storyboard */,
+				616CA6641FF3BA7100FF14E2 /* AddressList.storyboard */,
 				6106C6C71F7A40A600E87486 /* ArticleDetails.storyboard */,
 				6152B1201F79149900045A42 /* ArticlesList.storyboard */,
 				61C95EA01FB38F8700543B40 /* Cart.storyboard */,
@@ -1061,6 +1069,15 @@
 				616CA65C1FF2A0CE00FF14E2 /* CheckoutViewModel.swift */,
 			);
 			path = Checkout;
+			sourceTree = "<group>";
+		};
+		616CA6661FF3BA8300FF14E2 /* AddressList */ = {
+			isa = PBXGroup;
+			children = (
+				616CA6671FF3BA9D00FF14E2 /* AddressListViewController.swift */,
+				616CA6691FF3BAB800FF14E2 /* AddressListViewModel.swift */,
+			);
+			path = AddressList;
 			sourceTree = "<group>";
 		};
 		617000E21FAA030A00DB898C /* LCE */ = {
@@ -1635,6 +1652,7 @@
 				613258631FD6EA5500513854 /* SeeAllTableHeaderView.xib in Resources */,
 				61236D531FEA83F500D64198 /* CheckoutCartCollectionCell.xib in Resources */,
 				61AAB92A1F7BC1F700CD32D3 /* SortModal.storyboard in Resources */,
+				616CA6651FF3BA7100FF14E2 /* AddressList.storyboard in Resources */,
 				610424271FC477A900EFEFDA /* AddressForm.storyboard in Resources */,
 				614142D41F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.xib in Resources */,
 				61836C1D1FD97AD6000A6BA6 /* AccountNotLoggedHeaderView.xib in Resources */,
@@ -1769,6 +1787,7 @@
 				61C2ABBE1FBAEC7800A1E170 /* ShopifyRepoErrorAdapter.swift in Sources */,
 				6118DF261FB496070044A519 /* UIViewShadow.swift in Sources */,
 				617E541A1FC8954C00130719 /* ShippingRate.swift in Sources */,
+				616CA66A1FF3BAB800FF14E2 /* AddressListViewModel.swift in Sources */,
 				61836C5B1FDACC9F000A6BA6 /* NavigationController.swift in Sources */,
 				61ED88EA1F7112FD006BDA79 /* UIViewControllerImageViewer.swift in Sources */,
 				61C95E9F1FB3540B00543B40 /* CoreStoreTransaction.swift in Sources */,
@@ -1882,6 +1901,7 @@
 				610FAAE81FB61937000D89CA /* AuthentificationRepositoryInterface.swift in Sources */,
 				616CA6571FF2692400FF14E2 /* CheckboxButton.swift in Sources */,
 				610A91401F9E34F000424369 /* ShopifyShopAdapter.swift in Sources */,
+				616CA6681FF3BA9D00FF14E2 /* AddressListViewController.swift in Sources */,
 				6131309C1FB9A84800DB6AAC /* Customer.swift in Sources */,
 				61FC3DAC1F7EB4E600DB0AD7 /* ProductOptionsCollectionDataSource.swift in Sources */,
 				618B4D531FE2EF2E0001F68D /* TabBarController.swift in Sources */,

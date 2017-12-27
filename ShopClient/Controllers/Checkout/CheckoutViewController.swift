@@ -78,7 +78,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
     
     // MARK: - CheckoutShippingAddressEditCellProtocol
     func didTapEdit() {
-        // TODO:
+        pushAddressListController()
     }
     
     // MARK: - AddressFormViewProtocol

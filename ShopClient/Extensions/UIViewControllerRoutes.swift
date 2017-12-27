@@ -48,6 +48,12 @@ extension UIViewController {
         
         navigationController?.pushViewController(addressFormController, animated: true)
     }
+    
+    func pushAddressListController() {
+        let addressListController = UIStoryboard.addressList().instantiateViewController(withIdentifier: ControllerIdentifier.addressList) as! AddressListViewController
+        
+        navigationController?.pushViewController(addressListController, animated: true)
+    }
 
     // MARK: - set
     func setHomeController() {
