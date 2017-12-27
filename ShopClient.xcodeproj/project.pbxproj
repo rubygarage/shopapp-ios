@@ -114,6 +114,9 @@
 		616CA6651FF3BA7100FF14E2 /* AddressList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 616CA6641FF3BA7100FF14E2 /* AddressList.storyboard */; };
 		616CA6681FF3BA9D00FF14E2 /* AddressListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616CA6671FF3BA9D00FF14E2 /* AddressListViewController.swift */; };
 		616CA66A1FF3BAB800FF14E2 /* AddressListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616CA6691FF3BAB800FF14E2 /* AddressListViewModel.swift */; };
+		616CA66E1FF3D2AB00FF14E2 /* AddressListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616CA66C1FF3D2AB00FF14E2 /* AddressListTableViewCell.swift */; };
+		616CA66F1FF3D2AB00FF14E2 /* AddressListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 616CA66D1FF3D2AB00FF14E2 /* AddressListTableViewCell.xib */; };
+		616CA6711FF3D39D00FF14E2 /* AddressListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616CA6701FF3D39D00FF14E2 /* AddressListDataSource.swift */; };
 		617000E41FAA031E00DB898C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617000E31FAA031E00DB898C /* BaseViewController.swift */; };
 		61719B981FC2FAEB007B6ED0 /* CartTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61719B971FC2FAEB007B6ED0 /* CartTableDelegate.swift */; };
 		61719B9B1FC2FCE5007B6ED0 /* CartHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61719B9A1FC2FCE5007B6ED0 /* CartHeaderView.swift */; };
@@ -359,6 +362,9 @@
 		616CA6641FF3BA7100FF14E2 /* AddressList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddressList.storyboard; sourceTree = "<group>"; };
 		616CA6671FF3BA9D00FF14E2 /* AddressListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListViewController.swift; sourceTree = "<group>"; };
 		616CA6691FF3BAB800FF14E2 /* AddressListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListViewModel.swift; sourceTree = "<group>"; };
+		616CA66C1FF3D2AB00FF14E2 /* AddressListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListTableViewCell.swift; sourceTree = "<group>"; };
+		616CA66D1FF3D2AB00FF14E2 /* AddressListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressListTableViewCell.xib; sourceTree = "<group>"; };
+		616CA6701FF3D39D00FF14E2 /* AddressListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListDataSource.swift; sourceTree = "<group>"; };
 		617000E31FAA031E00DB898C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		61719B971FC2FAEB007B6ED0 /* CartTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableDelegate.swift; sourceTree = "<group>"; };
 		61719B9A1FC2FCE5007B6ED0 /* CartHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartHeaderView.swift; sourceTree = "<group>"; };
@@ -813,6 +819,11 @@
 		611EF35D1F5957B6001B8B9C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				616CA66B1FF3D28900FF14E2 /* AddressListTableViewCell */,
+				618DDFCA1FE7ECD300315364 /* AccountFooterView */,
+				6140A9791FDEC5EA000C893E /* AccountLoggedHeaderView */,
+				61836C191FD97A93000A6BA6 /* AccountNotLoggedHeaderView */,
+				611947821FD95A59008BE9C6 /* AccountTableViewCell */,
 				61B5BED81F75055000E075B7 /* ArticleTableViewCell */,
 				61725FCC1FEAC1EE009F55EA /* BoldTitleTableHeaderView */,
 				61A1D4311FC57FB700E1B673 /* CardValidationView */,
@@ -1076,8 +1087,18 @@
 			children = (
 				616CA6671FF3BA9D00FF14E2 /* AddressListViewController.swift */,
 				616CA6691FF3BAB800FF14E2 /* AddressListViewModel.swift */,
+				616CA6701FF3D39D00FF14E2 /* AddressListDataSource.swift */,
 			);
 			path = AddressList;
+			sourceTree = "<group>";
+		};
+		616CA66B1FF3D28900FF14E2 /* AddressListTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				616CA66C1FF3D2AB00FF14E2 /* AddressListTableViewCell.swift */,
+				616CA66D1FF3D2AB00FF14E2 /* AddressListTableViewCell.xib */,
+			);
+			path = AddressListTableViewCell;
 			sourceTree = "<group>";
 		};
 		617000E21FAA030A00DB898C /* LCE */ = {
@@ -1642,6 +1663,7 @@
 				61236D621FEAA88800D64198 /* SearchTitleView.xib in Resources */,
 				6140A97D1FDEC605000C893E /* AccountLoggedHeaderView.xib in Resources */,
 				6133DAD41FB21A7900156971 /* CartButtonView.xib in Resources */,
+				616CA66F1FF3D2AB00FF14E2 /* AddressListTableViewCell.xib in Resources */,
 				61FC3DAA1F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.xib in Resources */,
 				61725FD01FEAC218009F55EA /* BoldTitleTableHeaderView.xib in Resources */,
 				61836C631FDAD071000A6BA6 /* InputTextFieldView.xib in Resources */,
@@ -1840,6 +1862,7 @@
 				617000E41FAA031E00DB898C /* BaseViewController.swift in Sources */,
 				0BD5EB411FF3F19D0076C01B /* LogoutUseCase.swift in Sources */,
 				614142CA1F6AF26300379BB9 /* HomeTableDelegate.swift in Sources */,
+				616CA6711FF3D39D00FF14E2 /* AddressListDataSource.swift in Sources */,
 				614C561D1FC8628E00857116 /* Address.swift in Sources */,
 				6140A97B1FDEC5FC000C893E /* AccountLoggedHeaderView.swift in Sources */,
 				61836C231FD98D48000A6BA6 /* BlackButton.swift in Sources */,
@@ -1937,6 +1960,7 @@
 				61E76E1D1FB46F1200AE5FB4 /* DAOProductVariantAdapter.swift in Sources */,
 				616A8ADD1FE82F670013E41F /* CategoryCollectionViewCell.swift in Sources */,
 				6165E9691FCDDA5C006DE8A5 /* BillingAddressViewController.swift in Sources */,
+				616CA66E1FF3D2AB00FF14E2 /* AddressListTableViewCell.swift in Sources */,
 				61A5072D1F7E79FB004504EF /* ImagesCarouselCollectionDelegate.swift in Sources */,
 				61836C261FD9A404000A6BA6 /* UnderlinedButton.swift in Sources */,
 				61BF1EA81FAB397D0098B9AA /* BaseViewModel.swift in Sources */,

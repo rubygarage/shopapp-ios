@@ -14,6 +14,7 @@ class Customer: NSObject {
     var lastName: String?
     var phone: String?
     var defaultAddress: Address?
+    var addresses: [Address]?
     
     var fullname: String {
         if let first = firstName, first.isEmpty == false, let last = lastName, last.isEmpty == false {

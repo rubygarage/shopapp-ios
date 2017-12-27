@@ -9,6 +9,7 @@
 import Foundation
 
 class Address: NSObject {
+    var id = String()
     var firstName: String?
     var lastName: String?
     var address: String?
