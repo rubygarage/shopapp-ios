@@ -13,11 +13,14 @@ class Customer: NSObject {
     var firstName: String?
     var lastName: String?
     var phone: String?
+    var defaultAddress: Address?
     
     var fullname: String {
-        get {
-            let customerNameLocalized = NSLocalizedString("Label.CustomerName", comment: String())
-            return String.localizedStringWithFormat(customerNameLocalized, firstName ?? String(), lastName ?? String())
+        if let first = firstName, first.isEmpty == false, let last = lastName, last.isEmpty == false {
+            let customerNameLocalized = NSLocalizedString("Label.FullName", comment: String())
+            return String.localizedStringWithFormat(customerNameLocalized, first, last)
+        } else {
+            return email
         }
     }
 }

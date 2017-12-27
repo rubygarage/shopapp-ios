@@ -9,10 +9,10 @@
 import UIKit
 
 protocol SeeAllHeaderViewProtocol {
-    func didTapSeeAll(type: ViewType)
+    func didTapSeeAll(type: SeeAllViewType)
 }
 
-enum ViewType {
+enum SeeAllViewType {
     case latestArrivals
     case popular
     case blogPosts
@@ -26,9 +26,9 @@ class SeeAllTableHeaderView: UIView {
     @IBOutlet weak var separatprHeightConstraint: NSLayoutConstraint!
     
     private var delegate: SeeAllHeaderViewProtocol?
-    private var headerViewType = ViewType.latestArrivals
+    private var headerViewType = SeeAllViewType.latestArrivals
     
-    init(delegate: SeeAllHeaderViewProtocol?, type: ViewType, separatorVisible: Bool = false) {
+    init(delegate: SeeAllHeaderViewProtocol?, type: SeeAllViewType, separatorVisible: Bool = false) {
         super.init(frame: CGRect.zero)
         
         self.delegate = delegate

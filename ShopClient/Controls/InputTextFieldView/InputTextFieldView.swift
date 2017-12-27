@@ -19,6 +19,8 @@ enum InputTextFieldViewKeybordType: Int {
     case password
     case name
     case phone
+    case zip
+    case `default`
 }
 
 private let kUnderlineViewAlphaDefault: CGFloat = 0.2
@@ -108,6 +110,9 @@ class InputTextFieldView: UIView {
         case InputTextFieldViewKeybordType.phone.rawValue:
             type = .phonePad
             break
+        case InputTextFieldViewKeybordType.zip.rawValue:
+            type = .numberPad
+            break
         default:
             type = .default
             break
@@ -116,11 +121,18 @@ class InputTextFieldView: UIView {
     }
     
     private func setupKeyboardCapitalization(with type: Int) {
-        textField?.autocapitalizationType = type == InputTextFieldViewKeybordType.name.rawValue ? .words : .none
+        switch type {
+        case InputTextFieldViewKeybordType.name.rawValue:
+            textField?.autocapitalizationType = .words
+        case InputTextFieldViewKeybordType.email.rawValue:
+            textField?.autocapitalizationType = .none
+        default:
+            textField?.autocapitalizationType = .sentences
+        }
     }
     
     private func setupKeyboardCorrection(with type: Int) {
-        textField?.autocorrectionType = type == InputTextFieldViewKeybordType.name.rawValue ? .yes : .no
+        textField?.autocorrectionType = type == InputTextFieldViewKeybordType.email.rawValue ? .no : .yes
     }
     
     private func setupKeyboardSecureTextEntry(with type: Int) {

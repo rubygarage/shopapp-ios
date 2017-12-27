@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTableDataSourceProtocol, SeeAllHeaderViewProtocol {
+class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTableDataSourceProtocol, SeeAllHeaderViewProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, AddressFormViewProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     var tableDataSource: CheckoutTableDataSource!
@@ -33,6 +33,12 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
         let cartNib = UINib(nibName: String(describing: CheckoutCartTableViewCell.self), bundle: nil)
         tableView?.register(cartNib, forCellReuseIdentifier: String(describing: CheckoutCartTableViewCell.self))
         
+        let shippingAddressAddNib = UINib(nibName: String(describing: CheckoutShippingAddressAddTableCell.self), bundle: nil)
+        tableView.register(shippingAddressAddNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressAddTableCell.self))
+        
+        let shippingAddressEditNib = UINib(nibName: String(describing: CheckoutShippingAddressEditTableCell.self), bundle: nil)
+        tableView.register(shippingAddressEditNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self))
+        
         tableDataSource = CheckoutTableDataSource(delegate: self)
         tableView?.dataSource = tableDataSource
         
@@ -43,24 +49,45 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
     }
     
     private func setupViewModel() {
-        viewModel.cartItems.asObservable()
-            .subscribe(onNext: { [weak self] _ in
+        viewModel.checkout.asObservable()
+            .subscribe(onNext: { [weak self] (checkout) in
                 self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
     
     private func loadData() {
-        viewModel.loadData()
+        viewModel.loadData(with: disposeBag)
     }
     
     // MARK: - CheckoutTableDataSourceProtocol
     func cartProducts() -> [CartProduct] {
-        return viewModel.cartItems.value
+        return viewModel.cartItems
+    }
+    
+    func shippingAddress() -> Address? {
+        return viewModel.checkout.value?.shippingAddress
+    }
+    
+    // MARK: - CheckoutShippingAddressAddCellProtocol
+    func didTapAddNewAddress() {
+        if let checkoutId = viewModel.checkout.value?.id {
+            pushAddressFormController(with: checkoutId, delegate: self)
+        }
+    }
+    
+    // MARK: - CheckoutShippingAddressEditCellProtocol
+    func didTapEdit() {
+        // TODO:
+    }
+    
+    // MARK: - AddressFormViewProtocol
+    func didUpdatedShippingAddress() {
+        viewModel.getCheckout()
     }
     
     // MARK: - SeeAllHeaderViewProtocol
-    func didTapSeeAll(type: ViewType) {
+    func didTapSeeAll(type: SeeAllViewType) {
         if type == .myCart {
             // TODO:
         }

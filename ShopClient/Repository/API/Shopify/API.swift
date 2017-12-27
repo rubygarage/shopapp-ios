@@ -204,9 +204,8 @@ class API: NSObject, APIInterface {
     }
     
     // MARK: - payments
-    func getCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
-        let email = sessionData().email
-        let query = checkoutQuery(email: email, cartProducts: cartProducts)
+    func createCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
+        let query = checkoutCreateQuery(cartProducts: cartProducts)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
             if let checkout = response?.checkoutCreate?.checkout {
                 let checkoutItem = Checkout(with: checkout)
@@ -221,11 +220,63 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
-    func getShippingRates(with checkout: Checkout, address: Address, callback: @escaping RepoCallback<[ShippingRate]>) {
+    func getCheckout(with checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
+        let query = checkoutGetQuery(with: checkoutId)
+        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
+            if let checkout = Checkout(with: response?.node as? Storefront.Checkout) {
+                callback(checkout, nil)
+            } else if let error = error {
+                let responseError = self?.process(error: error)
+                callback(nil, responseError)
+            } else {
+                callback(nil, ContentError())
+            }
+        })
+        run(task: task, callback: callback)
+    }
+    
+    func updateShippingAddress(with checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>) {
         let shippingAddress = Storefront.MailingAddressInput.create()
         shippingAddress.update(with: address)
-        let checkoutId = GraphQL.ID.init(rawValue: checkout.id)
-        updateShippingAddress(checkoutId: checkoutId, shippingAddress: shippingAddress, callback: callback)
+        let checkoutId = GraphQL.ID.init(rawValue: checkoutId)
+        let query = updateShippingAddressQuery(shippingAddress: shippingAddress, checkoutId: checkoutId)
+        let task = client?.mutateGraphWith(query, completionHandler: { (response, error) in
+            if let _ = response {
+                callback(true, nil)
+            }
+            if let responseError = ContentError(with: error) {
+                callback(false, responseError)
+            }
+        })
+        run(task: task, callback: callback)
+    }
+    
+    func updateCustomerDefaultAddress(with address: Address, callback: @escaping RepoCallback<Bool>) {
+        if let token = sessionData().token {
+            createCustomerAddress(with: token, address: address, callback: callback)
+        } else {
+            callback(false, ContentError())
+        }
+    }
+    
+    func getShippingRates(with checkoutId: String, callback: @escaping RepoCallback<[ShippingRate]>) {
+        let checkoutId = GraphQL.ID.init(rawValue: checkoutId)
+        let query = getShippingRatesQuery(checkoutId: checkoutId)
+        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
+            if let shippingRates = (response?.node as? Storefront.Checkout)?.availableShippingRates?.shippingRates {
+                var rates = [ShippingRate]()
+                for shippingRate in shippingRates {
+                    if let rate = ShippingRate(with: shippingRate) {
+                        rates.append(rate)
+                    }
+                }
+                callback(rates, nil)
+            }
+            if let responseError = ContentError(with: error) {
+                callback(nil, responseError)
+            }
+        })
+        run(task: task, callback: callback)
     }
     
     func updateCheckout(with rate: ShippingRate, checkout: Checkout, callback: @escaping RepoCallback<Checkout>) {
@@ -257,19 +308,6 @@ class API: NSObject, APIInterface {
     }
     
     // MARK: - private
-    private func updateShippingAddress(checkoutId: GraphQL.ID, shippingAddress: Storefront.MailingAddressInput, callback: @escaping RepoCallback<[ShippingRate]>) {
-        let query = updateShippingAddressQuery(shippingAddress: shippingAddress, checkoutId: checkoutId)
-        let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
-            if let _ = response {
-                self?.getShippingRates(checkoutId: checkoutId, callback: callback)
-            }
-            if let responseError = ContentError(with: error) {
-                callback(nil, responseError)
-            }
-        })
-        run(task: task, callback: callback)
-    }
-    
     private func getShippingRates(checkoutId: GraphQL.ID, callback: @escaping RepoCallback<[ShippingRate]>) {
         let query = getShippingRatesQuery(checkoutId: checkoutId)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
@@ -353,6 +391,34 @@ class API: NSObject, APIInterface {
                 callback(nil, RepoError(with: responseError))
             } else {
                 callback(nil, RepoError())
+            }
+        })
+        run(task: task, callback: callback)
+    }
+    
+    private func createCustomerAddress(with token: String, address: Address, callback: @escaping RepoCallback<Bool>) {
+        let query = customerAddressCreateQuery(customerAccessToken: token, address: address)
+        let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
+            if let addressId = response?.customerAddressCreate?.customerAddress?.id {
+                self?.updateCustomerDefaultAddress(with: token, addressId: addressId, callback: callback)
+            } else if let repoError = RepoError(with: error) {
+                callback(false, repoError)
+            } else {
+                callback(nil, RepoError())
+            }
+        })
+        run(task: task, callback: callback)
+    }
+    
+    private func updateCustomerDefaultAddress(with token: String, addressId: GraphQL.ID, callback: @escaping RepoCallback<Bool>) {
+        let query = customerUpdateDefaultAddressQuery(customerAccessToken: token, addressId: addressId)
+        let task = client?.mutateGraphWith(query, completionHandler: { (result, error) in
+            if let _ = result {
+                callback(true, nil)
+            } else if let repoError = RepoError(with: error) {
+                callback(false, repoError)
+            } else {
+                callback(false, RepoError())
             }
         })
         run(task: task, callback: callback)
@@ -479,17 +545,24 @@ class API: NSObject, APIInterface {
         })
     }
     
-    private func checkoutQuery(email: String?, cartProducts: [CartProduct]) -> Storefront.MutationQuery {
+    private func checkoutCreateQuery(cartProducts: [CartProduct]) -> Storefront.MutationQuery {
         return Storefront.buildMutation({ $0
-            .checkoutCreate(input: self.checkoutInput(email: email, cartProducts: cartProducts), self.checkoutCreatePayloadQuery())
+            .checkoutCreate(input: self.checkoutInput(cartProducts: cartProducts), self.checkoutCreatePayloadQuery())
         })
     }
     
-    private func checkoutInput(email: String?, cartProducts: [CartProduct]) -> Storefront.CheckoutCreateInput {
+    private func checkoutGetQuery(with checkoutId: String) -> Storefront.QueryRootQuery {
+        let id = GraphQL.ID.init(rawValue: checkoutId)
+        return Storefront.buildQuery({ $0
+            .node(id: id, { $0
+                .onCheckout(subfields: self.checkoutQuery())
+            })
+        })
+    }
+    
+    private func checkoutInput(cartProducts: [CartProduct]) -> Storefront.CheckoutCreateInput {
         let checkout = Storefront.CheckoutCreateInput.create()
-        checkout.email = Input<String>(orNull: email)
         checkout.lineItems = Input<[Storefront.CheckoutLineItemInput]>(orNull: checkoutLineItemInput(cartProducts: cartProducts))
-        
         return checkout
     }
     
@@ -523,6 +596,20 @@ class API: NSObject, APIInterface {
                 })
             })
         }
+    }
+    
+    private func customerUpdateDefaultAddressQuery(customerAccessToken: String, addressId: GraphQL.ID) -> Storefront.MutationQuery {
+        return Storefront.buildMutation({ $0
+            .customerDefaultAddressUpdate(customerAccessToken: customerAccessToken, addressId: addressId, self.customerDefaultAddressUpdatePayloadQuery())
+        })
+    }
+    
+    private func customerAddressCreateQuery(customerAccessToken: String, address: Address) -> Storefront.MutationQuery {
+        let addressInput = Storefront.MailingAddressInput.create()
+        addressInput.update(with: address)
+        return Storefront.buildMutation({ $0
+            .customerAddressCreate(customerAccessToken: customerAccessToken, address: addressInput, self.customerAddressCreatePayloadQuery())
+        })
     }
     
     private func getShippingRatesQuery(checkoutId: GraphQL.ID) -> Storefront.QueryRootQuery {
@@ -734,6 +821,8 @@ class API: NSObject, APIInterface {
             query.firstName()
             query.lastName()
             query.phone()
+            query.defaultAddress(self.mailingAddressQuery())
+            query.addresses(first: kShopifyItemsMaxCount, self.mailingAddressConnectionQuery())
         }
     }
     
@@ -765,6 +854,47 @@ class API: NSObject, APIInterface {
             query.subtotalPrice()
             query.totalPrice()
             query.totalTax()
+            query.shippingAddress(self.mailingAddressQuery())
+        }
+    }
+    
+    private func mailingAddressConnectionQuery() -> (Storefront.MailingAddressConnectionQuery) -> () {
+        return { (query) in
+            query.edges(self.mailingAddressEdgeQuery())
+        }
+    }
+    
+    private func mailingAddressEdgeQuery() -> (Storefront.MailingAddressEdgeQuery) -> () {
+        return { (query) in
+            query.node(self.mailingAddressQuery())
+        }
+    }
+    
+    private func mailingAddressQuery() -> (Storefront.MailingAddressQuery) -> () {
+        return { (query) in
+            query.id()
+            query.country()
+            query.firstName()
+            query.lastName()
+            query.address1()
+            query.address2()
+            query.city()
+            query.province()
+            query.zip()
+            query.phone()
+        }
+    }
+    
+    private func customerDefaultAddressUpdatePayloadQuery() -> (Storefront.CustomerDefaultAddressUpdatePayloadQuery) -> () {
+        return { (query: Storefront.CustomerDefaultAddressUpdatePayloadQuery) in
+            query.customer(self.customerQuery())
+        }
+    }
+    
+    private func customerAddressCreatePayloadQuery() -> (Storefront.CustomerAddressCreatePayloadQuery) -> () {
+        return { (query) in
+            query.customerAddress(self.mailingAddressQuery())
+            query.userErrors(self.userErrorQuery())
         }
     }
     
@@ -836,6 +966,7 @@ class API: NSObject, APIInterface {
 internal extension Storefront.MailingAddressInput {
     func update(with address: Address) {
         address1 = Input<String>(orNull: address.address)
+        address2 = Input<String>(orNull: address.secondAddress)
         city = Input<String>(orNull: address.city)
         country = Input<String>(orNull: address.country)
         firstName = Input<String>(orNull: address.firstName)

@@ -122,7 +122,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     // MARK: - SeeAllHeaderViewProtocol
-    func didTapSeeAll(type: ViewType) {
+    func didTapSeeAll(type: SeeAllViewType) {
         switch type {
         case .latestArrivals:
             let title = NSLocalizedString("ControllerTitle.LatestArrivals", comment: String())

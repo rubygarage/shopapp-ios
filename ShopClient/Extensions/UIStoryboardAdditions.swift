@@ -70,8 +70,8 @@ extension UIStoryboard {
         return UIStoryboard(name: "Checkout", bundle: nil)
     }
     
-    class func address() -> UIStoryboard {
-        return UIStoryboard(name: "Address", bundle: nil)
+    class func addressForm() -> UIStoryboard {
+        return UIStoryboard(name: "AddressForm", bundle: nil)
     }
     
     class func billingAddress() -> UIStoryboard {

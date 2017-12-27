@@ -9,12 +9,34 @@
 import Foundation
 
 class Address: NSObject {
-    var email = String()
-    var firstName = String()
-    var lastName = String()
-    var address = String()
-    var city = String()
-    var country = String()
-    var zip = String()
+    var firstName: String?
+    var lastName: String?
+    var address: String?
+    var secondAddress: String?
+    var city: String?
+    var country: String?
+    var state: String?
+    var zip: String?
     var phone: String?
+    
+    var fullname: String {
+        let customerNameLocalized = NSLocalizedString("Label.FullName", comment: String())
+        return String.localizedStringWithFormat(customerNameLocalized, firstName ?? String(), lastName ?? String())
+    }
+    
+    var fullAddress: String {
+        var result = String()
+        for addressPart in [address, secondAddress, city, zip, country] {
+            if let text = addressPart {
+                result += result.isEmpty ? text : text.asPart()
+            }
+        }
+        return result
+    }
+}
+
+internal extension String {
+    func asPart() -> String {
+        return ", \(self)"
+    }
 }
