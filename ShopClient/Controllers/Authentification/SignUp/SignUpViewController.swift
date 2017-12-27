@@ -27,6 +27,7 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
 
         setupViews()
         setupViewModel()
+        loadData()
     }
     
     private func setupViews() {
@@ -101,6 +102,20 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
                 }
             })
             .disposed(by: disposeBag)
+        
+        viewModel.policies.asObservable()
+            .subscribe(onNext: { [weak self] (privacyPolicy, termsOfService) in
+                self?.populateAgreementsLabel(with: privacyPolicy, termsOfService: termsOfService)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func loadData() {
+        viewModel.loadPolicies()
+    }
+    
+    private func populateAgreementsLabel(with privacyPolicy: Policy?, termsOfService: Policy?) {
+        acceptPoliciesLabel.isHidden = privacyPolicy == nil && termsOfService == nil
     }
     
     // MARK: - TTTAttributedLabelDelegate
@@ -108,10 +123,10 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
         let privacyPolicy = NSLocalizedString("Label.Range.PrivacyPolicy", comment: String()).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
         let termsOfService = NSLocalizedString("Label.Range.TermsOfService", comment: String()).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
         
-        if url.absoluteString == privacyPolicy {
-            // TODO:
-        } else if url.absoluteString == termsOfService{
-            // TODO:
+        if url.absoluteString == privacyPolicy, let privacyPolicy = viewModel.policies.value.privacyPolicy {
+            pushPolicyController(with: privacyPolicy)
+        } else if url.absoluteString == termsOfService, let termsOfService = viewModel.policies.value.termsOfService {
+            pushPolicyController(with: termsOfService)
         }
     }
 }
