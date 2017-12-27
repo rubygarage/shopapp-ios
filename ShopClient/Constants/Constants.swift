@@ -33,6 +33,10 @@ struct ControllerIdentifier {
     static let signUp = "SignUpControllerIdentifier"
 }
 
+struct SegueIdentifiers {
+    static let toPolicy = "toPolicy"
+}
+
 struct CornerRadius {
     static let defaultValue: CGFloat = 5
 }

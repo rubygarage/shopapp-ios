@@ -26,13 +26,6 @@ extension UIViewController {
         navigationController?.pushViewController(productDetaillsController, animated: true)
     }
     
-    func pushPolicyController(with policy: Policy) {
-        let policyController = UIStoryboard.policy().instantiateViewController(withIdentifier: ControllerIdentifier.policy) as! PolicyViewController
-        policyController.policy = policy
-
-        navigationController?.pushViewController(policyController, animated: true)
-    }
-    
     func pushArticleDetailsController(with articleId: String) {
         let articleDetailsController = UIStoryboard.articleDetails().instantiateViewController(withIdentifier: ControllerIdentifier.articleDetails) as! ArticleDetailsViewController
         articleDetailsController.articleId = articleId

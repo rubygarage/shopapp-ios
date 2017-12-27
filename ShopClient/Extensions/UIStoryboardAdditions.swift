@@ -26,10 +26,6 @@ extension UIStoryboard {
         return UIStoryboard(name: "Category", bundle: nil)
     }
     
-    class func policy() -> UIStoryboard {
-        return UIStoryboard(name: "Policy", bundle: nil)
-    }
-    
     class func productsList() -> UIStoryboard {
         return UIStoryboard(name: "ProductsList", bundle: nil)
     }

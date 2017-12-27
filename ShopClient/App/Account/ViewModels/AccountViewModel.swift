@@ -12,21 +12,28 @@ class AccountViewModel: BaseViewModel {
     var policies = Variable<[Policy]>([Policy]())
     var customer = Variable<Customer?>(nil)
     
+    private let customerUseCase = CustomerUseCase()
+    private let loginStatusUseCase = LoginStatusUseCase()
+    private let logoutUseCase = LogoutUseCase()
+    private let shopUseCase = ShopUseCase()
+    
     public func loadCustomer() {
-        if Repository.shared.isLoggedIn() {
-            getCustomer()
+        loginStatusUseCase.getLoginStatus { (isLoggedIn) in
+            if isLoggedIn {
+                getCustomer()
+            }
         }
     }
     
     public func loadPolicies() {
-        Repository.shared.getShop { [weak self] (shop, error) in
+        shopUseCase.getShop { [weak self] (shop) in
             self?.processResponse(with: shop)
         }
     }
     
     public func logout() {
-        Repository.shared.logout { [weak self] (success, error) in
-            if let success = success, success == true {
+        logoutUseCase.logout { [weak self] (isLoggedOut) in
+            if isLoggedOut {
                 self?.customer.value = nil
             }
         }
@@ -35,7 +42,7 @@ class AccountViewModel: BaseViewModel {
     // MARK: - private
     private func getCustomer() {
         state.onNext(.loading(showHud: true))
-        Repository.shared.getCustomer { [weak self] (customer, error) in
+        customerUseCase.getCustomer { [weak self] (customer, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }
@@ -46,15 +53,15 @@ class AccountViewModel: BaseViewModel {
         }
     }
     
-    private func processResponse(with shopItem: Shop?) {
+    private func processResponse(with shopItem: Shop) {
         var policiesItems = [Policy]()
-        if let privacyPolicy = shopItem?.privacyPolicy {
+        if let privacyPolicy = shopItem.privacyPolicy {
             policiesItems.append(privacyPolicy)
         }
-        if let refundPolicy = shopItem?.refundPolicy {
+        if let refundPolicy = shopItem.refundPolicy {
             policiesItems.append(refundPolicy)
         }
-        if let termsOfService = shopItem?.termsOfService {
+        if let termsOfService = shopItem.termsOfService {
             policiesItems.append(termsOfService)
         }
         policies.value = policiesItems

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0BD5EB3D1FF3F1830076C01B /* CustomerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5EB3C1FF3F1830076C01B /* CustomerUseCase.swift */; };
+		0BD5EB3F1FF3F1900076C01B /* ShopUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5EB3E1FF3F1900076C01B /* ShopUseCase.swift */; };
+		0BD5EB411FF3F19D0076C01B /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5EB401FF3F19D0076C01B /* LogoutUseCase.swift */; };
+		0BD5EB441FF3F9B70076C01B /* LoginStatusUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5EB431FF3F9B70076C01B /* LoginStatusUseCase.swift */; };
 		610424271FC477A900EFEFDA /* AddressForm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 610424261FC477A900EFEFDA /* AddressForm.storyboard */; };
 		6104242A1FC477D100EFEFDA /* AddressFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610424291FC477D100EFEFDA /* AddressFormViewController.swift */; };
 		6104242C1FC477F000EFEFDA /* AddressFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6104242B1FC477F000EFEFDA /* AddressFormViewModel.swift */; };
@@ -173,7 +177,6 @@
 		61AAB92C1F7BCF1000CD32D3 /* SortModalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AAB92B1F7BCF1000CD32D3 /* SortModalDataSource.swift */; };
 		61AAB9301F7BD07B00CD32D3 /* SortModalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AAB92E1F7BD07B00CD32D3 /* SortModalTableViewCell.swift */; };
 		61AAB9311F7BD07B00CD32D3 /* SortModalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61AAB92F1F7BD07B00CD32D3 /* SortModalTableViewCell.xib */; };
-		61AB83261F72E6F0009E7343 /* Policy.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61AB83251F72E6F0009E7343 /* Policy.storyboard */; };
 		61AC44311FC5A7E60020544A /* CardValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AC44301FC5A7E60020544A /* CardValidator.swift */; };
 		61AE67031FE95034007229DA /* SearchCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE67021FE95034007229DA /* SearchCollectionDataSource.swift */; };
 		61AE67051FE96099007229DA /* SearchCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE67041FE96099007229DA /* SearchCollectionDelegate.swift */; };
@@ -242,6 +245,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0BD5EB3C1FF3F1830076C01B /* CustomerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerUseCase.swift; sourceTree = "<group>"; };
+		0BD5EB3E1FF3F1900076C01B /* ShopUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopUseCase.swift; sourceTree = "<group>"; };
+		0BD5EB401FF3F19D0076C01B /* LogoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
+		0BD5EB431FF3F9B70076C01B /* LoginStatusUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStatusUseCase.swift; sourceTree = "<group>"; };
 		10BBCCE808D12F6C873F9215 /* Pods-ShopClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShopClient/Pods-ShopClient.release.xcconfig"; sourceTree = "<group>"; };
 		38B8C07405420E82AD6AAA3E /* Pods-ShopClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShopClient/Pods-ShopClient.debug.xcconfig"; sourceTree = "<group>"; };
 		610424261FC477A900EFEFDA /* AddressForm.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddressForm.storyboard; sourceTree = "<group>"; };
@@ -412,7 +419,6 @@
 		61AAB92B1F7BCF1000CD32D3 /* SortModalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalDataSource.swift; sourceTree = "<group>"; };
 		61AAB92E1F7BD07B00CD32D3 /* SortModalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalTableViewCell.swift; sourceTree = "<group>"; };
 		61AAB92F1F7BD07B00CD32D3 /* SortModalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SortModalTableViewCell.xib; sourceTree = "<group>"; };
-		61AB83251F72E6F0009E7343 /* Policy.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Policy.storyboard; sourceTree = "<group>"; };
 		61AC44301FC5A7E60020544A /* CardValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardValidator.swift; sourceTree = "<group>"; };
 		61AE67021FE95034007229DA /* SearchCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionDataSource.swift; sourceTree = "<group>"; };
 		61AE67041FE96099007229DA /* SearchCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionDelegate.swift; sourceTree = "<group>"; };
@@ -528,15 +534,14 @@
 		0BD5EB301FF3DDEB0076C01B /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				61BA57061FDFF98C00BF1586 /* AuthProtocol.swift */,
 				0BD5EB311FF3DDFA0076C01B /* Controllers */,
 				0BD5EB331FF3DF5E0076C01B /* DataSources */,
 				0BD5EB341FF3DF650076C01B /* Delegates */,
+				0BD5EB3A1FF3EFF00076C01B /* Protocols */,
 				0BD5EB321FF3DDFF0076C01B /* ViewModels */,
 				0BD5EB351FF3E6150076C01B /* Views */,
 				617DE1811FB5E9B4004EEF9A /* Account.storyboard */,
 				617DE1861FB5EFFB004EEF9A /* Authetification.storyboard */,
-				61AB83251F72E6F0009E7343 /* Policy.storyboard */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -591,7 +596,7 @@
 		0BD5EB361FF3E74E0076C01B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				611947821FD95A59008BE9C6 /* AccountTableViewCell */,
+				0BD5EB421FF3F1B60076C01B /* TableView */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -616,8 +621,36 @@
 		0BD5EB391FF3E8B70076C01B /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				0BD5EB3B1FF3F1320076C01B /* Account */,
 			);
 			path = UseCases;
+			sourceTree = "<group>";
+		};
+		0BD5EB3A1FF3EFF00076C01B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				61BA57061FDFF98C00BF1586 /* AuthProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		0BD5EB3B1FF3F1320076C01B /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				0BD5EB3C1FF3F1830076C01B /* CustomerUseCase.swift */,
+				0BD5EB431FF3F9B70076C01B /* LoginStatusUseCase.swift */,
+				0BD5EB401FF3F19D0076C01B /* LogoutUseCase.swift */,
+				0BD5EB3E1FF3F1900076C01B /* ShopUseCase.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		0BD5EB421FF3F1B60076C01B /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				611947821FD95A59008BE9C6 /* AccountTableViewCell */,
+			);
+			path = TableView;
 			sourceTree = "<group>";
 		};
 		610424281FC477B300EFEFDA /* AddressForm */ = {
@@ -1641,7 +1674,6 @@
 				6152B1211F79149900045A42 /* ArticlesList.storyboard in Resources */,
 				617DE1821FB5E9B4004EEF9A /* Account.storyboard in Resources */,
 				61B94C111F82409300B6887C /* ProductOptionHeaderView.xib in Resources */,
-				61AB83261F72E6F0009E7343 /* Policy.storyboard in Resources */,
 				61ED88EC1F7169F1006BDA79 /* Search.storyboard in Resources */,
 				61236D481FEA738C00D64198 /* CheckoutCartTableViewCell.xib in Resources */,
 				61BA58C71FE14A9F00BF1586 /* PopularTableViewCell.xib in Resources */,
@@ -1795,6 +1827,7 @@
 				61E8A2211FAC99F50092EDC1 /* BasePaginationViewModel.swift in Sources */,
 				61B94C101F82409300B6887C /* ProductOptionHeaderView.swift in Sources */,
 				616CA6611FF2A0CF00FF14E2 /* CheckoutViewController.swift in Sources */,
+				0BD5EB3F1FF3F1900076C01B /* ShopUseCase.swift in Sources */,
 				6106C6CB1F7A40F400E87486 /* ArticleDetailsViewController.swift in Sources */,
 				61E47F2B1FBDE8FD00EA4449 /* ReachabilityNetwork.swift in Sources */,
 				6196CF9E1F9F9E5600F823AD /* Author.swift in Sources */,
@@ -1817,6 +1850,7 @@
 				61ED11551FED058E00A0F35D /* ShopifyAddressAdapter.swift in Sources */,
 				61719B9B1FC2FCE5007B6ED0 /* CartHeaderView.swift in Sources */,
 				617000E41FAA031E00DB898C /* BaseViewController.swift in Sources */,
+				0BD5EB411FF3F19D0076C01B /* LogoutUseCase.swift in Sources */,
 				614142CA1F6AF26300379BB9 /* HomeTableDelegate.swift in Sources */,
 				614C561D1FC8628E00857116 /* Address.swift in Sources */,
 				6140A97B1FDEC5FC000C893E /* AccountLoggedHeaderView.swift in Sources */,
@@ -1824,6 +1858,7 @@
 				6141AAB91F8BE92700F9019B /* ShopClient.xcdatamodeld in Sources */,
 				611947881FD95ED4008BE9C6 /* AccountTableDataSource.swift in Sources */,
 				617DE18C1FB5F23D004EEF9A /* SignUpViewModel.swift in Sources */,
+				0BD5EB3D1FF3F1830076C01B /* CustomerUseCase.swift in Sources */,
 				61393A781FACC2450020C345 /* CategoryViewModel.swift in Sources */,
 				613339331F695A820063A754 /* UIViewControllerChilds.swift in Sources */,
 				61087CAC1FB0BC9200D774BB /* ProductDetailsViewModel.swift in Sources */,
@@ -1880,6 +1915,7 @@
 				610A91401F9E34F000424369 /* ShopifyShopAdapter.swift in Sources */,
 				6131309C1FB9A84800DB6AAC /* Customer.swift in Sources */,
 				61FC3DAC1F7EB4E600DB0AD7 /* ProductOptionsCollectionDataSource.swift in Sources */,
+				0BD5EB441FF3F9B70076C01B /* LoginStatusUseCase.swift in Sources */,
 				618B4D531FE2EF2E0001F68D /* TabBarController.swift in Sources */,
 				61B5BEDB1F75055000E075B7 /* ArticleTableViewCell.swift in Sources */,
 				61393A721FACC1430020C345 /* GridCollectionViewModel.swift in Sources */,
