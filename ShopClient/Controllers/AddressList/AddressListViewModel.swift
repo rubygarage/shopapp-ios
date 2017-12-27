@@ -8,10 +8,16 @@
 
 import RxSwift
 
+protocol AddressListViewModelProtocol {
+    func didUpdateShippingAddress()
+}
+
 class AddressListViewModel: BaseViewModel {
     var customerAddresses = Variable<[Address]>([Address]())
     
+    var checkoutId: String!
     var selectedAddress: Address!
+    var delegate: AddressListViewModelProtocol!
     
     // MARK: - public
     public func loadCustomerAddresses() {
@@ -33,6 +39,33 @@ class AddressListViewModel: BaseViewModel {
             return (address, selected)
         }
         return (nil, false)
+    }
+    
+    public func updateCheckoutShippingAddress(with address: Address?) {
+        if let address = address {
+            updateAddress(with: address)
+        }
+    }
+    
+    // MARK: - private
+    private func updateAddress(with address: Address) {
+        state.onNext(.loading(showHud: true))
+        Repository.shared.updateShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            } else if let success = success {
+                self?.processUpdatingResponse(with: success, address: address)
+                self?.state.onNext(.content)
+            }
+        }
+    }
+    
+    private func processUpdatingResponse(with success: Bool, address: Address) {
+        if success {
+            selectedAddress = address
+            loadCustomerAddresses()
+            delegate.didUpdateShippingAddress()
+        }
     }
 }
 

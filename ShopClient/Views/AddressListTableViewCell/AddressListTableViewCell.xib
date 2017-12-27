@@ -28,6 +28,9 @@
                         <state key="normal" image="radio_btn_disabled"/>
                         <state key="selected" image="radio_btn_selected"/>
                         <state key="highlighted" image="radio_btn_hold"/>
+                        <connections>
+                            <action selector="selectTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1sF-ja-Tpm"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customer Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBF-vr-3AY">
                         <rect key="frame" x="16" y="16" width="277" height="16"/>
@@ -79,6 +82,9 @@
                                 <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                 <state key="normal" title="Delete">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
                         </subviews>

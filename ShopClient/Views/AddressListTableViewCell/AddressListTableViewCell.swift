@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol AddressListTableViewCellProtocol {
+    func didSelectAddress(with address: Address?)
+}
+
 class AddressListTableViewCell: UITableViewCell {
     @IBOutlet weak var customerNameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
@@ -15,6 +19,9 @@ class AddressListTableViewCell: UITableViewCell {
     @IBOutlet weak var selectButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
+    
+    var delegate: AddressListTableViewCellProtocol!
+    var address: Address?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,7 +31,9 @@ class AddressListTableViewCell: UITableViewCell {
     }
     
     // MARK: - public
-    public func configure(with addressTuple: AddressTuple) {
+    public func configure(with addressTuple: AddressTuple, delegate: AddressListTableViewCellProtocol) {
+        address = addressTuple.address
+        self.delegate = delegate
         populateViews(with: addressTuple)
     }
     
@@ -45,5 +54,11 @@ class AddressListTableViewCell: UITableViewCell {
             phoneLabel.text = nil
         }
         selectButton.isSelected = addressTuple.selected
+        deleteButton.isEnabled = !addressTuple.selected
+    }
+    
+    // MARK: - actions
+    @IBAction func selectTapped(_ sender: UIButton) {
+        delegate.didSelectAddress(with: address)
     }
 }

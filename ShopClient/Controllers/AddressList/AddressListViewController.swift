@@ -8,11 +8,13 @@
 
 import UIKit
 
-class AddressListViewController: BaseViewController<AddressListViewModel>, AddressListDataSourceProtocol {
+class AddressListViewController: BaseViewController<AddressListViewModel>, AddressListDataSourceProtocol, AddressListTableViewCellProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     var tableDataSource: AddressListDataSource!
+    var checkoutId: String!
     var selectedAddress: Address!
+    var delegate: AddressListViewModelProtocol!
     
     override func viewDidLoad() {
         viewModel = AddressListViewModel()
@@ -32,7 +34,9 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     }
     
     private func setupViewModel() {
+        viewModel.checkoutId = checkoutId
         viewModel.selectedAddress = selectedAddress
+        viewModel.delegate = delegate
         
         viewModel.customerAddresses.asObservable()
             .subscribe(onNext: { [weak self] _ in
@@ -52,5 +56,10 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     
     func item(at index: Int) -> AddressTuple {
         return viewModel.item(at: index)
+    }
+    
+    // MARK: - AddressListTableViewCellProtocol
+    func didSelectAddress(with address: Address?) {
+        viewModel.updateCheckoutShippingAddress(with: address)
     }
 }

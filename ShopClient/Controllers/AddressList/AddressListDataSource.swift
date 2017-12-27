@@ -16,9 +16,9 @@ protocol AddressListDataSourceProtocol {
 }
 
 class AddressListDataSource: NSObject, UITableViewDataSource {
-    var delegate: AddressListDataSourceProtocol!
+    var delegate: (AddressListDataSourceProtocol & AddressListTableViewCellProtocol)!
     
-    init(delegate: AddressListDataSourceProtocol) {
+    init(delegate: AddressListDataSourceProtocol & AddressListTableViewCellProtocol) {
         super.init()
         
         self.delegate = delegate
@@ -31,7 +31,7 @@ class AddressListDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: AddressListTableViewCell.self), for: indexPath) as! AddressListTableViewCell
-        cell.configure(with: delegate.item(at: indexPath.row))
+        cell.configure(with: delegate.item(at: indexPath.row), delegate: delegate)
         return cell
     }
 }
