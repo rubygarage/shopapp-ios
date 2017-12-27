@@ -12,6 +12,7 @@ class AddressListTableViewCell: UITableViewCell {
     @IBOutlet weak var customerNameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var selectButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     
@@ -23,8 +24,8 @@ class AddressListTableViewCell: UITableViewCell {
     }
     
     // MARK: - public
-    public func configure(with address: Address?) {
-        populateViews(with: address)
+    public func configure(with addressTuple: AddressTuple) {
+        populateViews(with: addressTuple)
     }
     
     // MARK: - private
@@ -33,7 +34,8 @@ class AddressListTableViewCell: UITableViewCell {
         deleteButton.setTitle(NSLocalizedString("Button.Delete", comment: String()).uppercased(), for: .normal)
     }
     
-    private func populateViews(with address: Address?) {
+    private func populateViews(with addressTuple: AddressTuple) {
+        let address = addressTuple.address
         customerNameLabel.text = address?.fullname
         addressLabel.text = address?.fullAddress
         if let phoneText = address?.phone {
@@ -42,5 +44,6 @@ class AddressListTableViewCell: UITableViewCell {
         } else {
             phoneLabel.text = nil
         }
+        selectButton.isSelected = addressTuple.selected
     }
 }

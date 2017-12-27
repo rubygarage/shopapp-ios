@@ -49,8 +49,9 @@ extension UIViewController {
         navigationController?.pushViewController(addressFormController, animated: true)
     }
     
-    func pushAddressListController() {
+    func pushAddressListController(with selectedAddress: Address) {
         let addressListController = UIStoryboard.addressList().instantiateViewController(withIdentifier: ControllerIdentifier.addressList) as! AddressListViewController
+        addressListController.selectedAddress = selectedAddress
         
         navigationController?.pushViewController(addressListController, animated: true)
     }

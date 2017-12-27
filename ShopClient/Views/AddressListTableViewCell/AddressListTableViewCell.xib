@@ -136,6 +136,7 @@
                 <outlet property="deleteButton" destination="Ek1-RE-Ana" id="4SP-bJ-qcg"/>
                 <outlet property="editButton" destination="jeW-B4-w3f" id="lGB-ho-3UF"/>
                 <outlet property="phoneLabel" destination="OQ7-er-aW5" id="YIR-Ii-vOV"/>
+                <outlet property="selectButton" destination="PaA-dB-7dk" id="eCk-w3-KWn"/>
             </connections>
             <point key="canvasLocation" x="-74.5" y="36"/>
         </tableViewCell>

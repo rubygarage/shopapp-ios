@@ -8,9 +8,11 @@
 
 import UIKit
 
+typealias AddressTuple = (address: Address?, selected: Bool)
+
 protocol AddressListDataSourceProtocol {
     func itemsCount() -> Int
-    func item(at index: Int) -> Address?
+    func item(at index: Int) -> AddressTuple
 }
 
 class AddressListDataSource: NSObject, UITableViewDataSource {

@@ -12,6 +12,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     @IBOutlet weak var tableView: UITableView!
     
     var tableDataSource: AddressListDataSource!
+    var selectedAddress: Address!
     
     override func viewDidLoad() {
         viewModel = AddressListViewModel()
@@ -31,6 +32,8 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     }
     
     private func setupViewModel() {
+        viewModel.selectedAddress = selectedAddress
+        
         viewModel.customerAddresses.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.tableView.reloadData()
@@ -47,10 +50,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
         return viewModel.customerAddresses.value.count
     }
     
-    func item(at index: Int) -> Address? {
-        if index < viewModel.customerAddresses.value.count {
-            return viewModel.customerAddresses.value[index]
-        }
-        return nil
+    func item(at index: Int) -> AddressTuple {
+        return viewModel.item(at: index)
     }
 }
