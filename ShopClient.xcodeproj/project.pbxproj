@@ -498,6 +498,128 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0BD5EB2D1FF3D8F40076C01B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				0BD5EB301FF3DDEB0076C01B /* Account */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		0BD5EB2E1FF3D8FB0076C01B /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				610A91351F9E292400424369 /* API */,
+				61AFA3F11F9DFBE8004B9D53 /* DAO */,
+				6137EE001F9E19460040C004 /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		0BD5EB2F1FF3D9000076C01B /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				61AFA3F41F9DFE50004B9D53 /* Models */,
+				0BD5EB391FF3E8B70076C01B /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		0BD5EB301FF3DDEB0076C01B /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				61BA57061FDFF98C00BF1586 /* AuthProtocol.swift */,
+				0BD5EB311FF3DDFA0076C01B /* Controllers */,
+				0BD5EB331FF3DF5E0076C01B /* DataSources */,
+				0BD5EB341FF3DF650076C01B /* Delegates */,
+				0BD5EB321FF3DDFF0076C01B /* ViewModels */,
+				0BD5EB351FF3E6150076C01B /* Views */,
+				617DE1811FB5E9B4004EEF9A /* Account.storyboard */,
+				617DE1861FB5EFFB004EEF9A /* Authetification.storyboard */,
+				61AB83251F72E6F0009E7343 /* Policy.storyboard */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		0BD5EB311FF3DDFA0076C01B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				617DE1841FB5E9E2004EEF9A /* AccountViewController.swift */,
+				61C2ABC21FBB23D500A1E170 /* SignInViewController.swift */,
+				617DE1891FB5F1F0004EEF9A /* SignUpViewController.swift */,
+				6124BCE21F73C2880099E879 /* PolicyViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0BD5EB321FF3DDFF0076C01B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				611947801FD87540008BE9C6 /* AccountViewModel.swift */,
+				61C2ABC41FBB240A00A1E170 /* SignInViewModel.swift */,
+				617DE18B1FB5F23D004EEF9A /* SignUpViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0BD5EB331FF3DF5E0076C01B /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				611947871FD95ED4008BE9C6 /* AccountTableDataSource.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
+		0BD5EB341FF3DF650076C01B /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				611947891FD95EE3008BE9C6 /* AccountTableDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		0BD5EB351FF3E6150076C01B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0BD5EB381FF3E76A0076C01B /* Headers */,
+				0BD5EB361FF3E74E0076C01B /* Cells */,
+				0BD5EB371FF3E7530076C01B /* Footers */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0BD5EB361FF3E74E0076C01B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				611947821FD95A59008BE9C6 /* AccountTableViewCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		0BD5EB371FF3E7530076C01B /* Footers */ = {
+			isa = PBXGroup;
+			children = (
+				618DDFCA1FE7ECD300315364 /* AccountFooterView */,
+			);
+			path = Footers;
+			sourceTree = "<group>";
+		};
+		0BD5EB381FF3E76A0076C01B /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				6140A9791FDEC5EA000C893E /* AccountLoggedHeaderView */,
+				61836C191FD97A93000A6BA6 /* AccountNotLoggedHeaderView */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		0BD5EB391FF3E8B70076C01B /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
 		610424281FC477B300EFEFDA /* AddressForm */ = {
 			isa = PBXGroup;
 			children = (
@@ -642,7 +764,6 @@
 				6180AC081F72D2B9007768F2 /* Category */,
 				616CA6591FF2A09100FF14E2 /* Checkout */,
 				614142BF1F6AEEEA00379BB9 /* Home */,
-				6124BCE11F73C2880099E879 /* Policy */,
 				610873A41F7D027200BF81CA /* ProductDetails */,
 				61534F2E1F73EE5E00F24189 /* ProductsList */,
 				61DA4B861F614B9F00444F64 /* Search */,
@@ -654,10 +775,6 @@
 		611EF35D1F5957B6001B8B9C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				618DDFCA1FE7ECD300315364 /* AccountFooterView */,
-				6140A9791FDEC5EA000C893E /* AccountLoggedHeaderView */,
-				61836C191FD97A93000A6BA6 /* AccountNotLoggedHeaderView */,
-				611947821FD95A59008BE9C6 /* AccountTableViewCell */,
 				61B5BED81F75055000E075B7 /* ArticleTableViewCell */,
 				61725FCC1FEAC1EE009F55EA /* BoldTitleTableHeaderView */,
 				61A1D4311FC57FB700E1B673 /* CardValidationView */,
@@ -725,14 +842,6 @@
 				61236D601FEAA88800D64198 /* SearchTitleView.xib */,
 			);
 			path = SearchTitleView;
-			sourceTree = "<group>";
-		};
-		6124BCE11F73C2880099E879 /* Policy */ = {
-			isa = PBXGroup;
-			children = (
-				6124BCE21F73C2880099E879 /* PolicyViewController.swift */,
-			);
-			path = Policy;
 			sourceTree = "<group>";
 		};
 		6131D2431FB33F48008330C0 /* CoreStore */ = {
@@ -846,20 +955,17 @@
 		614142DB1F6C322400379BB9 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				617DE1811FB5E9B4004EEF9A /* Account.storyboard */,
 				610424261FC477A900EFEFDA /* AddressForm.storyboard */,
 				6106C6C71F7A40A600E87486 /* ArticleDetails.storyboard */,
 				6152B1201F79149900045A42 /* ArticlesList.storyboard */,
-				617DE1861FB5EFFB004EEF9A /* Authetification.storyboard */,
 				61C95EA01FB38F8700543B40 /* Cart.storyboard */,
 				6180AC061F72D266007768F2 /* Category.storyboard */,
 				61236D3C1FEA6E2500D64198 /* Checkout.storyboard */,
 				6165E9651FCDDA39006DE8A5 /* BillingAddress.storyboard */,
+				61E4E6371F56C868001C6E01 /* Home.storyboard */,
 				61D561741F7419BD00233DA3 /* ImagesCarousel.storyboard */,
 				61E4E63C1F56C868001C6E01 /* LaunchScreen.storyboard */,
-				61E4E6371F56C868001C6E01 /* Home.storyboard */,
 				6119478B1FD964A6008BE9C6 /* Main.storyboard */,
-				61AB83251F72E6F0009E7343 /* Policy.storyboard */,
 				61D561721F7418D000233DA3 /* ProductDetails.storyboard */,
 				61534F291F73EC2F00F24189 /* ProductsList.storyboard */,
 				61A507351F7E7A50004504EF /* ProductOptions.storyboard */,
@@ -960,26 +1066,6 @@
 				61725FCF1FEAC218009F55EA /* BoldTitleTableHeaderView.xib */,
 			);
 			path = BoldTitleTableHeaderView;
-			sourceTree = "<group>";
-		};
-		617DE1831FB5E9C1004EEF9A /* Account */ = {
-			isa = PBXGroup;
-			children = (
-				617DE1841FB5E9E2004EEF9A /* AccountViewController.swift */,
-				611947801FD87540008BE9C6 /* AccountViewModel.swift */,
-				611947871FD95ED4008BE9C6 /* AccountTableDataSource.swift */,
-				611947891FD95EE3008BE9C6 /* AccountTableDelegate.swift */,
-			);
-			path = Account;
-			sourceTree = "<group>";
-		};
-		617DE1881FB5F1DB004EEF9A /* SignUp */ = {
-			isa = PBXGroup;
-			children = (
-				617DE1891FB5F1F0004EEF9A /* SignUpViewController.swift */,
-				617DE18B1FB5F23D004EEF9A /* SignUpViewModel.swift */,
-			);
-			path = SignUp;
 			sourceTree = "<group>";
 		};
 		6180AC011F72CCFA007768F2 /* SupportingFiles */ = {
@@ -1137,17 +1223,6 @@
 			path = SortModalTableViewCell;
 			sourceTree = "<group>";
 		};
-		61AFA3F01F9DFBD6004B9D53 /* Repository */ = {
-			isa = PBXGroup;
-			children = (
-				610A91351F9E292400424369 /* API */,
-				61AFA3F11F9DFBE8004B9D53 /* DAO */,
-				61AFA3F41F9DFE50004B9D53 /* Models */,
-				6137EE001F9E19460040C004 /* Repositories */,
-			);
-			path = Repository;
-			sourceTree = "<group>";
-		};
 		61AFA3F11F9DFBE8004B9D53 /* DAO */ = {
 			isa = PBXGroup;
 			children = (
@@ -1216,6 +1291,17 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		61B614181FEAC8EF00A4FB82 /* Checkout */ = {
+			isa = PBXGroup;
+			children = (
+				61B6141C1FEAC94E00A4FB82 /* CheckoutViewController.swift */,
+				61B6141B1FEAC94E00A4FB82 /* CheckoutViewModel.swift */,
+				61B6141A1FEAC94D00A4FB82 /* CheckoutTableDataSource.swift */,
+				61B614191FEAC94D00A4FB82 /* CheckoutTableDelegate.swift */,
+			);
+			path = Checkout;
+			sourceTree = "<group>";
+		};
 		61BA57081FE0409200BF1586 /* CartEmptyDataView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1252,15 +1338,6 @@
 				61BF1EAF1FAB598C0098B9AA /* ErrorView.xib */,
 			);
 			path = ErrorView;
-			sourceTree = "<group>";
-		};
-		61C2ABC11FBB23AC00A1E170 /* SignIn */ = {
-			isa = PBXGroup;
-			children = (
-				61C2ABC21FBB23D500A1E170 /* SignInViewController.swift */,
-				61C2ABC41FBB240A00A1E170 /* SignInViewModel.swift */,
-			);
-			path = SignIn;
 			sourceTree = "<group>";
 		};
 		61C95E991FB347FE00543B40 /* Extensions */ = {
@@ -1371,6 +1448,9 @@
 		61E4E6321F56C868001C6E01 /* ShopClient */ = {
 			isa = PBXGroup;
 			children = (
+				0BD5EB2D1FF3D8F40076C01B /* App */,
+				0BD5EB2E1FF3D8FB0076C01B /* Data */,
+				0BD5EB2F1FF3D9000076C01B /* Domain */,
 				61E4E6331F56C868001C6E01 /* AppDelegate.swift */,
 				61CEAA641F5E98110016FBD7 /* Constants */,
 				61836C1F1FD98CFA000A6BA6 /* Controls */,
@@ -1378,7 +1458,6 @@
 				61CEAA6A1F5ECFD10016FBD7 /* Extensions */,
 				61E47F291FBDE8D500EA4449 /* Helpers */,
 				611EF3501F5829AB001B8B9C /* Models */,
-				61AFA3F01F9DFBD6004B9D53 /* Repository */,
 				614142DB1F6C322400379BB9 /* Storyboards */,
 				6180AC011F72CCFA007768F2 /* SupportingFiles */,
 				611EF35D1F5957B6001B8B9C /* Views */,
