@@ -181,10 +181,6 @@
 		61AFA3F61F9DFECC004B9D53 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AFA3F51F9DFECC004B9D53 /* Shop.swift */; };
 		61B5BEDB1F75055000E075B7 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B5BED91F75055000E075B7 /* ArticleTableViewCell.swift */; };
 		61B5BEDC1F75055000E075B7 /* ArticleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61B5BEDA1F75055000E075B7 /* ArticleTableViewCell.xib */; };
-		61B6141D1FEAC94E00A4FB82 /* CheckoutTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B614191FEAC94D00A4FB82 /* CheckoutTableDelegate.swift */; };
-		61B6141E1FEAC94E00A4FB82 /* CheckoutTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B6141A1FEAC94D00A4FB82 /* CheckoutTableDataSource.swift */; };
-		61B6141F1FEAC94E00A4FB82 /* CheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B6141B1FEAC94E00A4FB82 /* CheckoutViewModel.swift */; };
-		61B614201FEAC94E00A4FB82 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B6141C1FEAC94E00A4FB82 /* CheckoutViewController.swift */; };
 		61B94C0D1F82323800B6887C /* ProductOptionsCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B94C0C1F82323800B6887C /* ProductOptionsCollectionDelegate.swift */; };
 		61B94C101F82409300B6887C /* ProductOptionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B94C0E1F82409300B6887C /* ProductOptionHeaderView.swift */; };
 		61B94C111F82409300B6887C /* ProductOptionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61B94C0F1F82409300B6887C /* ProductOptionHeaderView.xib */; };
@@ -635,11 +631,11 @@
 		611EF3591F5956A3001B8B9C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				61BA57041FDFF94800BF1586 /* Authentification */,
 				617DE1831FB5E9C1004EEF9A /* Account */,
 				610424281FC477B300EFEFDA /* AddressForm */,
 				6106C6C91F7A40DF00E87486 /* ArticleDetails */,
 				6152B1221F7914DB00045A42 /* ArticlesList */,
+				61BA57041FDFF94800BF1586 /* Authentification */,
 				61ED88ED1F716F57006BDA79 /* Base */,
 				6165E9671FCDDA44006DE8A5 /* BillingAddress */,
 				61C95EA21FB38F9B00543B40 /* Cart */,
@@ -714,6 +710,10 @@
 			children = (
 				616A8AE01FE82F930013E41F /* SearchTitleView.swift */,
 				616A8AE11FE82F930013E41F /* SearchTitleView.xib */,
+				61B6141A1FEAC94D00A4FB82 /* CheckoutTableDataSource.swift */,
+				61B614191FEAC94D00A4FB82 /* CheckoutTableDelegate.swift */,
+				61B6141B1FEAC94E00A4FB82 /* CheckoutViewModel.swift */,
+				61B6141C1FEAC94E00A4FB82 /* CheckoutViewController.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1196,17 +1196,6 @@
 				61B5BEDA1F75055000E075B7 /* ArticleTableViewCell.xib */,
 			);
 			path = ArticleTableViewCell;
-			sourceTree = "<group>";
-		};
-		61B614181FEAC8EF00A4FB82 /* Checkout */ = {
-			isa = PBXGroup;
-			children = (
-				61B6141C1FEAC94E00A4FB82 /* CheckoutViewController.swift */,
-				61B6141B1FEAC94E00A4FB82 /* CheckoutViewModel.swift */,
-				61B6141A1FEAC94D00A4FB82 /* CheckoutTableDataSource.swift */,
-				61B614191FEAC94D00A4FB82 /* CheckoutTableDelegate.swift */,
-			);
-			path = Checkout;
 			sourceTree = "<group>";
 		};
 		61BA57041FDFF94800BF1586 /* Authentification */ = {
@@ -1728,7 +1717,6 @@
 				61B94C101F82409300B6887C /* ProductOptionHeaderView.swift in Sources */,
 				616CA6611FF2A0CF00FF14E2 /* CheckoutViewController.swift in Sources */,
 				6106C6CB1F7A40F400E87486 /* ArticleDetailsViewController.swift in Sources */,
-				61B6141E1FEAC94E00A4FB82 /* CheckoutTableDataSource.swift in Sources */,
 				61E47F2B1FBDE8FD00EA4449 /* ReachabilityNetwork.swift in Sources */,
 				6196CF9E1F9F9E5600F823AD /* Author.swift in Sources */,
 				6196CF881F9F8AF200F823AD /* ProductRepositoryInterface.swift in Sources */,
@@ -1741,7 +1729,6 @@
 				6124BCE31F73C2880099E879 /* PolicyViewController.swift in Sources */,
 				61A5072E1F7E79FB004504EF /* ImagesCarouselCollectionDataSource.swift in Sources */,
 				6196CF8A1F9F8B5800F823AD /* ProductRepository.swift in Sources */,
-				61B6141D1FEAC94E00A4FB82 /* CheckoutTableDelegate.swift in Sources */,
 				6119478A1FD95EE3008BE9C6 /* AccountTableDelegate.swift in Sources */,
 				61AAB9281F7BC11C00CD32D3 /* SortModalViewController.swift in Sources */,
 				6133392D1F6957AF0063A754 /* DetailsImagesCollectionViewCell.swift in Sources */,
@@ -1764,7 +1751,6 @@
 				614142D61F6BD70400379BB9 /* LastArrivalsTableDataSource.swift in Sources */,
 				6104242A1FC477D100EFEFDA /* AddressFormViewController.swift in Sources */,
 				61AAB9301F7BD07B00CD32D3 /* SortModalTableViewCell.swift in Sources */,
-				61B6141F1FEAC94E00A4FB82 /* CheckoutViewModel.swift in Sources */,
 				615A97751FA0AF0000C6095D /* ShopifyAuthorAdapter.swift in Sources */,
 				6131D2451FB33F7D008330C0 /* DAO.swift in Sources */,
 				61CEAA6C1F5ECFFE0016FBD7 /* UIStoryboardAdditions.swift in Sources */,
@@ -1836,7 +1822,6 @@
 				61A1D4351FC5877D00E1B673 /* CreditCard.swift in Sources */,
 				617E541C1FC8A79500130719 /* ShopifyShippingRateAdapter.swift in Sources */,
 				61AFA3F31F9DFCE7004B9D53 /* DAOInterface.swift in Sources */,
-				61B614201FEAC94E00A4FB82 /* CheckoutViewController.swift in Sources */,
 				6137EE061F9E19F80040C004 /* ShopRepositoryInterface.swift in Sources */,
 				6120F3001FC348BC00CBD724 /* ShopifyCheckoutAdapter.swift in Sources */,
 				61C2ABBC1FB9F38900A1E170 /* RepoError.swift in Sources */,
