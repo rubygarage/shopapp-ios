@@ -259,6 +259,14 @@ class API: NSObject, APIInterface {
         }
     }
     
+    func deleteCustomerAddress(with addressId: String, callback: @escaping RepoCallback<Bool>) {
+        if let token = sessionData().token {
+            deleteCustomerAddress(with: token, addressId: addressId, callback: callback)
+        } else {
+            callback(false, ContentError())
+        }
+    }
+    
     func getShippingRates(with checkoutId: String, callback: @escaping RepoCallback<[ShippingRate]>) {
         let checkoutId = GraphQL.ID.init(rawValue: checkoutId)
         let query = getShippingRatesQuery(checkoutId: checkoutId)
@@ -414,6 +422,20 @@ class API: NSObject, APIInterface {
         let query = customerUpdateDefaultAddressQuery(customerAccessToken: token, addressId: addressId)
         let task = client?.mutateGraphWith(query, completionHandler: { (result, error) in
             if let _ = result {
+                callback(true, nil)
+            } else if let repoError = RepoError(with: error) {
+                callback(false, repoError)
+            } else {
+                callback(false, RepoError())
+            }
+        })
+        run(task: task, callback: callback)
+    }
+    
+    private func deleteCustomerAddress(with token: String, addressId: String, callback: @escaping RepoCallback<Bool>) {
+        let query = customerAddressDeleteQuery(addressId: addressId, token: token)
+        let task = client?.mutateGraphWith(query, completionHandler: { (result, error) in
+            if let _ = result?.customerAddressDelete?.deletedCustomerAddressId {
                 callback(true, nil)
             } else if let repoError = RepoError(with: error) {
                 callback(false, repoError)
@@ -609,6 +631,13 @@ class API: NSObject, APIInterface {
         addressInput.update(with: address)
         return Storefront.buildMutation({ $0
             .customerAddressCreate(customerAccessToken: customerAccessToken, address: addressInput, self.customerAddressCreatePayloadQuery())
+        })
+    }
+    
+    private func customerAddressDeleteQuery(addressId: String, token: String) -> Storefront.MutationQuery {
+        let id = GraphQL.ID.init(rawValue: addressId)
+        return Storefront.buildMutation({ $0
+            .customerAddressDelete(id: id, customerAccessToken: token, self.customerAddressDeletePayloadQuery())
         })
     }
     
@@ -894,6 +923,13 @@ class API: NSObject, APIInterface {
     private func customerAddressCreatePayloadQuery() -> (Storefront.CustomerAddressCreatePayloadQuery) -> () {
         return { (query) in
             query.customerAddress(self.mailingAddressQuery())
+            query.userErrors(self.userErrorQuery())
+        }
+    }
+    
+    private func customerAddressDeletePayloadQuery() -> (Storefront.CustomerAddressDeletePayloadQuery) -> () {
+        return { (query) in
+            query.deletedCustomerAddressId()
             query.userErrors(self.userErrorQuery())
         }
     }

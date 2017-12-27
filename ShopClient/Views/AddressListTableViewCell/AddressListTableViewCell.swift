@@ -9,7 +9,8 @@
 import UIKit
 
 protocol AddressListTableViewCellProtocol {
-    func didSelectAddress(with address: Address?)
+    func didTapSelect(with address: Address)
+    func didTapDelete(with address: Address)
 }
 
 class AddressListTableViewCell: UITableViewCell {
@@ -21,7 +22,7 @@ class AddressListTableViewCell: UITableViewCell {
     @IBOutlet weak var deleteButton: UIButton!
     
     var delegate: AddressListTableViewCellProtocol!
-    var address: Address?
+    var address: Address!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,9 +46,9 @@ class AddressListTableViewCell: UITableViewCell {
     
     private func populateViews(with addressTuple: AddressTuple) {
         let address = addressTuple.address
-        customerNameLabel.text = address?.fullname
-        addressLabel.text = address?.fullAddress
-        if let phoneText = address?.phone {
+        customerNameLabel.text = address.fullname
+        addressLabel.text = address.fullAddress
+        if let phoneText = address.phone {
             let customerNameLocalized = NSLocalizedString("Label.Phone", comment: String())
             phoneLabel.text = String.localizedStringWithFormat(customerNameLocalized, phoneText)
         } else {
@@ -59,6 +60,10 @@ class AddressListTableViewCell: UITableViewCell {
     
     // MARK: - actions
     @IBAction func selectTapped(_ sender: UIButton) {
-        delegate.didSelectAddress(with: address)
+        delegate.didTapSelect(with: address)
+    }
+    
+    @IBAction func deleteTapped(_ sender: UIButton) {
+        delegate.didTapDelete(with: address)
     }
 }

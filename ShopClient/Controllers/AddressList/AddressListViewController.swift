@@ -59,7 +59,11 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     }
     
     // MARK: - AddressListTableViewCellProtocol
-    func didSelectAddress(with address: Address?) {
+    func didTapSelect(with address: Address) {
         viewModel.updateCheckoutShippingAddress(with: address)
+    }
+    
+    func didTapDelete(with address: Address) {
+        viewModel.deleteCustomerAddress(with: address)
     }
 }

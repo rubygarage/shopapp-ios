@@ -38,17 +38,10 @@ class AddressListViewModel: BaseViewModel {
             let selected = address.isEqual(to: selectedAddress)
             return (address, selected)
         }
-        return (nil, false)
+        return (Address(), false)
     }
     
-    public func updateCheckoutShippingAddress(with address: Address?) {
-        if let address = address {
-            updateAddress(with: address)
-        }
-    }
-    
-    // MARK: - private
-    private func updateAddress(with address: Address) {
+    public func updateCheckoutShippingAddress(with address: Address) {
         state.onNext(.loading(showHud: true))
         Repository.shared.updateShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
             if let error = error {
@@ -60,6 +53,18 @@ class AddressListViewModel: BaseViewModel {
         }
     }
     
+    public func deleteCustomerAddress(with address: Address) {
+        Repository.shared.deleteCustomerAddress(with: address.id) { [weak self] (success, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            } else if let success = success {
+                success ? self?.loadCustomerAddresses() : ()
+                self?.state.onNext(.content)
+            }
+        }
+    }
+    
+    // MARK: - private
     private func processUpdatingResponse(with success: Bool, address: Address) {
         if success {
             selectedAddress = address

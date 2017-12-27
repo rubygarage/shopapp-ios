@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias AddressTuple = (address: Address?, selected: Bool)
+typealias AddressTuple = (address: Address, selected: Bool)
 
 protocol AddressListDataSourceProtocol {
     func itemsCount() -> Int
