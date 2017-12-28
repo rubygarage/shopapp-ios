@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1sa-pe-94c">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Qv2-21-Axr">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -31,57 +31,41 @@
             </objects>
             <point key="canvasLocation" x="572" y="-394"/>
         </scene>
-        <!--Home-->
+        <!--HomeNavigationController-->
         <scene sceneID="6WA-MX-jkg">
             <objects>
-                <viewControllerPlaceholder storyboardName="Home" id="3fI-NP-7n7" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Product" referencedIdentifier="HomeNavigationController" id="3fI-NP-7n7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="home_default" selectedImage="home_selected" id="9pU-nH-sp0">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iBm-Jo-zW9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="280" y="125"/>
+            <point key="canvasLocation" x="193" y="124"/>
         </scene>
-        <!--Search-->
+        <!--SearchNavigationController-->
         <scene sceneID="dky-u5-Xqd">
             <objects>
-                <viewControllerPlaceholder storyboardName="Search" id="gdc-Bw-SQd" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Product" referencedIdentifier="SearchNavigationController" id="gdc-Bw-SQd" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="search_default" selectedImage="search_selected" id="hYv-dN-mKL">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d2M-gy-hCk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="572" y="125"/>
+            <point key="canvasLocation" x="571" y="124"/>
         </scene>
-        <!--Account-->
+        <!--AccountNavigationController-->
         <scene sceneID="Yoz-qJ-iUP">
             <objects>
-                <viewControllerPlaceholder storyboardName="Account" id="3Fc-tM-9Yb" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Account" referencedIdentifier="AccountNavigationController" id="3Fc-tM-9Yb" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="account_default" selectedImage="account_selected" id="MS9-DU-YFW">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EXg-88-bJ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="866" y="124"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="JuU-1k-kUo">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Otc-S6-PcZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="1sa-pe-94c" customClass="NavigationController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="QYI-UU-1uj">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Qv2-21-Axr" kind="relationship" relationship="rootViewController" id="1Ag-7d-zfO"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="-233" y="-394"/>
+            <point key="canvasLocation" x="930" y="123"/>
         </scene>
     </scenes>
     <resources>

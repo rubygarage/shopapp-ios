@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="F1m-Lv-M3l">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -48,7 +48,7 @@
         <!--Navigation Controller-->
         <scene sceneID="eZB-DS-ZFv">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="F1m-Lv-M3l" customClass="NavigationController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AccountNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="F1m-Lv-M3l" customClass="NavigationController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="account_default" selectedImage="account_selected" id="oQe-qM-avp">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -392,6 +392,6 @@
         <image name="tabbar_sign_up" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9Y3-HY-brn"/>
+        <segue reference="2Th-4v-kuF"/>
     </inferredMetricsTieBreakers>
 </document>

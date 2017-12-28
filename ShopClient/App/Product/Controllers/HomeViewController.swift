@@ -32,8 +32,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     private func updateNavigationBar() {
-        tabBarController?.navigationItem.titleView = nil
-        tabBarController?.title = NSLocalizedString("ControllerTitle.Home", comment: String())
+        navigationItem.title = NSLocalizedString("ControllerTitle.Home", comment: String())
         updateCartBarItem()
     }
     
@@ -57,17 +56,19 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     private func updateCartBarItem() {
-        Repository.shared.getCartProductList { [weak self] (products, error) in
-            let cartItemsCount = products?.count ?? 0
-            self?.addCartBarButton(with: cartItemsCount)
-        }
+        viewModel.getCartItemsCount()
     }
     
     private func setupViewModel() {
         viewModel.data.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.tableView.reloadData()
-                self?.updateCartBarItem()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.cartItemsCount.asObservable()
+            .subscribe(onNext: { [weak self] cartItemsCount in
+                self?.addCartBarButton(with: cartItemsCount)
             })
             .disposed(by: disposeBag)
     }

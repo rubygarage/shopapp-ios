@@ -12,11 +12,7 @@ private let kCustomBarItemWidth: CGFloat = 32
 
 extension UIViewController {    
     public func addCartBarButton(with itemsCount: Int) {
-        if let tabController = tabBarController {
-            tabController.navigationItem.rightBarButtonItem = cartBarItem(with: itemsCount)
-        } else {
-            navigationItem.rightBarButtonItem = cartBarItem(with: itemsCount)
-        }
+        navigationItem.rightBarButtonItem = cartBarItem(with: itemsCount)
     }
     
     public func addBackButtonIfNeeded() {
