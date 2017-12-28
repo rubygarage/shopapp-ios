@@ -26,13 +26,6 @@ extension UIViewController {
         navigationController?.pushViewController(productDetaillsController, animated: true)
     }
     
-    func pushPolicyController(with policy: Policy) {
-        let policyController = UIStoryboard.policy().instantiateViewController(withIdentifier: ControllerIdentifier.policy) as! PolicyViewController
-        policyController.policy = policy
-
-        navigationController?.pushViewController(policyController, animated: true)
-    }
-    
     func pushArticleDetailsController(with articleId: String) {
         let articleDetailsController = UIStoryboard.articleDetails().instantiateViewController(withIdentifier: ControllerIdentifier.articleDetails) as! ArticleDetailsViewController
         articleDetailsController.articleId = articleId
@@ -100,18 +93,6 @@ extension UIViewController {
         billingAddressController.preloadedAddress = preloadedAddress
         billingAddressController.delegate = delegate
         present(billingAddressController, animated: true)
-    }
-    
-    func showSignInController(delegate: AuthenticationProtocol) {
-        let signInController = UIStoryboard.auth().instantiateViewController(withIdentifier: ControllerIdentifier.signIn) as! SignInViewController
-        signInController.delegate = delegate
-        showNavigationController(with: signInController)
-    }
-    
-    func showSignUpController(delegate: AuthenticationProtocol) {
-        let signUpController = UIStoryboard.auth().instantiateViewController(withIdentifier: ControllerIdentifier.signUp) as! SignUpViewController
-        signUpController.delegate = delegate
-        showNavigationController(with: signUpController)
     }
     
     func showCartController() {

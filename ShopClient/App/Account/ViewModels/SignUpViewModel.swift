@@ -1,37 +1,51 @@
 //
-//  SignInViewModel.swift
+//  SignUpViewModel.swift
 //  ShopClient
 //
-//  Created by Evgeniy Antonov on 11/14/17.
+//  Created by Evgeniy Antonov on 11/10/17.
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
 import RxSwift
 
-class SignInViewModel: BaseViewModel {
+class SignUpViewModel: BaseViewModel {
     var emailText = Variable<String>("")
+    var firstNameText = Variable<String>("")
+    var lastNameText = Variable<String>("")
     var passwordText = Variable<String>("")
+    var phoneText = Variable<String>("")
     var emailErrorMessage = PublishSubject<String>()
     var passwordErrorMessage = PublishSubject<String>()
-    var signInSuccess = Variable<Bool>(false)
+    var signUpSuccess = Variable<Bool>(false)
+    var policies = Variable<(privacyPolicy: Policy?, termsOfService: Policy?)>(privacyPolicy: nil, termsOfService: nil)
     
     var delegate: AuthenticationProtocol!
     
-    var signInButtonEnabled: Observable<Bool> {
+    var signUpButtonEnabled: Observable<Bool> {
         return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { email, password in
             email.hasAtLeastOneSymbol() && password.hasAtLeastOneSymbol()
         }
     }
     
-    var loginPressed: AnyObserver<()> {
+    var signUpPressed: AnyObserver<()> {
         return AnyObserver { [weak self] event in
             self?.checkCresentials()
         }
     }
     
+    private let shopUseCase = ShopUseCase()
+    private let signUpUseCase = SignUpUseCase()
+    
+    public func loadPolicies() {
+        shopUseCase.getShop { [weak self] (shop) in
+            self?.policies.value = (shop.privacyPolicy, shop.termsOfService)
+        }
+    }
+    
+    // MARK: - private
     private func checkCresentials() {
         if emailText.value.isValidAsEmail() && passwordText.value.isValidAsPassword() {
-            signIn()
+            signUp()
         } else {
             processErrorsIfNeeded()
         }
@@ -48,11 +62,11 @@ class SignInViewModel: BaseViewModel {
         }
     }
     
-    private func signIn() {
+    private func signUp() {
         state.onNext(.loading(showHud: true))
-        Repository.shared.login(with: emailText.value, password: passwordText.value) { [weak self] (success, error) in
+        signUpUseCase.signUp(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), password: passwordText.value, phone: phoneText.value.orNil()) { [weak self] (success, error) in
             if let success = success {
-                self?.notifyAboutSignInResult(success: success)
+                self?.notifyAboutSignUpResult(success: success)
                 self?.state.onNext(.content)
             }
             if let error = error {
@@ -61,10 +75,10 @@ class SignInViewModel: BaseViewModel {
         }
     }
     
-    private func notifyAboutSignInResult(success: Bool) {
+    private func notifyAboutSignUpResult(success: Bool) {
         if success {
             delegate?.didAuthorize()
         }
-        signInSuccess.value = success
+        signUpSuccess.value = success
     }
 }

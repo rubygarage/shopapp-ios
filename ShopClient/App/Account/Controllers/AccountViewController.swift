@@ -14,6 +14,8 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     var tableDataSource: AccountTableDataSource!
     var tableDelegate: AccountTableDelegate!
     
+    private var selectedPolicy: Policy?
+    
     override func viewDidLoad() {
         viewModel = AccountViewModel()
         super.viewDidLoad()
@@ -29,9 +31,20 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
         updateNavigationBar()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let policyViewController = segue.destination as? PolicyViewController {
+            policyViewController.policy = selectedPolicy
+        } else if let navigationController = segue.destination as? UINavigationController {
+            if let signInViewController = navigationController.viewControllers.first as? SignInViewController {
+                signInViewController.delegate = self
+            } else if let signUpViewController = navigationController.viewControllers.first as? SignUpViewController {
+                signUpViewController.delegate = self
+            }
+        }
+    }
+    
     private func updateNavigationBar() {
-        tabBarController?.navigationItem.titleView = nil
-        tabBarController?.title = NSLocalizedString("ControllerTitle.Account", comment: String())
+        navigationItem.title = NSLocalizedString("ControllerTitle.Account", comment: String())
     }
     
     private func setupTableView() {
@@ -72,8 +85,8 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     // MARK: - AccountTableDelegateProtocol
     func didSelectItem(at index: Int) {
         if index < viewModel.policies.value.count {
-            let policy = viewModel.policies.value[index]
-            pushPolicyController(with: policy)
+            selectedPolicy = viewModel.policies.value[index]
+            performSegue(withIdentifier: SegueIdentifiers.toPolicy, sender: self)
         }
     }
     
@@ -83,11 +96,11 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     
     // MARK: - AccountNotLoggedHeaderProtocol
     func didTapSignIn() {
-        showSignInController(delegate: self)
+        performSegue(withIdentifier: SegueIdentifiers.toSignIn, sender: self)
     }
     
     func didTapCreateNewAccount() {
-        showSignUpController(delegate: self)
+        performSegue(withIdentifier: SegueIdentifiers.toSignUp, sender: self)
     }
     
     // MARK: - AccountLoggedHeaderProtocol
