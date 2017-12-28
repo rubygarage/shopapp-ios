@@ -8,10 +8,6 @@
 
 import RxSwift
 
-protocol AddressFormViewProtocol {
-    func didUpdatedShippingAddress()
-}
-
 class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     @IBOutlet weak var countryTextFieldView: InputTextFieldView!
     @IBOutlet weak var nameTextFieldView: InputTextFieldView!
@@ -26,8 +22,8 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     @IBOutlet weak var defaultAddressButton: CheckboxButton!
     @IBOutlet weak var checkboxTitleLabel: UILabel!
     
-    var delegate: AddressFormViewProtocol?
-    var checkoutId: String!
+    var address: Address?
+    var completion: AddressFormCompletion?
     
     override func viewDidLoad() {
         viewModel = AddressFormViewModel()
@@ -54,7 +50,7 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     }
     
     private func setupViewModel() {
-        viewModel.checkoutId = checkoutId
+        viewModel.completion = completion
         
         countryTextFieldView.textField.rx.text.map({ $0 ?? String() })
             .bind(to: viewModel.countryText)
@@ -95,13 +91,6 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
         viewModel.isAddressValid
             .subscribe(onNext: { [weak self] (isValid) in
                 self?.submitButton.isEnabled = isValid
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.shippingAddressAdded
-            .subscribe(onNext: { [weak self] _ in
-                self?.delegate?.didUpdatedShippingAddress()
-                self?.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
         

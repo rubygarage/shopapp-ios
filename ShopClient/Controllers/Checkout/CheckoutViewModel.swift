@@ -18,10 +18,11 @@ enum CheckoutSection: Int {
 class CheckoutViewModel: BaseViewModel {
     var cartItems = [CartProduct]()
     var checkout = Variable<Checkout?>(nil)
+    var remoteOperationsCompleted = PublishSubject<()>()
     
     public func loadData(with disposeBag: DisposeBag) {
         state.onNext(.loading(showHud: true))
-        checkoutSingle.subscribe(onSuccess: { [weak self] (checkout) in
+        checkoutCreateSingle.subscribe(onSuccess: { [weak self] (checkout) in
             self?.checkout.value = checkout
             self?.getCustomer()
         }) { [weak self] (error) in
@@ -34,6 +35,7 @@ class CheckoutViewModel: BaseViewModel {
     public func getCheckout() {
         let checkoutId = checkout.value?.id ?? String()
         Repository.shared.getCheckout(with: checkoutId) { [weak self] (result, error) in
+            self?.remoteOperationsCompleted.onNext()
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }
@@ -41,6 +43,13 @@ class CheckoutViewModel: BaseViewModel {
                 self?.checkout.value = checkout
                 self?.state.onNext(.content)
             }
+        }
+    }
+    
+    public func updateCheckoutShippingAddress(with address: Address, isDefaultAddress: Bool) {
+        let checkoutId = checkout.value?.id ?? String()
+        Repository.shared.updateShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
+            self?.updateCustomerDefaultAddress(with: address, isDefaultAddress: isDefaultAddress)
         }
     }
     
@@ -60,7 +69,7 @@ class CheckoutViewModel: BaseViewModel {
         })
     }
     
-    private var checkoutSingle: Single<Checkout> {
+    private var checkoutCreateSingle: Single<Checkout> {
         return cartItemsSingle.flatMap({ (cartItems) in
             Single.create(subscribe: { (event) in
                 Repository.shared.createCheckout(cartProducts: cartItems, callback: { (checkout, error) in
@@ -79,16 +88,23 @@ class CheckoutViewModel: BaseViewModel {
     private func getCustomer() {
         Repository.shared.getCustomer { [weak self] (customer, error) in
             if let address = customer?.defaultAddress {
-                self?.updateCheckoutShippingAddress(with: address)
+                self?.updateCheckoutShippingAddress(with: address, isDefaultAddress: false)
             } else {
                 self?.state.onNext(.content)
             }
         }
     }
     
-    private func updateCheckoutShippingAddress(with address: Address) {
-        let checkoutId = checkout.value?.id ?? String()
-        Repository.shared.updateShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
+    private func updateCustomerDefaultAddress(with address: Address, isDefaultAddress: Bool) {
+        if isDefaultAddress {
+            updateCustomerDefaultAddress(with: address)
+        } else {
+            getCheckout()
+        }
+    }
+    
+    private func updateCustomerDefaultAddress(with address: Address) {
+        Repository.shared.updateCustomerDefaultAddress(with: address) { [weak self] (success, error) in
             self?.getCheckout()
         }
     }

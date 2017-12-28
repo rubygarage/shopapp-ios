@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTableDataSourceProtocol, SeeAllHeaderViewProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, AddressFormViewProtocol, AddressListViewModelProtocol {
+class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTableDataSourceProtocol, SeeAllHeaderViewProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, AddressListViewModelProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     var tableDataSource: CheckoutTableDataSource!
@@ -54,10 +54,20 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
                 self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
+        
+        viewModel.remoteOperationsCompleted
+            .subscribe(onNext: { [weak self] _ in
+                self?.closeAddressFormController()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func loadData() {
         viewModel.loadData(with: disposeBag)
+    }
+    
+    private func closeAddressFormController() {
+        navigationController?.popToViewController(self, animated: true)
     }
     
     // MARK: - CheckoutTableDataSourceProtocol
@@ -71,8 +81,8 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
     
     // MARK: - CheckoutShippingAddressAddCellProtocol
     func didTapAddNewAddress() {
-        if let checkoutId = viewModel.checkout.value?.id {
-            pushAddressFormController(with: checkoutId, delegate: self)
+        pushAddressFormController(with: nil) { [weak self] (address, isDefaultAddress) in
+            self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: isDefaultAddress)
         }
     }
     
@@ -81,11 +91,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
         if let checkoutId = viewModel.checkout.value?.id, let address = viewModel.checkout.value?.shippingAddress {
             pushAddressListController(with: checkoutId, selectedAddress: address, delegate: self)
         }
-    }
-    
-    // MARK: - AddressFormViewProtocol
-    func didUpdatedShippingAddress() {
-        viewModel.getCheckout()
     }
     
     // MARK: - SeeAllHeaderViewProtocol

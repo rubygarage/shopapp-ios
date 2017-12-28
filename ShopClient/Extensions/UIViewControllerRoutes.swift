@@ -41,10 +41,10 @@ extension UIViewController {
         navigationController?.pushViewController(productsListController, animated: true)
     }
     
-    func pushAddressFormController(with checkoutId: String, delegate: AddressFormViewProtocol?) {
+    func pushAddressFormController(with address: Address?, completion: AddressFormCompletion?) {
         let addressFormController = UIStoryboard.addressForm().instantiateViewController(withIdentifier: ControllerIdentifier.addressForm) as! AddressFormViewController
-        addressFormController.checkoutId = checkoutId
-        addressFormController.delegate = delegate
+        addressFormController.address = address
+        addressFormController.completion = completion
         
         navigationController?.pushViewController(addressFormController, animated: true)
     }
