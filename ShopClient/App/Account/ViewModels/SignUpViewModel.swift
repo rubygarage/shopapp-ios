@@ -33,9 +33,12 @@ class SignUpViewModel: BaseViewModel {
         }
     }
     
+    private let shopUseCase = ShopUseCase()
+    private let signUpUseCase = SignUpUseCase()
+    
     public func loadPolicies() {
-        Repository.shared.getShop { [weak self] (shop, error) in
-            self?.policies.value = (shop?.privacyPolicy, shop?.termsOfService)
+        shopUseCase.getShop { [weak self] (shop) in
+            self?.policies.value = (shop.privacyPolicy, shop.termsOfService)
         }
     }
     
@@ -61,7 +64,7 @@ class SignUpViewModel: BaseViewModel {
     
     private func signUp() {
         state.onNext(.loading(showHud: true))
-        Repository.shared.signUp(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), password: passwordText.value, phone: phoneText.value.orNil(), callback: { [weak self] (success, error) in
+        signUpUseCase.signUp(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), password: passwordText.value, phone: phoneText.value.orNil()) { [weak self] (success, error) in
             if let success = success {
                 self?.notifyAboutSignUpResult(success: success)
                 self?.state.onNext(.content)
@@ -69,7 +72,7 @@ class SignUpViewModel: BaseViewModel {
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }
-        })
+        }
     }
     
     private func notifyAboutSignUpResult(success: Bool) {

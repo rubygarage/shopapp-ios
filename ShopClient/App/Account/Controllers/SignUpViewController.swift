@@ -20,6 +20,8 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
     
     var delegate: AuthenticationProtocol!
     
+    private var selectedPolicy: Policy?
+    
     override func viewDidLoad() {
         viewModel = SignUpViewModel()
         viewModel.delegate = delegate
@@ -28,6 +30,12 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
         setupViews()
         setupViewModel()
         loadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let policyViewController = segue.destination as? PolicyViewController {
+            policyViewController.policy = selectedPolicy
+        }
     }
     
     private func setupViews() {
@@ -124,9 +132,11 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
         let termsOfService = NSLocalizedString("Label.Range.TermsOfService", comment: String()).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
         
         if url.absoluteString == privacyPolicy, let privacyPolicy = viewModel.policies.value.privacyPolicy {
-            pushPolicyController(with: privacyPolicy)
+            selectedPolicy = privacyPolicy
+            performSegue(withIdentifier: SegueIdentifiers.toPolicy, sender: self)
         } else if url.absoluteString == termsOfService, let termsOfService = viewModel.policies.value.termsOfService {
-            pushPolicyController(with: termsOfService)
+            selectedPolicy = termsOfService
+            performSegue(withIdentifier: SegueIdentifiers.toPolicy, sender: self)
         }
     }
 }

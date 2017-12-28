@@ -64,7 +64,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wHc-59-TBv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-183" y="722"/>
+            <point key="canvasLocation" x="574" y="6"/>
         </scene>
         <!--Policy View Controller-->
         <scene sceneID="xzY-dd-RIo">
@@ -97,7 +97,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nhw-AJ-uhG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1346" y="722"/>
+            <point key="canvasLocation" x="1362" y="1494"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="O3U-Bi-uN4">
@@ -184,6 +184,12 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKj-4W-ndo" customClass="TTTAttributedLabel">
+                                                <rect key="frame" x="37" y="414" width="301" height="14"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -191,8 +197,10 @@
                                             <constraint firstItem="9cl-xB-xLA" firstAttribute="leading" secondItem="VPd-tJ-IiL" secondAttribute="trailing" constant="4" id="3g5-5b-sOn"/>
                                             <constraint firstItem="cXW-aO-4Pj" firstAttribute="top" secondItem="taH-6o-eIT" secondAttribute="bottom" constant="20" id="3kS-5r-LLU"/>
                                             <constraint firstItem="9cl-xB-xLA" firstAttribute="width" secondItem="VPd-tJ-IiL" secondAttribute="width" id="4nf-y7-vcj"/>
+                                            <constraint firstItem="XKj-4W-ndo" firstAttribute="top" secondItem="ZXD-ef-Qqf" secondAttribute="bottom" constant="20" id="5Sg-1V-k8e"/>
                                             <constraint firstItem="9cl-xB-xLA" firstAttribute="centerY" secondItem="VPd-tJ-IiL" secondAttribute="centerY" id="93J-ZJ-f4P"/>
                                             <constraint firstItem="VPd-tJ-IiL" firstAttribute="leading" secondItem="Qwo-0k-0PZ" secondAttribute="leading" id="B3p-hy-Pb5"/>
+                                            <constraint firstAttribute="trailing" secondItem="XKj-4W-ndo" secondAttribute="trailing" constant="37" id="Ddq-i5-V4t"/>
                                             <constraint firstAttribute="trailing" secondItem="Qwo-0k-0PZ" secondAttribute="trailing" constant="35" id="I9I-fb-XE5"/>
                                             <constraint firstAttribute="trailing" secondItem="cXW-aO-4Pj" secondAttribute="trailing" constant="35" id="LJs-hj-Ne1"/>
                                             <constraint firstItem="taH-6o-eIT" firstAttribute="leading" secondItem="S7q-MC-CDL" secondAttribute="leading" constant="35" id="LLw-Mr-Qmc"/>
@@ -201,6 +209,7 @@
                                             <constraint firstAttribute="trailing" secondItem="taH-6o-eIT" secondAttribute="trailing" constant="35" id="UPe-ml-qY8"/>
                                             <constraint firstItem="Qwo-0k-0PZ" firstAttribute="leading" secondItem="S7q-MC-CDL" secondAttribute="leading" constant="35" id="WgA-Wn-qVW"/>
                                             <constraint firstAttribute="trailing" secondItem="ZXD-ef-Qqf" secondAttribute="trailing" constant="45" id="cTZ-B1-qw3"/>
+                                            <constraint firstItem="XKj-4W-ndo" firstAttribute="leading" secondItem="S7q-MC-CDL" secondAttribute="leading" constant="37" id="gBH-kU-2oA"/>
                                             <constraint firstItem="Qwo-0k-0PZ" firstAttribute="top" secondItem="S7q-MC-CDL" secondAttribute="top" constant="43" id="o8h-3G-6A6"/>
                                             <constraint firstItem="taH-6o-eIT" firstAttribute="top" secondItem="VPd-tJ-IiL" secondAttribute="bottom" constant="20" id="sMO-W3-cWa"/>
                                             <constraint firstItem="cXW-aO-4Pj" firstAttribute="leading" secondItem="S7q-MC-CDL" secondAttribute="leading" constant="35" id="tuL-gz-9rY"/>
@@ -229,17 +238,19 @@
                     </view>
                     <navigationItem key="navigationItem" id="kzq-DA-frd"/>
                     <connections>
+                        <outlet property="acceptPoliciesLabel" destination="XKj-4W-ndo" id="nfO-at-Caf"/>
                         <outlet property="emailTextFieldView" destination="Qwo-0k-0PZ" id="xoo-Jn-NCs"/>
                         <outlet property="lastNameTextFieldView" destination="9cl-xB-xLA" id="P3k-wZ-YM5"/>
                         <outlet property="nameTextFieldView" destination="VPd-tJ-IiL" id="jAy-vf-Jhx"/>
                         <outlet property="passwordTextFieldView" destination="cXW-aO-4Pj" id="Is1-cM-T7L"/>
                         <outlet property="phoneTextFieldView" destination="taH-6o-eIT" id="7wt-Ka-62G"/>
                         <outlet property="signUpButton" destination="ZXD-ef-Qqf" id="ILb-sA-yKY"/>
+                        <segue destination="ejd-jT-O3e" kind="show" identifier="toPolicy" id="9Y3-HY-brn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ph1-kW-fZO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2100" y="1494"/>
+            <point key="canvasLocation" x="574" y="2213"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="dRb-ur-MBF">
@@ -333,7 +344,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S3D-y8-IVR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="574" y="1494"/>
+            <point key="canvasLocation" x="-183" y="2214"/>
         </scene>
         <!--Sign In-->
         <scene sceneID="oBI-Jw-63J">
@@ -371,7 +382,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Njx-qS-l2r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1345" y="1494"/>
+            <point key="canvasLocation" x="574" y="1494"/>
         </scene>
     </scenes>
     <resources>
@@ -380,4 +391,7 @@
         <image name="tabbar_login" width="40" height="40"/>
         <image name="tabbar_sign_up" width="40" height="40"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="9Y3-HY-brn"/>
+    </inferredMetricsTieBreakers>
 </document>
