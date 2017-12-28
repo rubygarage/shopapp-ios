@@ -35,7 +35,6 @@ class AddressFormViewModel: BaseViewModel {
     
     var isAddressValid: Observable<Bool> {
         return Observable.combineLatest(requiredTextFields, { (textFields) in
-            print(textFields)
             return textFields.map({ $0.isEmpty == false }).filter({ $0 == false }).count == 0
         })
     }
