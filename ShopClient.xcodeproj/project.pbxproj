@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B9B1E381FF4EB4700FECA8E /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B1E371FF4EB4700FECA8E /* LoginUseCase.swift */; };
+		0B9B1E3A1FF4EDB000FECA8E /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B1E391FF4EDB000FECA8E /* SignUpUseCase.swift */; };
 		0BD5EB3D1FF3F1830076C01B /* CustomerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5EB3C1FF3F1830076C01B /* CustomerUseCase.swift */; };
 		0BD5EB3F1FF3F1900076C01B /* ShopUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5EB3E1FF3F1900076C01B /* ShopUseCase.swift */; };
 		0BD5EB411FF3F19D0076C01B /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5EB401FF3F19D0076C01B /* LogoutUseCase.swift */; };
-		0BD5EB441FF3F9B70076C01B /* LoginStatusUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5EB431FF3F9B70076C01B /* LoginStatusUseCase.swift */; };
 		610424271FC477A900EFEFDA /* AddressForm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 610424261FC477A900EFEFDA /* AddressForm.storyboard */; };
 		6104242A1FC477D100EFEFDA /* AddressFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610424291FC477D100EFEFDA /* AddressFormViewController.swift */; };
 		6104242C1FC477F000EFEFDA /* AddressFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6104242B1FC477F000EFEFDA /* AddressFormViewModel.swift */; };
@@ -120,7 +121,6 @@
 		61725FD01FEAC218009F55EA /* BoldTitleTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61725FCF1FEAC218009F55EA /* BoldTitleTableHeaderView.xib */; };
 		617DE1821FB5E9B4004EEF9A /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 617DE1811FB5E9B4004EEF9A /* Account.storyboard */; };
 		617DE1851FB5E9E2004EEF9A /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617DE1841FB5E9E2004EEF9A /* AccountViewController.swift */; };
-		617DE1871FB5EFFB004EEF9A /* Authetification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 617DE1861FB5EFFB004EEF9A /* Authetification.storyboard */; };
 		617DE18A1FB5F1F0004EEF9A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617DE1891FB5F1F0004EEF9A /* SignUpViewController.swift */; };
 		617DE18C1FB5F23D004EEF9A /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617DE18B1FB5F23D004EEF9A /* SignUpViewModel.swift */; };
 		617E541A1FC8954C00130719 /* ShippingRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617E54191FC8954C00130719 /* ShippingRate.swift */; };
@@ -245,10 +245,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B9B1E371FF4EB4700FECA8E /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		0B9B1E391FF4EDB000FECA8E /* SignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUseCase.swift; sourceTree = "<group>"; };
 		0BD5EB3C1FF3F1830076C01B /* CustomerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerUseCase.swift; sourceTree = "<group>"; };
 		0BD5EB3E1FF3F1900076C01B /* ShopUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopUseCase.swift; sourceTree = "<group>"; };
 		0BD5EB401FF3F19D0076C01B /* LogoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
-		0BD5EB431FF3F9B70076C01B /* LoginStatusUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStatusUseCase.swift; sourceTree = "<group>"; };
 		10BBCCE808D12F6C873F9215 /* Pods-ShopClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShopClient/Pods-ShopClient.release.xcconfig"; sourceTree = "<group>"; };
 		38B8C07405420E82AD6AAA3E /* Pods-ShopClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShopClient/Pods-ShopClient.debug.xcconfig"; sourceTree = "<group>"; };
 		610424261FC477A900EFEFDA /* AddressForm.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddressForm.storyboard; sourceTree = "<group>"; };
@@ -362,7 +363,6 @@
 		61725FCF1FEAC218009F55EA /* BoldTitleTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoldTitleTableHeaderView.xib; sourceTree = "<group>"; };
 		617DE1811FB5E9B4004EEF9A /* Account.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
 		617DE1841FB5E9E2004EEF9A /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
-		617DE1861FB5EFFB004EEF9A /* Authetification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authetification.storyboard; sourceTree = "<group>"; };
 		617DE1891FB5F1F0004EEF9A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		617DE18B1FB5F23D004EEF9A /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		617E54191FC8954C00130719 /* ShippingRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShippingRate.swift; sourceTree = "<group>"; };
@@ -541,7 +541,6 @@
 				0BD5EB321FF3DDFF0076C01B /* ViewModels */,
 				0BD5EB351FF3E6150076C01B /* Views */,
 				617DE1811FB5E9B4004EEF9A /* Account.storyboard */,
-				617DE1861FB5EFFB004EEF9A /* Authetification.storyboard */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -638,9 +637,10 @@
 			isa = PBXGroup;
 			children = (
 				0BD5EB3C1FF3F1830076C01B /* CustomerUseCase.swift */,
-				0BD5EB431FF3F9B70076C01B /* LoginStatusUseCase.swift */,
+				0B9B1E371FF4EB4700FECA8E /* LoginUseCase.swift */,
 				0BD5EB401FF3F19D0076C01B /* LogoutUseCase.swift */,
 				0BD5EB3E1FF3F1900076C01B /* ShopUseCase.swift */,
+				0B9B1E391FF4EDB000FECA8E /* SignUpUseCase.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -1668,7 +1668,6 @@
 				61AAB92A1F7BC1F700CD32D3 /* SortModal.storyboard in Resources */,
 				610424271FC477A900EFEFDA /* AddressForm.storyboard in Resources */,
 				614142D41F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.xib in Resources */,
-				617DE1871FB5EFFB004EEF9A /* Authetification.storyboard in Resources */,
 				61836C1D1FD97AD6000A6BA6 /* AccountNotLoggedHeaderView.xib in Resources */,
 				6133392E1F6957AF0063A754 /* DetailsImagesCollectionViewCell.xib in Resources */,
 				6152B1211F79149900045A42 /* ArticlesList.storyboard in Resources */,
@@ -1811,6 +1810,7 @@
 				61C95E9D1FB34B9F00543B40 /* DAOProductVariantHelper.swift in Sources */,
 				6131D2491FB34563008330C0 /* DAOShop.swift in Sources */,
 				61AE67031FE95034007229DA /* SearchCollectionDataSource.swift in Sources */,
+				0B9B1E381FF4EB4700FECA8E /* LoginUseCase.swift in Sources */,
 				615A976B1FA0907900C6095D /* ShopifyImageAdapter.swift in Sources */,
 				61ED88F71F7171F1006BDA79 /* GridCollectionViewController.swift in Sources */,
 				6141AAA91F8BDD8500F9019B /* UIViewControllerAlert.swift in Sources */,
@@ -1915,12 +1915,12 @@
 				610A91401F9E34F000424369 /* ShopifyShopAdapter.swift in Sources */,
 				6131309C1FB9A84800DB6AAC /* Customer.swift in Sources */,
 				61FC3DAC1F7EB4E600DB0AD7 /* ProductOptionsCollectionDataSource.swift in Sources */,
-				0BD5EB441FF3F9B70076C01B /* LoginStatusUseCase.swift in Sources */,
 				618B4D531FE2EF2E0001F68D /* TabBarController.swift in Sources */,
 				61B5BEDB1F75055000E075B7 /* ArticleTableViewCell.swift in Sources */,
 				61393A721FACC1430020C345 /* GridCollectionViewModel.swift in Sources */,
 				61E4E6341F56C868001C6E01 /* AppDelegate.swift in Sources */,
 				61BA570A1FE040D900BF1586 /* CartEmptyDataView.swift in Sources */,
+				0B9B1E3A1FF4EDB000FECA8E /* SignUpUseCase.swift in Sources */,
 				6131D2381FB31395008330C0 /* CartProductDAOInterface.swift in Sources */,
 				6196CF901F9F929200F823AD /* Category.swift in Sources */,
 				6120F2FE1FC3487E00CBD724 /* Checkout.swift in Sources */,

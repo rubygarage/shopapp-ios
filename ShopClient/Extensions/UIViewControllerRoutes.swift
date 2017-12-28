@@ -95,18 +95,6 @@ extension UIViewController {
         present(billingAddressController, animated: true)
     }
     
-    func showSignInController(delegate: AuthenticationProtocol) {
-        let signInController = UIStoryboard.auth().instantiateViewController(withIdentifier: ControllerIdentifier.signIn) as! SignInViewController
-        signInController.delegate = delegate
-        showNavigationController(with: signInController)
-    }
-    
-    func showSignUpController(delegate: AuthenticationProtocol) {
-        let signUpController = UIStoryboard.auth().instantiateViewController(withIdentifier: ControllerIdentifier.signUp) as! SignUpViewController
-        signUpController.delegate = delegate
-        showNavigationController(with: signUpController)
-    }
-    
     func showCartController() {
         let cartController = UIStoryboard.cart().instantiateViewController(withIdentifier: ControllerIdentifier.cart)
         showNavigationController(with: cartController)

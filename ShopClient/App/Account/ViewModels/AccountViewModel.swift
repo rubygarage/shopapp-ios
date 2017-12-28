@@ -13,12 +13,12 @@ class AccountViewModel: BaseViewModel {
     var customer = Variable<Customer?>(nil)
     
     private let customerUseCase = CustomerUseCase()
-    private let loginStatusUseCase = LoginStatusUseCase()
+    private let loginUseCase = LoginUseCase()
     private let logoutUseCase = LogoutUseCase()
     private let shopUseCase = ShopUseCase()
     
     public func loadCustomer() {
-        loginStatusUseCase.getLoginStatus { (isLoggedIn) in
+        loginUseCase.getLoginStatus { (isLoggedIn) in
             if isLoggedIn {
                 getCustomer()
             }

@@ -34,6 +34,12 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let policyViewController = segue.destination as? PolicyViewController {
             policyViewController.policy = selectedPolicy
+        } else if let navigationController = segue.destination as? UINavigationController {
+            if let signInViewController = navigationController.viewControllers.first as? SignInViewController {
+                signInViewController.delegate = self
+            } else if let signUpViewController = navigationController.viewControllers.first as? SignUpViewController {
+                signUpViewController.delegate = self
+            }
         }
     }
     
@@ -90,11 +96,11 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     
     // MARK: - AccountNotLoggedHeaderProtocol
     func didTapSignIn() {
-        showSignInController(delegate: self)
+        performSegue(withIdentifier: SegueIdentifiers.toSignIn, sender: self)
     }
     
     func didTapCreateNewAccount() {
-        showSignUpController(delegate: self)
+        performSegue(withIdentifier: SegueIdentifiers.toSignUp, sender: self)
     }
     
     // MARK: - AccountLoggedHeaderProtocol

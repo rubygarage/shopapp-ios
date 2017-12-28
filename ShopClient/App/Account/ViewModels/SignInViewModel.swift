@@ -29,6 +29,8 @@ class SignInViewModel: BaseViewModel {
         }
     }
     
+    private let loginUseCase = LoginUseCase()
+    
     private func checkCresentials() {
         if emailText.value.isValidAsEmail() && passwordText.value.isValidAsPassword() {
             signIn()
@@ -50,7 +52,7 @@ class SignInViewModel: BaseViewModel {
     
     private func signIn() {
         state.onNext(.loading(showHud: true))
-        Repository.shared.login(with: emailText.value, password: passwordText.value) { [weak self] (success, error) in
+        loginUseCase.login(with: emailText.value, password: passwordText.value) { [weak self] (success, error) in
             if let success = success {
                 self?.notifyAboutSignInResult(success: success)
                 self?.state.onNext(.content)
