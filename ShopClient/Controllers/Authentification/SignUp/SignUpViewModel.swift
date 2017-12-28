@@ -17,6 +17,7 @@ class SignUpViewModel: BaseViewModel {
     var emailErrorMessage = PublishSubject<String>()
     var passwordErrorMessage = PublishSubject<String>()
     var signUpSuccess = Variable<Bool>(false)
+    var policies = Variable<(privacyPolicy: Policy?, termsOfService: Policy?)>(privacyPolicy: nil, termsOfService: nil)
     
     var delegate: AuthenticationProtocol!
     
@@ -32,6 +33,13 @@ class SignUpViewModel: BaseViewModel {
         }
     }
     
+    public func loadPolicies() {
+        Repository.shared.getShop { [weak self] (shop, error) in
+            self?.policies.value = (shop?.privacyPolicy, shop?.termsOfService)
+        }
+    }
+    
+    // MARK: - private
     private func checkCresentials() {
         if emailText.value.isValidAsEmail() && passwordText.value.isValidAsPassword() {
             signUp()

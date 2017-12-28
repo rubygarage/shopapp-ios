@@ -18,7 +18,8 @@ target 'ShopClient' do
   pod 'AvatarImageView', '~> 2.1'
   pod 'SwipeCellKit', '~> 2.0'
   pod 'UIImage+Additions', '~> 2.1'
-
+  pod 'TTTAttributedLabel', '~> 2.0'
+  
   # Database
   pod 'CoreStore', '~> 4.2'
 
