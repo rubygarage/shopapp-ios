@@ -14,6 +14,7 @@ protocol AddressListViewModelProtocol {
 
 class AddressListViewModel: BaseViewModel {
     var customerAddresses = Variable<[Address]>([Address]())
+    var remoteOperationsCompleted = PublishSubject<()>()
     
     var checkoutId: String!
     var selectedAddress: Address!
@@ -23,6 +24,7 @@ class AddressListViewModel: BaseViewModel {
     public func loadCustomerAddresses() {
         state.onNext(.loading(showHud: true))
         Repository.shared.getCustomer { [weak self] (customer, error) in
+            self?.remoteOperationsCompleted.onNext()
             if let addresses = customer?.addresses {
                 self?.customerAddresses.value = addresses
                 self?.state.onNext(.content)
@@ -54,15 +56,15 @@ class AddressListViewModel: BaseViewModel {
     }
     
     public func updateAddress(with address: Address) {
-//        state.onNext(.loading(showHud: true))
-//        Repository.shared.updateCustomerAddress(with: address) { [weak self] (success, error) in
-//            if let error = error {
-//                self?.state.onNext(.error(error: error))
-//            } else if let success = success {
-//                success ? self?.loadCustomerAddresses() : ()
-//                self?.state.onNext(.content)
-//            }
-//        }
+        state.onNext(.loading(showHud: true))
+        Repository.shared.updateCustomerAddress(with: address) { [weak self] (success, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            } else if let success = success {
+                success ? self?.loadCustomerAddresses() : ()
+                self?.state.onNext(.content)
+            }
+        }
     }
     
     public func deleteCustomerAddress(with address: Address) {

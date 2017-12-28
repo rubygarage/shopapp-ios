@@ -22,16 +22,18 @@ class AddressFormViewModel: BaseViewModel {
     var phoneText = Variable<String>("")
     var useDefaultShippingAddress = Variable<Bool>(false)
     
+    var address: Address?
     var completion: AddressFormCompletion?
     
     private var requiredTextFields: [Observable<String>] {
         get {
-            return [countryText, firstNameText, lastNameText, addressText, cityText, stateText, zipText, phoneText].map({ $0.asObservable() })
+            return [countryText, firstNameText, lastNameText, addressText, cityText, zipText, phoneText].map({ $0.asObservable() })
         }
     }
     
     var isAddressValid: Observable<Bool> {
         return Observable.combineLatest(requiredTextFields, { (textFields) in
+            print(textFields)
             return textFields.map({ $0.isEmpty == false }).filter({ $0 == false }).count == 0
         })
     }
@@ -48,6 +50,20 @@ class AddressFormViewModel: BaseViewModel {
         }
     }
     
+    // MARK: - public
+    public func updateFields() {
+        countryText.value = address?.country ?? String()
+        firstNameText.value = address?.firstName ?? String()
+        lastNameText.value = address?.lastName ?? String()
+        addressText.value = address?.address ?? String()
+        addressOptionalText.value = address?.secondAddress ?? String()
+        cityText.value = address?.city ?? String()
+        stateText.value = address?.state ?? String()
+        zipText.value = address?.zip ?? String()
+        phoneText.value = address?.phone ?? String()
+    }
+    
+    // MARK: - private
     private func submitAction() {
         completion?(getAddress(), useDefaultShippingAddress.value)
     }
@@ -56,8 +72,9 @@ class AddressFormViewModel: BaseViewModel {
         useDefaultShippingAddress.value = !useDefaultShippingAddress.value
     }
  
-    public func getAddress() -> Address {
+    private func getAddress() -> Address {
         let address = Address()
+        address.id = self.address?.id ?? String()
         address.country = countryText.value.trimmingCharacters(in: .whitespaces)
         address.firstName = firstNameText.value.trimmingCharacters(in: .whitespaces)
         address.lastName = lastNameText.value.trimmingCharacters(in: .whitespaces)

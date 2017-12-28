@@ -31,6 +31,7 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
 
         setupViews()
         setupViewModel()
+        populateViewsIfNeeded()
     }
     
     private func setupViews() {
@@ -50,6 +51,7 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     }
     
     private func setupViewModel() {
+        viewModel.address = address
         viewModel.completion = completion
         
         countryTextFieldView.textField.rx.text.map({ $0 ?? String() })
@@ -107,5 +109,20 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
         defaultAddressButton.rx.tap
             .bind(to: viewModel.useDefaultAddressTapped)
             .disposed(by: disposeBag)
+    }
+    
+    private func populateViewsIfNeeded() {
+        if let address = viewModel.address {
+            countryTextFieldView.textField.text = address.country
+            nameTextFieldView.textField.text = address.firstName
+            lastNameTextFieldView.textField.text = address.lastName
+            addressTextFieldView.textField.text = address.address
+            addressOptionalTextFieldView.textField.text = address.secondAddress
+            cityTextFieldView.textField.text = address.city
+            stateTextFieldView.textField.text = address.state
+            zipCodeTextFieldView.textField.text = address.zip
+            phoneTextFieldView.textField.text = address.phone
+            viewModel.updateFields()
+        }
     }
 }

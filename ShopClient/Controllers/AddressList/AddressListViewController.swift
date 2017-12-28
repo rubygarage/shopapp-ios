@@ -43,10 +43,21 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
                 self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
+        
+        viewModel.remoteOperationsCompleted
+            .subscribe(onNext: { [weak self] _ in
+                self?.closeAddressFormController()
+            })
+            .disposed(by: disposeBag)
     }
     
+    // MARK: - private
     private func loadData() {
         viewModel.loadCustomerAddresses()
+    }
+    
+    private func closeAddressFormController() {
+        navigationController?.popToViewController(self, animated: true)
     }
     
     // MARK: - AddressListDataSourceProtocol
@@ -64,7 +75,9 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     }
     
     func didTapEdit(with address: Address) {
-        viewModel.updateAddress(with: address)
+        pushAddressFormController(with: address) { [weak self] (filledAddress, isDefaultAddress) in
+            self?.viewModel.updateAddress(with: filledAddress)
+        }
     }
     
     func didTapDelete(with address: Address) {
