@@ -63,6 +63,10 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
         viewModel.updateCheckoutShippingAddress(with: address)
     }
     
+    func didTapEdit(with address: Address) {
+        viewModel.updateAddress(with: address)
+    }
+    
     func didTapDelete(with address: Address) {
         viewModel.deleteCustomerAddress(with: address)
     }

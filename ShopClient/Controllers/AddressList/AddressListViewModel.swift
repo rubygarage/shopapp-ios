@@ -53,7 +53,20 @@ class AddressListViewModel: BaseViewModel {
         }
     }
     
+    public func updateAddress(with address: Address) {
+//        state.onNext(.loading(showHud: true))
+//        Repository.shared.updateCustomerAddress(with: address) { [weak self] (success, error) in
+//            if let error = error {
+//                self?.state.onNext(.error(error: error))
+//            } else if let success = success {
+//                success ? self?.loadCustomerAddresses() : ()
+//                self?.state.onNext(.content)
+//            }
+//        }
+    }
+    
     public func deleteCustomerAddress(with address: Address) {
+        state.onNext(.loading(showHud: true))
         Repository.shared.deleteCustomerAddress(with: address.id) { [weak self] (success, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))

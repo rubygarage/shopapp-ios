@@ -67,6 +67,9 @@
                                 <state key="normal" title="Edit">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="editTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="PyD-nz-mkC"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mff-K6-lNa">
                                 <rect key="frame" x="56" y="15" width="1" height="20"/>

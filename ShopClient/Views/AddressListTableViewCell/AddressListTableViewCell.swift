@@ -10,6 +10,7 @@ import UIKit
 
 protocol AddressListTableViewCellProtocol {
     func didTapSelect(with address: Address)
+    func didTapEdit(with address: Address)
     func didTapDelete(with address: Address)
 }
 
@@ -61,6 +62,10 @@ class AddressListTableViewCell: UITableViewCell {
     // MARK: - actions
     @IBAction func selectTapped(_ sender: UIButton) {
         delegate.didTapSelect(with: address)
+    }
+    
+    @IBAction func editTapped(_ sender: UIButton) {
+        delegate.didTapEdit(with: address)
     }
     
     @IBAction func deleteTapped(_ sender: UIButton) {
