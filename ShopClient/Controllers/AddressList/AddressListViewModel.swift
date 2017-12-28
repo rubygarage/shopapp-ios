@@ -8,9 +8,7 @@
 
 import RxSwift
 
-protocol AddressListViewModelProtocol {
-    func didUpdateShippingAddress()
-}
+typealias AddressListCompletion = (_ needUpdateCheckout: Bool) -> ()
 
 class AddressListViewModel: BaseViewModel {
     var customerAddresses = Variable<[Address]>([Address]())
@@ -18,7 +16,7 @@ class AddressListViewModel: BaseViewModel {
     
     var checkoutId: String!
     var selectedAddress: Address!
-    var delegate: AddressListViewModelProtocol!
+    var completion: AddressListCompletion?
     
     // MARK: - public
     public func loadCustomerAddresses() {
@@ -49,19 +47,19 @@ class AddressListViewModel: BaseViewModel {
             if let error = error {
                 self?.state.onNext(.error(error: error))
             } else if let success = success {
-                self?.processUpdatingResponse(with: success, address: address)
+                self?.processCheckoutUpdatingResponse(with: success, address: address)
                 self?.state.onNext(.content)
             }
         }
     }
     
-    public func updateAddress(with address: Address) {
+    public func updateAddress(with address: Address, isSelected: Bool) {
         state.onNext(.loading(showHud: true))
         Repository.shared.updateCustomerAddress(with: address) { [weak self] (success, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             } else if let success = success {
-                success ? self?.loadCustomerAddresses() : ()
+                self?.processAddressUpdatingResponse(with: success, address: address, isSelected: isSelected)
                 self?.state.onNext(.content)
             }
         }
@@ -80,12 +78,22 @@ class AddressListViewModel: BaseViewModel {
     }
     
     // MARK: - private
-    private func processUpdatingResponse(with success: Bool, address: Address) {
+    private func processCheckoutUpdatingResponse(with success: Bool, address: Address) {
         if success {
             selectedAddress = address
-            loadCustomerAddresses()
-            delegate.didUpdateShippingAddress()
+            updateAddresses(needUpdateCheckout: true)
         }
+    }
+    
+    private func processAddressUpdatingResponse(with success: Bool, address: Address, isSelected: Bool) {
+        if success {
+            isSelected ? updateCheckoutShippingAddress(with: address) : updateAddresses(needUpdateCheckout: false)
+        }
+    }
+    
+    private func updateAddresses(needUpdateCheckout: Bool) {
+        loadCustomerAddresses()
+        completion?(needUpdateCheckout)
     }
 }
 

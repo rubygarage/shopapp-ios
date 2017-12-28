@@ -14,7 +14,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     var tableDataSource: AddressListDataSource!
     var checkoutId: String!
     var selectedAddress: Address!
-    var delegate: AddressListViewModelProtocol!
+    var completion: AddressListCompletion?
     
     override func viewDidLoad() {
         viewModel = AddressListViewModel()
@@ -36,7 +36,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     private func setupViewModel() {
         viewModel.checkoutId = checkoutId
         viewModel.selectedAddress = selectedAddress
-        viewModel.delegate = delegate
+        viewModel.completion = completion
         
         viewModel.customerAddresses.asObservable()
             .subscribe(onNext: { [weak self] _ in
@@ -75,8 +75,9 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     }
     
     func didTapEdit(with address: Address) {
+        let isSelected = address.isEqual(to: selectedAddress)
         pushAddressFormController(with: address) { [weak self] (filledAddress, isDefaultAddress) in
-            self?.viewModel.updateAddress(with: filledAddress)
+            self?.viewModel.updateAddress(with: filledAddress, isSelected: isSelected)
         }
     }
     

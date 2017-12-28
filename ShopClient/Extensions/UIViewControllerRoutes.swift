@@ -49,11 +49,11 @@ extension UIViewController {
         navigationController?.pushViewController(addressFormController, animated: true)
     }
     
-    func pushAddressListController(with checkoutId: String, selectedAddress: Address, delegate: AddressListViewModelProtocol) {
+    func pushAddressListController(with checkoutId: String, selectedAddress: Address, completion: AddressListCompletion?) {
         let addressListController = UIStoryboard.addressList().instantiateViewController(withIdentifier: ControllerIdentifier.addressList) as! AddressListViewController
         addressListController.checkoutId = checkoutId
         addressListController.selectedAddress = selectedAddress
-        addressListController.delegate = delegate
+        addressListController.completion = completion
         
         navigationController?.pushViewController(addressListController, animated: true)
     }

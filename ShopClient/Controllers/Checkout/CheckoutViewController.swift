@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTableDataSourceProtocol, SeeAllHeaderViewProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, AddressListViewModelProtocol {
+class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTableDataSourceProtocol, SeeAllHeaderViewProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     var tableDataSource: CheckoutTableDataSource!
@@ -54,12 +54,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
                 self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
-        
-        viewModel.remoteOperationsCompleted
-            .subscribe(onNext: { [weak self] _ in
-                self?.closeAddressFormController()
-            })
-            .disposed(by: disposeBag)
     }
     
     private func loadData() {
@@ -89,7 +83,11 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
     // MARK: - CheckoutShippingAddressEditCellProtocol
     func didTapEdit() {
         if let checkoutId = viewModel.checkout.value?.id, let address = viewModel.checkout.value?.shippingAddress {
-            pushAddressListController(with: checkoutId, selectedAddress: address, delegate: self)
+            pushAddressListController(with: checkoutId, selectedAddress: address, completion: { [weak self] (needUpdateCheckout) in
+                if needUpdateCheckout {
+                    self?.viewModel.getCheckout()
+                }
+            })
         }
     }
     
@@ -98,10 +96,5 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
         if type == .myCart {
             // TODO:
         }
-    }
-    
-    // MARK: - AddressListViewModelProtocol
-    func didUpdateShippingAddress() {
-        viewModel.getCheckout()
     }
 }

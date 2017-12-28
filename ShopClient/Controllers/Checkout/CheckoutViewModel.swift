@@ -18,7 +18,6 @@ enum CheckoutSection: Int {
 class CheckoutViewModel: BaseViewModel {
     var cartItems = [CartProduct]()
     var checkout = Variable<Checkout?>(nil)
-    var remoteOperationsCompleted = PublishSubject<()>()
     
     public func loadData(with disposeBag: DisposeBag) {
         state.onNext(.loading(showHud: true))
@@ -35,7 +34,6 @@ class CheckoutViewModel: BaseViewModel {
     public func getCheckout() {
         let checkoutId = checkout.value?.id ?? String()
         Repository.shared.getCheckout(with: checkoutId) { [weak self] (result, error) in
-            self?.remoteOperationsCompleted.onNext()
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }
