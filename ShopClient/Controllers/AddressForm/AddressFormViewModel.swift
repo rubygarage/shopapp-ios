@@ -21,6 +21,8 @@ class AddressFormViewModel: BaseViewModel {
     var zipText = Variable<String>("")
     var phoneText = Variable<String>("")
     var useDefaultShippingAddress = Variable<Bool>(false)
+    var addressSubmitted = PublishSubject<()>()
+
     
     var address: Address?
     var completion: AddressFormCompletion?
@@ -66,6 +68,7 @@ class AddressFormViewModel: BaseViewModel {
     // MARK: - private
     private func submitAction() {
         completion?(getAddress(), useDefaultShippingAddress.value)
+        addressSubmitted.onNext()
     }
     
     private func updateCheckbox() {

@@ -43,21 +43,11 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
                 self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
-        
-        viewModel.remoteOperationsCompleted
-            .subscribe(onNext: { [weak self] _ in
-                self?.closeAddressFormController()
-            })
-            .disposed(by: disposeBag)
     }
     
     // MARK: - private
     private func loadData() {
         viewModel.loadCustomerAddresses()
-    }
-    
-    private func closeAddressFormController() {
-        navigationController?.popToViewController(self, animated: true)
     }
     
     // MARK: - AddressListDataSourceProtocol

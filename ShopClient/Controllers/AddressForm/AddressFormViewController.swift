@@ -100,6 +100,12 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
             .bind(to: viewModel.submitTapped)
             .disposed(by: disposeBag)
         
+        viewModel.addressSubmitted
+            .subscribe(onNext: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.useDefaultShippingAddress.asObservable()
             .subscribe(onNext: { [weak self] (selected) in
                 self?.defaultAddressButton.isSelected = selected

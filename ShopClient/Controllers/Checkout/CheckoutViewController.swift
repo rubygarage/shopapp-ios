@@ -83,12 +83,31 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
     // MARK: - CheckoutShippingAddressEditCellProtocol
     func didTapEdit() {
         if let checkoutId = viewModel.checkout.value?.id, let address = viewModel.checkout.value?.shippingAddress {
-            pushAddressListController(with: checkoutId, selectedAddress: address, completion: { [weak self] (needUpdateCheckout) in
-                if needUpdateCheckout {
-                    self?.viewModel.getCheckout()
-                }
-            })
+            processUpdateAddress(with: checkoutId, address: address)
         }
+    }
+    
+    // MARK: - private
+    private func processUpdateAddress(with checkoutId: String, address: Address) {
+        if Repository.shared.isLoggedIn() {
+            openAddressList(with: checkoutId, address: address)
+        } else {
+            openAddressForm(with: address)
+        }
+    }
+    
+    private func openAddressList(with checkoutId: String, address: Address) {
+        pushAddressListController(with: checkoutId, selectedAddress: address, completion: { [weak self] (needUpdateCheckout) in
+            if needUpdateCheckout {
+                self?.viewModel.getCheckout()
+            }
+        })
+    }
+    
+    private func openAddressForm(with address: Address) {
+        pushAddressFormController(with: address, completion: { [weak self] (address, isDefaultAddress) in
+            self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: isDefaultAddress)
+        })
     }
     
     // MARK: - SeeAllHeaderViewProtocol

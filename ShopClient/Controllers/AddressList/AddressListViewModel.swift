@@ -12,7 +12,6 @@ typealias AddressListCompletion = (_ needUpdateCheckout: Bool) -> ()
 
 class AddressListViewModel: BaseViewModel {
     var customerAddresses = Variable<[Address]>([Address]())
-    var remoteOperationsCompleted = PublishSubject<()>()
     
     var checkoutId: String!
     var selectedAddress: Address!
@@ -22,7 +21,6 @@ class AddressListViewModel: BaseViewModel {
     public func loadCustomerAddresses() {
         state.onNext(.loading(showHud: true))
         Repository.shared.getCustomer { [weak self] (customer, error) in
-            self?.remoteOperationsCompleted.onNext()
             if let addresses = customer?.addresses {
                 self?.customerAddresses.value = addresses
                 self?.state.onNext(.content)
