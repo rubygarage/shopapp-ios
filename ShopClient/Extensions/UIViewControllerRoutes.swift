@@ -15,21 +15,6 @@ extension UIViewController {
         pushController(with: UIStoryboard.search(), identifier: ControllerIdentifier.search)
     }
     
-    func pushDetailController(with product: Product) {
-        let productDetaillsController = UIStoryboard.productDetails().instantiateViewController(withIdentifier: ControllerIdentifier.productDetails) as! ProductDetailsViewController
-        productDetaillsController.productId = product.id 
-        
-        navigationController?.pushViewController(productDetaillsController, animated: true)
-    }
-    
-    func pushProductsListController(with title: String? = nil, sortingValue: SortingValue) {
-        let productsListController = UIStoryboard.productsList().instantiateViewController(withIdentifier: ControllerIdentifier.productsList) as! ProductsListViewController
-        productsListController.title = title
-        productsListController.sortingValue = sortingValue
-        
-        navigationController?.pushViewController(productsListController, animated: true)
-    }
-    
     func pushAddressFormController(with address: Address?, completion: AddressFormCompletion?) {
         let addressFormController = UIStoryboard.addressForm().instantiateViewController(withIdentifier: ControllerIdentifier.addressForm) as! AddressFormViewController
         addressFormController.address = address

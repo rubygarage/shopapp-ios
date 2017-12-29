@@ -35,6 +35,8 @@ struct ControllerIdentifier {
 }
 
 struct SegueIdentifiers {
+    static let toProductsList = "toProductsList"
+    static let toProductDetails = "toProductDetails"
     static let toArticlesList = "toArticlesList"
     static let toArticleDetails = "toArticleDetails"
     static let toPolicy = "toPolicy"

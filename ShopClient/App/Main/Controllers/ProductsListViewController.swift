@@ -19,7 +19,17 @@ class ProductsListViewController: GridCollectionViewController<ProductsListViewM
         loadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateNavigationBar()
+    }
+    
     // MARK: - private
+    private func updateNavigationBar() {
+        viewModel.getCartItemsCount()
+    }
+    
     private func setupViewModel() {
         viewModel.sortingValue = sortingValue
         
@@ -27,6 +37,12 @@ class ProductsListViewController: GridCollectionViewController<ProductsListViewM
             .subscribe(onNext: { [weak self] _ in
                 self?.stopLoadAnimating()
                 self?.collectionView.reloadData()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.cartItemsCount.asObservable()
+            .subscribe(onNext: { [weak self] cartItemsCount in
+                self?.addCartBarButton(with: cartItemsCount)
             })
             .disposed(by: disposeBag)
     }

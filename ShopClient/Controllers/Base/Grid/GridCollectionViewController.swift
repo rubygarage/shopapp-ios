@@ -13,12 +13,19 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
     
     private var collectionDataSource: GridCollectionDataSource?
     private var collectionDelegate: GridCollectionDelegate?
+    private var selectedProduct: Product?
     
     // MARK: - view controller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupCollectionView()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
+            productDetailsViewController.productId = selectedProduct!.id
+        }
     }
     
     // MARK: - setup
@@ -47,8 +54,8 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
     // MARK: - GridCollectionDelegateProtocol
     func didSelectItem(at index: Int) {
         if index < viewModel.products.value.count {
-            let product = viewModel.products.value[index]
-            pushDetailController(with: product)
+            selectedProduct = viewModel.products.value[index]
+            performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
         }
     }
 }

@@ -6,10 +6,20 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 class ProductsListViewModel: GridCollectionViewModel {
+    var cartItemsCount = PublishSubject<Int>()
     var sortingValue: SortingValue!
+    
+    private let cartProductListUseCase = CartProductListUseCase()
+    private let productListUseCase = ProductListUseCase()
+    
+    public func getCartItemsCount() {
+        cartProductListUseCase.getCartProductList { [weak self] (products) in
+            self?.cartItemsCount.onNext(products.count)
+        }
+    }
     
     public func reloadData() {
         paginationValue = nil
@@ -25,7 +35,7 @@ class ProductsListViewModel: GridCollectionViewModel {
         let showHud = products.value.count == 0
         state.onNext(.loading(showHud: showHud))
         let reverse = sortingValue == .createdAt
-        Repository.shared.getProductList(paginationValue: paginationValue, sortBy: sortingValue, reverse: reverse) { [weak self] (products, error) in
+        productListUseCase.getProductList(with: paginationValue, sortingValue: sortingValue, reverse: reverse) { [weak self] (products, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }

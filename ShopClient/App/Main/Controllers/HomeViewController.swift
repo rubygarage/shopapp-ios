@@ -15,6 +15,8 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     
     private var dataSource: HomeTableDataSource?
     private var delegate: HomeTableDelegate?
+    private var destinationTitle: String!
+    private var sortingValue: SortingValue!
     private var selectedProduct: Product?
     private var selectedArticle: Article?
     
@@ -34,14 +36,20 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let articleDetailsViewController = segue.destination as? ArticleDetailsViewController {
+        if let productsListViewController = segue.destination as? ProductsListViewController {
+            productsListViewController.title = destinationTitle
+            productsListViewController.sortingValue = sortingValue
+            destinationTitle = nil
+        } else if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
+            productDetailsViewController.productId = selectedProduct!.id
+        } else if let articleDetailsViewController = segue.destination as? ArticleDetailsViewController {
             articleDetailsViewController.articleId = selectedArticle!.id
         }
     }
     
     private func updateNavigationBar() {
         navigationItem.title = NSLocalizedString("ControllerTitle.Home", comment: String())
-        updateCartBarItem()
+        viewModel.getCartItemsCount()
     }
     
     private func setupTableView() {
@@ -61,10 +69,6 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         tableView?.delegate = delegate
         
         tableView?.contentInset = TableView.defaultContentInsets
-    }
-    
-    private func updateCartBarItem() {
-        viewModel.getCartItemsCount()
     }
     
     private func setupViewModel() {
@@ -126,7 +130,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     private func openProductDetails(with products: [Product], index: Int) {
         if index < products.count {
             selectedProduct = products[index]
-            pushDetailController(with: selectedProduct!)
+            performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
         }
     }
     
@@ -134,11 +138,13 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     func didTapSeeAll(type: SeeAllViewType) {
         switch type {
         case .latestArrivals:
-            let title = NSLocalizedString("ControllerTitle.LatestArrivals", comment: String())
-            pushProductsListController(with: title, sortingValue: .createdAt)
+            destinationTitle = NSLocalizedString("ControllerTitle.LatestArrivals", comment: String())
+            sortingValue = .createdAt
+            performSegue(withIdentifier: SegueIdentifiers.toProductsList, sender: self)
         case .popular:
-            let title = NSLocalizedString("ControllerTitle.Popular", comment: String())
-            pushProductsListController(with: title, sortingValue: .popular)
+            destinationTitle = NSLocalizedString("ControllerTitle.Popular", comment: String())
+            sortingValue = .popular
+            performSegue(withIdentifier: SegueIdentifiers.toProductsList, sender: self)
         case .blogPosts:
             performSegue(withIdentifier: SegueIdentifiers.toArticlesList, sender: self)
         default:

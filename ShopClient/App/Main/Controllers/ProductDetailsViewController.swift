@@ -23,9 +23,10 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     @IBOutlet weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
     
     var productId: String!
-    var detailImagesController: ImagesCarouselViewController?
-    var showingImageIndex = 0
-    var productAddedToCart = false
+    
+    private var detailImagesController: ImagesCarouselViewController?
+    private var showingImageIndex = 0
+    private var productAddedToCart = false
 
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -40,7 +41,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        updateCartBarItem()
+        updateNavigationBar()
     }
     
     // MARK: - setup
@@ -65,6 +66,12 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         viewModel.selectedVariant
             .subscribe(onNext: { [weak self] (result) in
                 self?.updateOptionsViews(result: result)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.cartItemsCount.asObservable()
+            .subscribe(onNext: { [weak self] cartItemsCount in
+                self?.addCartBarButton(with: cartItemsCount)
             })
             .disposed(by: disposeBag)
     }
@@ -118,11 +125,8 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         openProductOptionsController(with: allOptions, selectedOptions: selectedOptions, delegate: self, onView: optionsContainerView)
     }
     
-    private func updateCartBarItem() {
-        Repository.shared.getCartProductList { [weak self] (cartProducts, _) in
-            let cartItemsCount = cartProducts?.count ?? 0
-            self?.addCartBarButton(with: cartItemsCount)
-        }
+    private func updateNavigationBar() {
+        viewModel.getCartItemsCount()
     }
     
     private func updateAddToCartButton() {
@@ -134,7 +138,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         viewModel.addToCart
             .subscribe(onNext: { [weak self] success in
                 if success {
-                    self?.updateCartBarItem()
+                    self?.updateNavigationBar()
                     self?.updateAddToCartButton()
                 }
             })

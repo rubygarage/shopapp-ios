@@ -11,20 +11,32 @@ import RxSwift
 typealias SelectedVariant = (variant: ProductVariant?, allOptions: [ProductOption], selectedOptions: [SelectedOption], currency: String)
 
 class ProductDetailsViewModel: BaseViewModel {
+    var cartItemsCount = PublishSubject<Int>()
     var product = Variable<Product?>(nil)
     var selectedVariant = PublishSubject<SelectedVariant>()
     var quantity = Variable<Int>(1)
     
     var productId: String!
-    var productOptions = [ProductOption]()
-    var selectedOptions = [SelectedOption]()
-    var selectedProductVariant: ProductVariant?
     var currency: String?
+    
+    private let addCartProductUseCase = AddCartProductUseCase()
+    private let cartProductListUseCase = CartProductListUseCase()
+    private let productUseCase = ProductUseCase()
+    
+    private var productOptions = [ProductOption]()
+    private var selectedOptions = [SelectedOption]()
+    private var selectedProductVariant: ProductVariant?
 
     // MARK: - public
+    public func getCartItemsCount() {
+        cartProductListUseCase.getCartProductList { [weak self] (products) in
+            self?.cartItemsCount.onNext(products.count)
+        }
+    }
+    
     public func loadData() {
         state.onNext(.loading(showHud: true))
-        Repository.shared.getProduct(id: productId) { [weak self] (product, error) in
+        productUseCase.getProduct(with: productId) { [weak self] (product, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }
@@ -50,10 +62,10 @@ class ProductDetailsViewModel: BaseViewModel {
         return Observable.create({ [weak self] event in
             let productQuantity = self?.quantity.value ?? 1
             if let cartProduct = CartProduct(with: self?.product.value, productQuantity: productQuantity, variant: self?.selectedProductVariant) {
-                Repository.shared.addCartProduct(cartProduct: cartProduct, callback: { (cartProduct, error) in
+                self?.addCartProductUseCase.addCartProduct(cartProduct) { (cartProduct, error) in
                     let success = cartProduct != nil && error == nil
                     event.onNext(success)
-                })
+                }
             } else {
                 event.onNext(false)
             }
