@@ -15,22 +15,11 @@ extension UIViewController {
         pushController(with: UIStoryboard.search(), identifier: ControllerIdentifier.search)
     }
     
-    func pushArticlesListController() {
-        pushController(with: UIStoryboard.articlesList(), identifier: ControllerIdentifier.articlesList)
-    }
-    
     func pushDetailController(with product: Product) {
         let productDetaillsController = UIStoryboard.productDetails().instantiateViewController(withIdentifier: ControllerIdentifier.productDetails) as! ProductDetailsViewController
         productDetaillsController.productId = product.id 
         
         navigationController?.pushViewController(productDetaillsController, animated: true)
-    }
-    
-    func pushArticleDetailsController(with articleId: String) {
-        let articleDetailsController = UIStoryboard.articleDetails().instantiateViewController(withIdentifier: ControllerIdentifier.articleDetails) as! ArticleDetailsViewController
-        articleDetailsController.articleId = articleId
-        
-        navigationController?.pushViewController(articleDetailsController, animated: true)
     }
     
     func pushProductsListController(with title: String? = nil, sortingValue: SortingValue) {

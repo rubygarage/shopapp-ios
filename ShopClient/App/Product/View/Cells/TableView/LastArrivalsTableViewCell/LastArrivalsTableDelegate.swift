@@ -15,7 +15,7 @@ protocol LastArrivalsTableDelegateProtocol {
 private let kLastArrivalsTableCellSize = CGSize(width: 200, height: 215)
 
 class LastArrivalsTableDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    var delegate: LastArrivalsTableDelegateProtocol?
+    private var delegate: LastArrivalsTableDelegateProtocol?
     
     init(delegate: LastArrivalsTableDelegateProtocol?) {
         super.init()

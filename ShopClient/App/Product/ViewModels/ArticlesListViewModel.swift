@@ -11,6 +11,8 @@ import RxSwift
 class ArticlesListViewModel: BasePaginationViewModel {
     var items = Variable<[Article]>([Article]())
     
+    private let articleListUseCase = ArticleListUseCase()
+    
     public func reloadData() {
         paginationValue = nil
         loadRemoteData()
@@ -24,7 +26,7 @@ class ArticlesListViewModel: BasePaginationViewModel {
     private func loadRemoteData() {
         let showHud = items.value.count == 0
         state.onNext(.loading(showHud: showHud))
-        Repository.shared.getArticleList(paginationValue: paginationValue, sortBy: SortingValue.createdAt, reverse: true) { [weak self] (articles, error) in
+        articleListUseCase.getArticleList(with: paginationValue) { [weak self] (articles, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }

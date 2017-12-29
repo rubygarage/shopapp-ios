@@ -11,6 +11,7 @@ import UIKit
 class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>, ArticlesListTableDataSourceProtocol, ArticlesListTableDelegateProtocol {
     private var tableDataSource: ArticlesListTableDataSource?
     private var tableDelegate: ArticlesListTableDelegate?
+    private var selectedArticle: Article?
     
     // MARK: - view controller lifecycle
     override func viewDidLoad() {
@@ -21,6 +22,12 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
         setupTableView()
         setupViewModel()
         loadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let articleDetailsViewController = segue.destination as? ArticleDetailsViewController {
+            articleDetailsViewController.articleId = selectedArticle!.id
+        }
     }
     
     // MARK: - setup
@@ -75,8 +82,8 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
     // MARK: - ArticlesListTableDelegateProtocol
     func didSelectItem(at index: Int) {
         if index < viewModel.items.value.count {
-            let article = viewModel.items.value[index]
-            pushArticleDetailsController(with: article.id)
+            selectedArticle = viewModel.items.value[index]
+            performSegue(withIdentifier: SegueIdentifiers.toArticleDetails, sender: self)
         }
     }
     

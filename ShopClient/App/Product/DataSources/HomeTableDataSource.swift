@@ -22,7 +22,7 @@ protocol HomeTableDataSourceProtocol {
 }
 
 class HomeTableDataSource: NSObject, UITableViewDataSource {
-    var delegate: (HomeTableDataSourceProtocol & LastArrivalsCellDelegate & PopularCellDelegate)?
+    private var delegate: (HomeTableDataSourceProtocol & LastArrivalsCellDelegate & PopularCellDelegate)?
     
     init(delegate: (HomeTableDataSourceProtocol & LastArrivalsCellDelegate & PopularCellDelegate)?) {
         super.init()

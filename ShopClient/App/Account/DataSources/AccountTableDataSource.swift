@@ -13,7 +13,7 @@ protocol AccountTableDataSourceProtocol {
 }
 
 class AccountTableDataSource: NSObject, UITableViewDataSource {
-    var delegate: AccountTableDataSourceProtocol!
+    private var delegate: AccountTableDataSourceProtocol!
     
     init(delegate: AccountTableDataSourceProtocol) {
         super.init()

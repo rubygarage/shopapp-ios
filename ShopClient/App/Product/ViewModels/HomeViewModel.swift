@@ -12,9 +12,9 @@ class HomeViewModel: BaseViewModel {
     var data = Variable<(latestProducts: [Product], popularProducts: [Product], articles: [Article])>(latestProducts: [Product](), popularProducts: [Product](), articles: [Article]())
     var cartItemsCount = PublishSubject<Int>()
     
-    private var articleListUseCase = ArticleListUseCase()
-    private var cartProductListUseCase = CartProductListUseCase()
-    private var productListUseCase = ProductListUseCase()
+    private let articleListUseCase = ArticleListUseCase()
+    private let cartProductListUseCase = CartProductListUseCase()
+    private let productListUseCase = ProductListUseCase()
     
     public func getCartItemsCount() {
         cartProductListUseCase.getCartProductList { [weak self] (products) in

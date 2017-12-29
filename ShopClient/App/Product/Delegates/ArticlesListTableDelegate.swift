@@ -13,7 +13,7 @@ protocol ArticlesListTableDelegateProtocol {
 }
 
 class ArticlesListTableDelegate: NSObject, UITableViewDelegate {
-    var delegate: ArticlesListTableDelegateProtocol?
+    private var delegate: ArticlesListTableDelegateProtocol?
     
     init(delegate: ArticlesListTableDelegateProtocol?) {
         super.init()

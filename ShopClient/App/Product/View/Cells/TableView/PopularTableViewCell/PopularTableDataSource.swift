@@ -14,7 +14,7 @@ protocol PopularTableDataSourceProtocol {
 }
 
 class PopularTableDataSource: NSObject, UICollectionViewDataSource {
-    var delegate: PopularTableDataSourceProtocol!
+    private var delegate: PopularTableDataSourceProtocol!
     
     init(delegate: PopularTableDataSourceProtocol) {
         super.init()

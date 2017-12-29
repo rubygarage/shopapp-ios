@@ -14,7 +14,7 @@ protocol AccountTableDelegateProtocol {
 }
 
 class AccountTableDelegate: NSObject, UITableViewDelegate {
-    var delegate: (AccountTableDelegateProtocol & AccountNotLoggedHeaderProtocol & AccountLoggedHeaderProtocol & AccountFooterViewProtocol)!
+    private var delegate: (AccountTableDelegateProtocol & AccountNotLoggedHeaderProtocol & AccountLoggedHeaderProtocol & AccountFooterViewProtocol)!
     
     init(delegate: (AccountTableDelegateProtocol & AccountNotLoggedHeaderProtocol & AccountLoggedHeaderProtocol & AccountFooterViewProtocol)) {
         super.init()

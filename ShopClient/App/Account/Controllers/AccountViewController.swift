@@ -11,9 +11,8 @@ import UIKit
 class AccountViewController: BaseViewController<AccountViewModel>, AccountTableDataSourceProtocol, AccountTableDelegateProtocol, AccountNotLoggedHeaderProtocol, AccountLoggedHeaderProtocol, AccountFooterViewProtocol, AuthenticationProtocol {
     @IBOutlet weak var tableView: UITableView!
     
-    var tableDataSource: AccountTableDataSource!
-    var tableDelegate: AccountTableDelegate!
-    
+    private var tableDataSource: AccountTableDataSource!
+    private var tableDelegate: AccountTableDelegate!
     private var selectedPolicy: Policy?
     
     override func viewDidLoad() {

@@ -13,7 +13,7 @@ protocol HomeTableDelegateProtocol {
 }
 
 class HomeTableDelegate: NSObject, UITableViewDelegate {
-    var delegate: (HomeTableDelegateProtocol & SeeAllHeaderViewProtocol)?
+    private var delegate: (HomeTableDelegateProtocol & SeeAllHeaderViewProtocol)?
     
     init(delegate: (HomeTableDelegateProtocol & SeeAllHeaderViewProtocol)?) {
         super.init()

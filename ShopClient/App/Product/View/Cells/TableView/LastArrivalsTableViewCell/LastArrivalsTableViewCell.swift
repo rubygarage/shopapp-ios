@@ -17,11 +17,10 @@ private let kLastArrivalsNumberOfSections = 1
 class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableDataSourceProtocol, LastArrivalsTableDelegateProtocol {
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var dataSource: LastArrivalsTableDataSource?
-    var delegate: LastArrivalsTableDelegate?
-    var cellDelegate: LastArrivalsCellDelegate?
-    
-    var products = [Product]()
+    private var dataSource: LastArrivalsTableDataSource?
+    private var delegate: LastArrivalsTableDelegate?
+    private var cellDelegate: LastArrivalsCellDelegate?
+    private var products = [Product]()
     
     override func awakeFromNib() {
         super.awakeFromNib()

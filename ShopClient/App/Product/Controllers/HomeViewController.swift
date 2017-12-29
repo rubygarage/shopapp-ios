@@ -15,6 +15,8 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     
     private var dataSource: HomeTableDataSource?
     private var delegate: HomeTableDelegate?
+    private var selectedProduct: Product?
+    private var selectedArticle: Article?
     
     override func viewDidLoad() {
         viewModel = HomeViewModel()
@@ -29,6 +31,12 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         super.viewWillAppear(animated)
         
         updateNavigationBar()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let articleDetailsViewController = segue.destination as? ArticleDetailsViewController {
+            articleDetailsViewController.articleId = selectedArticle!.id
+        }
     }
     
     private func updateNavigationBar() {
@@ -100,8 +108,8 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     // MARK: - HomeTableDelegateProtocol
     func didSelectArticle(at index: Int) {
         if index < viewModel.data.value.articles.count {
-            let article = viewModel.data.value.articles[index]
-            pushArticleDetailsController(with: article.id)
+            selectedArticle = viewModel.data.value.articles[index]
+            performSegue(withIdentifier: SegueIdentifiers.toArticleDetails, sender: self)
         }
     }
     
@@ -117,8 +125,8 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     
     private func openProductDetails(with products: [Product], index: Int) {
         if index < products.count {
-            let selectedProduct = products[index]
-            pushDetailController(with: selectedProduct)
+            selectedProduct = products[index]
+            pushDetailController(with: selectedProduct!)
         }
     }
     
@@ -132,7 +140,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
             let title = NSLocalizedString("ControllerTitle.Popular", comment: String())
             pushProductsListController(with: title, sortingValue: .popular)
         case .blogPosts:
-            pushArticlesListController()
+            performSegue(withIdentifier: SegueIdentifiers.toArticlesList, sender: self)
         default:
             return
         }

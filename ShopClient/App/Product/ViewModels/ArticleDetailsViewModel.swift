@@ -19,9 +19,11 @@ class ArticleDetailsViewModel: BaseViewModel {
         }
     }
     
+    private let articleUseCase = ArticleUseCase()
+    
     func loadArticle() {
         state.onNext(.loading(showHud: true))
-        Repository.shared.getArticle(id: self.articleId, callback: { [weak self] (article, error) in
+        articleUseCase.getArticle(with: articleId) { [weak self] (article, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }
@@ -29,6 +31,6 @@ class ArticleDetailsViewModel: BaseViewModel {
                 self?.data.onNext(article)
                 self?.state.onNext(.content)
             }
-        })
+        }
     }
 }

@@ -13,7 +13,7 @@ protocol PopularTableDelegateProtocol {
 }
 
 class PopularTableDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    var delegate: PopularTableDelegateProtocol!
+    private var delegate: PopularTableDelegateProtocol!
     
     init(delegate: PopularTableDelegateProtocol) {
         super.init()

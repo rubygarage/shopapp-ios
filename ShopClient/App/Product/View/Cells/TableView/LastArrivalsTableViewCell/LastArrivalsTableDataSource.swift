@@ -15,7 +15,7 @@ protocol LastArrivalsTableDataSourceProtocol {
 }
 
 class LastArrivalsTableDataSource: NSObject, UICollectionViewDataSource {
-    var delegate: LastArrivalsTableDataSourceProtocol?
+    private var delegate: LastArrivalsTableDataSourceProtocol?
     
     init(delegate: LastArrivalsTableDataSourceProtocol?) {
         super.init()

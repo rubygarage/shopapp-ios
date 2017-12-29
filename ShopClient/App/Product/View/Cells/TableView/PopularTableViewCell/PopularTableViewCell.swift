@@ -16,10 +16,10 @@ class PopularTableViewCell: UITableViewCell, PopularTableDataSourceProtocol, Pop
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
-    var dataSource: PopularTableDataSource!
-    var delegate: PopularTableDelegate!
-    var cellDelegate: PopularCellDelegate?
-    var products = [Product]()
+    private var dataSource: PopularTableDataSource!
+    private var delegate: PopularTableDelegate!
+    private var cellDelegate: PopularCellDelegate?
+    private var products = [Product]()
     
     override func awakeFromNib() {
         super.awakeFromNib()

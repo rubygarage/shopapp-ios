@@ -14,7 +14,7 @@ protocol ArticlesListTableDataSourceProtocol {
 }
 
 class ArticlesListTableDataSource: NSObject, UITableViewDataSource {
-    var delegate: ArticlesListTableDataSourceProtocol?
+    private var delegate: ArticlesListTableDataSourceProtocol?
     
     init(delegate: ArticlesListTableDataSourceProtocol?) {
         super.init()
