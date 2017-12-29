@@ -45,6 +45,7 @@
 "Button.AddNewAddress" = "Add new Address";
 "Button.Submit" = "Submit";
 "Button.Edit" = "Edit";
+"Button.Delete" = "Delete";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";

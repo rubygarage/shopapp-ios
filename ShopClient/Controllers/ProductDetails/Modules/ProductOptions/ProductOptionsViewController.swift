@@ -21,9 +21,9 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
     
     var options = [ProductOption]()
     var selectedOptions = [SelectedOption]()
-    var collectionDataSource: ProductOptionsCollectionDataSource?
-    var collectionDelegate: ProductOptionsCollectionDelegate?
     var controllerDelegate: ProductOptionsControllerProtocol?
+    private var collectionDataSource: ProductOptionsCollectionDataSource?
+    private var collectionDelegate: ProductOptionsCollectionDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()

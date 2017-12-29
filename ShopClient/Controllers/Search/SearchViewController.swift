@@ -13,9 +13,9 @@ private let kAnimationDuration: TimeInterval = 0.3
 class SearchViewController: GridCollectionViewController<SearchViewModel>, SearchTitleViewProtocol, SearchCollectionDataSourceProtocol {
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
     
-    let titleView = SearchTitleView()
-    var categoriesDataSource: SearchCollectionDataSource!
-    var categoriesDelegate: SearchCollectionDelegate!
+    private let titleView = SearchTitleView()
+    private var categoriesDataSource: SearchCollectionDataSource!
+    private var categoriesDelegate: SearchCollectionDelegate!
     
     override func viewDidLoad() {
         viewModel = SearchViewModel()

@@ -8,6 +8,8 @@
 
 import RxSwift
 
+typealias AddressFormCompletion = (_ address: Address, _ isDefaultAddress: Bool) -> ()
+
 class AddressFormViewModel: BaseViewModel {
     var countryText = Variable<String>("")
     var firstNameText = Variable<String>("")
@@ -18,14 +20,16 @@ class AddressFormViewModel: BaseViewModel {
     var stateText = Variable<String>("")
     var zipText = Variable<String>("")
     var phoneText = Variable<String>("")
-    var shippingAddressAdded = PublishSubject<Bool>()
     var useDefaultShippingAddress = Variable<Bool>(false)
+    var addressSubmitted = PublishSubject<()>()
+
     
-    var checkoutId: String!
+    var address: Address?
+    var completion: AddressFormCompletion?
     
     private var requiredTextFields: [Observable<String>] {
         get {
-            return [countryText, firstNameText, lastNameText, addressText, cityText, stateText, zipText, phoneText].map({ $0.asObservable() })
+            return [countryText, firstNameText, lastNameText, addressText, cityText, zipText, phoneText].map({ $0.asObservable() })
         }
     }
     
@@ -47,43 +51,32 @@ class AddressFormViewModel: BaseViewModel {
         }
     }
     
+    // MARK: - public
+    public func updateFields() {
+        countryText.value = address?.country ?? String()
+        firstNameText.value = address?.firstName ?? String()
+        lastNameText.value = address?.lastName ?? String()
+        addressText.value = address?.address ?? String()
+        addressOptionalText.value = address?.secondAddress ?? String()
+        cityText.value = address?.city ?? String()
+        stateText.value = address?.state ?? String()
+        zipText.value = address?.zip ?? String()
+        phoneText.value = address?.phone ?? String()
+    }
+    
+    // MARK: - private
     private func submitAction() {
-        state.onNext(.loading(showHud: true))
-        Repository.shared.updateShippingAddress(with: checkoutId, address: getAddress()) { [weak self] (result, error) in
-            if let error = error {
-                self?.state.onNext(.error(error: error))
-            }
-            if let _ = result {
-                self?.updateCustomerDefaultAddressIfNeeded()
-            }
-        }
-    }
-    
-    private func updateCustomerDefaultAddressIfNeeded() {
-        if useDefaultShippingAddress.value {
-            updateCustomerDefaultAddress()
-        } else {
-            notifyAboutChanges()
-        }
-    }
-    
-    private func updateCustomerDefaultAddress() {
-        Repository.shared.updateCustomerDefaultAddress(with: getAddress()) { [weak self] (success, error) in
-            self?.notifyAboutChanges()
-        }
-    }
-    
-    private func notifyAboutChanges() {
-        shippingAddressAdded.onNext(true)
-        state.onNext(.content)
+        completion?(getAddress(), useDefaultShippingAddress.value)
+        addressSubmitted.onNext()
     }
     
     private func updateCheckbox() {
         useDefaultShippingAddress.value = !useDefaultShippingAddress.value
     }
  
-    public func getAddress() -> Address {
+    private func getAddress() -> Address {
         let address = Address()
+        address.id = self.address?.id ?? String()
         address.country = countryText.value.trimmingCharacters(in: .whitespaces)
         address.firstName = firstNameText.value.trimmingCharacters(in: .whitespaces)
         address.lastName = lastNameText.value.trimmingCharacters(in: .whitespaces)

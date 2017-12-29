@@ -19,14 +19,15 @@ extension Address {
     }
     
     private func update(with item: Storefront.MailingAddress?) {
-        firstName = item?.firstName ?? String()
-        lastName = item?.lastName ?? String()
-        address = item?.address1 ?? String()
-        secondAddress = item?.address2 ?? String()
-        city = item?.city ?? String()
-        country = item?.country ?? String()
-        state = item?.province ?? String()
-        zip = item?.zip ?? String()
-        phone = item?.phone ?? String()
+        id = item?.id.rawValue ?? String()
+        firstName = item?.firstName
+        lastName = item?.lastName
+        address = item?.address1
+        secondAddress = item?.address2
+        city = item?.city
+        country = item?.country
+        state = item?.province
+        zip = item?.zip
+        phone = item?.phone
     }
 }

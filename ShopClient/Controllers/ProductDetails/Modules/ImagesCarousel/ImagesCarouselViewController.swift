@@ -18,9 +18,9 @@ class ImagesCarouselViewController: UIViewController, ImagesCarouselCollectionDa
     
     var images = [Image]()
     var controllerDelegate: ImagesCarouselViewControllerProtocol?
-    var dataSource: ImagesCarouselCollectionDataSource?
-    var delegate: ImagesCarouselCollectionDelegate?
     var showingIndex: Int = 0
+    private var dataSource: ImagesCarouselCollectionDataSource?
+    private var delegate: ImagesCarouselCollectionDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()

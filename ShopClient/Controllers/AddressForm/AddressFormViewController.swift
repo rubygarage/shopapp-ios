@@ -8,10 +8,6 @@
 
 import RxSwift
 
-protocol AddressFormViewProtocol {
-    func didUpdatedShippingAddress()
-}
-
 class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     @IBOutlet weak var countryTextFieldView: InputTextFieldView!
     @IBOutlet weak var nameTextFieldView: InputTextFieldView!
@@ -26,8 +22,8 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     @IBOutlet weak var defaultAddressButton: CheckboxButton!
     @IBOutlet weak var checkboxTitleLabel: UILabel!
     
-    var delegate: AddressFormViewProtocol?
-    var checkoutId: String!
+    var address: Address?
+    var completion: AddressFormCompletion?
     
     override func viewDidLoad() {
         viewModel = AddressFormViewModel()
@@ -35,6 +31,7 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
 
         setupViews()
         setupViewModel()
+        populateViewsIfNeeded()
     }
     
     private func setupViews() {
@@ -54,7 +51,8 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     }
     
     private func setupViewModel() {
-        viewModel.checkoutId = checkoutId
+        viewModel.address = address
+        viewModel.completion = completion
         
         countryTextFieldView.textField.rx.text.map({ $0 ?? String() })
             .bind(to: viewModel.countryText)
@@ -98,15 +96,14 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
             })
             .disposed(by: disposeBag)
         
-        viewModel.shippingAddressAdded
-            .subscribe(onNext: { [weak self] _ in
-                self?.delegate?.didUpdatedShippingAddress()
-                self?.navigationController?.popViewController(animated: true)
-            })
-            .disposed(by: disposeBag)
-        
         submitButton.rx.tap
             .bind(to: viewModel.submitTapped)
+            .disposed(by: disposeBag)
+        
+        viewModel.addressSubmitted
+            .subscribe(onNext: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            })
             .disposed(by: disposeBag)
         
         viewModel.useDefaultShippingAddress.asObservable()
@@ -118,5 +115,20 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
         defaultAddressButton.rx.tap
             .bind(to: viewModel.useDefaultAddressTapped)
             .disposed(by: disposeBag)
+    }
+    
+    private func populateViewsIfNeeded() {
+        if let address = viewModel.address {
+            countryTextFieldView.textField.text = address.country
+            nameTextFieldView.textField.text = address.firstName
+            lastNameTextFieldView.textField.text = address.lastName
+            addressTextFieldView.textField.text = address.address
+            addressOptionalTextFieldView.textField.text = address.secondAddress
+            cityTextFieldView.textField.text = address.city
+            stateTextFieldView.textField.text = address.state
+            zipCodeTextFieldView.textField.text = address.zip
+            phoneTextFieldView.textField.text = address.phone
+            viewModel.updateFields()
+        }
     }
 }

@@ -11,8 +11,8 @@ import UIScrollView_InfiniteScroll
 
 class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionViewController<T>, GridCollectionDataSourceProtocol, GridCollectionDelegateProtocol {
     
-    var collectionDataSource: GridCollectionDataSource?
-    var collectionDelegate: GridCollectionDelegate?
+    private var collectionDataSource: GridCollectionDataSource?
+    private var collectionDelegate: GridCollectionDelegate?
     
     // MARK: - view controller lifecycle
     override func viewDidLoad() {

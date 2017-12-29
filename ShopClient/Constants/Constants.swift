@@ -28,6 +28,7 @@ struct ControllerIdentifier {
     static let auth = "AuthrntificationControllerIdentifier"
     static let checkout = "CheckoutControllerIdentifier"
     static let addressForm = "AddressFormControllerIdentifier"
+    static let addressList = "AddressListControllerIdentifier"
     static let billingAddress = "BillingAddressControllerIdentifier"
     static let signIn = "SignInControllerIdentifier"
     static let signUp = "SignUpControllerIdentifier"

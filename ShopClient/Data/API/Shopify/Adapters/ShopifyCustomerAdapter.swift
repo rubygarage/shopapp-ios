@@ -20,5 +20,15 @@ extension Customer {
         lastName = item?.lastName
         phone = item?.phone
         defaultAddress = Address(with: item?.defaultAddress)
+        
+        if let edges = item?.addresses.edges {
+            var addressesArray = [Address]()
+            for edge in edges {
+                if let address = Address(with: edge.node) {
+                    addressesArray.append(address)
+                }
+            }
+            addresses = addressesArray
+        }
     }
 }

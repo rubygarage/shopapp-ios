@@ -8,11 +8,11 @@
 
 import UIKit
 
-class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTableDataSourceProtocol, SeeAllHeaderViewProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, AddressFormViewProtocol {
+class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTableDataSourceProtocol, SeeAllHeaderViewProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol {
     @IBOutlet weak var tableView: UITableView!
     
-    var tableDataSource: CheckoutTableDataSource!
-    var tableDelegate: CheckoutTableDelegate!
+    private var tableDataSource: CheckoutTableDataSource!
+    private var tableDelegate: CheckoutTableDelegate!
     
     override func viewDidLoad() {
         viewModel = CheckoutViewModel()
@@ -60,6 +60,10 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
         viewModel.loadData(with: disposeBag)
     }
     
+    private func closeAddressFormController() {
+        navigationController?.popToViewController(self, animated: true)
+    }
+    
     // MARK: - CheckoutTableDataSourceProtocol
     func cartProducts() -> [CartProduct] {
         return viewModel.cartItems
@@ -71,19 +75,39 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
     
     // MARK: - CheckoutShippingAddressAddCellProtocol
     func didTapAddNewAddress() {
-        if let checkoutId = viewModel.checkout.value?.id {
-            pushAddressFormController(with: checkoutId, delegate: self)
+        pushAddressFormController(with: nil) { [weak self] (address, isDefaultAddress) in
+            self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: isDefaultAddress)
         }
     }
     
     // MARK: - CheckoutShippingAddressEditCellProtocol
     func didTapEdit() {
-        // TODO:
+        if let checkoutId = viewModel.checkout.value?.id, let address = viewModel.checkout.value?.shippingAddress {
+            processUpdateAddress(with: checkoutId, address: address)
+        }
     }
     
-    // MARK: - AddressFormViewProtocol
-    func didUpdatedShippingAddress() {
-        viewModel.getCheckout()
+    // MARK: - private
+    private func processUpdateAddress(with checkoutId: String, address: Address) {
+        if Repository.shared.isLoggedIn() {
+            openAddressList(with: checkoutId, address: address)
+        } else {
+            openAddressForm(with: address)
+        }
+    }
+    
+    private func openAddressList(with checkoutId: String, address: Address) {
+        pushAddressListController(with: checkoutId, selectedAddress: address, completion: { [weak self] (needUpdateCheckout) in
+            if needUpdateCheckout {
+                self?.viewModel.getCheckout()
+            }
+        })
+    }
+    
+    private func openAddressForm(with address: Address) {
+        pushAddressFormController(with: address, completion: { [weak self] (address, isDefaultAddress) in
+            self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: isDefaultAddress)
+        })
     }
     
     // MARK: - SeeAllHeaderViewProtocol

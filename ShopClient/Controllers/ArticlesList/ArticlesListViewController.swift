@@ -9,8 +9,8 @@
 import UIKit
 
 class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>, ArticlesListTableDataSourceProtocol, ArticlesListTableDelegateProtocol {
-    var tableDataSource: ArticlesListTableDataSource?
-    var tableDelegate: ArticlesListTableDelegate?
+    private var tableDataSource: ArticlesListTableDataSource?
+    private var tableDelegate: ArticlesListTableDelegate?
     
     // MARK: - view controller lifecycle
     override func viewDidLoad() {
