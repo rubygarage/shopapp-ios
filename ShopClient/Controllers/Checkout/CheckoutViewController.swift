@@ -122,6 +122,8 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     
     // MARK: - CheckoutPaymentAddCellProtocol
     func didTapAddPayment() {
-        pushPaymentTypeController()
+        if let checkoutId = viewModel.checkout.value?.id, let address = viewModel.checkout.value?.shippingAddress {
+            pushPaymentTypeController()
+        }
     }
 }

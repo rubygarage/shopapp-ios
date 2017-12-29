@@ -17,13 +17,28 @@
                     <view key="view" contentMode="scaleToFill" id="Gbx-Yb-Z6a">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UjW-eu-8PS">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="UjW-eu-8PS" firstAttribute="trailing" secondItem="dgw-Hh-80S" secondAttribute="trailing" id="8Li-x0-hiw"/>
+                            <constraint firstItem="UjW-eu-8PS" firstAttribute="top" secondItem="Gbx-Yb-Z6a" secondAttribute="top" id="G8l-Lh-uSO"/>
+                            <constraint firstItem="UjW-eu-8PS" firstAttribute="leading" secondItem="dgw-Hh-80S" secondAttribute="leading" id="ft5-sa-5VG"/>
+                            <constraint firstItem="UjW-eu-8PS" firstAttribute="bottom" secondItem="dgw-Hh-80S" secondAttribute="bottom" id="mou-nT-WQJ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="dgw-Hh-80S"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="UjW-eu-8PS" id="DIy-rK-dku"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zc6-H5-dFP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="234" y="-92"/>
+            <point key="canvasLocation" x="232.80000000000001" y="-92.203898050974516"/>
         </scene>
     </scenes>
 </document>

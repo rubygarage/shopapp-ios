@@ -23,10 +23,8 @@ class AddressListViewModel: BaseViewModel {
         Repository.shared.getCustomer { [weak self] (customer, error) in
             if let addresses = customer?.addresses {
                 self?.customerAddresses.value = addresses
-                self?.state.onNext(.content)
-            } else if let error = error {
-                self?.state.onNext(.error(error: error))
             }
+            self?.state.onNext(.content)
         }
     }
     

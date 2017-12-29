@@ -103,6 +103,8 @@
 "Label.Order.Total" = "Total";
 "Label.Order.Quantity" = "QTY:";
 "Label.Order.Each" = "each";
+"Label.Order.Total" = "Total:";
+"Label.Payment.CreditCard" = "Credit Card";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

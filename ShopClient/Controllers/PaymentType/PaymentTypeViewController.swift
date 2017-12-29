@@ -8,16 +8,33 @@
 
 import UIKit
 
-class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
-
+class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, PaymentTypeTableCellProtocol {
+    @IBOutlet weak var tableView: UITableView!
+    
+    private var tableDataSource: PaymentTypeDataSource!
+    
     override func viewDidLoad() {
         viewModel = PaymentTypeViewModel()
         super.viewDidLoad()
 
         setupViews()
+        setupTableView()
     }
     
     private func setupViews() {
         title = NSLocalizedString("ControllerTitle.PaymentType", comment: String())
+    }
+    
+    private func setupTableView() {
+        let cellNib = UINib(nibName: String(describing: PaymentTypeTableCell.self), bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: String(describing: PaymentTypeTableCell.self))
+        
+        tableDataSource = PaymentTypeDataSource(with: self)
+        tableView.dataSource = tableDataSource
+    }
+    
+    // MARK: - PaymentTypeTableCellProtocol
+    func didSelectCreditCartPayment() {
+        // TODO:
     }
 }
