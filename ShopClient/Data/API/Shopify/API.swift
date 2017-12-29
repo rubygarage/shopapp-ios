@@ -251,9 +251,9 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
-    func updateCustomerDefaultAddress(with address: Address, callback: @escaping RepoCallback<Bool>) {
+    func updateCustomerDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Bool>) {
         if let token = sessionData().token {
-            createCustomerAddress(with: token, address: address, callback: callback)
+            updateCustomerDefaultAddress(with: token, addressId: addressId, callback: callback)
         } else {
             callback(false, ContentError())
         }
@@ -267,11 +267,11 @@ class API: NSObject, APIInterface {
         }
     }
     
-    func addCustomerAddress(with address: Address, callback: @escaping RepoCallback<Bool>) {
+    func addCustomerAddress(with address: Address, callback: @escaping RepoCallback<String>) {
         if let token = sessionData().token {
             createCustomerAddress(with: token, address: address, callback: callback)
         } else {
-            callback(false, ContentError())
+            callback(nil, ContentError())
         }
     }
     
@@ -420,13 +420,13 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
-    private func createCustomerAddress(with token: String, address: Address, callback: @escaping RepoCallback<Bool>) {
+    private func createCustomerAddress(with token: String, address: Address, callback: @escaping RepoCallback<String>) {
         let query = customerAddressCreateQuery(customerAccessToken: token, address: address)
-        let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
-            if let addressId = response?.customerAddressCreate?.customerAddress?.id {
-                self?.updateCustomerDefaultAddress(with: token, addressId: addressId, callback: callback)
+        let task = client?.mutateGraphWith(query, completionHandler: { (response, error) in
+            if let addressId = response?.customerAddressCreate?.customerAddress?.id.rawValue {
+                callback(addressId, nil)
             } else if let repoError = RepoError(with: error) {
-                callback(false, repoError)
+                callback(nil, repoError)
             } else {
                 callback(nil, RepoError())
             }
@@ -434,7 +434,7 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
-    private func updateCustomerDefaultAddress(with token: String, addressId: GraphQL.ID, callback: @escaping RepoCallback<Bool>) {
+    private func updateCustomerDefaultAddress(with token: String, addressId: String, callback: @escaping RepoCallback<Bool>) {
         let query = customerUpdateDefaultAddressQuery(customerAccessToken: token, addressId: addressId)
         let task = client?.mutateGraphWith(query, completionHandler: { (result, error) in
             if let _ = result {
@@ -650,9 +650,10 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func customerUpdateDefaultAddressQuery(customerAccessToken: String, addressId: GraphQL.ID) -> Storefront.MutationQuery {
+    private func customerUpdateDefaultAddressQuery(customerAccessToken: String, addressId: String) -> Storefront.MutationQuery {
+        let id = GraphQL.ID.init(rawValue: addressId)
         return Storefront.buildMutation({ $0
-            .customerDefaultAddressUpdate(customerAccessToken: customerAccessToken, addressId: addressId, self.customerDefaultAddressUpdatePayloadQuery())
+            .customerDefaultAddressUpdate(customerAccessToken: customerAccessToken, addressId: id, self.customerDefaultAddressUpdatePayloadQuery())
         })
     }
     
