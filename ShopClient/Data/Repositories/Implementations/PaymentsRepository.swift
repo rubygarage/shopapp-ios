@@ -21,12 +21,16 @@ extension Repository {
         APICore?.updateShippingAddress(with: checkoutId, address: address, callback: callback)
     }
     
-    func updateCustomerDefaultAddress(with address: Address, callback: @escaping RepoCallback<Bool>) {
-        APICore?.updateCustomerDefaultAddress(with: address, callback: callback)
+    func updateCustomerDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Bool>) {
+        APICore?.updateCustomerDefaultAddress(with: addressId, callback: callback)
     }
     
     func updateCustomerAddress(with address: Address, callback: @escaping RepoCallback<Bool>) {
         APICore?.updateCustomerAddress(with: address, callback: callback)
+    }
+    
+    func addCustomerAddress(with address: Address, callback: @escaping RepoCallback<String>) {
+        APICore?.addCustomerAddress(with: address, callback: callback)
     }
     
     func deleteCustomerAddress(with addressId: String, callback: @escaping RepoCallback<Bool>) {

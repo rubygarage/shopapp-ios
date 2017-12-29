@@ -8,10 +8,11 @@
 
 import UIKit
 
-class AddressListViewController: BaseViewController<AddressListViewModel>, AddressListDataSourceProtocol, AddressListTableViewCellProtocol {
+class AddressListViewController: BaseViewController<AddressListViewModel>, AddressListDataSourceProtocol, AddressListTableViewCellProtocol, AddressListHeaderViewProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     private var tableDataSource: AddressListDataSource!
+    private var tableDelegate: AddressListDelegate!
     var checkoutId: String!
     var selectedAddress: Address!
     var completion: AddressListCompletion?
@@ -31,6 +32,9 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
         
         tableDataSource = AddressListDataSource(delegate: self)
         tableView.dataSource = tableDataSource
+        
+        tableDelegate = AddressListDelegate(delegate: self)
+        tableView.delegate = tableDelegate
     }
     
     private func setupViewModel() {
@@ -73,5 +77,12 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     
     func didTapDelete(with address: Address) {
         viewModel.deleteCustomerAddress(with: address)
+    }
+    
+    // MARK: - AddressListHeaderViewProtocol
+    func didTapAddNewAddress() {
+        pushAddressFormController(with: nil) { [weak self] (address, isDefaultAddress) in
+            self?.viewModel.addCustomerAddress(with: address, isDefaultAddress: isDefaultAddress)
+        }
     }
 }

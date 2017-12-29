@@ -45,9 +45,17 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     public func updateCheckoutShippingAddress(with address: Address, isDefaultAddress: Bool) {
+        state.onNext(.loading(showHud: true))
         let checkoutId = checkout.value?.id ?? String()
         Repository.shared.updateShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
-            self?.updateCustomerDefaultAddress(with: address, isDefaultAddress: isDefaultAddress)
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            } else if let success = success, success == true {
+                self?.processUpdateCheckoutShippingAddress(address: address, isDefaultAddress: isDefaultAddress)
+            } else {
+                self?.state.onNext(.error(error: RepoError()))
+            }
+            
         }
     }
     
@@ -93,16 +101,26 @@ class CheckoutViewModel: BaseViewModel {
         }
     }
     
-    private func updateCustomerDefaultAddress(with address: Address, isDefaultAddress: Bool) {
+    private func processUpdateCheckoutShippingAddress(address: Address, isDefaultAddress: Bool) {
+        Repository.shared.addCustomerAddress(with: address) { [weak self] (addressId, error) in
+            if let addressId = addressId {
+                self?.processCustomerAddingAddress(with: addressId, isDefaultAddress: isDefaultAddress)
+            } else {
+                self?.getCheckout()
+            }
+        }
+    }
+    
+    private func processCustomerAddingAddress(with addressId: String, isDefaultAddress: Bool) {
         if isDefaultAddress {
-            updateCustomerDefaultAddress(with: address)
+            updateCustomerDefaultAddress(with: addressId)
         } else {
             getCheckout()
         }
     }
     
-    private func updateCustomerDefaultAddress(with address: Address) {
-        Repository.shared.updateCustomerDefaultAddress(with: address) { [weak self] (success, error) in
+    private func updateCustomerDefaultAddress(with addressId: String) {
+        Repository.shared.updateCustomerDefaultAddress(with: addressId) { [weak self] (success, error) in
             self?.getCheckout()
         }
     }
