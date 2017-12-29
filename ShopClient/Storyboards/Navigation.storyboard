@@ -34,7 +34,7 @@
         <!--HomeNavigationController-->
         <scene sceneID="6WA-MX-jkg">
             <objects>
-                <viewControllerPlaceholder storyboardName="Product" referencedIdentifier="HomeNavigationController" id="3fI-NP-7n7" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="HomeNavigationController" id="3fI-NP-7n7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="home_default" selectedImage="home_selected" id="9pU-nH-sp0">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -46,7 +46,7 @@
         <!--SearchNavigationController-->
         <scene sceneID="dky-u5-Xqd">
             <objects>
-                <viewControllerPlaceholder storyboardName="Product" referencedIdentifier="SearchNavigationController" id="gdc-Bw-SQd" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="SearchNavigationController" id="gdc-Bw-SQd" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="search_default" selectedImage="search_selected" id="hYv-dN-mKL">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
