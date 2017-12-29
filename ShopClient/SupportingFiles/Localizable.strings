@@ -20,6 +20,7 @@
 "ControllerTitle.OrderDetails" = "Order Details";
 "ControllerTitle.AddNewAddress" = "Add New Address";
 "ControllerTitle.BillingAddress" = "Billing Address";
+"ControllerTitle.PaymentType" = "Payment Type";
 
 "Alert.Error" = "Error";
 "Alert.ChooseShippingRate" = "Choose shipping rate";
@@ -53,6 +54,7 @@
 "Button.Submit" = "Submit";
 "Button.Edit" = "Edit";
 "Button.Delete" = "Delete";
+"Button.AddPaymentType" = "Add payment type";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";
@@ -68,6 +70,7 @@
 "Label.PriceInfo" = "%@\n%@\n%@\n%@";
 "Label.ShippingAddress" = "Shipping Address";
 "Label.PaymentInformation" = "Payment Information";
+"Label.Payment" = "Payment";
 "Label.SameAsShippingAddress" = "Same as shipping address";
 "Label.LatestArrivals" = "Latest Arrivals";
 "Label.Popular" = "Popular";

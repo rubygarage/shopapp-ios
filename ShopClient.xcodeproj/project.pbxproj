@@ -203,6 +203,11 @@
 		6196CF9A1F9F9A8000F823AD /* ProductOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196CF991F9F9A8000F823AD /* ProductOption.swift */; };
 		6196CF9C1F9F9E1D00F823AD /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196CF9B1F9F9E1D00F823AD /* Article.swift */; };
 		6196CF9E1F9F9E5600F823AD /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196CF9D1F9F9E5600F823AD /* Author.swift */; };
+		61986ACF1FF66B0C005632D7 /* CheckoutPaymentAddTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61986ACD1FF66B0C005632D7 /* CheckoutPaymentAddTableCell.swift */; };
+		61986AD01FF66B0C005632D7 /* CheckoutPaymentAddTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61986ACE1FF66B0C005632D7 /* CheckoutPaymentAddTableCell.xib */; };
+		61986AD21FF6703F005632D7 /* PaymentType.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61986AD11FF6703F005632D7 /* PaymentType.storyboard */; };
+		61986AD51FF671BE005632D7 /* PaymentTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61986AD41FF671BE005632D7 /* PaymentTypeViewController.swift */; };
+		61986AD71FF671FB005632D7 /* PaymentTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61986AD61FF671FB005632D7 /* PaymentTypeViewModel.swift */; };
 		61A1D4331FC57FD900E1B673 /* CardValidationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A1D4321FC57FD900E1B673 /* CardValidationView.swift */; };
 		61A1D4351FC5877D00E1B673 /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A1D4341FC5877D00E1B673 /* CreditCard.swift */; };
 		61A1D4381FC5892200E1B673 /* CreditCardAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A1D4371FC5892200E1B673 /* CreditCardAdapter.swift */; };
@@ -486,6 +491,11 @@
 		6196CF991F9F9A8000F823AD /* ProductOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductOption.swift; sourceTree = "<group>"; };
 		6196CF9B1F9F9E1D00F823AD /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		6196CF9D1F9F9E5600F823AD /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
+		61986ACD1FF66B0C005632D7 /* CheckoutPaymentAddTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutPaymentAddTableCell.swift; sourceTree = "<group>"; };
+		61986ACE1FF66B0C005632D7 /* CheckoutPaymentAddTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckoutPaymentAddTableCell.xib; sourceTree = "<group>"; };
+		61986AD11FF6703F005632D7 /* PaymentType.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PaymentType.storyboard; sourceTree = "<group>"; };
+		61986AD41FF671BE005632D7 /* PaymentTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTypeViewController.swift; sourceTree = "<group>"; };
+		61986AD61FF671FB005632D7 /* PaymentTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTypeViewModel.swift; sourceTree = "<group>"; };
 		61A1D4321FC57FD900E1B673 /* CardValidationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardValidationView.swift; sourceTree = "<group>"; };
 		61A1D4341FC5877D00E1B673 /* CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCard.swift; sourceTree = "<group>"; };
 		61A1D4371FC5892200E1B673 /* CreditCardAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardAdapter.swift; sourceTree = "<group>"; };
@@ -1066,6 +1076,7 @@
 		611EF3591F5956A3001B8B9C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				61986AD31FF6719C005632D7 /* PaymentType */,
 				610424281FC477B300EFEFDA /* AddressForm */,
 				616CA6661FF3BA8300FF14E2 /* AddressList */,
 				61ED88ED1F716F57006BDA79 /* Base */,
@@ -1090,6 +1101,7 @@
 				61E76E201FB4719400AE5FB4 /* CartTableViewCell */,
 				61236D4F1FEA83CB00D64198 /* CheckoutCartCollectionCell */,
 				61236D441FEA734B00D64198 /* CheckoutCartTableViewCell */,
+				61986ACC1FF66AEA005632D7 /* CheckoutPaymentAddTableCell */,
 				61725FC71FEAB87A009F55EA /* CheckoutShippingAddressAddTableCell */,
 				61DE4EB91FEBF91C00A95016 /* CheckoutShippingAddressEditTableCell */,
 				6133392A1F69578D0063A754 /* DetailsImagesCollectionCell */,
@@ -1244,6 +1256,10 @@
 				6165E9651FCDDA39006DE8A5 /* BillingAddress.storyboard */,
 				61E4E63C1F56C868001C6E01 /* LaunchScreen.storyboard */,
 				6119478B1FD964A6008BE9C6 /* Navigation.storyboard */,
+				6119478B1FD964A6008BE9C6 /* Main.storyboard */,
+				61986AD11FF6703F005632D7 /* PaymentType.storyboard */,
+				61D561721F7418D000233DA3 /* ProductDetails.storyboard */,
+				61534F291F73EC2F00F24189 /* ProductsList.storyboard */,
 				61A507351F7E7A50004504EF /* ProductOptions.storyboard */,
 				61AAB9291F7BC1F700CD32D3 /* SortModal.storyboard */,
 			);
@@ -1413,6 +1429,24 @@
 			);
 			name = TabBar;
 			path = "New Group";
+			sourceTree = "<group>";
+		};
+		61986ACC1FF66AEA005632D7 /* CheckoutPaymentAddTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				61986ACD1FF66B0C005632D7 /* CheckoutPaymentAddTableCell.swift */,
+				61986ACE1FF66B0C005632D7 /* CheckoutPaymentAddTableCell.xib */,
+			);
+			path = CheckoutPaymentAddTableCell;
+			sourceTree = "<group>";
+		};
+		61986AD31FF6719C005632D7 /* PaymentType */ = {
+			isa = PBXGroup;
+			children = (
+				61986AD41FF671BE005632D7 /* PaymentTypeViewController.swift */,
+				61986AD61FF671FB005632D7 /* PaymentTypeViewModel.swift */,
+			);
+			path = PaymentType;
 			sourceTree = "<group>";
 		};
 		61A1D4311FC57FB700E1B673 /* CardValidationView */ = {
@@ -1849,6 +1883,7 @@
 				610781F21FF63E1B0039355A /* AddressListTableHeaderView.xib in Resources */,
 				614142C61F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib in Resources */,
 				61A507361F7E7A50004504EF /* ProductOptions.storyboard in Resources */,
+				61986AD01FF66B0C005632D7 /* CheckoutPaymentAddTableCell.xib in Resources */,
 				61236D621FEAA88800D64198 /* SearchTitleView.xib in Resources */,
 				6133DAD41FB21A7900156971 /* CartButtonView.xib in Resources */,
 				616CA66F1FF3D2AB00FF14E2 /* AddressListTableViewCell.xib in Resources */,
@@ -1879,6 +1914,8 @@
 				61719B9D1FC2FCEE007B6ED0 /* CartHeaderView.xib in Resources */,
 				61719B9F1FC306FA007B6ED0 /* Localizable.stringsdict in Resources */,
 				61ED88F41F7170C9006BDA79 /* GridCollectionViewCell.xib in Resources */,
+				61986AD21FF6703F005632D7 /* PaymentType.storyboard in Resources */,
+				61E4E6391F56C868001C6E01 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2086,6 +2123,7 @@
 				611947881FD95ED4008BE9C6 /* AccountTableDataSource.swift in Sources */,
 				617DE18C1FB5F23D004EEF9A /* SignUpViewModel.swift in Sources */,
 				0B4EA3681FFD2702000C7A80 /* OrderListUseCase.swift in Sources */,
+				61986AD51FF671BE005632D7 /* PaymentTypeViewController.swift in Sources */,
 				0BD5EB3D1FF3F1830076C01B /* CustomerUseCase.swift in Sources */,
 				61393A781FACC2450020C345 /* CategoryViewModel.swift in Sources */,
 				613339331F695A820063A754 /* UIViewControllerChilds.swift in Sources */,
@@ -2194,6 +2232,7 @@
 				616A8ADD1FE82F670013E41F /* CategoryCollectionViewCell.swift in Sources */,
 				0BA630791FFFC554007088B8 /* OrderItemTableViewCell.swift in Sources */,
 				6165E9691FCDDA5C006DE8A5 /* BillingAddressViewController.swift in Sources */,
+				61986AD71FF671FB005632D7 /* PaymentTypeViewModel.swift in Sources */,
 				616CA66E1FF3D2AB00FF14E2 /* AddressListTableViewCell.swift in Sources */,
 				610781F41FF640080039355A /* AddressListDelegate.swift in Sources */,
 				61A5072D1F7E79FB004504EF /* ImagesCarouselCollectionDelegate.swift in Sources */,
@@ -2207,6 +2246,7 @@
 				6137EE041F9E19D90040C004 /* RepositoryInterface.swift in Sources */,
 				61C2ABC31FBB23D500A1E170 /* SignInViewController.swift in Sources */,
 				615A97711FA09EAB00C6095D /* ShopifyCategoryAdapter.swift in Sources */,
+				61986ACF1FF66B0C005632D7 /* CheckoutPaymentAddTableCell.swift in Sources */,
 				61A1D4331FC57FD900E1B673 /* CardValidationView.swift in Sources */,
 				61BF1EAB1FAB56D90098B9AA /* LoadingView.swift in Sources */,
 				61A54BF31FF5253E00D4D151 /* AccountTableViewCell.swift in Sources */,

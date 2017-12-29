@@ -27,6 +27,12 @@ extension UIViewController {
         
         navigationController?.pushViewController(addressListController, animated: true)
     }
+    
+    func pushPaymentTypeController() {
+        let paymentTypeController = UIStoryboard.paymentType().instantiateViewController(withIdentifier: ControllerIdentifier.paymentType) as! PaymentTypeViewController
+        
+        navigationController?.pushViewController(paymentTypeController, animated: true)
+    }
 
     // MARK: - set
     func setHomeController() {

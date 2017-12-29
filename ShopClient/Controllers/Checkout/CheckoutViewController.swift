@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTableDataSourceProtocol, SeeAllHeaderViewProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol {
+class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeaderViewProtocol, CheckoutCombinedProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     private var tableDataSource: CheckoutTableDataSource!
@@ -38,6 +38,9 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
         
         let shippingAddressEditNib = UINib(nibName: String(describing: CheckoutShippingAddressEditTableCell.self), bundle: nil)
         tableView.register(shippingAddressEditNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self))
+        
+        let paymentAddNib = UINib(nibName: String(describing: CheckoutPaymentAddTableCell.self), bundle: nil)
+        tableView.register(paymentAddNib, forCellReuseIdentifier: String(describing: CheckoutPaymentAddTableCell.self))
         
         tableDataSource = CheckoutTableDataSource(delegate: self)
         tableView?.dataSource = tableDataSource
@@ -115,5 +118,10 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTab
         if type == .myCart {
             // TODO:
         }
+    }
+    
+    // MARK: - CheckoutPaymentAddCellProtocol
+    func didTapAddPayment() {
+        pushPaymentTypeController()
     }
 }

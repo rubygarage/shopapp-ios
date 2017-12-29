@@ -8,15 +8,17 @@
 
 import UIKit
 
+protocol CheckoutCombinedProtocol: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, CheckoutPaymentAddCellProtocol {}
+
 protocol CheckoutTableDataSourceProtocol {
     func cartProducts() -> [CartProduct]
     func shippingAddress() -> Address?
 }
 
 class CheckoutTableDataSource: NSObject, UITableViewDataSource {
-    var delegate: (CheckoutTableDataSourceProtocol & CheckoutShippingAddressAddCellProtocol & CheckoutShippingAddressEditCellProtocol)!
+    var delegate: CheckoutCombinedProtocol!
     
-    init(delegate: CheckoutTableDataSourceProtocol & CheckoutShippingAddressAddCellProtocol & CheckoutShippingAddressEditCellProtocol) {
+    init(delegate: CheckoutCombinedProtocol) {
         super.init()
         
         self.delegate = delegate
@@ -37,6 +39,8 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
             return cartCell(with: tableView, indexPath: indexPath)
         case CheckoutSection.shippingAddress.rawValue:
             return shippingAddressCell(with: tableView, indexPath: indexPath)
+        case CheckoutSection.payment.rawValue:
+            return paymentAddCell(with: tableView, indexPath: indexPath)
         default:
             return UITableViewCell()
         }
@@ -67,6 +71,12 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     private func shippingAddressEditCell(with tableView: UITableView, indexPath: IndexPath, address: Address) -> CheckoutShippingAddressEditTableCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self), for: indexPath) as! CheckoutShippingAddressEditTableCell
         cell.configure(with: address, delegate: delegate)
+        return cell
+    }
+    
+    private func paymentAddCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutPaymentAddTableCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutPaymentAddTableCell.self), for: indexPath) as! CheckoutPaymentAddTableCell
+        cell.configure(with: delegate)
         return cell
     }
 }

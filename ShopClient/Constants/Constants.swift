@@ -31,6 +31,7 @@ struct ControllerIdentifier {
     static let billingAddress = "BillingAddressControllerIdentifier"
     static let signIn = "SignInControllerIdentifier"
     static let signUp = "SignUpControllerIdentifier"
+    static let paymentType = "PaymentTypeControllerIdentifier"
 }
 
 struct SegueIdentifiers {

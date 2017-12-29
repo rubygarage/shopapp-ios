@@ -23,6 +23,8 @@ class CheckoutTableDelegate: NSObject, UITableViewDelegate {
             return SeeAllTableHeaderView(delegate: delegate, type: .myCart, separatorVisible: true)
         case CheckoutSection.shippingAddress.rawValue:
             return BoldTitleTableHeaderView(type: .shippingAddress)
+        case CheckoutSection.payment.rawValue:
+            return BoldTitleTableHeaderView(type: .payment)
         default:
             return nil
         }
