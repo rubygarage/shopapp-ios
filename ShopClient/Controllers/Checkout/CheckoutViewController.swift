@@ -11,8 +11,8 @@ import UIKit
 class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutTableDataSourceProtocol, SeeAllHeaderViewProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol {
     @IBOutlet weak var tableView: UITableView!
     
-    var tableDataSource: CheckoutTableDataSource!
-    var tableDelegate: CheckoutTableDelegate!
+    private var tableDataSource: CheckoutTableDataSource!
+    private var tableDelegate: CheckoutTableDelegate!
     
     override func viewDidLoad() {
         viewModel = CheckoutViewModel()

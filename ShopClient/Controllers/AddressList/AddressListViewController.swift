@@ -11,7 +11,7 @@ import UIKit
 class AddressListViewController: BaseViewController<AddressListViewModel>, AddressListDataSourceProtocol, AddressListTableViewCellProtocol {
     @IBOutlet weak var tableView: UITableView!
     
-    var tableDataSource: AddressListDataSource!
+    private var tableDataSource: AddressListDataSource!
     var checkoutId: String!
     var selectedAddress: Address!
     var completion: AddressListCompletion?

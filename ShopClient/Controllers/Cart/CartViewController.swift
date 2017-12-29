@@ -14,8 +14,8 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var checkoutButton: BlackButton!
     
-    var tableDataSource: CartTableDataSource?
-    var tableDelegate: CartTableDelegate?
+    private var tableDataSource: CartTableDataSource?
+    private var tableDelegate: CartTableDelegate?
     
     override var emptyDataView: UIView {
         return CartEmptyDataView(frame: view.frame, delegate: self)

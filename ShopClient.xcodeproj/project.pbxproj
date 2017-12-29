@@ -1052,10 +1052,10 @@
 		616CA6591FF2A09100FF14E2 /* Checkout */ = {
 			isa = PBXGroup;
 			children = (
-				616CA65B1FF2A0CE00FF14E2 /* CheckoutTableDataSource.swift */,
-				616CA65A1FF2A0CE00FF14E2 /* CheckoutTableDelegate.swift */,
 				616CA65D1FF2A0CE00FF14E2 /* CheckoutViewController.swift */,
 				616CA65C1FF2A0CE00FF14E2 /* CheckoutViewModel.swift */,
+				616CA65B1FF2A0CE00FF14E2 /* CheckoutTableDataSource.swift */,
+				616CA65A1FF2A0CE00FF14E2 /* CheckoutTableDelegate.swift */,
 			);
 			path = Checkout;
 			sourceTree = "<group>";
@@ -1216,9 +1216,9 @@
 		61A507291F7E79FB004504EF /* ImagesCarousel */ = {
 			isa = PBXGroup;
 			children = (
+				61A5072C1F7E79FB004504EF /* ImagesCarouselViewController.swift */,
 				61A5072A1F7E79FB004504EF /* ImagesCarouselCollectionDelegate.swift */,
 				61A5072B1F7E79FB004504EF /* ImagesCarouselCollectionDataSource.swift */,
-				61A5072C1F7E79FB004504EF /* ImagesCarouselViewController.swift */,
 			);
 			path = ImagesCarousel;
 			sourceTree = "<group>";

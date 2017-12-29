@@ -13,8 +13,8 @@ import RxCocoa
 class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, PopularCellDelegate, SeeAllHeaderViewProtocol {
     @IBOutlet weak var tableView: UITableView!
     
-    var dataSource: HomeTableDataSource?
-    var delegate: HomeTableDelegate?
+    private var dataSource: HomeTableDataSource?
+    private var delegate: HomeTableDelegate?
     
     override func viewDidLoad() {
         viewModel = HomeViewModel()

@@ -24,9 +24,9 @@ class SortModalViewController: UIViewController, SortModalDataSourceProtocol, So
     
     var sortItems = [String]()
     var selectedSortItem = String()
-    var tableDataSource: SortModalDataSource?
-    var tableDelegate: SortModalDelegate?
     var delegate: SortModalControllerProtocol?
+    private var tableDataSource: SortModalDataSource?
+    private var tableDelegate: SortModalDelegate?
     
     // MARK: - view controller lifecycle
     override func viewDidLoad() {
