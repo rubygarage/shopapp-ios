@@ -267,6 +267,14 @@ class API: NSObject, APIInterface {
         }
     }
     
+    func addCustomerAddress(with address: Address, callback: @escaping RepoCallback<Bool>) {
+        if let token = sessionData().token {
+            createCustomerAddress(with: token, address: address, callback: callback)
+        } else {
+            callback(false, ContentError())
+        }
+    }
+    
     func deleteCustomerAddress(with addressId: String, callback: @escaping RepoCallback<Bool>) {
         if let token = sessionData().token {
             deleteCustomerAddress(with: token, addressId: addressId, callback: callback)

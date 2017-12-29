@@ -29,6 +29,10 @@ extension Repository {
         APICore?.updateCustomerAddress(with: address, callback: callback)
     }
     
+    func addCustomerAddress(with address: Address, callback: @escaping RepoCallback<Bool>) {
+        APICore?.addCustomerAddress(with: address, callback: callback)
+    }
+    
     func deleteCustomerAddress(with addressId: String, callback: @escaping RepoCallback<Bool>) {
         APICore?.deleteCustomerAddress(with: addressId, callback: callback)
     }

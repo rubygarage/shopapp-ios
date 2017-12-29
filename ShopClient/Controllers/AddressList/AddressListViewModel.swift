@@ -75,6 +75,18 @@ class AddressListViewModel: BaseViewModel {
         }
     }
     
+    public func addCustomerAddress(with address: Address, isDefaultAddress: Bool) {
+        state.onNext(.loading(showHud: true))
+        Repository.shared.addCustomerAddress(with: address) { [weak self] (success, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            } else if let success = success {
+                success ? self?.loadCustomerAddresses() : ()
+                self?.state.onNext(.content)
+            }
+        }
+    }
+    
     // MARK: - private
     private func processCheckoutUpdatingResponse(with success: Bool, address: Address) {
         if success {

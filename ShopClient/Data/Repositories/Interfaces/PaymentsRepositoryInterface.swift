@@ -12,6 +12,7 @@ protocol PaymentsRepositoryInterface {
     func updateShippingAddress(with checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>)
     func updateCustomerDefaultAddress(with address: Address, callback: @escaping RepoCallback<Bool>)
     func updateCustomerAddress(with address: Address, callback: @escaping RepoCallback<Bool>)
+    func addCustomerAddress(with address: Address, callback: @escaping RepoCallback<Bool>)
     func deleteCustomerAddress(with addressId: String, callback: @escaping RepoCallback<Bool>)
     func getShippingRates(with checkoutId: String, callback: @escaping RepoCallback<[ShippingRate]>)
     func updateCheckout(with rate: ShippingRate, checkout: Checkout, callback: @escaping RepoCallback<Checkout>)
