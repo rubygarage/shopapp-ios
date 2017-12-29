@@ -14,9 +14,13 @@ enum BoldTitleViewType {
     case payment
 }
 
+private let kTopMarginDefault: CGFloat = 15
+private let kTopMarginPayment: CGFloat = 4
+
 class BoldTitleTableHeaderView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var headerTitleLabel: UILabel!
+    @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
     
     private var headerViewType = BoldTitleViewType.shippingAddress
     
@@ -39,7 +43,12 @@ class BoldTitleTableHeaderView: UIView {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
+        setupConstraints()
         populateViews()
+    }
+    
+    private func setupConstraints() {
+        topMarginConstraint.constant = headerViewType == .payment ? kTopMarginPayment : kTopMarginDefault
     }
     
     private func populateViews() {
