@@ -10,12 +10,13 @@ import UIKit
 
 private let kAnimationDuration: TimeInterval = 0.3
 
-class SearchViewController: GridCollectionViewController<SearchViewModel>, SearchTitleViewProtocol, SearchCollectionDataSourceProtocol {
+class SearchViewController: GridCollectionViewController<SearchViewModel>, SearchTitleViewProtocol, SearchCollectionDelegateProtocol, SearchCollectionDataSourceProtocol {
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
     
     private let titleView = SearchTitleView()
     private var categoriesDataSource: SearchCollectionDataSource!
     private var categoriesDelegate: SearchCollectionDelegate!
+    private var selectedCategory: Category?
     
     override func viewDidLoad() {
         viewModel = SearchViewModel()
@@ -32,20 +33,27 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         
         updateNavigationBar()
         
-        tabBarController?.navigationController?.removeShadow()
-        tabBarController?.navigationController?.navigationBar.barTintColor = UIColor.backgroundDefault
+        navigationController?.removeShadow()
+        navigationController?.navigationBar.barTintColor = UIColor.backgroundDefault
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        tabBarController?.navigationController?.addShadow()
-        tabBarController?.navigationController?.navigationBar.barTintColor = UIColor.white
+        navigationController?.addShadow()
+        navigationController?.navigationBar.barTintColor = UIColor.white
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let categoryViewController = segue.destination as? CategoryViewController {
+            categoryViewController.title = selectedCategory!.title
+            categoryViewController.categoryId = selectedCategory!.id
+        }
     }
     
     private func updateNavigationBar() {
-        tabBarController?.navigationItem.rightBarButtonItem = nil
-        tabBarController?.navigationItem.titleView = titleView
+        navigationItem.rightBarButtonItem = nil
+        navigationItem.titleView = titleView
         
         Repository.shared.getCartProductList { [weak self] (products, error) in
             let cartItemsCount = products?.count ?? 0
@@ -62,7 +70,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         categoriesDataSource = SearchCollectionDataSource(delegate: self)
         categoriesCollectionView.dataSource = categoriesDataSource
         
-        categoriesDelegate = SearchCollectionDelegate()
+        categoriesDelegate = SearchCollectionDelegate(delegate: self)
         categoriesCollectionView.delegate = categoriesDelegate
         
         categoriesCollectionView.contentInset = CategoryCollectionViewCell.collectionViewInsets
@@ -145,6 +153,14 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     
     func category(at index: Int) -> Category {
         return viewModel.category(at: index)
+    }
+    
+    // MARK: - SearchCollectionDelegateProtocol
+    func didSelectCategory(at index: Int) {
+        if index < viewModel.categories.value.count {
+            selectedCategory = viewModel.categories.value[index]
+            performSegue(withIdentifier: SegueIdentifiers.toCategory, sender: self)
+        }
     }
     
     // MARK: - ErrorViewProtocol

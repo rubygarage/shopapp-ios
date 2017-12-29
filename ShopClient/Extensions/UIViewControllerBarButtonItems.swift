@@ -25,10 +25,6 @@ extension UIViewController {
         navigationItem.rightBarButtonItem = closeButton()
     }
     
-    public func sortBarItem(with action: Selector) -> UIBarButtonItem {
-        return UIBarButtonItem(image: #imageLiteral(resourceName: "sort"), style: .plain, target: self, action: action)
-    }
-    
     // MARK: - private
     private func cartBarItem(with cartItemsCount: Int) -> UIBarButtonItem {
         let cartView = CartButtonView(frame: CGRect(x: 0, y: 0, width: kCustomBarItemWidth, height: kCustomBarItemWidth))
@@ -51,10 +47,6 @@ extension UIViewController {
     }
     
     // MARK: - actions
-    @objc private func seachButtonHandler() {
-        pushSearchController()
-    }
-    
     @objc private func cartButtonHandler() {
         showCartController()
     }

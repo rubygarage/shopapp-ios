@@ -125,6 +125,7 @@
                     <connections>
                         <outlet property="categoriesCollectionView" destination="4C4-4B-wkN" id="XEA-I1-TfB"/>
                         <outlet property="collectionView" destination="yWl-1j-1Lt" id="5fp-fi-NDK"/>
+                        <segue destination="GSM-jj-cBr" kind="show" identifier="toCategory" id="sQi-O8-8uE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FuP-Yr-BUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -255,7 +256,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7d3-Kn-PBp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="202" y="2374"/>
+            <point key="canvasLocation" x="207" y="2450"/>
         </scene>
         <!--Products List View Controller-->
         <scene sceneID="W83-mX-1ZD">
@@ -459,7 +460,45 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="951" y="2373"/>
+            <point key="canvasLocation" x="958" y="2450"/>
+        </scene>
+        <!--Category View Controller-->
+        <scene sceneID="oaF-9p-ART">
+            <objects>
+                <viewController storyboardIdentifier="CategoryControllerIdentifier" id="GSM-jj-cBr" customClass="CategoryViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="p95-hk-brZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aYK-FB-c6x">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="1iO-2k-5B3">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aYK-FB-c6x" firstAttribute="bottom" secondItem="zTz-ur-Eqd" secondAttribute="bottom" id="90s-CB-EZi"/>
+                            <constraint firstItem="aYK-FB-c6x" firstAttribute="top" secondItem="zTz-ur-Eqd" secondAttribute="top" id="mr9-pi-Mro"/>
+                            <constraint firstItem="aYK-FB-c6x" firstAttribute="trailing" secondItem="zTz-ur-Eqd" secondAttribute="trailing" id="rA9-3o-AVH"/>
+                            <constraint firstItem="aYK-FB-c6x" firstAttribute="leading" secondItem="zTz-ur-Eqd" secondAttribute="leading" id="yuB-xu-M5R"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zTz-ur-Eqd"/>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="aYK-FB-c6x" id="61k-7s-lX5"/>
+                        <segue destination="2iw-CM-RMu" kind="show" identifier="toProductDetails" id="Ucu-Sf-yUc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IXX-4D-Osx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2052" y="1599"/>
         </scene>
     </scenes>
     <resources>
@@ -469,7 +508,7 @@
         <image name="search_selected" width="27" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RyX-CT-HJC"/>
+        <segue reference="Ucu-Sf-yUc"/>
         <segue reference="Dq7-PS-rRI"/>
     </inferredMetricsTieBreakers>
 </document>

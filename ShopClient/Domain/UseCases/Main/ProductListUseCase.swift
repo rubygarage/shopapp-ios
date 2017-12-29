@@ -22,4 +22,8 @@ struct ProductListUseCase {
     public func getProductList(with paginationValue: Any?, sortingValue: SortingValue, reverse: Bool, _ callback: @escaping RepoCallback<[Product]>) {
         Repository.shared.getProductList(paginationValue: paginationValue, sortBy: sortingValue, reverse: reverse, callback: callback)
     }
+    
+    public func getProductList(with paginationValue: Any?, searchPhrase: String, _ callback: @escaping RepoCallback<[Product]>) {
+        Repository.shared.searchProducts(paginationValue: paginationValue, searchQuery: searchPhrase, callback: callback)
+    }
 }

@@ -11,10 +11,6 @@ import UIKit
 extension UIViewController {
     
     // MARK: - push
-    func pushSearchController() {
-        pushController(with: UIStoryboard.search(), identifier: ControllerIdentifier.search)
-    }
-    
     func pushAddressFormController(with address: Address?, completion: AddressFormCompletion?) {
         let addressFormController = UIStoryboard.addressForm().instantiateViewController(withIdentifier: ControllerIdentifier.addressForm) as! AddressFormViewController
         addressFormController.address = address
@@ -89,11 +85,6 @@ extension UIViewController {
     }
     
     // MARK: - private
-    private func pushController(with storyBoard: UIStoryboard, identifier: String, animated: Bool = true) {
-        let controller = storyBoard.instantiateViewController(withIdentifier: identifier)
-        navigationController?.pushViewController(controller, animated: true)
-    }
-    
     private func showNavigationController(with rootController: UIViewController) {
         let navigationController = NavigationController(rootViewController: rootController)
         present(navigationController, animated: true)

@@ -14,7 +14,7 @@ protocol SearchCollectionDataSourceProtocol {
 }
 
 class SearchCollectionDataSource: NSObject, UICollectionViewDataSource {
-    var delegate: SearchCollectionDataSourceProtocol!
+    private var delegate: SearchCollectionDataSourceProtocol!
     
     init(delegate: SearchCollectionDataSourceProtocol) {
         super.init()

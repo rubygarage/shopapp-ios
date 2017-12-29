@@ -22,15 +22,12 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel>, S
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        updateCartBarItem()
+        updateNavigationBar()
     }
     
     // MARK: - setup
-    private func updateCartBarItem() {
-        Repository.shared.getCartProductList { [weak self] (products, error) in
-            let cartItemsCount = products?.count ?? 0
-            self?.addCartBarButton(with: cartItemsCount)
-        }
+    private func updateNavigationBar() {
+        viewModel.getCartItemsCount()
     }
     
     private func setupViewModel() {
@@ -40,6 +37,12 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel>, S
             .subscribe(onNext: { [weak self] products in
                 self?.stopLoadAnimating()
                 self?.collectionView.reloadData()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.cartItemsCount.asObservable()
+            .subscribe(onNext: { [weak self] cartItemsCount in
+                self?.addCartBarButton(with: cartItemsCount)
             })
             .disposed(by: disposeBag)
     }

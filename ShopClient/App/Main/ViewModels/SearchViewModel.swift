@@ -12,6 +12,9 @@ class SearchViewModel: GridCollectionViewModel {
     var searchPhrase = Variable<String>(String())
     var categories = Variable<[Category]>([Category]())
     
+    private let categoryListUseCase = CategoryListUseCase()
+    private let productListUseCase = ProductListUseCase()
+    
     public func reloadData() {
         paginationValue = nil
         loadRemoteData()
@@ -24,7 +27,7 @@ class SearchViewModel: GridCollectionViewModel {
     
     public func loadCategories() {
         state.onNext(.loading(showHud: true))
-        Repository.shared.getCategoryList { [weak self] (catogories, error) in
+        categoryListUseCase.getCategoryList { [weak self] (catogories, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }
@@ -51,7 +54,7 @@ class SearchViewModel: GridCollectionViewModel {
     private func loadRemoteData() {
         let showHud = products.value.count == 0
         state.onNext(.loading(showHud: showHud))
-        Repository.shared.searchProducts(paginationValue: paginationValue, searchQuery: searchPhrase.value) { [weak self] (products, error) in
+        productListUseCase.getProductList(with: paginationValue, searchPhrase: searchPhrase.value) { [weak self] (products, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }

@@ -10,14 +10,6 @@ import UIKit
 
 extension UIStoryboard {
     
-    class func search() -> UIStoryboard {
-        return UIStoryboard(name: "Search", bundle: nil)
-    }
-    
-    class func category() -> UIStoryboard {
-        return UIStoryboard(name: "Category", bundle: nil)
-    }
-    
     class func imagesCarousel() -> UIStoryboard {
         return UIStoryboard(name: "ImagesCarousel", bundle: nil)
     }
