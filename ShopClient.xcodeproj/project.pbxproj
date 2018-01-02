@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0B4EA3461FFB8EDC000C7A80 /* CartButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA3451FFB8EDC000C7A80 /* CartButtonViewModel.swift */; };
+		0B4EA3481FFBBF9D000C7A80 /* ResetPasswordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA3471FFBBF9D000C7A80 /* ResetPasswordUseCase.swift */; };
+		0B4EA34A1FFBBFF6000C7A80 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA3491FFBBFF6000C7A80 /* ResetPasswordViewController.swift */; };
+		0B4EA34C1FFBC00D000C7A80 /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA34B1FFBC00D000C7A80 /* ResetPasswordViewModel.swift */; };
 		0B9B1E381FF4EB4700FECA8E /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B1E371FF4EB4700FECA8E /* LoginUseCase.swift */; };
 		0B9B1E3A1FF4EDB000FECA8E /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B1E391FF4EDB000FECA8E /* SignUpUseCase.swift */; };
 		0B9B1E3C1FF50CC400FECA8E /* AuthProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B1E3B1FF50CC400FECA8E /* AuthProtocol.swift */; };
@@ -258,6 +261,9 @@
 
 /* Begin PBXFileReference section */
 		0B4EA3451FFB8EDC000C7A80 /* CartButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartButtonViewModel.swift; sourceTree = "<group>"; };
+		0B4EA3471FFBBF9D000C7A80 /* ResetPasswordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordUseCase.swift; sourceTree = "<group>"; };
+		0B4EA3491FFBBFF6000C7A80 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		0B4EA34B1FFBC00D000C7A80 /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
 		0B9B1E371FF4EB4700FECA8E /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		0B9B1E391FF4EDB000FECA8E /* SignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUseCase.swift; sourceTree = "<group>"; };
 		0B9B1E3B1FF50CC400FECA8E /* AuthProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthProtocol.swift; sourceTree = "<group>"; };
@@ -680,9 +686,10 @@
 			isa = PBXGroup;
 			children = (
 				617DE1841FB5E9E2004EEF9A /* AccountViewController.swift */,
+				6124BCE21F73C2880099E879 /* PolicyViewController.swift */,
+				0B4EA3491FFBBFF6000C7A80 /* ResetPasswordViewController.swift */,
 				61C2ABC21FBB23D500A1E170 /* SignInViewController.swift */,
 				617DE1891FB5F1F0004EEF9A /* SignUpViewController.swift */,
-				6124BCE21F73C2880099E879 /* PolicyViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -691,6 +698,7 @@
 			isa = PBXGroup;
 			children = (
 				611947801FD87540008BE9C6 /* AccountViewModel.swift */,
+				0B4EA34B1FFBC00D000C7A80 /* ResetPasswordViewModel.swift */,
 				61C2ABC41FBB240A00A1E170 /* SignInViewModel.swift */,
 				617DE18B1FB5F23D004EEF9A /* SignUpViewModel.swift */,
 			);
@@ -771,6 +779,7 @@
 				0BD5EB3C1FF3F1830076C01B /* CustomerUseCase.swift */,
 				0B9B1E371FF4EB4700FECA8E /* LoginUseCase.swift */,
 				0BD5EB401FF3F19D0076C01B /* LogoutUseCase.swift */,
+				0B4EA3471FFBBF9D000C7A80 /* ResetPasswordUseCase.swift */,
 				0BD5EB3E1FF3F1900076C01B /* ShopUseCase.swift */,
 				0B9B1E391FF4EDB000FECA8E /* SignUpUseCase.swift */,
 			);
@@ -1875,6 +1884,7 @@
 				615A976B1FA0907900C6095D /* ShopifyImageAdapter.swift in Sources */,
 				61ED88F71F7171F1006BDA79 /* GridCollectionViewController.swift in Sources */,
 				6141AAA91F8BDD8500F9019B /* UIViewControllerAlert.swift in Sources */,
+				0B4EA34C1FFBC00D000C7A80 /* ResetPasswordViewModel.swift in Sources */,
 				61B94C0D1F82323800B6887C /* ProductOptionsCollectionDelegate.swift in Sources */,
 				618A43891F9F850A0066F053 /* Product.swift in Sources */,
 				6119F2F81FA9EE3500564859 /* BaseCollectionViewController.swift in Sources */,
@@ -1934,6 +1944,7 @@
 				6131D2451FB33F7D008330C0 /* DAO.swift in Sources */,
 				61CEAA6C1F5ECFFE0016FBD7 /* UIStoryboardAdditions.swift in Sources */,
 				6133DAD21FB21A6F00156971 /* CartButtonView.swift in Sources */,
+				0B4EA3481FFBBF9D000C7A80 /* ResetPasswordUseCase.swift in Sources */,
 				61E76E1B1FB46C0200AE5FB4 /* DAOImageHelper.swift in Sources */,
 				618A43871F9F56930066F053 /* ShopDAOInterface.swift in Sources */,
 				6152B1281F791A1100045A42 /* ArticlesListTableDelegate.swift in Sources */,
@@ -1951,6 +1962,7 @@
 				61725FCA1FEAB8EB009F55EA /* CheckoutShippingAddressAddTableCell.swift in Sources */,
 				6196CF981F9F9A2200F823AD /* ProductVariant.swift in Sources */,
 				61DA4B881F614BBC00444F64 /* SearchViewController.swift in Sources */,
+				0B4EA34A1FFBBFF6000C7A80 /* ResetPasswordViewController.swift in Sources */,
 				61ED88F31F7170C9006BDA79 /* GridCollectionViewCell.swift in Sources */,
 				618B4D551FE2F3900001F68D /* UIColorCustom.swift in Sources */,
 				0BEF52C41FF5403700E50080 /* ArticleListUseCase.swift in Sources */,
