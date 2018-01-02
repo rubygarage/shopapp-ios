@@ -22,6 +22,7 @@
 "ControllerTitle.ShippingAddress" = "Shipping Address";
 "ControllerTitle.BillingAddress" = "Billing Address";
 "ControllerTitle.PaymentType" = "Payment Type";
+"ControllerTitle.CreditCard" = "Credit Card";
 
 "Alert.Error" = "Error";
 "Alert.ChooseShippingRate" = "Choose shipping rate";
@@ -106,6 +107,7 @@
 "Label.Order.Each" = "each";
 "Label.Order.Total" = "Total:";
 "Label.Payment.CreditCard" = "Credit Card";
+"Label.ExpirationDate" = "Expiration date";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";
@@ -129,3 +131,6 @@
 "Placeholder.State" = "State";
 "Placeholder.ZipCode" = "Zip Code";
 "Placeholder.PhoneNumber" = "Phone Number";
+"Placeholder.CardHolderName" = "Card Holder Name";
+"Placeholder.CardNumber" = "Card Number";
+"Placeholder.CVV" = "CVV";

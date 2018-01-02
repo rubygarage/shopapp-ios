@@ -17,15 +17,41 @@ internal extension String {
         return emailPredicate.evaluate(with: self)
     }
     
+    func isValidAsHolderName() -> Bool {
+        return components(separatedBy: " ").count > 1
+    }
+    
     func isValidAsPassword() -> Bool {
-        return self.count >= kPasswordCharactersCountMin
+        return count >= kPasswordCharactersCountMin
+    }
+    
+    func isValidAsCardNumber() -> Bool {
+        return count == CreditCardLimit.cardNumberMaxCount
+    }
+    
+    func isValidAsCVV() -> Bool {
+        return count == CreditCardLimit.cvvMaxCount
+    }
+    
+    func luhnValid() -> Bool {
+        var sum = 0
+        let reversedCharacters = self.reversed().map { String($0) }
+        for (idx, element) in reversedCharacters.enumerated() {
+            guard let digit = Int(element) else { return false }
+            switch ((idx % 2 == 1), digit) {
+            case (true, 9): sum += 9
+            case (true, 0...8): sum += (digit * 2) % 9
+            default: sum += digit
+            }
+        }
+        return sum % 10 == 0
     }
     
     func orNil() -> String? {
-        return self.isEmpty ? nil : self
+        return isEmpty ? nil : self
     }
     
     func hasAtLeastOneSymbol() -> Bool {
-        return self.count > 0
+        return count > 0
     }
 }

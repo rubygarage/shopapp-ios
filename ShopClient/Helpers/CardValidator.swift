@@ -12,32 +12,12 @@ class CardValidator: NSObject {
     public class func validate(card: Card) -> String? {
         if card.number?.luhnValid() == false {
             return NSLocalizedString("Error.InvalidCardNumber", comment: String())
-        } else if card.name?.holderNameValid() == false {
+        } else if card.name?.isValidAsHolderName() == false {
             return NSLocalizedString("Error.InvalidHolderName", comment: String())
         } else if card.expiresDateValid() == false {
             return NSLocalizedString("Error.InvalidExpiresDate", comment: String())
         }
         return nil
-    }
-}
-
-private extension String {
-    func luhnValid() -> Bool {
-        var sum = 0
-        let reversedCharacters = self.reversed().map { String($0) }
-        for (idx, element) in reversedCharacters.enumerated() {
-            guard let digit = Int(element) else { return false }
-            switch ((idx % 2 == 1), digit) {
-            case (true, 9): sum += 9
-            case (true, 0...8): sum += (digit * 2) % 9
-            default: sum += digit
-            }
-        }
-        return sum % 10 == 0
-    }
-    
-    func holderNameValid() -> Bool {
-        return components(separatedBy: " ").count > 1
     }
 }
 

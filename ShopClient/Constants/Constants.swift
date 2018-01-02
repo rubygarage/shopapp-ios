@@ -79,3 +79,8 @@ struct TableView {
     static let removeActionBackgroundColor = UIColor.backgroundDefault
     static let removeActionFont = UIFont.systemFont(ofSize: 12)
 }
+
+struct CreditCardLimit {
+    static let cvvMaxCount = 3
+    static let cardNumberMaxCount = 16
+}
