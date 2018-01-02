@@ -30,16 +30,13 @@ target 'ShopClient' do
   # Secutity
   pod 'KeychainSwift', '~> 10.0'
 
-  # Payment
-  pod 'MFCard', '~> 1.2'
-
   # Crash&Beta
   pod 'Fabric', '~> 1.7'
   pod 'Crashlytics', '~> 3.9'
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|
-      if ['AvatarImageView', 'MFCard', 'SKPhotoBrowser', 'SwipeCellKit'].include? target.name
+      if ['AvatarImageView', 'SKPhotoBrowser', 'SwipeCellKit'].include? target.name
         target.build_configurations.each do |config|
           config.build_settings['SWIFT_VERSION'] = '4.0'
         end
