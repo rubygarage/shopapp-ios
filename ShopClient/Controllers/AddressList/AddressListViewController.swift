@@ -13,7 +13,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     
     private var tableDataSource: AddressListDataSource!
     private var tableDelegate: AddressListDelegate!
-    var selectedAddress: Address!
+    var selectedAddress: Address?
     var completion: AddressListCompletion?
     
     override func viewDidLoad() {
@@ -64,13 +64,13 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     // MARK: - AddressListTableViewCellProtocol
     func didTapSelect(with address: Address) {
         viewModel.updateCheckoutShippingAddress(with: address)
-        navigationController?.popViewController(animated: true)
+//        navigationController?.popViewController(animated: true)
     }
     
     func didTapEdit(with address: Address) {
-        let isSelected = address.isEqual(to: selectedAddress)
+        let selected = selectedAddress?.isEqual(to: address) ?? false
         pushAddressFormController(with: address) { [weak self] (filledAddress, isDefaultAddress) in
-            self?.viewModel.updateAddress(with: filledAddress, isSelected: isSelected)
+            self?.viewModel.updateAddress(with: filledAddress, isSelected: selected)
         }
     }
     

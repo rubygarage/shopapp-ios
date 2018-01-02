@@ -40,4 +40,8 @@ extension UIStoryboard {
     class func paymentType() -> UIStoryboard {
         return UIStoryboard(name: "PaymentType", bundle: nil)
     }
+    
+    class func creditCard() -> UIStoryboard {
+        return UIStoryboard(name: "CreditCard", bundle: nil)
+    }
 }

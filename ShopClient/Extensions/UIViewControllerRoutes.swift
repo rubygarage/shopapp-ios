@@ -19,18 +19,26 @@ extension UIViewController {
         navigationController?.pushViewController(addressFormController, animated: true)
     }
     
-    func pushAddressListController(with selectedAddress: Address, completion: AddressListCompletion?) {
+    func pushAddressListController(with selectedAddress: Address? = nil, title: String?, completion: AddressListCompletion?) {
         let addressListController = UIStoryboard.addressList().instantiateViewController(withIdentifier: ControllerIdentifier.addressList) as! AddressListViewController
+        addressListController.title = title
         addressListController.selectedAddress = selectedAddress
         addressListController.completion = completion
         
         navigationController?.pushViewController(addressListController, animated: true)
     }
     
-    func pushPaymentTypeController() {
+    func pushPaymentTypeController(with completion: PaymentCompletion?) {
         let paymentTypeController = UIStoryboard.paymentType().instantiateViewController(withIdentifier: ControllerIdentifier.paymentType) as! PaymentTypeViewController
+        paymentTypeController.completion = completion
         
         navigationController?.pushViewController(paymentTypeController, animated: true)
+    }
+    
+    func pushCreditCardController() {
+        let creditCardController = UIStoryboard.creditCard().instantiateViewController(withIdentifier: ControllerIdentifier.creditCard) as! CreditCardViewController
+        
+        navigationController?.pushViewController(creditCardController, animated: true)
     }
 
     // MARK: - set

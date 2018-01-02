@@ -19,6 +19,7 @@
 "ControllerTitle.MyOrders" = "My Orders";
 "ControllerTitle.OrderDetails" = "Order Details";
 "ControllerTitle.AddNewAddress" = "Add New Address";
+"ControllerTitle.ShippingAddress" = "Shipping Address";
 "ControllerTitle.BillingAddress" = "Billing Address";
 "ControllerTitle.PaymentType" = "Payment Type";
 

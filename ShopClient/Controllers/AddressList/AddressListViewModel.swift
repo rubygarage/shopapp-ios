@@ -13,7 +13,7 @@ typealias AddressListCompletion = (_ address: Address) -> ()
 class AddressListViewModel: BaseViewModel {
     var customerAddresses = Variable<[Address]>([Address]())
     
-    var selectedAddress: Address!
+    var selectedAddress: Address?
     var completion: AddressListCompletion?
     
     // MARK: - public
@@ -30,7 +30,7 @@ class AddressListViewModel: BaseViewModel {
     public func item(at index: Int) -> AddressTuple {
         if index < customerAddresses.value.count {
             let address = customerAddresses.value[index]
-            let selected = address.isEqual(to: selectedAddress)
+            let selected = selectedAddress?.isEqual(to: address) ?? false
             return (address, selected)
         }
         return (Address(), false)

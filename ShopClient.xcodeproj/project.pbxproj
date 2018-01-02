@@ -172,6 +172,9 @@
 		617E541C1FC8A79500130719 /* ShopifyShippingRateAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617E541B1FC8A79500130719 /* ShopifyShippingRateAdapter.swift */; };
 		6180AC031F72CD14007768F2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6180AC021F72CD14007768F2 /* Localizable.strings */; };
 		6180AC0A1F72D2D6007768F2 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6180AC091F72D2D6007768F2 /* CategoryViewController.swift */; };
+		6182BA611FFBADC100836979 /* CreditCard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6182BA601FFBADC100836979 /* CreditCard.storyboard */; };
+		6182BA641FFBAE1500836979 /* CreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6182BA631FFBAE1500836979 /* CreditCardViewController.swift */; };
+		6182BA661FFBAE2D00836979 /* CreditCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6182BA651FFBAE2D00836979 /* CreditCardViewModel.swift */; };
 		61836C231FD98D48000A6BA6 /* BlackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61836C221FD98D48000A6BA6 /* BlackButton.swift */; };
 		61836C261FD9A404000A6BA6 /* UnderlinedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61836C251FD9A404000A6BA6 /* UnderlinedButton.swift */; };
 		61836C5B1FDACC9F000A6BA6 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61836C5A1FDACC9F000A6BA6 /* NavigationController.swift */; };
@@ -463,6 +466,9 @@
 		617E541B1FC8A79500130719 /* ShopifyShippingRateAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyShippingRateAdapter.swift; sourceTree = "<group>"; };
 		6180AC021F72CD14007768F2 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		6180AC091F72D2D6007768F2 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		6182BA601FFBADC100836979 /* CreditCard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreditCard.storyboard; sourceTree = "<group>"; };
+		6182BA631FFBAE1500836979 /* CreditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardViewController.swift; sourceTree = "<group>"; };
+		6182BA651FFBAE2D00836979 /* CreditCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardViewModel.swift; sourceTree = "<group>"; };
 		61836C221FD98D48000A6BA6 /* BlackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackButton.swift; sourceTree = "<group>"; };
 		61836C251FD9A404000A6BA6 /* UnderlinedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedButton.swift; sourceTree = "<group>"; };
 		61836C5A1FDACC9F000A6BA6 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -1082,6 +1088,7 @@
 		611EF3591F5956A3001B8B9C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6182BA621FFBADF900836979 /* CreditCard */,
 				61986AD31FF6719C005632D7 /* PaymentType */,
 				610424281FC477B300EFEFDA /* AddressForm */,
 				616CA6661FF3BA8300FF14E2 /* AddressList */,
@@ -1260,13 +1267,11 @@
 				616CA6641FF3BA7100FF14E2 /* AddressList.storyboard */,
 				61C95EA01FB38F8700543B40 /* Cart.storyboard */,
 				61236D3C1FEA6E2500D64198 /* Checkout.storyboard */,
+				6182BA601FFBADC100836979 /* CreditCard.storyboard */,
 				6165E9651FCDDA39006DE8A5 /* BillingAddress.storyboard */,
 				61E4E63C1F56C868001C6E01 /* LaunchScreen.storyboard */,
 				6119478B1FD964A6008BE9C6 /* Navigation.storyboard */,
-				6119478B1FD964A6008BE9C6 /* Main.storyboard */,
 				61986AD11FF6703F005632D7 /* PaymentType.storyboard */,
-				61D561721F7418D000233DA3 /* ProductDetails.storyboard */,
-				61534F291F73EC2F00F24189 /* ProductsList.storyboard */,
 				61A507351F7E7A50004504EF /* ProductOptions.storyboard */,
 				61AAB9291F7BC1F700CD32D3 /* SortModal.storyboard */,
 			);
@@ -1373,6 +1378,15 @@
 				61719B9E1FC306FA007B6ED0 /* Localizable.stringsdict */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		6182BA621FFBADF900836979 /* CreditCard */ = {
+			isa = PBXGroup;
+			children = (
+				6182BA631FFBAE1500836979 /* CreditCardViewController.swift */,
+				6182BA651FFBAE2D00836979 /* CreditCardViewModel.swift */,
+			);
+			path = CreditCard;
 			sourceTree = "<group>";
 		};
 		61836C1F1FD98CFA000A6BA6 /* Controls */ = {
@@ -1895,6 +1909,7 @@
 				6180AC031F72CD14007768F2 /* Localizable.strings in Resources */,
 				61DE4EBD1FEBF96800A95016 /* CheckoutShippingAddressEditTableCell.xib in Resources */,
 				61BF1EB01FAB598C0098B9AA /* ErrorView.xib in Resources */,
+				6182BA611FFBADC100836979 /* CreditCard.storyboard in Resources */,
 				6165E9661FCDDA39006DE8A5 /* BillingAddress.storyboard in Resources */,
 				0B9426571FFE468C00A986AB /* OrderHeaderView.xib in Resources */,
 				610781F21FF63E1B0039355A /* AddressListTableHeaderView.xib in Resources */,
@@ -1933,7 +1948,6 @@
 				61719B9F1FC306FA007B6ED0 /* Localizable.stringsdict in Resources */,
 				61ED88F41F7170C9006BDA79 /* GridCollectionViewCell.xib in Resources */,
 				61986AD21FF6703F005632D7 /* PaymentType.storyboard in Resources */,
-				61E4E6391F56C868001C6E01 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2095,6 +2109,7 @@
 				61A2AC731FACC2B2005FAD54 /* SearchViewModel.swift in Sources */,
 				0BEF52D61FF6997700E50080 /* CategoryListUseCase.swift in Sources */,
 				6196CF8E1F9F91D600F823AD /* CategoryRepository.swift in Sources */,
+				6182BA641FFBAE1500836979 /* CreditCardViewController.swift in Sources */,
 				61AAB92C1F7BCF1000CD32D3 /* SortModalDataSource.swift in Sources */,
 				6196CF961F9F99BB00F823AD /* Image.swift in Sources */,
 				6131D2471FB33FCB008330C0 /* DAOCartProduct.swift in Sources */,
@@ -2244,6 +2259,7 @@
 				61C2ABBC1FB9F38900A1E170 /* RepoError.swift in Sources */,
 				61CEAA6E1F5ED16E0016FBD7 /* UIViewControllerRoutes.swift in Sources */,
 				61236D611FEAA88800D64198 /* SearchTitleView.swift in Sources */,
+				6182BA661FFBAE2D00836979 /* CreditCardViewModel.swift in Sources */,
 				6119F2F51FA9EA1F00564859 /* BaseTableViewController.swift in Sources */,
 				610A913B1F9E298600424369 /* API.swift in Sources */,
 				0BA630681FFF7EA9007088B8 /* OrderDetailsTableDataSource.swift in Sources */,

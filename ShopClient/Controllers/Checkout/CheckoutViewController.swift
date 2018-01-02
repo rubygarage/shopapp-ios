@@ -100,7 +100,9 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     }
     
     private func openAddressList(with checkoutId: String, address: Address) {
-        pushAddressListController(with: address, completion: { [weak self] (address) in
+        let addressListTitle = NSLocalizedString("ControllerTitle.ShippingAddress", comment: String())
+        pushAddressListController(with: address, title: addressListTitle, completion: { [weak self] (address) in
+            self?.navigationController?.popViewController(animated: true)
             self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: false)
         })
     }
@@ -121,7 +123,9 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     // MARK: - CheckoutPaymentAddCellProtocol
     func didTapAddPayment() {
         if let checkoutId = viewModel.checkout.value?.id, let address = viewModel.checkout.value?.shippingAddress {
-            pushPaymentTypeController()
+            pushPaymentTypeController(with: {
+                print("========")
+            })
         }
     }
 }
