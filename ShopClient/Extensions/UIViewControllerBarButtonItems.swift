@@ -11,8 +11,8 @@ import UIKit
 private let kCustomBarItemWidth: CGFloat = 32
 
 extension UIViewController {    
-    public func addCartBarButton(with itemsCount: Int) {
-        navigationItem.rightBarButtonItem = cartBarItem(with: itemsCount)
+    public func addCartBarButton() {
+        navigationItem.rightBarButtonItem = cartBarItem()
     }
     
     public func addBackButtonIfNeeded() {
@@ -26,10 +26,9 @@ extension UIViewController {
     }
     
     // MARK: - private
-    private func cartBarItem(with cartItemsCount: Int) -> UIBarButtonItem {
+    private func cartBarItem() -> UIBarButtonItem {
         let cartView = CartButtonView(frame: CGRect(x: 0, y: 0, width: kCustomBarItemWidth, height: kCustomBarItemWidth))
         cartView.isUserInteractionEnabled = false
-        cartView.itemsCount = cartItemsCount
         
         let button = UIButton(frame: cartView.frame)
         button.addSubview(cartView)

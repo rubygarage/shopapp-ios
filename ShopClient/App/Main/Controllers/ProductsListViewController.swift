@@ -27,7 +27,7 @@ class ProductsListViewController: GridCollectionViewController<ProductsListViewM
     
     // MARK: - private
     private func updateNavigationBar() {
-        viewModel.getCartItemsCount()
+        addCartBarButton()
     }
     
     private func setupViewModel() {
@@ -37,12 +37,6 @@ class ProductsListViewController: GridCollectionViewController<ProductsListViewM
             .subscribe(onNext: { [weak self] _ in
                 self?.stopLoadAnimating()
                 self?.collectionView.reloadData()
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.cartItemsCount.asObservable()
-            .subscribe(onNext: { [weak self] cartItemsCount in
-                self?.addCartBarButton(with: cartItemsCount)
             })
             .disposed(by: disposeBag)
     }

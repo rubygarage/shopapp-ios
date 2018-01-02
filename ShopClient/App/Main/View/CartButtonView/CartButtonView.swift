@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 let kItemsCountViewCornerRadius: CGFloat = 7
 
@@ -15,11 +16,8 @@ class CartButtonView: UIView {
     @IBOutlet private weak var itemsCountLabel: UILabel!
     @IBOutlet weak var itemsCountBackgroundView: UIView!
     
-    var itemsCount: Int = 0 {
-        didSet {
-            populateViews()
-        }
-    }
+    private let disposeBag = DisposeBag()
+    private var viewModel = CartButtonViewModel()
     
     // MARK: - init
     override init(frame: CGRect) {
@@ -41,13 +39,23 @@ class CartButtonView: UIView {
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        populateViews()
+        
+        viewModel.cartItemsCount.asObservable()
+            .subscribe(onNext: { [weak self] cartItemsCount in
+                self?.populateViews(with: cartItemsCount)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.getCartItemsCount()
     }
     
     private func setupViews() {
         itemsCountBackgroundView.layer.cornerRadius = kItemsCountViewCornerRadius
     }
     
-    private func populateViews() {
+    private func populateViews(with itemsCount: Int = 0) {
         itemsCountLabel.text = "\(itemsCount)"
         itemsCountLabel.isHidden = itemsCount == 0
         itemsCountBackgroundView.isHidden = itemsCount == 0

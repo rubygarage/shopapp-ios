@@ -68,12 +68,6 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
                 self?.updateOptionsViews(result: result)
             })
             .disposed(by: disposeBag)
-        
-        viewModel.cartItemsCount.asObservable()
-            .subscribe(onNext: { [weak self] cartItemsCount in
-                self?.addCartBarButton(with: cartItemsCount)
-            })
-            .disposed(by: disposeBag)
     }
     
     private func loadData() {
@@ -126,7 +120,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     }
     
     private func updateNavigationBar() {
-        viewModel.getCartItemsCount()
+        addCartBarButton()
     }
     
     private func updateAddToCartButton() {

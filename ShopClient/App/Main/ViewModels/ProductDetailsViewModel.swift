@@ -11,7 +11,6 @@ import RxSwift
 typealias SelectedVariant = (variant: ProductVariant?, allOptions: [ProductOption], selectedOptions: [SelectedOption], currency: String)
 
 class ProductDetailsViewModel: BaseViewModel {
-    var cartItemsCount = PublishSubject<Int>()
     var product = Variable<Product?>(nil)
     var selectedVariant = PublishSubject<SelectedVariant>()
     var quantity = Variable<Int>(1)
@@ -20,7 +19,6 @@ class ProductDetailsViewModel: BaseViewModel {
     var currency: String?
     
     private let addCartProductUseCase = AddCartProductUseCase()
-    private let cartProductListUseCase = CartProductListUseCase()
     private let productUseCase = ProductUseCase()
     
     private var productOptions = [ProductOption]()
@@ -28,12 +26,6 @@ class ProductDetailsViewModel: BaseViewModel {
     private var selectedProductVariant: ProductVariant?
 
     // MARK: - public
-    public func getCartItemsCount() {
-        cartProductListUseCase.getCartProductList { [weak self] (products) in
-            self?.cartItemsCount.onNext(products.count)
-        }
-    }
-    
     public func loadData() {
         state.onNext(.loading(showHud: true))
         productUseCase.getProduct(with: productId) { [weak self] (product, error) in

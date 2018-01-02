@@ -48,17 +48,14 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         if let categoryViewController = segue.destination as? CategoryViewController {
             categoryViewController.title = selectedCategory!.title
             categoryViewController.categoryId = selectedCategory!.id
+        } else if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
+            productDetailsViewController.productId = selectedProduct!.id
         }
     }
     
     private func updateNavigationBar() {
-        navigationItem.rightBarButtonItem = nil
         navigationItem.titleView = titleView
-        
-        Repository.shared.getCartProductList { [weak self] (products, error) in
-            let cartItemsCount = products?.count ?? 0
-            self?.titleView.cartItemsCount = cartItemsCount
-        }
+        titleView.updateCartBarItem()
     }
     
     private func setupViews() {

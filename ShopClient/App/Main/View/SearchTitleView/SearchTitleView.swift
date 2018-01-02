@@ -45,12 +45,6 @@ class SearchTitleView: UIView, UITextFieldDelegate {
         }
     }
     
-    var cartItemsCount: Int = 0 {
-        didSet {
-            updateCartBarItem(with: cartItemsCount)
-        }
-    }
-    
     override var intrinsicContentSize: CGSize {
         return UILayoutFittingExpandedSize
     }
@@ -71,6 +65,11 @@ class SearchTitleView: UIView, UITextFieldDelegate {
         updateClearButtonIfNeeded()
     }
     
+    func updateCartBarItem() {
+        cartButtonView.subviews.forEach({ $0.removeFromSuperview() })
+        cartButtonView.addSubview(cartBarItem())
+    }
+    
     private func commonInit() {
         Bundle.main.loadNibNamed(String(describing: SearchTitleView.self), owner: self)
         addSubview(contentView)
@@ -82,11 +81,6 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     private func setupViews() {
         searchTextField.delegate = self
         clearButton.setTitle(NSLocalizedString("Button.Clear", comment: String()), for: .normal)
-    }
-    
-    private func updateCartBarItem(with cartItemsCount: Int) {
-        cartButtonView.subviews.forEach({ $0.removeFromSuperview() })
-        cartButtonView.addSubview(cartBarItem(with: cartItemsCount))
     }
     
     private func updateViews(animated: Bool) {
@@ -174,10 +168,9 @@ class SearchTitleView: UIView, UITextFieldDelegate {
 }
 
 internal extension SearchTitleView {
-    func cartBarItem(with cartItemsCount: Int) -> UIButton {
+    func cartBarItem() -> UIButton {
         let cartView = CartButtonView(frame: CGRect(x: 0, y: 0, width: kBarItemWidth, height: kBarItemWidth))
         cartView.isUserInteractionEnabled = false
-        cartView.itemsCount = cartItemsCount
         
         let button = UIButton(frame: cartView.frame)
         button.addSubview(cartView)

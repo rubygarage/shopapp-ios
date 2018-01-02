@@ -10,17 +10,9 @@ import RxSwift
 
 class HomeViewModel: BaseViewModel {
     var data = Variable<(latestProducts: [Product], popularProducts: [Product], articles: [Article])>(latestProducts: [Product](), popularProducts: [Product](), articles: [Article]())
-    var cartItemsCount = PublishSubject<Int>()
     
     private let articleListUseCase = ArticleListUseCase()
-    private let cartProductListUseCase = CartProductListUseCase()
     private let productListUseCase = ProductListUseCase()
-    
-    public func getCartItemsCount() {
-        cartProductListUseCase.getCartProductList { [weak self] (products) in
-            self?.cartItemsCount.onNext(products.count)
-        }
-    }
     
     public func loadData(with disposeBag: DisposeBag) {
         state.onNext(.loading(showHud: true))
