@@ -13,7 +13,6 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     
     private var tableDataSource: AddressListDataSource!
     private var tableDelegate: AddressListDelegate!
-    var checkoutId: String!
     var selectedAddress: Address!
     var completion: AddressListCompletion?
     
@@ -38,7 +37,6 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     }
     
     private func setupViewModel() {
-        viewModel.checkoutId = checkoutId
         viewModel.selectedAddress = selectedAddress
         viewModel.completion = completion
         
@@ -66,6 +64,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     // MARK: - AddressListTableViewCellProtocol
     func didTapSelect(with address: Address) {
         viewModel.updateCheckoutShippingAddress(with: address)
+        navigationController?.popViewController(animated: true)
     }
     
     func didTapEdit(with address: Address) {

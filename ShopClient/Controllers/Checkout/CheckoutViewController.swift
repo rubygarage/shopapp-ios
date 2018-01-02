@@ -100,10 +100,8 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     }
     
     private func openAddressList(with checkoutId: String, address: Address) {
-        pushAddressListController(with: checkoutId, selectedAddress: address, completion: { [weak self] (needUpdateCheckout) in
-            if needUpdateCheckout {
-                self?.viewModel.getCheckout()
-            }
+        pushAddressListController(with: address, completion: { [weak self] (address) in
+            self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: false)
         })
     }
     

@@ -19,9 +19,8 @@ extension UIViewController {
         navigationController?.pushViewController(addressFormController, animated: true)
     }
     
-    func pushAddressListController(with checkoutId: String, selectedAddress: Address, completion: AddressListCompletion?) {
+    func pushAddressListController(with selectedAddress: Address, completion: AddressListCompletion?) {
         let addressListController = UIStoryboard.addressList().instantiateViewController(withIdentifier: ControllerIdentifier.addressList) as! AddressListViewController
-        addressListController.checkoutId = checkoutId
         addressListController.selectedAddress = selectedAddress
         addressListController.completion = completion
         

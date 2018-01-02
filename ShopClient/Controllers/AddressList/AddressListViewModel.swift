@@ -8,12 +8,11 @@
 
 import RxSwift
 
-typealias AddressListCompletion = (_ needUpdateCheckout: Bool) -> ()
+typealias AddressListCompletion = (_ address: Address) -> ()
 
 class AddressListViewModel: BaseViewModel {
     var customerAddresses = Variable<[Address]>([Address]())
     
-    var checkoutId: String!
     var selectedAddress: Address!
     var completion: AddressListCompletion?
     
@@ -38,15 +37,9 @@ class AddressListViewModel: BaseViewModel {
     }
     
     public func updateCheckoutShippingAddress(with address: Address) {
-        state.onNext(.loading(showHud: true))
-        Repository.shared.updateShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
-            if let error = error {
-                self?.state.onNext(.error(error: error))
-            } else if let success = success {
-                self?.processCheckoutUpdatingResponse(with: success, address: address)
-                self?.state.onNext(.content)
-            }
-        }
+        selectedAddress = address
+        loadCustomerAddresses()
+        completion?(address)
     }
     
     public func updateAddress(with address: Address, isSelected: Bool) {
@@ -86,22 +79,18 @@ class AddressListViewModel: BaseViewModel {
     }
     
     // MARK: - private
-    private func processCheckoutUpdatingResponse(with success: Bool, address: Address) {
-        if success {
-            selectedAddress = address
-            updateAddresses(needUpdateCheckout: true)
-        }
-    }
-    
     private func processAddressUpdatingResponse(with success: Bool, address: Address, isSelected: Bool) {
         if success {
-            isSelected ? updateCheckoutShippingAddress(with: address) : updateAddresses(needUpdateCheckout: false)
+            processSelectedAddressUpdatingResponse(with: address, isSelected: isSelected)
+            loadCustomerAddresses()
         }
     }
     
-    private func updateAddresses(needUpdateCheckout: Bool) {
-        loadCustomerAddresses()
-        completion?(needUpdateCheckout)
+    private func processSelectedAddressUpdatingResponse(with address: Address, isSelected: Bool) {
+        if isSelected {
+            selectedAddress = address
+            completion?(address)
+        }
     }
     
     private func processAddressAddingResponse(with addressId: String, isDefaultAddress: Bool) {
