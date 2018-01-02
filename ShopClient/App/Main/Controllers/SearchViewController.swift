@@ -54,13 +54,8 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     }
     
     private func updateNavigationBar() {
-        navigationItem.rightBarButtonItem = nil
         navigationItem.titleView = titleView
-        
-        Repository.shared.getCartProductList { [weak self] (products, error) in
-            let cartItemsCount = products?.count ?? 0
-            self?.titleView.cartItemsCount = cartItemsCount
-        }
+        titleView.updateCartBarItem()
     }
     
     private func setupViews() {

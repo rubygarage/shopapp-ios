@@ -9,19 +9,10 @@
 import RxSwift
 
 class CategoryViewModel: GridCollectionViewModel {
-    var cartItemsCount = PublishSubject<Int>()
-    
     var categoryId: String!
     var selectedSortingValue = SortingValue.createdAt
     
-    private let cartProductListUseCase = CartProductListUseCase()
     private let categoryUseCase = CategoryUseCase()
-    
-    public func getCartItemsCount() {
-        cartProductListUseCase.getCartProductList { [weak self] (products) in
-            self?.cartItemsCount.onNext(products.count)
-        }
-    }
     
     public func reloadData() {
         paginationValue = nil
