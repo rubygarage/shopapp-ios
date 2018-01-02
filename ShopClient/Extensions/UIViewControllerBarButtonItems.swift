@@ -12,11 +12,7 @@ private let kCustomBarItemWidth: CGFloat = 32
 
 extension UIViewController {    
     public func addCartBarButton(with itemsCount: Int) {
-        if let tabController = tabBarController {
-            tabController.navigationItem.rightBarButtonItem = cartBarItem(with: itemsCount)
-        } else {
-            navigationItem.rightBarButtonItem = cartBarItem(with: itemsCount)
-        }
+        navigationItem.rightBarButtonItem = cartBarItem(with: itemsCount)
     }
     
     public func addBackButtonIfNeeded() {
@@ -27,10 +23,6 @@ extension UIViewController {
     
     public func addCloseButton() {
         navigationItem.rightBarButtonItem = closeButton()
-    }
-    
-    public func sortBarItem(with action: Selector) -> UIBarButtonItem {
-        return UIBarButtonItem(image: #imageLiteral(resourceName: "sort"), style: .plain, target: self, action: action)
     }
     
     // MARK: - private
@@ -55,10 +47,6 @@ extension UIViewController {
     }
     
     // MARK: - actions
-    @objc private func seachButtonHandler() {
-        pushSearchController()
-    }
-    
     @objc private func cartButtonHandler() {
         showCartController()
     }

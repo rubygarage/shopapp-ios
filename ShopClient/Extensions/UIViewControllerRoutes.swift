@@ -11,36 +11,6 @@ import UIKit
 extension UIViewController {
     
     // MARK: - push
-    func pushSearchController() {
-        pushController(with: UIStoryboard.search(), identifier: ControllerIdentifier.search)
-    }
-    
-    func pushArticlesListController() {
-        pushController(with: UIStoryboard.articlesList(), identifier: ControllerIdentifier.articlesList)
-    }
-    
-    func pushDetailController(with product: Product) {
-        let productDetaillsController = UIStoryboard.productDetails().instantiateViewController(withIdentifier: ControllerIdentifier.productDetails) as! ProductDetailsViewController
-        productDetaillsController.productId = product.id 
-        
-        navigationController?.pushViewController(productDetaillsController, animated: true)
-    }
-    
-    func pushArticleDetailsController(with articleId: String) {
-        let articleDetailsController = UIStoryboard.articleDetails().instantiateViewController(withIdentifier: ControllerIdentifier.articleDetails) as! ArticleDetailsViewController
-        articleDetailsController.articleId = articleId
-        
-        navigationController?.pushViewController(articleDetailsController, animated: true)
-    }
-    
-    func pushProductsListController(with title: String? = nil, sortingValue: SortingValue) {
-        let productsListController = UIStoryboard.productsList().instantiateViewController(withIdentifier: ControllerIdentifier.productsList) as! ProductsListViewController
-        productsListController.title = title
-        productsListController.sortingValue = sortingValue
-        
-        navigationController?.pushViewController(productsListController, animated: true)
-    }
-    
     func pushAddressFormController(with address: Address?, completion: AddressFormCompletion?) {
         let addressFormController = UIStoryboard.addressForm().instantiateViewController(withIdentifier: ControllerIdentifier.addressForm) as! AddressFormViewController
         addressFormController.address = address
@@ -115,11 +85,6 @@ extension UIViewController {
     }
     
     // MARK: - private
-    private func pushController(with storyBoard: UIStoryboard, identifier: String, animated: Bool = true) {
-        let controller = storyBoard.instantiateViewController(withIdentifier: identifier)
-        navigationController?.pushViewController(controller, animated: true)
-    }
-    
     private func showNavigationController(with rootController: UIViewController) {
         let navigationController = NavigationController(rootViewController: rootController)
         present(navigationController, animated: true)
