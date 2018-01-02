@@ -48,6 +48,8 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         if let categoryViewController = segue.destination as? CategoryViewController {
             categoryViewController.title = selectedCategory!.title
             categoryViewController.categoryId = selectedCategory!.id
+        } else if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
+            productDetailsViewController.productId = selectedProduct!.id
         }
     }
     
