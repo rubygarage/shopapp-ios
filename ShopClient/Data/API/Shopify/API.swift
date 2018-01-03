@@ -195,6 +195,19 @@ class API: NSObject, APIInterface {
         callback(true, nil)
     }
     
+    func resetPassword(with email: String, callback: @escaping RepoCallback<Bool>) {
+        let query = resetPasswordQuery(email: email)
+        let task = client?.mutateGraphWith(query) { [weak self] (response, error) in
+            if let responseError = response?.customerRecover?.userErrors.first {
+                let error = self?.process(error: responseError)
+                callback(false, error)
+            } else {
+                callback(true, nil)
+            }
+        }
+        run(task: task, callback: callback)
+    }
+    
     func getCustomer(callback: @escaping RepoCallback<Customer>) {
         if let token = sessionData().token, let email = sessionData().email {
             getCustomer(with: token, email: email, callback: callback)
@@ -588,6 +601,15 @@ class API: NSObject, APIInterface {
                 .customerAccessToken(self.accessTokenQuery())
                 .userErrors(self.userErrorQuery())
             })
+        })
+    }
+    
+    private func resetPasswordQuery(email: String) -> Storefront.MutationQuery {
+        return Storefront.buildMutation({ $0
+            .customerRecover(email: email, { $0
+                .userErrors(self.userErrorQuery())
+            })
+        
         })
     }
     

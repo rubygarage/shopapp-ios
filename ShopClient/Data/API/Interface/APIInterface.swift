@@ -40,6 +40,7 @@ protocol APIInterface {
     func login(with email: String, password: String, callback: @escaping RepoCallback<Bool>)
     func logout(callback: RepoCallback<Bool>)
     func isLoggedIn() -> Bool
+    func resetPassword(with email: String, callback: @escaping RepoCallback<Bool>)
     func getCustomer(callback: @escaping RepoCallback<Customer>)
     
     // MARK: - payments

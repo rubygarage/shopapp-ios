@@ -25,6 +25,10 @@ extension Repository: AuthentificationRepositoryInterface {
         return APICore?.isLoggedIn() ?? false
     }
     
+    func resetPassword(with email: String, callback: @escaping RepoCallback<Bool>) {
+        APICore?.resetPassword(with: email, callback: callback)
+    }
+    
     func getCustomer(callback: @escaping RepoCallback<Customer>) {
         APICore?.getCustomer(callback: callback)
     }

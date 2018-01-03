@@ -11,6 +11,7 @@ import RxSwift
 class SignInViewController: BaseViewController<SignInViewModel> {
     @IBOutlet weak var emailTextFieldView: InputTextFieldView!
     @IBOutlet weak var passwordTextFieldView: InputTextFieldView!
+    @IBOutlet weak var forgotButton: UIButton!
     @IBOutlet weak var signInButton: BlackButton!
     
     var delegate: AuthenticationProtocol!
@@ -29,6 +30,7 @@ class SignInViewController: BaseViewController<SignInViewModel> {
         title = NSLocalizedString("ControllerTitle.SignIn", comment: String())
         emailTextFieldView.placeholder = NSLocalizedString("Placeholder.Email", comment: String()).uppercased()
         passwordTextFieldView.placeholder = NSLocalizedString("Placeholder.Password", comment: String()).uppercased()
+        forgotButton.setTitle(NSLocalizedString("Button.Forgot", comment: String()), for: .normal)
         signInButton.setTitle(NSLocalizedString("Button.SignIn", comment: String()).uppercased(), for: .normal)
     }
     

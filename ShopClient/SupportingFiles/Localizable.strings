@@ -14,6 +14,7 @@
 "ControllerTitle.Cart" = "My Cart";
 "ControllerTitle.SignIn" = "Sign In";
 "ControllerTitle.SignUp" = "Sign Up";
+"ControllerTitle.ForgorPassword" = "Forgor Password";
 "ControllerTitle.Checkout" = "Checkout";
 "ControllerTitle.AddNewAddress" = "Add New Address";
 "ControllerTitle.BillingAddress" = "Billing Address";
@@ -35,7 +36,10 @@
 "Button.RefundPolicy" = "Refund Policy";
 "Button.TermsOfService" = "Terms of Service";
 "Button.SignIn" = "Sign In";
+"Button.Forgot" = "Forgot?";
 "Button.SignUp" = "Sign Up";
+"Button.Submit" = "Submit";
+"Button.Resend" = "Resend reset link";
 "Button.Logout" = "Log Out";
 "Button.CreateNewAccount" = "Create New Account";
 "Button.MyOrders" = "My Orders";
@@ -75,6 +79,12 @@
 "Label.AcceptPoliciesAttributed" = "By creating your account, you accept our Privacy Policy and Terms of Service";
 "Label.Range.PrivacyPolicy" = "Privacy Policy";
 "Label.Range.TermsOfService" = "Terms of Service";
+"Label.ForgotPassword.PasswordTitle" = "Reset Your Password";
+"Label.ForgotPassword.PasswordDescription" = "Enter your address below and follow the\ninstructions in the email will send you shortly";
+"Label.ForgotPassword.LinkTitle" = "Reset link has been sent to";
+"Label.ForgotPassword.LinkDescription" = "To reset your password just click the link in the email we sent you!";
+"Label.ForgotPassword.LinkAdditionalTitle" = "Don't receive it?";
+"Label.ForgotPassword.LinkAdditionalDescription" = "Don't forget to check your mail or click the link below and we'll send you a new link";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";
