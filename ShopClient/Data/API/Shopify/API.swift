@@ -403,7 +403,7 @@ class API: NSObject, APIInterface {
     }
     
     private func pay(with card: CreditCard, checkout: Checkout, cardVaultUrl: URL, address: Address, callback: @escaping RepoCallback<Bool>) {
-        let creditCard = Card.CreditCard(firstName: card.firstName, lastName: card.lastName, number: card.cardNumber, expiryMonth: card.expireMonth, expiryYear: card.expireYear, verificationCode: card.verificationCode)
+        let creditCard = Card.CreditCard(firstName: card.firstName, lastName: card.lastName, number: card.cardNumber, expiryMonth: card.expireMonth.withoutZero(), expiryYear: card.expireYear, verificationCode: card.verificationCode)
         let cardClient = Card.Client.init()
         
         let task = cardClient.vault(creditCard, to: cardVaultUrl) { [weak self] (token, error) in
@@ -1163,5 +1163,11 @@ internal extension Storefront.MailingAddressInput {
         if let phoneItem = address.phone {
             phone = Input<String>(orNull: phoneItem)
         }
+    }
+}
+
+internal extension String {
+    func withoutZero() -> String {
+        return self.replacingOccurrences(of: "0", with: "")
     }
 }
