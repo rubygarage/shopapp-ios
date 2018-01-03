@@ -9,6 +9,7 @@
 import Foundation
 
 private let kMaskedNumberCountMax = 4
+private let kExpireYearShortCountMax = 2
 
 class CreditCard: NSObject {
     var firstName = String()
@@ -30,7 +31,8 @@ class CreditCard: NSObject {
     }
     
     var expirationDateLocalized: String {
-        let expirationLocalized = NSLocalizedString("Label.CreditCard.ExpirationDate", comment: String())
-        return String.localizedStringWithFormat(expirationLocalized, expireMonth, expireYear)
+        let expireLocalized = NSLocalizedString("Label.CreditCard.ExpirationDate", comment: String())
+        let expireYearShort = String(expireYear.suffix(kExpireYearShortCountMax))
+        return String.localizedStringWithFormat(expireLocalized, expireMonth, expireYearShort)
     }
 }
