@@ -73,6 +73,7 @@
 "Label.PriceInfo" = "%@\n%@\n%@\n%@";
 "Label.ShippingAddress" = "Shipping Address";
 "Label.PaymentInformation" = "Payment Information";
+"Label.BillingAddress" = "Billing Address";
 "Label.Payment" = "Payment";
 "Label.SameAsShippingAddress" = "Same as shipping address";
 "Label.LatestArrivals" = "Latest Arrivals";
@@ -109,6 +110,8 @@
 "Label.Order.Total" = "Total:";
 "Label.Payment.CreditCard" = "Credit Card";
 "Label.ExpirationDate" = "Expiration date";
+"Label.CreditCard.MaskedNumber" = "**%@";
+"Label.CreditCard.ExpirationDate" = "Exp : %@ / %@";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

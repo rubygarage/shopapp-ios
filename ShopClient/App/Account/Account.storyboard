@@ -674,7 +674,7 @@
                             <constraint firstItem="fDl-AX-NfF" firstAttribute="trailing" secondItem="ayF-80-Ljj" secondAttribute="trailing" constant="-10" id="w0h-1A-4Mq"/>
                             <constraint firstItem="riL-s3-G4C" firstAttribute="top" secondItem="Kc4-Yv-9Gb" secondAttribute="bottom" constant="32" id="yQW-Ko-Qq8"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6oa-rj-uaw"/>
+                        <viewLayoutGuide key="safeArea" id="jxV-gu-0ra"/>
                     </view>
                     <connections>
                         <outlet property="additionalDescriptionLabel" destination="KRh-By-cDe" id="ZKw-fP-V1F"/>

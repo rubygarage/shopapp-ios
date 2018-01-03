@@ -46,6 +46,9 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
         let paymentAddNib = UINib(nibName: String(describing: CheckoutPaymentAddTableCell.self), bundle: nil)
         tableView.register(paymentAddNib, forCellReuseIdentifier: String(describing: CheckoutPaymentAddTableCell.self))
         
+        let paymentEditNib = UINib(nibName: String(describing: CheckoutPaymentEditTableCell.self), bundle: nil)
+        tableView.register(paymentEditNib, forCellReuseIdentifier: String(describing: CheckoutPaymentEditTableCell.self))
+        
         tableDataSource = CheckoutTableDataSource(delegate: self)
         tableView?.dataSource = tableDataSource
         
@@ -82,6 +85,14 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     
     func shippingAddress() -> Address? {
         return viewModel.checkout.value?.shippingAddress
+    }
+    
+    func billingAddress() -> Address? {
+        return viewModel.billingAddress
+    }
+    
+    func creditCard() -> CreditCard? {
+        return viewModel.creditCard
     }
     
     // MARK: - CheckoutShippingAddressAddCellProtocol
@@ -143,6 +154,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
         pushPaymentTypeController(with: { [weak self] (billingAddress, card) in
             self?.viewModel.billingAddress = billingAddress
             self?.viewModel.creditCard = card
+            self?.tableView.reloadData()
             self?.updatePlaceOrderButtonUI()
             self?.returnFlowToSelf()
         })

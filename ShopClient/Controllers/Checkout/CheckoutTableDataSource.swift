@@ -13,6 +13,8 @@ protocol CheckoutCombinedProtocol: CheckoutTableDataSourceProtocol, CheckoutShip
 protocol CheckoutTableDataSourceProtocol {
     func cartProducts() -> [CartProduct]
     func shippingAddress() -> Address?
+    func billingAddress() -> Address?
+    func creditCard() -> CreditCard?
 }
 
 class CheckoutTableDataSource: NSObject, UITableViewDataSource {
@@ -40,7 +42,7 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
         case CheckoutSection.shippingAddress.rawValue:
             return shippingAddressCell(with: tableView, indexPath: indexPath)
         case CheckoutSection.payment.rawValue:
-            return paymentAddCell(with: tableView, indexPath: indexPath)
+            return paymentCell(with: tableView, indexPath: indexPath)
         default:
             return UITableViewCell()
         }
@@ -74,9 +76,23 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
         return cell
     }
     
+    private func paymentCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        if let address = delegate.billingAddress(), let card = delegate.creditCard() {
+            return paymentEditCell(with: tableView, indexPath: indexPath, billingAddress: address, creditCard: card)
+        } else {
+            return paymentAddCell(with: tableView, indexPath: indexPath)
+        }
+    }
+    
     private func paymentAddCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutPaymentAddTableCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutPaymentAddTableCell.self), for: indexPath) as! CheckoutPaymentAddTableCell
         cell.configure(with: delegate)
+        return cell
+    }
+    
+    private func paymentEditCell(with tableView: UITableView, indexPath: IndexPath, billingAddress: Address, creditCard: CreditCard) -> CheckoutPaymentEditTableCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutPaymentEditTableCell.self), for: indexPath) as! CheckoutPaymentEditTableCell
+        cell.configure(with: billingAddress, creditCard: creditCard)
         return cell
     }
 }
