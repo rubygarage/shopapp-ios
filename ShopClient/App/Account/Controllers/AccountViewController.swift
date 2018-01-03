@@ -104,7 +104,7 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     
     // MARK: - AccountLoggedHeaderProtocol
     func didTapMyOrders() {
-        // TODO:
+        performSegue(withIdentifier: SegueIdentifiers.toOrdersList, sender: self)
     }
     
     // MARK: - AccountFooterViewProtocol

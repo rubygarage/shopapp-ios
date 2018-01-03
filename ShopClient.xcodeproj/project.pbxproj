@@ -12,6 +12,14 @@
 		0B4EA34A1FFBBFF6000C7A80 /* ForgorPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA3491FFBBFF6000C7A80 /* ForgorPasswordViewController.swift */; };
 		0B4EA34C1FFBC00D000C7A80 /* ForgorPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA34B1FFBC00D000C7A80 /* ForgorPasswordViewModel.swift */; };
 		0B4EA34E1FFCCC29000C7A80 /* LinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA34D1FFCCC29000C7A80 /* LinkViewController.swift */; };
+		0B4EA3501FFCFED4000C7A80 /* OrdersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA34F1FFCFED4000C7A80 /* OrdersListViewController.swift */; };
+		0B4EA3521FFCFEE1000C7A80 /* OrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA3511FFCFEE1000C7A80 /* OrderDetailsViewController.swift */; };
+		0B4EA3541FFCFEF5000C7A80 /* OrdersListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA3531FFCFEF5000C7A80 /* OrdersListViewModel.swift */; };
+		0B4EA3561FFCFF02000C7A80 /* OrderDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA3551FFCFF02000C7A80 /* OrderDetailsViewModel.swift */; };
+		0B4EA3581FFCFFDA000C7A80 /* OrdersListTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA3571FFCFFDA000C7A80 /* OrdersListTableDataSource.swift */; };
+		0B4EA35A1FFCFFE6000C7A80 /* OrdersListTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA3591FFCFFE6000C7A80 /* OrdersListTableDelegate.swift */; };
+		0B4EA35C1FFD0126000C7A80 /* OrderDetailsTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA35B1FFD0126000C7A80 /* OrderDetailsTableDataSource.swift */; };
+		0B4EA35E1FFD0148000C7A80 /* OrderDetailsTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA35D1FFD0148000C7A80 /* OrderDetailsTableDelegate.swift */; };
 		0B9B1E381FF4EB4700FECA8E /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B1E371FF4EB4700FECA8E /* LoginUseCase.swift */; };
 		0B9B1E3A1FF4EDB000FECA8E /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B1E391FF4EDB000FECA8E /* SignUpUseCase.swift */; };
 		0B9B1E3C1FF50CC400FECA8E /* AuthProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B1E3B1FF50CC400FECA8E /* AuthProtocol.swift */; };
@@ -266,6 +274,14 @@
 		0B4EA3491FFBBFF6000C7A80 /* ForgorPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgorPasswordViewController.swift; sourceTree = "<group>"; };
 		0B4EA34B1FFBC00D000C7A80 /* ForgorPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgorPasswordViewModel.swift; sourceTree = "<group>"; };
 		0B4EA34D1FFCCC29000C7A80 /* LinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkViewController.swift; sourceTree = "<group>"; };
+		0B4EA34F1FFCFED4000C7A80 /* OrdersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersListViewController.swift; sourceTree = "<group>"; };
+		0B4EA3511FFCFEE1000C7A80 /* OrderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewController.swift; sourceTree = "<group>"; };
+		0B4EA3531FFCFEF5000C7A80 /* OrdersListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersListViewModel.swift; sourceTree = "<group>"; };
+		0B4EA3551FFCFF02000C7A80 /* OrderDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewModel.swift; sourceTree = "<group>"; };
+		0B4EA3571FFCFFDA000C7A80 /* OrdersListTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersListTableDataSource.swift; sourceTree = "<group>"; };
+		0B4EA3591FFCFFE6000C7A80 /* OrdersListTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersListTableDelegate.swift; sourceTree = "<group>"; };
+		0B4EA35B1FFD0126000C7A80 /* OrderDetailsTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsTableDataSource.swift; sourceTree = "<group>"; };
+		0B4EA35D1FFD0148000C7A80 /* OrderDetailsTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsTableDelegate.swift; sourceTree = "<group>"; };
 		0B9B1E371FF4EB4700FECA8E /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		0B9B1E391FF4EDB000FECA8E /* SignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUseCase.swift; sourceTree = "<group>"; };
 		0B9B1E3B1FF50CC400FECA8E /* AuthProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthProtocol.swift; sourceTree = "<group>"; };
@@ -690,6 +706,8 @@
 				617DE1841FB5E9E2004EEF9A /* AccountViewController.swift */,
 				0B4EA3491FFBBFF6000C7A80 /* ForgorPasswordViewController.swift */,
 				0B4EA34D1FFCCC29000C7A80 /* LinkViewController.swift */,
+				0B4EA3511FFCFEE1000C7A80 /* OrderDetailsViewController.swift */,
+				0B4EA34F1FFCFED4000C7A80 /* OrdersListViewController.swift */,
 				6124BCE21F73C2880099E879 /* PolicyViewController.swift */,
 				61C2ABC21FBB23D500A1E170 /* SignInViewController.swift */,
 				617DE1891FB5F1F0004EEF9A /* SignUpViewController.swift */,
@@ -702,6 +720,8 @@
 			children = (
 				611947801FD87540008BE9C6 /* AccountViewModel.swift */,
 				0B4EA34B1FFBC00D000C7A80 /* ForgorPasswordViewModel.swift */,
+				0B4EA3551FFCFF02000C7A80 /* OrderDetailsViewModel.swift */,
+				0B4EA3531FFCFEF5000C7A80 /* OrdersListViewModel.swift */,
 				61C2ABC41FBB240A00A1E170 /* SignInViewModel.swift */,
 				617DE18B1FB5F23D004EEF9A /* SignUpViewModel.swift */,
 			);
@@ -712,6 +732,8 @@
 			isa = PBXGroup;
 			children = (
 				611947871FD95ED4008BE9C6 /* AccountTableDataSource.swift */,
+				0B4EA35B1FFD0126000C7A80 /* OrderDetailsTableDataSource.swift */,
+				0B4EA3571FFCFFDA000C7A80 /* OrdersListTableDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -720,6 +742,8 @@
 			isa = PBXGroup;
 			children = (
 				611947891FD95EE3008BE9C6 /* AccountTableDelegate.swift */,
+				0B4EA35D1FFD0148000C7A80 /* OrderDetailsTableDelegate.swift */,
+				0B4EA3591FFCFFE6000C7A80 /* OrdersListTableDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -1887,6 +1911,7 @@
 				0B9B1E381FF4EB4700FECA8E /* LoginUseCase.swift in Sources */,
 				615A976B1FA0907900C6095D /* ShopifyImageAdapter.swift in Sources */,
 				61ED88F71F7171F1006BDA79 /* GridCollectionViewController.swift in Sources */,
+				0B4EA3501FFCFED4000C7A80 /* OrdersListViewController.swift in Sources */,
 				6141AAA91F8BDD8500F9019B /* UIViewControllerAlert.swift in Sources */,
 				0B4EA34C1FFBC00D000C7A80 /* ForgorPasswordViewModel.swift in Sources */,
 				61B94C0D1F82323800B6887C /* ProductOptionsCollectionDelegate.swift in Sources */,
@@ -1902,6 +1927,7 @@
 				61A5072F1F7E79FB004504EF /* ImagesCarouselViewController.swift in Sources */,
 				61E8A2211FAC99F50092EDC1 /* BasePaginationViewModel.swift in Sources */,
 				61B94C101F82409300B6887C /* ProductOptionHeaderView.swift in Sources */,
+				0B4EA35E1FFD0148000C7A80 /* OrderDetailsTableDelegate.swift in Sources */,
 				616CA6611FF2A0CF00FF14E2 /* CheckoutViewController.swift in Sources */,
 				0BD5EB3F1FF3F1900076C01B /* ShopUseCase.swift in Sources */,
 				6106C6CB1F7A40F400E87486 /* ArticleDetailsViewController.swift in Sources */,
@@ -1928,6 +1954,7 @@
 				61ED11551FED058E00A0F35D /* ShopifyAddressAdapter.swift in Sources */,
 				61719B9B1FC2FCE5007B6ED0 /* CartHeaderView.swift in Sources */,
 				617000E41FAA031E00DB898C /* BaseViewController.swift in Sources */,
+				0B4EA35C1FFD0126000C7A80 /* OrderDetailsTableDataSource.swift in Sources */,
 				0BD5EB411FF3F19D0076C01B /* LogoutUseCase.swift in Sources */,
 				0BEF52D21FF66AD700E50080 /* ProductUseCase.swift in Sources */,
 				614142CA1F6AF26300379BB9 /* HomeTableDelegate.swift in Sources */,
@@ -1982,12 +2009,15 @@
 				61836C651FDAD07A000A6BA6 /* InputTextFieldView.swift in Sources */,
 				0BEF52D41FF66BE000E50080 /* AddCartProductUseCase.swift in Sources */,
 				0BEF52C61FF54A4E00E50080 /* CartProductListUseCase.swift in Sources */,
+				0B4EA3521FFCFEE1000C7A80 /* OrderDetailsViewController.swift in Sources */,
 				61719B981FC2FAEB007B6ED0 /* CartTableDelegate.swift in Sources */,
+				0B4EA3541FFCFEF5000C7A80 /* OrdersListViewModel.swift in Sources */,
 				6152B1261F79181100045A42 /* ArticlesListTableDataSource.swift in Sources */,
 				6180AC0A1F72D2D6007768F2 /* CategoryViewController.swift in Sources */,
 				61AFA3F61F9DFECC004B9D53 /* Shop.swift in Sources */,
 				61A507341F7E7A35004504EF /* ProductOptionsViewController.swift in Sources */,
 				6133DADA1FB224CF00156971 /* CartProduct.swift in Sources */,
+				0B4EA35A1FFCFFE6000C7A80 /* OrdersListTableDelegate.swift in Sources */,
 				618A43811F9F491E0066F053 /* Repository.swift in Sources */,
 				6120F2FC1FC33A9A00CBD724 /* PaymentsRepository.swift in Sources */,
 				61FC3DA91F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift in Sources */,
@@ -2007,6 +2037,7 @@
 				0B9B1E3A1FF4EDB000FECA8E /* SignUpUseCase.swift in Sources */,
 				6131D2381FB31395008330C0 /* CartProductDAOInterface.swift in Sources */,
 				6196CF901F9F929200F823AD /* Category.swift in Sources */,
+				0B4EA3581FFCFFDA000C7A80 /* OrdersListTableDataSource.swift in Sources */,
 				6120F2FE1FC3487E00CBD724 /* Checkout.swift in Sources */,
 				614142D81F6BD8B200379BB9 /* LastArrivalsTableDelegate.swift in Sources */,
 				0BEF52CF1FF6469900E50080 /* ArticleTableViewCell.swift in Sources */,
@@ -2024,6 +2055,7 @@
 				61AFA3F31F9DFCE7004B9D53 /* DAOInterface.swift in Sources */,
 				6137EE061F9E19F80040C004 /* ShopRepositoryInterface.swift in Sources */,
 				6120F3001FC348BC00CBD724 /* ShopifyCheckoutAdapter.swift in Sources */,
+				0B4EA3561FFCFF02000C7A80 /* OrderDetailsViewModel.swift in Sources */,
 				61C2ABBC1FB9F38900A1E170 /* RepoError.swift in Sources */,
 				61CEAA6E1F5ED16E0016FBD7 /* UIViewControllerRoutes.swift in Sources */,
 				61236D611FEAA88800D64198 /* SearchTitleView.swift in Sources */,
