@@ -15,11 +15,14 @@ enum ExpiryDateType {
 
 private let kUnderlineViewAlphaDefault: CGFloat = 0.2
 private let kUnderlineViewAlphaHighlighted: CGFloat = 1
+private let kUnderlineViewHeightDefault: CGFloat = 1
+private let kUnderlineViewHeightHighlighted: CGFloat = 2
 
 class ExpiryDatePicker: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var underlineView: UIView!
+    @IBOutlet weak var underlineViewHeight: NSLayoutConstraint!
     
     var pickerView = UIPickerView()
     var placeholder: String {
@@ -57,7 +60,7 @@ class ExpiryDatePicker: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         pickerView.dataSource = self
         pickerView.delegate = self
         pickerView.backgroundColor = UIColor.white
-        dateTextField.tintColor = UIColor.white
+        dateTextField.tintColor = UIColor.clear
         dateTextField?.attributedPlaceholder = NSAttributedString(string: placeholder.uppercased(), attributes: [NSForegroundColorAttributeName: UIColor.black])
         dateTextField?.inputView = pickerView
         underlineView.alpha = kUnderlineViewAlphaDefault
@@ -102,9 +105,11 @@ class ExpiryDatePicker: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBAction func textFieldEditingDidBegin(_ sender: UITextField) {
         underlineView.alpha = kUnderlineViewAlphaHighlighted
+        underlineViewHeight.constant = kUnderlineViewHeightHighlighted
     }
     
     @IBAction func textFieldEditingDidEnd(_ sender: UITextField) {
         underlineView.alpha = kUnderlineViewAlphaDefault
+        underlineViewHeight.constant = kUnderlineViewHeightDefault
     }
 }

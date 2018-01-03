@@ -13,6 +13,8 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
     @IBOutlet weak var cardNumberTextFieldView: InputTextFieldView!
     @IBOutlet weak var securityCodeTextFieldView: InputTextFieldView!
     @IBOutlet weak var expirationDateLabel: UILabel!
+    @IBOutlet weak var monthExpirationView: MonthExpiryDatePicker!
+    @IBOutlet weak var yearExpirationView: YearExpiryDatePicker!
     @IBOutlet weak var submitButton: BlackButton!
     
     override func viewDidLoad() {
@@ -39,6 +41,14 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
         
         cardNumberTextFieldView.textField.rx.text.map({ $0 ?? String() })
             .bind(to: viewModel.cardNumberText)
+            .disposed(by: disposeBag)
+        
+        monthExpirationView.dateTextField.rx.text.map({ $0 ?? String() })
+            .bind(to: viewModel.monthExpirationText)
+            .disposed(by: disposeBag)
+        
+        yearExpirationView.dateTextField.rx.text.map({ $0 ?? String() })
+            .bind(to: viewModel.yearExpirationText)
             .disposed(by: disposeBag)
         
         securityCodeTextFieldView.textField.rx.text.map({ $0 ?? String() })

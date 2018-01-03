@@ -11,13 +11,15 @@ import RxSwift
 class CreditCardViewModel: BaseViewModel {
     var holderNameText = Variable<String>("")
     var cardNumberText = Variable<String>("")
+    var monthExpirationText = Variable<String>("")
+    var yearExpirationText = Variable<String>("")
     var securityCodeText = Variable<String>("")
     var holderNameErrorMessage = PublishSubject<String>()
     var cardNumberErrorMessage = PublishSubject<String>()
     
     var isCardDataValid: Observable<Bool> {
-        return Observable.combineLatest(holderNameText.asObservable(), cardNumberText.asObservable(), securityCodeText.asObservable()) { holderName, cardNumber, securityCode in
-            return holderName.hasAtLeastOneSymbol() && cardNumber.isValidAsCardNumber() && securityCode.isValidAsCVV()
+        return Observable.combineLatest(holderNameText.asObservable(), cardNumberText.asObservable(), monthExpirationText.asObservable(), yearExpirationText.asObservable(), securityCodeText.asObservable()) { holderName, cardNumber, monthExpiration, yearExpiration, securityCode in
+            return holderName.hasAtLeastOneSymbol() && cardNumber.isValidAsCardNumber() && monthExpiration.hasAtLeastOneSymbol() && yearExpiration.hasAtLeastOneSymbol() && securityCode.isValidAsCVV()
         }
     }
     

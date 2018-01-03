@@ -139,8 +139,10 @@
                         <outlet property="cardNumberTextFieldView" destination="PJX-FP-APh" id="iug-Zq-UhI"/>
                         <outlet property="expirationDateLabel" destination="tkD-lJ-Te6" id="8o8-kk-MP1"/>
                         <outlet property="holderNameTextFieldView" destination="VPL-QD-V8n" id="agg-uQ-3rn"/>
+                        <outlet property="monthExpirationView" destination="sDe-vh-bUP" id="nxM-0R-VEI"/>
                         <outlet property="securityCodeTextFieldView" destination="90h-a7-RAk" id="aCF-q3-Toe"/>
                         <outlet property="submitButton" destination="foR-RG-Zt4" id="j5N-qI-2ro"/>
+                        <outlet property="yearExpirationView" destination="IfF-y3-Hqb" id="iNf-xH-63r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qy8-9o-ajG" userLabel="First Responder" sceneMemberID="firstResponder"/>
