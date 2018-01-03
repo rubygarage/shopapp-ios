@@ -54,4 +54,8 @@ protocol APIInterface {
     func getShippingRates(with checkoutId: String, callback: @escaping RepoCallback<[ShippingRate]>)
     func updateCheckout(with rate: ShippingRate, checkout: Checkout, callback: @escaping RepoCallback<Checkout>)
     func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, callback: @escaping RepoCallback<Bool>)
+    
+    // MARK: - orders
+    func getOrderList(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>)
+    func getOrder(id: String, callback: @escaping RepoCallback<Order>)
 }

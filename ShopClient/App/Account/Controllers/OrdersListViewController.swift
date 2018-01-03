@@ -8,28 +8,58 @@
 
 import UIKit
 
-class OrdersListViewController: UIViewController {
+class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
+    private var selectedOrder: Order?
 
+    // MARK: - view controller lifecycle
     override func viewDidLoad() {
+        viewModel = OrdersListViewModel()
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        setupViews()
+        setupTableView()
+        setupViewModel()
+        loadData()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let orderDetailsViewController = segue.destination as? OrderDetailsViewController {
+            orderDetailsViewController.orderId = selectedOrder!.id
+        }
     }
-    */
-
+    
+    // MARK: - setup
+    private func setupViews() {
+        title = NSLocalizedString("ControllerTitle.MyOrders", comment: String())
+    }
+    
+    private func setupViewModel() {
+        viewModel?.items.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.stopLoadAnimating()
+                self?.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func loadData() {
+        viewModel.reloadData()
+    }
+    
+    private func setupTableView() {
+        
+    }
+    
+    override func pullToRefreshHandler() {
+        viewModel.reloadData()
+    }
+    
+    override func infinityScrollHandler() {
+        viewModel.loadNextPage()
+    }
+    
+    // MARK: - ErrorViewProtocol
+    func didTapTryAgain() {
+        loadData()
+    }
 }

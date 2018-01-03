@@ -100,29 +100,30 @@
             </objects>
             <point key="canvasLocation" x="1362" y="1494"/>
         </scene>
-        <!--View Controller-->
+        <!--Orders List View Controller-->
         <scene sceneID="NSC-q9-Wy6">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="GpK-nH-9eS" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="GpK-nH-9eS" customClass="OrdersListViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xkh-Tx-kfn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z73-iK-Fjm">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Z73-iK-Fjm">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Z73-iK-Fjm" firstAttribute="trailing" secondItem="jbw-9r-08m" secondAttribute="trailing" id="Sp9-KF-Wvz"/>
-                            <constraint firstItem="Z73-iK-Fjm" firstAttribute="bottom" secondItem="jbw-9r-08m" secondAttribute="bottom" id="euT-z5-FXu"/>
-                            <constraint firstItem="Z73-iK-Fjm" firstAttribute="leading" secondItem="jbw-9r-08m" secondAttribute="leading" id="hmO-Nv-FU9"/>
-                            <constraint firstItem="Z73-iK-Fjm" firstAttribute="top" secondItem="jbw-9r-08m" secondAttribute="top" id="uAc-z2-VdH"/>
+                            <constraint firstItem="Z73-iK-Fjm" firstAttribute="trailing" secondItem="jbw-9r-08m" secondAttribute="trailing" id="7UI-es-tFz"/>
+                            <constraint firstItem="Z73-iK-Fjm" firstAttribute="bottom" secondItem="jbw-9r-08m" secondAttribute="bottom" id="9eI-nK-ExU"/>
+                            <constraint firstItem="Z73-iK-Fjm" firstAttribute="top" secondItem="Xkh-Tx-kfn" secondAttribute="top" id="GE8-57-C4y"/>
+                            <constraint firstItem="Z73-iK-Fjm" firstAttribute="leading" secondItem="jbw-9r-08m" secondAttribute="leading" id="R3L-PP-bPa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jbw-9r-08m"/>
                     </view>
                     <connections>
+                        <outlet property="tableView" destination="Z73-iK-Fjm" id="LYS-4T-5Oq"/>
                         <segue destination="ZjV-3t-aY7" kind="show" identifier="toOrderDetails" id="BoU-Yr-zoO"/>
                     </connections>
                 </viewController>
@@ -130,25 +131,25 @@
             </objects>
             <point key="canvasLocation" x="2124" y="1493.7031484257873"/>
         </scene>
-        <!--View Controller-->
+        <!--Order Details View Controller-->
         <scene sceneID="tYG-db-tzb">
             <objects>
-                <viewController id="ZjV-3t-aY7" sceneMemberID="viewController">
+                <viewController id="ZjV-3t-aY7" customClass="OrderDetailsViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LqB-4u-yY9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VUd-pq-Zdd">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VUd-pq-Zdd">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="VUd-pq-Zdd" firstAttribute="top" secondItem="xyT-4h-bDe" secondAttribute="top" id="60a-vQ-n48"/>
-                            <constraint firstItem="VUd-pq-Zdd" firstAttribute="trailing" secondItem="xyT-4h-bDe" secondAttribute="trailing" id="6M2-ns-R3k"/>
-                            <constraint firstItem="VUd-pq-Zdd" firstAttribute="bottom" secondItem="xyT-4h-bDe" secondAttribute="bottom" id="Day-FM-u0s"/>
-                            <constraint firstItem="VUd-pq-Zdd" firstAttribute="leading" secondItem="xyT-4h-bDe" secondAttribute="leading" id="MCJ-iw-7C3"/>
+                            <constraint firstItem="VUd-pq-Zdd" firstAttribute="top" secondItem="LqB-4u-yY9" secondAttribute="top" id="35L-hr-w4T"/>
+                            <constraint firstItem="VUd-pq-Zdd" firstAttribute="trailing" secondItem="xyT-4h-bDe" secondAttribute="trailing" id="Wxu-wg-APJ"/>
+                            <constraint firstItem="VUd-pq-Zdd" firstAttribute="leading" secondItem="xyT-4h-bDe" secondAttribute="leading" id="cWD-xC-kRa"/>
+                            <constraint firstAttribute="bottom" secondItem="VUd-pq-Zdd" secondAttribute="bottom" id="pqX-Ys-cFc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xyT-4h-bDe"/>
                     </view>

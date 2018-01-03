@@ -6,4 +6,42 @@
 //  Copyright © 2018 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import RxSwift
+
+class OrdersListViewModel: BasePaginationViewModel {
+    var items = Variable<[Order]>([Order]())
+    
+    private let orderListUseCase = OrderListUseCase()
+    
+    public func reloadData() {
+        paginationValue = nil
+        loadRemoteData()
+    }
+    
+    public func loadNextPage() {
+        paginationValue = items.value.last?.paginationValue
+        loadRemoteData()
+    }
+    
+    private func loadRemoteData() {
+        let showHud = items.value.count == 0
+        state.onNext(.loading(showHud: showHud))
+        orderListUseCase.getOrderList(with: paginationValue) { [weak self] (order, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            }
+            if let order = order {
+                self?.updateOrders(with: order)
+                self?.state.onNext(.content)
+            }
+            self?.canLoadMore = order?.count ?? 0 == kItemsPerPage
+        }
+    }
+    
+    private func updateOrders(with orders: [Order]) {
+        if paginationValue == nil {
+            items.value.removeAll()
+        }
+        items.value += orders
+    }
+}

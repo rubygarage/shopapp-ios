@@ -344,6 +344,67 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
+    // MARK: - orders
+    func getOrderList(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
+        if let token = sessionData().token {
+            getOrderList(with: token, perPage: perPage, paginationValue: paginationValue, callback: callback)
+        } else {
+            callback(nil, ContentError())
+        }
+    }
+    
+    func getOrder(id: String, callback: @escaping RepoCallback<Order>) {
+        
+    }
+    
+    /*
+    let query = Storefront.buildQuery { $0
+        .customer(customerAccessToken: token) { $0
+            .orders(first: 10) { $0
+                .edges { $0
+                    .cursor()
+                    .node { $0
+                        .id()
+                        .currencyCode()
+                        .orderNumber()
+                        .processedAt()
+                        .subtotalPrice()
+                        .totalTax()
+                        .totalShippingPrice()
+                        .totalRefunded()
+                        .totalPrice()
+                        .shippingAddress { $0
+                            .address1()
+                            .city()
+                            .country()
+                            .phone()
+                        }
+                        .lineItems(first: 250) { $0
+                            .edges { $0
+                                .node { $0
+                                    .quantity()
+                                    .title()
+                                    .variant { $0
+                                        .price()
+                                        .selectedOptions { $0
+                                            .name()
+                                            .value()
+                                        }
+                                        .image { $0
+                                            .id()
+                                            .src()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    */
+    
     // MARK: - private
     private func getShippingRates(checkoutId: GraphQL.ID, callback: @escaping RepoCallback<[ShippingRate]>) {
         let query = getShippingRatesQuery(checkoutId: checkoutId)
@@ -487,6 +548,43 @@ class API: NSObject, APIInterface {
             }
         })
         run(task: task, callback: callback)
+    }
+    
+    private func getOrderList(with token: String, perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
+        let query = Storefront.buildQuery { $0
+            .customer(customerAccessToken: token) { $0
+                .orders(first: Int32(perPage), after: paginationValue as? String) { $0
+                    .edges { $0
+                        .cursor()
+                        .node { $0
+                            .id()
+                            .currencyCode()
+                            .orderNumber()
+                            .processedAt()
+                            .subtotalPrice()
+                            .lineItems(first: kShopifyItemsMaxCount) { $0
+                                .edges { $0
+                                    .node { $0
+                                        .quantity()
+                                        .variant { $0
+                                            .price()
+                                            .selectedOptions { $0
+                                                .name()
+                                                .value()
+                                            }
+                                            .image { $0
+                                                .id()
+                                                .src()
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     // MARK: - sorting
