@@ -196,7 +196,7 @@ class API: NSObject, APIInterface {
     }
     
     func resetPassword(with email: String, callback: @escaping RepoCallback<Bool>) {
-        let query = resetPasswordQuary(email: email)
+        let query = resetPasswordQuery(email: email)
         let task = client?.mutateGraphWith(query) { [weak self] (response, error) in
             if let responseError = response?.customerRecover?.userErrors.first {
                 let error = self?.process(error: responseError)
@@ -604,7 +604,7 @@ class API: NSObject, APIInterface {
         })
     }
     
-    private func resetPasswordQuary(email: String) -> Storefront.MutationQuery {
+    private func resetPasswordQuery(email: String) -> Storefront.MutationQuery {
         return Storefront.buildMutation({ $0
             .customerRecover(email: email, { $0
                 .userErrors(self.userErrorQuery())
