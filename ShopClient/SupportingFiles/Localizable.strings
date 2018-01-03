@@ -78,6 +78,7 @@
 "Label.DefaultShippingAddress" = "Default shipping address";
 "Label.AcceptPoliciesAttributed" = "By creating your account, you accept our Privacy Policy and Terms of Service";
 "Label.Range.PrivacyPolicy" = "Privacy Policy";
+"Label.Range.TermsOfService" = "Terms of Service"
 "Label.ForgotPassword.PasswordTitle" = "Reset Your Password";
 "Label.ForgotPassword.PasswordDescription" = "Enter your address below and follow the\ninstructions in the email will send you shortly";
 "Label.ForgotPassword.LinkTitle" = "Reset link has been sent to";
