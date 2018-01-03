@@ -28,15 +28,17 @@ extension UIViewController {
         navigationController?.pushViewController(addressListController, animated: true)
     }
     
-    func pushPaymentTypeController(with completion: PaymentCompletion?) {
+    func pushPaymentTypeController(with completion: CreditCardPaymentCompletion?) {
         let paymentTypeController = UIStoryboard.paymentType().instantiateViewController(withIdentifier: ControllerIdentifier.paymentType) as! PaymentTypeViewController
         paymentTypeController.completion = completion
         
         navigationController?.pushViewController(paymentTypeController, animated: true)
     }
     
-    func pushCreditCardController() {
+    func pushCreditCardController(with billingAddress: Address, completion: CreditCardPaymentCompletion?) {
         let creditCardController = UIStoryboard.creditCard().instantiateViewController(withIdentifier: ControllerIdentifier.creditCard) as! CreditCardViewController
+        creditCardController.billingAddres = billingAddress
+        creditCardController.completion = completion
         
         navigationController?.pushViewController(creditCardController, animated: true)
     }

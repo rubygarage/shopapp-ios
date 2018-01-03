@@ -8,13 +8,11 @@
 
 import UIKit
 
-typealias PaymentCompletion = () -> ()
-
 class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, PaymentTypeTableCellProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     private var tableDataSource: PaymentTypeDataSource!
-    var completion: PaymentCompletion?
+    var completion: CreditCardPaymentCompletion?
     
     override func viewDidLoad() {
         viewModel = PaymentTypeViewModel()
@@ -40,7 +38,7 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, Payme
     func didSelectCreditCartPayment() {
         let addressListTitle = NSLocalizedString("ControllerTitle.BillingAddress", comment: String())
         pushAddressListController(title: addressListTitle) { [weak self] (address) in
-            self?.pushCreditCardController()
+            self?.pushCreditCardController(with: address, completion: self?.completion)
         }
     }
 }

@@ -17,6 +17,9 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
     @IBOutlet weak var yearExpirationView: YearExpiryDatePicker!
     @IBOutlet weak var submitButton: BlackButton!
     
+    var billingAddres: Address!
+    var completion: CreditCardPaymentCompletion?
+    
     override func viewDidLoad() {
         viewModel = CreditCardViewModel()
         super.viewDidLoad()
@@ -35,6 +38,9 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
     }
     
     private func setupViewModel() {
+        viewModel.billingAddres = billingAddres
+        viewModel.completion = completion
+        
         holderNameTextFieldView.textField.rx.text.map({ $0 ?? String() })
             .bind(to: viewModel.holderNameText)
             .disposed(by: disposeBag)

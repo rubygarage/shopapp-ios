@@ -8,6 +8,8 @@
 
 import RxSwift
 
+typealias CreditCardPaymentCompletion = (_ billingAddress: Address, _ card: CreditCard) -> ()
+
 class CreditCardViewModel: BaseViewModel {
     var holderNameText = Variable<String>("")
     var cardNumberText = Variable<String>("")
@@ -16,6 +18,9 @@ class CreditCardViewModel: BaseViewModel {
     var securityCodeText = Variable<String>("")
     var holderNameErrorMessage = PublishSubject<String>()
     var cardNumberErrorMessage = PublishSubject<String>()
+    
+    var billingAddres: Address!
+    var completion: CreditCardPaymentCompletion?
     
     var isCardDataValid: Observable<Bool> {
         return Observable.combineLatest(holderNameText.asObservable(), cardNumberText.asObservable(), monthExpirationText.asObservable(), yearExpirationText.asObservable(), securityCodeText.asObservable()) { holderName, cardNumber, monthExpiration, yearExpiration, securityCode in
@@ -39,7 +44,7 @@ class CreditCardViewModel: BaseViewModel {
     }
     
     private func submitAction() {
-        // TODO:
+        completion?(billingAddres, generateCreditCard())
     }
     
     private func processErrors() {
@@ -48,5 +53,18 @@ class CreditCardViewModel: BaseViewModel {
         } else if cardNumberText.value.luhnValid() == false {
             cardNumberErrorMessage.onNext(NSLocalizedString("Error.InvalidCardNumber", comment: String()))
         }
+    }
+    
+    private func generateCreditCard() -> CreditCard {
+        let card = CreditCard()
+        let names = holderNameText.value.split(separator: " ", maxSplits: 1)
+        card.firstName = String(describing: names.first!)
+        card.lastName = String(describing: names.last!)
+        card.cardNumber = cardNumberText.value
+        card.expireMonth = monthExpirationText.value
+        card.expireYear = yearExpirationText.value
+        card.verificationCode = securityCodeText.value
+        
+        return card
     }
 }

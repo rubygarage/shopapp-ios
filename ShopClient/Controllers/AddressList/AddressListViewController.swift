@@ -64,7 +64,6 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     // MARK: - AddressListTableViewCellProtocol
     func didTapSelect(with address: Address) {
         viewModel.updateCheckoutShippingAddress(with: address)
-//        navigationController?.popViewController(animated: true)
     }
     
     func didTapEdit(with address: Address) {
