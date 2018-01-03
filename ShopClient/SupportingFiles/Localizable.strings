@@ -134,3 +134,5 @@
 "Placeholder.CardHolderName" = "Card Holder Name";
 "Placeholder.CardNumber" = "Card Number";
 "Placeholder.CVV" = "CVV";
+"Placeholder.Month" = "Month";
+"Placeholder.Year" = "Year";
