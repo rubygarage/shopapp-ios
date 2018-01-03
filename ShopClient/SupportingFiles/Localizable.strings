@@ -39,6 +39,7 @@
 "Button.Forgot" = "Forgot?";
 "Button.SignUp" = "Sign Up";
 "Button.Submit" = "Submit";
+"Button.Resend" = "Resend reset link";
 "Button.Logout" = "Log Out";
 "Button.CreateNewAccount" = "Create New Account";
 "Button.MyOrders" = "My Orders";

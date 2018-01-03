@@ -8,7 +8,7 @@
 
 import RxSwift
 
-class ResetPasswordViewModel: BaseViewModel {
+class ForgorPasswordViewModel: BaseViewModel {
     var emailText = Variable<String>(String())
     var emailErrorMessage = PublishSubject<String>()
     var resetPasswordSuccess = Variable<Bool>(false)

@@ -8,18 +8,27 @@
 
 import UIKit
 
-class ResetPasswordViewController: BaseViewController<ResetPasswordViewModel> {
+class ForgorPasswordViewController: BaseViewController<ForgorPasswordViewModel> {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var emailTextFieldView: InputTextFieldView!
     @IBOutlet weak var forgotPasswordButton: BlackButton!
+    @IBOutlet weak var linkView: UIView!
+    
+    private var linkViewController: LinkViewController!
     
     override func viewDidLoad() {
-        viewModel = ResetPasswordViewModel()
+        viewModel = ForgorPasswordViewModel()
         super.viewDidLoad()
         
         setupViews()
         setupViewModel()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let linkViewController = segue.destination as? LinkViewController {
+            self.linkViewController = linkViewController
+        }
     }
 
     private func setupViews() {
@@ -29,6 +38,10 @@ class ResetPasswordViewController: BaseViewController<ResetPasswordViewModel> {
         descriptionLabel.text = NSLocalizedString("Label.ForgotPassword.PasswordDescription", comment: String())
         emailTextFieldView.placeholder = NSLocalizedString("Placeholder.Email", comment: String()).uppercased()
         forgotPasswordButton.setTitle(NSLocalizedString("Button.Submit", comment: String()).uppercased(), for: .normal)
+        
+        emailTextFieldView.textField.rx.text.map({ $0 ?? String() })
+            .bind(to: linkViewController.emailText)
+            .disposed(by: disposeBag)
     }
     
     private func setupViewModel() {
@@ -60,9 +73,7 @@ class ResetPasswordViewController: BaseViewController<ResetPasswordViewModel> {
         
         viewModel.resetPasswordSuccess.asObservable()
             .subscribe(onNext: { [weak self] success in
-                if success {
-                    self?.dismiss(animated: true)
-                }
+                self?.linkView.isHidden = !success
             })
             .disposed(by: disposeBag)
     }
