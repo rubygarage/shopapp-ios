@@ -57,6 +57,7 @@
 "Button.Edit" = "Edit";
 "Button.Delete" = "Delete";
 "Button.AddPaymentType" = "Add payment type";
+"Button.PlaceOrder" = "Place Order";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";

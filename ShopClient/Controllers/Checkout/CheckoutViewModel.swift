@@ -20,6 +20,15 @@ class CheckoutViewModel: BaseViewModel {
     var cartItems = [CartProduct]()
     var checkout = Variable<Checkout?>(nil)
     
+    var billingAddress: Address?
+    var creditCard: CreditCard?
+    
+    var placeOrderPressed: AnyObserver<()> {
+        return AnyObserver { [weak self] event in
+            self?.placeOrderAction()
+        }
+    }
+    
     public func loadData(with disposeBag: DisposeBag) {
         state.onNext(.loading(showHud: true))
         checkoutCreateSingle.subscribe(onSuccess: { [weak self] (checkout) in
@@ -124,5 +133,24 @@ class CheckoutViewModel: BaseViewModel {
         Repository.shared.updateCustomerDefaultAddress(with: addressId) { [weak self] (success, error) in
             self?.getCheckout()
         }
+    }
+    
+    private func placeOrderAction() {
+        if let checkout = checkout.value, let card = creditCard, let billingAddress = billingAddress {
+            state.onNext(.loading(showHud: true))
+            Repository.shared.pay(with: card, checkout: checkout, billingAddress: billingAddress) { [weak self] (success, error) in
+                if let error = error {
+                    self?.state.onNext(.error(error: error))
+                }
+                if let success = success {
+                    self?.processPlaceOrderResponse(with: success)
+                    self?.state.onNext(.content)
+                }
+            }
+        }
+    }
+    
+    private func processPlaceOrderResponse(with success: Bool) {
+        // TODO:
     }
 }

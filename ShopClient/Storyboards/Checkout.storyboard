@@ -19,20 +19,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" estimatedSectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="pyA-b5-EGg">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="597"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="elL-2l-Ht7">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ta6-JQ-eSm">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="ta6-JQ-eSm" firstAttribute="leading" secondItem="elL-2l-Ht7" secondAttribute="leading" id="HGo-j9-zEu"/>
+                                    <constraint firstAttribute="bottom" secondItem="ta6-JQ-eSm" secondAttribute="bottom" id="LyQ-h0-4iK"/>
+                                    <constraint firstAttribute="height" constant="50" id="NI1-Tg-tE7"/>
+                                    <constraint firstItem="ta6-JQ-eSm" firstAttribute="top" secondItem="elL-2l-Ht7" secondAttribute="top" id="VyU-ZV-Ko6"/>
+                                    <constraint firstAttribute="trailing" secondItem="ta6-JQ-eSm" secondAttribute="trailing" id="rLc-5C-dNN"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="elL-2l-Ht7" firstAttribute="trailing" secondItem="4Jr-sw-EUI" secondAttribute="trailing" id="3Uo-0f-owe"/>
                             <constraint firstItem="pyA-b5-EGg" firstAttribute="top" secondItem="4Jr-sw-EUI" secondAttribute="top" id="C11-H0-J03"/>
-                            <constraint firstItem="pyA-b5-EGg" firstAttribute="bottom" secondItem="4Jr-sw-EUI" secondAttribute="bottom" id="Wrs-B6-K3H"/>
+                            <constraint firstItem="elL-2l-Ht7" firstAttribute="bottom" secondItem="4Jr-sw-EUI" secondAttribute="bottom" id="SCF-Uk-86D"/>
+                            <constraint firstItem="elL-2l-Ht7" firstAttribute="leading" secondItem="4Jr-sw-EUI" secondAttribute="leading" id="fdT-Vw-daC"/>
+                            <constraint firstItem="elL-2l-Ht7" firstAttribute="top" secondItem="pyA-b5-EGg" secondAttribute="bottom" id="ffW-Pu-eRB"/>
                             <constraint firstItem="pyA-b5-EGg" firstAttribute="leading" secondItem="4Jr-sw-EUI" secondAttribute="leading" id="kxC-Hd-SRK"/>
                             <constraint firstItem="pyA-b5-EGg" firstAttribute="trailing" secondItem="4Jr-sw-EUI" secondAttribute="trailing" id="rlC-ne-3RB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4Jr-sw-EUI"/>
                     </view>
                     <connections>
+                        <outlet property="placeOrderButton" destination="ta6-JQ-eSm" id="yFW-x8-nNg"/>
+                        <outlet property="placeOrderHeightConstraint" destination="NI1-Tg-tE7" id="l1G-Hq-ams"/>
                         <outlet property="tableView" destination="pyA-b5-EGg" id="4nf-Ch-xLB"/>
                     </connections>
                 </viewController>

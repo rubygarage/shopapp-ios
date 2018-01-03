@@ -10,6 +10,8 @@ import UIKit
 
 class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeaderViewProtocol, CheckoutCombinedProtocol {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var placeOrderHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var placeOrderButton: UIButton!
     
     private var tableDataSource: CheckoutTableDataSource!
     private var tableDelegate: CheckoutTableDelegate!
@@ -27,6 +29,8 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     private func setupViews() {
         addCloseButton()
         title = NSLocalizedString("ControllerTitle.Checkout", comment: String())
+        placeOrderButton.setTitle(NSLocalizedString("Button.PlaceOrder", comment: String()).uppercased(), for: .normal)
+        updatePlaceOrderButtonUI()
     }
     
     private func setupTableView() {
@@ -56,6 +60,10 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
             .subscribe(onNext: { [weak self] (checkout) in
                 self?.tableView.reloadData()
             })
+            .disposed(by: disposeBag)
+        
+        placeOrderButton.rx.tap
+            .bind(to: viewModel.placeOrderPressed)
             .disposed(by: disposeBag)
     }
     
@@ -113,6 +121,16 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
         })
     }
     
+    private func updatePlaceOrderButtonUI() {
+        let visible = viewModel.checkout.value != nil && viewModel.creditCard != nil && viewModel.billingAddress != nil
+        placeOrderButton.isHidden = !visible
+        placeOrderHeightConstraint.constant = visible ? 50 : 0
+    }
+    
+    private func returnFlowToSelf() {
+        navigationController?.popToViewController(self, animated: true)
+    }
+    
     // MARK: - SeeAllHeaderViewProtocol
     func didTapSeeAll(type: SeeAllViewType) {
         if type == .myCart {
@@ -122,10 +140,11 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     
     // MARK: - CheckoutPaymentAddCellProtocol
     func didTapAddPayment() {
-        if let _ = viewModel.checkout.value?.id {
-            pushPaymentTypeController(with: { (billingAddress, card) in
-                print("========")
-            })
-        }
+        pushPaymentTypeController(with: { [weak self] (billingAddress, card) in
+            self?.viewModel.billingAddress = billingAddress
+            self?.viewModel.creditCard = card
+            self?.updatePlaceOrderButtonUI()
+            self?.returnFlowToSelf()
+        })
     }
 }
