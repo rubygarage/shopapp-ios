@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let kYearsPeriod: Int = 29
+private let kYearsPeriod: Int = 30
 
 class YearExpiryDatePicker: ExpiryDatePicker {
     override var placeholder: String {
@@ -18,7 +18,7 @@ class YearExpiryDatePicker: ExpiryDatePicker {
     override var data: [String] {
         let currentYear = Calendar.current.component(.year, from: Date())
         var years = [String]()
-        for index in 0...kYearsPeriod {
+        for index in 0..<kYearsPeriod {
             years.append(String(currentYear + index))
         }
         return years
