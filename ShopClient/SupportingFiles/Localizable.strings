@@ -15,6 +15,7 @@
 "ControllerTitle.SignIn" = "Sign In";
 "ControllerTitle.SignUp" = "Sign Up";
 "ControllerTitle.ForgorPassword" = "Forgor Password";
+"ControllerTitle.Checkout" = "Checkout";
 "ControllerTitle.MyOrders" = "My Orders";
 "ControllerTitle.OrderDetails" = "Order Details";
 "ControllerTitle.AddNewAddress" = "Add New Address";

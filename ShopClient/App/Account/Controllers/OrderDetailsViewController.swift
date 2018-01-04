@@ -8,6 +8,6 @@
 
 import UIKit
 
-class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
+class OrderDetailsViewController: BaseViewController<BaseViewModel> {
     var orderId: String!
 }

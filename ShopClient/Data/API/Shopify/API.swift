@@ -507,6 +507,8 @@ class API: NSObject, APIInterface {
     }
     
     private func getOrderList(with token: String, perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
+        // This query will be separate in feture.
+        // I need to research about API (get order by id) to understand how can we do it correctly.
         let query = Storefront.buildQuery { $0
             .customer(customerAccessToken: token) { $0
                 .orders(first: Int32(perPage), after: paginationValue as? String) { $0
@@ -522,12 +524,7 @@ class API: NSObject, APIInterface {
                                 .edges { $0
                                     .node { $0
                                         .quantity()
-                                        .variant { $0
-                                            .image { $0
-                                                .id()
-                                                .src()
-                                            }
-                                        }
+                                        .variant(self.productVariantQuery())
                                     }
                                 }
                             }
@@ -536,6 +533,19 @@ class API: NSObject, APIInterface {
                 }
             }
         }
+        let task = client?.queryGraphWith(query) { [weak self] (response, error) in
+            var orders = [Order]()
+            if let edges = response?.customer?.orders.edges {
+                for edge in edges {
+                    if let order = Order(with: edge) {
+                        orders.append(order)
+                    }
+                }
+            }
+            let responseError = self?.process(error: error)
+            callback(orders, responseError)
+        }
+        run(task: task, callback: callback)
     }
     
     private func getOrder(with token: String, id: String, callback: @escaping RepoCallback<Order>) {
@@ -555,28 +565,13 @@ class API: NSObject, APIInterface {
                             .totalTax()
                             .totalShippingPrice()
                             .totalPrice()
-                            .shippingAddress { $0
-                                .address1()
-                                .city()
-                                .country()
-                                .phone()
-                            }
+                            .shippingAddress(self.mailingAddressQuery())
                             .lineItems(first: kShopifyItemsMaxCount) { $0
                                 .edges { $0
                                     .node { $0
                                         .quantity()
                                         .title()
-                                        .variant { $0
-                                            .price()
-                                            .selectedOptions { $0
-                                                .name()
-                                                .value()
-                                            }
-                                            .image { $0
-                                                .id()
-                                                .src()
-                                            }
-                                        }
+                                        .variant(self.productVariantQuery())
                                     }
                                 }
                             }
