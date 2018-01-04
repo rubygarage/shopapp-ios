@@ -354,56 +354,12 @@ class API: NSObject, APIInterface {
     }
     
     func getOrder(id: String, callback: @escaping RepoCallback<Order>) {
-        
-    }
-    
-    /*
-    let query = Storefront.buildQuery { $0
-        .customer(customerAccessToken: token) { $0
-            .orders(first: 10) { $0
-                .edges { $0
-                    .cursor()
-                    .node { $0
-                        .id()
-                        .currencyCode()
-                        .orderNumber()
-                        .processedAt()
-                        .subtotalPrice()
-                        .totalTax()
-                        .totalShippingPrice()
-                        .totalRefunded()
-                        .totalPrice()
-                        .shippingAddress { $0
-                            .address1()
-                            .city()
-                            .country()
-                            .phone()
-                        }
-                        .lineItems(first: 250) { $0
-                            .edges { $0
-                                .node { $0
-                                    .quantity()
-                                    .title()
-                                    .variant { $0
-                                        .price()
-                                        .selectedOptions { $0
-                                            .name()
-                                            .value()
-                                        }
-                                        .image { $0
-                                            .id()
-                                            .src()
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        if let token = sessionData().token {
+            getOrder(with: token, id: id, callback: callback)
+        } else {
+            callback(nil, ContentError())
         }
     }
-    */
     
     // MARK: - private
     private func getShippingRates(checkoutId: GraphQL.ID, callback: @escaping RepoCallback<[ShippingRate]>) {
@@ -566,6 +522,50 @@ class API: NSObject, APIInterface {
                                 .edges { $0
                                     .node { $0
                                         .quantity()
+                                        .variant { $0
+                                            .image { $0
+                                                .id()
+                                                .src()
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func getOrder(with token: String, id: String, callback: @escaping RepoCallback<Order>) {
+        // There is a example of a query for getting all information that we need for each order.
+        // It well be change in the next task (order details).
+        let query = Storefront.buildQuery { $0
+            .customer(customerAccessToken: token) { $0
+                .orders(first: 1) { $0
+                    .edges { $0
+                        .cursor()
+                        .node { $0
+                            .id()
+                            .currencyCode()
+                            .orderNumber()
+                            .processedAt()
+                            .subtotalPrice()
+                            .totalTax()
+                            .totalShippingPrice()
+                            .totalPrice()
+                            .shippingAddress { $0
+                                .address1()
+                                .city()
+                                .country()
+                                .phone()
+                            }
+                            .lineItems(first: kShopifyItemsMaxCount) { $0
+                                .edges { $0
+                                    .node { $0
+                                        .quantity()
+                                        .title()
                                         .variant { $0
                                             .price()
                                             .selectedOptions { $0
