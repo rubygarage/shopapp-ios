@@ -33,7 +33,7 @@ extension Order {
         currencyCode = item?.currencyCode.rawValue
         number = item != nil ? Int(item!.orderNumber) : 0
         createdAt = item?.processedAt
-        subtotalPrice = item?.subtotalPrice
+        totalPrice = item?.totalPrice
         
         if let lineItems = item?.lineItems.edges.map({ $0.node }) {
             var orderItems = [OrderItem]()
@@ -47,7 +47,7 @@ extension Order {
         
         if isAllInfoNeeded {
             shippingAddress = Address(with: item?.shippingAddress)
-            totalPrice = item?.totalPrice
+            subtotalPrice = item?.subtotalPrice
             totalShippingPrice = item?.totalShippingPrice
             totalTax = item?.totalTax
         }

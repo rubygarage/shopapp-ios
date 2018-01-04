@@ -10,7 +10,7 @@ import UIKit
 
 protocol CheckoutCartCollectionDataSourceDelegate {
     func itemsCount() -> Int
-    func item(at index: Int) -> CartProduct
+    func item(at index: Int) -> Image
 }
 
 class CheckoutCartCollectionDataSource: NSObject, UICollectionViewDataSource {

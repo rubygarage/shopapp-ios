@@ -45,7 +45,8 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     // MARK: - private
     private func cartCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutCartTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutCartTableViewCell.self), for: indexPath) as! CheckoutCartTableViewCell
-        cell.configure(with: delegate.cartProducts())
+        let images = delegate.cartProducts().flatMap { $0.productVariant?.image }
+        cell.configure(with: images)
         return cell
     }
     

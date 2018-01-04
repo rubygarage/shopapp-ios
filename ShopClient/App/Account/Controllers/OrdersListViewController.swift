@@ -8,7 +8,10 @@
 
 import UIKit
 
-class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
+class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, OrdersListTableDataSourceProtocol, OrdersListTableDelegateProtocol {
+    
+    private var tableDataSource: OrdersListTableDataSource!
+    private var tableDelegate: OrdersListTableDelegate!
     private var selectedOrder: Order?
 
     // MARK: - view controller lifecycle
@@ -47,7 +50,16 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
     }
     
     private func setupTableView() {
+        let cartNib = UINib(nibName: String(describing: CheckoutCartTableViewCell.self), bundle: nil)
+        tableView?.register(cartNib, forCellReuseIdentifier: String(describing: CheckoutCartTableViewCell.self))
         
+        tableDataSource = OrdersListTableDataSource(delegate: self)
+        tableView?.dataSource = tableDataSource
+        
+        tableDelegate = OrdersListTableDelegate(delegate: self)
+        tableView?.delegate = tableDelegate
+        
+        tableView?.contentInset = TableView.defaultContentInsets
     }
     
     override func pullToRefreshHandler() {
@@ -56,6 +68,19 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
     
     override func infinityScrollHandler() {
         viewModel.loadNextPage()
+    }
+    
+    // MARK: - OrdersListTableDataSourceProtocol
+    func orders() -> [Order] {
+        return viewModel.items.value
+    }
+    
+    // MARK: - OrdersListTableDelegateProtocol
+    func didSelectItem(at index: Int) {
+        if index < viewModel.items.value.count {
+            selectedOrder = viewModel.items.value[index]
+            performSegue(withIdentifier: SegueIdentifiers.toOrderDetails, sender: self)
+        }
     }
     
     // MARK: - ErrorViewProtocol

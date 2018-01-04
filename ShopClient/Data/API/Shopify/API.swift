@@ -519,7 +519,7 @@ class API: NSObject, APIInterface {
                             .currencyCode()
                             .orderNumber()
                             .processedAt()
-                            .subtotalPrice()
+                            .totalPrice()
                             .lineItems(first: kShopifyItemsMaxCount) { $0
                                 .edges { $0
                                     .node { $0

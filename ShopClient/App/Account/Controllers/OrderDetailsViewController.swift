@@ -8,6 +8,19 @@
 
 import UIKit
 
-class OrderDetailsViewController: BaseViewController<BaseViewModel> {
+class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
     var orderId: String!
+    
+    // MARK: - view controller lifecycle
+    override func viewDidLoad() {
+        viewModel = OrderDetailsViewModel()
+        super.viewDidLoad()
+        
+        setupViews()
+    }
+    
+    // MARK: - setup
+    private func setupViews() {
+        title = NSLocalizedString("ControllerTitle.OrderDetails", comment: String())
+    }
 }

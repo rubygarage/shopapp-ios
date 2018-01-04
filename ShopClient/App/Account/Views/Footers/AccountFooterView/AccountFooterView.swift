@@ -17,7 +17,7 @@ class AccountFooterView: UIView, UnderlinedButtonProtocol {
     @IBOutlet weak var logoutButton: UnderlinedButton!
     @IBOutlet weak var logoutUnderlineView: UIView!
     
-    var footerDelegate: AccountFooterViewProtocol!
+    private var footerDelegate: AccountFooterViewProtocol!
     
     init(delegate: AccountFooterViewProtocol) {
         super.init(frame: CGRect.zero)
