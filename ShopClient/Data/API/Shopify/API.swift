@@ -344,6 +344,23 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
+    // MARK: - orders
+    func getOrderList(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
+        if let token = sessionData().token {
+            getOrderList(with: token, perPage: perPage, paginationValue: paginationValue, callback: callback)
+        } else {
+            callback(nil, ContentError())
+        }
+    }
+    
+    func getOrder(id: String, callback: @escaping RepoCallback<Order>) {
+        if let token = sessionData().token {
+            getOrder(with: token, id: id, callback: callback)
+        } else {
+            callback(nil, ContentError())
+        }
+    }
+    
     // MARK: - private
     private func getShippingRates(checkoutId: GraphQL.ID, callback: @escaping RepoCallback<[ShippingRate]>) {
         let query = getShippingRatesQuery(checkoutId: checkoutId)
@@ -487,6 +504,82 @@ class API: NSObject, APIInterface {
             }
         })
         run(task: task, callback: callback)
+    }
+    
+    private func getOrderList(with token: String, perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
+        // This query will be separate in feture.
+        // I need to research about API (get order by id) to understand how can we do it correctly.
+        let query = Storefront.buildQuery { $0
+            .customer(customerAccessToken: token) { $0
+                .orders(first: Int32(perPage), after: paginationValue as? String, reverse: true, sortKey: .processedAt) { $0
+                    .edges { $0
+                        .cursor()
+                        .node { $0
+                            .id()
+                            .currencyCode()
+                            .orderNumber()
+                            .processedAt()
+                            .totalPrice()
+                            .lineItems(first: kShopifyItemsMaxCount) { $0
+                                .edges { $0
+                                    .node { $0
+                                        .quantity()
+                                        .variant(self.productVariantQuery())
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        let task = client?.queryGraphWith(query) { [weak self] (response, error) in
+            var orders = [Order]()
+            if let edges = response?.customer?.orders.edges {
+                for edge in edges {
+                    if let order = Order(with: edge) {
+                        orders.append(order)
+                    }
+                }
+            }
+            let responseError = self?.process(error: error)
+            callback(orders, responseError)
+        }
+        run(task: task, callback: callback)
+    }
+    
+    private func getOrder(with token: String, id: String, callback: @escaping RepoCallback<Order>) {
+        // There is a example of a query for getting all information that we need for each order.
+        // It well be change in the next task (order details).
+        let query = Storefront.buildQuery { $0
+            .customer(customerAccessToken: token) { $0
+                .orders(first: 1) { $0
+                    .edges { $0
+                        .cursor()
+                        .node { $0
+                            .id()
+                            .currencyCode()
+                            .orderNumber()
+                            .processedAt()
+                            .subtotalPrice()
+                            .totalTax()
+                            .totalShippingPrice()
+                            .totalPrice()
+                            .shippingAddress(self.mailingAddressQuery())
+                            .lineItems(first: kShopifyItemsMaxCount) { $0
+                                .edges { $0
+                                    .node { $0
+                                        .quantity()
+                                        .title()
+                                        .variant(self.productVariantQuery())
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     // MARK: - sorting

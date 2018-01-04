@@ -40,7 +40,7 @@ class AccountLoggedHeaderView: UIView {
         }
     }
     
-    var headerDelegate: AccountLoggedHeaderProtocol!
+    private var headerDelegate: AccountLoggedHeaderProtocol!
     
     init(customer: Customer, delegate: AccountLoggedHeaderProtocol) {
         super.init(frame: CGRect.zero)

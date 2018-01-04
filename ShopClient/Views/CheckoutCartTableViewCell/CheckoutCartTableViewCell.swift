@@ -11,7 +11,7 @@ import UIKit
 class CheckoutCartTableViewCell: UITableViewCell, CheckoutCartCollectionDataSourceDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var cartProducts: [CartProduct]!
+    var images: [Image]!
     var collectionDataSource: CheckoutCartCollectionDataSource!
     var collectionDelegate: CheckoutCartCollectionDelegate!
 
@@ -21,8 +21,8 @@ class CheckoutCartTableViewCell: UITableViewCell, CheckoutCartCollectionDataSour
         selectionStyle = .none
     }
     
-    public func configure(with items: [CartProduct]) {
-        cartProducts = items
+    public func configure(with items: [Image]) {
+        images = items
         setupCollectionView()
     }
     
@@ -40,10 +40,10 @@ class CheckoutCartTableViewCell: UITableViewCell, CheckoutCartCollectionDataSour
     
     // MARK: - CheckoutCartCollectionDataSourceDelegate
     func itemsCount() -> Int {
-        return cartProducts.count
+        return images.count
     }
     
-    func item(at index: Int) -> CartProduct {
-        return cartProducts[index]
+    func item(at index: Int) -> Image {
+        return images[index]
     }
 }

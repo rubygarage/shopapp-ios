@@ -20,7 +20,7 @@ class AccountNotLoggedHeaderView: UIView, UnderlinedButtonProtocol {
     @IBOutlet weak var createNewAccountButton: UnderlinedButton!
     @IBOutlet weak var createAccountUnderlinedView: UIView!
     
-    var headerDelegate: AccountNotLoggedHeaderProtocol!
+    private var headerDelegate: AccountNotLoggedHeaderProtocol!
     
     init(delegate: AccountNotLoggedHeaderProtocol) {
         super.init(frame: CGRect.zero)

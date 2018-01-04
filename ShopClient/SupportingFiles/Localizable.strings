@@ -16,6 +16,8 @@
 "ControllerTitle.SignUp" = "Sign Up";
 "ControllerTitle.ForgorPassword" = "Forgor Password";
 "ControllerTitle.Checkout" = "Checkout";
+"ControllerTitle.MyOrders" = "My Orders";
+"ControllerTitle.OrderDetails" = "Order Details";
 "ControllerTitle.AddNewAddress" = "Add New Address";
 "ControllerTitle.BillingAddress" = "Billing Address";
 
@@ -85,6 +87,10 @@
 "Label.ForgotPassword.LinkDescription" = "To reset your password just click the link in the email we sent you!";
 "Label.ForgotPassword.LinkAdditionalTitle" = "Don't receive it?";
 "Label.ForgotPassword.LinkAdditionalDescription" = "Don't forget to check your mail or click the link below and we'll send you a new link";
+"Label.Order.Number" = "Order #%@";
+"Label.Order.Date" = "Placed on %@";
+"Label.Order.Items" = "Item(s):";
+"Label.Order.Total" = "Total:";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";
