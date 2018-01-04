@@ -511,7 +511,7 @@ class API: NSObject, APIInterface {
         // I need to research about API (get order by id) to understand how can we do it correctly.
         let query = Storefront.buildQuery { $0
             .customer(customerAccessToken: token) { $0
-                .orders(first: Int32(perPage), after: paginationValue as? String) { $0
+                .orders(first: Int32(perPage), after: paginationValue as? String, reverse: true, sortKey: .processedAt) { $0
                     .edges { $0
                         .cursor()
                         .node { $0

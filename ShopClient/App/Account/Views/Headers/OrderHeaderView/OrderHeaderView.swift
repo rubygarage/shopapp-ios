@@ -50,8 +50,10 @@ class OrderHeaderView: UIView {
     }
     
     private func populateViews(order: Order) {
-        numberLabel.text = "ORDER #" + String(order.number!)
-        dateLabel.text = "Placed on "
+        let numberFormat = NSLocalizedString("Label.Order.Number", comment: String()).uppercased()
+        numberLabel.text = String(format: numberFormat, String(order.number!))
+        let dateFormat = NSLocalizedString("Label.Order.Date", comment: String())
+        dateLabel.text = String(format: dateFormat, order.createdAt!.longDescription)
     }
     
     func viewDidTap(gestureRecognizer: UIGestureRecognizer) {

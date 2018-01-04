@@ -35,7 +35,7 @@ class OrdersListTableDataSource: NSObject, UITableViewDataSource {
         let orders = delegate.orders()
         let order = orders[indexPath.section]
         let items = order.items
-        let images = items != nil ? items!.flatMap { $0.productVariant?.image } : [Image]()
+        let images = items != nil ? items!.map { $0.productVariant?.image ?? Image() } : [Image]()
         cell.configure(with: images)
         return cell
     }
