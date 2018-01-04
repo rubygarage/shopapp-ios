@@ -21,6 +21,7 @@ class OrdersListTableDelegate: NSObject, UITableViewDelegate, OrderHeaderViewPro
         
         self.delegate = delegate
     }
+    
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let orders = delegate.orders()
@@ -33,6 +34,7 @@ class OrdersListTableDelegate: NSObject, UITableViewDelegate, OrderHeaderViewPro
         let order = orders[section]
         return OrderFooterView(section: section, order: order, delegate: self)
     }
+    
     // MARK: - OrderHeaderViewProtocol
     func viewDidTap(_ section: Int) {
         delegate.didSelectItem(at: section)

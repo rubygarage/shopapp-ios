@@ -19,7 +19,7 @@ extension OrderItem {
     }
     
     private func update(with item: Storefront.OrderLineItem?, isAllInfoNeeded: Bool) {
-        quantity = item != nil ? Int(item!.quantity) : 0
+        quantity = Int(item?.quantity ?? 0)
 
         if let variant = item?.variant {
             if let productVariant = ProductVariant(with: variant, productImage: nil) {

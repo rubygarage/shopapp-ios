@@ -89,7 +89,7 @@
 "Label.ForgotPassword.LinkAdditionalDescription" = "Don't forget to check your mail or click the link below and we'll send you a new link";
 "Label.Order.Number" = "Order #%@";
 "Label.Order.Date" = "Placed on %@";
-"Label.Order.Items" = "Items(s):";
+"Label.Order.Items" = "Item(s):";
 "Label.Order.Total" = "Total:";
 
 "Error.Unknown" = "Unknown error";
