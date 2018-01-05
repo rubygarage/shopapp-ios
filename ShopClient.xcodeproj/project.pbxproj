@@ -1727,6 +1727,7 @@
 				61E4E62E1F56C868001C6E01 /* Resources */,
 				7861D8391D7CFE0B5E0888BB /* [CP] Embed Pods Frameworks */,
 				3996E684F38DD2BB24DA1044 /* [CP] Copy Pods Resources */,
+				0BA630641FFE7B8C007088B8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1749,7 +1750,7 @@
 				TargetAttributes = {
 					61E4E62F1F56C868001C6E01 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = J5BJ6M865W;
+						DevelopmentTeam = K2WTD52A5C;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1847,6 +1848,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		0BA630641FFE7B8C007088B8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" ec1a2d2e6ae5cf3addf0ec8f67c34deb4a00cbea 1df1d0dc0136843e0575d1bb7de4fb6ea36a34d1b622696e6c4251ec6d9ce916";
 		};
 		3996E684F38DD2BB24DA1044 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2255,10 +2269,10 @@
 			baseConfigurationReference = 38B8C07405420E82AD6AAA3E /* Pods-ShopClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = J5BJ6M865W;
+				DEVELOPMENT_TEAM = K2WTD52A5C;
 				INFOPLIST_FILE = ShopClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = RG.ShopClient;
+				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.ShopClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -2269,10 +2283,10 @@
 			baseConfigurationReference = 10BBCCE808D12F6C873F9215 /* Pods-ShopClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = J5BJ6M865W;
+				DEVELOPMENT_TEAM = K2WTD52A5C;
 				INFOPLIST_FILE = ShopClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = RG.ShopClient;
+				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.ShopClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

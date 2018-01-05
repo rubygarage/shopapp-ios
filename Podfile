@@ -33,6 +33,10 @@ target 'ShopClient' do
   # Payment
   pod 'MFCard', '~> 1.2'
 
+  # Crash&Beta
+  pod 'Fabric', '~> 1.7'
+  pod 'Crashlytics', '~> 3.9'
+
   post_install do |installer|
     installer.pods_project.targets.each do |target|
       if ['AvatarImageView', 'MFCard', 'SKPhotoBrowser', 'SwipeCellKit'].include? target.name
