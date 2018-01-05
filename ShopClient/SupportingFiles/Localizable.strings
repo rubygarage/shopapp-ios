@@ -40,7 +40,7 @@
 "Button.TermsOfService" = "Terms of Service";
 "Button.SignIn" = "Sign In";
 "Button.Forgot" = "Forgot?";
-"Button.SignUp" = "Sign Up";
+"Button.CreateNewAccount" = "Create New Account";
 "Button.Submit" = "Submit";
 "Button.Resend" = "Resend reset link";
 "Button.Logout" = "Log Out";
