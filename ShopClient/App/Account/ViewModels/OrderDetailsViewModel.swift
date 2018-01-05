@@ -9,7 +9,7 @@
 import RxSwift
 
 class OrderDetailsViewModel: BaseViewModel {
-    var data = PublishSubject<Order>()
+    var data = Variable<Order?>(nil)
     
     var orderId: String!
     
@@ -28,7 +28,7 @@ class OrderDetailsViewModel: BaseViewModel {
                 self?.state.onNext(.error(error: error))
             }
             if let order = order {
-                self?.data.onNext(order)
+                self?.data.value = order
                 self?.state.onNext(.content)
             }
         }

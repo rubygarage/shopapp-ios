@@ -8,8 +8,11 @@
 
 import UIKit
 
-class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
+class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, OrdersDetailsTableDataSourceProtocol, OrdersDetailsTableDelegateProtocol {
     @IBOutlet weak var tableView: UITableView!
+    
+    private var tableDataSource: OrdersDetailsTableDataSource!
+    private var tableDelegate: OrdersDetailsTableDelegate!
     
     var orderId: String!
     
@@ -33,13 +36,18 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
         /*
         let cartCellNib = UINib(nibName: String(describing: CartTableViewCell.self), bundle: nil)
         tableView.register(cartCellNib, forCellReuseIdentifier: String(describing: CartTableViewCell.self))
+        */
         
-        tableDataSource = CartTableDataSource(delegate: self)
+        let shippingAddressEditNib = UINib(nibName: String(describing: CheckoutShippingAddressEditTableCell.self), bundle: nil)
+        tableView.register(shippingAddressEditNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self))
+        
+        tableDataSource = OrdersDetailsTableDataSource(delegate: self)
         tableView.dataSource = tableDataSource
         
-        tableDelegate = CartTableDelegate(delegate: self)
+        tableDelegate = OrdersDetailsTableDelegate(delegate: self)
         tableView.delegate = tableDelegate
- */
+        
+        tableView?.contentInset = TableView.defaultContentInsets
     }
     
     private func setupViewModel() {
@@ -50,7 +58,7 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
             .disposed(by: disposeBag)
         
         viewModel.data.asObservable()
-            .subscribe(onNext: { [weak self] products in
+            .subscribe(onNext: { [weak self] _ in
                 self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
@@ -58,5 +66,10 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
     
     private func loadData() {
         viewModel.loadOrder()
+    }
+    
+    // MARK: - OrdersDetailsTableDataSourceProtocol
+    func order() -> Order? {
+        return viewModel.data.value
     }
 }

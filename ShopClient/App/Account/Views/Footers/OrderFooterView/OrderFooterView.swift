@@ -48,7 +48,7 @@ class OrderFooterView: UIView {
     
     private func setupViews() {
         itemsLabel.text = NSLocalizedString("Label.Order.Items", comment: String())
-        totalLabel.text = NSLocalizedString("Label.Order.Total", comment: String()).uppercased()
+        totalLabel.text = NSLocalizedString("Label.Order.TotalWithColon", comment: String()).uppercased()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(viewDidTap))
         addGestureRecognizer(tap)
