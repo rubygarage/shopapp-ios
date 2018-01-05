@@ -12,11 +12,15 @@ import RxCocoa
 
 typealias SelectedOption = (name: String, value: String)
 
+private let kQuantityUnderlineColorDefault = UIColor(displayP3Red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
+
 class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerProtocol, ProductOptionsControllerProtocol {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var quantityTitleLabel: UILabel!
     @IBOutlet weak var quantityTextField: UITextField!
+    @IBOutlet weak var quantityUnderlineView: UIView!
     @IBOutlet weak var addToCartButton: UIButton!
     @IBOutlet weak var optionsContainerView: UIView!
     @IBOutlet weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
@@ -44,6 +48,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     // MARK: - setup
     private func setupViews() {
+        quantityTitleLabel.text = NSLocalizedString("Label.Quantity", comment: String())
         addToCartButton.setTitle(NSLocalizedString("Button.AddToCart", comment: String()), for: .normal)
         addToCartButton.layer.cornerRadius = CornerRadius.defaultValue
     }
@@ -148,6 +153,14 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         } else {
             addProductToCart()
         }
+    }
+    
+    @IBAction func quantityEditingDidBegin(_ sender: UITextField) {
+        quantityUnderlineView.backgroundColor = UIColor.black
+    }
+    
+    @IBAction func quantityEditingDidEnd(_ sender: UITextField) {
+        quantityUnderlineView.backgroundColor = kQuantityUnderlineColorDefault
     }
     
     // MARK: - DetailImagesViewControllerProtocol
