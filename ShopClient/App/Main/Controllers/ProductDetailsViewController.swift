@@ -15,6 +15,7 @@ typealias SelectedOption = (name: String, value: String)
 private let kQuantityUnderlineColorDefault = UIColor(red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
 private let kBottomViewColorEnabled = UIColor(red: 0, green: 0.48, blue: 1, alpha: 1)
 private let kBottomViewColorDisabled = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+private let kAddToCartChangesAnimationDuration: TimeInterval = 0.33
 
 class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerProtocol, ProductOptionsControllerProtocol {
     @IBOutlet weak var titleLabel: UILabel!
@@ -117,7 +118,9 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         if !productAddedToCart {
             let variantAvailable = variant != nil
             addToCartButton.isEnabled = variantAvailable
-            bottomView.backgroundColor = variantAvailable ? kBottomViewColorEnabled : kBottomViewColorDisabled
+            UIView.animate(withDuration: kAddToCartChangesAnimationDuration, animations: {
+                self.bottomView.backgroundColor = variantAvailable ? kBottomViewColorEnabled : kBottomViewColorDisabled
+            })
         }
     }
     
