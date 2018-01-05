@@ -36,16 +36,7 @@ extension UIViewController {
         tabbarController?.selectedIndex = 0
     }
     
-    // MARK: - open as child
-    func openImagesCarouselChildController(with images: [Image], delegate: ImagesCarouselViewControllerProtocol?, showingIndex: Int, onView: UIView) {
-        let detailImagesController = UIStoryboard.imagesCarousel().instantiateViewController(withIdentifier: ControllerIdentifier.imagesCarousel) as! ImagesCarouselViewController
-        detailImagesController.images = images
-        detailImagesController.controllerDelegate = delegate
-        detailImagesController.showingIndex = showingIndex
-        
-        configureChildViewController(childController: detailImagesController, onView: onView)
-    }
-    
+    // MARK: - open as child    
     func openProductOptionsController(with options: [ProductOption], selectedOptions: [SelectedOption], delegate: ProductOptionsControllerProtocol?, onView: UIView) {
         let optionsController = UIStoryboard.productOptions().instantiateViewController(withIdentifier: ControllerIdentifier.productOptions) as! ProductOptionsViewController
         optionsController.options = options

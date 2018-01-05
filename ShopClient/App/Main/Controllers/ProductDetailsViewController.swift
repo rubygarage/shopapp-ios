@@ -13,7 +13,6 @@ import RxCocoa
 typealias SelectedOption = (name: String, value: String)
 
 class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerProtocol, ProductOptionsControllerProtocol {
-    @IBOutlet weak var imagesContainerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
@@ -25,7 +24,6 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     var productId: String!
     
     private var detailImagesController: ImagesCarouselViewController?
-    private var showingImageIndex = 0
     private var productAddedToCart = false
 
     // MARK: - life cycle
@@ -90,7 +88,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     private func populateImages(with product: Product) {
         if let images = product.images {
-            openImagesCarouselChildController(with: images, delegate: self, showingIndex: showingImageIndex, onView: imagesContainerView)
+            detailImagesController?.images = images
         }
     }
     
@@ -143,13 +141,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         showCartController()
     }
     
-    // MARK: - actions
-    @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
-        if let product = viewModel.product.value {
-            pushImageViewer(with: product, initialIndex: showingImageIndex)
-        }
-    }
-    
+    // MARK: - actions    
     @IBAction func addToProductTapped(_ sender: UIButton) {
         if productAddedToCart {
             openCartController()
@@ -159,8 +151,10 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     }
     
     // MARK: - DetailImagesViewControllerProtocol
-    func didShowImage(at index: Int) {
-        showingImageIndex = index
+    func didTapImage(at index: Int) {
+        if let product = viewModel.product.value {
+            pushImageViewer(with: product, initialIndex: index)
+        }
     }
     
     // MARK: - ProductOptionsControllerProtocol
@@ -175,5 +169,12 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     // MARK: - ErrorViewProtocol
     func didTapTryAgain() {
         loadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let imagesCarouselController = segue.destination as? ImagesCarouselViewController {
+            imagesCarouselController.controllerDelegate = self
+            detailImagesController = imagesCarouselController
+        }
     }
 }

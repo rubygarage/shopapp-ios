@@ -9,14 +9,18 @@
 import UIKit
 
 protocol ImagesCarouselViewControllerProtocol {
-    func didShowImage(at index: Int)
+    func didTapImage(at index: Int)
 }
 
 class ImagesCarouselViewController: UIViewController, ImagesCarouselCollectionDataSourceProtocol, ImagesCarouselCollectionDelegateProtocol {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     
-    var images = [Image]()
+    var images = [Image]() {
+        didSet {
+            updateViews()
+        }
+    }
     var controllerDelegate: ImagesCarouselViewControllerProtocol?
     var showingIndex: Int = 0
     private var dataSource: ImagesCarouselCollectionDataSource?
@@ -26,14 +30,6 @@ class ImagesCarouselViewController: UIViewController, ImagesCarouselCollectionDa
         super.viewDidLoad()
 
         setupCollectionView()
-        setupPageControl()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        updateShowingImage(with: showingIndex, animated: false)
-        pageControl.currentPage = showingIndex
     }
     
     private func setupCollectionView() {
@@ -56,8 +52,19 @@ class ImagesCarouselViewController: UIViewController, ImagesCarouselCollectionDa
         collectionView.scrollToItem(at: indexPath, at: .left, animated: animated)
     }
     
+    private func updateViews() {
+        setupPageControl()
+        collectionView.reloadData()
+    }
+    
+    // MARK: - actions
+    @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
+        controllerDelegate?.didTapImage(at: showingIndex)
+    }
+    
     // MARK: - pageControl actions
     @IBAction func pageControlValueChanged(_ sender: UIPageControl) {
+        showingIndex = sender.currentPage
         updateShowingImage(with: sender.currentPage)
     }
     
@@ -77,6 +84,6 @@ class ImagesCarouselViewController: UIViewController, ImagesCarouselCollectionDa
     
     func didScroll(to index: Int) {
         pageControl.currentPage = index
-        controllerDelegate?.didShowImage(at: index)
+        showingIndex = index
     }
 }
