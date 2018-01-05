@@ -437,14 +437,17 @@
                                     <constraint firstItem="MKM-u4-iZT" firstAttribute="top" secondItem="yyt-6B-eUF" secondAttribute="bottom" id="wrt-Sx-VtL"/>
                                 </constraints>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8y-La-p8d">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8y-La-p8d" userLabel="Bottom View">
                                 <rect key="frame" x="0.0" y="1017" width="375" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B5D-4I-QGs">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <state key="normal" title="Add to cart">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <state key="disabled" title="This product">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="addToProductTapped:" destination="2iw-CM-RMu" eventType="touchUpInside" id="1Z4-uq-xat"/>
@@ -478,6 +481,7 @@
                     <size key="freeformSize" width="375" height="1067"/>
                     <connections>
                         <outlet property="addToCartButton" destination="B5D-4I-QGs" id="AhZ-UR-tAD"/>
+                        <outlet property="bottomView" destination="X8y-La-p8d" id="G07-la-lrh"/>
                         <outlet property="descriptionLabel" destination="3BV-lT-OBn" id="tYV-Id-j6L"/>
                         <outlet property="optionsContainerView" destination="MKM-u4-iZT" id="oTe-Ui-dOp"/>
                         <outlet property="optionsContainerViewHeightConstraint" destination="ry8-KO-0i5" id="WaA-MC-Ccx"/>

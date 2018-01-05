@@ -12,7 +12,9 @@ import RxCocoa
 
 typealias SelectedOption = (name: String, value: String)
 
-private let kQuantityUnderlineColorDefault = UIColor(displayP3Red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
+private let kQuantityUnderlineColorDefault = UIColor(red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
+private let kBottomViewColorEnabled = UIColor(red: 0, green: 0.48, blue: 1, alpha: 1)
+private let kBottomViewColorDisabled = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
 
 class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerProtocol, ProductOptionsControllerProtocol {
     @IBOutlet weak var titleLabel: UILabel!
@@ -24,6 +26,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     @IBOutlet weak var addToCartButton: UIButton!
     @IBOutlet weak var optionsContainerView: UIView!
     @IBOutlet weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomView: UIView!
     
     var productId: String!
     
@@ -49,8 +52,8 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     // MARK: - setup
     private func setupViews() {
         quantityTitleLabel.text = NSLocalizedString("Label.Quantity", comment: String())
-        addToCartButton.setTitle(NSLocalizedString("Button.AddToCart", comment: String()), for: .normal)
-        addToCartButton.layer.cornerRadius = CornerRadius.defaultValue
+        addToCartButton.setTitle(NSLocalizedString("Button.AddToCart", comment: String()).uppercased(), for: .normal)
+        addToCartButton.setTitle(NSLocalizedString("Button.ProductTemporaryUnavailable", comment: String()).uppercased(), for: .disabled)
     }
     
     private func setupViewModel() {
@@ -112,9 +115,9 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     private func populateAddToCartButton(variant: ProductVariant?) {
         if !productAddedToCart {
-            let enabled = variant != nil
-            addToCartButton.backgroundColor = enabled ? UIColor.blue : UIColor.lightGray
-            addToCartButton.isEnabled = enabled
+            let variantAvailable = variant != nil
+            addToCartButton.isEnabled = variantAvailable
+            bottomView.backgroundColor = variantAvailable ? kBottomViewColorEnabled : kBottomViewColorDisabled
         }
     }
     
@@ -128,7 +131,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     private func updateAddToCartButton() {
         productAddedToCart = true
-        self.addToCartButton.setTitle(NSLocalizedString("Button.AddedToCart", comment: String()), for: .normal)
+        self.addToCartButton.setTitle(NSLocalizedString("Button.AddedToCart", comment: String()).uppercased(), for: .normal)
     }
     
     private func addProductToCart() {
