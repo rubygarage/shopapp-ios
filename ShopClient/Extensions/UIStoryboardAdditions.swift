@@ -9,11 +9,6 @@
 import UIKit
 
 extension UIStoryboard {
-    
-    class func imagesCarousel() -> UIStoryboard {
-        return UIStoryboard(name: "ImagesCarousel", bundle: nil)
-    }
-    
     class func sortModal() -> UIStoryboard {
         return UIStoryboard(name: "SortModal", bundle: nil)
     }

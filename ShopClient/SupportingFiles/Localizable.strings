@@ -27,6 +27,7 @@
 
 "Button.Sort" = "Sort";
 "Button.AddToCart" = "Add to cart";
+"Button.ProductTemporaryUnavailable" = "This product is temporarily unavailable";
 "Button.AddedToCart" = "Added to cart";
 "Button.Ok" = "OK";
 "Button.Cancel" = "Cancel";

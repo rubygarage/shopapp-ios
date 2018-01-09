@@ -12,20 +12,26 @@ import RxCocoa
 
 typealias SelectedOption = (name: String, value: String)
 
+private let kQuantityUnderlineColorDefault = UIColor(red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
+private let kBottomViewColorEnabled = UIColor(red: 0, green: 0.48, blue: 1, alpha: 1)
+private let kBottomViewColorDisabled = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+private let kAddToCartChangesAnimationDuration: TimeInterval = 0.33
+
 class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerProtocol, ProductOptionsControllerProtocol {
-    @IBOutlet weak var imagesContainerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var quantityTitleLabel: UILabel!
     @IBOutlet weak var quantityTextField: UITextField!
+    @IBOutlet weak var quantityUnderlineView: UIView!
     @IBOutlet weak var addToCartButton: UIButton!
     @IBOutlet weak var optionsContainerView: UIView!
     @IBOutlet weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomView: UIView!
     
     var productId: String!
     
     private var detailImagesController: ImagesCarouselViewController?
-    private var showingImageIndex = 0
     private var productAddedToCart = false
 
     // MARK: - life cycle
@@ -46,8 +52,9 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     // MARK: - setup
     private func setupViews() {
-        addToCartButton.setTitle(NSLocalizedString("Button.AddToCart", comment: String()), for: .normal)
-        addToCartButton.layer.cornerRadius = CornerRadius.defaultValue
+        quantityTitleLabel.text = NSLocalizedString("Label.Quantity", comment: String())
+        addToCartButton.setTitle(NSLocalizedString("Button.AddToCart", comment: String()).uppercased(), for: .normal)
+        addToCartButton.setTitle(NSLocalizedString("Button.ProductTemporaryUnavailable", comment: String()).uppercased(), for: .disabled)
     }
     
     private func setupViewModel() {
@@ -90,7 +97,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     private func populateImages(with product: Product) {
         if let images = product.images {
-            openImagesCarouselChildController(with: images, delegate: self, showingIndex: showingImageIndex, onView: imagesContainerView)
+            detailImagesController?.images = images
         }
     }
     
@@ -109,9 +116,11 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     private func populateAddToCartButton(variant: ProductVariant?) {
         if !productAddedToCart {
-            let enabled = variant != nil
-            addToCartButton.backgroundColor = enabled ? UIColor.blue : UIColor.lightGray
-            addToCartButton.isEnabled = enabled
+            let variantAvailable = variant != nil
+            addToCartButton.isEnabled = variantAvailable
+            UIView.animate(withDuration: kAddToCartChangesAnimationDuration, animations: {
+                self.bottomView.backgroundColor = variantAvailable ? kBottomViewColorEnabled : kBottomViewColorDisabled
+            })
         }
     }
     
@@ -125,7 +134,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     private func updateAddToCartButton() {
         productAddedToCart = true
-        self.addToCartButton.setTitle(NSLocalizedString("Button.AddedToCart", comment: String()), for: .normal)
+        self.addToCartButton.setTitle(NSLocalizedString("Button.AddedToCart", comment: String()).uppercased(), for: .normal)
     }
     
     private func addProductToCart() {
@@ -143,13 +152,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         showCartController()
     }
     
-    // MARK: - actions
-    @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
-        if let product = viewModel.product.value {
-            pushImageViewer(with: product, initialIndex: showingImageIndex)
-        }
-    }
-    
+    // MARK: - actions    
     @IBAction func addToProductTapped(_ sender: UIButton) {
         if productAddedToCart {
             openCartController()
@@ -158,9 +161,19 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         }
     }
     
+    @IBAction func quantityEditingDidBegin(_ sender: UITextField) {
+        quantityUnderlineView.backgroundColor = UIColor.black
+    }
+    
+    @IBAction func quantityEditingDidEnd(_ sender: UITextField) {
+        quantityUnderlineView.backgroundColor = kQuantityUnderlineColorDefault
+    }
+    
     // MARK: - DetailImagesViewControllerProtocol
-    func didShowImage(at index: Int) {
-        showingImageIndex = index
+    func didTapImage(at index: Int) {
+        if let product = viewModel.product.value {
+            pushImageViewer(with: product, initialIndex: index)
+        }
     }
     
     // MARK: - ProductOptionsControllerProtocol
@@ -175,5 +188,12 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     // MARK: - ErrorViewProtocol
     func didTapTryAgain() {
         loadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let imagesCarouselController = segue.destination as? ImagesCarouselViewController {
+            imagesCarouselController.controllerDelegate = self
+            detailImagesController = imagesCarouselController
+        }
     }
 }

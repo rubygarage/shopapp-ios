@@ -13,7 +13,6 @@ let kItemsPerPage = 10
 struct ControllerIdentifier {
     static let home = "HomeControllerIdentifier"
     static let productDetails = "ProductsDetailControllerIdentifier"
-    static let imagesCarousel = "ImagesCarouselControllerIdentifier"
     static let menu = "MenuControllerIdentifier"
     static let search = "SearchControllerIdentifier"
     static let category = "CategoryControllerIdentifier"
