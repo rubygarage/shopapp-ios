@@ -9,41 +9,6 @@
 import UIKit
 
 extension UIViewController {
-    
-    // MARK: - push
-    /*
-    func pushAddressFormController(with address: Address?, completion: AddressFormCompletion?) {
-        let addressFormController = UIStoryboard.addressForm().instantiateViewController(withIdentifier: ControllerIdentifier.addressForm) as! AddressFormViewController
-        addressFormController.address = address
-        addressFormController.completion = completion
-        
-        navigationController?.pushViewController(addressFormController, animated: true)
-    }
-    
-    func pushAddressListController(with selectedAddress: Address? = nil, title: String?, completion: AddressListCompletion?) {
-        let addressListController = UIStoryboard.addressList().instantiateViewController(withIdentifier: ControllerIdentifier.addressList) as! AddressListViewController
-        addressListController.title = title
-        addressListController.selectedAddress = selectedAddress
-        addressListController.completion = completion
-        
-        navigationController?.pushViewController(addressListController, animated: true)
-    }
- 
-    func pushPaymentTypeController(with completion: CreditCardPaymentCompletion?) {
-        let paymentTypeController = UIStoryboard.paymentType().instantiateViewController(withIdentifier: ControllerIdentifier.paymentType) as! PaymentTypeViewController
-        paymentTypeController.completion = completion
-        
-        navigationController?.pushViewController(paymentTypeController, animated: true)
-    }
- */
-    
-    func pushCreditCardController(with billingAddress: Address, completion: CreditCardPaymentCompletion?) {
-        let creditCardController = UIStoryboard.creditCard().instantiateViewController(withIdentifier: ControllerIdentifier.creditCard) as! CreditCardViewController
-        creditCardController.billingAddres = billingAddress
-        creditCardController.completion = completion
-        
-        navigationController?.pushViewController(creditCardController, animated: true)
-    }
 
     // MARK: - set
     func setHomeController() {
