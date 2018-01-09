@@ -12,6 +12,7 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, Payme
     @IBOutlet weak var tableView: UITableView!
     
     private var tableDataSource: PaymentTypeDataSource!
+    private var destinationTitle: String!
     var completion: CreditCardPaymentCompletion?
     
     override func viewDidLoad() {
@@ -36,9 +37,17 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, Payme
     
     // MARK: - PaymentTypeTableCellProtocol
     func didSelectCreditCartPayment() {
-        let addressListTitle = NSLocalizedString("ControllerTitle.BillingAddress", comment: String())
-        pushAddressListController(title: addressListTitle) { [weak self] (address) in
-            self?.pushCreditCardController(with: address, completion: self?.completion)
+        performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
+    }
+    
+    // MARK: - segues
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let addressListViewController = segue.destination as? AddressListViewController {
+            addressListViewController.title = NSLocalizedString("ControllerTitle.BillingAddress", comment: String())
+            addressListViewController.addressListType = .billing
+//            addressListViewController.completion = { [weak self] (address) in
+//                self?.pushCreditCardController(with: address, completion: self?.completion)
+//            }
         }
     }
 }

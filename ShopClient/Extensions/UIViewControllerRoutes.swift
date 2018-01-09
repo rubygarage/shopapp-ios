@@ -11,6 +11,7 @@ import UIKit
 extension UIViewController {
     
     // MARK: - push
+    /*
     func pushAddressFormController(with address: Address?, completion: AddressFormCompletion?) {
         let addressFormController = UIStoryboard.addressForm().instantiateViewController(withIdentifier: ControllerIdentifier.addressForm) as! AddressFormViewController
         addressFormController.address = address
@@ -27,13 +28,14 @@ extension UIViewController {
         
         navigationController?.pushViewController(addressListController, animated: true)
     }
-    
+ 
     func pushPaymentTypeController(with completion: CreditCardPaymentCompletion?) {
         let paymentTypeController = UIStoryboard.paymentType().instantiateViewController(withIdentifier: ControllerIdentifier.paymentType) as! PaymentTypeViewController
         paymentTypeController.completion = completion
         
         navigationController?.pushViewController(paymentTypeController, animated: true)
     }
+ */
     
     func pushCreditCardController(with billingAddress: Address, completion: CreditCardPaymentCompletion?) {
         let creditCardController = UIStoryboard.creditCard().instantiateViewController(withIdentifier: ControllerIdentifier.creditCard) as! CreditCardViewController

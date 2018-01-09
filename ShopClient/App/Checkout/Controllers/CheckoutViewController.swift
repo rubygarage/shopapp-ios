@@ -18,9 +18,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     
     private var tableDataSource: CheckoutTableDataSource!
     private var tableDelegate: CheckoutTableDelegate!
-    private var destinationTitle: String!
     private var destinationAddress: Address?
-    private var addressListCompletion: AddressListCompletion?
     
     override func viewDidLoad() {
         viewModel = CheckoutViewModel()
@@ -123,11 +121,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     }
     
     private func openAddressList(with checkoutId: String, address: Address) {
-        destinationTitle = NSLocalizedString("ControllerTitle.ShippingAddress", comment: String())
-        addressListCompletion = { [weak self] (address) in
-            self?.navigationController?.popViewController(animated: true)
-            self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: false)
-        }
+        destinationAddress = address
         performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
     }
     
@@ -154,23 +148,29 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     
     // MARK: - CheckoutPaymentAddCellProtocol
     func didTapAddPayment() {
-        pushPaymentTypeController(with: { [weak self] (billingAddress, card) in
-            self?.viewModel.billingAddress = billingAddress
-            self?.viewModel.creditCard = card
-            self?.tableView.reloadData()
-            self?.updatePlaceOrderButtonUI()
-            self?.returnFlowToSelf()
-        })
+        performSegue(withIdentifier: SegueIdentifiers.toPaymentType, sender: self)
     }
     
     // MARK: - segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let addressListViewController = segue.destination as? AddressListViewController {
-            addressListViewController.title = destinationTitle
-            addressListViewController.completion = addressListCompletion
+            addressListViewController.addressListType = .shipping
+            addressListViewController.selectedAddress = destinationAddress
+            addressListViewController.completion = { [weak self] (address) in
+                self?.navigationController?.popViewController(animated: true)
+                self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: false)
+            }
         } else if let addressFormViewController = segue.destination as? AddressFormViewController {
             addressFormViewController.completion = { [weak self] (address, isDefaultAddress) in
                 self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: isDefaultAddress)
+            }
+        } else if let paymentTypeViewController = segue.destination as? PaymentTypeViewController {
+            paymentTypeViewController.completion = { [weak self] (billingAddress, card) in
+                self?.viewModel.billingAddress = billingAddress
+                self?.viewModel.creditCard = card
+                self?.tableView.reloadData()
+                self?.updatePlaceOrderButtonUI()
+                self?.returnFlowToSelf()
             }
         }
     }

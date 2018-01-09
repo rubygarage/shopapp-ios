@@ -12,6 +12,7 @@ typealias AddressListCompletion = (_ address: Address) -> ()
 
 class AddressListViewModel: BaseViewModel {
     var customerAddresses = Variable<[Address]>([Address]())
+    var didSelectAddress = PublishSubject<Address>()
     
     var selectedAddress: Address?
     var completion: AddressListCompletion?
@@ -40,6 +41,7 @@ class AddressListViewModel: BaseViewModel {
         selectedAddress = address
         loadCustomerAddresses()
         completion?(address)
+        didSelectAddress.onNext(address)
     }
     
     public func updateAddress(with address: Address, isSelected: Bool) {

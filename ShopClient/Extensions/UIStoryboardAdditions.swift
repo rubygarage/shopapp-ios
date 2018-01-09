@@ -25,18 +25,6 @@ extension UIStoryboard {
         return UIStoryboard(name: "Checkout", bundle: nil)
     }
     
-    class func addressForm() -> UIStoryboard {
-        return UIStoryboard(name: "AddressForm", bundle: nil)
-    }
-    
-    class func addressList() -> UIStoryboard {
-        return UIStoryboard(name: "AddressList", bundle: nil)
-    }
-    
-    class func paymentType() -> UIStoryboard {
-        return UIStoryboard(name: "PaymentType", bundle: nil)
-    }
-    
     class func creditCard() -> UIStoryboard {
         return UIStoryboard(name: "CreditCard", bundle: nil)
     }

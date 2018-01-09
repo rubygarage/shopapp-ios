@@ -61,6 +61,7 @@
                         <outlet property="tableView" destination="pyA-b5-EGg" id="4nf-Ch-xLB"/>
                         <segue destination="Yjd-px-Jvs" kind="show" identifier="toAddressList" id="dnR-TS-EYt"/>
                         <segue destination="zXe-Cz-Abu" kind="show" identifier="toAddressForm" id="gfd-AL-YqW"/>
+                        <segue destination="c3v-9W-mKd" kind="show" identifier="toPaymentType" id="CGV-uG-Hxc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWy-vV-BzK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -91,11 +92,13 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="7x0-g5-3yi" id="Imt-Lf-dDG"/>
+                        <segue destination="zXe-Cz-Abu" kind="show" identifier="toAddressForm" id="CAU-cl-Z7h"/>
+                        <segue destination="35q-zi-ACv" kind="show" identifier="toCreditCard" id="tdz-rN-PUG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0dC-mI-bYZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-543" y="893"/>
+            <point key="canvasLocation" x="-50" y="896"/>
         </scene>
         <!--Address Form View Controller-->
         <scene sceneID="l9L-mQ-41u">
@@ -336,10 +339,184 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="218-Br-ENO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="343" y="962"/>
+            <point key="canvasLocation" x="751" y="964"/>
+        </scene>
+        <!--Payment Type View Controller-->
+        <scene sceneID="E5U-uh-pFk">
+            <objects>
+                <viewController storyboardIdentifier="PaymentTypeControllerIdentifier" id="c3v-9W-mKd" customClass="PaymentTypeViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oLq-CS-0l8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HdE-8d-3A9">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="HdE-8d-3A9" firstAttribute="bottom" secondItem="VhD-c0-C8p" secondAttribute="bottom" id="0eT-tR-bx8"/>
+                            <constraint firstItem="HdE-8d-3A9" firstAttribute="leading" secondItem="VhD-c0-C8p" secondAttribute="leading" id="Ebr-Rr-Ldc"/>
+                            <constraint firstItem="HdE-8d-3A9" firstAttribute="top" secondItem="oLq-CS-0l8" secondAttribute="top" id="Xt9-2H-l80"/>
+                            <constraint firstItem="HdE-8d-3A9" firstAttribute="trailing" secondItem="VhD-c0-C8p" secondAttribute="trailing" id="s8z-Fe-Szh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="VhD-c0-C8p"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="HdE-8d-3A9" id="WpW-SP-7bx"/>
+                        <segue destination="Yjd-px-Jvs" kind="show" identifier="toAddressList" id="uNy-8M-tPD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pi9-aR-oRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-823" y="896"/>
+        </scene>
+        <!--Credit Card View Controller-->
+        <scene sceneID="tYZ-iz-I58">
+            <objects>
+                <viewController storyboardIdentifier="CreditCardControllerIdentifier" id="35q-zi-ACv" customClass="CreditCardViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="685-nQ-1bX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Isd-pp-hVo" customClass="TPKeyboardAvoidingScrollView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8og-iE-j8B">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="518"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C19-Ol-Gq4" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="35" y="50" width="305" height="47"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="47" id="ofB-ob-rYQ"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
+                                                        <integer key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2VT-Bi-bf3" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="35" y="122" width="305" height="47"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="47" id="pYR-Gr-fpu"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
+                                                        <integer key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="soR-NB-Ay3">
+                                                <rect key="frame" x="45" y="216" width="285" height="14.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IVJ-Cf-REH" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="45" y="403" width="285" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="cuV-iH-fJH"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtO-Uq-n9w" customClass="MonthExpiryDatePicker" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="45" y="257" width="137.5" height="22"/>
+                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="22" id="Cwc-b3-vUC"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q4j-e1-ubP" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="35" y="309" width="305" height="47"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="47" id="rKX-EV-14z"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
+                                                        <integer key="value" value="7"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FXG-hk-yS2" customClass="YearExpiryDatePicker" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="192.5" y="257" width="137.5" height="22"/>
+                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="22" id="zka-Vd-rHQ"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="gtO-Uq-n9w" firstAttribute="leading" secondItem="8og-iE-j8B" secondAttribute="leading" constant="45" id="1Ea-40-IgG"/>
+                                            <constraint firstItem="q4j-e1-ubP" firstAttribute="leading" secondItem="8og-iE-j8B" secondAttribute="leading" constant="35" id="2G6-3y-hlN"/>
+                                            <constraint firstAttribute="trailing" secondItem="q4j-e1-ubP" secondAttribute="trailing" constant="35" id="2uP-po-sbm"/>
+                                            <constraint firstAttribute="trailing" secondItem="2VT-Bi-bf3" secondAttribute="trailing" constant="35" id="3Cq-EP-n8p"/>
+                                            <constraint firstItem="soR-NB-Ay3" firstAttribute="top" secondItem="2VT-Bi-bf3" secondAttribute="bottom" constant="47" id="4tv-kw-SpE"/>
+                                            <constraint firstItem="2VT-Bi-bf3" firstAttribute="top" secondItem="C19-Ol-Gq4" secondAttribute="bottom" constant="25" id="7Vd-xZ-FGa"/>
+                                            <constraint firstAttribute="trailing" secondItem="IVJ-Cf-REH" secondAttribute="trailing" constant="45" id="FQ6-uA-9HW"/>
+                                            <constraint firstAttribute="trailing" secondItem="soR-NB-Ay3" secondAttribute="trailing" constant="45" id="GUU-BP-6YV"/>
+                                            <constraint firstItem="2VT-Bi-bf3" firstAttribute="leading" secondItem="8og-iE-j8B" secondAttribute="leading" constant="35" id="HBr-0d-dIP"/>
+                                            <constraint firstItem="FXG-hk-yS2" firstAttribute="leading" secondItem="gtO-Uq-n9w" secondAttribute="trailing" constant="10" id="Rea-cF-XJ3"/>
+                                            <constraint firstItem="gtO-Uq-n9w" firstAttribute="top" secondItem="soR-NB-Ay3" secondAttribute="bottom" constant="27" id="T1T-P5-u5t"/>
+                                            <constraint firstItem="soR-NB-Ay3" firstAttribute="leading" secondItem="8og-iE-j8B" secondAttribute="leading" constant="45" id="UeJ-w5-2Gv"/>
+                                            <constraint firstItem="C19-Ol-Gq4" firstAttribute="leading" secondItem="8og-iE-j8B" secondAttribute="leading" constant="35" id="XB2-e9-ixZ"/>
+                                            <constraint firstItem="IVJ-Cf-REH" firstAttribute="top" secondItem="q4j-e1-ubP" secondAttribute="bottom" constant="47" id="aRs-Mw-MBm"/>
+                                            <constraint firstItem="C19-Ol-Gq4" firstAttribute="top" secondItem="8og-iE-j8B" secondAttribute="top" constant="50" id="cmg-Hh-ANo"/>
+                                            <constraint firstItem="q4j-e1-ubP" firstAttribute="top" secondItem="gtO-Uq-n9w" secondAttribute="bottom" constant="30" id="dk9-JN-6Pg"/>
+                                            <constraint firstItem="FXG-hk-yS2" firstAttribute="top" secondItem="gtO-Uq-n9w" secondAttribute="top" id="jjV-ZY-G2D"/>
+                                            <constraint firstAttribute="bottom" secondItem="IVJ-Cf-REH" secondAttribute="bottom" constant="65" id="m4p-ea-OLN"/>
+                                            <constraint firstItem="IVJ-Cf-REH" firstAttribute="leading" secondItem="8og-iE-j8B" secondAttribute="leading" constant="45" id="res-5J-JrL"/>
+                                            <constraint firstAttribute="trailing" secondItem="C19-Ol-Gq4" secondAttribute="trailing" constant="35" id="rzZ-B4-jdK"/>
+                                            <constraint firstAttribute="trailing" secondItem="FXG-hk-yS2" secondAttribute="trailing" constant="45" id="s0E-TH-yZc"/>
+                                            <constraint firstItem="FXG-hk-yS2" firstAttribute="width" secondItem="gtO-Uq-n9w" secondAttribute="width" id="zco-2z-maV"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="8og-iE-j8B" firstAttribute="leading" secondItem="Isd-pp-hVo" secondAttribute="leading" id="JXs-e0-bGl"/>
+                                    <constraint firstAttribute="bottom" secondItem="8og-iE-j8B" secondAttribute="bottom" id="Opn-ng-hdP"/>
+                                    <constraint firstItem="8og-iE-j8B" firstAttribute="top" secondItem="Isd-pp-hVo" secondAttribute="top" id="bLF-Z3-jNU"/>
+                                    <constraint firstAttribute="trailing" secondItem="8og-iE-j8B" secondAttribute="trailing" id="mnm-x5-LqT"/>
+                                    <constraint firstItem="8og-iE-j8B" firstAttribute="width" secondItem="Isd-pp-hVo" secondAttribute="width" id="rzg-Ge-oKq"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Isd-pp-hVo" firstAttribute="bottom" secondItem="Wl7-7R-Rzq" secondAttribute="bottom" id="0mV-2A-xUl"/>
+                            <constraint firstItem="Isd-pp-hVo" firstAttribute="top" secondItem="685-nQ-1bX" secondAttribute="top" id="76h-Ea-zGA"/>
+                            <constraint firstItem="Isd-pp-hVo" firstAttribute="leading" secondItem="Wl7-7R-Rzq" secondAttribute="leading" id="nD5-dr-arU"/>
+                            <constraint firstItem="Isd-pp-hVo" firstAttribute="trailing" secondItem="Wl7-7R-Rzq" secondAttribute="trailing" id="wzp-P2-ERt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Wl7-7R-Rzq"/>
+                    </view>
+                    <connections>
+                        <outlet property="cardNumberTextFieldView" destination="2VT-Bi-bf3" id="9I6-ks-JaA"/>
+                        <outlet property="expirationDateLabel" destination="soR-NB-Ay3" id="soF-Qk-FpU"/>
+                        <outlet property="holderNameTextFieldView" destination="C19-Ol-Gq4" id="euH-Hj-C1o"/>
+                        <outlet property="monthExpirationView" destination="gtO-Uq-n9w" id="X9u-Dm-u7Q"/>
+                        <outlet property="securityCodeTextFieldView" destination="q4j-e1-ubP" id="LF7-cJ-zQP"/>
+                        <outlet property="submitButton" destination="IVJ-Cf-REH" id="WNh-h2-2jK"/>
+                        <outlet property="yearExpirationView" destination="FXG-hk-yS2" id="yRk-pV-i6d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="epd-Im-XuG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-50" y="1688"/>
         </scene>
     </scenes>
     <resources>
         <image name="check" width="14" height="11"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="CAU-cl-Z7h"/>
+        <segue reference="uNy-8M-tPD"/>
+    </inferredMetricsTieBreakers>
 </document>
