@@ -73,13 +73,6 @@ extension UIViewController {
         present(sortController, animated: true)
     }
     
-    func showBillingAddressController(with preloadedAddress: Address, delegate: BillingAddressViewProtocol?) {
-        let billingAddressController = UIStoryboard.billingAddress().instantiateViewController(withIdentifier: ControllerIdentifier.billingAddress) as! BillingAddressViewController
-        billingAddressController.preloadedAddress = preloadedAddress
-        billingAddressController.delegate = delegate
-        present(billingAddressController, animated: true)
-    }
-    
     func showCartController() {
         let cartController = UIStoryboard.cart().instantiateViewController(withIdentifier: ControllerIdentifier.cart)
         showNavigationController(with: cartController)

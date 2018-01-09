@@ -8,6 +8,9 @@
 
 import UIKit
 
+private let kPlaceOrderHeightVisible: CGFloat = 50
+private let kPlaceOrderHeightInvisible: CGFloat = 0
+
 class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeaderViewProtocol, CheckoutCombinedProtocol {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var placeOrderHeightConstraint: NSLayoutConstraint!
@@ -15,6 +18,9 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     
     private var tableDataSource: CheckoutTableDataSource!
     private var tableDelegate: CheckoutTableDelegate!
+    private var destinationTitle: String!
+    private var destinationAddress: Address?
+    private var addressListCompletion: AddressListCompletion?
     
     override func viewDidLoad() {
         viewModel = CheckoutViewModel()
@@ -97,9 +103,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     
     // MARK: - CheckoutShippingAddressAddCellProtocol
     func didTapAddNewAddress() {
-        pushAddressFormController(with: nil) { [weak self] (address, isDefaultAddress) in
-            self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: isDefaultAddress)
-        }
+        performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
     }
     
     // MARK: - CheckoutShippingAddressEditCellProtocol
@@ -119,23 +123,22 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     }
     
     private func openAddressList(with checkoutId: String, address: Address) {
-        let addressListTitle = NSLocalizedString("ControllerTitle.ShippingAddress", comment: String())
-        pushAddressListController(with: address, title: addressListTitle, completion: { [weak self] (address) in
+        destinationTitle = NSLocalizedString("ControllerTitle.ShippingAddress", comment: String())
+        addressListCompletion = { [weak self] (address) in
             self?.navigationController?.popViewController(animated: true)
             self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: false)
-        })
+        }
+        performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
     }
     
     private func openAddressForm(with address: Address) {
-        pushAddressFormController(with: address, completion: { [weak self] (address, isDefaultAddress) in
-            self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: isDefaultAddress)
-        })
+        performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
     }
     
     private func updatePlaceOrderButtonUI() {
         let visible = viewModel.checkout.value != nil && viewModel.creditCard != nil && viewModel.billingAddress != nil
         placeOrderButton.isHidden = !visible
-        placeOrderHeightConstraint.constant = visible ? 50 : 0
+        placeOrderHeightConstraint.constant = visible ? kPlaceOrderHeightVisible : kPlaceOrderHeightInvisible
     }
     
     private func returnFlowToSelf() {
@@ -158,5 +161,17 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
             self?.updatePlaceOrderButtonUI()
             self?.returnFlowToSelf()
         })
+    }
+    
+    // MARK: - segues
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let addressListViewController = segue.destination as? AddressListViewController {
+            addressListViewController.title = destinationTitle
+            addressListViewController.completion = addressListCompletion
+        } else if let addressFormViewController = segue.destination as? AddressFormViewController {
+            addressFormViewController.completion = { [weak self] (address, isDefaultAddress) in
+                self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: isDefaultAddress)
+            }
+        }
     }
 }

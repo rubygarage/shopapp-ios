@@ -46,6 +46,8 @@ struct SegueIdentifiers {
     static let toSignUp = "toSignUp"
     static let toOrdersList = "toOrdersList"
     static let toOrderDetails = "toOrderDetails"
+    static let toAddressForm = "toAddressForm"
+    static let toAddressList = "toAddressList"
 }
 
 struct CornerRadius {
