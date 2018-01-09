@@ -46,7 +46,7 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
         lastNameTextFieldView.placeholder = NSLocalizedString("Placeholder.LastName", comment: String()).uppercased()
         phoneTextFieldView.placeholder = NSLocalizedString("Placeholder.PhoneNumber", comment: String()).uppercased()
         passwordTextFieldView.placeholder = NSLocalizedString("Placeholder.CreatePassword", comment: String()).uppercased()
-        signUpButton.setTitle(NSLocalizedString("Button.SignUp", comment: String()).uppercased(), for: .normal)
+        signUpButton.setTitle(NSLocalizedString("Button.CreateNewAccount", comment: String()).uppercased(), for: .normal)
         
         let text = NSLocalizedString("Label.AcceptPoliciesAttributed", comment: String())
         let privacyPolicy = NSLocalizedString("Label.Range.PrivacyPolicy", comment: String())

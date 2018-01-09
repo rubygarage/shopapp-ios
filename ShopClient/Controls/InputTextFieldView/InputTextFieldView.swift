@@ -106,16 +106,10 @@ class InputTextFieldView: UIView {
         switch keyboardType {
         case InputTextFieldViewKeybordType.email.rawValue:
             type = .emailAddress
-            break
         case InputTextFieldViewKeybordType.phone.rawValue:
             type = .phonePad
-            break
-        case InputTextFieldViewKeybordType.zip.rawValue:
-            type = .numberPad
-            break
         default:
             type = .default
-            break
         }
         textField?.keyboardType = type
     }
