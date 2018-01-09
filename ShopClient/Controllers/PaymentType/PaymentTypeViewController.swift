@@ -45,6 +45,7 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, Payme
         if let addressListViewController = segue.destination as? AddressListViewController {
             addressListViewController.title = NSLocalizedString("ControllerTitle.BillingAddress", comment: String())
             addressListViewController.addressListType = .billing
+            addressListViewController.destinationCreditCardCompletion = completion
 //            addressListViewController.completion = { [weak self] (address) in
 //                self?.pushCreditCardController(with: address, completion: self?.completion)
 //            }
