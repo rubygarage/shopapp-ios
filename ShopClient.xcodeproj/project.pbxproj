@@ -946,6 +946,7 @@
 			isa = PBXGroup;
 			children = (
 				616A8ADA1FE82F3C0013E41F /* CategoryCollectionViewCell */,
+				6133392A1F69578D0063A754 /* DetailsImagesCollectionCell */,
 				61ED88F01F7170C9006BDA79 /* GridCollectionCell */,
 				614142D01F6BD28D00379BB9 /* LastArrivalsCollectionViewCell */,
 			);
@@ -1202,6 +1203,10 @@
 				61BA57081FE0409200BF1586 /* CartEmptyDataView */,
 				61E76E201FB4719400AE5FB4 /* CartTableViewCell */,
 				6133392A1F69578D0063A754 /* DetailsImagesCollectionCell */,
+				61236D4F1FEA83CB00D64198 /* CheckoutCartCollectionCell */,
+				61236D441FEA734B00D64198 /* CheckoutCartTableViewCell */,
+				61725FC71FEAB87A009F55EA /* CheckoutShippingAddressAddTableCell */,
+				61DE4EB91FEBF91C00A95016 /* CheckoutShippingAddressEditTableCell */,
 				61BF1EAE1FAB597C0098B9AA /* ErrorView */,
 				61BF1EA91FAB56C00098B9AA /* LoadingView */,
 				61FC3DA61F7EB41900DB0AD7 /* ProductOptionCollectionCell */,

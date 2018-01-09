@@ -110,8 +110,15 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     }
     
     private func populatePrice(variant: ProductVariant?) {
-        priceLabel.text = "\(variant?.price ?? String()) \(viewModel.currency ?? String())"
         priceLabel.isHidden = variant == nil
+        
+        guard let variant = variant else {
+            return
+        }
+        
+        let formatter = NumberFormatter.formatter(with: viewModel.currency!)
+        let price = NSDecimalNumber(string: variant.price!)
+        priceLabel.text = formatter.string(from: price)
     }
     
     private func populateAddToCartButton(variant: ProductVariant?) {
