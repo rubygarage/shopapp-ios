@@ -354,11 +354,32 @@ class API: NSObject, APIInterface {
     }
     
     func getOrder(id: String, callback: @escaping RepoCallback<Order>) {
-        if let token = sessionData().token {
-            getOrder(with: token, id: id, callback: callback)
-        } else {
-            callback(nil, ContentError())
+        let id = GraphQL.ID(rawValue: id)
+        let query = Storefront.buildQuery { $0
+            .node(id: id) { $0
+                .onOrder { $0
+                    .id()
+                    .currencyCode()
+                    .orderNumber()
+                    .processedAt()
+                    .subtotalPrice()
+                    .totalTax()
+                    .totalShippingPrice()
+                    .totalPrice()
+                    .shippingAddress(self.mailingAddressQuery())
+                    .lineItems(first: kShopifyItemsMaxCount, self.lineItemConnectionQuery())
+                }
+            }
         }
+        let task = client?.queryGraphWith(query) { [weak self] (response, error) in
+            var responseOrder: Order?
+            if let node = response?.node as? Storefront.Order, let order = Order(with: node) {
+                responseOrder = order
+            }
+            let responseError = self?.process(error: error)
+            callback(responseOrder, responseError)
+        }
+        run(task: task, callback: callback)
     }
     
     // MARK: - private
@@ -507,8 +528,6 @@ class API: NSObject, APIInterface {
     }
     
     private func getOrderList(with token: String, perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
-        // This query will be separate in feture.
-        // I need to research about API (get order by id) to understand how can we do it correctly.
         let query = Storefront.buildQuery { $0
             .customer(customerAccessToken: token) { $0
                 .orders(first: Int32(perPage), after: paginationValue as? String, reverse: true, sortKey: .processedAt) { $0
@@ -520,14 +539,7 @@ class API: NSObject, APIInterface {
                             .orderNumber()
                             .processedAt()
                             .totalPrice()
-                            .lineItems(first: kShopifyItemsMaxCount) { $0
-                                .edges { $0
-                                    .node { $0
-                                        .quantity()
-                                        .variant(self.productVariantQuery())
-                                    }
-                                }
-                            }
+                            .lineItems(first: kShopifyItemsMaxCount, self.lineItemConnectionQuery())
                         }
                     }
                 }
@@ -546,40 +558,6 @@ class API: NSObject, APIInterface {
             callback(orders, responseError)
         }
         run(task: task, callback: callback)
-    }
-    
-    private func getOrder(with token: String, id: String, callback: @escaping RepoCallback<Order>) {
-        // There is a example of a query for getting all information that we need for each order.
-        // It well be change in the next task (order details).
-        let query = Storefront.buildQuery { $0
-            .customer(customerAccessToken: token) { $0
-                .orders(first: 1) { $0
-                    .edges { $0
-                        .cursor()
-                        .node { $0
-                            .id()
-                            .currencyCode()
-                            .orderNumber()
-                            .processedAt()
-                            .subtotalPrice()
-                            .totalTax()
-                            .totalShippingPrice()
-                            .totalPrice()
-                            .shippingAddress(self.mailingAddressQuery())
-                            .lineItems(first: kShopifyItemsMaxCount) { $0
-                                .edges { $0
-                                    .node { $0
-                                        .quantity()
-                                        .title()
-                                        .variant(self.productVariantQuery())
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
     
     // MARK: - sorting
@@ -1093,6 +1071,18 @@ class API: NSObject, APIInterface {
         return { (query) in
             query.deletedCustomerAddressId()
             query.userErrors(self.userErrorQuery())
+        }
+    }
+    
+    private func lineItemConnectionQuery() -> (Storefront.OrderLineItemConnectionQuery) -> () {
+        return { (query: Storefront.OrderLineItemConnectionQuery) in
+            query.edges({ $0
+                .node { $0
+                    .quantity()
+                    .title()
+                    .variant(self.productVariantQuery())
+                }
+            })
         }
     }
     

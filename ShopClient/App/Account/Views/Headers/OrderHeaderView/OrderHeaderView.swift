@@ -17,10 +17,10 @@ class OrderHeaderView: UIView {
     @IBOutlet var numberLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
     
-    private var delegate: OrderHeaderViewProtocol!
+    private var delegate: OrderHeaderViewProtocol?
     private var section: Int!
 
-    init(section: Int, order: Order, delegate: OrderHeaderViewProtocol) {
+    init(section: Int, order: Order, delegate: OrderHeaderViewProtocol? = nil) {
         super.init(frame: CGRect.zero)
         
         self.section = section
@@ -57,6 +57,6 @@ class OrderHeaderView: UIView {
     }
     
     func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
-        delegate.viewDidTap(section)
+        delegate?.viewDidTap(section)
     }
 }

@@ -67,6 +67,7 @@
 "Label.TotalPrice" = "Total price: %.2f %@";
 "Label.PriceInfo" = "%@\n%@\n%@\n%@";
 "Label.ShippingAddress" = "Shipping Address";
+"Label.PaymentInformation" = "Payment Information";
 "Label.SameAsShippingAddress" = "Same as shipping address";
 "Label.LatestArrivals" = "Latest Arrivals";
 "Label.Popular" = "Popular";
@@ -91,7 +92,14 @@
 "Label.Order.Number" = "Order #%@";
 "Label.Order.Date" = "Placed on %@";
 "Label.Order.Items" = "Item(s):";
-"Label.Order.Total" = "Total:";
+"Label.Order.TotalWithColon" = "Total:";
+"Label.Order.Subtotal" = "Subtotal";
+"Label.Order.Discount" = "Discount";
+"Label.Order.Shipping" = "Shipping";
+"Label.Order.Tax" = "Tax";
+"Label.Order.Total" = "Total";
+"Label.Order.Quantity" = "QTY:";
+"Label.Order.Each" = "each";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

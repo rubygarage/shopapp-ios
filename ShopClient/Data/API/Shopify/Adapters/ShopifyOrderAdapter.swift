@@ -38,7 +38,7 @@ extension Order {
         if let lineItems = item?.lineItems.edges.map({ $0.node }) {
             var orderItems = [OrderItem]()
             for lineItem in lineItems {
-                if let orderItem = OrderItem(with: lineItem, isAllInfoNeeded: isAllInfoNeeded) {
+                if let orderItem = OrderItem(with: lineItem) {
                     orderItems.append(orderItem)
                 }
             }

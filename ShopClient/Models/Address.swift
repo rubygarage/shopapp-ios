@@ -26,11 +26,14 @@ class Address: NSObject {
     }
     
     var fullAddress: String {
-        var result = String()
-        for addressPart in [address, secondAddress, city, zip, country] {
-            if let text = addressPart {
-                result += result.isEmpty ? text : text.asPart()
-            }
+        var result = address!
+        if let secondAddress = secondAddress {
+            result = [result, secondAddress].joined(separator: "\n")
+        }
+        let adressParts = [city, zip, country].flatMap { $0 }
+        if !adressParts.isEmpty {
+            let subresult = adressParts.joined(separator: ", ")
+            result = [result, subresult].joined(separator: "\n")
         }
         return result
     }

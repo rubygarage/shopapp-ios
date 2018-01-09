@@ -48,15 +48,18 @@ class OrderFooterView: UIView {
     
     private func setupViews() {
         itemsLabel.text = NSLocalizedString("Label.Order.Items", comment: String())
-        totalLabel.text = NSLocalizedString("Label.Order.Total", comment: String()).uppercased()
+        totalLabel.text = NSLocalizedString("Label.Order.TotalWithColon", comment: String()).uppercased()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(viewDidTap))
         addGestureRecognizer(tap)
     }
     
     private func populateViews(order: Order) {
+        let formatter = NumberFormatter.formatter(with: order.currencyCode!)
+        let totalPrice = NSDecimalNumber(decimal: order.totalPrice!)
+        
         countLabel.text = order.items != nil ? String(order.items!.flatMap { $0.quantity }.reduce(0, +)) : String(0)
-        priceLabel.text = order.totalPrice!.description + " " + order.currencyCode!
+        priceLabel.text = formatter.string(from: totalPrice)
     }
     
     func viewDidTap(gestureRecognizer: UIGestureRecognizer) {

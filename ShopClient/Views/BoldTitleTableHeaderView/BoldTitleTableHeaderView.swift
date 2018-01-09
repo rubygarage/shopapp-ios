@@ -10,6 +10,7 @@ import UIKit
 
 enum BoldTitleViewType {
     case shippingAddress
+    case paymentInformation
 }
 
 class BoldTitleTableHeaderView: UIView {
@@ -44,6 +45,8 @@ class BoldTitleTableHeaderView: UIView {
         switch headerViewType {
         case BoldTitleViewType.shippingAddress:
             headerTitleLabel.text = NSLocalizedString("Label.ShippingAddress", comment: String())
+        case BoldTitleViewType.paymentInformation:
+            headerTitleLabel.text = NSLocalizedString("Label.PaymentInformation", comment: String())
         }
     }
 }
