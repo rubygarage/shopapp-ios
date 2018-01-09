@@ -98,6 +98,8 @@
 "Label.Order.Shipping" = "Shipping";
 "Label.Order.Tax" = "Tax";
 "Label.Order.Total" = "Total";
+"Label.Order.Quantity" = "QTY:";
+"Label.Order.Each" = "each";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

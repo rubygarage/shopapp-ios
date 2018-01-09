@@ -58,9 +58,9 @@ class OrdersDetailsTableDataSource: NSObject, UITableViewDataSource {
         
         switch indexPath.section {
         case OrdersDetailsSection.paymentInformation.rawValue:
-            cell = UITableViewCell()//item
+            cell = orderItemCell(with: tableView, indexPath: indexPath)
         case OrdersDetailsSection.shippingAddress.rawValue:
-            cell = shippingAddressEditCell(with: tableView, indexPath: indexPath)
+            cell = shippingAddressCell(with: tableView, indexPath: indexPath)
         default:
             break
         }
@@ -69,7 +69,14 @@ class OrdersDetailsTableDataSource: NSObject, UITableViewDataSource {
     }
     
     // MARK: - private
-    private func shippingAddressEditCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingAddressEditTableCell {
+    private func orderItemCell(with tableView: UITableView, indexPath: IndexPath) -> OrderItemTableViewCell {
+        let item =  delegate.order()!.items![indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: OrderItemTableViewCell.self), for: indexPath) as! OrderItemTableViewCell
+        cell.configure(with: item, currencyCode: delegate.order()!.currencyCode!)
+        return cell
+    }
+    
+    private func shippingAddressCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingAddressEditTableCell {
         let address = delegate.order()!.shippingAddress!
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self), for: indexPath) as! CheckoutShippingAddressEditTableCell
         cell.configure(with: address)

@@ -54,11 +54,17 @@ class PaymentDetailsFooterView: UIView {
     }
     
     private func populateViews(order: Order) {
-        subtotalValueLabel.text = order.subtotalPrice!.description + " " + order.currencyCode!
-        discountValueLabel.text = String(0) + " " + order.currencyCode!
-        shippingValueLabel.text = order.totalShippingPrice!.description + " " + order.currencyCode!
-        taxValueLabel.text = order.totalTax!.description + " " + order.currencyCode!
-        totalValueLabel.text = order.totalPrice!.description + " " + order.currencyCode!
+        let subtotalPrice = NSDecimalNumber(decimal: order.subtotalPrice!).doubleValue
+        let totalShippingPrice = NSDecimalNumber(decimal: order.totalShippingPrice!).doubleValue
+        let totalTax = NSDecimalNumber(decimal: order.totalTax!).doubleValue
+        let totalPrice = NSDecimalNumber(decimal: order.totalPrice!).doubleValue
+        let currency = order.currencyCode!
+        
+        subtotalValueLabel.text = String(format: "%.2f %@", subtotalPrice, currency)
+        discountValueLabel.text = String(format: "%.2f %@", 0.0, currency)
+        shippingValueLabel.text = String(format: "%.2f %@", totalShippingPrice, currency)
+        taxValueLabel.text = String(format: "%.2f %@", totalTax, currency)
+        totalValueLabel.text = String(format: "%.2f %@", totalPrice, currency)
     }
 
 }

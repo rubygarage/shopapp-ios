@@ -33,10 +33,8 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, Ord
     }
     
     private func setupTableView() {
-        /*
-        let cartCellNib = UINib(nibName: String(describing: CartTableViewCell.self), bundle: nil)
-        tableView.register(cartCellNib, forCellReuseIdentifier: String(describing: CartTableViewCell.self))
-        */
+        let orderItemNib = UINib(nibName: String(describing: OrderItemTableViewCell.self), bundle: nil)
+        tableView.register(orderItemNib, forCellReuseIdentifier: String(describing: OrderItemTableViewCell.self))
         
         let shippingAddressEditNib = UINib(nibName: String(describing: CheckoutShippingAddressEditTableCell.self), bundle: nil)
         tableView.register(shippingAddressEditNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self))
