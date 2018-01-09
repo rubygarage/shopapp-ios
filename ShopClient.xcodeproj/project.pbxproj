@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B2F3EC62004EA4000FB40A4 /* NumberFormatterCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2F3EC52004EA4000FB40A4 /* NumberFormatterCurrency.swift */; };
 		0B4EA3461FFB8EDC000C7A80 /* CartButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA3451FFB8EDC000C7A80 /* CartButtonViewModel.swift */; };
 		0B4EA3481FFBBF9D000C7A80 /* ResetPasswordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA3471FFBBF9D000C7A80 /* ResetPasswordUseCase.swift */; };
 		0B4EA34A1FFBBFF6000C7A80 /* ForgorPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4EA3491FFBBFF6000C7A80 /* ForgorPasswordViewController.swift */; };
@@ -285,6 +286,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B2F3EC52004EA4000FB40A4 /* NumberFormatterCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterCurrency.swift; sourceTree = "<group>"; };
 		0B4EA3451FFB8EDC000C7A80 /* CartButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartButtonViewModel.swift; sourceTree = "<group>"; };
 		0B4EA3471FFBBF9D000C7A80 /* ResetPasswordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordUseCase.swift; sourceTree = "<group>"; };
 		0B4EA3491FFBBFF6000C7A80 /* ForgorPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgorPasswordViewController.swift; sourceTree = "<group>"; };
@@ -1611,6 +1613,7 @@
 			children = (
 				61C2ABBF1FBB10C600A1E170 /* StringValidator.swift */,
 				0BA630621FFE6596007088B8 /* DateDesccription.swift */,
+				0B2F3EC52004EA4000FB40A4 /* NumberFormatterCurrency.swift */,
 				618B4D541FE2F3900001F68D /* UIColorCustom.swift */,
 				61CEAA6B1F5ECFFE0016FBD7 /* UIStoryboardAdditions.swift */,
 				6141AAA81F8BDD8500F9019B /* UIViewControllerAlert.swift */,
@@ -2012,6 +2015,7 @@
 				61C2ABBE1FBAEC7800A1E170 /* ShopifyRepoErrorAdapter.swift in Sources */,
 				6118DF261FB496070044A519 /* UIViewShadow.swift in Sources */,
 				617E541A1FC8954C00130719 /* ShippingRate.swift in Sources */,
+				0B2F3EC62004EA4000FB40A4 /* NumberFormatterCurrency.swift in Sources */,
 				616CA66A1FF3BAB800FF14E2 /* AddressListViewModel.swift in Sources */,
 				61836C5B1FDACC9F000A6BA6 /* NavigationController.swift in Sources */,
 				61ED88EA1F7112FD006BDA79 /* UIViewControllerImageViewer.swift in Sources */,

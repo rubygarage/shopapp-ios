@@ -26,27 +26,20 @@ class Address: NSObject {
     }
     
     var fullAddress: String {
-        var result = String()
-        result += address!
+        var result = address!
         if let secondAddress = secondAddress {
-            result += secondAddress.asSubpart()
+            result = [result, secondAddress].joined(separator: "\n")
         }
-        var subresult = String()
-        for addressPart in [city, zip, country] {
-            if let text = addressPart {
-                subresult += subresult.isEmpty ? text : text.asPart()
-            }
+        let adressParts = [city, zip, country].flatMap { $0 }
+        if !adressParts.isEmpty {
+            let subresult = adressParts.joined(separator: ", ")
+            result = [result, subresult].joined(separator: "\n")
         }
-        result += subresult.asSubpart()
         return result
     }
 }
 
 internal extension String {
-    func asSubpart() -> String {
-        return "\n\(self)"
-    }
-    
     func asPart() -> String {
         return ", \(self)"
     }

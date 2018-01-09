@@ -54,17 +54,18 @@ class PaymentDetailsFooterView: UIView {
     }
     
     private func populateViews(order: Order) {
-        let subtotalPrice = NSDecimalNumber(decimal: order.subtotalPrice!).doubleValue
-        let totalShippingPrice = NSDecimalNumber(decimal: order.totalShippingPrice!).doubleValue
-        let totalTax = NSDecimalNumber(decimal: order.totalTax!).doubleValue
-        let totalPrice = NSDecimalNumber(decimal: order.totalPrice!).doubleValue
-        let currency = order.currencyCode!
+        let formatter = NumberFormatter.formatter(with: order.currencyCode!)
+        let subtotalPrice = NSDecimalNumber(decimal: order.subtotalPrice!)
+        let discountPrice = NSDecimalNumber(value: 0)
+        let totalShippingPrice = NSDecimalNumber(decimal: order.totalShippingPrice!)
+        let totalTax = NSDecimalNumber(decimal: order.totalTax!)
+        let totalPrice = NSDecimalNumber(decimal: order.totalPrice!)
         
-        subtotalValueLabel.text = String(format: "%.2f %@", subtotalPrice, currency)
-        discountValueLabel.text = String(format: "%.2f %@", 0.0, currency)
-        shippingValueLabel.text = String(format: "%.2f %@", totalShippingPrice, currency)
-        taxValueLabel.text = String(format: "%.2f %@", totalTax, currency)
-        totalValueLabel.text = String(format: "%.2f %@", totalPrice, currency)
+        subtotalValueLabel.text = formatter.string(from: subtotalPrice)
+        discountValueLabel.text = formatter.string(from: discountPrice)
+        shippingValueLabel.text = formatter.string(from: totalShippingPrice)
+        taxValueLabel.text = formatter.string(from: totalTax)
+        totalValueLabel.text = formatter.string(from: totalPrice)
     }
 
 }

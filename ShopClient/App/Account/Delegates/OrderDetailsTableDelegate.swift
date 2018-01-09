@@ -40,29 +40,11 @@ class OrdersDetailsTableDelegate: NSObject, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        var view: UIView? = nil
-        
-        switch section {
-        case OrdersDetailsSection.paymentInformation.rawValue:
-            view = PaymentDetailsFooterView(order: delegate.order()!)
-        default:
-            break
-        }
-        
-        return view
+        return section == OrdersDetailsSection.paymentInformation.rawValue ? PaymentDetailsFooterView(order: delegate.order()!) : nil
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        var height = CGFloat(0)
-        
-        switch section {
-        case OrdersDetailsSection.paymentInformation.rawValue:
-            height = PaymentDetailsFooterView.height
-        default:
-            break
-        }
-        
-        return height
+        return section == OrdersDetailsSection.paymentInformation.rawValue ? PaymentDetailsFooterView.height : 0
     }
  
 }

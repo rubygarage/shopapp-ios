@@ -34,17 +34,18 @@ class OrderItemTableViewCell: UITableViewCell {
     }
     
     func configure(with orderItem: OrderItem, currencyCode: String) {
-        let price = Double(orderItem.productVariant!.price!)!
-        let totalPrice = price * Double(orderItem.quantity!)
+        let formatter = NumberFormatter.formatter(with: currencyCode)
+        let price = NSDecimalNumber(string: orderItem.productVariant!.price!)
+        let totalPrice = NSDecimalNumber(value: price.doubleValue * Double(orderItem.quantity!))
         
-        totalPriceLabel.text = String(format: "%.2f %@", totalPrice, currencyCode)
+        totalPriceLabel.text = formatter.string(from: totalPrice)
         titleLabel.text = orderItem.title
         quantityValueLabel.text = String(orderItem.quantity!)
         itemPriceLabel.isHidden = !(orderItem.quantity! > 1)
         
         if orderItem.quantity! > 1 {
             let eachText = NSLocalizedString("Label.Order.Each", comment: String())
-            itemPriceLabel.text = String(format: "%.2f %@ %@", price, currencyCode, eachText)
+            itemPriceLabel.text = String(format: "%@ %@", formatter.string(from: price)!, eachText)
         }
         
         if let options = orderItem.productVariant!.selectedOptions {

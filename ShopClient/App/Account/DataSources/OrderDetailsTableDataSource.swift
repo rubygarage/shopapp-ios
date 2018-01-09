@@ -12,6 +12,8 @@ enum OrdersDetailsSection: Int {
     case header
     case paymentInformation
     case shippingAddress
+    
+    static let allValues = [header, paymentInformation, shippingAddress]
 }
 
 protocol OrdersDetailsTableDataSourceProtocol {
@@ -33,7 +35,7 @@ class OrdersDetailsTableDataSource: NSObject, UITableViewDataSource {
             return 0
         }
         
-        return 3
+        return OrdersDetailsSection.allValues.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

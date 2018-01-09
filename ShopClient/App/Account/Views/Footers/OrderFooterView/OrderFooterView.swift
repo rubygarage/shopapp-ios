@@ -55,11 +55,11 @@ class OrderFooterView: UIView {
     }
     
     private func populateViews(order: Order) {
-        let totalPrice = NSDecimalNumber(decimal: order.totalPrice!).doubleValue
-        let currency = order.currencyCode!
+        let formatter = NumberFormatter.formatter(with: order.currencyCode!)
+        let totalPrice = NSDecimalNumber(decimal: order.totalPrice!)
         
         countLabel.text = order.items != nil ? String(order.items!.flatMap { $0.quantity }.reduce(0, +)) : String(0)
-        priceLabel.text = String(format: "%.2f %@", totalPrice, currency)
+        priceLabel.text = formatter.string(from: totalPrice)
     }
     
     func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
