@@ -38,7 +38,9 @@ class SignUpViewModel: BaseViewModel {
     
     public func loadPolicies() {
         shopUseCase.getShop { [weak self] (shop) in
-            self?.policies.value = (shop.privacyPolicy, shop.termsOfService)
+            if let privacyPolicy = shop.privacyPolicy, privacyPolicy.body?.isEmpty == false, let termsOfService = shop.termsOfService, termsOfService.body?.isEmpty == false {
+                self?.policies.value = (shop.privacyPolicy, shop.termsOfService)
+            }
         }
     }
     

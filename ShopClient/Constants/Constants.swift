@@ -31,6 +31,8 @@ struct ControllerIdentifier {
     static let billingAddress = "BillingAddressControllerIdentifier"
     static let signIn = "SignInControllerIdentifier"
     static let signUp = "SignUpControllerIdentifier"
+    static let paymentType = "PaymentTypeControllerIdentifier"
+    static let creditCard = "CreditCardControllerIdentifier"
 }
 
 struct SegueIdentifiers {
@@ -44,6 +46,10 @@ struct SegueIdentifiers {
     static let toSignUp = "toSignUp"
     static let toOrdersList = "toOrdersList"
     static let toOrderDetails = "toOrderDetails"
+    static let toAddressForm = "toAddressForm"
+    static let toAddressList = "toAddressList"
+    static let toPaymentType = "toPaymentType"
+    static let toCreditCard = "toCreditCard"
 }
 
 struct CornerRadius {
@@ -76,4 +82,9 @@ struct TableView {
     static let defaultContentInsets = UIEdgeInsetsMake(5, 0, 20, 0)
     static let removeActionBackgroundColor = UIColor.backgroundDefault
     static let removeActionFont = UIFont.systemFont(ofSize: 12)
+}
+
+struct CreditCardLimit {
+    static let cvvMaxCount = 3
+    static let cardNumberMaxCount = 16
 }

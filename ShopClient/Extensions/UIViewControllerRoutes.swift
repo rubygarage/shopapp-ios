@@ -9,24 +9,6 @@
 import UIKit
 
 extension UIViewController {
-    
-    // MARK: - push
-    func pushAddressFormController(with address: Address?, completion: AddressFormCompletion?) {
-        let addressFormController = UIStoryboard.addressForm().instantiateViewController(withIdentifier: ControllerIdentifier.addressForm) as! AddressFormViewController
-        addressFormController.address = address
-        addressFormController.completion = completion
-        
-        navigationController?.pushViewController(addressFormController, animated: true)
-    }
-    
-    func pushAddressListController(with checkoutId: String, selectedAddress: Address, completion: AddressListCompletion?) {
-        let addressListController = UIStoryboard.addressList().instantiateViewController(withIdentifier: ControllerIdentifier.addressList) as! AddressListViewController
-        addressListController.checkoutId = checkoutId
-        addressListController.selectedAddress = selectedAddress
-        addressListController.completion = completion
-        
-        navigationController?.pushViewController(addressListController, animated: true)
-    }
 
     // MARK: - set
     func setHomeController() {
@@ -56,13 +38,6 @@ extension UIViewController {
         sortController.modalPresentationStyle = .overCurrentContext
         sortController.modalTransitionStyle = .crossDissolve
         present(sortController, animated: true)
-    }
-    
-    func showBillingAddressController(with preloadedAddress: Address, delegate: BillingAddressViewProtocol?) {
-        let billingAddressController = UIStoryboard.billingAddress().instantiateViewController(withIdentifier: ControllerIdentifier.billingAddress) as! BillingAddressViewController
-        billingAddressController.preloadedAddress = preloadedAddress
-        billingAddressController.delegate = delegate
-        present(billingAddressController, animated: true)
     }
     
     func showCartController() {

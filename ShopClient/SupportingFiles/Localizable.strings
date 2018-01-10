@@ -19,7 +19,10 @@
 "ControllerTitle.MyOrders" = "My Orders";
 "ControllerTitle.OrderDetails" = "Order Details";
 "ControllerTitle.AddNewAddress" = "Add New Address";
+"ControllerTitle.ShippingAddress" = "Shipping Address";
 "ControllerTitle.BillingAddress" = "Billing Address";
+"ControllerTitle.PaymentType" = "Payment Type";
+"ControllerTitle.CreditCard" = "Credit Card";
 
 "Alert.Error" = "Error";
 "Alert.ChooseShippingRate" = "Choose shipping rate";
@@ -53,6 +56,8 @@
 "Button.Submit" = "Submit";
 "Button.Edit" = "Edit";
 "Button.Delete" = "Delete";
+"Button.AddPaymentType" = "Add payment type";
+"Button.PlaceOrder" = "Place Order";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";
@@ -68,6 +73,8 @@
 "Label.PriceInfo" = "%@\n%@\n%@\n%@";
 "Label.ShippingAddress" = "Shipping Address";
 "Label.PaymentInformation" = "Payment Information";
+"Label.BillingAddress" = "Billing Address";
+"Label.Payment" = "Payment";
 "Label.SameAsShippingAddress" = "Same as shipping address";
 "Label.LatestArrivals" = "Latest Arrivals";
 "Label.Popular" = "Popular";
@@ -100,6 +107,11 @@
 "Label.Order.Total" = "Total";
 "Label.Order.Quantity" = "QTY:";
 "Label.Order.Each" = "each";
+"Label.Order.Total" = "Total:";
+"Label.Payment.CreditCard" = "Credit Card";
+"Label.ExpirationDate" = "Expiration date";
+"Label.CreditCard.MaskedNumber" = "**%@";
+"Label.CreditCard.ExpirationDate" = "Exp : %@ / %@";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";
@@ -123,3 +135,8 @@
 "Placeholder.State" = "State";
 "Placeholder.ZipCode" = "Zip Code";
 "Placeholder.PhoneNumber" = "Phone Number";
+"Placeholder.CardHolderName" = "Card Holder Name";
+"Placeholder.CardNumber" = "Card Number";
+"Placeholder.CVV" = "CVV";
+"Placeholder.Month" = "Month";
+"Placeholder.Year" = "Year";

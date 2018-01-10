@@ -15,12 +15,14 @@ enum InputTextFieldViewState {
 }
 
 enum InputTextFieldViewKeybordType: Int {
-    case email
-    case password
-    case name
-    case phone
-    case zip
-    case `default`
+    case email      // 0
+    case password   // 1
+    case name       // 2
+    case phone      // 3
+    case zip        // 4
+    case `default`  // 5
+    case cardNumber // 6
+    case cvv        // 7
 }
 
 private let kUnderlineViewAlphaDefault: CGFloat = 0.2
@@ -29,7 +31,7 @@ private let kUnderlineViewHeightDefault: CGFloat = 1
 private let kUnderlineViewHeightHighlighted: CGFloat = 2
 private let kErrorColor = UIColor(displayP3Red: 0.89, green: 0.31, blue: 0.31, alpha: 1)
 
-class InputTextFieldView: UIView {
+class InputTextFieldView: UIView, UITextFieldDelegate {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var underlineView: UIView!
@@ -85,6 +87,7 @@ class InputTextFieldView: UIView {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
+        textField?.delegate = self
         setupViews()
         updateUI()
     }
@@ -108,6 +111,8 @@ class InputTextFieldView: UIView {
             type = .emailAddress
         case InputTextFieldViewKeybordType.phone.rawValue:
             type = .phonePad
+        case InputTextFieldViewKeybordType.cardNumber.rawValue, InputTextFieldViewKeybordType.cvv.rawValue:
+            type = .numberPad
         default:
             type = .default
         }
@@ -130,9 +135,9 @@ class InputTextFieldView: UIView {
     }
     
     private func setupKeyboardSecureTextEntry(with type: Int) {
-        let secure = type == InputTextFieldViewKeybordType.password.rawValue
-        textField?.isSecureTextEntry = secure
-        showPasswordButton?.isHidden = !secure
+        let secureTextEntry = type == InputTextFieldViewKeybordType.password.rawValue || type == InputTextFieldViewKeybordType.cvv.rawValue
+        textField?.isSecureTextEntry = secureTextEntry
+        showPasswordButton?.isHidden = type != InputTextFieldViewKeybordType.password.rawValue
     }
     
     // MARK: - actions
@@ -153,5 +158,19 @@ class InputTextFieldView: UIView {
     @IBAction func showPasswordTapped(_ sender: UIButton) {
         showPasswordButton.isSelected = !showPasswordButton.isSelected
         textField?.isSecureTextEntry = !showPasswordButton.isSelected
+    }
+    
+    // MARK: - UITextFieldDelegate
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let generatedString = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
+        
+        switch keyboardType {
+        case InputTextFieldViewKeybordType.cardNumber.rawValue:
+            return generatedString.count <= CreditCardLimit.cardNumberMaxCount
+        case InputTextFieldViewKeybordType.cvv.rawValue:
+            return generatedString.count <= CreditCardLimit.cvvMaxCount
+        default:
+            return true
+        }
     }
 }

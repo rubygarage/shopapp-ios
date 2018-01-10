@@ -55,13 +55,13 @@ class AccountViewModel: BaseViewModel {
     
     private func processResponse(with shopItem: Shop) {
         var policiesItems = [Policy]()
-        if let privacyPolicy = shopItem.privacyPolicy {
+        if let privacyPolicy = shopItem.privacyPolicy, privacyPolicy.body?.isEmpty == false {
             policiesItems.append(privacyPolicy)
         }
-        if let refundPolicy = shopItem.refundPolicy {
+        if let refundPolicy = shopItem.refundPolicy, refundPolicy.body?.isEmpty == false {
             policiesItems.append(refundPolicy)
         }
-        if let termsOfService = shopItem.termsOfService {
+        if let termsOfService = shopItem.termsOfService, termsOfService.body?.isEmpty == false {
             policiesItems.append(termsOfService)
         }
         policies.value = policiesItems
