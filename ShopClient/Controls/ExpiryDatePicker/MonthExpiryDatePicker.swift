@@ -14,6 +14,16 @@ class MonthExpiryDatePicker: ExpiryDatePicker {
     }
     
     override var data: [String] {
-        return ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", ]
+        var monthes = [String]()
+        for index in 1...Calendar.current.monthSymbols.count {
+            monthes.append(index.asLongMonth())
+        }
+        return monthes
+    }
+}
+
+internal extension Int {
+    func asLongMonth() -> String {
+        return String(format: "%02d", self)
     }
 }

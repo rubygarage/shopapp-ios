@@ -15,17 +15,13 @@ protocol CheckoutShippingAddressAddCellProtocol {
 class CheckoutShippingAddressAddTableCell: UITableViewCell {
     @IBOutlet weak var addNewAddressButton: BlackButton!
     
-    var delegate: CheckoutShippingAddressAddCellProtocol!
+    var delegate: CheckoutShippingAddressAddCellProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         selectionStyle = .none
         setupViews()
-    }
-    
-    func configure(with delegate: CheckoutShippingAddressAddCellProtocol) {
-        self.delegate = delegate
     }
     
     // MARK: - setup
@@ -35,6 +31,6 @@ class CheckoutShippingAddressAddTableCell: UITableViewCell {
     
     // MARK: - actions
     @IBAction func addNewAddressTapped(_ sender: BlackButton) {
-        delegate.didTapAddNewAddress()
+        delegate?.didTapAddNewAddress()
     }
 }

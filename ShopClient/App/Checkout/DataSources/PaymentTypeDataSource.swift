@@ -15,7 +15,7 @@ enum PaymentTypeSection {
 }
 
 class PaymentTypeDataSource: NSObject, UITableViewDataSource {
-    var delegate: PaymentTypeTableCellProtocol?
+    private var delegate: PaymentTypeTableCellProtocol?
     
     init(with delegate: PaymentTypeTableCellProtocol?) {
         super.init()
@@ -30,7 +30,7 @@ class PaymentTypeDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PaymentTypeTableCell.self), for: indexPath) as! PaymentTypeTableCell
-        cell.configure(with: delegate)
+        cell.delegate = delegate
         return cell
     }
 }

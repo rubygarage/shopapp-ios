@@ -61,10 +61,16 @@ class CreditCardViewModel: BaseViewModel {
         card.firstName = String(describing: names.first!)
         card.lastName = String(describing: names.last!)
         card.cardNumber = cardNumberText.value
-        card.expireMonth = monthExpirationText.value
+        card.expireMonth = monthExpirationText.value.asShortMonth()
         card.expireYear = yearExpirationText.value
         card.verificationCode = securityCodeText.value
         
         return card
+    }
+}
+
+internal extension String {
+    func asShortMonth() -> String {
+        return String(format: "%01d", Int(self)!)
     }
 }

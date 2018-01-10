@@ -16,17 +16,13 @@ class PaymentTypeTableCell: UITableViewCell {
     @IBOutlet weak var paymentTypeLabel: UILabel!
     @IBOutlet weak var paymentSelectButton: UIButton!
     
-    private var delegate: PaymentTypeTableCellProtocol?
+    var delegate: PaymentTypeTableCellProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         selectionStyle = .none
         paymentTypeLabel.text = NSLocalizedString("Label.Payment.CreditCard", comment: String())
-    }
-    
-    public func configure(with delegate: PaymentTypeTableCellProtocol?) {
-        self.delegate = delegate
     }
     
     // MARK: - actions

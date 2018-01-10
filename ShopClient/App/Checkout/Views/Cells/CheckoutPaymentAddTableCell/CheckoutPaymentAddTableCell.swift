@@ -15,7 +15,7 @@ protocol CheckoutPaymentAddCellProtocol {
 class CheckoutPaymentAddTableCell: UITableViewCell {
     @IBOutlet weak var addPaymentButton: BlackButton!
     
-    private var delegate: CheckoutPaymentAddCellProtocol!
+    var delegate: CheckoutPaymentAddCellProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,12 +24,8 @@ class CheckoutPaymentAddTableCell: UITableViewCell {
         addPaymentButton.setTitle(NSLocalizedString("Button.AddPaymentType", comment: String()).uppercased(), for: .normal)
     }
     
-    public func configure(with delegate: CheckoutPaymentAddCellProtocol) {
-        self.delegate = delegate
-    }
-    
     // MARK: - actions
     @IBAction func addPaymentTapped(_ sender: BlackButton) {
-        delegate.didTapAddPayment()
+        delegate?.didTapAddPayment()
     }
 }

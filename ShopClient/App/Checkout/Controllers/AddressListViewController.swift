@@ -37,7 +37,6 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     
     private func setupViews() {
         title = addressListType == .shipping ? NSLocalizedString("ControllerTitle.ShippingAddress", comment: String()) : NSLocalizedString("ControllerTitle.BillingAddress", comment: String())
-
     }
     
     private func setupTableView() {

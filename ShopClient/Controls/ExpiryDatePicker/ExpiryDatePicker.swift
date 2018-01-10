@@ -8,11 +8,6 @@
 
 import UIKit
 
-enum ExpiryDateType {
-    case month
-    case year
-}
-
 private let kUnderlineViewAlphaDefault: CGFloat = 0.2
 private let kUnderlineViewAlphaHighlighted: CGFloat = 1
 private let kUnderlineViewHeightDefault: CGFloat = 1
@@ -26,11 +21,10 @@ class ExpiryDatePicker: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     
     var pickerView = UIPickerView()
     var placeholder: String {
-        return String()
+        return ""
     }
     
     var data: [String] {
-        assert(false, "data method not implemented")
         return [String]()
     }
     
