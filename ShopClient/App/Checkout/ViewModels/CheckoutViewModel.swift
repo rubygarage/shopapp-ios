@@ -23,6 +23,10 @@ class CheckoutViewModel: BaseViewModel {
     var billingAddress: Address?
     var creditCard: CreditCard?
     
+    private let checkoutUseCase = CheckoutUseCase()
+    private let cartProductListUseCase = CartProductListUseCase()
+    private let customerUseCase = CustomerUseCase()
+    
     var placeOrderPressed: AnyObserver<()> {
         return AnyObserver { [weak self] event in
             self?.placeOrderAction()
@@ -43,7 +47,7 @@ class CheckoutViewModel: BaseViewModel {
     
     public func getCheckout() {
         let checkoutId = checkout.value?.id ?? String()
-        Repository.shared.getCheckout(with: checkoutId) { [weak self] (result, error) in
+        checkoutUseCase.getCheckout(with: checkoutId) { [weak self] (result, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }
@@ -57,7 +61,7 @@ class CheckoutViewModel: BaseViewModel {
     public func updateCheckoutShippingAddress(with address: Address, isDefaultAddress: Bool) {
         state.onNext(.loading(showHud: true))
         let checkoutId = checkout.value?.id ?? String()
-        Repository.shared.updateShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
+        checkoutUseCase.updateCheckoutShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             } else if let success = success, success == true {
@@ -71,15 +75,10 @@ class CheckoutViewModel: BaseViewModel {
     
     // MARK: - private
     private var cartItemsSingle: Single<[CartProduct]> {
-        return Single.create(subscribe: { (event) in
-            Repository.shared.getCartProductList(callback: { [weak self] (result, error) in
-                if let error = error {
-                    event(.error(error))
-                }
-                if let items = result {
-                    self?.cartItems = items
-                    event(.success(items))
-                }
+        return Single.create(subscribe: { [weak self] (event) in
+            self?.cartProductListUseCase.getCartProductList({ [weak self] (result) in
+                self?.cartItems = result
+                event(.success(result))
             })
             return Disposables.create()
         })
@@ -87,8 +86,8 @@ class CheckoutViewModel: BaseViewModel {
     
     private var checkoutCreateSingle: Single<Checkout> {
         return cartItemsSingle.flatMap({ (cartItems) in
-            Single.create(subscribe: { (event) in
-                Repository.shared.createCheckout(cartProducts: cartItems, callback: { (checkout, error) in
+            Single.create(subscribe: { [weak self] (event) in
+                self?.checkoutUseCase.createCheckout(cartProducts: cartItems, callback: { (checkout, error) in
                     if let error = error {
                         event(.error(error))
                     }
@@ -102,7 +101,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     private func getCustomer() {
-        Repository.shared.getCustomer { [weak self] (customer, error) in
+        customerUseCase.getCustomer { [weak self] (customer, error) in
             if let address = customer?.defaultAddress {
                 self?.updateCheckoutShippingAddress(with: address, isDefaultAddress: false)
             } else {
@@ -112,7 +111,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     private func processUpdateCheckoutShippingAddress(address: Address, isDefaultAddress: Bool) {
-        Repository.shared.addCustomerAddress(with: address) { [weak self] (addressId, error) in
+        customerUseCase.addAddress(with: address) { [weak self] (addressId, error) in
             if let addressId = addressId {
                 self?.processCustomerAddingAddress(with: addressId, isDefaultAddress: isDefaultAddress)
             } else {
@@ -130,7 +129,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     private func updateCustomerDefaultAddress(with addressId: String) {
-        Repository.shared.updateCustomerDefaultAddress(with: addressId) { [weak self] (success, error) in
+        customerUseCase.updateDefaultAddress(with: addressId) { [weak self] (success, error) in
             self?.getCheckout()
         }
     }
@@ -138,7 +137,7 @@ class CheckoutViewModel: BaseViewModel {
     private func placeOrderAction() {
         if let checkout = checkout.value, let card = creditCard, let billingAddress = billingAddress {
             state.onNext(.loading(showHud: true))
-            Repository.shared.pay(with: card, checkout: checkout, billingAddress: billingAddress) { [weak self] (success, error) in
+            checkoutUseCase.pay(with: card, checkout: checkout, billingAddress: billingAddress) { [weak self] (success, error) in
                 if let error = error {
                     self?.state.onNext(.error(error: error))
                 }
