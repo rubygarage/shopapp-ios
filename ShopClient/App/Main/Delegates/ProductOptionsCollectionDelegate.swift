@@ -15,7 +15,7 @@ protocol ProductOptionsCollectionDelegateProtocol {
 let kOptionsHeaderViewSize = CGSize(width: 0, height: 30)
 
 class ProductOptionsCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    var delegate: ProductOptionsCollectionDelegateProtocol?
+    private var delegate: ProductOptionsCollectionDelegateProtocol?
     
     init(delegate: ProductOptionsCollectionDelegateProtocol) {
         super.init()

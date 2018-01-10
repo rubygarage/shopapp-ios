@@ -20,7 +20,12 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
     @IBOutlet weak var collectionLayout: UICollectionViewFlowLayout!
     
     var options = [ProductOption]()
-    var selectedOptions = [SelectedOption]()
+    var selectedOptions = [SelectedOption]() {
+        didSet {
+            collectionView.reloadData()
+            controllerDelegate?.didCalculate(collectionViewHeight: collectionView.contentSize.height)
+        }
+    }
     var controllerDelegate: ProductOptionsControllerProtocol?
     private var collectionDataSource: ProductOptionsCollectionDataSource?
     private var collectionDelegate: ProductOptionsCollectionDelegate?
@@ -29,12 +34,6 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
         super.viewDidLoad()
 
         setupCollectionView()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        controllerDelegate?.didCalculate(collectionViewHeight: collectionView.contentSize.height)
     }
     
     private func setupCollectionView() {

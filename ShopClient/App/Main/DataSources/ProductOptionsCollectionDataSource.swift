@@ -17,7 +17,7 @@ protocol ProductOptionsCollectionDataSourceProtocol {
 }
 
 class ProductOptionsCollectionDataSource: NSObject, UICollectionViewDataSource {
-    var delegate: ProductOptionsCollectionDataSourceProtocol?
+    private var delegate: ProductOptionsCollectionDataSourceProtocol?
     
     init(delegate: ProductOptionsCollectionDataSourceProtocol?) {
         super.init()

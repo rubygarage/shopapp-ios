@@ -25,13 +25,13 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     @IBOutlet weak var quantityTextField: UITextField!
     @IBOutlet weak var quantityUnderlineView: UIView!
     @IBOutlet weak var addToCartButton: UIButton!
-    @IBOutlet weak var optionsContainerView: UIView!
     @IBOutlet weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomView: UIView!
     
     var productId: String!
     
     private var detailImagesController: ImagesCarouselViewController?
+    private var productOptionsViewController: ProductOptionsViewController?
     private var productAddedToCart = false
 
     // MARK: - life cycle
@@ -132,7 +132,8 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     }
     
     private func populateOptionsView(allOptions: [ProductOption], selectedOptions: [SelectedOption]) {
-        openProductOptionsController(with: allOptions, selectedOptions: selectedOptions, delegate: self, onView: optionsContainerView)
+        productOptionsViewController?.options = allOptions
+        productOptionsViewController?.selectedOptions = selectedOptions
     }
     
     private func updateNavigationBar() {
@@ -201,6 +202,9 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         if let imagesCarouselController = segue.destination as? ImagesCarouselViewController {
             imagesCarouselController.controllerDelegate = self
             detailImagesController = imagesCarouselController
+        } else if let productOptionsViewController = segue.destination as? ProductOptionsViewController {
+            productOptionsViewController.controllerDelegate = self
+            self.productOptionsViewController = productOptionsViewController
         }
     }
 }
