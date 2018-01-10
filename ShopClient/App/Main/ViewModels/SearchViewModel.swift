@@ -9,7 +9,7 @@
 import RxSwift
 
 class SearchViewModel: GridCollectionViewModel {
-    var searchPhrase = Variable<String>(String())
+    var searchPhrase = Variable<String>("")
     var categories = Variable<[Category]>([Category]())
     
     private let categoryListUseCase = CategoryListUseCase()
@@ -52,7 +52,7 @@ class SearchViewModel: GridCollectionViewModel {
     
     // MARK: - private
     private func loadRemoteData() {
-        let showHud = products.value.count == 0
+        let showHud = products.value.isEmpty
         state.onNext(.loading(showHud: showHud))
         productListUseCase.getProductList(with: paginationValue, searchPhrase: searchPhrase.value) { [weak self] (products, error) in
             if let error = error {

@@ -12,7 +12,7 @@ protocol ProductOptionsCollectionDelegateProtocol {
     func didSelectItem(at indexPath: IndexPath)
 }
 
-let kOptionsHeaderViewSize = CGSize(width: 0, height: 46)
+let kOptionsHeaderViewSize = CGSize(width: 0, height: kOptionCollectionViewHeaderHeight)
 
 class ProductOptionsCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private var delegate: ProductOptionsCollectionDelegateProtocol?
@@ -28,7 +28,11 @@ class ProductOptionsCollectionDelegate: NSObject, UICollectionViewDelegate, UICo
         return kOptionsHeaderViewSize
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.didSelectItem(at: indexPath)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: kOptionCollectionViewCellHeight)
     }
+    
+    //func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //delegate?.didSelectItem(at: indexPath)
+    //}
 }

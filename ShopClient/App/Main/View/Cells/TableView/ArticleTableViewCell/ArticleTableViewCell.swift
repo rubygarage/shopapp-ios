@@ -23,7 +23,7 @@ class ArticleTableViewCell: UITableViewCell {
     }
     
     func configure(with item: Article?, separatorHidden: Bool) {
-        let imageUrl = URL(string: item?.image?.src ?? String())
+        let imageUrl = URL(string: item?.image?.src ?? "")
         articleImageView.sd_setImage(with: imageUrl, completed: nil)
         titleLabel.text = item?.title
         descriptionLabel.text = item?.content

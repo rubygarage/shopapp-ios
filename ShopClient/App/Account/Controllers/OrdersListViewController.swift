@@ -33,7 +33,7 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, Or
     
     // MARK: - setup
     private func setupViews() {
-        title = NSLocalizedString("ControllerTitle.MyOrders", comment: String())
+        title = "ControllerTitle.MyOrders".localizable
     }
     
     private func setupViewModel() {

@@ -43,7 +43,7 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     }
     
     private func updateNavigationBar() {
-        navigationItem.title = NSLocalizedString("ControllerTitle.Account", comment: String())
+        navigationItem.title = "ControllerTitle.Account".localizable
     }
     
     private func setupTableView() {

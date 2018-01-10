@@ -67,7 +67,7 @@ class ProductDetailsViewModel: BaseViewModel {
     
     // MARK: - private
     private func setupData(product: Product) {
-        if selectedOptions.count == 0 {
+        if selectedOptions.isEmpty {
             setupSelectedOptions(product: product)
         }
         if selectedProductVariant == nil {
@@ -83,7 +83,7 @@ class ProductDetailsViewModel: BaseViewModel {
     private func setupSelectedOptions(product: Product) {
         if let options = product.options {
             for option in options {
-                selectedOptions.append((name: option.name ?? String(), value: option.values?.first ?? String()))
+                selectedOptions.append((name: option.name ?? "", value: option.values?.first ?? ""))
             }
         }
     }
@@ -93,8 +93,8 @@ class ProductDetailsViewModel: BaseViewModel {
         let selectedOptionsNValues = selectedOptions.map({ $0.value })
         
         for variant in variants {
-            let variantNames = variant.selectedOptions?.map({ $0.name }) ?? [String()]
-            let variantValues = variant.selectedOptions?.map({ $0.value }) ?? [String()]
+            let variantNames = variant.selectedOptions?.map({ $0.name }) ?? [""]
+            let variantValues = variant.selectedOptions?.map({ $0.value }) ?? [""]
             
             if selectedOptionsNames == variantNames && selectedOptionsNValues == variantValues {
                 updateSelectedVariant(variant: variant)

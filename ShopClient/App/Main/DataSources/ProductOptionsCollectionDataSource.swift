@@ -27,26 +27,26 @@ class ProductOptionsCollectionDataSource: NSObject, UICollectionViewDataSource {
     
     // MARK: - UICollectionViewDataSource
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        let optionsCount = delegate?.optionsCount() ?? 0
-        return optionsCount > 1 ? optionsCount : 0
+        return delegate?.optionsCount() ?? 0
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return delegate?.itemsCount(in: section) ?? 0
+        let itemsCount = delegate?.itemsCount(in: section) ?? 0
+        return itemsCount > 1 ? 1 : 0
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductOptionCollectionViewCell.self), for: indexPath) as! ProductOptionCollectionViewCell
-        let text = delegate?.item(at: indexPath.section, valueIndex: indexPath.row) ?? String()
-        let selected = delegate?.isItemSelected(at: indexPath) ?? false
-        cell.configure(with: text, selected: selected)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductOptionsCollectionViewCell.self), for: indexPath) as! ProductOptionsCollectionViewCell
+        //let text = delegate?.item(at: indexPath.section, valueIndex: indexPath.row) ?? String()
+        //let selected = delegate?.isItemSelected(at: indexPath) ?? false
+        //cell.configure(with: text, selected: selected)
         
         return cell
     }
     
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: String(describing: ProductOptionHeaderView.self), for: indexPath) as! ProductOptionHeaderView
-        let text = delegate?.sectionTitle(for: indexPath.section) ?? String()
+        let text = delegate?.sectionTitle(for: indexPath.section) ?? ""
         headerView.configure(with: text)
         
         return headerView

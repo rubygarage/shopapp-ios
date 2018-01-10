@@ -25,7 +25,7 @@ class CategoryViewModel: GridCollectionViewModel {
     }
     
     private func loadRemoteData() {
-        let showHud = products.value.count == 0
+        let showHud = products.value.isEmpty
         state.onNext(.loading(showHud: showHud))
         let reverse = selectedSortingValue == .createdAt
         categoryUseCase.getCategory(with: categoryId, paginationValue: paginationValue, sortingValue: selectedSortingValue, reverse: reverse) { [weak self] (result, error) in

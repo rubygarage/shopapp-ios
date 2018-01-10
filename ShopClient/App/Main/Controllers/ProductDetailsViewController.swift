@@ -52,15 +52,15 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     // MARK: - setup
     private func setupViews() {
-        quantityTitleLabel.text = NSLocalizedString("Label.Quantity", comment: String())
-        addToCartButton.setTitle(NSLocalizedString("Button.AddToCart", comment: String()).uppercased(), for: .normal)
-        addToCartButton.setTitle(NSLocalizedString("Button.ProductTemporaryUnavailable", comment: String()).uppercased(), for: .disabled)
+        quantityTitleLabel.text = "Label.Quantity".localizable
+        addToCartButton.setTitle("Button.AddToCart".localizable.uppercased(), for: .normal)
+        addToCartButton.setTitle("Button.ProductTemporaryUnavailable".localizable.uppercased(), for: .disabled)
     }
     
     private func setupViewModel() {
         viewModel.productId = productId
         
-        quantityTextField.rx.text.map { Int($0 ?? String()) ?? 1 }
+        quantityTextField.rx.text.map { Int($0 ?? "") ?? 1 }
             .bind(to: viewModel.quantity)
             .disposed(by: disposeBag)
         
@@ -142,7 +142,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     private func updateAddToCartButton() {
         productAddedToCart = true
-        self.addToCartButton.setTitle(NSLocalizedString("Button.AddedToCart", comment: String()).uppercased(), for: .normal)
+        self.addToCartButton.setTitle("Button.AddedToCart".localizable.uppercased(), for: .normal)
     }
     
     private func addProductToCart() {

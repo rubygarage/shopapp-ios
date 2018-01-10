@@ -12,7 +12,7 @@ class DetailsImagesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productImageView: UIImageView!
 
     public func configure(with image: Image) {
-        let imageUrl = URL(string: image.src ?? String())
+        let imageUrl = URL(string: image.src ?? "")
         productImageView.sd_setImage(with: imageUrl, completed: nil)
     }
 }

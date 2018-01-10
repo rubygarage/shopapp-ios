@@ -66,8 +66,8 @@ class AccountLoggedHeaderView: UIView {
     }
     
     private func setupViews() {
-        myOrdersButton.setTitle(NSLocalizedString("Button.MyOrders", comment: String()), for: .normal)
-        welcomeLabel.text = NSLocalizedString("Label.Welcome", comment: String())
+        myOrdersButton.setTitle("Button.MyOrders".localizable, for: .normal)
+        welcomeLabel.text = "Label.Welcome".localizable
     }
     
     private func populateViews(customer: Customer) {

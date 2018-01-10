@@ -24,7 +24,7 @@ class ProductsListViewModel: GridCollectionViewModel {
     }
     
     private func loadRemoteData() {
-        let showHud = products.value.count == 0
+        let showHud = products.value.isEmpty
         state.onNext(.loading(showHud: showHud))
         let reverse = sortingValue == .createdAt
         productListUseCase.getProductList(with: paginationValue, sortingValue: sortingValue, reverse: reverse) { [weak self] (products, error) in

@@ -14,7 +14,7 @@ protocol ImagesCarouselCollectionDataSourceProtocol {
 }
 
 class ImagesCarouselCollectionDataSource: NSObject, UICollectionViewDataSource {
-    var delegate: ImagesCarouselCollectionDataSourceProtocol?
+    private var delegate: ImagesCarouselCollectionDataSourceProtocol?
     
     init(delegate: ImagesCarouselCollectionDataSourceProtocol) {
         super.init()

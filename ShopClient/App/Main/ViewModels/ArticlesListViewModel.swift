@@ -24,7 +24,7 @@ class ArticlesListViewModel: BasePaginationViewModel {
     }
     
     private func loadRemoteData() {
-        let showHud = items.value.count == 0
+        let showHud = items.value.isEmpty
         state.onNext(.loading(showHud: showHud))
         articleListUseCase.getArticleList(with: paginationValue) { [weak self] (articles, error) in
             if let error = error {

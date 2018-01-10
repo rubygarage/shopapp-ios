@@ -44,7 +44,7 @@ class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel> 
     }
     
     private func populateViews(with article: Article) {
-        let imageUrl = URL(string: article.image?.src ?? String())
+        let imageUrl = URL(string: article.image?.src ?? "")
         articleImageView.sd_setImage(with: imageUrl)
         articleTitleLabel.text = article.title
         authorNameLabel.text = article.author?.fullName

@@ -55,11 +55,11 @@ class SignUpViewModel: BaseViewModel {
     
     private func processErrorsIfNeeded() {
         if emailText.value.isValidAsEmail() == false {
-            let errorMessage = NSLocalizedString("Error.InvalidEmail", comment: String())
+            let errorMessage = "Error.InvalidEmail".localizable
             emailErrorMessage.onNext(errorMessage)
         }
         if passwordText.value.isValidAsPassword() == false {
-            let errorMessage = NSLocalizedString("Error.InvalidPassword", comment: String())
+            let errorMessage = "Error.InvalidPassword".localizable
             passwordErrorMessage.onNext(errorMessage)
         }
     }

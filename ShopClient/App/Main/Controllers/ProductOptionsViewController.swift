@@ -8,8 +8,9 @@
 
 import UIKit
 
-let kOptionCellEstimatedSize = CGSize(width: 100, height: 31)
-let kOptionCollectioniewAdditionalHeight = CGFloat(30.0)
+let kOptionCollectionViewHeaderHeight = CGFloat(46.0)
+let kOptionCollectionViewCellHeight = CGFloat(31.0)
+let kOptionCollectionViewAdditionalHeight = CGFloat(30.0)
 
 protocol ProductOptionsControllerProtocol {
     func didCalculate(collectionViewHeight: CGFloat)
@@ -23,10 +24,10 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
     var options = [ProductOption]()
     var selectedOptions = [SelectedOption]() {
         didSet {
+            let collectioViewHeight = (kOptionCollectionViewHeaderHeight + kOptionCollectionViewCellHeight) * CGFloat(options.count)
+            let additionalHeight = !options.isEmpty ? kOptionCollectionViewAdditionalHeight : 0.0
+            controllerDelegate?.didCalculate(collectionViewHeight: collectioViewHeight + additionalHeight)
             collectionView.reloadData()
-            collectionView.layoutIfNeeded()
-            let additionalHeight = collectionView.contentSize.height > 0 ? kOptionCollectioniewAdditionalHeight : 0.0
-            controllerDelegate?.didCalculate(collectionViewHeight: collectionView.contentSize.height + additionalHeight)
         }
     }
     var controllerDelegate: ProductOptionsControllerProtocol?
@@ -40,14 +41,12 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
     }
     
     private func setupCollectionView() {
-        let nib = UINib(nibName: String(describing: ProductOptionCollectionViewCell.self), bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: String(describing: ProductOptionCollectionViewCell.self))
+        let nib = UINib(nibName: String(describing: ProductOptionsCollectionViewCell.self), bundle: nil)
+        collectionView.register(nib, forCellWithReuseIdentifier: String(describing: ProductOptionsCollectionViewCell.self))
         
         let headerNib = UINib(nibName: String(describing: ProductOptionHeaderView.self), bundle: nil)
         collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: String(describing: ProductOptionHeaderView.self))
-        
-        collectionLayout.estimatedItemSize = kOptionCellEstimatedSize
-        
+
         collectionDataSource = ProductOptionsCollectionDataSource(delegate: self)
         collectionView.dataSource = collectionDataSource
         
@@ -71,16 +70,16 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
     func item(at optionIndex: Int, valueIndex: Int) -> String {
         if optionIndex < options.count {
             let option = options[optionIndex]
-            return option.values?[valueIndex] ?? String()
+            return option.values?[valueIndex] ?? ""
         }
-        return String()
+        return ""
     }
     
     func sectionTitle(for sectionIndex: Int) -> String {
         if sectionIndex < options.count {
-            return options[sectionIndex].name ?? String()
+            return options[sectionIndex].name ?? ""
         }
-        return String()
+        return ""
     }
     
     func isItemSelected(at indexPath: IndexPath) -> Bool {
@@ -95,7 +94,7 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
     // MARK: - ProductOptionsCollectionDelegateProtocol
     func didSelectItem(at indexPath: IndexPath) {
         if indexPath.section < options.count {
-            let name = options[indexPath.section].name ?? String()
+            let name = options[indexPath.section].name ?? ""
             let value = options[indexPath.section].values![indexPath.row]
             controllerDelegate?.didSelectOption(with: name, value: value)
         }

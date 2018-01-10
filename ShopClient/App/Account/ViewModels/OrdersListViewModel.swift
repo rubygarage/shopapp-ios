@@ -24,7 +24,7 @@ class OrdersListViewModel: BasePaginationViewModel {
     }
     
     private func loadRemoteData() {
-        let showHud = items.value.count == 0
+        let showHud = items.value.isEmpty
         state.onNext(.loading(showHud: showHud))
         orderListUseCase.getOrderList(with: paginationValue) { [weak self] (order, error) in
             if let error = error {

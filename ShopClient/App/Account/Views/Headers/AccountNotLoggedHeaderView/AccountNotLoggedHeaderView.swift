@@ -45,9 +45,9 @@ class AccountNotLoggedHeaderView: UIView, UnderlinedButtonProtocol {
     }
     
     private func setupViews() {
-        signInButton.setTitle(NSLocalizedString("Button.SignIn", comment: String()).uppercased(), for: .normal)
-        signInLabel.text = NSLocalizedString("Label.SignInToShop", comment: String())
-        createNewAccountButton.setTitle(NSLocalizedString("Button.CreateNewAccount", comment: String()).uppercased(), for: .normal)
+        signInButton.setTitle("Button.SignIn".localizable.uppercased(), for: .normal)
+        signInLabel.text = "Label.SignInToShop".localizable
+        createNewAccountButton.setTitle("Button.CreateNewAccount".localizable.uppercased(), for: .normal)
         createNewAccountButton.delegate = self
     }
     
