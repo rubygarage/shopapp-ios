@@ -46,9 +46,6 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, Payme
             addressListViewController.title = NSLocalizedString("ControllerTitle.BillingAddress", comment: String())
             addressListViewController.addressListType = .billing
             addressListViewController.destinationCreditCardCompletion = completion
-//            addressListViewController.completion = { [weak self] (address) in
-//                self?.pushCreditCardController(with: address, completion: self?.completion)
-//            }
         }
     }
 }
