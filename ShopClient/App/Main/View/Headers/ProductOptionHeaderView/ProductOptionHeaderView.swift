@@ -11,12 +11,7 @@ import UIKit
 class ProductOptionHeaderView: UICollectionReusableView {
     @IBOutlet weak var optionNameLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-    func configure(with title: String?) {
-        optionNameLabel.text = title
+    func configure(with title: String) {
+        optionNameLabel.text = title + ":"
     }
 }

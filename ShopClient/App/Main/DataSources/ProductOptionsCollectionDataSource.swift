@@ -37,17 +37,16 @@ class ProductOptionsCollectionDataSource: NSObject, UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductOptionCollectionViewCell.self), for: indexPath) as! ProductOptionCollectionViewCell
-        let text = delegate?.item(at: indexPath.section, valueIndex: indexPath.row)
+        let text = delegate?.item(at: indexPath.section, valueIndex: indexPath.row) ?? String()
         let selected = delegate?.isItemSelected(at: indexPath) ?? false
         cell.configure(with: text, selected: selected)
-        cell.contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
         
         return cell
     }
     
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: String(describing: ProductOptionHeaderView.self), for: indexPath) as! ProductOptionHeaderView
-        let text = delegate?.sectionTitle(for: indexPath.section)
+        let text = delegate?.sectionTitle(for: indexPath.section) ?? String()
         headerView.configure(with: text)
         
         return headerView

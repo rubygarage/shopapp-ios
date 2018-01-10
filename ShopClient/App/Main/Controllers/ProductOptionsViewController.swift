@@ -9,6 +9,7 @@
 import UIKit
 
 let kOptionCellEstimatedSize = CGSize(width: 100, height: 31)
+let kOptionCollectioniewAdditionalHeight = CGFloat(30.0)
 
 protocol ProductOptionsControllerProtocol {
     func didCalculate(collectionViewHeight: CGFloat)
@@ -23,7 +24,9 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
     var selectedOptions = [SelectedOption]() {
         didSet {
             collectionView.reloadData()
-            controllerDelegate?.didCalculate(collectionViewHeight: collectionView.contentSize.height)
+            collectionView.layoutIfNeeded()
+            let additionalHeight = collectionView.contentSize.height > 0 ? kOptionCollectioniewAdditionalHeight : 0.0
+            controllerDelegate?.didCalculate(collectionViewHeight: collectionView.contentSize.height + additionalHeight)
         }
     }
     var controllerDelegate: ProductOptionsControllerProtocol?

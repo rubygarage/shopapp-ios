@@ -8,17 +8,16 @@
 
 import UIKit
 
+let kProductUnselectedOptionColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1)
+
 class ProductOptionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var optionTitleLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        layer.cornerRadius = CornerRadius.defaultValue
-    }
-    
-    func configure(with text: String?, selected: Bool) {
+    func configure(with text: String, selected: Bool) {
         optionTitleLabel.text = text
-        backgroundColor = selected ? UIColor.green : UIColor.lightGray
+        optionTitleLabel.textColor = selected ? UIColor.white : UIColor.black
+        backgroundColor = selected ? UIColor.black : kProductUnselectedOptionColor
+        contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        layer.cornerRadius = frame.size.height / 2
     }
 }
