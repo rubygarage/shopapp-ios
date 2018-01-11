@@ -17,6 +17,6 @@ extension ShippingRate {
         
         title = item?.title
         price = item?.price.description
-        handle = item?.handle ?? String()
+        handle = item?.handle ?? ""
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 let kOptionCollectionViewHeaderHeight = CGFloat(46.0)
 let kOptionCollectionViewCellHeight = CGFloat(31.0)
-let kOptionCollectionViewAdditionalHeight = CGFloat(30.0)
+private let kOptionCollectionViewAdditionalHeight = CGFloat(30.0)
 
 protocol ProductOptionsControllerProtocol {
     func didCalculate(collectionViewHeight: CGFloat)

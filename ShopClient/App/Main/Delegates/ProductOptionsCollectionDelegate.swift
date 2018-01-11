@@ -8,7 +8,7 @@
 
 import UIKit
 
-let kOptionsHeaderViewSize = CGSize(width: 0, height: kOptionCollectionViewHeaderHeight)
+private let kOptionsHeaderViewSize = CGSize(width: 0, height: kOptionCollectionViewHeaderHeight)
 
 class ProductOptionsCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     // MARK: - UICollectionViewDelegate

@@ -12,6 +12,6 @@ class ProductOptionHeaderView: UICollectionReusableView {
     @IBOutlet weak var optionNameLabel: UILabel!
     
     func configure(with title: String) {
-        optionNameLabel.text = title + ":"
+        optionNameLabel.text = String.localizedStringWithFormat("Label.Product.OptionTitle".localizable, title)
     }
 }

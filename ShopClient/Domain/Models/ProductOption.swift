@@ -9,7 +9,7 @@
 import Foundation
 
 class ProductOption: NSObject {
-    var id = String()
+    var id = ""
     var name: String?
     var values: [String]?
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 class ProductVariant: NSObject {
-    var id = String()
+    var id = ""
     var title: String?
     var price: String?
     var available: Bool = false

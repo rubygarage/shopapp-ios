@@ -714,7 +714,7 @@ class API: NSObject, APIInterface {
     private func checkoutLineItemInput(cartProducts: [CartProduct]) -> [Storefront.CheckoutLineItemInput] {
         var inputs = [Storefront.CheckoutLineItemInput]()
         for product in cartProducts {
-            let productId = GraphQL.ID.init(rawValue: product.productVariant?.id ?? String())
+            let productId = GraphQL.ID.init(rawValue: product.productVariant?.id ?? "")
             inputs.append(Storefront.CheckoutLineItemInput.create(quantity: Int32(product.quantity), variantId: productId))
         }
         return inputs
@@ -1099,7 +1099,7 @@ class API: NSObject, APIInterface {
         let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
         let token = keyChain.get(SessionData.accessToken)
         let email = keyChain.get(SessionData.email)
-        let expiryDateString = keyChain.get(SessionData.expiryDate) ?? String()
+        let expiryDateString = keyChain.get(SessionData.expiryDate) ?? ""
         let expiryDateTimeInterval = TimeInterval(expiryDateString) ?? TimeInterval()
         let expiryDate = Date(timeIntervalSinceNow: expiryDateTimeInterval)
         

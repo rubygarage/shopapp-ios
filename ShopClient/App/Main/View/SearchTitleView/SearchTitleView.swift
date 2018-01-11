@@ -101,7 +101,7 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     }
     
     private func attributedPlaceholderDefault() -> NSAttributedString {
-        let placeholder = " " + "Placeholder.Search".localizable
+        let placeholder = "Placeholder.Search".localizable
         let attributedPlaceholder = NSMutableAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: UIColor.black])
         let textAttachment = NSTextAttachment()
         textAttachment.image = #imageLiteral(resourceName: "search")

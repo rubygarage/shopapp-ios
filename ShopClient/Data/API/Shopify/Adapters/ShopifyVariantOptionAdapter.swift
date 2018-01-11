@@ -15,7 +15,7 @@ extension VariantOption {
         }
         self.init()
         
-        name = variantObject?.name ?? String()
-        value = variantObject?.value ?? String()
+        name = variantObject?.name ?? ""
+        value = variantObject?.value ?? ""
     }
 }

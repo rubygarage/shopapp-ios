@@ -9,6 +9,6 @@
 import Foundation
 
 class VariantOption: NSObject {
-    var name = String()
-    var value = String()
+    var name = ""
+    var value = ""
 }

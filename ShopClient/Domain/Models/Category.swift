@@ -9,7 +9,7 @@
 import Foundation
 
 class Category: NSObject {
-    var id = String()
+    var id = ""
     var title: String?
     var categoryDescription: String?
     var image: Image?

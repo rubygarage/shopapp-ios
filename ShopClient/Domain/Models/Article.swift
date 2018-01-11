@@ -9,7 +9,7 @@
 import Foundation
 
 class Article: NSObject {
-    var id = String()
+    var id = ""
     var title: String?
     var content: String?
     var image: Image?

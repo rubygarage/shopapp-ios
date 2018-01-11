@@ -106,12 +106,14 @@
 "Label.Order.Tax" = "Tax";
 "Label.Order.Total" = "Total";
 "Label.Order.Quantity" = "QTY:";
-"Label.Order.Each" = "each";
+"Label.Order.Option" = "%@ %@";
+"Label.Order.Each" = "%@ each";
 "Label.Order.Total" = "Total:";
 "Label.Payment.CreditCard" = "Credit Card";
 "Label.ExpirationDate" = "Expiration date";
 "Label.CreditCard.MaskedNumber" = "**%@";
 "Label.CreditCard.ExpirationDate" = "Exp : %@ / %@";
+"Label.Product.OptionTitle" = "%@:";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";
@@ -127,7 +129,7 @@
 "Placeholder.LastName" = "Last Name";
 "Placeholder.PhoneNumber" = "Phone number";
 "Placeholder.CreatePassword" = "Create a Password*";
-"Placeholder.Search" = "Search";
+"Placeholder.Search" = " Search";
 "Placeholder.Country" = "Country";
 "Placeholder.Address" = "Address";
 "Placeholder.AddressOptional" = "Address 2 (optional)";

@@ -9,7 +9,7 @@
 import Foundation
 
 class Product: NSObject {
-    var id = String()
+    var id = ""
     var title: String?
     var productDescription: String?
     var currency: String?
@@ -28,7 +28,7 @@ class Product: NSObject {
     // MARK: - additional
     var lowestPrice: String {
         get {
-            return variants?.sorted(by: { $0.price ?? String() < $1.price ?? String() }).first?.price ?? String()
+            return variants?.sorted(by: { $0.price ?? "" < $1.price ?? "" }).first?.price ?? ""
         }
     }
 }

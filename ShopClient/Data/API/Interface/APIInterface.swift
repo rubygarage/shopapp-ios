@@ -13,9 +13,9 @@ enum SortingValue: Int {
     case name
     case popular
     
-    static let allValues = [NSLocalizedString("SortingValue.CreatedAt", comment: String()),
-                            NSLocalizedString("SortingValue.Name", comment: String()),
-                            NSLocalizedString("SortingValue.Popular", comment: String())]
+    static let allValues = ["SortingValue.CreatedAt".localizable,
+                            "SortingValue.Name".localizable,
+                            "SortingValue.Popular".localizable]
 }
 
 protocol APIInterface {

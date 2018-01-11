@@ -68,7 +68,7 @@ extension DAO {
     }
     
     private func getPredicate(with productVariantId: String?) -> NSPredicate {
-        let variantId = productVariantId ?? String()
+        let variantId = productVariantId ?? ""
         return NSPredicate(format: "productVariant.id == %@", variantId)
     }
 }

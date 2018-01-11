@@ -19,7 +19,7 @@ extension Address {
     }
     
     private func update(with item: Storefront.MailingAddress?) {
-        id = item?.id.rawValue ?? String()
+        id = item?.id.rawValue ?? ""
         firstName = item?.firstName
         lastName = item?.lastName
         address = item?.address1

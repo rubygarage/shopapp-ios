@@ -15,7 +15,7 @@ extension ProductVariant {
         }
         self.init()
         
-        id = item?.id.rawValue ?? String()
+        id = item?.id.rawValue ?? ""
         title = item?.title
         price = item?.price.description
         available = item?.availableForSale ?? false

@@ -9,7 +9,7 @@
 import Foundation
 
 class RepoError: Error {
-    var errorMessage = NSLocalizedString("Error.Unknown", comment: String())
+    var errorMessage = "Error.Unknown".localizable
     var statusCode: Int = 0
 
     init() {}
@@ -50,6 +50,6 @@ class NetworkError: RepoError {
     override init() {
         super.init()
         
-        errorMessage = NSLocalizedString("Error.NoConnection", comment: String())
+        errorMessage = "Error.NoConnection".localizable
     }
 }

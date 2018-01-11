@@ -9,7 +9,7 @@
 import Foundation
 
 class Checkout: NSObject {
-    var id = String()
+    var id = ""
     var webUrl: String?
     var subtotalPrice: Decimal?
     var totalPrice: Decimal?
