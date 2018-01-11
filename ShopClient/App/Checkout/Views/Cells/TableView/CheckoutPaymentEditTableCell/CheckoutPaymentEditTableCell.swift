@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CheckoutPaymentEditTableCellProtocol {
+    func didTapEditPaymentType()
+}
+
 class CheckoutPaymentEditTableCell: UITableViewCell {
     @IBOutlet weak var creditCardLabel: UILabel!
     @IBOutlet weak var cardNumberLabel: UILabel!
@@ -17,6 +21,8 @@ class CheckoutPaymentEditTableCell: UITableViewCell {
     @IBOutlet weak var billingAddressLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
     
+    var delegate: CheckoutPaymentEditTableCellProtocol!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -24,11 +30,12 @@ class CheckoutPaymentEditTableCell: UITableViewCell {
         setupViews()
     }
     
-    public func configure(with billingAddress: Address, creditCard: CreditCard) {
+    public func configure(with billingAddress: Address, creditCard: CreditCard, delegate: CheckoutPaymentEditTableCellProtocol) {
         cardNumberLabel.text = creditCard.maskedNumber
         expirationDateLabel.text = creditCard.expirationDateLocalized
         holderNameLabel.text = creditCard.holderName
         billingAddressLabel.text = billingAddress.fullAddress
+        self.delegate = delegate
     }
     
     // MARK: - private
@@ -36,5 +43,10 @@ class CheckoutPaymentEditTableCell: UITableViewCell {
         creditCardLabel?.text = "Label.Payment.CreditCard".localizable
         billingAddressTitleLabel?.text = "Label.BillingAddress".localizable
         editButton?.setTitle("Button.Edit".localizable.uppercased(), for: .normal)
+    }
+    
+    // MARK: - actions
+    @IBAction func editTapped(_ sender: UIButton) {
+        delegate.didTapEditPaymentType()
     }
 }

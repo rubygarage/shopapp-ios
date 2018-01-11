@@ -162,6 +162,11 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
         performSegue(withIdentifier: SegueIdentifiers.toPaymentType, sender: self)
     }
     
+    // MARK: - CheckoutPaymentEditTableCellProtocol
+    func didTapEditPaymentType() {
+        performSegue(withIdentifier: SegueIdentifiers.toPaymentType, sender: self)
+    }
+    
     // MARK: - CheckoutTableDelegateProtocol
     
     func checkout() -> Checkout? {
