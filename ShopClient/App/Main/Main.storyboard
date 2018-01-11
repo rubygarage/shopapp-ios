@@ -425,6 +425,7 @@
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="hgA-g4-YlP" secondAttribute="trailing" constant="20" id="83u-Go-rYn"/>
                                             <constraint firstItem="7os-fj-8bp" firstAttribute="leading" secondItem="Qay-w4-Oom" secondAttribute="leading" id="HK9-e6-TNL"/>
@@ -434,8 +435,11 @@
                                             <constraint firstAttribute="height" constant="60" id="ma5-NR-6Xc"/>
                                             <constraint firstAttribute="bottom" secondItem="7os-fj-8bp" secondAttribute="bottom" id="oLA-kn-mRp"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="BVK-gf-1aC" appends="YES" id="sAb-Lx-4ag"/>
+                                        </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wUn-wL-MNB" userLabel="Description View">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wUn-wL-MNB" userLabel="Description View">
                                         <rect key="frame" x="0.0" y="717" width="375" height="56"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Description Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3BV-lT-OBn">
@@ -447,10 +451,10 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="3BV-lT-OBn" secondAttribute="bottom" constant="20" id="Eyl-GO-utp"/>
-                                            <constraint firstAttribute="trailing" secondItem="3BV-lT-OBn" secondAttribute="trailing" constant="20" id="bbD-ym-hyZ"/>
-                                            <constraint firstItem="3BV-lT-OBn" firstAttribute="leading" secondItem="wUn-wL-MNB" secondAttribute="leading" constant="20" id="yHg-gl-Kuy"/>
-                                            <constraint firstItem="3BV-lT-OBn" firstAttribute="top" secondItem="wUn-wL-MNB" secondAttribute="top" constant="20" id="z9A-Hv-Ftf"/>
+                                            <constraint firstAttribute="trailing" secondItem="3BV-lT-OBn" secondAttribute="trailing" constant="20" id="9R2-co-pBw"/>
+                                            <constraint firstAttribute="height" constant="56" id="GbI-xt-Tca"/>
+                                            <constraint firstItem="3BV-lT-OBn" firstAttribute="leading" secondItem="wUn-wL-MNB" secondAttribute="leading" constant="20" id="bNW-wN-QUn"/>
+                                            <constraint firstItem="3BV-lT-OBn" firstAttribute="centerY" secondItem="wUn-wL-MNB" secondAttribute="centerY" id="i8Q-CQ-NOU"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -525,6 +529,8 @@
                     <connections>
                         <outlet property="addToCartButton" destination="B5D-4I-QGs" id="AhZ-UR-tAD"/>
                         <outlet property="bottomView" destination="X8y-La-p8d" id="G07-la-lrh"/>
+                        <outlet property="contentView" destination="U58-8e-lWv" id="7vh-6z-7mm"/>
+                        <outlet property="descriptionContainerViewHeightConstraint" destination="GbI-xt-Tca" id="eUa-bv-HBH"/>
                         <outlet property="descriptionLabel" destination="3BV-lT-OBn" id="tYV-Id-j6L"/>
                         <outlet property="optionsContainerViewHeightConstraint" destination="lVY-Vz-JGJ" id="b6i-NH-k7Z"/>
                         <outlet property="priceLabel" destination="40U-Lo-b1L" id="6bb-3l-k40"/>
@@ -535,6 +541,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hW1-rU-WGd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="BVK-gf-1aC">
+                    <connections>
+                        <action selector="descriptionContainerDidTap:" destination="2iw-CM-RMu" id="fLP-HQ-TzR"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-362.39999999999998" y="2743.1784107946028"/>
         </scene>

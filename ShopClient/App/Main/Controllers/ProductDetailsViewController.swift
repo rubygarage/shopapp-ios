@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import TPKeyboardAvoiding
 
 typealias SelectedOption = (name: String, value: String)
 
@@ -17,7 +18,12 @@ private let kBottomViewColorEnabled = UIColor(red: 0, green: 0.48, blue: 1, alph
 private let kBottomViewColorDisabled = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
 private let kAddToCartChangesAnimationDuration: TimeInterval = 0.33
 
+private let kProductDescriptionHeaderHeight = CGFloat(60.0)
+private let kProductDescriptionHiddenHeight = CGFloat(0.0)
+private let kProductDescriptionAdditionalHeight = CGFloat(40.0)
+
 class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerProtocol, ProductOptionsControllerProtocol {
+    @IBOutlet var contentView: TPKeyboardAvoidingScrollView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
@@ -26,6 +32,11 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     @IBOutlet weak var quantityUnderlineView: UIView!
     @IBOutlet weak var addToCartButton: UIButton!
     @IBOutlet weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var descriptionContainerViewHeightConstraint: NSLayoutConstraint! {
+        didSet {
+            descriptionContainerViewHeightConstraint.constant = kProductDescriptionHiddenHeight
+        }
+    }
     @IBOutlet weak var bottomView: UIView!
     
     var productId: String!
@@ -175,6 +186,24 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     @IBAction func quantityEditingDidEnd(_ sender: UITextField) {
         quantityUnderlineView.backgroundColor = kQuantityUnderlineColorDefault
+    }
+    
+    @IBAction func descriptionContainerDidTap(_ sender: UITapGestureRecognizer) {
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        let navigationBarHeight = navigationController?.navigationBar.frame.size.height ?? CGFloat(0.0)
+        let barHeight = statusBarHeight + navigationBarHeight
+        let contentOffsetY = self.contentView.contentSize.height - barHeight - kProductDescriptionHeaderHeight
+        
+        let constant = descriptionContainerViewHeightConstraint.constant != kProductDescriptionHiddenHeight
+            ? kProductDescriptionHiddenHeight
+            : descriptionLabel.frame.size.height + kProductDescriptionAdditionalHeight
+        
+        self.descriptionContainerViewHeightConstraint.constant = constant
+        
+        UIView.animate(withDuration: kAddToCartChangesAnimationDuration, animations: {
+            self.contentView.contentOffset = CGPoint(x: 0.0, y: contentOffsetY)
+            self.view.layoutIfNeeded()
+        })
     }
     
     // MARK: - DetailImagesViewControllerProtocol
