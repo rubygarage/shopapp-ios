@@ -42,7 +42,7 @@ class AccountFooterView: UIView, UnderlinedButtonProtocol {
     }
     
     private func setupViews() {
-        logoutButton.setTitle("Button.Logout".localizable).uppercased(), for: .normal)
+        logoutButton.setTitle("Button.Logout".localizable.uppercased(), for: .normal)
         logoutButton.delegate = self
     }
     

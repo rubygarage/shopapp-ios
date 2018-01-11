@@ -8,8 +8,11 @@
 
 import UIKit
 
-class ProductOptionsCollectionViewCell: UICollectionViewCell {
+class ProductOptionsCollectionViewCell: UICollectionViewCell {//, ProductOptionCollectionDataSourceProtocol, ProductOptionCollectionDelegateProtocol {
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    private var dataSource: ProductOptionCollectionDataSource?
+    private var delegate: ProductOptionCollectionDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,11 +23,12 @@ class ProductOptionsCollectionViewCell: UICollectionViewCell {
     private func setupCollectionView() {
         let nib = UINib(nibName: String(describing: ProductOptionCollectionViewCell.self), bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: String(describing: ProductOptionCollectionViewCell.self))
+        /*
+        dataSource = ProductOptionCollectionDataSource(delegate: self)
+        collectionView.dataSource = dataSource
         
-//        dataSource = LastArrivalsTableDataSource(delegate: self)
-//        collectionView.dataSource = dataSource
-//        
-//        delegate = LastArrivalsTableDelegate(delegate: self)
-//        collectionView.delegate = delegate
+        delegate = ProductOptionCollectionDelegate(delegate: self)
+        collectionView.delegate = delegate
+ */
     }
 }

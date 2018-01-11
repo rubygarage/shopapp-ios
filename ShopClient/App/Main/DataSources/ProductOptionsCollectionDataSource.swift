@@ -37,9 +37,6 @@ class ProductOptionsCollectionDataSource: NSObject, UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductOptionsCollectionViewCell.self), for: indexPath) as! ProductOptionsCollectionViewCell
-        //let text = delegate?.item(at: indexPath.section, valueIndex: indexPath.row) ?? String()
-        //let selected = delegate?.isItemSelected(at: indexPath) ?? false
-        //cell.configure(with: text, selected: selected)
         
         return cell
     }
