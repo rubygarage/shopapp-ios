@@ -49,7 +49,6 @@ extension Order {
             shippingAddress = Address(with: item?.shippingAddress)
             subtotalPrice = item?.subtotalPrice
             totalShippingPrice = item?.totalShippingPrice
-            totalTax = item?.totalTax
         }
     }
 }

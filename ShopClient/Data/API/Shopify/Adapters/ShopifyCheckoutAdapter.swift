@@ -20,7 +20,6 @@ extension Checkout {
         currencyCode = item?.currencyCode.rawValue
         subtotalPrice = item?.subtotalPrice
         totalPrice = item?.totalPrice
-        totalTax = item?.totalTax
         shippingAddress = Address(with: item?.shippingAddress)
     }
 }

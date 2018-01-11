@@ -13,12 +13,10 @@ class PaymentDetailsFooterView: UIView {
     @IBOutlet var subtotalLabel: UILabel!
     @IBOutlet var discountLabel: UILabel!
     @IBOutlet var shippingLabel: UILabel!
-    @IBOutlet var taxLabel: UILabel!
     @IBOutlet var totalLabel: UILabel!
     @IBOutlet var subtotalValueLabel: UILabel!
     @IBOutlet var discountValueLabel: UILabel!
     @IBOutlet var shippingValueLabel: UILabel!
-    @IBOutlet var taxValueLabel: UILabel!
     @IBOutlet var totalValueLabel: UILabel!
     
     static let height = CGFloat(175)
@@ -56,7 +54,6 @@ class PaymentDetailsFooterView: UIView {
         subtotalLabel.text = "Label.Order.Subtotal".localizable
         discountLabel.text = "Label.Order.Discount".localizable
         shippingLabel.text = "Label.Order.Shipping".localizable
-        taxLabel.text = "Label.Order.Tax".localizable
         totalLabel.text = "Label.Order.Total".localizable.uppercased()
     }
     
@@ -65,13 +62,11 @@ class PaymentDetailsFooterView: UIView {
         let subtotalPrice = NSDecimalNumber(decimal: order.subtotalPrice!)
         let discountPrice = NSDecimalNumber(value: 0)
         let totalShippingPrice = NSDecimalNumber(decimal: order.totalShippingPrice!)
-        let totalTax = NSDecimalNumber(decimal: order.totalTax!)
         let totalPrice = NSDecimalNumber(decimal: order.totalPrice!)
         
         subtotalValueLabel.text = formatter.string(from: subtotalPrice)
         discountValueLabel.text = formatter.string(from: discountPrice)
         shippingValueLabel.text = formatter.string(from: totalShippingPrice)
-        taxValueLabel.text = formatter.string(from: totalTax)
         totalValueLabel.text = formatter.string(from: totalPrice)
     }
     
@@ -80,13 +75,11 @@ class PaymentDetailsFooterView: UIView {
         let subtotalPrice = NSDecimalNumber(decimal: checkout.subtotalPrice!)
         let discountPrice = NSDecimalNumber(value: 0)
         let totalShippingPrice = NSDecimalNumber(value: 0)
-        let totalTax = NSDecimalNumber(decimal: checkout.totalTax!)
         let totalPrice = NSDecimalNumber(decimal: checkout.totalPrice!)
         
         subtotalValueLabel.text = formatter.string(from: subtotalPrice)
         discountValueLabel.text = formatter.string(from: discountPrice)
         shippingValueLabel.text = formatter.string(from: totalShippingPrice)
-        taxValueLabel.text = formatter.string(from: totalTax)
         totalValueLabel.text = formatter.string(from: totalPrice)
     }
 }
