@@ -108,7 +108,7 @@ class SearchTitleView: UIView, UITextFieldDelegate {
         let deltaY = (searchTextField.font!.capHeight - #imageLiteral(resourceName: "search").size.height).rounded() / 2
         textAttachment.bounds = CGRect(x: 0, y: deltaY, width: #imageLiteral(resourceName: "search").size.width, height: #imageLiteral(resourceName: "search").size.height)
         let attrStringWithImage = NSAttributedString(attachment: textAttachment)
-        attributedPlaceholder.replaceCharacters(in: NSMakeRange(0, 0), with: attrStringWithImage)
+        attributedPlaceholder.replaceCharacters(in: NSRange(location: 0, length: 0), with: attrStringWithImage)
         return attributedPlaceholder
     }
     

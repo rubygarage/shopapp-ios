@@ -13,8 +13,8 @@ enum AlertButtonIndex: Int {
     case cancel = 1
 }
 
-typealias ButtonClosure = (_ buttonIndex: Int) -> ()
-typealias AlertClosure = (AlertButtonIndex) -> ()
+typealias ButtonClosure = (_ buttonIndex: Int) -> Void
+typealias AlertClosure = (AlertButtonIndex) -> Void
 
 extension UIViewController {
     // MARK: - public
@@ -37,12 +37,12 @@ extension UIViewController {
     private func showAlertController(with title: String?, message: String?, submit: String? = nil, cancel: String, handler: AlertClosure?) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        let cancelAction = UIAlertAction(title: cancel, style: .default) { (action) in
+        let cancelAction = UIAlertAction(title: cancel, style: .default) { (_) in
             handler?(.cancel)
         }
         alertController.addAction(cancelAction)
         if submit != nil {
-            let submitAction = UIAlertAction(title: submit, style: .default, handler: { (action) in
+            let submitAction = UIAlertAction(title: submit, style: .default, handler: { (_) in
                 handler?(.submit)
             })
             alertController.addAction(submitAction)
@@ -55,16 +55,16 @@ extension UIViewController {
         
         if let destructive = destructive {
             let alertAction = UIAlertAction(title: destructive, style: .destructive,
-                                            handler: { (action: UIAlertAction) -> () in
+                                            handler: { _ -> Void in
                                                 handle(buttons.count)
             })
             alertController.addAction(alertAction)
         }
         
-        if buttons.count > 0 {
+        if buttons.isEmpty {
             for title in buttons {
                 let alertAction = UIAlertAction(title: title, style: .default,
-                                                handler: { (action: UIAlertAction) -> () in
+                                                handler: { (action: UIAlertAction) -> Void in
                                                     let index = buttons.index(of: action.title!)
                                                     handle(index!)
                 })

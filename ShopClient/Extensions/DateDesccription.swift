@@ -10,10 +10,8 @@ import Foundation
 
 internal extension Date {
     var longDescription: String {
-        get {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
-            return dateFormatter.string(from: self)
-        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+        return dateFormatter.string(from: self)
     }
 }

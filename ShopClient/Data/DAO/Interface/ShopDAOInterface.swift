@@ -7,5 +7,5 @@
 //
 
 protocol ShopDAOInterface {
-    func save(shopObject: Shop, callback: @escaping () -> ())
+    func save(shopObject: Shop, callback: @escaping () -> Void)
 }

@@ -25,10 +25,10 @@ class BaseTableViewController<T: BasePaginationViewModel>: BasePaginationViewCon
     }
     
     private func setupInfinityScroll() {
-        tableView.setShouldShowInfiniteScrollHandler { [weak self] (tableView) -> Bool in
+        tableView.setShouldShowInfiniteScrollHandler { [weak self] _ -> Bool in
             return self?.viewModel.canLoadMore ?? false
         }
-        tableView.addInfiniteScroll { [weak self] (tableView) in
+        tableView.addInfiniteScroll { [weak self] _ in
             self?.infinityScrollHandler()
         }
     }

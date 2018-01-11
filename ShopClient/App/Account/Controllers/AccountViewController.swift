@@ -65,7 +65,7 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
             .disposed(by: disposeBag)
         
         viewModel.customer.asObservable()
-            .subscribe(onNext: { [weak self] customer in
+            .subscribe(onNext: { [weak self] _ in
                 self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)

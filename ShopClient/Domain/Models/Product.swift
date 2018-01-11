@@ -27,8 +27,6 @@ class Product: NSObject {
     
     // MARK: - additional
     var lowestPrice: String {
-        get {
-            return variants?.sorted(by: { $0.price ?? "" < $1.price ?? "" }).first?.price ?? ""
-        }
+        return variants?.sorted(by: { $0.price ?? "" < $1.price ?? "" }).first?.price ?? ""
     }
 }

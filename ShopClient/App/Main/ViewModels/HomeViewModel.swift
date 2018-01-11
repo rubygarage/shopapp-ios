@@ -22,10 +22,10 @@ class HomeViewModel: BaseViewModel {
                     self?.data.value = (latestProducts, popularProducts, articles)
                 }
                 self?.state.onNext(.content)
-            }) { [weak self] (error) in
+            }, onError: { [weak self] (error) in
                 let castedError = error as? RepoError
                 self?.state.onNext(.error(error: castedError))
-            }
+            })
             .disposed(by: disposeBag)
     }
     

@@ -164,7 +164,7 @@ class API: NSObject, APIInterface {
     func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, callback: @escaping RepoCallback<Bool>) {
         let query = signUpQuery(email: email, password: password, firstName: firstName, lastName: lastName, phone: phone)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
-            if let _ = response?.customerCreate?.customer {
+            if response?.customerCreate?.customer != nil {
                 self?.getToken(with: email, password: password, callback: { (token, error) in
                     let success = token != nil
                     callback(success, RepoError(with: error))
@@ -254,7 +254,7 @@ class API: NSObject, APIInterface {
         let checkoutId = GraphQL.ID.init(rawValue: checkoutId)
         let query = updateShippingAddressQuery(shippingAddress: shippingAddress, checkoutId: checkoutId)
         let task = client?.mutateGraphWith(query, completionHandler: { (response, error) in
-            if let _ = response {
+            if response != nil {
                 callback(true, nil)
             }
             if let responseError = ContentError(with: error) {
@@ -441,7 +441,7 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
-    private func getToken(with email: String, password: String, callback: @escaping (_ token: Storefront.CustomerAccessToken?, _ error: RepoError?) -> ()) {
+    private func getToken(with email: String, password: String, callback: @escaping (_ token: Storefront.CustomerAccessToken?, _ error: RepoError?) -> Void) {
         let query = tokenQuery(email: email, password: password)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
             if let token = response?.customerAccessTokenCreate?.customerAccessToken {
@@ -488,7 +488,7 @@ class API: NSObject, APIInterface {
     private func updateCustomerDefaultAddress(with token: String, addressId: String, callback: @escaping RepoCallback<Bool>) {
         let query = customerUpdateDefaultAddressQuery(customerAccessToken: token, addressId: addressId)
         let task = client?.mutateGraphWith(query, completionHandler: { (result, error) in
-            if let _ = result {
+            if result != nil {
                 callback(true, nil)
             } else if let repoError = RepoError(with: error) {
                 callback(false, repoError)
@@ -502,7 +502,7 @@ class API: NSObject, APIInterface {
     private func updateCustomerAddress(with token: String, address: Address, callback: @escaping RepoCallback<Bool>) {
         let query = customerAddressUpdateQuery(customerAccessToken: token, address: address)
         let task = client?.mutateGraphWith(query, completionHandler: { (result, error) in
-            if let _ = result?.customerAddressUpdate?.customerAddress {
+            if result?.customerAddressUpdate?.customerAddress != nil {
                 callback(true, nil)
             } else if let repoError = RepoError(with: error) {
                 callback(false, repoError)
@@ -516,7 +516,7 @@ class API: NSObject, APIInterface {
     private func deleteCustomerAddress(with token: String, addressId: String, callback: @escaping RepoCallback<Bool>) {
         let query = customerAddressDeleteQuery(addressId: addressId, token: token)
         let task = client?.mutateGraphWith(query, completionHandler: { (result, error) in
-            if let _ = result?.customerAddressDelete?.deletedCustomerAddressId {
+            if result?.customerAddressDelete?.deletedCustomerAddressId != nil {
                 callback(true, nil)
             } else if let repoError = RepoError(with: error) {
                 callback(false, repoError)
@@ -817,7 +817,7 @@ class API: NSObject, APIInterface {
     }
     
     // MARK: - subqueries
-    private func productConnectionQuery() -> (Storefront.ProductConnectionQuery) -> () {
+    private func productConnectionQuery() -> (Storefront.ProductConnectionQuery) -> Void {
         return { (query: Storefront.ProductConnectionQuery) in
             query.edges({ $0
                 .cursor()
@@ -826,7 +826,7 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func productQuery(additionalInfoNedded: Bool = false) -> (Storefront.ProductQuery) -> () {
+    private func productQuery(additionalInfoNedded: Bool = false) -> (Storefront.ProductQuery) -> Void {
         let imageCount = additionalInfoNedded ? kShopifyItemsMaxCount : 1
         let variantsCount = additionalInfoNedded ? kShopifyItemsMaxCount : 1
         
@@ -846,7 +846,7 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func imageConnectionQuery() -> (Storefront.ImageConnectionQuery) -> () {
+    private func imageConnectionQuery() -> (Storefront.ImageConnectionQuery) -> Void {
         return { (query: Storefront.ImageConnectionQuery) in
             query.edges({ $0
                 .node(self.imageQuery())
@@ -854,7 +854,7 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func imageQuery() -> (Storefront.ImageQuery) -> () {
+    private func imageQuery() -> (Storefront.ImageQuery) -> Void {
         return { (query: Storefront.ImageQuery) in
             query.id()
             query.src()
@@ -862,7 +862,7 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func variantConnectionQuery() -> (Storefront.ProductVariantConnectionQuery) -> () {
+    private func variantConnectionQuery() -> (Storefront.ProductVariantConnectionQuery) -> Void {
         return { (query: Storefront.ProductVariantConnectionQuery) in
             query.edges({ $0
                 .node(self.productVariantQuery())
@@ -870,7 +870,7 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func productVariantQuery() -> (Storefront.ProductVariantQuery) -> () {
+    private func productVariantQuery() -> (Storefront.ProductVariantQuery) -> Void {
         return { (query: Storefront.ProductVariantQuery) in
             query.id()
             query.title()
@@ -881,7 +881,7 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func collectionConnectionQuery(perPage: Int, after: Any?, sortBy: SortingValue?, reverse: Bool) -> (Storefront.CollectionConnectionQuery) -> () {
+    private func collectionConnectionQuery(perPage: Int, after: Any?, sortBy: SortingValue?, reverse: Bool) -> (Storefront.CollectionConnectionQuery) -> Void {
         return { (query: Storefront.CollectionConnectionQuery) in
             query.edges({ $0
                 .cursor()
@@ -891,7 +891,7 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func collectionQuery(perPage: Int = 0, after: Any? = nil, sortBy: SortingValue?, reverse: Bool, productsNeeded: Bool = false) -> (Storefront.CollectionQuery) -> () {
+    private func collectionQuery(perPage: Int = 0, after: Any? = nil, sortBy: SortingValue?, reverse: Bool, productsNeeded: Bool = false) -> (Storefront.CollectionQuery) -> Void {
         let sortKey = productCollectionSortValue(for: sortBy)
         return { (query: Storefront.CollectionQuery) in
             query.id()
@@ -908,7 +908,7 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func policyQuery() -> (Storefront.ShopPolicyQuery) -> () {
+    private func policyQuery() -> (Storefront.ShopPolicyQuery) -> Void {
         return { (query: Storefront.ShopPolicyQuery) in
             query.title()
             query.body()
@@ -916,7 +916,7 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func articleConnectionQuery() -> (Storefront.ArticleConnectionQuery) -> () {
+    private func articleConnectionQuery() -> (Storefront.ArticleConnectionQuery) -> Void {
         return { (query: Storefront.ArticleConnectionQuery) in
             query.edges({ $0
                 .node(self.articleQuery())
@@ -925,7 +925,7 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func articleQuery() -> (Storefront.ArticleQuery) -> () {
+    private func articleQuery() -> (Storefront.ArticleQuery) -> Void {
         return { (query: Storefront.ArticleQuery) in
             query.id()
             query.title()
@@ -939,7 +939,7 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func authorQuery() -> (Storefront.ArticleAuthorQuery) -> () {
+    private func authorQuery() -> (Storefront.ArticleAuthorQuery) -> Void {
         return { (query: Storefront.ArticleAuthorQuery) in
             query.firstName()
             query.lastName()
@@ -949,14 +949,14 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func blogQuery() -> (Storefront.BlogQuery) -> () {
+    private func blogQuery() -> (Storefront.BlogQuery) -> Void {
         return { (query: Storefront.BlogQuery) in
             query.id()
             query.title()
         }
     }
     
-    private func optionQuery() -> (Storefront.ProductOptionQuery) -> () {
+    private func optionQuery() -> (Storefront.ProductOptionQuery) -> Void {
         return { (query: Storefront.ProductOptionQuery) in
             query.id()
             query.name()
@@ -964,20 +964,20 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func paymentSettingsQuery() -> (Storefront.PaymentSettingsQuery) -> () {
+    private func paymentSettingsQuery() -> (Storefront.PaymentSettingsQuery) -> Void {
         return { (query: Storefront.PaymentSettingsQuery) in
             query.currencyCode()
         }
     }
     
-    private func selectedOptionQuery() -> (Storefront.SelectedOptionQuery) -> () {
+    private func selectedOptionQuery() -> (Storefront.SelectedOptionQuery) -> Void {
         return { (query: Storefront.SelectedOptionQuery) in
             query.name()
             query.value()
         }
     }
     
-    private func customerQuery() -> (Storefront.CustomerQuery) -> ()  {
+    private func customerQuery() -> (Storefront.CustomerQuery) -> Void {
         return { (query: Storefront.CustomerQuery) in
             query.email()
             query.firstName()
@@ -988,28 +988,28 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func userErrorQuery() -> (Storefront.UserErrorQuery) -> () {
+    private func userErrorQuery() -> (Storefront.UserErrorQuery) -> Void {
         return { (query: Storefront.UserErrorQuery) in
             query.message()
             query.field()
         }
     }
     
-    private func accessTokenQuery() -> (Storefront.CustomerAccessTokenQuery) -> () {
+    private func accessTokenQuery() -> (Storefront.CustomerAccessTokenQuery) -> Void {
         return { (query) in
             query.accessToken()
             query.expiresAt()
         }
     }
     
-    private func checkoutCreatePayloadQuery() -> (Storefront.CheckoutCreatePayloadQuery) -> () {
+    private func checkoutCreatePayloadQuery() -> (Storefront.CheckoutCreatePayloadQuery) -> Void {
         return { (query) in
             query.checkout(self.checkoutQuery())
             query.userErrors(self.userErrorQuery())
         }
     }
     
-    private func checkoutQuery() -> (Storefront.CheckoutQuery) -> () {
+    private func checkoutQuery() -> (Storefront.CheckoutQuery) -> Void {
         return { (query) in
             query.id()
             query.webUrl()
@@ -1021,19 +1021,19 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func mailingAddressConnectionQuery() -> (Storefront.MailingAddressConnectionQuery) -> () {
+    private func mailingAddressConnectionQuery() -> (Storefront.MailingAddressConnectionQuery) -> Void {
         return { (query) in
             query.edges(self.mailingAddressEdgeQuery())
         }
     }
     
-    private func mailingAddressEdgeQuery() -> (Storefront.MailingAddressEdgeQuery) -> () {
+    private func mailingAddressEdgeQuery() -> (Storefront.MailingAddressEdgeQuery) -> Void {
         return { (query) in
             query.node(self.mailingAddressQuery())
         }
     }
     
-    private func mailingAddressQuery() -> (Storefront.MailingAddressQuery) -> () {
+    private func mailingAddressQuery() -> (Storefront.MailingAddressQuery) -> Void {
         return { (query) in
             query.id()
             query.country()
@@ -1048,34 +1048,34 @@ class API: NSObject, APIInterface {
         }
     }
     
-    private func customerDefaultAddressUpdatePayloadQuery() -> (Storefront.CustomerDefaultAddressUpdatePayloadQuery) -> () {
+    private func customerDefaultAddressUpdatePayloadQuery() -> (Storefront.CustomerDefaultAddressUpdatePayloadQuery) -> Void {
         return { (query: Storefront.CustomerDefaultAddressUpdatePayloadQuery) in
             query.customer(self.customerQuery())
         }
     }
     
-    private func customerAddressCreatePayloadQuery() -> (Storefront.CustomerAddressCreatePayloadQuery) -> () {
+    private func customerAddressCreatePayloadQuery() -> (Storefront.CustomerAddressCreatePayloadQuery) -> Void {
         return { (query) in
             query.customerAddress(self.mailingAddressQuery())
             query.userErrors(self.userErrorQuery())
         }
     }
     
-    private func customerAddressUpdatePayloadQuery() -> (Storefront.CustomerAddressUpdatePayloadQuery) -> () {
+    private func customerAddressUpdatePayloadQuery() -> (Storefront.CustomerAddressUpdatePayloadQuery) -> Void {
         return { (query) in
             query.customerAddress(self.mailingAddressQuery())
             query.userErrors(self.userErrorQuery())
         }
     }
     
-    private func customerAddressDeletePayloadQuery() -> (Storefront.CustomerAddressDeletePayloadQuery) -> () {
+    private func customerAddressDeletePayloadQuery() -> (Storefront.CustomerAddressDeletePayloadQuery) -> Void {
         return { (query) in
             query.deletedCustomerAddressId()
             query.userErrors(self.userErrorQuery())
         }
     }
     
-    private func lineItemConnectionQuery() -> (Storefront.OrderLineItemConnectionQuery) -> () {
+    private func lineItemConnectionQuery() -> (Storefront.OrderLineItemConnectionQuery) -> Void {
         return { (query: Storefront.OrderLineItemConnectionQuery) in
             query.edges({ $0
                 .node { $0
@@ -1114,7 +1114,7 @@ class API: NSObject, APIInterface {
     
     func isLoggedIn() -> Bool {
         let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
-        if let _ = keyChain.get(SessionData.accessToken), let expiryDate = keyChain.get(SessionData.expiryDate), let _ = keyChain.get(SessionData.email) {
+        if keyChain.get(SessionData.accessToken) != nil, let expiryDate = keyChain.get(SessionData.expiryDate), keyChain.get(SessionData.email) != nil {
             let date = Date(timeIntervalSinceNow: TimeInterval(expiryDate)!)
             return date > Date()
         }

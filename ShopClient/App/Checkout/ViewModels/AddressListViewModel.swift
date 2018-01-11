@@ -8,7 +8,7 @@
 
 import RxSwift
 
-typealias AddressListCompletion = (_ address: Address) -> ()
+typealias AddressListCompletion = (_ address: Address) -> Void
 
 class AddressListViewModel: BaseViewModel {
     var customerAddresses = Variable<[Address]>([Address]())
@@ -20,7 +20,7 @@ class AddressListViewModel: BaseViewModel {
     // MARK: - public
     public func loadCustomerAddresses() {
         state.onNext(.loading(showHud: true))
-        Repository.shared.getCustomer { [weak self] (customer, error) in
+        Repository.shared.getCustomer { [weak self] (customer, _) in
             if let addresses = customer?.addresses {
                 self?.customerAddresses.value = addresses
             }
@@ -104,7 +104,7 @@ class AddressListViewModel: BaseViewModel {
     }
     
     private func updateCustomerDefaultAddress(with addressId: String) {
-        Repository.shared.updateCustomerDefaultAddress(with: addressId) { [weak self] (success, error) in
+        Repository.shared.updateCustomerDefaultAddress(with: addressId) { [weak self] (_, _) in
             self?.loadCustomerAddresses()
         }
     }

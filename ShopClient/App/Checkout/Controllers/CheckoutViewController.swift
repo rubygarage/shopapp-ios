@@ -64,7 +64,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     
     private func setupViewModel() {
         viewModel.checkout.asObservable()
-            .subscribe(onNext: { [weak self] (checkout) in
+            .subscribe(onNext: { [weak self] _ in
                 self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)

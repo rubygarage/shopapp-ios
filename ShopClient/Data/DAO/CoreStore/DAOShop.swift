@@ -9,7 +9,7 @@
 import CoreStore
 
 extension DAO {
-    func save(shopObject: Shop, callback: @escaping () -> ()) {
+    func save(shopObject: Shop, callback: @escaping () -> Void) {
         // TODO:
     }
 }

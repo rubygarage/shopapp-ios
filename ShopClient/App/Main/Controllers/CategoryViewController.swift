@@ -34,7 +34,7 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel>, S
         viewModel.categoryId = categoryId
         
         viewModel.products.asObservable()
-            .subscribe(onNext: { [weak self] products in
+            .subscribe(onNext: { [weak self] _ in
                 self?.stopLoadAnimating()
                 self?.collectionView.reloadData()
             })

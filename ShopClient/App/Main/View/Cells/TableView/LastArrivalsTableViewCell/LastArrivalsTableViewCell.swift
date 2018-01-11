@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LastArrivalsCellDelegate {
+protocol LastArrivalsCellDelegate: class {
     func didSelectLastArrivalsProduct(at index: Int)
 }
 

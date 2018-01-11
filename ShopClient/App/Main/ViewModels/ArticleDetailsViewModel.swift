@@ -14,7 +14,7 @@ class ArticleDetailsViewModel: BaseViewModel {
     var articleId: String!
     
     var loadData: AnyObserver<()> {
-        return AnyObserver { [weak self] event in
+        return AnyObserver { [weak self] _ in
             self?.loadArticle()
         }
     }

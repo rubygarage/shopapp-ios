@@ -52,6 +52,6 @@ internal extension String {
     }
     
     func hasAtLeastOneSymbol() -> Bool {
-        return count > 0
+        return !isEmpty
     }
 }
