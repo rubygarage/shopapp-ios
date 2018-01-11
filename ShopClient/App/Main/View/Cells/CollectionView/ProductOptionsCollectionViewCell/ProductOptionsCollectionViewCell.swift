@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ProductOptionsCellDelegate {
+protocol ProductOptionsCellDelegate: class {
     func didSelectItem(with values: [String], selectedValue: String)
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let kProductUnselectedOptionColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1)
+private let kProductUnselectedOptionColor = UIColor(red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
 
 class ProductOptionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var optionTitleLabel: UILabel!
