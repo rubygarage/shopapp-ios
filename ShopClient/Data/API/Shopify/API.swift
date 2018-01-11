@@ -9,8 +9,8 @@
 import MobileBuySDK
 import KeychainSwift
 
-private let kShopifyStorefrontAccessToken = "b3e39673d32634413ec93860acdf25cb"
-private let kShopifyStorefrontURL = "pepesadshop.myshopify.com"
+private let kShopifyStorefrontAccessToken = "317392940ba3519bcfa070943900b1de"
+private let kShopifyStorefrontURL = "blablablstore.myshopify.com"
 private let kShopifyItemsMaxCount: Int32 = 250
 
 class API: NSObject, APIInterface {

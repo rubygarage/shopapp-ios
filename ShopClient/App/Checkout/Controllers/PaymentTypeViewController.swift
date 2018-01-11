@@ -24,7 +24,7 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, Payme
     }
     
     private func setupViews() {
-        title = NSLocalizedString("ControllerTitle.PaymentType", comment: String())
+        title = "ControllerTitle.PaymentType".localizable
     }
     
     private func setupTableView() {
@@ -43,7 +43,7 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, Payme
     // MARK: - segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let addressListViewController = segue.destination as? AddressListViewController {
-            addressListViewController.title = NSLocalizedString("ControllerTitle.BillingAddress", comment: String())
+            addressListViewController.title = "ControllerTitle.BillingAddress".localizable
             addressListViewController.addressListType = .billing
             addressListViewController.destinationCreditCardCompletion = completion
         }

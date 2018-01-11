@@ -35,7 +35,7 @@ class AddressFormViewModel: BaseViewModel {
     
     var isAddressValid: Observable<Bool> {
         return Observable.combineLatest(requiredTextFields, { (textFields) in
-            return textFields.map({ $0.isEmpty == false }).filter({ $0 == false }).count == 0
+            return textFields.map({ $0.isEmpty == false }).filter({ $0 == false }).isEmpty
         })
     }
     
@@ -53,15 +53,15 @@ class AddressFormViewModel: BaseViewModel {
     
     // MARK: - public
     public func updateFields() {
-        countryText.value = address?.country ?? String()
-        firstNameText.value = address?.firstName ?? String()
-        lastNameText.value = address?.lastName ?? String()
-        addressText.value = address?.address ?? String()
-        addressOptionalText.value = address?.secondAddress ?? String()
-        cityText.value = address?.city ?? String()
-        stateText.value = address?.state ?? String()
-        zipText.value = address?.zip ?? String()
-        phoneText.value = address?.phone ?? String()
+        countryText.value = address?.country ?? ""
+        firstNameText.value = address?.firstName ?? ""
+        lastNameText.value = address?.lastName ?? ""
+        addressText.value = address?.address ?? ""
+        addressOptionalText.value = address?.secondAddress ?? ""
+        cityText.value = address?.city ?? ""
+        stateText.value = address?.state ?? ""
+        zipText.value = address?.zip ?? ""
+        phoneText.value = address?.phone ?? ""
     }
     
     // MARK: - private
@@ -76,7 +76,7 @@ class AddressFormViewModel: BaseViewModel {
  
     private func getAddress() -> Address {
         let address = Address()
-        address.id = self.address?.id ?? String()
+        address.id = self.address?.id ?? ""
         address.country = countryText.value.trimmingCharacters(in: .whitespaces)
         address.firstName = firstNameText.value.trimmingCharacters(in: .whitespaces)
         address.lastName = lastNameText.value.trimmingCharacters(in: .whitespaces)

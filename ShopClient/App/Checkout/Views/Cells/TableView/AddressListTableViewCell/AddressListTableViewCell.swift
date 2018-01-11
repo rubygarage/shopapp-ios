@@ -41,8 +41,8 @@ class AddressListTableViewCell: UITableViewCell {
     
     // MARK: - private
     private func setupViews() {
-        editButton.setTitle(NSLocalizedString("Button.Edit", comment: String()).uppercased(), for: .normal)
-        deleteButton.setTitle(NSLocalizedString("Button.Delete", comment: String()).uppercased(), for: .normal)
+        editButton.setTitle("Button.Edit".localizable.uppercased(), for: .normal)
+        deleteButton.setTitle("Button.Delete".localizable.uppercased(), for: .normal)
     }
     
     private func populateViews(with addressTuple: AddressTuple) {
@@ -50,7 +50,7 @@ class AddressListTableViewCell: UITableViewCell {
         customerNameLabel.text = address.fullname
         addressLabel.text = address.fullAddress
         if let phoneText = address.phone {
-            let customerNameLocalized = NSLocalizedString("Label.Phone", comment: String())
+            let customerNameLocalized = "Label.Phone".localizable
             phoneLabel.text = String.localizedStringWithFormat(customerNameLocalized, phoneText)
         } else {
             phoneLabel.text = nil

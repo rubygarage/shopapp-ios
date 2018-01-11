@@ -8,16 +8,16 @@
 
 import UIKit
 
-protocol ProductOptionCollectioDataSourceProtocol {
+protocol ProductOptionCollectionDataSourceProtocol {
     func numberOfItems() -> Int
     func item(for index: Int) -> String
     func isItemSelected(at index: Int) -> Bool
 }
 
 class ProductOptionCollectionDataSource: NSObject, UICollectionViewDataSource {
-    private var delegate: ProductOptionCollectioDataSourceProtocol?
+    private var delegate: ProductOptionCollectionDataSourceProtocol?
     
-    init(delegate: ProductOptionCollectioDataSourceProtocol?) {
+    init(delegate: ProductOptionCollectionDataSourceProtocol?) {
         super.init()
         
         self.delegate = delegate

@@ -14,7 +14,7 @@ class CheckoutCartCollectionCell: UICollectionViewCell {
     @IBOutlet weak var cartItemImageView: UIImageView!
     
     public func configure(with item: Image) {
-        let imageUrl = URL(string: item.src ?? String())
+        let imageUrl = URL(string: item.src ?? "")
         cartItemImageView.sd_setImage(with: imageUrl)
     }
 }

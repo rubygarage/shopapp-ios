@@ -13,19 +13,11 @@ extension UIStoryboard {
         return UIStoryboard(name: "SortModal", bundle: nil)
     }
     
-    class func productOptions() -> UIStoryboard {
-        return UIStoryboard(name: "ProductOptions", bundle: nil)
-    }
-    
     class func cart() -> UIStoryboard {
         return UIStoryboard(name: "Cart", bundle: nil)
     }
     
     class func checkout() -> UIStoryboard {
         return UIStoryboard(name: "Checkout", bundle: nil)
-    }
-    
-    class func creditCard() -> UIStoryboard {
-        return UIStoryboard(name: "CreditCard", bundle: nil)
     }
 }

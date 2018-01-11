@@ -46,11 +46,11 @@ class PaymentDetailsFooterView: UIView {
     }
     
     private func setupViews() {
-        subtotalLabel.text = NSLocalizedString("Label.Order.Subtotal", comment: String())
-        discountLabel.text = NSLocalizedString("Label.Order.Discount", comment: String())
-        shippingLabel.text = NSLocalizedString("Label.Order.Shipping", comment: String())
-        taxLabel.text = NSLocalizedString("Label.Order.Tax", comment: String())
-        totalLabel.text = NSLocalizedString("Label.Order.Total", comment: String()).uppercased()
+        subtotalLabel.text = "Label.Order.Subtotal".localizable
+        discountLabel.text = "Label.Order.Discount".localizable
+        shippingLabel.text = "Label.Order.Shipping".localizable
+        taxLabel.text = "Label.Order.Tax".localizable
+        totalLabel.text = "Label.Order.Total".localizable.uppercased()
     }
     
     private func populateViews(order: Order) {

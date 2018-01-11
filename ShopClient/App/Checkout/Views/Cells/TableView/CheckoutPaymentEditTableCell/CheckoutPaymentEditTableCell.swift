@@ -33,8 +33,8 @@ class CheckoutPaymentEditTableCell: UITableViewCell {
     
     // MARK: - private
     private func setupViews() {
-        creditCardLabel?.text = NSLocalizedString("Label.Payment.CreditCard", comment: String())
-        billingAddressTitleLabel?.text = NSLocalizedString("Label.BillingAddress", comment: String())
-        editButton?.setTitle(NSLocalizedString("Button.Edit", comment: String()).uppercased(), for: .normal)
+        creditCardLabel?.text = "Label.Payment.CreditCard".localizable
+        billingAddressTitleLabel?.text = "Label.BillingAddress".localizable
+        editButton?.setTitle("Button.Edit".localizable.uppercased(), for: .normal)
     }
 }

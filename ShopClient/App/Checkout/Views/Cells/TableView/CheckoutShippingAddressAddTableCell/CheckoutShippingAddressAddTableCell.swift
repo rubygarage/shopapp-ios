@@ -26,7 +26,7 @@ class CheckoutShippingAddressAddTableCell: UITableViewCell {
     
     // MARK: - setup
     private func setupViews() {
-        addNewAddressButton.setTitle(NSLocalizedString("Button.AddNewAddress", comment: String()).uppercased(), for: .normal)
+        addNewAddressButton.setTitle("Button.AddNewAddress".localizable.uppercased(), for: .normal)
     }
     
     // MARK: - actions

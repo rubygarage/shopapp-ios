@@ -34,14 +34,14 @@ class CheckoutShippingAddressEditTableCell: UITableViewCell {
     
     // MARK: - private
     private func setupViews() {
-        editButton?.setTitle(NSLocalizedString("Button.Edit", comment: String()).uppercased(), for: .normal)
+        editButton?.setTitle("Button.Edit".localizable.uppercased(), for: .normal)
     }
     
     private func populateViews(with address: Address) {
         nameLabel?.text = address.fullname
         addressLabel?.text = address.fullAddress
         if let phoneText = address.phone {
-            let customerNameLocalized = NSLocalizedString("Label.Phone", comment: String())
+            let customerNameLocalized = "Label.Phone".localizable
             phoneLabel?.text = String.localizedStringWithFormat(customerNameLocalized, phoneText)
         } else {
             phoneLabel?.text = nil

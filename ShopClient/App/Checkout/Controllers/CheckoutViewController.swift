@@ -32,8 +32,8 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     
     private func setupViews() {
         addCloseButton()
-        title = NSLocalizedString("ControllerTitle.Checkout", comment: String())
-        placeOrderButton.setTitle(NSLocalizedString("Button.PlaceOrder", comment: String()).uppercased(), for: .normal)
+        title = "ControllerTitle.Checkout".localizable
+        placeOrderButton.setTitle("Button.PlaceOrder".localizable.uppercased(), for: .normal)
         updatePlaceOrderButtonUI()
     }
     

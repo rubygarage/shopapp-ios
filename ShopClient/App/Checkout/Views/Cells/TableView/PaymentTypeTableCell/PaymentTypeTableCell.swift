@@ -22,7 +22,7 @@ class PaymentTypeTableCell: UITableViewCell {
         super.awakeFromNib()
         
         selectionStyle = .none
-        paymentTypeLabel.text = NSLocalizedString("Label.Payment.CreditCard", comment: String())
+        paymentTypeLabel.text = "Label.Payment.CreditCard".localizable
     }
     
     // MARK: - actions

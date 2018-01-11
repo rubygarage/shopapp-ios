@@ -49,9 +49,9 @@ class CreditCardViewModel: BaseViewModel {
     
     private func processErrors() {
         if holderNameText.value.isValidAsHolderName() == false {
-            holderNameErrorMessage.onNext(NSLocalizedString("Error.InvalidHolderName", comment: String()))
+            holderNameErrorMessage.onNext("Error.InvalidHolderName".localizable)
         } else if cardNumberText.value.luhnValid() == false {
-            cardNumberErrorMessage.onNext(NSLocalizedString("Error.InvalidCardNumber", comment: String()))
+            cardNumberErrorMessage.onNext("Error.InvalidCardNumber".localizable)
         }
     }
     

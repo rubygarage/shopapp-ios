@@ -17,13 +17,17 @@ protocol ProductOptionsControllerProtocol {
     func didSelectOption(with name: String, value: String)
 }
 
-class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDataSourceProtocol, ProductOptionsCollectionDelegateProtocol {
+class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDataSourceProtocol, ProductOptionsCellDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionLayout: UICollectionViewFlowLayout!
     
     var options = [ProductOption]()
     var selectedOptions = [SelectedOption]() {
         didSet {
+            if options.count == 1 && options.first!.values?.count == 1 {
+                controllerDelegate?.didCalculate(collectionViewHeight: 0.0)
+                return
+            }
             let collectioViewHeight = (kOptionCollectionViewHeaderHeight + kOptionCollectionViewCellHeight) * CGFloat(options.count)
             let additionalHeight = !options.isEmpty ? kOptionCollectionViewAdditionalHeight : 0.0
             controllerDelegate?.didCalculate(collectionViewHeight: collectioViewHeight + additionalHeight)
@@ -50,7 +54,7 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
         collectionDataSource = ProductOptionsCollectionDataSource(delegate: self)
         collectionView.dataSource = collectionDataSource
         
-        collectionDelegate = ProductOptionsCollectionDelegate(delegate: self)
+        collectionDelegate = ProductOptionsCollectionDelegate()
         collectionView.delegate = collectionDelegate
     }
     
@@ -67,14 +71,14 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
         return 0
     }
     
-    func item(at optionIndex: Int, valueIndex: Int) -> String {
-        if optionIndex < options.count {
+    func items(at optionIndex: Int) -> (values: [String], selectedValue: String) {
+        if optionIndex < options.count && optionIndex < selectedOptions.count {
             let option = options[optionIndex]
-            return option.values?[valueIndex] ?? ""
+            return (option.values ?? [String](), selectedOptions[optionIndex].value)
         }
-        return ""
+        return ([String](), "")
     }
-    
+
     func sectionTitle(for sectionIndex: Int) -> String {
         if sectionIndex < options.count {
             return options[sectionIndex].name ?? ""
@@ -82,21 +86,10 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
         return ""
     }
     
-    func isItemSelected(at indexPath: IndexPath) -> Bool {
-        if indexPath.section < options.count && indexPath.section < selectedOptions.count {
-            let item = options[indexPath.section].values![indexPath.row]
-            let selectedItem = selectedOptions[indexPath.section].value
-            return item == selectedItem
-        }
-        return false
-    }
-    
-    // MARK: - ProductOptionsCollectionDelegateProtocol
-    func didSelectItem(at indexPath: IndexPath) {
-        if indexPath.section < options.count {
-            let name = options[indexPath.section].name ?? ""
-            let value = options[indexPath.section].values![indexPath.row]
-            controllerDelegate?.didSelectOption(with: name, value: value)
+    // MARK: - ProductOptionsCellDelegate
+    func didSelectItem(with values: [String], selectedValue: String) {
+        if let name = options.filter({ $0.values! == values }).first?.name {
+            controllerDelegate?.didSelectOption(with: name, value: selectedValue)
         }
     }
 }

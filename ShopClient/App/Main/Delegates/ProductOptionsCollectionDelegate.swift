@@ -8,21 +8,9 @@
 
 import UIKit
 
-protocol ProductOptionsCollectionDelegateProtocol {
-    func didSelectItem(at indexPath: IndexPath)
-}
-
 let kOptionsHeaderViewSize = CGSize(width: 0, height: kOptionCollectionViewHeaderHeight)
 
 class ProductOptionsCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    private var delegate: ProductOptionsCollectionDelegateProtocol?
-    
-    init(delegate: ProductOptionsCollectionDelegateProtocol) {
-        super.init()
-        
-        self.delegate = delegate
-    }
-    
     // MARK: - UICollectionViewDelegate
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return kOptionsHeaderViewSize
@@ -31,8 +19,4 @@ class ProductOptionsCollectionDelegate: NSObject, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: kOptionCollectionViewCellHeight)
     }
-    
-    //func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //delegate?.didSelectItem(at: indexPath)
-    //}
 }

@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5K-mb-qPx">
-                        <rect key="frame" x="12" y="8" width="118" height="16"/>
+                        <rect key="frame" x="54.5" y="8" width="33" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -28,12 +28,8 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="v5K-mb-qPx" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="0Gc-te-l8c"/>
-                <constraint firstItem="v5K-mb-qPx" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Fyc-li-XSm"/>
-                <constraint firstItem="v5K-mb-qPx" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="PgC-z0-dM0"/>
-                <constraint firstItem="v5K-mb-qPx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="SYS-Pc-1m2"/>
-                <constraint firstAttribute="bottom" secondItem="v5K-mb-qPx" secondAttribute="bottom" constant="9" id="ykq-V2-B6S"/>
-                <constraint firstAttribute="trailing" secondItem="v5K-mb-qPx" secondAttribute="trailing" constant="12" id="ypr-d1-SsA"/>
+                <constraint firstItem="v5K-mb-qPx" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="BUM-vY-Bda"/>
+                <constraint firstItem="v5K-mb-qPx" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Rtu-My-t5N"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="142" height="61"/>

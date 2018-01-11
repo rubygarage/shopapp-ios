@@ -21,7 +21,7 @@ class CheckoutPaymentAddTableCell: UITableViewCell {
         super.awakeFromNib()
         
         selectionStyle = .none
-        addPaymentButton.setTitle(NSLocalizedString("Button.AddPaymentType", comment: String()).uppercased(), for: .normal)
+        addPaymentButton.setTitle("Button.AddPaymentType".localizable.uppercased(), for: .normal)
     }
     
     // MARK: - actions

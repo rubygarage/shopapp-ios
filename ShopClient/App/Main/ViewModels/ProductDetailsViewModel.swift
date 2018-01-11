@@ -93,8 +93,8 @@ class ProductDetailsViewModel: BaseViewModel {
         let selectedOptionsNValues = selectedOptions.map({ $0.value })
         
         for variant in variants {
-            let variantNames = variant.selectedOptions?.map({ $0.name }) ?? [""]
-            let variantValues = variant.selectedOptions?.map({ $0.value }) ?? [""]
+            let variantNames = variant.selectedOptions?.map({ $0.name }) ?? [String]()
+            let variantValues = variant.selectedOptions?.map({ $0.value }) ?? [String]()
             
             if selectedOptionsNames == variantNames && selectedOptionsNValues == variantValues {
                 updateSelectedVariant(variant: variant)

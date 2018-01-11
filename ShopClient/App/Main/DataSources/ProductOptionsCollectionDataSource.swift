@@ -11,15 +11,14 @@ import UIKit
 protocol ProductOptionsCollectionDataSourceProtocol {
     func optionsCount() -> Int
     func itemsCount(in optionIndex: Int) -> Int
-    func item(at optionIndex: Int, valueIndex: Int) -> String
+    func items(at optionIndex: Int) -> (values: [String], selectedValue: String)
     func sectionTitle(for sectionIndex: Int) -> String
-    func isItemSelected(at indexPath: IndexPath) -> Bool
 }
 
 class ProductOptionsCollectionDataSource: NSObject, UICollectionViewDataSource {
-    private var delegate: ProductOptionsCollectionDataSourceProtocol?
+    private var delegate: (ProductOptionsCollectionDataSourceProtocol & ProductOptionsCellDelegate)?
     
-    init(delegate: ProductOptionsCollectionDataSourceProtocol?) {
+    init(delegate: (ProductOptionsCollectionDataSourceProtocol & ProductOptionsCellDelegate)?) {
         super.init()
         
         self.delegate = delegate
@@ -37,6 +36,8 @@ class ProductOptionsCollectionDataSource: NSObject, UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductOptionsCollectionViewCell.self), for: indexPath) as! ProductOptionsCollectionViewCell
+        let items = delegate?.items(at: indexPath.section) ?? (values: [String](), selectedValue: "")
+        cell.configure(with: items.values, selectedValue: items.selectedValue, cellDelegate: delegate)
         
         return cell
     }

@@ -29,35 +29,35 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
     }
     
     private func setupViews() {
-        title = NSLocalizedString("ControllerTitle.CreditCard", comment: String())
-        holderNameTextFieldView.placeholder = NSLocalizedString("Placeholder.CardHolderName", comment: String()).uppercased()
-        cardNumberTextFieldView.placeholder = NSLocalizedString("Placeholder.CardNumber", comment: String()).uppercased()
-        securityCodeTextFieldView.placeholder = NSLocalizedString("Placeholder.CVV", comment: String()).uppercased()
-        expirationDateLabel.text = NSLocalizedString("Label.ExpirationDate", comment: String()).uppercased()
-        submitButton.setTitle(NSLocalizedString("Button.Submit", comment: String()).uppercased(), for: .normal)
+        title = "ControllerTitle.CreditCard".localizable
+        holderNameTextFieldView.placeholder = "Placeholder.CardHolderName".localizable.uppercased()
+        cardNumberTextFieldView.placeholder = "Placeholder.CardNumber".localizable.uppercased()
+        securityCodeTextFieldView.placeholder = "Placeholder.CVV".localizable.uppercased()
+        expirationDateLabel.text = "Label.ExpirationDate".localizable.uppercased()
+        submitButton.setTitle("Button.Submit".localizable.uppercased(), for: .normal)
     }
     
     private func setupViewModel() {
         viewModel.billingAddres = billingAddres
         viewModel.completion = completion
         
-        holderNameTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        holderNameTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.holderNameText)
             .disposed(by: disposeBag)
         
-        cardNumberTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        cardNumberTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.cardNumberText)
             .disposed(by: disposeBag)
         
-        monthExpirationView.dateTextField.rx.text.map({ $0 ?? String() })
+        monthExpirationView.dateTextField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.monthExpirationText)
             .disposed(by: disposeBag)
         
-        yearExpirationView.dateTextField.rx.text.map({ $0 ?? String() })
+        yearExpirationView.dateTextField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.yearExpirationText)
             .disposed(by: disposeBag)
         
-        securityCodeTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        securityCodeTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.securityCodeText)
             .disposed(by: disposeBag)
         
