@@ -33,7 +33,7 @@ class ForgorPasswordViewController: BaseViewController<ForgorPasswordViewModel> 
 
     private func setupViews() {
         addCloseButton()
-        title = "ControllerTitle.ForgorPassword".localizable
+        title = "ControllerTitle.ForgotPassword".localizable
         titleLabel.text = "Label.ForgotPassword.PasswordTitle".localizable
         descriptionLabel.text = "Label.ForgotPassword.PasswordDescription".localizable
         emailTextFieldView.placeholder = "Placeholder.Email".localizable.uppercased()
