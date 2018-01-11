@@ -151,6 +151,11 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
         performSegue(withIdentifier: SegueIdentifiers.toPaymentType, sender: self)
     }
     
+    // MARK: - CheckoutTableDelegateProtocol
+    func checkout() -> Checkout? {
+        return viewModel.checkout.value
+    }
+    
     // MARK: - segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let addressListViewController = segue.destination as? AddressListViewController {

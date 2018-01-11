@@ -1229,6 +1229,14 @@
 			children = (
 				0B24F0F7200750AC00F13224 /* CollectionView */,
 				0B24F0F8200750B200F13224 /* TableView */,
+				61236D4F1FEA83CB00D64198 /* CheckoutCartCollectionCell */,
+				616CA66B1FF3D28900FF14E2 /* AddressListTableViewCell */,
+				61236D441FEA734B00D64198 /* CheckoutCartTableViewCell */,
+				61986ACC1FF66AEA005632D7 /* CheckoutPaymentAddTableCell */,
+				6177D3141FFD3504005B9752 /* CheckoutPaymentEditTableCell */,
+				61725FC71FEAB87A009F55EA /* CheckoutShippingAddressAddTableCell */,
+				61DE4EB91FEBF91C00A95016 /* CheckoutShippingAddressEditTableCell */,
+				61986AD81FF67D4A005632D7 /* PaymentTypeTableCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";

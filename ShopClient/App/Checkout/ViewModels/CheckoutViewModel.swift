@@ -69,7 +69,6 @@ class CheckoutViewModel: BaseViewModel {
             } else {
                 self?.state.onNext(.error(error: RepoError()))
             }
-            
         }
     }
     
