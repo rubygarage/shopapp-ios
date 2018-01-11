@@ -1,5 +1,5 @@
 //
-//  PaymentTypeTableCell.swift
+//  PaymentCreditCardTableCell.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 12/29/17.
@@ -12,7 +12,7 @@ protocol PaymentTypeTableCellProtocol: class {
     func didSelectCreditCartPayment()
 }
 
-class PaymentTypeTableCell: UITableViewCell {
+class PaymentCreditCardTableCell: UITableViewCell {
     @IBOutlet weak var paymentTypeLabel: UILabel!
     @IBOutlet weak var paymentSelectButton: UIButton!
     

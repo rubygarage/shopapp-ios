@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, PaymentTypeTableCellProtocol {
+class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, PaymentCreditCardTableCellProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     private var tableDataSource: PaymentTypeDataSource!
@@ -28,12 +28,17 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, Payme
     }
     
     private func setupTableView() {
-        let cellNib = UINib(nibName: String(describing: PaymentTypeTableCell.self), bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: String(describing: PaymentTypeTableCell.self))
+        let paymentCreditCardNib = UINib(nibName: String(describing: PaymentCreditCardTableCell.self), bundle: nil)
+        tableView.register(paymentCreditCardNib, forCellReuseIdentifier: String(describing: PaymentCreditCardTableCell.self))
+        
+        let paymentApplePayNib = UINib(nibName: String(describing: PaymentApplePayTableCell.self), bundle: nil)
+        tableView.register(paymentApplePayNib, forCellReuseIdentifier: String(describing: PaymentApplePayTableCell.self))
         
         tableDataSource = PaymentTypeDataSource()
         tableDataSource.delegate = self
         tableView.dataSource = tableDataSource
+        
+        tableView.contentInset = TableView.paymentTypeContentInsets
     }
     
     // MARK: - PaymentTypeTableCellProtocol

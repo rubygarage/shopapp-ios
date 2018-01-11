@@ -15,8 +15,8 @@
 		0B24F0D120074D7500F13224 /* CheckoutCartCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24F0B920074D7400F13224 /* CheckoutCartCollectionDelegate.swift */; };
 		0B24F0D220074D7500F13224 /* CheckoutShippingAddressEditTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24F0BB20074D7400F13224 /* CheckoutShippingAddressEditTableCell.swift */; };
 		0B24F0D320074D7500F13224 /* CheckoutShippingAddressEditTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B24F0BC20074D7400F13224 /* CheckoutShippingAddressEditTableCell.xib */; };
-		0B24F0D420074D7500F13224 /* PaymentTypeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B24F0BE20074D7400F13224 /* PaymentTypeTableCell.xib */; };
-		0B24F0D520074D7500F13224 /* PaymentTypeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24F0BF20074D7400F13224 /* PaymentTypeTableCell.swift */; };
+		0B24F0D420074D7500F13224 /* PaymentCreditCardTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B24F0BE20074D7400F13224 /* PaymentCreditCardTableCell.xib */; };
+		0B24F0D520074D7500F13224 /* PaymentCreditCardTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24F0BF20074D7400F13224 /* PaymentCreditCardTableCell.swift */; };
 		0B24F0D620074D7500F13224 /* CheckoutCartCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B24F0C120074D7400F13224 /* CheckoutCartCollectionCell.xib */; };
 		0B24F0D720074D7500F13224 /* CheckoutCartCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24F0C220074D7400F13224 /* CheckoutCartCollectionCell.swift */; };
 		0B24F0D820074D7500F13224 /* CheckoutPaymentAddTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24F0C420074D7400F13224 /* CheckoutPaymentAddTableCell.swift */; };
@@ -297,6 +297,8 @@
 		61FC3DA91F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC3DA71F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift */; };
 		61FC3DAA1F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61FC3DA81F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.xib */; };
 		61FC3DAC1F7EB4E600DB0AD7 /* ProductOptionsCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC3DAB1F7EB4E600DB0AD7 /* ProductOptionsCollectionDataSource.swift */; };
+		61FFEDBC2007EBC000775FBA /* PaymentApplePayTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FFEDBA2007EBC000775FBA /* PaymentApplePayTableCell.swift */; };
+		61FFEDBD2007EBC000775FBA /* PaymentApplePayTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61FFEDBB2007EBC000775FBA /* PaymentApplePayTableCell.xib */; };
 		E48C459A560E7DC50BF69226 /* Pods_ShopClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9DA8ECD13CBDF3EE2618FE4 /* Pods_ShopClient.framework */; };
 /* End PBXBuildFile section */
 
@@ -309,8 +311,8 @@
 		0B24F0B920074D7400F13224 /* CheckoutCartCollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutCartCollectionDelegate.swift; sourceTree = "<group>"; };
 		0B24F0BB20074D7400F13224 /* CheckoutShippingAddressEditTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutShippingAddressEditTableCell.swift; sourceTree = "<group>"; };
 		0B24F0BC20074D7400F13224 /* CheckoutShippingAddressEditTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutShippingAddressEditTableCell.xib; sourceTree = "<group>"; };
-		0B24F0BE20074D7400F13224 /* PaymentTypeTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentTypeTableCell.xib; sourceTree = "<group>"; };
-		0B24F0BF20074D7400F13224 /* PaymentTypeTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTypeTableCell.swift; sourceTree = "<group>"; };
+		0B24F0BE20074D7400F13224 /* PaymentCreditCardTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentCreditCardTableCell.xib; sourceTree = "<group>"; };
+		0B24F0BF20074D7400F13224 /* PaymentCreditCardTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentCreditCardTableCell.swift; sourceTree = "<group>"; };
 		0B24F0C120074D7400F13224 /* CheckoutCartCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutCartCollectionCell.xib; sourceTree = "<group>"; };
 		0B24F0C220074D7400F13224 /* CheckoutCartCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutCartCollectionCell.swift; sourceTree = "<group>"; };
 		0B24F0C420074D7400F13224 /* CheckoutPaymentAddTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutPaymentAddTableCell.swift; sourceTree = "<group>"; };
@@ -601,6 +603,9 @@
 		61FC3DA71F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductOptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		61FC3DA81F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductOptionCollectionViewCell.xib; sourceTree = "<group>"; };
 		61FC3DAB1F7EB4E600DB0AD7 /* ProductOptionsCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductOptionsCollectionDataSource.swift; sourceTree = "<group>"; };
+		61FFEDB82007C27E00775FBA /* ShopClient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShopClient.entitlements; sourceTree = "<group>"; };
+		61FFEDBA2007EBC000775FBA /* PaymentApplePayTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentApplePayTableCell.swift; sourceTree = "<group>"; };
+		61FFEDBB2007EBC000775FBA /* PaymentApplePayTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentApplePayTableCell.xib; sourceTree = "<group>"; };
 		C9DA8ECD13CBDF3EE2618FE4 /* Pods_ShopClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShopClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -645,13 +650,13 @@
 			path = CheckoutShippingAddressEditTableCell;
 			sourceTree = "<group>";
 		};
-		0B24F0BD20074D7400F13224 /* PaymentTypeTableCell */ = {
+		0B24F0BD20074D7400F13224 /* PaymentCreditCardTableCell */ = {
 			isa = PBXGroup;
 			children = (
-				0B24F0BE20074D7400F13224 /* PaymentTypeTableCell.xib */,
-				0B24F0BF20074D7400F13224 /* PaymentTypeTableCell.swift */,
+				0B24F0BF20074D7400F13224 /* PaymentCreditCardTableCell.swift */,
+				0B24F0BE20074D7400F13224 /* PaymentCreditCardTableCell.xib */,
 			);
-			path = PaymentTypeTableCell;
+			path = PaymentCreditCardTableCell;
 			sourceTree = "<group>";
 		};
 		0B24F0C020074D7400F13224 /* CheckoutCartCollectionCell */ = {
@@ -741,7 +746,9 @@
 				0B24F0C320074D7400F13224 /* CheckoutPaymentAddTableCell */,
 				0B24F0C620074D7400F13224 /* CheckoutPaymentEditTableCell */,
 				0B24F0B220074D7400F13224 /* CheckoutShippingAddressAddTableCell */,
-				0B24F0BD20074D7400F13224 /* PaymentTypeTableCell */,
+				0B24F0BA20074D7400F13224 /* CheckoutShippingAddressEditTableCell */,
+				61FFEDB92007EB9E00775FBA /* PaymentTypeTableCell */,
+				0B24F0BD20074D7400F13224 /* PaymentCreditCardTableCell */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -1913,6 +1920,7 @@
 		61E4E6321F56C868001C6E01 /* ShopClient */ = {
 			isa = PBXGroup;
 			children = (
+				61FFEDB82007C27E00775FBA /* ShopClient.entitlements */,
 				0BD5EB2D1FF3D8F40076C01B /* App */,
 				0BD5EB2E1FF3D8FB0076C01B /* Data */,
 				0BD5EB2F1FF3D9000076C01B /* Domain */,
@@ -1952,6 +1960,15 @@
 				61B94C0F1F82409300B6887C /* ProductOptionHeaderView.xib */,
 			);
 			path = ProductOptionHeaderView;
+			sourceTree = "<group>";
+		};
+		61FFEDB92007EB9E00775FBA /* PaymentApplePayTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				61FFEDBA2007EBC000775FBA /* PaymentApplePayTableCell.swift */,
+				61FFEDBB2007EBC000775FBA /* PaymentApplePayTableCell.xib */,
+			);
+			path = PaymentApplePayTableCell;
 			sourceTree = "<group>";
 		};
 		62DF95DF333AB98BEB47C090 /* Pods */ = {
@@ -2010,6 +2027,11 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = K2WTD52A5C;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplePay = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -2037,13 +2059,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				61BA570E1FE040FB00BF1586 /* CartEmptyDataView.xib in Resources */,
+				61FFEDBD2007EBC000775FBA /* PaymentApplePayTableCell.xib in Resources */,
 				0B24F0CF20074D7500F13224 /* CheckoutCartTableViewCell.xib in Resources */,
 				0B24F0EF20074F1A00F13224 /* ExpiryDatePicker.xib in Resources */,
 				0BA630751FFFC533007088B8 /* OrderItemTableViewCell.xib in Resources */,
 				61AAB9311F7BD07B00CD32D3 /* SortModalTableViewCell.xib in Resources */,
 				0B24F0DB20074D7500F13224 /* CheckoutPaymentEditTableCell.xib in Resources */,
 				61A54BF91FF5254900D4D151 /* AccountFooterView.xib in Resources */,
-				0B24F0D420074D7500F13224 /* PaymentTypeTableCell.xib in Resources */,
+				0B24F0D420074D7500F13224 /* PaymentCreditCardTableCell.xib in Resources */,
 				0B24F0EC20074F1A00F13224 /* InputTextFieldView.xib in Resources */,
 				61236D3D1FEA6E2500D64198 /* Checkout.storyboard in Resources */,
 				61A54BF41FF5253E00D4D151 /* AccountTableViewCell.xib in Resources */,
@@ -2342,6 +2365,7 @@
 				61BA58C61FE14A9F00BF1586 /* PopularTableViewCell.swift in Sources */,
 				616CA6601FF2A0CF00FF14E2 /* CheckoutViewModel.swift in Sources */,
 				6137EE081F9E1A4E0040C004 /* ShopRepository.swift in Sources */,
+				61FFEDBC2007EBC000775FBA /* PaymentApplePayTableCell.swift in Sources */,
 				0BA630631FFE6596007088B8 /* Date+Desccription.swift in Sources */,
 				0BA6306A1FFF7EB7007088B8 /* OrderDetailsTableDelegate.swift in Sources */,
 				6196CF981F9F9A2200F823AD /* ProductVariant.swift in Sources */,
@@ -2574,12 +2598,13 @@
 			baseConfigurationReference = 38B8C07405420E82AD6AAA3E /* Pods-ShopClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ShopClient/ShopClient.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K2WTD52A5C;
 				INFOPLIST_FILE = ShopClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.ShopClient;
+				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.ShopClient.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -2591,12 +2616,13 @@
 			baseConfigurationReference = 10BBCCE808D12F6C873F9215 /* Pods-ShopClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ShopClient/ShopClient.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K2WTD52A5C;
 				INFOPLIST_FILE = ShopClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.ShopClient;
+				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.ShopClient.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
