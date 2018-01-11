@@ -1013,6 +1013,7 @@ class API: NSObject, APIInterface {
         return { (query) in
             query.id()
             query.webUrl()
+            query.currencyCode()
             query.subtotalPrice()
             query.totalPrice()
             query.totalTax()

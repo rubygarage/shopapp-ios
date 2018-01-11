@@ -30,6 +30,13 @@ class PaymentDetailsFooterView: UIView {
         populateViews(order: order)
     }
     
+    init(checkout: Checkout) {
+        super.init(frame: CGRect.zero)
+        
+        commonInit()
+        populateViews(checkout: checkout)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -67,5 +74,19 @@ class PaymentDetailsFooterView: UIView {
         taxValueLabel.text = formatter.string(from: totalTax)
         totalValueLabel.text = formatter.string(from: totalPrice)
     }
-
+    
+    private func populateViews(checkout: Checkout) {
+        let formatter = NumberFormatter.formatter(with: checkout.currencyCode!)
+        let subtotalPrice = NSDecimalNumber(decimal: checkout.subtotalPrice!)
+        let discountPrice = NSDecimalNumber(value: 0)
+        let totalShippingPrice = NSDecimalNumber(value: 0)
+        let totalTax = NSDecimalNumber(decimal: checkout.totalTax!)
+        let totalPrice = NSDecimalNumber(decimal: checkout.totalPrice!)
+        
+        subtotalValueLabel.text = formatter.string(from: subtotalPrice)
+        discountValueLabel.text = formatter.string(from: discountPrice)
+        shippingValueLabel.text = formatter.string(from: totalShippingPrice)
+        taxValueLabel.text = formatter.string(from: totalTax)
+        totalValueLabel.text = formatter.string(from: totalPrice)
+    }
 }

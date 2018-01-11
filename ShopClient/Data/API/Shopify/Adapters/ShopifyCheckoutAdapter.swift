@@ -17,6 +17,7 @@ extension Checkout {
         
         id = item?.id.rawValue ?? ""
         webUrl = item?.webUrl.absoluteString
+        currencyCode = item?.currencyCode.rawValue
         subtotalPrice = item?.subtotalPrice
         totalPrice = item?.totalPrice
         totalTax = item?.totalTax
