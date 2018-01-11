@@ -106,9 +106,8 @@
 "Label.Order.Tax" = "Tax";
 "Label.Order.Total" = "Total";
 "Label.Order.Quantity" = "QTY:";
-"Label.Order.Option" = "%@ %@";
+"Label.Order.Option" = "%@: %@";
 "Label.Order.Each" = "%@ each";
-"Label.Order.Total" = "Total:";
 "Label.Payment.CreditCard" = "Credit Card";
 "Label.ExpirationDate" = "Expiration date";
 "Label.CreditCard.MaskedNumber" = "**%@";
