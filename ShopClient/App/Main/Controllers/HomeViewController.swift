@@ -48,7 +48,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     private func updateNavigationBar() {
-        navigationItem.title = NSLocalizedString("ControllerTitle.Home", comment: String())
+        navigationItem.title = "ControllerTitle.Home".localizable
         addCartBarButton()
     }
     
@@ -132,11 +132,11 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     func didTapSeeAll(type: SeeAllViewType) {
         switch type {
         case .latestArrivals:
-            destinationTitle = NSLocalizedString("ControllerTitle.LatestArrivals", comment: String())
+            destinationTitle = "ControllerTitle.LatestArrivals".localizable
             sortingValue = .createdAt
             performSegue(withIdentifier: SegueIdentifiers.toProductsList, sender: self)
         case .popular:
-            destinationTitle = NSLocalizedString("ControllerTitle.Popular", comment: String())
+            destinationTitle = "ControllerTitle.Popular".localizable
             sortingValue = .popular
             performSegue(withIdentifier: SegueIdentifiers.toProductsList, sender: self)
         case .blogPosts:

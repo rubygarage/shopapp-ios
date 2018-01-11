@@ -33,19 +33,19 @@ class ForgorPasswordViewController: BaseViewController<ForgorPasswordViewModel> 
 
     private func setupViews() {
         addCloseButton()
-        title = NSLocalizedString("ControllerTitle.ForgorPassword", comment: String())
-        titleLabel.text = NSLocalizedString("Label.ForgotPassword.PasswordTitle", comment: String())
-        descriptionLabel.text = NSLocalizedString("Label.ForgotPassword.PasswordDescription", comment: String())
-        emailTextFieldView.placeholder = NSLocalizedString("Placeholder.Email", comment: String()).uppercased()
-        forgotPasswordButton.setTitle(NSLocalizedString("Button.Submit", comment: String()).uppercased(), for: .normal)
+        title = "ControllerTitle.ForgorPassword".localizable
+        titleLabel.text = "Label.ForgotPassword.PasswordTitle".localizable
+        descriptionLabel.text = "Label.ForgotPassword.PasswordDescription".localizable
+        emailTextFieldView.placeholder = "Placeholder.Email".localizable.uppercased()
+        forgotPasswordButton.setTitle("Button.Submit".localizable.uppercased(), for: .normal)
         
-        emailTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        emailTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: linkViewController.emailText)
             .disposed(by: disposeBag)
     }
     
     private func setupViewModel() {
-        emailTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        emailTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.emailText)
             .disposed(by: disposeBag)
         

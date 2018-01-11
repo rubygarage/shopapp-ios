@@ -15,7 +15,7 @@ extension ProductOption {
         }
         self.init()
         
-        id = item?.id.rawValue ?? String()
+        id = item?.id.rawValue ?? ""
         name = item?.name
         values = item?.values
     }

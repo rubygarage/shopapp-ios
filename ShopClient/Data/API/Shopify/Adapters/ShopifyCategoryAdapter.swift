@@ -30,7 +30,7 @@ extension Category {
     }
     
     private func update(with item: Storefront.Collection?, currencyValue: String?, productsListNeeded: Bool = false) {
-        id = item?.id.rawValue ?? String()
+        id = item?.id.rawValue ?? ""
         title = item?.title
         categoryDescription = item?.description
         image = Image(with: item?.image)

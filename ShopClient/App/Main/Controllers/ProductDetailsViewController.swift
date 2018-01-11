@@ -25,13 +25,13 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     @IBOutlet weak var quantityTextField: UITextField!
     @IBOutlet weak var quantityUnderlineView: UIView!
     @IBOutlet weak var addToCartButton: UIButton!
-    @IBOutlet weak var optionsContainerView: UIView!
     @IBOutlet weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomView: UIView!
     
     var productId: String!
     
     private var detailImagesController: ImagesCarouselViewController?
+    private var productOptionsViewController: ProductOptionsViewController?
     private var productAddedToCart = false
 
     // MARK: - life cycle
@@ -52,15 +52,15 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     // MARK: - setup
     private func setupViews() {
-        quantityTitleLabel.text = NSLocalizedString("Label.Quantity", comment: String())
-        addToCartButton.setTitle(NSLocalizedString("Button.AddToCart", comment: String()).uppercased(), for: .normal)
-        addToCartButton.setTitle(NSLocalizedString("Button.ProductTemporaryUnavailable", comment: String()).uppercased(), for: .disabled)
+        quantityTitleLabel.text = "Label.Quantity".localizable
+        addToCartButton.setTitle("Button.AddToCart".localizable.uppercased(), for: .normal)
+        addToCartButton.setTitle("Button.ProductTemporaryUnavailable".localizable.uppercased(), for: .disabled)
     }
     
     private func setupViewModel() {
         viewModel.productId = productId
         
-        quantityTextField.rx.text.map { Int($0 ?? String()) ?? 1 }
+        quantityTextField.rx.text.map { Int($0 ?? "") ?? 1 }
             .bind(to: viewModel.quantity)
             .disposed(by: disposeBag)
         
@@ -110,8 +110,15 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     }
     
     private func populatePrice(variant: ProductVariant?) {
-        priceLabel.text = "\(variant?.price ?? String()) \(viewModel.currency ?? String())"
         priceLabel.isHidden = variant == nil
+        
+        guard let variant = variant else {
+            return
+        }
+        
+        let formatter = NumberFormatter.formatter(with: viewModel.currency!)
+        let price = NSDecimalNumber(string: variant.price!)
+        priceLabel.text = formatter.string(from: price)
     }
     
     private func populateAddToCartButton(variant: ProductVariant?) {
@@ -125,7 +132,8 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     }
     
     private func populateOptionsView(allOptions: [ProductOption], selectedOptions: [SelectedOption]) {
-        openProductOptionsController(with: allOptions, selectedOptions: selectedOptions, delegate: self, onView: optionsContainerView)
+        productOptionsViewController?.options = allOptions
+        productOptionsViewController?.selectedOptions = selectedOptions
     }
     
     private func updateNavigationBar() {
@@ -134,7 +142,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     private func updateAddToCartButton() {
         productAddedToCart = true
-        self.addToCartButton.setTitle(NSLocalizedString("Button.AddedToCart", comment: String()).uppercased(), for: .normal)
+        self.addToCartButton.setTitle("Button.AddedToCart".localizable.uppercased(), for: .normal)
     }
     
     private func addProductToCart() {
@@ -194,6 +202,9 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         if let imagesCarouselController = segue.destination as? ImagesCarouselViewController {
             imagesCarouselController.controllerDelegate = self
             detailImagesController = imagesCarouselController
+        } else if let productOptionsViewController = segue.destination as? ProductOptionsViewController {
+            productOptionsViewController.controllerDelegate = self
+            self.productOptionsViewController = productOptionsViewController
         }
     }
 }

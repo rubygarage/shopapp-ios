@@ -9,7 +9,7 @@
 import Foundation
 
 class Image: NSObject {
-    var id = String()
+    var id = ""
     var src: String?
     var imageDescription: String?
 }

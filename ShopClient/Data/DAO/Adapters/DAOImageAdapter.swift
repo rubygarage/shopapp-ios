@@ -13,7 +13,7 @@ extension Image {
         }
         self.init()
         
-        id = image?.id ?? String()
+        id = image?.id ?? ""
         src = image?.src
         imageDescription = image?.imageDescription
     }

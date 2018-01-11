@@ -15,7 +15,7 @@ extension Image {
         }
         self.init()
     
-        id = item?.id?.rawValue ?? String()
+        id = item?.id?.rawValue ?? ""
         src = item?.src.absoluteString
         imageDescription = item?.altText
     }

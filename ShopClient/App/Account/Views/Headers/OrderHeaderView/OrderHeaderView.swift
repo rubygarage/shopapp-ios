@@ -50,9 +50,9 @@ class OrderHeaderView: UIView {
     }
     
     private func populateViews(order: Order) {
-        let numberFormat = NSLocalizedString("Label.Order.Number", comment: String()).uppercased()
+        let numberFormat = "Label.Order.Number".localizable.uppercased()
         numberLabel.text = String(format: numberFormat, String(order.number!))
-        let dateFormat = NSLocalizedString("Label.Order.Date", comment: String())
+        let dateFormat = "Label.Order.Date".localizable
         dateLabel.text = String(format: dateFormat, order.createdAt!.longDescription)
     }
     

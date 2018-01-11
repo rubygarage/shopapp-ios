@@ -29,7 +29,7 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, Ord
     
     // MARK: - setup
     private func setupViews() {
-        title = NSLocalizedString("ControllerTitle.OrderDetails", comment: String())
+        title = "ControllerTitle.OrderDetails".localizable
     }
     
     private func setupTableView() {

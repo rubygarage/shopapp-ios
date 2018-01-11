@@ -29,7 +29,7 @@ extension Order {
     }
     
     private func update(with item: Storefront.Order?, isAllInfoNeeded: Bool) {
-        id = item?.id.rawValue ?? String()
+        id = item?.id.rawValue ?? ""
         currencyCode = item?.currencyCode.rawValue
         number = item != nil ? Int(item!.orderNumber) : 0
         createdAt = item?.processedAt

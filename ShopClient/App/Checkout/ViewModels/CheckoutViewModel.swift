@@ -46,7 +46,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     public func getCheckout() {
-        let checkoutId = checkout.value?.id ?? String()
+        let checkoutId = checkout.value?.id ?? ""
         checkoutUseCase.getCheckout(with: checkoutId) { [weak self] (result, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
@@ -60,7 +60,7 @@ class CheckoutViewModel: BaseViewModel {
     
     public func updateCheckoutShippingAddress(with address: Address, isDefaultAddress: Bool) {
         state.onNext(.loading(showHud: true))
-        let checkoutId = checkout.value?.id ?? String()
+        let checkoutId = checkout.value?.id ?? ""
         checkoutUseCase.updateCheckoutShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))

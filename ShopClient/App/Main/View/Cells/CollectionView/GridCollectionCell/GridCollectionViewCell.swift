@@ -20,11 +20,13 @@ class GridCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var priceLabel: UILabel!
 
     public func configure(with item: Product) {
-        let imageUrl = URL(string: item.images?.first?.src ?? String())
+        let imageUrl = URL(string: item.images?.first?.src ?? "")
         productImageView.sd_setImage(with: imageUrl, completed: nil)
         titleLabel.text = item.title
-        let localizedString = NSLocalizedString("Label.PriceFrom", comment: String())
-        priceLabel.text = String.localizedStringWithFormat(localizedString, item.lowestPrice, item.currency ?? String())
+        let formatter = NumberFormatter.formatter(with: item.currency!)
+        let localizedString = "Label.PriceFrom".localizable
+        let price = NSDecimalNumber(string: item.lowestPrice)
+        priceLabel.text = String.localizedStringWithFormat(localizedString, formatter.string(from: price)!)
     }
 }
 

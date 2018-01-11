@@ -18,16 +18,6 @@ extension UIViewController {
         tabbarController?.selectedIndex = 0
     }
     
-    // MARK: - open as child    
-    func openProductOptionsController(with options: [ProductOption], selectedOptions: [SelectedOption], delegate: ProductOptionsControllerProtocol?, onView: UIView) {
-        let optionsController = UIStoryboard.productOptions().instantiateViewController(withIdentifier: ControllerIdentifier.productOptions) as! ProductOptionsViewController
-        optionsController.options = options
-        optionsController.selectedOptions = selectedOptions
-        optionsController.controllerDelegate = delegate
-        
-        configureChildViewController(childController: optionsController, onView: onView)
-    }
-    
     // MARK: - present
     func showCategorySortingController(with items:[String], selectedItem: String, delegate: SortModalControllerProtocol?) {
         let sortController = UIStoryboard.sortModal().instantiateViewController(withIdentifier: ControllerIdentifier.sortModal) as! SortModalViewController

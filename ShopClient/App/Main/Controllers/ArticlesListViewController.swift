@@ -32,7 +32,7 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
     
     // MARK: - setup
     private func setupViews() {
-        title = NSLocalizedString("ControllerTitle.BlogPosts", comment: String())
+        title = "ControllerTitle.BlogPosts".localizable
     }
     
     private func setupViewModel() {

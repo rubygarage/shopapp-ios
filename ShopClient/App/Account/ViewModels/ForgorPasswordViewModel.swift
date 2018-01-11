@@ -9,7 +9,7 @@
 import RxSwift
 
 class ForgorPasswordViewModel: BaseViewModel {
-    var emailText = Variable<String>(String())
+    var emailText = Variable<String>("")
     var emailErrorMessage = PublishSubject<String>()
     var resetPasswordSuccess = Variable<Bool>(false)
     
@@ -36,7 +36,7 @@ class ForgorPasswordViewModel: BaseViewModel {
     }
     
     private func processErrors() {
-        let errorMessage = NSLocalizedString("Error.InvalidEmail", comment: String())
+        let errorMessage = "Error.InvalidEmail".localizable
         emailErrorMessage.onNext(errorMessage)
     }
     

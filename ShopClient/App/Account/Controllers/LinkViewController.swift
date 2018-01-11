@@ -18,7 +18,7 @@ class LinkViewController: BaseViewController<ForgorPasswordViewModel>, Underline
     @IBOutlet weak var resendButton: UnderlinedButton!
     @IBOutlet weak var resendUnderlineView: UIView!
     
-    var emailText = Variable<String>(String())
+    var emailText = Variable<String>("")
     
     override func viewDidLoad() {
         viewModel = ForgorPasswordViewModel()
@@ -29,11 +29,11 @@ class LinkViewController: BaseViewController<ForgorPasswordViewModel>, Underline
     }
     
     private func setupViews() {
-        titleLabel.text = NSLocalizedString("Label.ForgotPassword.LinkTitle", comment: String())
-        descriptionLabel.text = NSLocalizedString("Label.ForgotPassword.LinkDescription", comment: String())
-        additionalTitleLabel.text = NSLocalizedString("Label.ForgotPassword.LinkAdditionalTitle", comment: String())
-        additionalDescriptionLabel.text = NSLocalizedString("Label.ForgotPassword.LinkAdditionalDescription", comment: String())
-        resendButton.setTitle(NSLocalizedString("Button.Resend", comment: String()).uppercased(), for: .normal)
+        titleLabel.text = "Label.ForgotPassword.LinkTitle".localizable
+        descriptionLabel.text = "Label.ForgotPassword.LinkDescription".localizable
+        additionalTitleLabel.text = "Label.ForgotPassword.LinkAdditionalTitle".localizable
+        additionalDescriptionLabel.text = "Label.ForgotPassword.LinkAdditionalDescription".localizable
+        resendButton.setTitle("Button.Resend".localizable.uppercased(), for: .normal)
         resendButton.delegate = self
         
         emailText.asObservable()

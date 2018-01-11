@@ -40,38 +40,38 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
     
     private func setupViews() {
         addCloseButton()
-        title = NSLocalizedString("ControllerTitle.SignUp", comment: String())
-        emailTextFieldView.placeholder = NSLocalizedString("Placeholder.Email", comment: String()).uppercased()
-        nameTextFieldView.placeholder = NSLocalizedString("Placeholder.Name", comment: String()).uppercased()
-        lastNameTextFieldView.placeholder = NSLocalizedString("Placeholder.LastName", comment: String()).uppercased()
-        phoneTextFieldView.placeholder = NSLocalizedString("Placeholder.PhoneNumber", comment: String()).uppercased()
-        passwordTextFieldView.placeholder = NSLocalizedString("Placeholder.CreatePassword", comment: String()).uppercased()
-        signUpButton.setTitle(NSLocalizedString("Button.CreateNewAccount", comment: String()).uppercased(), for: .normal)
+        title = "ControllerTitle.SignUp".localizable
+        emailTextFieldView.placeholder = "Placeholder.Email".localizable.uppercased()
+        nameTextFieldView.placeholder = "Placeholder.Name".localizable.uppercased()
+        lastNameTextFieldView.placeholder = "Placeholder.LastName".localizable.uppercased()
+        phoneTextFieldView.placeholder = "Placeholder.PhoneNumber".localizable.uppercased()
+        passwordTextFieldView.placeholder = "Placeholder.CreatePassword".localizable.uppercased()
+        signUpButton.setTitle("Button.CreateNewAccount".localizable.uppercased(), for: .normal)
         
-        let text = NSLocalizedString("Label.AcceptPoliciesAttributed", comment: String())
-        let privacyPolicy = NSLocalizedString("Label.Range.PrivacyPolicy", comment: String())
-        let termsOfService = NSLocalizedString("Label.Range.TermsOfService", comment: String())
+        let text = "Label.AcceptPoliciesAttributed".localizable
+        let privacyPolicy = "Label.Range.PrivacyPolicy".localizable
+        let termsOfService = "Label.Range.TermsOfService".localizable
         acceptPoliciesLabel.setup(with: text, links: [privacyPolicy, termsOfService], delegate: self)
     }
     
     private func setupViewModel() {
-        emailTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        emailTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.emailText)
             .disposed(by: disposeBag)
         
-        nameTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        nameTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.firstNameText)
             .disposed(by: disposeBag)
         
-        lastNameTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        lastNameTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.lastNameText)
             .disposed(by: disposeBag)
         
-        passwordTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        passwordTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.passwordText)
             .disposed(by: disposeBag)
         
-        phoneTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        phoneTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.phoneText)
             .disposed(by: disposeBag)
         
@@ -128,8 +128,8 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
     
     // MARK: - TTTAttributedLabelDelegate
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
-        let privacyPolicy = NSLocalizedString("Label.Range.PrivacyPolicy", comment: String()).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
-        let termsOfService = NSLocalizedString("Label.Range.TermsOfService", comment: String()).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
+        let privacyPolicy = "Label.Range.PrivacyPolicy".localizable.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
+        let termsOfService = "Label.Range.TermsOfService".localizable.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
         
         if url.absoluteString == privacyPolicy, let privacyPolicy = viewModel.policies.value.privacyPolicy {
             selectedPolicy = privacyPolicy

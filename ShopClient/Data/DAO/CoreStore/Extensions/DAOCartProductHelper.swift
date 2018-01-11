@@ -15,7 +15,7 @@ extension CartProductEntity {
         quantity = Int16(item.quantity)
         currency = item.currency
         
-        let predicate = NSPredicate(format: "id = %@", item.productVariant?.id ?? String())
+        let predicate = NSPredicate(format: "id = %@", item.productVariant?.id ?? "")
         var variant = transaction.fetchOne(From<ProductVariantEntity>(), Where(predicate))
         if variant == nil {
             variant = transaction.create(Into<ProductVariantEntity>())

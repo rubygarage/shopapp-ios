@@ -74,7 +74,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     }
     
     private func setupViewModel() {
-        titleView.searchTextField.rx.text.map({ $0 ?? String() })
+        titleView.searchTextField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.searchPhrase)
             .disposed(by: disposeBag)
         

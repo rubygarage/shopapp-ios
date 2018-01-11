@@ -42,8 +42,6 @@ class OrdersDetailsTableDataSource: NSObject, UITableViewDataSource {
         var numberOfRows = 0
         
         switch section {
-        case OrdersDetailsSection.header.rawValue:
-            numberOfRows = 0
         case OrdersDetailsSection.paymentInformation.rawValue:
             numberOfRows = delegate.order()!.items!.count
         case OrdersDetailsSection.shippingAddress.rawValue:

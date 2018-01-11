@@ -80,7 +80,7 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     
     private func setupViews() {
         searchTextField.delegate = self
-        clearButton.setTitle(NSLocalizedString("Button.Clear", comment: String()), for: .normal)
+        clearButton.setTitle("Button.Clear".localizable, for: .normal)
     }
     
     private func updateViews(animated: Bool) {
@@ -101,7 +101,7 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     }
     
     private func attributedPlaceholderDefault() -> NSAttributedString {
-        let placeholder = " " + NSLocalizedString("Placeholder.Search", comment: String())
+        let placeholder = "Placeholder.Search".localizable
         let attributedPlaceholder = NSMutableAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: UIColor.black])
         let textAttachment = NSTextAttachment()
         textAttachment.image = #imageLiteral(resourceName: "search")
@@ -113,12 +113,12 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     }
     
     private func attributedPlaceholderSelected() -> NSAttributedString {
-        let placeholder = NSLocalizedString("Placeholder.Search", comment: String())
+        let placeholder = "Placeholder.Search".localizable
         return NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: kPlaceholderColorDefault])
     }
     
     private func updateClearButtonIfNeeded() {
-        let text = searchTextField.text ?? String()
+        let text = searchTextField.text ?? ""
         let clearButtonHidden = !(text.isEmpty == false && state == .editing)
         if clearButton.isHidden != clearButtonHidden {
             UIView.transition(with: contentView, duration: kAnimationDuration, options: .transitionCrossDissolve, animations: {

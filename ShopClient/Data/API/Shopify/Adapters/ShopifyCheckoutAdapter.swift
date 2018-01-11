@@ -15,7 +15,7 @@ extension Checkout {
         }
         self.init()
         
-        id = item?.id.rawValue ?? String()
+        id = item?.id.rawValue ?? ""
         webUrl = item?.webUrl.absoluteString
         subtotalPrice = item?.subtotalPrice
         totalPrice = item?.totalPrice

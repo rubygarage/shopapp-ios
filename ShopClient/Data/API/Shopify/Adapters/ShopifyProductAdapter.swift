@@ -29,11 +29,11 @@ extension Product {
     }
     
     private func update(with item: Storefront.Product?, currencyValue: String?) {
-        id = item?.id.rawValue ?? String()
+        id = item?.id.rawValue ?? ""
         title = item?.title
         productDescription = item?.description
         currency = currencyValue
-        discount = String()
+        discount = ""
         type = item?.productType
         vendor = item?.vendor
         createdAt = item?.createdAt

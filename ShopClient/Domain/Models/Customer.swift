@@ -9,7 +9,7 @@
 import Foundation
 
 class Customer: NSObject {
-    var email = String()
+    var email = ""
     var firstName: String?
     var lastName: String?
     var phone: String?
@@ -18,7 +18,7 @@ class Customer: NSObject {
     
     var fullname: String {
         if let first = firstName, first.isEmpty == false, let last = lastName, last.isEmpty == false {
-            let customerNameLocalized = NSLocalizedString("Label.FullName", comment: String())
+            let customerNameLocalized = "Label.FullName".localizable
             return String.localizedStringWithFormat(customerNameLocalized, first, last)
         } else {
             return email

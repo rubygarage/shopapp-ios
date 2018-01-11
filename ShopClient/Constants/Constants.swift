@@ -52,10 +52,6 @@ struct SegueIdentifiers {
     static let toCreditCard = "toCreditCard"
 }
 
-struct CornerRadius {
-    static let defaultValue: CGFloat = 5
-}
-
 struct Layer {
     static let shadowColor = UIColor.lightGray.cgColor
     static let shadowOpacity: Float = 0.5

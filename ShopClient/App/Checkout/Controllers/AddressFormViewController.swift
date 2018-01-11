@@ -35,58 +35,58 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     }
     
     private func setupViews() {
-        title = NSLocalizedString("ControllerTitle.AddNewAddress", comment: String())
+        title = "ControllerTitle.AddNewAddress".localizable
         
-        countryTextFieldView.placeholder = NSLocalizedString("Placeholder.Country", comment: String()).uppercased()
-        nameTextFieldView.placeholder = NSLocalizedString("Placeholder.Name", comment: String()).uppercased()
-        lastNameTextFieldView.placeholder = NSLocalizedString("Placeholder.LastName", comment: String()).uppercased()
-        addressTextFieldView.placeholder = NSLocalizedString("Placeholder.Address", comment: String()).uppercased()
-        addressOptionalTextFieldView.placeholder = NSLocalizedString("Placeholder.AddressOptional", comment: String()).uppercased()
-        cityTextFieldView.placeholder = NSLocalizedString("Placeholder.City", comment: String()).uppercased()
-        stateTextFieldView.placeholder = NSLocalizedString("Placeholder.State", comment: String()).uppercased()
-        zipCodeTextFieldView.placeholder = NSLocalizedString("Placeholder.ZipCode", comment: String()).uppercased()
-        phoneTextFieldView.placeholder = NSLocalizedString("Placeholder.PhoneNumber", comment: String()).uppercased()
-        submitButton.setTitle(NSLocalizedString("Button.Submit", comment: String()).uppercased(), for: .normal)
-        checkboxTitleLabel.text = NSLocalizedString("Label.DefaultShippingAddress", comment: String())
+        countryTextFieldView.placeholder = "Placeholder.Country".localizable.uppercased()
+        nameTextFieldView.placeholder = "Placeholder.Name".localizable.uppercased()
+        lastNameTextFieldView.placeholder = "Placeholder.LastName".localizable.uppercased()
+        addressTextFieldView.placeholder = "Placeholder.Address".localizable.uppercased()
+        addressOptionalTextFieldView.placeholder = "Placeholder.AddressOptional".localizable.uppercased()
+        cityTextFieldView.placeholder = "Placeholder.City".localizable.uppercased()
+        stateTextFieldView.placeholder = "Placeholder.State".localizable.uppercased()
+        zipCodeTextFieldView.placeholder = "Placeholder.ZipCode".localizable.uppercased()
+        phoneTextFieldView.placeholder = "Placeholder.PhoneNumber".localizable.uppercased()
+        submitButton.setTitle("Button.Submit".localizable.uppercased(), for: .normal)
+        checkboxTitleLabel.text = "Label.DefaultShippingAddress".localizable
     }
     
     private func setupViewModel() {
         viewModel.address = address
         viewModel.completion = completion
         
-        countryTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        countryTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.countryText)
             .disposed(by: disposeBag)
         
-        nameTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        nameTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.firstNameText)
             .disposed(by: disposeBag)
         
-        lastNameTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        lastNameTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.lastNameText)
             .disposed(by: disposeBag)
         
-        addressTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        addressTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.addressText)
             .disposed(by: disposeBag)
         
-        addressOptionalTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        addressOptionalTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.addressOptionalText)
             .disposed(by: disposeBag)
         
-        cityTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        cityTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.cityText)
             .disposed(by: disposeBag)
         
-        stateTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        stateTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.stateText)
             .disposed(by: disposeBag)
         
-        zipCodeTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        zipCodeTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.zipText)
             .disposed(by: disposeBag)
         
-        phoneTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        phoneTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.phoneText)
             .disposed(by: disposeBag)
         

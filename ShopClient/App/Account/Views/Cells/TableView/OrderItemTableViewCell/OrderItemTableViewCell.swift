@@ -30,7 +30,7 @@ class OrderItemTableViewCell: UITableViewCell {
     }
     
     private func setupViews() {
-        quantityLabel.text = NSLocalizedString("Label.Order.Quantity", comment: String())
+        quantityLabel.text = "Label.Order.Quantity".localizable
     }
     
     func configure(with orderItem: OrderItem, currencyCode: String) {
@@ -44,15 +44,14 @@ class OrderItemTableViewCell: UITableViewCell {
         itemPriceLabel.isHidden = !(orderItem.quantity! > 1)
         
         if orderItem.quantity! > 1 {
-            let eachText = NSLocalizedString("Label.Order.Each", comment: String())
-            itemPriceLabel.text = String(format: "%@ %@", formatter.string(from: price)!, eachText)
+            itemPriceLabel.text = String.localizedStringWithFormat("Label.Order.Each".localizable, formatter.string(from: price)!)
         }
         
         if let options = orderItem.productVariant!.selectedOptions {
-            var subtitle = String()
+            var subtitle = ""
             
             options.forEach {
-                let text = String(format: "%@: %@", $0.name, $0.value)
+                let text = String.localizedStringWithFormat("Label.Order.Option".localizable, $0.name, $0.value)
                 subtitle.append(text)
                 
                 if options.last != $0 {

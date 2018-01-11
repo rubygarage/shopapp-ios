@@ -29,7 +29,7 @@ extension Article {
     }
     
     private func update(with item: Storefront.Article?) {
-        id = item?.id.rawValue ?? String()
+        id = item?.id.rawValue ?? ""
         title = item?.title
         content = item?.content
         author = Author(with: item?.author)

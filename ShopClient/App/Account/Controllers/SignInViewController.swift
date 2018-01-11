@@ -27,19 +27,19 @@ class SignInViewController: BaseViewController<SignInViewModel> {
     
     private func setupViews() {
         addCloseButton()
-        title = NSLocalizedString("ControllerTitle.SignIn", comment: String())
-        emailTextFieldView.placeholder = NSLocalizedString("Placeholder.Email", comment: String()).uppercased()
-        passwordTextFieldView.placeholder = NSLocalizedString("Placeholder.Password", comment: String()).uppercased()
-        forgotButton.setTitle(NSLocalizedString("Button.Forgot", comment: String()), for: .normal)
-        signInButton.setTitle(NSLocalizedString("Button.SignIn", comment: String()).uppercased(), for: .normal)
+        title = "ControllerTitle.SignIn".localizable
+        emailTextFieldView.placeholder = "Placeholder.Email".localizable.uppercased()
+        passwordTextFieldView.placeholder = "Placeholder.Password".localizable.uppercased()
+        forgotButton.setTitle("Button.Forgot".localizable, for: .normal)
+        signInButton.setTitle("Button.SignIn".localizable.uppercased(), for: .normal)
     }
     
     private func setupViewModel() {
-        emailTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        emailTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.emailText)
             .disposed(by: disposeBag)
         
-        passwordTextFieldView.textField.rx.text.map({ $0 ?? String() })
+        passwordTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.passwordText)
             .disposed(by: disposeBag)
         

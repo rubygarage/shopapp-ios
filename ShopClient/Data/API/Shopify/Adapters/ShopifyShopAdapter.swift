@@ -15,7 +15,7 @@ extension Shop {
         }
         self.init()
         
-        name = shopObject?.name ?? String()
+        name = shopObject?.name ?? ""
         shopDescription = shopObject?.description
         privacyPolicy = Policy(policyObject: shopObject?.privacyPolicy)
         refundPolicy = Policy(policyObject: shopObject?.refundPolicy)

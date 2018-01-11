@@ -9,7 +9,7 @@
 import Foundation
 
 class Shop: NSObject {
-    var name = String()
+    var name = ""
     var shopDescription: String?
     var privacyPolicy: Policy?
     var refundPolicy: Policy?

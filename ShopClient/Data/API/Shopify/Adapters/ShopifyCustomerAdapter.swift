@@ -15,7 +15,7 @@ extension Customer {
         }
         self.init()
         
-        email = item?.email ?? String()
+        email = item?.email ?? ""
         firstName = item?.firstName
         lastName = item?.lastName
         phone = item?.phone

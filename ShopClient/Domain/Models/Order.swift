@@ -9,7 +9,7 @@
 import Foundation
 
 class Order: NSObject {
-    var id = String()
+    var id = ""
     var currencyCode: String?
     var number: Int?
     var createdAt: Date?
