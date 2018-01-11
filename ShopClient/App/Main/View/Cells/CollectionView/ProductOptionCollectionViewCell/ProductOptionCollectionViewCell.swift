@@ -17,7 +17,6 @@ class ProductOptionCollectionViewCell: UICollectionViewCell {
         optionTitleLabel.text = text
         optionTitleLabel.textColor = selected ? UIColor.white : UIColor.black
         backgroundColor = selected ? UIColor.black : kProductUnselectedOptionColor
-        //contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
         layer.cornerRadius = frame.size.height / 2
     }
 }
