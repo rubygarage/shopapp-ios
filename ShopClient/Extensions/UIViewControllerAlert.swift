@@ -37,12 +37,12 @@ extension UIViewController {
     private func showAlertController(with title: String?, message: String?, submit: String? = nil, cancel: String, handler: AlertClosure?) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        let cancelAction = UIAlertAction(title: cancel, style: .default) { (_) in
+        let cancelAction = UIAlertAction(title: cancel, style: .default) { _ in
             handler?(.cancel)
         }
         alertController.addAction(cancelAction)
         if submit != nil {
-            let submitAction = UIAlertAction(title: submit, style: .default, handler: { (_) in
+            let submitAction = UIAlertAction(title: submit, style: .default, handler: { _ in
                 handler?(.submit)
             })
             alertController.addAction(submitAction)
