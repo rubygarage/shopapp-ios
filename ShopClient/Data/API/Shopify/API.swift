@@ -363,7 +363,6 @@ class API: NSObject, APIInterface {
                     .orderNumber()
                     .processedAt()
                     .subtotalPrice()
-                    .totalTax()
                     .totalShippingPrice()
                     .totalPrice()
                     .shippingAddress(self.mailingAddressQuery())
@@ -1016,7 +1015,6 @@ class API: NSObject, APIInterface {
             query.currencyCode()
             query.subtotalPrice()
             query.totalPrice()
-            query.totalTax()
             query.shippingAddress(self.mailingAddressQuery())
         }
     }

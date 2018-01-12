@@ -27,7 +27,7 @@ class Address: NSObject {
     
     var fullAddress: String {
         var result = address!
-        if let secondAddress = secondAddress {
+        if let secondAddress = secondAddress, !secondAddress.isEmpty {
             result = [result, secondAddress].joined(separator: "\n")
         }
         let adressParts = [city, zip, country].flatMap { $0 }

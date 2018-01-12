@@ -17,7 +17,6 @@ class Order: NSObject {
     var subtotalPrice: Decimal?
     var totalPrice: Decimal?
     var totalShippingPrice: Decimal?
-    var totalTax: Decimal?
     var paginationValue: String?
     var items: [OrderItem]?
 }
