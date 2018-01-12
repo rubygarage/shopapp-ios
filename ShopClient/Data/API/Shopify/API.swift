@@ -849,6 +849,7 @@ class API: NSObject, APIInterface {
         return { (query: Storefront.ProductQuery) in
             query.id()
             query.images(first: 1, self.imageConnectionQuery())
+            query.options(self.optionQuery())
         }
     }
     
