@@ -20,15 +20,15 @@ class BaseTableViewController<T: BasePaginationViewModel>: BasePaginationViewCon
     
     private func setupPullToRefresh() {
         refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action:  #selector(self.pullToRefreshHandler), for: UIControlEvents.valueChanged)
+        refreshControl?.addTarget(self, action: #selector(self.pullToRefreshHandler), for: UIControlEvents.valueChanged)
         tableView.refreshControl = refreshControl
     }
     
     private func setupInfinityScroll() {
-        tableView.setShouldShowInfiniteScrollHandler { [weak self] (tableView) -> Bool in
+        tableView.setShouldShowInfiniteScrollHandler { [weak self] _ -> Bool in
             return self?.viewModel.canLoadMore ?? false
         }
-        tableView.addInfiniteScroll { [weak self] (tableView) in
+        tableView.addInfiniteScroll { [weak self] _ in
             self?.infinityScrollHandler()
         }
     }

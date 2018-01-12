@@ -1,4 +1,3 @@
-
 //
 //  BaseViewController.swift
 //  ShopClient
@@ -29,9 +28,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
     var loadingView = LoadingView()
     var errorView = ErrorView()
     var emptyDataView: UIView {
-        get {
-            return UIView()
-        }
+        return UIView()
     }
     
     override func viewDidLoad() {
@@ -59,16 +56,12 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
         switch state {
         case .content:
             setContentState()
-            break
         case .error(let error):
             setErrorState(with: error)
-            break
         case .loading(let showHud):
             setLoadingState(showHud: showHud)
-            break
         case .empty:
             setEmptyState()
-            break
         }
     }
     

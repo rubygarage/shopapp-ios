@@ -25,7 +25,7 @@ extension DAO {
                 item = transaction.create(Into<CartProductEntity>())
                 item?.update(with: cartProduct, transaction: transaction)
             }
-        }) { (result) in
+        }, completion: { (result) in
             switch result {
             case .success:
                 let item = CoreStore.fetchOne(From<CartProductEntity>(), Where(predicate))
@@ -33,7 +33,7 @@ extension DAO {
             case .failure(let error):
                 callback(nil, RepoError(with: error))
             }
-        }
+        })
     }
     
     func deleteProductFromCart(with productVariantId: String?, callback: @escaping RepoCallback<Bool>) {
@@ -41,14 +41,14 @@ extension DAO {
         CoreStore.perform(asynchronous: { (transaction) in
             let item: CartProductEntity? = transaction.fetchOne(From<CartProductEntity>(), Where(predicate))
             transaction.delete(item)
-        }) { (result) in
+        }, completion: { (result) in
             switch result {
             case .success:
                 callback(true, nil)
             case .failure(let error):
                 callback(false, RepoError(with: error))
             }
-        }
+        })
     }
     
     func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<CartProduct>) {
@@ -56,7 +56,7 @@ extension DAO {
         CoreStore.perform(asynchronous: { (transaction) in
             let item: CartProductEntity? = transaction.fetchOrCreate(predicate: predicate)
             item?.quantity = Int16(quantity)
-        }) { (result) in
+        }, completion: { (result) in
             switch result {
             case .success:
                 let item = CoreStore.fetchOne(From<CartProductEntity>(), Where(predicate))
@@ -64,7 +64,7 @@ extension DAO {
             case .failure(let error):
                 callback(nil, RepoError(with: error))
             }
-        }
+        })
     }
     
     private func getPredicate(with productVariantId: String?) -> NSPredicate {

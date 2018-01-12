@@ -1803,7 +1803,6 @@
 				0BD5EB2D1FF3D8F40076C01B /* App */,
 				0BD5EB2E1FF3D8FB0076C01B /* Data */,
 				0BD5EB2F1FF3D9000076C01B /* Domain */,
-				61E4E6331F56C868001C6E01 /* AppDelegate.swift */,
 				61CEAA641F5E98110016FBD7 /* Constants */,
 				61836C1F1FD98CFA000A6BA6 /* Controls */,
 				611EF3591F5956A3001B8B9C /* Controllers */,
@@ -1813,6 +1812,7 @@
 				614142DB1F6C322400379BB9 /* Storyboards */,
 				6180AC011F72CCFA007768F2 /* SupportingFiles */,
 				611EF35D1F5957B6001B8B9C /* Views */,
+				61E4E6331F56C868001C6E01 /* AppDelegate.swift */,
 				61E4E63A1F56C868001C6E01 /* Assets.xcassets */,
 				61E4E63F1F56C868001C6E01 /* Info.plist */,
 			);
@@ -1901,7 +1901,8 @@
 				61E4E62E1F56C868001C6E01 /* Resources */,
 				7861D8391D7CFE0B5E0888BB /* [CP] Embed Pods Frameworks */,
 				3996E684F38DD2BB24DA1044 /* [CP] Copy Pods Resources */,
-				0BA630641FFE7B8C007088B8 /* ShellScript */,
+				8E3A6F2A20078145001ADB11 /* SwiftLint */,
+				0BA630641FFE7B8C007088B8 /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -1920,7 +1921,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = "Evgeniy Antonov";
+				ORGANIZATIONNAME = RubyGarage;
 				TargetAttributes = {
 					61E4E62F1F56C868001C6E01 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -2025,13 +2026,14 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0BA630641FFE7B8C007088B8 /* ShellScript */ = {
+		0BA630641FFE7B8C007088B8 /* Fabric */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = Fabric;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2098,6 +2100,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShopClient/Pods-ShopClient-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		8E3A6F2A20078145001ADB11 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 

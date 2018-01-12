@@ -64,7 +64,7 @@ class CartViewModel: BaseViewModel {
     }
     
     private func updateSuccessState(with itemsCount: Int?) {
-        if let count = itemsCount, count > 0 {
+        if let itemsCount = itemsCount, itemsCount > 0 {
             state.onNext(.content)
         } else {
             state.onNext(.empty)

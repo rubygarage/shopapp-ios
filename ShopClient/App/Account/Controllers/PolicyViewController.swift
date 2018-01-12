@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-private let kTextViewContentInsets = UIEdgeInsetsMake(28, 16, 28, 16)
+private let kTextViewContentInsets = UIEdgeInsets(top: 28, left: 16, bottom: 28, right: 16)
 
 class PolicyViewController: UIViewController {
     @IBOutlet weak var policyTextView: UITextView!

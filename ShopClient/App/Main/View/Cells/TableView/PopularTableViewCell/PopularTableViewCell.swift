@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PopularCellDelegate {
+protocol PopularCellDelegate: class {
     func didSelectPopularProduct(at index: Int)
 }
 

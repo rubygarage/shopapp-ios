@@ -50,7 +50,7 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     
     private func setupViewModel() {
         viewModel.data.asObservable()
-            .subscribe(onNext: { [weak self] products in
+            .subscribe(onNext: { [weak self] _ in
                 self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
@@ -95,7 +95,7 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
         let title = NSLocalizedString("Button.Remove", comment: String())
-        let deleteAction = SwipeAction(style: .destructive, title: title) { [weak self] (action, indexPath) in
+        let deleteAction = SwipeAction(style: .destructive, title: title) { [weak self] (_, indexPath) in
             self?.viewModel.removeCardProduct(at: indexPath.row)
         }
         deleteAction.backgroundColor = TableView.removeActionBackgroundColor

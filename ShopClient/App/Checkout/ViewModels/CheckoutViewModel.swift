@@ -28,7 +28,7 @@ class CheckoutViewModel: BaseViewModel {
     private let customerUseCase = CustomerUseCase()
     
     var placeOrderPressed: AnyObserver<()> {
-        return AnyObserver { [weak self] event in
+        return AnyObserver { [weak self] _ in
             self?.placeOrderAction()
         }
     }
@@ -38,10 +38,10 @@ class CheckoutViewModel: BaseViewModel {
         checkoutCreateSingle.subscribe(onSuccess: { [weak self] (checkout) in
             self?.checkout.value = checkout
             self?.getCustomer()
-        }) { [weak self] (error) in
+        }, onError: { [weak self] (error) in
             let castedError = error as? RepoError
             self?.state.onNext(.error(error: castedError))
-        }
+        })
         .disposed(by: disposeBag)
     }
     
@@ -100,7 +100,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     private func getCustomer() {
-        customerUseCase.getCustomer { [weak self] (customer, error) in
+        customerUseCase.getCustomer { [weak self] (customer, _) in
             if let address = customer?.defaultAddress {
                 self?.updateCheckoutShippingAddress(with: address, isDefaultAddress: false)
             } else {
@@ -110,7 +110,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     private func processUpdateCheckoutShippingAddress(address: Address, isDefaultAddress: Bool) {
-        customerUseCase.addAddress(with: address) { [weak self] (addressId, error) in
+        customerUseCase.addAddress(with: address) { [weak self] (addressId, _) in
             if let addressId = addressId {
                 self?.processCustomerAddingAddress(with: addressId, isDefaultAddress: isDefaultAddress)
             } else {
@@ -128,7 +128,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     private func updateCustomerDefaultAddress(with addressId: String) {
-        customerUseCase.updateDefaultAddress(with: addressId) { [weak self] (success, error) in
+        customerUseCase.updateDefaultAddress(with: addressId) { [weak self] (_, _) in
             self?.getCheckout()
         }
     }

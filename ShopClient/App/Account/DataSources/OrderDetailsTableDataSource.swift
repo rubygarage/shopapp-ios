@@ -31,7 +31,7 @@ class OrdersDetailsTableDataSource: NSObject, UITableViewDataSource {
     
     // MARK: - UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard let _ = delegate.order() else {
+        guard delegate.order() != nil else {
             return 0
         }
         

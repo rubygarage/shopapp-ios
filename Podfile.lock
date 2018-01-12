@@ -14,6 +14,7 @@ PODS:
     - SDWebImage/Core (= 4.2.2)
   - SDWebImage/Core (4.2.2)
   - SKPhotoBrowser (5.0.0)
+  - SwiftLint (0.24.0)
   - SwipeCellKit (2.0.0)
   - Toaster (2.1.1)
   - TPKeyboardAvoiding (1.3.2)
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - RxSwift (~> 4.0)
   - SDWebImage (~> 4.1)
   - SKPhotoBrowser (~> 5.0)
+  - SwiftLint (~> 0.24)
   - SwipeCellKit (~> 2.0)
   - Toaster (~> 2.1)
   - TPKeyboardAvoiding (~> 1.3)
@@ -52,6 +54,7 @@ SPEC CHECKSUMS:
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
   SKPhotoBrowser: fe936f878955a568c726bf05d14e1d2717d91ce0
+  SwiftLint: a014c92b4664e8b13f380f8640a51bb1733778ba
   SwipeCellKit: 349c61ffde96ac3ae51c2691a03e421b5b29ee98
   Toaster: a6c9532de1ded8105e77376f7dffeb2e12b46dbb
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
@@ -59,6 +62,6 @@ SPEC CHECKSUMS:
   UIImage+Additions: da531911c34e298b46b567a28df03bb098af1389
   UIScrollView-InfiniteScroll: c132d6d5851daff229ab4a1060ccf70a05a051c9
 
-PODFILE CHECKSUM: db906555b70f355640b550b419bf6bd027e8504c
+PODFILE CHECKSUM: 97b4dc50d1edef938f145c755329467e2ca0d3bc
 
 COCOAPODS: 1.3.1

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CheckoutCartCollectionDataSourceDelegate {
+protocol CheckoutCartCollectionDataSourceDelegate: class {
     func itemsCount() -> Int
     func item(at index: Int) -> Image
 }

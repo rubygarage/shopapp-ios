@@ -28,7 +28,7 @@ class SignUpViewModel: BaseViewModel {
     }
     
     var signUpPressed: AnyObserver<()> {
-        return AnyObserver { [weak self] event in
+        return AnyObserver { [weak self] _ in
             self?.checkCresentials()
         }
     }

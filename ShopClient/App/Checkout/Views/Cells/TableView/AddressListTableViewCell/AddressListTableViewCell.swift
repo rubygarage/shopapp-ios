@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AddressListTableViewCellProtocol {
+protocol AddressListTableViewCellProtocol: class {
     func didTapSelect(with address: Address)
     func didTapEdit(with address: Address)
     func didTapDelete(with address: Address)

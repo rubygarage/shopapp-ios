@@ -22,7 +22,7 @@ class CheckoutTableDelegate: NSObject, UITableViewDelegate {
     }
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if let _ = delegate.checkout(), section == CheckoutSection.payment.rawValue {
+        if delegate.checkout() != nil, section == CheckoutSection.payment.rawValue {
             return PaymentDetailsFooterView.height
         }
         return 0

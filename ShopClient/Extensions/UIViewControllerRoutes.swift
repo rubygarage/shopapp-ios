@@ -19,7 +19,7 @@ extension UIViewController {
     }
     
     // MARK: - present
-    func showCategorySortingController(with items:[String], selectedItem: String, delegate: SortModalControllerProtocol?) {
+    func showCategorySortingController(with items: [String], selectedItem: String, delegate: SortModalControllerProtocol?) {
         let sortController = UIStoryboard.sortModal().instantiateViewController(withIdentifier: ControllerIdentifier.sortModal) as! SortModalViewController
         sortController.sortItems = items
         sortController.selectedSortItem = selectedItem

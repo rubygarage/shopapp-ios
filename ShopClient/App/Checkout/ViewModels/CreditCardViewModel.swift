@@ -8,7 +8,7 @@
 
 import RxSwift
 
-typealias CreditCardPaymentCompletion = (_ billingAddress: Address, _ card: CreditCard) -> ()
+typealias CreditCardPaymentCompletion = (_ billingAddress: Address, _ card: CreditCard) -> Void
 
 class CreditCardViewModel: BaseViewModel {
     var holderNameText = Variable<String>("")
@@ -29,7 +29,7 @@ class CreditCardViewModel: BaseViewModel {
     }
     
     var submitTapped: AnyObserver<()> {
-        return AnyObserver { [weak self] event in
+        return AnyObserver { [weak self] _ in
             self?.validateData()
         }
     }
