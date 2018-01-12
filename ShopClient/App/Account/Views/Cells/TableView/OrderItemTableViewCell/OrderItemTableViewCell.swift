@@ -34,6 +34,10 @@ class OrderItemTableViewCell: UITableViewCell {
     }
     
     func configure(with orderItem: OrderItem, currencyCode: String) {
+        let image = orderItem.productVariant?.image ?? Image()
+        let imageUrl = URL(string: image.src ?? "")
+        itemImageView.sd_setImage(with: imageUrl)
+        
         let formatter = NumberFormatter.formatter(with: currencyCode)
         let price = NSDecimalNumber(string: orderItem.productVariant!.price!)
         let totalPrice = NSDecimalNumber(value: price.doubleValue * Double(orderItem.quantity!))
