@@ -11,7 +11,7 @@ import UIKit
 private let kPlaceOrderHeightVisible: CGFloat = 50
 private let kPlaceOrderHeightInvisible: CGFloat = 0
 
-class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeaderViewProtocol, CheckoutCombinedProtocol, CheckoutCartTableViewCellDelegate {
+class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeaderViewProtocol, CheckoutCombinedProtocol {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var placeOrderHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var placeOrderButton: UIButton!
