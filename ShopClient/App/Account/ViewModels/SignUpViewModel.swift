@@ -19,7 +19,7 @@ class SignUpViewModel: BaseViewModel {
     var signUpSuccess = Variable<Bool>(false)
     var policies = Variable<(privacyPolicy: Policy?, termsOfService: Policy?)>(privacyPolicy: nil, termsOfService: nil)
     
-    var delegate: AuthenticationProtocol!
+    weak var delegate: AuthenticationProtocol?
     
     var signUpButtonEnabled: Observable<Bool> {
         return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { email, password in

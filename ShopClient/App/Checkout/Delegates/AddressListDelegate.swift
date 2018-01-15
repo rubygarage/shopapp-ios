@@ -9,16 +9,14 @@
 import UIKit
 
 class AddressListDelegate: NSObject, UITableViewDelegate {
-    private var delegate: AddressListHeaderViewProtocol!
     
-    init(delegate: AddressListHeaderViewProtocol) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: AddressListHeaderViewProtocol?
     
     // MARK: - UITableViewDelegate
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return AddressListTableHeaderView(delegate: delegate)
+        let view = AddressListTableHeaderView()
+        view.delegate = delegate
+        return view
     }
 }

@@ -11,7 +11,9 @@ import UIKit
 class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, OrdersListTableDataSourceProtocol, OrdersListTableDelegateProtocol, CheckoutCartTableViewCellDelegate {
     
     private var tableDataSource: OrdersListTableDataSource!
+    // swiftlint:disable weak_delegate
     private var tableDelegate: OrdersListTableDelegate!
+    // swiftlint:enable weak_delegate
     private var selectedOrder: Order?
     private var selectedProductVariant: ProductVariant!
 
@@ -56,10 +58,12 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, Or
         let cartNib = UINib(nibName: String(describing: CheckoutCartTableViewCell.self), bundle: nil)
         tableView?.register(cartNib, forCellReuseIdentifier: String(describing: CheckoutCartTableViewCell.self))
         
-        tableDataSource = OrdersListTableDataSource(delegate: self)
+        tableDataSource = OrdersListTableDataSource()
+        tableDataSource.delegate = self
         tableView?.dataSource = tableDataSource
         
-        tableDelegate = OrdersListTableDelegate(delegate: self)
+        tableDelegate = OrdersListTableDelegate()
+        tableDelegate.delegate = self
         tableView?.delegate = tableDelegate
         
         tableView?.contentInset = TableView.defaultContentInsets

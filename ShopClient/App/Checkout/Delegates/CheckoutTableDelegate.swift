@@ -8,21 +8,18 @@
 
 import UIKit
 
-protocol CheckoutTableDelegateProtocol {
+protocol CheckoutTableDelegateProtocol: class {
     func checkout() -> Checkout?
 }
 
 class CheckoutTableDelegate: NSObject, UITableViewDelegate {
-    private var delegate: (SeeAllHeaderViewProtocol & CheckoutTableDelegateProtocol)!
     
-    init(delegate: SeeAllHeaderViewProtocol & CheckoutTableDelegateProtocol) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: (SeeAllHeaderViewProtocol & CheckoutTableDelegateProtocol)?
+    
     // MARK: - UITableViewDelegate
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if delegate.checkout() != nil, section == CheckoutSection.payment.rawValue {
+        if delegate?.checkout() != nil, section == CheckoutSection.payment.rawValue {
             return PaymentDetailsFooterView.height
         }
         return 0
@@ -31,7 +28,9 @@ class CheckoutTableDelegate: NSObject, UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case CheckoutSection.cart.rawValue:
-            return SeeAllTableHeaderView(delegate: delegate, type: .myCart, separatorVisible: true)
+            let view = SeeAllTableHeaderView(type: .myCart, separatorVisible: true)
+            view.delegate = delegate
+            return view
         case CheckoutSection.shippingAddress.rawValue:
             return BoldTitleTableHeaderView(type: .shippingAddress)
         case CheckoutSection.payment.rawValue:
@@ -42,7 +41,7 @@ class CheckoutTableDelegate: NSObject, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if let checkout = delegate.checkout(), section == CheckoutSection.payment.rawValue {
+        if let checkout = delegate?.checkout(), section == CheckoutSection.payment.rawValue {
             return PaymentDetailsFooterView(checkout: checkout)
         }
         return nil

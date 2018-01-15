@@ -8,21 +8,17 @@
 
 import UIKit
 
-protocol ImagesCarouselCollectionDataSourceProtocol {
+protocol ImagesCarouselCollectionDataSourceProtocol: class {
     func numberOfItems() -> Int
     func item(for index: Int) -> Image
 }
 
 class ImagesCarouselCollectionDataSource: NSObject, UICollectionViewDataSource {
-    private var delegate: ImagesCarouselCollectionDataSourceProtocol?
     
-    init(delegate: ImagesCarouselCollectionDataSourceProtocol) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: ImagesCarouselCollectionDataSourceProtocol?
     
     // MARK: - UICollectionViewDataSource
+    
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return delegate?.numberOfItems() ?? 0
     }

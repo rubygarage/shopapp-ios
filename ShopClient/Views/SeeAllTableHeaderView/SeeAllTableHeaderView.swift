@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SeeAllHeaderViewProtocol {
+protocol SeeAllHeaderViewProtocol: class {
     func didTapSeeAll(type: SeeAllViewType)
 }
 
@@ -25,13 +25,13 @@ class SeeAllTableHeaderView: UIView {
     @IBOutlet weak var seeAllButton: UIButton!
     @IBOutlet weak var separatprHeightConstraint: NSLayoutConstraint!
     
-    private var delegate: SeeAllHeaderViewProtocol?
     private var headerViewType = SeeAllViewType.latestArrivals
     
-    init(delegate: SeeAllHeaderViewProtocol?, type: SeeAllViewType, separatorVisible: Bool = false) {
+    weak var delegate: SeeAllHeaderViewProtocol?
+    
+    init(type: SeeAllViewType, separatorVisible: Bool = false) {
         super.init(frame: CGRect.zero)
         
-        self.delegate = delegate
         headerViewType = type
         commonInit()
         setupConstraints(separatorVisible: separatorVisible)
@@ -70,7 +70,8 @@ class SeeAllTableHeaderView: UIView {
         seeAllButton.setTitle(NSLocalizedString("Button.SeeAll", comment: String()), for: .normal)
     }
     
-    // MARK: - actions
+    // MARK: - Actions
+    
     @IBAction func seeAllTapped(_ sender: UIButton) {
         delegate?.didTapSeeAll(type: headerViewType)
     }

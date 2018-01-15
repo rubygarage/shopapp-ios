@@ -8,21 +8,17 @@
 
 import UIKit
 
-protocol ArticlesListTableDataSourceProtocol {
+protocol ArticlesListTableDataSourceProtocol: class {
     func articlesCount() -> Int
     func article(at index: Int) -> Article?
 }
 
 class ArticlesListTableDataSource: NSObject, UITableViewDataSource {
-    private var delegate: ArticlesListTableDataSourceProtocol?
     
-    init(delegate: ArticlesListTableDataSourceProtocol?) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: ArticlesListTableDataSourceProtocol?
     
     // MARK: - UITableViewDataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return delegate?.articlesCount() ?? 0
     }

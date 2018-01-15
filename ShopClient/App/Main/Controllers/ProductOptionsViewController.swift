@@ -12,14 +12,22 @@ let kOptionCollectionViewHeaderHeight = CGFloat(46.0)
 let kOptionCollectionViewCellHeight = CGFloat(31.0)
 private let kOptionCollectionViewAdditionalHeight = CGFloat(30.0)
 
-protocol ProductOptionsControllerProtocol {
+protocol ProductOptionsControllerProtocol: class {
     func didCalculate(collectionViewHeight: CGFloat)
     func didSelectOption(with name: String, value: String)
 }
 
 class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDataSourceProtocol, ProductOptionsCellDelegate {
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionLayout: UICollectionViewFlowLayout!
+    
+    private var collectionDataSource: ProductOptionsCollectionDataSource!
+    // swiftlint:disable weak_delegate
+    private var collectionDelegate: ProductOptionsCollectionDelegate!
+    // swiftlint:enable weak_delegate
+    
+    weak var controllerDelegate: ProductOptionsControllerProtocol?
     
     var options = [ProductOption]()
     var selectedOptions = [SelectedOption]() {
@@ -34,9 +42,6 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
             collectionView.reloadData()
         }
     }
-    var controllerDelegate: ProductOptionsControllerProtocol?
-    private var collectionDataSource: ProductOptionsCollectionDataSource?
-    private var collectionDelegate: ProductOptionsCollectionDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +56,8 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
         let headerNib = UINib(nibName: String(describing: ProductOptionHeaderView.self), bundle: nil)
         collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: String(describing: ProductOptionHeaderView.self))
 
-        collectionDataSource = ProductOptionsCollectionDataSource(delegate: self)
+        collectionDataSource = ProductOptionsCollectionDataSource()
+        collectionDataSource.delegate = self
         collectionView.dataSource = collectionDataSource
         
         collectionDelegate = ProductOptionsCollectionDelegate()

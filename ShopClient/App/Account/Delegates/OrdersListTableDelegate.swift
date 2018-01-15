@@ -8,35 +8,40 @@
 
 import UIKit
 
-protocol OrdersListTableDelegateProtocol {
+protocol OrdersListTableDelegateProtocol: class {
     func orders() -> [Order]
     func didSelectItem(at index: Int)
 }
 
 class OrdersListTableDelegate: NSObject, UITableViewDelegate, OrderHeaderViewProtocol, OrderFooterViewProtocol {
-    private var delegate: OrdersListTableDelegateProtocol!
     
-    init(delegate: OrdersListTableDelegateProtocol) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: OrdersListTableDelegateProtocol?
     
     // MARK: - UITableViewDelegate
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let orders = delegate.orders()
-        let order = orders[section]
-        return OrderHeaderView(section: section, order: order, delegate: self)
+        if let orders = delegate?.orders() {
+            let order = orders[section]
+            let view = OrderHeaderView(section: section, order: order)
+            view.delegate = self
+            return view
+        }
+        return nil
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let orders = delegate.orders()
-        let order = orders[section]
-        return OrderFooterView(section: section, order: order, delegate: self)
+        if let orders = delegate?.orders() {
+            let order = orders[section]
+            let view = OrderFooterView(section: section, order: order)
+            view.delegate = self
+            return view
+        }
+        return nil
     }
     
     // MARK: - OrderHeaderViewProtocol
+    
     func viewDidTap(_ section: Int) {
-        delegate.didSelectItem(at: section)
+        delegate?.didSelectItem(at: section)
     }
 }

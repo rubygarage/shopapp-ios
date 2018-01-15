@@ -8,22 +8,18 @@
 
 import UIKit
 
-protocol OrdersListTableDataSourceProtocol {
+protocol OrdersListTableDataSourceProtocol: class {
     func orders() -> [Order]
 }
 
 class OrdersListTableDataSource: NSObject, UITableViewDataSource {
-    private var delegate: (OrdersListTableDataSourceProtocol & CheckoutCartTableViewCellDelegate)!
     
-    init(delegate: OrdersListTableDataSourceProtocol & CheckoutCartTableViewCellDelegate) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: (OrdersListTableDataSourceProtocol & CheckoutCartTableViewCellDelegate)?
     
     // MARK: - UITableViewDataSource
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return delegate.orders().count
+        return delegate?.orders().count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -32,15 +28,16 @@ class OrdersListTableDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutCartTableViewCell.self), for: indexPath) as! CheckoutCartTableViewCell
-        var images = [Image]()
-        var productVariantIds = [String]()
-        let orders = delegate.orders()
-        let order = orders[indexPath.section]
-        if let items = order.items {
-            images = items.map { $0.productVariant?.image ?? Image() }
-            productVariantIds = items.map { $0.productVariant?.id ?? "" }
+        if let orders = delegate?.orders() {
+            var images = [Image]()
+            var productVariantIds = [String]()
+            let order = orders[indexPath.section]
+            if let items = order.items {
+                images = items.map { $0.productVariant?.image ?? Image() }
+                productVariantIds = items.map { $0.productVariant?.id ?? "" }
+            }
+            cell.configure(with: images, productVariantIds: productVariantIds, index: indexPath.section)
         }
-        cell.configure(with: images, productVariantIds: productVariantIds, index: indexPath.section, cellDelegate: delegate)
         return cell
     }
 }

@@ -8,22 +8,23 @@
 
 import UIKit
 
-protocol CartEmptyDataViewProtocol {
+protocol CartEmptyDataViewProtocol: class {
     func didTapStartShopping()
 }
 
 class CartEmptyDataView: UIView {
+    
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var emptyCartLabel: UILabel!
     @IBOutlet weak var startShoppingButton: UIButton!
     
-    var delegate: CartEmptyDataViewProtocol!
+    weak var delegate: CartEmptyDataViewProtocol?
     
-    // MARK: - init
-    init(frame: CGRect, delegate: CartEmptyDataViewProtocol) {
+    // MARK: - Init
+    
+    override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.delegate = delegate
         commonInit()
     }
     
@@ -47,8 +48,9 @@ class CartEmptyDataView: UIView {
         startShoppingButton.setTitle(NSLocalizedString("Button.StartShopping", comment: String()).uppercased(), for: .normal)
     }
     
-    // MARK: - actions
+    // MARK: - Actions
+    
     @IBAction func startShoppingTapped(_ sender: UIButton) {
-        delegate.didTapStartShopping()
+        delegate?.didTapStartShopping()
     }
 }

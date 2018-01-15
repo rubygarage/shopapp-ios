@@ -8,29 +8,25 @@
 
 import UIKit
 
-protocol AccountTableDataSourceProtocol {
+protocol AccountTableDataSourceProtocol: class {
     func policies() -> [Policy]
 }
 
 class AccountTableDataSource: NSObject, UITableViewDataSource {
-    private var delegate: AccountTableDataSourceProtocol!
     
-    init(delegate: AccountTableDataSourceProtocol) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: AccountTableDataSourceProtocol?
     
     // MARK: - UITableViewDataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return delegate.policies().count
+        return delegate?.policies().count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: AccountTableViewCell.self), for: indexPath) as! AccountTableViewCell
-        let policy = delegate.policies()[indexPath.row]
-        cell.configure(with: policy)
-        
+        if let policy = delegate?.policies()[indexPath.row] {
+            cell.configure(with: policy)
+        }
         return cell
     }
 }

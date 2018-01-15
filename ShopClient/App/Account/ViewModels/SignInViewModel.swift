@@ -15,7 +15,7 @@ class SignInViewModel: BaseViewModel {
     var passwordErrorMessage = PublishSubject<String>()
     var signInSuccess = Variable<Bool>(false)
     
-    var delegate: AuthenticationProtocol!
+    weak var delegate: AuthenticationProtocol?
     
     var signInButtonEnabled: Observable<Bool> {
         return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { email, password in

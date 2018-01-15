@@ -18,7 +18,7 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
     @IBOutlet weak var signUpButton: BlackButton!
     @IBOutlet weak var acceptPoliciesLabel: TTTAttributedLabel!
     
-    var delegate: AuthenticationProtocol!
+    weak var delegate: AuthenticationProtocol?
     
     private var selectedPolicy: Policy?
     

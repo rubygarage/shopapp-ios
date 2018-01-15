@@ -143,10 +143,7 @@ whitelist_rules:
 #  - vertical_parameter_alignment_on_call
   - vertical_whitespace
   - void_return
-
-# !!! Let's discuss this rule in future
-#  - weak_delegate
-
+  - weak_delegate
   - xctfail_message
 #  - yoda_condition
 

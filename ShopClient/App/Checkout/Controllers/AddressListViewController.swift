@@ -14,12 +14,18 @@ enum AddressListType {
 }
 
 class AddressListViewController: BaseViewController<AddressListViewModel>, AddressListDataSourceProtocol, AddressListTableViewCellProtocol, AddressListHeaderViewProtocol {
+    
     @IBOutlet weak var tableView: UITableView!
     
     private var tableDataSource: AddressListDataSource!
+    
+    // swiftlint:disable weak_delegate
     private var tableDelegate: AddressListDelegate!
+    // swiftlint:enable weak_delegate
+    
     private var destinationAddress: Address?
     private var destinationAddressFormCompletion: AddressFormCompletion!
+    
     var destinationCreditCardCompletion: CreditCardPaymentCompletion?
     var selectedAddress: Address?
     var completion: AddressListCompletion?
@@ -43,10 +49,12 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
         let addressCellNib = UINib(nibName: String(describing: AddressListTableViewCell.self), bundle: nil)
         tableView.register(addressCellNib, forCellReuseIdentifier: String(describing: AddressListTableViewCell.self))
         
-        tableDataSource = AddressListDataSource(delegate: self)
+        tableDataSource = AddressListDataSource()
+        tableDataSource.delegate = self
         tableView.dataSource = tableDataSource
         
-        tableDelegate = AddressListDelegate(delegate: self)
+        tableDelegate = AddressListDelegate()
+        tableDelegate.delegate = self
         tableView.delegate = tableDelegate
     }
     
@@ -70,12 +78,14 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
         .disposed(by: disposeBag)
     }
     
-    // MARK: - private
+    // MARK: - Private
+    
     private func loadData() {
         viewModel.loadCustomerAddresses()
     }
     
     // MARK: - AddressListDataSourceProtocol
+    
     func itemsCount() -> Int {
         return viewModel.customerAddresses.value.count
     }
@@ -85,6 +95,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     }
     
     // MARK: - AddressListTableViewCellProtocol
+    
     func didTapSelect(with address: Address) {
         viewModel.updateCheckoutShippingAddress(with: address)
     }
@@ -103,6 +114,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     }
     
     // MARK: - AddressListHeaderViewProtocol
+    
     func didTapAddNewAddress() {
         destinationAddress = nil
         destinationAddressFormCompletion = { [weak self] (address, isDefaultAddress) in
@@ -112,6 +124,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     }
     
     // MARK: - segues
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let addressFormViewController = segue.destination as? AddressFormViewController {
             addressFormViewController.address = destinationAddress

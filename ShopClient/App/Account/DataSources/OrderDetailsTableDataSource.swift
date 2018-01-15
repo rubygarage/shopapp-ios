@@ -16,22 +16,18 @@ enum OrdersDetailsSection: Int {
     static let allValues = [header, paymentInformation, shippingAddress]
 }
 
-protocol OrdersDetailsTableDataSourceProtocol {
+protocol OrdersDetailsTableDataSourceProtocol: class {
     func order() -> Order?
 }
 
 class OrdersDetailsTableDataSource: NSObject, UITableViewDataSource {
-    private var delegate: OrdersDetailsTableDataSourceProtocol!
     
-    init(delegate: OrdersDetailsTableDataSourceProtocol) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: OrdersDetailsTableDataSourceProtocol?
     
     // MARK: - UITableViewDataSource
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard delegate.order() != nil else {
+        guard delegate?.order() != nil else {
             return 0
         }
         
@@ -43,7 +39,7 @@ class OrdersDetailsTableDataSource: NSObject, UITableViewDataSource {
         
         switch section {
         case OrdersDetailsSection.paymentInformation.rawValue:
-            numberOfRows = delegate.order()!.items!.count
+            numberOfRows = delegate?.order()?.items?.count ?? 0
         case OrdersDetailsSection.shippingAddress.rawValue:
             numberOfRows = delegate.order()!.shippingAddress != nil ? 1 : 0
         default:
@@ -68,19 +64,22 @@ class OrdersDetailsTableDataSource: NSObject, UITableViewDataSource {
         return cell
     }
     
-    // MARK: - private
+    // MARK: - Private
+    
     private func orderItemCell(with tableView: UITableView, indexPath: IndexPath) -> OrderItemTableViewCell {
-        let item =  delegate.order()!.items![indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: OrderItemTableViewCell.self), for: indexPath) as! OrderItemTableViewCell
-        cell.configure(with: item, currencyCode: delegate.order()!.currencyCode!)
+        if let order = delegate?.order(), let item = order.items?[indexPath.row] {
+            cell.configure(with: item, currencyCode: order.currencyCode!)
+        }
         return cell
     }
     
     private func shippingAddressCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingAddressEditTableCell {
-        let address = delegate.order()!.shippingAddress!
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self), for: indexPath) as! CheckoutShippingAddressEditTableCell
-        cell.configure(with: address)
-        cell.editButton.isHidden = true
+        if let address = delegate?.order()?.shippingAddress {
+            cell.configure(with: address)
+            cell.editButton.isHidden = true
+        }
         return cell
     }
 }

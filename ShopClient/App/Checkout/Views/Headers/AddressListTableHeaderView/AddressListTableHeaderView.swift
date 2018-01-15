@@ -8,26 +8,24 @@
 
 import UIKit
 
-protocol AddressListHeaderViewProtocol {
+protocol AddressListHeaderViewProtocol: class {
     func didTapAddNewAddress()
 }
 
 class AddressListTableHeaderView: UIView {
+    
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var addNewAddressButton: BlackButton!
     
-    private var delegate: AddressListHeaderViewProtocol!
+    weak var delegate: AddressListHeaderViewProtocol?
     
-    init(delegate: AddressListHeaderViewProtocol) {
+    override init(frame: CGRect) {
         super.init(frame: CGRect.zero)
-        
-        self.delegate = delegate
         commonInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
         commonInit()
     }
     
@@ -44,8 +42,9 @@ class AddressListTableHeaderView: UIView {
         addNewAddressButton.setTitle("Button.AddNewAddress".localizable.uppercased(), for: .normal)
     }
     
-    // MARK: - actions
+    // MARK: - Actions
+    
     @IBAction func addNewAddressTapped(_ sender: BlackButton) {
-        delegate.didTapAddNewAddress()
+        delegate?.didTapAddNewAddress()
     }
 }

@@ -15,15 +15,11 @@ protocol CartTableDataSourceProtocol {
 }
 
 class CartTableDataSource: NSObject, UITableViewDataSource {
-    var delegate: (CartTableDataSourceProtocol & CartTableCellProtocol & SwipeTableViewCellDelegate)?
     
-    init(delegate: (CartTableDataSourceProtocol & CartTableCellProtocol & SwipeTableViewCellDelegate)?) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: (CartTableDataSourceProtocol & CartTableCellProtocol & SwipeTableViewCellDelegate)?
     
     // MARK: - UITableViewDataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return delegate?.itemsCount() ?? 0
     }

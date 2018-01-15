@@ -8,18 +8,13 @@
 
 import UIKit
 
-protocol PopularTableDelegateProtocol {
+protocol PopularTableDelegateProtocol: class {
     func didSelectItem(at index: Int)
 }
 
 class PopularTableDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    private var delegate: PopularTableDelegateProtocol!
     
-    init(delegate: PopularTableDelegateProtocol) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: PopularTableDelegateProtocol?
     
     // MARK: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

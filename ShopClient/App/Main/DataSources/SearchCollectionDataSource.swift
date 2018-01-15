@@ -8,30 +8,26 @@
 
 import UIKit
 
-protocol SearchCollectionDataSourceProtocol {
+protocol SearchCollectionDataSourceProtocol: class {
     func categoriesCount() -> Int
     func category(at index: Int) -> Category
 }
 
 class SearchCollectionDataSource: NSObject, UICollectionViewDataSource {
-    private var delegate: SearchCollectionDataSourceProtocol!
     
-    init(delegate: SearchCollectionDataSourceProtocol) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: SearchCollectionDataSourceProtocol?
     
     // MARK: - UICollectionViewDataSource
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return delegate.categoriesCount()
+        return delegate?.categoriesCount() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CategoryCollectionViewCell.self), for: indexPath) as! CategoryCollectionViewCell
-        let category = delegate.category(at: indexPath.row)
-        cell.configure(with: category)
-        
+        if let category = delegate?.category(at: indexPath.row) {
+            cell.configure(with: category)
+        }
         return cell
     }
 }

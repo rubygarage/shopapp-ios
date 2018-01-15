@@ -8,14 +8,15 @@
 
 import UIKit
 
-protocol CheckoutPaymentAddCellProtocol {
+protocol CheckoutPaymentAddCellProtocol: class {
     func didTapAddPayment()
 }
 
 class CheckoutPaymentAddTableCell: UITableViewCell {
+    
     @IBOutlet weak var addPaymentButton: BlackButton!
     
-    var delegate: CheckoutPaymentAddCellProtocol?
+    weak var delegate: CheckoutPaymentAddCellProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,6 +26,7 @@ class CheckoutPaymentAddTableCell: UITableViewCell {
     }
     
     // MARK: - actions
+    
     @IBAction func addPaymentTapped(_ sender: BlackButton) {
         delegate?.didTapAddPayment()
     }

@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 import SwipeCellKit
 
-protocol CartTableCellProtocol {
+protocol CartTableCellProtocol: class {
     func didUpdate(cartProduct: CartProduct, quantity: Int)
 }
 
@@ -27,8 +27,9 @@ class CartTableViewCell: SwipeTableViewCell, UITextFieldDelegate {
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var pricePerOneItemLabel: UILabel!
     
+    weak var cellDelegate: CartTableCellProtocol?
+    
     var cartProduct: CartProduct?
-    var cellDelegate: CartTableCellProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()

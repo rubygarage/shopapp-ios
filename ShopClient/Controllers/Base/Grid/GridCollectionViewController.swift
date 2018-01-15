@@ -13,8 +13,10 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
     
     var selectedProduct: Product?
     
-    private var collectionDataSource: GridCollectionDataSource?
-    private var collectionDelegate: GridCollectionDelegate?
+    private var collectionDataSource: GridCollectionDataSource!
+    // swiftlint:disable weak_delegate
+    private var collectionDelegate: GridCollectionDelegate!
+    // swiftlint:enable weak_delegate
     
     // MARK: - view controller lifecycle
     override func viewDidLoad() {
@@ -34,10 +36,12 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
         let nib = UINib(nibName: String(describing: GridCollectionViewCell.self), bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: String(describing: GridCollectionViewCell.self))
         
-        collectionDataSource = GridCollectionDataSource(delegate: self)
+        collectionDataSource = GridCollectionDataSource()
+        collectionDataSource.delegate = self
         collectionView.dataSource = collectionDataSource
         
-        collectionDelegate = GridCollectionDelegate(delegate: self)
+        collectionDelegate = GridCollectionDelegate()
+        collectionDelegate.delegate = self
         collectionView.delegate = collectionDelegate
         
         collectionView.contentInset = GridCollectionViewCell.collectionViewInsets

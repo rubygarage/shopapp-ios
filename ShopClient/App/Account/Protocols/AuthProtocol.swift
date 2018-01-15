@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol AuthenticationProtocol {
+protocol AuthenticationProtocol: class {
     func didAuthorize()
 }

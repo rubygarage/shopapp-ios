@@ -12,7 +12,10 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, Ord
     @IBOutlet weak var tableView: UITableView!
     
     private var tableDataSource: OrdersDetailsTableDataSource!
+    
+    // swiftlint:disable weak_delegate
     private var tableDelegate: OrdersDetailsTableDelegate!
+    // swiftlint:enable weak_delegate
     
     var orderId: String!
     
@@ -47,10 +50,12 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, Ord
         let shippingAddressEditNib = UINib(nibName: String(describing: CheckoutShippingAddressEditTableCell.self), bundle: nil)
         tableView.register(shippingAddressEditNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self))
         
-        tableDataSource = OrdersDetailsTableDataSource(delegate: self)
+        tableDataSource = OrdersDetailsTableDataSource()
+        tableDataSource.delegate = self
         tableView.dataSource = tableDataSource
         
-        tableDelegate = OrdersDetailsTableDelegate(delegate: self)
+        tableDelegate = OrdersDetailsTableDelegate()
+        tableDelegate.delegate = self
         tableView.delegate = tableDelegate
         
         tableView?.contentInset = TableView.defaultContentInsets

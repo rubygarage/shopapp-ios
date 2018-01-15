@@ -15,6 +15,7 @@ protocol AddressListTableViewCellProtocol: class {
 }
 
 class AddressListTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var customerNameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
@@ -22,8 +23,9 @@ class AddressListTableViewCell: UITableViewCell {
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     
-    var delegate: AddressListTableViewCellProtocol!
-    var address: Address!
+    private var address: Address!
+    
+    weak var delegate: AddressListTableViewCellProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,21 +34,21 @@ class AddressListTableViewCell: UITableViewCell {
         setupViews()
     }
     
-    // MARK: - public
-    public func configure(with addressTuple: AddressTuple, delegate: AddressListTableViewCellProtocol) {
-        address = addressTuple.address
-        self.delegate = delegate
-        populateViews(with: addressTuple)
+    // MARK: - Public
+    
+    public func configure(with address: Address, selected: Bool) {
+        self.address = address
+        populateViews(with: address, selected: selected)
     }
     
-    // MARK: - private
+    // MARK: - Private
+    
     private func setupViews() {
         editButton.setTitle("Button.Edit".localizable.uppercased(), for: .normal)
         deleteButton.setTitle("Button.Delete".localizable.uppercased(), for: .normal)
     }
     
-    private func populateViews(with addressTuple: AddressTuple) {
-        let address = addressTuple.address
+    private func populateViews(with address: Address, selected: Bool) {
         customerNameLabel.text = address.fullname
         addressLabel.text = address.fullAddress
         if let phoneText = address.phone {
@@ -55,20 +57,21 @@ class AddressListTableViewCell: UITableViewCell {
         } else {
             phoneLabel.text = nil
         }
-        selectButton.isSelected = addressTuple.selected
-        deleteButton.isEnabled = !addressTuple.selected
+        selectButton.isSelected = selected
+        deleteButton.isEnabled = !selected
     }
     
-    // MARK: - actions
+    // MARK: - Actions
+    
     @IBAction func selectTapped(_ sender: UIButton) {
-        delegate.didTapSelect(with: address)
+        delegate?.didTapSelect(with: address)
     }
     
     @IBAction func editTapped(_ sender: UIButton) {
-        delegate.didTapEdit(with: address)
+        delegate?.didTapEdit(with: address)
     }
     
     @IBAction func deleteTapped(_ sender: UIButton) {
-        delegate.didTapDelete(with: address)
+        delegate?.didTapDelete(with: address)
     }
 }

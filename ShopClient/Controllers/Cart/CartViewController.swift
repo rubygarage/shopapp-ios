@@ -14,11 +14,15 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var checkoutButton: BlackButton!
     
-    private var tableDataSource: CartTableDataSource?
-    private var tableDelegate: CartTableDelegate?
+    private var tableDataSource: CartTableDataSource!
+    // swiftlint:disable weak_delegate
+    private var tableDelegate: CartTableDelegate!
+    // swiftlint:enable weak_delegate
     
     override var emptyDataView: UIView {
-        return CartEmptyDataView(frame: view.frame, delegate: self)
+        let emptyView = CartEmptyDataView(frame: view.frame)
+        emptyView.delegate = self
+        return emptyView
     }
     
     override func viewDidLoad() {
@@ -41,10 +45,12 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
         let cartCellNib = UINib(nibName: String(describing: CartTableViewCell.self), bundle: nil)
         tableView.register(cartCellNib, forCellReuseIdentifier: String(describing: CartTableViewCell.self))
         
-        tableDataSource = CartTableDataSource(delegate: self)
+        tableDataSource = CartTableDataSource()
+        tableDataSource.delegate = self
         tableView.dataSource = tableDataSource
         
-        tableDelegate = CartTableDelegate(delegate: self)
+        tableDelegate = CartTableDelegate()
+        tableDelegate.delegate = self
         tableView.delegate = tableDelegate
     }
     

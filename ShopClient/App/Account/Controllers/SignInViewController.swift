@@ -14,7 +14,7 @@ class SignInViewController: BaseViewController<SignInViewModel> {
     @IBOutlet weak var forgotButton: UIButton!
     @IBOutlet weak var signInButton: BlackButton!
     
-    var delegate: AuthenticationProtocol!
+    weak var delegate: AuthenticationProtocol?
     
     override func viewDidLoad() {
         viewModel = SignInViewModel()

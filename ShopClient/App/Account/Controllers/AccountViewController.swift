@@ -12,7 +12,9 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     @IBOutlet weak var tableView: UITableView!
     
     private var tableDataSource: AccountTableDataSource!
+    // swiftlint:disable weak_delegate
     private var tableDelegate: AccountTableDelegate!
+    // swiftlint:enable weak_delegate
     private var selectedPolicy: Policy?
     
     override func viewDidLoad() {
@@ -50,10 +52,12 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
         let cellNib = UINib(nibName: String(describing: AccountTableViewCell.self), bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: String(describing: AccountTableViewCell.self))
         
-        tableDataSource = AccountTableDataSource(delegate: self)
+        tableDataSource = AccountTableDataSource()
+        tableDataSource.delegate = self
         tableView.dataSource = tableDataSource
         
-        tableDelegate = AccountTableDelegate(delegate: self)
+        tableDelegate = AccountTableDelegate()
+        tableDelegate.delegate = self
         tableView.delegate = tableDelegate
     }
     

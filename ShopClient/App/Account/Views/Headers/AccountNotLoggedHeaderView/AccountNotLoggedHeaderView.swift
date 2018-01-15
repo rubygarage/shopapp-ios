@@ -8,24 +8,24 @@
 
 import UIKit
 
-protocol AccountNotLoggedHeaderProtocol {
+protocol AccountNotLoggedHeaderProtocol: class {
     func didTapSignIn()
     func didTapCreateNewAccount()
 }
 
 class AccountNotLoggedHeaderView: UIView, UnderlinedButtonProtocol {
+    
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var signInButton: BlackButton!
     @IBOutlet weak var signInLabel: UILabel!
     @IBOutlet weak var createNewAccountButton: UnderlinedButton!
     @IBOutlet weak var createAccountUnderlinedView: UIView!
     
-    private var headerDelegate: AccountNotLoggedHeaderProtocol!
+    weak var delegate: AccountNotLoggedHeaderProtocol?
     
-    init(delegate: AccountNotLoggedHeaderProtocol) {
+    override init(frame: CGRect) {
         super.init(frame: CGRect.zero)
         
-        headerDelegate = delegate
         commonInit()
     }
     
@@ -51,16 +51,18 @@ class AccountNotLoggedHeaderView: UIView, UnderlinedButtonProtocol {
         createNewAccountButton.delegate = self
     }
     
-    // MARK: - actions
+    // MARK: - Actions
+    
     @IBAction func signInTapped(_ sender: BlackButton) {
-        headerDelegate.didTapSignIn()
+        delegate?.didTapSignIn()
     }
     
     @IBAction func createNewAccountTapped(_ sender: UnderlinedButton) {
-        headerDelegate.didTapCreateNewAccount()
+        delegate?.didTapCreateNewAccount()
     }
     
     // MARK: - UnderlinedButtonProtocol
+    
     func didChangeState(isHighlighted: Bool) {
         createAccountUnderlinedView.isHidden = isHighlighted
     }

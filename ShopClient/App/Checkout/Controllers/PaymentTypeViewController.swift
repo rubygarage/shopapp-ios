@@ -31,7 +31,8 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, Payme
         let cellNib = UINib(nibName: String(describing: PaymentTypeTableCell.self), bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: String(describing: PaymentTypeTableCell.self))
         
-        tableDataSource = PaymentTypeDataSource(with: self)
+        tableDataSource = PaymentTypeDataSource()
+        tableDataSource.delegate = self
         tableView.dataSource = tableDataSource
     }
     

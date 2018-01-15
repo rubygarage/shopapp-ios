@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ProductOptionsCollectionDataSourceProtocol {
+protocol ProductOptionsCollectionDataSourceProtocol: class {
     func optionsCount() -> Int
     func itemsCount(in optionIndex: Int) -> Int
     func items(at optionIndex: Int) -> (values: [String], selectedValue: String)
@@ -16,15 +16,11 @@ protocol ProductOptionsCollectionDataSourceProtocol {
 }
 
 class ProductOptionsCollectionDataSource: NSObject, UICollectionViewDataSource {
-    private var delegate: (ProductOptionsCollectionDataSourceProtocol & ProductOptionsCellDelegate)?
     
-    init(delegate: (ProductOptionsCollectionDataSourceProtocol & ProductOptionsCellDelegate)?) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: (ProductOptionsCollectionDataSourceProtocol & ProductOptionsCellDelegate)?
     
     // MARK: - UICollectionViewDataSource
+    
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return delegate?.optionsCount() ?? 0
     }

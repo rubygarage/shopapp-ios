@@ -8,21 +8,17 @@
 
 import UIKit
 
-protocol ImagesCarouselCollectionDelegateProtocol {
+protocol ImagesCarouselCollectionDelegateProtocol: class {
     func sizeForCell() -> CGSize
     func didScroll(to index: Int)
 }
 
 class ImagesCarouselCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    var delegate: ImagesCarouselCollectionDelegateProtocol?
     
-    init(delegate: ImagesCarouselCollectionDelegateProtocol) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: ImagesCarouselCollectionDelegateProtocol?
     
     // MARK: - UICollectionViewDelegateFlowLayout
+    
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return self.delegate?.sizeForCell() ?? CGSize.zero

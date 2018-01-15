@@ -8,20 +8,16 @@
 
 import UIKit
 
-protocol HomeTableDelegateProtocol {
+protocol HomeTableDelegateProtocol: class {
     func didSelectArticle(at index: Int)
 }
 
 class HomeTableDelegate: NSObject, UITableViewDelegate {
-    private var delegate: (HomeTableDelegateProtocol & SeeAllHeaderViewProtocol)?
     
-    init(delegate: (HomeTableDelegateProtocol & SeeAllHeaderViewProtocol)?) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: (HomeTableDelegateProtocol & SeeAllHeaderViewProtocol)?
     
     // MARK: - UITableViewDelegate
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == HomeSection.newInBlog.rawValue {
             delegate?.didSelectArticle(at: indexPath.row)
@@ -29,14 +25,20 @@ class HomeTableDelegate: NSObject, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var type: SeeAllViewType
+
         switch section {
         case HomeSection.lastArrivals.rawValue:
-            return SeeAllTableHeaderView(delegate: delegate, type: .latestArrivals)
+            type = .latestArrivals
         case HomeSection.popular.rawValue:
-            return SeeAllTableHeaderView(delegate: delegate, type: .popular)
+            type = .popular
         default:
-            return SeeAllTableHeaderView(delegate: delegate, type: .blogPosts)
+            type = .blogPosts
         }
+        
+        let view = SeeAllTableHeaderView(type: type)
+        view.delegate = delegate
+        return view
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

@@ -11,25 +11,22 @@ import UIKit
 private let kGridNumberOfColumns: CGFloat = 2
 private let kCellImageRatio: CGFloat = 16 / 9
 
-protocol GridCollectionDelegateProtocol {
+protocol GridCollectionDelegateProtocol: class {
     func didSelectItem(at index: Int)
 }
 
 class GridCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    var delegate: GridCollectionDelegateProtocol?
     
-    init(delegate: GridCollectionDelegateProtocol) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: GridCollectionDelegateProtocol?
     
     // MARK: - UICollectionViewDelegate
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.didSelectItem(at: indexPath.row)
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
+    
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {        
         return GridCollectionViewCell.cellSize
     }

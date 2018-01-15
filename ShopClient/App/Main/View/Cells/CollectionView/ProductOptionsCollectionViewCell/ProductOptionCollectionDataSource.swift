@@ -8,22 +8,18 @@
 
 import UIKit
 
-protocol ProductOptionCollectionDataSourceProtocol {
+protocol ProductOptionCollectionDataSourceProtocol: class {
     func numberOfItems() -> Int
     func item(for index: Int) -> String
     func isItemSelected(at index: Int) -> Bool
 }
 
 class ProductOptionCollectionDataSource: NSObject, UICollectionViewDataSource {
-    private var delegate: ProductOptionCollectionDataSourceProtocol?
     
-    init(delegate: ProductOptionCollectionDataSourceProtocol?) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: ProductOptionCollectionDataSourceProtocol?
     
     // MARK: - UICollectionViewDataSource
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return delegate?.numberOfItems() ?? 0
     }
@@ -32,7 +28,8 @@ class ProductOptionCollectionDataSource: NSObject, UICollectionViewDataSource {
         return productOptionCell(collectionView: collectionView, indexPath: indexPath)
     }
     
-    // MARK: - private
+    // MARK: - Private
+    
     private func productOptionCell(collectionView: UICollectionView, indexPath: IndexPath) -> ProductOptionCollectionViewCell {
         let reuseIdentifier = String(describing: ProductOptionCollectionViewCell.self)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProductOptionCollectionViewCell

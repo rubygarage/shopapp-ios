@@ -17,7 +17,9 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     @IBOutlet weak var placeOrderButton: UIButton!
     
     private var tableDataSource: CheckoutTableDataSource!
+    // swiftlint:disable weak_delegate
     private var tableDelegate: CheckoutTableDelegate!
+    // swiftlint:enable weak_delegate
     private var destinationAddress: Address?
     private var selectedProductVariant: ProductVariant!
     
@@ -54,10 +56,12 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
         let paymentEditNib = UINib(nibName: String(describing: CheckoutPaymentEditTableCell.self), bundle: nil)
         tableView.register(paymentEditNib, forCellReuseIdentifier: String(describing: CheckoutPaymentEditTableCell.self))
         
-        tableDataSource = CheckoutTableDataSource(delegate: self)
+        tableDataSource = CheckoutTableDataSource()
+        tableDataSource.delegate = self
         tableView?.dataSource = tableDataSource
         
-        tableDelegate = CheckoutTableDelegate(delegate: self)
+        tableDelegate = CheckoutTableDelegate()
+        tableDelegate.delegate = self
         tableView?.delegate = tableDelegate
         
         tableView?.contentInset = TableView.defaultContentInsets

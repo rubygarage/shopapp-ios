@@ -8,25 +8,26 @@
 
 import UIKit
 
-protocol OrderFooterViewProtocol {
+protocol OrderFooterViewProtocol: class {
     func viewDidTap(_ section: Int)
 }
 
 class OrderFooterView: UIView {
+    
     @IBOutlet var contentView: UIView!
     @IBOutlet var itemsLabel: UILabel!
     @IBOutlet var countLabel: UILabel!
     @IBOutlet var totalLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
     
-    private var delegate: OrderFooterViewProtocol!
     private var section: Int!
     
-    init(section: Int, order: Order, delegate: OrderFooterViewProtocol) {
+    weak var delegate: OrderFooterViewProtocol?
+    
+    init(section: Int, order: Order) {
         super.init(frame: CGRect.zero)
         
         self.section = section
-        self.delegate = delegate
         commonInit()
         populateViews(order: order)
     }
@@ -63,6 +64,6 @@ class OrderFooterView: UIView {
     }
     
     func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
-        delegate.viewDidTap(section)
+        delegate?.viewDidTap(section)
     }
 }

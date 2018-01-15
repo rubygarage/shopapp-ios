@@ -9,11 +9,15 @@
 import UIKit
 
 class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>, ArticlesListTableDataSourceProtocol, ArticlesListTableDelegateProtocol {
-    private var tableDataSource: ArticlesListTableDataSource?
-    private var tableDelegate: ArticlesListTableDelegate?
+    
+    private var tableDataSource: ArticlesListTableDataSource!
+    // swiftlint:disable weak_delegate
+    private var tableDelegate: ArticlesListTableDelegate!
+    // swiftlint:enable weak_delegate
     private var selectedArticle: Article?
     
     // MARK: - view controller lifecycle
+    
     override func viewDidLoad() {
         viewModel = ArticlesListViewModel()
         super.viewDidLoad()
@@ -30,7 +34,8 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
         }
     }
     
-    // MARK: - setup
+    // MARK: - Setup
+    
     private func setupViews() {
         title = "ControllerTitle.BlogPosts".localizable
     }
@@ -52,10 +57,12 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
         let articleNib = UINib(nibName: String(describing: ArticleTableViewCell.self), bundle: nil)
         tableView.register(articleNib, forCellReuseIdentifier: String(describing: ArticleTableViewCell.self))
         
-        tableDataSource = ArticlesListTableDataSource(delegate: self)
+        tableDataSource = ArticlesListTableDataSource()
+        tableDataSource.delegate = self
         tableView.dataSource = tableDataSource
         
-        tableDelegate = ArticlesListTableDelegate(delegate: self)
+        tableDelegate = ArticlesListTableDelegate()
+        tableDelegate.delegate = self
         tableView.delegate = tableDelegate
     }
     
@@ -68,6 +75,7 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
     }
     
     // MARK: - ArticlesListTableDataSourceProtocol
+    
     func articlesCount() -> Int {
         return viewModel.items.value.count
     }
@@ -80,6 +88,7 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
     }
     
     // MARK: - ArticlesListTableDelegateProtocol
+    
     func didSelectItem(at index: Int) {
         if index < viewModel.items.value.count {
             selectedArticle = viewModel.items.value[index]
@@ -88,6 +97,7 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
     }
     
     // MARK: - ErrorViewProtocol
+    
     func didTapTryAgain() {
         loadData()
     }

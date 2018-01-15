@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SortModalControllerProtocol {
+protocol SortModalControllerProtocol: class {
     func didSelect(item: String)
 }
 
@@ -24,9 +24,13 @@ class SortModalViewController: UIViewController, SortModalDataSourceProtocol, So
     
     var sortItems = [String]()
     var selectedSortItem = String()
-    var delegate: SortModalControllerProtocol?
-    private var tableDataSource: SortModalDataSource?
-    private var tableDelegate: SortModalDelegate?
+    
+    weak var delegate: SortModalControllerProtocol?
+    
+    private var tableDataSource: SortModalDataSource!
+    // swiftlint:disable weak_delegate
+    private var tableDelegate: SortModalDelegate!
+    // swiftlint:enable weak_delegate
     
     // MARK: - view controller lifecycle
     override func viewDidLoad() {
@@ -56,10 +60,12 @@ class SortModalViewController: UIViewController, SortModalDataSourceProtocol, So
         
         tableViewHeightConstraint.constant = CGFloat(sortItems.count) * kSortTableCellHeight
         
-        tableDataSource = SortModalDataSource(delegate: self)
+        tableDataSource = SortModalDataSource()
+        tableDataSource.delegate = self
         tableView.dataSource = tableDataSource
         
-        tableDelegate = SortModalDelegate(delegate: self)
+        tableDelegate = SortModalDelegate()
+        tableDelegate.delegate = self
         tableView.delegate = tableDelegate
     }
     

@@ -8,25 +8,22 @@
 
 import UIKit
 
-protocol SearchCollectionDelegateProtocol {
+protocol SearchCollectionDelegateProtocol: class {
     func didSelectCategory(at index: Int)
 }
 
 class SearchCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    private var delegate: SearchCollectionDelegateProtocol?
     
-    init(delegate: SearchCollectionDelegateProtocol?) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: SearchCollectionDelegateProtocol?
     
     // MARK: - UICollectionViewDelegate
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.didSelectCategory(at: indexPath.row)
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CategoryCollectionViewCell.cellSize
     }

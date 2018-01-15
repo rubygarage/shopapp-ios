@@ -15,15 +15,11 @@ enum PaymentTypeSection {
 }
 
 class PaymentTypeDataSource: NSObject, UITableViewDataSource {
-    private var delegate: PaymentTypeTableCellProtocol?
     
-    init(with delegate: PaymentTypeTableCellProtocol?) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: PaymentTypeTableCellProtocol?
     
     // MARK: - UITableViewDataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return PaymentTypeSection.allValues.count
     }
