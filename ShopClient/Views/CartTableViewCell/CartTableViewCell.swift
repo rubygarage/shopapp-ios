@@ -40,7 +40,7 @@ class CartTableViewCell: SwipeTableViewCell, UITextFieldDelegate {
     private func setup() {
         selectionStyle = .none
         
-        quantityLabel.text = NSLocalizedString("Label.Quantity", comment: String())
+        quantityLabel.text = "Label.Quantity".localizable
         quantityTextField.delegate = self
     }
     
@@ -55,14 +55,14 @@ class CartTableViewCell: SwipeTableViewCell, UITextFieldDelegate {
     }
     
     private func populateImageView(with item: CartProduct?) {
-        let urlString = item?.productVariant?.image?.src ?? String()
+        let urlString = item?.productVariant?.image?.src ?? ""
         let url = URL(string: urlString)
         variantImageView.sd_setImage(with: url, completed: nil)
     }
     
     private func populateTitle(with item: CartProduct?) {
-        let productTitle = item?.productTitle ?? String()
-        let variantTitle = item?.productVariant?.title ?? String()
+        let productTitle = item?.productTitle ?? ""
+        let variantTitle = item?.productVariant?.title ?? ""
         variantTitleLabel.text = "\(productTitle) \(variantTitle)"
     }
     
@@ -72,20 +72,25 @@ class CartTableViewCell: SwipeTableViewCell, UITextFieldDelegate {
     }
     
     private func popualateTotalPrice(with item: CartProduct?) {
-        let quantity = Float(item?.quantity ?? 0)
-        let priceString = item?.productVariant?.price ?? String()
-        let price = (priceString as NSString).floatValue
-        let currency = item?.currency ?? String()
-        totalPriceLabel.text = "\(quantity * price) \(currency)"
+        let currency = item?.currency ?? ""
+        let formatter = NumberFormatter.formatter(with: currency)
+        let priceString = item?.productVariant?.price ?? ""
+        let price = NSDecimalNumber(string: priceString)
+        let quantity = Double(item?.quantity ?? 0)
+        let totalPrice = NSDecimalNumber(value: 2999999.0 * quantity)//price.doubleValue
+        totalPriceLabel.text = formatter.string(from: totalPrice)
     }
     
     func populatePricePerOne(with item: CartProduct?) {
         let quantity = item?.quantity ?? 1
         if quantity > 1 {
-            let price = item?.productVariant?.price ?? String()
-            let currency = item?.currency ?? String()
-            let localizedString = NSLocalizedString("Label.PriceEach", comment: String())
-            pricePerOneItemLabel.text = String.localizedStringWithFormat(localizedString, price, currency)
+            let currency = item?.currency ?? ""
+            let formatter = NumberFormatter.formatter(with: currency)
+            let priceString = item?.productVariant?.price ?? ""
+            let price = NSDecimalNumber(string: priceString)
+            let localizedString = "Label.PriceEach".localizable
+            let formattedPrice = formatter.string(from: price) ?? ""
+            pricePerOneItemLabel.text = String.localizedStringWithFormat(localizedString, formattedPrice)
         } else {
             pricePerOneItemLabel.text = nil
         }
@@ -99,7 +104,7 @@ class CartTableViewCell: SwipeTableViewCell, UITextFieldDelegate {
     @IBAction func quantityEditingDidEnd(_ sender: UITextField) {
         quantityUnderlineView.backgroundColor = kQuantityUnderlineColorDefault
         if let cartProduct = cartProduct {
-            let quantityString = sender.text ?? String()
+            let quantityString = sender.text ?? ""
             let quantity = (quantityString as NSString).integerValue
             let checkedQuantity = check(quantity: quantity)
             cellDelegate?.didUpdate(cartProduct: cartProduct, quantity: checkedQuantity)

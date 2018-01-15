@@ -34,8 +34,10 @@ class CartHeaderView: UIView {
     }
     
     private func populateViews(with productsCount: Int, totalPrice: Float, currency: String) {
-        let format = NSLocalizedString("OrdersCount", comment: String())
+        let formatter = NumberFormatter.formatter(with: currency)
+        let price = NSDecimalNumber(decimal: Decimal(Double(totalPrice)))
+        let format = "OrdersCount".localizable
         totalItemsCountLabel.text = String.localizedStringWithFormat(format, productsCount)
-        totalPriceLabel.text = "\(totalPrice) \(currency)"
+        totalPriceLabel.text = formatter.string(from: price)
     }
 }
