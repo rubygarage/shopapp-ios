@@ -77,7 +77,7 @@ class CartTableViewCell: SwipeTableViewCell, UITextFieldDelegate {
         let priceString = item?.productVariant?.price ?? ""
         let price = NSDecimalNumber(string: priceString)
         let quantity = Double(item?.quantity ?? 0)
-        let totalPrice = NSDecimalNumber(value: 2999999.0 * quantity)//price.doubleValue
+        let totalPrice = NSDecimalNumber(value: price.doubleValue * quantity)
         totalPriceLabel.text = formatter.string(from: totalPrice)
     }
     

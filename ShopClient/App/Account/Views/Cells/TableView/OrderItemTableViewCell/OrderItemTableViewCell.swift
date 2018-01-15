@@ -50,7 +50,7 @@ class OrderItemTableViewCell: UITableViewCell {
             itemPriceLabel.isHidden = !(orderItem.quantity! > 1)
             
             if orderItem.quantity! > 1 {
-                itemPriceLabel.text = String.localizedStringWithFormat("Label.Order.Each".localizable, formatter.string(from: price)!)
+                itemPriceLabel.text = String.localizedStringWithFormat("Label.PriceEach".localizable, formatter.string(from: price)!)
             }
             
             if let options = productVariant.selectedOptions {
