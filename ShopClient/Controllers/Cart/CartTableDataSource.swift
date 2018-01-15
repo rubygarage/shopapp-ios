@@ -27,7 +27,7 @@ class CartTableDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CartTableViewCell.self), for: indexPath) as! CartTableViewCell
         cell.configure(with: delegate?.item(for: indexPath.row))
-        cell.delegate = delegate
+        cell.cellDelegate = delegate
         
         return cell
     }
