@@ -44,9 +44,8 @@ class CartTableViewCell: SwipeTableViewCell, UITextFieldDelegate {
         quantityTextField.delegate = self
     }
     
-    public func configure(with item: CartProduct?, delegate: (CartTableCellProtocol & SwipeTableViewCellDelegate)?) {
+    public func configure(with item: CartProduct?) {
         cartProduct = item
-        cellDelegate = delegate
         self.delegate = delegate
         populateImageView(with: item)
         populateTitle(with: item)

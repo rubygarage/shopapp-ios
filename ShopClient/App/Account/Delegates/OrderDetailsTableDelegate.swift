@@ -30,7 +30,7 @@ class OrdersDetailsTableDelegate: NSObject, UITableViewDelegate {
         case OrdersDetailsSection.paymentInformation.rawValue:
             view = BoldTitleTableHeaderView(type: .paymentInformation)
         case OrdersDetailsSection.shippingAddress.rawValue:
-            if delegate.order()!.shippingAddress != nil {
+            if delegate?.order()?.shippingAddress != nil {
                 view = BoldTitleTableHeaderView(type: .shippingAddress)
             }
         default:

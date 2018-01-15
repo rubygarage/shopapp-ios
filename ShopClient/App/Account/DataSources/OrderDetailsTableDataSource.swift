@@ -41,7 +41,7 @@ class OrdersDetailsTableDataSource: NSObject, UITableViewDataSource {
         case OrdersDetailsSection.paymentInformation.rawValue:
             numberOfRows = delegate?.order()?.items?.count ?? 0
         case OrdersDetailsSection.shippingAddress.rawValue:
-            numberOfRows = delegate.order()!.shippingAddress != nil ? 1 : 0
+            numberOfRows = delegate?.order()?.shippingAddress != nil ? 1 : 0
         default:
             break
         }

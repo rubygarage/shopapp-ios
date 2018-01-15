@@ -8,9 +8,9 @@
 
 import UIKit
 
-protocol CheckoutCombinedProtocol: class, CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, CheckoutPaymentAddCellProtocol, CheckoutTableDelegateProtocol, CheckoutCartTableViewCellDelegate {}
+protocol CheckoutCombinedProtocol: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, CheckoutPaymentAddCellProtocol, CheckoutTableDelegateProtocol, CheckoutCartTableViewCellDelegate {}
 
-protocol CheckoutTableDataSourceProtocol {
+protocol CheckoutTableDataSourceProtocol: class {
     func cartProducts() -> [CartProduct]
     func shippingAddress() -> Address?
     func billingAddress() -> Address?
@@ -48,8 +48,9 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     
     private func cartCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutCartTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutCartTableViewCell.self), for: indexPath) as! CheckoutCartTableViewCell
-        if let images = delegate?.cartProducts().flatMap({ $0.productVariant?.image }), let productVariantIds = delegate.cartProducts().flatMap({ $0.productVariant?.id }) {
+        if let images = delegate?.cartProducts().flatMap({ $0.productVariant?.image }), let productVariantIds = delegate?.cartProducts().flatMap({ $0.productVariant?.id }) {
             cell.configure(with: images, productVariantIds: productVariantIds)
+            cell.cellDelegate = delegate
         }
         return cell
     }

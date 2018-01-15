@@ -38,6 +38,7 @@ class OrdersListTableDataSource: NSObject, UITableViewDataSource {
             }
             cell.configure(with: images, productVariantIds: productVariantIds, index: indexPath.section)
         }
+        cell.cellDelegate = delegate
         return cell
     }
 }
