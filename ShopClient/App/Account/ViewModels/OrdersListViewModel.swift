@@ -23,6 +23,21 @@ class OrdersListViewModel: BasePaginationViewModel {
         loadRemoteData()
     }
     
+    public func productVariant(with productVariantId: String, at index: Int) -> ProductVariant? {
+        var variant: ProductVariant?
+        let order = items.value[index]
+        
+        if let items = order.items {
+            items.forEach {
+                if let productVariant = $0.productVariant, productVariant.id == productVariantId {
+                    variant = productVariant
+                }
+            }
+        }
+        
+        return variant
+    }
+    
     private func loadRemoteData() {
         let showHud = items.value.isEmpty
         state.onNext(.loading(showHud: showHud))

@@ -620,9 +620,9 @@
 		0B24F0B520074D7400F13224 /* CheckoutCartTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				0B24F0B620074D7400F13224 /* CheckoutCartCollectionDataSource.swift */,
-				0B24F0B720074D7400F13224 /* CheckoutCartTableViewCell.xib */,
 				0B24F0B820074D7400F13224 /* CheckoutCartTableViewCell.swift */,
+				0B24F0B720074D7400F13224 /* CheckoutCartTableViewCell.xib */,
+				0B24F0B620074D7400F13224 /* CheckoutCartCollectionDataSource.swift */,
 				0B24F0B920074D7400F13224 /* CheckoutCartCollectionDelegate.swift */,
 			);
 			path = CheckoutCartTableViewCell;
@@ -729,7 +729,6 @@
 		0B24F0F7200750AC00F13224 /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				0B24F0C020074D7400F13224 /* CheckoutCartCollectionCell */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";
@@ -738,11 +737,9 @@
 			isa = PBXGroup;
 			children = (
 				0B24F0C920074D7500F13224 /* AddressListTableViewCell */,
-				0B24F0B520074D7400F13224 /* CheckoutCartTableViewCell */,
 				0B24F0C320074D7400F13224 /* CheckoutPaymentAddTableCell */,
 				0B24F0C620074D7400F13224 /* CheckoutPaymentEditTableCell */,
 				0B24F0B220074D7400F13224 /* CheckoutShippingAddressAddTableCell */,
-				0B24F0BA20074D7400F13224 /* CheckoutShippingAddressEditTableCell */,
 				0B24F0BD20074D7400F13224 /* PaymentTypeTableCell */,
 			);
 			path = TableView;
@@ -772,6 +769,23 @@
 				61FC3DA61F7EB41900DB0AD7 /* ProductOptionHeaderView */,
 			);
 			path = Headers;
+			sourceTree = "<group>";
+		};
+		0B69B55A2008FFDC00F071E3 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				0B24F0C020074D7400F13224 /* CheckoutCartCollectionCell */,
+			);
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		0B69B55B2008FFE800F071E3 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				0B24F0B520074D7400F13224 /* CheckoutCartTableViewCell */,
+				0B24F0BA20074D7400F13224 /* CheckoutShippingAddressEditTableCell */,
+			);
+			path = TableView;
 			sourceTree = "<group>";
 		};
 		0B9426521FFE461C00A986AB /* OrderHeaderView */ = {
@@ -925,7 +939,9 @@
 		0BA6306D1FFFB101007088B8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0B69B55A2008FFDC00F071E3 /* CollectionView */,
 				0BA6306E1FFFB10A007088B8 /* Footers */,
+				0B69B55B2008FFE800F071E3 /* TableView */,
 			);
 			path = Views;
 			sourceTree = "<group>";

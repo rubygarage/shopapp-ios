@@ -13,9 +13,9 @@ protocol OrdersListTableDataSourceProtocol {
 }
 
 class OrdersListTableDataSource: NSObject, UITableViewDataSource {
-    private var delegate: OrdersListTableDataSourceProtocol!
+    private var delegate: (OrdersListTableDataSourceProtocol & CheckoutCartTableViewCellDelegate)!
     
-    init(delegate: OrdersListTableDataSourceProtocol) {
+    init(delegate: OrdersListTableDataSourceProtocol & CheckoutCartTableViewCellDelegate) {
         super.init()
         
         self.delegate = delegate
@@ -36,7 +36,8 @@ class OrdersListTableDataSource: NSObject, UITableViewDataSource {
         let order = orders[indexPath.section]
         let items = order.items
         let images = items != nil ? items!.map { $0.productVariant?.image ?? Image() } : [Image]()
-        cell.configure(with: images)
+        let productVariantIds = items != nil ? items!.map { $0.productVariant?.id ?? "" } : [String]()
+        cell.configure(with: images, productVariantIds: productVariantIds, index: indexPath.section, cellDelegate: delegate)
         return cell
     }
 }

@@ -16,6 +16,11 @@ class ProductDetailsViewModel: BaseViewModel {
     var quantity = Variable<Int>(1)
     
     var productId: String!
+    var productVariant: ProductVariant! {
+        didSet {
+            productId = productVariant.productId
+        }
+    }
     var currency: String?
     
     private let addCartProductUseCase = AddCartProductUseCase()

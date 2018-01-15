@@ -10,11 +10,11 @@ import UIKit
 
 protocol CheckoutCartCollectionDataSourceDelegate: class {
     func itemsCount() -> Int
-    func item(at index: Int) -> Image
+    func item(at index: Int) -> (image: Image, productVariantId: String)
 }
 
 class CheckoutCartCollectionDataSource: NSObject, UICollectionViewDataSource {
-    var delegate: CheckoutCartCollectionDataSourceDelegate!
+    private var delegate: CheckoutCartCollectionDataSourceDelegate!
     
     init(delegate: CheckoutCartCollectionDataSourceDelegate) {
         super.init()
@@ -29,7 +29,8 @@ class CheckoutCartCollectionDataSource: NSObject, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CheckoutCartCollectionCell.self), for: indexPath) as! CheckoutCartCollectionCell
-        cell.configure(with: delegate.item(at: indexPath.row))
+        let item = delegate.item(at: indexPath.row)
+        cell.configure(with: item.image, productVariantId: item.productVariantId)
         
         return cell
     }

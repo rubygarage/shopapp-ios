@@ -18,9 +18,9 @@ protocol CheckoutTableDataSourceProtocol {
 }
 
 class CheckoutTableDataSource: NSObject, UITableViewDataSource {
-    private var delegate: CheckoutCombinedProtocol!
+    private var delegate: (CheckoutCombinedProtocol & CheckoutCartTableViewCellDelegate)!
     
-    init(delegate: CheckoutCombinedProtocol) {
+    init(delegate: CheckoutCombinedProtocol & CheckoutCartTableViewCellDelegate) {
         super.init()
         
         self.delegate = delegate
@@ -52,7 +52,8 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     private func cartCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutCartTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutCartTableViewCell.self), for: indexPath) as! CheckoutCartTableViewCell
         let images = delegate.cartProducts().flatMap { $0.productVariant?.image }
-        cell.configure(with: images)
+        let productVariantIds = delegate.cartProducts().flatMap { $0.productVariant?.id }
+        cell.configure(with: images, productVariantIds: productVariantIds, cellDelegate: delegate)
         return cell
     }
     
