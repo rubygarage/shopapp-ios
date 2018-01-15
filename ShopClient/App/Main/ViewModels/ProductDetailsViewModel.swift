@@ -42,6 +42,9 @@ class ProductDetailsViewModel: BaseViewModel {
             if let productObject = product {
                 self?.setupData(product: productObject)
                 self?.product.value = productObject
+                if let productVariant = self?.productVariant, let selectedOptions = productVariant.selectedOptions {
+                    selectedOptions.forEach { self?.selectOption(with: $0.name, value: $0.value) }
+                }
                 self?.state.onNext(.content)
             }
         }
