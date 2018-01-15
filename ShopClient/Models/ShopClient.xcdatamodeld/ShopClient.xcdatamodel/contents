@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13241" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CartProductEntity" representedClassName="CartProductEntity" syncable="YES" codeGenerationType="class">
         <attribute name="currency" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="productId" optional="YES" attributeType="String" syncable="YES"/>
@@ -23,7 +23,7 @@
         <attribute name="src" attributeType="String" syncable="YES"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="image" inverseEntity="CategoryEntity" syncable="YES"/>
         <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductEntity" inverseName="images" inverseEntity="ProductEntity" syncable="YES"/>
-        <relationship name="productVariant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductVariantEntity" inverseName="image" inverseEntity="ProductVariantEntity" syncable="YES"/>
+        <relationship name="productVariant" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductVariantEntity" inverseName="image" inverseEntity="ProductVariantEntity" syncable="YES"/>
     </entity>
     <entity name="PolicyEntity" representedClassName="PolicyEntity" isAbstract="YES" syncable="YES" codeGenerationType="class">
         <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
@@ -82,16 +82,16 @@
         <relationship name="shop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ShopEntity" inverseName="termsOfService" inverseEntity="ShopEntity" syncable="YES"/>
     </entity>
     <elements>
+        <element name="CartProductEntity" positionX="0" positionY="135" width="128" height="120"/>
+        <element name="CategoryEntity" positionX="-9" positionY="81" width="128" height="165"/>
+        <element name="ImageEntity" positionX="36" positionY="162" width="128" height="135"/>
+        <element name="PolicyEntity" positionX="18" positionY="153" width="128" height="90"/>
+        <element name="PrivacyPolicyEntity" positionX="0" positionY="162" width="128" height="60"/>
+        <element name="ProductEntity" positionX="-9" positionY="9" width="128" height="285"/>
+        <element name="ProductOptionEntity" positionX="-18" positionY="54" width="128" height="105"/>
+        <element name="ProductVariantEntity" positionX="-27" positionY="27" width="128" height="165"/>
+        <element name="RefundPolicyEntity" positionX="-36" positionY="45" width="128" height="60"/>
         <element name="ShopEntity" positionX="-54" positionY="-9" width="128" height="135"/>
         <element name="TermsOfServiceEntity" positionX="-18" positionY="63" width="128" height="60"/>
-        <element name="RefundPolicyEntity" positionX="-36" positionY="45" width="128" height="60"/>
-        <element name="ProductVariantEntity" positionX="-27" positionY="27" width="128" height="165"/>
-        <element name="ProductOptionEntity" positionX="-18" positionY="54" width="128" height="105"/>
-        <element name="ProductEntity" positionX="-9" positionY="9" width="128" height="285"/>
-        <element name="PrivacyPolicyEntity" positionX="0" positionY="162" width="128" height="60"/>
-        <element name="PolicyEntity" positionX="18" positionY="153" width="128" height="90"/>
-        <element name="ImageEntity" positionX="36" positionY="162" width="128" height="135"/>
-        <element name="CategoryEntity" positionX="-9" positionY="81" width="128" height="165"/>
-        <element name="CartProductEntity" positionX="0" positionY="135" width="128" height="120"/>
     </elements>
 </model>
