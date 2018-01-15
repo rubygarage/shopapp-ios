@@ -72,6 +72,18 @@ class CheckoutViewModel: BaseViewModel {
         }
     }
     
+    public func productVariant(with productVariantId: String) -> ProductVariant? {
+        var variant: ProductVariant?
+        
+        cartItems.forEach {
+            if let productVariant = $0.productVariant, productVariant.id == productVariantId {
+                variant = productVariant
+            }
+        }
+        
+        return variant
+    }
+    
     // MARK: - private
     private var cartItemsSingle: Single<[CartProduct]> {
         return Single.create(subscribe: { [weak self] (event) in

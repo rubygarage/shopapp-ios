@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -125,6 +125,7 @@
                     <connections>
                         <outlet property="tableView" destination="Z73-iK-Fjm" id="LYS-4T-5Oq"/>
                         <segue destination="ZjV-3t-aY7" kind="show" identifier="toOrderDetails" id="BoU-Yr-zoO"/>
+                        <segue destination="Fvn-bh-Rct" kind="show" identifier="toProductDetails" id="0WY-zz-qIc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Pg-M4-8r5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -155,11 +156,20 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="VUd-pq-Zdd" id="5Tn-ay-har"/>
+                        <segue destination="Fvn-bh-Rct" kind="show" identifier="toProductDetails" id="Edi-8c-pdA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtP-yV-pI6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2124" y="2211.5442278860573"/>
+            <point key="canvasLocation" x="2124" y="2282"/>
+        </scene>
+        <!--ProductsDetailControllerIdentifier-->
+        <scene sceneID="1AL-cQ-MAn">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="ProductsDetailControllerIdentifier" id="Fvn-bh-Rct" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g3I-M3-ZRw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2796" y="1949"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="O3U-Bi-uN4">
@@ -312,7 +322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ph1-kW-fZO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="574" y="2213"/>
+            <point key="canvasLocation" x="574" y="2282"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="dRb-ur-MBF">
@@ -418,7 +428,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S3D-y8-IVR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-183" y="2214"/>
+            <point key="canvasLocation" x="-183" y="2282"/>
         </scene>
         <!--Forgor Password View Controller-->
         <scene sceneID="iJa-sR-ZOx">
@@ -527,7 +537,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="msS-xB-YON" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-183.19999999999999" y="3661.6191904047978"/>
+            <point key="canvasLocation" x="-183" y="3751"/>
         </scene>
         <!--Sign In-->
         <scene sceneID="oBI-Jw-63J">
@@ -583,7 +593,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7sj-gg-UoT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-183" y="2937"/>
+            <point key="canvasLocation" x="-183" y="3027"/>
         </scene>
         <!--Link View Controller-->
         <scene sceneID="KaW-24-Urc">
@@ -688,7 +698,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TwF-mZ-Ihr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-183.19999999999999" y="4354.2728635682161"/>
+            <point key="canvasLocation" x="-183" y="4459"/>
         </scene>
     </scenes>
     <resources>
@@ -698,6 +708,7 @@
         <image name="tabbar_sign_up" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2Th-4v-kuF"/>
+        <segue reference="Edi-8c-pdA"/>
+        <segue reference="9Y3-HY-brn"/>
     </inferredMetricsTieBreakers>
 </document>

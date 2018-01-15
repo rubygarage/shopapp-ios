@@ -19,6 +19,16 @@ class OrderDetailsViewModel: BaseViewModel {
         }
     }
     
+    public func productVariant(at index: Int) -> ProductVariant? {
+        var variant: ProductVariant?
+
+        if let order = data.value, let item = order.items?[index], let productVariant = item.productVariant {
+            variant = productVariant
+        }
+        
+        return variant
+    }
+    
     private let orderUseCase = OrderUseCase()
     
     func loadOrder() {

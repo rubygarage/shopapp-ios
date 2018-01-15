@@ -9,7 +9,7 @@
 import MobileBuySDK
 
 extension ProductVariant {
-    convenience init?(with item: Storefront.ProductVariant?, productImage: Storefront.Image?) {
+    convenience init?(with item: Storefront.ProductVariant?, productId: GraphQL.ID?, productImage: Storefront.Image?) {
         if item == nil {
             return nil
         }
@@ -28,6 +28,9 @@ extension ProductVariant {
                 }
             }
             selectedOptions = selectedOptionsArray
+        }
+        if let productId = productId?.rawValue {
+            self.productId = productId
         }
     }
 }

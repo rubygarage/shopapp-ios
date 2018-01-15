@@ -53,7 +53,7 @@ extension Product {
         if let variantsNodes = item?.variants.edges.map({ $0.node }) {
             var variantsArray = [ProductVariant]()
             for variantNode in variantsNodes {
-                if let variant = ProductVariant(with: variantNode, productImage: item?.images.edges.first?.node) {
+                if let variant = ProductVariant(with: variantNode, productId: item?.id, productImage: item?.images.edges.first?.node) {
                     variantsArray.append(variant)
                 }
             }

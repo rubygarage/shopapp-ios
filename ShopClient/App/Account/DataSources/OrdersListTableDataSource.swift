@@ -13,9 +13,9 @@ protocol OrdersListTableDataSourceProtocol {
 }
 
 class OrdersListTableDataSource: NSObject, UITableViewDataSource {
-    private var delegate: OrdersListTableDataSourceProtocol!
+    private var delegate: (OrdersListTableDataSourceProtocol & CheckoutCartTableViewCellDelegate)!
     
-    init(delegate: OrdersListTableDataSourceProtocol) {
+    init(delegate: OrdersListTableDataSourceProtocol & CheckoutCartTableViewCellDelegate) {
         super.init()
         
         self.delegate = delegate
@@ -32,11 +32,15 @@ class OrdersListTableDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutCartTableViewCell.self), for: indexPath) as! CheckoutCartTableViewCell
+        var images = [Image]()
+        var productVariantIds = [String]()
         let orders = delegate.orders()
         let order = orders[indexPath.section]
-        let items = order.items
-        let images = items != nil ? items!.map { $0.productVariant?.image ?? Image() } : [Image]()
-        cell.configure(with: images)
+        if let items = order.items {
+            images = items.map { $0.productVariant?.image ?? Image() }
+            productVariantIds = items.map { $0.productVariant?.id ?? "" }
+        }
+        cell.configure(with: images, productVariantIds: productVariantIds, index: indexPath.section, cellDelegate: delegate)
         return cell
     }
 }

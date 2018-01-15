@@ -19,6 +19,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     private var tableDataSource: CheckoutTableDataSource!
     private var tableDelegate: CheckoutTableDelegate!
     private var destinationAddress: Address?
+    private var selectedProductVariant: ProductVariant!
     
     override func viewDidLoad() {
         viewModel = CheckoutViewModel()
@@ -154,6 +155,13 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     // MARK: - CheckoutTableDelegateProtocol
     func checkout() -> Checkout? {
         return viewModel.checkout.value
+    }
+    
+    // MARK: - CheckoutCartTableViewCellDelegate
+    func didSelectItem(with productVariantId: String, at index: Int) {
+        selectedProductVariant = viewModel.productVariant(with: productVariantId)
+        // TODO: Open product details screen with selectedProductVariant
+        // performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
     
     // MARK: - segues

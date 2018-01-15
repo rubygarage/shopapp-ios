@@ -88,6 +88,7 @@
 "Label.YourCartIsEmpty" = "Your cart is empty :(";
 "Label.DefaultShippingAddress" = "Default shipping address";
 "Label.AcceptPoliciesAttributed" = "By creating your account, you accept our Privacy Policy and Terms of Service";
+"Label.N/A" = "N/A";
 "Label.Range.PrivacyPolicy" = "Privacy Policy";
 "Label.Range.TermsOfService" = "Terms of Service";
 "Label.ForgotPassword.PasswordTitle" = "Reset Your Password";

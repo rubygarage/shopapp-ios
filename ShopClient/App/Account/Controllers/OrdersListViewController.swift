@@ -8,11 +8,12 @@
 
 import UIKit
 
-class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, OrdersListTableDataSourceProtocol, OrdersListTableDelegateProtocol {
+class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, OrdersListTableDataSourceProtocol, OrdersListTableDelegateProtocol, CheckoutCartTableViewCellDelegate {
     
     private var tableDataSource: OrdersListTableDataSource!
     private var tableDelegate: OrdersListTableDelegate!
     private var selectedOrder: Order?
+    private var selectedProductVariant: ProductVariant!
 
     // MARK: - view controller lifecycle
     override func viewDidLoad() {
@@ -28,6 +29,8 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, Or
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let orderDetailsViewController = segue.destination as? OrderDetailsViewController {
             orderDetailsViewController.orderId = selectedOrder!.id
+        } else if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
+            productDetailsViewController.productVariant = selectedProductVariant
         }
     }
     
@@ -81,6 +84,12 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, Or
             selectedOrder = viewModel.items.value[index]
             performSegue(withIdentifier: SegueIdentifiers.toOrderDetails, sender: self)
         }
+    }
+    
+    // MARK: - CheckoutCartTableViewCellDelegate
+    func didSelectItem(with productVariantId: String, at index: Int) {
+        selectedProductVariant = viewModel.productVariant(with: productVariantId, at: index)
+        performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
     
     // MARK: - ErrorViewProtocol

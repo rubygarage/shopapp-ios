@@ -23,8 +23,11 @@ extension OrderItem {
         title = item?.title
         
         if let variant = item?.variant {
-            if let productVariant = ProductVariant(with: variant, productImage: nil) {
+            if let productVariant = ProductVariant(with: variant, productId: variant.product.id, productImage: variant.product.images.edges.first?.node) {
                 self.productVariant = productVariant
+                if variant.product.options.count == 1 && variant.product.options.first?.values.count == 1 {
+                    self.productVariant?.selectedOptions = nil
+                }
             }
         }
     }

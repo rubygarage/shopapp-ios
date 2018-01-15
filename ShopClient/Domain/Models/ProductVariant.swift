@@ -15,4 +15,5 @@ class ProductVariant: NSObject {
     var available: Bool = false
     var image: Image?
     var selectedOptions: [VariantOption]?
+    var productId = ""
 }

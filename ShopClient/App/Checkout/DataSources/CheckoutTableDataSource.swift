@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CheckoutCombinedProtocol: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, CheckoutPaymentAddCellProtocol, CheckoutTableDelegateProtocol {}
+protocol CheckoutCombinedProtocol: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, CheckoutPaymentAddCellProtocol, CheckoutTableDelegateProtocol, CheckoutCartTableViewCellDelegate {}
 
 protocol CheckoutTableDataSourceProtocol {
     func cartProducts() -> [CartProduct]
@@ -52,7 +52,8 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     private func cartCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutCartTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutCartTableViewCell.self), for: indexPath) as! CheckoutCartTableViewCell
         let images = delegate.cartProducts().flatMap { $0.productVariant?.image }
-        cell.configure(with: images)
+        let productVariantIds = delegate.cartProducts().flatMap { $0.productVariant?.id }
+        cell.configure(with: images, productVariantIds: productVariantIds, cellDelegate: delegate)
         return cell
     }
     

@@ -845,6 +845,14 @@ class API: NSObject, APIInterface {
         }
     }
     
+    private func shortProductQuery() -> (Storefront.ProductQuery) -> Void {        
+        return { (query: Storefront.ProductQuery) in
+            query.id()
+            query.images(first: 1, self.imageConnectionQuery())
+            query.options(self.optionQuery())
+        }
+    }
+    
     private func imageConnectionQuery() -> (Storefront.ImageConnectionQuery) -> Void {
         return { (query: Storefront.ImageConnectionQuery) in
             query.edges({ $0
@@ -877,6 +885,18 @@ class API: NSObject, APIInterface {
             query.availableForSale()
             query.image(self.imageQuery())
             query.selectedOptions(self.selectedOptionQuery())
+        }
+    }
+    
+    private func productVariantWithShortProductQuery() -> (Storefront.ProductVariantQuery) -> Void {
+        return { (query: Storefront.ProductVariantQuery) in
+            query.id()
+            query.title()
+            query.price()
+            query.availableForSale()
+            query.image(self.imageQuery())
+            query.selectedOptions(self.selectedOptionQuery())
+            query.product(self.shortProductQuery())
         }
     }
     
@@ -1079,7 +1099,7 @@ class API: NSObject, APIInterface {
                 .node { $0
                     .quantity()
                     .title()
-                    .variant(self.productVariantQuery())
+                    .variant(self.productVariantWithShortProductQuery())
                 }
             })
         }

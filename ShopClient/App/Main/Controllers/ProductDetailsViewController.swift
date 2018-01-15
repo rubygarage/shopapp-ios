@@ -40,6 +40,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     @IBOutlet weak var bottomView: UIView!
     
     var productId: String!
+    var productVariant: ProductVariant!
     
     private var detailImagesController: ImagesCarouselViewController?
     private var productOptionsViewController: ProductOptionsViewController?
@@ -70,6 +71,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     private func setupViewModel() {
         viewModel.productId = productId
+        viewModel.productVariant = productVariant
         
         quantityTextField.rx.text.map { Int($0 ?? "") ?? 1 }
             .bind(to: viewModel.quantity)
