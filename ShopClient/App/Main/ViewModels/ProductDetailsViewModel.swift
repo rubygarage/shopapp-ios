@@ -18,7 +18,9 @@ class ProductDetailsViewModel: BaseViewModel {
     var productId: String!
     var productVariant: ProductVariant! {
         didSet {
-            productId = productVariant.productId
+            if let productVariant = productVariant {
+                productId = productVariant.productId
+            }
         }
     }
     var currency: String?

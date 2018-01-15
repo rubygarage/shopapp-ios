@@ -726,13 +726,6 @@
 			path = CheckboxButton;
 			sourceTree = "<group>";
 		};
-		0B24F0F7200750AC00F13224 /* CollectionView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CollectionView;
-			sourceTree = "<group>";
-		};
 		0B24F0F8200750B200F13224 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1243,7 +1236,6 @@
 		61005B4520052C8E00351764 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				0B24F0F7200750AC00F13224 /* CollectionView */,
 				0B24F0F8200750B200F13224 /* TableView */,
 			);
 			path = Cells;

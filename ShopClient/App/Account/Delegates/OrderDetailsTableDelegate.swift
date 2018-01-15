@@ -10,6 +10,7 @@ import UIKit
 
 protocol OrdersDetailsTableDelegateProtocol {
     func order() -> Order?
+    func didSelectItem(at index: Int)
 }
 
 class OrdersDetailsTableDelegate: NSObject, UITableViewDelegate {
@@ -47,6 +48,12 @@ class OrdersDetailsTableDelegate: NSObject, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return section == OrdersDetailsSection.paymentInformation.rawValue ? PaymentDetailsFooterView.height : 0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == OrdersDetailsSection.paymentInformation.rawValue {
+            delegate?.didSelectItem(at: indexPath.row)
+        }
     }
  
 }

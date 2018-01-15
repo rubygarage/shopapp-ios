@@ -16,6 +16,8 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, Ord
     
     var orderId: String!
     
+    private var selectedProductVariant: ProductVariant!
+    
     // MARK: - view controller lifecycle
     override func viewDidLoad() {
         viewModel = OrderDetailsViewModel()
@@ -25,6 +27,12 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, Ord
         setupTableView()
         setupViewModel()
         loadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
+            productDetailsViewController.productVariant = selectedProductVariant
+        }
     }
     
     // MARK: - setup
@@ -69,5 +77,11 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, Ord
     // MARK: - OrdersDetailsTableDataSourceProtocol
     func order() -> Order? {
         return viewModel.data.value
+    }
+    
+    // MARK: - OrdersDetailsTableDelegateProtocol
+    func didSelectItem(at index: Int) {
+        selectedProductVariant = viewModel.productVariant(at: index)
+        performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
 }
