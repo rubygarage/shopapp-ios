@@ -781,6 +781,15 @@
 			path = TableView;
 			sourceTree = "<group>";
 		};
+		0B69B55C200CB1BE00F071E3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0B69B55A2008FFDC00F071E3 /* CollectionView */,
+				0B69B55B2008FFE800F071E3 /* TableView */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		0B9426521FFE461C00A986AB /* OrderHeaderView */ = {
 			isa = PBXGroup;
 			children = (
@@ -932,9 +941,8 @@
 		0BA6306D1FFFB101007088B8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0B69B55A2008FFDC00F071E3 /* CollectionView */,
+				0B69B55C200CB1BE00F071E3 /* Cells */,
 				0BA6306E1FFFB10A007088B8 /* Footers */,
-				0B69B55B2008FFE800F071E3 /* TableView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
