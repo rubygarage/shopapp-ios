@@ -18,9 +18,9 @@ protocol CheckoutTableDataSourceProtocol {
 }
 
 class CheckoutTableDataSource: NSObject, UITableViewDataSource {
-    private var delegate: (CheckoutCombinedProtocol & CheckoutCartTableViewCellDelegate)!
+    private var delegate: CheckoutCombinedProtocol!
     
-    init(delegate: CheckoutCombinedProtocol & CheckoutCartTableViewCellDelegate) {
+    init(delegate: CheckoutCombinedProtocol) {
         super.init()
         
         self.delegate = delegate
