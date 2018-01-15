@@ -16,8 +16,4 @@ extension UIStoryboard {
     class func cart() -> UIStoryboard {
         return UIStoryboard(name: "Cart", bundle: nil)
     }
-    
-    class func checkout() -> UIStoryboard {
-        return UIStoryboard(name: "Checkout", bundle: nil)
-    }
 }

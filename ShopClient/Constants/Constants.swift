@@ -40,6 +40,7 @@ struct SegueIdentifiers {
     static let toProductDetails = "toProductDetails"
     static let toArticlesList = "toArticlesList"
     static let toArticleDetails = "toArticleDetails"
+    static let toCheckout = "toCheckout"
     static let toCategory = "toCategory"
     static let toPolicy = "toPolicy"
     static let toSignIn = "toSignIn"

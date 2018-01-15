@@ -35,11 +35,6 @@ extension UIViewController {
         showNavigationController(with: cartController)
     }
     
-    func showCheckoutController() {
-        let checkoutController = UIStoryboard.checkout().instantiateViewController(withIdentifier: ControllerIdentifier.checkout)
-        showNavigationController(with: checkoutController)
-    }
-    
     // MARK: - private
     private func showNavigationController(with rootController: UIViewController) {
         let navigationController = NavigationController(rootViewController: rootController)

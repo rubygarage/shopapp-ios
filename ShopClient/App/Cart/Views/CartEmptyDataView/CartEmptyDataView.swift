@@ -44,8 +44,8 @@ class CartEmptyDataView: UIView {
     }
     
     private func setupViews() {
-        emptyCartLabel?.text = NSLocalizedString("Label.YourCartIsEmpty", comment: String())
-        startShoppingButton.setTitle(NSLocalizedString("Button.StartShopping", comment: String()).uppercased(), for: .normal)
+        emptyCartLabel?.text = "Label.YourCartIsEmpty".localizable
+        startShoppingButton.setTitle("Button.StartShopping".localizable.uppercased(), for: .normal)
     }
     
     // MARK: - Actions

@@ -35,8 +35,8 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     }
     
     private func setupViews() {
-        title = NSLocalizedString("ControllerTitle.Cart", comment: String())
-        checkoutButton.setTitle(NSLocalizedString("Button.Checkout", comment: String()).uppercased(), for: .normal)
+        title = "ControllerTitle.Cart".localizable
+        checkoutButton.setTitle("Button.Checkout".localizable.uppercased(), for: .normal)
         addCloseButton()
     }
     
@@ -68,7 +68,7 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     // MARK: - Actions
     
     @IBAction func checkoutTapped(_ sender: BlackButton) {
-        showCheckoutController()
+        performSegue(withIdentifier: SegueIdentifiers.toCheckout, sender: self)
     }
     
     // MARK: - CartTableDataSourceProtocol
@@ -104,7 +104,7 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
-        let title = NSLocalizedString("Button.Remove", comment: String())
+        let title = "Button.Remove".localizable
         let deleteAction = SwipeAction(style: .destructive, title: title) { [weak self] (_, indexPath) in
             self?.viewModel.removeCardProduct(at: indexPath.row)
         }

@@ -22,7 +22,7 @@ class CartTableDelegate: NSObject, UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let productsCount = delegate?.itemsCount() ?? 0
         let totalPrice: Float = delegate?.totalPrice() ?? 0
-        let currency = delegate?.currency() ?? String()
+        let currency = delegate?.currency() ?? ""
         
         return CartHeaderView(productsCounts: productsCount, totalPrice: totalPrice, currency: currency)
     }
