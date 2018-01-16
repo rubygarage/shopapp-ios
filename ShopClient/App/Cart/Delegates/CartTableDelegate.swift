@@ -15,11 +15,13 @@ protocol CartTableDelegateProtocol: class {
     func didSelectItem(at index: Int)
 }
 
-class CartTableDelegate: NSObject, UITableViewDelegate {
+class CartTableDelegate: NSObject {
     weak var delegate: CartTableDelegateProtocol?
-    
-    // MARK: - UITableViewDelegate
-    
+}
+
+// MARK: - UITableViewDelegate
+
+extension CartTableDelegate: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let productsCount = delegate?.itemsCount() ?? 0
         let totalPrice: Float = delegate?.totalPrice() ?? 0

@@ -15,19 +15,22 @@ protocol GridCollectionDelegateProtocol: class {
     func didSelectItem(at index: Int)
 }
 
-class GridCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
+class GridCollectionDelegate: NSObject {
     weak var delegate: GridCollectionDelegateProtocol?
-    
-    // MARK: - UICollectionViewDelegate
-    
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension GridCollectionDelegate: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.didSelectItem(at: indexPath.row)
     }
-    
-    // MARK: - UICollectionViewDelegateFlowLayout
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {        
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension GridCollectionDelegate: UICollectionViewDelegateFlowLayout {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return GridCollectionViewCell.cellSize
     }
 }

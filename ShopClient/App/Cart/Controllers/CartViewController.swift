@@ -7,23 +7,27 @@
 //
 
 import UIKit
+
 import SwipeCellKit
 
-class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol, CartTableDelegateProtocol, CartTableCellProtocol, CartEmptyDataViewProtocol, SwipeTableViewCellDelegate {
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var checkoutButton: BlackButton!
+class CartViewController: BaseViewController<CartViewModel> {
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var checkoutButton: BlackButton!
     
     private var tableDataSource: CartTableDataSource!
     // swiftlint:disable weak_delegate
     private var tableDelegate: CartTableDelegate!
     // swiftlint:enable weak_delegate
-    private var selectedProductVariant: ProductVariant!
+    
+    fileprivate var selectedProductVariant: ProductVariant!
     
     override var emptyDataView: UIView {
         let emptyView = CartEmptyDataView(frame: view.frame)
         emptyView.delegate = self
         return emptyView
     }
+    
+    // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         viewModel = CartViewModel()
@@ -40,6 +44,8 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
             productDetailsViewController.productVariant = selectedProductVariant
         }
     }
+    
+    // MARK: - Setup
     
     private func setupViews() {
         title = "ControllerTitle.Cart".localizable
@@ -68,7 +74,7 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
             .disposed(by: disposeBag)
     }
     
-    private func loadData() {
+    fileprivate func loadData() {
         viewModel.loadData()
     }
     
@@ -77,9 +83,28 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     @IBAction func checkoutTapped(_ sender: BlackButton) {
         performSegue(withIdentifier: SegueIdentifiers.toCheckout, sender: self)
     }
-    
-    // MARK: - CartTableDataSourceProtocol
-    
+}
+
+// MARK: - ErrorViewProtocol
+
+extension CartViewController {
+    func didTapTryAgain() {
+        loadData()
+    }
+}
+
+// MARK: - CartEmptyDataViewProtocol
+
+extension CartViewController: CartEmptyDataViewProtocol {
+    func didTapStartShopping() {
+        setHomeController()
+        dismiss(animated: true)
+    }
+}
+
+// MARK: - CartTableDataSourceProtocol
+
+extension CartViewController: CartTableDataSourceProtocol {
     func itemsCount() -> Int {
         return viewModel.data.value.count
     }
@@ -90,9 +115,11 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
         }
         return nil
     }
-    
-    // MARK: - CartTableDelegateProtocol
-    
+}
+
+// MARK: - CartTableDelegateProtocol
+
+extension CartViewController: CartTableDelegateProtocol {
     func totalPrice() -> Float {
         return viewModel.calculateTotalPrice()
     }
@@ -105,15 +132,19 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
         selectedProductVariant = viewModel.productVariant(at: index)
         performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
-    
-    // MARK: - CartTableCellProtocol
-    
+}
+
+// MARK: - CartTableCellProtocol
+
+extension CartViewController: CartTableCellProtocol {
     func didUpdate(cartProduct: CartProduct, quantity: Int) {
         viewModel.update(cartProduct: cartProduct, quantity: quantity)
     }
-    
-    // MARK: - SwipeTableViewCellDelegate
-    
+}
+
+// MARK: - SwipeTableViewCellDelegate
+
+extension CartViewController: SwipeTableViewCellDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
         let title = "Button.Remove".localizable
@@ -127,18 +158,5 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
         deleteAction.hidesWhenSelected = true
         
         return [deleteAction]
-    }
-    
-    // MARK: - CartEmptyDataViewProtocol
-    
-    func didTapStartShopping() {
-        setHomeController()
-        dismiss(animated: true)
-    }
-    
-    // MARK: - ErrorViewProtocol
-    
-    func didTapTryAgain() {
-        loadData()
     }
 }

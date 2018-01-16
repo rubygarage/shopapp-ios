@@ -11,12 +11,16 @@ import UIKit
 class BaseTableViewController<T: BasePaginationViewModel>: BasePaginationViewController<T> {
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - View controller lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupPullToRefresh()
         setupInfinityScroll()
     }
+    
+    // MARK: - Setup
     
     private func setupPullToRefresh() {
         refreshControl = UIRefreshControl()
@@ -33,7 +37,7 @@ class BaseTableViewController<T: BasePaginationViewModel>: BasePaginationViewCon
         }
     }
     
-    public func stopLoadAnimating() {
+    func stopLoadAnimating() {
         refreshControl?.endRefreshing()
         tableView.finishInfiniteScroll()
     }

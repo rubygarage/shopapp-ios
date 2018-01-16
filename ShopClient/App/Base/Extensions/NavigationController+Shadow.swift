@@ -7,16 +7,17 @@
 //
 
 import UIKit
+
 import UIImage_Additions
 
 private let kShadowImageColor = UIColor.black.withAlphaComponent(0.12)
 
 extension UINavigationController {
-    public func addShadow() {
+    func addShadow() {
         navigationBar.shadowImage = UIImage.add_image(with: kShadowImageColor)
     }
     
-    public func removeShadow() {
+    func removeShadow() {
         navigationBar.shadowImage = UIImage()
     }
 }

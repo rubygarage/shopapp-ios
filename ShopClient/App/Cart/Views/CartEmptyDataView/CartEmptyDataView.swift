@@ -13,14 +13,13 @@ protocol CartEmptyDataViewProtocol: class {
 }
 
 class CartEmptyDataView: UIView {
-    
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var emptyCartLabel: UILabel!
-    @IBOutlet weak var startShoppingButton: UIButton!
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var emptyCartLabel: UILabel!
+    @IBOutlet private weak var startShoppingButton: UIButton!
     
     weak var delegate: CartEmptyDataViewProtocol?
     
-    // MARK: - Init
+    // MARK: - View lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,6 +32,8 @@ class CartEmptyDataView: UIView {
         
         commonInit()
     }
+    
+    // MARK: - Setup
     
     private func commonInit() {
         Bundle.main.loadNibNamed(String(describing: CartEmptyDataView.self), owner: self)

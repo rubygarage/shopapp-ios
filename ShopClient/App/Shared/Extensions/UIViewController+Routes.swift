@@ -13,8 +13,7 @@ extension UIViewController {
     // MARK: - set
     func setHomeController() {
         let appDelegate  = UIApplication.shared.delegate as! AppDelegate
-        let navigationController = appDelegate.window?.rootViewController as? NavigationController
-        let tabbarController = navigationController?.viewControllers.first as? UITabBarController
+        let tabbarController = appDelegate.window?.rootViewController as? UITabBarController
         tabbarController?.selectedIndex = 0
     }
     

@@ -7,16 +7,16 @@
 //
 
 import UIKit
+
 import UIScrollView_InfiniteScroll
 
-class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionViewController<T>, GridCollectionDataSourceProtocol, GridCollectionDelegateProtocol {
-    
-    var selectedProduct: Product?
-    
+class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionViewController<T>, GridCollectionDelegateProtocol {
     private var collectionDataSource: GridCollectionDataSource!
     // swiftlint:disable weak_delegate
     private var collectionDelegate: GridCollectionDelegate!
     // swiftlint:enable weak_delegate
+    
+    var selectedProduct: Product?
     
     // MARK: - View controller lifecycle
     
@@ -49,16 +49,6 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
         collectionView.contentInset = GridCollectionViewCell.collectionViewInsets
     }
     
-    // MARK: - GridCollectionDataSourceProtocol
-    
-    func numberOfItems() -> Int {
-        return viewModel.products.value.count
-    }
-    
-    func item(for indexPath: IndexPath) -> Product {
-        return viewModel.products.value[indexPath.row]
-    }
-    
     // MARK: - GridCollectionDelegateProtocol
     
     func didSelectItem(at index: Int) {
@@ -66,5 +56,17 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
             selectedProduct = viewModel.products.value[index]
             performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
         }
+    }
+}
+
+// MARK: - GridCollectionDataSourceProtocol
+
+extension GridCollectionViewController: GridCollectionDataSourceProtocol {
+    func numberOfItems() -> Int {
+        return viewModel.products.value.count
+    }
+    
+    func item(for indexPath: IndexPath) -> Product {
+        return viewModel.products.value[indexPath.row]
     }
 }

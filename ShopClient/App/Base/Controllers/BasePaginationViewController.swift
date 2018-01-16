@@ -11,12 +11,13 @@ import UIKit
 class BasePaginationViewController<T: BasePaginationViewModel>: BaseViewController<T> {
     var refreshControl: UIRefreshControl?
     
-    // MARK: - methods to override
-    public func pullToRefreshHandler() {
+    // MARK: - Methods to override
+    
+    func pullToRefreshHandler() {
         assert(false, "'pulltoRefreshHandler' method not implemented")
     }
     
-    public func infinityScrollHandler() {
+    func infinityScrollHandler() {
         assert(false, "'infinityScrollHandler' method not implemented")
     }
 }

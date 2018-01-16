@@ -9,14 +9,31 @@
 import RxSwift
 
 class CartViewModel: BaseViewModel {
-    var data = Variable<[CartProduct]>([CartProduct]())
-    
     private let cartProductListUseCase = CartProductListUseCase()
     private let deleteCartProductUseCase = DeleteCartProductUseCase()
     private let changeCartProductUseCase = ChangeCartProductUseCase()
     
-    // MARK: - public
-    public func loadData() {
+    var data = Variable<[CartProduct]>([CartProduct]())
+    
+    // MARK: - Private
+    
+    private func removeFromData(with item: CartProduct) {
+        if let index = data.value.index(of: item) {
+            data.value.remove(at: index)
+        }
+    }
+    
+    private func updateSuccessState(with itemsCount: Int?) {
+        if let itemsCount = itemsCount, itemsCount > 0 {
+            state.onNext(.content)
+        } else {
+            state.onNext(.empty)
+        }
+    }
+    
+    // MARK: - Internal
+    
+    func loadData() {
         state.onNext(.loading(showHud: true))
         cartProductListUseCase.getCartProductList { [weak self] (cartProducts, error) in
             if let error = error {
@@ -29,7 +46,7 @@ class CartViewModel: BaseViewModel {
         }
     }
     
-    public func removeCardProduct(at index: Int) {
+    func removeCardProduct(at index: Int) {
         let cartProduct = data.value[index]
         state.onNext(.loading(showHud: false))
         deleteCartProductUseCase.deleteProductFromCart(productVariantId: cartProduct.productVariant?.id) { [weak self] (success, error) in
@@ -43,7 +60,7 @@ class CartViewModel: BaseViewModel {
         }
     }
     
-    public func update(cartProduct: CartProduct, quantity: Int) {
+    func update(cartProduct: CartProduct, quantity: Int) {
         state.onNext(.loading(showHud: false))
         changeCartProductUseCase.changeCartProductQuantity(productVariantId: cartProduct.productVariant?.id, quantity: quantity) { [weak self] (_, error) in
             if let error = error {
@@ -55,28 +72,13 @@ class CartViewModel: BaseViewModel {
         }
     }
     
-    public func calculateTotalPrice() -> Float {
+    func calculateTotalPrice() -> Float {
         let allPrices = data.value.map({ Float($0.quantity) * (Float($0.productVariant?.price ?? String()) ?? 1) })
         return allPrices.reduce(0, +)
     }
     
-    public func productVariant(at index: Int) -> ProductVariant? {
+    func productVariant(at index: Int) -> ProductVariant? {
         let product = data.value[index]
         return product.productVariant
-    }
-    
-    // MARK: - private
-    private func removeFromData(with item: CartProduct) {
-        if let index = data.value.index(of: item) {
-            data.value.remove(at: index)
-        }
-    }
-    
-    private func updateSuccessState(with itemsCount: Int?) {
-        if let itemsCount = itemsCount, itemsCount > 0 {
-            state.onNext(.content)
-        } else {
-            state.onNext(.empty)
-        }
     }
 }
