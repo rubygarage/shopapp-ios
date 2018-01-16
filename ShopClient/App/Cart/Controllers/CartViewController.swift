@@ -17,6 +17,7 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     // swiftlint:disable weak_delegate
     private var tableDelegate: CartTableDelegate!
     // swiftlint:enable weak_delegate
+    private var selectedProductVariant: ProductVariant!
     
     override var emptyDataView: UIView {
         let emptyView = CartEmptyDataView(frame: view.frame)
