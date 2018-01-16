@@ -15,7 +15,9 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     
     private let titleView = SearchTitleView()
     private var categoriesDataSource: SearchCollectionDataSource!
+    // swiftlint:disable weak_delegate
     private var categoriesDelegate: SearchCollectionDelegate!
+    // swiftlint:enable weak_delegate
     private var selectedCategory: Category?
     
     override func viewDidLoad() {
@@ -64,10 +66,12 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         let nib = UINib(nibName: String(describing: CategoryCollectionViewCell.self), bundle: nil)
         categoriesCollectionView.register(nib, forCellWithReuseIdentifier: String(describing: CategoryCollectionViewCell.self))
         
-        categoriesDataSource = SearchCollectionDataSource(delegate: self)
+        categoriesDataSource = SearchCollectionDataSource()
+        categoriesDataSource.delegate = self
         categoriesCollectionView.dataSource = categoriesDataSource
         
-        categoriesDelegate = SearchCollectionDelegate(delegate: self)
+        categoriesDelegate = SearchCollectionDelegate()
+        categoriesDelegate.delegate = self
         categoriesCollectionView.delegate = categoriesDelegate
         
         categoriesCollectionView.contentInset = CategoryCollectionViewCell.collectionViewInsets
@@ -111,7 +115,8 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         }
     }
     
-    // MARK: - overriding
+    // MARK: - Overriding
+    
     override func pullToRefreshHandler() {
         viewModel.reloadData()
     }
@@ -126,6 +131,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     }
     
     // MARK: - SearchTitleViewProtocol
+    
     func didTapSearch() {
         viewModel.reloadData()
     }
@@ -144,6 +150,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     }
     
     // MARK: - SearchCollectionDataSourceProtocol
+    
     func categoriesCount() -> Int {
         return viewModel.categoriesCount()
     }
@@ -153,6 +160,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     }
     
     // MARK: - SearchCollectionDelegateProtocol
+    
     func didSelectCategory(at index: Int) {
         if index < viewModel.categories.value.count {
             selectedCategory = viewModel.categories.value[index]
@@ -161,6 +169,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     }
     
     // MARK: - ErrorViewProtocol
+    
     func didTapTryAgain() {
         loadData()
     }

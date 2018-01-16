@@ -13,7 +13,7 @@ enum SearchState {
     case editing
 }
 
-protocol SearchTitleViewProtocol {
+protocol SearchTitleViewProtocol: class {
     func didTapSearch()
     func didTapCart()
     func didTapBack()
@@ -37,7 +37,7 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     @IBOutlet weak var underlineRightMargin: NSLayoutConstraint!
     @IBOutlet weak var clearButton: UIButton!
     
-    var delegate: SearchTitleViewProtocol?
+    weak var delegate: SearchTitleViewProtocol?
     
     var state: SearchState = .default {
         didSet {

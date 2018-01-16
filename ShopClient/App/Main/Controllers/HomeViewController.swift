@@ -13,8 +13,10 @@ import RxCocoa
 class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, PopularCellDelegate, SeeAllHeaderViewProtocol {
     @IBOutlet weak var tableView: UITableView!
     
-    private var dataSource: HomeTableDataSource?
-    private var delegate: HomeTableDelegate?
+    private var dataSource: HomeTableDataSource!
+    // swiftlint:disable weak_delegate
+    private var delegate: HomeTableDelegate!
+    // swiftlint:enable weak_delegate
     private var destinationTitle: String!
     private var sortingValue: SortingValue!
     private var selectedProduct: Product?
@@ -54,21 +56,23 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     
     private func setupTableView() {
         let lastArrivalsNib = UINib(nibName: String(describing: LastArrivalsTableViewCell.self), bundle: nil)
-        tableView?.register(lastArrivalsNib, forCellReuseIdentifier: String(describing: LastArrivalsTableViewCell.self))
+        tableView.register(lastArrivalsNib, forCellReuseIdentifier: String(describing: LastArrivalsTableViewCell.self))
         
         let popularNib = UINib(nibName: String(describing: PopularTableViewCell.self), bundle: nil)
-        tableView?.register(popularNib, forCellReuseIdentifier: String(describing: PopularTableViewCell.self))
+        tableView.register(popularNib, forCellReuseIdentifier: String(describing: PopularTableViewCell.self))
         
         let newInBlogNib = UINib(nibName: String(describing: ArticleTableViewCell.self), bundle: nil)
-        tableView?.register(newInBlogNib, forCellReuseIdentifier: String(describing: ArticleTableViewCell.self))
+        tableView.register(newInBlogNib, forCellReuseIdentifier: String(describing: ArticleTableViewCell.self))
                 
-        dataSource = HomeTableDataSource(delegate: self)
-        tableView?.dataSource = dataSource
+        dataSource = HomeTableDataSource()
+        dataSource.delegate = self
+        tableView.dataSource = dataSource
         
-        delegate = HomeTableDelegate(delegate: self)
-        tableView?.delegate = delegate
+        delegate = HomeTableDelegate()
+        delegate.delegate = self
+        tableView.delegate = delegate
         
-        tableView?.contentInset = TableView.defaultContentInsets
+        tableView.contentInset = TableView.defaultContentInsets
     }
     
     private func setupViewModel() {
@@ -84,6 +88,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     // MARK: - HomeTableDataSourceProtocol
+    
     func lastArrivalsObjects() -> [Product] {
         return viewModel.data.value.latestProducts
     }
@@ -104,6 +109,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     // MARK: - HomeTableDelegateProtocol
+    
     func didSelectArticle(at index: Int) {
         if index < viewModel.data.value.articles.count {
             selectedArticle = viewModel.data.value.articles[index]
@@ -112,11 +118,13 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     // MARK: - LastArrivalsCellDelegate
+    
     func didSelectLastArrivalsProduct(at index: Int) {
         openProductDetails(with: viewModel.data.value.latestProducts, index: index)
     }
     
     // MARK: - PopularCellDelegate
+    
     func didSelectPopularProduct(at index: Int) {
         openProductDetails(with: viewModel.data.value.popularProducts, index: index)
     }
@@ -129,6 +137,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     // MARK: - SeeAllHeaderViewProtocol
+    
     func didTapSeeAll(type: SeeAllViewType) {
         switch type {
         case .latestArrivals:
@@ -147,6 +156,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     // MARK: - ErrorViewProtocol
+    
     func didTapTryAgain() {
         viewModel.loadData(with: disposeBag)
     }

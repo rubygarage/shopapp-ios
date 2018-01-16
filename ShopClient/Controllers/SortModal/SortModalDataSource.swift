@@ -8,22 +8,18 @@
 
 import UIKit
 
-protocol SortModalDataSourceProtocol {
+protocol SortModalDataSourceProtocol: class {
     func itemsCount() -> Int
     func item(at index: Int) -> String?
     func selectedItem() -> String?
 }
 
 class SortModalDataSource: NSObject, UITableViewDataSource {
-    var delegate: SortModalDataSourceProtocol?
     
-    init(delegate: SortModalDataSourceProtocol?) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: SortModalDataSourceProtocol?
     
     // MARK: - UITableViewDataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return delegate?.itemsCount() ?? 0
     }

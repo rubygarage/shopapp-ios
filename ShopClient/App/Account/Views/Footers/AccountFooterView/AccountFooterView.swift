@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AccountFooterViewProtocol {
+protocol AccountFooterViewProtocol: class {
     func didTapLogout()
 }
 
@@ -17,12 +17,11 @@ class AccountFooterView: UIView, UnderlinedButtonProtocol {
     @IBOutlet weak var logoutButton: UnderlinedButton!
     @IBOutlet weak var logoutUnderlineView: UIView!
     
-    private var footerDelegate: AccountFooterViewProtocol!
+    weak var delegate: AccountFooterViewProtocol?
     
-    init(delegate: AccountFooterViewProtocol) {
-        super.init(frame: CGRect.zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        footerDelegate = delegate
         commonInit()
     }
     
@@ -46,12 +45,14 @@ class AccountFooterView: UIView, UnderlinedButtonProtocol {
         logoutButton.delegate = self
     }
     
-    // MARK: - action
+    // MARK: - Action
+    
     @IBAction func logoutTapped(_ sender: UIButton) {
-        footerDelegate.didTapLogout()
+        delegate?.didTapLogout()
     }
     
     // MARK: - UnderlinedButtonProtocol
+    
     func didChangeState(isHighlighted: Bool) {
         logoutUnderlineView.isHidden = isHighlighted
     }

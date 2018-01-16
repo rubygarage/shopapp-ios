@@ -8,22 +8,17 @@
 
 import UIKit
 
-protocol LastArrivalsTableDataSourceProtocol {
+protocol LastArrivalsTableDataSourceProtocol: class {
     func numberOfSections() -> Int
     func numberOfProducts() -> Int
     func item(for index: Int) -> Product
 }
 
 class LastArrivalsTableDataSource: NSObject, UICollectionViewDataSource {
-    private var delegate: LastArrivalsTableDataSourceProtocol?
-    
-    init(delegate: LastArrivalsTableDataSourceProtocol?) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: LastArrivalsTableDataSourceProtocol?
     
     // MARK: - UICollectionViewDataSource
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return delegate?.numberOfSections() ?? 1
     }
@@ -36,7 +31,8 @@ class LastArrivalsTableDataSource: NSObject, UICollectionViewDataSource {
         return lastArrivalsCell(collectionView: collectionView, indexPath: indexPath)
     }
     
-    // MARK: - private
+    // MARK: - Private
+    
     private func lastArrivalsCell(collectionView: UICollectionView, indexPath: IndexPath) -> LastArrivalsCollectionViewCell {
         let reuseIdentifier = String(describing: LastArrivalsCollectionViewCell.self)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LastArrivalsCollectionViewCell

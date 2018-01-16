@@ -12,7 +12,9 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     @IBOutlet weak var tableView: UITableView!
     
     private var tableDataSource: AccountTableDataSource!
+    // swiftlint:disable weak_delegate
     private var tableDelegate: AccountTableDelegate!
+    // swiftlint:enable weak_delegate
     private var selectedPolicy: Policy?
     
     override func viewDidLoad() {
@@ -50,10 +52,12 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
         let cellNib = UINib(nibName: String(describing: AccountTableViewCell.self), bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: String(describing: AccountTableViewCell.self))
         
-        tableDataSource = AccountTableDataSource(delegate: self)
+        tableDataSource = AccountTableDataSource()
+        tableDataSource.delegate = self
         tableView.dataSource = tableDataSource
         
-        tableDelegate = AccountTableDelegate(delegate: self)
+        tableDelegate = AccountTableDelegate()
+        tableDelegate.delegate = self
         tableView.delegate = tableDelegate
     }
     
@@ -77,11 +81,13 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     }
     
     // MARK: - AccountTableDataSourceProtocol
+    
     func policies() -> [Policy] {
         return viewModel.policies.value
     }
     
     // MARK: - AccountTableDelegateProtocol
+    
     func didSelectItem(at index: Int) {
         if index < viewModel.policies.value.count {
             selectedPolicy = viewModel.policies.value[index]
@@ -94,6 +100,7 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     }
     
     // MARK: - AccountNotLoggedHeaderProtocol
+    
     func didTapSignIn() {
         performSegue(withIdentifier: SegueIdentifiers.toSignIn, sender: self)
     }
@@ -103,16 +110,19 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     }
     
     // MARK: - AccountLoggedHeaderProtocol
+    
     func didTapMyOrders() {
         performSegue(withIdentifier: SegueIdentifiers.toOrdersList, sender: self)
     }
     
     // MARK: - AccountFooterViewProtocol
+    
     func didTapLogout() {
         viewModel.logout()
     }
     
     // MARK: - AuthenticationProtocol
+    
     func didAuthorize() {
         loadData()
     }

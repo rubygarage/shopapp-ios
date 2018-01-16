@@ -10,15 +10,18 @@ import UIKit
 import SwipeCellKit
 
 class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol, CartTableDelegateProtocol, CartTableCellProtocol, CartEmptyDataViewProtocol, SwipeTableViewCellDelegate {
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var checkoutButton: BlackButton!
     
-    private var tableDataSource: CartTableDataSource?
-    private var tableDelegate: CartTableDelegate?
+    private var tableDataSource: CartTableDataSource!
+    // swiftlint:disable weak_delegate
+    private var tableDelegate: CartTableDelegate!
+    // swiftlint:enable weak_delegate
     
     override var emptyDataView: UIView {
-        return CartEmptyDataView(frame: view.frame, delegate: self)
+        let emptyView = CartEmptyDataView(frame: view.frame)
+        emptyView.delegate = self
+        return emptyView
     }
     
     override func viewDidLoad() {
@@ -41,10 +44,12 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
         let cartCellNib = UINib(nibName: String(describing: CartTableViewCell.self), bundle: nil)
         tableView.register(cartCellNib, forCellReuseIdentifier: String(describing: CartTableViewCell.self))
         
-        tableDataSource = CartTableDataSource(delegate: self)
+        tableDataSource = CartTableDataSource()
+        tableDataSource.delegate = self
         tableView.dataSource = tableDataSource
         
-        tableDelegate = CartTableDelegate(delegate: self)
+        tableDelegate = CartTableDelegate()
+        tableDelegate.delegate = self
         tableView.delegate = tableDelegate
     }
     
@@ -60,12 +65,14 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
         viewModel.loadData()
     }
     
-    // MARK: - actions
+    // MARK: - Actions
+    
     @IBAction func checkoutTapped(_ sender: BlackButton) {
         showCheckoutController()
     }
     
     // MARK: - CartTableDataSourceProtocol
+    
     func itemsCount() -> Int {
         return viewModel.data.value.count
     }
@@ -78,6 +85,7 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     }
     
     // MARK: - CartTableDelegateProtocol
+    
     func totalPrice() -> Float {
         return viewModel.calculateTotalPrice()
     }
@@ -87,11 +95,13 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     }
     
     // MARK: - CartTableCellProtocol
+    
     func didUpdate(cartProduct: CartProduct, quantity: Int) {
         viewModel.update(cartProduct: cartProduct, quantity: quantity)
     }
     
     // MARK: - SwipeTableViewCellDelegate
+    
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
         let title = NSLocalizedString("Button.Remove", comment: String())
@@ -108,12 +118,14 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     }
     
     // MARK: - CartEmptyDataViewProtocol
+    
     func didTapStartShopping() {
         setHomeController()
         dismiss(animated: true)
     }
     
     // MARK: - ErrorViewProtocol
+    
     func didTapTryAgain() {
         loadData()
     }

@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol CheckoutShippingAddressAddCellProtocol {
+protocol CheckoutShippingAddressAddCellProtocol: class {
     func didTapAddNewAddress()
 }
 
 class CheckoutShippingAddressAddTableCell: UITableViewCell {
     @IBOutlet weak var addNewAddressButton: BlackButton!
     
-    var delegate: CheckoutShippingAddressAddCellProtocol?
+    weak var delegate: CheckoutShippingAddressAddCellProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()

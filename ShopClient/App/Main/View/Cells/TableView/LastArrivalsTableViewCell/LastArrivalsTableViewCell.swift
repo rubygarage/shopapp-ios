@@ -17,10 +17,13 @@ private let kLastArrivalsNumberOfSections = 1
 class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableDataSourceProtocol, LastArrivalsTableDelegateProtocol {
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var dataSource: LastArrivalsTableDataSource?
-    private var delegate: LastArrivalsTableDelegate?
-    private var cellDelegate: LastArrivalsCellDelegate?
+    private var dataSource: LastArrivalsTableDataSource!
+    // swiftlint:disable weak_delegate
+    private var delegate: LastArrivalsTableDelegate!
+    // swiftlint:enable weak_delegate
     private var products = [Product]()
+    
+    weak var cellDelegate: LastArrivalsCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,22 +35,24 @@ class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableDataSourcePro
         let nib = UINib(nibName: String(describing: LastArrivalsCollectionViewCell.self), bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: String(describing: LastArrivalsCollectionViewCell.self))
         
-        dataSource = LastArrivalsTableDataSource(delegate: self)
+        dataSource = LastArrivalsTableDataSource()
+        dataSource.delegate = self
         collectionView.dataSource = dataSource
         
-        delegate = LastArrivalsTableDelegate(delegate: self)
+        delegate = LastArrivalsTableDelegate()
+        delegate.delegate = self
         collectionView.delegate = delegate
     }
     
-    func configure(with products: [Product]?, cellDelegate: LastArrivalsCellDelegate?) {
+    func configure(with products: [Product]?) {
         if let items = products {
             self.products = items
             collectionView.reloadData()
         }
-        self.cellDelegate = cellDelegate
     }
     
     // MARK: - LastArrivalsTableDataSourceProtocol
+    
     func numberOfSections() -> Int {
         return kLastArrivalsNumberOfSections
     }
@@ -61,6 +66,7 @@ class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableDataSourcePro
     }
     
     // MARK: - LastArrivalsTableDelegateProtocol
+    
     func didSelectItem(at index: Int) {
         cellDelegate?.didSelectLastArrivalsProduct(at: index)
     }

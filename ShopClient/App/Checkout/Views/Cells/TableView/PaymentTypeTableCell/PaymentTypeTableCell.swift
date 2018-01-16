@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PaymentTypeTableCellProtocol {
+protocol PaymentTypeTableCellProtocol: class {
     func didSelectCreditCartPayment()
 }
 
@@ -16,7 +16,7 @@ class PaymentTypeTableCell: UITableViewCell {
     @IBOutlet weak var paymentTypeLabel: UILabel!
     @IBOutlet weak var paymentSelectButton: UIButton!
     
-    var delegate: PaymentTypeTableCellProtocol?
+    weak var delegate: PaymentTypeTableCellProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()

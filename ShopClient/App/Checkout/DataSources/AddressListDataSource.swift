@@ -16,22 +16,22 @@ protocol AddressListDataSourceProtocol {
 }
 
 class AddressListDataSource: NSObject, UITableViewDataSource {
-    var delegate: (AddressListDataSourceProtocol & AddressListTableViewCellProtocol)!
-    
-    init(delegate: AddressListDataSourceProtocol & AddressListTableViewCellProtocol) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: (AddressListDataSourceProtocol & AddressListTableViewCellProtocol)?
     
     // MARK: - UITableViewDataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return delegate.itemsCount()
+        return delegate?.itemsCount() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: AddressListTableViewCell.self), for: indexPath) as! AddressListTableViewCell
-        cell.configure(with: delegate.item(at: indexPath.row), delegate: delegate)
+
+        if let addressTuple = delegate?.item(at: indexPath.row) {
+            cell.configure(with: addressTuple.address, selected: addressTuple.selected)
+        }
+        
+        cell.delegate = delegate
         return cell
     }
 }

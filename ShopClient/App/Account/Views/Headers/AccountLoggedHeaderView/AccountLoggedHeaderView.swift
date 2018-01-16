@@ -9,7 +9,7 @@
 import UIKit
 import AvatarImageView
 
-protocol AccountLoggedHeaderProtocol {
+protocol AccountLoggedHeaderProtocol: class {
     func didTapMyOrders()
 }
 
@@ -40,12 +40,11 @@ class AccountLoggedHeaderView: UIView {
         }
     }
     
-    private var headerDelegate: AccountLoggedHeaderProtocol!
+    weak var delegate: AccountLoggedHeaderProtocol?
     
-    init(customer: Customer, delegate: AccountLoggedHeaderProtocol) {
-        super.init(frame: CGRect.zero)
+    init(frame: CGRect, customer: Customer) {
+        super.init(frame: frame)
         
-        headerDelegate = delegate
         commonInit()
         populateViews(customer: customer)
     }
@@ -75,8 +74,9 @@ class AccountLoggedHeaderView: UIView {
         customerImageView.dataSource = CustomerImageDataSource(customerName: customer.fullname)
     }
     
-    // MARK: - actions
+    // MARK: - Actions
+    
     @IBAction func myOrdersTapped(_ sender: UIButton) {
-        headerDelegate.didTapMyOrders()
+        delegate?.didTapMyOrders()
     }
 }

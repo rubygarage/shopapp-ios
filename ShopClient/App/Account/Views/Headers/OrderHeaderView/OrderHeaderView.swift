@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol OrderHeaderViewProtocol {
+protocol OrderHeaderViewProtocol: class {
     func viewDidTap(_ section: Int)
 }
 
@@ -17,14 +17,14 @@ class OrderHeaderView: UIView {
     @IBOutlet var numberLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
     
-    private var delegate: OrderHeaderViewProtocol?
     private var section: Int!
+    
+    weak var delegate: OrderHeaderViewProtocol?
 
-    init(section: Int, order: Order, delegate: OrderHeaderViewProtocol? = nil) {
+    init(section: Int, order: Order) {
         super.init(frame: CGRect.zero)
         
         self.section = section
-        self.delegate = delegate
         commonInit()
         populateViews(order: order)
     }

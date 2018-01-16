@@ -14,23 +14,20 @@ protocol CheckoutCartCollectionDataSourceDelegate: class {
 }
 
 class CheckoutCartCollectionDataSource: NSObject, UICollectionViewDataSource {
-    private var delegate: CheckoutCartCollectionDataSourceDelegate!
-    
-    init(delegate: CheckoutCartCollectionDataSourceDelegate) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: CheckoutCartCollectionDataSourceDelegate?
     
     // MARK: - UICollectionViewDataSource
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return delegate.itemsCount()
+        return delegate?.itemsCount() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CheckoutCartCollectionCell.self), for: indexPath) as! CheckoutCartCollectionCell
-        let item = delegate.item(at: indexPath.row)
-        cell.configure(with: item.image, productVariantId: item.productVariantId)
+        
+        if let item = delegate?.item(at: indexPath.row) {
+            cell.configure(with: item.image, productVariantId: item.productVariantId)
+        }
         
         return cell
     }

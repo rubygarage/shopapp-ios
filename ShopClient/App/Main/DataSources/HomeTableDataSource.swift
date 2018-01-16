@@ -22,15 +22,10 @@ protocol HomeTableDataSourceProtocol {
 }
 
 class HomeTableDataSource: NSObject, UITableViewDataSource {
-    private var delegate: (HomeTableDataSourceProtocol & LastArrivalsCellDelegate & PopularCellDelegate)?
-    
-    init(delegate: (HomeTableDataSourceProtocol & LastArrivalsCellDelegate & PopularCellDelegate)?) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: (HomeTableDataSourceProtocol & LastArrivalsCellDelegate & PopularCellDelegate)?
     
     // MARK: - UITableViewDataSource
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let delegate = delegate else { return 0 }
         let lastArrivalsSectionCount = delegate.lastArrivalsObjects().isEmpty ? 0 : 1
@@ -64,18 +59,19 @@ class HomeTableDataSource: NSObject, UITableViewDataSource {
         }
     }
     
-    // MARK: - private
+    // MARK: - Private
+    
     private func lastArrivalsCell(with tableView: UITableView, indexPath: IndexPath) -> LastArrivalsTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: LastArrivalsTableViewCell.self), for: indexPath) as! LastArrivalsTableViewCell
-        cell.configure(with: delegate?.lastArrivalsObjects(), cellDelegate: self.delegate)
-        
+        cell.cellDelegate = delegate
+        cell.configure(with: delegate?.lastArrivalsObjects())
         return cell
     }
     
     private func popularCell(with tableView: UITableView, indexPath: IndexPath) -> PopularTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PopularTableViewCell.self), for: indexPath) as! PopularTableViewCell
-        cell.configure(with: delegate?.popularObjects(), cellDelegate: self.delegate)
-        
+        cell.cellDelegate = delegate
+        cell.configure(with: delegate?.popularObjects())
         return cell
     }
     

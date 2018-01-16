@@ -8,20 +8,15 @@
 
 import UIKit
 
-protocol ArticlesListTableDelegateProtocol {
+protocol ArticlesListTableDelegateProtocol: class {
     func didSelectItem(at index: Int)
 }
 
 class ArticlesListTableDelegate: NSObject, UITableViewDelegate {
-    private var delegate: ArticlesListTableDelegateProtocol?
+    weak var delegate: ArticlesListTableDelegateProtocol?
     
-    init(delegate: ArticlesListTableDelegateProtocol?) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    // MARK: - UITableViewDelegate
     
-    // MARK: - UITableViewDelegate    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.didSelectItem(at: indexPath.row)
     }

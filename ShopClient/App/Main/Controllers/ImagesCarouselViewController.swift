@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ImagesCarouselViewControllerProtocol {
+protocol ImagesCarouselViewControllerProtocol: class {
     func didTapImage(at index: Int)
 }
 
@@ -16,15 +16,19 @@ class ImagesCarouselViewController: UIViewController, ImagesCarouselCollectionDa
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     
+    private var dataSource: ImagesCarouselCollectionDataSource!
+    // swiftlint:disable weak_delegate
+    private var delegate: ImagesCarouselCollectionDelegate!
+    // swiftlint:enable weak_delegate
+    
+    weak var controllerDelegate: ImagesCarouselViewControllerProtocol?
+    
     var images = [Image]() {
         didSet {
             updateViews()
         }
     }
-    var controllerDelegate: ImagesCarouselViewControllerProtocol?
     var showingIndex: Int = 0
-    private var dataSource: ImagesCarouselCollectionDataSource?
-    private var delegate: ImagesCarouselCollectionDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +40,12 @@ class ImagesCarouselViewController: UIViewController, ImagesCarouselCollectionDa
         let nib = UINib(nibName: String(describing: DetailsImagesCollectionViewCell.self), bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: String(describing: DetailsImagesCollectionViewCell.self))
         
-        dataSource = ImagesCarouselCollectionDataSource(delegate: self)
+        dataSource = ImagesCarouselCollectionDataSource()
+        dataSource.delegate = self
         collectionView.dataSource = dataSource
         
-        delegate = ImagesCarouselCollectionDelegate(delegate: self)
+        delegate = ImagesCarouselCollectionDelegate()
+        delegate.delegate = self
         collectionView.delegate = delegate
     }
     
@@ -57,18 +63,21 @@ class ImagesCarouselViewController: UIViewController, ImagesCarouselCollectionDa
         collectionView.reloadData()
     }
     
-    // MARK: - actions
+    // MARK: - Actions
+    
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
         controllerDelegate?.didTapImage(at: showingIndex)
     }
     
-    // MARK: - pageControl actions
+    // MARK: - PageControl actions
+    
     @IBAction func pageControlValueChanged(_ sender: UIPageControl) {
         showingIndex = sender.currentPage
         updateShowingImage(with: sender.currentPage)
     }
     
     // MARK: - DetailsImagesCollectionDataSourceProtocol
+    
     func numberOfItems() -> Int {
         return images.count
     }
@@ -78,6 +87,7 @@ class ImagesCarouselViewController: UIViewController, ImagesCarouselCollectionDa
     }
     
     // MARK: - DetailsImagesCollectionDelegateProtocol
+    
     func sizeForCell() -> CGSize {
         return self.view.frame.size
     }

@@ -10,7 +10,7 @@ import UIKit
 
 protocol CheckoutCombinedProtocol: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, CheckoutPaymentAddCellProtocol, CheckoutTableDelegateProtocol, CheckoutCartTableViewCellDelegate {}
 
-protocol CheckoutTableDataSourceProtocol {
+protocol CheckoutTableDataSourceProtocol: class {
     func cartProducts() -> [CartProduct]
     func shippingAddress() -> Address?
     func billingAddress() -> Address?
@@ -18,15 +18,10 @@ protocol CheckoutTableDataSourceProtocol {
 }
 
 class CheckoutTableDataSource: NSObject, UITableViewDataSource {
-    private var delegate: CheckoutCombinedProtocol!
-    
-    init(delegate: CheckoutCombinedProtocol) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: CheckoutCombinedProtocol?
     
     // MARK: - UITableViewDataSource
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return CheckoutSection.allValues.count
     }
@@ -48,17 +43,19 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
         }
     }
     
-    // MARK: - private
+    // MARK: - Private
+    
     private func cartCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutCartTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutCartTableViewCell.self), for: indexPath) as! CheckoutCartTableViewCell
-        let images = delegate.cartProducts().flatMap { $0.productVariant?.image }
-        let productVariantIds = delegate.cartProducts().flatMap { $0.productVariant?.id }
-        cell.configure(with: images, productVariantIds: productVariantIds, cellDelegate: delegate)
+        if let images = delegate?.cartProducts().flatMap({ $0.productVariant?.image }), let productVariantIds = delegate?.cartProducts().flatMap({ $0.productVariant?.id }) {
+            cell.configure(with: images, productVariantIds: productVariantIds)
+            cell.cellDelegate = delegate
+        }
         return cell
     }
     
     private func shippingAddressCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        if let shippingAddress = delegate.shippingAddress() {
+        if let shippingAddress = delegate?.shippingAddress() {
             return shippingAddressEditCell(with: tableView, indexPath: indexPath, address: shippingAddress)
         } else {
             return shippingAddressAddCell(with: tableView, indexPath: indexPath)
@@ -73,12 +70,13 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     
     private func shippingAddressEditCell(with tableView: UITableView, indexPath: IndexPath, address: Address) -> CheckoutShippingAddressEditTableCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self), for: indexPath) as! CheckoutShippingAddressEditTableCell
-        cell.configure(with: address, delegate: delegate)
+        cell.delegate = delegate
+        cell.configure(with: address)
         return cell
     }
     
     private func paymentCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        if let address = delegate.billingAddress(), let card = delegate.creditCard() {
+        if let address = delegate?.billingAddress(), let card = delegate?.creditCard() {
             return paymentEditCell(with: tableView, indexPath: indexPath, billingAddress: address, creditCard: card)
         } else {
             return paymentAddCell(with: tableView, indexPath: indexPath)

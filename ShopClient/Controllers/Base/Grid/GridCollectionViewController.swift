@@ -13,10 +13,13 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
     
     var selectedProduct: Product?
     
-    private var collectionDataSource: GridCollectionDataSource?
-    private var collectionDelegate: GridCollectionDelegate?
+    private var collectionDataSource: GridCollectionDataSource!
+    // swiftlint:disable weak_delegate
+    private var collectionDelegate: GridCollectionDelegate!
+    // swiftlint:enable weak_delegate
     
-    // MARK: - view controller lifecycle
+    // MARK: - View controller lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,21 +32,25 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
         }
     }
     
-    // MARK: - setup
+    // MARK: - Setup
+    
     private func setupCollectionView() {
         let nib = UINib(nibName: String(describing: GridCollectionViewCell.self), bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: String(describing: GridCollectionViewCell.self))
         
-        collectionDataSource = GridCollectionDataSource(delegate: self)
+        collectionDataSource = GridCollectionDataSource()
+        collectionDataSource.delegate = self
         collectionView.dataSource = collectionDataSource
         
-        collectionDelegate = GridCollectionDelegate(delegate: self)
+        collectionDelegate = GridCollectionDelegate()
+        collectionDelegate.delegate = self
         collectionView.delegate = collectionDelegate
         
         collectionView.contentInset = GridCollectionViewCell.collectionViewInsets
     }
     
     // MARK: - GridCollectionDataSourceProtocol
+    
     func numberOfItems() -> Int {
         return viewModel.products.value.count
     }
@@ -53,6 +60,7 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
     }
     
     // MARK: - GridCollectionDelegateProtocol
+    
     func didSelectItem(at index: Int) {
         if index < viewModel.products.value.count {
             selectedProduct = viewModel.products.value[index]

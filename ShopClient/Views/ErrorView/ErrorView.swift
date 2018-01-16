@@ -18,14 +18,16 @@ class ErrorView: UIView {
     @IBOutlet weak var errorImageView: UIImageView!
     @IBOutlet weak var tryAgainButton: UIButton!
     
-    var delegate: ErrorViewProtocol?
+    weak var delegate: ErrorViewProtocol?
+    
     var error: RepoError? {
         didSet {
             updateUI()
         }
     }
     
-    // MARK: - init
+    // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -50,7 +52,8 @@ class ErrorView: UIView {
         errorTextLabel.text = error?.errorMessage
     }
     
-    // MARK: - actions
+    // MARK: - Actions
+    
     @IBAction func tryAgainTapped(_ sender: UIButton) {
         delegate?.didTapTryAgain?()
     }

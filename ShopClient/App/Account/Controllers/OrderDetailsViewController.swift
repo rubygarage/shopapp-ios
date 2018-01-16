@@ -12,13 +12,15 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, Ord
     @IBOutlet weak var tableView: UITableView!
     
     private var tableDataSource: OrdersDetailsTableDataSource!
+    // swiftlint:disable weak_delegate
     private var tableDelegate: OrdersDetailsTableDelegate!
+    // swiftlint:enable weak_delegate
+    private var selectedProductVariant: ProductVariant!
     
     var orderId: String!
     
-    private var selectedProductVariant: ProductVariant!
+    // MARK: - View controller lifecycle
     
-    // MARK: - view controller lifecycle
     override func viewDidLoad() {
         viewModel = OrderDetailsViewModel()
         super.viewDidLoad()
@@ -35,7 +37,8 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, Ord
         }
     }
     
-    // MARK: - setup
+    // MARK: - Setup
+    
     private func setupViews() {
         title = "ControllerTitle.OrderDetails".localizable
     }
@@ -47,10 +50,12 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, Ord
         let shippingAddressEditNib = UINib(nibName: String(describing: CheckoutShippingAddressEditTableCell.self), bundle: nil)
         tableView.register(shippingAddressEditNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self))
         
-        tableDataSource = OrdersDetailsTableDataSource(delegate: self)
+        tableDataSource = OrdersDetailsTableDataSource()
+        tableDataSource.delegate = self
         tableView.dataSource = tableDataSource
         
-        tableDelegate = OrdersDetailsTableDelegate(delegate: self)
+        tableDelegate = OrdersDetailsTableDelegate()
+        tableDelegate.delegate = self
         tableView.delegate = tableDelegate
         
         tableView?.contentInset = TableView.defaultContentInsets
@@ -75,11 +80,13 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, Ord
     }
     
     // MARK: - OrdersDetailsTableDataSourceProtocol
+    
     func order() -> Order? {
         return viewModel.data.value
     }
     
     // MARK: - OrdersDetailsTableDelegateProtocol
+    
     func didSelectItem(at index: Int) {
         selectedProductVariant = viewModel.productVariant(at: index)
         performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)

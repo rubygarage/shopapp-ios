@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SortModalControllerProtocol {
+protocol SortModalControllerProtocol: class {
     func didSelect(item: String)
 }
 
@@ -24,11 +24,16 @@ class SortModalViewController: UIViewController, SortModalDataSourceProtocol, So
     
     var sortItems = [String]()
     var selectedSortItem = String()
-    var delegate: SortModalControllerProtocol?
-    private var tableDataSource: SortModalDataSource?
-    private var tableDelegate: SortModalDelegate?
     
-    // MARK: - view controller lifecycle
+    weak var delegate: SortModalControllerProtocol?
+    
+    private var tableDataSource: SortModalDataSource!
+    // swiftlint:disable weak_delegate
+    private var tableDelegate: SortModalDelegate!
+    // swiftlint:enable weak_delegate
+    
+    // MARK: - View controller lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +41,8 @@ class SortModalViewController: UIViewController, SortModalDataSourceProtocol, So
         setupTableView()
     }
     
-    // MARK: - setup
+    // MARK: - Setup
+    
     private func setupViews() {
         backgroundView.layer.cornerRadius = kSortingViewCornerRadius
         
@@ -56,20 +62,24 @@ class SortModalViewController: UIViewController, SortModalDataSourceProtocol, So
         
         tableViewHeightConstraint.constant = CGFloat(sortItems.count) * kSortTableCellHeight
         
-        tableDataSource = SortModalDataSource(delegate: self)
+        tableDataSource = SortModalDataSource()
+        tableDataSource.delegate = self
         tableView.dataSource = tableDataSource
         
-        tableDelegate = SortModalDelegate(delegate: self)
+        tableDelegate = SortModalDelegate()
+        tableDelegate.delegate = self
         tableView.delegate = tableDelegate
     }
     
-    // MARK: - action
+    // MARK: - Action
+    
     @IBAction func sortTapped(_ sender: UIButton) {
         delegate?.didSelect(item: selectedSortItem)
         dismiss(animated: true)
     }
     
     // MARK: - SortModalDataSourceProtocol
+    
     func itemsCount() -> Int {
         return sortItems.count
     }
@@ -86,6 +96,7 @@ class SortModalViewController: UIViewController, SortModalDataSourceProtocol, So
     }
     
     // MARK: - SortModalDelegateProtocol
+    
     func heightForRow() -> CGFloat {
         return kSortTableCellHeight
     }

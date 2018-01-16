@@ -17,9 +17,12 @@ class PopularTableViewCell: UITableViewCell, PopularTableDataSourceProtocol, Pop
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
     private var dataSource: PopularTableDataSource!
+    // swiftlint:disable weak_delegate
     private var delegate: PopularTableDelegate!
-    private var cellDelegate: PopularCellDelegate?
+    // swiftlint:enable weak_delegate
     private var products = [Product]()
+    
+    weak var cellDelegate: PopularCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,25 +31,28 @@ class PopularTableViewCell: UITableViewCell, PopularTableDataSourceProtocol, Pop
         setupCollectionView()
     }
     
-    // MARK: - public
-    func configure(with products: [Product]?, cellDelegate: PopularCellDelegate?) {
+    // MARK: - Public
+    
+    func configure(with products: [Product]?) {
         if let items = products {
             self.products = items
             updateCollectionViewHeight()
             collectionView.reloadData()
         }
-        self.cellDelegate = cellDelegate
     }
     
-    // MARK: - private
+    // MARK: - Private
+    
     private func setupCollectionView() {
         let nib = UINib(nibName: String(describing: GridCollectionViewCell.self), bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: String(describing: GridCollectionViewCell.self))
         
-        dataSource = PopularTableDataSource(delegate: self)
+        dataSource = PopularTableDataSource()
+        dataSource.delegate = self
         collectionView.dataSource = dataSource
         
-        delegate = PopularTableDelegate(delegate: self)
+        delegate = PopularTableDelegate()
+        delegate.delegate = self
         collectionView.delegate = delegate
         
         collectionView.contentInset = GridCollectionViewCell.collectionViewInsets
@@ -58,6 +64,7 @@ class PopularTableViewCell: UITableViewCell, PopularTableDataSourceProtocol, Pop
     }
     
     // MARK: - PopularTableDataSourceProtocol
+    
     func numberOfProducts() -> Int {
         return products.count
     }
@@ -67,6 +74,7 @@ class PopularTableViewCell: UITableViewCell, PopularTableDataSourceProtocol, Pop
     }
     
     // MARK: - PopularTableDelegateProtocol
+    
     func didSelectItem(at index: Int) {
         cellDelegate?.didSelectPopularProduct(at: index)
     }

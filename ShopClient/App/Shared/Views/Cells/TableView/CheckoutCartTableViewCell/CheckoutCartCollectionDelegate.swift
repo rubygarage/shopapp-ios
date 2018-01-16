@@ -13,15 +13,10 @@ protocol CheckoutCartCollectionDelegateProtocol: class {
 }
 
 class CheckoutCartCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    private var delegate: CheckoutCartCollectionDelegateProtocol!
-    
-    init(delegate: CheckoutCartCollectionDelegateProtocol) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: CheckoutCartCollectionDelegateProtocol?
     
     // MARK: - UICollectionViewDelegateFlowLayout
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CheckoutCartCollectionCell.cellSize
     }
@@ -31,5 +26,4 @@ class CheckoutCartCollectionDelegate: NSObject, UICollectionViewDelegate, UIColl
             delegate?.didSelectItem(with: cell.productVariantId)
         }
     }
-    
 }

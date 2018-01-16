@@ -10,21 +10,16 @@ import UIKit
 
 let kOptionCollectionViewCellAdditionalWidth = CGFloat(24.0)
 
-protocol ProductOptionCollectionDelegateProtocol {
+protocol ProductOptionCollectionDelegateProtocol: class {
     func item(for index: Int) -> String
     func didSelectItem(at index: Int)
 }
 
 class ProductOptionCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    private var delegate: ProductOptionCollectionDelegateProtocol?
-    
-    init(delegate: ProductOptionCollectionDelegateProtocol?) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: ProductOptionCollectionDelegateProtocol?
     
     // MARK: - UICollectionViewDelegate
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let text = delegate?.item(for: indexPath.row) ?? ""
         let font = UIFont.systemFont(ofSize: UIFont.labelFontSize)

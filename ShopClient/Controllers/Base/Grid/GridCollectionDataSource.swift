@@ -8,21 +8,17 @@
 
 import UIKit
 
-protocol GridCollectionDataSourceProtocol {
+protocol GridCollectionDataSourceProtocol: class {
     func numberOfItems() -> Int
     func item(for indexPath: IndexPath) -> Product
 }
 
 class GridCollectionDataSource: NSObject, UICollectionViewDataSource {
-    var delegate: GridCollectionDataSourceProtocol?
     
-    init(delegate: GridCollectionDataSourceProtocol) {
-        super.init()
-        
-        self.delegate = delegate
-    }
+    weak var delegate: GridCollectionDataSourceProtocol?
     
     // MARK: - UICollectionViewDataSource
+    
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return delegate?.numberOfItems() ?? 0
     }
