@@ -21,5 +21,14 @@ extension Checkout {
         subtotalPrice = item?.subtotalPrice
         totalPrice = item?.totalPrice
         shippingAddress = Address(with: item?.shippingAddress)
+        if let nodes = item?.lineItems.edges.map({ $0.node }) {
+            var itemsArray = [LineItem]()
+            for node in nodes {
+                if let lineItem = LineItem(with: node) {
+                    itemsArray.append(lineItem)
+                }
+            }
+            lineItems = itemsArray
+        }
     }
 }

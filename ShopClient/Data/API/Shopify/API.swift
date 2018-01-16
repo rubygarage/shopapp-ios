@@ -12,9 +12,12 @@ import KeychainSwift
 private let kShopifyStorefrontAccessToken = "317392940ba3519bcfa070943900b1de"
 private let kShopifyStorefrontURL = "blablablstore.myshopify.com"
 private let kShopifyItemsMaxCount: Int32 = 250
+private let kShopiftStoreName = "blablablstore"
+private let kMerchantID = "merchant.com.rubygarage.shopclient.test"
 
-class API: NSObject, APIInterface {
+class API: NSObject, APIInterface, PaySessionDelegate {
     var client: Graph.Client?
+    private var paySession: PaySession?
     
     override init() {
         super.init()
@@ -316,9 +319,9 @@ class API: NSObject, APIInterface {
         run(task: task, callback: callback)
     }
     
-    func updateCheckout(with rate: ShippingRate, checkout: Checkout, callback: @escaping RepoCallback<Checkout>) {
-        let checkoutId = GraphQL.ID.init(rawValue: checkout.id)
-        let query = updateShippingLineQuery(checkoutId: checkoutId, shippingRateHandle: rate.handle)
+    func updateCheckout(with rate: ShippingRate, checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
+        let id = GraphQL.ID.init(rawValue: checkoutId)
+        let query = updateShippingLineQuery(checkoutId: id, shippingRateHandle: rate.handle)
         let task = client?.mutateGraphWith(query, completionHandler: { (response, error) in
             if let checkout = Checkout(with: response?.checkoutShippingLineUpdate?.checkout) {
                 callback(checkout, nil)
@@ -340,6 +343,71 @@ class API: NSObject, APIInterface {
             if let cardVaultUrl = response?.shop.paymentSettings.cardVaultUrl {
                 self?.pay(with: card, checkout: checkout, cardVaultUrl: cardVaultUrl, address: billingAddress, callback: callback)
             }
+        })
+        run(task: task, callback: callback)
+    }
+    
+    func setupApplePay(with checkout: Checkout, callback: @escaping RepoCallback<Bool>) {
+        getShopCurrency { [weak self] (response, error) in
+            if let currencyCode = response?.currencyCode.rawValue, let countryCode = response?.countryCode.rawValue {
+//                let email = self?.sessionData().email
+                let payCheckout = checkout.payCheckout
+                let payCurrency = PayCurrency(currencyCode: currencyCode, countryCode: countryCode)
+                
+                self?.paySession = PaySession(shopName: kShopiftStoreName, checkout: payCheckout, currency: payCurrency, merchantID: kMerchantID)
+                self?.paySession?.delegate = self
+                self?.paySession?.authorize()
+            }
+        }
+        
+        /*
+        getCheckout(with: checkout.id) { [weak self] (checkout, error) in
+            if let checkout = checkout {
+                
+                self?.getShopCurrency(callback: { [weak self] (paymentSettings, error) in
+                    if let currencyCode = paymentSettings?.currencyCode.rawValue, let countryCode = paymentSettings?.countryCode.rawValue {
+                        
+                        self?.getShippingRates(with: checkout.id, callback: { [weak self] (rates, error) in
+                            if let rate = rates?.first {
+                                
+                                self?.updateCheckout(with: rate, checkout: checkout, callback: { (check, error) in
+                                    if let check = check {
+                                        
+                                        let discount = PayDiscount(code: currencyCode, amount: Decimal(0))
+                                        let subtotalPrice = checkout.subtotalPrice!
+                                        let zeroDecimal = Decimal(0)
+                                        let paymentDue = Decimal(10)
+                                        let shippingAddress = checkout.shippingAddress
+                                        let payAddress = PayAddress(addressLine1: shippingAddress?.address, addressLine2: shippingAddress?.secondAddress, city: shippingAddress?.city, country: shippingAddress?.country, province: shippingAddress?.state, zip: shippingAddress?.zip, firstName: shippingAddress?.firstName, lastName: shippingAddress?.lastName, phone: shippingAddress?.phone, email: "user1@i.ua")
+                                        
+                                        let ratePrice = Decimal(Int(rate.price!)!)
+                                        let shippingRate = PayShippingRate(handle: rate.handle, title: rate.title!, price: ratePrice)
+                                        
+                                        let payCheckout = PayCheckout(id: checkout.id, lineItems: [PayLineItem](), discount: discount, shippingAddress: payAddress, shippingRate: shippingRate, subtotalPrice: subtotalPrice, needsShipping: true, totalTax: zeroDecimal, paymentDue: paymentDue)
+                                        let payCurrency = PayCurrency(currencyCode: currencyCode, countryCode: countryCode)
+                                        self?.paySession = PaySession(shopName: "blablablstore", checkout: payCheckout, currency: payCurrency, merchantID: "merchant.com.rubygarage.shopclient.test")
+                                        self?.paySession?.delegate = self
+                                        self?.paySession?.authorize()
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+        }
+ */
+    }
+    
+    func getShopCurrency(callback: @escaping RepoCallback<Storefront.PaymentSettings>) {
+        let query = Storefront.buildQuery { $0
+            .shop { $0
+                .paymentSettings(self.paymentSettingsQuery())
+            }
+        }
+        
+        let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
+            callback(response?.shop.paymentSettings, RepoError(with: error))
         })
         run(task: task, callback: callback)
     }
@@ -780,11 +848,7 @@ class API: NSObject, APIInterface {
                     .id()
                     .availableShippingRates { $0
                         .ready()
-                        .shippingRates { $0
-                            .title()
-                            .price()
-                            .handle()
-                        }
+                        .shippingRates(self.shippingRateQuery())
                     }
                 }
             }
@@ -986,6 +1050,7 @@ class API: NSObject, APIInterface {
     private func paymentSettingsQuery() -> (Storefront.PaymentSettingsQuery) -> Void {
         return { (query: Storefront.PaymentSettingsQuery) in
             query.currencyCode()
+            query.countryCode()
         }
     }
     
@@ -1035,7 +1100,30 @@ class API: NSObject, APIInterface {
             query.currencyCode()
             query.subtotalPrice()
             query.totalPrice()
+            query.totalTax()
+            query.shippingLine(self.shippingRateQuery())
             query.shippingAddress(self.mailingAddressQuery())
+            query.lineItems(first: kShopifyItemsMaxCount, self.checkoutLineItemConnectionQuery())
+        }
+    }
+    
+    private func checkoutLineItemConnectionQuery() -> (Storefront.CheckoutLineItemConnectionQuery) -> Void {
+        return { (query: Storefront.CheckoutLineItemConnectionQuery) in
+            query.edges(self.checkoutLineItemEdgeQuery())
+        }
+    }
+    
+    private func checkoutLineItemEdgeQuery() -> (Storefront.CheckoutLineItemEdgeQuery) -> Void {
+        return { (query: Storefront.CheckoutLineItemEdgeQuery) in
+            query.node(self.checkoutLineItemQuery())
+        }
+    }
+    
+    private func checkoutLineItemQuery() -> (Storefront.CheckoutLineItemQuery) -> Void {
+        return { (query: Storefront.CheckoutLineItemQuery) in
+            query.id()
+            query.quantity()
+            query.variant(self.productVariantQuery())
         }
     }
     
@@ -1105,6 +1193,14 @@ class API: NSObject, APIInterface {
         }
     }
     
+    private func shippingRateQuery() -> (Storefront.ShippingRateQuery) -> Void {
+        return { (query: Storefront.ShippingRateQuery) in
+            query.title()
+            query.price()
+            query.handle()
+        }
+    }
+    
     // MARK: - session data
     private func saveSessionData(with token: Storefront.CustomerAccessToken, email: String) {
         let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
@@ -1168,6 +1264,115 @@ class API: NSObject, APIInterface {
     private func process(statusCode: Int, error: Error) -> RepoError? {
         return CriticalError(with: error, statusCode: statusCode)
     }
+    
+    // MARK: - PaySessionDelegate
+    
+    func paySession(_ paySession: PaySession, didRequestShippingRatesFor address: PayPostalAddress, checkout: PayCheckout, provide: @escaping (PayCheckout?, [PayShippingRate]) -> Void) {
+        updateCheckout(with: checkout.id, updatingPartialShippingAddress: address) { [weak self] (response, error) in
+            if let checkout = Checkout(with: response)?.payCheckout {
+                self?.fetchShippingRatesForCheckout(with: checkout.id, completion: { (ratesResponse, error) in
+                    if error != nil {
+                        provide(nil, [])
+                    } else {
+                        let rates = ratesResponse.map({ ShippingRate(with: $0)!.payShippingRate })
+                        provide(checkout, rates)
+                    }
+                })
+            } else {
+                provide(nil, [])
+            }
+        }
+    }
+
+    func paySession(_ paySession: PaySession, didUpdateShippingAddress address: PayPostalAddress, checkout: PayCheckout, provide: @escaping (PayCheckout?) -> Void) {
+        print("2")
+        
+    }
+    
+    func paySession(_ paySession: PaySession, didSelectShippingRate shippingRate: PayShippingRate, checkout: PayCheckout, provide: @escaping (PayCheckout?) -> Void) {
+        print("3")
+        let selectedRate = ShippingRate()
+        selectedRate.handle = shippingRate.handle
+        selectedRate.price = shippingRate.price.description
+        selectedRate.title = shippingRate.title
+        updateCheckout(with: selectedRate, checkoutId: checkout.id) { (checkout, error) in
+            print("ddddd")
+        }
+        provide(checkout)
+    }
+
+    func paySession(_ paySession: PaySession, didAuthorizePayment authorization: PayAuthorization, checkout: PayCheckout, completeTransaction: @escaping (PaySession.TransactionStatus) -> Void) {
+        print("4")
+        completeTransaction(.success)
+    }
+
+    func paySessionDidFinish(_ paySession: PaySession) {
+        print("5")
+    }
+    
+    // MARK: - Pay session delegate additional methods
+    
+    private func updateCheckout(with checkoutId: String, updatingPartialShippingAddress address: PayPostalAddress, completion: @escaping (_ checkout: Storefront.Checkout?, _ error: Graph.QueryError?) -> Void) {
+        let mutation = mutationForUpdateCheckout(with: checkoutId, updatingPartialShippingAddress: address)
+        let task = client?.mutateGraphWith(mutation, completionHandler: { (response, error) in
+            completion(response?.checkoutShippingAddressUpdate?.checkout, error)
+        })
+        task?.resume()
+    }
+    
+    private func fetchShippingRatesForCheckout(with id: String, completion: @escaping (_ rates: [Storefront.ShippingRate], _ error: Graph.QueryError?) -> Void) {
+        let retry = Graph.RetryHandler<Storefront.QueryRoot>(endurance: .finite(30)) { response, error -> Bool in
+            if let response = response {
+                return (response.node as! Storefront.Checkout).availableShippingRates?.ready ?? false == false
+            } else {
+                return false
+            }
+        }
+        
+        let checkoutID = GraphQL.ID(rawValue: id)
+        let query = getShippingRatesQuery(checkoutId: checkoutID)
+        let task = client?.queryGraphWith(query, retryHandler: retry, completionHandler: { (response, error) in
+            let checkout = response?.node as? Storefront.Checkout
+            let rates = checkout?.availableShippingRates?.shippingRates ?? [Storefront.ShippingRate]()
+            completion(rates, error)
+        })
+        task?.resume()
+    }
+    
+    // MARK: - Pay session delegate additional submethods
+    private func mutationForUpdateCheckout(with id: String, updatingPartialShippingAddress address: PayPostalAddress) -> Storefront.MutationQuery {
+        let checkoutID = GraphQL.ID(rawValue: id)
+        let addressInput = Storefront.MailingAddressInput.create(city: address.city.orNull, country: address.country.orNull, province: address.province.orNull, zip: address.zip.orNull)
+        
+        return Storefront.buildMutation { $0
+            .checkoutShippingAddressUpdate(shippingAddress: addressInput, checkoutId: checkoutID) { $0
+                .userErrors { $0
+                    .field()
+                    .message()
+                }
+                .checkout(self.checkoutQuery())
+            }
+        }
+    }
+    
+    private func queryShippingRatesForCheckout(_ id: String) -> Storefront.QueryRootQuery {
+        return Storefront.buildQuery { $0
+            .node(id: GraphQL.ID(rawValue: id)) { $0
+                .onCheckout(subfields: self.checkoutQuery())
+//                .onCheckout { $0
+//                    .id()
+//                    .availableShippingRates { $0
+//                        .ready()
+//                        .shippingRates { $0
+//                            .handle()
+//                            .price()
+//                            .title()
+//                        }
+//                    }
+//                }
+            }
+        }
+    }
 }
 
 internal extension Storefront.MailingAddressInput {
@@ -1182,5 +1387,36 @@ internal extension Storefront.MailingAddressInput {
         if let phoneItem = address.phone {
             phone = Input<String>(orNull: phoneItem)
         }
+    }
+}
+
+internal extension Checkout {
+    var payCheckout: PayCheckout {
+        let payItems = lineItems.map { item in
+            PayLineItem(price: item.price!, quantity: item.quantity)
+        }
+        let payAddress = PayAddress(addressLine1: shippingAddress?.address, addressLine2: shippingAddress?.secondAddress, city: shippingAddress?.city, country: shippingAddress?.country, province: shippingAddress?.state, zip: shippingAddress?.zip, firstName: shippingAddress?.firstName, lastName: shippingAddress?.lastName, phone: shippingAddress?.phone, email: nil)
+        
+        return PayCheckout(
+            id:              id,
+            lineItems:       payItems,
+            discount:        nil,
+            shippingAddress: payAddress,
+            shippingRate:    nil,//self.shippingRate?.payShippingRate,
+            subtotalPrice:   subtotalPrice!,
+            needsShipping:   true,
+            totalTax:        totalTax!,
+            paymentDue:      totalPrice!
+        )
+    }
+}
+
+internal extension ShippingRate {
+    var payShippingRate: PayShippingRate {
+        return PayShippingRate(
+            handle: handle,
+            title: title!,
+            price: Decimal(string: price!)!
+        )
     }
 }

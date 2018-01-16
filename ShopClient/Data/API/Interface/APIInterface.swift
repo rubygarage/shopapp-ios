@@ -52,8 +52,9 @@ protocol APIInterface {
     func addCustomerAddress(with address: Address, callback: @escaping RepoCallback<String>)
     func deleteCustomerAddress(with addressId: String, callback: @escaping RepoCallback<Bool>)
     func getShippingRates(with checkoutId: String, callback: @escaping RepoCallback<[ShippingRate]>)
-    func updateCheckout(with rate: ShippingRate, checkout: Checkout, callback: @escaping RepoCallback<Checkout>)
+    func updateCheckout(with rate: ShippingRate, checkoutId: String, callback: @escaping RepoCallback<Checkout>)
     func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, callback: @escaping RepoCallback<Bool>)
+    func setupApplePay(with checkout: Checkout, callback: @escaping RepoCallback<Bool>)
     
     // MARK: - orders
     func getOrderList(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>)

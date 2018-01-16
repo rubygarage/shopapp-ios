@@ -196,13 +196,17 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
             addressFormViewController.completion = { [weak self] (address, isDefaultAddress) in
                 self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: isDefaultAddress)
             }
-        } else if let paymentTypeViewController = segue.destination as? PaymentTypeViewController {
-            paymentTypeViewController.completion = { [weak self] (billingAddress, card) in
+        } else if let paymentTypeViewController = segue.destination as? PaymentTypeViewController, let checkout = viewModel.checkout.value {
+            paymentTypeViewController.checkout = checkout
+            paymentTypeViewController.creditCardCompletion = { [weak self] (billingAddress, card) in
                 self?.viewModel.billingAddress = billingAddress
                 self?.viewModel.creditCard = card
                 self?.tableView.reloadData()
                 self?.updatePlaceOrderButtonUI()
                 self?.returnFlowToSelf()
+            }
+            paymentTypeViewController.applePayCompletion = {
+                print("apple pay")
             }
         }
     }

@@ -41,11 +41,15 @@ extension Repository {
         APICore?.getShippingRates(with: checkoutId, callback: callback)
     }
     
-    func updateCheckout(with rate: ShippingRate, checkout: Checkout, callback: @escaping RepoCallback<Checkout>) {
-        APICore?.updateCheckout(with: rate, checkout: checkout, callback: callback)
+    func updateCheckout(with rate: ShippingRate, checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
+        APICore?.updateCheckout(with: rate, checkoutId: checkoutId, callback: callback)
     }
     
     func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, callback: @escaping RepoCallback<Bool>) {
         APICore?.pay(with: card, checkout: checkout, billingAddress: billingAddress, callback: callback)
+    }
+    
+    func setupApplePay(with checkout: Checkout, callback: @escaping RepoCallback<Bool>) {
+        APICore?.setupApplePay(with: checkout, callback: callback)
     }
 }

@@ -15,6 +15,10 @@ enum PaymentTypeSection: Int {
     static let allValues = [creditCard, applePay]
 }
 
+protocol PaymentTypeDataSourceProtocol {
+    func isSelected(type: PaymentTypeSection) -> Bool
+}
+
 class PaymentTypeDataSource: NSObject, UITableViewDataSource {
     weak var delegate: PaymentTypeTableCellProtocol?
     
@@ -25,24 +29,11 @@ class PaymentTypeDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.row {
-        case PaymentTypeSection.creditCard.rawValue:
-            return paymentCreditCardCell(tableView: tableView, indexPath: indexPath)
-        default:
-            return paymentApplePayCell(tableView: tableView, indexPath: indexPath)
-        }
-    }
-    
-    // MARK: - private
-    private func paymentCreditCardCell(tableView: UITableView, indexPath: IndexPath) -> PaymentCreditCardTableCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PaymentCreditCardTableCell.self), for: indexPath) as! PaymentCreditCardTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PaymentTypeTableViewCell.self), for: indexPath) as! PaymentTypeTableViewCell
         cell.delegate = delegate
-        return cell
-    }
-    
-    private func paymentApplePayCell(tableView: UITableView, indexPath: IndexPath) -> PaymentApplePayTableCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PaymentApplePayTableCell.self), for: indexPath) as! PaymentApplePayTableCell
-        
+        let type = PaymentTypeSection(rawValue: indexPath.row)!
+        cell.typeSelected = delegate?.isSelected(type: type) ?? false
+        cell.type = type
         return cell
     }
 }
