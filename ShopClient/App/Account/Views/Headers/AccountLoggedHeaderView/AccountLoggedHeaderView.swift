@@ -43,8 +43,8 @@ class AccountLoggedHeaderView: UIView {
     
     weak var delegate: AccountLoggedHeaderProtocol?
     
-    init(customer: Customer) {
-        super.init(frame: CGRect.zero)
+    init(frame: CGRect, customer: Customer) {
+        super.init(frame: frame)
         
         commonInit()
         populateViews(customer: customer)

@@ -20,7 +20,7 @@ class AddressListTableHeaderView: UIView {
     weak var delegate: AddressListHeaderViewProtocol?
     
     override init(frame: CGRect) {
-        super.init(frame: CGRect.zero)
+        super.init(frame: frame)
         commonInit()
     }
     

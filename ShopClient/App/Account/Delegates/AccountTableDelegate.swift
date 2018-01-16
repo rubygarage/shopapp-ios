@@ -23,11 +23,11 @@ class AccountTableDelegate: NSObject, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let customer = delegate?.customer() {
-            let view = AccountLoggedHeaderView(customer: customer)
+            let view = AccountLoggedHeaderView(frame: CGRect.zero, customer: customer)
             view.delegate = delegate
             return view
         } else {
-            let view = AccountNotLoggedHeaderView()
+            let view = AccountNotLoggedHeaderView(frame: CGRect.zero)
             view.delegate = delegate
             return view
         }

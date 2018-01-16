@@ -15,7 +15,7 @@ class AddressListDelegate: NSObject, UITableViewDelegate {
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = AddressListTableHeaderView()
+        let view = AddressListTableHeaderView(frame: CGRect.zero)
         view.delegate = delegate
         return view
     }
