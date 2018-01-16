@@ -13,9 +13,10 @@ import UIKit
 }
 
 class ErrorView: UIView {
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var errorTextLabel: UILabel!
-    @IBOutlet weak var errorImageView: UIImageView!
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var errorTextLabel: UILabel!
+    @IBOutlet private weak var errorImageView: UIImageView!
+    
     @IBOutlet weak var tryAgainButton: UIButton!
     
     weak var delegate: ErrorViewProtocol?
@@ -26,7 +27,7 @@ class ErrorView: UIView {
         }
     }
     
-    // MARK: - Init
+    // MARK: - View lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,6 +40,8 @@ class ErrorView: UIView {
         
         commonInit()
     }
+    
+    // MARK: - Setup
     
     private func commonInit() {
         Bundle.main.loadNibNamed(String(describing: ErrorView.self), owner: self)

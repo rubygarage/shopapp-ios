@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 import SwipeCellKit
 
 protocol CartTableDataSourceProtocol {
@@ -14,11 +15,13 @@ protocol CartTableDataSourceProtocol {
     func item(for index: Int) -> CartProduct?
 }
 
-class CartTableDataSource: NSObject, UITableViewDataSource {
+class CartTableDataSource: NSObject {
     weak var delegate: (CartTableDataSourceProtocol & CartTableCellProtocol & SwipeTableViewCellDelegate)?
-    
-    // MARK: - UITableViewDataSource
-    
+}
+
+// MARK: - UITableViewDataSource
+
+extension CartTableDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return delegate?.itemsCount() ?? 0
     }

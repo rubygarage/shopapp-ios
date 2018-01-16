@@ -11,12 +11,16 @@ import UIKit
 class BaseCollectionViewController<T: BasePaginationViewModel>: BasePaginationViewController<T> {
     @IBOutlet weak var collectionView: UICollectionView!
     
+    // MARK: - View controller lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupPullToRefresh()
         setupInfinityScroll()
     }
+    
+    // MARK: - Setup
     
     private func setupPullToRefresh() {
         refreshControl = UIRefreshControl()
@@ -33,7 +37,7 @@ class BaseCollectionViewController<T: BasePaginationViewModel>: BasePaginationVi
         }
     }
     
-    public func stopLoadAnimating() {
+    func stopLoadAnimating() {
         refreshControl?.endRefreshing()
         collectionView.finishInfiniteScroll()
     }

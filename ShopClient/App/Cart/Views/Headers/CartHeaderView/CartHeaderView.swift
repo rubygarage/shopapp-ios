@@ -9,9 +9,11 @@
 import UIKit
 
 class CartHeaderView: UIView {
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var totalItemsCountLabel: UILabel!
-    @IBOutlet weak var totalPriceLabel: UILabel!
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var totalItemsCountLabel: UILabel!
+    @IBOutlet private weak var totalPriceLabel: UILabel!
+    
+    // MARK: - View lifecycle
     
     init(productsCounts: Int, totalPrice: Float, currency: String) {
         super.init(frame: CGRect.zero)
@@ -25,6 +27,8 @@ class CartHeaderView: UIView {
         
         commonInit()
     }
+    
+    // MARK: - Setup
     
     private func commonInit() {
         Bundle.main.loadNibNamed(String(describing: CartHeaderView.self), owner: self)

@@ -12,11 +12,16 @@ private let kBackgroundColor = UIColor(displayP3Red: 0.9765, green: 0.9765, blue
 private let kShadowImageColor = UIColor.black.withAlphaComponent(0.12)
 
 class TabBarController: UITabBarController {
+    
+    // MARK: - View controller lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
     }
+    
+    // MARK: - Setup
     
     private func setup() {
         UITabBar.appearance().backgroundImage = UIImage.add_image(with: kBackgroundColor)

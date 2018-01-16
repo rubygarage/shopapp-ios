@@ -847,8 +847,8 @@
 			isa = PBXGroup;
 			children = (
 				61BA57081FE0409200BF1586 /* CartEmptyDataView */,
-				61719B991FC2FC9F007B6ED0 /* CartHeaderView */,
-				61E76E201FB4719400AE5FB4 /* CartTableViewCell */,
+				0BEAB64F200E5E970084AA53 /* Cells */,
+				0BEAB650200E5EA30084AA53 /* Headers */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1345,6 +1345,30 @@
 				61CEAA6D1F5ED16E0016FBD7 /* UIViewController+Routes.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0BEAB64F200E5E970084AA53 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0BEAB651200E5EB00084AA53 /* TableView */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		0BEAB650200E5EA30084AA53 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				61719B991FC2FC9F007B6ED0 /* CartHeaderView */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		0BEAB651200E5EB00084AA53 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				61E76E201FB4719400AE5FB4 /* CartTableViewCell */,
+			);
+			path = TableView;
 			sourceTree = "<group>";
 		};
 		0BEF52C71FF554BC00E50080 /* CollectionView */ = {

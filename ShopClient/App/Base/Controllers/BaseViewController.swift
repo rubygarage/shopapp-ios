@@ -7,8 +7,9 @@
 //
 
 import UIKit
-import RxSwift
+
 import RxCocoa
+import RxSwift
 import Toaster
 
 enum ViewState {
@@ -27,9 +28,12 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
     var viewModel: T!
     var loadingView = LoadingView()
     var errorView = ErrorView()
+    
     var emptyDataView: UIView {
         return UIView()
     }
+    
+    // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +41,8 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
         setupViews()
         subscribeViewState()
     }
+    
+    // MARK: - Setup
     
     private func setupViews() {
         addBackButtonIfNeeded()

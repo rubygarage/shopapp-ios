@@ -9,11 +9,16 @@
 import UIKit
 
 class NavigationController: UINavigationController {
+    
+    // MARK: - View controller lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setup()
     }
+    
+    // MARK: - Setup
     
     private func setup() {
         navigationBar.tintColor = UIColor.black

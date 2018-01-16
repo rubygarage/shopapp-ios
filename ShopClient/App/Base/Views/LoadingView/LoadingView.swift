@@ -9,7 +9,9 @@
 import UIKit
 
 class LoadingView: UIView {
-    @IBOutlet var contentView: UIView!
+    @IBOutlet private var contentView: UIView!
+    
+    // MARK: - View lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,6 +24,8 @@ class LoadingView: UIView {
         
         commonInit()
     }
+    
+    // MARK: - Setup
     
     private func commonInit() {
         Bundle.main.loadNibNamed(String(describing: LoadingView.self), owner: self)

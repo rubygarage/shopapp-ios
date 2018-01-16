@@ -13,12 +13,13 @@ protocol GridCollectionDataSourceProtocol: class {
     func item(for indexPath: IndexPath) -> Product
 }
 
-class GridCollectionDataSource: NSObject, UICollectionViewDataSource {
-    
+class GridCollectionDataSource: NSObject {
     weak var delegate: GridCollectionDataSourceProtocol?
-    
-    // MARK: - UICollectionViewDataSource
-    
+}
+
+// MARK: - UICollectionViewDataSource
+
+extension GridCollectionDataSource: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return delegate?.numberOfItems() ?? 0
     }

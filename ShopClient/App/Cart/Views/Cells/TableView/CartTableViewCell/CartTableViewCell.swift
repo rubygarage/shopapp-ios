@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 import SDWebImage
 import SwipeCellKit
 
@@ -18,24 +19,28 @@ private let kCartProductQuantityMin = 1
 private let kCartProductQuantityMax = 999
 private let kQuantityUnderlineColorDefault = UIColor(displayP3Red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
 
-class CartTableViewCell: SwipeTableViewCell, UITextFieldDelegate {
-    @IBOutlet weak var variantImageView: UIImageView!
-    @IBOutlet weak var variantTitleLabel: UILabel!
-    @IBOutlet weak var quantityLabel: UILabel!
-    @IBOutlet weak var quantityTextField: UITextField!
-    @IBOutlet weak var quantityUnderlineView: UIView!
-    @IBOutlet weak var totalPriceLabel: UILabel!
-    @IBOutlet weak var pricePerOneItemLabel: UILabel!
+class CartTableViewCell: SwipeTableViewCell {
+    @IBOutlet private weak var variantImageView: UIImageView!
+    @IBOutlet private weak var variantTitleLabel: UILabel!
+    @IBOutlet private weak var quantityLabel: UILabel!
+    @IBOutlet private weak var quantityTextField: UITextField!
+    @IBOutlet private weak var quantityUnderlineView: UIView!
+    @IBOutlet private weak var totalPriceLabel: UILabel!
+    @IBOutlet private weak var pricePerOneItemLabel: UILabel!
+    
+    var cartProduct: CartProduct?
     
     weak var cellDelegate: CartTableCellProtocol?
     
-    var cartProduct: CartProduct?
+    // MARK: - View lifecycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         setup()
     }
+    
+    // MARK: - Setup
     
     private func setup() {
         selectionStyle = .none
@@ -81,7 +86,7 @@ class CartTableViewCell: SwipeTableViewCell, UITextFieldDelegate {
         totalPriceLabel.text = formatter.string(from: totalPrice)
     }
     
-    func populatePricePerOne(with item: CartProduct?) {
+    private func populatePricePerOne(with item: CartProduct?) {
         let quantity = item?.quantity ?? 1
         if quantity > 1 {
             let currency = item?.currency ?? ""
@@ -96,7 +101,15 @@ class CartTableViewCell: SwipeTableViewCell, UITextFieldDelegate {
         }
     }
     
-    // MARK: - actions
+    private func check(quantity: Int) -> Int {
+        if quantity < kCartProductQuantityMin {
+            return kCartProductQuantityMin
+        }
+        return quantity
+    }
+    
+    // MARK: - Actions
+    
     @IBAction func quantityEditingDidBegin(_ sender: UITextField) {
         quantityUnderlineView.backgroundColor = UIColor.black
     }
@@ -110,16 +123,11 @@ class CartTableViewCell: SwipeTableViewCell, UITextFieldDelegate {
             cellDelegate?.didUpdate(cartProduct: cartProduct, quantity: checkedQuantity)
         }
     }
-    
-    // MARK: - private
-    private func check(quantity: Int) -> Int {
-        if quantity < kCartProductQuantityMin {
-            return kCartProductQuantityMin
-        }
-        return quantity
-    }
-    
-    // MARK: - UITextFieldDelegate
+}
+
+// MARK: - UITextFieldDelegate
+
+extension CartTableViewCell: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let formattedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
         let formattedQuantity = (formattedText as NSString?)?.integerValue ?? 0
