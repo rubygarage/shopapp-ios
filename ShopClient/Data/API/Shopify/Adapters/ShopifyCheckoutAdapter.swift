@@ -20,6 +20,8 @@ extension Checkout {
         currencyCode = item?.currencyCode.rawValue
         subtotalPrice = item?.subtotalPrice
         totalPrice = item?.totalPrice
+        totalTax = item?.totalTax
+        shippingLine = ShippingRate(with: item?.shippingLine)
         shippingAddress = Address(with: item?.shippingAddress)
         if let nodes = item?.lineItems.edges.map({ $0.node }) {
             var itemsArray = [LineItem]()
