@@ -11,10 +11,14 @@ import RxSwift
 class CartViewModel: BaseViewModel {
     var data = Variable<[CartProduct]>([CartProduct]())
     
+    private let cartProductListUseCase = CartProductListUseCase()
+    private let deleteCartProductUseCase = DeleteCartProductUseCase()
+    private let changeCartProductUseCase = ChangeCartProductUseCase()
+    
     // MARK: - public
     public func loadData() {
         state.onNext(.loading(showHud: true))
-        Repository.shared.getCartProductList { [weak self] (cartProducts, error) in
+        cartProductListUseCase.getCartProductList { [weak self] (cartProducts, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }
@@ -28,7 +32,7 @@ class CartViewModel: BaseViewModel {
     public func removeCardProduct(at index: Int) {
         let cartProduct = data.value[index]
         state.onNext(.loading(showHud: false))
-        Repository.shared.deleteProductFromCart(with: cartProduct.productVariant?.id) { [weak self] (success, error) in
+        deleteCartProductUseCase.deleteProductFromCart(productVariantId: cartProduct.productVariant?.id) { [weak self] (success, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }
@@ -41,7 +45,7 @@ class CartViewModel: BaseViewModel {
     
     public func update(cartProduct: CartProduct, quantity: Int) {
         state.onNext(.loading(showHud: false))
-        Repository.shared.changeCartProductQuantity(with: cartProduct.productVariant?.id, quantity: quantity) { [weak self] (_, error) in
+        changeCartProductUseCase.changeCartProductQuantity(productVariantId: cartProduct.productVariant?.id, quantity: quantity) { [weak self] (_, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             } else {
