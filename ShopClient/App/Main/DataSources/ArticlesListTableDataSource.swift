@@ -14,7 +14,6 @@ protocol ArticlesListTableDataSourceProtocol: class {
 }
 
 class ArticlesListTableDataSource: NSObject, UITableViewDataSource {
-    
     weak var delegate: ArticlesListTableDataSourceProtocol?
     
     // MARK: - UITableViewDataSource

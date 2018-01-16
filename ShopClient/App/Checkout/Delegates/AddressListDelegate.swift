@@ -9,7 +9,6 @@
 import UIKit
 
 class AddressListDelegate: NSObject, UITableViewDelegate {
-    
     weak var delegate: AddressListHeaderViewProtocol?
     
     // MARK: - UITableViewDelegate

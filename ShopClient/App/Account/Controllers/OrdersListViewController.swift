@@ -9,7 +9,6 @@
 import UIKit
 
 class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, OrdersListTableDataSourceProtocol, OrdersListTableDelegateProtocol, CheckoutCartTableViewCellDelegate {
-    
     private var tableDataSource: OrdersListTableDataSource!
     // swiftlint:disable weak_delegate
     private var tableDelegate: OrdersListTableDelegate!
@@ -17,7 +16,8 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, Or
     private var selectedOrder: Order?
     private var selectedProductVariant: ProductVariant!
 
-    // MARK: - view controller lifecycle
+    // MARK: - View controller lifecycle
+    
     override func viewDidLoad() {
         viewModel = OrdersListViewModel()
         super.viewDidLoad()
@@ -36,7 +36,8 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, Or
         }
     }
     
-    // MARK: - setup
+    // MARK: - Setup
+    
     private func setupViews() {
         title = "ControllerTitle.MyOrders".localizable
     }
@@ -78,11 +79,13 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, Or
     }
     
     // MARK: - OrdersListTableDataSourceProtocol
+    
     func orders() -> [Order] {
         return viewModel.items.value
     }
     
     // MARK: - OrdersListTableDelegateProtocol
+    
     func didSelectItem(at index: Int) {
         if index < viewModel.items.value.count {
             selectedOrder = viewModel.items.value[index]
@@ -91,12 +94,14 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, Or
     }
     
     // MARK: - CheckoutCartTableViewCellDelegate
+    
     func didSelectItem(with productVariantId: String, at index: Int) {
         selectedProductVariant = viewModel.productVariant(with: productVariantId, at: index)
         performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
     
     // MARK: - ErrorViewProtocol
+    
     func didTapTryAgain() {
         loadData()
     }

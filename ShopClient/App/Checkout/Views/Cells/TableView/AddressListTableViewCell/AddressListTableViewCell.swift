@@ -15,7 +15,6 @@ protocol AddressListTableViewCellProtocol: class {
 }
 
 class AddressListTableViewCell: UITableViewCell {
-    
     @IBOutlet weak var customerNameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!

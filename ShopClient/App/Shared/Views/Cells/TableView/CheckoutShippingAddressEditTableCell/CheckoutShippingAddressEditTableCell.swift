@@ -13,7 +13,6 @@ protocol CheckoutShippingAddressEditCellProtocol: class {
 }
 
 class CheckoutShippingAddressEditTableCell: UITableViewCell {
-    
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!

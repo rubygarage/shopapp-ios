@@ -18,7 +18,8 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
     private var collectionDelegate: GridCollectionDelegate!
     // swiftlint:enable weak_delegate
     
-    // MARK: - view controller lifecycle
+    // MARK: - View controller lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,7 +32,8 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
         }
     }
     
-    // MARK: - setup
+    // MARK: - Setup
+    
     private func setupCollectionView() {
         let nib = UINib(nibName: String(describing: GridCollectionViewCell.self), bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: String(describing: GridCollectionViewCell.self))
@@ -48,6 +50,7 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
     }
     
     // MARK: - GridCollectionDataSourceProtocol
+    
     func numberOfItems() -> Int {
         return viewModel.products.value.count
     }
@@ -57,6 +60,7 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
     }
     
     // MARK: - GridCollectionDelegateProtocol
+    
     func didSelectItem(at index: Int) {
         if index < viewModel.products.value.count {
             selectedProduct = viewModel.products.value[index]

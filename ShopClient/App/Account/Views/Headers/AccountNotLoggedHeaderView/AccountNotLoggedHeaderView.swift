@@ -14,7 +14,6 @@ protocol AccountNotLoggedHeaderProtocol: class {
 }
 
 class AccountNotLoggedHeaderView: UIView, UnderlinedButtonProtocol {
-    
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var signInButton: BlackButton!
     @IBOutlet weak var signInLabel: UILabel!

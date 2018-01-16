@@ -14,7 +14,6 @@ protocol AccountTableDelegateProtocol: class {
 }
 
 class AccountTableDelegate: NSObject, UITableViewDelegate {
-    
     weak var delegate: (AccountTableDelegateProtocol & AccountNotLoggedHeaderProtocol & AccountLoggedHeaderProtocol & AccountFooterViewProtocol)?
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

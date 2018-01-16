@@ -22,7 +22,6 @@ protocol HomeTableDataSourceProtocol {
 }
 
 class HomeTableDataSource: NSObject, UITableViewDataSource {
-    
     weak var delegate: (HomeTableDataSourceProtocol & LastArrivalsCellDelegate & PopularCellDelegate)?
     
     // MARK: - UITableViewDataSource

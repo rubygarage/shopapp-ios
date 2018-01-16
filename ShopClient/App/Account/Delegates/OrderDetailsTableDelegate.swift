@@ -14,7 +14,6 @@ protocol OrdersDetailsTableDelegateProtocol: class {
 }
 
 class OrdersDetailsTableDelegate: NSObject, UITableViewDelegate {
-    
     weak var delegate: OrdersDetailsTableDelegateProtocol?
     
     // MARK: - UITableViewDelegate

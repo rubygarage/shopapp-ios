@@ -14,7 +14,6 @@ protocol CheckoutCartCollectionDataSourceDelegate: class {
 }
 
 class CheckoutCartCollectionDataSource: NSObject, UICollectionViewDataSource {
-    
     weak var delegate: CheckoutCartCollectionDataSourceDelegate?
     
     // MARK: - UICollectionViewDataSource

@@ -15,7 +15,6 @@ enum PaymentTypeSection {
 }
 
 class PaymentTypeDataSource: NSObject, UITableViewDataSource {
-    
     weak var delegate: PaymentTypeTableCellProtocol?
     
     // MARK: - UITableViewDataSource

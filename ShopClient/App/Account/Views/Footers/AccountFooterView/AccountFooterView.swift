@@ -13,7 +13,6 @@ protocol AccountFooterViewProtocol: class {
 }
 
 class AccountFooterView: UIView, UnderlinedButtonProtocol {
-    
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var logoutButton: UnderlinedButton!
     @IBOutlet weak var logoutUnderlineView: UIView!

@@ -88,6 +88,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     }
     
     // MARK: - CheckoutTableDataSourceProtocol
+    
     func cartProducts() -> [CartProduct] {
         return viewModel.cartItems
     }
@@ -105,18 +106,21 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     }
     
     // MARK: - CheckoutShippingAddressAddCellProtocol
+    
     func didTapAddNewAddress() {
         performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
     }
     
     // MARK: - CheckoutShippingAddressEditCellProtocol
+    
     func didTapEdit() {
         if let checkoutId = viewModel.checkout.value?.id, let address = viewModel.checkout.value?.shippingAddress {
             processUpdateAddress(with: checkoutId, address: address)
         }
     }
     
-    // MARK: - private
+    // MARK: - Private
+    
     private func processUpdateAddress(with checkoutId: String, address: Address) {
         if Repository.shared.isLoggedIn() {
             openAddressList(with: checkoutId, address: address)
@@ -145,6 +149,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     }
     
     // MARK: - SeeAllHeaderViewProtocol
+    
     func didTapSeeAll(type: SeeAllViewType) {
         if type == .myCart {
             // TODO:
@@ -152,23 +157,27 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     }
     
     // MARK: - CheckoutPaymentAddCellProtocol
+    
     func didTapAddPayment() {
         performSegue(withIdentifier: SegueIdentifiers.toPaymentType, sender: self)
     }
     
     // MARK: - CheckoutTableDelegateProtocol
+    
     func checkout() -> Checkout? {
         return viewModel.checkout.value
     }
     
     // MARK: - CheckoutCartTableViewCellDelegate
+    
     func didSelectItem(with productVariantId: String, at index: Int) {
         selectedProductVariant = viewModel.productVariant(with: productVariantId)
         // TODO: Open product details screen with selectedProductVariant
         // performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
     
-    // MARK: - segues
+    // MARK: - Segues
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let addressListViewController = segue.destination as? AddressListViewController {
             addressListViewController.addressListType = .shipping

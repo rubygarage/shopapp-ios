@@ -13,7 +13,6 @@ protocol ArticlesListTableDelegateProtocol: class {
 }
 
 class ArticlesListTableDelegate: NSObject, UITableViewDelegate {
-    
     weak var delegate: ArticlesListTableDelegateProtocol?
     
     // MARK: - UITableViewDelegate

@@ -16,7 +16,6 @@ protocol AddressListDataSourceProtocol {
 }
 
 class AddressListDataSource: NSObject, UITableViewDataSource {
-    
     weak var delegate: (AddressListDataSourceProtocol & AddressListTableViewCellProtocol)?
     
     // MARK: - UITableViewDataSource

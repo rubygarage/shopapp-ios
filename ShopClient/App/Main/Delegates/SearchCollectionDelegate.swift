@@ -13,7 +13,6 @@ protocol SearchCollectionDelegateProtocol: class {
 }
 
 class SearchCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
     weak var delegate: SearchCollectionDelegateProtocol?
     
     // MARK: - UICollectionViewDelegate

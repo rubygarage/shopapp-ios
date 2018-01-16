@@ -18,7 +18,6 @@ protocol ProductOptionsControllerProtocol: class {
 }
 
 class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDataSourceProtocol, ProductOptionsCellDelegate {
-    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionLayout: UICollectionViewFlowLayout!
     
@@ -65,6 +64,7 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
     }
     
     // MARK: - ProductOptionsCollectionDataSourceProtocol
+    
     func optionsCount() -> Int {
         return options.count
     }
@@ -93,6 +93,7 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
     }
     
     // MARK: - ProductOptionsCellDelegate
+    
     func didSelectItem(with values: [String], selectedValue: String) {
         if let name = options.filter({ $0.values! == values }).first?.name {
             controllerDelegate?.didSelectOption(with: name, value: selectedValue)

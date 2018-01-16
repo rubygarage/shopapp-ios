@@ -15,7 +15,6 @@ protocol LastArrivalsTableDataSourceProtocol: class {
 }
 
 class LastArrivalsTableDataSource: NSObject, UICollectionViewDataSource {
-    
     weak var delegate: LastArrivalsTableDataSourceProtocol?
     
     // MARK: - UICollectionViewDataSource

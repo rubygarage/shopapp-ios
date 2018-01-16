@@ -28,7 +28,6 @@ private let kUnderlineMarginRight: CGFloat = 10
 private let kBarItemWidth: CGFloat = 32
 
 class SearchTitleView: UIView, UITextFieldDelegate {
-    
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var underLineView: UIView!

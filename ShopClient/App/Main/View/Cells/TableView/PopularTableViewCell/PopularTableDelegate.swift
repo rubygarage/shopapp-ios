@@ -13,7 +13,6 @@ protocol PopularTableDelegateProtocol: class {
 }
 
 class PopularTableDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
     weak var delegate: PopularTableDelegateProtocol?
     
     // MARK: - UICollectionViewDelegate

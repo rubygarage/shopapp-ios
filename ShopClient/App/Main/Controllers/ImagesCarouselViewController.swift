@@ -63,18 +63,21 @@ class ImagesCarouselViewController: UIViewController, ImagesCarouselCollectionDa
         collectionView.reloadData()
     }
     
-    // MARK: - actions
+    // MARK: - Actions
+    
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
         controllerDelegate?.didTapImage(at: showingIndex)
     }
     
-    // MARK: - pageControl actions
+    // MARK: - PageControl actions
+    
     @IBAction func pageControlValueChanged(_ sender: UIPageControl) {
         showingIndex = sender.currentPage
         updateShowingImage(with: sender.currentPage)
     }
     
     // MARK: - DetailsImagesCollectionDataSourceProtocol
+    
     func numberOfItems() -> Int {
         return images.count
     }
@@ -84,6 +87,7 @@ class ImagesCarouselViewController: UIViewController, ImagesCarouselCollectionDa
     }
     
     // MARK: - DetailsImagesCollectionDelegateProtocol
+    
     func sizeForCell() -> CGSize {
         return self.view.frame.size
     }

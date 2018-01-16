@@ -14,7 +14,6 @@ protocol ImagesCarouselCollectionDataSourceProtocol: class {
 }
 
 class ImagesCarouselCollectionDataSource: NSObject, UICollectionViewDataSource {
-    
     weak var delegate: ImagesCarouselCollectionDataSourceProtocol?
     
     // MARK: - UICollectionViewDataSource

@@ -14,7 +14,6 @@ protocol SearchCollectionDataSourceProtocol: class {
 }
 
 class SearchCollectionDataSource: NSObject, UICollectionViewDataSource {
-    
     weak var delegate: SearchCollectionDataSourceProtocol?
     
     // MARK: - UICollectionViewDataSource

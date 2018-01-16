@@ -115,7 +115,8 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         }
     }
     
-    // MARK: - overriding
+    // MARK: - Overriding
+    
     override func pullToRefreshHandler() {
         viewModel.reloadData()
     }
@@ -130,6 +131,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     }
     
     // MARK: - SearchTitleViewProtocol
+    
     func didTapSearch() {
         viewModel.reloadData()
     }
@@ -148,6 +150,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     }
     
     // MARK: - SearchCollectionDataSourceProtocol
+    
     func categoriesCount() -> Int {
         return viewModel.categoriesCount()
     }
@@ -157,6 +160,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     }
     
     // MARK: - SearchCollectionDelegateProtocol
+    
     func didSelectCategory(at index: Int) {
         if index < viewModel.categories.value.count {
             selectedCategory = viewModel.categories.value[index]
@@ -165,6 +169,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     }
     
     // MARK: - ErrorViewProtocol
+    
     func didTapTryAgain() {
         loadData()
     }

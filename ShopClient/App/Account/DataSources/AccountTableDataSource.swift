@@ -13,7 +13,6 @@ protocol AccountTableDataSourceProtocol: class {
 }
 
 class AccountTableDataSource: NSObject, UITableViewDataSource {
-    
     weak var delegate: AccountTableDataSourceProtocol?
     
     // MARK: - UITableViewDataSource

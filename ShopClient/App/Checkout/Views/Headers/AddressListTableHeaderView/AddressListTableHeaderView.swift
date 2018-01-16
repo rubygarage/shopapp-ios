@@ -13,7 +13,6 @@ protocol AddressListHeaderViewProtocol: class {
 }
 
 class AddressListTableHeaderView: UIView {
-    
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var addNewAddressButton: BlackButton!
     

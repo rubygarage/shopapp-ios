@@ -13,7 +13,6 @@ protocol HomeTableDelegateProtocol: class {
 }
 
 class HomeTableDelegate: NSObject, UITableViewDelegate {
-    
     weak var delegate: (HomeTableDelegateProtocol & SeeAllHeaderViewProtocol)?
     
     // MARK: - UITableViewDelegate

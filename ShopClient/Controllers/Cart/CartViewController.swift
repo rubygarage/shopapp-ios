@@ -10,7 +10,6 @@ import UIKit
 import SwipeCellKit
 
 class CartViewController: BaseViewController<CartViewModel>, CartTableDataSourceProtocol, CartTableDelegateProtocol, CartTableCellProtocol, CartEmptyDataViewProtocol, SwipeTableViewCellDelegate {
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var checkoutButton: BlackButton!
     
@@ -66,12 +65,14 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
         viewModel.loadData()
     }
     
-    // MARK: - actions
+    // MARK: - Actions
+    
     @IBAction func checkoutTapped(_ sender: BlackButton) {
         showCheckoutController()
     }
     
     // MARK: - CartTableDataSourceProtocol
+    
     func itemsCount() -> Int {
         return viewModel.data.value.count
     }
@@ -84,6 +85,7 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     }
     
     // MARK: - CartTableDelegateProtocol
+    
     func totalPrice() -> Float {
         return viewModel.calculateTotalPrice()
     }
@@ -93,11 +95,13 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     }
     
     // MARK: - CartTableCellProtocol
+    
     func didUpdate(cartProduct: CartProduct, quantity: Int) {
         viewModel.update(cartProduct: cartProduct, quantity: quantity)
     }
     
     // MARK: - SwipeTableViewCellDelegate
+    
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
         let title = NSLocalizedString("Button.Remove", comment: String())
@@ -114,12 +118,14 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     }
     
     // MARK: - CartEmptyDataViewProtocol
+    
     func didTapStartShopping() {
         setHomeController()
         dismiss(animated: true)
     }
     
     // MARK: - ErrorViewProtocol
+    
     func didTapTryAgain() {
         loadData()
     }

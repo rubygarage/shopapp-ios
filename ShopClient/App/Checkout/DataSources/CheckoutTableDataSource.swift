@@ -18,7 +18,6 @@ protocol CheckoutTableDataSourceProtocol: class {
 }
 
 class CheckoutTableDataSource: NSObject, UITableViewDataSource {
-    
     weak var delegate: CheckoutCombinedProtocol?
     
     // MARK: - UITableViewDataSource

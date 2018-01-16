@@ -64,6 +64,7 @@ class PopularTableViewCell: UITableViewCell, PopularTableDataSourceProtocol, Pop
     }
     
     // MARK: - PopularTableDataSourceProtocol
+    
     func numberOfProducts() -> Int {
         return products.count
     }
@@ -73,6 +74,7 @@ class PopularTableViewCell: UITableViewCell, PopularTableDataSourceProtocol, Pop
     }
     
     // MARK: - PopularTableDelegateProtocol
+    
     func didSelectItem(at index: Int) {
         cellDelegate?.didSelectPopularProduct(at: index)
     }

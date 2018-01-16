@@ -15,7 +15,6 @@ protocol CartTableDelegateProtocol: class {
 }
 
 class CartTableDelegate: NSObject, UITableViewDelegate {
-    
     weak var delegate: CartTableDelegateProtocol?
     
     // MARK: - UITableViewDelegate

@@ -51,6 +51,7 @@ class ProductOptionsCollectionViewCell: UICollectionViewCell, ProductOptionColle
     }
     
     // MARK: - ProductOptionCollectioDataSourceProtocol
+    
     func numberOfItems() -> Int {
         return values.count
     }
@@ -64,6 +65,7 @@ class ProductOptionsCollectionViewCell: UICollectionViewCell, ProductOptionColle
     }
     
     // MARK: - ProductOptionCollectionDelegateProtocol
+    
     func didSelectItem(at index: Int) {
         cellDelegate?.didSelectItem(with: values, selectedValue: values[index])
     }

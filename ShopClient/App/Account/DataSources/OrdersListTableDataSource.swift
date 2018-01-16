@@ -13,7 +13,6 @@ protocol OrdersListTableDataSourceProtocol: class {
 }
 
 class OrdersListTableDataSource: NSObject, UITableViewDataSource {
-    
     weak var delegate: (OrdersListTableDataSourceProtocol & CheckoutCartTableViewCellDelegate)?
     
     // MARK: - UITableViewDataSource

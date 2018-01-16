@@ -11,7 +11,6 @@ import RxSwift
 import RxCocoa
 
 class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, PopularCellDelegate, SeeAllHeaderViewProtocol {
-    
     @IBOutlet weak var tableView: UITableView!
     
     private var dataSource: HomeTableDataSource!
@@ -89,6 +88,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     // MARK: - HomeTableDataSourceProtocol
+    
     func lastArrivalsObjects() -> [Product] {
         return viewModel.data.value.latestProducts
     }
@@ -109,6 +109,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     // MARK: - HomeTableDelegateProtocol
+    
     func didSelectArticle(at index: Int) {
         if index < viewModel.data.value.articles.count {
             selectedArticle = viewModel.data.value.articles[index]
@@ -117,11 +118,13 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     // MARK: - LastArrivalsCellDelegate
+    
     func didSelectLastArrivalsProduct(at index: Int) {
         openProductDetails(with: viewModel.data.value.latestProducts, index: index)
     }
     
     // MARK: - PopularCellDelegate
+    
     func didSelectPopularProduct(at index: Int) {
         openProductDetails(with: viewModel.data.value.popularProducts, index: index)
     }
@@ -134,6 +137,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     // MARK: - SeeAllHeaderViewProtocol
+    
     func didTapSeeAll(type: SeeAllViewType) {
         switch type {
         case .latestArrivals:
@@ -152,6 +156,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     }
     
     // MARK: - ErrorViewProtocol
+    
     func didTapTryAgain() {
         viewModel.loadData(with: disposeBag)
     }

@@ -13,7 +13,6 @@ protocol CheckoutPaymentAddCellProtocol: class {
 }
 
 class CheckoutPaymentAddTableCell: UITableViewCell {
-    
     @IBOutlet weak var addPaymentButton: BlackButton!
     
     weak var delegate: CheckoutPaymentAddCellProtocol?

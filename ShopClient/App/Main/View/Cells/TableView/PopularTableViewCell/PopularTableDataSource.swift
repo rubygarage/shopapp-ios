@@ -14,7 +14,6 @@ protocol PopularTableDataSourceProtocol: class {
 }
 
 class PopularTableDataSource: NSObject, UICollectionViewDataSource {
-    
     weak var delegate: PopularTableDataSourceProtocol?
     
     // MARK: - UICollectionViewDataSource

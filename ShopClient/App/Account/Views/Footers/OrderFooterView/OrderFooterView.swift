@@ -13,7 +13,6 @@ protocol OrderFooterViewProtocol: class {
 }
 
 class OrderFooterView: UIView {
-    
     @IBOutlet var contentView: UIView!
     @IBOutlet var itemsLabel: UILabel!
     @IBOutlet var countLabel: UILabel!

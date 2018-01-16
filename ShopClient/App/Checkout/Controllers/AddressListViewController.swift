@@ -14,15 +14,12 @@ enum AddressListType {
 }
 
 class AddressListViewController: BaseViewController<AddressListViewModel>, AddressListDataSourceProtocol, AddressListTableViewCellProtocol, AddressListHeaderViewProtocol {
-    
     @IBOutlet weak var tableView: UITableView!
     
     private var tableDataSource: AddressListDataSource!
-    
     // swiftlint:disable weak_delegate
     private var tableDelegate: AddressListDelegate!
     // swiftlint:enable weak_delegate
-    
     private var destinationAddress: Address?
     private var destinationAddressFormCompletion: AddressFormCompletion!
     
@@ -123,7 +120,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
         performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
     }
     
-    // MARK: - segues
+    // MARK: - Segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let addressFormViewController = segue.destination as? AddressFormViewController {

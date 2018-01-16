@@ -81,11 +81,13 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     }
     
     // MARK: - AccountTableDataSourceProtocol
+    
     func policies() -> [Policy] {
         return viewModel.policies.value
     }
     
     // MARK: - AccountTableDelegateProtocol
+    
     func didSelectItem(at index: Int) {
         if index < viewModel.policies.value.count {
             selectedPolicy = viewModel.policies.value[index]
@@ -98,6 +100,7 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     }
     
     // MARK: - AccountNotLoggedHeaderProtocol
+    
     func didTapSignIn() {
         performSegue(withIdentifier: SegueIdentifiers.toSignIn, sender: self)
     }
@@ -107,16 +110,19 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     }
     
     // MARK: - AccountLoggedHeaderProtocol
+    
     func didTapMyOrders() {
         performSegue(withIdentifier: SegueIdentifiers.toOrdersList, sender: self)
     }
     
     // MARK: - AccountFooterViewProtocol
+    
     func didTapLogout() {
         viewModel.logout()
     }
     
     // MARK: - AuthenticationProtocol
+    
     func didAuthorize() {
         loadData()
     }

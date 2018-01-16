@@ -16,7 +16,6 @@ protocol ProductOptionCollectionDelegateProtocol: class {
 }
 
 class ProductOptionCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
     weak var delegate: ProductOptionCollectionDelegateProtocol?
     
     // MARK: - UICollectionViewDelegate

@@ -21,7 +21,6 @@ protocol OrdersDetailsTableDataSourceProtocol: class {
 }
 
 class OrdersDetailsTableDataSource: NSObject, UITableViewDataSource {
-    
     weak var delegate: OrdersDetailsTableDataSourceProtocol?
     
     // MARK: - UITableViewDataSource

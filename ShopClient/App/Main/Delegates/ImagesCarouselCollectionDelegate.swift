@@ -14,7 +14,6 @@ protocol ImagesCarouselCollectionDelegateProtocol: class {
 }
 
 class ImagesCarouselCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
     weak var delegate: ImagesCarouselCollectionDelegateProtocol?
     
     // MARK: - UICollectionViewDelegateFlowLayout

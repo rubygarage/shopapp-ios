@@ -13,7 +13,6 @@ protocol CheckoutCartCollectionDelegateProtocol: class {
 }
 
 class CheckoutCartCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
     weak var delegate: CheckoutCartCollectionDelegateProtocol?
     
     // MARK: - UICollectionViewDelegateFlowLayout

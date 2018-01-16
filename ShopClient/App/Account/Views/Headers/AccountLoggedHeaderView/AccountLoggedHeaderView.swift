@@ -30,7 +30,6 @@ struct CustomerImageDataSource: AvatarImageViewDataSource {
 }
 
 class AccountLoggedHeaderView: UIView {
-    
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var myOrdersButton: UIButton!
     @IBOutlet weak var welcomeLabel: UILabel!

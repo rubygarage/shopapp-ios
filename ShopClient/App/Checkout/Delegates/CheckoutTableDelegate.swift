@@ -13,7 +13,6 @@ protocol CheckoutTableDelegateProtocol: class {
 }
 
 class CheckoutTableDelegate: NSObject, UITableViewDelegate {
-    
     weak var delegate: (SeeAllHeaderViewProtocol & CheckoutTableDelegateProtocol)?
     
     // MARK: - UITableViewDelegate

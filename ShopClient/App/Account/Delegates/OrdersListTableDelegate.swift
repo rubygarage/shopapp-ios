@@ -14,7 +14,6 @@ protocol OrdersListTableDelegateProtocol: class {
 }
 
 class OrdersListTableDelegate: NSObject, UITableViewDelegate, OrderHeaderViewProtocol, OrderFooterViewProtocol {
-    
     weak var delegate: OrdersListTableDelegateProtocol?
     
     // MARK: - UITableViewDelegate

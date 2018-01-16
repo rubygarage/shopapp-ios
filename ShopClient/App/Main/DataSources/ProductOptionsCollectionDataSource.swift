@@ -16,7 +16,6 @@ protocol ProductOptionsCollectionDataSourceProtocol: class {
 }
 
 class ProductOptionsCollectionDataSource: NSObject, UICollectionViewDataSource {
-    
     weak var delegate: (ProductOptionsCollectionDataSourceProtocol & ProductOptionsCellDelegate)?
     
     // MARK: - UICollectionViewDataSource

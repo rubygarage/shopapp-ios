@@ -9,14 +9,13 @@
 import UIKit
 
 class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>, ArticlesListTableDataSourceProtocol, ArticlesListTableDelegateProtocol {
-    
     private var tableDataSource: ArticlesListTableDataSource!
     // swiftlint:disable weak_delegate
     private var tableDelegate: ArticlesListTableDelegate!
     // swiftlint:enable weak_delegate
     private var selectedArticle: Article?
     
-    // MARK: - view controller lifecycle
+    // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         viewModel = ArticlesListViewModel()
