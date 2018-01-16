@@ -65,7 +65,7 @@
 
 "Label.PriceFrom" = "From %@";
 "Label.Quantity" = "QTY:";
-"Label.PriceEach" = "%@ %@ each";
+"Label.PriceEach" = "%@ each";
 "Label.PriceOfProducts" = "Price of products: %.2f %@";
 "Label.PriceOfDelivery" = "Price of delivery: %.2f %@";
 "Label.TotalTax" = "Total tax: %.2f %@";
@@ -108,7 +108,6 @@
 "Label.Order.Total" = "Total";
 "Label.Order.Quantity" = "QTY:";
 "Label.Order.Option" = "%@: %@";
-"Label.Order.Each" = "%@ each";
 "Label.Payment.CreditCard" = "Credit Card";
 "Label.ExpirationDate" = "Expiration date";
 "Label.CreditCard.MaskedNumber" = "**%@";

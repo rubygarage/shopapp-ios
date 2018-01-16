@@ -14,6 +14,15 @@ extension ProductVariantEntity {
         price = item?.price
         title = item?.title
         available = item?.available ?? false
+        productId = item?.productId
+        
+        if let selectedOptions = item?.selectedOptions {
+            selectedOptions.forEach {
+                let variantOptionEntity: VariantOptionEntity = transaction.create(Into<VariantOptionEntity>())
+                variantOptionEntity.update(with: $0)
+                addToSelectedOptions(variantOptionEntity)
+            }
+        }
         
         if let imageItem = item?.image {
             let predicate = NSPredicate(format: "id = %@", imageItem.id)

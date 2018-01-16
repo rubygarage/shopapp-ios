@@ -87,9 +87,14 @@ class CheckoutViewModel: BaseViewModel {
     // MARK: - private
     private var cartItemsSingle: Single<[CartProduct]> {
         return Single.create(subscribe: { [weak self] (event) in
-            self?.cartProductListUseCase.getCartProductList({ [weak self] (result) in
-                self?.cartItems = result
-                event(.success(result))
+            self?.cartProductListUseCase.getCartProductList({ [weak self] (result, error) in
+                if let error = error {
+                    event(.error(error))
+                }
+                if let result = result {
+                    self?.cartItems = result
+                    event(.success(result))
+                }
             })
             return Disposables.create()
         })
