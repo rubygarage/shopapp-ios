@@ -31,13 +31,7 @@ extension UIViewController {
     }
     
     func showCartController() {
-        let cartController = UIStoryboard.cart().instantiateViewController(withIdentifier: ControllerIdentifier.cart)
-        showNavigationController(with: cartController)
-    }
-    
-    // MARK: - private
-    private func showNavigationController(with rootController: UIViewController) {
-        let navigationController = NavigationController(rootViewController: rootController)
-        present(navigationController, animated: true)
+        let cartNavigationController = UIStoryboard.cart().instantiateInitialViewController()!
+        present(cartNavigationController, animated: true)
     }
 }

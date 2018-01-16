@@ -34,6 +34,12 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
         loadData()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
+            productDetailsViewController.productVariant = selectedProductVariant
+        }
+    }
+    
     private func setupViews() {
         title = "ControllerTitle.Cart".localizable
         checkoutButton.setTitle("Button.Checkout".localizable.uppercased(), for: .normal)
@@ -92,6 +98,11 @@ class CartViewController: BaseViewController<CartViewModel>, CartTableDataSource
     
     func currency() -> String {
         return viewModel.data.value.first?.currency ?? String()
+    }
+    
+    func didSelectItem(at index: Int) {
+        selectedProductVariant = viewModel.productVariant(at: index)
+        performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
     
     // MARK: - CartTableCellProtocol

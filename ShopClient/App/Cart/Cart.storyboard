@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1am-BH-FlW">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="lLs-T9-IC2" customClass="TPKeyboardAvoidingTableView">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="lLs-T9-IC2" customClass="TPKeyboardAvoidingTableView">
                                 <rect key="frame" x="0.0" y="64" width="375" height="553"/>
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
@@ -54,6 +54,7 @@
                         <outlet property="checkoutButton" destination="zX9-nM-Tb7" id="ZCy-1U-cye"/>
                         <outlet property="tableView" destination="lLs-T9-IC2" id="44f-tA-enS"/>
                         <segue destination="aOF-FA-kHD" kind="presentation" identifier="toCheckout" id="gfI-Fj-MXd"/>
+                        <segue destination="lX5-Bo-Biv" kind="show" identifier="toProductDetails" id="5rJ-oM-F6L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t74-vG-ojN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -66,7 +67,7 @@
                 <viewControllerPlaceholder storyboardName="Checkout" referencedIdentifier="CheckoutNavigationController" id="aOF-FA-kHD" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ne9-04-TQN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-147" y="1295"/>
+            <point key="canvasLocation" x="325" y="1309"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Faz-2V-dMB">
@@ -85,6 +86,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7rU-YP-wfQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-146" y="99"/>
+        </scene>
+        <!--ProductsDetailControllerIdentifier-->
+        <scene sceneID="O2J-xf-sfF">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="ProductsDetailControllerIdentifier" id="lX5-Bo-Biv" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yyp-wY-4QQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-596" y="1309"/>
         </scene>
     </scenes>
 </document>

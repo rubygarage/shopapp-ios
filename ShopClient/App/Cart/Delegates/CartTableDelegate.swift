@@ -12,6 +12,7 @@ protocol CartTableDelegateProtocol: class {
     func itemsCount() -> Int
     func totalPrice() -> Float
     func currency() -> String
+    func didSelectItem(at index: Int)
 }
 
 class CartTableDelegate: NSObject, UITableViewDelegate {
@@ -25,5 +26,9 @@ class CartTableDelegate: NSObject, UITableViewDelegate {
         let currency = delegate?.currency() ?? ""
         
         return CartHeaderView(productsCounts: productsCount, totalPrice: totalPrice, currency: currency)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.didSelectItem(at: indexPath.row)
     }
 }

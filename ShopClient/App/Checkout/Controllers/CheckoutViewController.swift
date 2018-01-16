@@ -172,14 +172,15 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     
     func didSelectItem(with productVariantId: String, at index: Int) {
         selectedProductVariant = viewModel.productVariant(with: productVariantId)
-        // TODO: Open product details screen with selectedProductVariant
-        // performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
+        performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
     
     // MARK: - Segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let addressListViewController = segue.destination as? AddressListViewController {
+        if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
+            productDetailsViewController.productVariant = selectedProductVariant
+        } else if let addressListViewController = segue.destination as? AddressListViewController {
             addressListViewController.addressListType = .shipping
             addressListViewController.selectedAddress = destinationAddress
             addressListViewController.completion = { [weak self] (address) in

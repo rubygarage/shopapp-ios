@@ -63,11 +63,20 @@
                         <segue destination="Yjd-px-Jvs" kind="show" identifier="toAddressList" id="dnR-TS-EYt"/>
                         <segue destination="zXe-Cz-Abu" kind="show" identifier="toAddressForm" id="gfd-AL-YqW"/>
                         <segue destination="c3v-9W-mKd" kind="show" identifier="toPaymentType" id="CGV-uG-Hxc"/>
+                        <segue destination="RiA-xA-2z5" kind="show" identifier="toProductDetails" id="zB2-WO-his"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWy-vV-BzK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-50" y="125"/>
+        </scene>
+        <!--ProductsDetailControllerIdentifier-->
+        <scene sceneID="wkd-wm-JoU">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="ProductsDetailControllerIdentifier" id="RiA-xA-2z5" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dt9-7w-B8P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="124"/>
         </scene>
         <!--Address List View Controller-->
         <scene sceneID="TCC-fX-Ngj">

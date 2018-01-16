@@ -20,5 +20,14 @@ extension ProductVariant {
         title = variant?.title
         available = variant?.available ?? false
         image = Image(with: variant?.image)
+        productId = variant?.productId ?? ""
+        selectedOptions = variant?.selectedOptions?.map {
+            let option = VariantOption()
+            if let optionEntity = $0 as? VariantOptionEntity {
+                option.name = optionEntity.name ?? ""
+                option.value = optionEntity.value ?? ""
+            }
+            return option
+        }
     }
 }
