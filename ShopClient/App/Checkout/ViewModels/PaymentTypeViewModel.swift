@@ -16,7 +16,7 @@ class PaymentTypeViewModel: BaseViewModel {
     
     public func setupApplePay() {
         checkoutUseCase.setupApplePay(with: checkout) { (success, error) in
-            print("ddd")
+            // TODO:
         }
     }
 }

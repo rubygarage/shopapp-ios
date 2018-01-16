@@ -17,8 +17,9 @@ private let kMerchantID = "merchant.com.rubygarage.shopclient.test"
 private let kShopifyPaymetTypeApplePay = "apple_pay"
 
 class API: NSObject, APIInterface, PaySessionDelegate {
-    var client: Graph.Client?
+    private var client: Graph.Client?
     private var paySession: PaySession?
+    private var paymentByApplePayCompletion: RepoCallback<Bool>?
     
     override init() {
         super.init()
@@ -349,6 +350,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     }
     
     func setupApplePay(with checkout: Checkout, callback: @escaping RepoCallback<Bool>) {
+        paymentByApplePayCompletion = callback
         getShopCurrency { [weak self] (response, error) in
             if let currencyCode = response?.currencyCode.rawValue, let countryCode = response?.countryCode.rawValue {
                 let payCheckout = checkout.payCheckout
@@ -1283,10 +1285,12 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         let idempotencyKey = UUID().uuidString
         if let email = sessionData().email {
             updateCheckout(with: checkout.id, email: email, completion: { [weak self] (success, error) in
-                self?.completeCheckout(checkout, billingAddress: authorization.billingAddress, applePayToken: authorization.token, idempotencyToken: idempotencyKey, completion: { (payment) in
+                self?.completeCheckout(checkout, billingAddress: authorization.billingAddress, applePayToken: authorization.token, idempotencyToken: idempotencyKey, completion: { (payment, error) in
                     if let success = payment?.ready, success == true {
+                        self?.paymentByApplePayCompletion?(true, nil)
                         completeTransaction(.success)
                     } else {
+                        self?.paymentByApplePayCompletion?(false, error)
                         completeTransaction(.failure)
                     }
                 })
@@ -1336,16 +1340,19 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         task?.resume()
     }
     
-    func completeCheckout(_ checkout: PayCheckout, billingAddress: PayAddress, applePayToken token: String, idempotencyToken: String, completion: @escaping (_ payment: Storefront.Payment?) -> Void) {
+    func completeCheckout(_ checkout: PayCheckout, billingAddress: PayAddress, applePayToken token: String, idempotencyToken: String, completion: @escaping (_ payment: Storefront.Payment?, _ error: RepoError?) -> Void) {
         let mutation = mutationForCompleteCheckoutUsingApplePay(with: checkout, billingAddress: billingAddress, token: token, idempotencyToken: idempotencyToken)
         let task = client?.mutateGraphWith(mutation, completionHandler: { [weak self] (response, error) in
             if let payment = response?.checkoutCompleteWithTokenizedPayment?.payment {
                 print("Payment created, fetching status...")
                 self?.fetchCompletedPayment(with: payment.id, completion: { (payment) in
-                    completion(payment)
+                    completion(payment, nil)
                 })
+            } else if let responseError = response?.checkoutCompleteWithTokenizedPayment?.userErrors.first {
+                let error = self?.process(error: responseError)
+                completion(nil, error)
             } else {
-                completion(nil)
+                completion(nil, RepoError())
             }
         })
         task?.resume()
