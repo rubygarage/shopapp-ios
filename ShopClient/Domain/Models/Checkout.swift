@@ -13,7 +13,6 @@ class Checkout: NSObject {
     var webUrl: String?
     var subtotalPrice: Decimal?
     var totalPrice: Decimal?
-    var totalTax: Decimal?
     var shippingLine: ShippingRate?
     var shippingAddress: Address?
     var currencyCode: String?

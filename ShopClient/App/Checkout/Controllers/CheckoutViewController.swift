@@ -163,6 +163,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     }
     
     // MARK: - CheckoutPaymentEditTableCellProtocol
+    
     func didTapEditPaymentType() {
         performSegue(withIdentifier: SegueIdentifiers.toPaymentType, sender: self)
     }
@@ -204,9 +205,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
                 self?.tableView.reloadData()
                 self?.updatePlaceOrderButtonUI()
                 self?.returnFlowToSelf()
-            }
-            paymentTypeViewController.applePayCompletion = {
-                print("apple pay")
             }
         }
     }

@@ -13,12 +13,14 @@ protocol PaymentTypeTableCellProtocol: class {
 }
 
 class PaymentTypeTableViewCell: UITableViewCell {
-    @IBOutlet weak var paymentTypeLabel: UILabel!
-    @IBOutlet weak var paymentTypeImage: UIImageView!
-    @IBOutlet weak var paymentSelectButton: UIButton!
+    @IBOutlet private weak var paymentTypeLabel: UILabel!
+    @IBOutlet private weak var paymentTypeImage: UIImageView!
+    @IBOutlet private weak var paymentSelectButton: UIButton!
+    
+    var typeSelected = false
     
     weak var delegate: PaymentTypeTableCellProtocol?
-    var typeSelected = false
+    
     var type: PaymentTypeSection = .creditCard {
         didSet {
             populateViews()
@@ -48,7 +50,8 @@ class PaymentTypeTableViewCell: UITableViewCell {
         paymentSelectButton.isSelected = typeSelected
     }
     
-    // MARK: - actions
+    // MARK: - Actions
+    
     @IBAction func selectPaymentTapped(_ sender: UIButton) {
         paymentSelectButton.isSelected = true
         delegate?.didPayment(with: type)

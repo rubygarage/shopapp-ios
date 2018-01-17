@@ -37,14 +37,16 @@ class CheckoutPaymentEditTableCell: UITableViewCell {
         billingAddressLabel.text = billingAddress.fullAddress
     }
     
-    // MARK: - private
+    // MARK: - Private
+    
     private func setupViews() {
         creditCardLabel?.text = "Label.Payment.CreditCard".localizable
         billingAddressTitleLabel?.text = "Label.BillingAddress".localizable
         editButton?.setTitle("Button.Edit".localizable.uppercased(), for: .normal)
     }
     
-    // MARK: - actions
+    // MARK: - Actions
+    
     @IBAction func editTapped(_ sender: UIButton) {
         delegate?.didTapEditPaymentType()
     }

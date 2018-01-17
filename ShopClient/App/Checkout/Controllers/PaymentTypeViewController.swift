@@ -14,7 +14,6 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, Payme
     private var tableDataSource: PaymentTypeDataSource!
     private var destinationTitle: String!
     var creditCardCompletion: CreditCardPaymentCompletion?
-    var applePayCompletion: ApplePayPaymentCompletion?
     var checkout: Checkout!
     
     override func viewDidLoad() {
@@ -50,6 +49,7 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, Payme
     }
     
     // MARK: - PaymentTypeTableCellProtocol
+    
     func didPayment(with type: PaymentTypeSection) {
         viewModel.selectedType = type
         tableView.reloadData()
@@ -62,11 +62,13 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, Payme
     }
     
     // MARK: - PaymentTypeDataSourceProtocol
+    
     func isSelected(type: PaymentTypeSection) -> Bool {
         return type == viewModel.selectedType
     }
     
-    // MARK: - segues
+    // MARK: - Segues
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let addressListViewController = segue.destination as? AddressListViewController {
             addressListViewController.title = "ControllerTitle.BillingAddress".localizable

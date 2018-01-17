@@ -9,7 +9,6 @@
 import RxSwift
 
 typealias CreditCardPaymentCompletion = (_ billingAddress: Address, _ card: CreditCard) -> Void
-typealias ApplePayPaymentCompletion = () -> Void
 
 class CreditCardViewModel: BaseViewModel {
     var holderNameText = Variable<String>("")

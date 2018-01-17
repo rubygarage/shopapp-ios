@@ -1089,7 +1089,6 @@ class API: NSObject, APIInterface, PaySessionDelegate {
             query.currencyCode()
             query.subtotalPrice()
             query.totalPrice()
-            query.totalTax()
             query.shippingLine(self.shippingRateQuery())
             query.shippingAddress(self.mailingAddressQuery())
             query.lineItems(first: kShopifyItemsMaxCount, self.checkoutLineItemConnectionQuery())
@@ -1491,7 +1490,7 @@ internal extension Checkout {
             shippingRate: shippingLine?.payShippingRate,
             subtotalPrice: subtotalPrice!,
             needsShipping: true,
-            totalTax: totalTax!,
+            totalTax: Decimal(0),
             paymentDue: totalPrice!
         )
     }
