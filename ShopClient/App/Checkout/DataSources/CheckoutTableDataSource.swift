@@ -91,7 +91,8 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     
     private func paymentEditCell(with tableView: UITableView, indexPath: IndexPath, billingAddress: Address, creditCard: CreditCard) -> CheckoutPaymentEditTableCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutPaymentEditTableCell.self), for: indexPath) as! CheckoutPaymentEditTableCell
-        cell.configure(with: billingAddress, creditCard: creditCard, delegate: delegate)
+        cell.delegate = delegate
+        cell.configure(with: billingAddress, creditCard: creditCard)
         return cell
     }
 }

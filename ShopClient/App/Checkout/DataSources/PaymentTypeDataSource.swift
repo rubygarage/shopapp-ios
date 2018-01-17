@@ -16,12 +16,12 @@ enum PaymentTypeSection: Int {
     static let allValues = PKPaymentAuthorizationController.canMakePayments() ? [creditCard, applePay] : [creditCard]
 }
 
-protocol PaymentTypeDataSourceProtocol {
+protocol PaymentTypeDataSourceProtocol: class {
     func isSelected(type: PaymentTypeSection) -> Bool
 }
 
 class PaymentTypeDataSource: NSObject, UITableViewDataSource {
-    weak var delegate: PaymentTypeTableCellProtocol?
+    weak var delegate: (PaymentTypeDataSourceProtocol & PaymentTypeTableCellProtocol)?
     
     // MARK: - UITableViewDataSource
     

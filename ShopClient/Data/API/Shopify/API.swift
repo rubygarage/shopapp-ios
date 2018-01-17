@@ -351,7 +351,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     
     func setupApplePay(with checkout: Checkout, callback: @escaping RepoCallback<Bool>) {
         paymentByApplePayCompletion = callback
-        getShopCurrency { [weak self] (response, error) in
+        getShopCurrency { [weak self] (response, _) in
             if let currencyCode = response?.currencyCode.rawValue, let countryCode = response?.countryCode.rawValue {
                 let payCheckout = checkout.payCheckout
                 let payCurrency = PayCurrency(currencyCode: currencyCode, countryCode: countryCode)
@@ -1272,7 +1272,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         selectedRate.handle = shippingRate.handle
         selectedRate.price = shippingRate.price.description
         selectedRate.title = shippingRate.title
-        updateCheckout(with: selectedRate, checkoutId: checkout.id) { (response, error) in
+        updateCheckout(with: selectedRate, checkoutId: checkout.id) { (response, _) in
             if let payCheckout = response?.payCheckout {
                 provide(payCheckout)
             } else {
@@ -1313,7 +1313,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     }
     
     private func fetchShippingRatesForCheckout(with id: String, completion: @escaping (_ rates: [Storefront.ShippingRate], _ error: Graph.QueryError?) -> Void) {
-        let retry = Graph.RetryHandler<Storefront.QueryRoot>(endurance: .finite(30)) { response, error -> Bool in
+        let retry = Graph.RetryHandler<Storefront.QueryRoot>(endurance: .finite(30)) { (response, _) -> Bool in
             if let response = response {
                 return (response.node as! Storefront.Checkout).availableShippingRates?.ready ?? false == false
             } else {
@@ -1359,7 +1359,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     }
     
     func fetchCompletedPayment(with paymentId: GraphQL.ID, completion: @escaping (Storefront.Payment?) -> Void) {
-        let retry = Graph.RetryHandler<Storefront.QueryRoot>(endurance: .finite(30)) { response, error -> Bool in
+        let retry = Graph.RetryHandler<Storefront.QueryRoot>(endurance: .finite(30)) { response, _ -> Bool in
             if let payment = response?.node as? Storefront.Payment {
                 return !payment.ready
             } else {
@@ -1368,7 +1368,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         }
         
         let query = paymentNodeQuery(with: paymentId)
-        let task  = client?.queryGraphWith(query, retryHandler: retry) { query, error in
+        let task  = client?.queryGraphWith(query, retryHandler: retry) { (query, _) in
             if let payment = query?.node as? Storefront.Payment {
                 completion(payment)
             } else {
@@ -1395,22 +1395,22 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         let checkoutID = GraphQL.ID(rawValue: checkout.id)
         
         let mailingAddress = Storefront.MailingAddressInput.create(
-            address1:  billingAddress.addressLine1.orNull,
-            address2:  billingAddress.addressLine2.orNull,
-            city:      billingAddress.city.orNull,
-            country:   billingAddress.country.orNull,
+            address1: billingAddress.addressLine1.orNull,
+            address2: billingAddress.addressLine2.orNull,
+            city: billingAddress.city.orNull,
+            country: billingAddress.country.orNull,
             firstName: billingAddress.firstName.orNull,
-            lastName:  billingAddress.lastName.orNull,
-            province:  billingAddress.province.orNull,
-            zip:       billingAddress.zip.orNull
+            lastName: billingAddress.lastName.orNull,
+            province: billingAddress.province.orNull,
+            zip: billingAddress.zip.orNull
         )
         
         let paymentInput = Storefront.TokenizedPaymentInput.create(
-            amount:         checkout.paymentDue,
+            amount: checkout.paymentDue,
             idempotencyKey: idempotencyToken,
             billingAddress: mailingAddress,
-            type:           kShopifyPaymetTypeApplePay,
-            paymentData:    token
+            type: kShopifyPaymetTypeApplePay,
+            paymentData: token
         )
         
         return Storefront.buildMutation({ $0
@@ -1455,15 +1455,15 @@ internal extension Checkout {
         let payAddress = PayAddress(addressLine1: shippingAddress?.address, addressLine2: shippingAddress?.secondAddress, city: shippingAddress?.city, country: shippingAddress?.country, province: shippingAddress?.state, zip: shippingAddress?.zip, firstName: shippingAddress?.firstName, lastName: shippingAddress?.lastName, phone: shippingAddress?.phone, email: nil)
         
         return PayCheckout(
-            id:              id,
-            lineItems:       payItems,
-            discount:        nil,
+            id: id,
+            lineItems: payItems,
+            discount: nil,
             shippingAddress: payAddress,
-            shippingRate:    shippingLine?.payShippingRate,
-            subtotalPrice:   subtotalPrice!,
-            needsShipping:   true,
-            totalTax:        totalTax!,
-            paymentDue:      totalPrice!
+            shippingRate: shippingLine?.payShippingRate,
+            subtotalPrice: subtotalPrice!,
+            needsShipping: true,
+            totalTax: totalTax!,
+            paymentDue: totalPrice!
         )
     }
 }

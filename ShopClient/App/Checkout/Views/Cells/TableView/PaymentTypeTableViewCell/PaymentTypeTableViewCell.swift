@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PaymentTypeTableCellProtocol {
+protocol PaymentTypeTableCellProtocol: class {
     func didPayment(with type: PaymentTypeSection)
 }
 
@@ -17,7 +17,7 @@ class PaymentTypeTableViewCell: UITableViewCell {
     @IBOutlet weak var paymentTypeImage: UIImageView!
     @IBOutlet weak var paymentSelectButton: UIButton!
     
-    var delegate: PaymentTypeTableCellProtocol?
+    weak var delegate: PaymentTypeTableCellProtocol?
     var typeSelected = false
     var type: PaymentTypeSection = .creditCard {
         didSet {
