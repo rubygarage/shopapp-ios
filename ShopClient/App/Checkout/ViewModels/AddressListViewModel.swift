@@ -112,6 +112,6 @@ class AddressListViewModel: BaseViewModel {
 
 internal extension Address {
     func isEqual(to object: Address) -> Bool {
-        return fullname == object.fullname && fullAddress == object.fullAddress && phone == object.phone
+        return fullName == object.fullName && fullAddress == object.fullAddress && phone == object.phone
     }
 }

@@ -38,7 +38,7 @@ class CheckoutShippingAddressEditTableCell: UITableViewCell {
     }
     
     private func populateViews(with address: Address) {
-        nameLabel?.text = address.fullname
+        nameLabel?.text = address.fullName
         addressLabel?.text = address.fullAddress
         if let phoneText = address.phone {
             let customerNameLocalized = "Label.Phone".localizable

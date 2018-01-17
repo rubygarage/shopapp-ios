@@ -48,7 +48,7 @@ class AddressListTableViewCell: UITableViewCell {
     }
     
     private func populateViews(with address: Address, selected: Bool) {
-        customerNameLabel.text = address.fullname
+        customerNameLabel.text = address.fullName
         addressLabel.text = address.fullAddress
         if let phoneText = address.phone {
             let customerNameLocalized = "Label.Phone".localizable
