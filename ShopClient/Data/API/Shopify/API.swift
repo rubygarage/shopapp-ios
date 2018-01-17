@@ -504,7 +504,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
                 let responseError = self?.process(error: error)
                 callback(nil, responseError)
             } else {
-                callback(nil, ContentError())
+                let responseError = self?.process(error: error)
+                callback(nil, responseError)
             }
         })
         run(task: task, callback: callback)
