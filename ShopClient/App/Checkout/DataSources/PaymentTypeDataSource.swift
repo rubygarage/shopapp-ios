@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import PassKit
 
 enum PaymentTypeSection: Int {
     case creditCard
     case applePay
     
-    static let allValues = [creditCard, applePay]
+    static let allValues = PKPaymentAuthorizationController.canMakePayments() ? [creditCard, applePay] : [creditCard]
 }
 
 protocol PaymentTypeDataSourceProtocol {

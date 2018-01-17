@@ -17,15 +17,15 @@ enum CheckoutSection: Int {
 }
 
 class CheckoutViewModel: BaseViewModel {
+    private let checkoutUseCase = CheckoutUseCase()
+    private let cartProductListUseCase = CartProductListUseCase()
+    private let customerUseCase = CustomerUseCase()
+    
     var cartItems = [CartProduct]()
     var checkout = Variable<Checkout?>(nil)
     
     var billingAddress: Address?
     var creditCard: CreditCard?
-    
-    private let checkoutUseCase = CheckoutUseCase()
-    private let cartProductListUseCase = CartProductListUseCase()
-    private let customerUseCase = CustomerUseCase()
     
     var placeOrderPressed: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
