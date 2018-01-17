@@ -34,9 +34,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         )
     }
     
-    // MARK: - APIInterface
+    // MARK: - Shop info
     
-    // MARK: - shop info
     func getShopInfo(callback: @escaping RepoCallback<Shop>) {
         let query = Storefront.buildQuery { $0
             .shop { $0
@@ -57,7 +56,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         run(task: task, callback: callback)
     }
     
-    // MARK: - products
+    // MARK: - Products
+    
     func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Product]>) {
         let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: nil, sortBy: sortBy, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
@@ -106,7 +106,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         run(task: task, callback: callback)
     }
     
-    // MARK: - categories
+    // MARK: - Categories
+    
     func getCategoryList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Category]>) {
         let query = categoryListQuery(perPage: perPage, after: paginationValue, sortBy: sortBy, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
@@ -137,7 +138,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         run(task: task, callback: callback)
     }
     
-    // MARK: - articles
+    // MARK: - Articles
+    
     func getArticleList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Article]>) {
         let query = articleListQuery(perPage: perPage, after: paginationValue, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
@@ -165,7 +167,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         run(task: task, callback: callback)
     }
     
-    // MARK: - authentification
+    // MARK: - Authentification
+    
     func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, callback: @escaping RepoCallback<Bool>) {
         let query = signUpQuery(email: email, password: password, firstName: firstName, lastName: lastName, phone: phone)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
@@ -221,7 +224,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         }
     }
     
-    // MARK: - payments
+    // MARK: - Payments
+    
     func createCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
         let query = checkoutCreateQuery(cartProducts: cartProducts)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
@@ -337,16 +341,19 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     }
     
     func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, callback: @escaping RepoCallback<Bool>) {
-        let query = cardVaultUrlQuery()
-        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
-            if let responseError = ContentError(with: error) {
-                callback(false, responseError)
-            }
-            if let cardVaultUrl = response?.shop.paymentSettings.cardVaultUrl {
-                self?.pay(with: card, checkout: checkout, cardVaultUrl: cardVaultUrl, address: billingAddress, callback: callback)
-            }
-        })
-        run(task: task, callback: callback)
+        if let email = sessionData().email {
+            updateCheckout(with: checkout.id, email: email, completion: { [weak self] (success, error) in
+                if success == true {
+                    self?.createCardVault(with: card, checkout: checkout, billingAddress: billingAddress, callback: callback)
+                } else if let responseError = RepoError(with: error) {
+                    callback(false, responseError)
+                } else {
+                    callback(false, RepoError())
+                }
+            })
+        } else {
+            callback(false, RepoError())
+        }
     }
     
     func setupApplePay(with checkout: Checkout, callback: @escaping RepoCallback<Bool>) {
@@ -376,7 +383,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         run(task: task, callback: callback)
     }
     
-    // MARK: - orders
+    // MARK: - Orders
+    
     func getOrderList(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
         if let token = sessionData().token {
             getOrderList(with: token, perPage: perPage, paginationValue: paginationValue, callback: callback)
@@ -413,7 +421,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         run(task: task, callback: callback)
     }
     
-    // MARK: - private
+    // MARK: - Private
+    
     private func getShippingRates(checkoutId: GraphQL.ID, callback: @escaping RepoCallback<[ShippingRate]>) {
         let query = getShippingRatesQuery(checkoutId: checkoutId)
         let task = client?.queryGraphWith(query, completionHandler: { (response, error) in
@@ -428,6 +437,19 @@ class API: NSObject, APIInterface, PaySessionDelegate {
             }
             if let responseError = ContentError(with: error) {
                 callback(nil, responseError)
+            }
+        })
+        run(task: task, callback: callback)
+    }
+    
+    private func createCardVault(with card: CreditCard, checkout: Checkout, billingAddress: Address, callback: @escaping RepoCallback<Bool>) {
+        let query = cardVaultUrlQuery()
+        let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
+            if let responseError = ContentError(with: error) {
+                callback(false, responseError)
+            }
+            if let cardVaultUrl = response?.shop.paymentSettings.cardVaultUrl {
+                self?.pay(with: card, checkout: checkout, cardVaultUrl: cardVaultUrl, address: billingAddress, callback: callback)
             }
         })
         run(task: task, callback: callback)
@@ -591,7 +613,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         run(task: task, callback: callback)
     }
     
-    // MARK: - sorting
+    // MARK: - Sorting
+    
     func productSortValue(for key: SortingValue?) -> Storefront.ProductSortKeys? {
         if key == nil {
             return nil
@@ -620,7 +643,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         }
     }
     
-    // MARK: - queries building
+    // MARK: - Queries building
+    
     private func productsListQuery(with perPage: Int, after: Any?, searchPhrase: String?, sortBy: SortingValue?, reverse: Bool) -> Storefront.QueryRootQuery {
         let sortKey = productSortValue(for: sortBy)
         
@@ -843,7 +867,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         }
     }
     
-    // MARK: - subqueries
+    // MARK: - Subqueries
+    
     private func productConnectionQuery() -> (Storefront.ProductConnectionQuery) -> Void {
         return { (query: Storefront.ProductConnectionQuery) in
             query.edges({ $0
@@ -1179,7 +1204,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         }
     }
     
-    // MARK: - session data
+    // MARK: - Session data
+    
     private func saveSessionData(with token: Storefront.CustomerAccessToken, email: String) {
         let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
         keyChain.set(token.accessToken, forKey: SessionData.accessToken)
@@ -1213,7 +1239,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         return false
     }
     
-    // MARK: - check connection network
+    // MARK: - Check connection network
+    
     private func run<T>(task: Task?, callback: RepoCallback<T>) {
         if ReachabilityNetwork.hasConnection() {
             task?.resume()
@@ -1222,7 +1249,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         }
     }
     
-    // MARK: - error handling
+    // MARK: - Error handling
+    
     private func process(error: Graph.QueryError?) -> RepoError? {
         if let error = error, case .invalidQuery(let reasons) = error {
             return CriticalError(with: error, message: reasons.first?.message)
@@ -1379,6 +1407,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     }
     
     // MARK: - Pay session delegate additional submethods
+    
     private func mutationForUpdateCheckout(with id: String, updatingPartialShippingAddress address: PayPostalAddress) -> Storefront.MutationQuery {
         let checkoutID = GraphQL.ID(rawValue: id)
         let addressInput = Storefront.MailingAddressInput.create(city: address.city.orNull, country: address.country.orNull, province: address.province.orNull, zip: address.zip.orNull)
