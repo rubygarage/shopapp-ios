@@ -9,11 +9,11 @@
 import UIKit
 
 class ForgotPasswordViewController: BaseViewController<ForgotPasswordViewModel> {
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var emailTextFieldView: InputTextFieldView!
-    @IBOutlet weak var forgotPasswordButton: BlackButton!
-    @IBOutlet weak var linkView: UIView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var emailTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var forgotPasswordButton: BlackButton!
+    @IBOutlet private weak var linkView: UIView!
     
     private var linkViewController: LinkViewController!
     
