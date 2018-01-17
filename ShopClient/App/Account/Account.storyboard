@@ -430,10 +430,10 @@
             </objects>
             <point key="canvasLocation" x="-183" y="2282"/>
         </scene>
-        <!--Forgor Password View Controller-->
+        <!--Forgot Password View Controller-->
         <scene sceneID="iJa-sR-ZOx">
             <objects>
-                <viewController id="ngi-jF-uUl" customClass="ForgorPasswordViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ngi-jF-uUl" customClass="ForgotPasswordViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qYu-Yv-Nz0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -31,13 +31,14 @@ private let kUnderlineViewHeightDefault: CGFloat = 1
 private let kUnderlineViewHeightHighlighted: CGFloat = 2
 private let kErrorColor = UIColor(displayP3Red: 0.89, green: 0.31, blue: 0.31, alpha: 1)
 
-class InputTextFieldView: UIView, UITextFieldDelegate {
-    @IBOutlet var contentView: UIView!
+class InputTextFieldView: UIView {
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var underlineView: UIView!
+    @IBOutlet private weak var underlineViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var errorMesageLabel: UILabel!
+    @IBOutlet private weak var showPasswordButton: UIButton!
+    
     @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var underlineView: UIView!
-    @IBOutlet weak var underlineViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var errorMesageLabel: UILabel!
-    @IBOutlet weak var showPasswordButton: UIButton!
     
     @IBInspectable var keyboardType: Int = InputTextFieldViewKeybordType.name.rawValue {
         didSet {
@@ -53,7 +54,6 @@ class InputTextFieldView: UIView, UITextFieldDelegate {
             updateUI()
         }
     }
-    
     var errorMessage: String? {
         didSet {
             state = .error
@@ -61,14 +61,14 @@ class InputTextFieldView: UIView, UITextFieldDelegate {
             updateUI()
         }
     }
-    
     var placeholder: String? {
         didSet {
             textField?.attributedPlaceholder = NSAttributedString(string: placeholder ?? String(), attributes: [NSForegroundColorAttributeName: UIColor.black])
         }
     }
     
-    // MARK: - initialization
+    // MARK: - View lifecycle
+    
     init() {
         super.init(frame: CGRect.zero)
         
@@ -80,6 +80,8 @@ class InputTextFieldView: UIView, UITextFieldDelegate {
         
         commonInit()
     }
+    
+    // MARK: - Setup
     
     private func commonInit() {
         Bundle.main.loadNibNamed(String(describing: InputTextFieldView.self), owner: self)
@@ -140,7 +142,8 @@ class InputTextFieldView: UIView, UITextFieldDelegate {
         showPasswordButton?.isHidden = type != InputTextFieldViewKeybordType.password.rawValue
     }
     
-    // MARK: - actions
+    // MARK: - Actions
+    
     @IBAction func editingDidBegin(_ sender: UITextField) {
         state = .highlighted
     }
@@ -159,8 +162,11 @@ class InputTextFieldView: UIView, UITextFieldDelegate {
         showPasswordButton.isSelected = !showPasswordButton.isSelected
         textField?.isSecureTextEntry = !showPasswordButton.isSelected
     }
-    
-    // MARK: - UITextFieldDelegate
+}
+
+// MARK: - UITextFieldDelegate
+
+extension InputTextFieldView: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let generatedString = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
         

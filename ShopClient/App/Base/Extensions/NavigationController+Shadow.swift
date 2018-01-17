@@ -1,5 +1,5 @@
 //
-//  NavigationControllerShadow.swift
+//  NavigationController+Shadow.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 12/14/17.

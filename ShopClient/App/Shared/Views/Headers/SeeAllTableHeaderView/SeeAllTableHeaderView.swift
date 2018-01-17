@@ -20,14 +20,16 @@ enum SeeAllViewType {
 }
 
 class SeeAllTableHeaderView: UIView {
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var sectionTitleLabel: UILabel!
-    @IBOutlet weak var seeAllButton: UIButton!
-    @IBOutlet weak var separatprHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var sectionTitleLabel: UILabel!
+    @IBOutlet private weak var seeAllButton: UIButton!
+    @IBOutlet private weak var separatprHeightConstraint: NSLayoutConstraint!
     
     private var headerViewType = SeeAllViewType.latestArrivals
     
     weak var delegate: SeeAllHeaderViewProtocol?
+    
+    // MARK: - View lifecycle
     
     init(type: SeeAllViewType, separatorVisible: Bool = false) {
         super.init(frame: CGRect.zero)
@@ -42,6 +44,8 @@ class SeeAllTableHeaderView: UIView {
         
         commonInit()
     }
+    
+    // MARK: - Setup
     
     private func commonInit() {
         Bundle.main.loadNibNamed(String(describing: SeeAllTableHeaderView.self), owner: self)
@@ -59,15 +63,15 @@ class SeeAllTableHeaderView: UIView {
     private func populateViews() {
         switch headerViewType {
         case .latestArrivals:
-            sectionTitleLabel.text = NSLocalizedString("Label.LatestArrivals", comment: String())
+            sectionTitleLabel.text = "Label.LatestArrivals".localizable
         case .popular:
-            sectionTitleLabel.text = NSLocalizedString("Label.Popular", comment: String())
+            sectionTitleLabel.text = "Label.Popular".localizable
         case .blogPosts:
-            sectionTitleLabel.text = NSLocalizedString("Label.BlogPosts", comment: String())
+            sectionTitleLabel.text = "Label.BlogPosts".localizable
         case .myCart:
-            sectionTitleLabel.text = NSLocalizedString("Label.MyCart", comment: String())
+            sectionTitleLabel.text = "Label.MyCart".localizable
         }
-        seeAllButton.setTitle(NSLocalizedString("Button.SeeAll", comment: String()), for: .normal)
+        seeAllButton.setTitle("Button.SeeAll".localizable, for: .normal)
     }
     
     // MARK: - Actions

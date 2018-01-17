@@ -1,5 +1,5 @@
 //
-//  UIViewControllerBarButtonItems.swift
+//  UIViewController+BarButtonItems.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 9/26/17.
@@ -10,22 +10,10 @@ import UIKit
 
 private let kCustomBarItemWidth: CGFloat = 32
 
-extension UIViewController {    
-    public func addCartBarButton() {
-        navigationItem.rightBarButtonItem = cartBarItem()
-    }
+extension UIViewController {
     
-    public func addBackButtonIfNeeded() {
-        if navigationController?.viewControllers.first != self {
-            navigationItem.leftBarButtonItem = backButton()
-        }
-    }
+    // MARK: - Private
     
-    public func addCloseButton() {
-        navigationItem.rightBarButtonItem = closeButton()
-    }
-    
-    // MARK: - private
     private func cartBarItem() -> UIBarButtonItem {
         let cartView = CartButtonView(frame: CGRect(x: 0, y: 0, width: kCustomBarItemWidth, height: kCustomBarItemWidth))
         cartView.isUserInteractionEnabled = false
@@ -45,7 +33,24 @@ extension UIViewController {
         return UIBarButtonItem(image: #imageLiteral(resourceName: "cross"), style: .plain, target: self, action: #selector(self.closeButtonHandler))
     }
     
-    // MARK: - actions
+    // MARK: - Public
+    
+    public func addCartBarButton() {
+        navigationItem.rightBarButtonItem = cartBarItem()
+    }
+    
+    public func addBackButtonIfNeeded() {
+        if navigationController?.viewControllers.first != self {
+            navigationItem.leftBarButtonItem = backButton()
+        }
+    }
+    
+    public func addCloseButton() {
+        navigationItem.rightBarButtonItem = closeButton()
+    }
+    
+    // MARK: - Actions
+    
     @objc private func cartButtonHandler() {
         showCartController()
     }

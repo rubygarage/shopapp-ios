@@ -1,5 +1,5 @@
 //
-//  UIViewControllerRoutes.swift
+//  UIViewController+Routes.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 9/5/17.
@@ -9,15 +9,12 @@
 import UIKit
 
 extension UIViewController {
-
-    // MARK: - set
     func setHomeController() {
         let appDelegate  = UIApplication.shared.delegate as! AppDelegate
         let tabbarController = appDelegate.window?.rootViewController as? UITabBarController
         tabbarController?.selectedIndex = 0
     }
-    
-    // MARK: - present
+
     func showCategorySortingController(with items: [String], selectedItem: String, delegate: SortModalControllerProtocol?) {
         let sortController = UIStoryboard.sortModal().instantiateViewController(withIdentifier: ControllerIdentifier.sortModal) as! SortModalViewController
         sortController.sortItems = items

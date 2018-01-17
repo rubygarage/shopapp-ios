@@ -1,5 +1,5 @@
 //
-//  StoryboardAdditions.swift
+//  Storyboard+Additions.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 9/5/17.

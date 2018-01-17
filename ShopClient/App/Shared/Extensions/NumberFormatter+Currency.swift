@@ -1,5 +1,5 @@
 //
-//  NumberFormatterCurrency.swift
+//  NumberFormatter+Currency.swift
 //  ShopClient
 //
 //  Created by Radyslav Krechet on 1/9/18.
