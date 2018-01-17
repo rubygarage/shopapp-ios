@@ -13,6 +13,7 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, Payme
     
     private var tableDataSource: PaymentTypeDataSource!
     private var destinationTitle: String!
+    
     var creditCardCompletion: CreditCardPaymentCompletion?
     var checkout: Checkout!
     
