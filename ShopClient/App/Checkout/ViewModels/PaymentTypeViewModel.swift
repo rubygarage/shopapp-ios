@@ -9,5 +9,14 @@
 import UIKit
 
 class PaymentTypeViewModel: BaseViewModel {
-
+    private let checkoutUseCase = CheckoutUseCase()
+    
+    var selectedType: PaymentTypeSection?
+    var checkout: Checkout!
+    
+    public func setupApplePay() {
+        checkoutUseCase.setupApplePay(with: checkout) { (success, error) in
+            // TODO:
+        }
+    }
 }
