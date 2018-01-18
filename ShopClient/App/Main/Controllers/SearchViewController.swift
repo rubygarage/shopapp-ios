@@ -149,6 +149,10 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
         updateCollectionViewsIfNeeded(categoriesViewHidden: true)
     }
     
+    func didTapClear() {
+        viewModel.searchPhrase.value = ""
+    }
+    
     // MARK: - SearchCollectionDataSourceProtocol
     
     func categoriesCount() -> Int {

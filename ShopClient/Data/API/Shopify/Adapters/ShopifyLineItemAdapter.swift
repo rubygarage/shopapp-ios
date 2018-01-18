@@ -10,9 +10,6 @@ import MobileBuySDK
 
 extension LineItem {
     convenience init?(with item: Storefront.CheckoutLineItem) {
-        if item == nil {
-            return nil
-        }
         self.init()
         
         id = item.id.rawValue

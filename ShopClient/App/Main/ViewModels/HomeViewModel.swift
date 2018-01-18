@@ -23,7 +23,7 @@ class HomeViewModel: BasePaginationViewModel {
     public func loadData(with disposeBag: DisposeBag) {
         let showHud = data.value.latestProducts.isEmpty && data.value.popularProducts.isEmpty && data.value.articles.isEmpty
         state.onNext(.loading(showHud: showHud))
-        Single.zip(productsSingle, popularSingle, articlesSingle).do()
+        Single.zip(productsSingle, popularSingle, articlesSingle)
             .subscribe(onSuccess: { [weak self] (latestProducts, popularProducts, articles) in
                 if let latestProducts = latestProducts, let popularProducts = popularProducts, let articles = articles {
                     self?.data.value = (latestProducts, popularProducts, articles)
