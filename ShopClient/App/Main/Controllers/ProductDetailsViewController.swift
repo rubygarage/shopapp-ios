@@ -60,6 +60,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         super.viewWillAppear(animated)
         
         updateNavigationBar()
+        resetAddToCartButtonIfNeeded()
     }
     
     // MARK: - setup
@@ -158,6 +159,15 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         self.addToCartButton.setTitle("Button.AddedToCart".localizable.uppercased(), for: .normal)
     }
     
+    private func resetAddToCartButtonIfNeeded() {
+        guard productAddedToCart else {
+            return
+        }
+        
+        productAddedToCart = false
+        self.addToCartButton.setTitle("Button.AddToCart".localizable.uppercased(), for: .normal)
+    }
+    
     private func addProductToCart() {
         viewModel.addToCart
             .subscribe(onNext: { [weak self] success in
@@ -222,6 +232,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     func didSelectOption(with name: String, value: String) {
         viewModel.selectOption(with: name, value: value)
+        resetAddToCartButtonIfNeeded()
     }
     
     // MARK: - ErrorViewProtocol
