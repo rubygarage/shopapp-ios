@@ -56,6 +56,9 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
         let paymentEditNib = UINib(nibName: String(describing: CheckoutPaymentEditTableCell.self), bundle: nil)
         tableView.register(paymentEditNib, forCellReuseIdentifier: String(describing: CheckoutPaymentEditTableCell.self))
         
+        let shiippingOptionsDisabledNib = UINib(nibName: String(describing: CheckoutShippingOptionsDisabledTableCell.self), bundle: nil)
+        tableView.register(shiippingOptionsDisabledNib, forCellReuseIdentifier: String(describing: CheckoutShippingOptionsDisabledTableCell.self))
+        
         tableDataSource = CheckoutTableDataSource()
         tableDataSource.delegate = self
         tableView?.dataSource = tableDataSource

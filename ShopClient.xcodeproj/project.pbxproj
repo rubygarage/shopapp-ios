@@ -248,6 +248,8 @@
 		61AAB92C1F7BCF1000CD32D3 /* SortModalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AAB92B1F7BCF1000CD32D3 /* SortModalDataSource.swift */; };
 		61AAB9301F7BD07B00CD32D3 /* SortModalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AAB92E1F7BD07B00CD32D3 /* SortModalTableViewCell.swift */; };
 		61AAB9311F7BD07B00CD32D3 /* SortModalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61AAB92F1F7BD07B00CD32D3 /* SortModalTableViewCell.xib */; };
+		61AB7D2B2010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AB7D292010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.swift */; };
+		61AB7D2C2010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61AB7D2A2010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.xib */; };
 		61AE67031FE95034007229DA /* SearchCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE67021FE95034007229DA /* SearchCollectionDataSource.swift */; };
 		61AE67051FE96099007229DA /* SearchCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE67041FE96099007229DA /* SearchCollectionDelegate.swift */; };
 		61AFA3F31F9DFCE7004B9D53 /* DAOInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AFA3F21F9DFCE7004B9D53 /* DAOInterface.swift */; };
@@ -550,6 +552,8 @@
 		61AAB92B1F7BCF1000CD32D3 /* SortModalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalDataSource.swift; sourceTree = "<group>"; };
 		61AAB92E1F7BD07B00CD32D3 /* SortModalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalTableViewCell.swift; sourceTree = "<group>"; };
 		61AAB92F1F7BD07B00CD32D3 /* SortModalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SortModalTableViewCell.xib; sourceTree = "<group>"; };
+		61AB7D292010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutShippingOptionsDisabledTableCell.swift; sourceTree = "<group>"; };
+		61AB7D2A2010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckoutShippingOptionsDisabledTableCell.xib; sourceTree = "<group>"; };
 		61AE67021FE95034007229DA /* SearchCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionDataSource.swift; sourceTree = "<group>"; };
 		61AE67041FE96099007229DA /* SearchCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionDelegate.swift; sourceTree = "<group>"; };
 		61AFA3F21F9DFCE7004B9D53 /* DAOInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOInterface.swift; sourceTree = "<group>"; };
@@ -746,11 +750,11 @@
 		0B24F0F8200750B200F13224 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				61D33AC42008F8C900228E86 /* CheckoutShippingOptionsTableCell */,
 				0B24F0C920074D7500F13224 /* AddressListTableViewCell */,
 				0B24F0C320074D7400F13224 /* CheckoutPaymentAddTableCell */,
 				0B24F0C620074D7400F13224 /* CheckoutPaymentEditTableCell */,
 				0B24F0B220074D7400F13224 /* CheckoutShippingAddressAddTableCell */,
+				61D33AC42008F8C900228E86 /* CheckoutShippingOptionsDisabledTableCell */,
 				0B24F0BD20074D7400F13224 /* PaymentTypeTableViewCell */,
 			);
 			path = TableView;
@@ -1896,11 +1900,13 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
-		61D33AC42008F8C900228E86 /* CheckoutShippingOptionsTableCell */ = {
+		61D33AC42008F8C900228E86 /* CheckoutShippingOptionsDisabledTableCell */ = {
 			isa = PBXGroup;
 			children = (
+				61AB7D292010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.swift */,
+				61AB7D2A2010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.xib */,
 			);
-			path = CheckoutShippingOptionsTableCell;
+			path = CheckoutShippingOptionsDisabledTableCell;
 			sourceTree = "<group>";
 		};
 		61E266611FB21A1600A274E5 /* CartButtonView */ = {
@@ -2076,6 +2082,7 @@
 				0B24F0EF20074F1A00F13224 /* ExpiryDatePicker.xib in Resources */,
 				0BA630751FFFC533007088B8 /* OrderItemTableViewCell.xib in Resources */,
 				61AAB9311F7BD07B00CD32D3 /* SortModalTableViewCell.xib in Resources */,
+				61AB7D2C2010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.xib in Resources */,
 				0B24F0DB20074D7500F13224 /* CheckoutPaymentEditTableCell.xib in Resources */,
 				61A54BF91FF5254900D4D151 /* AccountFooterView.xib in Resources */,
 				0B24F0D420074D7500F13224 /* PaymentTypeTableViewCell.xib in Resources */,
@@ -2301,6 +2308,7 @@
 				6196CF8E1F9F91D600F823AD /* CategoryRepository.swift in Sources */,
 				6182BA641FFBAE1500836979 /* CreditCardViewController.swift in Sources */,
 				61AAB92C1F7BCF1000CD32D3 /* SortModalDataSource.swift in Sources */,
+				61AB7D2B2010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.swift in Sources */,
 				6196CF961F9F99BB00F823AD /* Image.swift in Sources */,
 				6131D2471FB33FCB008330C0 /* DAOCartProduct.swift in Sources */,
 				61534F301F73EE5E00F24189 /* ProductsListViewController.swift in Sources */,

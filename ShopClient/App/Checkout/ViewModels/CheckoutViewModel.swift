@@ -12,8 +12,9 @@ enum CheckoutSection: Int {
     case cart
     case shippingAddress
     case payment
+    case shippingOptions
     
-    static let allValues = [cart, shippingAddress, payment]
+    static let allValues = [cart, shippingAddress, payment, shippingOptions]
 }
 
 class CheckoutViewModel: BaseViewModel {

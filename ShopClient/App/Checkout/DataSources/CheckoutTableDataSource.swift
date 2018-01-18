@@ -38,6 +38,8 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
             return shippingAddressCell(with: tableView, indexPath: indexPath)
         case CheckoutSection.payment.rawValue:
             return paymentCell(with: tableView, indexPath: indexPath)
+        case CheckoutSection.shippingOptions.rawValue:
+            return shippingOptionsCell(with: tableView, indexPath: indexPath)
         default:
             return UITableViewCell()
         }
@@ -93,6 +95,11 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutPaymentEditTableCell.self), for: indexPath) as! CheckoutPaymentEditTableCell
         cell.delegate = delegate
         cell.configure(with: billingAddress, creditCard: creditCard)
+        return cell
+    }
+    
+    private func shippingOptionsCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingOptionsDisabledTableCell.self), for: indexPath) as! CheckoutShippingOptionsDisabledTableCell
         return cell
     }
 }
