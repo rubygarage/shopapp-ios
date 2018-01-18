@@ -12,7 +12,9 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
     @IBOutlet weak var tableView: UITableView!
     
     private var tableDataSource: PaymentTypeDataSource!
+    // swiftlint:disable weak_delegate
     private var tableDelegate: PaymentTypeDelegate!
+    // swiftlint:enable weak_delegate
     private var destinationTitle: String!
     
     var creditCardCompletion: CreditCardPaymentCompletion?
