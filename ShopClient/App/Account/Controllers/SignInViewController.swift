@@ -28,8 +28,8 @@ class SignInViewController: BaseViewController<SignInViewModel> {
     private func setupViews() {
         addCloseButton()
         title = "ControllerTitle.SignIn".localizable
-        emailTextFieldView.placeholder = "Placeholder.Email".localizable.uppercased()
-        passwordTextFieldView.placeholder = "Placeholder.Password".localizable.uppercased()
+        emailTextFieldView.placeholder = "Placeholder.Email".localizable.required.uppercased()
+        passwordTextFieldView.placeholder = "Placeholder.Password".localizable.required.uppercased()
         forgotButton.setTitle("Button.Forgot".localizable, for: .normal)
         signInButton.setTitle("Button.SignIn".localizable.uppercased(), for: .normal)
     }
