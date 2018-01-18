@@ -205,10 +205,9 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     
     func resetPassword(with email: String, callback: @escaping RepoCallback<Bool>) {
         let query = resetPasswordQuery(email: email)
-        let task = client?.mutateGraphWith(query) { [weak self] (response, error) in
-            if let responseError = response?.customerRecover?.userErrors.first {
-                let error = self?.process(error: responseError)
-                callback(false, error)
+        let task = client?.mutateGraphWith(query) { [weak self] (_, error) in
+            if let responseError = self?.process(error: error) {
+                callback(false, responseError)
             } else {
                 callback(true, nil)
             }
@@ -504,7 +503,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
                 let responseError = self?.process(error: error)
                 callback(nil, responseError)
             } else {
-                callback(nil, ContentError())
+                let responseError = self?.process(error: error)
+                callback(nil, responseError)
             }
         })
         run(task: task, callback: callback)
