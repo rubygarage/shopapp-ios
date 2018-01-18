@@ -252,6 +252,7 @@
 		61AB7D2C2010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61AB7D2A2010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.xib */; };
 		61AB7D302010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AB7D2E2010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableCell.swift */; };
 		61AB7D312010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61AB7D2F2010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableCell.xib */; };
+		61AB7D332010F83A00DB9D44 /* PaymentTypeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AB7D322010F83A00DB9D44 /* PaymentTypeDelegate.swift */; };
 		61AE67031FE95034007229DA /* SearchCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE67021FE95034007229DA /* SearchCollectionDataSource.swift */; };
 		61AE67051FE96099007229DA /* SearchCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE67041FE96099007229DA /* SearchCollectionDelegate.swift */; };
 		61AFA3F31F9DFCE7004B9D53 /* DAOInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AFA3F21F9DFCE7004B9D53 /* DAOInterface.swift */; };
@@ -558,6 +559,7 @@
 		61AB7D2A2010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckoutShippingOptionsDisabledTableCell.xib; sourceTree = "<group>"; };
 		61AB7D2E2010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutShippingOptionsEnabledTableCell.swift; sourceTree = "<group>"; };
 		61AB7D2F2010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckoutShippingOptionsEnabledTableCell.xib; sourceTree = "<group>"; };
+		61AB7D322010F83A00DB9D44 /* PaymentTypeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTypeDelegate.swift; sourceTree = "<group>"; };
 		61AE67021FE95034007229DA /* SearchCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionDataSource.swift; sourceTree = "<group>"; };
 		61AE67041FE96099007229DA /* SearchCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionDelegate.swift; sourceTree = "<group>"; };
 		61AFA3F21F9DFCE7004B9D53 /* DAOInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOInterface.swift; sourceTree = "<group>"; };
@@ -1474,6 +1476,7 @@
 			children = (
 				610781F31FF640080039355A /* AddressListDelegate.swift */,
 				616CA65A1FF2A0CE00FF14E2 /* CheckoutTableDelegate.swift */,
+				61AB7D322010F83A00DB9D44 /* PaymentTypeDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -2296,6 +2299,7 @@
 				616CA66A1FF3BAB800FF14E2 /* AddressListViewModel.swift in Sources */,
 				61836C5B1FDACC9F000A6BA6 /* NavigationController.swift in Sources */,
 				0B24F0FD2007514500F13224 /* DetailsImagesCollectionViewCell.swift in Sources */,
+				61AB7D332010F83A00DB9D44 /* PaymentTypeDelegate.swift in Sources */,
 				61ED88EA1F7112FD006BDA79 /* UIViewController+ImageViewer.swift in Sources */,
 				61C95E9F1FB3540B00543B40 /* CoreStoreTransaction.swift in Sources */,
 				61393A761FACC1AA0020C345 /* ProductsListViewModel.swift in Sources */,

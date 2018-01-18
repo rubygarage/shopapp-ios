@@ -29,25 +29,19 @@
                                     <constraint firstAttribute="height" constant="17" id="CpK-H5-dJu"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vN-G9-4Ee">
-                                <rect key="frame" x="304" y="8" width="44" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="GUX-cl-p2r"/>
-                                    <constraint firstAttribute="height" constant="44" id="wyj-Tc-nJE"/>
-                                </constraints>
-                                <state key="normal" image="radio_btn_disabled"/>
-                                <state key="selected" image="radio_btn_selected"/>
-                                <state key="highlighted" image="radio_btn_hold"/>
-                                <connections>
-                                    <action selector="selectPaymentTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Tlf-bj-jdk"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGk-ti-Eqs">
-                                <rect key="frame" x="63" y="22" width="225" height="16"/>
+                                <rect key="frame" x="63" y="22" width="275" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="gis-Oh-DPI">
+                                <rect key="frame" x="332" y="25" width="6" height="10"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="6" id="R1N-CY-tw5"/>
+                                    <constraint firstAttribute="height" constant="10" id="YTa-jr-DLE"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -55,10 +49,9 @@
                             <constraint firstItem="vGk-ti-Eqs" firstAttribute="centerY" secondItem="RKS-4x-Ae0" secondAttribute="centerY" id="7pD-Dh-nCT"/>
                             <constraint firstItem="vGk-ti-Eqs" firstAttribute="leading" secondItem="Ob7-kT-dzp" secondAttribute="trailing" constant="16" id="891-HP-K5j"/>
                             <constraint firstItem="Ob7-kT-dzp" firstAttribute="leading" secondItem="RKS-4x-Ae0" secondAttribute="leading" constant="20" id="AhZ-wi-b1w"/>
-                            <constraint firstItem="6vN-G9-4Ee" firstAttribute="leading" secondItem="vGk-ti-Eqs" secondAttribute="trailing" constant="16" id="CyM-aN-VK5"/>
-                            <constraint firstAttribute="trailing" secondItem="6vN-G9-4Ee" secondAttribute="trailing" constant="6" id="NXF-4A-4K1"/>
-                            <constraint firstItem="6vN-G9-4Ee" firstAttribute="centerY" secondItem="RKS-4x-Ae0" secondAttribute="centerY" id="Oib-sp-SZ6"/>
-                            <constraint firstAttribute="trailing" secondItem="6vN-G9-4Ee" secondAttribute="trailing" constant="6" id="jHk-Sg-vOY"/>
+                            <constraint firstItem="gis-Oh-DPI" firstAttribute="centerY" secondItem="vGk-ti-Eqs" secondAttribute="centerY" id="keL-Kf-fhH"/>
+                            <constraint firstAttribute="trailing" secondItem="vGk-ti-Eqs" secondAttribute="trailing" constant="16" id="tlQ-Ac-PDw"/>
+                            <constraint firstAttribute="trailing" secondItem="gis-Oh-DPI" secondAttribute="trailing" constant="16" id="yVO-ri-vaB"/>
                             <constraint firstItem="Ob7-kT-dzp" firstAttribute="centerY" secondItem="RKS-4x-Ae0" secondAttribute="centerY" id="zGI-dw-gJd"/>
                         </constraints>
                     </view>
@@ -73,7 +66,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="paymentSelectButton" destination="6vN-G9-4Ee" id="xsV-Qz-IYo"/>
+                <outlet property="arrowImageView" destination="gis-Oh-DPI" id="DfC-vh-A6t"/>
                 <outlet property="paymentTypeImage" destination="Ob7-kT-dzp" id="h1y-wR-eRS"/>
                 <outlet property="paymentTypeLabel" destination="vGk-ti-Eqs" id="su7-Lu-tlu"/>
             </connections>
@@ -81,9 +74,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="arrow_right" width="6" height="10"/>
         <image name="payment_card" width="27" height="17"/>
-        <image name="radio_btn_disabled" width="24" height="24"/>
-        <image name="radio_btn_hold" width="24" height="24"/>
-        <image name="radio_btn_selected" width="24" height="24"/>
     </resources>
 </document>
