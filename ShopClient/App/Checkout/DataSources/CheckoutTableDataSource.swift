@@ -15,6 +15,7 @@ protocol CheckoutTableDataSourceProtocol: class {
     func shippingAddress() -> Address?
     func billingAddress() -> Address?
     func creditCard() -> CreditCard?
+    func availableShippingRates() -> [ShippingRate]?
 }
 
 class CheckoutTableDataSource: NSObject, UITableViewDataSource {
@@ -27,6 +28,9 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == CheckoutSection.shippingOptions.rawValue {
+            return delegate?.shippingAddress() != nil ? delegate?.availableShippingRates()?.count ?? 1 : 1
+        }
         return 1
     }
     
@@ -99,7 +103,21 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     }
     
     private func shippingOptionsCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingOptionsDisabledTableCell.self), for: indexPath) as! CheckoutShippingOptionsDisabledTableCell
+        if delegate?.shippingAddress() != nil, let rates = delegate?.availableShippingRates(), let currencyCode = delegate?.checkout()?.currencyCode {
+            let rate = rates[indexPath.row]
+            return shippingOptionsEnabledCell(with: tableView, indexPath: indexPath, rate: rate, currencyCode: currencyCode)
+        } else {
+            return shippingOptionsDisabledCell(with: tableView, indexPath: indexPath)
+        }
+    }
+    
+    private func shippingOptionsEnabledCell(with tableView: UITableView, indexPath: IndexPath, rate: ShippingRate, currencyCode: String) -> CheckoutShippingOptionsEnabledTableCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingOptionsEnabledTableCell.self), for: indexPath) as! CheckoutShippingOptionsEnabledTableCell
+        cell.configure(with: rate, currencyCode: currencyCode)
         return cell
+    }
+    
+    private func shippingOptionsDisabledCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingOptionsDisabledTableCell {
+        return tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingOptionsDisabledTableCell.self), for: indexPath) as! CheckoutShippingOptionsDisabledTableCell
     }
 }

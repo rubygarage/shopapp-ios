@@ -59,6 +59,9 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
         let shiippingOptionsDisabledNib = UINib(nibName: String(describing: CheckoutShippingOptionsDisabledTableCell.self), bundle: nil)
         tableView.register(shiippingOptionsDisabledNib, forCellReuseIdentifier: String(describing: CheckoutShippingOptionsDisabledTableCell.self))
         
+        let shiippingOptionsEnabledNib = UINib(nibName: String(describing: CheckoutShippingOptionsEnabledTableCell.self), bundle: nil)
+        tableView.register(shiippingOptionsEnabledNib, forCellReuseIdentifier: String(describing: CheckoutShippingOptionsEnabledTableCell.self))
+        
         tableDataSource = CheckoutTableDataSource()
         tableDataSource.delegate = self
         tableView?.dataSource = tableDataSource
@@ -106,6 +109,10 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     
     func creditCard() -> CreditCard? {
         return viewModel.creditCard
+    }
+    
+    func availableShippingRates() -> [ShippingRate]? {
+        return viewModel.checkout.value?.availableShippingRates
     }
     
     // MARK: - CheckoutShippingAddressAddCellProtocol

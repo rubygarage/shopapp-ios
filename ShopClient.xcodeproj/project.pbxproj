@@ -250,6 +250,8 @@
 		61AAB9311F7BD07B00CD32D3 /* SortModalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61AAB92F1F7BD07B00CD32D3 /* SortModalTableViewCell.xib */; };
 		61AB7D2B2010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AB7D292010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.swift */; };
 		61AB7D2C2010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61AB7D2A2010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.xib */; };
+		61AB7D302010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AB7D2E2010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableCell.swift */; };
+		61AB7D312010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61AB7D2F2010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableCell.xib */; };
 		61AE67031FE95034007229DA /* SearchCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE67021FE95034007229DA /* SearchCollectionDataSource.swift */; };
 		61AE67051FE96099007229DA /* SearchCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AE67041FE96099007229DA /* SearchCollectionDelegate.swift */; };
 		61AFA3F31F9DFCE7004B9D53 /* DAOInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AFA3F21F9DFCE7004B9D53 /* DAOInterface.swift */; };
@@ -554,6 +556,8 @@
 		61AAB92F1F7BD07B00CD32D3 /* SortModalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SortModalTableViewCell.xib; sourceTree = "<group>"; };
 		61AB7D292010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutShippingOptionsDisabledTableCell.swift; sourceTree = "<group>"; };
 		61AB7D2A2010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckoutShippingOptionsDisabledTableCell.xib; sourceTree = "<group>"; };
+		61AB7D2E2010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutShippingOptionsEnabledTableCell.swift; sourceTree = "<group>"; };
+		61AB7D2F2010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckoutShippingOptionsEnabledTableCell.xib; sourceTree = "<group>"; };
 		61AE67021FE95034007229DA /* SearchCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionDataSource.swift; sourceTree = "<group>"; };
 		61AE67041FE96099007229DA /* SearchCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionDelegate.swift; sourceTree = "<group>"; };
 		61AFA3F21F9DFCE7004B9D53 /* DAOInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOInterface.swift; sourceTree = "<group>"; };
@@ -755,6 +759,7 @@
 				0B24F0C620074D7400F13224 /* CheckoutPaymentEditTableCell */,
 				0B24F0B220074D7400F13224 /* CheckoutShippingAddressAddTableCell */,
 				61D33AC42008F8C900228E86 /* CheckoutShippingOptionsDisabledTableCell */,
+				61AB7D2D2010CB4000DB9D44 /* CheckoutShippingOptionsEnabledTableCell */,
 				0B24F0BD20074D7400F13224 /* PaymentTypeTableViewCell */,
 			);
 			path = TableView;
@@ -1794,6 +1799,15 @@
 			path = SortModalTableViewCell;
 			sourceTree = "<group>";
 		};
+		61AB7D2D2010CB4000DB9D44 /* CheckoutShippingOptionsEnabledTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				61AB7D2E2010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableCell.swift */,
+				61AB7D2F2010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableCell.xib */,
+			);
+			path = CheckoutShippingOptionsEnabledTableCell;
+			sourceTree = "<group>";
+		};
 		61AFA3F11F9DFBE8004B9D53 /* DAO */ = {
 			isa = PBXGroup;
 			children = (
@@ -2088,6 +2102,7 @@
 				0B24F0D420074D7500F13224 /* PaymentTypeTableViewCell.xib in Resources */,
 				0B24F0EC20074F1A00F13224 /* InputTextFieldView.xib in Resources */,
 				61236D3D1FEA6E2500D64198 /* Checkout.storyboard in Resources */,
+				61AB7D312010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableCell.xib in Resources */,
 				61A54BF41FF5253E00D4D151 /* AccountTableViewCell.xib in Resources */,
 				61BF1EAD1FAB56E40098B9AA /* LoadingView.xib in Resources */,
 				61E4E63E1F56C868001C6E01 /* LaunchScreen.storyboard in Resources */,
@@ -2336,6 +2351,7 @@
 				0B24F0CC20074D7500F13224 /* CheckoutShippingAddressAddTableCell.swift in Sources */,
 				618819B41FB3085600FECDCC /* DAOCartProductAdapter.swift in Sources */,
 				6124BCE31F73C2880099E879 /* PolicyViewController.swift in Sources */,
+				61AB7D302010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableCell.swift in Sources */,
 				61A5072E1F7E79FB004504EF /* ImagesCarouselCollectionDataSource.swift in Sources */,
 				6196CF8A1F9F8B5800F823AD /* ProductRepository.swift in Sources */,
 				6119478A1FD95EE3008BE9C6 /* AccountTableDelegate.swift in Sources */,

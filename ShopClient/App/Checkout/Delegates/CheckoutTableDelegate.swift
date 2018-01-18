@@ -36,7 +36,8 @@ class CheckoutTableDelegate: NSObject, UITableViewDelegate {
         case CheckoutSection.payment.rawValue:
             return BoldTitleTableHeaderView(type: .payment)
         case CheckoutSection.shippingOptions.rawValue:
-            return BoldTitleTableHeaderView(type: .shippingOptions, disabled: true)
+            let disabled = delegate?.checkout()?.availableShippingRates == nil
+            return BoldTitleTableHeaderView(type: .shippingOptions, disabled: disabled)
         default:
             return nil
         }
