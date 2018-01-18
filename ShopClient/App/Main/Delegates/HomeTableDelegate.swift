@@ -37,6 +37,7 @@ class HomeTableDelegate: NSObject, UITableViewDelegate {
         
         let view = SeeAllTableHeaderView(type: type)
         view.delegate = delegate
+        view.seeAllButton.isHidden = section == HomeSection.popular.rawValue
         return view
     }
     

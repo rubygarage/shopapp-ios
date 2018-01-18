@@ -22,8 +22,9 @@ enum SeeAllViewType {
 class SeeAllTableHeaderView: UIView {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var sectionTitleLabel: UILabel!
-    @IBOutlet private weak var seeAllButton: UIButton!
     @IBOutlet private weak var separatprHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var seeAllButton: UIButton!
     
     private var headerViewType = SeeAllViewType.latestArrivals
     
