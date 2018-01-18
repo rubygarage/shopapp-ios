@@ -15,6 +15,8 @@ protocol PaymentTypeDelegateProtocol: class {
 class PaymentTypeDelegate: NSObject, UITableViewDelegate {
     weak var delegate: PaymentTypeDelegateProtocol?
     
+    // MARK: - UITableViewDelegate
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let type = PaymentTypeSection(rawValue: indexPath.row) {
             delegate?.didSelectPayment(type: type)
