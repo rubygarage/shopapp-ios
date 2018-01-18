@@ -19,8 +19,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     func configure(with category: Category) {
         categoryTitleLabel.text = category.title
-        let imageUrl = URL(string: category.image?.src ?? "")
-        categoryImageView.sd_setImage(with: imageUrl)
+        categoryImageView.set(image: category.image, initialContentMode: .top)
     }
 }
 

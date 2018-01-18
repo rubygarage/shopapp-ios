@@ -34,9 +34,7 @@ class OrderItemTableViewCell: UITableViewCell {
     }
     
     func configure(with orderItem: OrderItem, currencyCode: String) {
-        let image = orderItem.productVariant?.image ?? Image()
-        let imageUrl = URL(string: image.src ?? "")
-        itemImageView.sd_setImage(with: imageUrl)
+        itemImageView.set(image: orderItem.productVariant?.image)
         
         titleLabel.text = orderItem.title
         quantityValueLabel.text = String(orderItem.quantity!)

@@ -18,8 +18,7 @@ class CheckoutCartCollectionCell: UICollectionViewCell {
     // MARK: - Setup
     
     func configure(with item: Image, productVariantId: String) {
-        let imageUrl = URL(string: item.src ?? "")
-        cartItemImageView.sd_setImage(with: imageUrl)
+        cartItemImageView.set(image: item)
         self.productVariantId = productVariantId
     }
 }

@@ -8,7 +8,6 @@
 
 import UIKit
 
-import SDWebImage
 import SwipeCellKit
 
 protocol CartTableCellProtocol: class {
@@ -60,9 +59,7 @@ class CartTableViewCell: SwipeTableViewCell {
     }
     
     private func populateImageView(with item: CartProduct?) {
-        let urlString = item?.productVariant?.image?.src ?? ""
-        let url = URL(string: urlString)
-        variantImageView.sd_setImage(with: url, completed: nil)
+        variantImageView.set(image: item?.productVariant?.image)
     }
     
     private func populateTitle(with item: CartProduct?) {

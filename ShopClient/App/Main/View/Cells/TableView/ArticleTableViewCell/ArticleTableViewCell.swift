@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SDWebImage
 
 class ArticleTableViewCell: UITableViewCell {
     @IBOutlet weak var articleImageView: UIImageView!
@@ -23,8 +22,7 @@ class ArticleTableViewCell: UITableViewCell {
     }
     
     func configure(with item: Article?, separatorHidden: Bool) {
-        let imageUrl = URL(string: item?.image?.src ?? "")
-        articleImageView.sd_setImage(with: imageUrl, completed: nil)
+        articleImageView.set(image: item?.image)
         titleLabel.text = item?.title
         descriptionLabel.text = item?.content
         authorLabel.text = item?.author?.fullName

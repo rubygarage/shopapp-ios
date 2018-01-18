@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SDWebImage
 
 class LastArrivalsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productImageView: UIImageView!
@@ -15,8 +14,7 @@ class LastArrivalsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     
     func configure(with item: Product) {
-        let imageUrl = URL(string: item.images?.first?.src ?? "")
-        productImageView.sd_setImage(with: imageUrl)
+        productImageView.set(image: item.images?.first)
         titleLabel.text = item.title
         let formatter = NumberFormatter.formatter(with: item.currency!)
         let localizedString = "Label.PriceFrom".localizable

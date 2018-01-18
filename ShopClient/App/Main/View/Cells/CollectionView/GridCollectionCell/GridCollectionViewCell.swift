@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SDWebImage
 
 private let kNumberOfColumns: CGFloat = 2
 private let kCollectionViewMargin: CGFloat = 7
@@ -20,8 +19,7 @@ class GridCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var priceLabel: UILabel!
 
     public func configure(with item: Product) {
-        let imageUrl = URL(string: item.images?.first?.src ?? "")
-        productImageView.sd_setImage(with: imageUrl, completed: nil)
+        productImageView.set(image: item.images?.first)
         titleLabel.text = item.title
         let formatter = NumberFormatter.formatter(with: item.currency!)
         let localizedString = "Label.PriceFrom".localizable
