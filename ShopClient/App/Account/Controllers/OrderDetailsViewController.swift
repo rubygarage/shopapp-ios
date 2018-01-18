@@ -89,6 +89,8 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, Ord
     
     func didSelectItem(at index: Int) {
         selectedProductVariant = viewModel.productVariant(at: index)
-        performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
+        if selectedProductVariant != nil {
+            performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
+        }
     }
 }
