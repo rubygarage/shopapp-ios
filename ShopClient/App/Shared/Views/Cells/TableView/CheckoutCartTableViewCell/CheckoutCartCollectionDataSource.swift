@@ -13,11 +13,13 @@ protocol CheckoutCartCollectionDataSourceDelegate: class {
     func item(at index: Int) -> (image: Image, productVariantId: String)
 }
 
-class CheckoutCartCollectionDataSource: NSObject, UICollectionViewDataSource {
+class CheckoutCartCollectionDataSource: NSObject {
     weak var delegate: CheckoutCartCollectionDataSourceDelegate?
-    
-    // MARK: - UICollectionViewDataSource
-    
+}
+
+// MARK: - UICollectionViewDataSource
+
+extension CheckoutCartCollectionDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return delegate?.itemsCount() ?? 0
     }

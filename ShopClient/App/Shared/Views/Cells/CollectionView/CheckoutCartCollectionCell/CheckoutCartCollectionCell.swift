@@ -11,11 +11,13 @@ import UIKit
 private let kCellSize = CGSize(width: 111, height: 98)
 
 class CheckoutCartCollectionCell: UICollectionViewCell {
-    @IBOutlet weak var cartItemImageView: UIImageView!
+    @IBOutlet private weak var cartItemImageView: UIImageView!
     
     var productVariantId = ""
     
-    public func configure(with item: Image, productVariantId: String) {
+    // MARK: - Setup
+    
+    func configure(with item: Image, productVariantId: String) {
         let imageUrl = URL(string: item.src ?? "")
         cartItemImageView.sd_setImage(with: imageUrl)
         self.productVariantId = productVariantId

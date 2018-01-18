@@ -1,5 +1,5 @@
 //
-//  ResetPasswordViewModel.swift
+//  ForgotPasswordViewModel.swift
 //  ShopClient
 //
 //  Created by Radyslav Krechet on 1/2/18.
@@ -8,7 +8,7 @@
 
 import RxSwift
 
-class ForgorPasswordViewModel: BaseViewModel {
+class ForgotPasswordViewModel: BaseViewModel {
     var emailText = Variable<String>("")
     var emailErrorMessage = PublishSubject<String>()
     var resetPasswordSuccess = Variable<Bool>(false)

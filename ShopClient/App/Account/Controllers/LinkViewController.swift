@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class LinkViewController: BaseViewController<ForgorPasswordViewModel>, UnderlinedButtonProtocol {
+class LinkViewController: BaseViewController<ForgotPasswordViewModel>, UnderlinedButtonProtocol {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -21,7 +21,7 @@ class LinkViewController: BaseViewController<ForgorPasswordViewModel>, Underline
     var emailText = Variable<String>("")
     
     override func viewDidLoad() {
-        viewModel = ForgorPasswordViewModel()
+        viewModel = ForgotPasswordViewModel()
         super.viewDidLoad()
         
         setupViews()

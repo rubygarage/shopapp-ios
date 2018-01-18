@@ -20,27 +20,21 @@ class Address: NSObject {
     var zip: String?
     var phone: String?
     
-    var fullname: String {
-        let customerNameLocalized = NSLocalizedString("Label.FullName", comment: String())
+    var fullName: String {
+        let customerNameLocalized = "Label.FullName".localizable
         return String.localizedStringWithFormat(customerNameLocalized, firstName ?? String(), lastName ?? String())
     }
     
     var fullAddress: String {
         var result = address!
         if let secondAddress = secondAddress, !secondAddress.isEmpty {
-            result = [result, secondAddress].joined(separator: "\n")
+            result = [result, secondAddress].joined(separator: ", ")
         }
         let adressParts = [city, zip, country].flatMap { $0 }
         if !adressParts.isEmpty {
             let subresult = adressParts.joined(separator: ", ")
-            result = [result, subresult].joined(separator: "\n")
+            result = [result, subresult].joined(separator: ", ")
         }
         return result
-    }
-}
-
-internal extension String {
-    func asPart() -> String {
-        return ", \(self)"
     }
 }

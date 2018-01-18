@@ -1,5 +1,5 @@
 //
-//  ResetPasswordViewController.swift
+//  ForgotPasswordViewController.swift
 //  ShopClient
 //
 //  Created by Radyslav Krechet on 1/2/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ForgorPasswordViewController: BaseViewController<ForgorPasswordViewModel> {
+class ForgotPasswordViewController: BaseViewController<ForgotPasswordViewModel> {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var emailTextFieldView: InputTextFieldView!
@@ -18,7 +18,7 @@ class ForgorPasswordViewController: BaseViewController<ForgorPasswordViewModel> 
     private var linkViewController: LinkViewController!
     
     override func viewDidLoad() {
-        viewModel = ForgorPasswordViewModel()
+        viewModel = ForgotPasswordViewModel()
         super.viewDidLoad()
         
         setupViews()

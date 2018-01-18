@@ -9,17 +9,19 @@
 import UIKit
 
 class PaymentDetailsFooterView: UIView {
-    @IBOutlet var contentView: UIView!
-    @IBOutlet var subtotalLabel: UILabel!
-    @IBOutlet var discountLabel: UILabel!
-    @IBOutlet var shippingLabel: UILabel!
-    @IBOutlet var totalLabel: UILabel!
-    @IBOutlet var subtotalValueLabel: UILabel!
-    @IBOutlet var discountValueLabel: UILabel!
-    @IBOutlet var shippingValueLabel: UILabel!
-    @IBOutlet var totalValueLabel: UILabel!
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var subtotalLabel: UILabel!
+    @IBOutlet private weak var discountLabel: UILabel!
+    @IBOutlet private weak var shippingLabel: UILabel!
+    @IBOutlet private weak var totalLabel: UILabel!
+    @IBOutlet private weak var subtotalValueLabel: UILabel!
+    @IBOutlet private weak var discountValueLabel: UILabel!
+    @IBOutlet private weak var shippingValueLabel: UILabel!
+    @IBOutlet private weak var totalValueLabel: UILabel!
     
     static let height = CGFloat(175)
+    
+    // MARK: - View lifecycle
     
     init(order: Order) {
         super.init(frame: CGRect.zero)
@@ -40,6 +42,8 @@ class PaymentDetailsFooterView: UIView {
         
         commonInit()
     }
+    
+    // MARK: - Setup
     
     private func commonInit() {
         Bundle.main.loadNibNamed(String(describing: PaymentDetailsFooterView.self), owner: self)

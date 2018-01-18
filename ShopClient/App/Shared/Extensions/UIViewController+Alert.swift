@@ -1,5 +1,5 @@
 //
-//  UIViewControllerAlert.swift
+//  UIViewController+Alert.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 10/9/17.
@@ -17,23 +17,9 @@ typealias ButtonClosure = (_ buttonIndex: Int) -> Void
 typealias AlertClosure = (AlertButtonIndex) -> Void
 
 extension UIViewController {
-    // MARK: - public
-    func showErrorAlert(with message: String?, handler: AlertClosure? = nil) {
-        let title = NSLocalizedString("Alert.Error", comment: String())
-        let cancel = NSLocalizedString("Button.Ok", comment: String())
-        showAlertController(with: title, message: message, cancel: cancel, handler: handler)
-    }
     
-    func showAlert(with title: String?, message: String?, submit: String, handler: @escaping AlertClosure) {
-        let cancel = NSLocalizedString("Button.Cancel", comment: String())
-        showAlertController(with: title, message: message, submit: submit, cancel: cancel, handler: handler)
-    }
+    // MARK: - Private
     
-    func showActionSheet(with title: String?, message: String? = nil, buttons: [String], destructive: String? = nil, cancel: String, handle: @escaping ButtonClosure) {
-        showController(with: title, message: message, style: .actionSheet, buttons: buttons, destructive: destructive, cancel: cancel, handle: handle)
-    }
-    
-    // MARK: - private
     private func showAlertController(with title: String?, message: String?, submit: String? = nil, cancel: String, handler: AlertClosure?) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
@@ -78,5 +64,22 @@ extension UIViewController {
         }
         
         self.present(alertController, animated: true)
+    }
+    
+    // MARK: - Public
+    
+    func showErrorAlert(with message: String?, handler: AlertClosure? = nil) {
+        let title = "Alert.Error".localizable
+        let cancel = "Button.Ok".localizable
+        showAlertController(with: title, message: message, cancel: cancel, handler: handler)
+    }
+    
+    func showAlert(with title: String?, message: String?, submit: String, handler: @escaping AlertClosure) {
+        let cancel = "Button.Cancel".localizable
+        showAlertController(with: title, message: message, submit: submit, cancel: cancel, handler: handler)
+    }
+    
+    func showActionSheet(with title: String?, message: String? = nil, buttons: [String], destructive: String? = nil, cancel: String, handle: @escaping ButtonClosure) {
+        showController(with: title, message: message, style: .actionSheet, buttons: buttons, destructive: destructive, cancel: cancel, handle: handle)
     }
 }

@@ -97,7 +97,9 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, Or
     
     func didSelectItem(with productVariantId: String, at index: Int) {
         selectedProductVariant = viewModel.productVariant(with: productVariantId, at: index)
-        performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
+        if selectedProductVariant != nil {
+            performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
+        }
     }
     
     // MARK: - ErrorViewProtocol

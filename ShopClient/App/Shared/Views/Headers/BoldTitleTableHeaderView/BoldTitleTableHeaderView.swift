@@ -18,11 +18,13 @@ private let kTopMarginDefault: CGFloat = 15
 private let kTopMarginPayment: CGFloat = 4
 
 class BoldTitleTableHeaderView: UIView {
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var headerTitleLabel: UILabel!
-    @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var headerTitleLabel: UILabel!
+    @IBOutlet private weak var topMarginConstraint: NSLayoutConstraint!
     
     private var headerViewType = BoldTitleViewType.shippingAddress
+    
+    // MARK: - View lifecycle
     
     init(type: BoldTitleViewType) {
         super.init(frame: CGRect.zero)
@@ -36,6 +38,8 @@ class BoldTitleTableHeaderView: UIView {
         
         commonInit()
     }
+    
+    // MARK: - Setup
     
     private func commonInit() {
         Bundle.main.loadNibNamed(String(describing: BoldTitleTableHeaderView.self), owner: self)

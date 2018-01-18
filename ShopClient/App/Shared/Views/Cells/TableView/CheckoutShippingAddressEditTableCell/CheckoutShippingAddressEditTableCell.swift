@@ -13,12 +13,15 @@ protocol CheckoutShippingAddressEditCellProtocol: class {
 }
 
 class CheckoutShippingAddressEditTableCell: UITableViewCell {
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var addressLabel: UILabel!
+    @IBOutlet private weak var phoneLabel: UILabel!
+    
     @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var phoneLabel: UILabel!
     
     weak var delegate: CheckoutShippingAddressEditCellProtocol?
+    
+    // MARK: - View lifecycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,7 +41,7 @@ class CheckoutShippingAddressEditTableCell: UITableViewCell {
     }
     
     private func populateViews(with address: Address) {
-        nameLabel?.text = address.fullname
+        nameLabel?.text = address.fullName
         addressLabel?.text = address.fullAddress
         if let phoneText = address.phone {
             let customerNameLocalized = "Label.Phone".localizable

@@ -12,24 +12,29 @@ protocol CheckoutCartTableViewCellDelegate: class {
     func didSelectItem(with productVariantId: String, at index: Int)
 }
 
-class CheckoutCartTableViewCell: UITableViewCell, CheckoutCartCollectionDataSourceDelegate, CheckoutCartCollectionDelegateProtocol {
-    @IBOutlet weak var collectionView: UICollectionView!
+class CheckoutCartTableViewCell: UITableViewCell {
+    @IBOutlet private weak var collectionView: UICollectionView!
     
-    private var images: [Image]!
-    private var productVariantIds: [String]!
     private var collectionDataSource: CheckoutCartCollectionDataSource!
     // swiftlint:disable weak_delegate
     private var collectionDelegate: CheckoutCartCollectionDelegate!
     // swiftlint:enable weak_delegate
-    private var index = 0
+    
+    fileprivate var images: [Image]!
+    fileprivate var productVariantIds: [String]!
+    fileprivate var index = 0
     
     weak var cellDelegate: CheckoutCartTableViewCellDelegate?
+    
+    // MARK: - View lifecycle
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
         selectionStyle = .none
     }
+    
+    // MARK: - Setup
     
     public func configure(with items: [Image], productVariantIds: [String], index: Int? = nil) {
         images = items
@@ -39,8 +44,6 @@ class CheckoutCartTableViewCell: UITableViewCell, CheckoutCartCollectionDataSour
         }
         setupCollectionView()
     }
-    
-    // MARK: - Private
     
     private func setupCollectionView() {
         let cartNib = UINib(nibName: String(describing: CheckoutCartCollectionCell.self), bundle: nil)
@@ -54,9 +57,11 @@ class CheckoutCartTableViewCell: UITableViewCell, CheckoutCartCollectionDataSour
         collectionDelegate.delegate = self
         collectionView.delegate = collectionDelegate
     }
-    
-    // MARK: - CheckoutCartCollectionDataSourceDelegate
-    
+}
+
+// MARK: - CheckoutCartCollectionDataSourceDelegate
+
+extension CheckoutCartTableViewCell: CheckoutCartCollectionDataSourceDelegate {
     func itemsCount() -> Int {
         return images.count
     }
@@ -64,9 +69,11 @@ class CheckoutCartTableViewCell: UITableViewCell, CheckoutCartCollectionDataSour
     func item(at index: Int) -> (image: Image, productVariantId: String) {
         return (image: images[index], productVariantId: productVariantIds[index])
     }
-    
-    // MARK: - CheckoutCartCollectionDelegateProtocol
-    
+}
+
+// MARK: - CheckoutCartCollectionDelegateProtocol
+
+extension CheckoutCartTableViewCell: CheckoutCartCollectionDelegateProtocol {
     func didSelectItem(with productVariantId: String) {
         cellDelegate?.didSelectItem(with: productVariantId, at: index)
     }

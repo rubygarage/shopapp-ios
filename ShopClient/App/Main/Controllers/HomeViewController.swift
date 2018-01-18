@@ -10,9 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, PopularCellDelegate, SeeAllHeaderViewProtocol {
-    @IBOutlet weak var tableView: UITableView!
-    
+class HomeViewController: BaseTableViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, PopularCellDelegate, SeeAllHeaderViewProtocol {
     private var dataSource: HomeTableDataSource!
     // swiftlint:disable weak_delegate
     private var delegate: HomeTableDelegate!
@@ -49,6 +47,10 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
         }
     }
     
+    override func pullToRefreshHandler() {
+        loadData()
+    }
+    
     private func updateNavigationBar() {
         navigationItem.title = "ControllerTitle.Home".localizable
         addCartBarButton()
@@ -78,6 +80,7 @@ class HomeViewController: BaseViewController<HomeViewModel>, HomeTableDataSource
     private func setupViewModel() {
         viewModel.data.asObservable()
             .subscribe(onNext: { [weak self] _ in
+                self?.stopLoadAnimating()
                 self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)

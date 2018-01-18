@@ -18,7 +18,6 @@ class BlackButton: UIButton {
             backgroundColor = isHighlighted ? kButtonColorHighlited : kButtonColorNormal
         }
     }
-    
     override var isEnabled: Bool {
         didSet {
             backgroundColor = isEnabled ? kButtonColorNormal : kButtonColorDisabled
@@ -27,7 +26,8 @@ class BlackButton: UIButton {
         }
     }
     
-    // MARK: - init
+    // MARK: - View lifecycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -39,6 +39,8 @@ class BlackButton: UIButton {
         
         setup()
     }
+    
+    // MARK: - Setup
     
     private func setup() {
         backgroundColor = kButtonColorNormal

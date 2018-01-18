@@ -8,14 +8,21 @@
 
 import RxSwift
 
-class HomeViewModel: BaseViewModel {
+class HomeViewModel: BasePaginationViewModel {
     var data = Variable<(latestProducts: [Product], popularProducts: [Product], articles: [Article])>(latestProducts: [Product](), popularProducts: [Product](), articles: [Article]())
     
     private let articleListUseCase = ArticleListUseCase()
     private let productListUseCase = ProductListUseCase()
     
+    override init() {
+        super.init()
+        
+        canLoadMore = false
+    }
+    
     public func loadData(with disposeBag: DisposeBag) {
-        state.onNext(.loading(showHud: true))
+        let showHud = data.value.latestProducts.isEmpty && data.value.popularProducts.isEmpty && data.value.articles.isEmpty
+        state.onNext(.loading(showHud: showHud))
         Single.zip(productsSingle, popularSingle, articlesSingle).do()
             .subscribe(onSuccess: { [weak self] (latestProducts, popularProducts, articles) in
                 if let latestProducts = latestProducts, let popularProducts = popularProducts, let articles = articles {

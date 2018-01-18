@@ -52,6 +52,12 @@ class SearchViewModel: GridCollectionViewModel {
     
     // MARK: - private
     private func loadRemoteData() {
+        guard !searchPhrase.value.isEmpty else {
+            updateProducts(products: [Product]())
+            
+            return
+        }
+        
         let showHud = products.value.isEmpty
         state.onNext(.loading(showHud: showHud))
         productListUseCase.getProductList(with: paginationValue, searchPhrase: searchPhrase.value) { [weak self] (products, error) in
