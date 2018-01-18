@@ -85,6 +85,21 @@ class CheckoutViewModel: BaseViewModel {
         return variant
     }
     
+    public func updateShippingRate(with rate: ShippingRate) {
+        if let checkoutId = checkout.value?.id {
+            state.onNext(.loading(showHud: true))
+            checkoutUseCase.updateShippingRate(with: checkoutId, rate: rate, callback: { [weak self] (result, error) in
+                if let error = error {
+                    self?.state.onNext(.error(error: error))
+                }
+                if let checkout = result {
+                    self?.checkout.value = checkout
+                    self?.state.onNext(.content)
+                }
+            })
+        }
+    }
+    
     // MARK: - private
     private var cartItemsSingle: Single<[CartProduct]> {
         return Single.create(subscribe: { [weak self] (event) in

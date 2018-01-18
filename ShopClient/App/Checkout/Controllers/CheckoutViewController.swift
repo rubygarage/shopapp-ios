@@ -77,6 +77,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
         viewModel.checkout.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.tableView.reloadData()
+                self?.updatePlaceOrderButtonUI()
             })
             .disposed(by: disposeBag)
         
@@ -149,7 +150,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     }
     
     private func updatePlaceOrderButtonUI() {
-        let visible = viewModel.checkout.value != nil && viewModel.creditCard != nil && viewModel.billingAddress != nil
+        let visible = viewModel.checkout.value != nil && viewModel.creditCard != nil && viewModel.billingAddress != nil && viewModel.checkout.value?.shippingLine != nil
         placeOrderButton.isHidden = !visible
         placeOrderHeightConstraint.constant = visible ? kPlaceOrderHeightVisible : kPlaceOrderHeightInvisible
     }
@@ -217,5 +218,13 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
                 self?.returnFlowToSelf()
             }
         }
+    }
+}
+
+// MARK: - CheckoutShippingOptionsEnabledTableCellProtocol
+
+extension CheckoutViewController: CheckoutShippingOptionsEnabledTableCellProtocol {
+    func didSelect(shippingRate: ShippingRate) {
+        viewModel.updateShippingRate(with: shippingRate)
     }
 }

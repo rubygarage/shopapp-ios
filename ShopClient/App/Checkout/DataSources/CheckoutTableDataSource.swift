@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CheckoutCombinedProtocol: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, CheckoutPaymentAddCellProtocol, CheckoutTableDelegateProtocol, CheckoutCartTableViewCellDelegate, CheckoutPaymentEditTableCellProtocol {}
+protocol CheckoutCombinedProtocol: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, CheckoutPaymentAddCellProtocol, CheckoutTableDelegateProtocol, CheckoutCartTableViewCellDelegate, CheckoutPaymentEditTableCellProtocol, CheckoutShippingOptionsEnabledTableCellProtocol {}
 
 protocol CheckoutTableDataSourceProtocol: class {
     func cartProducts() -> [CartProduct]
@@ -105,15 +105,17 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     private func shippingOptionsCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         if delegate?.shippingAddress() != nil, let rates = delegate?.availableShippingRates(), let currencyCode = delegate?.checkout()?.currencyCode {
             let rate = rates[indexPath.row]
-            return shippingOptionsEnabledCell(with: tableView, indexPath: indexPath, rate: rate, currencyCode: currencyCode)
+            let selected = delegate?.checkout()?.shippingLine?.handle == rate.handle
+            return shippingOptionsEnabledCell(with: tableView, indexPath: indexPath, rate: rate, currencyCode: currencyCode, selected: selected)
         } else {
             return shippingOptionsDisabledCell(with: tableView, indexPath: indexPath)
         }
     }
     
-    private func shippingOptionsEnabledCell(with tableView: UITableView, indexPath: IndexPath, rate: ShippingRate, currencyCode: String) -> CheckoutShippingOptionsEnabledTableCell {
+    private func shippingOptionsEnabledCell(with tableView: UITableView, indexPath: IndexPath, rate: ShippingRate, currencyCode: String, selected: Bool) -> CheckoutShippingOptionsEnabledTableCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingOptionsEnabledTableCell.self), for: indexPath) as! CheckoutShippingOptionsEnabledTableCell
-        cell.configure(with: rate, currencyCode: currencyCode)
+        cell.delegate = delegate
+        cell.configure(with: rate, currencyCode: currencyCode, selected: selected)
         return cell
     }
     
