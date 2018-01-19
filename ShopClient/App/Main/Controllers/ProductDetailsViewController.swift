@@ -219,9 +219,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         let barHeight = statusBarHeight + navigationBarHeight
         let contentOffsetY = self.contentView.contentSize.height - barHeight - kProductDescriptionHeaderHeight - kProductRelatedItemsHeight
         
-        let imageName = descriptionContainerViewHeightConstraint.constant != kProductDescriptionHiddenHeight
-            ? "plus"
-            : "minus"
+        let image = descriptionContainerViewHeightConstraint.constant != kProductDescriptionHiddenHeight ? #imageLiteral(resourceName: "plus") : #imageLiteral(resourceName: "minus")
         
         let constant = descriptionContainerViewHeightConstraint.constant != kProductDescriptionHiddenHeight
             ? kProductDescriptionHiddenHeight
@@ -230,7 +228,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         descriptionContainerViewHeightConstraint.constant = constant
         
         UIView.animate(withDuration: kAddToCartChangesAnimationDuration, animations: {
-            self.descriptionStateImageView.image = UIImage(named: imageName)
+            self.descriptionStateImageView.image = image
             self.contentView.contentOffset = CGPoint(x: 0.0, y: contentOffsetY)
             self.view.layoutIfNeeded()
         })
