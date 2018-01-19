@@ -12,8 +12,9 @@ enum CheckoutSection: Int {
     case cart
     case shippingAddress
     case payment
+    case shippingOptions
     
-    static let allValues = [cart, shippingAddress, payment]
+    static let allValues = [cart, shippingAddress, payment, shippingOptions]
 }
 
 class CheckoutViewModel: BaseViewModel {
@@ -82,6 +83,21 @@ class CheckoutViewModel: BaseViewModel {
         }
         
         return variant
+    }
+    
+    public func updateShippingRate(with rate: ShippingRate) {
+        if let checkoutId = checkout.value?.id {
+            state.onNext(.loading(showHud: true))
+            checkoutUseCase.updateShippingRate(with: checkoutId, rate: rate, callback: { [weak self] (result, error) in
+                if let error = error {
+                    self?.state.onNext(.error(error: error))
+                }
+                if let checkout = result {
+                    self?.checkout.value = checkout
+                    self?.state.onNext(.content)
+                }
+            })
+        }
     }
     
     // MARK: - private

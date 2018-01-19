@@ -78,7 +78,7 @@ class PaymentDetailsFooterView: UIView {
         let formatter = NumberFormatter.formatter(with: checkout.currencyCode!)
         let subtotalPrice = NSDecimalNumber(decimal: checkout.subtotalPrice!)
         let discountPrice = NSDecimalNumber(value: 0)
-        let totalShippingPrice = NSDecimalNumber(value: 0)
+        let totalShippingPrice = checkout.shippingLine == nil ? NSDecimalNumber(value: 0) : NSDecimalNumber(string: checkout.shippingLine?.price)
         let totalPrice = NSDecimalNumber(decimal: checkout.totalPrice!)
         
         subtotalValueLabel.text = formatter.string(from: subtotalPrice)

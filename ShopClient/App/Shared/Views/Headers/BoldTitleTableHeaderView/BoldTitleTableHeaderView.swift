@@ -12,6 +12,7 @@ enum BoldTitleViewType {
     case shippingAddress
     case paymentInformation
     case payment
+    case shippingOptions
 }
 
 private let kTopMarginDefault: CGFloat = 15
@@ -26,11 +27,12 @@ class BoldTitleTableHeaderView: UIView {
     
     // MARK: - View lifecycle
     
-    init(type: BoldTitleViewType) {
+    init(type: BoldTitleViewType, disabled: Bool = false) {
         super.init(frame: CGRect.zero)
         
         headerViewType = type
         commonInit()
+        headerTitleLabel.textColor = disabled ? UIColor.gray : UIColor.black
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -52,17 +54,20 @@ class BoldTitleTableHeaderView: UIView {
     }
     
     private func setupConstraints() {
-        topMarginConstraint.constant = headerViewType == .payment ? kTopMarginPayment : kTopMarginDefault
+        let lowMarginSectionTypes: [BoldTitleViewType] = [.payment, .shippingOptions]
+        topMarginConstraint.constant = lowMarginSectionTypes.contains(headerViewType) ? kTopMarginPayment : kTopMarginDefault
     }
     
     private func populateViews() {
         switch headerViewType {
         case .shippingAddress:
-            headerTitleLabel.text = NSLocalizedString("Label.ShippingAddress", comment: String())
+            headerTitleLabel.text = "Label.ShippingAddress".localizable
         case BoldTitleViewType.paymentInformation:
-            headerTitleLabel.text = NSLocalizedString("Label.PaymentInformation", comment: String())
+            headerTitleLabel.text = "Label.PaymentInformation".localizable
         case .payment:
-            headerTitleLabel.text = NSLocalizedString("Label.Payment", comment: String())
+            headerTitleLabel.text = "Label.Payment".localizable
+        case .shippingOptions:
+            headerTitleLabel.text = "Label.ShippingOptions".localizable
         }
     }
 }

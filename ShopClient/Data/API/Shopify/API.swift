@@ -1089,9 +1089,16 @@ class API: NSObject, APIInterface, PaySessionDelegate {
             query.currencyCode()
             query.subtotalPrice()
             query.totalPrice()
+            query.availableShippingRates(self.availableShippingRatesQuery())
             query.shippingLine(self.shippingRateQuery())
             query.shippingAddress(self.mailingAddressQuery())
             query.lineItems(first: kShopifyItemsMaxCount, self.checkoutLineItemConnectionQuery())
+        }
+    }
+    
+    func availableShippingRatesQuery() -> (Storefront.AvailableShippingRatesQuery) -> Void {
+        return { (query: Storefront.AvailableShippingRatesQuery) in
+            query.shippingRates(self.shippingRateQuery())
         }
     }
     

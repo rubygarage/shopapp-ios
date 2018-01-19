@@ -76,6 +76,7 @@
 "Label.PaymentInformation" = "Payment Information";
 "Label.BillingAddress" = "Billing Address";
 "Label.Payment" = "Payment";
+"Label.ShippingOptions" = "Shipping Options";
 "Label.SameAsShippingAddress" = "Same as shipping address";
 "Label.LatestArrivals" = "Latest Arrivals";
 "Label.Popular" = "Popular";
@@ -115,6 +116,7 @@
 "Label.CreditCard.MaskedNumber" = "**%@";
 "Label.CreditCard.ExpirationDate" = "Exp : %@ / %@";
 "Label.Product.OptionTitle" = "%@:";
+"Label.Checkout.AddShippingAddress" = "Please, add shipping address first";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

@@ -8,18 +8,10 @@
 
 import UIKit
 
-protocol PaymentTypeTableCellProtocol: class {
-    func didPayment(with type: PaymentTypeSection)
-}
-
 class PaymentTypeTableViewCell: UITableViewCell {
     @IBOutlet private weak var paymentTypeLabel: UILabel!
     @IBOutlet private weak var paymentTypeImage: UIImageView!
-    @IBOutlet private weak var paymentSelectButton: UIButton!
-    
-    var typeSelected = false
-    
-    weak var delegate: PaymentTypeTableCellProtocol?
+    @IBOutlet private weak var arrowImageView: UIImageView!
     
     var type: PaymentTypeSection = .creditCard {
         didSet {
@@ -47,13 +39,6 @@ class PaymentTypeTableViewCell: UITableViewCell {
         }
         paymentTypeLabel.text = paymentTitle
         paymentTypeImage.image = paymentImage
-        paymentSelectButton.isSelected = typeSelected
-    }
-    
-    // MARK: - Actions
-    
-    @IBAction func selectPaymentTapped(_ sender: UIButton) {
-        paymentSelectButton.isSelected = true
-        delegate?.didPayment(with: type)
+        arrowImageView.isHidden = type == .applePay
     }
 }

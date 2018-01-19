@@ -18,7 +18,7 @@ class CheckoutTableDelegate: NSObject, UITableViewDelegate {
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if delegate?.checkout() != nil, section == CheckoutSection.payment.rawValue {
+        if delegate?.checkout() != nil, section == CheckoutSection.shippingOptions.rawValue {
             return PaymentDetailsFooterView.height
         }
         return 0
@@ -35,13 +35,16 @@ class CheckoutTableDelegate: NSObject, UITableViewDelegate {
             return BoldTitleTableHeaderView(type: .shippingAddress)
         case CheckoutSection.payment.rawValue:
             return BoldTitleTableHeaderView(type: .payment)
+        case CheckoutSection.shippingOptions.rawValue:
+            let disabled = delegate?.checkout()?.availableShippingRates == nil
+            return BoldTitleTableHeaderView(type: .shippingOptions, disabled: disabled)
         default:
             return nil
         }
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if let checkout = delegate?.checkout(), section == CheckoutSection.payment.rawValue {
+        if let checkout = delegate?.checkout(), section == CheckoutSection.shippingOptions.rawValue {
             return PaymentDetailsFooterView(checkout: checkout)
         }
         return nil

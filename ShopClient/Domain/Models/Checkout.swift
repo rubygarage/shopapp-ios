@@ -14,6 +14,7 @@ class Checkout: NSObject {
     var subtotalPrice: Decimal?
     var totalPrice: Decimal?
     var shippingLine: ShippingRate?
+    var availableShippingRates: [ShippingRate]?
     var shippingAddress: Address?
     var currencyCode: String?
     var lineItems = [LineItem]()

@@ -8,13 +8,14 @@
 
 import UIKit
 
-protocol CheckoutCombinedProtocol: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, CheckoutPaymentAddCellProtocol, CheckoutTableDelegateProtocol, CheckoutCartTableViewCellDelegate, CheckoutPaymentEditTableCellProtocol {}
+protocol CheckoutCombinedProtocol: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, CheckoutPaymentAddCellProtocol, CheckoutTableDelegateProtocol, CheckoutCartTableViewCellDelegate, CheckoutPaymentEditTableCellProtocol, CheckoutShippingOptionsEnabledTableCellProtocol {}
 
 protocol CheckoutTableDataSourceProtocol: class {
     func cartProducts() -> [CartProduct]
     func shippingAddress() -> Address?
     func billingAddress() -> Address?
     func creditCard() -> CreditCard?
+    func availableShippingRates() -> [ShippingRate]?
 }
 
 class CheckoutTableDataSource: NSObject, UITableViewDataSource {
@@ -27,6 +28,9 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == CheckoutSection.shippingOptions.rawValue {
+            return delegate?.availableShippingRates()?.count ?? 1
+        }
         return 1
     }
     
@@ -38,6 +42,8 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
             return shippingAddressCell(with: tableView, indexPath: indexPath)
         case CheckoutSection.payment.rawValue:
             return paymentCell(with: tableView, indexPath: indexPath)
+        case CheckoutSection.shippingOptions.rawValue:
+            return shippingOptionsCell(with: tableView, indexPath: indexPath)
         default:
             return UITableViewCell()
         }
@@ -94,5 +100,26 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
         cell.delegate = delegate
         cell.configure(with: billingAddress, creditCard: creditCard)
         return cell
+    }
+    
+    private func shippingOptionsCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        if delegate?.shippingAddress() != nil, let rates = delegate?.availableShippingRates(), let currencyCode = delegate?.checkout()?.currencyCode {
+            let rate = rates[indexPath.row]
+            let selected = delegate?.checkout()?.shippingLine?.handle == rate.handle
+            return shippingOptionsEnabledCell(with: tableView, indexPath: indexPath, rate: rate, currencyCode: currencyCode, selected: selected)
+        } else {
+            return shippingOptionsDisabledCell(with: tableView, indexPath: indexPath)
+        }
+    }
+    
+    private func shippingOptionsEnabledCell(with tableView: UITableView, indexPath: IndexPath, rate: ShippingRate, currencyCode: String, selected: Bool) -> CheckoutShippingOptionsEnabledTableCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingOptionsEnabledTableCell.self), for: indexPath) as! CheckoutShippingOptionsEnabledTableCell
+        cell.delegate = delegate
+        cell.configure(with: rate, currencyCode: currencyCode, selected: selected)
+        return cell
+    }
+    
+    private func shippingOptionsDisabledCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingOptionsDisabledTableCell {
+        return tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingOptionsDisabledTableCell.self), for: indexPath) as! CheckoutShippingOptionsDisabledTableCell
     }
 }

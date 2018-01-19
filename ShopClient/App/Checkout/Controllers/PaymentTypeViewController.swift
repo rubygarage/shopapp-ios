@@ -8,10 +8,13 @@
 
 import UIKit
 
-class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, PaymentTypeTableCellProtocol, PaymentTypeDataSourceProtocol {
+class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
     @IBOutlet weak var tableView: UITableView!
     
     private var tableDataSource: PaymentTypeDataSource!
+    // swiftlint:disable weak_delegate
+    private var tableDelegate: PaymentTypeDelegate!
+    // swiftlint:enable weak_delegate
     private var destinationTitle: String!
     
     var creditCardCompletion: CreditCardPaymentCompletion?
@@ -39,33 +42,17 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, Payme
         tableView.register(paymentTypeNib, forCellReuseIdentifier: String(describing: PaymentTypeTableViewCell.self))
         
         tableDataSource = PaymentTypeDataSource()
-        tableDataSource.delegate = self
         tableView.dataSource = tableDataSource
+        
+        tableDelegate = PaymentTypeDelegate()
+        tableDelegate.delegate = self
+        tableView.delegate = tableDelegate
         
         tableView.contentInset = TableView.paymentTypeContentInsets
     }
     
-    private func setupApplePay() {
+    fileprivate func setupApplePay() {
         viewModel.setupApplePay()
-    }
-    
-    // MARK: - PaymentTypeTableCellProtocol
-    
-    func didPayment(with type: PaymentTypeSection) {
-        viewModel.selectedType = type
-        tableView.reloadData()
-        switch type {
-        case .applePay:
-            setupApplePay()
-        default:
-            performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
-        }
-    }
-    
-    // MARK: - PaymentTypeDataSourceProtocol
-    
-    func isSelected(type: PaymentTypeSection) -> Bool {
-        return type == viewModel.selectedType
     }
     
     // MARK: - Segues
@@ -75,6 +62,21 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel>, Payme
             addressListViewController.title = "ControllerTitle.BillingAddress".localizable
             addressListViewController.addressListType = .billing
             addressListViewController.destinationCreditCardCompletion = creditCardCompletion
+        }
+    }
+}
+
+// MARK: - PaymentTypeDelegateProtocol
+
+extension PaymentTypeViewController: PaymentTypeDelegateProtocol {
+    func didSelectPayment(type: PaymentTypeSection) {
+        viewModel.selectedType = type
+        tableView.reloadData()
+        switch type {
+        case .applePay:
+            setupApplePay()
+        default:
+            performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
         }
     }
 }

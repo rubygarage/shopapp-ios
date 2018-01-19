@@ -31,5 +31,14 @@ extension Checkout {
             }
             lineItems = itemsArray
         }
+        if let rates = item?.availableShippingRates?.shippingRates {
+            var itemsArray = [ShippingRate]()
+            for rate in rates {
+                if let rateItem = ShippingRate(with: rate) {
+                    itemsArray.append(rateItem)
+                }
+            }
+            availableShippingRates = itemsArray
+        }
     }
 }
