@@ -243,7 +243,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         resetAddToCartButtonIfNeeded()
     }
     
-    //MARK: - SeeAllHeaderViewProtocol
+    // MARK: - SeeAllHeaderViewProtocol
     
     func didTapSeeAll(type: SeeAllViewType) {
         // TODO:
