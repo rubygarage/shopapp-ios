@@ -41,11 +41,11 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
     private func setupViews() {
         addCloseButton()
         title = "ControllerTitle.SignUp".localizable
-        emailTextFieldView.placeholder = "Placeholder.Email".localizable.uppercased()
+        emailTextFieldView.placeholder = "Placeholder.Email".localizable.required.uppercased()
         nameTextFieldView.placeholder = "Placeholder.Name".localizable.uppercased()
         lastNameTextFieldView.placeholder = "Placeholder.LastName".localizable.uppercased()
         phoneTextFieldView.placeholder = "Placeholder.PhoneNumber".localizable.uppercased()
-        passwordTextFieldView.placeholder = "Placeholder.CreatePassword".localizable.uppercased()
+        passwordTextFieldView.placeholder = "Placeholder.CreatePassword".localizable.required.uppercased()
         signUpButton.setTitle("Button.CreateNewAccount".localizable.uppercased(), for: .normal)
         
         let text = "Label.AcceptPoliciesAttributed".localizable

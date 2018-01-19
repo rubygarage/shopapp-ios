@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SDWebImage
 
 class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel> {
     @IBOutlet weak var articleImageView: UIImageView!
@@ -44,8 +43,7 @@ class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel> 
     }
     
     private func populateViews(with article: Article) {
-        let imageUrl = URL(string: article.image?.src ?? "")
-        articleImageView.sd_setImage(with: imageUrl)
+        articleImageView.set(image: article.image)
         articleTitleLabel.text = article.title
         authorNameLabel.text = article.author?.fullName
         articleContentLabel.text = article.content

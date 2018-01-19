@@ -37,15 +37,15 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     private func setupViews() {
         title = "ControllerTitle.AddNewAddress".localizable
         
-        countryTextFieldView.placeholder = "Placeholder.Country".localizable.uppercased()
-        nameTextFieldView.placeholder = "Placeholder.Name".localizable.uppercased()
-        lastNameTextFieldView.placeholder = "Placeholder.LastName".localizable.uppercased()
-        addressTextFieldView.placeholder = "Placeholder.Address".localizable.uppercased()
+        countryTextFieldView.placeholder = "Placeholder.Country".localizable.required.uppercased()
+        nameTextFieldView.placeholder = "Placeholder.Name".localizable.required.uppercased()
+        lastNameTextFieldView.placeholder = "Placeholder.LastName".localizable.required.uppercased()
+        addressTextFieldView.placeholder = "Placeholder.Address".localizable.required.uppercased()
         addressOptionalTextFieldView.placeholder = "Placeholder.AddressOptional".localizable.uppercased()
-        cityTextFieldView.placeholder = "Placeholder.City".localizable.uppercased()
+        cityTextFieldView.placeholder = "Placeholder.City".localizable.required.uppercased()
         stateTextFieldView.placeholder = "Placeholder.State".localizable.uppercased()
-        zipCodeTextFieldView.placeholder = "Placeholder.ZipCode".localizable.uppercased()
-        phoneTextFieldView.placeholder = "Placeholder.PhoneNumber".localizable.uppercased()
+        zipCodeTextFieldView.placeholder = "Placeholder.ZipCode".localizable.required.uppercased()
+        phoneTextFieldView.placeholder = "Placeholder.PhoneNumber".localizable.required.uppercased()
         submitButton.setTitle("Button.Submit".localizable.uppercased(), for: .normal)
         checkboxTitleLabel.text = "Label.DefaultShippingAddress".localizable
     }

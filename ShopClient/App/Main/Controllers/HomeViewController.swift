@@ -147,10 +147,6 @@ class HomeViewController: BaseTableViewController<HomeViewModel>, HomeTableDataS
             destinationTitle = "ControllerTitle.LatestArrivals".localizable
             sortingValue = .createdAt
             performSegue(withIdentifier: SegueIdentifiers.toProductsList, sender: self)
-        case .popular:
-            destinationTitle = "ControllerTitle.Popular".localizable
-            sortingValue = .popular
-            performSegue(withIdentifier: SegueIdentifiers.toProductsList, sender: self)
         case .blogPosts:
             performSegue(withIdentifier: SegueIdentifiers.toArticlesList, sender: self)
         default:

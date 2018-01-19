@@ -22,8 +22,8 @@ enum SeeAllViewType {
 class SeeAllTableHeaderView: UIView {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var sectionTitleLabel: UILabel!
-    @IBOutlet private weak var seeAllButton: UIButton!
     @IBOutlet private weak var separatprHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var seeAllButton: UIButton!
     
     private var headerViewType = SeeAllViewType.latestArrivals
     
@@ -72,6 +72,10 @@ class SeeAllTableHeaderView: UIView {
             sectionTitleLabel.text = "Label.MyCart".localizable
         }
         seeAllButton.setTitle("Button.SeeAll".localizable, for: .normal)
+    }
+    
+    func hideSeeAllButton() {
+        seeAllButton.isHidden = true
     }
     
     // MARK: - Actions

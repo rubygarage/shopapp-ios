@@ -36,7 +36,7 @@ class ForgotPasswordViewController: BaseViewController<ForgotPasswordViewModel> 
         title = "ControllerTitle.ForgotPassword".localizable
         titleLabel.text = "Label.ForgotPassword.PasswordTitle".localizable
         descriptionLabel.text = "Label.ForgotPassword.PasswordDescription".localizable
-        emailTextFieldView.placeholder = "Placeholder.Email".localizable.uppercased()
+        emailTextFieldView.placeholder = "Placeholder.Email".localizable.required.uppercased()
         forgotPasswordButton.setTitle("Button.Submit".localizable.uppercased(), for: .normal)
         
         emailTextFieldView.textField.rx.text.map({ $0 ?? "" })

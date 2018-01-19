@@ -60,6 +60,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         super.viewWillAppear(animated)
         
         updateNavigationBar()
+        resetAddToCartButtonIfNeeded()
     }
     
     // MARK: - setup
@@ -155,7 +156,16 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     private func updateAddToCartButton() {
         productAddedToCart = true
-        self.addToCartButton.setTitle("Button.AddedToCart".localizable.uppercased(), for: .normal)
+        addToCartButton.setTitle("Button.AddedToCart".localizable.uppercased(), for: .normal)
+    }
+    
+    private func resetAddToCartButtonIfNeeded() {
+        guard productAddedToCart else {
+            return
+        }
+        
+        productAddedToCart = false
+        addToCartButton.setTitle("Button.AddToCart".localizable.uppercased(), for: .normal)
     }
     
     private func addProductToCart() {
@@ -200,7 +210,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
             ? kProductDescriptionHiddenHeight
             : descriptionLabel.frame.size.height + kProductDescriptionAdditionalHeight
         
-        self.descriptionContainerViewHeightConstraint.constant = constant
+        descriptionContainerViewHeightConstraint.constant = constant
         
         UIView.animate(withDuration: kAddToCartChangesAnimationDuration, animations: {
             self.contentView.contentOffset = CGPoint(x: 0.0, y: contentOffsetY)
@@ -222,6 +232,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     
     func didSelectOption(with name: String, value: String) {
         viewModel.selectOption(with: name, value: value)
+        resetAddToCartButtonIfNeeded()
     }
     
     // MARK: - ErrorViewProtocol

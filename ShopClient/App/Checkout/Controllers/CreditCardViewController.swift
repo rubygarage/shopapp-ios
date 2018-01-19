@@ -30,11 +30,11 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
     
     private func setupViews() {
         title = "ControllerTitle.CreditCard".localizable
-        holderNameTextFieldView.placeholder = "Placeholder.CardHolderName".localizable.uppercased()
-        cardNumberTextFieldView.placeholder = "Placeholder.CardNumber".localizable.uppercased()
-        securityCodeTextFieldView.placeholder = "Placeholder.CVV".localizable.uppercased()
-        expirationDateLabel.text = "Label.ExpirationDate".localizable.uppercased()
-        submitButton.setTitle("Button.Submit".localizable.uppercased(), for: .normal)
+        holderNameTextFieldView.placeholder = "Placeholder.CardHolderName".localizable.required.uppercased()
+        cardNumberTextFieldView.placeholder = "Placeholder.CardNumber".localizable.required.uppercased()
+        securityCodeTextFieldView.placeholder = "Placeholder.CVV".localizable.required.uppercased()
+        expirationDateLabel.text = "Label.ExpirationDate".localizable.required.uppercased()
+        submitButton.setTitle("Button.PayWithThisCard".localizable.uppercased(), for: .normal)
     }
     
     private func setupViewModel() {

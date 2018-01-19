@@ -18,6 +18,7 @@ protocol SearchTitleViewProtocol: class {
     func didTapCart()
     func didTapBack()
     func didStartEditing()
+    func didTapClear()
 }
 
 private let kAnimationDuration: TimeInterval = 0.3
@@ -152,6 +153,7 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     @IBAction func clearButtonTapped(_ sender: UIButton) {
         searchTextField.text = nil
         updateClearButtonIfNeeded()
+        delegate?.didTapClear()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

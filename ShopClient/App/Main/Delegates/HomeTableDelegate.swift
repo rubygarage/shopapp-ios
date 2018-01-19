@@ -37,6 +37,11 @@ class HomeTableDelegate: NSObject, UITableViewDelegate {
         
         let view = SeeAllTableHeaderView(type: type)
         view.delegate = delegate
+        
+        if section == HomeSection.popular.rawValue {
+            view.hideSeeAllButton()
+        }
+        
         return view
     }
     
