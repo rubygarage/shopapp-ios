@@ -10,6 +10,6 @@ import Foundation
 
 extension String {
     var required: String {
-        return "\(required)*"
+        return "\(self)*"
     }
 }

@@ -136,7 +136,6 @@
 		6131D2381FB31395008330C0 /* CartProductDAOInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6131D2371FB31395008330C0 /* CartProductDAOInterface.swift */; };
 		6131D2451FB33F7D008330C0 /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6131D2441FB33F7D008330C0 /* DAO.swift */; };
 		6131D2471FB33FCB008330C0 /* DAOCartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6131D2461FB33FCB008330C0 /* DAOCartProduct.swift */; };
-		6131D2491FB34563008330C0 /* DAOShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6131D2481FB34563008330C0 /* DAOShop.swift */; };
 		613258611FD6EA4C00513854 /* SeeAllTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613258601FD6EA4C00513854 /* SeeAllTableHeaderView.swift */; };
 		613258631FD6EA5500513854 /* SeeAllTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 613258621FD6EA5500513854 /* SeeAllTableHeaderView.xib */; };
 		6133DAD21FB21A6F00156971 /* CartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6133DAD11FB21A6F00156971 /* CartButtonView.swift */; };
@@ -204,7 +203,6 @@
 		618A43811F9F491E0066F053 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618A43801F9F491E0066F053 /* Repository.swift */; };
 		618A43831F9F4EF90066F053 /* Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618A43821F9F4EF90066F053 /* Policy.swift */; };
 		618A43851F9F4F340066F053 /* ShopifyPolicyAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618A43841F9F4F340066F053 /* ShopifyPolicyAdapter.swift */; };
-		618A43871F9F56930066F053 /* ShopDAOInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618A43861F9F56930066F053 /* ShopDAOInterface.swift */; };
 		618A43891F9F850A0066F053 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618A43881F9F850A0066F053 /* Product.swift */; };
 		618A438B1F9F85F20066F053 /* ShopifyProductAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618A438A1F9F85F20066F053 /* ShopifyProductAdapter.swift */; };
 		618B4D3F1FE151F00001F68D /* PopularTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B4D3E1FE151F00001F68D /* PopularTableDataSource.swift */; };
@@ -441,7 +439,6 @@
 		6131D2371FB31395008330C0 /* CartProductDAOInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartProductDAOInterface.swift; sourceTree = "<group>"; };
 		6131D2441FB33F7D008330C0 /* DAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
 		6131D2461FB33FCB008330C0 /* DAOCartProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOCartProduct.swift; sourceTree = "<group>"; };
-		6131D2481FB34563008330C0 /* DAOShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOShop.swift; sourceTree = "<group>"; };
 		613258601FD6EA4C00513854 /* SeeAllTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllTableHeaderView.swift; sourceTree = "<group>"; };
 		613258621FD6EA5500513854 /* SeeAllTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeeAllTableHeaderView.xib; sourceTree = "<group>"; };
 		6133DAD11FB21A6F00156971 /* CartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartButtonView.swift; sourceTree = "<group>"; };
@@ -511,7 +508,6 @@
 		618A43801F9F491E0066F053 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		618A43821F9F4EF90066F053 /* Policy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Policy.swift; sourceTree = "<group>"; };
 		618A43841F9F4F340066F053 /* ShopifyPolicyAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyPolicyAdapter.swift; sourceTree = "<group>"; };
-		618A43861F9F56930066F053 /* ShopDAOInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDAOInterface.swift; sourceTree = "<group>"; };
 		618A43881F9F850A0066F053 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		618A438A1F9F85F20066F053 /* ShopifyProductAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyProductAdapter.swift; sourceTree = "<group>"; };
 		618B4D3E1FE151F00001F68D /* PopularTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTableDataSource.swift; sourceTree = "<group>"; };
@@ -1614,7 +1610,6 @@
 				61C95E991FB347FE00543B40 /* Extensions */,
 				6131D2441FB33F7D008330C0 /* DAO.swift */,
 				6131D2461FB33FCB008330C0 /* DAOCartProduct.swift */,
-				6131D2481FB34563008330C0 /* DAOShop.swift */,
 			);
 			path = CoreStore;
 			sourceTree = "<group>";
@@ -1853,7 +1848,6 @@
 			isa = PBXGroup;
 			children = (
 				61AFA3F21F9DFCE7004B9D53 /* DAOInterface.swift */,
-				618A43861F9F56930066F053 /* ShopDAOInterface.swift */,
 				6131D2371FB31395008330C0 /* CartProductDAOInterface.swift */,
 			);
 			path = Interface;
@@ -2308,7 +2302,6 @@
 				0B9B1E3C1FF50CC400FECA8E /* AuthProtocol.swift in Sources */,
 				61C95E9D1FB34B9F00543B40 /* DAOProductVariantHelper.swift in Sources */,
 				61A54BED1FF5252600D4D151 /* AccountLoggedHeaderView.swift in Sources */,
-				6131D2491FB34563008330C0 /* DAOShop.swift in Sources */,
 				61AE67031FE95034007229DA /* SearchCollectionDataSource.swift in Sources */,
 				0B9B1E381FF4EB4700FECA8E /* LoginUseCase.swift in Sources */,
 				615A976B1FA0907900C6095D /* ShopifyImageAdapter.swift in Sources */,
@@ -2394,7 +2387,6 @@
 				6133DAD21FB21A6F00156971 /* CartButtonView.swift in Sources */,
 				0B4EA3481FFBBF9D000C7A80 /* ResetPasswordUseCase.swift in Sources */,
 				61E76E1B1FB46C0200AE5FB4 /* DAOImageHelper.swift in Sources */,
-				618A43871F9F56930066F053 /* ShopDAOInterface.swift in Sources */,
 				6152B1281F791A1100045A42 /* ArticlesListTableDelegate.swift in Sources */,
 				6152B1241F7914E800045A42 /* ArticlesListViewController.swift in Sources */,
 				618B4D3F1FE151F00001F68D /* PopularTableDataSource.swift in Sources */,
