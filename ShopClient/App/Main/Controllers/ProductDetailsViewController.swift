@@ -22,7 +22,7 @@ private let kProductDescriptionHeaderHeight = CGFloat(60.0)
 private let kProductDescriptionHiddenHeight = CGFloat(0.0)
 private let kProductDescriptionAdditionalHeight = CGFloat(40.0)
 
-class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerProtocol, ProductOptionsControllerProtocol {
+class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerProtocol, ProductOptionsControllerProtocol, SeeAllHeaderViewProtocol {
     @IBOutlet var contentView: TPKeyboardAvoidingScrollView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionStateImageView: UIImageView!
@@ -39,6 +39,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         }
     }
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var relatedItemsHeaderView: SeeAllTableHeaderView!
     
     var productId: String!
     var productVariant: ProductVariant!
@@ -69,6 +70,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         quantityTitleLabel.text = "Label.Quantity".localizable
         addToCartButton.setTitle("Button.AddToCart".localizable.uppercased(), for: .normal)
         addToCartButton.setTitle("Button.ProductTemporaryUnavailable".localizable.uppercased(), for: .disabled)
+        relatedItemsHeaderView.delegate = self
     }
     
     private func setupViewModel() {
@@ -239,6 +241,12 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     func didSelectOption(with name: String, value: String) {
         viewModel.selectOption(with: name, value: value)
         resetAddToCartButtonIfNeeded()
+    }
+    
+    //MARK: - SeeAllHeaderViewProtocol
+    
+    func didTapSeeAll(type: SeeAllViewType) {
+        // TODO:
     }
     
     // MARK: - ErrorViewProtocol

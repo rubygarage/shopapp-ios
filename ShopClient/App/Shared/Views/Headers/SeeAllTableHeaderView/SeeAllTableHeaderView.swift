@@ -17,6 +17,7 @@ enum SeeAllViewType {
     case popular
     case blogPosts
     case myCart
+    case relatedItems
 }
 
 class SeeAllTableHeaderView: UIView {
@@ -25,7 +26,7 @@ class SeeAllTableHeaderView: UIView {
     @IBOutlet private weak var separatprHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var seeAllButton: UIButton!
     
-    private var headerViewType = SeeAllViewType.latestArrivals
+    private var headerViewType = SeeAllViewType.relatedItems
     
     weak var delegate: SeeAllHeaderViewProtocol?
     
@@ -70,6 +71,8 @@ class SeeAllTableHeaderView: UIView {
             sectionTitleLabel.text = "Label.BlogPosts".localizable
         case .myCart:
             sectionTitleLabel.text = "Label.MyCart".localizable
+        case .relatedItems:
+            sectionTitleLabel.text = "Label.RelatedItems".localizable
         }
         seeAllButton.setTitle("Button.SeeAll".localizable, for: .normal)
     }
