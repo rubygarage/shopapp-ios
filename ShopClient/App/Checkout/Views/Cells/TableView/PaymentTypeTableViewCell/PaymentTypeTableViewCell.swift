@@ -11,7 +11,7 @@ import UIKit
 class PaymentTypeTableViewCell: UITableViewCell {
     @IBOutlet private weak var paymentTypeLabel: UILabel!
     @IBOutlet private weak var paymentTypeImage: UIImageView!
-    @IBOutlet weak var arrowImageView: UIImageView!
+    @IBOutlet private weak var arrowImageView: UIImageView!
     
     var type: PaymentTypeSection = .creditCard {
         didSet {

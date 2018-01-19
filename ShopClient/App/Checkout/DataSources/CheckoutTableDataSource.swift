@@ -29,7 +29,7 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == CheckoutSection.shippingOptions.rawValue {
-            return delegate?.shippingAddress() != nil ? delegate?.availableShippingRates()?.count ?? 1 : 1
+            return delegate?.availableShippingRates()?.count ?? 1
         }
         return 1
     }
