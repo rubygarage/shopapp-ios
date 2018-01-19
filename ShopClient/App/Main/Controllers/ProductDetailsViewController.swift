@@ -25,6 +25,7 @@ private let kProductDescriptionAdditionalHeight = CGFloat(40.0)
 class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerProtocol, ProductOptionsControllerProtocol {
     @IBOutlet var contentView: TPKeyboardAvoidingScrollView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionStateImageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var quantityTitleLabel: UILabel!
@@ -206,6 +207,10 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         let barHeight = statusBarHeight + navigationBarHeight
         let contentOffsetY = self.contentView.contentSize.height - barHeight - kProductDescriptionHeaderHeight
         
+        let imageName = descriptionContainerViewHeightConstraint.constant != kProductDescriptionHiddenHeight
+            ? "plus"
+            : "minus"
+        
         let constant = descriptionContainerViewHeightConstraint.constant != kProductDescriptionHiddenHeight
             ? kProductDescriptionHiddenHeight
             : descriptionLabel.frame.size.height + kProductDescriptionAdditionalHeight
@@ -213,6 +218,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         descriptionContainerViewHeightConstraint.constant = constant
         
         UIView.animate(withDuration: kAddToCartChangesAnimationDuration, animations: {
+            self.descriptionStateImageView.image = UIImage(named: imageName)
             self.contentView.contentOffset = CGPoint(x: 0.0, y: contentOffsetY)
             self.view.layoutIfNeeded()
         })
