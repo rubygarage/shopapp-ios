@@ -81,6 +81,10 @@ class SeeAllTableHeaderView: UIView {
         seeAllButton.isHidden = true
     }
     
+    func hideSeparator() {
+        setupConstraints(separatorVisible: false)
+    }
+    
     // MARK: - Actions
     
     @IBAction func seeAllTapped(_ sender: UIButton) {

@@ -10,6 +10,7 @@ import UIKit
 
 class ProductsListViewController: GridCollectionViewController<ProductsListViewModel> {
     var sortingValue: SortingValue!
+    var keyPhrase: String?
     
     override func viewDidLoad() {
         viewModel = ProductsListViewModel()
@@ -32,6 +33,7 @@ class ProductsListViewController: GridCollectionViewController<ProductsListViewM
     
     private func setupViewModel() {
         viewModel.sortingValue = sortingValue
+        viewModel.keyPhrase = keyPhrase
         
         viewModel.products.asObservable()
             .subscribe(onNext: { [weak self] _ in

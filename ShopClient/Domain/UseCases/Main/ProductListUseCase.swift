@@ -19,8 +19,8 @@ struct ProductListUseCase {
         Repository.shared.getProductList(perPage: kPopuarSectionItemsMaxCount, sortBy: SortingValue.popular, callback: callback)
     }
     
-    public func getProductList(with paginationValue: Any?, sortingValue: SortingValue, reverse: Bool, _ callback: @escaping RepoCallback<[Product]>) {
-        Repository.shared.getProductList(paginationValue: paginationValue, sortBy: sortingValue, reverse: reverse, callback: callback)
+    public func getProductList(with paginationValue: Any?, sortingValue: SortingValue, keyPhrase: String? = nil, reverse: Bool, _ callback: @escaping RepoCallback<[Product]>) {
+        Repository.shared.getProductList(paginationValue: paginationValue, sortBy: sortingValue, keyPhrase: keyPhrase, reverse: reverse, callback: callback)
     }
     
     public func getProductList(with paginationValue: Any?, searchPhrase: String, _ callback: @escaping RepoCallback<[Product]>) {

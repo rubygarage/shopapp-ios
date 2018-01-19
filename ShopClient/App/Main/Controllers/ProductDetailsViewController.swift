@@ -19,10 +19,11 @@ private let kBottomViewColorDisabled = UIColor(red: 0.9, green: 0.9, blue: 0.9, 
 private let kAddToCartChangesAnimationDuration: TimeInterval = 0.33
 
 private let kProductDescriptionHeaderHeight = CGFloat(60.0)
+private let kProductRelatedItemsHeight = CGFloat(291.0)
 private let kProductDescriptionHiddenHeight = CGFloat(0.0)
 private let kProductDescriptionAdditionalHeight = CGFloat(40.0)
 
-class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerProtocol, ProductOptionsControllerProtocol, SeeAllHeaderViewProtocol {
+class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerProtocol, ProductOptionsControllerProtocol, SeeAllHeaderViewProtocol, LastArrivalsCellDelegate {
     @IBOutlet var contentView: TPKeyboardAvoidingScrollView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionStateImageView: UIImageView!
@@ -40,6 +41,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     }
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var relatedItemsHeaderView: SeeAllTableHeaderView!
+    @IBOutlet weak var relatedItemsView: LastArrivalsTableViewCell!
     
     var productId: String!
     var productVariant: ProductVariant!
@@ -71,6 +73,8 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         addToCartButton.setTitle("Button.AddToCart".localizable.uppercased(), for: .normal)
         addToCartButton.setTitle("Button.ProductTemporaryUnavailable".localizable.uppercased(), for: .disabled)
         relatedItemsHeaderView.delegate = self
+        relatedItemsHeaderView.hideSeparator()
+        relatedItemsView.cellDelegate = self
     }
     
     private func setupViewModel() {
@@ -84,6 +88,12 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         viewModel.product.asObservable()
             .subscribe(onNext: { [weak self] product in
                 self?.populateViews(product: product)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.relatedItems.asObservable()
+            .subscribe(onNext: { [weak self] products in
+                self?.relatedItemsView.configure(with: products)
             })
             .disposed(by: disposeBag)
         
@@ -207,7 +217,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
         let navigationBarHeight = navigationController?.navigationBar.frame.size.height ?? CGFloat(0.0)
         let barHeight = statusBarHeight + navigationBarHeight
-        let contentOffsetY = self.contentView.contentSize.height - barHeight - kProductDescriptionHeaderHeight
+        let contentOffsetY = self.contentView.contentSize.height - barHeight - kProductDescriptionHeaderHeight - kProductRelatedItemsHeight
         
         let imageName = descriptionContainerViewHeightConstraint.constant != kProductDescriptionHiddenHeight
             ? "plus"
@@ -246,7 +256,18 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     // MARK: - SeeAllHeaderViewProtocol
     
     func didTapSeeAll(type: SeeAllViewType) {
-        // TODO:
+        performSegue(withIdentifier: SegueIdentifiers.toProductsList, sender: self)
+    }
+    
+    // MARK: - LastArrivalsCellDelegate
+    
+    func didSelectLastArrivalsProduct(at index: Int) {
+        if index < viewModel.relatedItems.value.count {
+            let selectedProduct = viewModel.relatedItems.value[index]
+            let productDetailsViewController = UIStoryboard.main().instantiateViewController(withIdentifier: ControllerIdentifier.productDetails) as! ProductDetailsViewController
+            productDetailsViewController.productId = selectedProduct.id
+            navigationController?.pushViewController(productDetailsViewController, animated: true)
+        }
     }
     
     // MARK: - ErrorViewProtocol
@@ -261,6 +282,10 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         } else if let productOptionsViewController = segue.destination as? ProductOptionsViewController {
             productOptionsViewController.controllerDelegate = self
             self.productOptionsViewController = productOptionsViewController
+        } else if let productsListViewController = segue.destination as? ProductsListViewController {
+            productsListViewController.title = "Label.RelatedItems".localizable
+            productsListViewController.sortingValue = .type
+            productsListViewController.keyPhrase = viewModel.product.value?.type
         }
     }
 }

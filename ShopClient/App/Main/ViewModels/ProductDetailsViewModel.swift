@@ -12,6 +12,7 @@ typealias SelectedVariant = (variant: ProductVariant?, allOptions: [ProductOptio
 
 class ProductDetailsViewModel: BaseViewModel {
     var product = Variable<Product?>(nil)
+    var relatedItems = Variable<[Product]>([Product]())
     var selectedVariant = PublishSubject<SelectedVariant>()
     var quantity = Variable<Int>(1)
     
@@ -27,6 +28,7 @@ class ProductDetailsViewModel: BaseViewModel {
     
     private let addCartProductUseCase = AddCartProductUseCase()
     private let productUseCase = ProductUseCase()
+    private let productListUseCase = ProductListUseCase()
     
     private var productOptions = [ProductOption]()
     private var selectedOptions = [SelectedOption]()
@@ -47,6 +49,7 @@ class ProductDetailsViewModel: BaseViewModel {
                 }
                 self?.state.onNext(.content)
             }
+            self?.loadRelatedItems()
         }
     }
     
@@ -119,6 +122,19 @@ class ProductDetailsViewModel: BaseViewModel {
         if let allOptions = product.value?.options, let currency = product.value?.currency {
             let result = SelectedVariant(variant: variant, allOptions: allOptions, selectedOptions: selectedOptions, currency: currency)
             selectedVariant.onNext(result)
+        }
+    }
+    
+    private func loadRelatedItems() {
+        state.onNext(.loading(showHud: false))
+        productListUseCase.getProductList(with: nil, sortingValue: SortingValue.type, keyPhrase: product.value?.type, reverse: false) { [weak self] (products, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            }
+            if let productsArray = products {
+                self?.relatedItems.value = productsArray
+                self?.state.onNext(.content)
+            }
         }
     }
 }

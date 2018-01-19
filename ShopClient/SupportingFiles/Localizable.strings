@@ -63,6 +63,7 @@
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";
 "SortingValue.Popular" = "By popularity";
+"SortingValue.Type" = "By type";
 
 "Label.PriceFrom" = "From %@";
 "Label.Quantity" = "QTY:";
