@@ -11,11 +11,11 @@ import Foundation
 import SDWebImage
 
 extension UIImageView {
-    func set(image: Image?, initialContentMode: UIViewContentMode = .center) {
-        let imageUrl = URL(string: image?.src ?? "")
+    func set(image remoteImage: Image?, initialContentMode: UIViewContentMode = .center) {
+        let imageUrl = URL(string: remoteImage?.src ?? "")
         let placeholderImage = UIImage(named: "placeholder")
         contentMode = initialContentMode
-        self.image = placeholderImage
+        image = placeholderImage
         sd_setImage(with: imageUrl, placeholderImage: placeholderImage) { [weak self] (_, error, _, _) in
             if error == nil {
                 self?.contentMode = .scaleAspectFit

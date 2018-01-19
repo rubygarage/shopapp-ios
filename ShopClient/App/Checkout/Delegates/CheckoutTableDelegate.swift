@@ -29,7 +29,7 @@ class CheckoutTableDelegate: NSObject, UITableViewDelegate {
         case CheckoutSection.cart.rawValue:
             let view = SeeAllTableHeaderView(type: .myCart, separatorVisible: true)
             view.delegate = delegate
-            view.seeAllButton.isHidden = true
+            view.hideSeeAllButton()
             return view
         case CheckoutSection.shippingAddress.rawValue:
             return BoldTitleTableHeaderView(type: .shippingAddress)
