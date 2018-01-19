@@ -9,10 +9,10 @@
 import MobileBuySDK
 import KeychainSwift
 
-private let kShopifyStorefrontAccessToken = "317392940ba3519bcfa070943900b1de"
-private let kShopifyStorefrontURL = "blablablstore.myshopify.com"
+private let kShopifyStorefrontAccessToken = "44fc90e5043e0a5e7ce5e95e1c30018f"
+private let kShopifyStorefrontURL = "rubytestruby.myshopify.com"
 private let kShopifyItemsMaxCount: Int32 = 250
-private let kShopifyStoreName = "blablablstore"
+private let kShopifyStoreName = "rubytestruby"
 private let kMerchantID = "merchant.com.rubygarage.shopclient.test"
 private let kShopifyPaymetTypeApplePay = "apple_pay"
 
