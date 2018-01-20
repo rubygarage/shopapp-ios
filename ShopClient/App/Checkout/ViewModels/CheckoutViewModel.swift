@@ -169,11 +169,11 @@ class CheckoutViewModel: BaseViewModel {
     private func placeOrderAction() {
         if let checkout = checkout.value, let card = creditCard, let billingAddress = billingAddress {
             state.onNext(.loading(showHud: true))
-            checkoutUseCase.pay(with: card, checkout: checkout, billingAddress: billingAddress) { [weak self] (success, error) in
+            checkoutUseCase.pay(with: card, checkout: checkout, billingAddress: billingAddress) { [weak self] (response, error) in
                 if let error = error {
                     self?.state.onNext(.error(error: error))
                 }
-                if let success = success {
+                if let success = response, success == true {
                     self?.processPlaceOrderResponse(with: success)
                     self?.state.onNext(.content)
                 }

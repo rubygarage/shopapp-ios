@@ -106,11 +106,10 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
     }
     
     private func process(criticalError: CriticalError?) {
+        loadingView.removeFromSuperview()
         showToast(with: criticalError?.errorMessage)
         if self is HomeViewController == false {
             setHomeController()
-        } else {
-            loadingView.removeFromSuperview()
         }
     }
     

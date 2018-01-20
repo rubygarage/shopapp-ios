@@ -496,16 +496,32 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         let query = completePayQuery(checkoutId: checkoutId, paymentInput: paymentInput)
         let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
             let mutation = response?.checkoutCompleteWithCreditCard
-            if let checkout = mutation?.checkout, let payment = mutation?.payment {
-                let success = checkout.ready && payment.ready
-                callback(success, nil)
+            if mutation?.checkout != nil && mutation?.payment != nil {
+                self?.completePayPolling(with: checkoutId, callback: callback)
             } else if let error = response?.checkoutCompleteWithCreditCard?.userErrors.first {
                 let responseError = self?.process(error: error)
-                callback(nil, responseError)
+                callback(false, responseError)
+            } else {
+                let responseError = self?.process(error: error)
+                callback(false, responseError)
+            }
+        })
+        run(task: task, callback: callback)
+    }
+    
+    private func completePayPolling(with checkoutId: GraphQL.ID, callback: @escaping RepoCallback<Bool>) {
+        let retry = Graph.RetryHandler<Storefront.QueryRoot>(endurance: .finite(30)) { (response, _) -> Bool in
+            return (response?.node as? Storefront.Checkout)?.order == nil
+        }
+        
+        let query = checkoutOrderQuery(with: checkoutId)
+        let task  = client?.queryGraphWith(query, retryHandler: retry) { response, error in
+            if (response?.node as? Storefront.Checkout)?.order?.id != nil {
+                callback(true, nil)
             } else {
                 callback(false, ContentError(with: error))
             }
-        })
+        }
         run(task: task, callback: callback)
     }
     
@@ -934,6 +950,24 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         }
     }
     
+    private func paymentNodeQuery(with paymentId: GraphQL.ID) -> Storefront.QueryRootQuery {
+        return Storefront.buildQuery { $0
+            .node(id: paymentId) { $0
+                .onPayment(subfields: paymentQuery())
+            }
+        }
+    }
+    
+    private func checkoutOrderQuery(with checkoutId: GraphQL.ID) -> Storefront.QueryRootQuery {
+        return Storefront.buildQuery({ $0
+            .node(id: checkoutId, { $0
+                .onCheckout(subfields: { $0
+                    .order(orderQuery())
+                })
+            })
+        })
+    }
+    
     // MARK: - Subqueries
     
     private func productConnectionQuery() -> (Storefront.ProductConnectionQuery) -> Void {
@@ -1277,11 +1311,11 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         }
     }
     
-    private func paymentNodeQuery(with paymentId: GraphQL.ID) -> Storefront.QueryRootQuery {
-        return Storefront.buildQuery { $0
-            .node(id: paymentId) { $0
-                .onPayment(subfields: self.paymentQuery())
-            }
+    private func orderQuery() -> (Storefront.OrderQuery) -> Void {
+        return { (query: Storefront.OrderQuery) in
+            query.id()
+            query.orderNumber()
+            query.totalPrice()
         }
     }
     
