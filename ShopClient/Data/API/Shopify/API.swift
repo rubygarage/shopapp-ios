@@ -44,7 +44,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
                 .privacyPolicy(policyQuery())
                 .refundPolicy(policyQuery())
                 .termsOfService(policyQuery())
-                .paymentSettings(self.paymentSettingsQuery())
+                .paymentSettings(paymentSettingsQuery())
             }
         }
         
@@ -388,7 +388,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     func getShopCurrency(callback: @escaping RepoCallback<Storefront.PaymentSettings>) {
         let query = Storefront.buildQuery { $0
             .shop { $0
-                .paymentSettings(self.paymentSettingsQuery())
+                .paymentSettings(paymentSettingsQuery())
             }
         }
         
@@ -420,8 +420,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
                     .subtotalPrice()
                     .totalShippingPrice()
                     .totalPrice()
-                    .shippingAddress(self.mailingAddressQuery())
-                    .lineItems(first: kShopifyItemsMaxCount, self.lineItemConnectionQuery())
+                    .shippingAddress(mailingAddressQuery())
+                    .lineItems(first: kShopifyItemsMaxCount, lineItemConnectionQuery())
                 }
             }
         }
@@ -648,7 +648,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
                             .orderNumber()
                             .processedAt()
                             .totalPrice()
-                            .lineItems(first: kShopifyItemsMaxCount, self.lineItemConnectionQuery())
+                            .lineItems(first: kShopifyItemsMaxCount, lineItemConnectionQuery())
                         }
                     }
                 }
@@ -715,7 +715,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         return Storefront.buildQuery { $0
             .shop { $0
                 .name()
-                .paymentSettings(self.paymentSettingsQuery())
+                .paymentSettings(paymentSettingsQuery())
                 .products(first: Int32(perPage), after: after as? String, reverse: reverse, sortKey: sortKey, query: query, self.productConnectionQuery())
             }
         }
@@ -725,10 +725,10 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         let nodeId = GraphQL.ID(rawValue: id)
         return Storefront.buildQuery({ $0
             .shop({ $0
-                .paymentSettings(self.paymentSettingsQuery())
+                .paymentSettings(paymentSettingsQuery())
             })
             .node(id: nodeId, { $0
-                .onProduct(subfields: self.productQuery(additionalInfoNedded: true))
+                .onProduct(subfields: productQuery(additionalInfoNedded: true))
             })
         })
     }
@@ -736,8 +736,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     private func categoryListQuery(perPage: Int, after: Any?, sortBy: SortingValue?, reverse: Bool) -> Storefront.QueryRootQuery {
         return Storefront.buildQuery({ $0
             .shop({ $0
-                .paymentSettings(self.paymentSettingsQuery())
-                .collections(first: Int32(perPage), self.collectionConnectionQuery(perPage: perPage, after: after, sortBy: sortBy, reverse: reverse))
+                .paymentSettings(paymentSettingsQuery())
+                .collections(first: Int32(perPage), collectionConnectionQuery(perPage: perPage, after: after, sortBy: sortBy, reverse: reverse))
             })
         })
     }
@@ -746,10 +746,10 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         let nodeId = GraphQL.ID(rawValue: id)
         return Storefront.buildQuery { $0
             .shop({ $0
-                .paymentSettings(self.paymentSettingsQuery())
+                .paymentSettings(paymentSettingsQuery())
             })
             .node(id: nodeId, { $0
-                .onCollection(subfields: self.collectionQuery(perPage: perPage, after: after, sortBy: sortBy, reverse: reverse, productsNeeded: true))
+                .onCollection(subfields: collectionQuery(perPage: perPage, after: after, sortBy: sortBy, reverse: reverse, productsNeeded: true))
             })
         }
     }
@@ -757,7 +757,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     private func articleListQuery(perPage: Int, after: Any?, reverse: Bool) -> Storefront.QueryRootQuery {
         return Storefront.buildQuery({ $0
             .shop({ $0
-                .articles(first: Int32(perPage), after: after as? String, reverse: reverse, self.articleConnectionQuery())
+                .articles(first: Int32(perPage), after: after as? String, reverse: reverse, articleConnectionQuery())
             })
         })
     }
@@ -766,7 +766,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         let nodeId = GraphQL.ID(rawValue: id)
         return Storefront.buildQuery({ $0
             .node(id: nodeId, { $0
-                .onArticle(subfields: self.articleQuery())
+                .onArticle(subfields: articleQuery())
             })
         })
     }
@@ -778,8 +778,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         input.phone = Input<String>(orNull: phone)
         return Storefront.buildMutation({ $0
             .customerCreate(input: input, { $0
-                .customer(self.customerQuery())
-                .userErrors(self.userErrorQuery())
+                .customer(customerQuery())
+                .userErrors(userErrorQuery())
             })
         })
     }
@@ -788,8 +788,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         let input = Storefront.CustomerAccessTokenCreateInput.create(email: email, password: password)
         return Storefront.buildMutation({ $0
             .customerAccessTokenCreate(input: input, { $0
-                .customerAccessToken(self.accessTokenQuery())
-                .userErrors(self.userErrorQuery())
+                .customerAccessToken(accessTokenQuery())
+                .userErrors(userErrorQuery())
             })
         })
     }
@@ -797,7 +797,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     private func resetPasswordQuery(email: String) -> Storefront.MutationQuery {
         return Storefront.buildMutation({ $0
             .customerRecover(email: email, { $0
-                .userErrors(self.userErrorQuery())
+                .userErrors(userErrorQuery())
             })
         
         })
@@ -805,7 +805,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     
     private func customerQuery(with accessToken: String) -> Storefront.QueryRootQuery {
         return Storefront.buildQuery({ $0
-            .customer(customerAccessToken: accessToken, self.customerQuery())
+            .customer(customerAccessToken: accessToken, customerQuery())
         })
     }
     
@@ -830,7 +830,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     
     private func checkoutCreateQuery(cartProducts: [CartProduct]) -> Storefront.MutationQuery {
         return Storefront.buildMutation({ $0
-            .checkoutCreate(input: self.checkoutInput(cartProducts: cartProducts), self.checkoutCreatePayloadQuery())
+            .checkoutCreate(input: checkoutInput(cartProducts: cartProducts), checkoutCreatePayloadQuery())
         })
     }
     
@@ -838,7 +838,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         let id = GraphQL.ID.init(rawValue: checkoutId)
         return Storefront.buildQuery({ $0
             .node(id: id, { $0
-                .onCheckout(subfields: self.checkoutQuery())
+                .onCheckout(subfields: checkoutQuery())
             })
         })
     }
@@ -884,7 +884,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     private func customerUpdateDefaultAddressQuery(customerAccessToken: String, addressId: String) -> Storefront.MutationQuery {
         let id = GraphQL.ID.init(rawValue: addressId)
         return Storefront.buildMutation({ $0
-            .customerDefaultAddressUpdate(customerAccessToken: customerAccessToken, addressId: id, self.customerDefaultAddressUpdatePayloadQuery())
+            .customerDefaultAddressUpdate(customerAccessToken: customerAccessToken, addressId: id, customerDefaultAddressUpdatePayloadQuery())
         })
     }
     
@@ -892,7 +892,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         let addressInput = Storefront.MailingAddressInput.create()
         addressInput.update(with: address)
         return Storefront.buildMutation({ $0
-            .customerAddressCreate(customerAccessToken: customerAccessToken, address: addressInput, self.customerAddressCreatePayloadQuery())
+            .customerAddressCreate(customerAccessToken: customerAccessToken, address: addressInput, customerAddressCreatePayloadQuery())
         })
     }
     
@@ -901,14 +901,14 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         let addressInput = Storefront.MailingAddressInput.create()
         addressInput.update(with: address)
         return Storefront.buildMutation({ $0
-            .customerAddressUpdate(customerAccessToken: customerAccessToken, id: addressId, address: addressInput, self.customerAddressUpdatePayloadQuery())
+            .customerAddressUpdate(customerAccessToken: customerAccessToken, id: addressId, address: addressInput, customerAddressUpdatePayloadQuery())
         })
     }
     
     private func customerAddressDeleteQuery(addressId: String, token: String) -> Storefront.MutationQuery {
         let id = GraphQL.ID.init(rawValue: addressId)
         return Storefront.buildMutation({ $0
-            .customerAddressDelete(id: id, customerAccessToken: token, self.customerAddressDeletePayloadQuery())
+            .customerAddressDelete(id: id, customerAccessToken: token, customerAddressDeletePayloadQuery())
         })
     }
     
@@ -919,7 +919,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
                     .id()
                     .availableShippingRates { $0
                         .ready()
-                        .shippingRates(self.shippingRateQuery())
+                        .shippingRates(shippingRateQuery())
                     }
                 }
             }
@@ -929,8 +929,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     private func updateShippingLineQuery(checkoutId: GraphQL.ID, shippingRateHandle: String) -> Storefront.MutationQuery {
         return Storefront.buildMutation { $0
             .checkoutShippingLineUpdate(checkoutId: checkoutId, shippingRateHandle: shippingRateHandle, { $0
-                .checkout(self.checkoutQuery())
-                .userErrors(self.userErrorQuery())
+                .checkout(checkoutQuery())
+                .userErrors(userErrorQuery())
             })
         }
     }
@@ -945,7 +945,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
                 .checkout({ $0
                     .ready()
                 })
-                .userErrors(self.userErrorQuery())
+                .userErrors(userErrorQuery())
             })
         }
     }
