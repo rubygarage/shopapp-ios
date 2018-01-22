@@ -312,6 +312,10 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U58-8e-lWv" customClass="TPKeyboardAvoidingScrollView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1150"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="NGV-9J-R6U">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="392"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ifp-Jb-DEo">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="392"/>
                                         <constraints>
@@ -523,8 +527,11 @@
                                     <constraint firstAttribute="trailing" secondItem="VVf-pX-u6l" secondAttribute="trailing" id="Bgl-E9-zP2"/>
                                     <constraint firstAttribute="trailing" secondItem="wUn-wL-MNB" secondAttribute="trailing" id="CUq-fr-WsW"/>
                                     <constraint firstItem="eQR-jY-MVs" firstAttribute="top" secondItem="39V-FZ-fv4" secondAttribute="bottom" id="Ecg-5N-8Hq"/>
+                                    <constraint firstItem="NGV-9J-R6U" firstAttribute="bottom" secondItem="Ifp-Jb-DEo" secondAttribute="bottom" id="GIw-QW-pdb"/>
                                     <constraint firstAttribute="trailing" secondItem="Mt3-H2-8Lf" secondAttribute="trailing" id="GYt-cu-jLI"/>
+                                    <constraint firstItem="NGV-9J-R6U" firstAttribute="leading" secondItem="Ifp-Jb-DEo" secondAttribute="leading" id="IZI-8u-FHe"/>
                                     <constraint firstAttribute="trailing" secondItem="yXx-nC-ut5" secondAttribute="trailing" id="KwX-Bi-CVi"/>
+                                    <constraint firstItem="NGV-9J-R6U" firstAttribute="trailing" secondItem="Ifp-Jb-DEo" secondAttribute="trailing" id="LLu-xC-HFs"/>
                                     <constraint firstAttribute="trailing" secondItem="yyt-6B-eUF" secondAttribute="trailing" id="NBY-Ti-WGV"/>
                                     <constraint firstAttribute="trailing" secondItem="39V-FZ-fv4" secondAttribute="trailing" id="Nnq-Bu-t83"/>
                                     <constraint firstItem="yyt-6B-eUF" firstAttribute="leading" secondItem="U58-8e-lWv" secondAttribute="leading" id="Ntq-5B-Qo1"/>
@@ -542,6 +549,7 @@
                                     <constraint firstItem="wUn-wL-MNB" firstAttribute="leading" secondItem="U58-8e-lWv" secondAttribute="leading" id="rIr-2l-o2s"/>
                                     <constraint firstItem="Abb-dJ-X8r" firstAttribute="leading" secondItem="U58-8e-lWv" secondAttribute="leading" id="ths-lu-Ef8"/>
                                     <constraint firstItem="VVf-pX-u6l" firstAttribute="top" secondItem="Ifp-Jb-DEo" secondAttribute="bottom" id="uk1-o1-sTO"/>
+                                    <constraint firstItem="NGV-9J-R6U" firstAttribute="top" secondItem="Ifp-Jb-DEo" secondAttribute="top" id="weG-qA-ggE"/>
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8y-La-p8d" userLabel="Bottom View">
@@ -593,6 +601,7 @@
                         <outlet property="descriptionContainerViewHeightConstraint" destination="GbI-xt-Tca" id="eUa-bv-HBH"/>
                         <outlet property="descriptionLabel" destination="3BV-lT-OBn" id="tYV-Id-j6L"/>
                         <outlet property="descriptionStateImageView" destination="w6U-GF-9OS" id="ATg-oq-BU4"/>
+                        <outlet property="detailImagesContainer" destination="Ifp-Jb-DEo" id="NEx-f4-ioM"/>
                         <outlet property="optionsContainerViewHeightConstraint" destination="lVY-Vz-JGJ" id="b6i-NH-k7Z"/>
                         <outlet property="priceLabel" destination="40U-Lo-b1L" id="6bb-3l-k40"/>
                         <outlet property="quantityTextField" destination="YxC-Df-lAk" id="KlK-xU-NU9"/>
@@ -764,6 +773,7 @@
     <resources>
         <image name="home_default" width="23" height="21"/>
         <image name="home_selected" width="23" height="21"/>
+        <image name="placeholder" width="43" height="39"/>
         <image name="plus" width="10" height="10"/>
         <image name="search_default" width="27" height="21"/>
         <image name="search_selected" width="27" height="21"/>
