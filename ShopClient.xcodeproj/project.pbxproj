@@ -1138,10 +1138,10 @@
 			isa = PBXGroup;
 			children = (
 				0B24F0E820074F1900F13224 /* BlackButton */,
-				0B69B569200CF1A700F071E3 /* Headers */,
-				0B24F0DE20074F1900F13224 /* InputTextFieldView */,
 				0B69B55C200CB1BE00F071E3 /* Cells */,
 				0BA6306E1FFFB10A007088B8 /* Footers */,
+				0B69B569200CF1A700F071E3 /* Headers */,
+				0B24F0DE20074F1900F13224 /* InputTextFieldView */,
 			);
 			path = Views;
 			sourceTree = "<group>";

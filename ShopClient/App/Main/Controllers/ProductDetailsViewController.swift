@@ -25,6 +25,7 @@ private let kProductDescriptionAdditionalHeight = CGFloat(40.0)
 
 class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerProtocol, ProductOptionsControllerProtocol, SeeAllHeaderViewProtocol, LastArrivalsCellDelegate {
     @IBOutlet var contentView: TPKeyboardAvoidingScrollView!
+    @IBOutlet weak var detailImagesContainer: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionStateImageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -123,8 +124,10 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     }
     
     private func populateImages(with product: Product) {
-        if let images = product.images {
+        if let images = product.images, !images.isEmpty {
             detailImagesController?.images = images
+        } else {
+            detailImagesContainer.isHidden = true
         }
     }
     
