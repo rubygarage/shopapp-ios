@@ -11,11 +11,8 @@ import TTTAttributedLabel
 private let kFontDefault = UIFont.systemFont(ofSize: 11)
 
 extension TTTAttributedLabel {
-    public func setup(with text: String, links: [String], delegate: TTTAttributedLabelDelegate) {
-        setupDefaultAttributes(with: text)
-        setupLinkAttributes(with: links)
-        self.delegate = delegate
-    }
+    
+    // MARK: - Private
     
     private func setupDefaultAttributes(with text: String) {
         let paragraphStyle = NSMutableParagraphStyle()
@@ -38,5 +35,13 @@ extension TTTAttributedLabel {
                 addLink(to: url, with: range)
             }
         }
+    }
+    
+    // MARK: - Internal
+    
+    func setup(with text: String, links: [String], delegate: TTTAttributedLabelDelegate) {
+        setupDefaultAttributes(with: text)
+        setupLinkAttributes(with: links)
+        self.delegate = delegate
     }
 }

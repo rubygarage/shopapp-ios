@@ -12,9 +12,11 @@ import WebKit
 private let kTextViewContentInsets = UIEdgeInsets(top: 28, left: 16, bottom: 28, right: 16)
 
 class PolicyViewController: UIViewController {
-    @IBOutlet weak var policyTextView: UITextView!
+    @IBOutlet private weak var policyTextView: UITextView!
     
     var policy: Policy?
+    
+    // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,8 @@ class PolicyViewController: UIViewController {
         setupViews()
         populateViews()
     }
+
+    // MARK: - Setup
     
     private func setupViews() {
         addBackButtonIfNeeded()

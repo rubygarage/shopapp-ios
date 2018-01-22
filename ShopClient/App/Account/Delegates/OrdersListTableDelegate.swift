@@ -13,11 +13,13 @@ protocol OrdersListTableDelegateProtocol: class {
     func didSelectItem(at index: Int)
 }
 
-class OrdersListTableDelegate: NSObject, UITableViewDelegate, OrderHeaderViewProtocol, OrderFooterViewProtocol {
+class OrdersListTableDelegate: NSObject {
     weak var delegate: OrdersListTableDelegateProtocol?
-    
-    // MARK: - UITableViewDelegate
-    
+}
+
+// MARK: - UITableViewDelegate
+
+extension OrdersListTableDelegate: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let orders = delegate?.orders() {
             let order = orders[section]
@@ -37,9 +39,11 @@ class OrdersListTableDelegate: NSObject, UITableViewDelegate, OrderHeaderViewPro
         }
         return nil
     }
-    
-    // MARK: - OrderHeaderViewProtocol
-    
+}
+
+// MARK: - OrderHeaderViewProtocol, OrderFooterViewProtocol
+
+extension OrdersListTableDelegate: OrderHeaderViewProtocol, OrderFooterViewProtocol {
     func viewDidTap(_ section: Int) {
         delegate?.didSelectItem(at: section)
     }

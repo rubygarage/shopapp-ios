@@ -8,14 +8,15 @@
 
 import UIKit
 
-class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, OrdersDetailsTableDataSourceProtocol, OrdersDetailsTableDelegateProtocol {
-    @IBOutlet weak var tableView: UITableView!
+class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
+    @IBOutlet private weak var tableView: UITableView!
     
     private var tableDataSource: OrdersDetailsTableDataSource!
     // swiftlint:disable weak_delegate
     private var tableDelegate: OrdersDetailsTableDelegate!
     // swiftlint:enable weak_delegate
-    private var selectedProductVariant: ProductVariant!
+    
+    fileprivate var selectedProductVariant: ProductVariant!
     
     var orderId: String!
     
@@ -78,15 +79,19 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, Ord
     private func loadData() {
         viewModel.loadOrder()
     }
-    
-    // MARK: - OrdersDetailsTableDataSourceProtocol
-    
+}
+
+// MARK: - OrdersDetailsTableDataSourceProtocol
+
+extension OrderDetailsViewController: OrdersDetailsTableDataSourceProtocol {
     func order() -> Order? {
         return viewModel.data.value
     }
-    
-    // MARK: - OrdersDetailsTableDelegateProtocol
-    
+}
+
+// MARK: - OrdersDetailsTableDelegateProtocol
+
+extension OrderDetailsViewController: OrdersDetailsTableDelegateProtocol {
     func didSelectItem(at index: Int) {
         selectedProductVariant = viewModel.productVariant(at: index)
         if selectedProductVariant != nil {

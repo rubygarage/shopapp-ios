@@ -10,17 +10,19 @@ import RxSwift
 import TTTAttributedLabel
 
 class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLabelDelegate {
-    @IBOutlet weak var emailTextFieldView: InputTextFieldView!
-    @IBOutlet weak var nameTextFieldView: InputTextFieldView!
-    @IBOutlet weak var lastNameTextFieldView: InputTextFieldView!
-    @IBOutlet weak var phoneTextFieldView: InputTextFieldView!
-    @IBOutlet weak var passwordTextFieldView: InputTextFieldView!
-    @IBOutlet weak var signUpButton: BlackButton!
-    @IBOutlet weak var acceptPoliciesLabel: TTTAttributedLabel!
+    @IBOutlet private weak var emailTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var nameTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var lastNameTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var phoneTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var passwordTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var signUpButton: BlackButton!
+    @IBOutlet private weak var acceptPoliciesLabel: TTTAttributedLabel!
+    
+    private var selectedPolicy: Policy?
     
     weak var delegate: AuthenticationProtocol?
     
-    private var selectedPolicy: Policy?
+    // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         viewModel = SignUpViewModel()
@@ -37,6 +39,8 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
             policyViewController.policy = selectedPolicy
         }
     }
+    
+    // MARK: - Setup
     
     private func setupViews() {
         addCloseButton()
@@ -127,6 +131,7 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
     }
     
     // MARK: - TTTAttributedLabelDelegate
+    
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
         let privacyPolicy = "Label.Range.PrivacyPolicy".localizable.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
         let termsOfService = "Label.Range.TermsOfService".localizable.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)

@@ -17,6 +17,8 @@ class ForgotPasswordViewController: BaseViewController<ForgotPasswordViewModel> 
     
     private var linkViewController: LinkViewController!
     
+    // MARK: - View controller lifecycle
+    
     override func viewDidLoad() {
         viewModel = ForgotPasswordViewModel()
         super.viewDidLoad()
@@ -30,6 +32,8 @@ class ForgotPasswordViewController: BaseViewController<ForgotPasswordViewModel> 
             self.linkViewController = linkViewController
         }
     }
+    
+    // MARK: - Setup
 
     private func setupViews() {
         addCloseButton()

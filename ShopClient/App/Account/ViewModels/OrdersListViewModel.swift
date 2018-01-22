@@ -9,34 +9,11 @@
 import RxSwift
 
 class OrdersListViewModel: BasePaginationViewModel {
-    var items = Variable<[Order]>([Order]())
-    
     private let orderListUseCase = OrderListUseCase()
     
-    public func reloadData() {
-        paginationValue = nil
-        loadRemoteData()
-    }
+    var items = Variable<[Order]>([Order]())
     
-    public func loadNextPage() {
-        paginationValue = items.value.last?.paginationValue
-        loadRemoteData()
-    }
-    
-    public func productVariant(with productVariantId: String, at index: Int) -> ProductVariant? {
-        var variant: ProductVariant?
-        let order = items.value[index]
-        
-        if let items = order.items {
-            items.forEach {
-                if let productVariant = $0.productVariant, productVariant.id == productVariantId {
-                    variant = productVariant
-                }
-            }
-        }
-        
-        return variant
-    }
+    // MARK: - Private
     
     private func loadRemoteData() {
         let showHud = items.value.isEmpty
@@ -58,5 +35,32 @@ class OrdersListViewModel: BasePaginationViewModel {
             items.value.removeAll()
         }
         items.value += orders
+    }
+    
+    // MARK: - Internal
+    
+    func reloadData() {
+        paginationValue = nil
+        loadRemoteData()
+    }
+    
+    func loadNextPage() {
+        paginationValue = items.value.last?.paginationValue
+        loadRemoteData()
+    }
+    
+    func productVariant(with productVariantId: String, at index: Int) -> ProductVariant? {
+        var variant: ProductVariant?
+        let order = items.value[index]
+        
+        if let items = order.items {
+            items.forEach {
+                if let productVariant = $0.productVariant, productVariant.id == productVariantId {
+                    variant = productVariant
+                }
+            }
+        }
+        
+        return variant
     }
 }

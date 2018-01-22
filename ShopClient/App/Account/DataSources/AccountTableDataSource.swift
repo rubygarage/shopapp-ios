@@ -12,11 +12,13 @@ protocol AccountTableDataSourceProtocol: class {
     func policies() -> [Policy]
 }
 
-class AccountTableDataSource: NSObject, UITableViewDataSource {
+class AccountTableDataSource: NSObject {
     weak var delegate: AccountTableDataSourceProtocol?
-    
-    // MARK: - UITableViewDataSource
-    
+}
+
+// MARK: - UITableViewDataSource
+
+extension AccountTableDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return delegate?.policies().count ?? 0
     }

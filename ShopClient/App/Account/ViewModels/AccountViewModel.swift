@@ -9,37 +9,16 @@
 import RxSwift
 
 class AccountViewModel: BaseViewModel {
-    var policies = Variable<[Policy]>([Policy]())
-    var customer = Variable<Customer?>(nil)
-    
     private let customerUseCase = CustomerUseCase()
     private let loginUseCase = LoginUseCase()
     private let logoutUseCase = LogoutUseCase()
     private let shopUseCase = ShopUseCase()
     
-    public func loadCustomer() {
-        loginUseCase.getLoginStatus { (isLoggedIn) in
-            if isLoggedIn {
-                getCustomer()
-            }
-        }
-    }
+    var policies = Variable<[Policy]>([Policy]())
+    var customer = Variable<Customer?>(nil)
     
-    public func loadPolicies() {
-        shopUseCase.getShop { [weak self] (shop) in
-            self?.processResponse(with: shop)
-        }
-    }
+    // MARK: - Private
     
-    public func logout() {
-        logoutUseCase.logout { [weak self] (isLoggedOut) in
-            if isLoggedOut {
-                self?.customer.value = nil
-            }
-        }
-    }
-    
-    // MARK: - private
     private func getCustomer() {
         state.onNext(.loading(showHud: true))
         customerUseCase.getCustomer { [weak self] (customer, error) in
@@ -65,5 +44,29 @@ class AccountViewModel: BaseViewModel {
             policiesItems.append(termsOfService)
         }
         policies.value = policiesItems
+    }
+    
+    // MARK: - Internal
+    
+    func loadCustomer() {
+        loginUseCase.getLoginStatus { (isLoggedIn) in
+            if isLoggedIn {
+                getCustomer()
+            }
+        }
+    }
+    
+    func loadPolicies() {
+        shopUseCase.getShop { [weak self] (shop) in
+            self?.processResponse(with: shop)
+        }
+    }
+    
+    func logout() {
+        logoutUseCase.logout { [weak self] (isLoggedOut) in
+            if isLoggedOut {
+                self?.customer.value = nil
+            }
+        }
     }
 }

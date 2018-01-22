@@ -13,11 +13,13 @@ protocol OrdersDetailsTableDelegateProtocol: class {
     func didSelectItem(at index: Int)
 }
 
-class OrdersDetailsTableDelegate: NSObject, UITableViewDelegate {
+class OrdersDetailsTableDelegate: NSObject {
     weak var delegate: OrdersDetailsTableDelegateProtocol?
-    
-    // MARK: - UITableViewDelegate
-    
+}
+
+// MARK: - UITableViewDelegate
+
+extension OrdersDetailsTableDelegate: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var view = UIView()
         
@@ -55,5 +57,4 @@ class OrdersDetailsTableDelegate: NSObject, UITableViewDelegate {
             delegate?.didSelectItem(at: indexPath.row)
         }
     }
- 
 }

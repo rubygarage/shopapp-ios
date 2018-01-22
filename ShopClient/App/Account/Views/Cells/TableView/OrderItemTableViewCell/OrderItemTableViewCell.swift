@@ -9,17 +9,20 @@
 import UIKit
 
 class OrderItemTableViewCell: UITableViewCell {
-    @IBOutlet weak var itemImageView: UIImageView!
-    @IBOutlet weak var totalPriceLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subtitleLabel: UILabel!
-    @IBOutlet weak var quantityLabel: UILabel!
-    @IBOutlet weak var quantityValueLabel: UILabel!
+    @IBOutlet private weak var itemImageView: UIImageView!
+    @IBOutlet private weak var totalPriceLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var subtitleLabel: UILabel!
+    @IBOutlet private weak var quantityLabel: UILabel!
+    @IBOutlet private weak var quantityValueLabel: UILabel!
+    
     @IBOutlet weak var itemPriceLabel: UILabel! {
         didSet {
             itemPriceLabel.isHidden = true
         }
     }
+    
+    // MARK: - View lifecycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +31,8 @@ class OrderItemTableViewCell: UITableViewCell {
         
         setupViews()
     }
+    
+    // MARK: - Setup
     
     private func setupViews() {
         quantityLabel.text = "Label.Order.Quantity".localizable

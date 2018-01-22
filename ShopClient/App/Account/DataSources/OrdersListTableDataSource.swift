@@ -12,11 +12,13 @@ protocol OrdersListTableDataSourceProtocol: class {
     func orders() -> [Order]
 }
 
-class OrdersListTableDataSource: NSObject, UITableViewDataSource {
+class OrdersListTableDataSource: NSObject {
     weak var delegate: (OrdersListTableDataSourceProtocol & CheckoutCartTableViewCellDelegate)?
-    
-    // MARK: - UITableViewDataSource
-    
+}
+
+// MARK: - UITableViewDataSource
+
+extension OrdersListTableDataSource: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return delegate?.orders().count ?? 0
     }

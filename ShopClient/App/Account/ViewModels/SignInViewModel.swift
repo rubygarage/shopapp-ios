@@ -9,6 +9,8 @@
 import RxSwift
 
 class SignInViewModel: BaseViewModel {
+    private let loginUseCase = LoginUseCase()
+    
     var emailText = Variable<String>("")
     var passwordText = Variable<String>("")
     var emailErrorMessage = PublishSubject<String>()
@@ -22,14 +24,13 @@ class SignInViewModel: BaseViewModel {
             email.hasAtLeastOneSymbol() && password.hasAtLeastOneSymbol()
         }
     }
-    
     var loginPressed: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
             self?.checkCresentials()
         }
     }
     
-    private let loginUseCase = LoginUseCase()
+    // MARK: - Private
     
     private func checkCresentials() {
         if emailText.value.isValidAsEmail() && passwordText.value.isValidAsPassword() {

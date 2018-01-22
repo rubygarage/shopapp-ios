@@ -9,6 +9,9 @@
 import RxSwift
 
 class SignUpViewModel: BaseViewModel {
+    private let shopUseCase = ShopUseCase()
+    private let signUpUseCase = SignUpUseCase()
+    
     var emailText = Variable<String>("")
     var firstNameText = Variable<String>("")
     var lastNameText = Variable<String>("")
@@ -26,25 +29,14 @@ class SignUpViewModel: BaseViewModel {
             email.hasAtLeastOneSymbol() && password.hasAtLeastOneSymbol()
         }
     }
-    
     var signUpPressed: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
             self?.checkCresentials()
         }
     }
     
-    private let shopUseCase = ShopUseCase()
-    private let signUpUseCase = SignUpUseCase()
+    // MARK: - Private
     
-    public func loadPolicies() {
-        shopUseCase.getShop { [weak self] (shop) in
-            if let privacyPolicy = shop.privacyPolicy, privacyPolicy.body?.isEmpty == false, let termsOfService = shop.termsOfService, termsOfService.body?.isEmpty == false {
-                self?.policies.value = (shop.privacyPolicy, shop.termsOfService)
-            }
-        }
-    }
-    
-    // MARK: - private
     private func checkCresentials() {
         if emailText.value.isValidAsEmail() && passwordText.value.isValidAsPassword() {
             signUp()
@@ -82,5 +74,15 @@ class SignUpViewModel: BaseViewModel {
             delegate?.didAuthorize()
         }
         signUpSuccess.value = success
+    }
+    
+    // MARK: - Internal
+    
+    func loadPolicies() {
+        shopUseCase.getShop { [weak self] (shop) in
+            if let privacyPolicy = shop.privacyPolicy, privacyPolicy.body?.isEmpty == false, let termsOfService = shop.termsOfService, termsOfService.body?.isEmpty == false {
+                self?.policies.value = (shop.privacyPolicy, shop.termsOfService)
+            }
+        }
     }
 }

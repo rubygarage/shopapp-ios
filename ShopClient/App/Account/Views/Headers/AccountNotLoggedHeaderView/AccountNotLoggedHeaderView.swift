@@ -13,14 +13,17 @@ protocol AccountNotLoggedHeaderProtocol: class {
     func didTapCreateNewAccount()
 }
 
-class AccountNotLoggedHeaderView: UIView, UnderlinedButtonProtocol {
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var signInButton: BlackButton!
-    @IBOutlet weak var signInLabel: UILabel!
-    @IBOutlet weak var createNewAccountButton: UnderlinedButton!
-    @IBOutlet weak var createAccountUnderlinedView: UIView!
+class AccountNotLoggedHeaderView: UIView {
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var signInButton: BlackButton!
+    @IBOutlet private weak var signInLabel: UILabel!
+    @IBOutlet private weak var createNewAccountButton: UnderlinedButton!
+    
+    @IBOutlet fileprivate weak var createAccountUnderlinedView: UIView!
     
     weak var delegate: AccountNotLoggedHeaderProtocol?
+    
+    // MARK: - View lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,6 +36,8 @@ class AccountNotLoggedHeaderView: UIView, UnderlinedButtonProtocol {
         
         commonInit()
     }
+    
+    // MARK: - Setup
     
     private func commonInit() {
         Bundle.main.loadNibNamed(String(describing: AccountNotLoggedHeaderView.self), owner: self)
@@ -59,9 +64,11 @@ class AccountNotLoggedHeaderView: UIView, UnderlinedButtonProtocol {
     @IBAction func createNewAccountTapped(_ sender: UnderlinedButton) {
         delegate?.didTapCreateNewAccount()
     }
-    
-    // MARK: - UnderlinedButtonProtocol
-    
+}
+
+// MARK: - UnderlinedButtonProtocol
+
+extension AccountNotLoggedHeaderView: UnderlinedButtonProtocol {
     func didChangeState(isHighlighted: Bool) {
         createAccountUnderlinedView.isHidden = isHighlighted
     }
