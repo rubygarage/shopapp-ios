@@ -19,14 +19,15 @@ class SettingsViewController: BaseViewController<SettingsViewModel> {
         viewModel = SettingsViewModel()
         super.viewDidLoad()
         
-        setupViews()
+        updateNavigationBar()
         setupTableView()
         setupViewModel()
+        loadData()
     }
     
     // MARK: - Setup
     
-    private func setupViews() {
+    private func updateNavigationBar() {
         title = "ControllerTitle.Settings".localizable
     }
     
@@ -42,18 +43,15 @@ class SettingsViewController: BaseViewController<SettingsViewModel> {
     }
     
     private func setupViewModel() {
-//        viewModel.policies.asObservable()
-//            .subscribe(onNext: { [weak self] _ in
-//                self?.tableView.reloadData()
-//            })
-//            .disposed(by: disposeBag)
-//        
-//        viewModel.customer.asObservable()
-//            .subscribe(onNext: { [weak self] _ in
-//                self?.updateNavigationBar()
-//                self?.tableView.reloadData()
-//            })
-//            .disposed(by: disposeBag)
+        viewModel.customer.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func loadData() {
+        viewModel.loadCustomer()
     }
 }
 
@@ -61,7 +59,7 @@ class SettingsViewController: BaseViewController<SettingsViewModel> {
 
 extension SettingsViewController: SettingsTableDataSourceProtocol {
     func promo() -> (description: String, state: Bool)? {
-        return ("Label.Promo".localizable, true)
+        return viewModel.customer.value != nil ? ("Label.Promo".localizable, viewModel.customer.value!.promo) : nil
     }
 }
 

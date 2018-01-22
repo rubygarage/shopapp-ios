@@ -1064,6 +1064,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
             query.firstName()
             query.lastName()
             query.phone()
+            query.acceptsMarketing()
             query.defaultAddress(self.mailingAddressQuery())
             query.addresses(first: kShopifyItemsMaxCount, self.mailingAddressConnectionQuery())
         }

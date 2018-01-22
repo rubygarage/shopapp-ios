@@ -19,6 +19,7 @@ extension Customer {
         firstName = item?.firstName
         lastName = item?.lastName
         phone = item?.phone
+        promo = item?.acceptsMarketing ?? false
         defaultAddress = Address(with: item?.defaultAddress)
         
         if let edges = item?.addresses.edges {

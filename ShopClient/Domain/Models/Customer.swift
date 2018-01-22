@@ -13,6 +13,7 @@ class Customer: NSObject {
     var firstName: String?
     var lastName: String?
     var phone: String?
+    var promo: Bool = false
     var defaultAddress: Address?
     var addresses: [Address]?
     
