@@ -37,22 +37,23 @@ protocol APIInterface {
     func getArticleList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Article]>)
     func getArticle(id: String, callback: @escaping RepoCallback<Article>)
     
-    // MARK: - authentification
+    // MARK: - customer
     func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, callback: @escaping RepoCallback<Bool>)
     func login(with email: String, password: String, callback: @escaping RepoCallback<Bool>)
     func logout(callback: RepoCallback<Bool>)
     func isLoggedIn() -> Bool
     func resetPassword(with email: String, callback: @escaping RepoCallback<Bool>)
     func getCustomer(callback: @escaping RepoCallback<Customer>)
+    func updateCustomer(_ customer: Customer, callback: @escaping RepoCallback<Bool>)
+    func addCustomerAddress(with address: Address, callback: @escaping RepoCallback<String>)
+    func updateCustomerAddress(with address: Address, callback: @escaping RepoCallback<Bool>)
+    func updateCustomerDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Bool>)
+    func deleteCustomerAddress(with addressId: String, callback: @escaping RepoCallback<Bool>)
     
     // MARK: - payments
     func createCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>)
     func getCheckout(with checkoutId: String, callback: @escaping RepoCallback<Checkout>)
     func updateShippingAddress(with checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>)
-    func updateCustomerDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Bool>)
-    func updateCustomerAddress(with address: Address, callback: @escaping RepoCallback<Bool>)
-    func addCustomerAddress(with address: Address, callback: @escaping RepoCallback<String>)
-    func deleteCustomerAddress(with addressId: String, callback: @escaping RepoCallback<Bool>)
     func getShippingRates(with checkoutId: String, callback: @escaping RepoCallback<[ShippingRate]>)
     func updateCheckout(with rate: ShippingRate, checkoutId: String, callback: @escaping RepoCallback<Checkout>)
     func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, callback: @escaping RepoCallback<Bool>)

@@ -9,8 +9,9 @@
 import RxSwift
 
 class SettingsViewModel: BaseViewModel {
-    private let customerUseCase = CustomerUseCase()
     private let loginUseCase = LoginUseCase()
+    private let customerUseCase = CustomerUseCase()
+    private let updateCustomUseCase = UpdateCustomUseCase()
     
     var customer = Variable<Customer?>(nil)
     
@@ -35,6 +36,18 @@ class SettingsViewModel: BaseViewModel {
         loginUseCase.getLoginStatus { (isLoggedIn) in
             if isLoggedIn {
                 getCustomer()
+            }
+        }
+    }
+    
+    func updateCustomer() {
+        state.onNext(.loading(showHud: false))
+        updateCustomUseCase.updateCustomer(customer.value!) { [weak self] (success, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            }
+            if let success = success, success == true {
+                self?.state.onNext(.content)
             }
         }
     }

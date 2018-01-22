@@ -167,7 +167,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         run(task: task, callback: callback)
     }
     
-    // MARK: - Authentification
+    // MARK: - Customer
     
     func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, callback: @escaping RepoCallback<Bool>) {
         let query = signUpQuery(email: email, password: password, firstName: firstName, lastName: lastName, phone: phone)
@@ -223,6 +223,46 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         }
     }
     
+    func updateCustomer(_ customer: Customer, callback: @escaping RepoCallback<Bool>) {
+        if let token = sessionData().token {
+            updateCustomer(with: token, customer: customer, callback: callback)
+        } else {
+            callback(false, ContentError())
+        }
+    }
+    
+    func addCustomerAddress(with address: Address, callback: @escaping RepoCallback<String>) {
+        if let token = sessionData().token {
+            createCustomerAddress(with: token, address: address, callback: callback)
+        } else {
+            callback(nil, ContentError())
+        }
+    }
+    
+    func updateCustomerAddress(with address: Address, callback: @escaping RepoCallback<Bool>) {
+        if let token = sessionData().token {
+            updateCustomerAddress(with: token, address: address, callback: callback)
+        } else {
+            callback(false, ContentError())
+        }
+    }
+    
+    func updateCustomerDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Bool>) {
+        if let token = sessionData().token {
+            updateCustomerDefaultAddress(with: token, addressId: addressId, callback: callback)
+        } else {
+            callback(false, ContentError())
+        }
+    }
+    
+    func deleteCustomerAddress(with addressId: String, callback: @escaping RepoCallback<Bool>) {
+        if let token = sessionData().token {
+            deleteCustomerAddress(with: token, addressId: addressId, callback: callback)
+        } else {
+            callback(false, ContentError())
+        }
+    }
+    
     // MARK: - Payments
     
     func createCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
@@ -270,38 +310,6 @@ class API: NSObject, APIInterface, PaySessionDelegate {
             }
         })
         run(task: task, callback: callback)
-    }
-    
-    func updateCustomerDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Bool>) {
-        if let token = sessionData().token {
-            updateCustomerDefaultAddress(with: token, addressId: addressId, callback: callback)
-        } else {
-            callback(false, ContentError())
-        }
-    }
-    
-    func updateCustomerAddress(with address: Address, callback: @escaping RepoCallback<Bool>) {
-        if let token = sessionData().token {
-            updateCustomerAddress(with: token, address: address, callback: callback)
-        } else {
-            callback(false, ContentError())
-        }
-    }
-    
-    func addCustomerAddress(with address: Address, callback: @escaping RepoCallback<String>) {
-        if let token = sessionData().token {
-            createCustomerAddress(with: token, address: address, callback: callback)
-        } else {
-            callback(nil, ContentError())
-        }
-    }
-    
-    func deleteCustomerAddress(with addressId: String, callback: @escaping RepoCallback<Bool>) {
-        if let token = sessionData().token {
-            deleteCustomerAddress(with: token, addressId: addressId, callback: callback)
-        } else {
-            callback(false, ContentError())
-        }
     }
     
     func getShippingRates(with checkoutId: String, callback: @escaping RepoCallback<[ShippingRate]>) {
@@ -519,6 +527,20 @@ class API: NSObject, APIInterface, PaySessionDelegate {
                 callback(nil, RepoError(with: responseError))
             } else {
                 callback(nil, RepoError())
+            }
+        })
+        run(task: task, callback: callback)
+    }
+    
+    private func updateCustomer(with token: String, customer: Customer, callback: @escaping RepoCallback<Bool>) {
+        let query = customerUpdateQuery(with: token, customer: customer)
+        let task = client?.mutateGraphWith(query, completionHandler: { (result, error) in
+            if result?.customerUpdate?.customer != nil {
+                callback(true, nil)
+            } else if let repoError = RepoError(with: error) {
+                callback(false, repoError)
+            } else {
+                callback(false, RepoError())
             }
         })
         run(task: task, callback: callback)
@@ -750,6 +772,14 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     private func customerQuery(with accessToken: String) -> Storefront.QueryRootQuery {
         return Storefront.buildQuery({ $0
             .customer(customerAccessToken: accessToken, self.customerQuery())
+        })
+    }
+    
+    private func customerUpdateQuery(with accessToken: String, customer: Customer) -> Storefront.MutationQuery {
+        let input = Storefront.CustomerUpdateInput.create()
+        input.update(with: customer)
+        return Storefront.buildMutation({ $0
+            .customerUpdate(customerAccessToken: accessToken, customer: input, self.customerUpdatePayloadQuery())
         })
     }
     
@@ -1067,6 +1097,13 @@ class API: NSObject, APIInterface, PaySessionDelegate {
             query.acceptsMarketing()
             query.defaultAddress(self.mailingAddressQuery())
             query.addresses(first: kShopifyItemsMaxCount, self.mailingAddressConnectionQuery())
+        }
+    }
+    
+    private func customerUpdatePayloadQuery() -> (Storefront.CustomerUpdatePayloadQuery) -> Void {
+        return { (query: Storefront.CustomerUpdatePayloadQuery) in
+            query.customer(self.customerQuery())
+            query.userErrors(self.userErrorQuery())
         }
     }
     
@@ -1475,6 +1512,16 @@ class API: NSObject, APIInterface, PaySessionDelegate {
                 })
             }
         }
+    }
+}
+
+extension Storefront.CustomerUpdateInput {
+    func update(with customer: Customer) {
+        firstName = customer.firstName.orNull
+        lastName = customer.lastName.orNull
+        email = Input<String>(orNull: customer.email)
+        phone = customer.phone.orNull
+        acceptsMarketing = Input<Bool>(orNull: customer.promo)
     }
 }
 
