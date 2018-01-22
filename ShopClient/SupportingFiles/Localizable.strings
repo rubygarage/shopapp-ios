@@ -11,6 +11,7 @@
 "ControllerTitle.LatestArrivals" = "Latest Arrivals";
 "ControllerTitle.BlogPosts" = "Blog Posts";
 "ControllerTitle.Cart" = "My Cart";
+"ControllerTitle.Settings" = "Settings";
 "ControllerTitle.SignIn" = "Sign In";
 "ControllerTitle.SignUp" = "Sign Up";
 "ControllerTitle.ForgotPassword" = "Forgot Password";
@@ -93,6 +94,7 @@
 "Label.DefaultShippingAddress" = "Default shipping address";
 "Label.AcceptPoliciesAttributed" = "By creating your account, you accept our Privacy Policy and Terms of Service";
 "Label.N/A" = "N/A";
+"Label.Promo" = "Accept promotion emails";
 "Label.Range.PrivacyPolicy" = "Privacy Policy";
 "Label.Range.TermsOfService" = "Terms of Service";
 "Label.ForgotPassword.PasswordTitle" = "Reset Your Password";

@@ -133,20 +133,35 @@
             </objects>
             <point key="canvasLocation" x="2124" y="1493.7031484257873"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="3wp-c9-FLE">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="Vuw-Re-lYh" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="Vuw-Re-lYh" customClass="SettingsViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DUO-oY-njh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="60" estimatedRowHeight="60" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="lFP-jN-Z1E">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="lFP-jN-Z1E" firstAttribute="leading" secondItem="PA5-ac-xUo" secondAttribute="leading" id="Dd6-8E-QH5"/>
+                            <constraint firstItem="lFP-jN-Z1E" firstAttribute="bottom" secondItem="PA5-ac-xUo" secondAttribute="bottom" id="NHG-r8-Hli"/>
+                            <constraint firstItem="lFP-jN-Z1E" firstAttribute="trailing" secondItem="PA5-ac-xUo" secondAttribute="trailing" id="mIN-Bv-SbT"/>
+                            <constraint firstItem="lFP-jN-Z1E" firstAttribute="top" secondItem="DUO-oY-njh" secondAttribute="top" id="pk8-Sp-Pbl"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="PA5-ac-xUo"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="lFP-jN-Z1E" id="Wo4-NF-Scs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hXg-jl-Lxh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-954" y="1494"/>
+            <point key="canvasLocation" x="-954.39999999999998" y="1493.7031484257873"/>
         </scene>
         <!--Order Details View Controller-->
         <scene sceneID="tYG-db-tzb">
