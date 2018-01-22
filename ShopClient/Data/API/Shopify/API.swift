@@ -9,10 +9,10 @@
 import MobileBuySDK
 import KeychainSwift
 
-private let kShopifyStorefrontAccessToken = "317392940ba3519bcfa070943900b1de"
-private let kShopifyStorefrontURL = "blablablstore.myshopify.com"
+private let kShopifyStorefrontAccessToken = "44fc90e5043e0a5e7ce5e95e1c30018f"
+private let kShopifyStorefrontURL = "rubytestruby.myshopify.com"
 private let kShopifyItemsMaxCount: Int32 = 250
-private let kShopifyStoreName = "blablablstore"
+private let kShopifyStoreName = "rubytestruby"
 private let kMerchantID = "merchant.com.rubygarage.shopclient.test"
 private let kShopifyPaymetTypeApplePay = "apple_pay"
 
@@ -58,8 +58,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     
     // MARK: - Products
     
-    func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Product]>) {
-        let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: nil, sortBy: sortBy, reverse: reverse)
+    func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, keyPhrase: String?, reverse: Bool, callback: @escaping RepoCallback<[Product]>) {
+        let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: nil, sortBy: sortBy, keyPhrase: keyPhrase, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             var products = [Product]()
             let currency = response?.shop.paymentSettings.currencyCode.rawValue
@@ -89,7 +89,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     }
     
     func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping RepoCallback<[Product]>) {
-        let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: searchQuery, sortBy: nil, reverse: false)
+        let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: searchQuery, sortBy: .name, keyPhrase: nil, reverse: false)
         let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             var products = [Product]()
             let currency = response?.shop.paymentSettings.currencyCode.rawValue
@@ -626,6 +626,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
             return Storefront.ProductSortKeys.title
         case SortingValue.popular:
             return Storefront.ProductSortKeys.relevance
+        case SortingValue.type:
+            return Storefront.ProductSortKeys.productType
         }
     }
     
@@ -640,19 +642,25 @@ class API: NSObject, APIInterface, PaySessionDelegate {
             return Storefront.ProductCollectionSortKeys.title
         case SortingValue.popular:
             return Storefront.ProductCollectionSortKeys.relevance
+        default:
+            return nil
         }
     }
     
     // MARK: - Queries building
     
-    private func productsListQuery(with perPage: Int, after: Any?, searchPhrase: String?, sortBy: SortingValue?, reverse: Bool) -> Storefront.QueryRootQuery {
+    private func productsListQuery(with perPage: Int, after: Any?, searchPhrase: String?, sortBy: SortingValue?, keyPhrase: String?, reverse: Bool) -> Storefront.QueryRootQuery {
         let sortKey = productSortValue(for: sortBy)
+        var query = searchPhrase
+        if let keyPhrase = keyPhrase, let sortKey = sortKey, sortKey == Storefront.ProductSortKeys.productType {
+            query = "product_type:'\(keyPhrase)'"
+        }
         
         return Storefront.buildQuery { $0
             .shop { $0
                 .name()
                 .paymentSettings(self.paymentSettingsQuery())
-                .products(first: Int32(perPage), after: after as? String, reverse: reverse, sortKey: sortKey, query: searchPhrase, self.productConnectionQuery())
+                .products(first: Int32(perPage), after: after as? String, reverse: reverse, sortKey: sortKey, query: query, self.productConnectionQuery())
             }
         }
     }

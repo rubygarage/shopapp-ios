@@ -12,10 +12,12 @@ enum SortingValue: Int {
     case createdAt
     case name
     case popular
+    case type
     
     static let allValues = ["SortingValue.CreatedAt".localizable,
                             "SortingValue.Name".localizable,
-                            "SortingValue.Popular".localizable]
+                            "SortingValue.Popular".localizable,
+                            "SortingValue.Type".localizable]
 }
 
 protocol APIInterface {
@@ -23,7 +25,7 @@ protocol APIInterface {
     func getShopInfo(callback: @escaping RepoCallback<Shop>)
     
     // MARK: - products
-    func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Product]>)
+    func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, keyPhrase: String?, reverse: Bool, callback: @escaping RepoCallback<[Product]>)
     func getProduct(id: String, callback: @escaping RepoCallback<Product>)
     func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping RepoCallback<[Product]>)
     

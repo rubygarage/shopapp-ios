@@ -10,6 +10,7 @@ import RxSwift
 
 class ProductsListViewModel: GridCollectionViewModel {
     var sortingValue: SortingValue!
+    var keyPhrase: String?
     
     private let productListUseCase = ProductListUseCase()
     
@@ -27,7 +28,7 @@ class ProductsListViewModel: GridCollectionViewModel {
         let showHud = products.value.isEmpty
         state.onNext(.loading(showHud: showHud))
         let reverse = sortingValue == .createdAt
-        productListUseCase.getProductList(with: paginationValue, sortingValue: sortingValue, reverse: reverse) { [weak self] (products, error) in
+        productListUseCase.getProductList(with: paginationValue, sortingValue: sortingValue, keyPhrase: keyPhrase, reverse: reverse) { [weak self] (products, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }
