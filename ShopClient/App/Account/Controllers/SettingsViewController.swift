@@ -69,8 +69,7 @@ extension SettingsViewController: SwitchTableViewCellProtocol {
     func stateDidChange(at indexPath: IndexPath, value: Bool) {
         switch indexPath.section {
         case SettingsSection.promo.rawValue:
-            viewModel.customer.value!.promo = value
-            viewModel.updateCustomer()
+            viewModel.setPromo(value)
         default:
             break
         }

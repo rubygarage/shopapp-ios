@@ -30,6 +30,18 @@ class SettingsViewModel: BaseViewModel {
         }
     }
     
+    private func update(_ customer: Customer) {
+        state.onNext(.loading(showHud: false))
+        updateCustomUseCase.updateCustomer(customer) { [weak self] (success, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            }
+            if let success = success, success == true {
+                self?.state.onNext(.content)
+            }
+        }
+    }
+    
     // MARK: - Internal
     
     func loadCustomer() {
@@ -40,15 +52,12 @@ class SettingsViewModel: BaseViewModel {
         }
     }
     
-    func updateCustomer() {
-        state.onNext(.loading(showHud: false))
-        updateCustomUseCase.updateCustomer(customer.value!) { [weak self] (success, error) in
-            if let error = error {
-                self?.state.onNext(.error(error: error))
-            }
-            if let success = success, success == true {
-                self?.state.onNext(.content)
-            }
+    func setPromo(_ value: Bool) {
+        guard let customer = customer.value else {
+            return
         }
+        
+        customer.promo = value
+        update(customer)
     }
 }
