@@ -13,9 +13,13 @@ protocol AccountTableDelegateProtocol: class {
     func customer() -> Customer?
 }
 
-class AccountTableDelegate: NSObject, UITableViewDelegate {
+class AccountTableDelegate: NSObject {
     weak var delegate: (AccountTableDelegateProtocol & AccountNotLoggedHeaderProtocol & AccountLoggedHeaderProtocol & AccountFooterViewProtocol)?
-    
+}
+
+// MARK: - UITableViewDelegate
+
+extension AccountTableDelegate: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.didSelectItem(at: indexPath.row)
     }

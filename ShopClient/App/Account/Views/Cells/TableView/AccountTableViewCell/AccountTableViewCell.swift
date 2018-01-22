@@ -9,13 +9,17 @@
 import UIKit
 
 class AccountTableViewCell: UITableViewCell {
-    @IBOutlet weak var policyTitleLabel: UILabel!
+    @IBOutlet private weak var policyTitleLabel: UILabel!
+    
+    // MARK: - View lifecycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         selectionStyle = .none
     }
+    
+    // MARK: - Setup
     
     func configure(with policy: Policy) {
         policyTitleLabel.text = policy.title

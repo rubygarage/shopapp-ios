@@ -13,13 +13,15 @@ protocol OrderHeaderViewProtocol: class {
 }
 
 class OrderHeaderView: UIView {
-    @IBOutlet var contentView: UIView!
-    @IBOutlet var numberLabel: UILabel!
-    @IBOutlet var dateLabel: UILabel!
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var numberLabel: UILabel!
+    @IBOutlet private weak var dateLabel: UILabel!
     
     private var section: Int!
     
     weak var delegate: OrderHeaderViewProtocol?
+    
+    // MARK: - View lifecycle
 
     init(section: Int, order: Order) {
         super.init(frame: CGRect.zero)
@@ -34,6 +36,8 @@ class OrderHeaderView: UIView {
         
         commonInit()
     }
+    
+    // MARK: - Setup
     
     private func commonInit() {
         Bundle.main.loadNibNamed(String(describing: OrderHeaderView.self), owner: self)

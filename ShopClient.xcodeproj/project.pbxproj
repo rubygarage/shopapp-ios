@@ -988,8 +988,8 @@
 		0B9426521FFE461C00A986AB /* OrderHeaderView */ = {
 			isa = PBXGroup;
 			children = (
-				0B9426561FFE468C00A986AB /* OrderHeaderView.xib */,
 				0B9426541FFE468100A986AB /* OrderHeaderView.swift */,
+				0B9426561FFE468C00A986AB /* OrderHeaderView.xib */,
 			);
 			path = OrderHeaderView;
 			sourceTree = "<group>";
@@ -997,8 +997,8 @@
 		0B9426531FFE463100A986AB /* OrderFooterView */ = {
 			isa = PBXGroup;
 			children = (
-				0BA6305E1FFE57E0007088B8 /* OrderFooterView.xib */,
 				0BA630601FFE57E8007088B8 /* OrderFooterView.swift */,
+				0BA6305E1FFE57E0007088B8 /* OrderFooterView.xib */,
 			);
 			path = OrderFooterView;
 			sourceTree = "<group>";
@@ -1743,8 +1743,8 @@
 		61A54BE61FF5252600D4D151 /* AccountLoggedHeaderView */ = {
 			isa = PBXGroup;
 			children = (
-				61A54BE71FF5252600D4D151 /* AccountLoggedHeaderView.xib */,
 				61A54BE81FF5252600D4D151 /* AccountLoggedHeaderView.swift */,
+				61A54BE71FF5252600D4D151 /* AccountLoggedHeaderView.xib */,
 			);
 			path = AccountLoggedHeaderView;
 			sourceTree = "<group>";
@@ -1752,8 +1752,8 @@
 		61A54BE91FF5252600D4D151 /* AccountNotLoggedHeaderView */ = {
 			isa = PBXGroup;
 			children = (
-				61A54BEA1FF5252600D4D151 /* AccountNotLoggedHeaderView.xib */,
 				61A54BEB1FF5252600D4D151 /* AccountNotLoggedHeaderView.swift */,
+				61A54BEA1FF5252600D4D151 /* AccountNotLoggedHeaderView.xib */,
 			);
 			path = AccountNotLoggedHeaderView;
 			sourceTree = "<group>";

@@ -30,17 +30,20 @@ struct CustomerImageDataSource: AvatarImageViewDataSource {
 }
 
 class AccountLoggedHeaderView: UIView {
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var myOrdersButton: UIButton!
-    @IBOutlet weak var welcomeLabel: UILabel!
-    @IBOutlet weak var customerNameLabel: UILabel!
-    @IBOutlet weak var customerImageView: AvatarImageView! {
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var myOrdersButton: UIButton!
+    @IBOutlet private weak var welcomeLabel: UILabel!
+    @IBOutlet private weak var customerNameLabel: UILabel!
+    
+    @IBOutlet private weak var customerImageView: AvatarImageView! {
         didSet {
             customerImageView.configuration = CustomerImageConfig()
         }
     }
     
     weak var delegate: AccountLoggedHeaderProtocol?
+    
+    // MARK: - View lifecycle
     
     init(frame: CGRect, customer: Customer) {
         super.init(frame: frame)
@@ -54,6 +57,8 @@ class AccountLoggedHeaderView: UIView {
         
         commonInit()
     }
+    
+    // MARK: - Setup
     
     private func commonInit() {
         Bundle.main.loadNibNamed(String(describing: AccountLoggedHeaderView.self), owner: self)

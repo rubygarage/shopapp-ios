@@ -9,6 +9,8 @@
 import RxSwift
 
 class ForgotPasswordViewModel: BaseViewModel {
+    private let resetPasswordUseCase = ResetPasswordUseCase()
+    
     var emailText = Variable<String>("")
     var emailErrorMessage = PublishSubject<String>()
     var resetPasswordSuccess = Variable<Bool>(false)
@@ -18,14 +20,13 @@ class ForgotPasswordViewModel: BaseViewModel {
             email.hasAtLeastOneSymbol()
         }
     }
-    
     var resetPasswordPressed: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
             self?.checkCresentials()
         }
     }
     
-    private let resetPasswordUseCase = ResetPasswordUseCase()
+    // MARK: - Private
     
     private func checkCresentials() {
         if emailText.value.isValidAsEmail() {

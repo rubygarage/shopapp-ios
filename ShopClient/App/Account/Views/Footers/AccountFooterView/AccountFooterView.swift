@@ -12,12 +12,15 @@ protocol AccountFooterViewProtocol: class {
     func didTapLogout()
 }
 
-class AccountFooterView: UIView, UnderlinedButtonProtocol {
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var logoutButton: UnderlinedButton!
-    @IBOutlet weak var logoutUnderlineView: UIView!
+class AccountFooterView: UIView {
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var logoutButton: UnderlinedButton!
+    
+    @IBOutlet fileprivate weak var logoutUnderlineView: UIView!
     
     weak var delegate: AccountFooterViewProtocol?
+    
+    // MARK: - View lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,6 +33,8 @@ class AccountFooterView: UIView, UnderlinedButtonProtocol {
         
         commonInit()
     }
+    
+    // MARK: - Setup
     
     private func commonInit() {
         Bundle.main.loadNibNamed(String(describing: AccountFooterView.self), owner: self)
@@ -50,9 +55,11 @@ class AccountFooterView: UIView, UnderlinedButtonProtocol {
     @IBAction func logoutTapped(_ sender: UIButton) {
         delegate?.didTapLogout()
     }
-    
-    // MARK: - UnderlinedButtonProtocol
-    
+}
+
+// MARK: - UnderlinedButtonProtocol
+
+extension AccountFooterView: UnderlinedButtonProtocol {
     func didChangeState(isHighlighted: Bool) {
         logoutUnderlineView.isHidden = isHighlighted
     }

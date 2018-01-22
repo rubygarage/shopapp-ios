@@ -8,7 +8,7 @@
 
 import Foundation
 
-internal extension Date {
+extension Date {
     var longDescription: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE, MMM d, yyyy"

@@ -13,15 +13,17 @@ protocol OrderFooterViewProtocol: class {
 }
 
 class OrderFooterView: UIView {
-    @IBOutlet var contentView: UIView!
-    @IBOutlet var itemsLabel: UILabel!
-    @IBOutlet var countLabel: UILabel!
-    @IBOutlet var totalLabel: UILabel!
-    @IBOutlet var priceLabel: UILabel!
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var itemsLabel: UILabel!
+    @IBOutlet private weak var countLabel: UILabel!
+    @IBOutlet private weak var totalLabel: UILabel!
+    @IBOutlet private weak var priceLabel: UILabel!
     
     private var section: Int!
     
     weak var delegate: OrderFooterViewProtocol?
+    
+    // MARK: - View lifecycle
     
     init(section: Int, order: Order) {
         super.init(frame: CGRect.zero)
@@ -36,6 +38,8 @@ class OrderFooterView: UIView {
         
         commonInit()
     }
+    
+    // MARK: - Setup
     
     private func commonInit() {
         Bundle.main.loadNibNamed(String(describing: OrderFooterView.self), owner: self)

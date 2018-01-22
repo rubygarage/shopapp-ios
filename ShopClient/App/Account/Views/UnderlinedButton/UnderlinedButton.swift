@@ -13,21 +13,21 @@ protocol UnderlinedButtonProtocol: class {
 }
 
 class UnderlinedButton: UIButton {
-    
     weak var delegate: UnderlinedButtonProtocol?
     
-    override open var isHighlighted: Bool {
+    override var isHighlighted: Bool {
         didSet {
             delegate?.didChangeState(isHighlighted: isHighlighted)
         }
     }
-    
     override var isEnabled: Bool {
         didSet {
             let titleColor = isEnabled ? UIColor.black : UIColor.gray
             setTitleColor(titleColor, for: .normal)
         }
     }
+    
+    // MARK: - View lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,6 +40,8 @@ class UnderlinedButton: UIButton {
         
         setup()
     }
+    
+    // MARK: - Setup
     
     private func setup() {
         setTitleColor(UIColor.black, for: .normal)

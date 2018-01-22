@@ -8,13 +8,14 @@
 
 import UIKit
 
-class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, OrdersListTableDataSourceProtocol, OrdersListTableDelegateProtocol, CheckoutCartTableViewCellDelegate {
+class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
     private var tableDataSource: OrdersListTableDataSource!
     // swiftlint:disable weak_delegate
     private var tableDelegate: OrdersListTableDelegate!
     // swiftlint:enable weak_delegate
-    private var selectedOrder: Order?
-    private var selectedProductVariant: ProductVariant!
+    
+    fileprivate var selectedOrder: Order?
+    fileprivate var selectedProductVariant: ProductVariant!
 
     // MARK: - View controller lifecycle
     
@@ -51,10 +52,6 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, Or
             .disposed(by: disposeBag)
     }
     
-    private func loadData() {
-        viewModel.reloadData()
-    }
-    
     private func setupTableView() {
         let cartNib = UINib(nibName: String(describing: CheckoutCartTableViewCell.self), bundle: nil)
         tableView?.register(cartNib, forCellReuseIdentifier: String(describing: CheckoutCartTableViewCell.self))
@@ -70,6 +67,10 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, Or
         tableView?.contentInset = TableView.defaultContentInsets
     }
     
+    fileprivate func loadData() {
+        viewModel.reloadData()
+    }
+    
     override func pullToRefreshHandler() {
         viewModel.reloadData()
     }
@@ -77,34 +78,42 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel>, Or
     override func infinityScrollHandler() {
         viewModel.loadNextPage()
     }
-    
-    // MARK: - OrdersListTableDataSourceProtocol
-    
+}
+
+// MARK: - ErrorViewProtocol
+
+extension OrdersListViewController {
+    func didTapTryAgain() {
+        loadData()
+    }
+}
+
+// MARK: - OrdersListTableDataSourceProtocol
+
+extension OrdersListViewController: OrdersListTableDataSourceProtocol {
     func orders() -> [Order] {
         return viewModel.items.value
     }
-    
-    // MARK: - OrdersListTableDelegateProtocol
-    
+}
+
+// MARK: - OrdersListTableDelegateProtocol
+
+extension OrdersListViewController: OrdersListTableDelegateProtocol {
     func didSelectItem(at index: Int) {
         if index < viewModel.items.value.count {
             selectedOrder = viewModel.items.value[index]
             performSegue(withIdentifier: SegueIdentifiers.toOrderDetails, sender: self)
         }
     }
-    
-    // MARK: - CheckoutCartTableViewCellDelegate
-    
+}
+
+// MARK: - CheckoutCartTableViewCellDelegate
+
+extension OrdersListViewController: CheckoutCartTableViewCellDelegate {
     func didSelectItem(with productVariantId: String, at index: Int) {
         selectedProductVariant = viewModel.productVariant(with: productVariantId, at: index)
         if selectedProductVariant != nil {
             performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
         }
-    }
-    
-    // MARK: - ErrorViewProtocol
-    
-    func didTapTryAgain() {
-        loadData()
     }
 }

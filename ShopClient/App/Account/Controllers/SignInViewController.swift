@@ -9,12 +9,14 @@
 import RxSwift
 
 class SignInViewController: BaseViewController<SignInViewModel> {
-    @IBOutlet weak var emailTextFieldView: InputTextFieldView!
-    @IBOutlet weak var passwordTextFieldView: InputTextFieldView!
-    @IBOutlet weak var forgotButton: UIButton!
-    @IBOutlet weak var signInButton: BlackButton!
+    @IBOutlet private weak var emailTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var passwordTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var forgotButton: UIButton!
+    @IBOutlet private weak var signInButton: BlackButton!
     
     weak var delegate: AuthenticationProtocol?
+    
+    // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         viewModel = SignInViewModel()
@@ -24,6 +26,8 @@ class SignInViewController: BaseViewController<SignInViewModel> {
         setupViews()
         setupViewModel()
     }
+    
+    // MARK: - Setup
     
     private func setupViews() {
         addCloseButton()

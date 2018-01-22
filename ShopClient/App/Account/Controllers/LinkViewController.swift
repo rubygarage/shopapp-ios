@@ -7,18 +7,22 @@
 //
 
 import UIKit
+
 import RxSwift
 
-class LinkViewController: BaseViewController<ForgotPasswordViewModel>, UnderlinedButtonProtocol {
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var additionalTitleLabel: UILabel!
-    @IBOutlet weak var additionalDescriptionLabel: UILabel!
-    @IBOutlet weak var resendButton: UnderlinedButton!
-    @IBOutlet weak var resendUnderlineView: UIView!
+class LinkViewController: BaseViewController<ForgotPasswordViewModel> {
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var emailLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var additionalTitleLabel: UILabel!
+    @IBOutlet private weak var additionalDescriptionLabel: UILabel!
+    @IBOutlet private weak var resendButton: UnderlinedButton!
+    
+    @IBOutlet fileprivate weak var resendUnderlineView: UIView!
     
     var emailText = Variable<String>("")
+    
+    // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         viewModel = ForgotPasswordViewModel()
@@ -27,6 +31,8 @@ class LinkViewController: BaseViewController<ForgotPasswordViewModel>, Underline
         setupViews()
         setupViewModel()
     }
+    
+    // MARK: - Setup
     
     private func setupViews() {
         titleLabel.text = "Label.ForgotPassword.LinkTitle".localizable
@@ -52,8 +58,11 @@ class LinkViewController: BaseViewController<ForgotPasswordViewModel>, Underline
             .bind(to: viewModel.resetPasswordPressed)
             .disposed(by: disposeBag)
     }
-    
-    // MARK: - UnderlinedButtonProtocol
+}
+
+// MARK: - UnderlinedButtonProtocol
+
+extension LinkViewController: UnderlinedButtonProtocol {
     func didChangeState(isHighlighted: Bool) {
         resendUnderlineView.isHidden = isHighlighted
     }

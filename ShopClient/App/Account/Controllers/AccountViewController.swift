@@ -8,14 +8,17 @@
 
 import UIKit
 
-class AccountViewController: BaseViewController<AccountViewModel>, AccountTableDataSourceProtocol, AccountTableDelegateProtocol, AccountNotLoggedHeaderProtocol, AccountLoggedHeaderProtocol, AccountFooterViewProtocol, AuthenticationProtocol {
-    @IBOutlet weak var tableView: UITableView!
+class AccountViewController: BaseViewController<AccountViewModel> {
+    @IBOutlet private weak var tableView: UITableView!
     
     private var tableDataSource: AccountTableDataSource!
     // swiftlint:disable weak_delegate
     private var tableDelegate: AccountTableDelegate!
     // swiftlint:enable weak_delegate
-    private var selectedPolicy: Policy?
+    
+    fileprivate var selectedPolicy: Policy?
+    
+    // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         viewModel = AccountViewModel()
@@ -43,6 +46,8 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
             }
         }
     }
+    
+    // MARK: - Setup
     
     private func updateNavigationBar() {
         navigationItem.title = "ControllerTitle.Account".localizable
@@ -75,19 +80,23 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
             .disposed(by: disposeBag)
     }
     
-    private func loadData() {
+    fileprivate func loadData() {
         viewModel.loadCustomer()
         viewModel.loadPolicies()
     }
-    
-    // MARK: - AccountTableDataSourceProtocol
-    
+}
+
+// MARK: - AccountTableDataSourceProtocol
+
+extension AccountViewController: AccountTableDataSourceProtocol {
     func policies() -> [Policy] {
         return viewModel.policies.value
     }
-    
-    // MARK: - AccountTableDelegateProtocol
-    
+}
+
+// MARK: - AccountTableDelegateProtocol
+
+extension AccountViewController: AccountTableDelegateProtocol {
     func didSelectItem(at index: Int) {
         if index < viewModel.policies.value.count {
             selectedPolicy = viewModel.policies.value[index]
@@ -98,9 +107,11 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     func customer() -> Customer? {
         return viewModel.customer.value
     }
-    
-    // MARK: - AccountNotLoggedHeaderProtocol
-    
+}
+
+// MARK: - AccountNotLoggedHeaderProtocol
+
+extension AccountViewController: AccountNotLoggedHeaderProtocol {
     func didTapSignIn() {
         performSegue(withIdentifier: SegueIdentifiers.toSignIn, sender: self)
     }
@@ -108,21 +119,27 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableD
     func didTapCreateNewAccount() {
         performSegue(withIdentifier: SegueIdentifiers.toSignUp, sender: self)
     }
-    
-    // MARK: - AccountLoggedHeaderProtocol
-    
+}
+
+// MARK: - AccountLoggedHeaderProtocol
+
+extension AccountViewController: AccountLoggedHeaderProtocol {
     func didTapMyOrders() {
         performSegue(withIdentifier: SegueIdentifiers.toOrdersList, sender: self)
     }
-    
-    // MARK: - AccountFooterViewProtocol
-    
+}
+
+// MARK: - AccountFooterViewProtocol
+
+extension AccountViewController: AccountFooterViewProtocol {
     func didTapLogout() {
         viewModel.logout()
     }
-    
-    // MARK: - AuthenticationProtocol
-    
+}
+
+// MARK: - AuthenticationProtocol
+
+extension AccountViewController: AuthenticationProtocol {
     func didAuthorize() {
         loadData()
     }

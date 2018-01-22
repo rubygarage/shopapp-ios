@@ -9,9 +9,10 @@
 import RxSwift
 
 class OrderDetailsViewModel: BaseViewModel {
-    var data = Variable<Order?>(nil)
+    private let orderUseCase = OrderUseCase()
     
     var orderId: String!
+    var data = Variable<Order?>(nil)
     
     var loadData: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
@@ -19,7 +20,9 @@ class OrderDetailsViewModel: BaseViewModel {
         }
     }
     
-    public func productVariant(at index: Int) -> ProductVariant? {
+    // MARK: - Internal
+    
+    func productVariant(at index: Int) -> ProductVariant? {
         var variant: ProductVariant?
 
         if let order = data.value, let item = order.items?[index], let productVariant = item.productVariant {
@@ -28,8 +31,6 @@ class OrderDetailsViewModel: BaseViewModel {
         
         return variant
     }
-    
-    private let orderUseCase = OrderUseCase()
     
     func loadOrder() {
         state.onNext(.loading(showHud: true))
