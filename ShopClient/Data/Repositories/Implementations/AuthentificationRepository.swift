@@ -32,4 +32,8 @@ extension Repository: AuthentificationRepositoryInterface {
     func getCustomer(callback: @escaping RepoCallback<Customer>) {
         APICore?.getCustomer(callback: callback)
     }
+    
+    func updateCustomer(_ customer: Customer, callback: @escaping RepoCallback<Bool>) {
+        APICore?.updateCustomer(customer, callback: callback)
+    }
 }

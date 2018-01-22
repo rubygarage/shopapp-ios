@@ -49,10 +49,6 @@ class AccountViewController: BaseViewController<AccountViewModel> {
     
     // MARK: - Setup
     
-    private func updateNavigationBar() {
-        navigationItem.title = "ControllerTitle.Account".localizable
-    }
-    
     private func setupTableView() {
         let cellNib = UINib(nibName: String(describing: AccountTableViewCell.self), bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: String(describing: AccountTableViewCell.self))
@@ -75,14 +71,32 @@ class AccountViewController: BaseViewController<AccountViewModel> {
         
         viewModel.customer.asObservable()
             .subscribe(onNext: { [weak self] _ in
+                self?.updateNavigationBar()
                 self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
     
+    fileprivate func updateNavigationBar() {
+        navigationItem.title = "ControllerTitle.Account".localizable
+        
+        if viewModel.customer.value != nil && navigationItem.rightBarButtonItem == nil {
+            let settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .plain, target: self, action: #selector(self.settingsButtonHandler))
+            navigationItem.rightBarButtonItem = settingsButton
+        } else if viewModel.customer.value == nil {
+            navigationItem.rightBarButtonItem = nil
+        }
+    }
+    
     fileprivate func loadData() {
         viewModel.loadCustomer()
         viewModel.loadPolicies()
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func settingsButtonHandler() {
+        performSegue(withIdentifier: SegueIdentifiers.toAccountSettings, sender: self)
     }
 }
 
@@ -134,6 +148,7 @@ extension AccountViewController: AccountLoggedHeaderProtocol {
 extension AccountViewController: AccountFooterViewProtocol {
     func didTapLogout() {
         viewModel.logout()
+        updateNavigationBar()
     }
 }
 
