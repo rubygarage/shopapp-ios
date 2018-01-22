@@ -1307,6 +1307,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     
     private func paymentQuery() -> (Storefront.PaymentQuery) -> Void {
         return { (query: Storefront.PaymentQuery) in
+            query.id()
             query.ready()
         }
     }
