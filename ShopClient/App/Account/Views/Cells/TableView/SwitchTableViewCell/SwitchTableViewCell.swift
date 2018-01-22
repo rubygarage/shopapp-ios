@@ -8,6 +8,8 @@
 
 import RxSwift
 
+private let kSwitchControlDebounceDueTime = 0.3
+
 protocol SwitchTableViewCellProtocol: class {
     func stateDidChange(at indexPath: IndexPath, value: Bool)
 }
@@ -36,7 +38,7 @@ class SwitchTableViewCell: UITableViewCell {
     
     private func setupViews() {
         let switchResults = switchControl.rx.isOn
-            .debounce(0.3, scheduler: MainScheduler.instance)
+            .debounce(kSwitchControlDebounceDueTime, scheduler: MainScheduler.instance)
             .observeOn(MainScheduler.instance)
 
         switchResults.asObservable()
@@ -55,11 +57,5 @@ class SwitchTableViewCell: UITableViewCell {
         self.indexPath = indexPath
         swicthDescriptionlabel.text = description
         switchControl.isOn = state
-    }
-    
-    // MARK: - Actions
-    
-    @IBAction func switchControlValueDidChange(_ sender: UISwitch) {
-        //delegate?.stateDidChange(at: indexPath, value: sender.isOn)
     }
 }

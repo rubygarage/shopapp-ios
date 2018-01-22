@@ -28,9 +28,6 @@
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Z6d-EJ-rzU">
                         <rect key="frame" x="310" y="14.5" width="51" height="31"/>
                         <color key="onTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <connections>
-                            <action selector="switchControlValueDidChange:" destination="KGk-i7-Jjw" eventType="valueChanged" id="46A-c9-bhm"/>
-                        </connections>
                     </switch>
                 </subviews>
                 <constraints>
