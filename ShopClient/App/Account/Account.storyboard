@@ -41,6 +41,7 @@
                         <segue destination="zdO-YG-cfs" kind="presentation" identifier="toSignIn" id="taI-5h-oyg"/>
                         <segue destination="GpK-nH-9eS" kind="show" identifier="toOrdersList" id="Sly-3A-odQ"/>
                         <segue destination="Vuw-Re-lYh" kind="show" identifier="toAccountSettings" id="mdc-0i-wrK"/>
+                        <segue destination="ekz-Gg-Wge" kind="show" identifier="toPersonalInfo" id="JJX-Gk-0Pk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIy-lA-im1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -193,6 +194,115 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtP-yV-pI6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2124" y="2282"/>
+        </scene>
+        <!--Personal Info View Controller-->
+        <scene sceneID="Mf5-6b-ts8">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="ekz-Gg-Wge" customClass="PersonalInfoViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Aju-d4-PMl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="23l-fk-vuY" customClass="TPKeyboardAvoidingScrollView">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7tw-ZN-MX5">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcq-TF-fx0" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="35" y="110" width="305" height="47"/>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="47" id="BQh-QI-a5N"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
+                                                        <integer key="value" value="0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWH-ma-ydi" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="35" y="43" width="150.5" height="47"/>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="47" id="jOC-p0-bBj"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
+                                                        <integer key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8vp-gX-ShV" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="189" y="43" width="150.5" height="47"/>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="47" id="j0v-qF-Mgh"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
+                                                        <integer key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="796-pn-4ld" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="35" y="177" width="305" height="47"/>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="47" id="3gX-qV-xyQ"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
+                                                        <integer key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="8vp-gX-ShV" secondAttribute="trailing" constant="35" id="5YL-L7-VIf"/>
+                                            <constraint firstItem="8vp-gX-ShV" firstAttribute="leading" secondItem="EWH-ma-ydi" secondAttribute="trailing" constant="4" id="9b1-Wi-TZe"/>
+                                            <constraint firstItem="8vp-gX-ShV" firstAttribute="centerY" secondItem="EWH-ma-ydi" secondAttribute="centerY" id="MN8-xs-i4i"/>
+                                            <constraint firstItem="796-pn-4ld" firstAttribute="leading" secondItem="hcq-TF-fx0" secondAttribute="leading" id="NZg-aX-XBI"/>
+                                            <constraint firstItem="8vp-gX-ShV" firstAttribute="width" secondItem="EWH-ma-ydi" secondAttribute="width" id="d7Z-nF-Psk"/>
+                                            <constraint firstItem="796-pn-4ld" firstAttribute="trailing" secondItem="hcq-TF-fx0" secondAttribute="trailing" id="goI-g5-sG4"/>
+                                            <constraint firstItem="EWH-ma-ydi" firstAttribute="top" secondItem="7tw-ZN-MX5" secondAttribute="top" constant="43" id="h0L-dy-01V"/>
+                                            <constraint firstItem="EWH-ma-ydi" firstAttribute="leading" secondItem="7tw-ZN-MX5" secondAttribute="leading" constant="35" id="iPJ-hS-PsU"/>
+                                            <constraint firstItem="796-pn-4ld" firstAttribute="top" secondItem="hcq-TF-fx0" secondAttribute="bottom" constant="20" id="k1l-hK-yAM"/>
+                                            <constraint firstItem="hcq-TF-fx0" firstAttribute="trailing" secondItem="8vp-gX-ShV" secondAttribute="trailing" id="ulx-sZ-vfK"/>
+                                            <constraint firstItem="hcq-TF-fx0" firstAttribute="leading" secondItem="EWH-ma-ydi" secondAttribute="leading" id="uzl-QF-tqD"/>
+                                            <constraint firstItem="hcq-TF-fx0" firstAttribute="top" secondItem="EWH-ma-ydi" secondAttribute="bottom" constant="20" id="zfe-2w-zYH"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="7tw-ZN-MX5" firstAttribute="leading" secondItem="23l-fk-vuY" secondAttribute="leading" id="0ae-3h-I0Z"/>
+                                    <constraint firstAttribute="bottom" secondItem="7tw-ZN-MX5" secondAttribute="bottom" id="5wb-01-F4o"/>
+                                    <constraint firstAttribute="trailing" secondItem="7tw-ZN-MX5" secondAttribute="trailing" id="Dam-Pm-PDE"/>
+                                    <constraint firstItem="7tw-ZN-MX5" firstAttribute="height" secondItem="23l-fk-vuY" secondAttribute="height" id="Ond-x1-Cdr"/>
+                                    <constraint firstItem="7tw-ZN-MX5" firstAttribute="top" secondItem="23l-fk-vuY" secondAttribute="top" id="bde-Dh-2On"/>
+                                    <constraint firstItem="7tw-ZN-MX5" firstAttribute="width" secondItem="23l-fk-vuY" secondAttribute="width" id="d0U-eU-ouP"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="23l-fk-vuY" firstAttribute="trailing" secondItem="cbI-3x-wOa" secondAttribute="trailing" id="Vu5-e6-1eV"/>
+                            <constraint firstItem="23l-fk-vuY" firstAttribute="leading" secondItem="cbI-3x-wOa" secondAttribute="leading" id="WA7-uG-CJE"/>
+                            <constraint firstItem="23l-fk-vuY" firstAttribute="top" secondItem="cbI-3x-wOa" secondAttribute="top" id="jBm-rK-6Hy"/>
+                            <constraint firstItem="23l-fk-vuY" firstAttribute="bottom" secondItem="cbI-3x-wOa" secondAttribute="bottom" id="k3Z-2N-IvU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cbI-3x-wOa"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextFieldView" destination="hcq-TF-fx0" id="lBT-Br-FUv"/>
+                        <outlet property="lastNameTextFieldView" destination="8vp-gX-ShV" id="ksG-OG-dDe"/>
+                        <outlet property="nameTextFieldView" destination="EWH-ma-ydi" id="TN0-nL-Rs6"/>
+                        <outlet property="phoneTextFieldView" destination="796-pn-4ld" id="xa5-sz-gCG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bkn-kO-dh1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3432.8000000000002" y="1493.7031484257873"/>
         </scene>
         <!--ProductsDetailControllerIdentifier-->
         <scene sceneID="1AL-cQ-MAn">
@@ -740,6 +850,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Edi-8c-pdA"/>
-        <segue reference="2Th-4v-kuF"/>
+        <segue reference="9Y3-HY-brn"/>
     </inferredMetricsTieBreakers>
 </document>

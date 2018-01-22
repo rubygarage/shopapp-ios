@@ -96,7 +96,7 @@ class AccountViewController: BaseViewController<AccountViewModel> {
     // MARK: - Actions
     
     @objc private func settingsButtonHandler() {
-        performSegue(withIdentifier: SegueIdentifiers.toAccountSettings, sender: self)
+        performSegue(withIdentifier: SegueIdentifiers.toPersonalInfo, sender: self) // toAccountSettings
     }
 }
 

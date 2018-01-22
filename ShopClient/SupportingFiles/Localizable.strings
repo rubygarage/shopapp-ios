@@ -18,6 +18,7 @@
 "ControllerTitle.Checkout" = "Checkout";
 "ControllerTitle.MyOrders" = "My Orders";
 "ControllerTitle.OrderDetails" = "Order Details";
+"ControllerTitle.PersonalInfo" = "Personal Info";
 "ControllerTitle.AddNewAddress" = "Add New Address";
 "ControllerTitle.ShippingAddress" = "Shipping Address";
 "ControllerTitle.BillingAddress" = "Billing Address";
