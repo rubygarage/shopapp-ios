@@ -126,6 +126,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     private func populateImages(with product: Product) {
         if let images = product.images, !images.isEmpty {
             detailImagesController?.images = images
+            detailImagesContainer.isHidden = false
         } else {
             detailImagesContainer.isHidden = true
         }
