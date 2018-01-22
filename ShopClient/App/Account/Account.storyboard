@@ -40,6 +40,7 @@
                         <segue destination="tL0-Uj-cJq" kind="presentation" identifier="toSignUp" id="EcH-ry-AKT"/>
                         <segue destination="zdO-YG-cfs" kind="presentation" identifier="toSignIn" id="taI-5h-oyg"/>
                         <segue destination="GpK-nH-9eS" kind="show" identifier="toOrdersList" id="Sly-3A-odQ"/>
+                        <segue destination="Vuw-Re-lYh" kind="show" identifier="toAccountSettings" id="mdc-0i-wrK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIy-lA-im1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -131,6 +132,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Pg-M4-8r5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2124" y="1493.7031484257873"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="3wp-c9-FLE">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="Vuw-Re-lYh" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DUO-oY-njh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="PA5-ac-xUo"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hXg-jl-Lxh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-954" y="1494"/>
         </scene>
         <!--Order Details View Controller-->
         <scene sceneID="tYG-db-tzb">
@@ -709,6 +725,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Edi-8c-pdA"/>
-        <segue reference="9Y3-HY-brn"/>
+        <segue reference="2Th-4v-kuF"/>
     </inferredMetricsTieBreakers>
 </document>
