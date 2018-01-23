@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -533,32 +532,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOT-sV-RC3">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8OL-dY-JFW">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkout_success" translatesAutoresizingMaskIntoConstraints="NO" id="7Yn-gb-mtn">
-                                                <rect key="frame" x="122" y="130.5" width="130" height="116"/>
+                                                <rect key="frame" x="122" y="132" width="130" height="116"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="116" id="M6M-Cs-0Re"/>
                                                     <constraint firstAttribute="width" constant="130" id="cSQ-Nv-nXx"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thanks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ecd-1A-xKa">
-                                                <rect key="frame" x="16" y="289.5" width="343" height="21"/>
+                                                <rect key="frame" x="16" y="291" width="343" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your order num" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HdG-Wn-Pz8">
-                                                <rect key="frame" x="16" y="327.5" width="343" height="16"/>
+                                                <rect key="frame" x="16" y="329" width="343" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fv-8j-747" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="45" y="385.5" width="285" height="50"/>
+                                                <rect key="frame" x="45" y="387" width="285" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="j0Q-IB-14N"/>
@@ -570,7 +569,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pp8-jt-cQ1" customClass="UnderlinedButton" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="124" y="460.5" width="127" height="25"/>
+                                                <rect key="frame" x="124" y="462" width="127" height="25"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                 <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                                 <state key="normal" title="Continue shoping">
@@ -581,7 +580,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vTx-yC-vBc">
-                                                <rect key="frame" x="134" y="485.5" width="107" height="1"/>
+                                                <rect key="frame" x="134" y="487" width="107" height="1"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="yN4-pE-FfO"/>
@@ -606,16 +605,16 @@
                                             <constraint firstItem="HdG-Wn-Pz8" firstAttribute="top" secondItem="Ecd-1A-xKa" secondAttribute="bottom" constant="17" id="suR-Eq-sAZ"/>
                                             <constraint firstItem="Ecd-1A-xKa" firstAttribute="leading" secondItem="8OL-dY-JFW" secondAttribute="leading" constant="16" id="t2w-qu-Yl9"/>
                                             <constraint firstItem="7Yn-gb-mtn" firstAttribute="centerX" secondItem="8OL-dY-JFW" secondAttribute="centerX" id="vdL-Tm-3hV"/>
-                                            <constraint firstItem="Ecd-1A-xKa" firstAttribute="centerY" secondItem="8OL-dY-JFW" secondAttribute="centerY" multiplier="0.9" id="xiS-sC-U38"/>
+                                            <constraint firstItem="Ecd-1A-xKa" firstAttribute="centerY" secondItem="8OL-dY-JFW" secondAttribute="centerY" id="xiS-sC-U38"/>
                                             <constraint firstItem="vTx-yC-vBc" firstAttribute="leading" secondItem="pp8-jt-cQ1" secondAttribute="leading" constant="10" id="yBk-fe-TSe"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="8OL-dY-JFW" firstAttribute="top" secondItem="IOT-sV-RC3" secondAttribute="top" id="5R3-Ic-j3r"/>
                                     <constraint firstAttribute="bottom" secondItem="8OL-dY-JFW" secondAttribute="bottom" id="AVI-ZM-dOQ"/>
                                     <constraint firstItem="8OL-dY-JFW" firstAttribute="height" secondItem="IOT-sV-RC3" secondAttribute="height" id="Nw7-NF-XXo"/>
                                     <constraint firstItem="8OL-dY-JFW" firstAttribute="width" secondItem="IOT-sV-RC3" secondAttribute="width" id="Tpe-lR-s31"/>
+                                    <constraint firstItem="8OL-dY-JFW" firstAttribute="top" secondItem="IOT-sV-RC3" secondAttribute="top" id="WDY-DE-ga0"/>
                                     <constraint firstItem="8OL-dY-JFW" firstAttribute="leading" secondItem="IOT-sV-RC3" secondAttribute="leading" id="uxH-J3-AKe"/>
                                     <constraint firstAttribute="trailing" secondItem="8OL-dY-JFW" secondAttribute="trailing" id="wTU-6z-dmA"/>
                                 </constraints>
@@ -624,8 +623,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="IOT-sV-RC3" firstAttribute="bottom" secondItem="J9e-zn-JTn" secondAttribute="bottom" id="IAn-jF-etB"/>
-                            <constraint firstItem="IOT-sV-RC3" firstAttribute="top" secondItem="0om-am-KCN" secondAttribute="top" id="LFB-yV-9UF"/>
                             <constraint firstItem="IOT-sV-RC3" firstAttribute="trailing" secondItem="J9e-zn-JTn" secondAttribute="trailing" id="Y3B-fM-Y20"/>
+                            <constraint firstItem="IOT-sV-RC3" firstAttribute="top" secondItem="J9e-zn-JTn" secondAttribute="top" id="fto-fL-KjS"/>
                             <constraint firstItem="IOT-sV-RC3" firstAttribute="leading" secondItem="J9e-zn-JTn" secondAttribute="leading" id="q0e-Yq-wi0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="J9e-zn-JTn"/>
@@ -641,7 +640,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ezj-Ev-J7P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1102" y="1686"/>
+            <point key="canvasLocation" x="1101.5999999999999" y="1685.3073463268368"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vHW-0u-vIS">
