@@ -73,12 +73,8 @@ class PersonalInfoViewModel: BaseViewModel {
     }
     
     private func saveChanges() {
-        guard let customer = customer.value?.copy() as? Customer else {
-            return
-        }
-        setInputsToCustomer(customer)
         state.onNext(.loading(showHud: true))
-        updateCustomUseCase.updateCustomer(customer) { [weak self] (customer, error) in
+        updateCustomUseCase.updateCustomer(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), phone: phoneText.value.orNil()) { [weak self] (customer, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }
@@ -98,13 +94,6 @@ class PersonalInfoViewModel: BaseViewModel {
         lastNameText.value = customer.lastName ?? ""
         emailText.value = customer.email
         phoneText.value = customer.phone ?? ""
-    }
-    
-    private func setInputsToCustomer(_ customer: Customer) {
-        customer.firstName = firstNameText.value
-        customer.lastName = lastNameText.value
-        customer.email = emailText.value
-        customer.phone = phoneText.value
     }
     
     // MARK: - Internal

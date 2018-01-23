@@ -44,7 +44,8 @@ protocol APIInterface {
     func isLoggedIn() -> Bool
     func resetPassword(with email: String, callback: @escaping RepoCallback<Bool>)
     func getCustomer(callback: @escaping RepoCallback<Customer>)
-    func updateCustomer(_ customer: Customer, callback: @escaping RepoCallback<Customer>)
+    func updateCustomer(with email: String, firstName: String?, lastName: String?, phone: String?, callback: @escaping RepoCallback<Customer>)
+    func updateCustomer(with promo: Bool, callback: @escaping RepoCallback<Customer>)
     func addCustomerAddress(with address: Address, callback: @escaping RepoCallback<String>)
     func updateCustomerAddress(with address: Address, callback: @escaping RepoCallback<Bool>)
     func updateCustomerDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Bool>)

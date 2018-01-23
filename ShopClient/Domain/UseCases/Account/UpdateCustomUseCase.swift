@@ -9,7 +9,11 @@
 import Foundation
 
 struct UpdateCustomUseCase {
-    public func updateCustomer(_ customer: Customer, _ callback: @escaping RepoCallback<Customer>) {
-        Repository.shared.updateCustomer(customer, callback: callback)
+    public func updateCustomer(with promo: Bool, _ callback: @escaping RepoCallback<Customer>) {
+        Repository.shared.updateCustomer(with: promo, callback: callback)
+    }
+    
+    public func updateCustomer(with email: String, firstName: String?, lastName: String?, phone: String?, _ callback: @escaping RepoCallback<Customer>) {
+        Repository.shared.updateCustomer(with: email, firstName:firstName, lastName: lastName, phone: phone, callback: callback)
     }
 }

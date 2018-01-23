@@ -223,9 +223,17 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         }
     }
     
-    func updateCustomer(_ customer: Customer, callback: @escaping RepoCallback<Customer>) {
+    func updateCustomer(with email: String, firstName: String?, lastName: String?, phone: String?, callback: @escaping RepoCallback<Customer>) {
         if let token = sessionData().token {
-            updateCustomer(with: token, customer: customer, callback: callback)
+            updateCustomer(with: token, email: email, firstName: firstName, lastName: lastName, phone: phone, callback: callback)
+        } else {
+            callback(nil, ContentError())
+        }
+    }
+    
+    func updateCustomer(with promo: Bool, callback: @escaping RepoCallback<Customer>) {
+        if let token = sessionData().token {
+            updateCustomer(with: token, promo: promo, callback: callback)
         } else {
             callback(nil, ContentError())
         }
@@ -532,8 +540,17 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         run(task: task, callback: callback)
     }
     
-    private func updateCustomer(with token: String, customer: Customer, callback: @escaping RepoCallback<Customer>) {
-        let query = customerUpdateQuery(with: token, customer: customer)
+    private func updateCustomer(with token: String, email: String, firstName: String?, lastName: String?, phone: String?, callback: @escaping RepoCallback<Customer>) {
+        let query = customerUpdateQuery(with: token, email: email, firstName: firstName, lastName: lastName, phone: phone)
+        updateCustomer(with: query, callback: callback)
+    }
+    
+    private func updateCustomer(with token: String, promo: Bool, callback: @escaping RepoCallback<Customer>) {
+        let query = customerUpdateQuery(with: token, promo: promo)
+        updateCustomer(with: query, callback: callback)
+    }
+    
+    private func updateCustomer(with query: Storefront.MutationQuery, callback: @escaping RepoCallback<Customer>) {
         let task = client?.mutateGraphWith(query, completionHandler: { (result, _) in
             if let customer = result?.customerUpdate?.customer {
                 let result = Customer(with: customer)
@@ -776,9 +793,20 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         })
     }
     
-    private func customerUpdateQuery(with accessToken: String, customer: Customer) -> Storefront.MutationQuery {
+    private func customerUpdateQuery(with accessToken: String, email: String, firstName: String?, lastName: String?, phone: String?) -> Storefront.MutationQuery {
         let input = Storefront.CustomerUpdateInput.create()
-        input.update(with: customer)
+        input.firstName = firstName.orNull
+        input.lastName = lastName.orNull
+        input.email = Input<String>(orNull: email)
+        input.phone = phone.orNull
+        return Storefront.buildMutation({ $0
+            .customerUpdate(customerAccessToken: accessToken, customer: input, self.customerUpdatePayloadQuery())
+        })
+    }
+    
+    private func customerUpdateQuery(with accessToken: String, promo: Bool) -> Storefront.MutationQuery {
+        let input = Storefront.CustomerUpdateInput.create()
+        input.acceptsMarketing = Input<Bool>(orNull: promo)
         return Storefront.buildMutation({ $0
             .customerUpdate(customerAccessToken: accessToken, customer: input, self.customerUpdatePayloadQuery())
         })
@@ -1513,16 +1541,6 @@ class API: NSObject, APIInterface, PaySessionDelegate {
                 })
             }
         }
-    }
-}
-
-extension Storefront.CustomerUpdateInput {
-    func update(with customer: Customer) {
-        firstName = customer.firstName.orNull
-        lastName = customer.lastName.orNull
-        email = Input<String>(orNull: customer.email)
-        phone = customer.phone.orNull
-        acceptsMarketing = Input<Bool>(orNull: customer.promo)
     }
 }
 

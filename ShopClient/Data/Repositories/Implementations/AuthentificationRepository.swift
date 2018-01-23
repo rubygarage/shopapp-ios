@@ -33,7 +33,11 @@ extension Repository: AuthentificationRepositoryInterface {
         APICore?.getCustomer(callback: callback)
     }
     
-    func updateCustomer(_ customer: Customer, callback: @escaping RepoCallback<Customer>) {
-        APICore?.updateCustomer(customer, callback: callback)
+    func updateCustomer(with email: String, firstName: String?, lastName: String?, phone: String?, callback: @escaping RepoCallback<Customer>) {
+        APICore?.updateCustomer(with: email, firstName: firstName, lastName: lastName, phone: phone, callback: callback)
+    }
+    
+    func updateCustomer(with promo: Bool, callback: @escaping RepoCallback<Customer>) {
+        APICore?.updateCustomer(with: promo, callback: callback)
     }
 }

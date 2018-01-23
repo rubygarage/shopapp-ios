@@ -12,5 +12,6 @@ protocol AuthentificationRepositoryInterface {
     func isLoggedIn() -> Bool
     func resetPassword(with email: String, callback: @escaping RepoCallback<Bool>)
     func getCustomer(callback: @escaping RepoCallback<Customer>)
-    func updateCustomer(_ customer: Customer, callback: @escaping RepoCallback<Customer>)
+    func updateCustomer(with email: String, firstName: String?, lastName: String?, phone: String?, callback: @escaping RepoCallback<Customer>)
+    func updateCustomer(with promo: Bool, callback: @escaping RepoCallback<Customer>)
 }
