@@ -48,8 +48,11 @@
 "Button.Submit" = "Submit";
 "Button.Resend" = "Resend reset link";
 "Button.Logout" = "Log Out";
+"Button.ChangePassword" = "Change Password";
+"Button.SaveChanges" = "Save Changes";
 "Button.CreateNewAccount" = "Create New Account";
 "Button.MyOrders" = "My Orders";
+"Button.PersonalInfo" = "Personal Info";
 "Button.StartShopping" = "Start Shopping";
 "Button.Remove" = "Remove";
 "Button.Clear" = "Clear";

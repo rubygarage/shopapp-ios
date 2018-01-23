@@ -26,3 +26,17 @@ class Customer: NSObject {
         }
     }
 }
+
+// MARK: - NSCopying
+
+extension Customer: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = Customer()
+        copy.email = email
+        copy.firstName = firstName
+        copy.lastName = lastName
+        copy.phone = phone
+        copy.promo = promo
+        return copy
+    }
+}

@@ -11,6 +11,7 @@ import AvatarImageView
 
 protocol AccountLoggedHeaderProtocol: class {
     func didTapMyOrders()
+    func didTapPersonalInfo()
 }
 
 private let kAvatarTextSizeFactor: CGFloat = 0.4
@@ -32,6 +33,7 @@ struct CustomerImageDataSource: AvatarImageViewDataSource {
 class AccountLoggedHeaderView: UIView {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var myOrdersButton: UIButton!
+    @IBOutlet private weak var personalInfoButton: UIButton!
     @IBOutlet private weak var welcomeLabel: UILabel!
     @IBOutlet private weak var customerNameLabel: UILabel!
     
@@ -71,6 +73,7 @@ class AccountLoggedHeaderView: UIView {
     
     private func setupViews() {
         myOrdersButton.setTitle("Button.MyOrders".localizable, for: .normal)
+        personalInfoButton.setTitle("Button.PersonalInfo".localizable, for: .normal)
         welcomeLabel.text = "Label.Welcome".localizable
     }
     
@@ -83,5 +86,9 @@ class AccountLoggedHeaderView: UIView {
     
     @IBAction func myOrdersTapped(_ sender: UIButton) {
         delegate?.didTapMyOrders()
+    }
+    
+    @IBAction func personalInfoTapped(_ sender: UIButton) {
+        delegate?.didTapPersonalInfo()
     }
 }

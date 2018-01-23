@@ -32,11 +32,11 @@ class SettingsViewModel: BaseViewModel {
     
     private func update(_ customer: Customer) {
         state.onNext(.loading(showHud: false))
-        updateCustomUseCase.updateCustomer(customer) { [weak self] (success, error) in
+        updateCustomUseCase.updateCustomer(customer) { [weak self] (customer, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }
-            if let success = success, success == true {
+            if customer != nil {
                 self?.state.onNext(.content)
             }
         }

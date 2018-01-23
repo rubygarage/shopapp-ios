@@ -223,11 +223,11 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         }
     }
     
-    func updateCustomer(_ customer: Customer, callback: @escaping RepoCallback<Bool>) {
+    func updateCustomer(_ customer: Customer, callback: @escaping RepoCallback<Customer>) {
         if let token = sessionData().token {
             updateCustomer(with: token, customer: customer, callback: callback)
         } else {
-            callback(false, ContentError())
+            callback(nil, ContentError())
         }
     }
     
@@ -532,15 +532,16 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         run(task: task, callback: callback)
     }
     
-    private func updateCustomer(with token: String, customer: Customer, callback: @escaping RepoCallback<Bool>) {
+    private func updateCustomer(with token: String, customer: Customer, callback: @escaping RepoCallback<Customer>) {
         let query = customerUpdateQuery(with: token, customer: customer)
-        let task = client?.mutateGraphWith(query, completionHandler: { (result, error) in
-            if result?.customerUpdate?.customer != nil {
-                callback(true, nil)
-            } else if let repoError = RepoError(with: error) {
-                callback(false, repoError)
+        let task = client?.mutateGraphWith(query, completionHandler: { (result, _) in
+            if let customer = result?.customerUpdate?.customer {
+                let result = Customer(with: customer)
+                callback(result, nil)
+            } else if let repoError = NonCriticalError(with: result?.customerUpdate?.userErrors.first) {
+                callback(nil, repoError)
             } else {
-                callback(false, RepoError())
+                callback(nil, RepoError())
             }
         })
         run(task: task, callback: callback)

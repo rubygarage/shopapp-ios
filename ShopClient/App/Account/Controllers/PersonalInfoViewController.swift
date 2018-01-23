@@ -13,6 +13,10 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
     @IBOutlet private weak var lastNameTextFieldView: InputTextFieldView!
     @IBOutlet private weak var emailTextFieldView: InputTextFieldView!
     @IBOutlet private weak var phoneTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var changePasswordButton: UnderlinedButton!
+    @IBOutlet private weak var saveChangesButton: BlackButton!
+    
+    @IBOutlet fileprivate weak var changePasswordUnderlineView: UIView!
     
     // MARK: - View controller lifecycle
     
@@ -37,6 +41,9 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
         lastNameTextFieldView.placeholder = "Placeholder.LastName".localizable.uppercased()
         emailTextFieldView.placeholder = "Placeholder.Email".localizable.required.uppercased()
         phoneTextFieldView.placeholder = "Placeholder.PhoneNumber".localizable.uppercased()
+        changePasswordButton.setTitle("Button.ChangePassword".localizable.uppercased(), for: .normal)
+        changePasswordButton.delegate = self
+        saveChangesButton.setTitle("Button.SaveChanges".localizable.uppercased(), for: .normal)
     }
     
     private func setupViewModel() {
@@ -67,13 +74,34 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
                 self?.emailTextFieldView.errorMessage = errorMessage
             })
             .disposed(by: disposeBag)
+        
+        saveChangesButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
+        
+        saveChangesButton.rx.tap
+            .bind(to: viewModel.saveChangesPressed)
+            .disposed(by: disposeBag)
+        
+        viewModel.saveChangesButtonEnabled
+            .subscribe(onNext: { [weak self] enabled in
+                self?.saveChangesButton.isEnabled = enabled
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.saveChangesSuccess.asObservable()
+            .subscribe(onNext: { [weak self] success in
+                self?.saveChangesButton.isEnabled = !success
+            })
+            .disposed(by: disposeBag)
     }
     
     private func populateViews(with customer: Customer?) {
         guard let customer = customer else {
             return
         }
-        
         nameTextFieldView.textField.text = customer.firstName
         lastNameTextFieldView.textField.text = customer.lastName
         emailTextFieldView.textField.text = customer.email
@@ -82,5 +110,13 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
     
     private func loadData() {
         viewModel.loadCustomer()
+    }
+}
+
+// MARK: - UnderlinedButtonProtocol
+
+extension PersonalInfoViewController: UnderlinedButtonProtocol {
+    func didChangeState(isHighlighted: Bool) {
+        changePasswordUnderlineView.isHidden = isHighlighted
     }
 }

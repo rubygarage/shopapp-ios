@@ -20,7 +20,8 @@ class AccountViewModel: BaseViewModel {
     // MARK: - Private
     
     private func getCustomer() {
-        state.onNext(.loading(showHud: true))
+        let showHud = customer.value == nil
+        state.onNext(.loading(showHud: showHud))
         customerUseCase.getCustomer { [weak self] (customer, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
