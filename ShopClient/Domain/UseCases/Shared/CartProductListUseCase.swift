@@ -12,4 +12,8 @@ struct CartProductListUseCase {
     public func getCartProductList(_ callback: @escaping RepoCallback<[CartProduct]>) {
         Repository.shared.getCartProductList(callback: callback)
     }
+    
+    public func clearCart(_ callback: @escaping RepoCallback<Bool>) {
+        Repository.shared.deleteAllProductsFromCart(with: callback)
+    }
 }

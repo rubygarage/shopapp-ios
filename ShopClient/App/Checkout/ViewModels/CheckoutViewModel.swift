@@ -176,11 +176,17 @@ class CheckoutViewModel: BaseViewModel {
                     self?.state.onNext(.error(error: error))
                 }
                 if let order = response {
-                    self?.order = order
-                    self?.checkoutSuccedded.onNext()
-                    self?.state.onNext(.content)
+                    self?.clearCart(with: order)
                 }
             }
+        }
+    }
+    
+    private func clearCart(with order: Order) {
+        cartProductListUseCase.clearCart { [weak self] _ in
+            self?.order = order
+            self?.checkoutSuccedded.onNext()
+            self?.state.onNext(.content)
         }
     }
 }

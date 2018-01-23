@@ -579,6 +579,13 @@
                                                     <action selector="continueShoppingTapped:" destination="ve2-U7-Qzc" eventType="touchUpInside" id="Ql7-mg-1pt"/>
                                                 </connections>
                                             </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vTx-yC-vBc">
+                                                <rect key="frame" x="134" y="519" width="107" height="1"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="yN4-pE-FfO"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -588,7 +595,9 @@
                                             <constraint firstItem="pp8-jt-cQ1" firstAttribute="top" secondItem="6fv-8j-747" secondAttribute="bottom" constant="25" id="DFj-K4-EKo"/>
                                             <constraint firstAttribute="trailing" secondItem="Ecd-1A-xKa" secondAttribute="trailing" constant="16" id="F8q-Lf-GoZ"/>
                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pp8-jt-cQ1" secondAttribute="bottom" constant="50" id="J5M-gc-e3b"/>
+                                            <constraint firstItem="vTx-yC-vBc" firstAttribute="trailing" secondItem="pp8-jt-cQ1" secondAttribute="trailing" constant="-10" id="JT2-m9-mYq"/>
                                             <constraint firstAttribute="trailing" secondItem="6fv-8j-747" secondAttribute="trailing" constant="45" id="QLq-2x-LcJ"/>
+                                            <constraint firstItem="vTx-yC-vBc" firstAttribute="top" secondItem="pp8-jt-cQ1" secondAttribute="bottom" id="SNv-RM-TJh"/>
                                             <constraint firstItem="6fv-8j-747" firstAttribute="leading" secondItem="8OL-dY-JFW" secondAttribute="leading" constant="45" id="Tlx-Aw-GnJ"/>
                                             <constraint firstItem="HdG-Wn-Pz8" firstAttribute="leading" secondItem="8OL-dY-JFW" secondAttribute="leading" constant="16" id="U3Y-mZ-Ytq"/>
                                             <constraint firstItem="6fv-8j-747" firstAttribute="top" secondItem="HdG-Wn-Pz8" secondAttribute="bottom" constant="42" id="aQK-gC-ofU"/>
@@ -597,6 +606,7 @@
                                             <constraint firstItem="Ecd-1A-xKa" firstAttribute="leading" secondItem="8OL-dY-JFW" secondAttribute="leading" constant="16" id="t2w-qu-Yl9"/>
                                             <constraint firstItem="7Yn-gb-mtn" firstAttribute="centerX" secondItem="8OL-dY-JFW" secondAttribute="centerX" id="vdL-Tm-3hV"/>
                                             <constraint firstItem="Ecd-1A-xKa" firstAttribute="centerY" secondItem="8OL-dY-JFW" secondAttribute="centerY" id="xiS-sC-U38"/>
+                                            <constraint firstItem="vTx-yC-vBc" firstAttribute="leading" secondItem="pp8-jt-cQ1" secondAttribute="leading" constant="10" id="yBk-fe-TSe"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -621,6 +631,7 @@
                     </view>
                     <connections>
                         <outlet property="continueShoppingButton" destination="pp8-jt-cQ1" id="Pra-bg-Boa"/>
+                        <outlet property="continueShoppingUnderlineView" destination="vTx-yC-vBc" id="yP8-DZ-Q1X"/>
                         <outlet property="orderNumberLabel" destination="HdG-Wn-Pz8" id="Hcm-md-zg7"/>
                         <outlet property="thanksForShoppingLabel" destination="Ecd-1A-xKa" id="q8u-pQ-N7g"/>
                         <outlet property="viewOrderDetailsButton" destination="6fv-8j-747" id="HaC-Cu-PQF"/>

@@ -16,6 +16,8 @@ class CheckoutSuccessViewController: BaseViewController<CheckoutSuccessViewModel
     @IBOutlet private weak var viewOrderDetailsButton: BlackButton!
     @IBOutlet private weak var continueShoppingButton: UnderlinedButton!
     
+    @IBOutlet fileprivate weak var continueShoppingUnderlineView: UIView!
+    
     var orderId: String!
     var orderNumber: Int = 0
     
@@ -34,6 +36,7 @@ class CheckoutSuccessViewController: BaseViewController<CheckoutSuccessViewModel
         orderNumberLabel?.setup(with: orderNumber)
         viewOrderDetailsButton?.setTitle("Button.ViewOrderDetails".localizable.uppercased(), for: .normal)
         continueShoppingButton?.setTitle("Button.ContinueShopping".localizable.uppercased(), for: .normal)
+        continueShoppingButton.delegate = self
     }
     
     // MARK: - Actions
@@ -65,5 +68,13 @@ fileprivate extension UILabel {
         let range = (orderNumberLocalized as NSString).range(of: highlightedText)
         attributed.addAttribute(NSForegroundColorAttributeName, value: kOrderNumberColor, range: range)
         attributedText = attributed
+    }
+}
+
+// MARK: - UnderlinedButtonProtocol
+
+extension CheckoutSuccessViewController: UnderlinedButtonProtocol {
+    func didChangeState(isHighlighted: Bool) {
+        continueShoppingUnderlineView.isHidden = isHighlighted
     }
 }
