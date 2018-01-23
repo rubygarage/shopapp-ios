@@ -33,6 +33,7 @@ class AccountViewController: BaseViewController<AccountViewModel> {
         super.viewWillAppear(animated)
         
         updateNavigationBar()
+        loadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -140,6 +141,10 @@ extension AccountViewController: AccountNotLoggedHeaderProtocol {
 extension AccountViewController: AccountLoggedHeaderProtocol {
     func didTapMyOrders() {
         performSegue(withIdentifier: SegueIdentifiers.toOrdersList, sender: self)
+    }
+    
+    func didTapPersonalInfo() {
+        performSegue(withIdentifier: SegueIdentifiers.toPersonalInfo, sender: self)
     }
 }
 

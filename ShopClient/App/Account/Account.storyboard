@@ -41,6 +41,7 @@
                         <segue destination="zdO-YG-cfs" kind="presentation" identifier="toSignIn" id="taI-5h-oyg"/>
                         <segue destination="GpK-nH-9eS" kind="show" identifier="toOrdersList" id="Sly-3A-odQ"/>
                         <segue destination="Vuw-Re-lYh" kind="show" identifier="toAccountSettings" id="mdc-0i-wrK"/>
+                        <segue destination="ekz-Gg-Wge" kind="show" identifier="toPersonalInfo" id="JJX-Gk-0Pk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIy-lA-im1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -86,10 +87,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="thF-MB-gK1" firstAttribute="bottom" secondItem="AwO-FI-LwM" secondAttribute="bottom" id="I6c-Py-bfw"/>
-                            <constraint firstItem="AwO-FI-LwM" firstAttribute="top" secondItem="thF-MB-gK1" secondAttribute="top" id="aeV-P5-bu9"/>
-                            <constraint firstItem="AwO-FI-LwM" firstAttribute="leading" secondItem="thF-MB-gK1" secondAttribute="leading" id="geq-Sm-u3M"/>
-                            <constraint firstItem="thF-MB-gK1" firstAttribute="trailing" secondItem="AwO-FI-LwM" secondAttribute="trailing" id="xbp-GQ-f9T"/>
+                            <constraint firstItem="AwO-FI-LwM" firstAttribute="top" secondItem="thF-MB-gK1" secondAttribute="top" id="8yA-LQ-xZT"/>
+                            <constraint firstItem="AwO-FI-LwM" firstAttribute="bottom" secondItem="thF-MB-gK1" secondAttribute="bottom" id="JWu-UO-r9s"/>
+                            <constraint firstItem="AwO-FI-LwM" firstAttribute="trailing" secondItem="thF-MB-gK1" secondAttribute="trailing" id="buU-nk-yKx"/>
+                            <constraint firstItem="AwO-FI-LwM" firstAttribute="leading" secondItem="thF-MB-gK1" secondAttribute="leading" id="p8z-Bc-5Zx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="thF-MB-gK1"/>
                     </view>
@@ -99,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nhw-AJ-uhG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1362" y="1494"/>
+            <point key="canvasLocation" x="1360.8" y="1493.7031484257873"/>
         </scene>
         <!--Orders List View Controller-->
         <scene sceneID="NSC-q9-Wy6">
@@ -193,6 +194,152 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtP-yV-pI6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2124" y="2282"/>
+        </scene>
+        <!--Personal Info View Controller-->
+        <scene sceneID="Mf5-6b-ts8">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="ekz-Gg-Wge" customClass="PersonalInfoViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Aju-d4-PMl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="23l-fk-vuY" customClass="TPKeyboardAvoidingScrollView">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7tw-ZN-MX5">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcq-TF-fx0" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="35" y="110" width="305" height="47"/>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="47" id="BQh-QI-a5N"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
+                                                        <integer key="value" value="0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWH-ma-ydi" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="35" y="43" width="150.5" height="47"/>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="47" id="jOC-p0-bBj"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
+                                                        <integer key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8vp-gX-ShV" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="189" y="43" width="150.5" height="47"/>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="47" id="j0v-qF-Mgh"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
+                                                        <integer key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="796-pn-4ld" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="35" y="177" width="305" height="47"/>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="47" id="3gX-qV-xyQ"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
+                                                        <integer key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJk-cr-DM5" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="45" y="314" width="285" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="LIa-aT-EHw"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                <state key="normal" title="Button">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRs-43-afl" customClass="UnderlinedButton" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="157" y="256" width="61" height="25"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                                <state key="normal" title="Button">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yw5-bX-gWj">
+                                                <rect key="frame" x="167" y="281" width="41" height="1"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="ppx-Gn-Hhc"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="8vp-gX-ShV" secondAttribute="trailing" constant="35" id="5YL-L7-VIf"/>
+                                            <constraint firstItem="yw5-bX-gWj" firstAttribute="leading" secondItem="wRs-43-afl" secondAttribute="leading" constant="10" id="688-BK-t0T"/>
+                                            <constraint firstItem="8vp-gX-ShV" firstAttribute="leading" secondItem="EWH-ma-ydi" secondAttribute="trailing" constant="4" id="9b1-Wi-TZe"/>
+                                            <constraint firstItem="8vp-gX-ShV" firstAttribute="centerY" secondItem="EWH-ma-ydi" secondAttribute="centerY" id="MN8-xs-i4i"/>
+                                            <constraint firstItem="796-pn-4ld" firstAttribute="leading" secondItem="hcq-TF-fx0" secondAttribute="leading" id="NZg-aX-XBI"/>
+                                            <constraint firstItem="yw5-bX-gWj" firstAttribute="top" secondItem="wRs-43-afl" secondAttribute="bottom" id="VRY-V1-KG4"/>
+                                            <constraint firstItem="KJk-cr-DM5" firstAttribute="leading" secondItem="796-pn-4ld" secondAttribute="leading" constant="10" id="Y9N-dQ-58z"/>
+                                            <constraint firstItem="796-pn-4ld" firstAttribute="trailing" secondItem="KJk-cr-DM5" secondAttribute="trailing" constant="10" id="cbM-iD-Cj1"/>
+                                            <constraint firstItem="8vp-gX-ShV" firstAttribute="width" secondItem="EWH-ma-ydi" secondAttribute="width" id="d7Z-nF-Psk"/>
+                                            <constraint firstItem="wRs-43-afl" firstAttribute="top" secondItem="796-pn-4ld" secondAttribute="bottom" constant="32" id="fVD-te-QNl"/>
+                                            <constraint firstItem="KJk-cr-DM5" firstAttribute="top" secondItem="yw5-bX-gWj" secondAttribute="bottom" constant="32" id="g4H-6M-u73"/>
+                                            <constraint firstItem="796-pn-4ld" firstAttribute="trailing" secondItem="hcq-TF-fx0" secondAttribute="trailing" id="goI-g5-sG4"/>
+                                            <constraint firstItem="EWH-ma-ydi" firstAttribute="top" secondItem="7tw-ZN-MX5" secondAttribute="top" constant="43" id="h0L-dy-01V"/>
+                                            <constraint firstItem="EWH-ma-ydi" firstAttribute="leading" secondItem="7tw-ZN-MX5" secondAttribute="leading" constant="35" id="iPJ-hS-PsU"/>
+                                            <constraint firstItem="796-pn-4ld" firstAttribute="top" secondItem="hcq-TF-fx0" secondAttribute="bottom" constant="20" id="k1l-hK-yAM"/>
+                                            <constraint firstItem="hcq-TF-fx0" firstAttribute="trailing" secondItem="8vp-gX-ShV" secondAttribute="trailing" id="ulx-sZ-vfK"/>
+                                            <constraint firstItem="hcq-TF-fx0" firstAttribute="leading" secondItem="EWH-ma-ydi" secondAttribute="leading" id="uzl-QF-tqD"/>
+                                            <constraint firstItem="yw5-bX-gWj" firstAttribute="trailing" secondItem="wRs-43-afl" secondAttribute="trailing" constant="-10" id="wtC-ne-FhW"/>
+                                            <constraint firstItem="hcq-TF-fx0" firstAttribute="top" secondItem="EWH-ma-ydi" secondAttribute="bottom" constant="20" id="zfe-2w-zYH"/>
+                                            <constraint firstItem="wRs-43-afl" firstAttribute="centerX" secondItem="7tw-ZN-MX5" secondAttribute="centerX" id="zpO-Zi-Oyy"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="7tw-ZN-MX5" firstAttribute="leading" secondItem="23l-fk-vuY" secondAttribute="leading" id="0ae-3h-I0Z"/>
+                                    <constraint firstAttribute="bottom" secondItem="7tw-ZN-MX5" secondAttribute="bottom" id="5wb-01-F4o"/>
+                                    <constraint firstAttribute="trailing" secondItem="7tw-ZN-MX5" secondAttribute="trailing" id="Dam-Pm-PDE"/>
+                                    <constraint firstItem="7tw-ZN-MX5" firstAttribute="height" secondItem="23l-fk-vuY" secondAttribute="height" id="Ond-x1-Cdr"/>
+                                    <constraint firstItem="7tw-ZN-MX5" firstAttribute="top" secondItem="23l-fk-vuY" secondAttribute="top" id="bde-Dh-2On"/>
+                                    <constraint firstItem="7tw-ZN-MX5" firstAttribute="width" secondItem="23l-fk-vuY" secondAttribute="width" id="d0U-eU-ouP"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="23l-fk-vuY" firstAttribute="trailing" secondItem="cbI-3x-wOa" secondAttribute="trailing" id="Vu5-e6-1eV"/>
+                            <constraint firstItem="23l-fk-vuY" firstAttribute="leading" secondItem="cbI-3x-wOa" secondAttribute="leading" id="WA7-uG-CJE"/>
+                            <constraint firstItem="23l-fk-vuY" firstAttribute="top" secondItem="cbI-3x-wOa" secondAttribute="top" id="jBm-rK-6Hy"/>
+                            <constraint firstItem="23l-fk-vuY" firstAttribute="bottom" secondItem="cbI-3x-wOa" secondAttribute="bottom" id="k3Z-2N-IvU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cbI-3x-wOa"/>
+                    </view>
+                    <connections>
+                        <outlet property="changePasswordButton" destination="wRs-43-afl" id="OYi-YH-GO1"/>
+                        <outlet property="changePasswordUnderlineView" destination="yw5-bX-gWj" id="ywv-nS-wKL"/>
+                        <outlet property="emailTextFieldView" destination="hcq-TF-fx0" id="lBT-Br-FUv"/>
+                        <outlet property="lastNameTextFieldView" destination="8vp-gX-ShV" id="ksG-OG-dDe"/>
+                        <outlet property="nameTextFieldView" destination="EWH-ma-ydi" id="TN0-nL-Rs6"/>
+                        <outlet property="phoneTextFieldView" destination="796-pn-4ld" id="xa5-sz-gCG"/>
+                        <outlet property="saveChangesButton" destination="KJk-cr-DM5" id="523-4a-k3v"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bkn-kO-dh1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3432.8000000000002" y="1493.7031484257873"/>
         </scene>
         <!--ProductsDetailControllerIdentifier-->
         <scene sceneID="1AL-cQ-MAn">
@@ -740,6 +887,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Edi-8c-pdA"/>
-        <segue reference="2Th-4v-kuF"/>
+        <segue reference="9Y3-HY-brn"/>
     </inferredMetricsTieBreakers>
 </document>

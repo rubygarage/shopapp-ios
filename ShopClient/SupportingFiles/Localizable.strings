@@ -18,6 +18,7 @@
 "ControllerTitle.Checkout" = "Checkout";
 "ControllerTitle.MyOrders" = "My Orders";
 "ControllerTitle.OrderDetails" = "Order Details";
+"ControllerTitle.PersonalInfo" = "Personal Info";
 "ControllerTitle.AddNewAddress" = "Add New Address";
 "ControllerTitle.ShippingAddress" = "Shipping Address";
 "ControllerTitle.BillingAddress" = "Billing Address";
@@ -47,8 +48,11 @@
 "Button.Submit" = "Submit";
 "Button.Resend" = "Resend reset link";
 "Button.Logout" = "Log Out";
+"Button.ChangePassword" = "Change Password";
+"Button.SaveChanges" = "Save Changes";
 "Button.CreateNewAccount" = "Create New Account";
 "Button.MyOrders" = "My Orders";
+"Button.PersonalInfo" = "Personal Info";
 "Button.StartShopping" = "Start Shopping";
 "Button.Remove" = "Remove";
 "Button.Clear" = "Clear";

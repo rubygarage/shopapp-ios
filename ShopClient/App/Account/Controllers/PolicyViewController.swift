@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 
 private let kTextViewContentInsets = UIEdgeInsets(top: 28, left: 16, bottom: 28, right: 16)
+private let kTextViewContentOffset = CGPoint(x: -16, y: -28)
 
 class PolicyViewController: UIViewController {
     @IBOutlet private weak var policyTextView: UITextView!
@@ -23,6 +24,12 @@ class PolicyViewController: UIViewController {
 
         setupViews()
         populateViews()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        policyTextView.contentOffset = kTextViewContentOffset
     }
 
     // MARK: - Setup
