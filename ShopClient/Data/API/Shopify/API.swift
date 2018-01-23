@@ -355,19 +355,19 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         run(task: task, callback: callback)
     }
     
-    func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, callback: @escaping RepoCallback<Bool>) {
+    func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, callback: @escaping RepoCallback<Order>) {
         if let email = sessionData().email {
             updateCheckout(with: checkout.id, email: email, completion: { [weak self] (success, error) in
                 if success == true {
                     self?.createCardVault(with: card, checkout: checkout, billingAddress: billingAddress, callback: callback)
                 } else if let responseError = RepoError(with: error) {
-                    callback(false, responseError)
+                    callback(nil, responseError)
                 } else {
-                    callback(false, RepoError())
+                    callback(nil, RepoError())
                 }
             })
         } else {
-            callback(false, RepoError())
+            callback(nil, RepoError())
         }
     }
     
@@ -412,17 +412,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         let id = GraphQL.ID(rawValue: id)
         let query = Storefront.buildQuery { $0
             .node(id: id) { $0
-                .onOrder { $0
-                    .id()
-                    .currencyCode()
-                    .orderNumber()
-                    .processedAt()
-                    .subtotalPrice()
-                    .totalShippingPrice()
-                    .totalPrice()
-                    .shippingAddress(mailingAddressQuery())
-                    .lineItems(first: kShopifyItemsMaxCount, lineItemConnectionQuery())
-                }
+                .onOrder(subfields: orderQuery())
             }
         }
         let task = client?.queryGraphWith(query) { [weak self] (response, error) in
@@ -457,11 +447,11 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         run(task: task, callback: callback)
     }
     
-    private func createCardVault(with card: CreditCard, checkout: Checkout, billingAddress: Address, callback: @escaping RepoCallback<Bool>) {
+    private func createCardVault(with card: CreditCard, checkout: Checkout, billingAddress: Address, callback: @escaping RepoCallback<Order>) {
         let query = cardVaultUrlQuery()
         let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             if let responseError = ContentError(with: error) {
-                callback(false, responseError)
+                callback(nil, responseError)
             }
             if let cardVaultUrl = response?.shop.paymentSettings.cardVaultUrl {
                 self?.pay(with: card, checkout: checkout, cardVaultUrl: cardVaultUrl, address: billingAddress, callback: callback)
@@ -470,7 +460,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         run(task: task, callback: callback)
     }
     
-    private func pay(with card: CreditCard, checkout: Checkout, cardVaultUrl: URL, address: Address, callback: @escaping RepoCallback<Bool>) {
+    private func pay(with card: CreditCard, checkout: Checkout, cardVaultUrl: URL, address: Address, callback: @escaping RepoCallback<Order>) {
         let creditCard = Card.CreditCard(firstName: card.firstName, lastName: card.lastName, number: card.cardNumber, expiryMonth: card.expireMonth, expiryYear: card.expireYear, verificationCode: card.verificationCode)
         let cardClient = Card.Client.init()
         
@@ -479,13 +469,13 @@ class API: NSObject, APIInterface, PaySessionDelegate {
                 self?.completePay(checkout: checkout, cardVaultToken: token, address: address, callback: callback)
             }
             if let responseError = ContentError(with: error) {
-                callback(false, responseError)
+                callback(nil, responseError)
             }
         }
         run(task: task, callback: callback)
     }
     
-    private func completePay(checkout: Checkout, cardVaultToken: String, address: Address, callback: @escaping RepoCallback<Bool>) {
+    private func completePay(checkout: Checkout, cardVaultToken: String, address: Address, callback: @escaping RepoCallback<Order>) {
         let amount = checkout.totalPrice ?? 0
         let idempotencyKey = UUID().uuidString
         let billingAddress = Storefront.MailingAddressInput.create()
@@ -500,26 +490,26 @@ class API: NSObject, APIInterface, PaySessionDelegate {
                 self?.completePayPolling(with: checkoutId, callback: callback)
             } else if let error = response?.checkoutCompleteWithCreditCard?.userErrors.first {
                 let responseError = self?.process(error: error)
-                callback(false, responseError)
+                callback(nil, responseError)
             } else {
                 let responseError = self?.process(error: error)
-                callback(false, responseError)
+                callback(nil, responseError)
             }
         })
         run(task: task, callback: callback)
     }
     
-    private func completePayPolling(with checkoutId: GraphQL.ID, callback: @escaping RepoCallback<Bool>) {
+    private func completePayPolling(with checkoutId: GraphQL.ID, callback: @escaping RepoCallback<Order>) {
         let retry = Graph.RetryHandler<Storefront.QueryRoot>(endurance: .finite(30)) { (response, _) -> Bool in
             return (response?.node as? Storefront.Checkout)?.order == nil
         }
         
         let query = checkoutOrderQuery(with: checkoutId)
         let task  = client?.queryGraphWith(query, retryHandler: retry) { response, error in
-            if (response?.node as? Storefront.Checkout)?.order?.id != nil {
-                callback(true, nil)
+            if let checkout = response?.node as? Storefront.Checkout, let order = Order(with: checkout.order) {
+                callback(order, nil)
             } else {
-                callback(false, ContentError(with: error))
+                callback(nil, ContentError(with: error))
             }
         }
         run(task: task, callback: callback)
@@ -1316,7 +1306,13 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         return { (query: Storefront.OrderQuery) in
             query.id()
             query.orderNumber()
+            query.currencyCode()
             query.totalPrice()
+            query.subtotalPrice()
+            query.totalShippingPrice()
+            query.processedAt()
+            query.shippingAddress(self.mailingAddressQuery())
+            query.lineItems(first: kShopifyItemsMaxCount, self.lineItemConnectionQuery())
         }
     }
     

@@ -28,6 +28,7 @@ class CheckoutViewModel: BaseViewModel {
     
     var billingAddress: Address?
     var creditCard: CreditCard?
+    var order: Order?
     
     var placeOrderPressed: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
@@ -174,17 +175,12 @@ class CheckoutViewModel: BaseViewModel {
                 if let error = error {
                     self?.state.onNext(.error(error: error))
                 }
-                if let success = response, success == true {
-                    self?.processPlaceOrderResponse(with: success)
+                if let order = response {
+                    self?.order = order
+                    self?.checkoutSuccedded.onNext()
                     self?.state.onNext(.content)
                 }
             }
-        }
-    }
-    
-    private func processPlaceOrderResponse(with success: Bool) {
-        if success {
-            checkoutSuccedded.onNext()
         }
     }
 }

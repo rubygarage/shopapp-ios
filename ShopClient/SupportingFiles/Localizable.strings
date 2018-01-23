@@ -128,6 +128,7 @@
 "Label.Product.OptionTitle" = "%@:";
 "Label.Checkout.AddShippingAddress" = "Please, add shipping address first";
 "Label.ThanksForShopping" = "Thanks for shopping with us!";
+"Label.YourOrderNumber" = "Your order number is %@";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

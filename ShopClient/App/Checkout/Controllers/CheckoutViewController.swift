@@ -224,7 +224,10 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
                 self?.returnFlowToSelf()
             }
         } else if let checkoutSuccessViewController = segue.destination as? CheckoutSuccessViewController {
-            // TODO:
+            if let orderId = viewModel.order?.id, let orderNumber = viewModel.order?.number {
+                checkoutSuccessViewController.orderId = orderId
+                checkoutSuccessViewController.orderNumber = orderNumber
+            }
         }
     }
 }
