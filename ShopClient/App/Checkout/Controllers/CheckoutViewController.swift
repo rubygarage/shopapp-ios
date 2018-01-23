@@ -81,6 +81,12 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
             })
             .disposed(by: disposeBag)
         
+        viewModel.checkoutSuccedded
+            .subscribe(onNext: { [weak self] _ in
+                self?.performSegue(withIdentifier: SegueIdentifiers.toSuccessCheckout, sender: self)
+            })
+            .disposed(by: disposeBag)
+        
         placeOrderButton.rx.tap
             .bind(to: viewModel.placeOrderPressed)
             .disposed(by: disposeBag)
@@ -217,6 +223,8 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
                 self?.updatePlaceOrderButtonUI()
                 self?.returnFlowToSelf()
             }
+        } else if let checkoutSuccessViewController = segue.destination as? CheckoutSuccessViewController {
+            // TODO:
         }
     }
 }

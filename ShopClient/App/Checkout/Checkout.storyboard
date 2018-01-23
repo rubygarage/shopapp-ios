@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -64,6 +64,7 @@
                         <segue destination="zXe-Cz-Abu" kind="show" identifier="toAddressForm" id="gfd-AL-YqW"/>
                         <segue destination="c3v-9W-mKd" kind="show" identifier="toPaymentType" id="CGV-uG-Hxc"/>
                         <segue destination="RiA-xA-2z5" kind="show" identifier="toProductDetails" id="zB2-WO-his"/>
+                        <segue destination="ve2-U7-Qzc" kind="presentation" identifier="toSuccessCheckout" id="Spt-v6-Snf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWy-vV-BzK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -108,7 +109,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0dC-mI-bYZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-50" y="896"/>
+            <point key="canvasLocation" x="-449" y="896"/>
         </scene>
         <!--Address Form View Controller-->
         <scene sceneID="l9L-mQ-41u">
@@ -349,7 +350,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="218-Br-ENO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="751" y="964"/>
+            <point key="canvasLocation" x="351" y="963"/>
         </scene>
         <!--Payment Type View Controller-->
         <scene sceneID="E5U-uh-pFk">
@@ -381,7 +382,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pi9-aR-oRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-823" y="896"/>
+            <point key="canvasLocation" x="-1222" y="896"/>
         </scene>
         <!--Credit Card View Controller-->
         <scene sceneID="tYZ-iz-I58">
@@ -520,7 +521,114 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epd-Im-XuG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-50" y="1688"/>
+            <point key="canvasLocation" x="-449" y="1687"/>
+        </scene>
+        <!--Checkout Success View Controller-->
+        <scene sceneID="spq-u7-sXe">
+            <objects>
+                <viewController id="ve2-U7-Qzc" customClass="CheckoutSuccessViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0om-am-KCN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOT-sV-RC3">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8OL-dY-JFW">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkout_success" translatesAutoresizingMaskIntoConstraints="NO" id="7Yn-gb-mtn">
+                                                <rect key="frame" x="122" y="164" width="130" height="116"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="116" id="M6M-Cs-0Re"/>
+                                                    <constraint firstAttribute="width" constant="130" id="cSQ-Nv-nXx"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thanks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ecd-1A-xKa">
+                                                <rect key="frame" x="16" y="323" width="343" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your order num" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HdG-Wn-Pz8">
+                                                <rect key="frame" x="16" y="361" width="343" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fv-8j-747" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="45" y="419" width="285" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="j0Q-IB-14N"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                <state key="normal" title="View order details"/>
+                                                <connections>
+                                                    <action selector="viewOrderDetailsTapped:" destination="ve2-U7-Qzc" eventType="touchUpInside" id="oaI-dS-Oz7"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pp8-jt-cQ1" customClass="UnderlinedButton" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="124" y="494" width="127" height="25"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                                <state key="normal" title="Continue shoping">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="continueShoppingTapped:" destination="ve2-U7-Qzc" eventType="touchUpInside" id="Ql7-mg-1pt"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="7Yn-gb-mtn" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8OL-dY-JFW" secondAttribute="top" constant="50" id="2ZW-Lp-L6W"/>
+                                            <constraint firstItem="pp8-jt-cQ1" firstAttribute="centerX" secondItem="8OL-dY-JFW" secondAttribute="centerX" id="3oN-8W-sxo"/>
+                                            <constraint firstItem="Ecd-1A-xKa" firstAttribute="top" secondItem="7Yn-gb-mtn" secondAttribute="bottom" constant="43" id="5JG-uo-J3H"/>
+                                            <constraint firstItem="pp8-jt-cQ1" firstAttribute="top" secondItem="6fv-8j-747" secondAttribute="bottom" constant="25" id="DFj-K4-EKo"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ecd-1A-xKa" secondAttribute="trailing" constant="16" id="F8q-Lf-GoZ"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pp8-jt-cQ1" secondAttribute="bottom" constant="50" id="J5M-gc-e3b"/>
+                                            <constraint firstAttribute="trailing" secondItem="6fv-8j-747" secondAttribute="trailing" constant="45" id="QLq-2x-LcJ"/>
+                                            <constraint firstItem="6fv-8j-747" firstAttribute="leading" secondItem="8OL-dY-JFW" secondAttribute="leading" constant="45" id="Tlx-Aw-GnJ"/>
+                                            <constraint firstItem="HdG-Wn-Pz8" firstAttribute="leading" secondItem="8OL-dY-JFW" secondAttribute="leading" constant="16" id="U3Y-mZ-Ytq"/>
+                                            <constraint firstItem="6fv-8j-747" firstAttribute="top" secondItem="HdG-Wn-Pz8" secondAttribute="bottom" constant="42" id="aQK-gC-ofU"/>
+                                            <constraint firstAttribute="trailing" secondItem="HdG-Wn-Pz8" secondAttribute="trailing" constant="16" id="cNb-cC-O3Y"/>
+                                            <constraint firstItem="HdG-Wn-Pz8" firstAttribute="top" secondItem="Ecd-1A-xKa" secondAttribute="bottom" constant="17" id="suR-Eq-sAZ"/>
+                                            <constraint firstItem="Ecd-1A-xKa" firstAttribute="leading" secondItem="8OL-dY-JFW" secondAttribute="leading" constant="16" id="t2w-qu-Yl9"/>
+                                            <constraint firstItem="7Yn-gb-mtn" firstAttribute="centerX" secondItem="8OL-dY-JFW" secondAttribute="centerX" id="vdL-Tm-3hV"/>
+                                            <constraint firstItem="Ecd-1A-xKa" firstAttribute="centerY" secondItem="8OL-dY-JFW" secondAttribute="centerY" id="xiS-sC-U38"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="8OL-dY-JFW" firstAttribute="top" secondItem="IOT-sV-RC3" secondAttribute="top" id="5R3-Ic-j3r"/>
+                                    <constraint firstAttribute="bottom" secondItem="8OL-dY-JFW" secondAttribute="bottom" id="AVI-ZM-dOQ"/>
+                                    <constraint firstItem="8OL-dY-JFW" firstAttribute="height" secondItem="IOT-sV-RC3" secondAttribute="height" id="Nw7-NF-XXo"/>
+                                    <constraint firstItem="8OL-dY-JFW" firstAttribute="width" secondItem="IOT-sV-RC3" secondAttribute="width" id="Tpe-lR-s31"/>
+                                    <constraint firstItem="8OL-dY-JFW" firstAttribute="leading" secondItem="IOT-sV-RC3" secondAttribute="leading" id="uxH-J3-AKe"/>
+                                    <constraint firstAttribute="trailing" secondItem="8OL-dY-JFW" secondAttribute="trailing" id="wTU-6z-dmA"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="IOT-sV-RC3" firstAttribute="bottom" secondItem="J9e-zn-JTn" secondAttribute="bottom" id="IAn-jF-etB"/>
+                            <constraint firstItem="IOT-sV-RC3" firstAttribute="top" secondItem="0om-am-KCN" secondAttribute="top" id="LFB-yV-9UF"/>
+                            <constraint firstItem="IOT-sV-RC3" firstAttribute="trailing" secondItem="J9e-zn-JTn" secondAttribute="trailing" id="Y3B-fM-Y20"/>
+                            <constraint firstItem="IOT-sV-RC3" firstAttribute="leading" secondItem="J9e-zn-JTn" secondAttribute="leading" id="q0e-Yq-wi0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="J9e-zn-JTn"/>
+                    </view>
+                    <connections>
+                        <outlet property="continueShoppingButton" destination="pp8-jt-cQ1" id="Pra-bg-Boa"/>
+                        <outlet property="orderNumberLabel" destination="HdG-Wn-Pz8" id="Hcm-md-zg7"/>
+                        <outlet property="thanksForShoppingLabel" destination="Ecd-1A-xKa" id="q8u-pQ-N7g"/>
+                        <outlet property="viewOrderDetailsButton" destination="6fv-8j-747" id="HaC-Cu-PQF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ezj-Ev-J7P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1056.8" y="894.60269865067471"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IWA-vI-qO6">
@@ -543,9 +651,10 @@
     </scenes>
     <resources>
         <image name="check" width="14" height="11"/>
+        <image name="checkout_success" width="130" height="112"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gfd-AL-YqW"/>
-        <segue reference="uNy-8M-tPD"/>
+        <segue reference="dnR-TS-EYt"/>
     </inferredMetricsTieBreakers>
 </document>

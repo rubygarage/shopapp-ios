@@ -24,6 +24,7 @@ class CheckoutViewModel: BaseViewModel {
     
     var cartItems = [CartProduct]()
     var checkout = Variable<Checkout?>(nil)
+    var checkoutSuccedded = PublishSubject<()>()
     
     var billingAddress: Address?
     var creditCard: CreditCard?
@@ -182,6 +183,8 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     private func processPlaceOrderResponse(with success: Bool) {
-        // TODO:
+        if success {
+            checkoutSuccedded.onNext()
+        }
     }
 }

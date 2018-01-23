@@ -64,6 +64,8 @@
 "Button.PlaceOrder" = "Place Order";
 "Button.SetUp" = "Set up";
 "Button.PayWithThisCard" = "Pay with this card";
+"Button.ViewOrderDetails" = "View order Details";
+"Button.ContinueShopping" = "Continue shopping";
 
 "SortingValue.Name" = "By name";
 "SortingValue.CreatedAt" = "By date";
@@ -125,6 +127,7 @@
 "Label.CreditCard.ExpirationDate" = "Exp : %@ / %@";
 "Label.Product.OptionTitle" = "%@:";
 "Label.Checkout.AddShippingAddress" = "Please, add shipping address first";
+"Label.ThanksForShopping" = "Thanks for shopping with us!";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";
