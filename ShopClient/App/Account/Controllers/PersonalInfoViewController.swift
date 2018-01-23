@@ -29,10 +29,6 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
         loadData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // TODO: Present change password screen
-    }
-    
     // MARK: - Setup
     
     private func setupViews() {
@@ -81,6 +77,12 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
                     return
                 }
                 strongSelf.emailTextFieldView.errorMessage = errorMessage
+            })
+            .disposed(by: disposeBag)
+        
+        changePasswordButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.performSegue(withIdentifier: SegueIdentifiers.toChangePassword, sender: self)
             })
             .disposed(by: disposeBag)
         
