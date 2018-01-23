@@ -14,8 +14,8 @@ private let kNumberOfColumns: CGFloat = 2
 private let kCellRatio: CGFloat = 140 / 169
 
 class CategoryCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var categoryTitleLabel: UILabel!
-    @IBOutlet weak var categoryImageView: UIImageView!
+    @IBOutlet private weak var categoryTitleLabel: UILabel!
+    @IBOutlet private weak var categoryImageView: UIImageView!
     
     func configure(with category: Category) {
         categoryTitleLabel.text = category.title

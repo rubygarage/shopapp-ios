@@ -12,9 +12,9 @@ private let kPlaceOrderHeightVisible: CGFloat = 50
 private let kPlaceOrderHeightInvisible: CGFloat = 0
 
 class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeaderViewProtocol, CheckoutCombinedProtocol {
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var placeOrderHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var placeOrderButton: UIButton!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var placeOrderHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var placeOrderButton: UIButton!
     
     private var tableDataSource: CheckoutTableDataSource!
     // swiftlint:disable weak_delegate

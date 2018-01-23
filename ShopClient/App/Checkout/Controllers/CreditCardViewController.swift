@@ -9,13 +9,13 @@
 import UIKit
 
 class CreditCardViewController: BaseViewController<CreditCardViewModel> {
-    @IBOutlet weak var holderNameTextFieldView: InputTextFieldView!
-    @IBOutlet weak var cardNumberTextFieldView: InputTextFieldView!
-    @IBOutlet weak var securityCodeTextFieldView: InputTextFieldView!
-    @IBOutlet weak var expirationDateLabel: UILabel!
-    @IBOutlet weak var monthExpirationView: MonthExpiryDatePicker!
-    @IBOutlet weak var yearExpirationView: YearExpiryDatePicker!
-    @IBOutlet weak var submitButton: BlackButton!
+    @IBOutlet private weak var holderNameTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var cardNumberTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var securityCodeTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var expirationDateLabel: UILabel!
+    @IBOutlet private weak var monthExpirationView: MonthExpiryDatePicker!
+    @IBOutlet private weak var yearExpirationView: YearExpiryDatePicker!
+    @IBOutlet private weak var submitButton: BlackButton!
     
     var billingAddres: Address!
     var completion: CreditCardPaymentCompletion?
@@ -41,23 +41,23 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
         viewModel.billingAddres = billingAddres
         viewModel.completion = completion
         
-        holderNameTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        holderNameTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.holderNameText)
             .disposed(by: disposeBag)
         
-        cardNumberTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        cardNumberTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.cardNumberText)
             .disposed(by: disposeBag)
         
-        monthExpirationView.dateTextField.rx.text.map({ $0 ?? "" })
+        monthExpirationView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.monthExpirationText)
             .disposed(by: disposeBag)
         
-        yearExpirationView.dateTextField.rx.text.map({ $0 ?? "" })
+        yearExpirationView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.yearExpirationText)
             .disposed(by: disposeBag)
         
-        securityCodeTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        securityCodeTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.securityCodeText)
             .disposed(by: disposeBag)
         

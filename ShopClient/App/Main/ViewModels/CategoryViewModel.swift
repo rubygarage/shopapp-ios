@@ -13,6 +13,14 @@ class CategoryViewModel: GridCollectionViewModel {
     var selectedSortingValue = SortingValue.createdAt
     
     private let categoryUseCase = CategoryUseCase()
+
+    // MARK: - BaseViewModel
+
+    override func tryAgain() {
+        reloadData()
+    }
+
+    // MARK: - Public
     
     public func reloadData() {
         paginationValue = nil

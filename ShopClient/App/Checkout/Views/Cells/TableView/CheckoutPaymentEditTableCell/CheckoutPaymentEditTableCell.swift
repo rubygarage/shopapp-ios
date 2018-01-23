@@ -13,13 +13,13 @@ protocol CheckoutPaymentEditTableCellProtocol: class {
 }
 
 class CheckoutPaymentEditTableCell: UITableViewCell {
-    @IBOutlet weak var creditCardLabel: UILabel!
-    @IBOutlet weak var cardNumberLabel: UILabel!
-    @IBOutlet weak var expirationDateLabel: UILabel!
-    @IBOutlet weak var holderNameLabel: UILabel!
-    @IBOutlet weak var billingAddressTitleLabel: UILabel!
-    @IBOutlet weak var billingAddressLabel: UILabel!
-    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet private weak var creditCardLabel: UILabel!
+    @IBOutlet private weak var cardNumberLabel: UILabel!
+    @IBOutlet private weak var expirationDateLabel: UILabel!
+    @IBOutlet private weak var holderNameLabel: UILabel!
+    @IBOutlet private weak var billingAddressTitleLabel: UILabel!
+    @IBOutlet private weak var billingAddressLabel: UILabel!
+    @IBOutlet private weak var editButton: UIButton!
     
     weak var delegate: CheckoutPaymentEditTableCellProtocol?
     

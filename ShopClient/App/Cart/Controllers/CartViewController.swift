@@ -85,14 +85,6 @@ class CartViewController: BaseViewController<CartViewModel> {
     }
 }
 
-// MARK: - ErrorViewProtocol
-
-extension CartViewController {
-    func didTapTryAgain() {
-        loadData()
-    }
-}
-
 // MARK: - CartEmptyDataViewProtocol
 
 extension CartViewController: CartEmptyDataViewProtocol {

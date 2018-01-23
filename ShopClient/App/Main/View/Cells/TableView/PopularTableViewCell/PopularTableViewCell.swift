@@ -13,8 +13,8 @@ protocol PopularCellDelegate: class {
 }
 
 class PopularTableViewCell: UITableViewCell, PopularTableDataSourceProtocol, PopularTableDelegateProtocol {
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
     private var dataSource: PopularTableDataSource!
     // swiftlint:disable weak_delegate

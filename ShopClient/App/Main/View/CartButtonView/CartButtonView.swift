@@ -12,9 +12,9 @@ import RxSwift
 let kItemsCountViewCornerRadius: CGFloat = 7
 
 class CartButtonView: UIView {
-    @IBOutlet private var contentView: UIView!
+    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var itemsCountLabel: UILabel!
-    @IBOutlet weak var itemsCountBackgroundView: UIView!
+    @IBOutlet private weak var itemsCountBackgroundView: UIView!
     
     private let disposeBag = DisposeBag()
     private var viewModel = CartButtonViewModel()

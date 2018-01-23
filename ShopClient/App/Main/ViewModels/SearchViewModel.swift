@@ -14,6 +14,14 @@ class SearchViewModel: GridCollectionViewModel {
     
     private let categoryListUseCase = CategoryListUseCase()
     private let productListUseCase = ProductListUseCase()
+
+    // MARK: - BaseViewModel
+
+    override func tryAgain() {
+        reloadData()
+    }
+
+    // MARK: - Public
     
     public func reloadData() {
         paginationValue = nil

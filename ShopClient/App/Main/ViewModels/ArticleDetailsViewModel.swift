@@ -9,19 +9,18 @@
 import RxSwift
 
 class ArticleDetailsViewModel: BaseViewModel {
-    var data = PublishSubject<Article>()
-    
-    var articleId: String!
-    
-    var loadData: AnyObserver<()> {
-        return AnyObserver { [weak self] _ in
-            self?.loadArticle()
-        }
-    }
-    
     private let articleUseCase = ArticleUseCase()
-    
-    func loadArticle() {
+
+    var articleId: String!
+    var data = PublishSubject<Article>()
+
+    // MARK: - BaseViewModel
+
+    override func tryAgain() {
+        loadData()
+    }
+
+    func loadData() {
         state.onNext(.loading(showHud: true))
         articleUseCase.getArticle(with: articleId) { [weak self] (article, error) in
             if let error = error {

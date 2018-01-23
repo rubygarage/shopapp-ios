@@ -16,7 +16,7 @@ class OrderItemTableViewCell: UITableViewCell {
     @IBOutlet private weak var quantityLabel: UILabel!
     @IBOutlet private weak var quantityValueLabel: UILabel!
     
-    @IBOutlet weak var itemPriceLabel: UILabel! {
+    @IBOutlet private weak var itemPriceLabel: UILabel! {
         didSet {
             itemPriceLabel.isHidden = true
         }

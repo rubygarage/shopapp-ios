@@ -15,7 +15,7 @@ protocol LastArrivalsCellDelegate: class {
 private let kLastArrivalsNumberOfSections = 1
 
 class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableDataSourceProtocol, LastArrivalsTableDelegateProtocol {
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     private var dataSource: LastArrivalsTableDataSource!
     // swiftlint:disable weak_delegate

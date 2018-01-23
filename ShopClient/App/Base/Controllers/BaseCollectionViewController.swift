@@ -9,7 +9,9 @@
 import UIKit
 
 class BaseCollectionViewController<T: BasePaginationViewModel>: BasePaginationViewController<T> {
-    @IBOutlet weak var collectionView: UICollectionView!
+    // swiftlint:disable private_outlet
+    @IBOutlet private(set) weak var collectionView: UICollectionView!
+    // swiftlint:enable private_outlet
     
     // MARK: - View controller lifecycle
     

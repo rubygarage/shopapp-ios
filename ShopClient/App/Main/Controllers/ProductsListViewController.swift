@@ -55,9 +55,4 @@ class ProductsListViewController: GridCollectionViewController<ProductsListViewM
     override func infinityScrollHandler() {
         viewModel.loadNextPage()
     }
-    
-    // MARK: - ErrorViewProtocol
-    func didTapTryAgain() {
-        loadData()
-    }
 }

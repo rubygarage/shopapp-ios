@@ -9,7 +9,7 @@
 import UIKit
 
 class DetailsImagesCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var productImageView: UIImageView!
+    @IBOutlet private weak var productImageView: UIImageView!
 
     public func configure(with image: Image) {
         productImageView.set(image: image)

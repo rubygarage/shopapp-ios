@@ -9,7 +9,7 @@
 import UIKit
 
 class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     
     private var tableDataSource: PaymentTypeDataSource!
     // swiftlint:disable weak_delegate
@@ -54,6 +54,10 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
     fileprivate func setupApplePay() {
         viewModel.setupApplePay()
     }
+
+    fileprivate func reloadData() {
+        tableView.reloadData()
+    }
     
     // MARK: - Segues
     
@@ -71,7 +75,7 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
 extension PaymentTypeViewController: PaymentTypeDelegateProtocol {
     func didSelectPayment(type: PaymentTypeSection) {
         viewModel.selectedType = type
-        tableView.reloadData()
+        reloadData()
         switch type {
         case .applePay:
             setupApplePay()

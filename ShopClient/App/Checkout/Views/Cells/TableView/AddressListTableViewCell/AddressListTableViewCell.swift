@@ -15,12 +15,12 @@ protocol AddressListTableViewCellProtocol: class {
 }
 
 class AddressListTableViewCell: UITableViewCell {
-    @IBOutlet weak var customerNameLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var phoneLabel: UILabel!
-    @IBOutlet weak var selectButton: UIButton!
-    @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet private weak var customerNameLabel: UILabel!
+    @IBOutlet private weak var addressLabel: UILabel!
+    @IBOutlet private weak var phoneLabel: UILabel!
+    @IBOutlet private weak var selectButton: UIButton!
+    @IBOutlet private weak var editButton: UIButton!
+    @IBOutlet private weak var deleteButton: UIButton!
     
     private var address: Address!
     

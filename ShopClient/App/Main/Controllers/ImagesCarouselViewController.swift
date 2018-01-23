@@ -13,8 +13,8 @@ protocol ImagesCarouselViewControllerProtocol: class {
 }
 
 class ImagesCarouselViewController: UIViewController, ImagesCarouselCollectionDataSourceProtocol, ImagesCarouselCollectionDelegateProtocol {
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var pageControl: UIPageControl!
     
     private var dataSource: ImagesCarouselCollectionDataSource!
     // swiftlint:disable weak_delegate

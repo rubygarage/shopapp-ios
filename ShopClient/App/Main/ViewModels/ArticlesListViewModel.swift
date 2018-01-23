@@ -12,6 +12,14 @@ class ArticlesListViewModel: BasePaginationViewModel {
     var items = Variable<[Article]>([Article]())
     
     private let articleListUseCase = ArticleListUseCase()
+
+    // MARK: - BaseViewModel
+
+    override func tryAgain() {
+        reloadData()
+    }
+
+    // MARK: - Public
     
     public func reloadData() {
         paginationValue = nil

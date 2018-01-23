@@ -81,4 +81,10 @@ class CartViewModel: BaseViewModel {
         let product = data.value[index]
         return product.productVariant
     }
+
+    // MARK: - BaseViewModel
+
+    override func tryAgain() {
+        loadData()
+    }
 }

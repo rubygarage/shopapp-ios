@@ -16,8 +16,7 @@ class CheckoutShippingAddressEditTableCell: UITableViewCell {
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var addressLabel: UILabel!
     @IBOutlet private weak var phoneLabel: UILabel!
-    
-    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet private weak var editButton: UIButton!
     
     weak var delegate: CheckoutShippingAddressEditCellProtocol?
     
@@ -32,6 +31,10 @@ class CheckoutShippingAddressEditTableCell: UITableViewCell {
     
     func configure(with address: Address) {
         populateViews(with: address)
+    }
+
+    func setEditButtonVisible(_ visible: Bool) {
+        editButton.isHidden = !visible
     }
     
     // MARK: - Private

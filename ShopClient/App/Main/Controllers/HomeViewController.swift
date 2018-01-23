@@ -87,7 +87,7 @@ class HomeViewController: BaseTableViewController<HomeViewModel>, HomeTableDataS
     }
     
     private func loadData() {
-        viewModel.loadData(with: disposeBag)
+        viewModel.loadData()
     }
     
     // MARK: - HomeTableDataSourceProtocol
@@ -152,11 +152,5 @@ class HomeViewController: BaseTableViewController<HomeViewModel>, HomeTableDataS
         default:
             return
         }
-    }
-    
-    // MARK: - ErrorViewProtocol
-    
-    func didTapTryAgain() {
-        viewModel.loadData(with: disposeBag)
     }
 }

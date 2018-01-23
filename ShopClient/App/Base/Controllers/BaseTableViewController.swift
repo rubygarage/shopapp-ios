@@ -9,7 +9,9 @@
 import UIKit
 
 class BaseTableViewController<T: BasePaginationViewModel>: BasePaginationViewController<T> {
-    @IBOutlet weak var tableView: UITableView!
+    // swiftlint:disable private_outlet
+    @IBOutlet private(set) weak var tableView: UITableView!
+    // swiftlint:enable private_outlet
     
     // MARK: - View controller lifecycle
     
