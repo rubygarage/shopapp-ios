@@ -43,7 +43,16 @@ class CheckoutSuccessViewController: BaseViewController<CheckoutSuccessViewModel
     }
     
     @IBAction func continueShoppingTapped(_ sender: UnderlinedButton) {
-        // TODO:
+        setHomeController()
+        dismissModalStack()
+    }
+    
+    private func dismissModalStack() {
+        var controller = presentingViewController
+        while controller?.presentingViewController != nil {
+            controller = controller?.presentingViewController
+        }
+        controller?.dismiss(animated: true)
     }
 }
 
