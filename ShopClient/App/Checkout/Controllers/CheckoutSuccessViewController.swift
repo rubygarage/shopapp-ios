@@ -32,6 +32,7 @@ class CheckoutSuccessViewController: BaseViewController<CheckoutSuccessViewModel
     
     // MARK: - Setup
     private func setupViews() {
+        title = "ControllerTitle.Home".localizable
         thanksForShoppingLabel?.text = "Label.ThanksForShopping".localizable
         orderNumberLabel?.setup(with: orderNumber)
         viewOrderDetailsButton?.setTitle("Button.ViewOrderDetails".localizable.uppercased(), for: .normal)
@@ -40,10 +41,6 @@ class CheckoutSuccessViewController: BaseViewController<CheckoutSuccessViewModel
     }
     
     // MARK: - Actions
-    
-    @IBAction func viewOrderDetailsTapped(_ sender: BlackButton) {
-        // TODO:
-    }
     
     @IBAction func continueShoppingTapped(_ sender: UnderlinedButton) {
         setHomeController()
@@ -56,6 +53,14 @@ class CheckoutSuccessViewController: BaseViewController<CheckoutSuccessViewModel
             controller = controller?.presentingViewController
         }
         controller?.dismiss(animated: true)
+    }
+    
+    // MARK: - Segues
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let orderDetailsViewController = segue.destination as? OrderDetailsViewController {
+            orderDetailsViewController.orderId = orderId
+        }
     }
 }
 

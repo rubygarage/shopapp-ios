@@ -223,8 +223,8 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
                 self?.updatePlaceOrderButtonUI()
                 self?.returnFlowToSelf()
             }
-        } else if let checkoutSuccessViewController = segue.destination as? CheckoutSuccessViewController {
-            if let orderId = viewModel.order?.id, let orderNumber = viewModel.order?.number {
+        } else if let navigationController = segue.destination as? NavigationController {
+            if let checkoutSuccessViewController = navigationController.viewControllers.first as? CheckoutSuccessViewController, let orderId = viewModel.order?.id, let orderNumber = viewModel.order?.number {
                 checkoutSuccessViewController.orderId = orderId
                 checkoutSuccessViewController.orderNumber = orderNumber
             }

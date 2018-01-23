@@ -15,6 +15,7 @@ private let kShopifyItemsMaxCount: Int32 = 250
 private let kShopifyStoreName = "rubytestruby"
 private let kMerchantID = "merchant.com.rubygarage.shopclient.test"
 private let kShopifyPaymetTypeApplePay = "apple_pay"
+private let kShopifyRetryFinite = 10
 
 class API: NSObject, APIInterface, PaySessionDelegate {
     private var client: Graph.Client?
@@ -500,7 +501,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     }
     
     private func completePayPolling(with checkoutId: GraphQL.ID, callback: @escaping RepoCallback<Order>) {
-        let retry = Graph.RetryHandler<Storefront.QueryRoot>(endurance: .finite(30)) { (response, _) -> Bool in
+        let retry = Graph.RetryHandler<Storefront.QueryRoot>(endurance: .finite(kShopifyRetryFinite)) { (response, _) -> Bool in
             return (response?.node as? Storefront.Checkout)?.order == nil
         }
         
@@ -1453,7 +1454,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     }
     
     private func fetchShippingRatesForCheckout(with id: String, completion: @escaping (_ rates: [Storefront.ShippingRate], _ error: Graph.QueryError?) -> Void) {
-        let retry = Graph.RetryHandler<Storefront.QueryRoot>(endurance: .finite(30)) { (response, _) -> Bool in
+        let retry = Graph.RetryHandler<Storefront.QueryRoot>(endurance: .finite(kShopifyRetryFinite)) { (response, _) -> Bool in
             if let response = response {
                 return (response.node as! Storefront.Checkout).availableShippingRates?.ready ?? false == false
             } else {
@@ -1499,7 +1500,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     }
     
     func fetchCompletedPayment(with paymentId: GraphQL.ID, completion: @escaping (Storefront.Payment?) -> Void) {
-        let retry = Graph.RetryHandler<Storefront.QueryRoot>(endurance: .finite(30)) { response, _ -> Bool in
+        let retry = Graph.RetryHandler<Storefront.QueryRoot>(endurance: .finite(kShopifyRetryFinite)) { response, _ -> Bool in
             if let payment = response?.node as? Storefront.Payment {
                 return !payment.ready
             } else {
