@@ -50,6 +50,7 @@ protocol APIInterface {
     func getCustomer(callback: @escaping RepoCallback<Customer>)
     func updateCustomer(with email: String, firstName: String?, lastName: String?, phone: String?, callback: @escaping RepoCallback<Customer>)
     func updateCustomer(with promo: Bool, callback: @escaping RepoCallback<Customer>)
+    func updateCustomer(with password: String, callback: @escaping RepoCallback<Customer>)
     func addCustomerAddress(with address: Address, callback: @escaping RepoCallback<String>)
     func updateCustomerAddress(with address: Address, callback: @escaping RepoCallback<Bool>)
     func updateCustomerDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Customer>)

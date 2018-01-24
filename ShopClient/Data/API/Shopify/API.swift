@@ -247,6 +247,14 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         }
     }
     
+    func updateCustomer(with password: String, callback: @escaping RepoCallback<Customer>) {
+        if let token = sessionData().token {
+            updateCustomer(with: token, password: password, callback: callback)
+        } else {
+            callback(nil, ContentError())
+        }
+    }
+    
     func addCustomerAddress(with address: Address, callback: @escaping RepoCallback<String>) {
         if let token = sessionData().token {
             createCustomerAddress(with: token, address: address, callback: callback)
@@ -574,6 +582,11 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         updateCustomer(with: query, callback: callback)
     }
     
+    private func updateCustomer(with token: String, password: String, callback: @escaping RepoCallback<Customer>) {
+        let query = customerUpdateQuery(with: token, password: password)
+        updateCustomer(with: query, callback: callback)
+    }
+    
     private func updateCustomer(with query: Storefront.MutationQuery, callback: @escaping RepoCallback<Customer>) {
         let task = client?.mutateGraphWith(query, completionHandler: { (result, _) in
             if let customer = result?.customerUpdate?.customer {
@@ -831,6 +844,14 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     private func customerUpdateQuery(with accessToken: String, promo: Bool) -> Storefront.MutationQuery {
         let input = Storefront.CustomerUpdateInput.create()
         input.acceptsMarketing = Input<Bool>(orNull: promo)
+        return Storefront.buildMutation({ $0
+            .customerUpdate(customerAccessToken: accessToken, customer: input, self.customerUpdatePayloadQuery())
+        })
+    }
+    
+    private func customerUpdateQuery(with accessToken: String, password: String) -> Storefront.MutationQuery {
+        let input = Storefront.CustomerUpdateInput.create()
+        input.password = Input<String>(orNull: password)
         return Storefront.buildMutation({ $0
             .customerUpdate(customerAccessToken: accessToken, customer: input, self.customerUpdatePayloadQuery())
         })

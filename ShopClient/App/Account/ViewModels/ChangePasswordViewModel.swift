@@ -15,7 +15,7 @@ class ChangePasswordViewModel: BaseViewModel {
     var confirmPasswordText = Variable<String>("")
     var newPasswordErrorMessage = PublishSubject<String>()
     var confirmPasswordErrorMessage = PublishSubject<String>()
-    var updateSuccess = Variable<Bool>(false)
+    var updateSuccess = PublishSubject<Bool>()
     
     var updateButtonEnabled: Observable<Bool> {
         return Observable.combineLatest(newPasswordText.asObservable(), confirmPasswordText.asObservable()) { newEmail, confirmPassword in
@@ -56,17 +56,15 @@ class ChangePasswordViewModel: BaseViewModel {
     }
     
     private func update() {
-        /*
         state.onNext(.loading(showHud: true))
-        updateCustomUseCase.updateCustomer(with: emailText.value, firstName: firstNameText.value.orNil()) { [weak self] (customer, error) in
+        updateCustomUseCase.updateCustomer(with: newPasswordText.value) { [weak self] (customer, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }
-            if let customer = customer {
+            if customer != nil {
                 self?.state.onNext(.content)
             }
             self?.updateSuccess.onNext(error == nil && customer != nil)
         }
- */
     }
 }
