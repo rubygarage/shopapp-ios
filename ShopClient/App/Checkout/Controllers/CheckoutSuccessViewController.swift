@@ -10,7 +10,7 @@ import UIKit
 
 private let kOrderNumberColor = UIColor(red: 0, green: 0.48, blue: 1, alpha: 1)
 
-class CheckoutSuccessViewController: BaseViewController<CheckoutSuccessViewModel> {
+class CheckoutSuccessViewController: UIViewController {
     @IBOutlet private weak var thanksForShoppingLabel: UILabel!
     @IBOutlet private weak var orderNumberLabel: UILabel!
     @IBOutlet private weak var viewOrderDetailsButton: BlackButton!
@@ -24,13 +24,13 @@ class CheckoutSuccessViewController: BaseViewController<CheckoutSuccessViewModel
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = CheckoutSuccessViewModel()
         super.viewDidLoad()
 
         setupViews()
     }
     
     // MARK: - Setup
+    
     private func setupViews() {
         title = "ControllerTitle.Home".localizable
         thanksForShoppingLabel?.text = "Label.ThanksForShopping".localizable
