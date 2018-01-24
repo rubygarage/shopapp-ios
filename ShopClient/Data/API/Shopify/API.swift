@@ -1381,6 +1381,10 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     // MARK: - Error handling
     
     private func process(error: Graph.QueryError?) -> RepoError? {
+        if let error = error, case .request(let requestError) = error {
+            return ContentError(with: requestError)
+        }
+        
         if let error = error, case .invalidQuery(let reasons) = error {
             return CriticalError(with: error, message: reasons.first?.message)
         }
@@ -1388,7 +1392,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         if let error = error, case .http(let statusCode) = error {
             return process(statusCode: statusCode, error: error)
         }
-        
+
         return RepoError(with: error)
     }
     
