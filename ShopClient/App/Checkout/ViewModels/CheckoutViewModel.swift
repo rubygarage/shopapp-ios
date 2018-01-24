@@ -20,6 +20,7 @@ enum CheckoutSection: Int {
 class CheckoutViewModel: BaseViewModel {
     private let checkoutUseCase = CheckoutUseCase()
     private let cartProductListUseCase = CartProductListUseCase()
+    private let deleteCartProductsUseCase = DeleteCartProductsUseCase()
     private let customerUseCase = CustomerUseCase()
     
     var cartItems = [CartProduct]()
@@ -183,7 +184,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     private func clearCart(with order: Order) {
-        cartProductListUseCase.clearCart { [weak self] _ in
+        deleteCartProductsUseCase.clearCart { [weak self] _ in
             self?.order = order
             self?.checkoutSuccedded.onNext()
             self?.state.onNext(.content)
