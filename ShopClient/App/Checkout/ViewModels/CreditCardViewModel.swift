@@ -8,7 +8,7 @@
 
 import RxSwift
 
-typealias CreditCardPaymentCompletion = (_ billingAddress: Address, _ card: CreditCard) -> Void
+typealias CreditCardCompletion = (_ card: CreditCard) -> Void
 
 class CreditCardViewModel: BaseViewModel {
     var holderNameText = Variable<String>("")
@@ -19,8 +19,8 @@ class CreditCardViewModel: BaseViewModel {
     var holderNameErrorMessage = PublishSubject<String>()
     var cardNumberErrorMessage = PublishSubject<String>()
     
-    var billingAddres: Address!
-    
+    var completion: CreditCardCompletion?
+        
     var isCardDataValid: Observable<Bool> {
         return Observable.combineLatest(holderNameText.asObservable(), cardNumberText.asObservable(), monthExpirationText.asObservable(), yearExpirationText.asObservable(), securityCodeText.asObservable()) { holderName, cardNumber, monthExpiration, yearExpiration, securityCode in
             return holderName.hasAtLeastOneSymbol() && cardNumber.isValidAsCardNumber() && monthExpiration.hasAtLeastOneSymbol() && yearExpiration.hasAtLeastOneSymbol() && securityCode.isValidAsCVV()
@@ -43,7 +43,7 @@ class CreditCardViewModel: BaseViewModel {
     }
     
     private func submitAction() {
-//        completion?(billingAddres, generateCreditCard())
+        completion?(generateCreditCard())
     }
     
     private func processErrors() {

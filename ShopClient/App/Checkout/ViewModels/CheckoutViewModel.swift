@@ -25,6 +25,14 @@ enum PaymentTypeSection: Int {
     static let allValues = PKPaymentAuthorizationController.canMakePayments() ? [creditCard, applePay] : [creditCard]
 }
 
+enum PaymentTypeRow: Int {
+    case type
+    case card
+    case billingAddress
+    
+    static let allValues = [type, card, billingAddress]
+}
+
 class CheckoutViewModel: BaseViewModel {
     private let checkoutUseCase = CheckoutUseCase()
     private let cartProductListUseCase = CartProductListUseCase()

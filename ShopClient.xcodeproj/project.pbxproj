@@ -21,8 +21,8 @@
 		0B24F0D720074D7500F13224 /* CheckoutCartCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24F0C220074D7400F13224 /* CheckoutCartCollectionCell.swift */; };
 		0B24F0D820074D7500F13224 /* CheckoutPaymentAddTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24F0C420074D7400F13224 /* CheckoutPaymentAddTableCell.swift */; };
 		0B24F0D920074D7500F13224 /* CheckoutPaymentAddTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B24F0C520074D7400F13224 /* CheckoutPaymentAddTableCell.xib */; };
-		0B24F0DA20074D7500F13224 /* CheckoutPaymentEditTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24F0C720074D7400F13224 /* CheckoutPaymentEditTableCell.swift */; };
-		0B24F0DB20074D7500F13224 /* CheckoutPaymentEditTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B24F0C820074D7500F13224 /* CheckoutPaymentEditTableCell.xib */; };
+		0B24F0DA20074D7500F13224 /* CheckoutCreditCardEditTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24F0C720074D7400F13224 /* CheckoutCreditCardEditTableCell.swift */; };
+		0B24F0DB20074D7500F13224 /* CheckoutCreditCardEditTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B24F0C820074D7500F13224 /* CheckoutCreditCardEditTableCell.xib */; };
 		0B24F0DC20074D7500F13224 /* AddressListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B24F0CA20074D7500F13224 /* AddressListTableViewCell.xib */; };
 		0B24F0DD20074D7500F13224 /* AddressListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24F0CB20074D7500F13224 /* AddressListTableViewCell.swift */; };
 		0B24F0EC20074F1A00F13224 /* InputTextFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B24F0DF20074F1900F13224 /* InputTextFieldView.xib */; };
@@ -335,8 +335,8 @@
 		0B24F0C220074D7400F13224 /* CheckoutCartCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutCartCollectionCell.swift; sourceTree = "<group>"; };
 		0B24F0C420074D7400F13224 /* CheckoutPaymentAddTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutPaymentAddTableCell.swift; sourceTree = "<group>"; };
 		0B24F0C520074D7400F13224 /* CheckoutPaymentAddTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutPaymentAddTableCell.xib; sourceTree = "<group>"; };
-		0B24F0C720074D7400F13224 /* CheckoutPaymentEditTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutPaymentEditTableCell.swift; sourceTree = "<group>"; };
-		0B24F0C820074D7500F13224 /* CheckoutPaymentEditTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutPaymentEditTableCell.xib; sourceTree = "<group>"; };
+		0B24F0C720074D7400F13224 /* CheckoutCreditCardEditTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutCreditCardEditTableCell.swift; sourceTree = "<group>"; };
+		0B24F0C820074D7500F13224 /* CheckoutCreditCardEditTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutCreditCardEditTableCell.xib; sourceTree = "<group>"; };
 		0B24F0CA20074D7500F13224 /* AddressListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressListTableViewCell.xib; sourceTree = "<group>"; };
 		0B24F0CB20074D7500F13224 /* AddressListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressListTableViewCell.swift; sourceTree = "<group>"; };
 		0B24F0DF20074F1900F13224 /* InputTextFieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputTextFieldView.xib; sourceTree = "<group>"; };
@@ -715,13 +715,13 @@
 			path = CheckoutPaymentAddTableCell;
 			sourceTree = "<group>";
 		};
-		0B24F0C620074D7400F13224 /* CheckoutPaymentEditTableCell */ = {
+		0B24F0C620074D7400F13224 /* CheckoutCreditCardEditTableCell */ = {
 			isa = PBXGroup;
 			children = (
-				0B24F0C720074D7400F13224 /* CheckoutPaymentEditTableCell.swift */,
-				0B24F0C820074D7500F13224 /* CheckoutPaymentEditTableCell.xib */,
+				0B24F0C720074D7400F13224 /* CheckoutCreditCardEditTableCell.swift */,
+				0B24F0C820074D7500F13224 /* CheckoutCreditCardEditTableCell.xib */,
 			);
-			path = CheckoutPaymentEditTableCell;
+			path = CheckoutCreditCardEditTableCell;
 			sourceTree = "<group>";
 		};
 		0B24F0C920074D7500F13224 /* AddressListTableViewCell */ = {
@@ -783,7 +783,7 @@
 				6170420F2018C38C0063E369 /* CheckoutSelectedTypeTableCell */,
 				0B24F0C920074D7500F13224 /* AddressListTableViewCell */,
 				0B24F0C320074D7400F13224 /* CheckoutPaymentAddTableCell */,
-				0B24F0C620074D7400F13224 /* CheckoutPaymentEditTableCell */,
+				0B24F0C620074D7400F13224 /* CheckoutCreditCardEditTableCell */,
 				0B24F0B220074D7400F13224 /* CheckoutShippingAddressAddTableCell */,
 				61D33AC42008F8C900228E86 /* CheckoutShippingOptionsDisabledTableCell */,
 				61AB7D2D2010CB4000DB9D44 /* CheckoutShippingOptionsEnabledTableCell */,
@@ -2161,7 +2161,7 @@
 				0BA630751FFFC533007088B8 /* OrderItemTableViewCell.xib in Resources */,
 				61AAB9311F7BD07B00CD32D3 /* SortModalTableViewCell.xib in Resources */,
 				61AB7D2C2010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableCell.xib in Resources */,
-				0B24F0DB20074D7500F13224 /* CheckoutPaymentEditTableCell.xib in Resources */,
+				0B24F0DB20074D7500F13224 /* CheckoutCreditCardEditTableCell.xib in Resources */,
 				61A54BF91FF5254900D4D151 /* AccountFooterView.xib in Resources */,
 				0B24F0D420074D7500F13224 /* PaymentTypeTableViewCell.xib in Resources */,
 				0B24F0EC20074F1A00F13224 /* InputTextFieldView.xib in Resources */,
@@ -2526,7 +2526,7 @@
 				618B4D531FE2EF2E0001F68D /* TabBarController.swift in Sources */,
 				61393A721FACC1430020C345 /* GridCollectionViewModel.swift in Sources */,
 				61E4E6341F56C868001C6E01 /* AppDelegate.swift in Sources */,
-				0B24F0DA20074D7500F13224 /* CheckoutPaymentEditTableCell.swift in Sources */,
+				0B24F0DA20074D7500F13224 /* CheckoutCreditCardEditTableCell.swift in Sources */,
 				61BA570A1FE040D900BF1586 /* CartEmptyDataView.swift in Sources */,
 				0B9B1E3A1FF4EDB000FECA8E /* SignUpUseCase.swift in Sources */,
 				6131D2381FB31395008330C0 /* CartProductDAOInterface.swift in Sources */,

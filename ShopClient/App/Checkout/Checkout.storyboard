@@ -65,6 +65,7 @@
                         <segue destination="c3v-9W-mKd" kind="show" identifier="toPaymentType" id="CGV-uG-Hxc"/>
                         <segue destination="RiA-xA-2z5" kind="show" identifier="toProductDetails" id="zB2-WO-his"/>
                         <segue destination="cpJ-cT-Uv8" kind="presentation" identifier="toSuccessCheckout" id="2Ja-VQ-reW"/>
+                        <segue destination="35q-zi-ACv" kind="show" identifier="toCreditCard" id="O98-nT-rIz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWy-vV-BzK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -104,12 +105,11 @@
                     <connections>
                         <outlet property="tableView" destination="7x0-g5-3yi" id="Imt-Lf-dDG"/>
                         <segue destination="zXe-Cz-Abu" kind="show" identifier="toAddressForm" id="CAU-cl-Z7h"/>
-                        <segue destination="35q-zi-ACv" kind="show" identifier="toCreditCard" id="tdz-rN-PUG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0dC-mI-bYZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-449" y="896"/>
+            <point key="canvasLocation" x="-831" y="961"/>
         </scene>
         <!--Address Form View Controller-->
         <scene sceneID="l9L-mQ-41u">
@@ -350,7 +350,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="218-Br-ENO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="351" y="963"/>
+            <point key="canvasLocation" x="-50" y="1030"/>
         </scene>
         <!--Payment Type View Controller-->
         <scene sceneID="E5U-uh-pFk">
@@ -382,7 +382,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pi9-aR-oRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1222" y="896"/>
+            <point key="canvasLocation" x="-1602" y="960"/>
         </scene>
         <!--Credit Card View Controller-->
         <scene sceneID="tYZ-iz-I58">
@@ -521,7 +521,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epd-Im-XuG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-449" y="1687"/>
+            <point key="canvasLocation" x="1490" y="959"/>
         </scene>
         <!--Checkout Success View Controller-->
         <scene sceneID="spq-u7-sXe">
@@ -656,7 +656,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dCz-R5-iVh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1103" y="894"/>
+            <point key="canvasLocation" x="722" y="962"/>
         </scene>
         <!--OrderDetailsControllerIdentifier-->
         <scene sceneID="b5U-HQ-CTW">

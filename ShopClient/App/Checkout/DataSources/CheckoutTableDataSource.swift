@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CheckoutCombinedProtocol: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, CheckoutPaymentAddCellProtocol, CheckoutTableDelegateProtocol, CheckoutCartTableViewCellDelegate, CheckoutPaymentEditTableCellProtocol, CheckoutShippingOptionsEnabledTableCellProtocol, PaymentTypeViewControllerProtocol, CheckoutSelectedTypeTableCellProtocol {}
+protocol CheckoutCombinedProtocol: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, CheckoutPaymentAddCellProtocol, CheckoutTableDelegateProtocol, CheckoutCartTableViewCellDelegate, CheckoutCreditCardEditTableCellProtocol, CheckoutShippingOptionsEnabledTableCellProtocol, PaymentTypeViewControllerProtocol, CheckoutSelectedTypeTableCellProtocol {}
 
 protocol CheckoutTableDataSourceProtocol: class {
     func cartProducts() -> [CartProduct]
@@ -31,6 +31,8 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == CheckoutSection.shippingOptions.rawValue {
             return delegate?.availableShippingRates()?.count ?? 1
+        } else if section == CheckoutSection.payment.rawValue {
+            return delegate?.selectedPaymentType() == .creditCard ? PaymentTypeRow.allValues.count : 1
         }
         return 1
     }
@@ -83,8 +85,22 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     }
     
     private func paymentCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.row {
+        case PaymentTypeRow.type.rawValue:
+            return paymentTypeCell(with: tableView, indexPath: indexPath)
+        case PaymentTypeRow.card.rawValue:
+            return paymentCardCell(with: tableView, indexPath: indexPath)
+        case PaymentTypeRow.billingAddress.rawValue:
+            return paymentBillingAddressCell(with: tableView, indexPath: indexPath)
+        default:
+            return UITableViewCell()
+        }
 //        if let address = delegate?.billingAddress(), let card = delegate?.creditCard() {
 //            return paymentEditCell(with: tableView, indexPath: indexPath, billingAddress: address, creditCard: card)
+        
+    }
+    
+    private func paymentTypeCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         if let selectedType = delegate?.selectedPaymentType() {
             return paymentEditCell(with: tableView, indexPath: indexPath, selectedType: selectedType)
         } else {
@@ -95,29 +111,39 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     private func paymentAddCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutPaymentAddTableCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutPaymentAddTableCell.self), for: indexPath) as! CheckoutPaymentAddTableCell
         cell.delegate = delegate
+        let type = PaymentTypeRow(rawValue: indexPath.row)!
+        cell.configure(type: type)
         return cell
     }
     
-//    private func paymentEditCell(with tableView: UITableView, indexPath: IndexPath, billingAddress: Address, creditCard: CreditCard) -> CheckoutPaymentEditTableCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutPaymentEditTableCell.self), for: indexPath) as! CheckoutPaymentEditTableCell
-//        cell.delegate = delegate
-//        cell.configure(with: billingAddress, creditCard: creditCard)
-//        return cell
-//    }
-    private func paymentEditCell(with tableView: UITableView, indexPath: IndexPath, selectedType: PaymentTypeSection) -> UITableViewCell {
-        switch indexPath.row {
-        case 0:
-            return selectedPaymentTypeCell(with: tableView, indexPath: indexPath, selectedType: selectedType)
-        default:
-            return UITableViewCell()
-        }
-    }
-    
-    private func selectedPaymentTypeCell(with tableView: UITableView, indexPath: IndexPath, selectedType: PaymentTypeSection) -> CheckoutSelectedTypeTableCell {
+    private func paymentEditCell(with tableView: UITableView, indexPath: IndexPath, selectedType: PaymentTypeSection) -> CheckoutSelectedTypeTableCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutSelectedTypeTableCell.self), for: indexPath) as! CheckoutSelectedTypeTableCell
         cell.configure(type: selectedType)
         cell.delegate = delegate
         return cell
+    }
+    
+    private func paymentCardCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        if let card = delegate?.creditCard() {
+            return paymentCardEditCell(with: tableView, indexPath: indexPath, creditCard: card)
+        } else {
+            return paymentAddCell(with: tableView, indexPath: indexPath)
+        }
+    }
+    
+        private func paymentCardEditCell(with tableView: UITableView, indexPath: IndexPath, creditCard: CreditCard) -> CheckoutCreditCardEditTableCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutCreditCardEditTableCell.self), for: indexPath) as! CheckoutCreditCardEditTableCell
+            cell.delegate = delegate
+            cell.configure(with: creditCard)
+            return cell
+        }
+    
+    private func paymentBillingAddressCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        if let address = delegate?.billingAddress() {
+            return UITableViewCell()
+        } else {
+            return paymentAddCell(with: tableView, indexPath: indexPath)
+        }
     }
     
     private func shippingOptionsCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {

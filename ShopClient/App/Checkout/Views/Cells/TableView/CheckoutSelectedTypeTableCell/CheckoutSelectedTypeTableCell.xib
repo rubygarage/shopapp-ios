@@ -47,13 +47,23 @@
                                     <action selector="editTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="FNG-Fp-wmU"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lln-FP-uWT" userLabel="Separator View">
+                                <rect key="frame" x="0.0" y="50" width="398" height="1"/>
+                                <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="jMg-eG-bS1"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Hzf-vO-zc2" firstAttribute="leading" secondItem="6ga-sO-CRV" secondAttribute="trailing" constant="16" id="6BM-n5-io4"/>
                             <constraint firstItem="Rez-0X-aM8" firstAttribute="leading" secondItem="3Hh-vd-Ujl" secondAttribute="leading" constant="16" id="GKU-Hf-q5T"/>
                             <constraint firstAttribute="height" constant="50" id="Kck-Gx-8ti"/>
+                            <constraint firstAttribute="trailing" secondItem="lln-FP-uWT" secondAttribute="trailing" id="N4h-HH-Dfh"/>
+                            <constraint firstItem="lln-FP-uWT" firstAttribute="leading" secondItem="3Hh-vd-Ujl" secondAttribute="leading" id="Xpe-fn-1d1"/>
                             <constraint firstItem="6ga-sO-CRV" firstAttribute="centerY" secondItem="Rez-0X-aM8" secondAttribute="centerY" id="bsY-Bf-AJ2"/>
+                            <constraint firstAttribute="bottom" secondItem="lln-FP-uWT" secondAttribute="bottom" id="eoU-mz-bQp"/>
                             <constraint firstItem="Hzf-vO-zc2" firstAttribute="centerY" secondItem="Rez-0X-aM8" secondAttribute="centerY" id="ioH-9g-HpU"/>
                             <constraint firstItem="6ga-sO-CRV" firstAttribute="leading" secondItem="Rez-0X-aM8" secondAttribute="trailing" constant="16" id="r5L-II-50D"/>
                             <constraint firstItem="Rez-0X-aM8" firstAttribute="centerY" secondItem="3Hh-vd-Ujl" secondAttribute="centerY" id="yeR-YD-2vz"/>

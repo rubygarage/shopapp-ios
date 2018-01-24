@@ -61,6 +61,8 @@
 "Button.Edit" = "Edit";
 "Button.Delete" = "Delete";
 "Button.AddPaymentType" = "Add payment type";
+"Button.AddCard" = "Add card";
+"Button.AddBillingAddress" = "Add billing address";
 "Button.PlaceOrder" = "Place Order";
 "Button.SetUp" = "Set up";
 "Button.PayWithThisCard" = "Pay with this card";

@@ -58,8 +58,8 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         let paymentTypeNib = UINib(nibName: String(describing: CheckoutSelectedTypeTableCell.self), bundle: nil)
         tableView?.register(paymentTypeNib, forCellReuseIdentifier: String(describing: CheckoutSelectedTypeTableCell.self))
         
-        let paymentEditNib = UINib(nibName: String(describing: CheckoutPaymentEditTableCell.self), bundle: nil)
-        tableView.register(paymentEditNib, forCellReuseIdentifier: String(describing: CheckoutPaymentEditTableCell.self))
+        let paymentEditNib = UINib(nibName: String(describing: CheckoutCreditCardEditTableCell.self), bundle: nil)
+        tableView.register(paymentEditNib, forCellReuseIdentifier: String(describing: CheckoutCreditCardEditTableCell.self))
         
         let shiippingOptionsDisabledNib = UINib(nibName: String(describing: CheckoutShippingOptionsDisabledTableCell.self), bundle: nil)
         tableView.register(shiippingOptionsDisabledNib, forCellReuseIdentifier: String(describing: CheckoutShippingOptionsDisabledTableCell.self))
@@ -179,8 +179,17 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     
     // MARK: - CheckoutPaymentAddCellProtocol
     
-    func didTapAddPayment() {
-        performSegue(withIdentifier: SegueIdentifiers.toPaymentType, sender: self)
+    func didTapAddPayment(type: PaymentTypeRow) {
+        switch type {
+        case PaymentTypeRow.type:
+            performSegue(withIdentifier: SegueIdentifiers.toPaymentType, sender: self)
+        case PaymentTypeRow.card:
+            performSegue(withIdentifier: SegueIdentifiers.toCreditCard, sender: self)
+        case PaymentTypeRow.billingAddress:
+            // TODO: go to address
+                return
+        }
+        
     }
     
     // MARK: - CheckoutSelectedTypeTableCellProtocol
@@ -234,6 +243,16 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
                 checkoutSuccessViewController.orderId = orderId
                 checkoutSuccessViewController.orderNumber = orderNumber
             }
+        } else if let creditCardFormController = segue.destination as? CreditCardViewController {
+            creditCardFormController.completion = { [weak self] (card) in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.viewModel.creditCard = card
+                strongSelf.reloadTable()
+                strongSelf.updatePlaceOrderButtonUI()
+                strongSelf.returnFlowToSelf()
+            }
         }
     }
 }
@@ -252,5 +271,13 @@ extension CheckoutViewController: PaymentTypeViewControllerProtocol {
     func didSelect(paymentType: PaymentTypeSection) {
         selectedType = paymentType
         reloadTable()
+    }
+}
+
+// MARK: - CheckoutCreditCardEditTableCellProtocol
+
+extension CheckoutViewController: CheckoutCreditCardEditTableCellProtocol {
+    func didTapEditCard() {
+        performSegue(withIdentifier: SegueIdentifiers.toCreditCard, sender: self)
     }
 }
