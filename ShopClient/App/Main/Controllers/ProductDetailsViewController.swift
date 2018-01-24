@@ -93,8 +93,9 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
             .disposed(by: disposeBag)
         
         viewModel.relatedItems.asObservable()
+            .skip(1)
             .subscribe(onNext: { [weak self] products in
-                self?.relatedItemsView.configure(with: products)
+                self?.populateRelatedItems(with: products)
             })
             .disposed(by: disposeBag)
         
@@ -130,6 +131,13 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         } else {
             detailImagesContainer.isHidden = true
         }
+    }
+    
+    private func populateRelatedItems(with products: [Product]) {
+        if products.count < kItemsPerPage {
+            relatedItemsHeaderView.hideSeeAllButton()
+        }
+        relatedItemsView.configure(with: products)
     }
     
     private func populateTitle(with product: Product) {
