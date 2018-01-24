@@ -402,6 +402,7 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
                                                         <integer key="value" value="1"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hideShowPasswordButton" value="NO"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xo5-F8-IbM" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
