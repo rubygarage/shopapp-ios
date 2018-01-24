@@ -549,7 +549,12 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     
     private func updateCustomer(with token: String, email: String, firstName: String?, lastName: String?, phone: String?, callback: @escaping RepoCallback<Customer>) {
         let query = customerUpdateQuery(with: token, email: email, firstName: firstName, lastName: lastName, phone: phone)
-        updateCustomer(with: query, callback: callback)
+        updateCustomer(with: query) { [weak self] (customer, error) in
+            if customer != nil {
+                self?.updateSessionDate(with: email)
+            }
+            callback(customer, error)
+        }
     }
     
     private func updateCustomer(with token: String, promo: Bool, callback: @escaping RepoCallback<Customer>) {
@@ -1326,6 +1331,11 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         let expiryString = String(describing: token.expiresAt.timeIntervalSinceNow)
         keyChain.set(expiryString, forKey: SessionData.expiryDate)
         UserDefaults.standard.set(true, forKey: SessionData.loggedInStatus)
+    }
+    
+    private func updateSessionDate(with email: String) {
+        let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
+        keyChain.set(email, forKey: SessionData.email)
     }
     
     private func sessionData() -> (token: String?, email: String?, expiryDate: Date?) {
