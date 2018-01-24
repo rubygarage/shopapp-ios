@@ -1325,6 +1325,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         keyChain.set(email, forKey: SessionData.email)
         let expiryString = String(describing: token.expiresAt.timeIntervalSinceNow)
         keyChain.set(expiryString, forKey: SessionData.expiryDate)
+        UserDefaults.standard.set(true, forKey: SessionData.loggedInStatus)
     }
     
     private func sessionData() -> (token: String?, email: String?, expiryDate: Date?) {
@@ -1341,9 +1342,14 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     private func removeSessionData() {
         let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
         keyChain.clear()
+        UserDefaults.standard.set(false, forKey: SessionData.loggedInStatus)
     }
     
     func isLoggedIn() -> Bool {
+        guard UserDefaults.standard.value(forKey: SessionData.loggedInStatus) as? Bool != nil else {
+            removeSessionData()
+            return false
+        }
         let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
         if keyChain.get(SessionData.accessToken) != nil, let expiryDate = keyChain.get(SessionData.expiryDate), keyChain.get(SessionData.email) != nil {
             let date = Date(timeIntervalSinceNow: TimeInterval(expiryDate)!)
