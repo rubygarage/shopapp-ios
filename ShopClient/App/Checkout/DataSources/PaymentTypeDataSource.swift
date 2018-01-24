@@ -7,16 +7,13 @@
 //
 
 import UIKit
-import PassKit
 
-enum PaymentTypeSection: Int {
-    case creditCard
-    case applePay
-    
-    static let allValues = PKPaymentAuthorizationController.canMakePayments() ? [creditCard, applePay] : [creditCard]
+protocol PaymentTypeDataSourceProtocol: class {
+    func selectedPaymentType() -> PaymentTypeSection?
 }
 
 class PaymentTypeDataSource: NSObject, UITableViewDataSource {
+    weak var delegate: PaymentTypeDataSourceProtocol?
     
     // MARK: - UITableViewDataSource
     
@@ -27,7 +24,8 @@ class PaymentTypeDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PaymentTypeTableViewCell.self), for: indexPath) as! PaymentTypeTableViewCell
         let type = PaymentTypeSection(rawValue: indexPath.row)!
-        cell.type = type
+        let selected = delegate?.selectedPaymentType() == type
+        cell.configure(with: type, selected: selected)
         return cell
     }
 }

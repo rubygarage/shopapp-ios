@@ -20,7 +20,6 @@ class CreditCardViewModel: BaseViewModel {
     var cardNumberErrorMessage = PublishSubject<String>()
     
     var billingAddres: Address!
-    var completion: CreditCardPaymentCompletion?
     
     var isCardDataValid: Observable<Bool> {
         return Observable.combineLatest(holderNameText.asObservable(), cardNumberText.asObservable(), monthExpirationText.asObservable(), yearExpirationText.asObservable(), securityCodeText.asObservable()) { holderName, cardNumber, monthExpiration, yearExpiration, securityCode in
@@ -44,7 +43,7 @@ class CreditCardViewModel: BaseViewModel {
     }
     
     private func submitAction() {
-        completion?(billingAddres, generateCreditCard())
+//        completion?(billingAddres, generateCreditCard())
     }
     
     private func processErrors() {

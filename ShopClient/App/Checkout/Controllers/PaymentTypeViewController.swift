@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol PaymentTypeViewControllerProtocol: class {
+    func didSelect(paymentType: PaymentTypeSection)
+}
+
 class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
     @IBOutlet private weak var tableView: UITableView!
     
@@ -17,8 +21,9 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
     // swiftlint:enable weak_delegate
     private var destinationTitle: String!
     
-    var creditCardCompletion: CreditCardPaymentCompletion?
     var checkout: Checkout!
+    var selectedType: PaymentTypeSection?
+    weak var delegate: PaymentTypeViewControllerProtocol?
     
     override func viewDidLoad() {
         viewModel = PaymentTypeViewModel()
@@ -42,6 +47,7 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
         tableView.register(paymentTypeNib, forCellReuseIdentifier: String(describing: PaymentTypeTableViewCell.self))
         
         tableDataSource = PaymentTypeDataSource()
+        tableDataSource.delegate = self
         tableView.dataSource = tableDataSource
         
         tableDelegate = PaymentTypeDelegate()
@@ -55,32 +61,41 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
         viewModel.setupApplePay()
     }
 
-    fileprivate func reloadData() {
+    fileprivate func reloadTable() {
         tableView.reloadData()
     }
     
     // MARK: - Segues
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let addressListViewController = segue.destination as? AddressListViewController {
-            addressListViewController.title = "ControllerTitle.BillingAddress".localizable
-            addressListViewController.addressListType = .billing
-            addressListViewController.destinationCreditCardCompletion = creditCardCompletion
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let addressListViewController = segue.destination as? AddressListViewController {
+//            addressListViewController.title = "ControllerTitle.BillingAddress".localizable
+//            addressListViewController.addressListType = .billing
+//        }
+//    }
 }
 
 // MARK: - PaymentTypeDelegateProtocol
 
 extension PaymentTypeViewController: PaymentTypeDelegateProtocol {
     func didSelectPayment(type: PaymentTypeSection) {
-        viewModel.selectedType = type
-        reloadData()
-        switch type {
-        case .applePay:
-            setupApplePay()
-        default:
-            performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
-        }
+        delegate?.didSelect(paymentType: type)
+        selectedType = type
+        reloadTable()
+        navigationController?.popViewController(animated: true)
+//        viewModel.selectedType = type
+//        reloadData()
+//        switch type {
+//        case .applePay:
+//            setupApplePay()
+//        default:
+//            performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
+//        }
+    }
+}
+
+extension PaymentTypeViewController: PaymentTypeDataSourceProtocol {
+    func selectedPaymentType() -> PaymentTypeSection? {
+        return selectedType
     }
 }

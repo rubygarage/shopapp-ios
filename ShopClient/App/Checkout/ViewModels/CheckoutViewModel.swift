@@ -6,6 +6,7 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
+import PassKit
 import RxSwift
 
 enum CheckoutSection: Int {
@@ -15,6 +16,13 @@ enum CheckoutSection: Int {
     case shippingOptions
     
     static let allValues = [cart, shippingAddress, payment, shippingOptions]
+}
+
+enum PaymentTypeSection: Int {
+    case creditCard
+    case applePay
+    
+    static let allValues = PKPaymentAuthorizationController.canMakePayments() ? [creditCard, applePay] : [creditCard]
 }
 
 class CheckoutViewModel: BaseViewModel {

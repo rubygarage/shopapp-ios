@@ -11,13 +11,7 @@ import UIKit
 class PaymentTypeTableViewCell: UITableViewCell {
     @IBOutlet private weak var paymentTypeLabel: UILabel!
     @IBOutlet private weak var paymentTypeImage: UIImageView!
-    @IBOutlet private weak var arrowImageView: UIImageView!
-    
-    var type: PaymentTypeSection = .creditCard {
-        didSet {
-            populateViews()
-        }
-    }
+    @IBOutlet private weak var selectedImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,7 +20,8 @@ class PaymentTypeTableViewCell: UITableViewCell {
         paymentTypeLabel.text = "Label.Payment.CreditCard".localizable
     }
     
-    private func populateViews() {
+    public func configure(with type: PaymentTypeSection, selected: Bool) {
+        
         var paymentTitle = ""
         var paymentImage = UIImage()
         switch type {
@@ -39,6 +34,10 @@ class PaymentTypeTableViewCell: UITableViewCell {
         }
         paymentTypeLabel.text = paymentTitle
         paymentTypeImage.image = paymentImage
-        arrowImageView.isHidden = type == .applePay
+        selectedImageView.image = selected ? #imageLiteral(resourceName: "radio_btn_selected") : #imageLiteral(resourceName: "radio_btn_disabled")
+    }
+    
+    private func populateViews() {
+        
     }
 }

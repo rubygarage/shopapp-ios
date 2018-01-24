@@ -192,6 +192,8 @@
 		617000E41FAA031E00DB898C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617000E31FAA031E00DB898C /* BaseViewController.swift */; };
 		6170420020175CEA0063E369 /* CheckoutSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617041FF20175CEA0063E369 /* CheckoutSuccessViewController.swift */; };
 		617042072018936D0063E369 /* DeleteCartProductsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617042062018936D0063E369 /* DeleteCartProductsUseCase.swift */; };
+		617042122018C3AC0063E369 /* CheckoutSelectedTypeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617042102018C3AC0063E369 /* CheckoutSelectedTypeTableCell.swift */; };
+		617042132018C3AC0063E369 /* CheckoutSelectedTypeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 617042112018C3AC0063E369 /* CheckoutSelectedTypeTableCell.xib */; };
 		61719B981FC2FAEB007B6ED0 /* CartTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61719B971FC2FAEB007B6ED0 /* CartTableDelegate.swift */; };
 		61719B9B1FC2FCE5007B6ED0 /* CartHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61719B9A1FC2FCE5007B6ED0 /* CartHeaderView.swift */; };
 		61719B9D1FC2FCEE007B6ED0 /* CartHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61719B9C1FC2FCEE007B6ED0 /* CartHeaderView.xib */; };
@@ -510,6 +512,8 @@
 		617000E31FAA031E00DB898C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		617041FF20175CEA0063E369 /* CheckoutSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutSuccessViewController.swift; sourceTree = "<group>"; };
 		617042062018936D0063E369 /* DeleteCartProductsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCartProductsUseCase.swift; sourceTree = "<group>"; };
+		617042102018C3AC0063E369 /* CheckoutSelectedTypeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutSelectedTypeTableCell.swift; sourceTree = "<group>"; };
+		617042112018C3AC0063E369 /* CheckoutSelectedTypeTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckoutSelectedTypeTableCell.xib; sourceTree = "<group>"; };
 		61719B971FC2FAEB007B6ED0 /* CartTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableDelegate.swift; sourceTree = "<group>"; };
 		61719B9A1FC2FCE5007B6ED0 /* CartHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartHeaderView.swift; sourceTree = "<group>"; };
 		61719B9C1FC2FCEE007B6ED0 /* CartHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartHeaderView.xib; sourceTree = "<group>"; };
@@ -776,6 +780,7 @@
 		0B24F0F8200750B200F13224 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
+				6170420F2018C38C0063E369 /* CheckoutSelectedTypeTableCell */,
 				0B24F0C920074D7500F13224 /* AddressListTableViewCell */,
 				0B24F0C320074D7400F13224 /* CheckoutPaymentAddTableCell */,
 				0B24F0C620074D7400F13224 /* CheckoutPaymentEditTableCell */,
@@ -1745,6 +1750,15 @@
 			path = CategoryCollectionViewCell;
 			sourceTree = "<group>";
 		};
+		6170420F2018C38C0063E369 /* CheckoutSelectedTypeTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				617042102018C3AC0063E369 /* CheckoutSelectedTypeTableCell.swift */,
+				617042112018C3AC0063E369 /* CheckoutSelectedTypeTableCell.xib */,
+			);
+			path = CheckoutSelectedTypeTableCell;
+			sourceTree = "<group>";
+		};
 		61719B991FC2FC9F007B6ED0 /* CartHeaderView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2184,6 +2198,7 @@
 				617DE1821FB5E9B4004EEF9A /* Account.storyboard in Resources */,
 				61A54BEC1FF5252600D4D151 /* AccountLoggedHeaderView.xib in Resources */,
 				0BEF52D01FF6469900E50080 /* ArticleTableViewCell.xib in Resources */,
+				617042132018C3AC0063E369 /* CheckoutSelectedTypeTableCell.xib in Resources */,
 				0B24F0D320074D7500F13224 /* CheckoutShippingAddressEditTableCell.xib in Resources */,
 				61B94C111F82409300B6887C /* ProductOptionHeaderView.xib in Resources */,
 				0BE6E4822006444100EAEC76 /* ProductOptionsCollectionViewCell.xib in Resources */,
@@ -2476,6 +2491,7 @@
 				611B70EA1F7C19E20056BAF9 /* SortModalDelegate.swift in Sources */,
 				0B24F0F420074F1A00F13224 /* CheckboxButton.swift in Sources */,
 				618A43831F9F4EF90066F053 /* Policy.swift in Sources */,
+				617042122018C3AC0063E369 /* CheckoutSelectedTypeTableCell.swift in Sources */,
 				0BA6305D1FFE56B3007088B8 /* OrderDetailsViewModel.swift in Sources */,
 				0B24F0F320074F1A00F13224 /* BlackButton.swift in Sources */,
 				61903DF21FB0A60100DA0C96 /* VariantOption.swift in Sources */,

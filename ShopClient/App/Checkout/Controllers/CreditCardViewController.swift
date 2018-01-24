@@ -18,7 +18,6 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
     @IBOutlet private weak var submitButton: BlackButton!
     
     var billingAddres: Address!
-    var completion: CreditCardPaymentCompletion?
     
     override func viewDidLoad() {
         viewModel = CreditCardViewModel()
@@ -39,7 +38,6 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
     
     private func setupViewModel() {
         viewModel.billingAddres = billingAddres
-        viewModel.completion = completion
         
         holderNameTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.holderNameText)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CheckoutCombinedProtocol: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, CheckoutPaymentAddCellProtocol, CheckoutTableDelegateProtocol, CheckoutCartTableViewCellDelegate, CheckoutPaymentEditTableCellProtocol, CheckoutShippingOptionsEnabledTableCellProtocol {}
+protocol CheckoutCombinedProtocol: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, CheckoutPaymentAddCellProtocol, CheckoutTableDelegateProtocol, CheckoutCartTableViewCellDelegate, CheckoutPaymentEditTableCellProtocol, CheckoutShippingOptionsEnabledTableCellProtocol, PaymentTypeViewControllerProtocol, CheckoutSelectedTypeTableCellProtocol {}
 
 protocol CheckoutTableDataSourceProtocol: class {
     func cartProducts() -> [CartProduct]
@@ -16,6 +16,7 @@ protocol CheckoutTableDataSourceProtocol: class {
     func billingAddress() -> Address?
     func creditCard() -> CreditCard?
     func availableShippingRates() -> [ShippingRate]?
+    func selectedPaymentType() -> PaymentTypeSection?
 }
 
 class CheckoutTableDataSource: NSObject, UITableViewDataSource {
@@ -82,8 +83,10 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     }
     
     private func paymentCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        if let address = delegate?.billingAddress(), let card = delegate?.creditCard() {
-            return paymentEditCell(with: tableView, indexPath: indexPath, billingAddress: address, creditCard: card)
+//        if let address = delegate?.billingAddress(), let card = delegate?.creditCard() {
+//            return paymentEditCell(with: tableView, indexPath: indexPath, billingAddress: address, creditCard: card)
+        if let selectedType = delegate?.selectedPaymentType() {
+            return paymentEditCell(with: tableView, indexPath: indexPath, selectedType: selectedType)
         } else {
             return paymentAddCell(with: tableView, indexPath: indexPath)
         }
@@ -95,10 +98,25 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
         return cell
     }
     
-    private func paymentEditCell(with tableView: UITableView, indexPath: IndexPath, billingAddress: Address, creditCard: CreditCard) -> CheckoutPaymentEditTableCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutPaymentEditTableCell.self), for: indexPath) as! CheckoutPaymentEditTableCell
+//    private func paymentEditCell(with tableView: UITableView, indexPath: IndexPath, billingAddress: Address, creditCard: CreditCard) -> CheckoutPaymentEditTableCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutPaymentEditTableCell.self), for: indexPath) as! CheckoutPaymentEditTableCell
+//        cell.delegate = delegate
+//        cell.configure(with: billingAddress, creditCard: creditCard)
+//        return cell
+//    }
+    private func paymentEditCell(with tableView: UITableView, indexPath: IndexPath, selectedType: PaymentTypeSection) -> UITableViewCell {
+        switch indexPath.row {
+        case 0:
+            return selectedPaymentTypeCell(with: tableView, indexPath: indexPath, selectedType: selectedType)
+        default:
+            return UITableViewCell()
+        }
+    }
+    
+    private func selectedPaymentTypeCell(with tableView: UITableView, indexPath: IndexPath, selectedType: PaymentTypeSection) -> CheckoutSelectedTypeTableCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutSelectedTypeTableCell.self), for: indexPath) as! CheckoutSelectedTypeTableCell
+        cell.configure(type: selectedType)
         cell.delegate = delegate
-        cell.configure(with: billingAddress, creditCard: creditCard)
         return cell
     }
     

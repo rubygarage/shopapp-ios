@@ -23,7 +23,6 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     private var destinationAddress: Address?
     private var destinationAddressFormCompletion: AddressFormCompletion!
     
-    var destinationCreditCardCompletion: CreditCardPaymentCompletion?
     var selectedAddress: Address?
     var completion: AddressListCompletion?
     var addressListType: AddressListType = .shipping
@@ -128,7 +127,6 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
             addressFormViewController.completion = destinationAddressFormCompletion
         } else if let creditCardViewController = segue.destination as? CreditCardViewController {
             creditCardViewController.billingAddres = destinationAddress
-            creditCardViewController.completion = destinationCreditCardCompletion
         }
     }
 }

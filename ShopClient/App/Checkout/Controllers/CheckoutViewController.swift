@@ -23,6 +23,8 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     private var destinationAddress: Address?
     private var selectedProductVariant: ProductVariant!
     
+    fileprivate var selectedType: PaymentTypeSection?
+    
     override func viewDidLoad() {
         viewModel = CheckoutViewModel()
         super.viewDidLoad()
@@ -52,6 +54,9 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         
         let paymentAddNib = UINib(nibName: String(describing: CheckoutPaymentAddTableCell.self), bundle: nil)
         tableView.register(paymentAddNib, forCellReuseIdentifier: String(describing: CheckoutPaymentAddTableCell.self))
+        
+        let paymentTypeNib = UINib(nibName: String(describing: CheckoutSelectedTypeTableCell.self), bundle: nil)
+        tableView?.register(paymentTypeNib, forCellReuseIdentifier: String(describing: CheckoutSelectedTypeTableCell.self))
         
         let paymentEditNib = UINib(nibName: String(describing: CheckoutPaymentEditTableCell.self), bundle: nil)
         tableView.register(paymentEditNib, forCellReuseIdentifier: String(describing: CheckoutPaymentEditTableCell.self))
@@ -99,6 +104,10 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         navigationController?.popToViewController(self, animated: true)
     }
     
+    fileprivate func reloadTable() {
+        tableView?.reloadData()
+    }
+    
     // MARK: - CheckoutTableDataSourceProtocol
     
     func cartProducts() -> [CartProduct] {
@@ -119,6 +128,10 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     
     func availableShippingRates() -> [ShippingRate]? {
         return viewModel.checkout.value?.availableShippingRates
+    }
+    
+    func selectedPaymentType() -> PaymentTypeSection? {
+        return selectedType
     }
     
     // MARK: - CheckoutShippingAddressAddCellProtocol
@@ -170,7 +183,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         performSegue(withIdentifier: SegueIdentifiers.toPaymentType, sender: self)
     }
     
-    // MARK: - CheckoutPaymentEditTableCellProtocol
+    // MARK: - CheckoutSelectedTypeTableCellProtocol
     
     func didTapEditPaymentType() {
         performSegue(withIdentifier: SegueIdentifiers.toPaymentType, sender: self)
@@ -207,13 +220,15 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             }
         } else if let paymentTypeViewController = segue.destination as? PaymentTypeViewController, let checkout = viewModel.checkout.value {
             paymentTypeViewController.checkout = checkout
-            paymentTypeViewController.creditCardCompletion = { [weak self] (billingAddress, card) in
-                self?.viewModel.billingAddress = billingAddress
-                self?.viewModel.creditCard = card
-                self?.tableView.reloadData()
-                self?.updatePlaceOrderButtonUI()
-                self?.returnFlowToSelf()
-            }
+            paymentTypeViewController.delegate = self
+            paymentTypeViewController.selectedType = selectedType
+//            paymentTypeViewController.creditCardCompletion = { [weak self] (billingAddress, card) in
+//                self?.viewModel.billingAddress = billingAddress
+//                self?.viewModel.creditCard = card
+//                self?.tableView.reloadData()
+//                self?.updatePlaceOrderButtonUI()
+//                self?.returnFlowToSelf()
+//            }
         } else if let navigationController = segue.destination as? NavigationController {
             if let checkoutSuccessViewController = navigationController.viewControllers.first as? CheckoutSuccessViewController, let orderId = viewModel.order?.id, let orderNumber = viewModel.order?.number {
                 checkoutSuccessViewController.orderId = orderId
@@ -228,5 +243,14 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
 extension CheckoutViewController: CheckoutShippingOptionsEnabledTableCellProtocol {
     func didSelect(shippingRate: ShippingRate) {
         viewModel.updateShippingRate(with: shippingRate)
+    }
+}
+
+// MARK: - PaymentTypeViewControllerProtocol
+
+extension CheckoutViewController: PaymentTypeViewControllerProtocol {
+    func didSelect(paymentType: PaymentTypeSection) {
+        selectedType = paymentType
+        reloadTable()
     }
 }
