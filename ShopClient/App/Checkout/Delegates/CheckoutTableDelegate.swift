@@ -13,7 +13,7 @@ protocol CheckoutTableDelegateProtocol: class {
 }
 
 class CheckoutTableDelegate: NSObject, UITableViewDelegate {
-    weak var delegate: (SeeAllHeaderViewProtocol & CheckoutTableDelegateProtocol)?
+    weak var delegate: CheckoutTableDelegateProtocol?
     
     // MARK: - UITableViewDelegate
     
@@ -28,7 +28,6 @@ class CheckoutTableDelegate: NSObject, UITableViewDelegate {
         switch section {
         case CheckoutSection.cart.rawValue:
             let view = SeeAllTableHeaderView(type: .myCart, separatorVisible: true)
-            view.delegate = delegate
             view.hideSeeAllButton()
             return view
         case CheckoutSection.shippingAddress.rawValue:

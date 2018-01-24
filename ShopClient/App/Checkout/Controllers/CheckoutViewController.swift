@@ -11,7 +11,7 @@ import UIKit
 private let kPlaceOrderHeightVisible: CGFloat = 50
 private let kPlaceOrderHeightInvisible: CGFloat = 0
 
-class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeaderViewProtocol, CheckoutCombinedProtocol {
+class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCombinedProtocol {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var placeOrderHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var placeOrderButton: UIButton!
@@ -67,7 +67,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
         tableView?.dataSource = tableDataSource
         
         tableDelegate = CheckoutTableDelegate()
-        tableDelegate.delegate = self
         tableView?.delegate = tableDelegate
         
         tableView?.contentInset = TableView.defaultContentInsets
@@ -163,14 +162,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
     
     private func returnFlowToSelf() {
         navigationController?.popToViewController(self, animated: true)
-    }
-    
-    // MARK: - SeeAllHeaderViewProtocol
-    
-    func didTapSeeAll(type: SeeAllViewType) {
-        if type == .myCart {
-            // TODO:
-        }
     }
     
     // MARK: - CheckoutPaymentAddCellProtocol
