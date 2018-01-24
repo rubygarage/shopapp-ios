@@ -80,14 +80,6 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
     }
 }
 
-// MARK: - ErrorViewProtocol
-
-extension OrdersListViewController {
-    func didTapTryAgain() {
-        loadData()
-    }
-}
-
 // MARK: - OrdersListTableDataSourceProtocol
 
 extension OrdersListViewController: OrdersListTableDataSourceProtocol {

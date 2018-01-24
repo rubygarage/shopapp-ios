@@ -14,7 +14,7 @@ enum AddressListType {
 }
 
 class AddressListViewController: BaseViewController<AddressListViewModel>, AddressListDataSourceProtocol, AddressListTableViewCellProtocol, AddressListHeaderViewProtocol {
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     
     private var tableDataSource: AddressListDataSource!
     // swiftlint:disable weak_delegate

@@ -13,8 +13,8 @@ protocol PaymentTypeTableCellProtocol: class {
 }
 
 class PaymentCreditCardTableCell: UITableViewCell {
-    @IBOutlet weak var paymentTypeLabel: UILabel!
-    @IBOutlet weak var paymentSelectButton: UIButton!
+    @IBOutlet private weak var paymentTypeLabel: UILabel!
+    @IBOutlet private weak var paymentSelectButton: UIButton!
     
     weak var delegate: PaymentTypeTableCellProtocol?
     

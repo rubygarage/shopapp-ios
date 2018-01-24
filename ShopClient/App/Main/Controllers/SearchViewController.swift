@@ -11,7 +11,7 @@ import UIKit
 private let kAnimationDuration: TimeInterval = 0.3
 
 class SearchViewController: GridCollectionViewController<SearchViewModel>, SearchTitleViewProtocol, SearchCollectionDelegateProtocol, SearchCollectionDataSourceProtocol {
-    @IBOutlet weak var categoriesCollectionView: UICollectionView!
+    @IBOutlet private weak var categoriesCollectionView: UICollectionView!
     
     private let titleView = SearchTitleView()
     private var categoriesDataSource: SearchCollectionDataSource!
@@ -78,7 +78,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     }
     
     private func setupViewModel() {
-        titleView.searchTextField.rx.text.map({ $0 ?? "" })
+        titleView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.searchPhrase)
             .disposed(by: disposeBag)
         
@@ -170,11 +170,5 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
             selectedCategory = viewModel.categories.value[index]
             performSegue(withIdentifier: SegueIdentifiers.toCategory, sender: self)
         }
-    }
-    
-    // MARK: - ErrorViewProtocol
-    
-    func didTapTryAgain() {
-        loadData()
     }
 }

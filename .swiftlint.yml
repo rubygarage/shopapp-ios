@@ -95,7 +95,7 @@ whitelist_rules:
 #  - pattern_matching_keywords
 #  - prefixed_toplevel_constant
 #  - private_action
-#  - private_outlet
+  - private_outlet
   - private_over_fileprivate
   - private_unit_test
 #  - prohibited_super_call
@@ -149,4 +149,3 @@ whitelist_rules:
 
 included:
   - ShopClient
-

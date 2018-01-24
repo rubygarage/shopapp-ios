@@ -24,25 +24,25 @@ private let kProductDescriptionHiddenHeight = CGFloat(0.0)
 private let kProductDescriptionAdditionalHeight = CGFloat(40.0)
 
 class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerProtocol, ProductOptionsControllerProtocol, SeeAllHeaderViewProtocol, LastArrivalsCellDelegate {
-    @IBOutlet var contentView: TPKeyboardAvoidingScrollView!
-    @IBOutlet weak var detailImagesContainer: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionStateImageView: UIImageView!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var quantityTitleLabel: UILabel!
-    @IBOutlet weak var quantityTextField: UITextField!
-    @IBOutlet weak var quantityUnderlineView: UIView!
-    @IBOutlet weak var addToCartButton: UIButton!
-    @IBOutlet weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var descriptionContainerViewHeightConstraint: NSLayoutConstraint! {
+    @IBOutlet private var contentView: TPKeyboardAvoidingScrollView!
+    @IBOutlet private weak var detailImagesContainer: UIView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var descriptionStateImageView: UIImageView!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var priceLabel: UILabel!
+    @IBOutlet private weak var quantityTitleLabel: UILabel!
+    @IBOutlet private weak var quantityTextField: UITextField!
+    @IBOutlet private weak var quantityUnderlineView: UIView!
+    @IBOutlet private weak var addToCartButton: UIButton!
+    @IBOutlet private weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var descriptionContainerViewHeightConstraint: NSLayoutConstraint! {
         didSet {
             descriptionContainerViewHeightConstraint.constant = kProductDescriptionHiddenHeight
         }
     }
-    @IBOutlet weak var bottomView: UIView!
-    @IBOutlet weak var relatedItemsHeaderView: SeeAllTableHeaderView!
-    @IBOutlet weak var relatedItemsView: LastArrivalsTableViewCell!
+    @IBOutlet private weak var bottomView: UIView!
+    @IBOutlet private weak var relatedItemsHeaderView: SeeAllTableHeaderView!
+    @IBOutlet private weak var relatedItemsView: LastArrivalsTableViewCell!
     
     var productId: String!
     var productVariant: ProductVariant!
@@ -270,11 +270,6 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
             productDetailsViewController.productId = selectedProduct.id
             navigationController?.pushViewController(productDetailsViewController, animated: true)
         }
-    }
-    
-    // MARK: - ErrorViewProtocol
-    func didTapTryAgain() {
-        loadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

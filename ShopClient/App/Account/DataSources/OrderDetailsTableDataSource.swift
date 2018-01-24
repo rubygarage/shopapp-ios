@@ -42,7 +42,7 @@ extension OrdersDetailsTableDataSource: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self), for: indexPath) as! CheckoutShippingAddressEditTableCell
         if let address = delegate?.order()?.shippingAddress {
             cell.configure(with: address)
-            cell.editButton.isHidden = true
+            cell.setEditButtonVisible(false)
         }
         return cell
     }

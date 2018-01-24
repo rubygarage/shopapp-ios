@@ -9,10 +9,10 @@
 import UIKit
 
 class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel> {
-    @IBOutlet weak var articleImageView: UIImageView!
-    @IBOutlet weak var articleTitleLabel: UILabel!
-    @IBOutlet weak var authorNameLabel: UILabel!
-    @IBOutlet weak var articleContentLabel: UILabel!
+    @IBOutlet private weak var articleImageView: UIImageView!
+    @IBOutlet private weak var articleTitleLabel: UILabel!
+    @IBOutlet private weak var authorNameLabel: UILabel!
+    @IBOutlet private weak var articleContentLabel: UILabel!
     
     var articleId: String!
     
@@ -26,11 +26,9 @@ class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel> 
     
     private func setupViewModel() {
         viewModel.articleId = articleId
-        
-        errorView.tryAgainButton.rx.tap
-            .bind(to: viewModel.loadData)
-            .disposed(by: disposeBag)
-        
+
+        errorView.delegate = self
+
         viewModel.data
             .subscribe(onNext: { [weak self] article in
                 self?.populateViews(with: article)
@@ -38,14 +36,14 @@ class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel> 
             .disposed(by: disposeBag)
     }
     
-    private func loadData() {
-        viewModel.loadArticle()
-    }
-    
     private func populateViews(with article: Article) {
         articleImageView.set(image: article.image)
         articleTitleLabel.text = article.title
         authorNameLabel.text = article.author?.fullName
         articleContentLabel.text = article.content
+    }
+
+    fileprivate func loadData() {
+        viewModel.loadData()
     }
 }

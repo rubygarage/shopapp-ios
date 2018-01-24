@@ -14,12 +14,6 @@ class OrderDetailsViewModel: BaseViewModel {
     var orderId: String!
     var data = Variable<Order?>(nil)
     
-    var loadData: AnyObserver<()> {
-        return AnyObserver { [weak self] _ in
-            self?.loadOrder()
-        }
-    }
-    
     // MARK: - Internal
     
     func productVariant(at index: Int) -> ProductVariant? {
@@ -43,5 +37,11 @@ class OrderDetailsViewModel: BaseViewModel {
                 self?.state.onNext(.content)
             }
         }
+    }
+
+    // MARK: - BaseViewModel
+
+    override func tryAgain() {
+        loadOrder()
     }
 }

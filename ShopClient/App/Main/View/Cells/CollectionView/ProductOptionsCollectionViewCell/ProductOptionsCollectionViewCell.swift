@@ -13,7 +13,7 @@ protocol ProductOptionsCellDelegate: class {
 }
 
 class ProductOptionsCollectionViewCell: UICollectionViewCell, ProductOptionCollectionDataSourceProtocol, ProductOptionCollectionDelegateProtocol {
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     private var dataSource: ProductOptionCollectionDataSource!
     // swiftlint:disable weak_delegate

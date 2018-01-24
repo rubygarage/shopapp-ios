@@ -39,11 +39,11 @@ class SignInViewController: BaseViewController<SignInViewModel> {
     }
     
     private func setupViewModel() {
-        emailTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        emailTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.emailText)
             .disposed(by: disposeBag)
         
-        passwordTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        passwordTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.passwordText)
             .disposed(by: disposeBag)
         

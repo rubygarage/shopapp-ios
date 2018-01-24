@@ -13,8 +13,8 @@ protocol AddressListHeaderViewProtocol: class {
 }
 
 class AddressListTableHeaderView: UIView {
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var addNewAddressButton: BlackButton!
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var addNewAddressButton: BlackButton!
     
     weak var delegate: AddressListHeaderViewProtocol?
     

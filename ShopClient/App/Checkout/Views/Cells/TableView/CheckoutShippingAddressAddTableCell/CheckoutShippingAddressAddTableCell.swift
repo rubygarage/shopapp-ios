@@ -13,7 +13,7 @@ protocol CheckoutShippingAddressAddCellProtocol: class {
 }
 
 class CheckoutShippingAddressAddTableCell: UITableViewCell {
-    @IBOutlet weak var addNewAddressButton: BlackButton!
+    @IBOutlet private weak var addNewAddressButton: BlackButton!
     
     weak var delegate: CheckoutShippingAddressAddCellProtocol?
     

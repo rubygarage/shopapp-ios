@@ -13,12 +13,11 @@ private let kUnderlineViewAlphaHighlighted: CGFloat = 1
 private let kUnderlineViewHeightDefault: CGFloat = 1
 private let kUnderlineViewHeightHighlighted: CGFloat = 2
 
-class ExpiryDatePicker: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var dateTextField: UITextField!
-    @IBOutlet weak var underlineView: UIView!
-    @IBOutlet weak var underlineViewHeight: NSLayoutConstraint!
-    
+class ExpiryDatePicker: TextFieldWrapper, UIPickerViewDataSource, UIPickerViewDelegate {
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var underlineView: UIView!
+    @IBOutlet private weak var underlineViewHeight: NSLayoutConstraint!
+
     var pickerView = UIPickerView()
     var placeholder: String {
         return ""
@@ -54,9 +53,9 @@ class ExpiryDatePicker: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         pickerView.dataSource = self
         pickerView.delegate = self
         pickerView.backgroundColor = UIColor.white
-        dateTextField.tintColor = UIColor.clear
-        dateTextField?.attributedPlaceholder = NSAttributedString(string: placeholder.uppercased(), attributes: [NSForegroundColorAttributeName: UIColor.black])
-        dateTextField?.inputView = pickerView
+        textField.tintColor = UIColor.clear
+        textField?.attributedPlaceholder = NSAttributedString(string: placeholder.uppercased(), attributes: [NSForegroundColorAttributeName: UIColor.black])
+        textField?.inputView = pickerView
         underlineView.alpha = kUnderlineViewAlphaDefault
         addToolbar()
     }
@@ -74,13 +73,13 @@ class ExpiryDatePicker: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         toolBar.setItems([spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         
-        dateTextField.inputAccessoryView = toolBar
+        textField.inputAccessoryView = toolBar
     }
     
     // MARK: - actions
     @objc private func doneTapped() {
-        dateTextField.text = data[pickerView.selectedRow(inComponent: 0)]
-        dateTextField.endEditing(true)
+        textField.text = data[pickerView.selectedRow(inComponent: 0)]
+        textField.endEditing(true)
     }
     
     // MARK: - UIPickerViewDataSource

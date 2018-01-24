@@ -13,10 +13,10 @@ private let kCollectionViewMargin: CGFloat = 7
 private let kCellRatio: CGFloat = 210 / 185
 
 class GridCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var detailsView: UIView!
-    @IBOutlet weak var productImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet private weak var detailsView: UIView!
+    @IBOutlet private weak var productImageView: UIImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var priceLabel: UILabel!
 
     public func configure(with item: Product) {
         productImageView.set(image: item.images?.first)

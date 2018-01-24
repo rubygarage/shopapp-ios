@@ -28,16 +28,15 @@ private let kUnderlineMarginLeft: CGFloat = 40
 private let kUnderlineMarginRight: CGFloat = 10
 private let kBarItemWidth: CGFloat = 32
 
-class SearchTitleView: UIView, UITextFieldDelegate {
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var searchTextField: UITextField!
-    @IBOutlet weak var underLineView: UIView!
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var cartButtonView: UIView!
-    @IBOutlet weak var underlineLeftMargin: NSLayoutConstraint!
-    @IBOutlet weak var underlineRightMargin: NSLayoutConstraint!
-    @IBOutlet weak var clearButton: UIButton!
-    
+class SearchTitleView: TextFieldWrapper, UITextFieldDelegate {
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var underLineView: UIView!
+    @IBOutlet private weak var backButton: UIButton!
+    @IBOutlet private weak var cartButtonView: UIView!
+    @IBOutlet private weak var underlineLeftMargin: NSLayoutConstraint!
+    @IBOutlet private weak var underlineRightMargin: NSLayoutConstraint!
+    @IBOutlet private weak var clearButton: UIButton!
+
     weak var delegate: SearchTitleViewProtocol?
     
     var state: SearchState = .default {
@@ -80,15 +79,15 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     }
     
     private func setupViews() {
-        searchTextField.delegate = self
+        textField.delegate = self
         clearButton.setTitle("Button.Clear".localizable, for: .normal)
     }
     
     private func updateViews(animated: Bool) {
         let animationDuration = animated ? kAnimationDuration : 0
         UIView.transition(with: contentView, duration: animationDuration, options: .transitionCrossDissolve, animations: {
-            self.searchTextField.attributedPlaceholder = self.state == .default ? self.attributedPlaceholderDefault() : self.attributedPlaceholderSelected()
-            self.searchTextField.textAlignment = self.state == .editing ? .left : .center
+            self.textField.attributedPlaceholder = self.state == .default ? self.attributedPlaceholderDefault() : self.attributedPlaceholderSelected()
+            self.textField.textAlignment = self.state == .editing ? .left : .center
         })
         
         UIView.animate(withDuration: kAnimationDuration) {
@@ -106,7 +105,7 @@ class SearchTitleView: UIView, UITextFieldDelegate {
         let attributedPlaceholder = NSMutableAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: UIColor.black])
         let textAttachment = NSTextAttachment()
         textAttachment.image = #imageLiteral(resourceName: "search")
-        let deltaY = (searchTextField.font!.capHeight - #imageLiteral(resourceName: "search").size.height).rounded() / 2
+        let deltaY = (textField.font!.capHeight - #imageLiteral(resourceName: "search").size.height).rounded() / 2
         textAttachment.bounds = CGRect(x: 0, y: deltaY, width: #imageLiteral(resourceName: "search").size.width, height: #imageLiteral(resourceName: "search").size.height)
         let attrStringWithImage = NSAttributedString(attachment: textAttachment)
         attributedPlaceholder.replaceCharacters(in: NSRange(location: 0, length: 0), with: attrStringWithImage)
@@ -119,7 +118,7 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     }
     
     private func updateClearButtonIfNeeded() {
-        let text = searchTextField.text ?? ""
+        let text = textField.text ?? ""
         let clearButtonHidden = !(text.isEmpty == false && state == .editing)
         if clearButton.isHidden != clearButtonHidden {
             UIView.transition(with: contentView, duration: kAnimationDuration, options: .transitionCrossDissolve, animations: {
@@ -146,19 +145,19 @@ class SearchTitleView: UIView, UITextFieldDelegate {
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
         endEditing(true)
-        searchTextField.text = nil
+        textField.text = nil
         delegate?.didTapBack()
     }
     
     @IBAction func clearButtonTapped(_ sender: UIButton) {
-        searchTextField.text = nil
+        textField.text = nil
         updateClearButtonIfNeeded()
         delegate?.didTapClear()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first, touch.view != searchTextField {
-            searchTextField.endEditing(true)
+        if let touch = touches.first, touch.view != textField {
+            textField.endEditing(true)
         }
     }
     

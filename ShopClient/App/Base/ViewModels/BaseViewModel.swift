@@ -10,4 +10,6 @@ import RxSwift
 
 class BaseViewModel {
     var state = PublishSubject<ViewState>()
+
+    func tryAgain() {}
 }

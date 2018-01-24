@@ -9,8 +9,8 @@
 import UIKit
 
 class SortModalTableViewCell: UITableViewCell {
-    @IBOutlet weak var sortItemTitleLabel: UILabel!
-    @IBOutlet weak var selectedIndicatorView: UIView!
+    @IBOutlet private weak var sortItemTitleLabel: UILabel!
+    @IBOutlet private weak var selectedIndicatorView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

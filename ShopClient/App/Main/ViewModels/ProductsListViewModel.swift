@@ -39,4 +39,10 @@ class ProductsListViewModel: GridCollectionViewModel {
             self?.canLoadMore = products?.count ?? 0 == kItemsPerPage
         }
     }
+
+    // MARK: - BaseViewModel
+
+    override func tryAgain() {
+        reloadData()
+    }
 }

@@ -64,11 +64,7 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
     
     private func setupViewModel() {
         viewModel.orderId = orderId
-        
-        errorView.tryAgainButton.rx.tap
-            .bind(to: viewModel.loadData)
-            .disposed(by: disposeBag)
-        
+
         viewModel.data.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.tableView.reloadData()

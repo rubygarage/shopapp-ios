@@ -16,11 +16,11 @@ let kSortTableCellHeight: CGFloat = 40
 let kSortingViewCornerRadius: CGFloat = 7
 
 class SortModalViewController: UIViewController, SortModalDataSourceProtocol, SortModalDelegateProtocol {
-    @IBOutlet weak var backgroundView: UIView!
-    @IBOutlet weak var sortByLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var sortButton: UIButton!
+    @IBOutlet private weak var backgroundView: UIView!
+    @IBOutlet private weak var sortByLabel: UILabel!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var sortButton: UIButton!
     
     var sortItems = [String]()
     var selectedSortItem = String()

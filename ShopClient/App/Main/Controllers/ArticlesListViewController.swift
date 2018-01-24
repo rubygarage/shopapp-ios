@@ -94,10 +94,4 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
             performSegue(withIdentifier: SegueIdentifiers.toArticleDetails, sender: self)
         }
     }
-    
-    // MARK: - ErrorViewProtocol
-    
-    func didTapTryAgain() {
-        loadData()
-    }
 }

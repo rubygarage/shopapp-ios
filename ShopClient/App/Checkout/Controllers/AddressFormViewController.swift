@@ -9,18 +9,18 @@
 import RxSwift
 
 class AddressFormViewController: BaseViewController<AddressFormViewModel> {
-    @IBOutlet weak var countryTextFieldView: InputTextFieldView!
-    @IBOutlet weak var nameTextFieldView: InputTextFieldView!
-    @IBOutlet weak var lastNameTextFieldView: InputTextFieldView!
-    @IBOutlet weak var addressTextFieldView: InputTextFieldView!
-    @IBOutlet weak var addressOptionalTextFieldView: InputTextFieldView!
-    @IBOutlet weak var cityTextFieldView: InputTextFieldView!
-    @IBOutlet weak var stateTextFieldView: InputTextFieldView!
-    @IBOutlet weak var zipCodeTextFieldView: InputTextFieldView!
-    @IBOutlet weak var phoneTextFieldView: InputTextFieldView!
-    @IBOutlet weak var submitButton: BlackButton!
-    @IBOutlet weak var defaultAddressButton: CheckboxButton!
-    @IBOutlet weak var checkboxTitleLabel: UILabel!
+    @IBOutlet private weak var countryTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var nameTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var lastNameTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var addressTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var addressOptionalTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var cityTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var stateTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var zipCodeTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var phoneTextFieldView: InputTextFieldView!
+    @IBOutlet private weak var submitButton: BlackButton!
+    @IBOutlet private weak var defaultAddressButton: CheckboxButton!
+    @IBOutlet private weak var checkboxTitleLabel: UILabel!
     
     var address: Address?
     var completion: AddressFormCompletion?
@@ -54,39 +54,39 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
         viewModel.address = address
         viewModel.completion = completion
         
-        countryTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        countryTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.countryText)
             .disposed(by: disposeBag)
         
-        nameTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        nameTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.firstNameText)
             .disposed(by: disposeBag)
         
-        lastNameTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        lastNameTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.lastNameText)
             .disposed(by: disposeBag)
         
-        addressTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        addressTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.addressText)
             .disposed(by: disposeBag)
         
-        addressOptionalTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        addressOptionalTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.addressOptionalText)
             .disposed(by: disposeBag)
         
-        cityTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        cityTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.cityText)
             .disposed(by: disposeBag)
         
-        stateTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        stateTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.stateText)
             .disposed(by: disposeBag)
         
-        zipCodeTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        zipCodeTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.zipText)
             .disposed(by: disposeBag)
         
-        phoneTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        phoneTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.phoneText)
             .disposed(by: disposeBag)
         
@@ -119,15 +119,15 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     
     private func populateViewsIfNeeded() {
         if let address = viewModel.address {
-            countryTextFieldView.textField.text = address.country
-            nameTextFieldView.textField.text = address.firstName
-            lastNameTextFieldView.textField.text = address.lastName
-            addressTextFieldView.textField.text = address.address
-            addressOptionalTextFieldView.textField.text = address.secondAddress
-            cityTextFieldView.textField.text = address.city
-            stateTextFieldView.textField.text = address.state
-            zipCodeTextFieldView.textField.text = address.zip
-            phoneTextFieldView.textField.text = address.phone
+            countryTextFieldView.text = address.country
+            nameTextFieldView.text = address.firstName
+            lastNameTextFieldView.text = address.lastName
+            addressTextFieldView.text = address.address
+            addressOptionalTextFieldView.text = address.secondAddress
+            cityTextFieldView.text = address.city
+            stateTextFieldView.text = address.state
+            zipCodeTextFieldView.text = address.zip
+            phoneTextFieldView.text = address.phone
             viewModel.updateFields()
         }
     }

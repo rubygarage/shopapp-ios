@@ -59,23 +59,23 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
     }
     
     private func setupViewModel() {
-        emailTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        emailTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.emailText)
             .disposed(by: disposeBag)
         
-        nameTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        nameTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.firstNameText)
             .disposed(by: disposeBag)
         
-        lastNameTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        lastNameTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.lastNameText)
             .disposed(by: disposeBag)
         
-        passwordTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        passwordTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.passwordText)
             .disposed(by: disposeBag)
         
-        phoneTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        phoneTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.phoneText)
             .disposed(by: disposeBag)
         

@@ -43,13 +43,13 @@ class ForgotPasswordViewController: BaseViewController<ForgotPasswordViewModel> 
         emailTextFieldView.placeholder = "Placeholder.Email".localizable.required.uppercased()
         forgotPasswordButton.setTitle("Button.Submit".localizable.uppercased(), for: .normal)
         
-        emailTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        emailTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: linkViewController.emailText)
             .disposed(by: disposeBag)
     }
     
     private func setupViewModel() {
-        emailTextFieldView.textField.rx.text.map({ $0 ?? "" })
+        emailTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.emailText)
             .disposed(by: disposeBag)
         

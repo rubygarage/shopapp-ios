@@ -22,13 +22,13 @@ enum ViewState {
 private let kToastBottomOffset: CGFloat = 80
 private let kToastDuration: TimeInterval = 3
 
-class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol {
-    let disposeBag = DisposeBag()
+class BaseViewController<T: BaseViewModel>: UIViewController {
+    private(set) var disposeBag = DisposeBag()
+    private(set) var loadingView = LoadingView()
+    private(set) var errorView = ErrorView()
     
     var viewModel: T!
-    var loadingView = LoadingView()
-    var errorView = ErrorView()
-    
+
     var emptyDataView: UIView {
         return UIView()
     }
@@ -138,5 +138,13 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewProtocol 
     func showToast(with message: String?) {
         let toast = Toast(text: message, duration: kToastDuration)
         toast.show()
+    }
+}
+
+// MARK: - ErrorViewDelegate
+
+extension BaseViewController: ErrorViewDelegate {
+    func didTapTryAgain() {
+        viewModel.tryAgain()
     }
 }

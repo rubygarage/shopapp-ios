@@ -8,18 +8,17 @@
 
 import UIKit
 
-@objc protocol ErrorViewProtocol {
-    @objc optional func didTapTryAgain()
+protocol ErrorViewDelegate: class {
+    func didTapTryAgain()
 }
 
 class ErrorView: UIView {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var errorTextLabel: UILabel!
     @IBOutlet private weak var errorImageView: UIImageView!
+    @IBOutlet private weak var tryAgainButton: UIButton!
     
-    @IBOutlet weak var tryAgainButton: UIButton!
-    
-    weak var delegate: ErrorViewProtocol?
+    weak var delegate: ErrorViewDelegate?
     
     var error: RepoError? {
         didSet {
@@ -57,7 +56,7 @@ class ErrorView: UIView {
     
     // MARK: - Actions
     
-    @IBAction func tryAgainTapped(_ sender: UIButton) {
-        delegate?.didTapTryAgain?()
+    @IBAction private func tryAgainTapped(_ sender: UIButton) {
+        delegate?.didTapTryAgain()
     }
 }

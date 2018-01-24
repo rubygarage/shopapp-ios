@@ -8,6 +8,9 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
 enum InputTextFieldViewState {
     case normal
     case highlighted
@@ -31,14 +34,12 @@ private let kUnderlineViewHeightDefault: CGFloat = 1
 private let kUnderlineViewHeightHighlighted: CGFloat = 2
 private let kErrorColor = UIColor(displayP3Red: 0.89, green: 0.31, blue: 0.31, alpha: 1)
 
-class InputTextFieldView: UIView {
+class InputTextFieldView: TextFieldWrapper {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var underlineView: UIView!
     @IBOutlet private weak var underlineViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var errorMesageLabel: UILabel!
     @IBOutlet private weak var showPasswordButton: UIButton!
-    
-    @IBOutlet weak var textField: UITextField!
     
     @IBInspectable var keyboardType: Int = InputTextFieldViewKeybordType.name.rawValue {
         didSet {

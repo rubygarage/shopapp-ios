@@ -34,7 +34,14 @@ class ProductDetailsViewModel: BaseViewModel {
     private var selectedOptions = [SelectedOption]()
     private var selectedProductVariant: ProductVariant?
 
-    // MARK: - public
+    // MARK: - BaseViewModel
+
+    override func tryAgain() {
+        loadData()
+    }
+
+    // MARK: - Public
+
     public func loadData() {
         state.onNext(.loading(showHud: true))
         productUseCase.getProduct(with: productId) { [weak self] (product, error) in

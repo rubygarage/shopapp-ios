@@ -12,6 +12,12 @@ class OrdersListViewModel: BasePaginationViewModel {
     private let orderListUseCase = OrderListUseCase()
     
     var items = Variable<[Order]>([Order]())
+
+    // MARK: - BaseViewModel
+
+    override func tryAgain() {
+        reloadData()
+    }
     
     // MARK: - Private
     

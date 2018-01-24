@@ -9,18 +9,19 @@
 import RxSwift
 
 class HomeViewModel: BasePaginationViewModel {
-    var data = Variable<(latestProducts: [Product], popularProducts: [Product], articles: [Article])>(latestProducts: [Product](), popularProducts: [Product](), articles: [Article]())
-    
+    private let disposeBag = DisposeBag()
     private let articleListUseCase = ArticleListUseCase()
     private let productListUseCase = ProductListUseCase()
-    
+
+    var data = Variable<(latestProducts: [Product], popularProducts: [Product], articles: [Article])>(latestProducts: [Product](), popularProducts: [Product](), articles: [Article]())
+
     override init() {
         super.init()
         
         canLoadMore = false
     }
     
-    public func loadData(with disposeBag: DisposeBag) {
+    func loadData() {
         let showHud = data.value.latestProducts.isEmpty && data.value.popularProducts.isEmpty && data.value.articles.isEmpty
         state.onNext(.loading(showHud: showHud))
         Single.zip(productsSingle, popularSingle, articlesSingle)
@@ -76,5 +77,11 @@ class HomeViewModel: BasePaginationViewModel {
             }
             return Disposables.create()
         })
+    }
+
+    // MARK: - BaseViewModel
+
+    override func tryAgain() {
+        loadData()
     }
 }

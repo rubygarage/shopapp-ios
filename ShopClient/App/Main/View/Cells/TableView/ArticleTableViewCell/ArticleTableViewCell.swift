@@ -9,11 +9,11 @@
 import UIKit
 
 class ArticleTableViewCell: UITableViewCell {
-    @IBOutlet weak var articleImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var authorLabel: UILabel!
-    @IBOutlet weak var separatorView: UIView!
+    @IBOutlet private weak var articleImageView: UIImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var authorLabel: UILabel!
+    @IBOutlet private weak var separatorView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

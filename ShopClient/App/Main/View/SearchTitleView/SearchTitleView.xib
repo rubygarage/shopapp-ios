@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +16,7 @@
                 <outlet property="cartButtonView" destination="Tio-2b-Alh" id="jcB-tC-VF8"/>
                 <outlet property="clearButton" destination="C7k-ft-Fxc" id="Dbc-RI-6W7"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="0T5-CA-rtx"/>
-                <outlet property="searchTextField" destination="JgY-Vb-rAM" id="D6c-ZJ-PYO"/>
+                <outlet property="textField" destination="JgY-Vb-rAM" id="KWL-7h-2Zv"/>
                 <outlet property="underLineView" destination="5Ab-xH-1Xy" id="w0m-we-MNW"/>
                 <outlet property="underlineLeftMargin" destination="ftg-td-fVt" id="w9l-jl-CzK"/>
                 <outlet property="underlineRightMargin" destination="h5p-pt-Hro" id="gWM-fO-LKa"/>
