@@ -51,6 +51,19 @@ extension DAO {
         })
     }
     
+    func deleteAllProductsFromCart(with callback: @escaping RepoCallback<Bool>) {
+        CoreStore.perform(asynchronous: { (transaction) in
+            transaction.deleteAll(From<CartProductEntity>())
+        }, completion: { (result) in
+            switch result {
+            case .success:
+                callback(true, nil)
+            case .failure(let error):
+                callback(false, RepoError(with: error))
+            }
+        })
+    }
+    
     func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<CartProduct>) {
         let predicate = getPredicate(with: productVariantId)
         CoreStore.perform(asynchronous: { (transaction) in

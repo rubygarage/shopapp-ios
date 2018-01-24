@@ -21,6 +21,10 @@ extension Repository: CartRepositoryInterface {
         DAOCore?.deleteProductFromCart(with: productVariantId, callback: callback)
     }
     
+    func deleteAllProductsFromCart(with callback: @escaping RepoCallback<Bool>) {
+        DAOCore?.deleteAllProductsFromCart(with: callback)
+    }
+    
     func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<CartProduct>) {
         DAOCore?.changeCartProductQuantity(with: productVariantId, quantity: quantity, callback: callback)
     }

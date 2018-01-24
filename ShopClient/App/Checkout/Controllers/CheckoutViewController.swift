@@ -11,7 +11,7 @@ import UIKit
 private let kPlaceOrderHeightVisible: CGFloat = 50
 private let kPlaceOrderHeightInvisible: CGFloat = 0
 
-class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeaderViewProtocol, CheckoutCombinedProtocol {
+class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCombinedProtocol {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var placeOrderHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var placeOrderButton: UIButton!
@@ -67,7 +67,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
         tableView?.dataSource = tableDataSource
         
         tableDelegate = CheckoutTableDelegate()
-        tableDelegate.delegate = self
         tableView?.delegate = tableDelegate
         
         tableView?.contentInset = TableView.defaultContentInsets
@@ -78,6 +77,12 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
             .subscribe(onNext: { [weak self] _ in
                 self?.tableView.reloadData()
                 self?.updatePlaceOrderButtonUI()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.checkoutSuccedded
+            .subscribe(onNext: { [weak self] _ in
+                self?.performSegue(withIdentifier: SegueIdentifiers.toSuccessCheckout, sender: self)
             })
             .disposed(by: disposeBag)
         
@@ -159,14 +164,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
         navigationController?.popToViewController(self, animated: true)
     }
     
-    // MARK: - SeeAllHeaderViewProtocol
-    
-    func didTapSeeAll(type: SeeAllViewType) {
-        if type == .myCart {
-            // TODO:
-        }
-    }
-    
     // MARK: - CheckoutPaymentAddCellProtocol
     
     func didTapAddPayment() {
@@ -216,6 +213,11 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, SeeAllHeade
                 self?.tableView.reloadData()
                 self?.updatePlaceOrderButtonUI()
                 self?.returnFlowToSelf()
+            }
+        } else if let navigationController = segue.destination as? NavigationController {
+            if let checkoutSuccessViewController = navigationController.viewControllers.first as? CheckoutSuccessViewController, let orderId = viewModel.order?.id, let orderNumber = viewModel.order?.number {
+                checkoutSuccessViewController.orderId = orderId
+                checkoutSuccessViewController.orderNumber = orderNumber
             }
         }
     }

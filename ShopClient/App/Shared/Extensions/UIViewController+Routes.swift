@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController {
     func setHomeController() {
-        let appDelegate  = UIApplication.shared.delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let tabbarController = appDelegate.window?.rootViewController as? UITabBarController
         tabbarController?.selectedIndex = 0
     }

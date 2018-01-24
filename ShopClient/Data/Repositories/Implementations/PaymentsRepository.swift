@@ -45,7 +45,7 @@ extension Repository {
         APICore?.updateCheckout(with: rate, checkoutId: checkoutId, callback: callback)
     }
     
-    func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, callback: @escaping RepoCallback<Bool>) {
+    func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, callback: @escaping RepoCallback<Order>) {
         APICore?.pay(with: card, checkout: checkout, billingAddress: billingAddress, callback: callback)
     }
     

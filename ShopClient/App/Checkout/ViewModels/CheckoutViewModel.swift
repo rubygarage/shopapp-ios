@@ -20,13 +20,16 @@ enum CheckoutSection: Int {
 class CheckoutViewModel: BaseViewModel {
     private let checkoutUseCase = CheckoutUseCase()
     private let cartProductListUseCase = CartProductListUseCase()
+    private let deleteCartProductsUseCase = DeleteCartProductsUseCase()
     private let customerUseCase = CustomerUseCase()
     
     var cartItems = [CartProduct]()
     var checkout = Variable<Checkout?>(nil)
+    var checkoutSuccedded = PublishSubject<()>()
     
     var billingAddress: Address?
     var creditCard: CreditCard?
+    var order: Order?
     
     var placeOrderPressed: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
@@ -169,19 +172,22 @@ class CheckoutViewModel: BaseViewModel {
     private func placeOrderAction() {
         if let checkout = checkout.value, let card = creditCard, let billingAddress = billingAddress {
             state.onNext(.loading(showHud: true))
-            checkoutUseCase.pay(with: card, checkout: checkout, billingAddress: billingAddress) { [weak self] (success, error) in
+            checkoutUseCase.pay(with: card, checkout: checkout, billingAddress: billingAddress) { [weak self] (response, error) in
                 if let error = error {
                     self?.state.onNext(.error(error: error))
                 }
-                if let success = success {
-                    self?.processPlaceOrderResponse(with: success)
-                    self?.state.onNext(.content)
+                if let order = response {
+                    self?.clearCart(with: order)
                 }
             }
         }
     }
     
-    private func processPlaceOrderResponse(with success: Bool) {
-        // TODO:
+    private func clearCart(with order: Order) {
+        deleteCartProductsUseCase.clearCart { [weak self] _ in
+            self?.order = order
+            self?.checkoutSuccedded.onNext()
+            self?.state.onNext(.content)
+        }
     }
 }
