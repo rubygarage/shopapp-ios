@@ -112,10 +112,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         navigationController?.popToViewController(self, animated: true)
     }
     
-    private func returnFlowToSelf() {
-        navigationController?.popToViewController(self, animated: true)
-    }
-    
     private func shippingAddressCompletion() -> AddressListCompletion {
         return { [weak self] (address) in
             guard let strongSelf = self else {
@@ -134,6 +130,17 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             strongSelf.viewModel.billingAddress.value = address
             strongSelf.reloadTable()
             strongSelf.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    private func creditCardCompletion() -> CreditCardCompletion {
+        return { [weak self] (card) in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.viewModel.creditCard.value = card
+            strongSelf.reloadTable()
+            strongSelf.navigationController?.popToViewController(strongSelf, animated: true)
         }
     }
     
@@ -180,14 +187,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             }
         } else if let creditCardFormController = segue.destination as? CreditCardViewController {
             creditCardFormController.card = viewModel.creditCard.value
-            creditCardFormController.completion = { [weak self] (card) in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.viewModel.creditCard.value = card
-                strongSelf.reloadTable()
-                strongSelf.returnFlowToSelf()
-            }
+            creditCardFormController.completion = creditCardCompletion()
         }
     }
 }

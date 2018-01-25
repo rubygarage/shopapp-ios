@@ -41,19 +41,15 @@ class CheckoutViewModel: BaseViewModel {
     private let customerUseCase = CustomerUseCase()
     private let loginUseCase = LoginUseCase()
     
-    var cartItems = [CartProduct]()
     var checkout = Variable<Checkout?>(nil)
     var creditCard = Variable<CreditCard?>(nil)
     var billingAddress = Variable<Address?>(nil)
+    var selectedType = Variable<PaymentType?>(nil)
     var checkoutSuccedded = PublishSubject<()>()
     
-    var selectedType = Variable<PaymentType?>(nil)
-    
-//    var billingAddress: Address?
-//    var creditCard: CreditCard?
+    var cartItems = [CartProduct]()
     var order: Order?
     var selectedProductVariant: ProductVariant!
-//    var selectedType: PaymentType?
     
     var placeOrderPressed: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
@@ -208,6 +204,15 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     private func placeOrderAction() {
+        switch selectedType.value! {
+        case PaymentType.creditCard:
+            payByCreditCard()
+        case PaymentType.applePay:
+            payByApplePay()
+        }
+    }
+    
+    private func payByCreditCard() {
         if let checkout = checkout.value, let card = creditCard.value, let billingAddress = billingAddress.value {
             state.onNext(.loading(showHud: true))
             checkoutUseCase.pay(with: card, checkout: checkout, billingAddress: billingAddress) { [weak self] (response, error) in
@@ -217,6 +222,17 @@ class CheckoutViewModel: BaseViewModel {
                 if let order = response {
                     self?.clearCart(with: order)
                 }
+            }
+        }
+    }
+    
+    private func payByApplePay() {
+        checkoutUseCase.setupApplePay(with: checkout.value!) { [weak self] (success, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            }
+            if let success = success, success == true {
+                // TODO: get order
             }
         }
     }

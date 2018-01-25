@@ -56,23 +56,10 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
         
         tableView.contentInset = TableView.paymentTypeContentInsets
     }
-    
-    fileprivate func setupApplePay() {
-        viewModel.setupApplePay()
-    }
 
     fileprivate func reloadTable() {
         tableView.reloadData()
     }
-    
-    // MARK: - Segues
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let addressListViewController = segue.destination as? AddressListViewController {
-//            addressListViewController.title = "ControllerTitle.BillingAddress".localizable
-//            addressListViewController.addressListType = .billing
-//        }
-//    }
 }
 
 // MARK: - PaymentTypeDelegateProtocol
@@ -83,16 +70,10 @@ extension PaymentTypeViewController: PaymentTypeDelegateProtocol {
         selectedType = type
         reloadTable()
         navigationController?.popViewController(animated: true)
-//        viewModel.selectedType = type
-//        reloadData()
-//        switch type {
-//        case .applePay:
-//            setupApplePay()
-//        default:
-//            performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
-//        }
     }
 }
+
+// MARK: - PaymentTypeDataSourceProtocol
 
 extension PaymentTypeViewController: PaymentTypeDataSourceProtocol {
     func selectedPaymentType() -> PaymentType? {
