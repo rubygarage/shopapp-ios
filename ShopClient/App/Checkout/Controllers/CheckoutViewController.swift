@@ -8,12 +8,11 @@
 
 import UIKit
 
-private let kPlaceOrderHeightVisible: CGFloat = 50
-private let kPlaceOrderHeightInvisible: CGFloat = 0
+private let kPlaceOrderButtonColorEnabled = UIColor(red: 0, green: 0.48, blue: 1, alpha: 1)
+private let kPlaceOrderButtonColorDisabled = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
 
 class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCombinedProtocol {
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var placeOrderHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var placeOrderButton: UIButton!
     
     private var tableDataSource: CheckoutTableDataSource!
@@ -38,7 +37,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         addCloseButton()
         title = "ControllerTitle.Checkout".localizable
         placeOrderButton.setTitle("Button.PlaceOrder".localizable.uppercased(), for: .normal)
-        updatePlaceOrderButtonUI()
     }
     
     private func setupTableView() {
@@ -83,7 +81,13 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         viewModel.checkout.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.tableView.reloadData()
-                self?.updatePlaceOrderButtonUI()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.isCheckoutValid
+            .subscribe(onNext: { [weak self] enabled in
+                self?.placeOrderButton.isEnabled = enabled
+                self?.placeOrderButton.backgroundColor = enabled ? kPlaceOrderButtonColorEnabled : kPlaceOrderButtonColorDisabled
             })
             .disposed(by: disposeBag)
         
@@ -108,14 +112,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         navigationController?.popToViewController(self, animated: true)
     }
     
-    private func updatePlaceOrderButtonUI() {
-        let applePayCondition = viewModel.selectedType == .applePay
-        let creditCardCondition = viewModel.selectedType == .creditCard && viewModel.checkout.value != nil && viewModel.creditCard != nil && viewModel.billingAddress != nil && viewModel.checkout.value?.shippingLine != nil
-        let visible = applePayCondition || creditCardCondition
-        placeOrderButton.isHidden = !visible
-        placeOrderHeightConstraint.constant = visible ? kPlaceOrderHeightVisible : kPlaceOrderHeightInvisible
-    }
-    
     private func returnFlowToSelf() {
         navigationController?.popToViewController(self, animated: true)
     }
@@ -135,7 +131,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.viewModel.billingAddress = address
+            strongSelf.viewModel.billingAddress.value = address
             strongSelf.reloadTable()
             strongSelf.navigationController?.popViewController(animated: true)
         }
@@ -169,28 +165,27 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             addressListViewController.selectedAddress = isAddressTypeShipping ? shippingAddress() : billingAddress()
             addressListViewController.completion = isAddressTypeShipping ? shippingAddressCompletion() : billingAddressCompletion()
         } else if let addressFormViewController = segue.destination as? AddressFormViewController {
-            addressFormViewController.address = viewModel.billingAddress
+            addressFormViewController.address = viewModel.billingAddress.value
             addressFormViewController.completion = { [weak self] (address, isDefaultAddress) in
                 self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: isDefaultAddress)
             }
         } else if let paymentTypeViewController = segue.destination as? PaymentTypeViewController, let checkout = viewModel.checkout.value {
             paymentTypeViewController.checkout = checkout
             paymentTypeViewController.delegate = self
-            paymentTypeViewController.selectedType = viewModel.selectedType
+            paymentTypeViewController.selectedType = viewModel.selectedType.value
         } else if let navigationController = segue.destination as? NavigationController {
             if let checkoutSuccessViewController = navigationController.viewControllers.first as? CheckoutSuccessViewController, let orderId = viewModel.order?.id, let orderNumber = viewModel.order?.number {
                 checkoutSuccessViewController.orderId = orderId
                 checkoutSuccessViewController.orderNumber = orderNumber
             }
         } else if let creditCardFormController = segue.destination as? CreditCardViewController {
-            creditCardFormController.card = viewModel.creditCard
+            creditCardFormController.card = viewModel.creditCard.value
             creditCardFormController.completion = { [weak self] (card) in
                 guard let strongSelf = self else {
                     return
                 }
-                strongSelf.viewModel.creditCard = card
+                strongSelf.viewModel.creditCard.value = card
                 strongSelf.reloadTable()
-                strongSelf.updatePlaceOrderButtonUI()
                 strongSelf.returnFlowToSelf()
             }
         }
@@ -249,11 +244,11 @@ extension CheckoutViewController: CheckoutTableDataSourceProtocol {
     }
     
     func billingAddress() -> Address? {
-        return viewModel.billingAddress
+        return viewModel.billingAddress.value
     }
     
     func creditCard() -> CreditCard? {
-        return viewModel.creditCard
+        return viewModel.creditCard.value
     }
     
     func availableShippingRates() -> [ShippingRate]? {
@@ -261,7 +256,7 @@ extension CheckoutViewController: CheckoutTableDataSourceProtocol {
     }
     
     func selectedPaymentType() -> PaymentType? {
-        return viewModel.selectedType
+        return viewModel.selectedType.value
     }
 }
 
@@ -285,7 +280,7 @@ extension CheckoutViewController: CheckoutShippingOptionsEnabledTableCellProtoco
 
 extension CheckoutViewController: PaymentTypeViewControllerProtocol {
     func didSelect(paymentType: PaymentType) {
-        viewModel.selectedType = paymentType
+        viewModel.selectedType.value = paymentType
         reloadTable()
     }
 }

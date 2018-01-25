@@ -43,17 +43,29 @@ class CheckoutViewModel: BaseViewModel {
     
     var cartItems = [CartProduct]()
     var checkout = Variable<Checkout?>(nil)
+    var creditCard = Variable<CreditCard?>(nil)
+    var billingAddress = Variable<Address?>(nil)
     var checkoutSuccedded = PublishSubject<()>()
     
-    var billingAddress: Address?
-    var creditCard: CreditCard?
+    var selectedType = Variable<PaymentType?>(nil)
+    
+//    var billingAddress: Address?
+//    var creditCard: CreditCard?
     var order: Order?
     var selectedProductVariant: ProductVariant!
-    var selectedType: PaymentType?
+//    var selectedType: PaymentType?
     
     var placeOrderPressed: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
             self?.placeOrderAction()
+        }
+    }
+    
+    var isCheckoutValid: Observable<Bool> {
+        return Observable.combineLatest(selectedType.asObservable(), checkout.asObservable(), creditCard.asObservable(), billingAddress.asObservable()) { (type, checkout, card, address) in
+            let applePayCondition = type == .applePay
+            let creditCardCondition = type == .creditCard && checkout != nil && card != nil && address != nil && checkout?.shippingLine != nil
+            return applePayCondition || creditCardCondition
         }
     }
     
@@ -196,7 +208,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     private func placeOrderAction() {
-        if let checkout = checkout.value, let card = creditCard, let billingAddress = billingAddress {
+        if let checkout = checkout.value, let card = creditCard.value, let billingAddress = billingAddress.value {
             state.onNext(.loading(showHud: true))
             checkoutUseCase.pay(with: card, checkout: checkout, billingAddress: billingAddress) { [weak self] (response, error) in
                 if let error = error {
