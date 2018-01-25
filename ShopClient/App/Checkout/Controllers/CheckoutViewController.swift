@@ -23,7 +23,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     private var destinationAddressType: AddressListType = .shipping
     
     fileprivate var selectedProductVariant: ProductVariant!
-    fileprivate var selectedType: PaymentTypeSection?
+    fileprivate var selectedType: PaymentType?
     
     override func viewDidLoad() {
         viewModel = CheckoutViewModel()
@@ -261,7 +261,7 @@ extension CheckoutViewController: CheckoutTableDataSourceProtocol {
         return viewModel.checkout.value?.availableShippingRates
     }
     
-    func selectedPaymentType() -> PaymentTypeSection? {
+    func selectedPaymentType() -> PaymentType? {
         return selectedType
     }
 }
@@ -271,14 +271,6 @@ extension CheckoutViewController: CheckoutTableDataSourceProtocol {
 extension CheckoutViewController: CheckoutShippingAddressAddCellProtocol {
     func didTapAddNewAddress() {
         performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
-    }
-}
-
-// MARK: - CheckoutShippingAddressEditCellProtocol
-
-extension CheckoutViewController: CheckoutShippingAddressEditCellProtocol {
-    func didTapEdit() {
-        openAddressesController(with: .shipping)
     }
 }
 
@@ -293,7 +285,7 @@ extension CheckoutViewController: CheckoutShippingOptionsEnabledTableCellProtoco
 // MARK: - PaymentTypeViewControllerProtocol
 
 extension CheckoutViewController: PaymentTypeViewControllerProtocol {
-    func didSelect(paymentType: PaymentTypeSection) {
+    func didSelect(paymentType: PaymentType) {
         selectedType = paymentType
         reloadTable()
     }
@@ -307,9 +299,17 @@ extension CheckoutViewController: CheckoutCreditCardEditTableCellProtocol {
     }
 }
 
-// MARK: - CheckoutBillingAddressEditTableCellProtocol
+// MARK: - CheckoutShippingAddressEditCellProtocol
 
-extension CheckoutViewController: CheckoutBillingAddressEditTableCellProtocol {
+extension CheckoutViewController: CheckoutShippingAddressEditCellProtocol {
+    func didTapEditShippingAddress() {
+        openAddressesController(with: .shipping)
+    }
+}
+
+// MARK: - CheckoutBillingAddressEditCellProtocol
+
+extension CheckoutViewController: CheckoutBillingAddressEditCellProtocol {
     func didTapEditBillingAddress() {
         openAddressesController(with: .billing)
     }

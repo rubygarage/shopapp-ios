@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PaymentTypeDataSourceProtocol: class {
-    func selectedPaymentType() -> PaymentTypeSection?
+    func selectedPaymentType() -> PaymentType?
 }
 
 class PaymentTypeDataSource: NSObject, UITableViewDataSource {
@@ -18,12 +18,12 @@ class PaymentTypeDataSource: NSObject, UITableViewDataSource {
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PaymentTypeSection.allValues.count
+        return PaymentType.allValues.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PaymentTypeTableViewCell.self), for: indexPath) as! PaymentTypeTableViewCell
-        let type = PaymentTypeSection(rawValue: indexPath.row)!
+        let type = PaymentType(rawValue: indexPath.row)!
         let selected = delegate?.selectedPaymentType() == type
         cell.configure(with: type, selected: selected)
         return cell

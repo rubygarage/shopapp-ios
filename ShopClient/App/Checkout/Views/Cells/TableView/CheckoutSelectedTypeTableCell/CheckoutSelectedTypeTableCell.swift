@@ -28,7 +28,7 @@ class CheckoutSelectedTypeTableCell: UITableViewCell {
         editButton?.setTitle("Button.Edit".localizable.uppercased(), for: .normal)
     }
     
-    public func configure(type: PaymentTypeSection) {
+    public func configure(type: PaymentType) {
         var paymentImage = UIImage()
         var paymentTitle = ""
         switch type {

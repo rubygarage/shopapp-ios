@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CheckoutShippingAddressEditCellProtocol: class {
-    func didTapEdit()
+    func didTapEditShippingAddress()
 }
 
 class CheckoutShippingAddressEditTableCell: UITableViewCell {
@@ -57,6 +57,6 @@ class CheckoutShippingAddressEditTableCell: UITableViewCell {
     // MARK: - Actions
     
     @IBAction func editTapped(_ sender: UIButton) {
-        delegate?.didTapEdit()
+        delegate?.didTapEditShippingAddress()
     }
 }

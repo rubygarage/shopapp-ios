@@ -16,9 +16,10 @@ enum CheckoutSection: Int {
     case shippingOptions
     
     static let allValues = [cart, shippingAddress, payment, shippingOptions]
+    static let valuesWithoutShippingOptions = [cart, shippingAddress, payment]
 }
 
-enum PaymentTypeSection: Int {
+enum PaymentType: Int {
     case creditCard
     case applePay
     

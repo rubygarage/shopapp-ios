@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PaymentTypeViewControllerProtocol: class {
-    func didSelect(paymentType: PaymentTypeSection)
+    func didSelect(paymentType: PaymentType)
 }
 
 class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
@@ -22,7 +22,7 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
     private var destinationTitle: String!
     
     var checkout: Checkout!
-    var selectedType: PaymentTypeSection?
+    var selectedType: PaymentType?
     weak var delegate: PaymentTypeViewControllerProtocol?
     
     override func viewDidLoad() {
@@ -78,7 +78,7 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
 // MARK: - PaymentTypeDelegateProtocol
 
 extension PaymentTypeViewController: PaymentTypeDelegateProtocol {
-    func didSelectPayment(type: PaymentTypeSection) {
+    func didSelectPayment(type: PaymentType) {
         delegate?.didSelect(paymentType: type)
         selectedType = type
         reloadTable()
@@ -95,7 +95,7 @@ extension PaymentTypeViewController: PaymentTypeDelegateProtocol {
 }
 
 extension PaymentTypeViewController: PaymentTypeDataSourceProtocol {
-    func selectedPaymentType() -> PaymentTypeSection? {
+    func selectedPaymentType() -> PaymentType? {
         return selectedType
     }
 }

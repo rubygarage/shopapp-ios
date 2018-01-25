@@ -24,7 +24,7 @@ class PaymentTypeTableViewCell: UITableViewCell {
     
     // MARK: - Public
     
-    public func configure(with type: PaymentTypeSection, selected: Bool) {
+    public func configure(with type: PaymentType, selected: Bool) {
         
         var paymentTitle = ""
         var paymentImage = UIImage()
