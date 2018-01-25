@@ -207,24 +207,27 @@ class CheckoutViewModel: BaseViewModel {
     private func payByCreditCard() {
         if let checkout = checkout.value, let card = creditCard.value, let billingAddress = billingAddress.value {
             state.onNext(.loading(showHud: true))
-            checkoutUseCase.pay(with: card, checkout: checkout, billingAddress: billingAddress) { [weak self] (response, error) in
-                if let error = error {
-                    self?.state.onNext(.error(error: error))
-                }
-                if let order = response {
-                    self?.clearCart(with: order)
-                }
-            }
+            checkoutUseCase.pay(with: card, checkout: checkout, billingAddress: billingAddress, callback: paymentCallback())
         }
     }
     
     private func payByApplePay() {
-        checkoutUseCase.setupApplePay(with: checkout.value!) { [weak self] (response, error) in
+        if let checkout = checkout.value {
+            state.onNext(.loading(showHud: true))
+            checkoutUseCase.setupApplePay(with: checkout, callback: paymentCallback())
+        }
+    }
+    
+    private func paymentCallback() -> RepoCallback<Order> {
+        return { [weak self] (response, error) in
+            guard let strongSelf = self else {
+                return
+            }
             if let error = error {
-                self?.state.onNext(.error(error: error))
+                strongSelf.state.onNext(.error(error: error))
             }
             if let order = response {
-                self?.clearCart(with: order)
+                strongSelf.clearCart(with: order)
             }
         }
     }
