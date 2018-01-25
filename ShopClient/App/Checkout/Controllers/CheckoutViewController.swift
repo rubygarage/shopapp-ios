@@ -22,9 +22,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     // swiftlint:enable weak_delegate
     private var destinationAddressType: AddressListType = .shipping
     
-    fileprivate var selectedProductVariant: ProductVariant!
-    fileprivate var selectedType: PaymentType?
-    
     override func viewDidLoad() {
         viewModel = CheckoutViewModel()
         super.viewDidLoad()
@@ -112,7 +109,9 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     }
     
     private func updatePlaceOrderButtonUI() {
-        let visible = viewModel.checkout.value != nil && viewModel.creditCard != nil && viewModel.billingAddress != nil && viewModel.checkout.value?.shippingLine != nil
+        let applePayCondition = viewModel.selectedType == .applePay
+        let creditCardCondition = viewModel.selectedType == .creditCard && viewModel.checkout.value != nil && viewModel.creditCard != nil && viewModel.billingAddress != nil && viewModel.checkout.value?.shippingLine != nil
+        let visible = applePayCondition || creditCardCondition
         placeOrderButton.isHidden = !visible
         placeOrderHeightConstraint.constant = visible ? kPlaceOrderHeightVisible : kPlaceOrderHeightInvisible
     }
@@ -163,7 +162,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
-            productDetailsViewController.productVariant = selectedProductVariant
+            productDetailsViewController.productVariant = viewModel.selectedProductVariant
         } else if let addressListViewController = segue.destination as? AddressListViewController {
             addressListViewController.addressListType = destinationAddressType
             let isAddressTypeShipping = destinationAddressType == .shipping
@@ -177,7 +176,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         } else if let paymentTypeViewController = segue.destination as? PaymentTypeViewController, let checkout = viewModel.checkout.value {
             paymentTypeViewController.checkout = checkout
             paymentTypeViewController.delegate = self
-            paymentTypeViewController.selectedType = selectedType
+            paymentTypeViewController.selectedType = viewModel.selectedType
         } else if let navigationController = segue.destination as? NavigationController {
             if let checkoutSuccessViewController = navigationController.viewControllers.first as? CheckoutSuccessViewController, let orderId = viewModel.order?.id, let orderNumber = viewModel.order?.number {
                 checkoutSuccessViewController.orderId = orderId
@@ -233,7 +232,7 @@ extension CheckoutViewController: CheckoutTableDelegateProtocol {
 
 extension CheckoutViewController: CheckoutCartTableViewCellDelegate {
     func didSelectItem(with productVariantId: String, at index: Int) {
-        selectedProductVariant = viewModel.productVariant(with: productVariantId)
+        viewModel.selectedProductVariant = viewModel.productVariant(with: productVariantId)
         performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
 }
@@ -262,7 +261,7 @@ extension CheckoutViewController: CheckoutTableDataSourceProtocol {
     }
     
     func selectedPaymentType() -> PaymentType? {
-        return selectedType
+        return viewModel.selectedType
     }
 }
 
@@ -286,7 +285,7 @@ extension CheckoutViewController: CheckoutShippingOptionsEnabledTableCellProtoco
 
 extension CheckoutViewController: PaymentTypeViewControllerProtocol {
     func didSelect(paymentType: PaymentType) {
-        selectedType = paymentType
+        viewModel.selectedType = paymentType
         reloadTable()
     }
 }

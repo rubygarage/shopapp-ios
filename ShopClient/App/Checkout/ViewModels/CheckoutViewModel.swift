@@ -48,6 +48,8 @@ class CheckoutViewModel: BaseViewModel {
     var billingAddress: Address?
     var creditCard: CreditCard?
     var order: Order?
+    var selectedProductVariant: ProductVariant!
+    var selectedType: PaymentType?
     
     var placeOrderPressed: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
