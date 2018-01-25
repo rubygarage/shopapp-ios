@@ -48,7 +48,8 @@ class AddressFormViewModel: BaseViewModel {
         }
     }
     
-    // MARK: - public
+    // MARK: - Public
+    
     public func updateFields() {
         countryText.value = address?.country ?? ""
         firstNameText.value = address?.firstName ?? ""
@@ -61,7 +62,8 @@ class AddressFormViewModel: BaseViewModel {
         phoneText.value = address?.phone ?? ""
     }
     
-    // MARK: - private
+    // MARK: - Private
+    
     private func submitAction() {
         completion?(getAddress(), useDefaultShippingAddress.value)
         addressSubmitted.onNext()

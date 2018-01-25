@@ -244,6 +244,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
                 checkoutSuccessViewController.orderNumber = orderNumber
             }
         } else if let creditCardFormController = segue.destination as? CreditCardViewController {
+            creditCardFormController.card = viewModel.creditCard
             creditCardFormController.completion = { [weak self] (card) in
                 guard let strongSelf = self else {
                     return

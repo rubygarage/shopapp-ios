@@ -19,6 +19,7 @@ class CreditCardViewModel: BaseViewModel {
     var holderNameErrorMessage = PublishSubject<String>()
     var cardNumberErrorMessage = PublishSubject<String>()
     
+    var card: CreditCard?
     var completion: CreditCardCompletion?
         
     var isCardDataValid: Observable<Bool> {
@@ -33,7 +34,18 @@ class CreditCardViewModel: BaseViewModel {
         }
     }
     
-    // MARK: - private
+    // MARK: - Public
+    
+    public func updateFields() {
+        holderNameText.value = card?.holderName ?? ""
+        cardNumberText.value = card?.cardNumber ?? ""
+        monthExpirationText.value = card?.expireMonth ?? ""
+        yearExpirationText.value = card?.expireYear ?? ""
+        securityCodeText.value = card?.verificationCode ?? ""
+    }
+    
+    // MARK: - Private
+    
     private func validateData() {
         if holderNameText.value.isValidAsHolderName() && cardNumberText.value.luhnValid() {
             submitAction()
