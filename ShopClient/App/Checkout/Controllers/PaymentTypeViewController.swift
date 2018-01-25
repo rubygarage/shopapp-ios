@@ -30,16 +30,11 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
         super.viewDidLoad()
 
         setupViews()
-        setupViewModel()
         setupTableView()
     }
     
     private func setupViews() {
         title = "ControllerTitle.PaymentType".localizable
-    }
-    
-    private func setupViewModel() {
-        viewModel.checkout = checkout
     }
     
     private func setupTableView() {

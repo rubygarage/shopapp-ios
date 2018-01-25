@@ -12,5 +12,4 @@ class PaymentTypeViewModel: BaseViewModel {
     private let checkoutUseCase = CheckoutUseCase()
     
     var selectedType: PaymentType?
-    var checkout: Checkout!
 }

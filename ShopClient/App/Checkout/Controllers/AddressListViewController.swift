@@ -68,7 +68,6 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
             .subscribe(onNext: { [weak self] (address) in
                 if self?.addressListType == .billing {
                     self?.destinationAddress = address
-//                    self?.performSegue(withIdentifier: SegueIdentifiers.toCreditCard, sender: self)
                 }
         })
         .disposed(by: disposeBag)
