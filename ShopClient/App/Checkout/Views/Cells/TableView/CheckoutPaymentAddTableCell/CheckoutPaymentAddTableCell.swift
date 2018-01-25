@@ -9,13 +9,21 @@
 import UIKit
 
 protocol CheckoutPaymentAddCellProtocol: class {
-    func didTapAddPayment(type: PaymentTypeRow)
+    func didTapAddPayment(type: PaymentAddCellType)
+}
+
+enum PaymentAddCellType: Int {
+    case type
+    case card
+    case billingAddress
+    
+    static let allValues = [type, card, billingAddress]
 }
 
 class CheckoutPaymentAddTableCell: UITableViewCell {
     @IBOutlet private weak var addPaymentButton: BlackButton!
     
-    private var paymentRow: PaymentTypeRow = .type
+    private var paymentRow: PaymentAddCellType = .type
     
     weak var delegate: CheckoutPaymentAddCellProtocol?
     
@@ -29,14 +37,14 @@ class CheckoutPaymentAddTableCell: UITableViewCell {
     
     // MARK: - Public
     
-    public func configure(type: PaymentTypeRow) {
+    public func configure(type: PaymentAddCellType) {
         paymentRow = type
         switch type {
-        case PaymentTypeRow.type:
+        case PaymentAddCellType.type:
             addPaymentButton.setTitle("Button.AddPaymentType".localizable.uppercased(), for: .normal)
-        case PaymentTypeRow.card:
+        case PaymentAddCellType.card:
             addPaymentButton.setTitle("Button.AddCard".localizable.uppercased(), for: .normal)
-        case PaymentTypeRow.billingAddress:
+        case PaymentAddCellType.billingAddress:
             addPaymentButton.setTitle("Button.AddBillingAddress".localizable.uppercased(), for: .normal)
         }
     }

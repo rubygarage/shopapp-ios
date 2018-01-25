@@ -195,13 +195,13 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
 // MARK: - CheckoutPaymentAddCellProtocol
 
 extension CheckoutViewController: CheckoutPaymentAddCellProtocol {
-    func didTapAddPayment(type: PaymentTypeRow) {
+    func didTapAddPayment(type: PaymentAddCellType) {
         switch type {
-        case PaymentTypeRow.type:
+        case PaymentAddCellType.type:
             performSegue(withIdentifier: SegueIdentifiers.toPaymentType, sender: self)
-        case PaymentTypeRow.card:
+        case PaymentAddCellType.card:
             performSegue(withIdentifier: SegueIdentifiers.toCreditCard, sender: self)
-        case PaymentTypeRow.billingAddress:
+        case PaymentAddCellType.billingAddress:
             openAddressesController(with: .billing)
         }
     }

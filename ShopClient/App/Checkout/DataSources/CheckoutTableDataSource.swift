@@ -32,7 +32,7 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
         if section == CheckoutSection.shippingOptions.rawValue {
             return delegate?.availableShippingRates()?.count ?? 1
         } else if section == CheckoutSection.payment.rawValue {
-            return delegate?.selectedPaymentType() == .creditCard ? PaymentTypeRow.allValues.count : 1
+            return delegate?.selectedPaymentType() == .creditCard ? PaymentAddCellType.allValues.count : 1
         }
         return 1
     }
@@ -86,11 +86,11 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     
     private func paymentCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
-        case PaymentTypeRow.type.rawValue:
+        case PaymentAddCellType.type.rawValue:
             return paymentTypeCell(with: tableView, indexPath: indexPath)
-        case PaymentTypeRow.card.rawValue:
+        case PaymentAddCellType.card.rawValue:
             return paymentCardCell(with: tableView, indexPath: indexPath)
-        case PaymentTypeRow.billingAddress.rawValue:
+        case PaymentAddCellType.billingAddress.rawValue:
             return paymentBillingAddressCell(with: tableView, indexPath: indexPath)
         default:
             return UITableViewCell()
@@ -108,8 +108,8 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     private func paymentAddCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutPaymentAddTableCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutPaymentAddTableCell.self), for: indexPath) as! CheckoutPaymentAddTableCell
         cell.delegate = delegate
-        let type = PaymentTypeRow(rawValue: indexPath.row)!
-        cell.configure(type: type)
+        let type = PaymentAddCellType(rawValue: indexPath.row)
+        cell.configure(type: type!)
         return cell
     }
     
