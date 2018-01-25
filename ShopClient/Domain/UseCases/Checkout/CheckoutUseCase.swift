@@ -25,7 +25,7 @@ struct CheckoutUseCase {
         Repository.shared.pay(with: card, checkout: checkout, billingAddress: billingAddress, callback: callback)
     }
     
-    public func setupApplePay(with checkout: Checkout, callback: @escaping RepoCallback<Bool>) {
+    public func setupApplePay(with checkout: Checkout, callback: @escaping RepoCallback<Order>) {
         Repository.shared.setupApplePay(with: checkout, callback: callback)
     }
     

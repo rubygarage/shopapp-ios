@@ -219,12 +219,12 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     private func payByApplePay() {
-        checkoutUseCase.setupApplePay(with: checkout.value!) { [weak self] (success, error) in
+        checkoutUseCase.setupApplePay(with: checkout.value!) { [weak self] (response, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             }
-            if let success = success, success == true {
-                // TODO: get order
+            if let order = response {
+                self?.clearCart(with: order)
             }
         }
     }

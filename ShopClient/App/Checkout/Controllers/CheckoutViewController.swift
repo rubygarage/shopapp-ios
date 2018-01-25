@@ -264,7 +264,7 @@ extension CheckoutViewController: CheckoutTableDataSourceProtocol {
 
 extension CheckoutViewController: CheckoutShippingAddressAddCellProtocol {
     func didTapAddNewAddress() {
-        performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
+        openAddressesController(with: .shipping)
     }
 }
 
