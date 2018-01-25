@@ -13,12 +13,16 @@ class PaymentTypeTableViewCell: UITableViewCell {
     @IBOutlet private weak var paymentTypeImage: UIImageView!
     @IBOutlet private weak var selectedImageView: UIImageView!
     
+    // MARK: - View lifecycle
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         selectionStyle = .none
         paymentTypeLabel.text = "Label.Payment.CreditCard".localizable
     }
+    
+    // MARK: - Public
     
     public func configure(with type: PaymentTypeSection, selected: Bool) {
         
@@ -35,9 +39,5 @@ class PaymentTypeTableViewCell: UITableViewCell {
         paymentTypeLabel.text = paymentTitle
         paymentTypeImage.image = paymentImage
         selectedImageView.image = selected ? #imageLiteral(resourceName: "radio_btn_selected") : #imageLiteral(resourceName: "radio_btn_disabled")
-    }
-    
-    private func populateViews() {
-        
     }
 }

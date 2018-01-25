@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CheckoutCombinedProtocol: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, CheckoutPaymentAddCellProtocol, CheckoutTableDelegateProtocol, CheckoutCartTableViewCellDelegate, CheckoutCreditCardEditTableCellProtocol, CheckoutShippingOptionsEnabledTableCellProtocol, PaymentTypeViewControllerProtocol, CheckoutSelectedTypeTableCellProtocol {}
+protocol CheckoutCombinedProtocol: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellProtocol, CheckoutShippingAddressEditCellProtocol, CheckoutPaymentAddCellProtocol, CheckoutTableDelegateProtocol, CheckoutCartTableViewCellDelegate, CheckoutCreditCardEditTableCellProtocol, CheckoutShippingOptionsEnabledTableCellProtocol, PaymentTypeViewControllerProtocol, CheckoutSelectedTypeTableCellProtocol, CheckoutBillingAddressEditTableCellProtocol {}
 
 protocol CheckoutTableDataSourceProtocol: class {
     func cartProducts() -> [CartProduct]
@@ -140,10 +140,17 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     
     private func paymentBillingAddressCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         if let address = delegate?.billingAddress() {
-            return UITableViewCell()
+            return paymentBillingAddressEditCell(with: tableView, indexPath: indexPath, address: address)
         } else {
             return paymentAddCell(with: tableView, indexPath: indexPath)
         }
+    }
+    
+    private func paymentBillingAddressEditCell(with tableView: UITableView, indexPath: IndexPath, address: Address) -> CheckoutBillingAddressEditTableCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutBillingAddressEditTableCell.self), for: indexPath) as! CheckoutBillingAddressEditTableCell
+        cell.delegate = delegate
+        cell.configure(with: address)
+        return cell
     }
     
     private func shippingOptionsCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {

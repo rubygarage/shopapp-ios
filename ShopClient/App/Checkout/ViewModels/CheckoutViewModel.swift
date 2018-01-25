@@ -38,6 +38,7 @@ class CheckoutViewModel: BaseViewModel {
     private let cartProductListUseCase = CartProductListUseCase()
     private let deleteCartProductsUseCase = DeleteCartProductsUseCase()
     private let customerUseCase = CustomerUseCase()
+    private let loginUseCase = LoginUseCase()
     
     var cartItems = [CartProduct]()
     var checkout = Variable<Checkout?>(nil)
@@ -116,6 +117,12 @@ class CheckoutViewModel: BaseViewModel {
                     self?.state.onNext(.content)
                 }
             })
+        }
+    }
+    
+    public func getLoginStatus(callback: (_ isLogged: Bool) -> Void) {
+        loginUseCase.getLoginStatus { (isLogged) in
+            callback(isLogged)
         }
     }
     

@@ -20,23 +20,21 @@ class CheckoutCreditCardEditTableCell: UITableViewCell {
     
     weak var delegate: CheckoutCreditCardEditTableCellProtocol?
     
+    // MARK: - View lifecycle
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         selectionStyle = .none
-        setupViews()
+        editButton?.setTitle("Button.Edit".localizable.uppercased(), for: .normal)
     }
+    
+    // MARK: - Public
     
     public func configure(with creditCard: CreditCard) {
         cardNumberLabel.text = creditCard.maskedNumber
         expirationDateLabel.text = creditCard.expirationDateLocalized
         holderNameLabel.text = creditCard.holderName
-    }
-    
-    // MARK: - Private
-    
-    private func setupViews() {
-        editButton?.setTitle("Button.Edit".localizable.uppercased(), for: .normal)
     }
     
     // MARK: - Actions

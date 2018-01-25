@@ -27,6 +27,8 @@ class CheckoutPaymentAddTableCell: UITableViewCell {
         selectionStyle = .none
     }
     
+    // MARK: - Public
+    
     public func configure(type: PaymentTypeRow) {
         paymentRow = type
         switch type {
@@ -39,7 +41,7 @@ class CheckoutPaymentAddTableCell: UITableViewCell {
         }
     }
     
-    // MARK: - actions
+    // MARK: - Actions
     
     @IBAction func addPaymentTapped(_ sender: BlackButton) {
         delegate?.didTapAddPayment(type: paymentRow)

@@ -20,8 +20,8 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     // swiftlint:disable weak_delegate
     private var tableDelegate: CheckoutTableDelegate!
     // swiftlint:enable weak_delegate
-    private var destinationAddress: Address?
     private var selectedProductVariant: ProductVariant!
+    private var destinationAddressType: AddressListType = .shipping
     
     fileprivate var selectedType: PaymentTypeSection?
     
@@ -58,8 +58,11 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         let paymentTypeNib = UINib(nibName: String(describing: CheckoutSelectedTypeTableCell.self), bundle: nil)
         tableView?.register(paymentTypeNib, forCellReuseIdentifier: String(describing: CheckoutSelectedTypeTableCell.self))
         
-        let paymentEditNib = UINib(nibName: String(describing: CheckoutCreditCardEditTableCell.self), bundle: nil)
-        tableView.register(paymentEditNib, forCellReuseIdentifier: String(describing: CheckoutCreditCardEditTableCell.self))
+        let paymentCreditCardEditNib = UINib(nibName: String(describing: CheckoutCreditCardEditTableCell.self), bundle: nil)
+        tableView.register(paymentCreditCardEditNib, forCellReuseIdentifier: String(describing: CheckoutCreditCardEditTableCell.self))
+        
+        let paymentBillingAddressEditNib = UINib(nibName: String(describing: CheckoutBillingAddressEditTableCell.self), bundle: nil)
+        tableView.register(paymentBillingAddressEditNib, forCellReuseIdentifier: String(describing: CheckoutBillingAddressEditTableCell.self))
         
         let shiippingOptionsDisabledNib = UINib(nibName: String(describing: CheckoutShippingOptionsDisabledTableCell.self), bundle: nil)
         tableView.register(shiippingOptionsDisabledNib, forCellReuseIdentifier: String(describing: CheckoutShippingOptionsDisabledTableCell.self))
@@ -143,29 +146,21 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     // MARK: - CheckoutShippingAddressEditCellProtocol
     
     func didTapEdit() {
-        if let checkoutId = viewModel.checkout.value?.id, let address = viewModel.checkout.value?.shippingAddress {
-            processUpdateAddress(with: checkoutId, address: address)
+        openAddressesController(with: .shipping)
+    }
+    
+    fileprivate func openAddressesController(with type: AddressListType) {
+        destinationAddressType = type
+        viewModel.getLoginStatus { (isLogged) in
+            if isLogged {
+                performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
+            } else {
+                performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
+            }
         }
     }
     
     // MARK: - Private
-    
-    private func processUpdateAddress(with checkoutId: String, address: Address) {
-        if Repository.shared.isLoggedIn() {
-            openAddressList(with: checkoutId, address: address)
-        } else {
-            openAddressForm(with: address)
-        }
-    }
-    
-    private func openAddressList(with checkoutId: String, address: Address) {
-        destinationAddress = address
-        performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
-    }
-    
-    private func openAddressForm(with address: Address) {
-        performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
-    }
     
     private func updatePlaceOrderButtonUI() {
         let visible = viewModel.checkout.value != nil && viewModel.creditCard != nil && viewModel.billingAddress != nil && viewModel.checkout.value?.shippingLine != nil
@@ -186,10 +181,8 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         case PaymentTypeRow.card:
             performSegue(withIdentifier: SegueIdentifiers.toCreditCard, sender: self)
         case PaymentTypeRow.billingAddress:
-            // TODO: go to address
-                return
+            openAddressesController(with: .billing)
         }
-        
     }
     
     // MARK: - CheckoutSelectedTypeTableCellProtocol
@@ -217,13 +210,29 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
             productDetailsViewController.productVariant = selectedProductVariant
         } else if let addressListViewController = segue.destination as? AddressListViewController {
-            addressListViewController.addressListType = .shipping
-            addressListViewController.selectedAddress = destinationAddress
-            addressListViewController.completion = { [weak self] (address) in
-                self?.navigationController?.popViewController(animated: true)
-                self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: false)
+            addressListViewController.addressListType = destinationAddressType
+            let isAddressTypeShipping = destinationAddressType == .shipping
+            addressListViewController.selectedAddress = isAddressTypeShipping ? shippingAddress() : billingAddress()
+            if isAddressTypeShipping {
+                addressListViewController.completion = { [weak self] (address) in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    strongSelf.navigationController?.popViewController(animated: true)
+                    strongSelf.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: false)
+                }
+            } else {
+                addressListViewController.completion = { [weak self] (address) in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    strongSelf.viewModel.billingAddress = address
+                    strongSelf.reloadTable()
+                    strongSelf.navigationController?.popViewController(animated: true)
+                }
             }
         } else if let addressFormViewController = segue.destination as? AddressFormViewController {
+            addressFormViewController.address = viewModel.billingAddress
             addressFormViewController.completion = { [weak self] (address, isDefaultAddress) in
                 self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: isDefaultAddress)
             }
@@ -280,5 +289,13 @@ extension CheckoutViewController: PaymentTypeViewControllerProtocol {
 extension CheckoutViewController: CheckoutCreditCardEditTableCellProtocol {
     func didTapEditCard() {
         performSegue(withIdentifier: SegueIdentifiers.toCreditCard, sender: self)
+    }
+}
+
+// MARK: - CheckoutBillingAddressEditTableCellProtocol
+
+extension CheckoutViewController: CheckoutBillingAddressEditTableCellProtocol {
+    func didTapEditBillingAddress() {
+        openAddressesController(with: .billing)
     }
 }

@@ -41,7 +41,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nwf-35-t01">
-                                <rect key="frame" x="349" y="6" width="56" height="35"/>
+                                <rect key="frame" x="349" y="16" width="56" height="35"/>
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <inset key="contentEdgeInsets" minX="16" minY="10" maxX="16" maxY="10"/>
@@ -67,9 +67,9 @@
                             <constraint firstAttribute="trailing" secondItem="wJD-Vr-HUN" secondAttribute="trailing" id="6Wr-Fs-aoK"/>
                             <constraint firstItem="jPR-kY-lck" firstAttribute="top" secondItem="6W5-nT-Wgj" secondAttribute="top" constant="16" id="7Bz-bJ-ehU"/>
                             <constraint firstAttribute="bottom" secondItem="lQi-GM-Pxo" secondAttribute="bottom" constant="16" id="8k9-6w-E9c"/>
+                            <constraint firstItem="Nwf-35-t01" firstAttribute="top" secondItem="6W5-nT-Wgj" secondAttribute="top" constant="16" id="A9n-7z-rBy"/>
                             <constraint firstItem="dFA-jj-yD5" firstAttribute="leading" secondItem="6W5-nT-Wgj" secondAttribute="leading" constant="16" id="BdP-jU-gDi"/>
                             <constraint firstItem="dFA-jj-yD5" firstAttribute="top" secondItem="jPR-kY-lck" secondAttribute="bottom" constant="8" id="FSV-y6-yfS"/>
-                            <constraint firstItem="Nwf-35-t01" firstAttribute="centerY" secondItem="jPR-kY-lck" secondAttribute="centerY" id="GL6-4Z-55g"/>
                             <constraint firstAttribute="trailing" secondItem="lQi-GM-Pxo" secondAttribute="trailing" constant="16" id="Owf-ox-Zcu"/>
                             <constraint firstAttribute="trailing" secondItem="Nwf-35-t01" secondAttribute="trailing" constant="16" id="XBK-8S-5tQ"/>
                             <constraint firstItem="lQi-GM-Pxo" firstAttribute="top" secondItem="dFA-jj-yD5" secondAttribute="bottom" constant="8" id="fFB-if-g2L"/>
