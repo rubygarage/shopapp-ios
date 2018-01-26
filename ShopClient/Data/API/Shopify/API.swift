@@ -9,10 +9,10 @@
 import MobileBuySDK
 import KeychainSwift
 
-private let kShopifyStorefrontAccessToken = "44fc90e5043e0a5e7ce5e95e1c30018f"
-private let kShopifyStorefrontURL = "rubytestruby.myshopify.com"
+private let kShopifyStorefrontAccessToken = "fd719b8c3c31ea4ea5f4078e8b9a759f"
+private let kShopifyStorefrontURL = "celawojev.myshopify.com"
 private let kShopifyItemsMaxCount: Int32 = 250
-private let kShopifyStoreName = "rubytestruby"
+private let kShopifyStoreName = "celawojev"
 private let kMerchantID = "merchant.com.rubygarage.shopclient.test"
 private let kShopifyPaymetTypeApplePay = "apple_pay"
 private let kShopifyRetryFinite = 10
@@ -550,8 +550,11 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     private func updateCustomer(with token: String, email: String, firstName: String?, lastName: String?, phone: String?, callback: @escaping RepoCallback<Customer>) {
         let query = customerUpdateQuery(with: token, email: email, firstName: firstName, lastName: lastName, phone: phone)
         updateCustomer(with: query) { [weak self] (customer, error) in
+            guard let strongSelf = self else {
+                return
+            }
             if customer != nil {
-                self?.updateSessionDate(with: email)
+                strongSelf.updateSessionDate(with: email)
             }
             callback(customer, error)
         }

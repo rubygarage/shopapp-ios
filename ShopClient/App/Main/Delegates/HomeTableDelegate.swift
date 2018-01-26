@@ -32,13 +32,13 @@ class HomeTableDelegate: NSObject, UITableViewDelegate {
         switch section {
         case HomeSection.lastArrivals.rawValue:
             type = .latestArrivals
-            isNeedToHideSeeAllButton = delegate?.lastArrivalsObjectsCount() ?? 0 < kItemsPerPage ? true : false
+            isNeedToHideSeeAllButton = delegate?.lastArrivalsObjectsCount() ?? 0 < kItemsPerPage
         case HomeSection.popular.rawValue:
             type = .popular
             isNeedToHideSeeAllButton = true
         default:
             type = .blogPosts
-            isNeedToHideSeeAllButton = delegate?.articlesCount() ?? 0 < kItemsPerPage ? true : false
+            isNeedToHideSeeAllButton = delegate?.articlesCount() ?? 0 < kItemsPerPage
         }
         
         let view = SeeAllTableHeaderView(type: type)
