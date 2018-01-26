@@ -35,9 +35,7 @@ class CheckoutPaymentAddTableCell: UITableViewCell {
         selectionStyle = .none
     }
     
-    // MARK: - Public
-    
-    public func configure(type: PaymentAddCellType) {
+    func configure(type: PaymentAddCellType) {
         paymentRow = type
         switch type {
         case PaymentAddCellType.type:

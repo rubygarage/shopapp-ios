@@ -11,21 +11,6 @@ import RxSwift
 typealias SelectedVariant = (variant: ProductVariant?, allOptions: [ProductOption], selectedOptions: [SelectedOption], currency: String)
 
 class ProductDetailsViewModel: BaseViewModel {
-    var product = Variable<Product?>(nil)
-    var relatedItems = Variable<[Product]>([Product]())
-    var selectedVariant = PublishSubject<SelectedVariant>()
-    var quantity = Variable<Int>(1)
-    
-    var productId: String!
-    var productVariant: ProductVariant! {
-        didSet {
-            if let productVariant = productVariant {
-                productId = productVariant.productId
-            }
-        }
-    }
-    var currency: String?
-    
     private let addCartProductUseCase = AddCartProductUseCase()
     private let productUseCase = ProductUseCase()
     private let productListUseCase = ProductListUseCase()
@@ -33,6 +18,36 @@ class ProductDetailsViewModel: BaseViewModel {
     private var productOptions = [ProductOption]()
     private var selectedOptions = [SelectedOption]()
     private var selectedProductVariant: ProductVariant?
+    
+    var product = Variable<Product?>(nil)
+    var relatedItems = Variable<[Product]>([Product]())
+    var selectedVariant = PublishSubject<SelectedVariant>()
+    var quantity = Variable<Int>(1)
+    var productId: String!
+    var currency: String?
+    
+    var productVariant: ProductVariant! {
+        didSet {
+            if let productVariant = productVariant {
+                productId = productVariant.productId
+            }
+        }
+    }
+    
+    var addToCart: Observable<Bool> {
+        return Observable.create({ [weak self] event in
+            let productQuantity = self?.quantity.value ?? 1
+            if let cartProduct = CartProduct(with: self?.product.value, productQuantity: productQuantity, variant: self?.selectedProductVariant) {
+                self?.addCartProductUseCase.addCartProduct(cartProduct) { (cartProduct, error) in
+                    let success = cartProduct != nil && error == nil
+                    event.onNext(success)
+                }
+            } else {
+                event.onNext(false)
+            }
+            return Disposables.create()
+        })
+    }
 
     // MARK: - BaseViewModel
 
@@ -40,9 +55,7 @@ class ProductDetailsViewModel: BaseViewModel {
         loadData()
     }
 
-    // MARK: - Public
-
-    public func loadData() {
+    func loadData() {
         state.onNext(.loading(showHud: true))
         productUseCase.getProduct(with: productId) { [weak self] (product, error) in
             if let error = error {
@@ -60,7 +73,7 @@ class ProductDetailsViewModel: BaseViewModel {
         }
     }
     
-    public func selectOption(with name: String, value: String) {
+    func selectOption(with name: String, value: String) {
         let selectedOptionsNames = selectedOptions.map({ $0.name })
         if let index = selectedOptionsNames.index(of: name) {
             selectedOptions[index].value = value
@@ -70,22 +83,6 @@ class ProductDetailsViewModel: BaseViewModel {
         }
     }
     
-    public var addToCart: Observable<Bool> {
-        return Observable.create({ [weak self] event in
-            let productQuantity = self?.quantity.value ?? 1
-            if let cartProduct = CartProduct(with: self?.product.value, productQuantity: productQuantity, variant: self?.selectedProductVariant) {
-                self?.addCartProductUseCase.addCartProduct(cartProduct) { (cartProduct, error) in
-                    let success = cartProduct != nil && error == nil
-                    event.onNext(success)
-                }
-            } else {
-                event.onNext(false)
-            }
-            return Disposables.create()
-        })
-    }
-    
-    // MARK: - private
     private func setupData(product: Product) {
         if selectedOptions.isEmpty {
             setupSelectedOptions(product: product)

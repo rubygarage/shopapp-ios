@@ -23,6 +23,7 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
     
     var checkout: Checkout!
     var selectedType: PaymentType?
+    
     weak var delegate: PaymentTypeViewControllerProtocol?
     
     override func viewDidLoad() {

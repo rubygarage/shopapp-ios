@@ -19,15 +19,13 @@ class CategoryViewModel: GridCollectionViewModel {
     override func tryAgain() {
         reloadData()
     }
-
-    // MARK: - Public
     
-    public func reloadData() {
+    func reloadData() {
         paginationValue = nil
         loadRemoteData()
     }
     
-    public func loadNextPage() {
+    func loadNextPage() {
         paginationValue = products.value.last?.paginationValue
         loadRemoteData()
     }
@@ -48,7 +46,6 @@ class CategoryViewModel: GridCollectionViewModel {
         }
     }
     
-    // MARK: - private
     private func updateData(category: Category) {
         if let items = category.products {
             updateProducts(products: items)

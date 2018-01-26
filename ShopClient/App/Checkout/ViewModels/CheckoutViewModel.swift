@@ -7,6 +7,7 @@
 //
 
 import PassKit
+
 import RxSwift
 
 enum CheckoutSection: Int {
@@ -38,98 +39,10 @@ class CheckoutViewModel: BaseViewModel {
     var billingAddress = Variable<Address?>(nil)
     var selectedType = Variable<PaymentType?>(nil)
     var checkoutSuccedded = PublishSubject<()>()
-    
     var cartItems = [CartProduct]()
     var order: Order?
     var selectedProductVariant: ProductVariant!
     
-    var placeOrderPressed: AnyObserver<()> {
-        return AnyObserver { [weak self] _ in
-            self?.placeOrderAction()
-        }
-    }
-    
-    var isCheckoutValid: Observable<Bool> {
-        return Observable.combineLatest(selectedType.asObservable(), checkout.asObservable(), creditCard.asObservable(), billingAddress.asObservable()) { (type, checkout, card, address) in
-            let applePayCondition = type == .applePay
-            let creditCardCondition = type == .creditCard && checkout != nil && card != nil && address != nil && checkout?.shippingLine != nil
-            return applePayCondition || creditCardCondition
-        }
-    }
-    
-    public func loadData(with disposeBag: DisposeBag) {
-        state.onNext(.loading(showHud: true))
-        checkoutCreateSingle.subscribe(onSuccess: { [weak self] (checkout) in
-            self?.checkout.value = checkout
-            self?.getCustomer()
-        }, onError: { [weak self] (error) in
-            let castedError = error as? RepoError
-            self?.state.onNext(.error(error: castedError))
-        })
-        .disposed(by: disposeBag)
-    }
-    
-    public func getCheckout() {
-        let checkoutId = checkout.value?.id ?? ""
-        checkoutUseCase.getCheckout(with: checkoutId) { [weak self] (result, error) in
-            if let error = error {
-                self?.state.onNext(.error(error: error))
-            }
-            if let checkout = result {
-                self?.checkout.value = checkout
-                self?.state.onNext(.content)
-            }
-        }
-    }
-    
-    public func updateCheckoutShippingAddress(with address: Address, isDefaultAddress: Bool) {
-        state.onNext(.loading(showHud: true))
-        let checkoutId = checkout.value?.id ?? ""
-        checkoutUseCase.updateCheckoutShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
-            if let error = error {
-                self?.state.onNext(.error(error: error))
-            } else if let success = success, success == true {
-                self?.processUpdateCheckoutShippingAddress(address: address, isDefaultAddress: isDefaultAddress)
-            } else {
-                self?.state.onNext(.error(error: RepoError()))
-            }
-        }
-    }
-    
-    public func productVariant(with productVariantId: String) -> ProductVariant? {
-        var variant: ProductVariant?
-        
-        cartItems.forEach {
-            if let productVariant = $0.productVariant, productVariant.id == productVariantId {
-                variant = productVariant
-            }
-        }
-        
-        return variant
-    }
-    
-    public func updateShippingRate(with rate: ShippingRate) {
-        if let checkoutId = checkout.value?.id {
-            state.onNext(.loading(showHud: true))
-            checkoutUseCase.updateShippingRate(with: checkoutId, rate: rate, callback: { [weak self] (result, error) in
-                if let error = error {
-                    self?.state.onNext(.error(error: error))
-                }
-                if let checkout = result {
-                    self?.checkout.value = checkout
-                    self?.state.onNext(.content)
-                }
-            })
-        }
-    }
-    
-    public func getLoginStatus(callback: (_ isLogged: Bool) -> Void) {
-        loginUseCase.getLoginStatus { (isLogged) in
-            callback(isLogged)
-        }
-    }
-    
-    // MARK: - private
     private var cartItemsSingle: Single<[CartProduct]> {
         return Single.create(subscribe: { [weak self] (event) in
             self?.cartProductListUseCase.getCartProductList({ [weak self] (result, error) in
@@ -144,7 +57,6 @@ class CheckoutViewModel: BaseViewModel {
             return Disposables.create()
         })
     }
-    
     private var checkoutCreateSingle: Single<Checkout> {
         return cartItemsSingle.flatMap({ (cartItems) in
             Single.create(subscribe: { [weak self] (event) in
@@ -159,6 +71,91 @@ class CheckoutViewModel: BaseViewModel {
                 return Disposables.create()
             })
         })
+    }
+    
+    var placeOrderPressed: AnyObserver<()> {
+        return AnyObserver { [weak self] _ in
+            self?.placeOrderAction()
+        }
+    }
+    var isCheckoutValid: Observable<Bool> {
+        return Observable.combineLatest(selectedType.asObservable(), checkout.asObservable(), creditCard.asObservable(), billingAddress.asObservable()) { (type, checkout, card, address) in
+            let applePayCondition = type == .applePay
+            let creditCardCondition = type == .creditCard && checkout != nil && card != nil && address != nil && checkout?.shippingLine != nil
+            return applePayCondition || creditCardCondition
+        }
+    }
+    
+    func loadData(with disposeBag: DisposeBag) {
+        state.onNext(.loading(showHud: true))
+        checkoutCreateSingle.subscribe(onSuccess: { [weak self] (checkout) in
+            self?.checkout.value = checkout
+            self?.getCustomer()
+        }, onError: { [weak self] (error) in
+            let castedError = error as? RepoError
+            self?.state.onNext(.error(error: castedError))
+        })
+        .disposed(by: disposeBag)
+    }
+    
+    func getCheckout() {
+        let checkoutId = checkout.value?.id ?? ""
+        checkoutUseCase.getCheckout(with: checkoutId) { [weak self] (result, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            }
+            if let checkout = result {
+                self?.checkout.value = checkout
+                self?.state.onNext(.content)
+            }
+        }
+    }
+    
+    func updateCheckoutShippingAddress(with address: Address, isDefaultAddress: Bool) {
+        state.onNext(.loading(showHud: true))
+        let checkoutId = checkout.value?.id ?? ""
+        checkoutUseCase.updateCheckoutShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            } else if let success = success, success == true {
+                self?.processUpdateCheckoutShippingAddress(address: address, isDefaultAddress: isDefaultAddress)
+            } else {
+                self?.state.onNext(.error(error: RepoError()))
+            }
+        }
+    }
+    
+    func productVariant(with productVariantId: String) -> ProductVariant? {
+        var variant: ProductVariant?
+        
+        cartItems.forEach {
+            if let productVariant = $0.productVariant, productVariant.id == productVariantId {
+                variant = productVariant
+            }
+        }
+        
+        return variant
+    }
+    
+    func updateShippingRate(with rate: ShippingRate) {
+        if let checkoutId = checkout.value?.id {
+            state.onNext(.loading(showHud: true))
+            checkoutUseCase.updateShippingRate(with: checkoutId, rate: rate, callback: { [weak self] (result, error) in
+                if let error = error {
+                    self?.state.onNext(.error(error: error))
+                }
+                if let checkout = result {
+                    self?.checkout.value = checkout
+                    self?.state.onNext(.content)
+                }
+            })
+        }
+    }
+    
+    func getLoginStatus(callback: (_ isLogged: Bool) -> Void) {
+        loginUseCase.getLoginStatus { (isLogged) in
+            callback(isLogged)
+        }
     }
     
     private func getCustomer() {

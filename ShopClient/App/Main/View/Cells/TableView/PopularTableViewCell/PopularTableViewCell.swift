@@ -24,14 +24,14 @@ class PopularTableViewCell: UITableViewCell, PopularTableDataSourceProtocol, Pop
     
     weak var cellDelegate: PopularCellDelegate?
     
+    // MARK: - View lifecycle
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         selectionStyle = .none
         setupCollectionView()
     }
-    
-    // MARK: - Public
     
     func configure(with products: [Product]?) {
         if let items = products {
@@ -40,8 +40,6 @@ class PopularTableViewCell: UITableViewCell, PopularTableDataSourceProtocol, Pop
             collectionView.reloadData()
         }
     }
-    
-    // MARK: - Private
     
     private func setupCollectionView() {
         let nib = UINib(nibName: String(describing: GridCollectionViewCell.self), bundle: nil)

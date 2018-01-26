@@ -13,12 +13,10 @@ typealias AddressListCompletion = (_ address: Address) -> Void
 class AddressListViewModel: BaseViewModel {
     var customerAddresses = Variable<[Address]>([Address]())
     var didSelectAddress = PublishSubject<Address>()
-    
     var selectedAddress: Address?
     var completion: AddressListCompletion?
     
-    // MARK: - public
-    public func loadCustomerAddresses() {
+    func loadCustomerAddresses() {
         state.onNext(.loading(showHud: true))
         Repository.shared.getCustomer { [weak self] (customer, _) in
             if let addresses = customer?.addresses {
@@ -28,7 +26,7 @@ class AddressListViewModel: BaseViewModel {
         }
     }
     
-    public func item(at index: Int) -> AddressTuple {
+    func item(at index: Int) -> AddressTuple {
         if index < customerAddresses.value.count {
             let address = customerAddresses.value[index]
             let selected = selectedAddress?.isEqual(to: address) ?? false
@@ -37,14 +35,14 @@ class AddressListViewModel: BaseViewModel {
         return (Address(), false)
     }
     
-    public func updateCheckoutShippingAddress(with address: Address) {
+    func updateCheckoutShippingAddress(with address: Address) {
         selectedAddress = address
         loadCustomerAddresses()
         completion?(address)
         didSelectAddress.onNext(address)
     }
     
-    public func updateAddress(with address: Address, isSelected: Bool) {
+    func updateAddress(with address: Address, isSelected: Bool) {
         state.onNext(.loading(showHud: true))
         Repository.shared.updateCustomerAddress(with: address) { [weak self] (success, error) in
             if let error = error {
@@ -56,7 +54,7 @@ class AddressListViewModel: BaseViewModel {
         }
     }
     
-    public func deleteCustomerAddress(with address: Address) {
+    func deleteCustomerAddress(with address: Address) {
         state.onNext(.loading(showHud: true))
         Repository.shared.deleteCustomerAddress(with: address.id) { [weak self] (success, error) in
             if let error = error {
@@ -68,7 +66,7 @@ class AddressListViewModel: BaseViewModel {
         }
     }
     
-    public func addCustomerAddress(with address: Address, isDefaultAddress: Bool) {
+    func addCustomerAddress(with address: Address, isDefaultAddress: Bool) {
         state.onNext(.loading(showHud: true))
         Repository.shared.addCustomerAddress(with: address) { [weak self] (addressId, error) in
             if let error = error {
@@ -80,7 +78,6 @@ class AddressListViewModel: BaseViewModel {
         }
     }
     
-    // MARK: - private
     private func processAddressUpdatingResponse(with success: Bool, address: Address, isSelected: Bool) {
         if success {
             processSelectedAddressUpdatingResponse(with: address, isSelected: isSelected)

@@ -9,31 +9,29 @@
 import RxSwift
 
 class SearchViewModel: GridCollectionViewModel {
-    var searchPhrase = Variable<String>("")
-    var categories = Variable<[Category]>([Category]())
-    
     private let categoryListUseCase = CategoryListUseCase()
     private let productListUseCase = ProductListUseCase()
+    
+    var searchPhrase = Variable<String>("")
+    var categories = Variable<[Category]>([Category]())
 
     // MARK: - BaseViewModel
 
     override func tryAgain() {
         reloadData()
     }
-
-    // MARK: - Public
     
-    public func reloadData() {
+    func reloadData() {
         paginationValue = nil
         loadRemoteData()
     }
     
-    public func loadNextPage() {
+    func loadNextPage() {
         paginationValue = products.value.last?.paginationValue
         loadRemoteData()
     }
     
-    public func loadCategories() {
+    func loadCategories() {
         state.onNext(.loading(showHud: true))
         categoryListUseCase.getCategoryList { [weak self] (catogories, error) in
             if let error = error {
@@ -46,19 +44,18 @@ class SearchViewModel: GridCollectionViewModel {
         }
     }
     
-    public func clearResult() {
+    func clearResult() {
         products.value.removeAll()
     }
     
-    public func categoriesCount() -> Int {
+    func categoriesCount() -> Int {
         return categories.value.count
     }
     
-    public func category(at index: Int) -> Category {
+    func category(at index: Int) -> Category {
         return categories.value[index]
     }
     
-    // MARK: - private
     private func loadRemoteData() {
         guard !searchPhrase.value.isEmpty else {
             updateProducts(products: [Product]())

@@ -86,13 +86,14 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
     }
     
     private func populateViewsIfNeeded() {
-        if let card = card {
-            holderNameTextFieldView.text = card.holderName
-            cardNumberTextFieldView.text = card.cardNumber
-            securityCodeTextFieldView.text = card.verificationCode
-            monthExpirationView.text = card.expireMonth
-            yearExpirationView.text = card.expireYear
-            viewModel.updateFields()
+        guard let card = card else {
+            return
         }
+        holderNameTextFieldView.text = card.holderName
+        cardNumberTextFieldView.text = card.cardNumber
+        securityCodeTextFieldView.text = card.verificationCode
+        monthExpirationView.text = card.expireMonth
+        yearExpirationView.text = card.expireYear
+        viewModel.updateFields()
     }
 }

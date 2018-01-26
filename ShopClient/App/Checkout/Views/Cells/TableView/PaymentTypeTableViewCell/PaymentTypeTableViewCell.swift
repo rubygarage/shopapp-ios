@@ -22,10 +22,7 @@ class PaymentTypeTableViewCell: UITableViewCell {
         paymentTypeLabel.text = "Label.Payment.CreditCard".localizable
     }
     
-    // MARK: - Public
-    
-    public func configure(with type: PaymentType, selected: Bool) {
-        
+    func configure(with type: PaymentType, selected: Bool) {
         var paymentTitle = ""
         var paymentImage = UIImage()
         switch type {

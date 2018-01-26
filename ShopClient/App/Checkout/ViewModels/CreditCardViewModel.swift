@@ -18,7 +18,6 @@ class CreditCardViewModel: BaseViewModel {
     var securityCodeText = Variable<String>("")
     var holderNameErrorMessage = PublishSubject<String>()
     var cardNumberErrorMessage = PublishSubject<String>()
-    
     var card: CreditCard?
     var completion: CreditCardCompletion?
         
@@ -27,24 +26,22 @@ class CreditCardViewModel: BaseViewModel {
             return holderName.hasAtLeastOneSymbol() && cardNumber.isValidAsCardNumber() && monthExpiration.hasAtLeastOneSymbol() && yearExpiration.hasAtLeastOneSymbol() && securityCode.isValidAsCVV()
         }
     }
-    
     var submitTapped: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
             self?.validateData()
         }
     }
     
-    // MARK: - Public
-    
-    public func updateFields() {
-        holderNameText.value = card?.holderName ?? ""
-        cardNumberText.value = card?.cardNumber ?? ""
-        monthExpirationText.value = card?.expireMonth ?? ""
-        yearExpirationText.value = card?.expireYear ?? ""
-        securityCodeText.value = card?.verificationCode ?? ""
+    func updateFields() {
+        guard let card = card else {
+            return
+        }
+        holderNameText.value = card.holderName
+        cardNumberText.value = card.cardNumber
+        monthExpirationText.value = card.expireMonth
+        yearExpirationText.value = card.expireYear
+        securityCodeText.value = card.verificationCode
     }
-    
-    // MARK: - Private
     
     private func validateData() {
         if holderNameText.value.isValidAsHolderName() && cardNumberText.value.luhnValid() {

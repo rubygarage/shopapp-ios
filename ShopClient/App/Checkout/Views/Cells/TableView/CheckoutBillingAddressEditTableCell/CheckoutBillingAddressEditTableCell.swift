@@ -28,9 +28,7 @@ class CheckoutBillingAddressEditTableCell: UITableViewCell {
         editButton?.setTitle("Button.Edit".localizable.uppercased(), for: .normal)
     }
     
-    // MARK: - Public
-    
-    public func configure(with address: Address) {
+    func configure(with address: Address) {
         addressTitleLabel.text = "Label.BillingAddress".localizable
         addressDescriptionLabel.text = address.fullAddress
     }
