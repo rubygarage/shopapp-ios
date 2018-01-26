@@ -72,6 +72,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         tableView?.dataSource = tableDataSource
         
         tableDelegate = CheckoutTableDelegate()
+        tableDelegate.delegate = self
         tableView?.delegate = tableDelegate
         
         tableView?.contentInset = TableView.defaultContentInsets
