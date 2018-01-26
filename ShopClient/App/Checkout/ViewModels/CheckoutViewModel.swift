@@ -225,8 +225,7 @@ class CheckoutViewModel: BaseViewModel {
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            }
-            if let order = response {
+            } else if let order = response {
                 strongSelf.clearCart(with: order)
             }
         }
