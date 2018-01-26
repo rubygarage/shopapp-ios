@@ -23,7 +23,6 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     private var destinationAddress: Address?
     private var destinationAddressFormCompletion: AddressFormCompletion!
     
-    var destinationCreditCardCompletion: CreditCardPaymentCompletion?
     var selectedAddress: Address?
     var completion: AddressListCompletion?
     var addressListType: AddressListType = .shipping
@@ -69,7 +68,6 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
             .subscribe(onNext: { [weak self] (address) in
                 if self?.addressListType == .billing {
                     self?.destinationAddress = address
-                    self?.performSegue(withIdentifier: SegueIdentifiers.toCreditCard, sender: self)
                 }
         })
         .disposed(by: disposeBag)
@@ -126,9 +124,6 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
         if let addressFormViewController = segue.destination as? AddressFormViewController {
             addressFormViewController.address = destinationAddress
             addressFormViewController.completion = destinationAddressFormCompletion
-        } else if let creditCardViewController = segue.destination as? CreditCardViewController {
-            creditCardViewController.billingAddres = destinationAddress
-            creditCardViewController.completion = destinationCreditCardCompletion
         }
     }
 }

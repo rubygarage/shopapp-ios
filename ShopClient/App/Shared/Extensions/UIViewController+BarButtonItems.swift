@@ -11,8 +11,19 @@ import UIKit
 private let kCustomBarItemWidth: CGFloat = 32
 
 extension UIViewController {
+    func addCartBarButton() {
+        navigationItem.rightBarButtonItem = cartBarItem()
+    }
     
-    // MARK: - Private
+    func addBackButtonIfNeeded() {
+        if navigationController?.viewControllers.first != self {
+            navigationItem.leftBarButtonItem = backButton()
+        }
+    }
+    
+    func addCloseButton() {
+        navigationItem.rightBarButtonItem = closeButton()
+    }
     
     private func cartBarItem() -> UIBarButtonItem {
         let cartView = CartButtonView(frame: CGRect(x: 0, y: 0, width: kCustomBarItemWidth, height: kCustomBarItemWidth))
@@ -31,22 +42,6 @@ extension UIViewController {
     
     private func closeButton() -> UIBarButtonItem {
         return UIBarButtonItem(image: #imageLiteral(resourceName: "cross"), style: .plain, target: self, action: #selector(self.closeButtonHandler))
-    }
-    
-    // MARK: - Public
-    
-    public func addCartBarButton() {
-        navigationItem.rightBarButtonItem = cartBarItem()
-    }
-    
-    public func addBackButtonIfNeeded() {
-        if navigationController?.viewControllers.first != self {
-            navigationItem.leftBarButtonItem = backButton()
-        }
-    }
-    
-    public func addCloseButton() {
-        navigationItem.rightBarButtonItem = closeButton()
     }
     
     // MARK: - Actions

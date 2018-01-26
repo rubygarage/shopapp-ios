@@ -18,30 +18,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="pyA-b5-EGg">
-                                <rect key="frame" x="0.0" y="64" width="375" height="553"/>
-                                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="elL-2l-Ht7">
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ta6-JQ-eSm">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <state key="normal" title="Button">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="EZ7-t1-Y5Y"/>
                                     <constraint firstItem="ta6-JQ-eSm" firstAttribute="leading" secondItem="elL-2l-Ht7" secondAttribute="leading" id="HGo-j9-zEu"/>
                                     <constraint firstAttribute="bottom" secondItem="ta6-JQ-eSm" secondAttribute="bottom" id="LyQ-h0-4iK"/>
-                                    <constraint firstAttribute="height" constant="50" id="NI1-Tg-tE7"/>
                                     <constraint firstItem="ta6-JQ-eSm" firstAttribute="top" secondItem="elL-2l-Ht7" secondAttribute="top" id="VyU-ZV-Ko6"/>
                                     <constraint firstAttribute="trailing" secondItem="ta6-JQ-eSm" secondAttribute="trailing" id="rLc-5C-dNN"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="pyA-b5-EGg">
+                                <rect key="frame" x="0.0" y="64" width="375" height="553"/>
+                                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -58,13 +62,13 @@
                     <navigationItem key="navigationItem" id="uMZ-fA-UDq"/>
                     <connections>
                         <outlet property="placeOrderButton" destination="ta6-JQ-eSm" id="yFW-x8-nNg"/>
-                        <outlet property="placeOrderHeightConstraint" destination="NI1-Tg-tE7" id="l1G-Hq-ams"/>
                         <outlet property="tableView" destination="pyA-b5-EGg" id="4nf-Ch-xLB"/>
                         <segue destination="Yjd-px-Jvs" kind="show" identifier="toAddressList" id="dnR-TS-EYt"/>
                         <segue destination="zXe-Cz-Abu" kind="show" identifier="toAddressForm" id="gfd-AL-YqW"/>
                         <segue destination="c3v-9W-mKd" kind="show" identifier="toPaymentType" id="CGV-uG-Hxc"/>
                         <segue destination="RiA-xA-2z5" kind="show" identifier="toProductDetails" id="zB2-WO-his"/>
                         <segue destination="cpJ-cT-Uv8" kind="presentation" identifier="toSuccessCheckout" id="2Ja-VQ-reW"/>
+                        <segue destination="35q-zi-ACv" kind="show" identifier="toCreditCard" id="O98-nT-rIz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWy-vV-BzK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -104,12 +108,11 @@
                     <connections>
                         <outlet property="tableView" destination="7x0-g5-3yi" id="Imt-Lf-dDG"/>
                         <segue destination="zXe-Cz-Abu" kind="show" identifier="toAddressForm" id="CAU-cl-Z7h"/>
-                        <segue destination="35q-zi-ACv" kind="show" identifier="toCreditCard" id="tdz-rN-PUG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0dC-mI-bYZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-449" y="896"/>
+            <point key="canvasLocation" x="-831" y="961"/>
         </scene>
         <!--Address Form View Controller-->
         <scene sceneID="l9L-mQ-41u">
@@ -350,7 +353,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="218-Br-ENO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="351" y="963"/>
+            <point key="canvasLocation" x="-50" y="1030"/>
         </scene>
         <!--Payment Type View Controller-->
         <scene sceneID="E5U-uh-pFk">
@@ -382,7 +385,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pi9-aR-oRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1222" y="896"/>
+            <point key="canvasLocation" x="-1602" y="960"/>
         </scene>
         <!--Credit Card View Controller-->
         <scene sceneID="tYZ-iz-I58">
@@ -521,7 +524,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epd-Im-XuG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-449" y="1687"/>
+            <point key="canvasLocation" x="1490" y="959"/>
         </scene>
         <!--Checkout Success View Controller-->
         <scene sceneID="spq-u7-sXe">
@@ -656,7 +659,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dCz-R5-iVh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1103" y="894"/>
+            <point key="canvasLocation" x="722" y="962"/>
         </scene>
         <!--OrderDetailsControllerIdentifier-->
         <scene sceneID="b5U-HQ-CTW">

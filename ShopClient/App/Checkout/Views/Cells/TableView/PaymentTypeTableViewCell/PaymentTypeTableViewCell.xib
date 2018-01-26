@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,16 +30,16 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGk-ti-Eqs">
-                                <rect key="frame" x="63" y="22" width="275" height="16"/>
+                                <rect key="frame" x="63" y="22" width="235" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="gis-Oh-DPI">
-                                <rect key="frame" x="332" y="25" width="6" height="10"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="radio_btn_disabled" translatesAutoresizingMaskIntoConstraints="NO" id="dSq-84-YLk">
+                                <rect key="frame" x="314" y="18" width="24" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="6" id="R1N-CY-tw5"/>
-                                    <constraint firstAttribute="height" constant="10" id="YTa-jr-DLE"/>
+                                    <constraint firstAttribute="height" constant="24" id="Moe-WN-lVO"/>
+                                    <constraint firstAttribute="width" constant="24" id="VSl-Hf-PbJ"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -49,9 +49,9 @@
                             <constraint firstItem="vGk-ti-Eqs" firstAttribute="centerY" secondItem="RKS-4x-Ae0" secondAttribute="centerY" id="7pD-Dh-nCT"/>
                             <constraint firstItem="vGk-ti-Eqs" firstAttribute="leading" secondItem="Ob7-kT-dzp" secondAttribute="trailing" constant="16" id="891-HP-K5j"/>
                             <constraint firstItem="Ob7-kT-dzp" firstAttribute="leading" secondItem="RKS-4x-Ae0" secondAttribute="leading" constant="20" id="AhZ-wi-b1w"/>
-                            <constraint firstItem="gis-Oh-DPI" firstAttribute="centerY" secondItem="vGk-ti-Eqs" secondAttribute="centerY" id="keL-Kf-fhH"/>
-                            <constraint firstAttribute="trailing" secondItem="vGk-ti-Eqs" secondAttribute="trailing" constant="16" id="tlQ-Ac-PDw"/>
-                            <constraint firstAttribute="trailing" secondItem="gis-Oh-DPI" secondAttribute="trailing" constant="16" id="yVO-ri-vaB"/>
+                            <constraint firstAttribute="trailing" secondItem="dSq-84-YLk" secondAttribute="trailing" constant="16" id="Gy7-A8-U0H"/>
+                            <constraint firstItem="dSq-84-YLk" firstAttribute="leading" secondItem="vGk-ti-Eqs" secondAttribute="trailing" constant="16" id="Lu2-U0-3dV"/>
+                            <constraint firstItem="dSq-84-YLk" firstAttribute="centerY" secondItem="Ob7-kT-dzp" secondAttribute="centerY" id="oq2-fb-WPr"/>
                             <constraint firstItem="Ob7-kT-dzp" firstAttribute="centerY" secondItem="RKS-4x-Ae0" secondAttribute="centerY" id="zGI-dw-gJd"/>
                         </constraints>
                     </view>
@@ -66,15 +66,15 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="arrowImageView" destination="gis-Oh-DPI" id="DfC-vh-A6t"/>
                 <outlet property="paymentTypeImage" destination="Ob7-kT-dzp" id="h1y-wR-eRS"/>
                 <outlet property="paymentTypeLabel" destination="vGk-ti-Eqs" id="su7-Lu-tlu"/>
+                <outlet property="selectedImageView" destination="dSq-84-YLk" id="xvt-eT-fku"/>
             </connections>
             <point key="canvasLocation" x="51" y="61.5"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="arrow_right" width="6" height="10"/>
         <image name="payment_card" width="27" height="17"/>
+        <image name="radio_btn_disabled" width="24" height="24"/>
     </resources>
 </document>

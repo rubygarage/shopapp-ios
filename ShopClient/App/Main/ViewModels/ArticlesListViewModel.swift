@@ -18,15 +18,13 @@ class ArticlesListViewModel: BasePaginationViewModel {
     override func tryAgain() {
         reloadData()
     }
-
-    // MARK: - Public
     
-    public func reloadData() {
+    func reloadData() {
         paginationValue = nil
         loadRemoteData()
     }
     
-    public func loadNextPage() {
+    func loadNextPage() {
         paginationValue = items.value.last?.paginationValue
         loadRemoteData()
     }

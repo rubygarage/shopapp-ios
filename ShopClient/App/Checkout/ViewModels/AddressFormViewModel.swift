@@ -22,7 +22,6 @@ class AddressFormViewModel: BaseViewModel {
     var phoneText = Variable<String>("")
     var useDefaultShippingAddress = Variable<Bool>(false)
     var addressSubmitted = PublishSubject<()>()
-
     var address: Address?
     var completion: AddressFormCompletion?
     
@@ -35,33 +34,32 @@ class AddressFormViewModel: BaseViewModel {
             return textFields.map({ $0.isEmpty == false }).filter({ $0 == false }).isEmpty
         })
     }
-    
     var submitTapped: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
             self?.submitAction()
         }
     }
-    
     var useDefaultAddressTapped: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
             self?.updateCheckbox()
         }
     }
     
-    // MARK: - public
-    public func updateFields() {
-        countryText.value = address?.country ?? ""
-        firstNameText.value = address?.firstName ?? ""
-        lastNameText.value = address?.lastName ?? ""
-        addressText.value = address?.address ?? ""
-        addressOptionalText.value = address?.secondAddress ?? ""
-        cityText.value = address?.city ?? ""
-        stateText.value = address?.state ?? ""
-        zipText.value = address?.zip ?? ""
-        phoneText.value = address?.phone ?? ""
+    func updateFields() {
+        guard let address = address else {
+            return
+        }
+        countryText.value = address.country ?? ""
+        firstNameText.value = address.firstName ?? ""
+        lastNameText.value = address.lastName ?? ""
+        addressText.value = address.address ?? ""
+        addressOptionalText.value = address.secondAddress ?? ""
+        cityText.value = address.city ?? ""
+        stateText.value = address.state ?? ""
+        zipText.value = address.zip ?? ""
+        phoneText.value = address.phone ?? ""
     }
-    
-    // MARK: - private
+        
     private func submitAction() {
         completion?(getAddress(), useDefaultShippingAddress.value)
         addressSubmitted.onNext()

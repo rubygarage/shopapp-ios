@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol PaymentTypeViewControllerProtocol: class {
+    func didSelect(paymentType: PaymentType)
+}
+
 class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
     @IBOutlet private weak var tableView: UITableView!
     
@@ -17,15 +21,16 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
     // swiftlint:enable weak_delegate
     private var destinationTitle: String!
     
-    var creditCardCompletion: CreditCardPaymentCompletion?
     var checkout: Checkout!
+    var selectedType: PaymentType?
+    
+    weak var delegate: PaymentTypeViewControllerProtocol?
     
     override func viewDidLoad() {
         viewModel = PaymentTypeViewModel()
         super.viewDidLoad()
 
         setupViews()
-        setupViewModel()
         setupTableView()
     }
     
@@ -33,15 +38,12 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
         title = "ControllerTitle.PaymentType".localizable
     }
     
-    private func setupViewModel() {
-        viewModel.checkout = checkout
-    }
-    
     private func setupTableView() {
         let paymentTypeNib = UINib(nibName: String(describing: PaymentTypeTableViewCell.self), bundle: nil)
         tableView.register(paymentTypeNib, forCellReuseIdentifier: String(describing: PaymentTypeTableViewCell.self))
         
         tableDataSource = PaymentTypeDataSource()
+        tableDataSource.delegate = self
         tableView.dataSource = tableDataSource
         
         tableDelegate = PaymentTypeDelegate()
@@ -50,37 +52,27 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
         
         tableView.contentInset = TableView.paymentTypeContentInsets
     }
-    
-    fileprivate func setupApplePay() {
-        viewModel.setupApplePay()
-    }
 
-    fileprivate func reloadData() {
+    fileprivate func reloadTable() {
         tableView.reloadData()
-    }
-    
-    // MARK: - Segues
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let addressListViewController = segue.destination as? AddressListViewController {
-            addressListViewController.title = "ControllerTitle.BillingAddress".localizable
-            addressListViewController.addressListType = .billing
-            addressListViewController.destinationCreditCardCompletion = creditCardCompletion
-        }
     }
 }
 
 // MARK: - PaymentTypeDelegateProtocol
 
 extension PaymentTypeViewController: PaymentTypeDelegateProtocol {
-    func didSelectPayment(type: PaymentTypeSection) {
-        viewModel.selectedType = type
-        reloadData()
-        switch type {
-        case .applePay:
-            setupApplePay()
-        default:
-            performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
-        }
+    func didSelectPayment(type: PaymentType) {
+        delegate?.didSelect(paymentType: type)
+        selectedType = type
+        reloadTable()
+        navigationController?.popViewController(animated: true)
+    }
+}
+
+// MARK: - PaymentTypeDataSourceProtocol
+
+extension PaymentTypeViewController: PaymentTypeDataSourceProtocol {
+    func selectedPaymentType() -> PaymentType? {
+        return selectedType
     }
 }

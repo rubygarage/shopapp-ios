@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PaymentTypeDelegateProtocol: class {
-    func didSelectPayment(type: PaymentTypeSection)
+    func didSelectPayment(type: PaymentType)
 }
 
 class PaymentTypeDelegate: NSObject, UITableViewDelegate {
@@ -18,7 +18,7 @@ class PaymentTypeDelegate: NSObject, UITableViewDelegate {
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let type = PaymentTypeSection(rawValue: indexPath.row) {
+        if let type = PaymentType(rawValue: indexPath.row) {
             delegate?.didSelectPayment(type: type)
         }
     }

@@ -33,15 +33,11 @@ class AddressListTableViewCell: UITableViewCell {
         setupViews()
     }
     
-    // MARK: - Public
-    
-    public func configure(with address: Address, selected: Bool) {
+    func configure(with address: Address, selected: Bool) {
         self.address = address
         populateViews(with: address, selected: selected)
     }
-    
-    // MARK: - Private
-    
+        
     private func setupViews() {
         editButton.setTitle("Button.Edit".localizable.uppercased(), for: .normal)
         deleteButton.setTitle("Button.Delete".localizable.uppercased(), for: .normal)

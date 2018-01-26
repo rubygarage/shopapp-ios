@@ -8,7 +8,7 @@
 
 import RxSwift
 
-typealias CreditCardPaymentCompletion = (_ billingAddress: Address, _ card: CreditCard) -> Void
+typealias CreditCardCompletion = (_ card: CreditCard) -> Void
 
 class CreditCardViewModel: BaseViewModel {
     var holderNameText = Variable<String>("")
@@ -18,23 +18,31 @@ class CreditCardViewModel: BaseViewModel {
     var securityCodeText = Variable<String>("")
     var holderNameErrorMessage = PublishSubject<String>()
     var cardNumberErrorMessage = PublishSubject<String>()
-    
-    var billingAddres: Address!
-    var completion: CreditCardPaymentCompletion?
-    
+    var card: CreditCard?
+    var completion: CreditCardCompletion?
+        
     var isCardDataValid: Observable<Bool> {
         return Observable.combineLatest(holderNameText.asObservable(), cardNumberText.asObservable(), monthExpirationText.asObservable(), yearExpirationText.asObservable(), securityCodeText.asObservable()) { holderName, cardNumber, monthExpiration, yearExpiration, securityCode in
             return holderName.hasAtLeastOneSymbol() && cardNumber.isValidAsCardNumber() && monthExpiration.hasAtLeastOneSymbol() && yearExpiration.hasAtLeastOneSymbol() && securityCode.isValidAsCVV()
         }
     }
-    
     var submitTapped: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
             self?.validateData()
         }
     }
     
-    // MARK: - private
+    func updateFields() {
+        guard let card = card else {
+            return
+        }
+        holderNameText.value = card.holderName
+        cardNumberText.value = card.cardNumber
+        monthExpirationText.value = card.expireMonth
+        yearExpirationText.value = card.expireYear
+        securityCodeText.value = card.verificationCode
+    }
+    
     private func validateData() {
         if holderNameText.value.isValidAsHolderName() && cardNumberText.value.luhnValid() {
             submitAction()
@@ -44,7 +52,7 @@ class CreditCardViewModel: BaseViewModel {
     }
     
     private func submitAction() {
-        completion?(billingAddres, generateCreditCard())
+        completion?(generateCreditCard())
     }
     
     private func processErrors() {

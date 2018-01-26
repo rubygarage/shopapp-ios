@@ -13,14 +13,14 @@ private let kShopifyStorefrontAccessToken = "fd719b8c3c31ea4ea5f4078e8b9a759f"
 private let kShopifyStorefrontURL = "celawojev.myshopify.com"
 private let kShopifyItemsMaxCount: Int32 = 250
 private let kShopifyStoreName = "celawojev"
-private let kMerchantID = "merchant.com.rubygarage.shopclient.test"
+private let kMerchantID = "merchant.com.rubygarage.shopclient.test.temp"
 private let kShopifyPaymetTypeApplePay = "apple_pay"
 private let kShopifyRetryFinite = 10
 
 class API: NSObject, APIInterface, PaySessionDelegate {
     private var client: Graph.Client?
     private var paySession: PaySession?
-    private var paymentByApplePayCompletion: RepoCallback<Bool>?
+    private var paymentByApplePayCompletion: RepoCallback<Order>?
     
     override init() {
         super.init()
@@ -310,12 +310,14 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         shippingAddress.update(with: address)
         let checkoutId = GraphQL.ID.init(rawValue: checkoutId)
         let query = updateShippingAddressQuery(shippingAddress: shippingAddress, checkoutId: checkoutId)
-        let task = client?.mutateGraphWith(query, completionHandler: { (response, error) in
-            if response != nil {
+        let task = client?.mutateGraphWith(query, completionHandler: { [weak self] (response, error) in
+            if response?.checkoutShippingAddressUpdate?.checkout.shippingAddress != nil {
                 callback(true, nil)
-            }
-            if let responseError = ContentError(with: error) {
-                callback(false, responseError)
+            } else if let error = response?.checkoutShippingAddressUpdate?.userErrors.first {
+                let userError = self?.process(error: error)
+                callback(false, userError)
+            } else {
+                callback(false, ContentError(with: error))
             }
         })
         run(task: task, callback: callback)
@@ -372,7 +374,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         }
     }
     
-    func setupApplePay(with checkout: Checkout, callback: @escaping RepoCallback<Bool>) {
+    func setupApplePay(with checkout: Checkout, callback: @escaping RepoCallback<Order>) {
         paymentByApplePayCompletion = callback
         getShopCurrency { [weak self] (response, _) in
             if let currencyCode = response?.currencyCode.rawValue, let countryCode = response?.countryCode.rawValue {
@@ -875,7 +877,9 @@ class API: NSObject, APIInterface, PaySessionDelegate {
                     .shippingLine({ $0
                         .price()
                     })
+                    .shippingAddress(mailingAddressQuery())
                 })
+                .userErrors(userErrorQuery())
             })
         }
     }
@@ -1449,12 +1453,12 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         let idempotencyKey = UUID().uuidString
         if let email = sessionData().email {
             updateCheckout(with: checkout.id, email: email, completion: { [weak self] (success, error) in
-                self?.completeCheckout(checkout, billingAddress: authorization.billingAddress, applePayToken: authorization.token, idempotencyToken: idempotencyKey, completion: { (payment, error) in
-                    if let success = payment?.ready, success == true {
-                        self?.paymentByApplePayCompletion?(true, nil)
+                self?.completeCheckout(checkout, billingAddress: authorization.billingAddress, applePayToken: authorization.token, idempotencyToken: idempotencyKey, completion: { (order, error) in
+                    if let order = order {
+                        self?.paymentByApplePayCompletion?(order, nil)
                         completeTransaction(.success)
                     } else {
-                        self?.paymentByApplePayCompletion?(false, error)
+                        self?.paymentByApplePayCompletion?(nil, error)
                         completeTransaction(.failure)
                     }
                 })
@@ -1504,14 +1508,12 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         task?.resume()
     }
     
-    func completeCheckout(_ checkout: PayCheckout, billingAddress: PayAddress, applePayToken token: String, idempotencyToken: String, completion: @escaping (_ payment: Storefront.Payment?, _ error: RepoError?) -> Void) {
+    func completeCheckout(_ checkout: PayCheckout, billingAddress: PayAddress, applePayToken token: String, idempotencyToken: String, completion: @escaping (_ order: Order?, _ error: RepoError?) -> Void) {
         let mutation = mutationForCompleteCheckoutUsingApplePay(with: checkout, billingAddress: billingAddress, token: token, idempotencyToken: idempotencyToken)
         let task = client?.mutateGraphWith(mutation, completionHandler: { [weak self] (response, error) in
-            if let payment = response?.checkoutCompleteWithTokenizedPayment?.payment {
-                print("Payment created, fetching status...")
-                self?.fetchCompletedPayment(with: payment.id, completion: { (payment) in
-                    completion(payment, nil)
-                })
+            if response?.checkoutCompleteWithTokenizedPayment?.payment != nil {
+                let checkoutId = GraphQL.ID.init(rawValue: checkout.id)
+                self?.completePayPolling(with: checkoutId, callback: completion)
             } else if let responseError = response?.checkoutCompleteWithTokenizedPayment?.userErrors.first {
                 let error = self?.process(error: responseError)
                 completion(nil, error)
@@ -1519,26 +1521,6 @@ class API: NSObject, APIInterface, PaySessionDelegate {
                 completion(nil, RepoError())
             }
         })
-        task?.resume()
-    }
-    
-    func fetchCompletedPayment(with paymentId: GraphQL.ID, completion: @escaping (Storefront.Payment?) -> Void) {
-        let retry = Graph.RetryHandler<Storefront.QueryRoot>(endurance: .finite(kShopifyRetryFinite)) { response, _ -> Bool in
-            if let payment = response?.node as? Storefront.Payment {
-                return !payment.ready
-            } else {
-                return false
-            }
-        }
-        
-        let query = paymentNodeQuery(with: paymentId)
-        let task  = client?.queryGraphWith(query, retryHandler: retry) { (query, _) in
-            if let payment = query?.node as? Storefront.Payment {
-                completion(payment)
-            } else {
-                completion(nil)
-            }
-        }
         task?.resume()
     }
     
@@ -1609,6 +1591,9 @@ internal extension Storefront.MailingAddressInput {
         lastName = address.lastName.orNull
         zip = address.zip.orNull
         phone = address.phone.orNull
+        if let state = address.state, state.isEmpty == false {
+            province = address.state.orNull
+        }
     }
 }
 
