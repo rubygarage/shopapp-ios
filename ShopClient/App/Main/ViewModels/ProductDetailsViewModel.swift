@@ -55,8 +55,8 @@ class ProductDetailsViewModel: BaseViewModel {
                     selectedOptions.forEach { self?.selectOption(with: $0.name, value: $0.value) }
                 }
                 self?.state.onNext(.content)
+                self?.loadRelatedItems()
             }
-            self?.loadRelatedItems()
         }
     }
     

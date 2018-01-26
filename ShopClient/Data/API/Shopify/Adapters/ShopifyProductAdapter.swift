@@ -67,6 +67,11 @@ extension Product {
                 }
             }
             options = optionsArray
+            if let options = options, options.count == 1 && options.first?.values?.count == 1 {
+                variants?.forEach {
+                    $0.title = ""
+                }
+            }
         }
     }
 }

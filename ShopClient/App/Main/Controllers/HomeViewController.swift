@@ -113,6 +113,10 @@ class HomeViewController: BaseTableViewController<HomeViewModel>, HomeTableDataS
     
     // MARK: - HomeTableDelegateProtocol
     
+    func lastArrivalsObjectsCount() -> Int {
+        return viewModel.data.value.latestProducts.count
+    }
+    
     func didSelectArticle(at index: Int) {
         if index < viewModel.data.value.articles.count {
             selectedArticle = viewModel.data.value.articles[index]

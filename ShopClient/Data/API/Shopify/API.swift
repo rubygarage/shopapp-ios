@@ -9,10 +9,10 @@
 import MobileBuySDK
 import KeychainSwift
 
-private let kShopifyStorefrontAccessToken = "44fc90e5043e0a5e7ce5e95e1c30018f"
-private let kShopifyStorefrontURL = "rubytestruby.myshopify.com"
+private let kShopifyStorefrontAccessToken = "fd719b8c3c31ea4ea5f4078e8b9a759f"
+private let kShopifyStorefrontURL = "celawojev.myshopify.com"
 private let kShopifyItemsMaxCount: Int32 = 250
-private let kShopifyStoreName = "rubytestruby"
+private let kShopifyStoreName = "celawojev"
 private let kMerchantID = "merchant.com.rubygarage.shopclient.test"
 private let kShopifyPaymetTypeApplePay = "apple_pay"
 private let kShopifyRetryFinite = 10
@@ -549,7 +549,15 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     
     private func updateCustomer(with token: String, email: String, firstName: String?, lastName: String?, phone: String?, callback: @escaping RepoCallback<Customer>) {
         let query = customerUpdateQuery(with: token, email: email, firstName: firstName, lastName: lastName, phone: phone)
-        updateCustomer(with: query, callback: callback)
+        updateCustomer(with: query) { [weak self] (customer, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            if customer != nil {
+                strongSelf.updateSessionDate(with: email)
+            }
+            callback(customer, error)
+        }
     }
     
     private func updateCustomer(with token: String, promo: Bool, callback: @escaping RepoCallback<Customer>) {
@@ -1325,6 +1333,12 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         keyChain.set(email, forKey: SessionData.email)
         let expiryString = String(describing: token.expiresAt.timeIntervalSinceNow)
         keyChain.set(expiryString, forKey: SessionData.expiryDate)
+        UserDefaults.standard.set(true, forKey: SessionData.loggedInStatus)
+    }
+    
+    private func updateSessionDate(with email: String) {
+        let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
+        keyChain.set(email, forKey: SessionData.email)
     }
     
     private func sessionData() -> (token: String?, email: String?, expiryDate: Date?) {
@@ -1341,9 +1355,14 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     private func removeSessionData() {
         let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
         keyChain.clear()
+        UserDefaults.standard.set(false, forKey: SessionData.loggedInStatus)
     }
     
     func isLoggedIn() -> Bool {
+        guard UserDefaults.standard.value(forKey: SessionData.loggedInStatus) as? Bool != nil else {
+            removeSessionData()
+            return false
+        }
         let keyChain = KeychainSwift(keyPrefix: SessionData.keyPrefix)
         if keyChain.get(SessionData.accessToken) != nil, let expiryDate = keyChain.get(SessionData.expiryDate), keyChain.get(SessionData.email) != nil {
             let date = Date(timeIntervalSinceNow: TimeInterval(expiryDate)!)
@@ -1365,6 +1384,10 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     // MARK: - Error handling
     
     private func process(error: Graph.QueryError?) -> RepoError? {
+        if let error = error, case .request(let requestError) = error {
+            return ContentError(with: requestError)
+        }
+        
         if let error = error, case .invalidQuery(let reasons) = error {
             return CriticalError(with: error, message: reasons.first?.message)
         }
@@ -1372,7 +1395,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         if let error = error, case .http(let statusCode) = error {
             return process(statusCode: statusCode, error: error)
         }
-        
+
         return RepoError(with: error)
     }
     
