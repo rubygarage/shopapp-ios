@@ -114,16 +114,16 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     }
     
     private func shippingAddressFormCompletion() -> AddressFormCompletion {
-        return { [weak self] (address, isDefaultAddress) in
+        return { [weak self] address in
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: isDefaultAddress)
+            strongSelf.viewModel.updateCheckoutShippingAddress(with: address)
         }
     }
     
     private func billingAddressFormCompletion() -> AddressFormCompletion {
-        return { [weak self] (address, isDefaultAddress) in
+        return { [weak self] (address) in
             guard let strongSelf = self else {
                 return
             }
@@ -138,7 +138,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
                 return
             }
             strongSelf.navigationController?.popViewController(animated: true)
-            strongSelf.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: false)
+            strongSelf.viewModel.updateCheckoutShippingAddress(with: address)
         }
     }
     

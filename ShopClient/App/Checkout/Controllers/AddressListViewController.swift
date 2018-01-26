@@ -98,7 +98,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     func didTapEdit(with address: Address) {
         let selected = selectedAddress?.isEqual(to: address) ?? false
         destinationAddress = address
-        destinationAddressFormCompletion = { [weak self] (filledAddress, isDefaultAddress) in
+        destinationAddressFormCompletion = { [weak self] filledAddress in
             self?.viewModel.updateAddress(with: filledAddress, isSelected: selected)
         }
         performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
@@ -112,8 +112,8 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     
     func didTapAddNewAddress() {
         destinationAddress = nil
-        destinationAddressFormCompletion = { [weak self] (address, isDefaultAddress) in
-            self?.viewModel.addCustomerAddress(with: address, isDefaultAddress: isDefaultAddress)
+        destinationAddressFormCompletion = { [weak self] address in
+            self?.viewModel.addCustomerAddress(with: address)
         }
         performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
     }

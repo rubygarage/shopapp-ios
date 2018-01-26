@@ -111,14 +111,14 @@ class CheckoutViewModel: BaseViewModel {
         }
     }
     
-    func updateCheckoutShippingAddress(with address: Address, isDefaultAddress: Bool) {
+    func updateCheckoutShippingAddress(with address: Address) {
         state.onNext(.loading(showHud: true))
         let checkoutId = checkout.value?.id ?? ""
         checkoutUseCase.updateCheckoutShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             } else if let success = success, success == true {
-                self?.processUpdateCheckoutShippingAddress(address: address, isDefaultAddress: isDefaultAddress)
+                self?.getCheckout()
             } else {
                 self?.state.onNext(.error(error: RepoError()))
             }
@@ -161,34 +161,10 @@ class CheckoutViewModel: BaseViewModel {
     private func getCustomer() {
         customerUseCase.getCustomer { [weak self] (customer, _) in
             if let address = customer?.defaultAddress {
-                self?.updateCheckoutShippingAddress(with: address, isDefaultAddress: false)
+                self?.updateCheckoutShippingAddress(with: address)
             } else {
                 self?.state.onNext(.content)
             }
-        }
-    }
-    
-    private func processUpdateCheckoutShippingAddress(address: Address, isDefaultAddress: Bool) {
-        customerUseCase.addAddress(with: address) { [weak self] (addressId, _) in
-            if let addressId = addressId {
-                self?.processCustomerAddingAddress(with: addressId, isDefaultAddress: isDefaultAddress)
-            } else {
-                self?.getCheckout()
-            }
-        }
-    }
-    
-    private func processCustomerAddingAddress(with addressId: String, isDefaultAddress: Bool) {
-        if isDefaultAddress {
-            updateCustomerDefaultAddress(with: addressId)
-        } else {
-            getCheckout()
-        }
-    }
-    
-    private func updateCustomerDefaultAddress(with addressId: String) {
-        customerUseCase.updateDefaultAddress(with: addressId) { [weak self] (_, _) in
-            self?.getCheckout()
         }
     }
     
@@ -224,6 +200,8 @@ class CheckoutViewModel: BaseViewModel {
                 strongSelf.state.onNext(.error(error: error))
             } else if let order = response {
                 strongSelf.clearCart(with: order)
+            } else {
+                strongSelf.state.onNext(.content)
             }
         }
     }

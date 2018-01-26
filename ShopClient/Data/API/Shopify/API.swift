@@ -1467,7 +1467,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     }
 
     func paySessionDidFinish(_ paySession: PaySession) {
-        print("ApplePay modal view dissmissed")
+        paymentByApplePayCompletion?(nil, nil)
     }
     
     // MARK: - Pay session delegate additional methods

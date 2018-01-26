@@ -66,14 +66,13 @@ class AddressListViewModel: BaseViewModel {
         }
     }
     
-    func addCustomerAddress(with address: Address, isDefaultAddress: Bool) {
+    func addCustomerAddress(with address: Address) {
         state.onNext(.loading(showHud: true))
-        Repository.shared.addCustomerAddress(with: address) { [weak self] (addressId, error) in
+        Repository.shared.addCustomerAddress(with: address) { [weak self] (_, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
-            } else if let addressId = addressId {
-                self?.processAddressAddingResponse(with: addressId, isDefaultAddress: isDefaultAddress)
-                self?.state.onNext(.content)
+            } else {
+                self?.loadCustomerAddresses()
             }
         }
     }
@@ -88,21 +87,6 @@ class AddressListViewModel: BaseViewModel {
     private func processSelectedAddressUpdatingResponse(with address: Address, isSelected: Bool) {
         if isSelected {
             selectedAddress = address
-            completion?(address)
-        }
-    }
-    
-    private func processAddressAddingResponse(with addressId: String, isDefaultAddress: Bool) {
-        if isDefaultAddress {
-            updateCustomerDefaultAddress(with: addressId)
-        } else {
-            loadCustomerAddresses()
-        }
-    }
-    
-    private func updateCustomerDefaultAddress(with addressId: String) {
-        Repository.shared.updateCustomerDefaultAddress(with: addressId) { [weak self] (_, _) in
-            self?.loadCustomerAddresses()
         }
     }
 }
