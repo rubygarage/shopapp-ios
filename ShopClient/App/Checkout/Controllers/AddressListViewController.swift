@@ -108,6 +108,10 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
         viewModel.deleteCustomerAddress(with: address)
     }
     
+    func didTapDefault(with address: Address) {
+        viewModel.updateCustomerDefaultAddress(with: address)
+    }
+    
     // MARK: - AddressListHeaderViewProtocol
     
     func didTapAddNewAddress() {

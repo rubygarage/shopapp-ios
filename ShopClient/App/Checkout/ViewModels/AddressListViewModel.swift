@@ -11,7 +11,10 @@ import RxSwift
 typealias AddressListCompletion = (_ address: Address) -> Void
 
 class AddressListViewModel: BaseViewModel {
-    var customerAddresses = Variable<[Address]>([Address]())
+    private let customerUseCase = CustomerUseCase()
+    
+    var customerAddresses = Variable<[Address]>([])
+    var customerDefaultAddress = Variable<Address?>(nil)
     var didSelectAddress = PublishSubject<Address>()
     var selectedAddress: Address?
     var completion: AddressListCompletion?
@@ -21,6 +24,7 @@ class AddressListViewModel: BaseViewModel {
         Repository.shared.getCustomer { [weak self] (customer, _) in
             if let addresses = customer?.addresses {
                 self?.customerAddresses.value = addresses
+                self?.customerDefaultAddress.value = customer?.defaultAddress
             }
             self?.state.onNext(.content)
         }
@@ -30,9 +34,10 @@ class AddressListViewModel: BaseViewModel {
         if index < customerAddresses.value.count {
             let address = customerAddresses.value[index]
             let selected = selectedAddress?.isEqual(to: address) ?? false
-            return (address, selected)
+            let isDefault = customerDefaultAddress.value?.isEqual(to: address) ?? false
+            return (address, selected, isDefault)
         }
-        return (Address(), false)
+        return (Address(), false, false)
     }
     
     func updateCheckoutShippingAddress(with address: Address) {
@@ -69,6 +74,16 @@ class AddressListViewModel: BaseViewModel {
     func addCustomerAddress(with address: Address) {
         state.onNext(.loading(showHud: true))
         Repository.shared.addCustomerAddress(with: address) { [weak self] (_, error) in
+            if let error = error {
+                self?.state.onNext(.error(error: error))
+            } else {
+                self?.loadCustomerAddresses()
+            }
+        }
+    }
+    
+    func updateCustomerDefaultAddress(with address: Address) {
+        customerUseCase.updateDefaultAddress(with: address.id) { [weak self] (_, error) in
             if let error = error {
                 self?.state.onNext(.error(error: error))
             } else {

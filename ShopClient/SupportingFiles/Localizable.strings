@@ -60,6 +60,7 @@
 "Button.Submit" = "Submit";
 "Button.Edit" = "Edit";
 "Button.Delete" = "Delete";
+"Button.Default" = "Default";
 "Button.AddPaymentType" = "Add payment type";
 "Button.AddCard" = "Add card";
 "Button.AddBillingAddress" = "Add billing address";

@@ -23,7 +23,7 @@ extension Customer {
         defaultAddress = Address(with: item?.defaultAddress)
         
         if let edges = item?.addresses.edges {
-            var addressesArray = [Address]()
+            var addressesArray: [Address] = []
             for edge in edges {
                 if let address = Address(with: edge.node) {
                     addressesArray.append(address)
