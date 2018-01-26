@@ -1591,6 +1591,7 @@ internal extension Storefront.MailingAddressInput {
         lastName = address.lastName.orNull
         zip = address.zip.orNull
         phone = address.phone.orNull
+        province = address.state.orNull
     }
 }
 
