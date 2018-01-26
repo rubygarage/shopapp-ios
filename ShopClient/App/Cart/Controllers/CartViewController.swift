@@ -54,8 +54,9 @@ class CartViewController: BaseViewController<CartViewModel> {
     }
     
     private func setupTableView() {
-        let cartCellNib = UINib(nibName: String(describing: CartTableViewCell.self), bundle: nil)
-        tableView.register(cartCellNib, forCellReuseIdentifier: String(describing: CartTableViewCell.self))
+        let cellName = String(describing: CartTableViewCell.self)
+        let cartCellNib = UINib(nibName: cellName, bundle: nil)
+        tableView.register(cartCellNib, forCellReuseIdentifier: cellName)
         
         tableDataSource = CartTableDataSource()
         tableDataSource.delegate = self
@@ -69,7 +70,10 @@ class CartViewController: BaseViewController<CartViewModel> {
     private func setupViewModel() {
         viewModel.data.asObservable()
             .subscribe(onNext: { [weak self] _ in
-                self?.tableView.reloadData()
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
@@ -85,9 +89,9 @@ class CartViewController: BaseViewController<CartViewModel> {
     }
 }
 
-// MARK: - CartEmptyDataViewProtocol
+// MARK: - CartEmptyDataViewDelegate
 
-extension CartViewController: CartEmptyDataViewProtocol {
+extension CartViewController: CartEmptyDataViewDelegate {
     func didTapStartShopping() {
         setHomeController()
         dismiss(animated: true)
@@ -102,10 +106,10 @@ extension CartViewController: CartTableDataSourceProtocol {
     }
     
     func item(for index: Int) -> CartProduct? {
-        if index < viewModel.data.value.count {
-            return viewModel.data.value[index]
+        guard index < viewModel.data.value.count else {
+            return nil
         }
-        return nil
+        return viewModel.data.value[index]
     }
 }
 
@@ -117,7 +121,7 @@ extension CartViewController: CartTableDelegateProtocol {
     }
     
     func currency() -> String {
-        return viewModel.data.value.first?.currency ?? String()
+        return viewModel.data.value.first?.currency ?? ""
     }
     
     func didSelectItem(at index: Int) {
@@ -126,9 +130,9 @@ extension CartViewController: CartTableDelegateProtocol {
     }
 }
 
-// MARK: - CartTableCellProtocol
+// MARK: - CartTableCellDelegate
 
-extension CartViewController: CartTableCellProtocol {
+extension CartViewController: CartTableCellDelegate {
     func didUpdate(cartProduct: CartProduct, quantity: Int) {
         viewModel.update(cartProduct: cartProduct, quantity: quantity)
     }
@@ -138,15 +142,20 @@ extension CartViewController: CartTableCellProtocol {
 
 extension CartViewController: SwipeTableViewCellDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-        guard orientation == .right else { return nil }
+        guard orientation == .right else {
+            return nil
+        }
         let title = "Button.Remove".localizable
         let deleteAction = SwipeAction(style: .destructive, title: title) { [weak self] (_, indexPath) in
-            self?.viewModel.removeCardProduct(at: indexPath.row)
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.viewModel.removeCardProduct(at: indexPath.row)
         }
         deleteAction.backgroundColor = TableView.removeActionBackgroundColor
         deleteAction.image = #imageLiteral(resourceName: "trash")
         deleteAction.font = TableView.removeActionFont
-        deleteAction.textColor = UIColor.black
+        deleteAction.textColor = .black
         deleteAction.hidesWhenSelected = true
         
         return [deleteAction]

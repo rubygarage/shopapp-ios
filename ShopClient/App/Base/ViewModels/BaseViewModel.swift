@@ -11,5 +11,7 @@ import RxSwift
 class BaseViewModel {
     var state = PublishSubject<ViewState>()
 
-    func tryAgain() {}
+    func tryAgain() {
+        assert(false, "'tryAgain' method not implemented")
+    }
 }

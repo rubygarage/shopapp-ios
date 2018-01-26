@@ -16,7 +16,7 @@ protocol CartTableDataSourceProtocol {
 }
 
 class CartTableDataSource: NSObject {
-    weak var delegate: (CartTableDataSourceProtocol & CartTableCellProtocol & SwipeTableViewCellDelegate)?
+    weak var delegate: (CartTableDataSourceProtocol & CartTableCellDelegate & SwipeTableViewCellDelegate)?
 }
 
 // MARK: - UITableViewDataSource

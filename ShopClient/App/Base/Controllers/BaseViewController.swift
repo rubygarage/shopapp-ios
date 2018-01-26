@@ -12,15 +12,15 @@ import RxCocoa
 import RxSwift
 import Toaster
 
+private let kToastBottomOffset: CGFloat = 80
+private let kToastDuration: TimeInterval = 3
+
 enum ViewState {
     case loading(showHud: Bool)
     case content
     case error(error: RepoError?)
     case empty
 }
-
-private let kToastBottomOffset: CGFloat = 80
-private let kToastDuration: TimeInterval = 3
 
 class BaseViewController<T: BaseViewModel>: UIViewController {
     private(set) var disposeBag = DisposeBag()
@@ -53,9 +53,14 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
     }
     
     private func subscribeViewState() {
-        viewModel.state.subscribe(onNext: { [weak self] state in
-            self?.set(state: state)
-        }).disposed(by: disposeBag)
+        viewModel.state
+            .subscribe(onNext: { [weak self] state in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.set(state: state)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func set(state: ViewState) {

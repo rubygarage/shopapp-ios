@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CartEmptyDataViewProtocol: class {
+protocol CartEmptyDataViewDelegate: class {
     func didTapStartShopping()
 }
 
@@ -17,7 +17,7 @@ class CartEmptyDataView: UIView {
     @IBOutlet private weak var emptyCartLabel: UILabel!
     @IBOutlet private weak var startShoppingButton: UIButton!
     
-    weak var delegate: CartEmptyDataViewProtocol?
+    weak var delegate: CartEmptyDataViewDelegate?
     
     // MARK: - View lifecycle
     
@@ -45,7 +45,7 @@ class CartEmptyDataView: UIView {
     }
     
     private func setupViews() {
-        emptyCartLabel?.text = "Label.YourCartIsEmpty".localizable
+        emptyCartLabel.text = "Label.YourCartIsEmpty".localizable
         startShoppingButton.setTitle("Button.StartShopping".localizable.uppercased(), for: .normal)
     }
     

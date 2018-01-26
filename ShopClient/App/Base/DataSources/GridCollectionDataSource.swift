@@ -25,8 +25,7 @@ extension GridCollectionDataSource: UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let reuseIdentifier = String(describing: GridCollectionViewCell.self)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! GridCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: GridCollectionViewCell.self), for: indexPath) as! GridCollectionViewCell
         let item = delegate?.item(for: indexPath)
         cell.configure(with: item!)
         

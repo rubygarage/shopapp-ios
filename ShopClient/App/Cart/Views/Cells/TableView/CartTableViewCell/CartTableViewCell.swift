@@ -10,13 +10,13 @@ import UIKit
 
 import SwipeCellKit
 
-protocol CartTableCellProtocol: class {
-    func didUpdate(cartProduct: CartProduct, quantity: Int)
-}
-
 private let kCartProductQuantityMin = 1
 private let kCartProductQuantityMax = 999
 private let kQuantityUnderlineColorDefault = UIColor(displayP3Red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
+
+protocol CartTableCellDelegate: class {
+    func didUpdate(cartProduct: CartProduct, quantity: Int)
+}
 
 class CartTableViewCell: SwipeTableViewCell {
     @IBOutlet private weak var variantImageView: UIImageView!
@@ -29,7 +29,7 @@ class CartTableViewCell: SwipeTableViewCell {
     
     var cartProduct: CartProduct?
     
-    weak var cellDelegate: CartTableCellProtocol?
+    weak var cellDelegate: CartTableCellDelegate?
     
     // MARK: - View lifecycle
     
@@ -85,40 +85,41 @@ class CartTableViewCell: SwipeTableViewCell {
     
     private func populatePricePerOne(with item: CartProduct?) {
         let quantity = item?.quantity ?? 1
-        if quantity > 1 {
-            let currency = item?.currency ?? ""
-            let formatter = NumberFormatter.formatter(with: currency)
-            let priceString = item?.productVariant?.price ?? ""
-            let price = NSDecimalNumber(string: priceString)
-            let localizedString = "Label.PriceEach".localizable
-            let formattedPrice = formatter.string(from: price) ?? ""
-            pricePerOneItemLabel.text = String.localizedStringWithFormat(localizedString, formattedPrice)
-        } else {
+        guard quantity <= 1 else {
             pricePerOneItemLabel.text = nil
+            return
         }
+        let currency = item?.currency ?? ""
+        let formatter = NumberFormatter.formatter(with: currency)
+        let priceString = item?.productVariant?.price ?? ""
+        let price = NSDecimalNumber(string: priceString)
+        let localizedString = "Label.PriceEach".localizable
+        let formattedPrice = formatter.string(from: price) ?? ""
+        pricePerOneItemLabel.text = String.localizedStringWithFormat(localizedString, formattedPrice)
     }
     
     private func check(quantity: Int) -> Int {
-        if quantity < kCartProductQuantityMin {
-            return kCartProductQuantityMin
+        guard quantity < kCartProductQuantityMin else {
+            return quantity
         }
-        return quantity
+        return kCartProductQuantityMin
     }
     
     // MARK: - Actions
     
     @IBAction func quantityEditingDidBegin(_ sender: UITextField) {
-        quantityUnderlineView.backgroundColor = UIColor.black
+        quantityUnderlineView.backgroundColor = .black
     }
     
     @IBAction func quantityEditingDidEnd(_ sender: UITextField) {
         quantityUnderlineView.backgroundColor = kQuantityUnderlineColorDefault
-        if let cartProduct = cartProduct {
-            let quantityString = sender.text ?? ""
-            let quantity = (quantityString as NSString).integerValue
-            let checkedQuantity = check(quantity: quantity)
-            cellDelegate?.didUpdate(cartProduct: cartProduct, quantity: checkedQuantity)
+        guard let cartProduct = cartProduct else {
+            return
         }
+        let quantityString = sender.text ?? ""
+        let quantity = (quantityString as NSString).integerValue
+        let checkedQuantity = check(quantity: quantity)
+        cellDelegate?.didUpdate(cartProduct: cartProduct, quantity: checkedQuantity)
     }
 }
 
