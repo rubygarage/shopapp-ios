@@ -27,7 +27,7 @@ class AddressFormViewModel: BaseViewModel {
     var completion: AddressFormCompletion?
     
     private var requiredTextFields: [Observable<String>] {
-        return [countryText, firstNameText, lastNameText, addressText, cityText, stateText, zipText, phoneText].map({ $0.asObservable() })
+        return [countryText, firstNameText, lastNameText, addressText, cityText, zipText, phoneText].map({ $0.asObservable() })
     }
     
     var isAddressValid: Observable<Bool> {

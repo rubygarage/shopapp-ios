@@ -112,7 +112,26 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         navigationController?.popToViewController(self, animated: true)
     }
     
-    private func shippingAddressCompletion() -> AddressListCompletion {
+    private func shippingAddressFormCompletion() -> AddressFormCompletion {
+        return { [weak self] (address, isDefaultAddress) in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: isDefaultAddress)
+        }
+    }
+    
+    private func billingAddressFormCompletion() -> AddressFormCompletion {
+        return { [weak self] (address, isDefaultAddress) in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.viewModel.billingAddress.value = address
+            strongSelf.reloadTable()
+        }
+    }
+    
+    private func shippingAddressListCompletion() -> AddressListCompletion {
         return { [weak self] (address) in
             guard let strongSelf = self else {
                 return
@@ -122,7 +141,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         }
     }
     
-    private func billingAddressCompletion() -> AddressListCompletion {
+    private func billingAddressListCompletion() -> AddressListCompletion {
         return { [weak self] (address) in
             guard let strongSelf = self else {
                 return
@@ -170,12 +189,10 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             addressListViewController.addressListType = destinationAddressType
             let isAddressTypeShipping = destinationAddressType == .shipping
             addressListViewController.selectedAddress = isAddressTypeShipping ? shippingAddress() : billingAddress()
-            addressListViewController.completion = isAddressTypeShipping ? shippingAddressCompletion() : billingAddressCompletion()
+            addressListViewController.completion = isAddressTypeShipping ? shippingAddressListCompletion() : billingAddressListCompletion()
         } else if let addressFormViewController = segue.destination as? AddressFormViewController {
-            addressFormViewController.address = viewModel.billingAddress.value
-            addressFormViewController.completion = { [weak self] (address, isDefaultAddress) in
-                self?.viewModel.updateCheckoutShippingAddress(with: address, isDefaultAddress: isDefaultAddress)
-            }
+            addressFormViewController.address = destinationAddressType == .shipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
+            addressFormViewController.completion = destinationAddressType == .shipping ? shippingAddressFormCompletion() : billingAddressFormCompletion()
         } else if let paymentTypeViewController = segue.destination as? PaymentTypeViewController, let checkout = viewModel.checkout.value {
             paymentTypeViewController.checkout = checkout
             paymentTypeViewController.delegate = self
