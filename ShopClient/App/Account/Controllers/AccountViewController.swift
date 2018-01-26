@@ -51,8 +51,9 @@ class AccountViewController: BaseViewController<AccountViewModel> {
     // MARK: - Setup
     
     private func setupTableView() {
-        let cellNib = UINib(nibName: String(describing: AccountTableViewCell.self), bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: String(describing: AccountTableViewCell.self))
+        let cellName = String(describing: AccountTableViewCell.self)
+        let cellNib = UINib(nibName: cellName, bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: cellName)
         
         tableDataSource = AccountTableDataSource()
         tableDataSource.delegate = self
@@ -66,14 +67,20 @@ class AccountViewController: BaseViewController<AccountViewModel> {
     private func setupViewModel() {
         viewModel.policies.asObservable()
             .subscribe(onNext: { [weak self] _ in
-                self?.tableView.reloadData()
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
         
         viewModel.customer.asObservable()
             .subscribe(onNext: { [weak self] _ in
-                self?.updateNavigationBar()
-                self?.tableView.reloadData()
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.updateNavigationBar()
+                strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
@@ -113,10 +120,11 @@ extension AccountViewController: AccountTableDataSourceProtocol {
 
 extension AccountViewController: AccountTableDelegateProtocol {
     func didSelectItem(at index: Int) {
-        if index < viewModel.policies.value.count {
-            selectedPolicy = viewModel.policies.value[index]
-            performSegue(withIdentifier: SegueIdentifiers.toPolicy, sender: self)
+        guard index < viewModel.policies.value.count else {
+            return
         }
+        selectedPolicy = viewModel.policies.value[index]
+        performSegue(withIdentifier: SegueIdentifiers.toPolicy, sender: self)
     }
     
     func customer() -> Customer? {
@@ -124,9 +132,9 @@ extension AccountViewController: AccountTableDelegateProtocol {
     }
 }
 
-// MARK: - AccountNotLoggedHeaderProtocol
+// MARK: - AccountNotLoggedHeaderDelegate
 
-extension AccountViewController: AccountNotLoggedHeaderProtocol {
+extension AccountViewController: AccountNotLoggedHeaderDelegate {
     func didTapSignIn() {
         performSegue(withIdentifier: SegueIdentifiers.toSignIn, sender: self)
     }
@@ -136,9 +144,9 @@ extension AccountViewController: AccountNotLoggedHeaderProtocol {
     }
 }
 
-// MARK: - AccountLoggedHeaderProtocol
+// MARK: - AccountLoggedHeaderDelegate
 
-extension AccountViewController: AccountLoggedHeaderProtocol {
+extension AccountViewController: AccountLoggedHeaderDelegate {
     func didTapMyOrders() {
         performSegue(withIdentifier: SegueIdentifiers.toOrdersList, sender: self)
     }
@@ -148,9 +156,9 @@ extension AccountViewController: AccountLoggedHeaderProtocol {
     }
 }
 
-// MARK: - AccountFooterViewProtocol
+// MARK: - AccountFooterViewDelegate
 
-extension AccountViewController: AccountFooterViewProtocol {
+extension AccountViewController: AccountFooterViewDelegate {
     func didTapLogout() {
         viewModel.logout()
         updateNavigationBar()

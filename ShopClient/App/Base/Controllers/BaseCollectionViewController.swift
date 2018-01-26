@@ -24,6 +24,11 @@ class BaseCollectionViewController<T: BasePaginationViewModel>: BasePaginationVi
     
     // MARK: - Setup
     
+    func stopLoadAnimating() {
+        refreshControl?.endRefreshing()
+        collectionView.finishInfiniteScroll()
+    }
+    
     private func setupPullToRefresh() {
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(self.pullToRefreshHandler), for: .valueChanged)
@@ -43,10 +48,5 @@ class BaseCollectionViewController<T: BasePaginationViewModel>: BasePaginationVi
             }
             strongSelf.infinityScrollHandler()
         }
-    }
-    
-    func stopLoadAnimating() {
-        refreshControl?.endRefreshing()
-        collectionView.finishInfiniteScroll()
     }
 }

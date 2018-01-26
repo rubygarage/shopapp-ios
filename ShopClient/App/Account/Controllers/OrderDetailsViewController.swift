@@ -45,11 +45,13 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
     }
     
     private func setupTableView() {
-        let orderItemNib = UINib(nibName: String(describing: OrderItemTableViewCell.self), bundle: nil)
-        tableView.register(orderItemNib, forCellReuseIdentifier: String(describing: OrderItemTableViewCell.self))
+        let orderItemCellName = String(describing: OrderItemTableViewCell.self)
+        let orderItemNib = UINib(nibName: orderItemCellName, bundle: nil)
+        tableView.register(orderItemNib, forCellReuseIdentifier: orderItemCellName)
         
-        let shippingAddressEditNib = UINib(nibName: String(describing: CheckoutShippingAddressEditTableCell.self), bundle: nil)
-        tableView.register(shippingAddressEditNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self))
+        let checkoutShippingAddressEditCellname = String(describing: CheckoutShippingAddressEditTableCell.self)
+        let shippingAddressEditNib = UINib(nibName: checkoutShippingAddressEditCellname, bundle: nil)
+        tableView.register(shippingAddressEditNib, forCellReuseIdentifier: checkoutShippingAddressEditCellname)
         
         tableDataSource = OrdersDetailsTableDataSource()
         tableDataSource.delegate = self
@@ -59,7 +61,7 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
         tableDelegate.delegate = self
         tableView.delegate = tableDelegate
         
-        tableView?.contentInset = TableView.defaultContentInsets
+        tableView.contentInset = TableView.defaultContentInsets
     }
     
     private func setupViewModel() {
@@ -67,7 +69,10 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
 
         viewModel.data.asObservable()
             .subscribe(onNext: { [weak self] _ in
-                self?.tableView.reloadData()
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
@@ -89,9 +94,10 @@ extension OrderDetailsViewController: OrdersDetailsTableDataSourceProtocol {
 
 extension OrderDetailsViewController: OrdersDetailsTableDelegateProtocol {
     func didSelectItem(at index: Int) {
-        selectedProductVariant = viewModel.productVariant(at: index)
-        if selectedProductVariant != nil {
-            performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
+        guard let productVariant = viewModel.productVariant(at: index) else {
+            return
         }
+        selectedProductVariant = productVariant
+        performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol OrderFooterViewProtocol: class {
+protocol OrderFooterViewDelegate: class {
     func viewDidTap(_ section: Int)
 }
 
@@ -21,7 +21,7 @@ class OrderFooterView: UIView {
     
     private var section: Int!
     
-    weak var delegate: OrderFooterViewProtocol?
+    weak var delegate: OrderFooterViewDelegate?
     
     // MARK: - View lifecycle
     

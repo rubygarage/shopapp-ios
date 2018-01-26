@@ -24,6 +24,11 @@ class BaseTableViewController<T: BasePaginationViewModel>: BasePaginationViewCon
     
     // MARK: - Setup
     
+    func stopLoadAnimating() {
+        refreshControl?.endRefreshing()
+        tableView.finishInfiniteScroll()
+    }
+    
     private func setupPullToRefresh() {
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(self.pullToRefreshHandler), for: .valueChanged)
@@ -43,10 +48,5 @@ class BaseTableViewController<T: BasePaginationViewModel>: BasePaginationViewCon
             }
             strongSelf.infinityScrollHandler()
         }
-    }
-    
-    func stopLoadAnimating() {
-        refreshControl?.endRefreshing()
-        tableView.finishInfiniteScroll()
     }
 }

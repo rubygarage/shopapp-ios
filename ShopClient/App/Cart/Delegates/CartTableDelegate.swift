@@ -23,11 +23,10 @@ class CartTableDelegate: NSObject {
 
 extension CartTableDelegate: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let productsCount = delegate?.itemsCount() ?? 0
-        let totalPrice: Float = delegate?.totalPrice() ?? 0
-        let currency = delegate?.currency() ?? ""
-        
-        return CartHeaderView(productsCounts: productsCount, totalPrice: totalPrice, currency: currency)
+        guard let delegate = delegate else {
+            return nil
+        }
+        return CartHeaderView(productsCounts: delegate.itemsCount(), totalPrice: delegate.totalPrice(), currency: delegate.currency())
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

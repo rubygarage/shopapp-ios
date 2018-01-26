@@ -14,27 +14,24 @@ class OrderDetailsViewModel: BaseViewModel {
     var orderId: String!
     var data = Variable<Order?>(nil)
     
-    // MARK: - Internal
-    
     func productVariant(at index: Int) -> ProductVariant? {
-        var variant: ProductVariant?
-
-        if let order = data.value, let item = order.items?[index], let productVariant = item.productVariant {
-            variant = productVariant
+        guard let order = data.value, let item = order.items?[index], let productVariant = item.productVariant else {
+            return nil
         }
-        
-        return variant
+        return productVariant
     }
     
     func loadOrder() {
         state.onNext(.loading(showHud: true))
         orderUseCase.getOrder(with: orderId) { [weak self] (order, error) in
-            if let error = error {
-                self?.state.onNext(.error(error: error))
+            guard let strongSelf = self else {
+                return
             }
-            if let order = order {
-                self?.data.value = order
-                self?.state.onNext(.content)
+            if let error = error {
+                strongSelf.state.onNext(.error(error: error))
+            } else if let order = order {
+                strongSelf.data.value = order
+                strongSelf.state.onNext(.content)
             }
         }
     }

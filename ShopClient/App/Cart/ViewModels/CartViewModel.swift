@@ -15,25 +15,6 @@ class CartViewModel: BaseViewModel {
     
     var data = Variable<[CartProduct]>([])
     
-    // MARK: - Private
-    
-    private func removeFromData(with item: CartProduct) {
-        guard let index = data.value.index(of: item) else {
-            return
-        }
-        data.value.remove(at: index)
-    }
-    
-    private func updateSuccessState(with itemsCount: Int?) {
-        if let itemsCount = itemsCount, itemsCount > 0 {
-            state.onNext(.content)
-        } else {
-            state.onNext(.empty)
-        }
-    }
-    
-    // MARK: - Internal
-    
     func loadData() {
         state.onNext(.loading(showHud: true))
         cartProductListUseCase.getCartProductList { [weak self] (cartProducts, error) in
@@ -60,7 +41,7 @@ class CartViewModel: BaseViewModel {
                 strongSelf.state.onNext(.error(error: error))
             } else if let success = success {
                 success ? strongSelf.removeFromData(with: cartProduct) : ()
-                strongSelf.updateSuccessState(with: self?.data.value.count)
+                strongSelf.updateSuccessState(with: strongSelf.data.value.count)
             }
         }
     }
@@ -91,6 +72,21 @@ class CartViewModel: BaseViewModel {
         }
         let product = data.value[index]
         return product.productVariant
+    }
+    
+    private func removeFromData(with item: CartProduct) {
+        guard let index = data.value.index(of: item) else {
+            return
+        }
+        data.value.remove(at: index)
+    }
+    
+    private func updateSuccessState(with itemsCount: Int?) {
+        if let itemsCount = itemsCount, itemsCount > 0 {
+            state.onNext(.content)
+        } else {
+            state.onNext(.empty)
+        }
     }
 
     // MARK: - BaseViewModel

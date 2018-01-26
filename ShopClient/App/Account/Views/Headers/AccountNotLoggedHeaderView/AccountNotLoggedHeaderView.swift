@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AccountNotLoggedHeaderProtocol: class {
+protocol AccountNotLoggedHeaderDelegate: class {
     func didTapSignIn()
     func didTapCreateNewAccount()
 }
@@ -21,7 +21,7 @@ class AccountNotLoggedHeaderView: UIView {
     
     @IBOutlet fileprivate weak var createAccountUnderlinedView: UIView!
     
-    weak var delegate: AccountNotLoggedHeaderProtocol?
+    weak var delegate: AccountNotLoggedHeaderDelegate?
     
     // MARK: - View lifecycle
     

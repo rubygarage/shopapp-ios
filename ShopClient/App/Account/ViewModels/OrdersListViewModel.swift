@@ -11,39 +11,7 @@ import RxSwift
 class OrdersListViewModel: BasePaginationViewModel {
     private let orderListUseCase = OrderListUseCase()
     
-    var items = Variable<[Order]>([Order]())
-
-    // MARK: - BaseViewModel
-
-    override func tryAgain() {
-        reloadData()
-    }
-    
-    // MARK: - Private
-    
-    private func loadRemoteData() {
-        let showHud = items.value.isEmpty
-        state.onNext(.loading(showHud: showHud))
-        orderListUseCase.getOrderList(with: paginationValue) { [weak self] (order, error) in
-            if let error = error {
-                self?.state.onNext(.error(error: error))
-            }
-            if let order = order {
-                self?.updateOrders(with: order)
-                self?.state.onNext(.content)
-            }
-            self?.canLoadMore = order?.count ?? 0 == kItemsPerPage
-        }
-    }
-    
-    private func updateOrders(with orders: [Order]) {
-        if paginationValue == nil {
-            items.value.removeAll()
-        }
-        items.value += orders
-    }
-    
-    // MARK: - Internal
+    var items = Variable<[Order]>([])
     
     func reloadData() {
         paginationValue = nil
@@ -68,5 +36,35 @@ class OrdersListViewModel: BasePaginationViewModel {
         }
         
         return variant
+    }
+    
+    private func loadRemoteData() {
+        let showHud = items.value.isEmpty
+        state.onNext(.loading(showHud: showHud))
+        orderListUseCase.getOrderList(with: paginationValue) { [weak self] (order, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            if let error = error {
+                strongSelf.state.onNext(.error(error: error))
+            } else if let order = order {
+                strongSelf.updateOrders(with: order)
+                strongSelf.state.onNext(.content)
+            }
+            strongSelf.canLoadMore = order?.count ?? 0 == kItemsPerPage
+        }
+    }
+    
+    private func updateOrders(with orders: [Order]) {
+        if paginationValue == nil {
+            items.value.removeAll()
+        }
+        items.value += orders
+    }
+    
+    // MARK: - BaseViewModel
+    
+    override func tryAgain() {
+        reloadData()
     }
 }

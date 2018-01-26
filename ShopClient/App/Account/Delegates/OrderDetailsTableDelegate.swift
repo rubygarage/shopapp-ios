@@ -42,10 +42,10 @@ extension OrdersDetailsTableDelegate: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if let order = delegate?.order(), section == OrdersDetailsSection.paymentInformation.rawValue {
-            return PaymentDetailsFooterView(order: order)
+        guard let order = delegate?.order(), section == OrdersDetailsSection.paymentInformation.rawValue else {
+            return nil
         }
-        return nil
+        return PaymentDetailsFooterView(order: order)
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

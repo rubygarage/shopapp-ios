@@ -30,8 +30,8 @@ extension OrdersListTableDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutCartTableViewCell.self), for: indexPath) as! CheckoutCartTableViewCell
         if let orders = delegate?.orders() {
-            var images = [Image]()
-            var productVariantIds = [String]()
+            var images: [Image] = []
+            var productVariantIds: [String] = []
             let order = orders[indexPath.section]
             if let items = order.items {
                 images = items.map { $0.productVariant?.image ?? Image() }

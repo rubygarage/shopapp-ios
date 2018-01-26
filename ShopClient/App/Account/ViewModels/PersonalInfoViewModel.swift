@@ -37,22 +37,33 @@ class PersonalInfoViewModel: BaseViewModel {
     }
     var saveChangesPressed: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
-            self?.checkValidation()
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.checkValidation()
         }
     }
     
-    // MARK: - Private
+    func loadCustomer() {
+        loginUseCase.getLoginStatus { isLoggedIn in
+            if isLoggedIn {
+                getCustomer()
+            }
+        }
+    }
     
     private func getCustomer() {
         state.onNext(.loading(showHud: true))
         customerUseCase.getCustomer { [weak self] (customer, error) in
-            if let error = error {
-                self?.state.onNext(.error(error: error))
+            guard let strongSelf = self else {
+                return
             }
-            if let customer = customer {
-                self?.customer.value = customer
-                self?.setCustomerToInputs()
-                self?.state.onNext(.content)
+            if let error = error {
+                strongSelf.state.onNext(.error(error: error))
+            } else if let customer = customer {
+                strongSelf.customer.value = customer
+                strongSelf.setCustomerToInputs()
+                strongSelf.state.onNext(.content)
             }
         }
     }
@@ -66,23 +77,26 @@ class PersonalInfoViewModel: BaseViewModel {
     }
     
     private func processErrorsIfNeeded() {
-        if emailText.value.isValidAsEmail() == false {
-            let errorMessage = "Error.InvalidEmail".localizable
-            emailErrorMessage.onNext(errorMessage)
+        guard emailText.value.isValidAsEmail() == false else {
+            return
         }
+        let errorMessage = "Error.InvalidEmail".localizable
+        emailErrorMessage.onNext(errorMessage)
     }
     
     private func saveChanges() {
         state.onNext(.loading(showHud: true))
         updateCustomUseCase.updateCustomer(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), phone: phoneText.value.orNil()) { [weak self] (customer, error) in
+            guard let strongSelf = self else {
+                return
+            }
             if let error = error {
-                self?.state.onNext(.error(error: error))
+                strongSelf.state.onNext(.error(error: error))
+            } else if let customer = customer {
+                strongSelf.customer.value = customer
+                strongSelf.state.onNext(.content)
             }
-            if let customer = customer {
-                self?.customer.value = customer
-                self?.state.onNext(.content)
-            }
-            self?.saveChangesSuccess.onNext(error == nil && customer != nil)
+            strongSelf.saveChangesSuccess.onNext(error == nil && customer != nil)
         }
     }
     
@@ -94,15 +108,5 @@ class PersonalInfoViewModel: BaseViewModel {
         lastNameText.value = customer.lastName ?? ""
         emailText.value = customer.email
         phoneText.value = customer.phone ?? ""
-    }
-    
-    // MARK: - Internal
-    
-    func loadCustomer() {
-        loginUseCase.getLoginStatus { (isLoggedIn) in
-            if isLoggedIn {
-                getCustomer()
-            }
-        }
     }
 }

@@ -44,7 +44,10 @@ class LinkViewController: BaseViewController<ForgotPasswordViewModel> {
         
         emailText.asObservable()
             .subscribe(onNext: { [weak self] emailText in
-                self?.emailLabel.text = emailText
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.emailLabel.text = emailText
             })
             .disposed(by: disposeBag)
     }

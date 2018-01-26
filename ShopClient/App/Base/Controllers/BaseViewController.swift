@@ -44,6 +44,11 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
     
     // MARK: - Setup
     
+    func showToast(with message: String?) {
+        let toast = Toast(text: message, duration: kToastDuration)
+        toast.show()
+    }
+    
     private func setupViews() {
         addBackButtonIfNeeded()
         loadingView.frame = view.frame
@@ -137,11 +142,6 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
     
     private func process(defaultError: RepoError?) {
         loadingView.removeFromSuperview()
-    }
-    
-    func showToast(with message: String?) {
-        let toast = Toast(text: message, duration: kToastDuration)
-        toast.show()
     }
 }
 

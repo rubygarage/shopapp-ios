@@ -27,28 +27,6 @@ class OrdersDetailsTableDataSource: NSObject {
 // MARK: - UITableViewDataSource
 
 extension OrdersDetailsTableDataSource: UITableViewDataSource {
-    
-    // MARK: - Private
-    
-    private func orderItemCell(with tableView: UITableView, indexPath: IndexPath) -> OrderItemTableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: OrderItemTableViewCell.self), for: indexPath) as! OrderItemTableViewCell
-        if let order = delegate?.order(), let item = order.items?[indexPath.row] {
-            cell.configure(with: item, currencyCode: order.currencyCode!)
-        }
-        return cell
-    }
-    
-    private func shippingAddressCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingAddressEditTableCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self), for: indexPath) as! CheckoutShippingAddressEditTableCell
-        if let address = delegate?.order()?.shippingAddress {
-            cell.configure(with: address)
-            cell.setEditButtonVisible(false)
-        }
-        return cell
-    }
-    
-    // MARK: - Internal
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         guard delegate?.order() != nil else {
             return 0
@@ -58,13 +36,17 @@ extension OrdersDetailsTableDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let order = delegate?.order() else {
+            return 0
+        }
+        
         var numberOfRows = 0
         
         switch section {
         case OrdersDetailsSection.paymentInformation.rawValue:
-            numberOfRows = delegate?.order()?.items?.count ?? 0
+            numberOfRows = order.items?.count ?? 0
         case OrdersDetailsSection.shippingAddress.rawValue:
-            numberOfRows = delegate?.order()?.shippingAddress != nil ? 1 : 0
+            numberOfRows = order.shippingAddress != nil ? 1 : 0
         default:
             break
         }
@@ -84,6 +66,23 @@ extension OrdersDetailsTableDataSource: UITableViewDataSource {
             break
         }
         
+        return cell
+    }
+    
+    private func orderItemCell(with tableView: UITableView, indexPath: IndexPath) -> OrderItemTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: OrderItemTableViewCell.self), for: indexPath) as! OrderItemTableViewCell
+        if let order = delegate?.order(), let item = order.items?[indexPath.row] {
+            cell.configure(with: item, currencyCode: order.currencyCode!)
+        }
+        return cell
+    }
+    
+    private func shippingAddressCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingAddressEditTableCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self), for: indexPath) as! CheckoutShippingAddressEditTableCell
+        if let address = delegate?.order()?.shippingAddress {
+            cell.configure(with: address)
+            cell.setEditButtonVisible(false)
+        }
         return cell
     }
 }

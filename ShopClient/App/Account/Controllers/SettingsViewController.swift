@@ -32,8 +32,9 @@ class SettingsViewController: BaseViewController<SettingsViewModel> {
     }
     
     private func setupTableView() {
-        let cellNib = UINib(nibName: String(describing: SwitchTableViewCell.self), bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: String(describing: SwitchTableViewCell.self))
+        let cellName = String(describing: SwitchTableViewCell.self)
+        let cellNib = UINib(nibName: cellName, bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: cellName)
         
         tableDataSource = SettingsTableDataSource()
         tableDataSource.delegate = self
@@ -45,7 +46,10 @@ class SettingsViewController: BaseViewController<SettingsViewModel> {
     private func setupViewModel() {
         viewModel.customer.asObservable()
             .subscribe(onNext: { [weak self] _ in
-                self?.tableView.reloadData()
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
@@ -59,13 +63,16 @@ class SettingsViewController: BaseViewController<SettingsViewModel> {
 
 extension SettingsViewController: SettingsTableDataSourceProtocol {
     func promo() -> (description: String, state: Bool)? {
-        return viewModel.customer.value != nil ? ("Label.Promo".localizable, viewModel.customer.value!.promo) : nil
+        guard let customer = viewModel.customer.value else {
+            return nil
+        }
+        return ("Label.Promo".localizable, customer.promo)
     }
 }
 
-// MARK: - SwitchTableViewCellProtocol
+// MARK: - SwitchTableViewCellDelegate
 
-extension SettingsViewController: SwitchTableViewCellProtocol {
+extension SettingsViewController: SwitchTableViewCellDelegate {
     func stateDidChange(at indexPath: IndexPath, value: Bool) {
         switch indexPath.section {
         case SettingsSection.promo.rawValue:

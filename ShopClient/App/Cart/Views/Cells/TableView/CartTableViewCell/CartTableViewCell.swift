@@ -41,16 +41,8 @@ class CartTableViewCell: SwipeTableViewCell {
     
     // MARK: - Setup
     
-    private func setup() {
-        selectionStyle = .none
-        
-        quantityLabel.text = "Label.Quantity".localizable
-        quantityTextField.delegate = self
-    }
-    
-    public func configure(with item: CartProduct?) {
+    func configure(with item: CartProduct?) {
         cartProduct = item
-        self.delegate = delegate
         populateImageView(with: item)
         populateTitle(with: item)
         populateQuantity(with: item)
@@ -58,13 +50,24 @@ class CartTableViewCell: SwipeTableViewCell {
         populatePricePerOne(with: item)
     }
     
+    private func setup() {
+        selectionStyle = .none
+        
+        quantityLabel.text = "Label.Quantity".localizable
+        quantityTextField.delegate = self
+    }
+    
     private func populateImageView(with item: CartProduct?) {
         variantImageView.set(image: item?.productVariant?.image)
     }
     
     private func populateTitle(with item: CartProduct?) {
-        let productTitle = item?.productTitle ?? ""
-        let variantTitle = item?.productVariant?.title ?? ""
+        guard let item = item else {
+            variantTitleLabel.text = nil
+            return
+        }
+        let productTitle = item.productTitle ?? ""
+        let variantTitle = item.productVariant?.title ?? ""
         variantTitleLabel.text = "\(productTitle) \(variantTitle)"
     }
     
@@ -74,24 +77,28 @@ class CartTableViewCell: SwipeTableViewCell {
     }
     
     private func popualateTotalPrice(with item: CartProduct?) {
-        let currency = item?.currency ?? ""
+        guard let item = item else {
+            totalPriceLabel.text = nil
+            return
+        }
+        let currency = item.currency ?? ""
         let formatter = NumberFormatter.formatter(with: currency)
-        let priceString = item?.productVariant?.price ?? ""
+        let priceString = item.productVariant?.price ?? ""
         let price = NSDecimalNumber(string: priceString)
-        let quantity = Double(item?.quantity ?? 0)
+        let quantity = Double(item.quantity)
         let totalPrice = NSDecimalNumber(value: price.doubleValue * quantity)
         totalPriceLabel.text = formatter.string(from: totalPrice)
     }
     
     private func populatePricePerOne(with item: CartProduct?) {
         let quantity = item?.quantity ?? 1
-        guard quantity <= 1 else {
+        guard quantity <= 1, let item = item else {
             pricePerOneItemLabel.text = nil
             return
         }
-        let currency = item?.currency ?? ""
+        let currency = item.currency ?? ""
         let formatter = NumberFormatter.formatter(with: currency)
-        let priceString = item?.productVariant?.price ?? ""
+        let priceString = item.productVariant?.price ?? ""
         let price = NSDecimalNumber(string: priceString)
         let localizedString = "Label.PriceEach".localizable
         let formattedPrice = formatter.string(from: price) ?? ""

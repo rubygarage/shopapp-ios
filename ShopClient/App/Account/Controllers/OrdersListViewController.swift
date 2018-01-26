@@ -46,30 +46,36 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
     private func setupViewModel() {
         viewModel?.items.asObservable()
             .subscribe(onNext: { [weak self] _ in
-                self?.stopLoadAnimating()
-                self?.tableView.reloadData()
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.stopLoadAnimating()
+                strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
     
     private func setupTableView() {
-        let cartNib = UINib(nibName: String(describing: CheckoutCartTableViewCell.self), bundle: nil)
-        tableView?.register(cartNib, forCellReuseIdentifier: String(describing: CheckoutCartTableViewCell.self))
+        let cellName = String(describing: CheckoutCartTableViewCell.self)
+        let cartNib = UINib(nibName: cellName, bundle: nil)
+        tableView.register(cartNib, forCellReuseIdentifier: cellName)
         
         tableDataSource = OrdersListTableDataSource()
         tableDataSource.delegate = self
-        tableView?.dataSource = tableDataSource
+        tableView.dataSource = tableDataSource
         
         tableDelegate = OrdersListTableDelegate()
         tableDelegate.delegate = self
-        tableView?.delegate = tableDelegate
+        tableView.delegate = tableDelegate
         
-        tableView?.contentInset = TableView.defaultContentInsets
+        tableView.contentInset = TableView.defaultContentInsets
     }
     
     fileprivate func loadData() {
         viewModel.reloadData()
     }
+    
+    // MARK: - BasePaginationViewController
     
     override func pullToRefreshHandler() {
         viewModel.reloadData()
@@ -92,10 +98,11 @@ extension OrdersListViewController: OrdersListTableDataSourceProtocol {
 
 extension OrdersListViewController: OrdersListTableDelegateProtocol {
     func didSelectItem(at index: Int) {
-        if index < viewModel.items.value.count {
-            selectedOrder = viewModel.items.value[index]
-            performSegue(withIdentifier: SegueIdentifiers.toOrderDetails, sender: self)
+        guard index < viewModel.items.value.count else {
+            return
         }
+        selectedOrder = viewModel.items.value[index]
+        performSegue(withIdentifier: SegueIdentifiers.toOrderDetails, sender: self)
     }
 }
 

@@ -25,17 +25,27 @@ class SignUpViewModel: BaseViewModel {
     weak var delegate: AuthenticationProtocol?
     
     var signUpButtonEnabled: Observable<Bool> {
-        return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { email, password in
+        return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { (email, password) in
             email.hasAtLeastOneSymbol() && password.hasAtLeastOneSymbol()
         }
     }
     var signUpPressed: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
-            self?.checkCresentials()
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.checkCresentials()
         }
     }
     
-    // MARK: - Private
+    func loadPolicies() {
+        shopUseCase.getShop { [weak self] shop in
+            guard let strongSelf = self, let privacyPolicy = shop.privacyPolicy, privacyPolicy.body?.isEmpty == false, let termsOfService = shop.termsOfService, termsOfService.body?.isEmpty == false else {
+                return
+            }
+            strongSelf.policies.value = (shop.privacyPolicy, shop.termsOfService)
+        }
+    }
     
     private func checkCresentials() {
         if emailText.value.isValidAsEmail() && passwordText.value.isValidAsPassword() {
@@ -59,12 +69,14 @@ class SignUpViewModel: BaseViewModel {
     private func signUp() {
         state.onNext(.loading(showHud: true))
         signUpUseCase.signUp(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), password: passwordText.value, phone: phoneText.value.orNil()) { [weak self] (success, error) in
-            if let success = success {
-                self?.notifyAboutSignUpResult(success: success)
-                self?.state.onNext(.content)
+            guard let strongSelf = self else {
+                return
             }
             if let error = error {
-                self?.state.onNext(.error(error: error))
+                strongSelf.state.onNext(.error(error: error))
+            } else if let success = success {
+                strongSelf.notifyAboutSignUpResult(success: success)
+                strongSelf.state.onNext(.content)
             }
         }
     }
@@ -74,15 +86,5 @@ class SignUpViewModel: BaseViewModel {
             delegate?.didAuthorize()
         }
         signUpSuccess.value = success
-    }
-    
-    // MARK: - Internal
-    
-    func loadPolicies() {
-        shopUseCase.getShop { [weak self] (shop) in
-            if let privacyPolicy = shop.privacyPolicy, privacyPolicy.body?.isEmpty == false, let termsOfService = shop.termsOfService, termsOfService.body?.isEmpty == false {
-                self?.policies.value = (shop.privacyPolicy, shop.termsOfService)
-            }
-        }
     }
 }

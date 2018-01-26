@@ -19,30 +19,17 @@ protocol SettingsTableDataSourceProtocol: class {
 }
 
 class SettingsTableDataSource: NSObject {
-    weak var delegate: (SettingsTableDataSourceProtocol & SwitchTableViewCellProtocol)?
+    weak var delegate: (SettingsTableDataSourceProtocol & SwitchTableViewCellDelegate)?
 }
 
 // MARK: - UITableViewDataSource
 
 extension SettingsTableDataSource: UITableViewDataSource {
-    
-    // MARK: - Private
-    
-    private func switchCell(with tableView: UITableView, indexPath: IndexPath) -> SwitchTableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SwitchTableViewCell.self), for: indexPath) as! SwitchTableViewCell
-        cell.delegate = delegate
-        if let promo = delegate?.promo() {
-            cell.configure(with: indexPath, description: promo.description, state: promo.state)
-        }
-        return cell
-    }
-    
-    // MARK: - Internal
-    
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard let delegate = delegate else { return 0 }
-        let promoSectionCount = delegate.promo() == nil ? 0 : 1
-        return promoSectionCount
+        guard let delegate = delegate, delegate.promo() != nil else {
+            return 0
+        }
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,5 +48,14 @@ extension SettingsTableDataSource: UITableViewDataSource {
         default:
             return UITableViewCell()
         }
+    }
+    
+    private func switchCell(with tableView: UITableView, indexPath: IndexPath) -> SwitchTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SwitchTableViewCell.self), for: indexPath) as! SwitchTableViewCell
+        cell.delegate = delegate
+        if let promo = delegate?.promo() {
+            cell.configure(with: indexPath, description: promo.description, state: promo.state)
+        }
+        return cell
     }
 }

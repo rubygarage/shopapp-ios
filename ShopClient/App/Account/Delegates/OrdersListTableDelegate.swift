@@ -21,29 +21,29 @@ class OrdersListTableDelegate: NSObject {
 
 extension OrdersListTableDelegate: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let orders = delegate?.orders() {
-            let order = orders[section]
-            let view = OrderHeaderView(section: section, order: order)
-            view.delegate = self
-            return view
+        guard let orders = delegate?.orders() else {
+            return nil
         }
-        return nil
+        let order = orders[section]
+        let view = OrderHeaderView(section: section, order: order)
+        view.delegate = self
+        return view
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if let orders = delegate?.orders() {
-            let order = orders[section]
-            let view = OrderFooterView(section: section, order: order)
-            view.delegate = self
-            return view
+        guard let orders = delegate?.orders() else {
+            return nil
         }
-        return nil
+        let order = orders[section]
+        let view = OrderFooterView(section: section, order: order)
+        view.delegate = self
+        return view
     }
 }
 
-// MARK: - OrderHeaderViewProtocol, OrderFooterViewProtocol
+// MARK: - OrderHeaderViewDelegate, OrderFooterViewDelegate
 
-extension OrdersListTableDelegate: OrderHeaderViewProtocol, OrderFooterViewProtocol {
+extension OrdersListTableDelegate: OrderHeaderViewDelegate, OrderFooterViewDelegate {
     func viewDidTap(_ section: Int) {
         delegate?.didSelectItem(at: section)
     }

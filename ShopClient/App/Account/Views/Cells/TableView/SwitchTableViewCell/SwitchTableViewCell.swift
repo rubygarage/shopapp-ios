@@ -10,7 +10,7 @@ import RxSwift
 
 private let kSwitchControlDebounceDueTime = 0.3
 
-protocol SwitchTableViewCellProtocol: class {
+protocol SwitchTableViewCellDelegate: class {
     func stateDidChange(at indexPath: IndexPath, value: Bool)
 }
 
@@ -22,7 +22,7 @@ class SwitchTableViewCell: UITableViewCell {
     
     private var indexPath: IndexPath!
     
-    weak var delegate: SwitchTableViewCellProtocol?
+    weak var delegate: SwitchTableViewCellDelegate?
     
     // MARK: - View lifecycle
     
@@ -36,6 +36,12 @@ class SwitchTableViewCell: UITableViewCell {
     
     // MARK: - Setup
     
+    func configure(with indexPath: IndexPath, description: String, state: Bool = false) {
+        self.indexPath = indexPath
+        swicthDescriptionlabel.text = description
+        switchControl.isOn = state
+    }
+    
     private func setupViews() {
         let switchResults = switchControl.rx.isOn
             .debounce(kSwitchControlDebounceDueTime, scheduler: MainScheduler.instance)
@@ -44,18 +50,12 @@ class SwitchTableViewCell: UITableViewCell {
         switchResults.asObservable()
             .skip(1)
             .subscribe(onNext: { [weak self] value in
-                guard let `self` = self else {
+                guard let strongSelf = self else {
                     return
                 }
                 
-                self.delegate?.stateDidChange(at: self.indexPath, value: value)
+                strongSelf.delegate?.stateDidChange(at: strongSelf.indexPath, value: value)
             })
             .disposed(by: disposeBag)
-    }
-    
-    func configure(with indexPath: IndexPath, description: String, state: Bool = false) {
-        self.indexPath = indexPath
-        swicthDescriptionlabel.text = description
-        switchControl.isOn = state
     }
 }

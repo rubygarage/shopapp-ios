@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol OrderHeaderViewProtocol: class {
+protocol OrderHeaderViewDelegate: class {
     func viewDidTap(_ section: Int)
 }
 
@@ -19,7 +19,7 @@ class OrderHeaderView: UIView {
     
     private var section: Int!
     
-    weak var delegate: OrderHeaderViewProtocol?
+    weak var delegate: OrderHeaderViewDelegate?
     
     // MARK: - View lifecycle
 

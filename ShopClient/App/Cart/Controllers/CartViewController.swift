@@ -125,7 +125,10 @@ extension CartViewController: CartTableDelegateProtocol {
     }
     
     func didSelectItem(at index: Int) {
-        selectedProductVariant = viewModel.productVariant(at: index)
+        guard let productVariant = viewModel.productVariant(at: index) else {
+            return
+        }
+        selectedProductVariant = productVariant
         performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
 }

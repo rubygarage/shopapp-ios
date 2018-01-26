@@ -14,7 +14,7 @@ protocol AccountTableDelegateProtocol: class {
 }
 
 class AccountTableDelegate: NSObject {
-    weak var delegate: (AccountTableDelegateProtocol & AccountNotLoggedHeaderProtocol & AccountLoggedHeaderProtocol & AccountFooterViewProtocol)?
+    weak var delegate: (AccountTableDelegateProtocol & AccountNotLoggedHeaderDelegate & AccountLoggedHeaderDelegate & AccountFooterViewDelegate)?
 }
 
 // MARK: - UITableViewDelegate
@@ -37,11 +37,11 @@ extension AccountTableDelegate: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if delegate?.customer() != nil {
-            let view = AccountFooterView(frame: CGRect.zero)
-            view.delegate = delegate
-            return view
+        guard delegate?.customer() != nil else {
+            return UIView()
         }
-        return UIView()
+        let view = AccountFooterView(frame: CGRect.zero)
+        view.delegate = delegate
+        return view
     }
 }

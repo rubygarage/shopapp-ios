@@ -1177,6 +1177,7 @@
 				0BA6306E1FFFB10A007088B8 /* Footers */,
 				0B69B569200CF1A700F071E3 /* Headers */,
 				0B24F0DE20074F1900F13224 /* InputTextFieldView */,
+				0B24F0E120074F1900F13224 /* UnderlinedButton */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1304,7 +1305,6 @@
 				0BD5EB361FF3E74E0076C01B /* Cells */,
 				0BD5EB371FF3E7530076C01B /* Footers */,
 				0BD5EB381FF3E76A0076C01B /* Headers */,
-				0B24F0E120074F1900F13224 /* UnderlinedButton */,
 			);
 			path = Views;
 			sourceTree = "<group>";

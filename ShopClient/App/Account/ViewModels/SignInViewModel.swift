@@ -20,17 +20,18 @@ class SignInViewModel: BaseViewModel {
     weak var delegate: AuthenticationProtocol?
     
     var signInButtonEnabled: Observable<Bool> {
-        return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { email, password in
+        return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { (email, password) in
             email.hasAtLeastOneSymbol() && password.hasAtLeastOneSymbol()
         }
     }
     var loginPressed: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
-            self?.checkCresentials()
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.checkCresentials()
         }
     }
-    
-    // MARK: - Private
     
     private func checkCresentials() {
         if emailText.value.isValidAsEmail() && passwordText.value.isValidAsPassword() {
@@ -54,12 +55,14 @@ class SignInViewModel: BaseViewModel {
     private func signIn() {
         state.onNext(.loading(showHud: true))
         loginUseCase.login(with: emailText.value, password: passwordText.value) { [weak self] (success, error) in
-            if let success = success {
-                self?.notifyAboutSignInResult(success: success)
-                self?.state.onNext(.content)
+            guard let strongSelf = self else {
+                return
             }
             if let error = error {
-                self?.state.onNext(.error(error: error))
+                strongSelf.state.onNext(.error(error: error))
+            } else if let success = success {
+                strongSelf.notifyAboutSignInResult(success: success)
+                strongSelf.state.onNext(.content)
             }
         }
     }

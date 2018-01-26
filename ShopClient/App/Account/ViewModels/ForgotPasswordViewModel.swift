@@ -22,11 +22,12 @@ class ForgotPasswordViewModel: BaseViewModel {
     }
     var resetPasswordPressed: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
-            self?.checkCresentials()
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.checkCresentials()
         }
     }
-    
-    // MARK: - Private
     
     private func checkCresentials() {
         if emailText.value.isValidAsEmail() {
@@ -44,12 +45,14 @@ class ForgotPasswordViewModel: BaseViewModel {
     private func resetPassword() {
         state.onNext(.loading(showHud: true))
         resetPasswordUseCase.resetPassword(with: emailText.value) { [weak self] (success, error) in
-            if let success = success {
-                self?.notifyAboutResetPassword(success: success)
-                self?.state.onNext(.content)
+            guard let strongSelf = self else {
+                return
             }
             if let error = error {
-                self?.state.onNext(.error(error: error))
+                strongSelf.state.onNext(.error(error: error))
+            } else if let success = success {
+                strongSelf.notifyAboutResetPassword(success: success)
+                strongSelf.state.onNext(.content)
             }
         }
     }
