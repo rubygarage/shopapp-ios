@@ -20,13 +20,12 @@ class GridCollectionDataSource: NSObject {
 // MARK: - UICollectionViewDataSource
 
 extension GridCollectionDataSource: UICollectionViewDataSource {
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return delegate?.numberOfItems() ?? 0
     }
     
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let reuseIdentifier = String(describing: GridCollectionViewCell.self)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! GridCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: GridCollectionViewCell.self), for: indexPath) as! GridCollectionViewCell
         let item = delegate?.item(for: indexPath)
         cell.configure(with: item!)
         

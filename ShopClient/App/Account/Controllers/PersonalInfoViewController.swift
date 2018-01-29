@@ -49,7 +49,10 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
     private func setupViewModel() {
         viewModel.customer.asObservable()
             .subscribe(onNext: { [weak self] customer in
-                self?.populateViews(with: customer)
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.populateViews(with: customer)
             })
             .disposed(by: disposeBag)
         
@@ -71,13 +74,19 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
         
         viewModel.emailErrorMessage
             .subscribe(onNext: { [weak self] errorMessage in
-                self?.emailTextFieldView.errorMessage = errorMessage
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.emailTextFieldView.errorMessage = errorMessage
             })
             .disposed(by: disposeBag)
         
         saveChangesButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                self?.view.endEditing(true)
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.view.endEditing(true)
             })
             .disposed(by: disposeBag)
         
@@ -87,13 +96,19 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
         
         viewModel.saveChangesButtonEnabled
             .subscribe(onNext: { [weak self] enabled in
-                self?.saveChangesButton.isEnabled = enabled
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.saveChangesButton.isEnabled = enabled
             })
             .disposed(by: disposeBag)
         
         viewModel.saveChangesSuccess.asObservable()
             .subscribe(onNext: { [weak self] success in
-                self?.saveChangesButton.isEnabled = !success
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.saveChangesButton.isEnabled = !success
             })
             .disposed(by: disposeBag)
     }

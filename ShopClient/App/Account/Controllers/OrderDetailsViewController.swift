@@ -11,10 +11,7 @@ import UIKit
 class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
     @IBOutlet private weak var tableView: UITableView!
     
-    private var tableDataSource: OrdersDetailsTableDataSource!
-    // swiftlint:disable weak_delegate
-    private var tableDelegate: OrdersDetailsTableDelegate!
-    // swiftlint:enable weak_delegate
+    private var tableProvider: OrdersDetailsTableProvider!
     
     fileprivate var selectedProductVariant: ProductVariant!
     
@@ -45,29 +42,32 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
     }
     
     private func setupTableView() {
-        let orderItemNib = UINib(nibName: String(describing: OrderItemTableViewCell.self), bundle: nil)
-        tableView.register(orderItemNib, forCellReuseIdentifier: String(describing: OrderItemTableViewCell.self))
+        let orderItemCellName = String(describing: OrderItemTableViewCell.self)
+        let orderItemNib = UINib(nibName: orderItemCellName, bundle: nil)
+        tableView.register(orderItemNib, forCellReuseIdentifier: orderItemCellName)
         
-        let shippingAddressEditNib = UINib(nibName: String(describing: CheckoutShippingAddressEditTableCell.self), bundle: nil)
-        tableView.register(shippingAddressEditNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self))
+        let checkoutShippingAddressEditCellname = String(describing: CheckoutShippingAddressEditTableCell.self)
+        let shippingAddressEditNib = UINib(nibName: checkoutShippingAddressEditCellname, bundle: nil)
+        tableView.register(shippingAddressEditNib, forCellReuseIdentifier: checkoutShippingAddressEditCellname)
         
-        tableDataSource = OrdersDetailsTableDataSource()
-        tableDataSource.delegate = self
-        tableView.dataSource = tableDataSource
+        tableProvider = OrdersDetailsTableProvider()
+        tableProvider.delegate = self
+        tableView.dataSource = tableProvider
+        tableView.delegate = tableProvider
         
-        tableDelegate = OrdersDetailsTableDelegate()
-        tableDelegate.delegate = self
-        tableView.delegate = tableDelegate
-        
-        tableView?.contentInset = TableView.defaultContentInsets
+        tableView.contentInset = TableView.defaultContentInsets
     }
     
     private func setupViewModel() {
         viewModel.orderId = orderId
 
         viewModel.data.asObservable()
-            .subscribe(onNext: { [weak self] _ in
-                self?.tableView.reloadData()
+            .subscribe(onNext: { [weak self] order in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.tableProvider.order = order
+                strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
@@ -77,21 +77,11 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
     }
 }
 
-// MARK: - OrdersDetailsTableDataSourceProtocol
+// MARK: - OrdersDetailsTableProviderDelegate
 
-extension OrderDetailsViewController: OrdersDetailsTableDataSourceProtocol {
-    func order() -> Order? {
-        return viewModel.data.value
-    }
-}
-
-// MARK: - OrdersDetailsTableDelegateProtocol
-
-extension OrderDetailsViewController: OrdersDetailsTableDelegateProtocol {
-    func didSelectItem(at index: Int) {
-        selectedProductVariant = viewModel.productVariant(at: index)
-        if selectedProductVariant != nil {
-            performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
-        }
+extension OrderDetailsViewController: OrdersDetailsTableProviderDelegate {
+    func provider(_ provider: OrdersDetailsTableProvider, didSelect productVariant: ProductVariant) {
+        selectedProductVariant = productVariant
+        performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
 }

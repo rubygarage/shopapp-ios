@@ -7,12 +7,8 @@
 //
 
 import UIKit
-import AvatarImageView
 
-protocol AccountLoggedHeaderProtocol: class {
-    func didTapMyOrders()
-    func didTapPersonalInfo()
-}
+import AvatarImageView
 
 private let kAvatarTextSizeFactor: CGFloat = 0.4
 
@@ -30,6 +26,11 @@ struct CustomerImageDataSource: AvatarImageViewDataSource {
     }
 }
 
+protocol AccountLoggedHeaderDelegate: class {
+    func headerViewDidTapMyOrders(_ headerView: AccountLoggedHeaderView)
+    func headerViewDidTapPersonalInfo(_ headerView: AccountLoggedHeaderView)
+}
+
 class AccountLoggedHeaderView: UIView {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var myOrdersButton: UIButton!
@@ -43,7 +44,7 @@ class AccountLoggedHeaderView: UIView {
         }
     }
     
-    weak var delegate: AccountLoggedHeaderProtocol?
+    weak var delegate: AccountLoggedHeaderDelegate?
     
     // MARK: - View lifecycle
     
@@ -84,11 +85,11 @@ class AccountLoggedHeaderView: UIView {
     
     // MARK: - Actions
     
-    @IBAction func myOrdersTapped(_ sender: UIButton) {
-        delegate?.didTapMyOrders()
+    @IBAction func myOrdersButtonDidPress(_ sender: UIButton) {
+        delegate?.headerViewDidTapMyOrders(self)
     }
     
-    @IBAction func personalInfoTapped(_ sender: UIButton) {
-        delegate?.didTapPersonalInfo()
+    @IBAction func personalInfoButtonDidPress(_ sender: UIButton) {
+        delegate?.headerViewDidTapPersonalInfo(self)
     }
 }

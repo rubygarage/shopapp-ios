@@ -14,10 +14,7 @@ class CartViewController: BaseViewController<CartViewModel> {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var checkoutButton: BlackButton!
     
-    private var tableDataSource: CartTableDataSource!
-    // swiftlint:disable weak_delegate
-    private var tableDelegate: CartTableDelegate!
-    // swiftlint:enable weak_delegate
+    private var tableProvider: CartTableProvider!
     
     fileprivate var selectedProductVariant: ProductVariant!
     
@@ -54,22 +51,26 @@ class CartViewController: BaseViewController<CartViewModel> {
     }
     
     private func setupTableView() {
-        let cartCellNib = UINib(nibName: String(describing: CartTableViewCell.self), bundle: nil)
-        tableView.register(cartCellNib, forCellReuseIdentifier: String(describing: CartTableViewCell.self))
+        let cellName = String(describing: CartTableViewCell.self)
+        let cartCellNib = UINib(nibName: cellName, bundle: nil)
+        tableView.register(cartCellNib, forCellReuseIdentifier: cellName)
         
-        tableDataSource = CartTableDataSource()
-        tableDataSource.delegate = self
-        tableView.dataSource = tableDataSource
-        
-        tableDelegate = CartTableDelegate()
-        tableDelegate.delegate = self
-        tableView.delegate = tableDelegate
+        tableProvider = CartTableProvider()
+        tableProvider.delegate = self
+        tableView.dataSource = tableProvider
+        tableView.delegate = tableProvider
     }
     
     private func setupViewModel() {
         viewModel.data.asObservable()
-            .subscribe(onNext: { [weak self] _ in
-                self?.tableView.reloadData()
+            .subscribe(onNext: { [weak self] cartProducts in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.tableProvider.cartProducts = cartProducts
+                strongSelf.tableProvider.totalPrice = strongSelf.viewModel.calculateTotalPrice()
+                strongSelf.tableProvider.currency = cartProducts.first?.currency ?? ""
+                strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
@@ -80,56 +81,33 @@ class CartViewController: BaseViewController<CartViewModel> {
     
     // MARK: - Actions
     
-    @IBAction func checkoutTapped(_ sender: BlackButton) {
+    @IBAction func checkoutButtonDidPress(_ sender: BlackButton) {
         performSegue(withIdentifier: SegueIdentifiers.toCheckout, sender: self)
     }
 }
 
-// MARK: - CartEmptyDataViewProtocol
+// MARK: - CartEmptyDataViewDelegate
 
-extension CartViewController: CartEmptyDataViewProtocol {
-    func didTapStartShopping() {
+extension CartViewController: CartEmptyDataViewDelegate {
+    func viewDidTapStartShopping(_ view: CartEmptyDataView) {
         setHomeController()
         dismiss(animated: true)
     }
 }
 
-// MARK: - CartTableDataSourceProtocol
+// MARK: - CartTableProvider
 
-extension CartViewController: CartTableDataSourceProtocol {
-    func itemsCount() -> Int {
-        return viewModel.data.value.count
-    }
-    
-    func item(for index: Int) -> CartProduct? {
-        if index < viewModel.data.value.count {
-            return viewModel.data.value[index]
-        }
-        return nil
-    }
-}
-
-// MARK: - CartTableDelegateProtocol
-
-extension CartViewController: CartTableDelegateProtocol {
-    func totalPrice() -> Float {
-        return viewModel.calculateTotalPrice()
-    }
-    
-    func currency() -> String {
-        return viewModel.data.value.first?.currency ?? String()
-    }
-    
-    func didSelectItem(at index: Int) {
-        selectedProductVariant = viewModel.productVariant(at: index)
+extension CartViewController: CartTableProviderDelegate {
+    func provider(_ provider: CartTableProvider, didSelect productVariant: ProductVariant) {
+        selectedProductVariant = productVariant
         performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
 }
 
-// MARK: - CartTableCellProtocol
+// MARK: - CartTableCellDelegate
 
-extension CartViewController: CartTableCellProtocol {
-    func didUpdate(cartProduct: CartProduct, quantity: Int) {
+extension CartViewController: CartTableCellDelegate {
+    func tableViewCell(_ tableViewCell: CartTableViewCell, didUpdateCartProduct cartProduct: CartProduct, with quantity: Int) {
         viewModel.update(cartProduct: cartProduct, quantity: quantity)
     }
 }
@@ -138,15 +116,20 @@ extension CartViewController: CartTableCellProtocol {
 
 extension CartViewController: SwipeTableViewCellDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-        guard orientation == .right else { return nil }
+        guard orientation == .right else {
+            return nil
+        }
         let title = "Button.Remove".localizable
         let deleteAction = SwipeAction(style: .destructive, title: title) { [weak self] (_, indexPath) in
-            self?.viewModel.removeCardProduct(at: indexPath.row)
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.viewModel.removeCardProduct(at: indexPath.row)
         }
         deleteAction.backgroundColor = TableView.removeActionBackgroundColor
         deleteAction.image = #imageLiteral(resourceName: "trash")
         deleteAction.font = TableView.removeActionFont
-        deleteAction.textColor = UIColor.black
+        deleteAction.textColor = .black
         deleteAction.hidesWhenSelected = true
         
         return [deleteAction]

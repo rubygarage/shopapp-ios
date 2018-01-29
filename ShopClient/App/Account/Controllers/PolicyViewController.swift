@@ -40,7 +40,10 @@ class PolicyViewController: UIViewController {
     }
     
     private func populateViews() {
-        title = policy?.title
-        policyTextView.text = policy?.body
+        guard let policy = policy else {
+            return
+        }
+        title = policy.title
+        policyTextView.text = policy.body
     }
 }

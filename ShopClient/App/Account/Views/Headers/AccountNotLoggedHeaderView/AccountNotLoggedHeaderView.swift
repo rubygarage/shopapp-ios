@@ -8,9 +8,9 @@
 
 import UIKit
 
-protocol AccountNotLoggedHeaderProtocol: class {
-    func didTapSignIn()
-    func didTapCreateNewAccount()
+protocol AccountNotLoggedHeaderDelegate: class {
+    func headerViewDidTapSignIn(_ headerView: AccountNotLoggedHeaderView)
+    func headerViewDidTapCreateNewAccount(_ headerView: AccountNotLoggedHeaderView)
 }
 
 class AccountNotLoggedHeaderView: UIView {
@@ -21,7 +21,7 @@ class AccountNotLoggedHeaderView: UIView {
     
     @IBOutlet fileprivate weak var createAccountUnderlinedView: UIView!
     
-    weak var delegate: AccountNotLoggedHeaderProtocol?
+    weak var delegate: AccountNotLoggedHeaderDelegate?
     
     // MARK: - View lifecycle
     
@@ -57,12 +57,12 @@ class AccountNotLoggedHeaderView: UIView {
     
     // MARK: - Actions
     
-    @IBAction func signInTapped(_ sender: BlackButton) {
-        delegate?.didTapSignIn()
+    @IBAction func signInButtonDidPress(_ sender: BlackButton) {
+        delegate?.headerViewDidTapSignIn(self)
     }
     
-    @IBAction func createNewAccountTapped(_ sender: UnderlinedButton) {
-        delegate?.didTapCreateNewAccount()
+    @IBAction func createNewAccountButtonDidPress(_ sender: UnderlinedButton) {
+        delegate?.headerViewDidTapCreateNewAccount(self)
     }
 }
 

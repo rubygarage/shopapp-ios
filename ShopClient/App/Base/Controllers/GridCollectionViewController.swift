@@ -35,8 +35,9 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
     // MARK: - Setup
     
     private func setupCollectionView() {
-        let nib = UINib(nibName: String(describing: GridCollectionViewCell.self), bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: String(describing: GridCollectionViewCell.self))
+        let cellName = String(describing: GridCollectionViewCell.self)
+        let nib = UINib(nibName: cellName, bundle: nil)
+        collectionView.register(nib, forCellWithReuseIdentifier: cellName)
         
         collectionDataSource = GridCollectionDataSource()
         collectionDataSource.delegate = self
@@ -52,10 +53,11 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
     // MARK: - GridCollectionDelegateProtocol
     
     func didSelectItem(at index: Int) {
-        if index < viewModel.products.value.count {
-            selectedProduct = viewModel.products.value[index]
-            performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
+        guard index < viewModel.products.value.count else {
+            return
         }
+        selectedProduct = viewModel.products.value[index]
+        performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
 }
 
@@ -67,6 +69,9 @@ extension GridCollectionViewController: GridCollectionDataSourceProtocol {
     }
     
     func item(for indexPath: IndexPath) -> Product {
+        guard indexPath.row < viewModel.products.value.count else {
+            return Product()
+        }
         return viewModel.products.value[indexPath.row]
     }
 }

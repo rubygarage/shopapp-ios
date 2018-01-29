@@ -81,19 +81,28 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
         
         viewModel.emailErrorMessage
             .subscribe(onNext: { [weak self] errorMessage in
-                self?.emailTextFieldView.errorMessage = errorMessage
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.emailTextFieldView.errorMessage = errorMessage
             })
             .disposed(by: disposeBag)
         
         viewModel.passwordErrorMessage
             .subscribe(onNext: { [weak self] errorMessage in
-                self?.passwordTextFieldView.errorMessage = errorMessage
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.passwordTextFieldView.errorMessage = errorMessage
             })
             .disposed(by: disposeBag)
         
         signUpButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                self?.view.endEditing(true)
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.view.endEditing(true)
             })
             .disposed(by: disposeBag)
         
@@ -103,21 +112,28 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
         
         viewModel.signUpButtonEnabled
             .subscribe(onNext: { [weak self] enabled in
-                self?.signUpButton.isEnabled = enabled
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.signUpButton.isEnabled = enabled
             })
             .disposed(by: disposeBag)
         
         viewModel.signUpSuccess.asObservable()
             .subscribe(onNext: { [weak self] success in
-                if success {
-                    self?.dismiss(animated: true)
+                guard let strongSelf = self, success else {
+                    return
                 }
+                strongSelf.dismiss(animated: true)
             })
             .disposed(by: disposeBag)
         
         viewModel.policies.asObservable()
             .subscribe(onNext: { [weak self] (privacyPolicy, termsOfService) in
-                self?.populateAgreementsLabel(with: privacyPolicy, termsOfService: termsOfService)
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.populateAgreementsLabel(with: privacyPolicy, termsOfService: termsOfService)
             })
             .disposed(by: disposeBag)
     }

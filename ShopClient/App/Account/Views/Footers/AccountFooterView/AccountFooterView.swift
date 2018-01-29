@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol AccountFooterViewProtocol: class {
-    func didTapLogout()
+protocol AccountFooterViewDelegate: class {
+    func footerViewDidTapLogout(_ footerView: AccountFooterView)
 }
 
 class AccountFooterView: UIView {
@@ -18,7 +18,7 @@ class AccountFooterView: UIView {
     
     @IBOutlet fileprivate weak var logoutUnderlineView: UIView!
     
-    weak var delegate: AccountFooterViewProtocol?
+    weak var delegate: AccountFooterViewDelegate?
     
     // MARK: - View lifecycle
     
@@ -53,7 +53,7 @@ class AccountFooterView: UIView {
     // MARK: - Action
     
     @IBAction func logoutTapped(_ sender: UIButton) {
-        delegate?.didTapLogout()
+        delegate?.footerViewDidTapLogout(self)
     }
 }
 

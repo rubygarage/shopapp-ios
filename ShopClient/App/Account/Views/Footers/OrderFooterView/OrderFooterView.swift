@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol OrderFooterViewProtocol: class {
-    func viewDidTap(_ section: Int)
+protocol OrderFooterViewDelegate: class {
+    func footerView(_ footerView: OrderFooterView, didTapWith section: Int)
 }
 
 class OrderFooterView: UIView {
@@ -21,7 +21,7 @@ class OrderFooterView: UIView {
     
     private var section: Int!
     
-    weak var delegate: OrderFooterViewProtocol?
+    weak var delegate: OrderFooterViewDelegate?
     
     // MARK: - View lifecycle
     
@@ -67,6 +67,6 @@ class OrderFooterView: UIView {
     }
     
     func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
-        delegate?.viewDidTap(section)
+        delegate?.footerView(self, didTapWith: section)
     }
 }

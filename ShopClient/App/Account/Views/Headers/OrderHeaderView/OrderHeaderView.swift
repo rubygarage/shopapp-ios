@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol OrderHeaderViewProtocol: class {
-    func viewDidTap(_ section: Int)
+protocol OrderHeaderViewDelegate: class {
+    func headerView(_ headerView: OrderHeaderView, didTapWith section: Int)
 }
 
 class OrderHeaderView: UIView {
@@ -19,7 +19,7 @@ class OrderHeaderView: UIView {
     
     private var section: Int!
     
-    weak var delegate: OrderHeaderViewProtocol?
+    weak var delegate: OrderHeaderViewDelegate?
     
     // MARK: - View lifecycle
 
@@ -61,6 +61,6 @@ class OrderHeaderView: UIView {
     }
     
     func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
-        delegate?.viewDidTap(section)
+        delegate?.headerView(self, didTapWith: section)
     }
 }

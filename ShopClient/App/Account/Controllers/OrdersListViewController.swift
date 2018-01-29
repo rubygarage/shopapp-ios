@@ -9,10 +9,7 @@
 import UIKit
 
 class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
-    private var tableDataSource: OrdersListTableDataSource!
-    // swiftlint:disable weak_delegate
-    private var tableDelegate: OrdersListTableDelegate!
-    // swiftlint:enable weak_delegate
+    private var tableProvider: OrdersListTableProvider!
     
     fileprivate var selectedOrder: Order?
     fileprivate var selectedProductVariant: ProductVariant!
@@ -45,31 +42,35 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
     
     private func setupViewModel() {
         viewModel?.items.asObservable()
-            .subscribe(onNext: { [weak self] _ in
-                self?.stopLoadAnimating()
-                self?.tableView.reloadData()
+            .subscribe(onNext: { [weak self] orders in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.stopLoadAnimating()
+                strongSelf.tableProvider.orders = orders
+                strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
     
     private func setupTableView() {
-        let cartNib = UINib(nibName: String(describing: CheckoutCartTableViewCell.self), bundle: nil)
-        tableView?.register(cartNib, forCellReuseIdentifier: String(describing: CheckoutCartTableViewCell.self))
+        let cellName = String(describing: CheckoutCartTableViewCell.self)
+        let cartNib = UINib(nibName: cellName, bundle: nil)
+        tableView.register(cartNib, forCellReuseIdentifier: cellName)
         
-        tableDataSource = OrdersListTableDataSource()
-        tableDataSource.delegate = self
-        tableView?.dataSource = tableDataSource
+        tableProvider = OrdersListTableProvider()
+        tableProvider.delegate = self
+        tableView.dataSource = tableProvider
+        tableView.delegate = tableProvider
         
-        tableDelegate = OrdersListTableDelegate()
-        tableDelegate.delegate = self
-        tableView?.delegate = tableDelegate
-        
-        tableView?.contentInset = TableView.defaultContentInsets
+        tableView.contentInset = TableView.defaultContentInsets
     }
     
     fileprivate func loadData() {
         viewModel.reloadData()
     }
+    
+    // MARK: - BasePaginationViewController
     
     override func pullToRefreshHandler() {
         viewModel.reloadData()
@@ -80,22 +81,12 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
     }
 }
 
-// MARK: - OrdersListTableDataSourceProtocol
+// MARK: - OrdersListTableProviderDelegate
 
-extension OrdersListViewController: OrdersListTableDataSourceProtocol {
-    func orders() -> [Order] {
-        return viewModel.items.value
-    }
-}
-
-// MARK: - OrdersListTableDelegateProtocol
-
-extension OrdersListViewController: OrdersListTableDelegateProtocol {
-    func didSelectItem(at index: Int) {
-        if index < viewModel.items.value.count {
-            selectedOrder = viewModel.items.value[index]
-            performSegue(withIdentifier: SegueIdentifiers.toOrderDetails, sender: self)
-        }
+extension OrdersListViewController: OrdersListTableProviderDelegate {
+    func provider(_ provider: OrdersListTableProvider, didSelect order: Order) {
+        selectedOrder = order
+        performSegue(withIdentifier: SegueIdentifiers.toOrderDetails, sender: self)
     }
 }
 

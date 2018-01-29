@@ -55,13 +55,19 @@ class ForgotPasswordViewController: BaseViewController<ForgotPasswordViewModel> 
         
         viewModel.emailErrorMessage
             .subscribe(onNext: { [weak self] errorMessage in
-                self?.emailTextFieldView.errorMessage = errorMessage
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.emailTextFieldView.errorMessage = errorMessage
             })
             .disposed(by: disposeBag)
         
         forgotPasswordButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                self?.view.endEditing(true)
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.view.endEditing(true)
             })
             .disposed(by: disposeBag)
         
@@ -71,13 +77,19 @@ class ForgotPasswordViewController: BaseViewController<ForgotPasswordViewModel> 
         
         viewModel.resetPasswordButtonEnabled
             .subscribe(onNext: { [weak self] enabled in
-                self?.forgotPasswordButton.isEnabled = enabled
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.forgotPasswordButton.isEnabled = enabled
             })
             .disposed(by: disposeBag)
         
         viewModel.resetPasswordSuccess.asObservable()
             .subscribe(onNext: { [weak self] success in
-                self?.linkView.isHidden = !success
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.linkView.isHidden = !success
             })
             .disposed(by: disposeBag)
     }

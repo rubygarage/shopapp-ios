@@ -24,23 +24,29 @@ class BaseCollectionViewController<T: BasePaginationViewModel>: BasePaginationVi
     
     // MARK: - Setup
     
+    func stopLoadAnimating() {
+        refreshControl?.endRefreshing()
+        collectionView.finishInfiniteScroll()
+    }
+    
     private func setupPullToRefresh() {
         refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(self.pullToRefreshHandler), for: UIControlEvents.valueChanged)
+        refreshControl?.addTarget(self, action: #selector(self.pullToRefreshHandler), for: .valueChanged)
         collectionView.refreshControl = refreshControl
     }
     
     private func setupInfinityScroll() {
         collectionView.setShouldShowInfiniteScrollHandler { [weak self] _ -> Bool in
-            return self?.viewModel.canLoadMore ?? false
+            guard let strongSelf = self else {
+                return false
+            }
+            return strongSelf.viewModel.canLoadMore
         }
         collectionView.addInfiniteScroll { [weak self] _ in
-            self?.infinityScrollHandler()
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.infinityScrollHandler()
         }
-    }
-    
-    func stopLoadAnimating() {
-        refreshControl?.endRefreshing()
-        collectionView.finishInfiniteScroll()
     }
 }

@@ -49,19 +49,28 @@ class SignInViewController: BaseViewController<SignInViewModel> {
         
         viewModel.emailErrorMessage
             .subscribe(onNext: { [weak self] errorMessage in
-                self?.emailTextFieldView.errorMessage = errorMessage
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.emailTextFieldView.errorMessage = errorMessage
             })
             .disposed(by: disposeBag)
         
         viewModel.passwordErrorMessage
             .subscribe(onNext: { [weak self] errorMessage in
-                self?.passwordTextFieldView.errorMessage = errorMessage
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.passwordTextFieldView.errorMessage = errorMessage
             })
             .disposed(by: disposeBag)
         
         signInButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                self?.view.endEditing(true)
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.view.endEditing(true)
             })
             .disposed(by: disposeBag)
         
@@ -71,15 +80,19 @@ class SignInViewController: BaseViewController<SignInViewModel> {
         
         viewModel.signInButtonEnabled
             .subscribe(onNext: { [weak self] enabled in
-                self?.signInButton.isEnabled = enabled
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.signInButton.isEnabled = enabled
             })
             .disposed(by: disposeBag)
         
         viewModel.signInSuccess.asObservable()
             .subscribe(onNext: { [weak self] success in
-                if success {
-                    self?.dismiss(animated: true)
+                guard let strongSelf = self, success else {
+                    return
                 }
+                strongSelf.dismiss(animated: true)
             })
             .disposed(by: disposeBag)
     }

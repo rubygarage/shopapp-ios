@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ErrorViewDelegate: class {
-    func didTapTryAgain()
+    func viewDidTapTryAgain(_ view: ErrorView)
 }
 
 class ErrorView: UIView {
@@ -56,7 +56,7 @@ class ErrorView: UIView {
     
     // MARK: - Actions
     
-    @IBAction private func tryAgainTapped(_ sender: UIButton) {
-        delegate?.didTapTryAgain()
+    @IBAction private func tryAgainButtonDidTap(_ sender: UIButton) {
+        delegate?.viewDidTapTryAgain(self)
     }
 }
