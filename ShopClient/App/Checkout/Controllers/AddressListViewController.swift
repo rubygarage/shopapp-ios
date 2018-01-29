@@ -60,14 +60,20 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
         
         viewModel.customerAddresses.asObservable()
             .subscribe(onNext: { [weak self] _ in
-                self?.tableView.reloadData()
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
         
         viewModel.didSelectAddress
             .subscribe(onNext: { [weak self] (address) in
-                if self?.addressListType == .billing {
-                    self?.destinationAddress = address
+                guard let strongSelf = self else {
+                    return
+                }
+                if strongSelf.addressListType == .billing {
+                    strongSelf.destinationAddress = address
                 }
             })
             .disposed(by: disposeBag)
@@ -99,7 +105,10 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
         let selected = selectedAddress?.isEqual(to: address) ?? false
         destinationAddress = address
         destinationAddressFormCompletion = { [weak self] filledAddress in
-            self?.viewModel.updateAddress(with: filledAddress, isSelected: selected)
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.viewModel.updateAddress(with: filledAddress, isSelected: selected)
         }
         performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
     }
@@ -117,7 +126,10 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     func didTapAddNewAddress() {
         destinationAddress = nil
         destinationAddressFormCompletion = { [weak self] address in
-            self?.viewModel.addCustomerAddress(with: address)
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.viewModel.addCustomerAddress(with: address)
         }
         performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
     }

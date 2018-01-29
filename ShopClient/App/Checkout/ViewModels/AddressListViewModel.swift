@@ -22,11 +22,14 @@ class AddressListViewModel: BaseViewModel {
     func loadCustomerAddresses() {
         state.onNext(.loading(showHud: true))
         Repository.shared.getCustomer { [weak self] (customer, _) in
-            if let addresses = customer?.addresses {
-                self?.customerAddresses.value = addresses
-                self?.customerDefaultAddress.value = customer?.defaultAddress
+            guard let strongSelf = self else {
+                return
             }
-            self?.state.onNext(.content)
+            if let addresses = customer?.addresses {
+                strongSelf.customerAddresses.value = addresses
+                strongSelf.customerDefaultAddress.value = customer?.defaultAddress
+            }
+            strongSelf.state.onNext(.content)
         }
     }
     
@@ -50,11 +53,14 @@ class AddressListViewModel: BaseViewModel {
     func updateAddress(with address: Address, isSelected: Bool) {
         state.onNext(.loading(showHud: true))
         Repository.shared.updateCustomerAddress(with: address) { [weak self] (success, error) in
+            guard let strongSelf = self else {
+                return
+            }
             if let error = error {
-                self?.state.onNext(.error(error: error))
+                strongSelf.state.onNext(.error(error: error))
             } else if let success = success {
-                self?.processAddressUpdatingResponse(with: success, address: address, isSelected: isSelected)
-                self?.state.onNext(.content)
+                strongSelf.processAddressUpdatingResponse(with: success, address: address, isSelected: isSelected)
+                strongSelf.state.onNext(.content)
             }
         }
     }
@@ -62,11 +68,14 @@ class AddressListViewModel: BaseViewModel {
     func deleteCustomerAddress(with address: Address) {
         state.onNext(.loading(showHud: true))
         Repository.shared.deleteCustomerAddress(with: address.id) { [weak self] (success, error) in
+            guard let strongSelf = self else {
+                return
+            }
             if let error = error {
-                self?.state.onNext(.error(error: error))
+                strongSelf.state.onNext(.error(error: error))
             } else if let success = success {
-                success ? self?.loadCustomerAddresses() : ()
-                self?.state.onNext(.content)
+                strongSelf.processDeleteAddressResponse(with: success)
+                strongSelf.state.onNext(.content)
             }
         }
     }
@@ -74,10 +83,13 @@ class AddressListViewModel: BaseViewModel {
     func addCustomerAddress(with address: Address) {
         state.onNext(.loading(showHud: true))
         Repository.shared.addCustomerAddress(with: address) { [weak self] (_, error) in
+            guard let strongSelf = self else {
+                return
+            }
             if let error = error {
-                self?.state.onNext(.error(error: error))
+                strongSelf.state.onNext(.error(error: error))
             } else {
-                self?.loadCustomerAddresses()
+                strongSelf.loadCustomerAddresses()
             }
         }
     }
@@ -85,12 +97,15 @@ class AddressListViewModel: BaseViewModel {
     func updateCustomerDefaultAddress(with address: Address) {
         state.onNext(.loading(showHud: true))
         customerUseCase.updateDefaultAddress(with: address.id) { [weak self] (customer, error) in
+            guard let strongSelf = self else {
+                return
+            }
             if let addresses = customer?.addresses, let defaultAddress = customer?.defaultAddress {
-                self?.customerAddresses.value = addresses
-                self?.customerDefaultAddress.value = defaultAddress
-                self?.state.onNext(.content)
+                strongSelf.customerAddresses.value = addresses
+                strongSelf.customerDefaultAddress.value = defaultAddress
+                strongSelf.state.onNext(.content)
             } else {
-                self?.state.onNext(.error(error: error))
+                strongSelf.state.onNext(.error(error: error))
             }
         }
     }
@@ -98,6 +113,12 @@ class AddressListViewModel: BaseViewModel {
     private func processAddressUpdatingResponse(with success: Bool, address: Address, isSelected: Bool) {
         if success {
             processSelectedAddressUpdatingResponse(with: address, isSelected: isSelected)
+            loadCustomerAddresses()
+        }
+    }
+    
+    private func processDeleteAddressResponse(with success: Bool) {
+        if success {
             loadCustomerAddresses()
         }
     }
