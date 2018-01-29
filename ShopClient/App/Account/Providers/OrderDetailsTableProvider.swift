@@ -17,7 +17,7 @@ enum OrdersDetailsSection: Int {
 }
 
 protocol OrdersDetailsTableProviderDelegate: class {
-    func provider(_ provider: OrdersDetailsTableProvider, didSelectItemAt index: Int)
+    func provider(_ provider: OrdersDetailsTableProvider, didSelectProductVariant productVariant: ProductVariant)
 }
 
 class OrdersDetailsTableProvider: NSObject {
@@ -125,8 +125,9 @@ extension OrdersDetailsTableProvider: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == OrdersDetailsSection.paymentInformation.rawValue {
-            delegate?.provider(self, didSelectItemAt: indexPath.row)
+        guard indexPath.section == OrdersDetailsSection.paymentInformation.rawValue, let order = order, let item = order.items?[indexPath.row], let productVariant = item.productVariant else {
+            return
         }
+        delegate?.provider(self, didSelectProductVariant: productVariant)
     }
 }

@@ -14,13 +14,6 @@ class OrderDetailsViewModel: BaseViewModel {
     var orderId: String!
     var data = Variable<Order?>(nil)
     
-    func productVariant(at index: Int) -> ProductVariant? {
-        guard let order = data.value, let item = order.items?[index], let productVariant = item.productVariant else {
-            return nil
-        }
-        return productVariant
-    }
-    
     func loadOrder() {
         state.onNext(.loading(showHud: true))
         orderUseCase.getOrder(with: orderId) { [weak self] (order, error) in

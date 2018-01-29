@@ -9,7 +9,7 @@
 import UIKit
 
 protocol OrdersListTableProviderDelegate: class {
-    func provider(_ provider: OrdersListTableProvider, didSelectItemAt index: Int)
+    func provider(_ provider: OrdersListTableProvider, didSelectOrder order: Order)
 }
 
 class OrdersListTableProvider: NSObject {
@@ -72,7 +72,8 @@ extension OrdersListTableProvider: UITableViewDelegate {
 
 extension OrdersListTableProvider: OrderHeaderViewDelegate {
     func headerView(_ headerView: OrderHeaderView, didTapWith section: Int) {
-        delegate?.provider(self, didSelectItemAt: section)
+        let order = orders[section]
+        delegate?.provider(self, didSelectOrder: order)
     }
 }
 
@@ -80,6 +81,7 @@ extension OrdersListTableProvider: OrderHeaderViewDelegate {
 
 extension OrdersListTableProvider: OrderFooterViewDelegate {
     func footerView(_ footerView: OrderFooterView, didTapWith section: Int) {
-        delegate?.provider(self, didSelectItemAt: section)
+        let order = orders[section]
+        delegate?.provider(self, didSelectOrder: order)
     }
 }

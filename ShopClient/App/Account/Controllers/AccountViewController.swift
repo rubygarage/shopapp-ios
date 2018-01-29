@@ -107,11 +107,8 @@ class AccountViewController: BaseViewController<AccountViewModel> {
 // MARK: - AccountTableProviderDelegate
 
 extension AccountViewController: AccountTableProviderDelegate {
-    func provider(_ provider: AccountTableProvider, didSelectItemAt index: Int) {
-        guard index < viewModel.policies.value.count else {
-            return
-        }
-        selectedPolicy = viewModel.policies.value[index]
+    func provider(_ provider: AccountTableProvider, didSelectPolicy policy: Policy) {
+        selectedPolicy = policy
         performSegue(withIdentifier: SegueIdentifiers.toPolicy, sender: self)
     }
 }

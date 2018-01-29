@@ -66,14 +66,6 @@ class CartViewModel: BaseViewModel {
         return allPrices.reduce(0, +)
     }
     
-    func productVariant(at index: Int) -> ProductVariant? {
-        guard index < data.value.count else {
-            return nil
-        }
-        let product = data.value[index]
-        return product.productVariant
-    }
-    
     private func removeFromData(with item: CartProduct) {
         guard let index = data.value.index(of: item) else {
             return

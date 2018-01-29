@@ -98,10 +98,7 @@ extension CartViewController: CartEmptyDataViewDelegate {
 // MARK: - CartTableProvider
 
 extension CartViewController: CartTableProviderDelegate {
-    func provider(_ provider: CartTableProvider, didSelectItemAt index: Int) {
-        guard let productVariant = viewModel.productVariant(at: index) else {
-            return
-        }
+    func provider(_ provider: CartTableProvider, didSelectProductVariant productVariant: ProductVariant) {
         selectedProductVariant = productVariant
         performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
