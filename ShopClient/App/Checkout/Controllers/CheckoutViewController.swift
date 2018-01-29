@@ -123,7 +123,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     }
     
     private func billingAddressFormCompletion() -> AddressFormCompletion {
-        return { [weak self] (address) in
+        return { [weak self] address in
             guard let strongSelf = self else {
                 return
             }
@@ -133,7 +133,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     }
     
     private func shippingAddressListCompletion() -> AddressListCompletion {
-        return { [weak self] (address) in
+        return { [weak self] address in
             guard let strongSelf = self else {
                 return
             }
@@ -143,7 +143,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     }
     
     private func billingAddressListCompletion() -> AddressListCompletion {
-        return { [weak self] (address) in
+        return { [weak self] address in
             guard let strongSelf = self else {
                 return
             }

@@ -35,9 +35,9 @@ class AddressListTableViewCell: UITableViewCell {
         setupViews()
     }
     
-    func configure(with address: Address, selected: Bool, isDefault: Bool) {
+    func configure(with address: Address, isSelected: Bool, isDefault: Bool) {
         self.address = address
-        populateViews(with: address, selected: selected, isDefault: isDefault)
+        populateViews(with: address, isSelected: isSelected, isDefault: isDefault)
     }
         
     private func setupViews() {
@@ -46,7 +46,7 @@ class AddressListTableViewCell: UITableViewCell {
         defaultAddressButton.setTitle("Button.Default".localizable.uppercased(), for: .normal)
     }
     
-    private func populateViews(with address: Address, selected: Bool, isDefault: Bool) {
+    private func populateViews(with address: Address, isSelected: Bool, isDefault: Bool) {
         customerNameLabel.text = address.fullName
         addressLabel.text = address.fullAddress
         if let phoneText = address.phone {
@@ -55,8 +55,8 @@ class AddressListTableViewCell: UITableViewCell {
         } else {
             phoneLabel.text = nil
         }
-        selectButton.isSelected = selected
-        deleteButton.isEnabled = !selected
+        selectButton.isSelected = isSelected
+        deleteButton.isEnabled = !isSelected
         defaultAddressButton.isEnabled = !isDefault
     }
     
@@ -73,6 +73,7 @@ class AddressListTableViewCell: UITableViewCell {
     @IBAction func deleteTapped(_ sender: UIButton) {
         delegate?.didTapDelete(with: address)
     }
+    
     @IBAction func defaultAddressTapped(_ sender: UIButton) {
         delegate?.didTapDefault(with: address)
     }
