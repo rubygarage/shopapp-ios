@@ -107,7 +107,7 @@ class AccountViewController: BaseViewController<AccountViewModel> {
 // MARK: - AccountTableProviderDelegate
 
 extension AccountViewController: AccountTableProviderDelegate {
-    func provider(_ provider: AccountTableProvider, didSelectPolicy policy: Policy) {
+    func provider(_ provider: AccountTableProvider, didSelect policy: Policy) {
         selectedPolicy = policy
         performSegue(withIdentifier: SegueIdentifiers.toPolicy, sender: self)
     }

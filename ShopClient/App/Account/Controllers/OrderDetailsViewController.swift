@@ -80,7 +80,7 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
 // MARK: - OrdersDetailsTableProviderDelegate
 
 extension OrderDetailsViewController: OrdersDetailsTableProviderDelegate {
-    func provider(_ provider: OrdersDetailsTableProvider, didSelectProductVariant productVariant: ProductVariant) {
+    func provider(_ provider: OrdersDetailsTableProvider, didSelect productVariant: ProductVariant) {
         selectedProductVariant = productVariant
         performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }

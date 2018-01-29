@@ -11,7 +11,7 @@ import UIKit
 import SwipeCellKit
 
 protocol CartTableProviderDelegate: class {
-    func provider(_ provider: CartTableProvider, didSelectProductVariant productVariant: ProductVariant)
+    func provider(_ provider: CartTableProvider, didSelect productVariant: ProductVariant)
 }
 
 class CartTableProvider: NSObject {
@@ -51,6 +51,6 @@ extension CartTableProvider: UITableViewDelegate {
         guard let productVariant = cartProducts[indexPath.row].productVariant else {
             return
         }
-        delegate?.provider(self, didSelectProductVariant: productVariant)
+        delegate?.provider(self, didSelect: productVariant)
     }
 }

@@ -84,7 +84,7 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
 // MARK: - OrdersListTableProviderDelegate
 
 extension OrdersListViewController: OrdersListTableProviderDelegate {
-    func provider(_ provider: OrdersListTableProvider, didSelectOrder order: Order) {
+    func provider(_ provider: OrdersListTableProvider, didSelect order: Order) {
         selectedOrder = order
         performSegue(withIdentifier: SegueIdentifiers.toOrderDetails, sender: self)
     }

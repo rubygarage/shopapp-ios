@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AccountTableProviderDelegate: class {
-    func provider(_ provider: AccountTableProvider, didSelectPolicy policy: Policy)
+    func provider(_ provider: AccountTableProvider, didSelect policy: Policy)
 }
 
 class AccountTableProvider: NSObject {
@@ -39,7 +39,7 @@ extension AccountTableProvider: UITableViewDataSource {
 extension AccountTableProvider: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let policy = policies[indexPath.row]
-        delegate?.provider(self, didSelectPolicy: policy)
+        delegate?.provider(self, didSelect: policy)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

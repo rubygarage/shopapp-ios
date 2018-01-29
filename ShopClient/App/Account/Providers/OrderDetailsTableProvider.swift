@@ -17,7 +17,7 @@ enum OrdersDetailsSection: Int {
 }
 
 protocol OrdersDetailsTableProviderDelegate: class {
-    func provider(_ provider: OrdersDetailsTableProvider, didSelectProductVariant productVariant: ProductVariant)
+    func provider(_ provider: OrdersDetailsTableProvider, didSelect productVariant: ProductVariant)
 }
 
 class OrdersDetailsTableProvider: NSObject {
@@ -128,6 +128,6 @@ extension OrdersDetailsTableProvider: UITableViewDelegate {
         guard indexPath.section == OrdersDetailsSection.paymentInformation.rawValue, let order = order, let item = order.items?[indexPath.row], let productVariant = item.productVariant else {
             return
         }
-        delegate?.provider(self, didSelectProductVariant: productVariant)
+        delegate?.provider(self, didSelect: productVariant)
     }
 }
