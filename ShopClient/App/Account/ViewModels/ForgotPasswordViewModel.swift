@@ -13,7 +13,7 @@ class ForgotPasswordViewModel: BaseViewModel {
     
     var emailText = Variable<String>("")
     var emailErrorMessage = PublishSubject<String>()
-    var resetPasswordSuccess = Variable<Bool>(false)
+    var resetPasswordSuccess = PublishSubject<Bool>()
     
     var resetPasswordButtonEnabled: Observable<Bool> {
         return emailText.asObservable().map { email in
@@ -58,6 +58,6 @@ class ForgotPasswordViewModel: BaseViewModel {
     }
     
     private func notifyAboutResetPassword(success: Bool) {
-        resetPasswordSuccess.value = success
+        resetPasswordSuccess.onNext(success)
     }
 }

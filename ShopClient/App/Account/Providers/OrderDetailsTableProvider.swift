@@ -1,9 +1,9 @@
 //
-//  OrderDetailsTableDataSource.swift
+//  OrderDetailsTableProvider.swift
 //  ShopClient
 //
-//  Created by Radyslav Krechet on 1/5/18.
-//  Copyright © 2018 Evgeniy Antonov. All rights reserved.
+//  Created by Radyslav Krechet on 1/29/18.
+//  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
 import UIKit
@@ -16,19 +16,21 @@ enum OrdersDetailsSection: Int {
     static let allValues = [header, paymentInformation, shippingAddress]
 }
 
-protocol OrdersDetailsTableDataSourceProtocol: class {
-    func order() -> Order?
+protocol OrdersDetailsTableProviderDelegate: class {
+    func provider(_ provider: OrdersDetailsTableProvider, didSelectItemAt index: Int)
 }
 
-class OrdersDetailsTableDataSource: NSObject {
-    weak var delegate: OrdersDetailsTableDataSourceProtocol?
+class OrdersDetailsTableProvider: NSObject {
+    var order: Order?
+    
+    weak var delegate: OrdersDetailsTableProviderDelegate?
 }
 
 // MARK: - UITableViewDataSource
 
-extension OrdersDetailsTableDataSource: UITableViewDataSource {
+extension OrdersDetailsTableProvider: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard delegate?.order() != nil else {
+        guard order != nil else {
             return 0
         }
         
@@ -36,7 +38,7 @@ extension OrdersDetailsTableDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let order = delegate?.order() else {
+        guard let order = order else {
             return 0
         }
         
@@ -71,7 +73,7 @@ extension OrdersDetailsTableDataSource: UITableViewDataSource {
     
     private func orderItemCell(with tableView: UITableView, indexPath: IndexPath) -> OrderItemTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: OrderItemTableViewCell.self), for: indexPath) as! OrderItemTableViewCell
-        if let order = delegate?.order(), let item = order.items?[indexPath.row] {
+        if let order = order, let item = order.items?[indexPath.row] {
             cell.configure(with: item, currencyCode: order.currencyCode!)
         }
         return cell
@@ -79,10 +81,52 @@ extension OrdersDetailsTableDataSource: UITableViewDataSource {
     
     private func shippingAddressCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingAddressEditTableCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self), for: indexPath) as! CheckoutShippingAddressEditTableCell
-        if let address = delegate?.order()?.shippingAddress {
+        if let address = order?.shippingAddress {
             cell.configure(with: address)
             cell.setEditButtonVisible(false)
         }
         return cell
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension OrdersDetailsTableProvider: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var view = UIView()
+        
+        switch section {
+        case OrdersDetailsSection.header.rawValue:
+            if let order = order {
+                view = OrderHeaderView(section: section, order: order)
+            }
+        case OrdersDetailsSection.paymentInformation.rawValue:
+            view = BoldTitleTableHeaderView(type: .paymentInformation)
+        case OrdersDetailsSection.shippingAddress.rawValue:
+            if order?.shippingAddress != nil {
+                view = BoldTitleTableHeaderView(type: .shippingAddress)
+            }
+        default:
+            break
+        }
+        
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let order = order, section == OrdersDetailsSection.paymentInformation.rawValue else {
+            return nil
+        }
+        return PaymentDetailsFooterView(order: order)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == OrdersDetailsSection.paymentInformation.rawValue ? PaymentDetailsFooterView.height : 0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == OrdersDetailsSection.paymentInformation.rawValue {
+            delegate?.provider(self, didSelectItemAt: indexPath.row)
+        }
     }
 }

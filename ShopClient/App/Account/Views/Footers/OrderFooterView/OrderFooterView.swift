@@ -9,7 +9,7 @@
 import UIKit
 
 protocol OrderFooterViewDelegate: class {
-    func viewDidTap(_ section: Int)
+    func footerView(_ footerView: OrderFooterView, didTapWith section: Int)
 }
 
 class OrderFooterView: UIView {
@@ -67,6 +67,6 @@ class OrderFooterView: UIView {
     }
     
     func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
-        delegate?.viewDidTap(section)
+        delegate?.footerView(self, didTapWith: section)
     }
 }

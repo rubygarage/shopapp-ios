@@ -1,8 +1,8 @@
 //
-//  SettingsTableDataSource.swift
+//  SettingsProvider.swift
 //  ShopClient
 //
-//  Created by Radyslav Krechet on 1/22/18.
+//  Created by Radyslav Krechet on 1/29/18.
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
@@ -14,19 +14,17 @@ enum SettingsSection: Int {
     static let allValues = [promo]
 }
 
-protocol SettingsTableDataSourceProtocol: class {
-    func promo() -> (description: String, state: Bool)?
-}
-
-class SettingsTableDataSource: NSObject {
-    weak var delegate: (SettingsTableDataSourceProtocol & SwitchTableViewCellDelegate)?
+class SettingsTableProvider: NSObject {
+    var promo: (description: String, state: Bool)?
+    
+    weak var delegate: SwitchTableViewCellDelegate?
 }
 
 // MARK: - UITableViewDataSource
 
-extension SettingsTableDataSource: UITableViewDataSource {
+extension SettingsTableProvider: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard let delegate = delegate, delegate.promo() != nil else {
+        guard promo != nil else {
             return 0
         }
         return 1
@@ -53,7 +51,7 @@ extension SettingsTableDataSource: UITableViewDataSource {
     private func switchCell(with tableView: UITableView, indexPath: IndexPath) -> SwitchTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SwitchTableViewCell.self), for: indexPath) as! SwitchTableViewCell
         cell.delegate = delegate
-        if let promo = delegate?.promo() {
+        if let promo = promo {
             cell.configure(with: indexPath, description: promo.description, state: promo.state)
         }
         return cell

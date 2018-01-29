@@ -9,8 +9,8 @@
 import UIKit
 
 protocol AccountNotLoggedHeaderDelegate: class {
-    func didTapSignIn()
-    func didTapCreateNewAccount()
+    func headerViewDidTapSignIn(_ headerView: AccountNotLoggedHeaderView)
+    func headerViewDidTapCreateNewAccount(_ headerView: AccountNotLoggedHeaderView)
 }
 
 class AccountNotLoggedHeaderView: UIView {
@@ -57,12 +57,12 @@ class AccountNotLoggedHeaderView: UIView {
     
     // MARK: - Actions
     
-    @IBAction func signInTapped(_ sender: BlackButton) {
-        delegate?.didTapSignIn()
+    @IBAction func signInButtonDidPress(_ sender: BlackButton) {
+        delegate?.headerViewDidTapSignIn(self)
     }
     
-    @IBAction func createNewAccountTapped(_ sender: UnderlinedButton) {
-        delegate?.didTapCreateNewAccount()
+    @IBAction func createNewAccountButtonDidPress(_ sender: UnderlinedButton) {
+        delegate?.headerViewDidTapCreateNewAccount(self)
     }
 }
 

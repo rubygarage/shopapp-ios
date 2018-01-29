@@ -148,7 +148,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
 // MARK: - ErrorViewDelegate
 
 extension BaseViewController: ErrorViewDelegate {
-    func didTapTryAgain() {
+    func viewDidTapTryAgain(_ view: ErrorView) {
         viewModel.tryAgain()
     }
 }

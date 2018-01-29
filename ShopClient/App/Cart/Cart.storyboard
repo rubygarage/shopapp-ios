@@ -33,7 +33,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="checkoutTapped:" destination="epH-u5-E99" eventType="touchUpInside" id="cnU-VX-b7y"/>
+                                    <action selector="checkoutButtonDidPress:" destination="epH-u5-E99" eventType="touchUpInside" id="C5Z-Eq-uYY"/>
                                 </connections>
                             </button>
                         </subviews>

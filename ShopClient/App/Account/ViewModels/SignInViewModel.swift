@@ -15,7 +15,7 @@ class SignInViewModel: BaseViewModel {
     var passwordText = Variable<String>("")
     var emailErrorMessage = PublishSubject<String>()
     var passwordErrorMessage = PublishSubject<String>()
-    var signInSuccess = Variable<Bool>(false)
+    var signInSuccess = PublishSubject<Bool>()
     
     weak var delegate: AuthenticationProtocol?
     
@@ -71,6 +71,6 @@ class SignInViewModel: BaseViewModel {
         if success {
             delegate?.didAuthorize()
         }
-        signInSuccess.value = success
+        signInSuccess.onNext(success)
     }
 }

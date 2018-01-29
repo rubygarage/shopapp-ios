@@ -11,10 +11,7 @@ import UIKit
 class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
     @IBOutlet private weak var tableView: UITableView!
     
-    private var tableDataSource: OrdersDetailsTableDataSource!
-    // swiftlint:disable weak_delegate
-    private var tableDelegate: OrdersDetailsTableDelegate!
-    // swiftlint:enable weak_delegate
+    private var tableProvider: OrdersDetailsTableProvider!
     
     fileprivate var selectedProductVariant: ProductVariant!
     
@@ -53,13 +50,10 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
         let shippingAddressEditNib = UINib(nibName: checkoutShippingAddressEditCellname, bundle: nil)
         tableView.register(shippingAddressEditNib, forCellReuseIdentifier: checkoutShippingAddressEditCellname)
         
-        tableDataSource = OrdersDetailsTableDataSource()
-        tableDataSource.delegate = self
-        tableView.dataSource = tableDataSource
-        
-        tableDelegate = OrdersDetailsTableDelegate()
-        tableDelegate.delegate = self
-        tableView.delegate = tableDelegate
+        tableProvider = OrdersDetailsTableProvider()
+        tableProvider.delegate = self
+        tableView.dataSource = tableProvider
+        tableView.delegate = tableProvider
         
         tableView.contentInset = TableView.defaultContentInsets
     }
@@ -68,10 +62,11 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
         viewModel.orderId = orderId
 
         viewModel.data.asObservable()
-            .subscribe(onNext: { [weak self] _ in
+            .subscribe(onNext: { [weak self] order in
                 guard let strongSelf = self else {
                     return
                 }
+                strongSelf.tableProvider.order = order
                 strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
@@ -82,18 +77,10 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
     }
 }
 
-// MARK: - OrdersDetailsTableDataSourceProtocol
+// MARK: - OrdersDetailsTableProviderDelegate
 
-extension OrderDetailsViewController: OrdersDetailsTableDataSourceProtocol {
-    func order() -> Order? {
-        return viewModel.data.value
-    }
-}
-
-// MARK: - OrdersDetailsTableDelegateProtocol
-
-extension OrderDetailsViewController: OrdersDetailsTableDelegateProtocol {
-    func didSelectItem(at index: Int) {
+extension OrderDetailsViewController: OrdersDetailsTableProviderDelegate {
+    func provider(_ provider: OrdersDetailsTableProvider, didSelectItemAt index: Int) {
         guard let productVariant = viewModel.productVariant(at: index) else {
             return
         }

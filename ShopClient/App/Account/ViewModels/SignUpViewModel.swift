@@ -19,7 +19,7 @@ class SignUpViewModel: BaseViewModel {
     var phoneText = Variable<String>("")
     var emailErrorMessage = PublishSubject<String>()
     var passwordErrorMessage = PublishSubject<String>()
-    var signUpSuccess = Variable<Bool>(false)
+    var signUpSuccess = PublishSubject<Bool>()
     var policies = Variable<(privacyPolicy: Policy?, termsOfService: Policy?)>(privacyPolicy: nil, termsOfService: nil)
     
     weak var delegate: AuthenticationProtocol?
@@ -85,6 +85,6 @@ class SignUpViewModel: BaseViewModel {
         if success {
             delegate?.didAuthorize()
         }
-        signUpSuccess.value = success
+        signUpSuccess.onNext(success)
     }
 }

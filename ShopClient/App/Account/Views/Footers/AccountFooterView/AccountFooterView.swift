@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AccountFooterViewDelegate: class {
-    func didTapLogout()
+    func footerViewDidTapLogout(_ footerView: AccountFooterView)
 }
 
 class AccountFooterView: UIView {
@@ -53,7 +53,7 @@ class AccountFooterView: UIView {
     // MARK: - Action
     
     @IBAction func logoutTapped(_ sender: UIButton) {
-        delegate?.didTapLogout()
+        delegate?.footerViewDidTapLogout(self)
     }
 }
 

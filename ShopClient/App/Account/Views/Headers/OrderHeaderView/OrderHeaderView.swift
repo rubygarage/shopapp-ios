@@ -9,7 +9,7 @@
 import UIKit
 
 protocol OrderHeaderViewDelegate: class {
-    func viewDidTap(_ section: Int)
+    func headerView(_ headerView: OrderHeaderView, didTapWith section: Int)
 }
 
 class OrderHeaderView: UIView {
@@ -61,6 +61,6 @@ class OrderHeaderView: UIView {
     }
     
     func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
-        delegate?.viewDidTap(section)
+        delegate?.headerView(self, didTapWith: section)
     }
 }

@@ -11,10 +11,7 @@ import UIKit
 class AccountViewController: BaseViewController<AccountViewModel> {
     @IBOutlet private weak var tableView: UITableView!
     
-    private var tableDataSource: AccountTableDataSource!
-    // swiftlint:disable weak_delegate
-    private var tableDelegate: AccountTableDelegate!
-    // swiftlint:enable weak_delegate
+    private var tableProvider: AccountTableProvider!
     
     fileprivate var selectedPolicy: Policy?
     
@@ -55,31 +52,30 @@ class AccountViewController: BaseViewController<AccountViewModel> {
         let cellNib = UINib(nibName: cellName, bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: cellName)
         
-        tableDataSource = AccountTableDataSource()
-        tableDataSource.delegate = self
-        tableView.dataSource = tableDataSource
-        
-        tableDelegate = AccountTableDelegate()
-        tableDelegate.delegate = self
-        tableView.delegate = tableDelegate
+        tableProvider = AccountTableProvider()
+        tableProvider.delegate = self
+        tableView.dataSource = tableProvider
+        tableView.delegate = tableProvider
     }
     
     private func setupViewModel() {
         viewModel.policies.asObservable()
-            .subscribe(onNext: { [weak self] _ in
+            .subscribe(onNext: { [weak self] policies in
                 guard let strongSelf = self else {
                     return
                 }
+                strongSelf.tableProvider.policies = policies
                 strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
         
         viewModel.customer.asObservable()
-            .subscribe(onNext: { [weak self] _ in
+            .subscribe(onNext: { [weak self] customer in
                 guard let strongSelf = self else {
                     return
                 }
                 strongSelf.updateNavigationBar()
+                strongSelf.tableProvider.customer = customer
                 strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
@@ -89,7 +85,7 @@ class AccountViewController: BaseViewController<AccountViewModel> {
         navigationItem.title = "ControllerTitle.Account".localizable
         
         if viewModel.customer.value != nil && navigationItem.rightBarButtonItem == nil {
-            let settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .plain, target: self, action: #selector(self.settingsButtonHandler))
+            let settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .plain, target: self, action: #selector(self.settingsButtonDidPress))
             navigationItem.rightBarButtonItem = settingsButton
         } else if viewModel.customer.value == nil {
             navigationItem.rightBarButtonItem = nil
@@ -103,43 +99,31 @@ class AccountViewController: BaseViewController<AccountViewModel> {
     
     // MARK: - Actions
     
-    @objc private func settingsButtonHandler() {
+    @objc private func settingsButtonDidPress() {
         performSegue(withIdentifier: SegueIdentifiers.toAccountSettings, sender: self)
     }
 }
 
-// MARK: - AccountTableDataSourceProtocol
+// MARK: - AccountTableProviderDelegate
 
-extension AccountViewController: AccountTableDataSourceProtocol {
-    func policies() -> [Policy] {
-        return viewModel.policies.value
-    }
-}
-
-// MARK: - AccountTableDelegateProtocol
-
-extension AccountViewController: AccountTableDelegateProtocol {
-    func didSelectItem(at index: Int) {
+extension AccountViewController: AccountTableProviderDelegate {
+    func provider(_ provider: AccountTableProvider, didSelectItemAt index: Int) {
         guard index < viewModel.policies.value.count else {
             return
         }
         selectedPolicy = viewModel.policies.value[index]
         performSegue(withIdentifier: SegueIdentifiers.toPolicy, sender: self)
     }
-    
-    func customer() -> Customer? {
-        return viewModel.customer.value
-    }
 }
 
 // MARK: - AccountNotLoggedHeaderDelegate
 
 extension AccountViewController: AccountNotLoggedHeaderDelegate {
-    func didTapSignIn() {
+    func headerViewDidTapSignIn(_ headerView: AccountNotLoggedHeaderView) {
         performSegue(withIdentifier: SegueIdentifiers.toSignIn, sender: self)
     }
     
-    func didTapCreateNewAccount() {
+    func headerViewDidTapCreateNewAccount(_ headerView: AccountNotLoggedHeaderView) {
         performSegue(withIdentifier: SegueIdentifiers.toSignUp, sender: self)
     }
 }
@@ -147,11 +131,11 @@ extension AccountViewController: AccountNotLoggedHeaderDelegate {
 // MARK: - AccountLoggedHeaderDelegate
 
 extension AccountViewController: AccountLoggedHeaderDelegate {
-    func didTapMyOrders() {
+    func headerViewDidTapMyOrders(_ headerView: AccountLoggedHeaderView) {
         performSegue(withIdentifier: SegueIdentifiers.toOrdersList, sender: self)
     }
     
-    func didTapPersonalInfo() {
+    func headerViewDidTapPersonalInfo(_ headerView: AccountLoggedHeaderView) {
         performSegue(withIdentifier: SegueIdentifiers.toPersonalInfo, sender: self)
     }
 }
@@ -159,7 +143,7 @@ extension AccountViewController: AccountLoggedHeaderDelegate {
 // MARK: - AccountFooterViewDelegate
 
 extension AccountViewController: AccountFooterViewDelegate {
-    func didTapLogout() {
+    func footerViewDidTapLogout(_ footerView: AccountFooterView) {
         viewModel.logout()
         updateNavigationBar()
     }

@@ -15,7 +15,7 @@ private let kCartProductQuantityMax = 999
 private let kQuantityUnderlineColorDefault = UIColor(displayP3Red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
 
 protocol CartTableCellDelegate: class {
-    func didUpdate(cartProduct: CartProduct, quantity: Int)
+    func tableViewCell(_ tableViewCell: CartTableViewCell, didUpdateCartProduct cartProduct: CartProduct, with quantity: Int)
 }
 
 class CartTableViewCell: SwipeTableViewCell {
@@ -126,7 +126,7 @@ class CartTableViewCell: SwipeTableViewCell {
         let quantityString = sender.text ?? ""
         let quantity = (quantityString as NSString).integerValue
         let checkedQuantity = check(quantity: quantity)
-        cellDelegate?.didUpdate(cartProduct: cartProduct, quantity: checkedQuantity)
+        cellDelegate?.tableViewCell(self, didUpdateCartProduct: cartProduct, with: checkedQuantity)
     }
 }
 

@@ -9,10 +9,7 @@
 import UIKit
 
 class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
-    private var tableDataSource: OrdersListTableDataSource!
-    // swiftlint:disable weak_delegate
-    private var tableDelegate: OrdersListTableDelegate!
-    // swiftlint:enable weak_delegate
+    private var tableProvider: OrdersListTableProvider!
     
     fileprivate var selectedOrder: Order?
     fileprivate var selectedProductVariant: ProductVariant!
@@ -45,11 +42,12 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
     
     private func setupViewModel() {
         viewModel?.items.asObservable()
-            .subscribe(onNext: { [weak self] _ in
+            .subscribe(onNext: { [weak self] orders in
                 guard let strongSelf = self else {
                     return
                 }
                 strongSelf.stopLoadAnimating()
+                strongSelf.tableProvider.orders = orders
                 strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
@@ -60,13 +58,10 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
         let cartNib = UINib(nibName: cellName, bundle: nil)
         tableView.register(cartNib, forCellReuseIdentifier: cellName)
         
-        tableDataSource = OrdersListTableDataSource()
-        tableDataSource.delegate = self
-        tableView.dataSource = tableDataSource
-        
-        tableDelegate = OrdersListTableDelegate()
-        tableDelegate.delegate = self
-        tableView.delegate = tableDelegate
+        tableProvider = OrdersListTableProvider()
+        tableProvider.delegate = self
+        tableView.dataSource = tableProvider
+        tableView.delegate = tableProvider
         
         tableView.contentInset = TableView.defaultContentInsets
     }
@@ -86,18 +81,10 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
     }
 }
 
-// MARK: - OrdersListTableDataSourceProtocol
+// MARK: - OrdersListTableProviderDelegate
 
-extension OrdersListViewController: OrdersListTableDataSourceProtocol {
-    func orders() -> [Order] {
-        return viewModel.items.value
-    }
-}
-
-// MARK: - OrdersListTableDelegateProtocol
-
-extension OrdersListViewController: OrdersListTableDelegateProtocol {
-    func didSelectItem(at index: Int) {
+extension OrdersListViewController: OrdersListTableProviderDelegate {
+    func provider(_ provider: OrdersListTableProvider, didSelectItemAt index: Int) {
         guard index < viewModel.items.value.count else {
             return
         }

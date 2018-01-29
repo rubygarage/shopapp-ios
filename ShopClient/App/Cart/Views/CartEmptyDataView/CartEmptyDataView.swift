@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CartEmptyDataViewDelegate: class {
-    func didTapStartShopping()
+    func viewDidTapStartShopping(_ view: CartEmptyDataView)
 }
 
 class CartEmptyDataView: UIView {
@@ -51,7 +51,7 @@ class CartEmptyDataView: UIView {
     
     // MARK: - Actions
     
-    @IBAction func startShoppingTapped(_ sender: UIButton) {
-        delegate?.didTapStartShopping()
+    @IBAction func startShoppingButtonDidPress(_ sender: UIButton) {
+        delegate?.viewDidTapStartShopping(self)
     }
 }

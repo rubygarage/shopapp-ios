@@ -37,7 +37,7 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
-                        <action selector="myOrdersTapped:" destination="-1" eventType="touchUpInside" id="kF3-qV-6il"/>
+                        <action selector="myOrdersButtonDidPress:" destination="-1" eventType="touchUpInside" id="nyG-DQ-OeK"/>
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="0Qg-XR-G8j">
@@ -78,7 +78,7 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
-                        <action selector="personalInfoTapped:" destination="-1" eventType="touchUpInside" id="bO4-tG-mZm"/>
+                        <action selector="personalInfoButtonDidPress:" destination="-1" eventType="touchUpInside" id="GCJ-G0-Bde"/>
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="mq5-HB-eHo">

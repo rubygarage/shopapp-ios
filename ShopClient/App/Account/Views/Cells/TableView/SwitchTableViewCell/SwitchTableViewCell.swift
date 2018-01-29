@@ -11,7 +11,7 @@ import RxSwift
 private let kSwitchControlDebounceDueTime = 0.3
 
 protocol SwitchTableViewCellDelegate: class {
-    func stateDidChange(at indexPath: IndexPath, value: Bool)
+    func tableViewCell(_ tableViewCell: SwitchTableViewCell, didChangeSwitchStateAt indexPath: IndexPath, with value: Bool)
 }
 
 class SwitchTableViewCell: UITableViewCell {
@@ -53,8 +53,7 @@ class SwitchTableViewCell: UITableViewCell {
                 guard let strongSelf = self else {
                     return
                 }
-                
-                strongSelf.delegate?.stateDidChange(at: strongSelf.indexPath, value: value)
+                strongSelf.delegate?.tableViewCell(strongSelf, didChangeSwitchStateAt: strongSelf.indexPath, with: value)
             })
             .disposed(by: disposeBag)
     }

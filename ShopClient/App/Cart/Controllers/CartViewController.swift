@@ -14,10 +14,7 @@ class CartViewController: BaseViewController<CartViewModel> {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var checkoutButton: BlackButton!
     
-    private var tableDataSource: CartTableDataSource!
-    // swiftlint:disable weak_delegate
-    private var tableDelegate: CartTableDelegate!
-    // swiftlint:enable weak_delegate
+    private var tableProvider: CartTableProvider!
     
     fileprivate var selectedProductVariant: ProductVariant!
     
@@ -58,21 +55,21 @@ class CartViewController: BaseViewController<CartViewModel> {
         let cartCellNib = UINib(nibName: cellName, bundle: nil)
         tableView.register(cartCellNib, forCellReuseIdentifier: cellName)
         
-        tableDataSource = CartTableDataSource()
-        tableDataSource.delegate = self
-        tableView.dataSource = tableDataSource
-        
-        tableDelegate = CartTableDelegate()
-        tableDelegate.delegate = self
-        tableView.delegate = tableDelegate
+        tableProvider = CartTableProvider()
+        tableProvider.delegate = self
+        tableView.dataSource = tableProvider
+        tableView.delegate = tableProvider
     }
     
     private func setupViewModel() {
         viewModel.data.asObservable()
-            .subscribe(onNext: { [weak self] _ in
+            .subscribe(onNext: { [weak self] cartProducts in
                 guard let strongSelf = self else {
                     return
                 }
+                strongSelf.tableProvider.cartProducts = cartProducts
+                strongSelf.tableProvider.totalPrice = strongSelf.viewModel.calculateTotalPrice()
+                strongSelf.tableProvider.currency = cartProducts.first?.currency ?? ""
                 strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
@@ -84,7 +81,7 @@ class CartViewController: BaseViewController<CartViewModel> {
     
     // MARK: - Actions
     
-    @IBAction func checkoutTapped(_ sender: BlackButton) {
+    @IBAction func checkoutButtonDidPress(_ sender: BlackButton) {
         performSegue(withIdentifier: SegueIdentifiers.toCheckout, sender: self)
     }
 }
@@ -92,39 +89,16 @@ class CartViewController: BaseViewController<CartViewModel> {
 // MARK: - CartEmptyDataViewDelegate
 
 extension CartViewController: CartEmptyDataViewDelegate {
-    func didTapStartShopping() {
+    func viewDidTapStartShopping(_ view: CartEmptyDataView) {
         setHomeController()
         dismiss(animated: true)
     }
 }
 
-// MARK: - CartTableDataSourceProtocol
+// MARK: - CartTableProvider
 
-extension CartViewController: CartTableDataSourceProtocol {
-    func itemsCount() -> Int {
-        return viewModel.data.value.count
-    }
-    
-    func item(for index: Int) -> CartProduct? {
-        guard index < viewModel.data.value.count else {
-            return nil
-        }
-        return viewModel.data.value[index]
-    }
-}
-
-// MARK: - CartTableDelegateProtocol
-
-extension CartViewController: CartTableDelegateProtocol {
-    func totalPrice() -> Float {
-        return viewModel.calculateTotalPrice()
-    }
-    
-    func currency() -> String {
-        return viewModel.data.value.first?.currency ?? ""
-    }
-    
-    func didSelectItem(at index: Int) {
+extension CartViewController: CartTableProviderDelegate {
+    func provider(_ provider: CartTableProvider, didSelectItemAt index: Int) {
         guard let productVariant = viewModel.productVariant(at: index) else {
             return
         }
@@ -136,7 +110,7 @@ extension CartViewController: CartTableDelegateProtocol {
 // MARK: - CartTableCellDelegate
 
 extension CartViewController: CartTableCellDelegate {
-    func didUpdate(cartProduct: CartProduct, quantity: Int) {
+    func tableViewCell(_ tableViewCell: CartTableViewCell, didUpdateCartProduct cartProduct: CartProduct, with quantity: Int) {
         viewModel.update(cartProduct: cartProduct, quantity: quantity)
     }
 }
