@@ -17,7 +17,7 @@ struct CustomerUseCase {
         Repository.shared.addCustomerAddress(with: address, callback: callback)
     }
     
-    public func updateDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Bool>) {
+    public func updateDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Customer>) {
         Repository.shared.updateCustomerDefaultAddress(with: addressId, callback: callback)
     }
 }

@@ -83,11 +83,14 @@ class AddressListViewModel: BaseViewModel {
     }
     
     func updateCustomerDefaultAddress(with address: Address) {
-        customerUseCase.updateDefaultAddress(with: address.id) { [weak self] (_, error) in
-            if let error = error {
-                self?.state.onNext(.error(error: error))
+        state.onNext(.loading(showHud: true))
+        customerUseCase.updateDefaultAddress(with: address.id) { [weak self] (customer, error) in
+            if let addresses = customer?.addresses, let defaultAddress = customer?.defaultAddress {
+                self?.customerAddresses.value = addresses
+                self?.customerDefaultAddress.value = defaultAddress
+                self?.state.onNext(.content)
             } else {
-                self?.loadCustomerAddresses()
+                self?.state.onNext(.error(error: error))
             }
         }
     }

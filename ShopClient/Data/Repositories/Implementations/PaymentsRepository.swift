@@ -21,7 +21,7 @@ extension Repository {
         APICore?.updateShippingAddress(with: checkoutId, address: address, callback: callback)
     }
     
-    func updateCustomerDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Bool>) {
+    func updateCustomerDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Customer>) {
         APICore?.updateCustomerDefaultAddress(with: addressId, callback: callback)
     }
     

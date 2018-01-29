@@ -69,8 +69,8 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
                 if self?.addressListType == .billing {
                     self?.destinationAddress = address
                 }
-        })
-        .disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Private
