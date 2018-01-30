@@ -37,14 +37,14 @@ class CreditCardViewModel: BaseViewModel {
             return
         }
         holderNameText.value = card.holderName
-        cardNumberText.value = card.cardNumber
+        cardNumberText.value = card.cardNumber.asCardMaskNumber()
         monthExpirationText.value = card.expireMonth
         yearExpirationText.value = card.expireYear
         securityCodeText.value = card.verificationCode
     }
     
     private func validateData() {
-        if holderNameText.value.isValidAsHolderName() && cardNumberText.value.luhnValid() {
+        if holderNameText.value.isValidAsHolderName() && cardNumberText.value.asCardDefaultNumber().luhnValid() {
             submitAction()
         } else {
             processErrors()
@@ -58,7 +58,7 @@ class CreditCardViewModel: BaseViewModel {
     private func processErrors() {
         if holderNameText.value.isValidAsHolderName() == false {
             holderNameErrorMessage.onNext("Error.InvalidHolderName".localizable)
-        } else if cardNumberText.value.luhnValid() == false {
+        } else if cardNumberText.value.asCardDefaultNumber().luhnValid() == false {
             cardNumberErrorMessage.onNext("Error.InvalidCardNumber".localizable)
         }
     }
@@ -68,7 +68,7 @@ class CreditCardViewModel: BaseViewModel {
         let names = holderNameText.value.split(separator: " ", maxSplits: 1)
         card.firstName = String(describing: names.first!)
         card.lastName = String(describing: names.last!)
-        card.cardNumber = cardNumberText.value
+        card.cardNumber = cardNumberText.value.asCardDefaultNumber()
         card.expireMonth = monthExpirationText.value.asShortMonth()
         card.expireYear = yearExpirationText.value
         card.verificationCode = securityCodeText.value

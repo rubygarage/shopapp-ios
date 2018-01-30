@@ -125,7 +125,7 @@
 "Label.Payment.CreditCard" = "Credit / Debit Card";
 "Label.Payment.ApplePay" = "Apple Pay";
 "Label.ExpirationDate" = "Expiration date";
-"Label.CreditCard.MaskedNumber" = "**%@";
+"Label.CreditCard.MaskedNumber" = "%@ (%@)";
 "Label.CreditCard.ExpirationDate" = "Exp : %@ / %@";
 "Label.Product.OptionTitle" = "%@:";
 "Label.Checkout.AddShippingAddress" = "Please, add shipping address first";

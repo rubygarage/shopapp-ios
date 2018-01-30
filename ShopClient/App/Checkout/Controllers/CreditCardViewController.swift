@@ -90,7 +90,7 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
             return
         }
         holderNameTextFieldView.text = card.holderName
-        cardNumberTextFieldView.text = card.cardNumber
+        cardNumberTextFieldView.text = card.cardNumber.asCardMaskNumber()
         securityCodeTextFieldView.text = card.verificationCode
         monthExpirationView.text = card.expireMonth
         yearExpirationView.text = card.expireYear

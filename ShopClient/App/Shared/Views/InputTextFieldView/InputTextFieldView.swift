@@ -157,6 +157,9 @@ class InputTextFieldView: TextFieldWrapper {
         if state != .highlighted {
             state = .highlighted
         }
+        if keyboardType == InputTextFieldViewKeybordType.cardNumber.rawValue {
+            textField.text = textField.text?.asCardMaskNumber()
+        }
     }
     
     @IBAction func showPasswordTapped(_ sender: UIButton) {
@@ -169,7 +172,9 @@ class InputTextFieldView: TextFieldWrapper {
 
 extension InputTextFieldView: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let generatedString = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
+        guard let generatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) else {
+            return true
+        }
         
         switch keyboardType {
         case InputTextFieldViewKeybordType.cardNumber.rawValue:
