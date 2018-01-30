@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -93,18 +93,45 @@
                                     <action selector="deleteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="R2L-EY-EzU"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0H-is-ygj">
+                                <rect key="frame" x="129" y="-0.5" width="76" height="50"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                                <state key="normal" title="Default">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="defaultAddressTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jLo-rY-v4Z"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xjb-FP-QQd">
+                                <rect key="frame" x="128" y="15" width="1" height="20"/>
+                                <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="4nK-M7-OI7"/>
+                                    <constraint firstAttribute="width" constant="1" id="WGl-6J-Uy8"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Mff-K6-lNa" firstAttribute="leading" secondItem="jeW-B4-w3f" secondAttribute="trailing" id="1XF-5e-KgK"/>
                             <constraint firstAttribute="height" constant="50" id="3Fi-Qq-m96"/>
                             <constraint firstItem="Mff-K6-lNa" firstAttribute="centerY" secondItem="FVW-S4-y86" secondAttribute="centerY" id="6bm-uZ-Qzc"/>
+                            <constraint firstItem="O0H-is-ygj" firstAttribute="top" secondItem="FVW-S4-y86" secondAttribute="top" id="KIh-Xf-FaW"/>
                             <constraint firstItem="Ek1-RE-Ana" firstAttribute="top" secondItem="FVW-S4-y86" secondAttribute="top" id="L9y-mW-bFg"/>
                             <constraint firstItem="Ek1-RE-Ana" firstAttribute="leading" secondItem="Mff-K6-lNa" secondAttribute="trailing" id="NsJ-Nj-Qn3"/>
+                            <constraint firstItem="xjb-FP-QQd" firstAttribute="centerY" secondItem="FVW-S4-y86" secondAttribute="centerY" id="QUn-mM-kbY"/>
                             <constraint firstItem="jeW-B4-w3f" firstAttribute="top" secondItem="FVW-S4-y86" secondAttribute="top" id="ldl-kX-gQ8"/>
                             <constraint firstAttribute="bottom" secondItem="Ek1-RE-Ana" secondAttribute="bottom" id="o53-mf-q3C"/>
                             <constraint firstAttribute="bottom" secondItem="jeW-B4-w3f" secondAttribute="bottom" id="quO-G1-x4q"/>
+                            <constraint firstItem="O0H-is-ygj" firstAttribute="leading" secondItem="xjb-FP-QQd" secondAttribute="trailing" id="uuM-VW-M4J"/>
+                            <constraint firstItem="xjb-FP-QQd" firstAttribute="leading" secondItem="Ek1-RE-Ana" secondAttribute="trailing" id="v45-F4-g9B"/>
                             <constraint firstItem="jeW-B4-w3f" firstAttribute="leading" secondItem="FVW-S4-y86" secondAttribute="leading" id="wmH-yR-YuV"/>
+                            <constraint firstAttribute="bottom" secondItem="O0H-is-ygj" secondAttribute="bottom" id="xaz-F4-wKN"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OrK-IQ-U4i" userLabel="Bottom Separator View">
@@ -145,6 +172,7 @@
             <connections>
                 <outlet property="addressLabel" destination="jfc-4V-ubf" id="456-aG-TJU"/>
                 <outlet property="customerNameLabel" destination="kBF-vr-3AY" id="xRg-dk-zOe"/>
+                <outlet property="defaultAddressButton" destination="O0H-is-ygj" id="q03-Hs-NSA"/>
                 <outlet property="deleteButton" destination="Ek1-RE-Ana" id="4SP-bJ-qcg"/>
                 <outlet property="editButton" destination="jeW-B4-w3f" id="lGB-ho-3UF"/>
                 <outlet property="phoneLabel" destination="OQ7-er-aW5" id="YIR-Ii-vOV"/>

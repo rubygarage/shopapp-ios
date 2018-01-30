@@ -60,17 +60,23 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
         
         viewModel.customerAddresses.asObservable()
             .subscribe(onNext: { [weak self] _ in
-                self?.tableView.reloadData()
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
         
         viewModel.didSelectAddress
             .subscribe(onNext: { [weak self] (address) in
-                if self?.addressListType == .billing {
-                    self?.destinationAddress = address
+                guard let strongSelf = self else {
+                    return
                 }
-        })
-        .disposed(by: disposeBag)
+                if strongSelf.addressListType == .billing {
+                    strongSelf.destinationAddress = address
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Private
@@ -98,8 +104,11 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     func didTapEdit(with address: Address) {
         let selected = selectedAddress?.isEqual(to: address) ?? false
         destinationAddress = address
-        destinationAddressFormCompletion = { [weak self] (filledAddress, isDefaultAddress) in
-            self?.viewModel.updateAddress(with: filledAddress, isSelected: selected)
+        destinationAddressFormCompletion = { [weak self] filledAddress in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.viewModel.updateAddress(with: filledAddress, isSelected: selected)
         }
         performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
     }
@@ -108,12 +117,19 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
         viewModel.deleteCustomerAddress(with: address)
     }
     
+    func didTapDefault(with address: Address) {
+        viewModel.updateCustomerDefaultAddress(with: address)
+    }
+    
     // MARK: - AddressListHeaderViewProtocol
     
     func didTapAddNewAddress() {
         destinationAddress = nil
-        destinationAddressFormCompletion = { [weak self] (address, isDefaultAddress) in
-            self?.viewModel.addCustomerAddress(with: address, isDefaultAddress: isDefaultAddress)
+        destinationAddressFormCompletion = { [weak self] address in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.viewModel.addCustomerAddress(with: address)
         }
         performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
     }

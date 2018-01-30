@@ -11,7 +11,10 @@ import RxSwift
 typealias AddressListCompletion = (_ address: Address) -> Void
 
 class AddressListViewModel: BaseViewModel {
-    var customerAddresses = Variable<[Address]>([Address]())
+    private let customerUseCase = CustomerUseCase()
+    
+    var customerAddresses = Variable<[Address]>([])
+    var customerDefaultAddress = Variable<Address?>(nil)
     var didSelectAddress = PublishSubject<Address>()
     var selectedAddress: Address?
     var completion: AddressListCompletion?
@@ -19,10 +22,14 @@ class AddressListViewModel: BaseViewModel {
     func loadCustomerAddresses() {
         state.onNext(.loading(showHud: true))
         Repository.shared.getCustomer { [weak self] (customer, _) in
-            if let addresses = customer?.addresses {
-                self?.customerAddresses.value = addresses
+            guard let strongSelf = self else {
+                return
             }
-            self?.state.onNext(.content)
+            if let addresses = customer?.addresses {
+                strongSelf.customerAddresses.value = addresses
+                strongSelf.customerDefaultAddress.value = customer?.defaultAddress
+            }
+            strongSelf.state.onNext(.content)
         }
     }
     
@@ -30,9 +37,10 @@ class AddressListViewModel: BaseViewModel {
         if index < customerAddresses.value.count {
             let address = customerAddresses.value[index]
             let selected = selectedAddress?.isEqual(to: address) ?? false
-            return (address, selected)
+            let isDefault = customerDefaultAddress.value?.isEqual(to: address) ?? false
+            return (address, selected, isDefault)
         }
-        return (Address(), false)
+        return (Address(), false, false)
     }
     
     func updateCheckoutShippingAddress(with address: Address) {
@@ -45,11 +53,14 @@ class AddressListViewModel: BaseViewModel {
     func updateAddress(with address: Address, isSelected: Bool) {
         state.onNext(.loading(showHud: true))
         Repository.shared.updateCustomerAddress(with: address) { [weak self] (success, error) in
+            guard let strongSelf = self else {
+                return
+            }
             if let error = error {
-                self?.state.onNext(.error(error: error))
+                strongSelf.state.onNext(.error(error: error))
             } else if let success = success {
-                self?.processAddressUpdatingResponse(with: success, address: address, isSelected: isSelected)
-                self?.state.onNext(.content)
+                strongSelf.processAddressUpdatingResponse(with: success, address: address, isSelected: isSelected)
+                strongSelf.state.onNext(.content)
             }
         }
     }
@@ -57,23 +68,44 @@ class AddressListViewModel: BaseViewModel {
     func deleteCustomerAddress(with address: Address) {
         state.onNext(.loading(showHud: true))
         Repository.shared.deleteCustomerAddress(with: address.id) { [weak self] (success, error) in
+            guard let strongSelf = self else {
+                return
+            }
             if let error = error {
-                self?.state.onNext(.error(error: error))
+                strongSelf.state.onNext(.error(error: error))
             } else if let success = success {
-                success ? self?.loadCustomerAddresses() : ()
-                self?.state.onNext(.content)
+                strongSelf.processDeleteAddressResponse(with: success)
+                strongSelf.state.onNext(.content)
             }
         }
     }
     
-    func addCustomerAddress(with address: Address, isDefaultAddress: Bool) {
+    func addCustomerAddress(with address: Address) {
         state.onNext(.loading(showHud: true))
-        Repository.shared.addCustomerAddress(with: address) { [weak self] (addressId, error) in
+        Repository.shared.addCustomerAddress(with: address) { [weak self] (_, error) in
+            guard let strongSelf = self else {
+                return
+            }
             if let error = error {
-                self?.state.onNext(.error(error: error))
-            } else if let addressId = addressId {
-                self?.processAddressAddingResponse(with: addressId, isDefaultAddress: isDefaultAddress)
-                self?.state.onNext(.content)
+                strongSelf.state.onNext(.error(error: error))
+            } else {
+                strongSelf.loadCustomerAddresses()
+            }
+        }
+    }
+    
+    func updateCustomerDefaultAddress(with address: Address) {
+        state.onNext(.loading(showHud: true))
+        customerUseCase.updateDefaultAddress(with: address.id) { [weak self] (customer, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            if let addresses = customer?.addresses, let defaultAddress = customer?.defaultAddress {
+                strongSelf.customerAddresses.value = addresses
+                strongSelf.customerDefaultAddress.value = defaultAddress
+                strongSelf.state.onNext(.content)
+            } else {
+                strongSelf.state.onNext(.error(error: error))
             }
         }
     }
@@ -85,24 +117,15 @@ class AddressListViewModel: BaseViewModel {
         }
     }
     
-    private func processSelectedAddressUpdatingResponse(with address: Address, isSelected: Bool) {
-        if isSelected {
-            selectedAddress = address
-            completion?(address)
-        }
-    }
-    
-    private func processAddressAddingResponse(with addressId: String, isDefaultAddress: Bool) {
-        if isDefaultAddress {
-            updateCustomerDefaultAddress(with: addressId)
-        } else {
+    private func processDeleteAddressResponse(with success: Bool) {
+        if success {
             loadCustomerAddresses()
         }
     }
     
-    private func updateCustomerDefaultAddress(with addressId: String) {
-        Repository.shared.updateCustomerDefaultAddress(with: addressId) { [weak self] (_, _) in
-            self?.loadCustomerAddresses()
+    private func processSelectedAddressUpdatingResponse(with address: Address, isSelected: Bool) {
+        if isSelected {
+            selectedAddress = address
         }
     }
 }

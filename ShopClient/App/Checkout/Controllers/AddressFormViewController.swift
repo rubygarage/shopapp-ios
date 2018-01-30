@@ -19,8 +19,6 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     @IBOutlet private weak var zipCodeTextFieldView: InputTextFieldView!
     @IBOutlet private weak var phoneTextFieldView: InputTextFieldView!
     @IBOutlet private weak var submitButton: BlackButton!
-    @IBOutlet private weak var defaultAddressButton: CheckboxButton!
-    @IBOutlet private weak var checkboxTitleLabel: UILabel!
     
     var address: Address?
     var completion: AddressFormCompletion?
@@ -47,7 +45,6 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
         zipCodeTextFieldView.placeholder = "Placeholder.ZipCode".localizable.required.uppercased()
         phoneTextFieldView.placeholder = "Placeholder.PhoneNumber".localizable.required.uppercased()
         submitButton.setTitle("Button.Submit".localizable.uppercased(), for: .normal)
-        checkboxTitleLabel.text = "Label.DefaultShippingAddress".localizable
     }
     
     private func setupViewModel() {
@@ -104,16 +101,6 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
             .subscribe(onNext: { [weak self] _ in
                 self?.navigationController?.popViewController(animated: true)
             })
-            .disposed(by: disposeBag)
-        
-        viewModel.useDefaultShippingAddress.asObservable()
-            .subscribe(onNext: { [weak self] (selected) in
-                self?.defaultAddressButton.isSelected = selected
-            })
-            .disposed(by: disposeBag)
-        
-        defaultAddressButton.rx.tap
-            .bind(to: viewModel.useDefaultAddressTapped)
             .disposed(by: disposeBag)
     }
     

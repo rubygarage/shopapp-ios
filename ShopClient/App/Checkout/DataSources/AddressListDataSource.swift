@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias AddressTuple = (address: Address, selected: Bool)
+typealias AddressTuple = (address: Address, isSelected: Bool, isDefault: Bool)
 
 protocol AddressListDataSourceProtocol {
     func itemsCount() -> Int
@@ -28,7 +28,7 @@ class AddressListDataSource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: AddressListTableViewCell.self), for: indexPath) as! AddressListTableViewCell
 
         if let addressTuple = delegate?.item(at: indexPath.row) {
-            cell.configure(with: addressTuple.address, selected: addressTuple.selected)
+            cell.configure(with: addressTuple.address, isSelected: addressTuple.isSelected, isDefault: addressTuple.isDefault)
         }
         
         cell.delegate = delegate

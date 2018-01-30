@@ -119,14 +119,14 @@
             <objects>
                 <viewController storyboardIdentifier="AddressFormControllerIdentifier" id="zXe-Cz-Abu" customClass="AddressFormViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RB3-75-HF5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="820"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="760"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZeE-7k-k5e" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="64" width="375" height="756"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="696"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYb-Aq-v0z">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="740"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="696"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOS-In-oK0" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="45" width="305" height="47"/>
@@ -236,39 +236,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a6x-jX-BAu" userLabel="Checkbox View">
-                                                <rect key="frame" x="35" y="616" width="305" height="24"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a77-2C-hqB" customClass="CheckboxButton" customModule="ShopClient" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="24" id="3Op-QH-nSz"/>
-                                                            <constraint firstAttribute="height" constant="24" id="sTe-O9-bzc"/>
-                                                        </constraints>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="selected" image="check">
-                                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                    </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4nv-b4-4q6">
-                                                        <rect key="frame" x="34" y="4" width="261" height="16"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <color key="textColor" red="0.5450980392" green="0.5450980392" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstItem="4nv-b4-4q6" firstAttribute="centerY" secondItem="a6x-jX-BAu" secondAttribute="centerY" id="9nj-NS-D4z"/>
-                                                    <constraint firstAttribute="height" constant="24" id="KeR-ev-k2U"/>
-                                                    <constraint firstItem="a77-2C-hqB" firstAttribute="leading" secondItem="a6x-jX-BAu" secondAttribute="leading" id="Rf2-gi-2fm"/>
-                                                    <constraint firstItem="a77-2C-hqB" firstAttribute="centerY" secondItem="a6x-jX-BAu" secondAttribute="centerY" id="rTH-hf-Fad"/>
-                                                    <constraint firstAttribute="trailing" secondItem="4nv-b4-4q6" secondAttribute="trailing" constant="10" id="vmi-gR-xn7"/>
-                                                    <constraint firstItem="4nv-b4-4q6" firstAttribute="leading" secondItem="a77-2C-hqB" secondAttribute="trailing" constant="10" id="wof-3P-YR2"/>
-                                                </constraints>
-                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LHI-fr-yve" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="35" y="670" width="305" height="50"/>
+                                                <rect key="frame" x="35" y="626" width="305" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="KDD-Cq-kOF"/>
@@ -283,7 +252,6 @@
                                             <constraint firstItem="xW3-Vj-wvc" firstAttribute="top" secondItem="gMP-Rd-v2u" secondAttribute="bottom" constant="25" id="8eu-lf-No4"/>
                                             <constraint firstItem="LpL-5u-nWe" firstAttribute="top" secondItem="RVC-Bm-6zt" secondAttribute="bottom" constant="25" id="Caw-qD-eWW"/>
                                             <constraint firstItem="WhS-xj-qZV" firstAttribute="top" secondItem="dOS-In-oK0" secondAttribute="bottom" constant="25" id="DQ6-T8-x1c"/>
-                                            <constraint firstItem="a6x-jX-BAu" firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" id="Fm8-cO-KhV"/>
                                             <constraint firstItem="ln1-vf-fK0" firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" id="Fxd-tE-BEU"/>
                                             <constraint firstItem="LHI-fr-yve" firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" id="Gto-11-Wgh"/>
                                             <constraint firstItem="dOS-In-oK0" firstAttribute="top" secondItem="UYb-Aq-v0z" secondAttribute="top" constant="45" id="LVr-dI-YZ4"/>
@@ -292,10 +260,10 @@
                                             <constraint firstItem="WhS-xj-qZV" firstAttribute="leading" secondItem="dOS-In-oK0" secondAttribute="leading" id="QJh-Ng-DT0"/>
                                             <constraint firstItem="LpL-5u-nWe" firstAttribute="leading" secondItem="dOS-In-oK0" secondAttribute="leading" id="Qhf-S6-Tra"/>
                                             <constraint firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" constant="35" id="UxC-Y0-pUW"/>
-                                            <constraint firstItem="a6x-jX-BAu" firstAttribute="top" secondItem="xW3-Vj-wvc" secondAttribute="bottom" constant="20" id="Uzb-i6-WUa"/>
                                             <constraint firstItem="eAe-Ea-YZ3" firstAttribute="top" secondItem="TUA-OH-di7" secondAttribute="bottom" constant="25" id="Vqc-Vl-iGB"/>
                                             <constraint firstItem="xW3-Vj-wvc" firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" id="Xj0-Mq-NDP"/>
                                             <constraint firstItem="dOS-In-oK0" firstAttribute="leading" secondItem="UYb-Aq-v0z" secondAttribute="leading" constant="35" id="ZJO-h5-xu9"/>
+                                            <constraint firstItem="LHI-fr-yve" firstAttribute="top" secondItem="xW3-Vj-wvc" secondAttribute="bottom" constant="30" id="ZK0-ii-O3X"/>
                                             <constraint firstItem="RVC-Bm-6zt" firstAttribute="top" secondItem="WhS-xj-qZV" secondAttribute="bottom" constant="25" id="Zd1-iu-qfc"/>
                                             <constraint firstItem="eAe-Ea-YZ3" firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" id="aAK-c4-Nv2"/>
                                             <constraint firstItem="ln1-vf-fK0" firstAttribute="top" secondItem="WhS-xj-qZV" secondAttribute="top" id="aK0-mD-nDh"/>
@@ -304,10 +272,8 @@
                                             <constraint firstItem="TUA-OH-di7" firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" id="feq-cQ-2Xb"/>
                                             <constraint firstItem="eAe-Ea-YZ3" firstAttribute="leading" secondItem="dOS-In-oK0" secondAttribute="leading" id="fnu-KF-EHR"/>
                                             <constraint firstItem="gMP-Rd-v2u" firstAttribute="top" secondItem="eAe-Ea-YZ3" secondAttribute="bottom" constant="25" id="gXh-fU-LeH"/>
-                                            <constraint firstItem="a6x-jX-BAu" firstAttribute="leading" secondItem="dOS-In-oK0" secondAttribute="leading" id="ix1-V7-hRp"/>
                                             <constraint firstItem="LpL-5u-nWe" firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" id="l6E-Mb-zuV"/>
                                             <constraint firstAttribute="bottom" secondItem="LHI-fr-yve" secondAttribute="bottom" constant="20" id="mg6-fl-vWJ"/>
-                                            <constraint firstItem="LHI-fr-yve" firstAttribute="top" secondItem="a6x-jX-BAu" secondAttribute="bottom" constant="30" id="nUr-Cd-8ga"/>
                                             <constraint firstItem="gMP-Rd-v2u" firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" id="nf7-2o-6FZ"/>
                                             <constraint firstItem="RVC-Bm-6zt" firstAttribute="leading" secondItem="dOS-In-oK0" secondAttribute="leading" id="p9T-Im-zHq"/>
                                             <constraint firstItem="gMP-Rd-v2u" firstAttribute="leading" secondItem="dOS-In-oK0" secondAttribute="leading" id="tfT-nT-NYJ"/>
@@ -335,14 +301,12 @@
                         <viewLayoutGuide key="safeArea" id="CSe-8P-BPB"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="820"/>
+                    <size key="freeformSize" width="375" height="760"/>
                     <connections>
                         <outlet property="addressOptionalTextFieldView" destination="LpL-5u-nWe" id="a3E-zI-ev6"/>
                         <outlet property="addressTextFieldView" destination="RVC-Bm-6zt" id="qta-iu-Zlc"/>
-                        <outlet property="checkboxTitleLabel" destination="4nv-b4-4q6" id="fg8-Hi-0SL"/>
                         <outlet property="cityTextFieldView" destination="TUA-OH-di7" id="a0A-Rw-vdz"/>
                         <outlet property="countryTextFieldView" destination="dOS-In-oK0" id="DQ9-FW-Wzx"/>
-                        <outlet property="defaultAddressButton" destination="a77-2C-hqB" id="l1q-Hg-zmT"/>
                         <outlet property="lastNameTextFieldView" destination="ln1-vf-fK0" id="rvD-dL-epg"/>
                         <outlet property="nameTextFieldView" destination="WhS-xj-qZV" id="7ha-YQ-F35"/>
                         <outlet property="phoneTextFieldView" destination="xW3-Vj-wvc" id="jos-ny-1Hk"/>
@@ -689,7 +653,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="check" width="14" height="11"/>
         <image name="checkout_success" width="130" height="112"/>
     </resources>
     <inferredMetricsTieBreakers>

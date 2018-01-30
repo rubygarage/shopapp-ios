@@ -12,6 +12,7 @@ protocol AddressListTableViewCellProtocol: class {
     func didTapSelect(with address: Address)
     func didTapEdit(with address: Address)
     func didTapDelete(with address: Address)
+    func didTapDefault(with address: Address)
 }
 
 class AddressListTableViewCell: UITableViewCell {
@@ -21,6 +22,7 @@ class AddressListTableViewCell: UITableViewCell {
     @IBOutlet private weak var selectButton: UIButton!
     @IBOutlet private weak var editButton: UIButton!
     @IBOutlet private weak var deleteButton: UIButton!
+    @IBOutlet private weak var defaultAddressButton: UIButton!
     
     private var address: Address!
     
@@ -33,17 +35,18 @@ class AddressListTableViewCell: UITableViewCell {
         setupViews()
     }
     
-    func configure(with address: Address, selected: Bool) {
+    func configure(with address: Address, isSelected: Bool, isDefault: Bool) {
         self.address = address
-        populateViews(with: address, selected: selected)
+        populateViews(with: address, isSelected: isSelected, isDefault: isDefault)
     }
         
     private func setupViews() {
         editButton.setTitle("Button.Edit".localizable.uppercased(), for: .normal)
         deleteButton.setTitle("Button.Delete".localizable.uppercased(), for: .normal)
+        defaultAddressButton.setTitle("Button.Default".localizable.uppercased(), for: .normal)
     }
     
-    private func populateViews(with address: Address, selected: Bool) {
+    private func populateViews(with address: Address, isSelected: Bool, isDefault: Bool) {
         customerNameLabel.text = address.fullName
         addressLabel.text = address.fullAddress
         if let phoneText = address.phone {
@@ -52,8 +55,9 @@ class AddressListTableViewCell: UITableViewCell {
         } else {
             phoneLabel.text = nil
         }
-        selectButton.isSelected = selected
-        deleteButton.isEnabled = !selected
+        selectButton.isSelected = isSelected
+        deleteButton.isEnabled = !isSelected
+        defaultAddressButton.isEnabled = !isDefault
     }
     
     // MARK: - Actions
@@ -68,5 +72,9 @@ class AddressListTableViewCell: UITableViewCell {
     
     @IBAction func deleteTapped(_ sender: UIButton) {
         delegate?.didTapDelete(with: address)
+    }
+    
+    @IBAction func defaultAddressTapped(_ sender: UIButton) {
+        delegate?.didTapDefault(with: address)
     }
 }

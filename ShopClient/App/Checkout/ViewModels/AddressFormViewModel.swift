@@ -8,7 +8,7 @@
 
 import RxSwift
 
-typealias AddressFormCompletion = (_ address: Address, _ isDefaultAddress: Bool) -> Void
+typealias AddressFormCompletion = (_ address: Address) -> Void
 
 class AddressFormViewModel: BaseViewModel {
     var countryText = Variable<String>("")
@@ -20,7 +20,6 @@ class AddressFormViewModel: BaseViewModel {
     var stateText = Variable<String>("")
     var zipText = Variable<String>("")
     var phoneText = Variable<String>("")
-    var useDefaultShippingAddress = Variable<Bool>(false)
     var addressSubmitted = PublishSubject<()>()
     var address: Address?
     var completion: AddressFormCompletion?
@@ -37,11 +36,6 @@ class AddressFormViewModel: BaseViewModel {
     var submitTapped: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
             self?.submitAction()
-        }
-    }
-    var useDefaultAddressTapped: AnyObserver<()> {
-        return AnyObserver { [weak self] _ in
-            self?.updateCheckbox()
         }
     }
     
@@ -61,12 +55,8 @@ class AddressFormViewModel: BaseViewModel {
     }
         
     private func submitAction() {
-        completion?(getAddress(), useDefaultShippingAddress.value)
+        completion?(getAddress())
         addressSubmitted.onNext()
-    }
-    
-    private func updateCheckbox() {
-        useDefaultShippingAddress.value = !useDefaultShippingAddress.value
     }
  
     private func getAddress() -> Address {

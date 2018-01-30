@@ -256,11 +256,11 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         }
     }
     
-    func updateCustomerDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Bool>) {
+    func updateCustomerDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Customer>) {
         if let token = sessionData().token {
             updateCustomerDefaultAddress(with: token, addressId: addressId, callback: callback)
         } else {
-            callback(false, ContentError())
+            callback(nil, ContentError())
         }
     }
     
@@ -595,15 +595,15 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         run(task: task, callback: callback)
     }
     
-    private func updateCustomerDefaultAddress(with token: String, addressId: String, callback: @escaping RepoCallback<Bool>) {
+    private func updateCustomerDefaultAddress(with token: String, addressId: String, callback: @escaping RepoCallback<Customer>) {
         let query = customerUpdateDefaultAddressQuery(customerAccessToken: token, addressId: addressId)
         let task = client?.mutateGraphWith(query, completionHandler: { (result, error) in
-            if result != nil {
-                callback(true, nil)
+            if let customer = result?.customerDefaultAddressUpdate?.customer {
+                callback(Customer(with: customer), nil)
             } else if let repoError = RepoError(with: error) {
-                callback(false, repoError)
+                callback(nil, repoError)
             } else {
-                callback(false, RepoError())
+                callback(nil, RepoError())
             }
         })
         run(task: task, callback: callback)
@@ -1467,7 +1467,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     }
 
     func paySessionDidFinish(_ paySession: PaySession) {
-        print("ApplePay modal view dissmissed")
+        paymentByApplePayCompletion?(nil, nil)
     }
     
     // MARK: - Pay session delegate additional methods

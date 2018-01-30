@@ -60,6 +60,7 @@
 "Button.Submit" = "Submit";
 "Button.Edit" = "Edit";
 "Button.Delete" = "Delete";
+"Button.Default" = "Set as Default";
 "Button.AddPaymentType" = "Add payment type";
 "Button.AddCard" = "Add card";
 "Button.AddBillingAddress" = "Add billing address";
@@ -99,7 +100,6 @@
 "Label.FullName" = "%@ %@";
 "Label.Phone" = "Tel: %@";
 "Label.YourCartIsEmpty" = "Your cart is empty :(";
-"Label.DefaultShippingAddress" = "Default shipping address";
 "Label.AcceptPoliciesAttributed" = "By creating your account, you accept our Privacy Policy and Terms of Service";
 "Label.N/A" = "N/A";
 "Label.Promo" = "Accept promotion emails";
