@@ -37,7 +37,7 @@ class CreditCardViewModel: BaseViewModel {
             return
         }
         holderNameText.value = card.holderName
-        cardNumberText.value = card.cardNumber
+        cardNumberText.value = card.cardNumber.asCardMaskNumber()
         monthExpirationText.value = card.expireMonth
         yearExpirationText.value = card.expireYear
         securityCodeText.value = card.verificationCode
