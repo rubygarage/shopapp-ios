@@ -173,7 +173,10 @@ extension InputTextFieldView: UITextFieldDelegate {
         
         switch keyboardType {
         case InputTextFieldViewKeybordType.cardNumber.rawValue:
-            return generatedString.count <= CreditCardLimit.cardNumberMaxCount
+            if generatedString.count <= CreditCardLimit.cardNumberMaxCount {
+                textField.text = generatedString.asCardMaskNumber()
+            }
+            return false
         case InputTextFieldViewKeybordType.cvv.rawValue:
             return generatedString.count <= CreditCardLimit.cvvMaxCount
         default:

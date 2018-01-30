@@ -9,6 +9,7 @@
 import Foundation
 
 private let kPasswordCharactersCountMin = 6
+private let kCardNumberBlockCount = 4
 
 extension String {
     func isValidAsEmail() -> Bool {
@@ -53,5 +54,20 @@ extension String {
     
     func hasAtLeastOneSymbol() -> Bool {
         return !isEmpty
+    }
+    
+    func asCardMaskNumber() -> String {
+        return grouping(every: kCardNumberBlockCount, with: " ")
+    }
+    
+    func asCardDefaultNumber() -> String {
+        return replacingOccurrences(of: " ", with: "")
+    }
+    
+    private func grouping(every groupSize: String.IndexDistance, with separator: Character) -> String {
+        let cleanedUpCopy = replacingOccurrences(of: String(separator), with: "")
+        return String(cleanedUpCopy.enumerated().map({
+            $0.offset % groupSize == 0 ? [separator, $0.element] : [$0.element]
+        }).joined().dropFirst())
     }
 }
