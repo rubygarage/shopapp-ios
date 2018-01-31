@@ -13,13 +13,7 @@ class SearchViewModel: GridCollectionViewModel {
     private let productListUseCase = ProductListUseCase()
     
     var searchPhrase = Variable<String>("")
-    var categories = Variable<[Category]>([Category]())
-
-    // MARK: - BaseViewModel
-
-    override func tryAgain() {
-        reloadData()
-    }
+    var categories = Variable<[Category]>([])
     
     func reloadData() {
         paginationValue = nil
@@ -34,18 +28,20 @@ class SearchViewModel: GridCollectionViewModel {
     func loadCategories() {
         state.onNext(.loading(showHud: true))
         categoryListUseCase.getCategoryList { [weak self] (catogories, error) in
-            if let error = error {
-                self?.state.onNext(.error(error: error))
+            guard let strongSelf = self else {
+                return
             }
-            if let categories = catogories {
-                self?.categories.value = categories
-                self?.state.onNext(.content)
+            if let error = error {
+                strongSelf.state.onNext(.error(error: error))
+            } else if let categories = catogories {
+                strongSelf.categories.value = categories
+                strongSelf.state.onNext(.content)
             }
         }
     }
     
     func clearResult() {
-        updateProducts(products: [Product]())
+        updateProducts(products: [])
     }
     
     func categoriesCount() -> Int {
@@ -58,20 +54,28 @@ class SearchViewModel: GridCollectionViewModel {
     
     private func loadRemoteData() {
         guard !searchPhrase.value.isEmpty else {
-            updateProducts(products: [Product]())
+            updateProducts(products: [])
             return
         }
         
         state.onNext(.loading(showHud: false))
         productListUseCase.getProductList(with: paginationValue, searchPhrase: searchPhrase.value) { [weak self] (products, error) in
+            guard let strongSelf = self else {
+                return
+            }
             if let error = error {
-                self?.state.onNext(.error(error: error))
+                strongSelf.state.onNext(.error(error: error))
+            } else if let productsArray = products {
+                strongSelf.updateProducts(products: productsArray)
+                strongSelf.state.onNext(.content)
             }
-            if let productsArray = products {
-                self?.updateProducts(products: productsArray)
-                self?.state.onNext(.content)
-            }
-            self?.canLoadMore = products?.count ?? 0 == kItemsPerPage
+            strongSelf.canLoadMore = products?.count ?? 0 == kItemsPerPage
         }
+    }
+    
+    // MARK: - BaseViewModel
+    
+    override func tryAgain() {
+        reloadData()
     }
 }
