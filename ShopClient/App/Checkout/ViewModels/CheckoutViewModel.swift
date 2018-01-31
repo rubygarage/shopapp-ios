@@ -33,8 +33,6 @@ class CheckoutViewModel: BaseViewModel {
     private let deleteCartProductsUseCase = DeleteCartProductsUseCase()
     private let customerUseCase = CustomerUseCase()
     private let loginUseCase = LoginUseCase()
-    private let addAddressUseCase = AddAddressUseCase()
-    private let updateDefaultAddressUseCase = UpdateDefaultAddressUseCase()
     
     var checkout = Variable<Checkout?>(nil)
     var creditCard = Variable<CreditCard?>(nil)

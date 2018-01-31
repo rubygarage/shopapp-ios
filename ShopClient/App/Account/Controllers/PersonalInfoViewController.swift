@@ -48,7 +48,7 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
     }
     
     private func setupViewModel() {
-        viewModel.canChangePassword = false
+        viewModel.canChangeEmail = false
         
         viewModel.customer.asObservable()
             .subscribe(onNext: { [weak self] customer in
