@@ -107,12 +107,41 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="7x0-g5-3yi" id="Imt-Lf-dDG"/>
-                        <segue destination="ECB-Z1-FXx" kind="show" identifier="toCheckoutAddressForm" id="Ofb-Ck-LNE"/>
+                        <segue destination="6es-8c-np4" kind="show" identifier="toCustomerAddressForm" id="eHF-aH-7Li"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0dC-mI-bYZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-831" y="961"/>
+        </scene>
+        <!--Customer Address Form View Controller-->
+        <scene sceneID="qJ8-Ap-8Ij">
+            <objects>
+                <viewController id="6es-8c-np4" customClass="CustomerAddressFormViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z2e-rJ-Up0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wg2-8b-fWK">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <segue destination="zXe-Cz-Abu" kind="embed" id="mEQ-Aq-uhp"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="wg2-8b-fWK" firstAttribute="bottom" secondItem="n4Z-kk-Q7K" secondAttribute="bottom" id="1yO-bY-4lB"/>
+                            <constraint firstItem="wg2-8b-fWK" firstAttribute="leading" secondItem="n4Z-kk-Q7K" secondAttribute="leading" id="3Zt-lk-FGa"/>
+                            <constraint firstItem="wg2-8b-fWK" firstAttribute="trailing" secondItem="n4Z-kk-Q7K" secondAttribute="trailing" id="kTF-nZ-UTv"/>
+                            <constraint firstItem="wg2-8b-fWK" firstAttribute="top" secondItem="Z2e-rJ-Up0" secondAttribute="top" id="pxe-Ia-dUu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="n4Z-kk-Q7K"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ntM-4w-pKZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-831.20000000000005" y="1665.5172413793105"/>
         </scene>
         <!--Address Form View Controller-->
         <scene sceneID="l9L-mQ-41u">
@@ -680,7 +709,7 @@
         <image name="checkout_success" width="130" height="112"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ofb-Ck-LNE"/>
+        <segue reference="mEQ-Aq-uhp"/>
         <segue reference="dnR-TS-EYt"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -131,7 +131,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
             }
             strongSelf.viewModel.addCustomerAddress(with: address)
         }
-        performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
+        performSegue(withIdentifier: SegueIdentifiers.toCustomerAddressForm, sender: self)
     }
     
     // MARK: - Segues
@@ -140,6 +140,15 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
         if let addressFormViewController = segue.destination as? AddressFormViewController {
             addressFormViewController.address = destinationAddress
             addressFormViewController.completion = destinationAddressFormCompletion
+        } else if let customerAddressFormController = segue.destination as? CustomerAddressFormViewController {
+            customerAddressFormController.delegate = self
         }
+    }
+}
+
+extension AddressListViewController: CustomerAddressFormDelegate {
+    func viewModelDidAddShippingAddress(_ model: CustomerAddressFormViewModel) {
+        viewModel.loadCustomerAddresses()
+        navigationController?.popToViewController(self, animated: true)
     }
 }
