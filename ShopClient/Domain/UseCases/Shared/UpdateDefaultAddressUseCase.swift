@@ -9,7 +9,7 @@
 import Foundation
 
 struct UpdateDefaultAddressUseCase {
-    func updateDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Bool>) {
+    func updateDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Customer>) {
         Repository.shared.updateCustomerDefaultAddress(with: addressId, callback: callback)
     }
 }
