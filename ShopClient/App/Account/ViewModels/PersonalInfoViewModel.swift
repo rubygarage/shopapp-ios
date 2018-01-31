@@ -31,7 +31,7 @@ class PersonalInfoViewModel: BaseViewModel {
             let lastNameIsDifferent = customer.lastName ?? "" != lastName
             let emailIsDifferent = customer.email != email
             let emailIsValid = email.hasAtLeastOneSymbol()
-            let phoneIsDifferent = customer.phone ?? NSLocalizedString("", comment: "") != phone
+            let phoneIsDifferent = customer.phone ?? "" != phone
             return firstNameIsDifferent || lastNameIsDifferent || (strongSelf.canChangeEmail && emailIsDifferent && emailIsValid) || phoneIsDifferent
         }
         return observable
