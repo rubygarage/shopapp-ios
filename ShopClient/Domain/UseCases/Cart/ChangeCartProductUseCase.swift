@@ -9,7 +9,7 @@
 import Foundation
 
 struct ChangeCartProductUseCase {
-    public func changeCartProductQuantity(productVariantId: String?, quantity: Int, _ callback: @escaping RepoCallback<CartProduct>) {
+    func changeCartProductQuantity(productVariantId: String?, quantity: Int, _ callback: @escaping RepoCallback<CartProduct>) {
         Repository.shared.changeCartProductQuantity(with: productVariantId, quantity: quantity, callback: callback)
     }
 }

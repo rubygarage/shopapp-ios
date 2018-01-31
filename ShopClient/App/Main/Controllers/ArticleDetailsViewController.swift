@@ -6,44 +6,80 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
+import SafariServices
 import UIKit
 
-class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel> {
+class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel>, UIWebViewDelegate {
     @IBOutlet private weak var articleImageView: UIImageView!
     @IBOutlet private weak var articleTitleLabel: UILabel!
     @IBOutlet private weak var authorNameLabel: UILabel!
-    @IBOutlet private weak var articleContentLabel: UILabel!
+    @IBOutlet private weak var articleContentWebView: UIWebView!
+    @IBOutlet private weak var articleContentHeightLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var articleContentWidthLayoutConstraint: NSLayoutConstraint!
     
     var articleId: String!
+    
+    // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         viewModel = ArticleDetailsViewModel()
         super.viewDidLoad()
 
+        setupViews()
         setupViewModel()
         loadData()
+    }
+    
+    // MARK: - Setup
+    
+    private func setupViews() {
+        articleContentWebView.delegate = self
+        errorView.delegate = self
     }
     
     private func setupViewModel() {
         viewModel.articleId = articleId
 
-        errorView.delegate = self
-
         viewModel.data
-            .subscribe(onNext: { [weak self] article in
-                self?.populateViews(with: article)
+            .subscribe(onNext: { [weak self] result in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.populateViews(with: result.article, baseUrl: result.baseUrl)
             })
             .disposed(by: disposeBag)
     }
     
-    private func populateViews(with article: Article) {
+    private func populateViews(with article: Article, baseUrl: URL) {
         articleImageView.set(image: article.image)
         articleTitleLabel.text = article.title
         authorNameLabel.text = article.author?.fullName
-        articleContentLabel.text = article.content
+        guard let htmlString = article.contentHtml else {
+            return
+        }
+        let html = htmlString.adaptiveWithMultimediaWidth(articleTitleLabel.frame.size.width)
+        articleContentWebView.loadHTMLString(html, baseURL: baseUrl)
     }
 
-    fileprivate func loadData() {
+    private func loadData() {
         viewModel.loadData()
+    }
+    
+    // MARK: - UIWebViewDelegate
+    
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        guard navigationType.rawValue == UIWebViewNavigationType.linkClicked.rawValue else {
+            return true
+        }
+        if let url = request.url {
+            let safariViewController = SFSafariViewController(url: url)
+            present(safariViewController, animated: true)
+        }
+        return false
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        articleContentHeightLayoutConstraint.constant = webView.scrollView.contentSize.height
+        articleContentWidthLayoutConstraint.constant = webView.scrollView.contentSize.width
     }
 }

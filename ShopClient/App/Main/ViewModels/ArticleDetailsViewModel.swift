@@ -12,24 +12,26 @@ class ArticleDetailsViewModel: BaseViewModel {
     private let articleUseCase = ArticleUseCase()
 
     var articleId: String!
-    var data = PublishSubject<Article>()
-
-    // MARK: - BaseViewModel
-
-    override func tryAgain() {
-        loadData()
-    }
+    var data = PublishSubject<(article: Article, baseUrl: URL)>()
 
     func loadData() {
         state.onNext(.loading(showHud: true))
-        articleUseCase.getArticle(with: articleId) { [weak self] (article, error) in
-            if let error = error {
-                self?.state.onNext(.error(error: error))
+        articleUseCase.getArticle(with: articleId) { [weak self] (result, error) in
+            guard let strongSelf = self else {
+                return
             }
-            if let article = article {
-                self?.data.onNext(article)
-                self?.state.onNext(.content)
+            if let error = error {
+                strongSelf.state.onNext(.error(error: error))
+            } else if let result = result {
+                strongSelf.data.onNext(result)
+                strongSelf.state.onNext(.content)
             }
         }
+    }
+    
+    // MARK: - BaseViewModel
+    
+    override func tryAgain() {
+        loadData()
     }
 }

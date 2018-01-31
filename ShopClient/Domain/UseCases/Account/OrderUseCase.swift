@@ -9,7 +9,7 @@
 import Foundation
 
 struct OrderUseCase {
-    public func getOrder(with id: String, _ callback: @escaping RepoCallback<Order>) {
+    func getOrder(with id: String, _ callback: @escaping RepoCallback<Order>) {
         Repository.shared.getOrder(id: id, callback: callback)
     }
 }

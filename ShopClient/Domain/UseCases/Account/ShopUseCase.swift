@@ -9,7 +9,7 @@
 import Foundation
 
 struct ShopUseCase {
-    public func getShop(_ callback: @escaping (_ shop: Shop) -> Void) {
+    func getShop(_ callback: @escaping (_ shop: Shop) -> Void) {
         Repository.shared.getShop { (shop, _) in
             if let shop = shop {
                 callback(shop)

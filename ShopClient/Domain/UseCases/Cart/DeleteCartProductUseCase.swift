@@ -9,7 +9,7 @@
 import Foundation
 
 struct DeleteCartProductUseCase {
-    public func deleteProductFromCart(productVariantId: String?, _ callback: @escaping RepoCallback<Bool>) {
+    func deleteProductFromCart(productVariantId: String?, _ callback: @escaping RepoCallback<Bool>) {
         Repository.shared.deleteProductFromCart(with: productVariantId, callback: callback)
     }
 }

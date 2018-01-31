@@ -24,6 +24,12 @@ class TextFieldWrapper: UIView {
             textField.text = newValue
         }
     }
+    
+    // MARK: - Setup
+    
+    func setTextFieldEnabled(_ isEnabled: Bool) {
+        textField.isEnabled = isEnabled
+    }
 }
 
 // MARK: - Reactive

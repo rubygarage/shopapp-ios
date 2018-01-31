@@ -9,7 +9,7 @@
 import Foundation
 
 struct AddCartProductUseCase {
-    public func addCartProduct(_ cartProduct: CartProduct, _ callback: @escaping RepoCallback<CartProduct>) {
+    func addCartProduct(_ cartProduct: CartProduct, _ callback: @escaping RepoCallback<CartProduct>) {
         Repository.shared.addCartProduct(cartProduct: cartProduct, callback: callback)
     }
 }

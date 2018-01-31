@@ -40,6 +40,7 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
         nameTextFieldView.placeholder = "Placeholder.Name".localizable.uppercased()
         lastNameTextFieldView.placeholder = "Placeholder.LastName".localizable.uppercased()
         emailTextFieldView.placeholder = "Placeholder.Email".localizable.required.uppercased()
+        emailTextFieldView.setTextFieldEnabled(false)
         phoneTextFieldView.placeholder = "Placeholder.PhoneNumber".localizable.uppercased()
         changePasswordButton.setTitle("Button.ChangePassword".localizable.uppercased(), for: .normal)
         changePasswordButton.delegate = self
@@ -47,6 +48,8 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
     }
     
     private func setupViewModel() {
+        viewModel.canChangeEmail = false
+        
         viewModel.customer.asObservable()
             .subscribe(onNext: { [weak self] customer in
                 guard let strongSelf = self else {

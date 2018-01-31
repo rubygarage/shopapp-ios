@@ -13,7 +13,7 @@ extension Repository: ArticleRepositoryInterface {
         APICore?.getArticleList(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, reverse: reverse, callback: callback)
     }
     
-    func getArticle(id: String, callback: @escaping RepoCallback<Article>) {
+    func getArticle(id: String, callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>) {
         APICore?.getArticle(id: id, callback: callback)
     }
 }

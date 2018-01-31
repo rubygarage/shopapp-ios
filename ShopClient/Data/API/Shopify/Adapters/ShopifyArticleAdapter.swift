@@ -32,6 +32,7 @@ extension Article {
         id = item?.id.rawValue ?? ""
         title = item?.title
         content = item?.content
+        contentHtml = item?.contentHtml
         author = Author(with: item?.author)
         tags = item?.tags
         blogId = item?.blog.id.rawValue

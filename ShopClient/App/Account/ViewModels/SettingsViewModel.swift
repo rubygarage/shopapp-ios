@@ -16,7 +16,7 @@ class SettingsViewModel: BaseViewModel {
     var customer = Variable<Customer?>(nil)
     
     func loadCustomer() {
-        loginUseCase.getLoginStatus { (isLoggedIn) in
+        loginUseCase.getLoginStatus { isLoggedIn in
             if isLoggedIn {
                 getCustomer()
             }

@@ -12,6 +12,7 @@ typealias AddressListCompletion = (_ address: Address) -> Void
 
 class AddressListViewModel: BaseViewModel {
     private let customerUseCase = CustomerUseCase()
+    private let updateDefaultAddressUseCase = UpdateDefaultAddressUseCase()
     
     var customerAddresses = Variable<[Address]>([])
     var customerDefaultAddress = Variable<Address?>(nil)
@@ -96,7 +97,7 @@ class AddressListViewModel: BaseViewModel {
     
     func updateCustomerDefaultAddress(with address: Address) {
         state.onNext(.loading(showHud: true))
-        customerUseCase.updateDefaultAddress(with: address.id) { [weak self] (customer, error) in
+        updateDefaultAddressUseCase.updateDefaultAddress(with: address.id) { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return
             }

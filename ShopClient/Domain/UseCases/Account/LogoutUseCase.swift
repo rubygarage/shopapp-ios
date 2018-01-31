@@ -9,7 +9,7 @@
 import Foundation
 
 struct LogoutUseCase {
-    public func logout(_ callback: @escaping (_ isLoggedOut: Bool) -> Void) {
+    func logout(_ callback: @escaping (_ isLoggedOut: Bool) -> Void) {
         Repository.shared.logout { (success, _) in
             callback(success == true)
         }

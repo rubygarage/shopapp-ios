@@ -9,7 +9,7 @@
 import Foundation
 
 struct CategoryUseCase {
-    public func getCategory(with id: String, paginationValue: Any?, sortingValue: SortingValue, reverse: Bool, _ callback: @escaping RepoCallback<Category>) {
+    func getCategory(with id: String, paginationValue: Any?, sortingValue: SortingValue, reverse: Bool, _ callback: @escaping RepoCallback<Category>) {
         Repository.shared.getCategoryDetails(id: id, paginationValue: paginationValue, sortBy: sortingValue, reverse: reverse, callback: callback)
     }
 }

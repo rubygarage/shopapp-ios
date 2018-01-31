@@ -9,15 +9,7 @@
 import Foundation
 
 struct CustomerUseCase {
-    public func getCustomer(_ callback: @escaping RepoCallback<Customer>) {
+    func getCustomer(_ callback: @escaping RepoCallback<Customer>) {
         Repository.shared.getCustomer(callback: callback)
-    }
-    
-    public func addAddress(with address: Address, callback: @escaping RepoCallback<String>) {
-        Repository.shared.addCustomerAddress(with: address, callback: callback)
-    }
-    
-    public func updateDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Customer>) {
-        Repository.shared.updateCustomerDefaultAddress(with: addressId, callback: callback)
     }
 }
