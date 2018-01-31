@@ -9,17 +9,27 @@
 import UIKit
 
 protocol CheckoutAddressFormDelegate: class {
-    func viewModelDidUpdateShippingAddress(_ viewModel: CheckoutAddressFormViewModel)
+    func viewModelDidUpdateShippingAddress(_ model: CheckoutAddressFormViewModel)
+    func viewModel(_ model: CheckoutAddressFormViewModel, didFill billingAddress: Address)
 }
 
 class CheckoutAddressFormViewModel: BaseViewModel {
     private let checkoutUseCase = CheckoutUseCase()
     
     var checkoutId: String!
+    var addressType: AddressListType = .shipping
     
     weak var delegate: CheckoutAddressFormDelegate?
     
-    func updateCheckoutShippingAddress(with address: Address) {
+    func updateAddress(with address: Address) {
+        if addressType == .shipping {
+            updateCheckoutShippingAddress(with: address)
+        } else {
+            delegate?.viewModel(self, didFill: address)
+        }
+    }
+    
+    private func updateCheckoutShippingAddress(with address: Address) {
         state.onNext(.loading(showHud: true))
         checkoutUseCase.updateCheckoutShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
             guard let strongSelf = self else {

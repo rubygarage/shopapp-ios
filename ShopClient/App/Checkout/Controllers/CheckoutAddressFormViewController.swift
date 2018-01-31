@@ -12,6 +12,7 @@ class CheckoutAddressFormViewController: BaseViewController<CheckoutAddressFormV
     private var destinationAddressFormCompletion: AddressFormCompletion!
     
     var checkoutId: String!
+    var addressType: AddressListType = .shipping
     var address: Address?
     
     weak var delegate: CheckoutAddressFormDelegate?
@@ -30,6 +31,7 @@ class CheckoutAddressFormViewController: BaseViewController<CheckoutAddressFormV
     
     private func setupViewModel() {
         viewModel.checkoutId = checkoutId
+        viewModel.addressType = addressType
         viewModel.delegate = delegate
     }
     
@@ -40,7 +42,7 @@ class CheckoutAddressFormViewController: BaseViewController<CheckoutAddressFormV
                 guard let strongSelf = self else {
                     return
                 }
-                strongSelf.viewModel.updateCheckoutShippingAddress(with: address)
+                strongSelf.viewModel.updateAddress(with: address)
             }
         }
     }
