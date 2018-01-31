@@ -9,7 +9,7 @@
 import Foundation
 
 struct ResetPasswordUseCase {
-    public func resetPassword(with email: String, _ callback: @escaping RepoCallback<Bool>) {
+    func resetPassword(with email: String, _ callback: @escaping RepoCallback<Bool>) {
         Repository.shared.resetPassword(with: email, callback: callback)
     }
 }

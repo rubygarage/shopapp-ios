@@ -9,7 +9,7 @@
 import Foundation
 
 struct OrderListUseCase {
-    public func getOrderList(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Order]>) {
+    func getOrderList(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Order]>) {
         Repository.shared.getOrderList(paginationValue: paginationValue, callback: callback)
     }
 }

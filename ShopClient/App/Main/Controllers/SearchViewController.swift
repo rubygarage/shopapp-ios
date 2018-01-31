@@ -150,7 +150,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Searc
     }
     
     func didTapClear() {
-        viewModel.searchPhrase.value = ""
+        viewModel.clearResult()
     }
     
     // MARK: - SearchCollectionDataSourceProtocol

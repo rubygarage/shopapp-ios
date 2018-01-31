@@ -158,12 +158,16 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         run(task: task, callback: callback)
     }
     
-    func getArticle(id: String, callback: @escaping RepoCallback<Article>) {
+    func getArticle(id: String, callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>) {
         let query = articleRootQuery(id: id)
         let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
-            let article = Article(with: response?.node as? Storefront.Article)
             let responseError = self?.process(error: error)
-            callback(article, responseError)
+            guard let article = Article(with: response?.node as? Storefront.Article), let baseUrl = URL(string: "https://www." + kShopifyStorefrontURL) else {
+                callback(nil, responseError)
+                return
+            }
+            let result = (article, baseUrl)
+            callback(result, responseError)
         })
         run(task: task, callback: callback)
     }
@@ -1106,6 +1110,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
             query.id()
             query.title()
             query.content()
+            query.contentHtml()
             query.image(self.imageQuery())
             query.author(self.authorQuery())
             query.tags()

@@ -9,7 +9,7 @@
 import Foundation
 
 struct ArticleUseCase {
-    public func getArticle(with id: String, _ callback: @escaping RepoCallback<Article>) {
+    func getArticle(with id: String, _ callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>) {
         Repository.shared.getArticle(id: id, callback: callback)
     }
 }

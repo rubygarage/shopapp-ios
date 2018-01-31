@@ -20,18 +20,19 @@ class PersonalInfoViewModel: BaseViewModel {
     var phoneText = Variable<String>("")
     var emailErrorMessage = PublishSubject<String>()
     var saveChangesSuccess = PublishSubject<Bool>()
+    var canChangePassword = true
     
     var saveChangesButtonEnabled: Observable<Bool> {
         let observable = Observable.combineLatest(firstNameText.asObservable(), lastNameText.asObservable(), emailText.asObservable(), phoneText.asObservable()) { [weak self] (firstName, lastName, email, phone) -> Bool in
-            guard let customer = self?.customer.value else {
+            guard let strongSelf = self, let customer = self?.customer.value else {
                 return false
             }
-            let firstNameIsDifferent = customer.firstName != firstName
-            let lastNameIsDifferent = customer.lastName != lastName
+            let firstNameIsDifferent = customer.firstName ?? "" != firstName
+            let lastNameIsDifferent = customer.lastName ?? "" != lastName
             let emailIsDifferent = customer.email != email
             let emailIsValid = email.hasAtLeastOneSymbol()
-            let phoneIsDifferent = customer.phone != phone
-            return firstNameIsDifferent || lastNameIsDifferent || (emailIsDifferent && emailIsValid) || phoneIsDifferent
+            let phoneIsDifferent = customer.phone ?? "" != phone
+            return firstNameIsDifferent || lastNameIsDifferent || (strongSelf.canChangePassword && emailIsDifferent && emailIsValid) || phoneIsDifferent
         }
         return observable
     }

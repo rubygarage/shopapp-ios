@@ -9,7 +9,7 @@
 import Foundation
 
 struct CategoryListUseCase {
-    public func getCategoryList(_ callback: @escaping RepoCallback<[Category]>) {
+    func getCategoryList(_ callback: @escaping RepoCallback<[Category]>) {
         Repository.shared.getCategoryList(callback: callback)
     }
 }

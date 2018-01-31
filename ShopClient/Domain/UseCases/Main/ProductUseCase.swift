@@ -9,7 +9,7 @@
 import Foundation
 
 struct ProductUseCase {
-    public func getProduct(with id: String, _ callback: @escaping RepoCallback<Product>) {
+    func getProduct(with id: String, _ callback: @escaping RepoCallback<Product>) {
         Repository.shared.getProduct(id: id, callback: callback)
     }
 }

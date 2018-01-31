@@ -9,11 +9,11 @@
 import Foundation
 
 struct ArticleListUseCase {
-    public func getReverseArticleList(_ callback: @escaping RepoCallback<[Article]>) {
+    func getReverseArticleList(_ callback: @escaping RepoCallback<[Article]>) {
         Repository.shared.getArticleList(reverse: true, callback: callback)
     }
 
-    public func getArticleList(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Article]>) {
+    func getArticleList(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Article]>) {
         Repository.shared.getArticleList(paginationValue: paginationValue, sortBy: SortingValue.createdAt, reverse: true, callback: callback)
     }
 }

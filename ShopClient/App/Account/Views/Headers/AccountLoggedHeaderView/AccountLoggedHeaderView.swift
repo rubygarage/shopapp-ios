@@ -79,8 +79,8 @@ class AccountLoggedHeaderView: UIView {
     }
     
     private func populateViews(customer: Customer) {
-        customerNameLabel.text = customer.fullname
-        customerImageView.dataSource = CustomerImageDataSource(customerName: customer.fullname)
+        customerNameLabel.text = customer.fullName
+        customerImageView.dataSource = CustomerImageDataSource(customerName: customer.fullName)
     }
     
     // MARK: - Actions

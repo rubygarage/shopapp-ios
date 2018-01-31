@@ -214,26 +214,29 @@
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="bz9-XO-Qd2">
-                                        <rect key="frame" x="15" y="477" width="345" height="18"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <webView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HO6-dp-DAG">
+                                        <rect key="frame" x="15" y="477" width="345" height="1"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="cxs-si-zp0"/>
+                                            <constraint firstAttribute="width" constant="345" id="iSE-7y-aL3"/>
+                                        </constraints>
+                                        <dataDetectorType key="dataDetectorTypes"/>
+                                    </webView>
                                 </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="bz9-XO-Qd2" secondAttribute="bottom" constant="30" id="7bw-R1-D3F"/>
                                     <constraint firstAttribute="trailing" secondItem="E8X-x7-TTY" secondAttribute="trailing" constant="15" id="7eA-b1-Mxy"/>
                                     <constraint firstItem="1WT-Ge-0EH" firstAttribute="top" secondItem="wqZ-PD-xbw" secondAttribute="top" id="Aej-Dd-N6X"/>
                                     <constraint firstItem="1WT-Ge-0EH" firstAttribute="leading" secondItem="wqZ-PD-xbw" secondAttribute="leading" id="C6h-k6-uzV"/>
                                     <constraint firstAttribute="trailing" secondItem="1WT-Ge-0EH" secondAttribute="trailing" id="Gkg-NW-Kbw"/>
-                                    <constraint firstItem="bz9-XO-Qd2" firstAttribute="top" secondItem="RpD-it-Hg8" secondAttribute="bottom" constant="30" id="Iez-nr-H6p"/>
-                                    <constraint firstItem="bz9-XO-Qd2" firstAttribute="leading" secondItem="wqZ-PD-xbw" secondAttribute="leading" constant="15" id="SE7-FP-yBk"/>
+                                    <constraint firstItem="HO6-dp-DAG" firstAttribute="centerX" secondItem="wqZ-PD-xbw" secondAttribute="centerX" id="IiG-61-REn"/>
+                                    <constraint firstItem="HO6-dp-DAG" firstAttribute="top" secondItem="RpD-it-Hg8" secondAttribute="bottom" constant="30" id="MaP-BW-WI3"/>
                                     <constraint firstItem="RpD-it-Hg8" firstAttribute="leading" secondItem="wqZ-PD-xbw" secondAttribute="leading" constant="15" id="Tdf-I3-S34"/>
                                     <constraint firstItem="RpD-it-Hg8" firstAttribute="top" secondItem="E8X-x7-TTY" secondAttribute="bottom" constant="15" id="VYX-6O-d4r"/>
                                     <constraint firstItem="E8X-x7-TTY" firstAttribute="top" secondItem="1WT-Ge-0EH" secondAttribute="bottom" constant="20" id="gq1-EU-anm"/>
+                                    <constraint firstAttribute="bottom" secondItem="HO6-dp-DAG" secondAttribute="bottom" constant="30" id="i4J-Cl-wub"/>
                                     <constraint firstAttribute="trailing" secondItem="RpD-it-Hg8" secondAttribute="trailing" constant="15" id="mFy-Sb-Nrw"/>
-                                    <constraint firstAttribute="trailing" secondItem="bz9-XO-Qd2" secondAttribute="trailing" constant="15" id="qZD-FQ-hpL"/>
                                     <constraint firstItem="E8X-x7-TTY" firstAttribute="leading" secondItem="wqZ-PD-xbw" secondAttribute="leading" constant="15" id="vjZ-Dw-3Ll"/>
                                 </constraints>
                             </scrollView>
@@ -249,7 +252,9 @@
                         <viewLayoutGuide key="safeArea" id="UvS-bq-C4A"/>
                     </view>
                     <connections>
-                        <outlet property="articleContentLabel" destination="bz9-XO-Qd2" id="3lb-T3-Oh4"/>
+                        <outlet property="articleContentHeightLayoutConstraint" destination="cxs-si-zp0" id="lA4-pK-YFO"/>
+                        <outlet property="articleContentWebView" destination="HO6-dp-DAG" id="JpS-9D-VVh"/>
+                        <outlet property="articleContentWidthLayoutConstraint" destination="iSE-7y-aL3" id="uHx-0w-KID"/>
                         <outlet property="articleImageView" destination="1WT-Ge-0EH" id="Ujb-3S-XGt"/>
                         <outlet property="articleTitleLabel" destination="E8X-x7-TTY" id="Cms-bk-iom"/>
                         <outlet property="authorNameLabel" destination="RpD-it-Hg8" id="wra-z0-RaZ"/>
@@ -257,7 +262,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7d3-Kn-PBp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1558" y="2743"/>
+            <point key="canvasLocation" x="1557.5" y="2741.5"/>
         </scene>
         <!--Products List View Controller-->
         <scene sceneID="W83-mX-1ZD">
@@ -779,7 +784,7 @@
         <image name="search_selected" width="27" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Uoy-sz-tWO"/>
+        <segue reference="Ucu-Sf-yUc"/>
         <segue reference="DJ8-dD-zkt"/>
         <segue reference="Dq7-PS-rRI"/>
     </inferredMetricsTieBreakers>

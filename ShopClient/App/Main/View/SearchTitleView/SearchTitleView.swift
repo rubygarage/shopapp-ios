@@ -8,6 +8,8 @@
 
 import UIKit
 
+import RxSwift
+
 enum SearchState {
     case `default`
     case editing
@@ -27,8 +29,9 @@ private let kUnderlineMarginDefault: CGFloat = 55
 private let kUnderlineMarginLeft: CGFloat = 40
 private let kUnderlineMarginRight: CGFloat = 10
 private let kBarItemWidth: CGFloat = 32
+private let kTextFieldDebounceDueTime = 0.3
 
-class SearchTitleView: TextFieldWrapper, UITextFieldDelegate {
+class SearchTitleView: TextFieldWrapper {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var underLineView: UIView!
     @IBOutlet private weak var backButton: UIButton!
@@ -37,6 +40,8 @@ class SearchTitleView: TextFieldWrapper, UITextFieldDelegate {
     @IBOutlet private weak var underlineRightMargin: NSLayoutConstraint!
     @IBOutlet private weak var clearButton: UIButton!
 
+    private let disposeBag = DisposeBag()
+    
     weak var delegate: SearchTitleViewProtocol?
     
     var state: SearchState = .default {
@@ -79,8 +84,21 @@ class SearchTitleView: TextFieldWrapper, UITextFieldDelegate {
     }
     
     private func setupViews() {
-        textField.delegate = self
         clearButton.setTitle("Button.Clear".localizable, for: .normal)
+        
+        let textFieldResults = textField.rx.text
+            .debounce(kTextFieldDebounceDueTime, scheduler: MainScheduler.instance)
+            .observeOn(MainScheduler.instance)
+        
+        textFieldResults.asObservable()
+            .skip(1)
+            .subscribe(onNext: { [weak self] _ in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.delegate?.didTapSearch()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func updateViews(animated: Bool) {
@@ -135,7 +153,6 @@ class SearchTitleView: TextFieldWrapper, UITextFieldDelegate {
     }
     
     @IBAction func searchTextFieldEditingDidEnd(_ sender: UITextField) {
-        state = .default
         updateClearButtonIfNeeded()
     }
     
@@ -144,6 +161,8 @@ class SearchTitleView: TextFieldWrapper, UITextFieldDelegate {
     }
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
+        state = .default
+        updateClearButtonIfNeeded()
         endEditing(true)
         textField.text = nil
         delegate?.didTapBack()
@@ -159,12 +178,6 @@ class SearchTitleView: TextFieldWrapper, UITextFieldDelegate {
         if let touch = touches.first, touch.view != textField {
             textField.endEditing(true)
         }
-    }
-    
-    // MARK: - UITextFieldDelegate
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        delegate?.didTapSearch()
-        return true
     }
 }
 
