@@ -96,12 +96,6 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
         submitButton.rx.tap
             .bind(to: viewModel.submitTapped)
             .disposed(by: disposeBag)
-        
-        viewModel.addressSubmitted
-            .subscribe(onNext: { [weak self] _ in
-                self?.navigationController?.popViewController(animated: true)
-            })
-            .disposed(by: disposeBag)
     }
     
     private func populateViewsIfNeeded() {

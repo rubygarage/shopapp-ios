@@ -20,7 +20,6 @@ class AddressFormViewModel: BaseViewModel {
     var stateText = Variable<String>("")
     var zipText = Variable<String>("")
     var phoneText = Variable<String>("")
-    var addressSubmitted = PublishSubject<()>()
     var address: Address?
     var completion: AddressFormCompletion?
     
@@ -56,7 +55,6 @@ class AddressFormViewModel: BaseViewModel {
         
     private func submitAction() {
         completion?(getAddress())
-        addressSubmitted.onNext()
     }
  
     private func getAddress() -> Address {

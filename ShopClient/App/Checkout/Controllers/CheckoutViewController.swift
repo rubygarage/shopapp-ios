@@ -204,7 +204,9 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             creditCardFormController.card = viewModel.creditCard.value
             creditCardFormController.completion = creditCardCompletion()
         } else if let checkoutAddressFormController = segue.destination as? CheckoutAddressFormViewController {
+            checkoutAddressFormController.checkoutId = viewModel.checkout.value?.id
             checkoutAddressFormController.address = destinationAddressType == .shipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
+            checkoutAddressFormController.delegate = self
         }
         
 //        else if let addressFormViewController = segue.destination as? AddressFormViewController {
@@ -328,5 +330,14 @@ extension CheckoutViewController: CheckoutShippingAddressEditCellProtocol {
 extension CheckoutViewController: CheckoutBillingAddressEditCellProtocol {
     func didTapEditBillingAddress() {
         openAddressesController(with: .billing)
+    }
+}
+
+// MARK: - CheckoutAddressFormDelegate
+
+extension CheckoutViewController: CheckoutAddressFormDelegate {
+    func viewModelDidUpdateShippingAddress(_ viewModel: CheckoutAddressFormViewModel) {
+        self.viewModel.getCheckout()
+        navigationController?.popToViewController(self, animated: true)
     }
 }

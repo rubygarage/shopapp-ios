@@ -99,6 +99,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     func getCheckout() {
+        state.onNext(.loading(showHud: true))
         let checkoutId = checkout.value?.id ?? ""
         checkoutUseCase.getCheckout(with: checkoutId) { [weak self] (result, error) in
             if let error = error {
