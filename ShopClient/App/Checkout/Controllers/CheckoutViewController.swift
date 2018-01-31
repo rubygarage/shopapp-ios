@@ -176,7 +176,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             if isLogged {
                 performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
             } else {
-                performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
+                performSegue(withIdentifier: SegueIdentifiers.toCheckoutAddressForm, sender: self)
             }
         }
     }
@@ -191,9 +191,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             let isAddressTypeShipping = destinationAddressType == .shipping
             addressListViewController.selectedAddress = isAddressTypeShipping ? shippingAddress() : billingAddress()
             addressListViewController.completion = isAddressTypeShipping ? shippingAddressListCompletion() : billingAddressListCompletion()
-        } else if let addressFormViewController = segue.destination as? AddressFormViewController {
-            addressFormViewController.address = destinationAddressType == .shipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
-            addressFormViewController.completion = destinationAddressType == .shipping ? shippingAddressFormCompletion() : billingAddressFormCompletion()
         } else if let paymentTypeViewController = segue.destination as? PaymentTypeViewController, let checkout = viewModel.checkout.value {
             paymentTypeViewController.checkout = checkout
             paymentTypeViewController.delegate = self
@@ -206,7 +203,14 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         } else if let creditCardFormController = segue.destination as? CreditCardViewController {
             creditCardFormController.card = viewModel.creditCard.value
             creditCardFormController.completion = creditCardCompletion()
+        } else if let checkoutAddressFormController = segue.destination as? CheckoutAddressFormViewController {
+            checkoutAddressFormController.address = destinationAddressType == .shipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
         }
+        
+//        else if let addressFormViewController = segue.destination as? AddressFormViewController {
+//            addressFormViewController.address = destinationAddressType == .shipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
+//            addressFormViewController.completion = destinationAddressType == .shipping ? shippingAddressFormCompletion() : billingAddressFormCompletion()
+//        }
     }
 }
 
