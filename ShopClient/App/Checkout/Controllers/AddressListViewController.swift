@@ -13,13 +13,10 @@ enum AddressListType {
     case billing
 }
 
-class AddressListViewController: BaseViewController<AddressListViewModel>, AddressListDataSourceProtocol, AddressListTableViewCellProtocol {
+class AddressListViewController: BaseViewController<AddressListViewModel> {
     @IBOutlet private weak var tableView: UITableView!
     
-    private var tableDataSource: AddressListDataSource!
-    // swiftlint:disable weak_delegate
-    private var tableDelegate: AddressListDelegate!
-    // swiftlint:enable weak_delegate
+    private var tableProvider: AddressListProvider!
     
     fileprivate var destinationAddress: Address?
     fileprivate var destinationAddressAction: AddressAction = .add
@@ -28,6 +25,8 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     var selectedAddress: Address?
     var completion: AddressListCompletion?
     var addressListType: AddressListType = .shipping
+    
+    // MARK: - View conttroller lifecycle
     
     override func viewDidLoad() {
         viewModel = AddressListViewModel()
@@ -39,21 +38,21 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
         loadData()
     }
     
+    // MARK: - Setup
+    
     private func setupViews() {
         title = addressListType == .shipping ? "ControllerTitle.ShippingAddress".localizable : "ControllerTitle.BillingAddress".localizable
     }
     
     private func setupTableView() {
-        let addressCellNib = UINib(nibName: String(describing: AddressListTableViewCell.self), bundle: nil)
-        tableView.register(addressCellNib, forCellReuseIdentifier: String(describing: AddressListTableViewCell.self))
+        let cellName = String(describing: AddressListTableViewCell.self)
+        let cellNib = UINib(nibName: cellName, bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: cellName)
         
-        tableDataSource = AddressListDataSource()
-        tableDataSource.delegate = self
-        tableView.dataSource = tableDataSource
-        
-        tableDelegate = AddressListDelegate()
-        tableDelegate.delegate = self
-        tableView.delegate = tableDelegate
+        tableProvider = AddressListProvider()
+        tableProvider.delegate = self
+        tableView.dataSource = tableProvider
+        tableView.delegate = tableProvider
     }
     
     private func setupViewModel() {
@@ -61,10 +60,11 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
         viewModel.completion = completion
         
         viewModel.customerAddresses.asObservable()
-            .subscribe(onNext: { [weak self] _ in
+            .subscribe(onNext: { [weak self] addresses in
                 guard let strongSelf = self else {
                     return
                 }
+                strongSelf.tableProvider.addresses = addresses.map({ strongSelf.viewModel.addressTuple(with: $0) })
                 strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
@@ -85,38 +85,6 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
         viewModel.loadCustomerAddresses()
     }
     
-    // MARK: - AddressListDataSourceProtocol
-    
-    func itemsCount() -> Int {
-        return viewModel.customerAddresses.value.count
-    }
-    
-    func item(at index: Int) -> AddressTuple {
-        return viewModel.item(at: index)
-    }
-    
-    // MARK: - AddressListTableViewCellProtocol
-    
-    func didTapSelect(with address: Address) {
-        viewModel.updateCheckoutShippingAddress(with: address)
-    }
-    
-    func didTapEdit(with address: Address) {
-        destinationAddress = address
-        destinationAddressAction = .edit
-        needToUpdate = selectedAddress?.isEqual(to: address) ?? false
-        performSegue(withIdentifier: SegueIdentifiers.toCustomerAddressForm, sender: self)
-    }
-    
-    func didTapDelete(with address: Address) {
-        let isSelected = viewModel.selectedAddress?.isEqual(to: address) ?? false
-        viewModel.deleteCustomerAddress(with: address, isSelected: isSelected)
-    }
-    
-    func didTapDefault(with address: Address) {
-        viewModel.updateCustomerDefaultAddress(with: address)
-    }
-    
     // MARK: - Segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -135,6 +103,30 @@ extension AddressListViewController: AddressListHeaderViewProtocol {
         destinationAddress = nil
         destinationAddressAction = .add
         performSegue(withIdentifier: SegueIdentifiers.toCustomerAddressForm, sender: self)
+    }
+}
+
+// MARK: - AddressListTableViewCellProtocol
+
+extension AddressListViewController: AddressListTableViewCellProtocol {
+    func didTapSelect(with address: Address) {
+        viewModel.updateCheckoutShippingAddress(with: address)
+    }
+    
+    func didTapEdit(with address: Address) {
+        destinationAddress = address
+        destinationAddressAction = .edit
+        needToUpdate = selectedAddress?.isEqual(to: address) ?? false
+        performSegue(withIdentifier: SegueIdentifiers.toCustomerAddressForm, sender: self)
+    }
+    
+    func didTapDelete(with address: Address) {
+        let isSelected = viewModel.selectedAddress?.isEqual(to: address) ?? false
+        viewModel.deleteCustomerAddress(with: address, isSelected: isSelected)
+    }
+    
+    func didTapDefault(with address: Address) {
+        viewModel.updateCustomerDefaultAddress(with: address)
     }
 }
 

@@ -23,6 +23,8 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     var address: Address?
     var completion: AddressFormCompletion?
     
+    // MARK: - Viewcontroller lifecycle
+    
     override func viewDidLoad() {
         viewModel = AddressFormViewModel()
         super.viewDidLoad()
@@ -31,6 +33,8 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
         setupViewModel()
         populateViewsIfNeeded()
     }
+    
+    // MARK: - Setup
     
     private func setupViews() {        
         countryTextFieldView.placeholder = "Placeholder.Country".localizable.required.uppercased()

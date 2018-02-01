@@ -28,21 +28,17 @@ class AddressListViewModel: BaseViewModel {
                 return
             }
             if let addresses = customer?.addresses {
-                strongSelf.customerAddresses.value = addresses
                 strongSelf.customerDefaultAddress.value = customer?.defaultAddress
+                strongSelf.customerAddresses.value = addresses
             }
             strongSelf.state.onNext(.content)
         }
     }
     
-    func item(at index: Int) -> AddressTuple {
-        if index < customerAddresses.value.count {
-            let address = customerAddresses.value[index]
-            let selected = selectedAddress?.isEqual(to: address) ?? false
-            let isDefault = customerDefaultAddress.value?.isEqual(to: address) ?? false
-            return (address, selected, isDefault)
-        }
-        return (Address(), false, false)
+    func addressTuple(with address: Address) -> AddressTuple {
+        let selected = selectedAddress?.isEqual(to: address) ?? false
+        let isDefault = customerDefaultAddress.value?.isEqual(to: address) ?? false
+        return (address, selected, isDefault)
     }
     
     func updateCheckoutShippingAddress(with address: Address) {
@@ -74,8 +70,8 @@ class AddressListViewModel: BaseViewModel {
                 return
             }
             if let addresses = customer?.addresses, let defaultAddress = customer?.defaultAddress {
-                strongSelf.customerAddresses.value = addresses
                 strongSelf.customerDefaultAddress.value = defaultAddress
+                strongSelf.customerAddresses.value = addresses
                 strongSelf.state.onNext(.content)
             } else {
                 strongSelf.state.onNext(.error(error: error))
