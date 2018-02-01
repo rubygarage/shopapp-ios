@@ -8,19 +8,19 @@
 
 import UIKit
 
-protocol SearchCollectionProviderDelegate: class {
-    func provider(_ provider: SearchCollectionProvider, didSelect category: Category)
+protocol CategoryListCollectionProviderDelegate: class {
+    func provider(_ provider: CategoryListCollectionProvider, didSelect category: Category)
 }
 
-class SearchCollectionProvider: NSObject {
+class CategoryListCollectionProvider: NSObject {
     var categories: [Category] = []
     
-    weak var delegate: SearchCollectionProviderDelegate?
+    weak var delegate: CategoryListCollectionProviderDelegate?
 }
 
 // MARK: - UICollectionViewDataSource
 
-extension SearchCollectionProvider: UICollectionViewDataSource {
+extension CategoryListCollectionProvider: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
     }
@@ -36,7 +36,7 @@ extension SearchCollectionProvider: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegate
 
-extension SearchCollectionProvider: UICollectionViewDelegate {
+extension CategoryListCollectionProvider: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let delegate = delegate else {
             return
@@ -48,7 +48,7 @@ extension SearchCollectionProvider: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension SearchCollectionProvider: UICollectionViewDelegateFlowLayout {
+extension CategoryListCollectionProvider: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CategoryCollectionViewCell.cellSize
     }

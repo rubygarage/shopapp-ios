@@ -11,13 +11,11 @@ import UIKit
 private let kAnimationDuration: TimeInterval = 0.3
 
 class SearchViewController: GridCollectionViewController<SearchViewModel> {
-    @IBOutlet private weak var categoriesCollectionView: UICollectionView!
+    @IBOutlet private weak var categoryListContainerView: UIView!
     
     private let titleView = SearchTitleView()
     
-    private var categoriesProvider: SearchCollectionProvider!
-    
-    fileprivate var selectedCategory: Category?
+    //fileprivate var selectedCategory: Category?
     
     // MARK: - View controller lifecycle
     
@@ -27,7 +25,6 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
         
         setupViews()
         setupViewModel()
-        loadCategories()
         collectionView.keyboardDismissMode = .onDrag
     }
     
@@ -48,23 +45,27 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        /*
         if let categoryViewController = segue.destination as? CategoryViewController {
             categoryViewController.title = selectedCategory!.title
             categoryViewController.categoryId = selectedCategory!.id
-        } else if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
+        } else if
+    */
+        if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
             productDetailsViewController.productId = selectedProduct!.id
         }
     }
     
     // MARK: - Setup
     
-    fileprivate func updateCollectionViewsIfNeeded(categoriesViewHidden: Bool) {
-        guard categoriesCollectionView.isHidden != categoriesViewHidden else {
+    fileprivate func updateCategoryListIfNeeded(isHidden: Bool) {
+        let alpha: CGFloat = isHidden ? 0 : 1
+        guard categoryListContainerView.alpha != alpha else {
             return
         }
-        UIView.transition(with: view, duration: kAnimationDuration, options: .transitionCrossDissolve, animations: {
-            self.categoriesCollectionView.isHidden = categoriesViewHidden
-        })
+        UIView.animate(withDuration: kAnimationDuration) {
+            self.categoryListContainerView.alpha = alpha
+        }
     }
     
     private func updateNavigationBar() {
@@ -74,17 +75,6 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
     
     private func setupViews() {
         titleView.delegate = self
-        
-        let cellName = String(describing: CategoryCollectionViewCell.self)
-        let nib = UINib(nibName: cellName, bundle: nil)
-        categoriesCollectionView.register(nib, forCellWithReuseIdentifier: cellName)
-        
-        categoriesProvider = SearchCollectionProvider()
-        categoriesProvider.delegate = self
-        categoriesCollectionView.dataSource = categoriesProvider
-        categoriesCollectionView.delegate = categoriesProvider
-        
-        categoriesCollectionView.contentInset = CategoryCollectionViewCell.collectionViewInsets
     }
     
     private func setupViewModel() {
@@ -102,20 +92,6 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
                 strongSelf.collectionView.reloadData()
             })
             .disposed(by: disposeBag)
-        
-        viewModel.categories.asObservable()
-            .subscribe(onNext: { [weak self] categories in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.categoriesProvider.categories = categories
-                strongSelf.categoriesCollectionView.reloadData()
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func loadCategories() {
-        viewModel.loadCategories()
     }
     
     private func loadData() {
@@ -140,6 +116,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
     }
 }
 
+/*
 // MARK: - SearchCollectionProviderDelegate
 
 extension SearchViewController: SearchCollectionProviderDelegate {
@@ -148,12 +125,13 @@ extension SearchViewController: SearchCollectionProviderDelegate {
         performSegue(withIdentifier: SegueIdentifiers.toCategory, sender: self)
     }
 }
+*/
 
 // MARK: - SearchTitleViewDelegate
 
 extension SearchViewController: SearchTitleViewDelegate {
     func viewDidBeginEditing(_ view: SearchTitleView) {
-        updateCollectionViewsIfNeeded(categoriesViewHidden: true)
+        updateCategoryListIfNeeded(isHidden: true)
     }
     
     func viewDidChangeSearchPhrase(_ view: SearchTitleView) {
@@ -166,7 +144,7 @@ extension SearchViewController: SearchTitleViewDelegate {
     
     func viewDidTapBack(_ view: SearchTitleView) {
         viewModel.clearResult()
-        updateCollectionViewsIfNeeded(categoriesViewHidden: false)
+        updateCategoryListIfNeeded(isHidden: false)
     }
     
     func viewDidTapCart(_ view: SearchTitleView) {
