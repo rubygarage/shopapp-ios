@@ -188,13 +188,13 @@
         <!--Article Details View Controller-->
         <scene sceneID="JPx-lR-wHh">
             <objects>
-                <viewController storyboardIdentifier="ArticleDetailsControllerIdentifier" id="Zke-0H-d8m" customClass="ArticleDetailsViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ArticleDetailsControllerIdentifier" hidesBottomBarWhenPushed="YES" id="Zke-0H-d8m" customClass="ArticleDetailsViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IRB-M1-rwQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wqZ-PD-xbw">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1WT-Ge-0EH">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
@@ -570,7 +570,7 @@
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="addToProductTapped:" destination="2iw-CM-RMu" eventType="touchUpInside" id="1Z4-uq-xat"/>
+                                            <action selector="addToCartButtonDidPress:" destination="2iw-CM-RMu" eventType="touchUpInside" id="HKe-jW-A5B"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -693,7 +693,7 @@
                                 <color key="pageIndicatorTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <action selector="pageControlValueChanged:" destination="PT4-ez-VtB" eventType="valueChanged" id="sas-JY-xfB"/>
+                                    <action selector="pageControlValueDidChange:" destination="PT4-ez-VtB" eventType="valueChanged" id="JLu-A2-1Jd"/>
                                 </connections>
                             </pageControl>
                         </subviews>
@@ -720,7 +720,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DjV-SZ-6f7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="sAI-g8-4RK">
                     <connections>
-                        <action selector="imageTapped:" destination="PT4-ez-VtB" id="oVX-Ne-5rY"/>
+                        <action selector="imageDidTap:" destination="PT4-ez-VtB" id="UJ8-KZ-6eY"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -784,7 +784,7 @@
         <image name="search_selected" width="27" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ucu-Sf-yUc"/>
+        <segue reference="Uoy-sz-tWO"/>
         <segue reference="DJ8-dD-zkt"/>
         <segue reference="Dq7-PS-rRI"/>
     </inferredMetricsTieBreakers>

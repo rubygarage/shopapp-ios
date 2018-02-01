@@ -31,7 +31,8 @@ class CartHeaderView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        Bundle.main.loadNibNamed(String(describing: CartHeaderView.self), owner: self)
+        let viewName = String(describing: CartHeaderView.self)
+        Bundle.main.loadNibNamed(viewName, owner: self)
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

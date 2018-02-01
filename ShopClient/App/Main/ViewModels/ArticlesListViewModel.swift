@@ -9,15 +9,9 @@
 import RxSwift
 
 class ArticlesListViewModel: BasePaginationViewModel {
-    var items = Variable<[Article]>([Article]())
-    
     private let articleListUseCase = ArticleListUseCase()
-
-    // MARK: - BaseViewModel
-
-    override func tryAgain() {
-        reloadData()
-    }
+    
+    var items = Variable<[Article]>([])
     
     func reloadData() {
         paginationValue = nil
@@ -33,14 +27,16 @@ class ArticlesListViewModel: BasePaginationViewModel {
         let showHud = items.value.isEmpty
         state.onNext(.loading(showHud: showHud))
         articleListUseCase.getArticleList(with: paginationValue) { [weak self] (articles, error) in
+            guard let strongSelf = self else {
+                return
+            }
             if let error = error {
-                self?.state.onNext(.error(error: error))
+                strongSelf.state.onNext(.error(error: error))
+            } else if let articles = articles {
+                strongSelf.updateArticles(with: articles)
+                strongSelf.state.onNext(.content)
             }
-            if let articles = articles {
-                self?.updateArticles(with: articles)
-                self?.state.onNext(.content)
-            }
-            self?.canLoadMore = articles?.count ?? 0 == kItemsPerPage
+            strongSelf.canLoadMore = articles?.count ?? 0 == kItemsPerPage
         }
     }
     
@@ -49,5 +45,11 @@ class ArticlesListViewModel: BasePaginationViewModel {
             items.value.removeAll()
         }
         items.value += articles
+    }
+    
+    // MARK: - BaseViewModel
+    
+    override func tryAgain() {
+        reloadData()
     }
 }

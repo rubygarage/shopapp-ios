@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol OrderHeaderViewDelegate: class {
+protocol OrderHeaderDelegate: class {
     func headerView(_ headerView: OrderHeaderView, didTapWith section: Int)
 }
 
@@ -19,7 +19,7 @@ class OrderHeaderView: UIView {
     
     private var section: Int!
     
-    weak var delegate: OrderHeaderViewDelegate?
+    weak var delegate: OrderHeaderDelegate?
     
     // MARK: - View lifecycle
 
@@ -40,7 +40,8 @@ class OrderHeaderView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        Bundle.main.loadNibNamed(String(describing: OrderHeaderView.self), owner: self)
+        let viewName = String(describing: OrderHeaderView.self)
+        Bundle.main.loadNibNamed(viewName, owner: self)
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

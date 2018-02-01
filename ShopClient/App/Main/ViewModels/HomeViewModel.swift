@@ -12,9 +12,55 @@ class HomeViewModel: BasePaginationViewModel {
     private let disposeBag = DisposeBag()
     private let articleListUseCase = ArticleListUseCase()
     private let productListUseCase = ProductListUseCase()
-
-    var data = Variable<(latestProducts: [Product], popularProducts: [Product], articles: [Article])>(latestProducts: [Product](), popularProducts: [Product](), articles: [Article]())
-
+    
+    private var productsSingle: Single<[Product]?> {
+        return Single.create(subscribe: { [weak self] single in
+            guard let strongSelf = self else {
+                return Disposables.create()
+            }
+            strongSelf.productListUseCase.getLastArrivalProductList { (products, error) in
+                if let error = error {
+                    single(.error(error))
+                } else if let products = products {
+                    single(.success(products))
+                }
+            }
+            return Disposables.create()
+        })
+    }
+    private var popularSingle: Single<[Product]?> {
+        return Single.create(subscribe: { [weak self] single in
+            guard let strongSelf = self else {
+                return Disposables.create()
+            }
+            strongSelf.productListUseCase.getPopularProductList { (products, error) in
+                if let error = error {
+                    single(.error(error))
+                } else if let products = products {
+                    single(.success(products))
+                }
+            }
+            return Disposables.create()
+        })
+    }
+    private var articlesSingle: Single<[Article]?> {
+        return Single.create(subscribe: { [weak self] single in
+            guard let strongSelf = self else {
+                return Disposables.create()
+            }
+            strongSelf.articleListUseCase.getReverseArticleList { (articles, error) in
+                if let error = error {
+                    single(.error(error))
+                } else if let articles = articles {
+                    single(.success(articles))
+                }
+            }
+            return Disposables.create()
+        })
+    }
+    
+    var data = Variable<(latestProducts: [Product], popularProducts: [Product], articles: [Article])>(latestProducts: [], popularProducts: [], articles: [])
+    
     override init() {
         super.init()
         
@@ -26,59 +72,23 @@ class HomeViewModel: BasePaginationViewModel {
         state.onNext(.loading(showHud: showHud))
         Single.zip(productsSingle, popularSingle, articlesSingle)
             .subscribe(onSuccess: { [weak self] (latestProducts, popularProducts, articles) in
-                if let latestProducts = latestProducts, let popularProducts = popularProducts, let articles = articles {
-                    self?.data.value = (latestProducts, popularProducts, articles)
+                guard let strongSelf = self else {
+                    return
                 }
-                self?.state.onNext(.content)
-            }, onError: { [weak self] (error) in
-                let castedError = error as? RepoError
-                self?.state.onNext(.error(error: castedError))
+                if let latestProducts = latestProducts, let popularProducts = popularProducts, let articles = articles {
+                    strongSelf.data.value = (latestProducts, popularProducts, articles)
+                }
+                strongSelf.state.onNext(.content)
+                }, onError: { [weak self] (error) in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    let castedError = error as? RepoError
+                    strongSelf.state.onNext(.error(error: castedError))
             })
             .disposed(by: disposeBag)
     }
     
-    private var productsSingle: Single<[Product]?> {
-        return Single.create(subscribe: { [weak self] (single) in
-            self?.productListUseCase.getLastArrivalProductList { (products, error) in
-                if let error = error {
-                    single(.error(error))
-                }
-                if let products = products {
-                    single(.success(products))
-                }
-            }
-            return Disposables.create()
-        })
-    }
-    
-    private var popularSingle: Single<[Product]?> {
-        return Single.create(subscribe: { [weak self] (single) in
-            self?.productListUseCase.getPopularProductList { (products, error) in
-                if let error = error {
-                    single(.error(error))
-                }
-                if let products = products {
-                    single(.success(products))
-                }
-            }
-            return Disposables.create()
-        })
-    }
-    
-    private var articlesSingle: Single<[Article]?> {
-        return Single.create(subscribe: { [weak self] (single) in
-            self?.articleListUseCase.getReverseArticleList { (articles, error) in
-                if let error = error {
-                    single(.error(error))
-                }
-                if let articles = articles {
-                    single(.success(articles))
-                }
-            }
-            return Disposables.create()
-        })
-    }
-
     // MARK: - BaseViewModel
 
     override func tryAgain() {

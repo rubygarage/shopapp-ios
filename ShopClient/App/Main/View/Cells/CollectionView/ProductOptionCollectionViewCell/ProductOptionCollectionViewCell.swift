@@ -13,6 +13,8 @@ private let kProductUnselectedOptionColor = UIColor(red: 0.92, green: 0.92, blue
 class ProductOptionCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var optionTitleLabel: UILabel!
     
+    // MARK: - Setup
+    
     func configure(with text: String, selected: Bool) {
         optionTitleLabel.text = text
         optionTitleLabel.textColor = selected ? UIColor.white : UIColor.black

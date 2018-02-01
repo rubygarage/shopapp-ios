@@ -31,7 +31,7 @@ class BaseTableViewController<T: BasePaginationViewModel>: BasePaginationViewCon
     
     private func setupPullToRefresh() {
         refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(self.pullToRefreshHandler), for: .valueChanged)
+        refreshControl?.addTarget(self, action: #selector(pullToRefreshHandler), for: .valueChanged)
         tableView.refreshControl = refreshControl
     }
     
