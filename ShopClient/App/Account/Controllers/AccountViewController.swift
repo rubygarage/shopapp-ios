@@ -47,22 +47,6 @@ class AccountViewController: BaseViewController<AccountViewModel> {
     
     // MARK: - Setup
     
-    fileprivate func updateNavigationBar() {
-        navigationItem.title = "ControllerTitle.Account".localizable
-        
-        if viewModel.customer.value != nil && navigationItem.rightBarButtonItem == nil {
-            let settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .plain, target: self, action: #selector(settingsButtonDidPress))
-            navigationItem.rightBarButtonItem = settingsButton
-        } else if viewModel.customer.value == nil {
-            navigationItem.rightBarButtonItem = nil
-        }
-    }
-    
-    fileprivate func loadData() {
-        viewModel.loadCustomer()
-        viewModel.loadPolicies()
-    }
-    
     private func setupTableView() {
         let cellName = String(describing: AccountTableViewCell.self)
         let cellNib = UINib(nibName: cellName, bundle: nil)
@@ -95,6 +79,22 @@ class AccountViewController: BaseViewController<AccountViewModel> {
                 strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
+    }
+    
+    fileprivate func updateNavigationBar() {
+        navigationItem.title = "ControllerTitle.Account".localizable
+        
+        if viewModel.customer.value != nil && navigationItem.rightBarButtonItem == nil {
+            let settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .plain, target: self, action: #selector(self.settingsButtonDidPress))
+            navigationItem.rightBarButtonItem = settingsButton
+        } else if viewModel.customer.value == nil {
+            navigationItem.rightBarButtonItem = nil
+        }
+    }
+    
+    fileprivate func loadData() {
+        viewModel.loadCustomer()
+        viewModel.loadPolicies()
     }
     
     // MARK: - Actions
@@ -139,7 +139,7 @@ extension AccountViewController: AccountLoggedHeaderDelegate {
 
 // MARK: - AccountFooterViewDelegate
 
-extension AccountViewController: AccountFooterDelegate {
+extension AccountViewController: AccountFooterViewDelegate {
     func footerViewDidTapLogout(_ footerView: AccountFooterView) {
         viewModel.logout()
         updateNavigationBar()

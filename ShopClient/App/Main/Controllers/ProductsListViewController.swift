@@ -12,8 +12,6 @@ class ProductsListViewController: GridCollectionViewController<ProductsListViewM
     var sortingValue: SortingValue!
     var keyPhrase: String?
     
-    // MARK: - View controller lifecycle
-    
     override func viewDidLoad() {
         viewModel = ProductsListViewModel()
         super.viewDidLoad()
@@ -28,8 +26,7 @@ class ProductsListViewController: GridCollectionViewController<ProductsListViewM
         updateNavigationBar()
     }
     
-    // MARK: - Setup
-    
+    // MARK: - private
     private func updateNavigationBar() {
         addCartBarButton()
     }
@@ -39,13 +36,9 @@ class ProductsListViewController: GridCollectionViewController<ProductsListViewM
         viewModel.keyPhrase = keyPhrase
         
         viewModel.products.asObservable()
-            .subscribe(onNext: { [weak self] products in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.stopLoadAnimating()
-                strongSelf.collectionProvider.products = products
-                strongSelf.collectionView.reloadData()
+            .subscribe(onNext: { [weak self] _ in
+                self?.stopLoadAnimating()
+                self?.collectionView.reloadData()
             })
             .disposed(by: disposeBag)
     }
@@ -54,8 +47,7 @@ class ProductsListViewController: GridCollectionViewController<ProductsListViewM
         viewModel.reloadData()
     }
     
-    // MARK: - BasePaginationViewController
-    
+    // MARK: - ovarriding
     override func pullToRefreshHandler() {
         viewModel.reloadData()
     }

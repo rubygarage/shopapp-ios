@@ -17,7 +17,7 @@ enum SettingsSection: Int {
 class SettingsTableProvider: NSObject {
     var promo: (description: String, state: Bool)?
     
-    weak var delegate: SwitchTableCellDelegate?
+    weak var delegate: SwitchTableViewCellDelegate?
 }
 
 // MARK: - UITableViewDataSource
@@ -49,8 +49,7 @@ extension SettingsTableProvider: UITableViewDataSource {
     }
     
     private func switchCell(with tableView: UITableView, indexPath: IndexPath) -> SwitchTableViewCell {
-        let cellName = String(describing: SwitchTableViewCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! SwitchTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SwitchTableViewCell.self), for: indexPath) as! SwitchTableViewCell
         cell.delegate = delegate
         if let promo = promo {
             cell.configure(with: indexPath, description: promo.description, state: promo.state)

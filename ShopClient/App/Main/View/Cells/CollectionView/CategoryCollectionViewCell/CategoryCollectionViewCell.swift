@@ -17,8 +17,6 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var categoryTitleLabel: UILabel!
     @IBOutlet private weak var categoryImageView: UIImageView!
     
-    // MARK: - Setup
-    
     func configure(with category: Category) {
         categoryTitleLabel.text = category.title
         categoryImageView.set(image: category.image, initialContentMode: .top)

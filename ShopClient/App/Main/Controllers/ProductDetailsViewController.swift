@@ -7,24 +7,24 @@
 //
 
 import UIKit
-
-import RxCocoa
 import RxSwift
+import RxCocoa
 import TPKeyboardAvoiding
+
+typealias SelectedOption = (name: String, value: String)
 
 private let kQuantityUnderlineColorDefault = UIColor(red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
 private let kBottomViewColorEnabled = UIColor(red: 0, green: 0.48, blue: 1, alpha: 1)
 private let kBottomViewColorDisabled = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
 private let kAddToCartChangesAnimationDuration: TimeInterval = 0.33
+
 private let kProductDescriptionHeaderHeight = CGFloat(60.0)
 private let kProductRelatedItemsHeight = CGFloat(291.0)
 private let kProductDescriptionHiddenHeight = CGFloat(0.0)
 private let kProductDescriptionAdditionalHeight = CGFloat(40.0)
 
-typealias SelectedOption = (name: String, value: String)
-
-class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> {
-    @IBOutlet private weak var contentView: TPKeyboardAvoidingScrollView!
+class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerProtocol, ProductOptionsControllerProtocol, SeeAllHeaderViewProtocol, LastArrivalsCellDelegate {
+    @IBOutlet private var contentView: TPKeyboardAvoidingScrollView!
     @IBOutlet private weak var detailImagesContainer: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var descriptionStateImageView: UIImageView!
@@ -34,27 +34,24 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
     @IBOutlet private weak var quantityTextField: UITextField!
     @IBOutlet private weak var quantityUnderlineView: UIView!
     @IBOutlet private weak var addToCartButton: UIButton!
-    @IBOutlet private weak var bottomView: UIView!
-    @IBOutlet private weak var relatedItemsHeaderView: SeeAllTableHeaderView!
-    @IBOutlet private weak var relatedItemsView: LastArrivalsTableViewCell!
-    
+    @IBOutlet private weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var descriptionContainerViewHeightConstraint: NSLayoutConstraint! {
         didSet {
             descriptionContainerViewHeightConstraint.constant = kProductDescriptionHiddenHeight
         }
     }
-    
-    @IBOutlet fileprivate weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
-    
-    private var detailImagesController: ImagesCarouselViewController!
-    private var productOptionsViewController: ProductOptionsViewController!
-    private var productAddedToCart = false
+    @IBOutlet private weak var bottomView: UIView!
+    @IBOutlet private weak var relatedItemsHeaderView: SeeAllTableHeaderView!
+    @IBOutlet private weak var relatedItemsView: LastArrivalsTableViewCell!
     
     var productId: String!
     var productVariant: ProductVariant!
-
-    // MARK: - View controller lifecycle
     
+    private var detailImagesController: ImagesCarouselViewController?
+    private var productOptionsViewController: ProductOptionsViewController?
+    private var productAddedToCart = false
+
+    // MARK: - life cycle
     override func viewDidLoad() {
         viewModel = ProductDetailsViewModel()
         super.viewDidLoad()
@@ -71,37 +68,14 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
         resetAddToCartButtonIfNeeded()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let imagesCarouselController = segue.destination as? ImagesCarouselViewController {
-            imagesCarouselController.delegate = self
-            detailImagesController = imagesCarouselController
-        } else if let productOptionsViewController = segue.destination as? ProductOptionsViewController {
-            productOptionsViewController.delegate = self
-            self.productOptionsViewController = productOptionsViewController
-        } else if let productsListViewController = segue.destination as? ProductsListViewController {
-            productsListViewController.title = "Label.RelatedItems".localizable
-            productsListViewController.sortingValue = .type
-            productsListViewController.keyPhrase = viewModel.product.value?.type
-        }
-    }
-    
-    // MARK: - Setup
-    
-    fileprivate func resetAddToCartButtonIfNeeded() {
-        guard productAddedToCart else {
-            return
-        }
-        productAddedToCart = false
-        addToCartButton.setTitle("Button.AddToCart".localizable.uppercased(), for: .normal)
-    }
-    
+    // MARK: - setup
     private func setupViews() {
         quantityTitleLabel.text = "Label.Quantity".localizable
         addToCartButton.setTitle("Button.AddToCart".localizable.uppercased(), for: .normal)
         addToCartButton.setTitle("Button.ProductTemporaryUnavailable".localizable.uppercased(), for: .disabled)
         relatedItemsHeaderView.delegate = self
         relatedItemsHeaderView.hideSeparator()
-        relatedItemsView.delegate = self
+        relatedItemsView.cellDelegate = self
     }
     
     private func setupViewModel() {
@@ -114,29 +88,20 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
         
         viewModel.product.asObservable()
             .subscribe(onNext: { [weak self] product in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.populateViews(product: product)
+                self?.populateViews(product: product)
             })
             .disposed(by: disposeBag)
         
         viewModel.relatedItems.asObservable()
             .skip(1)
             .subscribe(onNext: { [weak self] products in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.populateRelatedItems(with: products)
+                self?.populateRelatedItems(with: products)
             })
             .disposed(by: disposeBag)
         
         viewModel.selectedVariant
-            .subscribe(onNext: { [weak self] result in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.updateOptionsViews(result: result)
+            .subscribe(onNext: { [weak self] (result) in
+                self?.updateOptionsViews(result: result)
             })
             .disposed(by: disposeBag)
     }
@@ -146,21 +111,33 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
     }
     
     private func populateViews(product: Product?) {
-        guard let product = product else {
-            return
+        if let product = product {
+            populateImages(with: product)
+            populateTitle(with: product)
+            populateDescription(with: product)
         }
-        populateImages(with: product)
-        populateTitle(with: product)
-        populateDescription(with: product)
+    }
+    
+    private func updateOptionsViews(result: SelectedVariant) {
+        populatePrice(variant: result.variant)
+        populateAddToCartButton(variant: result.variant)
+        populateOptionsView(allOptions: result.allOptions, selectedOptions: result.selectedOptions)
     }
     
     private func populateImages(with product: Product) {
-        guard let images = product.images, !images.isEmpty else {
+        if let images = product.images, !images.isEmpty {
+            detailImagesController?.images = images
+            detailImagesContainer.isHidden = false
+        } else {
             detailImagesContainer.isHidden = true
-            return
         }
-        detailImagesController.images = images
-        detailImagesContainer.isHidden = false
+    }
+    
+    private func populateRelatedItems(with products: [Product]) {
+        if products.count < kItemsPerPage {
+            relatedItemsHeaderView.hideSeeAllButton()
+        }
+        relatedItemsView.configure(with: products)
     }
     
     private func populateTitle(with product: Product) {
@@ -171,73 +148,68 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
         descriptionLabel.text = product.productDescription
     }
     
-    private func populateRelatedItems(with products: [Product]) {
-        if products.count < kItemsPerPage {
-            relatedItemsHeaderView.hideSeeAllButton()
-        }
-        relatedItemsView.configure(with: products)
-    }
-    
-    private func updateOptionsViews(result: SelectedVariant) {
-        populatePrice(variant: result.variant)
-        populateAddToCartButton(variant: result.variant)
-        populateOptionsView(allOptions: result.allOptions, selectedOptions: result.selectedOptions)
-    }
-
     private func populatePrice(variant: ProductVariant?) {
         priceLabel.isHidden = variant == nil
+        
         guard let variant = variant else {
             return
         }
+        
         let formatter = NumberFormatter.formatter(with: viewModel.currency!)
         let price = NSDecimalNumber(string: variant.price!)
         priceLabel.text = formatter.string(from: price)
     }
     
     private func populateAddToCartButton(variant: ProductVariant?) {
-        guard !productAddedToCart else {
-            return
+        if !productAddedToCart {
+            let variantAvailable = variant != nil
+            addToCartButton.isEnabled = variantAvailable
+            UIView.animate(withDuration: kAddToCartChangesAnimationDuration, animations: {
+                self.bottomView.backgroundColor = variantAvailable ? kBottomViewColorEnabled : kBottomViewColorDisabled
+            })
         }
-        let variantAvailable = variant != nil
-        addToCartButton.isEnabled = variantAvailable
-        UIView.animate(withDuration: kAddToCartChangesAnimationDuration, animations: {
-            self.bottomView.backgroundColor = variantAvailable ? kBottomViewColorEnabled : kBottomViewColorDisabled
-        })
     }
     
     private func populateOptionsView(allOptions: [ProductOption], selectedOptions: [SelectedOption]) {
-        productOptionsViewController.options = allOptions
-        productOptionsViewController.selectedOptions = selectedOptions
+        productOptionsViewController?.options = allOptions
+        productOptionsViewController?.selectedOptions = selectedOptions
     }
-
+    
     private func updateNavigationBar() {
         addCartBarButton()
-    }
-    
-    private func openCartController() {
-        showCartController()
-    }
-    
-    private func addProductToCart() {
-        viewModel.addToCart
-            .subscribe(onNext: { [weak self] success in
-                guard let strongSelf = self, success else {
-                    return
-                }
-                strongSelf.updateNavigationBar()
-                strongSelf.updateAddToCartButton()
-            })
-            .disposed(by: disposeBag)
     }
     
     private func updateAddToCartButton() {
         productAddedToCart = true
         addToCartButton.setTitle("Button.AddedToCart".localizable.uppercased(), for: .normal)
     }
-
-    // MARK: - Actions
     
-    @IBAction func addToCartButtonDidPress(_ sender: UIButton) {
+    private func resetAddToCartButtonIfNeeded() {
+        guard productAddedToCart else {
+            return
+        }
+        
+        productAddedToCart = false
+        addToCartButton.setTitle("Button.AddToCart".localizable.uppercased(), for: .normal)
+    }
+    
+    private func addProductToCart() {
+        viewModel.addToCart
+            .subscribe(onNext: { [weak self] success in
+                if success {
+                    self?.updateNavigationBar()
+                    self?.updateAddToCartButton()
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func openCartController() {
+        showCartController()
+    }
+    
+    // MARK: - actions    
+    @IBAction func addToProductTapped(_ sender: UIButton) {
         if productAddedToCart {
             openCartController()
         } else {
@@ -273,48 +245,52 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
             self.view.layoutIfNeeded()
         })
     }
-}
-
-// MARK: - ImagesCarouselViewControllerDelegate
-
-extension ProductDetailsViewController: ImagesCarouselViewControllerDelegate {
-    func viewController(_ viewController: ImagesCarouselViewController, didTapImageAt index: Int) {
+    
+    // MARK: - DetailImagesViewControllerProtocol
+    func didTapImage(at index: Int) {
         if let product = viewModel.product.value {
             pushImageViewer(with: product, initialIndex: index)
         }
     }
-}
-
-// MARK: - ProductOptionsControllerDelegate
-
-extension ProductDetailsViewController: ProductOptionsControllerDelegate {
-    func viewController(_ viewController: ProductOptionsViewController, didCalculate height: CGFloat) {
-        optionsContainerViewHeightConstraint.constant = height
+    
+    // MARK: - ProductOptionsControllerProtocol
+    func didCalculate(collectionViewHeight: CGFloat) {
+        optionsContainerViewHeightConstraint.constant = collectionViewHeight
     }
     
-    func viewController(_ viewController: ProductOptionsViewController, didSelect option: (name: String, value: String)) {
-        viewModel.selectOption(with: option.name, value: option.value)
+    func didSelectOption(with name: String, value: String) {
+        viewModel.selectOption(with: name, value: value)
         resetAddToCartButtonIfNeeded()
     }
-}
-
-// MARK: - SeeAllHeaderViewProtocol
-
-extension ProductDetailsViewController: SeeAllHeaderViewProtocol {
+    
+    // MARK: - SeeAllHeaderViewProtocol
+    
     func didTapSeeAll(type: SeeAllViewType) {
         performSegue(withIdentifier: SegueIdentifiers.toProductsList, sender: self)
     }
-}
-
-// MARK: - LastArrivalsTableViewCellDelegate
-
-extension ProductDetailsViewController: LastArrivalsTableCellDelegate {
-    func tableViewCell(_ tableViewCell: LastArrivalsTableViewCell, didSelect product: Product) {
-        guard let navigationController = navigationController else {
-            return
+    
+    // MARK: - LastArrivalsCellDelegate
+    
+    func didSelectLastArrivalsProduct(at index: Int) {
+        if index < viewModel.relatedItems.value.count {
+            let selectedProduct = viewModel.relatedItems.value[index]
+            let productDetailsViewController = UIStoryboard.main().instantiateViewController(withIdentifier: ControllerIdentifier.productDetails) as! ProductDetailsViewController
+            productDetailsViewController.productId = selectedProduct.id
+            navigationController?.pushViewController(productDetailsViewController, animated: true)
         }
-        let productDetailsViewController = UIStoryboard.main().instantiateViewController(withIdentifier: ControllerIdentifier.productDetails) as! ProductDetailsViewController
-        productDetailsViewController.productId = product.id
-        navigationController.pushViewController(productDetailsViewController, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let imagesCarouselController = segue.destination as? ImagesCarouselViewController {
+            imagesCarouselController.controllerDelegate = self
+            detailImagesController = imagesCarouselController
+        } else if let productOptionsViewController = segue.destination as? ProductOptionsViewController {
+            productOptionsViewController.controllerDelegate = self
+            self.productOptionsViewController = productOptionsViewController
+        } else if let productsListViewController = segue.destination as? ProductsListViewController {
+            productsListViewController.title = "Label.RelatedItems".localizable
+            productsListViewController.sortingValue = .type
+            productsListViewController.keyPhrase = viewModel.product.value?.type
+        }
     }
 }

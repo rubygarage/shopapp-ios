@@ -11,9 +11,7 @@ import UIKit
 class DetailsImagesCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var productImageView: UIImageView!
 
-    // MARK: - Setup
-    
-    func configure(with image: Image) {
+    public func configure(with image: Image) {
         productImageView.set(image: image)
     }
 }

@@ -13,8 +13,6 @@ class LastArrivalsCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
     
-    // MARK: - Setup
-    
     func configure(with item: Product) {
         productImageView.set(image: item.images?.first)
         titleLabel.text = item.title

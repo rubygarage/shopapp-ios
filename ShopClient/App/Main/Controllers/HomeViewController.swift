@@ -7,19 +7,18 @@
 //
 
 import UIKit
-
-import RxCocoa
 import RxSwift
+import RxCocoa
 
-class HomeViewController: BaseTableViewController<HomeViewModel> {
-    private var tableProvider: HomeTableProvider!
-    
-    fileprivate var destinationTitle: String!
-    fileprivate var sortingValue: SortingValue!
-    fileprivate var selectedProduct: Product?
-    fileprivate var selectedArticle: Article?
-    
-    // MARK: - View controller lifecycle
+class HomeViewController: BaseTableViewController<HomeViewModel>, HomeTableDataSourceProtocol, HomeTableDelegateProtocol, LastArrivalsCellDelegate, PopularCellDelegate, SeeAllHeaderViewProtocol {
+    private var dataSource: HomeTableDataSource!
+    // swiftlint:disable weak_delegate
+    private var delegate: HomeTableDelegate!
+    // swiftlint:enable weak_delegate
+    private var destinationTitle: String!
+    private var sortingValue: SortingValue!
+    private var selectedProduct: Product?
+    private var selectedArticle: Article?
     
     override func viewDidLoad() {
         viewModel = HomeViewModel()
@@ -48,11 +47,8 @@ class HomeViewController: BaseTableViewController<HomeViewModel> {
         }
     }
     
-    // MARK: - Setup
-    
-    fileprivate func openProductDetails(with product: Product) {
-        selectedProduct = product
-        performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
+    override func pullToRefreshHandler() {
+        loadData()
     }
     
     private func updateNavigationBar() {
@@ -61,37 +57,31 @@ class HomeViewController: BaseTableViewController<HomeViewModel> {
     }
     
     private func setupTableView() {
-        let lastArrivalsCellName = String(describing: LastArrivalsTableViewCell.self)
-        let lastArrivalsNib = UINib(nibName: lastArrivalsCellName, bundle: nil)
-        tableView.register(lastArrivalsNib, forCellReuseIdentifier: lastArrivalsCellName)
+        let lastArrivalsNib = UINib(nibName: String(describing: LastArrivalsTableViewCell.self), bundle: nil)
+        tableView.register(lastArrivalsNib, forCellReuseIdentifier: String(describing: LastArrivalsTableViewCell.self))
         
-        let popularCellName = String(describing: PopularTableViewCell.self)
-        let popularNib = UINib(nibName: popularCellName, bundle: nil)
-        tableView.register(popularNib, forCellReuseIdentifier: popularCellName)
+        let popularNib = UINib(nibName: String(describing: PopularTableViewCell.self), bundle: nil)
+        tableView.register(popularNib, forCellReuseIdentifier: String(describing: PopularTableViewCell.self))
         
-        let newInBlogCellName = String(describing: ArticleTableViewCell.self)
-        let newInBlogNib = UINib(nibName: newInBlogCellName, bundle: nil)
-        tableView.register(newInBlogNib, forCellReuseIdentifier: newInBlogCellName)
+        let newInBlogNib = UINib(nibName: String(describing: ArticleTableViewCell.self), bundle: nil)
+        tableView.register(newInBlogNib, forCellReuseIdentifier: String(describing: ArticleTableViewCell.self))
                 
-        tableProvider = HomeTableProvider()
-        tableProvider.delegate = self
-        tableView.dataSource = tableProvider
-        tableView.delegate = tableProvider
+        dataSource = HomeTableDataSource()
+        dataSource.delegate = self
+        tableView.dataSource = dataSource
+        
+        delegate = HomeTableDelegate()
+        delegate.delegate = self
+        tableView.delegate = delegate
         
         tableView.contentInset = TableView.defaultContentInsets
     }
     
     private func setupViewModel() {
         viewModel.data.asObservable()
-            .subscribe(onNext: { [weak self] (latestProduct, popularProducts, articles) in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.stopLoadAnimating()
-                strongSelf.tableProvider.lastArrivalsProducts = latestProduct
-                strongSelf.tableProvider.popularProducts = popularProducts
-                strongSelf.tableProvider.articles = articles
-                strongSelf.tableView.reloadData()
+            .subscribe(onNext: { [weak self] _ in
+                self?.stopLoadAnimating()
+                self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
@@ -100,41 +90,61 @@ class HomeViewController: BaseTableViewController<HomeViewModel> {
         viewModel.loadData()
     }
     
-    // MARK: - BasePaginationViewController
+    // MARK: - HomeTableDataSourceProtocol
     
-    override func pullToRefreshHandler() {
-        loadData()
+    func lastArrivalsObjects() -> [Product] {
+        return viewModel.data.value.latestProducts
     }
-}
-
-// MARK: - HomeTableProviderDelegate
-
-extension HomeViewController: HomeTableProviderDelegate {
-    func provider(_ provider: HomeTableProvider, didSelect article: Article) {
-        selectedArticle = article
-        performSegue(withIdentifier: SegueIdentifiers.toArticleDetails, sender: self)
+    
+    func popularObjects() -> [Product] {
+        return viewModel.data.value.popularProducts
     }
-}
-
-// MARK: - LastArrivalsTableViewCellDelegate
-
-extension HomeViewController: LastArrivalsTableCellDelegate {
-    func tableViewCell(_ tableViewCell: LastArrivalsTableViewCell, didSelect product: Product) {
-        openProductDetails(with: product)
+    
+    func articlesCount() -> Int {
+        return viewModel.data.value.articles.count
     }
-}
-
-// MARK: - PopularTableViewCellDelegate
-
-extension HomeViewController: PopularTableCellDelegate {
-    func tableViewCell(_ tableViewCell: PopularTableViewCell, didSelect product: Product) {
-        openProductDetails(with: product)
+    
+    func article(at index: Int) -> Article? {
+        if index < viewModel.data.value.articles.count {
+            return viewModel.data.value.articles[index]
+        }
+        return nil
     }
-}
-
-// MARK: - SeeAllHeaderViewProtocol
-
-extension HomeViewController: SeeAllHeaderViewProtocol {
+    
+    // MARK: - HomeTableDelegateProtocol
+    
+    func lastArrivalsObjectsCount() -> Int {
+        return viewModel.data.value.latestProducts.count
+    }
+    
+    func didSelectArticle(at index: Int) {
+        if index < viewModel.data.value.articles.count {
+            selectedArticle = viewModel.data.value.articles[index]
+            performSegue(withIdentifier: SegueIdentifiers.toArticleDetails, sender: self)
+        }
+    }
+    
+    // MARK: - LastArrivalsCellDelegate
+    
+    func didSelectLastArrivalsProduct(at index: Int) {
+        openProductDetails(with: viewModel.data.value.latestProducts, index: index)
+    }
+    
+    // MARK: - PopularCellDelegate
+    
+    func didSelectPopularProduct(at index: Int) {
+        openProductDetails(with: viewModel.data.value.popularProducts, index: index)
+    }
+    
+    private func openProductDetails(with products: [Product], index: Int) {
+        if index < products.count {
+            selectedProduct = products[index]
+            performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
+        }
+    }
+    
+    // MARK: - SeeAllHeaderViewProtocol
+    
     func didTapSeeAll(type: SeeAllViewType) {
         switch type {
         case .latestArrivals:

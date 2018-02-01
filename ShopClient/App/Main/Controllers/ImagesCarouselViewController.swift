@@ -8,28 +8,27 @@
 
 import UIKit
 
-protocol ImagesCarouselViewControllerDelegate: class {
-    func viewController(_ viewController: ImagesCarouselViewController, didTapImageAt index: Int)
+protocol ImagesCarouselViewControllerProtocol: class {
+    func didTapImage(at index: Int)
 }
 
-class ImagesCarouselViewController: UIViewController {
+class ImagesCarouselViewController: UIViewController, ImagesCarouselCollectionDataSourceProtocol, ImagesCarouselCollectionDelegateProtocol {
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var pageControl: UIPageControl!
     
-    @IBOutlet fileprivate weak var pageControl: UIPageControl!
+    private var dataSource: ImagesCarouselCollectionDataSource!
+    // swiftlint:disable weak_delegate
+    private var delegate: ImagesCarouselCollectionDelegate!
+    // swiftlint:enable weak_delegate
     
-    private var collectionProvider: ImagesCarouselCollectionProvider!
-    
-    var showingIndex: Int = 0
+    weak var controllerDelegate: ImagesCarouselViewControllerProtocol?
     
     var images = [Image]() {
         didSet {
             updateViews()
         }
     }
-    
-    weak var delegate: ImagesCarouselViewControllerDelegate?
-    
-    // MARK: - View controller lifecycle
+    var showingIndex: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,24 +36,17 @@ class ImagesCarouselViewController: UIViewController {
         setupCollectionView()
     }
     
-    // MARK: - Setup
-    
     private func setupCollectionView() {
-        let cellName = String(describing: DetailsImagesCollectionViewCell.self)
-        let nib = UINib(nibName: cellName, bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: cellName)
+        let nib = UINib(nibName: String(describing: DetailsImagesCollectionViewCell.self), bundle: nil)
+        collectionView.register(nib, forCellWithReuseIdentifier: String(describing: DetailsImagesCollectionViewCell.self))
         
-        collectionProvider = ImagesCarouselCollectionProvider()
-        collectionProvider.delegate = self
-        collectionView.dataSource = collectionProvider
-        collectionView.delegate = collectionProvider
-    }
-    
-    private func updateViews() {
-        setupPageControl()
-        collectionProvider.images = images
-        collectionProvider.sizeForCell = view.frame.size
-        collectionView.reloadData()
+        dataSource = ImagesCarouselCollectionDataSource()
+        dataSource.delegate = self
+        collectionView.dataSource = dataSource
+        
+        delegate = ImagesCarouselCollectionDelegate()
+        delegate.delegate = self
+        collectionView.delegate = delegate
     }
     
     private func setupPageControl() {
@@ -66,22 +58,41 @@ class ImagesCarouselViewController: UIViewController {
         collectionView.scrollToItem(at: indexPath, at: .left, animated: animated)
     }
     
-    // MARK: - Actions
-    
-    @IBAction func imageDidTap(_ sender: UITapGestureRecognizer) {
-        delegate?.viewController(self, didTapImageAt: showingIndex)
+    private func updateViews() {
+        setupPageControl()
+        collectionView.reloadData()
     }
     
-    @IBAction func pageControlValueDidChange(_ sender: UIPageControl) {
+    // MARK: - Actions
+    
+    @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
+        controllerDelegate?.didTapImage(at: showingIndex)
+    }
+    
+    // MARK: - PageControl actions
+    
+    @IBAction func pageControlValueChanged(_ sender: UIPageControl) {
         showingIndex = sender.currentPage
         updateShowingImage(with: sender.currentPage)
     }
-}
-
-// MARK: - ImagesCarouselCollectionProviderDelegate
-
-extension ImagesCarouselViewController: ImagesCarouselCollectionProviderDelegate {
-    func provider(_ provider: ImagesCarouselCollectionProvider, didScrollToImageAt index: Int) {
+    
+    // MARK: - DetailsImagesCollectionDataSourceProtocol
+    
+    func numberOfItems() -> Int {
+        return images.count
+    }
+    
+    func item(for index: Int) -> Image {
+        return images[index]
+    }
+    
+    // MARK: - DetailsImagesCollectionDelegateProtocol
+    
+    func sizeForCell() -> CGSize {
+        return self.view.frame.size
+    }
+    
+    func didScroll(to index: Int) {
         pageControl.currentPage = index
         showingIndex = index
     }

@@ -28,8 +28,7 @@ class LoadingView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        let viewName = String(describing: LoadingView.self)
-        Bundle.main.loadNibNamed(viewName, owner: self)
+        Bundle.main.loadNibNamed(String(describing: LoadingView.self), owner: self)
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

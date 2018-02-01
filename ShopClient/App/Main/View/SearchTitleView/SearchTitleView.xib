@@ -13,7 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchTitleView" customModule="ShopClient" customModuleProvider="target">
             <connections>
                 <outlet property="backButton" destination="Xfu-WH-a1H" id="cMu-hE-Mqy"/>
-                <outlet property="cartButtonView" destination="Tio-2b-Alh" id="v4A-ms-vdc"/>
+                <outlet property="cartButtonView" destination="Tio-2b-Alh" id="jcB-tC-VF8"/>
                 <outlet property="clearButton" destination="C7k-ft-Fxc" id="Dbc-RI-6W7"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="0T5-CA-rtx"/>
                 <outlet property="textField" destination="JgY-Vb-rAM" id="KWL-7h-2Zv"/>
@@ -36,8 +36,8 @@
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
                             <connections>
+                                <action selector="searchTextFieldEditingChanged:" destination="-1" eventType="editingChanged" id="dJe-0x-1Vv"/>
                                 <action selector="searchTextFieldEditingDidBegin:" destination="-1" eventType="editingDidBegin" id="ICM-VO-GFO"/>
-                                <action selector="searchTextFieldEditingDidChange:" destination="-1" eventType="editingChanged" id="Ql6-Qo-NAo"/>
                                 <action selector="searchTextFieldEditingDidEnd:" destination="-1" eventType="editingDidEnd" id="WjK-Ht-DbL"/>
                             </connections>
                         </textField>
@@ -59,7 +59,7 @@
                     </constraints>
                     <state key="normal" image="arrow_left"/>
                     <connections>
-                        <action selector="backButtonDidPress:" destination="-1" eventType="touchUpInside" id="Sju-0K-gHE"/>
+                        <action selector="backButtonTapped:" destination="-1" eventType="touchUpInside" id="8gw-M4-zj2"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7k-ft-Fxc">
@@ -73,7 +73,6 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
-                        <action selector="clearButtonDidPress:" destination="-1" eventType="touchUpInside" id="7Ag-rJ-OPY"/>
                         <action selector="clearButtonTapped:" destination="-1" eventType="touchUpInside" id="NRs-X5-LKt"/>
                     </connections>
                 </button>

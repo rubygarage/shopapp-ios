@@ -36,8 +36,7 @@ class CartEmptyDataView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        let viewName = String(describing: CartEmptyDataView.self)
-        Bundle.main.loadNibNamed(viewName, owner: self)
+        Bundle.main.loadNibNamed(String(describing: CartEmptyDataView.self), owner: self)
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

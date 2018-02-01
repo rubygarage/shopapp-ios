@@ -15,15 +15,15 @@ class ProductDetailsViewModel: BaseViewModel {
     private let productUseCase = ProductUseCase()
     private let productListUseCase = ProductListUseCase()
     
-    private var productOptions: [ProductOption] = []
-    private var selectedOptions: [SelectedOption] = []
+    private var productOptions = [ProductOption]()
+    private var selectedOptions = [SelectedOption]()
     private var selectedProductVariant: ProductVariant?
     
-    var productId: String!
     var product = Variable<Product?>(nil)
-    var relatedItems = Variable<[Product]>([])
+    var relatedItems = Variable<[Product]>([Product]())
     var selectedVariant = PublishSubject<SelectedVariant>()
     var quantity = Variable<Int>(1)
+    var productId: String!
     var currency: String?
     
     var productVariant: ProductVariant! {
@@ -36,38 +36,39 @@ class ProductDetailsViewModel: BaseViewModel {
     
     var addToCart: Observable<Bool> {
         return Observable.create({ [weak self] event in
-            guard let strongSelf = self else {
-                return Disposables.create()
-            }
-            let productQuantity = strongSelf.quantity.value
-            guard let cartProduct = CartProduct(with: strongSelf.product.value, productQuantity: productQuantity, variant: strongSelf.selectedProductVariant) else {
+            let productQuantity = self?.quantity.value ?? 1
+            if let cartProduct = CartProduct(with: self?.product.value, productQuantity: productQuantity, variant: self?.selectedProductVariant) {
+                self?.addCartProductUseCase.addCartProduct(cartProduct) { (cartProduct, error) in
+                    let success = cartProduct != nil && error == nil
+                    event.onNext(success)
+                }
+            } else {
                 event.onNext(false)
-                return Disposables.create()
-            }
-            strongSelf.addCartProductUseCase.addCartProduct(cartProduct) { (cartProduct, error) in
-                let success = cartProduct != nil && error == nil
-                event.onNext(success)
             }
             return Disposables.create()
         })
     }
 
+    // MARK: - BaseViewModel
+
+    override func tryAgain() {
+        loadData()
+    }
+
     func loadData() {
         state.onNext(.loading(showHud: true))
         productUseCase.getProduct(with: productId) { [weak self] (product, error) in
-            guard let strongSelf = self else {
-                return
-            }
             if let error = error {
-                strongSelf.state.onNext(.error(error: error))
-            } else if let product = product {
-                strongSelf.setupData(product: product)
-                strongSelf.product.value = product
-                if let productVariant = strongSelf.productVariant, let selectedOptions = productVariant.selectedOptions {
-                    selectedOptions.forEach { strongSelf.selectOption(with: $0.name, value: $0.value) }
+                self?.state.onNext(.error(error: error))
+            }
+            if let productObject = product {
+                self?.setupData(product: productObject)
+                self?.product.value = productObject
+                if let productVariant = self?.productVariant, let selectedOptions = productVariant.selectedOptions {
+                    selectedOptions.forEach { self?.selectOption(with: $0.name, value: $0.value) }
                 }
-                strongSelf.state.onNext(.content)
-                strongSelf.loadRelatedItems()
+                self?.state.onNext(.content)
+                self?.loadRelatedItems()
             }
         }
     }
@@ -90,19 +91,17 @@ class ProductDetailsViewModel: BaseViewModel {
             selectedProductVariant = product.variants?.first
         }
         currency = product.currency
-        guard let variant = product.variants?.first, let allOptions = product.options, let currency = product.currency else {
-            return
+        if let variant = product.variants?.first, let allOptions = product.options, let currency = product.currency {
+            let result = SelectedVariant(variant: variant, allOptions: allOptions, selectedOptions: selectedOptions, currency: currency)
+            selectedVariant.onNext(result)
         }
-        let result = SelectedVariant(variant: variant, allOptions: allOptions, selectedOptions: selectedOptions, currency: currency)
-        selectedVariant.onNext(result)
     }
     
     private func setupSelectedOptions(product: Product) {
-        guard let options = product.options else {
-            return
-        }
-        for option in options {
-            selectedOptions.append((name: option.name ?? "", value: option.values?.first ?? ""))
+        if let options = product.options {
+            for option in options {
+                selectedOptions.append((name: option.name ?? "", value: option.values?.first ?? ""))
+            }
         }
     }
     
@@ -111,8 +110,8 @@ class ProductDetailsViewModel: BaseViewModel {
         let selectedOptionsNValues = selectedOptions.map({ $0.value })
         
         for variant in variants {
-            let variantNames = variant.selectedOptions?.map({ $0.name }) ?? []
-            let variantValues = variant.selectedOptions?.map({ $0.value }) ?? []
+            let variantNames = variant.selectedOptions?.map({ $0.name }) ?? [String]()
+            let variantValues = variant.selectedOptions?.map({ $0.value }) ?? [String]()
             
             if selectedOptionsNames == variantNames && selectedOptionsNValues == variantValues {
                 updateSelectedVariant(variant: variant)
@@ -124,31 +123,22 @@ class ProductDetailsViewModel: BaseViewModel {
     
     private func updateSelectedVariant(variant: ProductVariant?) {
         selectedProductVariant = variant
-        guard let allOptions = product.value?.options, let currency = product.value?.currency else {
-            return
+        if let allOptions = product.value?.options, let currency = product.value?.currency {
+            let result = SelectedVariant(variant: variant, allOptions: allOptions, selectedOptions: selectedOptions, currency: currency)
+            selectedVariant.onNext(result)
         }
-        let result = SelectedVariant(variant: variant, allOptions: allOptions, selectedOptions: selectedOptions, currency: currency)
-        selectedVariant.onNext(result)
     }
     
     private func loadRelatedItems() {
         state.onNext(.loading(showHud: false))
         productListUseCase.getProductList(with: nil, sortingValue: SortingValue.type, keyPhrase: product.value?.type, reverse: false) { [weak self] (products, error) in
-            guard let strongSelf = self else {
-                return
-            }
             if let error = error {
-                strongSelf.state.onNext(.error(error: error))
-            } else if let products = products {
-                strongSelf.relatedItems.value = products
-                strongSelf.state.onNext(.content)
+                self?.state.onNext(.error(error: error))
+            }
+            if let productsArray = products {
+                self?.relatedItems.value = productsArray
+                self?.state.onNext(.content)
             }
         }
-    }
-    
-    // MARK: - BaseViewModel
-    
-    override func tryAgain() {
-        loadData()
     }
 }

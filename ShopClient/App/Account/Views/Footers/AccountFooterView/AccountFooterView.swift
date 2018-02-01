@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AccountFooterDelegate: class {
+protocol AccountFooterViewDelegate: class {
     func footerViewDidTapLogout(_ footerView: AccountFooterView)
 }
 
@@ -18,7 +18,7 @@ class AccountFooterView: UIView {
     
     @IBOutlet fileprivate weak var logoutUnderlineView: UIView!
     
-    weak var delegate: AccountFooterDelegate?
+    weak var delegate: AccountFooterViewDelegate?
     
     // MARK: - View lifecycle
     
@@ -37,8 +37,7 @@ class AccountFooterView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        let viewName = String(describing: AccountFooterView.self)
-        Bundle.main.loadNibNamed(viewName, owner: self)
+        Bundle.main.loadNibNamed(String(describing: AccountFooterView.self), owner: self)
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

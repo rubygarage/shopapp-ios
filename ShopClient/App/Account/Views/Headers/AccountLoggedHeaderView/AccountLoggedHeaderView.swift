@@ -12,13 +12,13 @@ import AvatarImageView
 
 private let kAvatarTextSizeFactor: CGFloat = 0.4
 
-private struct CustomerImageConfig: AvatarImageViewConfiguration {
+struct CustomerImageConfig: AvatarImageViewConfiguration {
     let shape: Shape = .circle
     let bgColor: UIColor? = UIColor.black
     let textSizeFactor: CGFloat = kAvatarTextSizeFactor
 }
 
-private struct CustomerImageDataSource: AvatarImageViewDataSource {
+struct CustomerImageDataSource: AvatarImageViewDataSource {
     var name: String
     
     init(customerName: String) {
@@ -64,8 +64,7 @@ class AccountLoggedHeaderView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        let viewName = String(describing: AccountLoggedHeaderView.self)
-        Bundle.main.loadNibNamed(viewName, owner: self)
+        Bundle.main.loadNibNamed(String(describing: AccountLoggedHeaderView.self), owner: self)
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

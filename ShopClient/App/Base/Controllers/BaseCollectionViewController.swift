@@ -31,7 +31,7 @@ class BaseCollectionViewController<T: BasePaginationViewModel>: BasePaginationVi
     
     private func setupPullToRefresh() {
         refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(pullToRefreshHandler), for: .valueChanged)
+        refreshControl?.addTarget(self, action: #selector(self.pullToRefreshHandler), for: .valueChanged)
         collectionView.refreshControl = refreshControl
     }
     

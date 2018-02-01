@@ -65,7 +65,7 @@ class SettingsViewController: BaseViewController<SettingsViewModel> {
 
 // MARK: - SwitchTableViewCellDelegate
 
-extension SettingsViewController: SwitchTableCellDelegate {
+extension SettingsViewController: SwitchTableViewCellDelegate {
     func tableViewCell(_ tableViewCell: SwitchTableViewCell, didChangeSwitchStateAt indexPath: IndexPath, with value: Bool) {
         switch indexPath.section {
         case SettingsSection.promo.rawValue:

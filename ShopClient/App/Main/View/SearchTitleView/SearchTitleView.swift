@@ -10,6 +10,19 @@ import UIKit
 
 import RxSwift
 
+enum SearchState {
+    case `default`
+    case editing
+}
+
+protocol SearchTitleViewProtocol: class {
+    func didTapSearch()
+    func didTapCart()
+    func didTapBack()
+    func didStartEditing()
+    func didTapClear()
+}
+
 private let kAnimationDuration: TimeInterval = 0.3
 private let kPlaceholderColorDefault = UIColor.black.withAlphaComponent(0.5)
 private let kUnderlineMarginDefault: CGFloat = 55
@@ -17,19 +30,6 @@ private let kUnderlineMarginLeft: CGFloat = 40
 private let kUnderlineMarginRight: CGFloat = 10
 private let kBarItemWidth: CGFloat = 32
 private let kTextFieldDebounceDueTime = 0.3
-
-private enum SearchState {
-    case `default`
-    case editing
-}
-
-protocol SearchTitleViewDelegate: class {
-    func viewDidBeginEditing(_ view: SearchTitleView)
-    func viewDidChangeSearchPhrase(_ view: SearchTitleView)
-    func viewDidTapClear(_ view: SearchTitleView)
-    func viewDidTapBack(_ view: SearchTitleView)
-    func viewDidTapCart(_ view: SearchTitleView)
-}
 
 class SearchTitleView: TextFieldWrapper {
     @IBOutlet private weak var contentView: UIView!
@@ -42,19 +42,17 @@ class SearchTitleView: TextFieldWrapper {
 
     private let disposeBag = DisposeBag()
     
-    private var state: SearchState = .default {
+    weak var delegate: SearchTitleViewProtocol?
+    
+    var state: SearchState = .default {
         didSet {
             updateViews(animated: true)
         }
     }
     
-    weak var delegate: SearchTitleViewDelegate?
-    
     override var intrinsicContentSize: CGSize {
         return UILayoutFittingExpandedSize
     }
-    
-    // MARK: - View lifecycle
     
     init() {
         super.init(frame: CGRect.zero)
@@ -72,16 +70,13 @@ class SearchTitleView: TextFieldWrapper {
         updateClearButtonIfNeeded()
     }
     
-    // MARK: - Setup
-    
     func updateCartBarItem() {
         cartButtonView.subviews.forEach({ $0.removeFromSuperview() })
         cartButtonView.addSubview(cartBarItem())
     }
     
     private func commonInit() {
-        let viewName = String(describing: SearchTitleView.self)
-        Bundle.main.loadNibNamed(viewName, owner: self)
+        Bundle.main.loadNibNamed(String(describing: SearchTitleView.self), owner: self)
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -98,17 +93,16 @@ class SearchTitleView: TextFieldWrapper {
         textFieldResults.asObservable()
             .skip(1)
             .subscribe(onNext: { [weak self] _ in
-                guard let strongSelf = self, let delegate = strongSelf.delegate else {
+                guard let strongSelf = self else {
                     return
                 }
-                delegate.viewDidChangeSearchPhrase(strongSelf)
+                strongSelf.delegate?.didTapSearch()
             })
             .disposed(by: disposeBag)
     }
     
     private func updateViews(animated: Bool) {
         let animationDuration = animated ? kAnimationDuration : 0
-        
         UIView.transition(with: contentView, duration: animationDuration, options: .transitionCrossDissolve, animations: {
             self.textField.attributedPlaceholder = self.state == .default ? self.attributedPlaceholderDefault() : self.attributedPlaceholderSelected()
             self.textField.textAlignment = self.state == .editing ? .left : .center
@@ -151,34 +145,33 @@ class SearchTitleView: TextFieldWrapper {
         }
     }
     
-    // MARK: - Actions
-    
-    @IBAction func backButtonDidPress(_ sender: UIButton) {
-        state = .default
-        updateClearButtonIfNeeded()
-        endEditing(true)
-        textField.text = nil
-        delegate?.viewDidTapBack(self)
-    }
-    
+    // MARK: - actions
     @IBAction func searchTextFieldEditingDidBegin(_ sender: UITextField) {
         state = .editing
         updateClearButtonIfNeeded()
-        delegate?.viewDidBeginEditing(self)
-    }
-    
-    @IBAction func searchTextFieldEditingDidChange(_ sender: UITextField) {
-        updateClearButtonIfNeeded()
+        delegate?.didStartEditing()
     }
     
     @IBAction func searchTextFieldEditingDidEnd(_ sender: UITextField) {
         updateClearButtonIfNeeded()
     }
     
-    @IBAction func clearButtonDidPress(_ sender: UIButton) {
+    @IBAction func searchTextFieldEditingChanged(_ sender: UITextField) {
+        updateClearButtonIfNeeded()
+    }
+    
+    @IBAction func backButtonTapped(_ sender: UIButton) {
+        state = .default
+        updateClearButtonIfNeeded()
+        endEditing(true)
+        textField.text = nil
+        delegate?.didTapBack()
+    }
+    
+    @IBAction func clearButtonTapped(_ sender: UIButton) {
         textField.text = nil
         updateClearButtonIfNeeded()
-        delegate?.viewDidTapClear(self)
+        delegate?.didTapClear()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -188,19 +181,19 @@ class SearchTitleView: TextFieldWrapper {
     }
 }
 
-extension SearchTitleView {
+internal extension SearchTitleView {
     func cartBarItem() -> UIButton {
         let cartView = CartButtonView(frame: CGRect(x: 0, y: 0, width: kBarItemWidth, height: kBarItemWidth))
         cartView.isUserInteractionEnabled = false
         
         let button = UIButton(frame: cartView.frame)
         button.addSubview(cartView)
-        button.addTarget(self, action: #selector(cartButtonDidPress), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.cartButtonHandler), for: .touchUpInside)
         
         return button
     }
     
-    @objc private func cartButtonDidPress() {
-        delegate?.viewDidTapCart(self)
+    @objc private func cartButtonHandler() {
+        delegate?.didTapCart()
     }
 }

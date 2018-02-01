@@ -8,18 +8,21 @@
 
 import UIKit
 
-protocol PopularTableCellDelegate: class {
-    func tableViewCell(_ tableViewCell: PopularTableViewCell, didSelect product: Product)
+protocol PopularCellDelegate: class {
+    func didSelectPopularProduct(at index: Int)
 }
 
-class PopularTableViewCell: UITableViewCell {
+class PopularTableViewCell: UITableViewCell, PopularTableDataSourceProtocol, PopularTableDelegateProtocol {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
-    private var collectionProvider: PopularTableCellProvider!
-    private var products: [Product] = []
+    private var dataSource: PopularTableDataSource!
+    // swiftlint:disable weak_delegate
+    private var delegate: PopularTableDelegate!
+    // swiftlint:enable weak_delegate
+    private var products = [Product]()
     
-    weak var delegate: PopularTableCellDelegate?
+    weak var cellDelegate: PopularCellDelegate?
     
     // MARK: - View lifecycle
     
@@ -30,24 +33,25 @@ class PopularTableViewCell: UITableViewCell {
         setupCollectionView()
     }
     
-    // MARK: - Setup
-    
-    func configure(with products: [Product]) {
-        self.products = products
-        updateCollectionViewHeight()
-        collectionProvider.products = products
-        collectionView.reloadData()
+    func configure(with products: [Product]?) {
+        if let items = products {
+            self.products = items
+            updateCollectionViewHeight()
+            collectionView.reloadData()
+        }
     }
     
     private func setupCollectionView() {
-        let cellName = String(describing: GridCollectionViewCell.self)
-        let nib = UINib(nibName: cellName, bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: cellName)
+        let nib = UINib(nibName: String(describing: GridCollectionViewCell.self), bundle: nil)
+        collectionView.register(nib, forCellWithReuseIdentifier: String(describing: GridCollectionViewCell.self))
         
-        collectionProvider = PopularTableCellProvider()
-        collectionProvider.delegate = self
-        collectionView.dataSource = collectionProvider
-        collectionView.delegate = collectionProvider
+        dataSource = PopularTableDataSource()
+        dataSource.delegate = self
+        collectionView.dataSource = dataSource
+        
+        delegate = PopularTableDelegate()
+        delegate.delegate = self
+        collectionView.delegate = delegate
         
         collectionView.contentInset = GridCollectionViewCell.collectionViewInsets
     }
@@ -56,12 +60,20 @@ class PopularTableViewCell: UITableViewCell {
         let cellHeight = GridCollectionViewCell.cellSize.height
         self.collectionViewHeightConstraint.constant = self.products.count > 2 ? cellHeight * 2 : cellHeight
     }
-}
-
-// MARK: - PopularCollectionProviderDelegate
-
-extension PopularTableViewCell: PopularTableCellProviderDelegate {
-    func provider(_ provider: PopularTableCellProvider, didSelect product: Product) {
-        delegate?.tableViewCell(self, didSelect: product)
+    
+    // MARK: - PopularTableDataSourceProtocol
+    
+    func numberOfProducts() -> Int {
+        return products.count
+    }
+    
+    func item(for index: Int) -> Product {
+        return products[index]
+    }
+    
+    // MARK: - PopularTableDelegateProtocol
+    
+    func didSelectItem(at index: Int) {
+        cellDelegate?.didSelectPopularProduct(at: index)
     }
 }

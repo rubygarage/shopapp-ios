@@ -36,10 +36,6 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
     
     // MARK: - Setup
     
-    fileprivate func loadData() {
-        viewModel.reloadData()
-    }
-    
     private func setupViews() {
         title = "ControllerTitle.MyOrders".localizable
     }
@@ -68,6 +64,10 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
         tableView.delegate = tableProvider
         
         tableView.contentInset = TableView.defaultContentInsets
+    }
+    
+    fileprivate func loadData() {
+        viewModel.reloadData()
     }
     
     // MARK: - BasePaginationViewController

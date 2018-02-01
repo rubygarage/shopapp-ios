@@ -17,10 +17,8 @@ class GridCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var productImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
-    
-    // MARK: - Setup
 
-    func configure(with item: Product) {
+    public func configure(with item: Product) {
         productImageView.set(image: item.images?.first)
         titleLabel.text = item.title
         let formatter = NumberFormatter.formatter(with: item.currency!)

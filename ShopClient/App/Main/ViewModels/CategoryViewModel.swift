@@ -9,10 +9,16 @@
 import RxSwift
 
 class CategoryViewModel: GridCollectionViewModel {
-    private let categoryUseCase = CategoryUseCase()
-    
     var categoryId: String!
     var selectedSortingValue = SortingValue.createdAt
+    
+    private let categoryUseCase = CategoryUseCase()
+
+    // MARK: - BaseViewModel
+
+    override func tryAgain() {
+        reloadData()
+    }
     
     func reloadData() {
         paginationValue = nil
@@ -29,30 +35,21 @@ class CategoryViewModel: GridCollectionViewModel {
         state.onNext(.loading(showHud: showHud))
         let reverse = selectedSortingValue == .createdAt
         categoryUseCase.getCategory(with: categoryId, paginationValue: paginationValue, sortingValue: selectedSortingValue, reverse: reverse) { [weak self] (result, error) in
-            guard let strongSelf = self else {
-                return
-            }
             if let error = error {
-                strongSelf.state.onNext(.error(error: error))
-            } else if let category = result {
-                strongSelf.updateData(category: category)
-                strongSelf.state.onNext(.content)
+                self?.state.onNext(.error(error: error))
             }
-            strongSelf.canLoadMore = result?.products?.count ?? 0 == kItemsPerPage
+            if let category = result {
+                self?.updateData(category: category)
+                self?.state.onNext(.content)
+            }
+            self?.canLoadMore = result?.products?.count ?? 0 == kItemsPerPage
         }
     }
     
     private func updateData(category: Category) {
-        guard let items = category.products else {
-            return
+        if let items = category.products {
+            updateProducts(products: items)
+            canLoadMore = products.value.count == kItemsPerPage
         }
-        updateProducts(products: items)
-        canLoadMore = products.value.count == kItemsPerPage
-    }
-    
-    // MARK: - BaseViewModel
-    
-    override func tryAgain() {
-        reloadData()
     }
 }

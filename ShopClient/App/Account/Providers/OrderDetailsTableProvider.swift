@@ -8,7 +8,7 @@
 
 import UIKit
 
-private enum OrdersDetailsSection: Int {
+enum OrdersDetailsSection: Int {
     case header
     case paymentInformation
     case shippingAddress
@@ -72,17 +72,15 @@ extension OrdersDetailsTableProvider: UITableViewDataSource {
     }
     
     private func orderItemCell(with tableView: UITableView, indexPath: IndexPath) -> OrderItemTableViewCell {
-        let cellName = String(describing: OrderItemTableViewCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! OrderItemTableViewCell
-        if let order = order, let item = order.items?[indexPath.row], let currencyCode = order.currencyCode {
-            cell.configure(with: item, currencyCode: currencyCode)
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: OrderItemTableViewCell.self), for: indexPath) as! OrderItemTableViewCell
+        if let order = order, let item = order.items?[indexPath.row] {
+            cell.configure(with: item, currencyCode: order.currencyCode!)
         }
         return cell
     }
     
     private func shippingAddressCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingAddressEditTableCell {
-        let cellName = String(describing: CheckoutShippingAddressEditTableCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! CheckoutShippingAddressEditTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self), for: indexPath) as! CheckoutShippingAddressEditTableCell
         if let address = order?.shippingAddress {
             cell.configure(with: address)
             cell.setEditButtonVisible(false)
@@ -94,13 +92,6 @@ extension OrdersDetailsTableProvider: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension OrdersDetailsTableProvider: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let delegate = delegate, indexPath.section == OrdersDetailsSection.paymentInformation.rawValue, let order = order, let item = order.items?[indexPath.row], let productVariant = item.productVariant else {
-            return
-        }
-        delegate.provider(self, didSelect: productVariant)
-    }
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var view = UIView()
         
@@ -131,5 +122,12 @@ extension OrdersDetailsTableProvider: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return section == OrdersDetailsSection.paymentInformation.rawValue ? PaymentDetailsFooterView.height : 0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.section == OrdersDetailsSection.paymentInformation.rawValue, let order = order, let item = order.items?[indexPath.row], let productVariant = item.productVariant else {
+            return
+        }
+        delegate?.provider(self, didSelect: productVariant)
     }
 }

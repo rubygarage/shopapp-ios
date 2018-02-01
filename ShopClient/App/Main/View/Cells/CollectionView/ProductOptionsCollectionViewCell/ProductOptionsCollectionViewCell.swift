@@ -8,21 +8,21 @@
 
 import UIKit
 
-protocol ProductOptionsCollectionCellDelegate: class {
-    func collectionViewCell(_ collectionViewCell: ProductOptionsCollectionViewCell, didSelectItemWith values: [String], selectedValue: String)
+protocol ProductOptionsCellDelegate: class {
+    func didSelectItem(with values: [String], selectedValue: String)
 }
 
-class ProductOptionsCollectionViewCell: UICollectionViewCell {
+class ProductOptionsCollectionViewCell: UICollectionViewCell, ProductOptionCollectionDataSourceProtocol, ProductOptionCollectionDelegateProtocol {
     @IBOutlet private weak var collectionView: UICollectionView!
     
-    private var collectionProvider: ProductOptionCollectionCellProvider!
+    private var dataSource: ProductOptionCollectionDataSource!
+    // swiftlint:disable weak_delegate
+    private var delegate: ProductOptionCollectionDelegate!
+    // swiftlint:enable weak_delegate
+    private var values = [String]()
     private var selectedValue = ""
     
-    fileprivate var values: [String] = []
-    
-    weak var delegate: ProductOptionsCollectionCellDelegate?
-    
-    // MARK: - View lifecycle
+    weak var cellDelegate: ProductOptionsCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,33 +30,43 @@ class ProductOptionsCollectionViewCell: UICollectionViewCell {
         setupCollectionView()
     }
     
-    // MARK: - Setup
+    private func setupCollectionView() {
+        let nib = UINib(nibName: String(describing: ProductOptionCollectionViewCell.self), bundle: nil)
+        collectionView.register(nib, forCellWithReuseIdentifier: String(describing: ProductOptionCollectionViewCell.self))
+
+        dataSource = ProductOptionCollectionDataSource()
+        dataSource.delegate = self
+        collectionView.dataSource = dataSource
+        
+        delegate = ProductOptionCollectionDelegate()
+        delegate.delegate = self
+        collectionView.delegate = delegate
+    }
     
-    func configure(with values: [String], selectedValue: String, delegate: ProductOptionsCollectionCellDelegate?) {
+    func configure(with values: [String], selectedValue: String, cellDelegate: ProductOptionsCellDelegate?) {
         self.values = values
         self.selectedValue = selectedValue
-        self.delegate = delegate
-        collectionProvider.values = values
-        collectionProvider.selectedValue = selectedValue
+        self.cellDelegate = cellDelegate
         collectionView.reloadData()
     }
     
-    private func setupCollectionView() {
-        let cellName = String(describing: ProductOptionCollectionViewCell.self)
-        let nib = UINib(nibName: cellName, bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: cellName)
-
-        collectionProvider = ProductOptionCollectionCellProvider()
-        collectionProvider.delegate = self
-        collectionView.dataSource = collectionProvider
-        collectionView.delegate = collectionProvider
+    // MARK: - ProductOptionCollectioDataSourceProtocol
+    
+    func numberOfItems() -> Int {
+        return values.count
     }
-}
-
-// MARK: - ProductOptionCollectionCellProviderDelegate
-
-extension ProductOptionsCollectionViewCell: ProductOptionCollectionCellProviderDelegate {
-    func provider(_ provider: ProductOptionCollectionCellProvider, didSelect value: String) {
-        delegate?.collectionViewCell(self, didSelectItemWith: values, selectedValue: value)
+    
+    func item(for index: Int) -> String {
+        return values[index]
+    }
+    
+    func isItemSelected(at index: Int) -> Bool {
+        return values[index] == selectedValue
+    }
+    
+    // MARK: - ProductOptionCollectionDelegateProtocol
+    
+    func didSelectItem(at index: Int) {
+        cellDelegate?.didSelectItem(with: values, selectedValue: values[index])
     }
 }

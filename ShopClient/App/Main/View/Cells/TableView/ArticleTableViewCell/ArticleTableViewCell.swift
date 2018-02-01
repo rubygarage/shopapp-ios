@@ -15,21 +15,17 @@ class ArticleTableViewCell: UITableViewCell {
     @IBOutlet private weak var authorLabel: UILabel!
     @IBOutlet private weak var separatorView: UIView!
     
-    // MARK: - View lifecycle
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         selectionStyle = .none
     }
     
-    // MARK: - Setup
-    
-    func configure(with item: Article, separatorHidden: Bool) {
-        articleImageView.set(image: item.image)
-        titleLabel.text = item.title
-        descriptionLabel.text = item.content
-        authorLabel.text = item.author?.fullName
+    func configure(with item: Article?, separatorHidden: Bool) {
+        articleImageView.set(image: item?.image)
+        titleLabel.text = item?.title
+        descriptionLabel.text = item?.content
+        authorLabel.text = item?.author?.fullName
         separatorView.isHidden = separatorHidden
     }
 }

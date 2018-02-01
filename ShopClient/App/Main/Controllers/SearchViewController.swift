@@ -10,16 +10,15 @@ import UIKit
 
 private let kAnimationDuration: TimeInterval = 0.3
 
-class SearchViewController: GridCollectionViewController<SearchViewModel> {
+class SearchViewController: GridCollectionViewController<SearchViewModel>, SearchTitleViewProtocol, SearchCollectionDelegateProtocol, SearchCollectionDataSourceProtocol {
     @IBOutlet private weak var categoriesCollectionView: UICollectionView!
     
     private let titleView = SearchTitleView()
-    
-    private var categoriesProvider: SearchCollectionProvider!
-    
-    fileprivate var selectedCategory: Category?
-    
-    // MARK: - View controller lifecycle
+    private var categoriesDataSource: SearchCollectionDataSource!
+    // swiftlint:disable weak_delegate
+    private var categoriesDelegate: SearchCollectionDelegate!
+    // swiftlint:enable weak_delegate
+    private var selectedCategory: Category?
     
     override func viewDidLoad() {
         viewModel = SearchViewModel()
@@ -56,17 +55,6 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
         }
     }
     
-    // MARK: - Setup
-    
-    fileprivate func updateCollectionViewsIfNeeded(categoriesViewHidden: Bool) {
-        guard categoriesCollectionView.isHidden != categoriesViewHidden else {
-            return
-        }
-        UIView.transition(with: view, duration: kAnimationDuration, options: .transitionCrossDissolve, animations: {
-            self.categoriesCollectionView.isHidden = categoriesViewHidden
-        })
-    }
-    
     private func updateNavigationBar() {
         navigationItem.titleView = titleView
         titleView.updateCartBarItem()
@@ -75,14 +63,16 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
     private func setupViews() {
         titleView.delegate = self
         
-        let cellName = String(describing: CategoryCollectionViewCell.self)
-        let nib = UINib(nibName: cellName, bundle: nil)
-        categoriesCollectionView.register(nib, forCellWithReuseIdentifier: cellName)
+        let nib = UINib(nibName: String(describing: CategoryCollectionViewCell.self), bundle: nil)
+        categoriesCollectionView.register(nib, forCellWithReuseIdentifier: String(describing: CategoryCollectionViewCell.self))
         
-        categoriesProvider = SearchCollectionProvider()
-        categoriesProvider.delegate = self
-        categoriesCollectionView.dataSource = categoriesProvider
-        categoriesCollectionView.delegate = categoriesProvider
+        categoriesDataSource = SearchCollectionDataSource()
+        categoriesDataSource.delegate = self
+        categoriesCollectionView.dataSource = categoriesDataSource
+        
+        categoriesDelegate = SearchCollectionDelegate()
+        categoriesDelegate.delegate = self
+        categoriesCollectionView.delegate = categoriesDelegate
         
         categoriesCollectionView.contentInset = CategoryCollectionViewCell.collectionViewInsets
     }
@@ -93,23 +83,17 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
             .disposed(by: disposeBag)
         
         viewModel.products.asObservable()
-            .subscribe(onNext: { [weak self] products in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.stopLoadAnimating()
-                strongSelf.collectionProvider.products = products
-                strongSelf.collectionView.reloadData()
+            .subscribe(onNext: { [weak self] _ in
+                self?.stopLoadAnimating()
+                self?.collectionView.reloadData()
+                self?.updateCollectionViewsIfNeeded(categoriesViewHidden: true)
             })
             .disposed(by: disposeBag)
         
         viewModel.categories.asObservable()
-            .subscribe(onNext: { [weak self] categories in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.categoriesProvider.categories = categories
-                strongSelf.categoriesCollectionView.reloadData()
+            .subscribe(onNext: { [weak self] _ in
+                self?.categoriesCollectionView.reloadData()
+                self?.updateCollectionViewsIfNeeded(categoriesViewHidden: false)
             })
             .disposed(by: disposeBag)
     }
@@ -122,7 +106,16 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
         viewModel.reloadData()
     }
     
-    // MARK: - BasePaginationViewController
+    private func updateCollectionViewsIfNeeded(categoriesViewHidden: Bool) {
+        if categoriesCollectionView.isHidden != categoriesViewHidden {
+            UIView.transition(with: view, duration: kAnimationDuration, options: .transitionCrossDissolve, animations: {
+                self.categoriesCollectionView.isHidden = categoriesViewHidden
+                self.collectionView.isHidden = !categoriesViewHidden
+            })
+        }
+    }
+    
+    // MARK: - Overriding
     
     override func pullToRefreshHandler() {
         viewModel.reloadData()
@@ -132,44 +125,50 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
         viewModel.loadNextPage()
     }
     
-    // MARK: - GridCollectionProviderDelegate
-    
-    override func provider(_ provider: GridCollectionProvider, didSelect product: Product) {
+    override func didSelectItem(at index: Int) {
         titleView.endEditing(true)
-        super.provider(provider, didSelect: product)
-    }
-}
-
-// MARK: - SearchCollectionProviderDelegate
-
-extension SearchViewController: SearchCollectionProviderDelegate {
-    func provider(_ provider: SearchCollectionProvider, didSelect category: Category) {
-        selectedCategory = category
-        performSegue(withIdentifier: SegueIdentifiers.toCategory, sender: self)
-    }
-}
-
-// MARK: - SearchTitleViewDelegate
-
-extension SearchViewController: SearchTitleViewDelegate {
-    func viewDidBeginEditing(_ view: SearchTitleView) {
-        updateCollectionViewsIfNeeded(categoriesViewHidden: true)
+        super.didSelectItem(at: index)
     }
     
-    func viewDidChangeSearchPhrase(_ view: SearchTitleView) {
+    // MARK: - SearchTitleViewProtocol
+    
+    func didTapSearch() {
         viewModel.reloadData()
     }
     
-    func viewDidTapClear(_ view: SearchTitleView) {
-        viewModel.clearResult()
+    func didTapCart() {
+        showCartController()
     }
     
-    func viewDidTapBack(_ view: SearchTitleView) {
+    func didTapBack() {
         viewModel.clearResult()
         updateCollectionViewsIfNeeded(categoriesViewHidden: false)
     }
     
-    func viewDidTapCart(_ view: SearchTitleView) {
-        showCartController()
+    func didStartEditing() {
+        updateCollectionViewsIfNeeded(categoriesViewHidden: true)
+    }
+    
+    func didTapClear() {
+        viewModel.clearResult()
+    }
+    
+    // MARK: - SearchCollectionDataSourceProtocol
+    
+    func categoriesCount() -> Int {
+        return viewModel.categoriesCount()
+    }
+    
+    func category(at index: Int) -> Category {
+        return viewModel.category(at: index)
+    }
+    
+    // MARK: - SearchCollectionDelegateProtocol
+    
+    func didSelectCategory(at index: Int) {
+        if index < viewModel.categories.value.count {
+            selectedCategory = viewModel.categories.value[index]
+            performSegue(withIdentifier: SegueIdentifiers.toCategory, sender: self)
+        }
     }
 }
