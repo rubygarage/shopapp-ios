@@ -15,7 +15,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
     
     private let titleView = SearchTitleView()
     
-    //fileprivate var selectedCategory: Category?
+    fileprivate var selectedCategory: Category?
     
     // MARK: - View controller lifecycle
     
@@ -45,13 +45,12 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        /*
-        if let categoryViewController = segue.destination as? CategoryViewController {
+        if let categoryListViewController = segue.destination as? CategoryListViewController {
+            categoryListViewController.delegate = self
+        } else if let categoryViewController = segue.destination as? CategoryViewController {
             categoryViewController.title = selectedCategory!.title
             categoryViewController.categoryId = selectedCategory!.id
-        } else if
-    */
-        if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
+        } else if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
             productDetailsViewController.productId = selectedProduct!.id
         }
     }
@@ -116,16 +115,14 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
     }
 }
 
-/*
-// MARK: - SearchCollectionProviderDelegate
+// MARK: - CategoryListControllerDelegate
 
-extension SearchViewController: SearchCollectionProviderDelegate {
-    func provider(_ provider: SearchCollectionProvider, didSelect category: Category) {
+extension SearchViewController: CategoryListControllerDelegate {
+    func viewController(_ viewController: CategoryListViewController, didSelect category: Category) {
         selectedCategory = category
         performSegue(withIdentifier: SegueIdentifiers.toCategory, sender: self)
     }
 }
-*/
 
 // MARK: - SearchTitleViewDelegate
 

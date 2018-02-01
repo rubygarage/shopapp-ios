@@ -780,7 +780,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2o3-Uy-08c">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="v48-Jp-HFz">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="v48-Jp-HFz">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -796,6 +796,7 @@
                             <constraint firstAttribute="trailing" secondItem="2o3-Uy-08c" secondAttribute="trailing" id="Xtw-JP-nzz"/>
                             <constraint firstAttribute="bottom" secondItem="2o3-Uy-08c" secondAttribute="bottom" id="i0a-ym-fMf"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="nPf-jT-dIT"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="2o3-Uy-08c" id="XUR-wF-sll"/>

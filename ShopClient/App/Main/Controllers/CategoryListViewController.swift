@@ -8,10 +8,14 @@
 
 import UIKit
 
+protocol CategoryListControllerDelegate: class {
+    func viewController(_ viewController: CategoryListViewController, didSelect category: Category)
+}
+
 class CategoryListViewController: BaseCollectionViewController<CategoryListViewModel> {
     private var collectionProvider: CategoryListCollectionProvider!
     
-    fileprivate var selectedCategory: Category?
+    weak var delegate: CategoryListControllerDelegate?
     
     // MARK: - View controller lifecycle
     
@@ -32,7 +36,7 @@ class CategoryListViewController: BaseCollectionViewController<CategoryListViewM
          collectionView.register(nib, forCellWithReuseIdentifier: cellName)
          
          collectionProvider = CategoryListCollectionProvider()
-         //collectionProvider.delegate = self
+         collectionProvider.delegate = self
          collectionView.dataSource = collectionProvider
          collectionView.delegate = collectionProvider
          
@@ -67,13 +71,10 @@ class CategoryListViewController: BaseCollectionViewController<CategoryListViewM
     }
 }
 
-/*
- // MARK: - SearchCollectionProviderDelegate
- 
- extension SearchViewController: SearchCollectionProviderDelegate {
- func provider(_ provider: SearchCollectionProvider, didSelect category: Category) {
- selectedCategory = category
- performSegue(withIdentifier: SegueIdentifiers.toCategory, sender: self)
- }
- }
- */
+// MARK: - SearchCollectionProviderDelegate
+
+extension CategoryListViewController: CategoryListCollectionProviderDelegate {
+    func provider(_ provider: CategoryListCollectionProvider, didSelect category: Category) {
+        delegate?.viewController(self, didSelect: category)
+    }
+}
