@@ -30,7 +30,8 @@ extension CartTableProvider: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CartTableViewCell.self), for: indexPath) as! CartTableViewCell
+        let cellName = String(describing: CartTableViewCell.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! CartTableViewCell
         let cartProduct = cartProducts[indexPath.row]
         cell.configure(with: cartProduct)
         cell.cellDelegate = delegate
@@ -43,14 +44,14 @@ extension CartTableProvider: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension CartTableProvider: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return CartHeaderView(productsCounts: cartProducts.count, totalPrice: totalPrice, currency: currency)
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let productVariant = cartProducts[indexPath.row].productVariant else {
+        guard let delegate = delegate, let productVariant = cartProducts[indexPath.row].productVariant else {
             return
         }
-        delegate?.provider(self, didSelect: productVariant)
+        delegate.provider(self, didSelect: productVariant)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return CartHeaderView(productsCounts: cartProducts.count, totalPrice: totalPrice, currency: currency)
     }
 }

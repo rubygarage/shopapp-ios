@@ -10,7 +10,7 @@ import RxSwift
 
 private let kSwitchControlDebounceDueTime = 0.3
 
-protocol SwitchTableViewCellDelegate: class {
+protocol SwitchTableCellDelegate: class {
     func tableViewCell(_ tableViewCell: SwitchTableViewCell, didChangeSwitchStateAt indexPath: IndexPath, with value: Bool)
 }
 
@@ -22,7 +22,7 @@ class SwitchTableViewCell: UITableViewCell {
     
     private var indexPath: IndexPath!
     
-    weak var delegate: SwitchTableViewCellDelegate?
+    weak var delegate: SwitchTableCellDelegate?
     
     // MARK: - View lifecycle
     
@@ -50,10 +50,10 @@ class SwitchTableViewCell: UITableViewCell {
         switchResults.asObservable()
             .skip(1)
             .subscribe(onNext: { [weak self] value in
-                guard let strongSelf = self else {
+                guard let strongSelf = self, let delegate = strongSelf.delegate else {
                     return
                 }
-                strongSelf.delegate?.tableViewCell(strongSelf, didChangeSwitchStateAt: strongSelf.indexPath, with: value)
+                delegate.tableViewCell(strongSelf, didChangeSwitchStateAt: strongSelf.indexPath, with: value)
             })
             .disposed(by: disposeBag)
     }
