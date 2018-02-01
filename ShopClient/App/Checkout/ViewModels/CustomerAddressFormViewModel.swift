@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CustomerAddressFormDelegate: class {
-    func viewModelDidAddShippingAddress(_ model: CustomerAddressFormViewModel)
+    func viewModelDidUpdateAddress(_ model: CustomerAddressFormViewModel)
 }
 
 class CustomerAddressFormViewModel: BaseViewModel {
@@ -26,7 +26,23 @@ class CustomerAddressFormViewModel: BaseViewModel {
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
             } else {
-                strongSelf.delegate?.viewModelDidAddShippingAddress(strongSelf)
+                strongSelf.state.onNext(.content)
+                strongSelf.delegate?.viewModelDidUpdateAddress(strongSelf)
+            }
+        }
+    }
+    
+    func updateCustomerAddress(with address: Address, isSelected: Bool) {
+        state.onNext(.loading(showHud: true))
+        Repository.shared.updateCustomerAddress(with: address) { [weak self] (success, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            if let error = error {
+                strongSelf.state.onNext(.error(error: error))
+            } else {
+                strongSelf.state.onNext(.content)
+                strongSelf.delegate?.viewModelDidUpdateAddress(strongSelf)
             }
         }
     }

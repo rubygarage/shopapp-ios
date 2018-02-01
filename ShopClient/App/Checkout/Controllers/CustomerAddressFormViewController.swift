@@ -8,7 +8,15 @@
 
 import UIKit
 
+enum AddressAction {
+    case add
+    case edit
+}
+
 class CustomerAddressFormViewController: BaseViewController<CustomerAddressFormViewModel> {
+    var selectedAddress: Address?
+    var addressAction: AddressAction = .add
+    
     weak var delegate: CustomerAddressFormDelegate?
     
     override func viewDidLoad() {
@@ -22,14 +30,29 @@ class CustomerAddressFormViewController: BaseViewController<CustomerAddressFormV
         viewModel.delegate = delegate
     }
     
+    private func addAddressCompletion() -> AddressFormCompletion? {
+        return { [weak self] address in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.viewModel.addCustomerAddress(with: address)
+        }
+    }
+    
+    private func updateAddressCompletion() -> AddressFormCompletion? {
+        return { [weak self] address in
+            guard let strongSelf = self else {
+                return
+            }
+            let selected = strongSelf.selectedAddress?.isEqual(to: address) ?? false
+            strongSelf.viewModel.updateCustomerAddress(with: address, isSelected: selected)
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let addressFormController = segue.destination as? AddressFormViewController {
-            addressFormController.completion = { [weak self] address in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.viewModel.addCustomerAddress(with: address)
-            }
+            addressFormController.address = selectedAddress
+            addressFormController.completion = addressAction == .add ? addAddressCompletion() : updateAddressCompletion()
         }
     }
 }

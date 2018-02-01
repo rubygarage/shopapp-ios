@@ -51,21 +51,6 @@ class AddressListViewModel: BaseViewModel {
         didSelectAddress.onNext(address)
     }
     
-    func updateAddress(with address: Address, isSelected: Bool) {
-        state.onNext(.loading(showHud: true))
-        Repository.shared.updateCustomerAddress(with: address) { [weak self] (success, error) in
-            guard let strongSelf = self else {
-                return
-            }
-            if let error = error {
-                strongSelf.state.onNext(.error(error: error))
-            } else if let success = success {
-                strongSelf.processAddressUpdatingResponse(with: success, address: address, isSelected: isSelected)
-                strongSelf.state.onNext(.content)
-            }
-        }
-    }
-    
     func deleteCustomerAddress(with address: Address) {
         state.onNext(.loading(showHud: true))
         Repository.shared.deleteCustomerAddress(with: address.id) { [weak self] (success, error) in
@@ -77,20 +62,6 @@ class AddressListViewModel: BaseViewModel {
             } else if let success = success {
                 strongSelf.processDeleteAddressResponse(with: success)
                 strongSelf.state.onNext(.content)
-            }
-        }
-    }
-    
-    func addCustomerAddress(with address: Address) {
-        state.onNext(.loading(showHud: true))
-        Repository.shared.addCustomerAddress(with: address) { [weak self] (_, error) in
-            guard let strongSelf = self else {
-                return
-            }
-            if let error = error {
-                strongSelf.state.onNext(.error(error: error))
-            } else {
-                strongSelf.loadCustomerAddresses()
             }
         }
     }

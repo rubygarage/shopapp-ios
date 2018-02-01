@@ -13,15 +13,16 @@ enum AddressListType {
     case billing
 }
 
-class AddressListViewController: BaseViewController<AddressListViewModel>, AddressListDataSourceProtocol, AddressListTableViewCellProtocol, AddressListHeaderViewProtocol {
+class AddressListViewController: BaseViewController<AddressListViewModel>, AddressListDataSourceProtocol, AddressListTableViewCellProtocol {
     @IBOutlet private weak var tableView: UITableView!
     
     private var tableDataSource: AddressListDataSource!
     // swiftlint:disable weak_delegate
     private var tableDelegate: AddressListDelegate!
     // swiftlint:enable weak_delegate
-    private var destinationAddress: Address?
-    private var destinationAddressFormCompletion: AddressFormCompletion!
+    
+    fileprivate var destinationAddress: Address?
+    fileprivate var destinationAddressAction: AddressAction = .add
     
     var selectedAddress: Address?
     var completion: AddressListCompletion?
@@ -78,9 +79,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
             })
             .disposed(by: disposeBag)
     }
-    
-    // MARK: - Private
-    
+        
     private func loadData() {
         viewModel.loadCustomerAddresses()
     }
@@ -102,15 +101,16 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     }
     
     func didTapEdit(with address: Address) {
-        let selected = selectedAddress?.isEqual(to: address) ?? false
+//        let selected = selectedAddress?.isEqual(to: address) ?? false
         destinationAddress = address
-        destinationAddressFormCompletion = { [weak self] filledAddress in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.viewModel.updateAddress(with: filledAddress, isSelected: selected)
-        }
-        performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
+        destinationAddressAction = .edit
+//        destinationAddressFormCompletion = { [weak self] filledAddress in
+//            guard let strongSelf = self else {
+//                return
+//            }
+//            strongSelf.viewModel.updateAddress(with: filledAddress, isSelected: selected)
+//        }
+        performSegue(withIdentifier: SegueIdentifiers.toCustomerAddressForm, sender: self)
     }
     
     func didTapDelete(with address: Address) {
@@ -121,33 +121,31 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
         viewModel.updateCustomerDefaultAddress(with: address)
     }
     
-    // MARK: - AddressListHeaderViewProtocol
-    
-    func didTapAddNewAddress() {
-        destinationAddress = nil
-        destinationAddressFormCompletion = { [weak self] address in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.viewModel.addCustomerAddress(with: address)
-        }
-        performSegue(withIdentifier: SegueIdentifiers.toCustomerAddressForm, sender: self)
-    }
-    
     // MARK: - Segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let addressFormViewController = segue.destination as? AddressFormViewController {
-            addressFormViewController.address = destinationAddress
-            addressFormViewController.completion = destinationAddressFormCompletion
-        } else if let customerAddressFormController = segue.destination as? CustomerAddressFormViewController {
+        if let customerAddressFormController = segue.destination as? CustomerAddressFormViewController {
+            customerAddressFormController.selectedAddress = destinationAddress
             customerAddressFormController.delegate = self
+            customerAddressFormController.addressAction = destinationAddressAction
         }
     }
 }
 
+// MARK: - AddressListHeaderViewProtocol
+
+extension AddressListViewController: AddressListHeaderViewProtocol {
+    func didTapAddNewAddress() {
+        destinationAddress = nil
+        destinationAddressAction = .add
+        performSegue(withIdentifier: SegueIdentifiers.toCustomerAddressForm, sender: self)
+    }
+}
+
+// MARK: - CustomerAddressFormDelegate
+
 extension AddressListViewController: CustomerAddressFormDelegate {
-    func viewModelDidAddShippingAddress(_ model: CustomerAddressFormViewModel) {
+    func viewModelDidUpdateAddress(_ model: CustomerAddressFormViewModel) {
         viewModel.loadCustomerAddresses()
         navigationController?.popToViewController(self, animated: true)
     }
