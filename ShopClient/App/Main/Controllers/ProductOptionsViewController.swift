@@ -56,9 +56,9 @@ class ProductOptionsViewController: UIViewController {
         let nib = UINib(nibName: cellName, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: cellName)
         
-        let headName = String(describing: ProductOptionHeaderView.self)
-        let headerNib = UINib(nibName: headName, bundle: nil)
-        collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headName)
+        let headerName = String(describing: ProductOptionHeaderView.self)
+        let headerNib = UINib(nibName: headerName, bundle: nil)
+        collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerName)
 
         collectionProvider = ProductOptionsCollectionProvider()
         collectionProvider.delegate = self

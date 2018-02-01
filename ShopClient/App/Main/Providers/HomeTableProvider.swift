@@ -38,9 +38,7 @@ extension HomeTableProvider: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case HomeSection.lastArrivals.rawValue:
-            return 1
-        case HomeSection.popular.rawValue:
+        case HomeSection.lastArrivals.rawValue, HomeSection.popular.rawValue:
             return 1
         case HomeSection.newInBlog.rawValue:
             return articles.count

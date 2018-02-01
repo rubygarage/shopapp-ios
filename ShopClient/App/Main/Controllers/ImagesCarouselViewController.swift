@@ -21,7 +21,7 @@ class ImagesCarouselViewController: UIViewController {
     
     var showingIndex: Int = 0
     
-    var images = [Image]() {
+    var images: [Image] = [] {
         didSet {
             updateViews()
         }
