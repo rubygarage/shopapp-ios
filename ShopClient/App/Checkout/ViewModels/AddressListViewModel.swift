@@ -13,6 +13,7 @@ typealias AddressListCompletion = (_ address: Address) -> Void
 class AddressListViewModel: BaseViewModel {
     private let customerUseCase = CustomerUseCase()
     private let updateDefaultAddressUseCase = UpdateDefaultAddressUseCase()
+    private let deleteAddressUseCase = DeleteAddressUseCase()
     
     var customerAddresses = Variable<[Address]>([])
     var customerDefaultAddress = Variable<Address?>(nil)
@@ -22,7 +23,7 @@ class AddressListViewModel: BaseViewModel {
     
     func loadCustomerAddresses() {
         state.onNext(.loading(showHud: true))
-        Repository.shared.getCustomer { [weak self] (customer, _) in
+        customerUseCase.getCustomer { [weak self] (customer, _) in
             guard let strongSelf = self else {
                 return
             }
@@ -51,16 +52,16 @@ class AddressListViewModel: BaseViewModel {
         didSelectAddress.onNext(address)
     }
     
-    func deleteCustomerAddress(with address: Address) {
+    func deleteCustomerAddress(with address: Address, isSelected: Bool) {
         state.onNext(.loading(showHud: true))
-        Repository.shared.deleteCustomerAddress(with: address.id) { [weak self] (success, error) in
+        deleteAddressUseCase.deleteCustomerAddress(with: address.id) { [weak self] (success, error) in
             guard let strongSelf = self else {
                 return
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
             } else if let success = success {
-                strongSelf.processDeleteAddressResponse(with: success)
+                strongSelf.processDeleteAddressResponse(with: success, isSelected: isSelected)
                 strongSelf.state.onNext(.content)
             }
         }
@@ -82,15 +83,10 @@ class AddressListViewModel: BaseViewModel {
         }
     }
     
-    private func processAddressUpdatingResponse(with success: Bool, address: Address, isSelected: Bool) {
-        if success {
-            processSelectedAddressUpdatingResponse(with: address, isSelected: isSelected)
-            loadCustomerAddresses()
-        }
-    }
-    
-    private func processDeleteAddressResponse(with success: Bool) {
-        if success {
+    private func processDeleteAddressResponse(with success: Bool, isSelected: Bool) {
+        if isSelected, let defaultAddress = customerDefaultAddress.value {
+            updateCheckoutShippingAddress(with: defaultAddress)
+        } else {
             loadCustomerAddresses()
         }
     }

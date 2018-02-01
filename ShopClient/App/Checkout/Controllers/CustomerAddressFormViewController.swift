@@ -23,7 +23,12 @@ class CustomerAddressFormViewController: BaseViewController<CustomerAddressFormV
         viewModel = CustomerAddressFormViewModel()
         super.viewDidLoad()
 
+        setupViews()
         setupViewModel()
+    }
+    
+    private func setupViews() {
+        title = "ControllerTitle.AddNewAddress".localizable
     }
     
     private func setupViewModel() {
@@ -44,8 +49,7 @@ class CustomerAddressFormViewController: BaseViewController<CustomerAddressFormV
             guard let strongSelf = self else {
                 return
             }
-            let selected = strongSelf.selectedAddress?.isEqual(to: address) ?? false
-            strongSelf.viewModel.updateCustomerAddress(with: address, isSelected: selected)
+            strongSelf.viewModel.updateCustomerAddress(with: address)
         }
     }
     

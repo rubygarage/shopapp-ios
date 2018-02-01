@@ -32,9 +32,7 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
         populateViewsIfNeeded()
     }
     
-    private func setupViews() {
-        title = "ControllerTitle.AddNewAddress".localizable
-        
+    private func setupViews() {        
         countryTextFieldView.placeholder = "Placeholder.Country".localizable.required.uppercased()
         nameTextFieldView.placeholder = "Placeholder.Name".localizable.required.uppercased()
         lastNameTextFieldView.placeholder = "Placeholder.LastName".localizable.required.uppercased()

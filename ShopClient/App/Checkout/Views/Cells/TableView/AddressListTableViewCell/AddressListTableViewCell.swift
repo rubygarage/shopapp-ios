@@ -56,7 +56,7 @@ class AddressListTableViewCell: UITableViewCell {
             phoneLabel.text = nil
         }
         selectButton.isSelected = isSelected
-        deleteButton.isEnabled = !isSelected
+        deleteButton.isEnabled = !isDefault
         defaultAddressButton.isEnabled = !isDefault
     }
     

@@ -156,6 +156,8 @@
 		612812B72020DBDA0048013B /* CheckoutAddressFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612812B62020DBDA0048013B /* CheckoutAddressFormViewModel.swift */; };
 		612812C1202224360048013B /* CustomerAddressFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612812C0202224360048013B /* CustomerAddressFormViewController.swift */; };
 		612812C3202224520048013B /* CustomerAddressFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612812C2202224520048013B /* CustomerAddressFormViewModel.swift */; };
+		612812C520233F8F0048013B /* UpdateAddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612812C420233F8F0048013B /* UpdateAddressUseCase.swift */; };
+		612812C7202345710048013B /* DeleteAddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612812C6202345710048013B /* DeleteAddressUseCase.swift */; };
 		6131309C1FB9A84800DB6AAC /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6131309B1FB9A84700DB6AAC /* Customer.swift */; };
 		6131309E1FB9A8DD00DB6AAC /* ShopifyCustomerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6131309D1FB9A8DD00DB6AAC /* ShopifyCustomerAdapter.swift */; };
 		6131D2381FB31395008330C0 /* CartProductDAOInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6131D2371FB31395008330C0 /* CartProductDAOInterface.swift */; };
@@ -470,6 +472,8 @@
 		612812B62020DBDA0048013B /* CheckoutAddressFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutAddressFormViewModel.swift; sourceTree = "<group>"; };
 		612812C0202224360048013B /* CustomerAddressFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerAddressFormViewController.swift; sourceTree = "<group>"; };
 		612812C2202224520048013B /* CustomerAddressFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerAddressFormViewModel.swift; sourceTree = "<group>"; };
+		612812C420233F8F0048013B /* UpdateAddressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAddressUseCase.swift; sourceTree = "<group>"; };
+		612812C6202345710048013B /* DeleteAddressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAddressUseCase.swift; sourceTree = "<group>"; };
 		6131309B1FB9A84700DB6AAC /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		6131309D1FB9A8DD00DB6AAC /* ShopifyCustomerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyCustomerAdapter.swift; sourceTree = "<group>"; };
 		6131D2371FB31395008330C0 /* CartProductDAOInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartProductDAOInterface.swift; sourceTree = "<group>"; };
@@ -1534,6 +1538,8 @@
 				0BD75362201F6D1F00AB1FED /* AddAddressUseCase.swift */,
 				0BEF52C51FF54A4E00E50080 /* CartProductListUseCase.swift */,
 				0BD5EB3C1FF3F1830076C01B /* CustomerUseCase.swift */,
+				612812C420233F8F0048013B /* UpdateAddressUseCase.swift */,
+				612812C6202345710048013B /* DeleteAddressUseCase.swift */,
 				0BD75364201F6D2B00AB1FED /* UpdateDefaultAddressUseCase.swift */,
 			);
 			path = Shared;
@@ -2404,6 +2410,8 @@
 				0BD5EB411FF3F19D0076C01B /* LogoutUseCase.swift in Sources */,
 				0B4EA3601FFD0343000C7A80 /* OrderRepositoryInterface.swift in Sources */,
 				0BEF52D21FF66AD700E50080 /* ProductUseCase.swift in Sources */,
+				612812C520233F8F0048013B /* UpdateAddressUseCase.swift in Sources */,
+				614142CA1F6AF26300379BB9 /* HomeTableDelegate.swift in Sources */,
 				616CA6711FF3D39D00FF14E2 /* AddressListDataSource.swift in Sources */,
 				614C561D1FC8628E00857116 /* Address.swift in Sources */,
 				0B4EA3661FFD2287000C7A80 /* OrderItem.swift in Sources */,
@@ -2523,6 +2531,7 @@
 				612812C1202224360048013B /* CustomerAddressFormViewController.swift in Sources */,
 				61A5072D1F7E79FB004504EF /* ImagesCarouselCollectionDelegate.swift in Sources */,
 				61BF1EA81FAB397D0098B9AA /* BaseViewModel.swift in Sources */,
+				612812C7202345710048013B /* DeleteAddressUseCase.swift in Sources */,
 				610A91381F9E294600424369 /* APIInterface.swift in Sources */,
 				615A97731FA0AD0500C6095D /* ShopifyArticleAdapter.swift in Sources */,
 				0BEF52C91FF63DA700E50080 /* ArticleUseCase.swift in Sources */,

@@ -9,11 +9,12 @@
 import UIKit
 
 protocol CustomerAddressFormDelegate: class {
-    func viewModelDidUpdateAddress(_ model: CustomerAddressFormViewModel)
+    func viewModel(_ model: CustomerAddressFormViewModel, didUpdate address: Address)
 }
 
 class CustomerAddressFormViewModel: BaseViewModel {
     private let addAddressUseCase = AddAddressUseCase()
+    private let updateAddressUseCase = UpdateAddressUseCase()
     
     weak var delegate: CustomerAddressFormDelegate?
     
@@ -27,14 +28,14 @@ class CustomerAddressFormViewModel: BaseViewModel {
                 strongSelf.state.onNext(.error(error: error))
             } else {
                 strongSelf.state.onNext(.content)
-                strongSelf.delegate?.viewModelDidUpdateAddress(strongSelf)
+                strongSelf.delegate?.viewModel(strongSelf, didUpdate: address)
             }
         }
     }
     
-    func updateCustomerAddress(with address: Address, isSelected: Bool) {
+    func updateCustomerAddress(with address: Address) {
         state.onNext(.loading(showHud: true))
-        Repository.shared.updateCustomerAddress(with: address) { [weak self] (success, error) in
+        updateAddressUseCase.updateCustomerAddress(with: address) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }
@@ -42,7 +43,7 @@ class CustomerAddressFormViewModel: BaseViewModel {
                 strongSelf.state.onNext(.error(error: error))
             } else {
                 strongSelf.state.onNext(.content)
-                strongSelf.delegate?.viewModelDidUpdateAddress(strongSelf)
+                strongSelf.delegate?.viewModel(strongSelf, didUpdate: address)
             }
         }
     }

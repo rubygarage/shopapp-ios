@@ -103,8 +103,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             .disposed(by: disposeBag)
     }
     
-    // MARK: - Private
-    
     private func loadData() {
         viewModel.loadData(with: disposeBag)
     }
@@ -137,7 +135,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.navigationController?.popViewController(animated: true)
+//            strongSelf.navigationController?.popViewController(animated: true)
             strongSelf.viewModel.updateCheckoutShippingAddress(with: address)
         }
     }
@@ -149,7 +147,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             }
             strongSelf.viewModel.billingAddress.value = address
             strongSelf.reloadTable()
-            strongSelf.navigationController?.popViewController(animated: true)
+//            strongSelf.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -163,9 +161,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             strongSelf.navigationController?.popToViewController(strongSelf, animated: true)
         }
     }
-    
-    // MARK: - Fileprivate
-    
+        
     fileprivate func reloadTable() {
         tableView?.reloadData()
     }
@@ -209,11 +205,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             checkoutAddressFormController.address = destinationAddressType == .shipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
             checkoutAddressFormController.delegate = self
         }
-        
-//        else if let addressFormViewController = segue.destination as? AddressFormViewController {
-//            addressFormViewController.address = destinationAddressType == .shipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
-//            addressFormViewController.completion = destinationAddressType == .shipping ? shippingAddressFormCompletion() : billingAddressFormCompletion()
-//        }
     }
 }
 

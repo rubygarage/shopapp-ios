@@ -23,6 +23,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     
     fileprivate var destinationAddress: Address?
     fileprivate var destinationAddressAction: AddressAction = .add
+    fileprivate var needToUpdate = false
     
     var selectedAddress: Address?
     var completion: AddressListCompletion?
@@ -101,20 +102,15 @@ class AddressListViewController: BaseViewController<AddressListViewModel>, Addre
     }
     
     func didTapEdit(with address: Address) {
-//        let selected = selectedAddress?.isEqual(to: address) ?? false
         destinationAddress = address
         destinationAddressAction = .edit
-//        destinationAddressFormCompletion = { [weak self] filledAddress in
-//            guard let strongSelf = self else {
-//                return
-//            }
-//            strongSelf.viewModel.updateAddress(with: filledAddress, isSelected: selected)
-//        }
+        needToUpdate = selectedAddress?.isEqual(to: address) ?? false
         performSegue(withIdentifier: SegueIdentifiers.toCustomerAddressForm, sender: self)
     }
     
     func didTapDelete(with address: Address) {
-        viewModel.deleteCustomerAddress(with: address)
+        let isSelected = viewModel.selectedAddress?.isEqual(to: address) ?? false
+        viewModel.deleteCustomerAddress(with: address, isSelected: isSelected)
     }
     
     func didTapDefault(with address: Address) {
@@ -145,8 +141,12 @@ extension AddressListViewController: AddressListHeaderViewProtocol {
 // MARK: - CustomerAddressFormDelegate
 
 extension AddressListViewController: CustomerAddressFormDelegate {
-    func viewModelDidUpdateAddress(_ model: CustomerAddressFormViewModel) {
-        viewModel.loadCustomerAddresses()
+    func viewModel(_ model: CustomerAddressFormViewModel, didUpdate address: Address) {
+        if needToUpdate {
+            viewModel.updateCheckoutShippingAddress(with: address)
+        } else {
+            viewModel.loadCustomerAddresses()
+        }
         navigationController?.popToViewController(self, animated: true)
     }
 }
