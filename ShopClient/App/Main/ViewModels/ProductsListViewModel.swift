@@ -9,17 +9,17 @@
 import RxSwift
 
 class ProductsListViewModel: GridCollectionViewModel {
+    private let productListUseCase = ProductListUseCase()
+    
     var sortingValue: SortingValue!
     var keyPhrase: String?
     
-    private let productListUseCase = ProductListUseCase()
-    
-    public func reloadData() {
+    func reloadData() {
         paginationValue = nil
         loadRemoteData()
     }
     
-    public func loadNextPage() {
+    func loadNextPage() {
         paginationValue = products.value.last?.paginationValue
         loadRemoteData()
     }
@@ -29,14 +29,16 @@ class ProductsListViewModel: GridCollectionViewModel {
         state.onNext(.loading(showHud: showHud))
         let reverse = sortingValue == .createdAt
         productListUseCase.getProductList(with: paginationValue, sortingValue: sortingValue, keyPhrase: keyPhrase, reverse: reverse) { [weak self] (products, error) in
+            guard let strongSelf = self else {
+                return
+            }
             if let error = error {
-                self?.state.onNext(.error(error: error))
+                strongSelf.state.onNext(.error(error: error))
+            } else if let products = products {
+                strongSelf.updateProducts(products: products)
+                strongSelf.state.onNext(.content)
             }
-            if let productsArray = products {
-                self?.updateProducts(products: productsArray)
-                self?.state.onNext(.content)
-            }
-            self?.canLoadMore = products?.count ?? 0 == kItemsPerPage
+            strongSelf.canLoadMore = products?.count ?? 0 == kItemsPerPage
         }
     }
 

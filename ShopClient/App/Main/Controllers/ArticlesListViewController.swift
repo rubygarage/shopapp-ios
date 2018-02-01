@@ -8,12 +8,10 @@
 
 import UIKit
 
-class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>, ArticlesListTableDataSourceProtocol, ArticlesListTableDelegateProtocol {
-    private var tableDataSource: ArticlesListTableDataSource!
-    // swiftlint:disable weak_delegate
-    private var tableDelegate: ArticlesListTableDelegate!
-    // swiftlint:enable weak_delegate
-    private var selectedArticle: Article?
+class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel> {
+    private var tableProvider: ArticlesListTableProvider!
+    
+    fileprivate var selectedArticle: Article?
     
     // MARK: - View controller lifecycle
     
@@ -41,9 +39,13 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
     
     private func setupViewModel() {
         viewModel?.items.asObservable()
-            .subscribe(onNext: { [weak self] _ in
-                self?.stopLoadAnimating()
-                self?.tableView.reloadData()
+            .subscribe(onNext: { [weak self] articles in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.stopLoadAnimating()
+                strongSelf.tableProvider.articles = articles
+                strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)        
     }
@@ -53,17 +55,17 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
     }
     
     private func setupTableView() {
-        let articleNib = UINib(nibName: String(describing: ArticleTableViewCell.self), bundle: nil)
-        tableView.register(articleNib, forCellReuseIdentifier: String(describing: ArticleTableViewCell.self))
+        let cellName = String(describing: ArticleTableViewCell.self)
+        let articleNib = UINib(nibName: cellName, bundle: nil)
+        tableView.register(articleNib, forCellReuseIdentifier: cellName)
         
-        tableDataSource = ArticlesListTableDataSource()
-        tableDataSource.delegate = self
-        tableView.dataSource = tableDataSource
-        
-        tableDelegate = ArticlesListTableDelegate()
-        tableDelegate.delegate = self
-        tableView.delegate = tableDelegate
+        tableProvider = ArticlesListTableProvider()
+        tableProvider.delegate = self
+        tableView.dataSource = tableProvider
+        tableView.delegate = tableProvider
     }
+    
+    // MARK: - BasePaginationViewController
     
     override func pullToRefreshHandler() {
         viewModel.reloadData()
@@ -72,26 +74,13 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
     override func infinityScrollHandler() {
         viewModel.loadNextPage()
     }
-    
-    // MARK: - ArticlesListTableDataSourceProtocol
-    
-    func articlesCount() -> Int {
-        return viewModel.items.value.count
-    }
-    
-    func article(at index: Int) -> Article? {
-        if index < viewModel.items.value.count {
-            return viewModel.items.value[index]
-        }
-        return nil
-    }
-    
-    // MARK: - ArticlesListTableDelegateProtocol
-    
-    func didSelectItem(at index: Int) {
-        if index < viewModel.items.value.count {
-            selectedArticle = viewModel.items.value[index]
-            performSegue(withIdentifier: SegueIdentifiers.toArticleDetails, sender: self)
-        }
+}
+
+// MARK: - ArticlesListTableProviderDelegate
+
+extension ArticlesListViewController: ArticlesListTableProviderDelegate {
+    func provider(_ provider: ArticlesListTableProvider, didSelect article: Article) {
+        selectedArticle = article
+        performSegue(withIdentifier: SegueIdentifiers.toArticleDetails, sender: self)
     }
 }

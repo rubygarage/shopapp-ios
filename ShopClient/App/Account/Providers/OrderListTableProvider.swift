@@ -16,6 +16,14 @@ class OrdersListTableProvider: NSObject {
     var orders: [Order] = []
     
     weak var delegate: (OrdersListTableProviderDelegate & CheckoutCartTableViewCellDelegate)?
+    
+    fileprivate func selectOrder(at index: Int) {
+        guard let delegate = delegate else {
+            return
+        }
+        let order = orders[index]
+        delegate.provider(self, didSelect: order)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -30,7 +38,8 @@ extension OrdersListTableProvider: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutCartTableViewCell.self), for: indexPath) as! CheckoutCartTableViewCell
+        let cellName = String(describing: CheckoutCartTableViewCell.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! CheckoutCartTableViewCell
         var images: [Image] = []
         var productVariantIds: [String] = []
         let order = orders[indexPath.section]
@@ -51,8 +60,7 @@ extension OrdersListTableProvider: UITableViewDelegate {
         guard !orders.isEmpty else {
             return nil
         }
-        let order = orders[section]
-        let view = OrderHeaderView(section: section, order: order)
+        let view = OrderHeaderView(section: section, order: orders[section])
         view.delegate = self
         return view
     }
@@ -61,8 +69,7 @@ extension OrdersListTableProvider: UITableViewDelegate {
         guard !orders.isEmpty else {
             return nil
         }
-        let order = orders[section]
-        let view = OrderFooterView(section: section, order: order)
+        let view = OrderFooterView(section: section, order: orders[section])
         view.delegate = self
         return view
     }
@@ -70,18 +77,16 @@ extension OrdersListTableProvider: UITableViewDelegate {
 
 // MARK: - OrderHeaderViewDelegate
 
-extension OrdersListTableProvider: OrderHeaderViewDelegate {
+extension OrdersListTableProvider: OrderHeaderDelegate {
     func headerView(_ headerView: OrderHeaderView, didTapWith section: Int) {
-        let order = orders[section]
-        delegate?.provider(self, didSelect: order)
+        selectOrder(at: section)
     }
 }
 
 // MARK: - OrderFooterViewDelegate
 
-extension OrdersListTableProvider: OrderFooterViewDelegate {
+extension OrdersListTableProvider: OrderFooterDelegate {
     func footerView(_ footerView: OrderFooterView, didTapWith section: Int) {
-        let order = orders[section]
-        delegate?.provider(self, didSelect: order)
+        selectOrder(at: section)
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol OrderFooterViewDelegate: class {
+protocol OrderFooterDelegate: class {
     func footerView(_ footerView: OrderFooterView, didTapWith section: Int)
 }
 
@@ -21,7 +21,7 @@ class OrderFooterView: UIView {
     
     private var section: Int!
     
-    weak var delegate: OrderFooterViewDelegate?
+    weak var delegate: OrderFooterDelegate?
     
     // MARK: - View lifecycle
     
@@ -42,7 +42,8 @@ class OrderFooterView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        Bundle.main.loadNibNamed(String(describing: OrderFooterView.self), owner: self)
+        let viewName = String(describing: OrderFooterView.self)
+        Bundle.main.loadNibNamed(viewName, owner: self)
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

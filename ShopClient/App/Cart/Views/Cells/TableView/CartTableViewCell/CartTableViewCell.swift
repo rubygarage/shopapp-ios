@@ -25,7 +25,12 @@ class CartTableViewCell: SwipeTableViewCell {
     @IBOutlet private weak var quantityTextField: UITextField!
     @IBOutlet private weak var quantityUnderlineView: UIView!
     @IBOutlet private weak var totalPriceLabel: UILabel!
-    @IBOutlet private weak var pricePerOneItemLabel: UILabel!
+    
+    @IBOutlet private weak var pricePerOneItemLabel: UILabel! {
+        didSet {
+            pricePerOneItemLabel.isHidden = true
+        }
+    }
     
     var cartProduct: CartProduct?
     
@@ -92,8 +97,8 @@ class CartTableViewCell: SwipeTableViewCell {
     
     private func populatePricePerOne(with item: CartProduct?) {
         let quantity = item?.quantity ?? 1
-        guard quantity <= 1, let item = item else {
-            pricePerOneItemLabel.text = nil
+        guard quantity > 1, let item = item else {
+            pricePerOneItemLabel.isHidden = true
             return
         }
         let currency = item.currency ?? ""
@@ -103,6 +108,7 @@ class CartTableViewCell: SwipeTableViewCell {
         let localizedString = "Label.PriceEach".localizable
         let formattedPrice = formatter.string(from: price) ?? ""
         pricePerOneItemLabel.text = String.localizedStringWithFormat(localizedString, formattedPrice)
+        pricePerOneItemLabel.isHidden = false
     }
     
     private func check(quantity: Int) -> Int {

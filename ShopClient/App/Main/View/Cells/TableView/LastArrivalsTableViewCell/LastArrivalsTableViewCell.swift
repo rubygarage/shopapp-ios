@@ -8,22 +8,19 @@
 
 import UIKit
 
-protocol LastArrivalsCellDelegate: class {
-    func didSelectLastArrivalsProduct(at index: Int)
+protocol LastArrivalsTableCellDelegate: class {
+    func tableViewCell(_ tableViewCell: LastArrivalsTableViewCell, didSelect product: Product)
 }
 
-private let kLastArrivalsNumberOfSections = 1
-
-class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableDataSourceProtocol, LastArrivalsTableDelegateProtocol {
+class LastArrivalsTableViewCell: UITableViewCell {
     @IBOutlet private weak var collectionView: UICollectionView!
     
-    private var dataSource: LastArrivalsTableDataSource!
-    // swiftlint:disable weak_delegate
-    private var delegate: LastArrivalsTableDelegate!
-    // swiftlint:enable weak_delegate
-    private var products = [Product]()
+    private var collectionProvider: LastArrivalsTableCellProvider!
+    private var products: [Product] = []
     
-    weak var cellDelegate: LastArrivalsCellDelegate?
+    weak var delegate: LastArrivalsTableCellDelegate?
+    
+    // MARK: - View lifecycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,43 +28,30 @@ class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableDataSourcePro
         setupCollectionView()
     }
     
+    // MARK: - Setup
+    
+    func configure(with products: [Product]) {
+        self.products = products
+        collectionProvider.products = products
+        collectionView.reloadData()
+    }
+    
     private func setupCollectionView() {
-        let nib = UINib(nibName: String(describing: LastArrivalsCollectionViewCell.self), bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: String(describing: LastArrivalsCollectionViewCell.self))
+        let cellName = String(describing: LastArrivalsCollectionViewCell.self)
+        let nib = UINib(nibName: cellName, bundle: nil)
+        collectionView.register(nib, forCellWithReuseIdentifier: cellName)
         
-        dataSource = LastArrivalsTableDataSource()
-        dataSource.delegate = self
-        collectionView.dataSource = dataSource
-        
-        delegate = LastArrivalsTableDelegate()
-        delegate.delegate = self
-        collectionView.delegate = delegate
+        collectionProvider = LastArrivalsTableCellProvider()
+        collectionProvider.delegate = self
+        collectionView.dataSource = collectionProvider
+        collectionView.delegate = collectionProvider
     }
-    
-    func configure(with products: [Product]?) {
-        if let items = products {
-            self.products = items
-            collectionView.reloadData()
-        }
-    }
-    
-    // MARK: - LastArrivalsTableDataSourceProtocol
-    
-    func numberOfSections() -> Int {
-        return kLastArrivalsNumberOfSections
-    }
-    
-    func numberOfProducts() -> Int {
-        return products.count
-    }
-    
-    func item(for index: Int) -> Product {
-        return products[index]
-    }
-    
-    // MARK: - LastArrivalsTableDelegateProtocol
-    
-    func didSelectItem(at index: Int) {
-        cellDelegate?.didSelectLastArrivalsProduct(at: index)
+}
+
+// MARK: - LastArrivalsTableCellProviderDelegate
+
+extension LastArrivalsTableViewCell: LastArrivalsTableCellProviderDelegate {
+    func provider(_ provider: LastArrivalsTableCellProvider, didSelect product: Product) {
+         delegate?.tableViewCell(self, didSelect: product)
     }
 }

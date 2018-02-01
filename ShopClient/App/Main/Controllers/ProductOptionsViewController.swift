@@ -8,39 +8,42 @@
 
 import UIKit
 
-let kOptionCollectionViewHeaderHeight = CGFloat(46.0)
-let kOptionCollectionViewCellHeight = CGFloat(31.0)
 private let kOptionCollectionViewAdditionalHeight = CGFloat(30.0)
 
-protocol ProductOptionsControllerProtocol: class {
-    func didCalculate(collectionViewHeight: CGFloat)
-    func didSelectOption(with name: String, value: String)
+let kOptionCollectionViewHeaderHeight = CGFloat(46.0)
+let kOptionCollectionViewCellHeight = CGFloat(31.0)
+
+protocol ProductOptionsControllerDelegate: class {
+    func viewController(_ viewController: ProductOptionsViewController, didCalculate height: CGFloat)
+    func viewController(_ viewController: ProductOptionsViewController, didSelect option: (name: String, value: String))
 }
 
-class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDataSourceProtocol, ProductOptionsCellDelegate {
+class ProductOptionsViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var collectionLayout: UICollectionViewFlowLayout!
     
-    private var collectionDataSource: ProductOptionsCollectionDataSource!
-    // swiftlint:disable weak_delegate
-    private var collectionDelegate: ProductOptionsCollectionDelegate!
-    // swiftlint:enable weak_delegate
+    private var collectionProvider: ProductOptionsCollectionProvider!
     
-    weak var controllerDelegate: ProductOptionsControllerProtocol?
+    var options: [ProductOption] = []
     
-    var options = [ProductOption]()
-    var selectedOptions = [SelectedOption]() {
+    var selectedOptions: [SelectedOption] = [] {
         didSet {
             if options.count == 1 && options.first!.values?.count == 1 {
-                controllerDelegate?.didCalculate(collectionViewHeight: 0.0)
+                delegate?.viewController(self, didCalculate: 0.0)
                 return
             }
             let collectioViewHeight = (kOptionCollectionViewHeaderHeight + kOptionCollectionViewCellHeight) * CGFloat(options.count)
             let additionalHeight = !options.isEmpty ? kOptionCollectionViewAdditionalHeight : 0.0
-            controllerDelegate?.didCalculate(collectionViewHeight: collectioViewHeight + additionalHeight)
+            delegate?.viewController(self, didCalculate: collectioViewHeight + additionalHeight)
+            collectionProvider.options = options
+            collectionProvider.selectedOptions = selectedOptions
             collectionView.reloadData()
         }
     }
+    
+    weak var delegate: ProductOptionsControllerDelegate?
+    
+    // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,54 +52,28 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionDa
     }
     
     private func setupCollectionView() {
-        let nib = UINib(nibName: String(describing: ProductOptionsCollectionViewCell.self), bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: String(describing: ProductOptionsCollectionViewCell.self))
+        let cellName = String(describing: ProductOptionsCollectionViewCell.self)
+        let nib = UINib(nibName: cellName, bundle: nil)
+        collectionView.register(nib, forCellWithReuseIdentifier: cellName)
         
-        let headerNib = UINib(nibName: String(describing: ProductOptionHeaderView.self), bundle: nil)
-        collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: String(describing: ProductOptionHeaderView.self))
+        let headName = String(describing: ProductOptionHeaderView.self)
+        let headerNib = UINib(nibName: headName, bundle: nil)
+        collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headName)
 
-        collectionDataSource = ProductOptionsCollectionDataSource()
-        collectionDataSource.delegate = self
-        collectionView.dataSource = collectionDataSource
-        
-        collectionDelegate = ProductOptionsCollectionDelegate()
-        collectionView.delegate = collectionDelegate
+        collectionProvider = ProductOptionsCollectionProvider()
+        collectionProvider.delegate = self
+        collectionView.dataSource = collectionProvider
+        collectionView.delegate = collectionProvider
     }
-    
-    // MARK: - ProductOptionsCollectionDataSourceProtocol
-    
-    func optionsCount() -> Int {
-        return options.count
-    }
-    
-    func itemsCount(in optionIndex: Int) -> Int {
-        if optionIndex < options.count {
-            let option = options[optionIndex]
-            return option.values!.count
-        }
-        return 0
-    }
-    
-    func items(at optionIndex: Int) -> (values: [String], selectedValue: String) {
-        if optionIndex < options.count && optionIndex < selectedOptions.count {
-            let option = options[optionIndex]
-            return (option.values ?? [String](), selectedOptions[optionIndex].value)
-        }
-        return ([String](), "")
-    }
+}
 
-    func sectionTitle(for sectionIndex: Int) -> String {
-        if sectionIndex < options.count {
-            return options[sectionIndex].name ?? ""
-        }
-        return ""
-    }
-    
-    // MARK: - ProductOptionsCellDelegate
-    
-    func didSelectItem(with values: [String], selectedValue: String) {
+// MARK: - ProductOptionsCollectionCellDelegate
+
+extension ProductOptionsViewController: ProductOptionsCollectionCellDelegate {
+    func collectionViewCell(_ collectionViewCell: ProductOptionsCollectionViewCell, didSelectItemWith values: [String], selectedValue: String) {
         if let name = options.filter({ $0.values! == values }).first?.name {
-            controllerDelegate?.didSelectOption(with: name, value: selectedValue)
+            let option = (name: name, value: selectedValue)
+            delegate?.viewController(self, didSelect: option)
         }
     }
 }

@@ -40,7 +40,8 @@ class AccountNotLoggedHeaderView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        Bundle.main.loadNibNamed(String(describing: AccountNotLoggedHeaderView.self), owner: self)
+        let viewName = String(describing: AccountNotLoggedHeaderView.self)
+        Bundle.main.loadNibNamed(viewName, owner: self)
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

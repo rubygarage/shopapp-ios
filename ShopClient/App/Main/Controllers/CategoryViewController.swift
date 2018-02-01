@@ -8,8 +8,10 @@
 
 import UIKit
 
-class CategoryViewController: GridCollectionViewController<CategoryViewModel>, SortModalControllerProtocol {
+class CategoryViewController: GridCollectionViewController<CategoryViewModel> {
     var categoryId: String!
+    
+    // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         viewModel = CategoryViewModel()
@@ -25,7 +27,8 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel>, S
         updateNavigationBar()
     }
     
-    // MARK: - setup
+    // MARK: - Setup
+    
     private func updateNavigationBar() {
         addCartBarButton()
     }
@@ -34,9 +37,13 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel>, S
         viewModel.categoryId = categoryId
         
         viewModel.products.asObservable()
-            .subscribe(onNext: { [weak self] _ in
-                self?.stopLoadAnimating()
-                self?.collectionView.reloadData()
+            .subscribe(onNext: { [weak self] products in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.stopLoadAnimating()
+                strongSelf.collectionProvider.products = products
+                strongSelf.collectionView.reloadData()
             })
             .disposed(by: disposeBag)
     }
@@ -45,28 +52,13 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel>, S
         viewModel.reloadData()
     }
     
-    // MARK: - actions
-    func sortTapHandler() {
-        let selectedValueString = SortingValue.allValues[viewModel.selectedSortingValue.rawValue]
-        showCategorySortingController(with: SortingValue.allValues, selectedItem: selectedValueString, delegate: self)
-    }
+    // MARK: - BasePaginationViewController
     
-    // MARK: - overriding
     override func pullToRefreshHandler() {
         viewModel.reloadData()
     }
     
     override func infinityScrollHandler() {
         viewModel.loadNextPage()
-    }
-    
-    // MARK: - SortModalControllerProtocol
-    func didSelect(item: String) {
-        if let index = SortingValue.allValues.index(of: item) {
-            viewModel.selectedSortingValue = SortingValue(rawValue: index) ?? viewModel.selectedSortingValue
-            let indexPath = IndexPath(row: 0, section: 0)
-            collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-            viewModel.reloadData()
-        }
     }
 }

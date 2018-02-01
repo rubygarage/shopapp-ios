@@ -16,7 +16,7 @@ class AccountTableProvider: NSObject {
     var policies: [Policy] = []
     var customer: Customer?
     
-    weak var delegate: (AccountTableProviderDelegate & AccountNotLoggedHeaderDelegate & AccountLoggedHeaderDelegate & AccountFooterViewDelegate)?
+    weak var delegate: (AccountTableProviderDelegate & AccountNotLoggedHeaderDelegate & AccountLoggedHeaderDelegate & AccountFooterDelegate)?
 }
 
 // MARK: - UITableViewDataSource
@@ -27,7 +27,8 @@ extension AccountTableProvider: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: AccountTableViewCell.self), for: indexPath) as! AccountTableViewCell
+        let cellName = String(describing: AccountTableViewCell.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! AccountTableViewCell
         let policy = policies[indexPath.row]
         cell.configure(with: policy)
         return cell
@@ -38,8 +39,11 @@ extension AccountTableProvider: UITableViewDataSource {
 
 extension AccountTableProvider: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let delegate = delegate else {
+            return
+        }
         let policy = policies[indexPath.row]
-        delegate?.provider(self, didSelect: policy)
+        delegate.provider(self, didSelect: policy)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

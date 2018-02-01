@@ -7,9 +7,10 @@
 //
 
 import UIKit
+
 import RxSwift
 
-let kItemsCountViewCornerRadius: CGFloat = 7
+private let kItemsCountViewCornerRadius: CGFloat = 7
 
 class CartButtonView: UIView {
     @IBOutlet private weak var contentView: UIView!
@@ -19,7 +20,8 @@ class CartButtonView: UIView {
     private let disposeBag = DisposeBag()
     private var viewModel = CartButtonViewModel()
     
-    // MARK: - init
+    // MARK: - View lifecycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -34,8 +36,11 @@ class CartButtonView: UIView {
         setupViews()
     }
     
+    // MARK: - Setup
+    
     private func commonInit() {
-        Bundle.main.loadNibNamed(String(describing: CartButtonView.self), owner: self)
+        let viewName = String(describing: CartButtonView.self)
+        Bundle.main.loadNibNamed(viewName, owner: self)
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -44,7 +49,10 @@ class CartButtonView: UIView {
         
         viewModel.cartItemsCount.asObservable()
             .subscribe(onNext: { [weak self] cartItemsCount in
-                self?.populateViews(with: cartItemsCount)
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.populateViews(with: cartItemsCount)
             })
             .disposed(by: disposeBag)
         

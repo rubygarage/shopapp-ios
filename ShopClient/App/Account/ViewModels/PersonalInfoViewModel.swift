@@ -13,6 +13,7 @@ class PersonalInfoViewModel: BaseViewModel {
     private let customerUseCase = CustomerUseCase()
     private let updateCustomUseCase = UpdateCustomUseCase()
     
+    var canChangeEmail = true
     var customer = Variable<Customer?>(nil)
     var firstNameText = Variable<String>("")
     var lastNameText = Variable<String>("")
@@ -20,11 +21,10 @@ class PersonalInfoViewModel: BaseViewModel {
     var phoneText = Variable<String>("")
     var emailErrorMessage = PublishSubject<String>()
     var saveChangesSuccess = PublishSubject<Bool>()
-    var canChangeEmail = true
     
     var saveChangesButtonEnabled: Observable<Bool> {
         let observable = Observable.combineLatest(firstNameText.asObservable(), lastNameText.asObservable(), emailText.asObservable(), phoneText.asObservable()) { [weak self] (firstName, lastName, email, phone) -> Bool in
-            guard let strongSelf = self, let customer = self?.customer.value else {
+            guard let strongSelf = self, let customer = strongSelf.customer.value else {
                 return false
             }
             let firstNameIsDifferent = customer.firstName ?? "" != firstName
