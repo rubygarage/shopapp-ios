@@ -135,12 +135,6 @@ class CheckoutViewModel: BaseViewModel {
         }
     }
     
-    func getLoginStatus(callback: (_ isLogged: Bool) -> Void) {
-        loginUseCase.getLoginStatus { (isLogged) in
-            callback(isLogged)
-        }
-    }
-    
     private func getCatrItems() {
         cartProductListUseCase.getCartProductList({ [weak self] (result, error) in
             guard let strongSelf = self else {

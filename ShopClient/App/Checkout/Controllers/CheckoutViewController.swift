@@ -193,12 +193,10 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     
     fileprivate func openAddressesController(with type: AddressListType) {
         destinationAddressType = type
-        viewModel.getLoginStatus { (isLogged) in
-            if isLogged {
-                performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
-            } else {
-                performSegue(withIdentifier: SegueIdentifiers.toCheckoutAddressForm, sender: self)
-            }
+        if viewModel.customerLogged.value {
+            performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
+        } else {
+            performSegue(withIdentifier: SegueIdentifiers.toCheckoutAddressForm, sender: self)
         }
     }
     
