@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CheckoutCombinedProtocol: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellDelegate, CheckoutShippingAddressEditCellProtocol, CheckoutPaymentAddCellDelegate, CheckoutTableDelegateProtocol, CheckoutCartTableViewCellDelegate, CheckoutCreditCardEditTableCellDelegate, CheckoutShippingOptionsEnabledTableCellDelegate, PaymentTypeViewControllerProtocol, CheckoutSelectedTypeTableCellDelegate, CheckoutBillingAddressEditCellDelegate {}
+protocol CheckoutCombinedDelegate: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellDelegate, CheckoutShippingAddressEditCellDelegate, CheckoutPaymentAddCellDelegate, CheckoutTableDelegateProtocol, CheckoutCartTableViewCellDelegate, CheckoutCreditCardEditTableCellDelegate, CheckoutShippingOptionsEnabledTableCellDelegate, PaymentTypeViewControllerDelegate, CheckoutSelectedTypeTableCellDelegate, CheckoutBillingAddressEditCellDelegate {}
 
 protocol CheckoutTableDataSourceProtocol: class {
     func cartProducts() -> [CartProduct]
@@ -20,7 +20,7 @@ protocol CheckoutTableDataSourceProtocol: class {
 }
 
 class CheckoutTableDataSource: NSObject, UITableViewDataSource {
-    weak var delegate: CheckoutCombinedProtocol?
+    weak var delegate: CheckoutCombinedDelegate?
     
     // MARK: - UITableViewDataSource
     

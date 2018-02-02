@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol PaymentTypeViewControllerProtocol: class {
-    func didSelect(paymentType: PaymentType)
+protocol PaymentTypeViewControllerDelegate: class {
+    func viewController(_ viewController: PaymentTypeViewController, didSelect paymentType: PaymentType)
 }
 
 class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
@@ -21,7 +21,7 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
     var checkout: Checkout!
     var selectedType: PaymentType?
     
-    weak var delegate: PaymentTypeViewControllerProtocol?
+    weak var delegate: PaymentTypeViewControllerDelegate?
     
     // MARK: - View controller lifecycle
     
@@ -61,7 +61,7 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
 
 extension PaymentTypeViewController: PaymentTypeProviderDelegate {
     func provider(_ provider: PaymentTypeProvider, didSelect type: PaymentType) {
-        delegate?.didSelect(paymentType: type)
+        delegate?.viewController(self, didSelect: type)
         selectedType = type
         reloadTable()
         navigationController?.popViewController(animated: true)

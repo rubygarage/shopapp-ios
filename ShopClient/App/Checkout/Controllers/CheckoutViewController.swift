@@ -11,7 +11,7 @@ import UIKit
 private let kPlaceOrderButtonColorEnabled = UIColor(red: 0, green: 0.48, blue: 1, alpha: 1)
 private let kPlaceOrderButtonColorDisabled = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
 
-class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCombinedProtocol {
+class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCombinedDelegate {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var placeOrderButton: UIButton!
     
@@ -299,10 +299,10 @@ extension CheckoutViewController: CheckoutShippingOptionsEnabledTableCellDelegat
     }
 }
 
-// MARK: - PaymentTypeViewControllerProtocol
+// MARK: - PaymentTypeViewControllerDelegate
 
-extension CheckoutViewController: PaymentTypeViewControllerProtocol {
-    func didSelect(paymentType: PaymentType) {
+extension CheckoutViewController: PaymentTypeViewControllerDelegate {
+    func viewController(_ viewController: PaymentTypeViewController, didSelect paymentType: PaymentType) {
         viewModel.selectedType.value = paymentType
         reloadTable()
     }
@@ -316,10 +316,10 @@ extension CheckoutViewController: CheckoutCreditCardEditTableCellDelegate {
     }
 }
 
-// MARK: - CheckoutShippingAddressEditCellProtocol
+// MARK: - CheckoutShippingAddressEditCellDelegate
 
-extension CheckoutViewController: CheckoutShippingAddressEditCellProtocol {
-    func didTapEditShippingAddress() {
+extension CheckoutViewController: CheckoutShippingAddressEditCellDelegate {
+    func tableViewCellDidTapEditShippingAddress(_ cell: CheckoutShippingAddressEditTableCell) {
         openAddressesController(with: .shipping)
     }
 }
