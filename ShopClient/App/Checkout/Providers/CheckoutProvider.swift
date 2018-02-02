@@ -14,6 +14,7 @@ class CheckoutProvider: NSObject {
     var billingAddress: Address?
     var creditCard: CreditCard?
     var selectedPaymentType: PaymentType?
+    var customerEmail: String?
     
     weak var delegate: CheckoutCombinedDelegate?
 }

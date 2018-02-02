@@ -38,43 +38,11 @@ class CheckoutViewModel: BaseViewModel {
     var creditCard = Variable<CreditCard?>(nil)
     var billingAddress = Variable<Address?>(nil)
     var selectedType = Variable<PaymentType?>(nil)
-    var checkoutSuccedded = PublishSubject<()>()
     var cartItems = Variable<[CartProduct]>([])
+    var customerLogged = Variable<Bool>(false)
+    var checkoutSuccedded = PublishSubject<()>()
     var order: Order?
     var selectedProductVariant: ProductVariant!
-    
-    private var cartItemsSingle: Single<[CartProduct]> {
-        return Single.create(subscribe: { [weak self] (event) in
-            self?.cartProductListUseCase.getCartProductList({ [weak self] (result, error) in
-                guard let strongSelf = self else {
-                    return
-                }
-                if let error = error {
-                    event(.error(error))
-                }
-                if let result = result {
-                    strongSelf.cartItems.value = result
-                    event(.success(result))
-                }
-            })
-            return Disposables.create()
-        })
-    }
-    private var checkoutCreateSingle: Single<Checkout> {
-        return cartItemsSingle.flatMap({ (cartItems) in
-            Single.create(subscribe: { [weak self] (event) in
-                self?.checkoutUseCase.createCheckout(cartProducts: cartItems, callback: { (checkout, error) in
-                    if let error = error {
-                        event(.error(error))
-                    }
-                    if let checkout = checkout {
-                        event(.success(checkout))
-                    }
-                })
-                return Disposables.create()
-            })
-        })
-    }
     
     var placeOrderPressed: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
@@ -92,22 +60,15 @@ class CheckoutViewModel: BaseViewModel {
         }
     }
     
-    func loadData(with disposeBag: DisposeBag) {
+    func loadData() {
         state.onNext(.loading(showHud: true))
-        checkoutCreateSingle.subscribe(onSuccess: { [weak self] (checkout) in
+        loginUseCase.getLoginStatus { [weak self] (isLogged) in
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.checkout.value = checkout
-            strongSelf.getCustomer()
-        }, onError: { [weak self] (error) in
-            guard let strongSelf = self else {
-                return
-            }
-            let castedError = error as? RepoError
-            strongSelf.state.onNext(.error(error: castedError))
-        })
-        .disposed(by: disposeBag)
+            strongSelf.customerLogged.value = isLogged
+            strongSelf.getCatrItems()
+        }
     }
     
     func getCheckout() {
@@ -178,6 +139,35 @@ class CheckoutViewModel: BaseViewModel {
         loginUseCase.getLoginStatus { (isLogged) in
             callback(isLogged)
         }
+    }
+    
+    private func getCatrItems() {
+        cartProductListUseCase.getCartProductList({ [weak self] (result, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            if let error = error {
+                strongSelf.state.onNext(.error(error: error))
+            }
+            if let cartItems = result {
+                strongSelf.cartItems.value = cartItems
+                strongSelf.createCheckout(cartItems: cartItems)
+            }
+        })
+    }
+    
+    private func createCheckout(cartItems: [CartProduct]) {
+        checkoutUseCase.createCheckout(cartProducts: cartItems, callback: { [weak self] (checkout, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            if let error = error {
+                strongSelf.state.onNext(.error(error: error))
+            } else if let checkout = checkout {
+                strongSelf.checkout.value = checkout
+                strongSelf.getCustomer()
+            }
+        })
     }
     
     private func getCustomer() {

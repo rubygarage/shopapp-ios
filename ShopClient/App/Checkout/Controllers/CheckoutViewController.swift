@@ -120,7 +120,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     }
     
     private func loadData() {
-        viewModel.loadData(with: disposeBag)
+        viewModel.loadData()
     }
     
     private func closeAddressFormController() {
