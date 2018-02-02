@@ -67,7 +67,7 @@ class CheckoutViewModel: BaseViewModel {
                 return
             }
             strongSelf.customerLogged.value = isLogged
-            strongSelf.getCatrItems()
+            strongSelf.getCartItems()
         }
     }
     
@@ -80,8 +80,7 @@ class CheckoutViewModel: BaseViewModel {
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            }
-            if let checkout = result {
+            } else if let checkout = result {
                 strongSelf.checkout.value = checkout
                 strongSelf.state.onNext(.content)
             }
@@ -126,8 +125,7 @@ class CheckoutViewModel: BaseViewModel {
                 }
                 if let error = error {
                     strongSelf.state.onNext(.error(error: error))
-                }
-                if let checkout = result {
+                } else if let checkout = result {
                     strongSelf.checkout.value = checkout
                     strongSelf.state.onNext(.content)
                 }
@@ -135,15 +133,14 @@ class CheckoutViewModel: BaseViewModel {
         }
     }
     
-    private func getCatrItems() {
+    private func getCartItems() {
         cartProductListUseCase.getCartProductList({ [weak self] (result, error) in
             guard let strongSelf = self else {
                 return
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            }
-            if let cartItems = result {
+            } else if let cartItems = result {
                 strongSelf.cartItems.value = cartItems
                 strongSelf.createCheckout(cartItems: cartItems)
             }

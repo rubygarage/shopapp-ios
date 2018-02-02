@@ -21,9 +21,10 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     @IBOutlet private weak var submitButton: BlackButton!
     
     var address: Address?
-    var completion: AddressFormCompletion?
     
-    // MARK: - Viewcontroller lifecycle
+    weak var delegate: AddressFormViewModelDelegate?
+    
+    // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         viewModel = AddressFormViewModel()
@@ -51,7 +52,7 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     
     private func setupViewModel() {
         viewModel.address = address
-        viewModel.completion = completion
+        viewModel.delegate = delegate
         
         countryTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.countryText)

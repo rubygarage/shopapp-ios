@@ -27,7 +27,7 @@ class ExpiryDatePicker: TextFieldWrapper {
         return [String]()
     }
     
-    // MARK: - Initialization
+    // MARK: - View lifecycle
     
     init() {
         super.init(frame: CGRect.zero)
@@ -70,7 +70,7 @@ class ExpiryDatePicker: TextFieldWrapper {
         toolBar.sizeToFit()
         
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.doneButtonDidPress))
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonDidPress))
         toolBar.setItems([spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         

@@ -29,7 +29,7 @@
                         <state key="selected" image="radio_btn_selected"/>
                         <state key="highlighted" image="radio_btn_hold"/>
                         <connections>
-                            <action selector="selectTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1sF-ja-Tpm"/>
+                            <action selector="selectButtonDidPress:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="OQN-gd-gws"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customer Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBF-vr-3AY">
@@ -68,7 +68,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="editTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="PyD-nz-mkC"/>
+                                    <action selector="editButtonDidPress:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hdc-wa-gxf"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mff-K6-lNa">
@@ -90,7 +90,7 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="deleteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="R2L-EY-EzU"/>
+                                    <action selector="deleteButtonDidPress:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="B7J-B9-f2y"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0H-is-ygj">
@@ -104,7 +104,7 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="defaultAddressTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jLo-rY-v4Z"/>
+                                    <action selector="defaultAddressButtonDidPress:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kBV-e7-5Fw"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xjb-FP-QQd">

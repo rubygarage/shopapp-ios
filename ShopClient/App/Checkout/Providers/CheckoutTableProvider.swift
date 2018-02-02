@@ -1,5 +1,5 @@
 //
-//  CheckoutProvider.swift
+//  CheckoutTableProvider.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 2/2/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CheckoutProvider: NSObject {
+class CheckoutTableProvider: NSObject {
     var checkout: Checkout?
     var cartProducts: [CartProduct] = []
     var billingAddress: Address?
@@ -21,7 +21,7 @@ class CheckoutProvider: NSObject {
 
 // MARK: - UITableViewDataSource
 
-extension CheckoutProvider: UITableViewDataSource {
+extension CheckoutTableProvider: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return selectedPaymentType == .creditCard ? CheckoutSection.allValues.count : CheckoutSection.valuesWithoutShippingOptions.count
     }
@@ -51,7 +51,8 @@ extension CheckoutProvider: UITableViewDataSource {
     }
     
     private func cartCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutCartTableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutCartTableViewCell.self), for: indexPath) as! CheckoutCartTableViewCell
+        let cellName = String(describing: CheckoutCartTableViewCell.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! CheckoutCartTableViewCell
         let images = cartProducts.map({ $0.productVariant?.image ?? Image() })
         let productVariantIds = cartProducts.map({ $0.productVariant?.id ?? "" })
         cell.configure(with: images, productVariantIds: productVariantIds)
@@ -67,14 +68,16 @@ extension CheckoutProvider: UITableViewDataSource {
         }
     }
     
-    private func shippingAddressAddCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingAddressAddTableCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingAddressAddTableCell.self), for: indexPath) as! CheckoutShippingAddressAddTableCell
+    private func shippingAddressAddCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingAddressAddTableViewCell {
+        let cellName = String(describing: CheckoutShippingAddressAddTableViewCell.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! CheckoutShippingAddressAddTableViewCell
         cell.delegate = delegate
         return cell
     }
     
     private func shippingAddressEditCell(with tableView: UITableView, indexPath: IndexPath, address: Address) -> CheckoutShippingAddressEditTableCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self), for: indexPath) as! CheckoutShippingAddressEditTableCell
+        let cellName = String(describing: CheckoutShippingAddressEditTableCell.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! CheckoutShippingAddressEditTableCell
         cell.delegate = delegate
         cell.configure(with: address)
         return cell
@@ -101,16 +104,18 @@ extension CheckoutProvider: UITableViewDataSource {
         }
     }
     
-    private func paymentAddCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutPaymentAddTableCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutPaymentAddTableCell.self), for: indexPath) as! CheckoutPaymentAddTableCell
+    private func paymentAddCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutPaymentAddTableViewCell {
+        let cellName = String(describing: CheckoutPaymentAddTableViewCell.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! CheckoutPaymentAddTableViewCell
         cell.delegate = delegate
         let type = PaymentAddCellType(rawValue: indexPath.row)
         cell.configure(type: type!)
         return cell
     }
     
-    private func paymentEditCell(with tableView: UITableView, indexPath: IndexPath, selectedType: PaymentType) -> CheckoutSelectedTypeTableCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutSelectedTypeTableCell.self), for: indexPath) as! CheckoutSelectedTypeTableCell
+    private func paymentEditCell(with tableView: UITableView, indexPath: IndexPath, selectedType: PaymentType) -> CheckoutSelectedTypeTableViewCell {
+        let cellName = String(describing: CheckoutSelectedTypeTableViewCell.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! CheckoutSelectedTypeTableViewCell
         cell.delegate = delegate
         cell.configure(type: selectedType)
         return cell
@@ -124,8 +129,9 @@ extension CheckoutProvider: UITableViewDataSource {
         }
     }
     
-    private func paymentCardEditCell(with tableView: UITableView, indexPath: IndexPath, creditCard: CreditCard) -> CheckoutCreditCardEditTableCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutCreditCardEditTableCell.self), for: indexPath) as! CheckoutCreditCardEditTableCell
+    private func paymentCardEditCell(with tableView: UITableView, indexPath: IndexPath, creditCard: CreditCard) -> CheckoutCreditCardEditTableViewCell {
+        let cellName = String(describing: CheckoutCreditCardEditTableViewCell.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! CheckoutCreditCardEditTableViewCell
         cell.delegate = delegate
         cell.configure(with: creditCard)
         return cell
@@ -139,8 +145,9 @@ extension CheckoutProvider: UITableViewDataSource {
         }
     }
     
-    private func paymentBillingAddressEditCell(with tableView: UITableView, indexPath: IndexPath, address: Address) -> CheckoutBillingAddressEditTableCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutBillingAddressEditTableCell.self), for: indexPath) as! CheckoutBillingAddressEditTableCell
+    private func paymentBillingAddressEditCell(with tableView: UITableView, indexPath: IndexPath, address: Address) -> CheckoutBillingAddressEditTableViewCell {
+        let cellName = String(describing: CheckoutBillingAddressEditTableViewCell.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! CheckoutBillingAddressEditTableViewCell
         cell.delegate = delegate
         cell.configure(with: address)
         return cell
@@ -156,26 +163,28 @@ extension CheckoutProvider: UITableViewDataSource {
         }
     }
     
-    private func shippingOptionsEnabledCell(with tableView: UITableView, indexPath: IndexPath, rate: ShippingRate, currencyCode: String, selected: Bool) -> CheckoutShippingOptionsEnabledTableCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingOptionsEnabledTableCell.self), for: indexPath) as! CheckoutShippingOptionsEnabledTableCell
+    private func shippingOptionsEnabledCell(with tableView: UITableView, indexPath: IndexPath, rate: ShippingRate, currencyCode: String, selected: Bool) -> CheckoutShippingOptionsEnabledTableViewCell {
+        let cellName = String(describing: CheckoutShippingOptionsEnabledTableViewCell.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! CheckoutShippingOptionsEnabledTableViewCell
         cell.delegate = delegate
         cell.configure(with: rate, currencyCode: currencyCode, selected: selected)
         return cell
     }
     
-    private func shippingOptionsDisabledCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingOptionsDisabledTableCell {
-        return tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingOptionsDisabledTableCell.self), for: indexPath) as! CheckoutShippingOptionsDisabledTableCell
+    private func shippingOptionsDisabledCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingOptionsDisabledTableViewCell {
+        let cellName = String(describing: CheckoutShippingOptionsDisabledTableViewCell.self)
+        return tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! CheckoutShippingOptionsDisabledTableViewCell
     }
 }
 
 // MARK: - UITableViewDelegate
 
-extension CheckoutProvider: UITableViewDelegate {
+extension CheckoutTableProvider: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if checkout != nil, section == CheckoutSection.shippingOptions.rawValue {
-            return PaymentDetailsFooterView.height
+        guard checkout != nil, section == CheckoutSection.shippingOptions.rawValue else {
+            return 0
         }
-        return 0
+        return PaymentDetailsFooterView.height
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

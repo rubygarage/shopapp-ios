@@ -24,7 +24,7 @@ class CheckboxButton: UIButton {
         }
     }
     
-    // MARK: - Init
+    // MARK: - View lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)

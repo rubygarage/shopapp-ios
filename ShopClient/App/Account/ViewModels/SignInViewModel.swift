@@ -29,11 +29,11 @@ class SignInViewModel: BaseViewModel {
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.checkCresentials()
+            strongSelf.checkCredentials()
         }
     }
     
-    private func checkCresentials() {
+    private func checkCredentials() {
         if emailText.value.isValidAsEmail() && passwordText.value.isValidAsPassword() {
             signIn()
         } else {

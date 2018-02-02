@@ -17,7 +17,7 @@ class CustomerAddressFormViewController: BaseViewController<CustomerAddressFormV
     var selectedAddress: Address?
     var addressAction: AddressAction = .add
     
-    weak var delegate: CustomerAddressFormDelegate?
+    weak var delegate: CustomerAddressFormModelDelegate?
     
     // MARK: - View controller lifecycle
     
@@ -29,6 +29,13 @@ class CustomerAddressFormViewController: BaseViewController<CustomerAddressFormV
         setupViewModel()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let addressFormController = segue.destination as? AddressFormViewController {
+            addressFormController.address = selectedAddress
+            addressFormController.delegate = self
+        }
+    }
+    
     // MARK: - Setup
     
     private func setupViews() {
@@ -38,29 +45,14 @@ class CustomerAddressFormViewController: BaseViewController<CustomerAddressFormV
     private func setupViewModel() {
         viewModel.delegate = delegate
     }
-    
-    private func addAddressCompletion() -> AddressFormCompletion? {
-        return { [weak self] address in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.viewModel.addCustomerAddress(with: address)
-        }
-    }
-    
-    private func updateAddressCompletion() -> AddressFormCompletion? {
-        return { [weak self] address in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.viewModel.updateCustomerAddress(with: address)
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let addressFormController = segue.destination as? AddressFormViewController {
-            addressFormController.address = selectedAddress
-            addressFormController.completion = addressAction == .add ? addAddressCompletion() : updateAddressCompletion()
+}
+
+extension CustomerAddressFormViewController: AddressFormViewModelDelegate {
+    func viewModel(_ model: AddressFormViewModel, didFill address: Address) {
+        if addressAction == .add {
+            viewModel.addCustomerAddress(with: address)
+        } else {
+            viewModel.updateCustomerAddress(with: address)
         }
     }
 }

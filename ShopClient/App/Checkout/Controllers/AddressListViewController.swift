@@ -16,7 +16,7 @@ enum AddressListType {
 class AddressListViewController: BaseViewController<AddressListViewModel> {
     @IBOutlet private weak var tableView: UITableView!
     
-    private var tableProvider: AddressListProvider!
+    private var tableProvider: AddressListTableProvider!
     
     fileprivate var destinationAddress: Address?
     fileprivate var destinationAddressAction: AddressAction = .add
@@ -38,6 +38,14 @@ class AddressListViewController: BaseViewController<AddressListViewModel> {
         loadData()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let customerAddressFormController = segue.destination as? CustomerAddressFormViewController {
+            customerAddressFormController.selectedAddress = destinationAddress
+            customerAddressFormController.delegate = self
+            customerAddressFormController.addressAction = destinationAddressAction
+        }
+    }
+    
     // MARK: - Setup
     
     private func setupViews() {
@@ -49,7 +57,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel> {
         let cellNib = UINib(nibName: cellName, bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: cellName)
         
-        tableProvider = AddressListProvider()
+        tableProvider = AddressListTableProvider()
         tableProvider.delegate = self
         tableView.dataSource = tableProvider
         tableView.delegate = tableProvider
@@ -84,16 +92,6 @@ class AddressListViewController: BaseViewController<AddressListViewModel> {
     private func loadData() {
         viewModel.loadCustomerAddresses()
     }
-    
-    // MARK: - Segues
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let customerAddressFormController = segue.destination as? CustomerAddressFormViewController {
-            customerAddressFormController.selectedAddress = destinationAddress
-            customerAddressFormController.delegate = self
-            customerAddressFormController.addressAction = destinationAddressAction
-        }
-    }
 }
 
 // MARK: - AddressListHeaderViewDelegate
@@ -108,7 +106,7 @@ extension AddressListViewController: AddressListHeaderViewDelegate {
 
 // MARK: - AddressListTableViewCellDelegate
 
-extension AddressListViewController: AddressListTableViewCellDelegate {
+extension AddressListViewController: AddressListTableCellDelegate {
     func tableViewCell(_ cell: AddressListTableViewCell, didSelect address: Address) {
         viewModel.updateCheckoutShippingAddress(with: address)
     }
@@ -132,7 +130,7 @@ extension AddressListViewController: AddressListTableViewCellDelegate {
 
 // MARK: - CustomerAddressFormDelegate
 
-extension AddressListViewController: CustomerAddressFormDelegate {
+extension AddressListViewController: CustomerAddressFormModelDelegate {
     func viewModel(_ model: CustomerAddressFormViewModel, didUpdate address: Address) {
         if needToUpdate {
             viewModel.updateCheckoutShippingAddress(with: address)

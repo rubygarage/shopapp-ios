@@ -1,5 +1,5 @@
 //
-//  AddressListProvider.swift
+//  AddressListTableProvider.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 2/1/18.
@@ -10,21 +10,22 @@ import UIKit
 
 typealias AddressTuple = (address: Address, isSelected: Bool, isDefault: Bool)
 
-class AddressListProvider: NSObject {
+class AddressListTableProvider: NSObject {
     var addresses: [AddressTuple] = []
     
-    weak var delegate: (AddressListTableViewCellDelegate & AddressListHeaderViewDelegate)?
+    weak var delegate: (AddressListTableCellDelegate & AddressListHeaderViewDelegate)?
 }
 
 // MARK: - UITableViewDataSource
 
-extension AddressListProvider: UITableViewDataSource {
+extension AddressListTableProvider: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return addresses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: AddressListTableViewCell.self), for: indexPath) as! AddressListTableViewCell
+        let cellName = String(describing: AddressListTableViewCell.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! AddressListTableViewCell
         let addressTuple = addresses[indexPath.row]
         cell.configure(with: addressTuple.address, isSelected: addressTuple.isSelected, isDefault: addressTuple.isDefault)
         cell.delegate = delegate
@@ -34,7 +35,7 @@ extension AddressListProvider: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension AddressListProvider: UITableViewDelegate {
+extension AddressListTableProvider: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = AddressListTableHeaderView(frame: CGRect.zero)
         view.delegate = delegate

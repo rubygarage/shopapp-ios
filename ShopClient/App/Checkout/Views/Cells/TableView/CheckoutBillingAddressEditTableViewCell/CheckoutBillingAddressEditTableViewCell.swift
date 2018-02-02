@@ -1,5 +1,5 @@
 //
-//  CheckoutBillingAddressEditTableCell.swift
+//  CheckoutBillingAddressEditTableViewCell.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 1/25/18.
@@ -9,10 +9,10 @@
 import UIKit
 
 protocol CheckoutBillingAddressEditCellDelegate: class {
-    func tableViewCellDidTapEditBillingAddress(_ cell: CheckoutBillingAddressEditTableCell)
+    func tableViewCellDidTapEditBillingAddress(_ cell: CheckoutBillingAddressEditTableViewCell)
 }
 
-class CheckoutBillingAddressEditTableCell: UITableViewCell {
+class CheckoutBillingAddressEditTableViewCell: UITableViewCell {
     @IBOutlet private weak var addressTitleLabel: UILabel!
     @IBOutlet private weak var addressDescriptionLabel: UILabel!
     @IBOutlet private weak var editButton: UIButton!

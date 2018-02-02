@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CheckoutAddressFormDelegate: class {
+protocol CheckoutAddressFormModelDelegate: class {
     func viewModelDidUpdateShippingAddress(_ model: CheckoutAddressFormViewModel)
     func viewModel(_ model: CheckoutAddressFormViewModel, didFill billingAddress: Address)
 }
@@ -19,7 +19,7 @@ class CheckoutAddressFormViewModel: BaseViewModel {
     var checkoutId: String!
     var addressType: AddressListType = .shipping
     
-    weak var delegate: CheckoutAddressFormDelegate?
+    weak var delegate: CheckoutAddressFormModelDelegate?
     
     func updateAddress(with address: Address) {
         if addressType == .shipping {

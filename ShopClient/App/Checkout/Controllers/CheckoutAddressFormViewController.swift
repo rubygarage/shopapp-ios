@@ -8,14 +8,14 @@
 
 import UIKit
 
-class CheckoutAddressFormViewController: BaseViewController<CheckoutAddressFormViewModel> {
-    private var destinationAddressFormCompletion: AddressFormCompletion!
-    
+class CheckoutAddressFormViewController: BaseViewController<CheckoutAddressFormViewModel> {    
     var checkoutId: String!
     var addressType: AddressListType = .shipping
     var address: Address?
     
-    weak var delegate: CheckoutAddressFormDelegate?
+    weak var delegate: CheckoutAddressFormModelDelegate?
+    
+    // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         viewModel = CheckoutAddressFormViewModel()
@@ -38,12 +38,13 @@ class CheckoutAddressFormViewController: BaseViewController<CheckoutAddressFormV
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let addressFormController = segue.destination as? AddressFormViewController {
             addressFormController.address = address
-            addressFormController.completion = { [weak self] address in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.viewModel.updateAddress(with: address)
-            }
+            addressFormController.delegate = self
         }
+    }
+}
+
+extension CheckoutAddressFormViewController: AddressFormViewModelDelegate {
+    func viewModel(_ model: AddressFormViewModel, didFill address: Address) {
+        viewModel.updateAddress(with: address)
     }
 }

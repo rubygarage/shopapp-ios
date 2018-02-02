@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AddressListTableViewCellDelegate: class {
+protocol AddressListTableCellDelegate: class {
     func tableViewCell(_ cell: AddressListTableViewCell, didSelect address: Address)
     func tableViewCell(_ cell: AddressListTableViewCell, didTapEdit address: Address)
     func tableViewCell(_ cell: AddressListTableViewCell, didTapDelete address: Address)
@@ -26,7 +26,7 @@ class AddressListTableViewCell: UITableViewCell {
     
     private var address: Address!
     
-    weak var delegate: AddressListTableViewCellDelegate?
+    weak var delegate: AddressListTableCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -62,19 +62,19 @@ class AddressListTableViewCell: UITableViewCell {
     
     // MARK: - Actions
     
-    @IBAction func selectTapped(_ sender: UIButton) {
+    @IBAction func selectButtonDidPress(_ sender: UIButton) {
         delegate?.tableViewCell(self, didSelect: address)
     }
     
-    @IBAction func editTapped(_ sender: UIButton) {
+    @IBAction func editButtonDidPress(_ sender: UIButton) {
         delegate?.tableViewCell(self, didTapEdit: address)
     }
     
-    @IBAction func deleteTapped(_ sender: UIButton) {
+    @IBAction func deleteButtonDidPress(_ sender: UIButton) {
         delegate?.tableViewCell(self, didTapDelete: address)
     }
     
-    @IBAction func defaultAddressTapped(_ sender: UIButton) {
+    @IBAction func defaultAddressButtonDidPress(_ sender: UIButton) {
         delegate?.tableViewCell(self, didTapDefault: address)
     }
 }

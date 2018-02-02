@@ -38,8 +38,9 @@ extension PaymentTypeProvider: UITableViewDataSource {
 
 extension PaymentTypeProvider: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let type = PaymentType(rawValue: indexPath.row) {
-            delegate?.provider(self, didSelect: type)
+        guard let delegate = delegate, let type = PaymentType(rawValue: indexPath.row) else {
+            return
         }
+        delegate.provider(self, didSelect: type)
     }
 }

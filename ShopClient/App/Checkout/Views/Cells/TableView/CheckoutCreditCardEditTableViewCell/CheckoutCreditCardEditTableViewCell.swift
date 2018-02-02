@@ -1,5 +1,5 @@
 //
-//  CheckoutPaymentEditTableCell.swift
+//  CheckoutCreditCardEditTableViewCell.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 1/3/18.
@@ -9,10 +9,10 @@
 import UIKit
 
 protocol CheckoutCreditCardEditTableCellDelegate: class {
-    func tableViewCellDidTapEditCard(_ cell: CheckoutCreditCardEditTableCell)
+    func tableViewCellDidTapEditCard(_ cell: CheckoutCreditCardEditTableViewCell)
 }
 
-class CheckoutCreditCardEditTableCell: UITableViewCell {
+class CheckoutCreditCardEditTableViewCell: UITableViewCell {
     @IBOutlet private weak var cardNumberLabel: UILabel!
     @IBOutlet private weak var expirationDateLabel: UILabel!
     @IBOutlet private weak var holderNameLabel: UILabel!

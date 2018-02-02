@@ -1,5 +1,5 @@
 //
-//  CheckoutPaymentAddTableCell.swift
+//  CheckoutPaymentAddTableViewCell.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 12/29/17.
@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CheckoutPaymentAddCellDelegate: class {
-    func tableViewCell(_ cell: CheckoutPaymentAddTableCell, didTapAdd paymentType: PaymentAddCellType)
+    func tableViewCell(_ cell: CheckoutPaymentAddTableViewCell, didTapAdd paymentType: PaymentAddCellType)
 }
 
 enum PaymentAddCellType: Int {
@@ -20,7 +20,7 @@ enum PaymentAddCellType: Int {
     static let allValues = [type, card, billingAddress]
 }
 
-class CheckoutPaymentAddTableCell: UITableViewCell {
+class CheckoutPaymentAddTableViewCell: UITableViewCell {
     @IBOutlet private weak var addPaymentButton: BlackButton!
     
     private var paymentRow: PaymentAddCellType = .type

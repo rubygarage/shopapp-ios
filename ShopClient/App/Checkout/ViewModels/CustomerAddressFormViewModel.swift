@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CustomerAddressFormDelegate: class {
+protocol CustomerAddressFormModelDelegate: class {
     func viewModel(_ model: CustomerAddressFormViewModel, didUpdate address: Address)
 }
 
@@ -16,7 +16,7 @@ class CustomerAddressFormViewModel: BaseViewModel {
     private let addAddressUseCase = AddAddressUseCase()
     private let updateAddressUseCase = UpdateAddressUseCase()
     
-    weak var delegate: CustomerAddressFormDelegate?
+    weak var delegate: CustomerAddressFormModelDelegate?
     
     func addCustomerAddress(with address: Address) {
         state.onNext(.loading(showHud: true))
