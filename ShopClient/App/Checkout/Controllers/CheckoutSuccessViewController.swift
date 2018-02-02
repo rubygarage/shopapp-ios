@@ -76,10 +76,10 @@ fileprivate extension UILabel {
     }
 }
 
-// MARK: - UnderlinedButtonProtocol
+// MARK: - UnderlinedButtonDelegate
 
-extension CheckoutSuccessViewController: UnderlinedButtonProtocol {
-    func didChangeState(isHighlighted: Bool) {
+extension CheckoutSuccessViewController: UnderlinedButtonDelegate {
+    func underlinedButton(_ button: UnderlinedButton, didChangeState isHighlighted: Bool) {
         continueShoppingUnderlineView.isHidden = isHighlighted
     }
 }

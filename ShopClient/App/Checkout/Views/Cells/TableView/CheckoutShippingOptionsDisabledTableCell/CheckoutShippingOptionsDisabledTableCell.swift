@@ -11,6 +11,8 @@ import UIKit
 class CheckoutShippingOptionsDisabledTableCell: UITableViewCell {
     @IBOutlet private weak var addAddressLabel: UILabel!
     
+    // MARK: - View lifecycle
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

@@ -34,7 +34,10 @@ class AddressFormViewModel: BaseViewModel {
     }
     var submitTapped: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
-            self?.submitAction()
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.submitAction()
         }
     }
     

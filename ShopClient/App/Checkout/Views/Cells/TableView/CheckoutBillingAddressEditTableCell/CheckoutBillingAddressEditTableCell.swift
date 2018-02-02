@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol CheckoutBillingAddressEditCellProtocol: class {
-    func didTapEditBillingAddress()
+protocol CheckoutBillingAddressEditCellDelegate: class {
+    func tableViewCellDidTapEditBillingAddress(_ cell: CheckoutBillingAddressEditTableCell)
 }
 
 class CheckoutBillingAddressEditTableCell: UITableViewCell {
@@ -17,7 +17,7 @@ class CheckoutBillingAddressEditTableCell: UITableViewCell {
     @IBOutlet private weak var addressDescriptionLabel: UILabel!
     @IBOutlet private weak var editButton: UIButton!
     
-    weak var delegate: CheckoutBillingAddressEditCellProtocol?
+    weak var delegate: CheckoutBillingAddressEditCellDelegate?
     
     // MARK: - View lifecycle
     
@@ -36,6 +36,6 @@ class CheckoutBillingAddressEditTableCell: UITableViewCell {
     // MARK: - Actions
     
     @IBAction func editTapped(_ sender: UIButton) {
-        delegate?.didTapEditBillingAddress()
+        delegate?.tableViewCellDidTapEditBillingAddress(self)
     }
 }

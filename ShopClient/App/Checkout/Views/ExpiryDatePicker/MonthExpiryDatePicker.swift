@@ -12,7 +12,6 @@ class MonthExpiryDatePicker: ExpiryDatePicker {
     override var placeholder: String {
         return NSLocalizedString("Placeholder.Month", comment: String())
     }
-    
     override var data: [String] {
         var monthes = [String]()
         for index in 1...Calendar.current.monthSymbols.count {

@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol CheckoutCreditCardEditTableCellProtocol: class {
-    func didTapEditCard()
+protocol CheckoutCreditCardEditTableCellDelegate: class {
+    func tableViewCellDidTapEditCard(_ cell: CheckoutCreditCardEditTableCell)
 }
 
 class CheckoutCreditCardEditTableCell: UITableViewCell {
@@ -18,7 +18,7 @@ class CheckoutCreditCardEditTableCell: UITableViewCell {
     @IBOutlet private weak var holderNameLabel: UILabel!
     @IBOutlet private weak var editButton: UIButton!
     
-    weak var delegate: CheckoutCreditCardEditTableCellProtocol?
+    weak var delegate: CheckoutCreditCardEditTableCellDelegate?
     
     // MARK: - View lifecycle
     
@@ -38,6 +38,6 @@ class CheckoutCreditCardEditTableCell: UITableViewCell {
     // MARK: - Actions
     
     @IBAction func editTapped(_ sender: UIButton) {
-        delegate?.didTapEditCard()
+        delegate?.tableViewCellDidTapEditCard(self)
     }
 }

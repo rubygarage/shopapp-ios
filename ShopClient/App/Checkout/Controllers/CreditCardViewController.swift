@@ -64,7 +64,10 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
         
         viewModel.isCardDataValid
             .subscribe(onNext: { [weak self] (isCardDataValid) in
-                self?.submitButton.isEnabled = isCardDataValid
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.submitButton.isEnabled = isCardDataValid
             })
             .disposed(by: disposeBag)
         
@@ -74,13 +77,19 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
         
         viewModel.holderNameErrorMessage
             .subscribe(onNext: { [weak self] errorMessage in
-                self?.holderNameTextFieldView.errorMessage = errorMessage
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.holderNameTextFieldView.errorMessage = errorMessage
             })
             .disposed(by: disposeBag)
         
         viewModel.cardNumberErrorMessage
             .subscribe(onNext: { [weak self] errorMessage in
-                self?.cardNumberTextFieldView.errorMessage = errorMessage
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.cardNumberTextFieldView.errorMessage = errorMessage
             })
             .disposed(by: disposeBag)
     }

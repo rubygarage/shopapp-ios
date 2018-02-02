@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol CheckoutPaymentAddCellProtocol: class {
-    func didTapAddPayment(type: PaymentAddCellType)
+protocol CheckoutPaymentAddCellDelegate: class {
+    func tableViewCell(_ cell: CheckoutPaymentAddTableCell, didTapAdd paymentType: PaymentAddCellType)
 }
 
 enum PaymentAddCellType: Int {
@@ -25,7 +25,7 @@ class CheckoutPaymentAddTableCell: UITableViewCell {
     
     private var paymentRow: PaymentAddCellType = .type
     
-    weak var delegate: CheckoutPaymentAddCellProtocol?
+    weak var delegate: CheckoutPaymentAddCellDelegate?
     
     // MARK: - View lifecycle
     
@@ -50,6 +50,6 @@ class CheckoutPaymentAddTableCell: UITableViewCell {
     // MARK: - Actions
     
     @IBAction func addPaymentTapped(_ sender: BlackButton) {
-        delegate?.didTapAddPayment(type: paymentRow)
+        delegate?.tableViewCell(self, didTapAdd: paymentRow)
     }
 }

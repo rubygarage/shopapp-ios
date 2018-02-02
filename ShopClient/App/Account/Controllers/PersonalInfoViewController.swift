@@ -131,10 +131,10 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
     }
 }
 
-// MARK: - UnderlinedButtonProtocol
+// MARK: - UnderlinedButtonDelegate
 
-extension PersonalInfoViewController: UnderlinedButtonProtocol {
-    func didChangeState(isHighlighted: Bool) {
+extension PersonalInfoViewController: UnderlinedButtonDelegate {
+    func underlinedButton(_ button: UnderlinedButton, didChangeState isHighlighted: Bool) {
         changePasswordUnderlineView.isHidden = isHighlighted
     }
 }

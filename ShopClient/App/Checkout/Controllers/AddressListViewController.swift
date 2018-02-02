@@ -96,36 +96,36 @@ class AddressListViewController: BaseViewController<AddressListViewModel> {
     }
 }
 
-// MARK: - AddressListHeaderViewProtocol
+// MARK: - AddressListHeaderViewDelegate
 
-extension AddressListViewController: AddressListHeaderViewProtocol {
-    func didTapAddNewAddress() {
+extension AddressListViewController: AddressListHeaderViewDelegate {
+    func tableViewHeaderDidTapAddAddress(_ header: AddressListTableHeaderView) {
         destinationAddress = nil
         destinationAddressAction = .add
         performSegue(withIdentifier: SegueIdentifiers.toCustomerAddressForm, sender: self)
     }
 }
 
-// MARK: - AddressListTableViewCellProtocol
+// MARK: - AddressListTableViewCellDelegate
 
-extension AddressListViewController: AddressListTableViewCellProtocol {
-    func didTapSelect(with address: Address) {
+extension AddressListViewController: AddressListTableViewCellDelegate {
+    func tableViewCell(_ cell: AddressListTableViewCell, didSelect address: Address) {
         viewModel.updateCheckoutShippingAddress(with: address)
     }
     
-    func didTapEdit(with address: Address) {
+    func tableViewCell(_ cell: AddressListTableViewCell, didTapEdit address: Address) {
         destinationAddress = address
         destinationAddressAction = .edit
         needToUpdate = selectedAddress?.isEqual(to: address) ?? false
         performSegue(withIdentifier: SegueIdentifiers.toCustomerAddressForm, sender: self)
     }
     
-    func didTapDelete(with address: Address) {
+    func tableViewCell(_ cell: AddressListTableViewCell, didTapDelete address: Address) {
         let isSelected = viewModel.selectedAddress?.isEqual(to: address) ?? false
         viewModel.deleteCustomerAddress(with: address, isSelected: isSelected)
     }
     
-    func didTapDefault(with address: Address) {
+    func tableViewCell(_ cell: AddressListTableViewCell, didTapDefault address: Address) {
         viewModel.updateCustomerDefaultAddress(with: address)
     }
 }

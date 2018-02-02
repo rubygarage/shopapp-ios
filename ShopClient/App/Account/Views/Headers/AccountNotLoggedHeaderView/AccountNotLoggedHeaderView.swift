@@ -67,10 +67,10 @@ class AccountNotLoggedHeaderView: UIView {
     }
 }
 
-// MARK: - UnderlinedButtonProtocol
+// MARK: - UnderlinedButtonDelegate
 
-extension AccountNotLoggedHeaderView: UnderlinedButtonProtocol {
-    func didChangeState(isHighlighted: Bool) {
+extension AccountNotLoggedHeaderView: UnderlinedButtonDelegate {
+    func underlinedButton(_ button: UnderlinedButton, didChangeState isHighlighted: Bool) {
         createAccountUnderlinedView.isHidden = isHighlighted
     }
 }

@@ -46,11 +46,14 @@ class CheckoutViewModel: BaseViewModel {
     private var cartItemsSingle: Single<[CartProduct]> {
         return Single.create(subscribe: { [weak self] (event) in
             self?.cartProductListUseCase.getCartProductList({ [weak self] (result, error) in
+                guard let strongSelf = self else {
+                    return
+                }
                 if let error = error {
                     event(.error(error))
                 }
                 if let result = result {
-                    self?.cartItems = result
+                    strongSelf.cartItems = result
                     event(.success(result))
                 }
             })
@@ -75,7 +78,10 @@ class CheckoutViewModel: BaseViewModel {
     
     var placeOrderPressed: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
-            self?.placeOrderAction()
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.placeOrderAction()
         }
     }
     var isCheckoutValid: Observable<Bool> {
@@ -89,11 +95,17 @@ class CheckoutViewModel: BaseViewModel {
     func loadData(with disposeBag: DisposeBag) {
         state.onNext(.loading(showHud: true))
         checkoutCreateSingle.subscribe(onSuccess: { [weak self] (checkout) in
-            self?.checkout.value = checkout
-            self?.getCustomer()
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.checkout.value = checkout
+            strongSelf.getCustomer()
         }, onError: { [weak self] (error) in
+            guard let strongSelf = self else {
+                return
+            }
             let castedError = error as? RepoError
-            self?.state.onNext(.error(error: castedError))
+            strongSelf.state.onNext(.error(error: castedError))
         })
         .disposed(by: disposeBag)
     }
@@ -102,12 +114,15 @@ class CheckoutViewModel: BaseViewModel {
         state.onNext(.loading(showHud: true))
         let checkoutId = checkout.value?.id ?? ""
         checkoutUseCase.getCheckout(with: checkoutId) { [weak self] (result, error) in
+            guard let strongSelf = self else {
+                return
+            }
             if let error = error {
-                self?.state.onNext(.error(error: error))
+                strongSelf.state.onNext(.error(error: error))
             }
             if let checkout = result {
-                self?.checkout.value = checkout
-                self?.state.onNext(.content)
+                strongSelf.checkout.value = checkout
+                strongSelf.state.onNext(.content)
             }
         }
     }
@@ -116,12 +131,15 @@ class CheckoutViewModel: BaseViewModel {
         state.onNext(.loading(showHud: true))
         let checkoutId = checkout.value?.id ?? ""
         checkoutUseCase.updateCheckoutShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
+            guard let strongSelf = self else {
+                return
+            }
             if let error = error {
-                self?.state.onNext(.error(error: error))
+                strongSelf.state.onNext(.error(error: error))
             } else if let success = success, success == true {
-                self?.getCheckout()
+                strongSelf.getCheckout()
             } else {
-                self?.state.onNext(.error(error: RepoError()))
+                strongSelf.state.onNext(.error(error: RepoError()))
             }
         }
     }
@@ -142,12 +160,15 @@ class CheckoutViewModel: BaseViewModel {
         if let checkoutId = checkout.value?.id {
             state.onNext(.loading(showHud: true))
             checkoutUseCase.updateShippingRate(with: checkoutId, rate: rate, callback: { [weak self] (result, error) in
+                guard let strongSelf = self else {
+                    return
+                }
                 if let error = error {
-                    self?.state.onNext(.error(error: error))
+                    strongSelf.state.onNext(.error(error: error))
                 }
                 if let checkout = result {
-                    self?.checkout.value = checkout
-                    self?.state.onNext(.content)
+                    strongSelf.checkout.value = checkout
+                    strongSelf.state.onNext(.content)
                 }
             })
         }
@@ -161,10 +182,13 @@ class CheckoutViewModel: BaseViewModel {
     
     private func getCustomer() {
         customerUseCase.getCustomer { [weak self] (customer, _) in
+            guard let strongSelf = self else {
+                return
+            }
             if let address = customer?.defaultAddress {
-                self?.updateCheckoutShippingAddress(with: address)
+                strongSelf.updateCheckoutShippingAddress(with: address)
             } else {
-                self?.state.onNext(.content)
+                strongSelf.state.onNext(.content)
             }
         }
     }
@@ -209,9 +233,12 @@ class CheckoutViewModel: BaseViewModel {
     
     private func clearCart(with order: Order) {
         deleteCartProductsUseCase.clearCart { [weak self] _ in
-            self?.order = order
-            self?.checkoutSuccedded.onNext()
-            self?.state.onNext(.content)
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.order = order
+            strongSelf.checkoutSuccedded.onNext()
+            strongSelf.state.onNext(.content)
         }
     }
 }

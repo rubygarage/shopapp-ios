@@ -1435,10 +1435,10 @@
 		61005B3E2004E3BB00351764 /* Checkout */ = {
 			isa = PBXGroup;
 			children = (
-				612812C8202380E20048013B /* Providers */,
 				61005B3F2004E3D200351764 /* Controllers */,
 				61005B412004E46E00351764 /* DataSources */,
 				61005B422004E47800351764 /* Delegates */,
+				612812C8202380E20048013B /* Providers */,
 				61005B402004E45E00351764 /* ViewModels */,
 				61005B4320052BC300351764 /* Views */,
 				61236D3C1FEA6E2500D64198 /* Checkout.storyboard */,

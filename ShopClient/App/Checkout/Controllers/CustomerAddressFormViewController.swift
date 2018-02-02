@@ -19,6 +19,8 @@ class CustomerAddressFormViewController: BaseViewController<CustomerAddressFormV
     
     weak var delegate: CustomerAddressFormDelegate?
     
+    // MARK: - View controller lifecycle
+    
     override func viewDidLoad() {
         viewModel = CustomerAddressFormViewModel()
         super.viewDidLoad()
@@ -26,6 +28,8 @@ class CustomerAddressFormViewController: BaseViewController<CustomerAddressFormV
         setupViews()
         setupViewModel()
     }
+    
+    // MARK: - Setup
     
     private func setupViews() {
         title = "ControllerTitle.AddNewAddress".localizable

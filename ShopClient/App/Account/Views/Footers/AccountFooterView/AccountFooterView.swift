@@ -58,10 +58,10 @@ class AccountFooterView: UIView {
     }
 }
 
-// MARK: - UnderlinedButtonProtocol
+// MARK: - UnderlinedButtonDelegate
 
-extension AccountFooterView: UnderlinedButtonProtocol {
-    func didChangeState(isHighlighted: Bool) {
+extension AccountFooterView: UnderlinedButtonDelegate {
+    func underlinedButton(_ button: UnderlinedButton, didChangeState isHighlighted: Bool) {
         logoutUnderlineView.isHidden = isHighlighted
     }
 }

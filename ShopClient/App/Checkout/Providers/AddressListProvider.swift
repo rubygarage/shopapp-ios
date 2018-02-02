@@ -13,7 +13,7 @@ typealias AddressTuple = (address: Address, isSelected: Bool, isDefault: Bool)
 class AddressListProvider: NSObject {
     var addresses: [AddressTuple] = []
     
-    weak var delegate: (AddressListTableViewCellProtocol & AddressListHeaderViewProtocol)?
+    weak var delegate: (AddressListTableViewCellDelegate & AddressListHeaderViewDelegate)?
 }
 
 // MARK: - UITableViewDataSource

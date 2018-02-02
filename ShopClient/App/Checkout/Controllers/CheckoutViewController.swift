@@ -81,20 +81,29 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     private func setupViewModel() {
         viewModel.checkout.asObservable()
             .subscribe(onNext: { [weak self] _ in
-                self?.tableView.reloadData()
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
         
         viewModel.isCheckoutValid
             .subscribe(onNext: { [weak self] enabled in
-                self?.placeOrderButton.isEnabled = enabled
-                self?.placeOrderButton.backgroundColor = enabled ? kPlaceOrderButtonColorEnabled : kPlaceOrderButtonColorDisabled
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.placeOrderButton.isEnabled = enabled
+                strongSelf.placeOrderButton.backgroundColor = enabled ? kPlaceOrderButtonColorEnabled : kPlaceOrderButtonColorDisabled
             })
             .disposed(by: disposeBag)
         
         viewModel.checkoutSuccedded
             .subscribe(onNext: { [weak self] _ in
-                self?.performSegue(withIdentifier: SegueIdentifiers.toSuccessCheckout, sender: self)
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.performSegue(withIdentifier: SegueIdentifiers.toSuccessCheckout, sender: strongSelf)
             })
             .disposed(by: disposeBag)
         
@@ -135,7 +144,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             guard let strongSelf = self else {
                 return
             }
-//            strongSelf.navigationController?.popViewController(animated: true)
             strongSelf.viewModel.updateCheckoutShippingAddress(with: address)
         }
     }
@@ -147,7 +155,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             }
             strongSelf.viewModel.billingAddress.value = address
             strongSelf.reloadTable()
-//            strongSelf.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -208,11 +215,11 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     }
 }
 
-// MARK: - CheckoutPaymentAddCellProtocol
+// MARK: - CheckoutPaymentAddCellDelegate
 
-extension CheckoutViewController: CheckoutPaymentAddCellProtocol {
-    func didTapAddPayment(type: PaymentAddCellType) {
-        switch type {
+extension CheckoutViewController: CheckoutPaymentAddCellDelegate {
+    func tableViewCell(_ cell: CheckoutPaymentAddTableCell, didTapAdd paymentType: PaymentAddCellType) {
+        switch paymentType {
         case PaymentAddCellType.type:
             performSegue(withIdentifier: SegueIdentifiers.toPaymentType, sender: self)
         case PaymentAddCellType.card:
@@ -223,10 +230,10 @@ extension CheckoutViewController: CheckoutPaymentAddCellProtocol {
     }
 }
 
-// MARK: - CheckoutSelectedTypeTableCellProtocol
+// MARK: - CheckoutSelectedTypeTableCellDelegate
 
-extension CheckoutViewController: CheckoutSelectedTypeTableCellProtocol {
-    func didTapEditPaymentType() {
+extension CheckoutViewController: CheckoutSelectedTypeTableCellDelegate {
+    func tableViewCellDidTapEditPaymentType(_ cell: CheckoutSelectedTypeTableCell) {
         performSegue(withIdentifier: SegueIdentifiers.toPaymentType, sender: self)
     }
 }
@@ -276,18 +283,18 @@ extension CheckoutViewController: CheckoutTableDataSourceProtocol {
     }
 }
 
-// MARK: - CheckoutShippingAddressAddCellProtocol
+// MARK: - CheckoutShippingAddressAddCellDelegate
 
-extension CheckoutViewController: CheckoutShippingAddressAddCellProtocol {
-    func didTapAddNewAddress() {
+extension CheckoutViewController: CheckoutShippingAddressAddCellDelegate {
+    func tableViewCellDidTapAddNewAddress(_ cell: CheckoutShippingAddressAddTableCell) {
         openAddressesController(with: .shipping)
     }
 }
 
-// MARK: - CheckoutShippingOptionsEnabledTableCellProtocol
+// MARK: - CheckoutShippingOptionsEnabledTableCellDelegate
 
-extension CheckoutViewController: CheckoutShippingOptionsEnabledTableCellProtocol {
-    func didSelect(shippingRate: ShippingRate) {
+extension CheckoutViewController: CheckoutShippingOptionsEnabledTableCellDelegate {
+    func tableViewCell(_ cell: CheckoutShippingOptionsEnabledTableCell, didSelect shippingRate: ShippingRate) {
         viewModel.updateShippingRate(with: shippingRate)
     }
 }
@@ -301,10 +308,10 @@ extension CheckoutViewController: PaymentTypeViewControllerProtocol {
     }
 }
 
-// MARK: - CheckoutCreditCardEditTableCellProtocol
+// MARK: - CheckoutCreditCardEditTableCellDelegate
 
-extension CheckoutViewController: CheckoutCreditCardEditTableCellProtocol {
-    func didTapEditCard() {
+extension CheckoutViewController: CheckoutCreditCardEditTableCellDelegate {
+    func tableViewCellDidTapEditCard(_ cell: CheckoutCreditCardEditTableCell) {
         performSegue(withIdentifier: SegueIdentifiers.toCreditCard, sender: self)
     }
 }
@@ -317,10 +324,10 @@ extension CheckoutViewController: CheckoutShippingAddressEditCellProtocol {
     }
 }
 
-// MARK: - CheckoutBillingAddressEditCellProtocol
+// MARK: - CheckoutBillingAddressEditCellDelegate
 
-extension CheckoutViewController: CheckoutBillingAddressEditCellProtocol {
-    func didTapEditBillingAddress() {
+extension CheckoutViewController: CheckoutBillingAddressEditCellDelegate {
+    func tableViewCellDidTapEditBillingAddress(_ cell: CheckoutBillingAddressEditTableCell) {
         openAddressesController(with: .billing)
     }
 }

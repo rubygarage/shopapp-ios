@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol CheckoutShippingOptionsEnabledTableCellProtocol: class {
-    func didSelect(shippingRate: ShippingRate)
+protocol CheckoutShippingOptionsEnabledTableCellDelegate: class {
+    func tableViewCell(_ cell: CheckoutShippingOptionsEnabledTableCell, didSelect shippingRate: ShippingRate)
 }
 
 class CheckoutShippingOptionsEnabledTableCell: UITableViewCell {
@@ -19,7 +19,7 @@ class CheckoutShippingOptionsEnabledTableCell: UITableViewCell {
     
     private var rate: ShippingRate!
     
-    weak var delegate: CheckoutShippingOptionsEnabledTableCellProtocol?
+    weak var delegate: CheckoutShippingOptionsEnabledTableCellDelegate?
     
     // MARK: - View Lifecycle
     
@@ -41,6 +41,6 @@ class CheckoutShippingOptionsEnabledTableCell: UITableViewCell {
     // MARK: - Actions
     
     @IBAction func selectShippingRateTapped(_ sender: UIButton) {
-        delegate?.didSelect(shippingRate: rate)
+        delegate?.tableViewCell(self, didSelect: rate)
     }
 }

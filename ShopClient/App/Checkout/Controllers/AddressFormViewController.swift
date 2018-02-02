@@ -91,7 +91,10 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
         
         viewModel.isAddressValid
             .subscribe(onNext: { [weak self] (isValid) in
-                self?.submitButton.isEnabled = isValid
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.submitButton.isEnabled = isValid
             })
             .disposed(by: disposeBag)
         

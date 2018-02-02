@@ -23,6 +23,8 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
     
     weak var delegate: PaymentTypeViewControllerProtocol?
     
+    // MARK: - View controller lifecycle
+    
     override func viewDidLoad() {
         viewModel = PaymentTypeViewModel()
         super.viewDidLoad()
@@ -30,6 +32,8 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
         setupViews()
         setupTableView()
     }
+    
+    // MARK: - Setup
     
     private func setupViews() {
         title = "ControllerTitle.PaymentType".localizable

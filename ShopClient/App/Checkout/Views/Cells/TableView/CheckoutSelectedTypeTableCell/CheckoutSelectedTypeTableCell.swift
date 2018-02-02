@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol CheckoutSelectedTypeTableCellProtocol: class {
-    func didTapEditPaymentType()
+protocol CheckoutSelectedTypeTableCellDelegate: class {
+    func tableViewCellDidTapEditPaymentType(_ cell: CheckoutSelectedTypeTableCell)
 }
 
 class CheckoutSelectedTypeTableCell: UITableViewCell {
@@ -17,7 +17,7 @@ class CheckoutSelectedTypeTableCell: UITableViewCell {
     @IBOutlet private weak var paymentTypeLabel: UILabel!
     @IBOutlet private weak var editButton: UIButton!
     
-    weak var delegate: CheckoutSelectedTypeTableCellProtocol?
+    weak var delegate: CheckoutSelectedTypeTableCellDelegate?
     
     // MARK: - View lifecycle
     
@@ -46,6 +46,6 @@ class CheckoutSelectedTypeTableCell: UITableViewCell {
     // MARK: - Actions
     
     @IBAction func editTapped(_ sender: UIButton) {
-        delegate?.didTapEditPaymentType()
+        delegate?.tableViewCellDidTapEditPaymentType(self)
     }
 }

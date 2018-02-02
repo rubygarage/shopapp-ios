@@ -18,14 +18,14 @@ class CheckboxButton: UIButton {
             updateUI()
         }
     }
-
     override var isSelected: Bool {
         didSet {
             updateUI()
         }
     }
     
-    // MARK: - init
+    // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

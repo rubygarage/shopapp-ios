@@ -28,7 +28,10 @@ class CreditCardViewModel: BaseViewModel {
     }
     var submitTapped: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
-            self?.validateData()
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.validateData()
         }
     }
     
