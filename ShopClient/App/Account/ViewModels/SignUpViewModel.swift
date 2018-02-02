@@ -38,6 +38,10 @@ class SignUpViewModel: BaseViewModel {
         }
     }
     
+    override func tryAgain() {
+        checkCresentials()
+    }
+    
     func loadPolicies() {
         shopUseCase.getShop { [weak self] shop in
             guard let strongSelf = self, let privacyPolicy = shop.privacyPolicy, privacyPolicy.body?.isEmpty == false, let termsOfService = shop.termsOfService, termsOfService.body?.isEmpty == false else {

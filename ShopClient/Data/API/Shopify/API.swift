@@ -9,10 +9,10 @@
 import MobileBuySDK
 import KeychainSwift
 
-private let kShopifyStorefrontAccessToken = "fd719b8c3c31ea4ea5f4078e8b9a759f"
-private let kShopifyStorefrontURL = "celawojev.myshopify.com"
+private let kShopifyStorefrontAccessToken = "b28324e0f4892fe4a0f387f4a82bd7f9"
+private let kShopifyStorefrontURL = "rubygarageshop.myshopify.com"
 private let kShopifyItemsMaxCount: Int32 = 250
-private let kShopifyStoreName = "celawojev"
+private let kShopifyStoreName = "rubygarageshop"
 private let kMerchantID = "merchant.com.rubygarage.shopclient.test.temp"
 private let kShopifyPaymetTypeApplePay = "apple_pay"
 private let kShopifyRetryFinite = 10
@@ -188,7 +188,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
                 let error = self?.process(error: responseError)
                 callback(false, error)
             } else {
-                callback(false, ContentError())
+                let responseError = self?.process(error: error)
+                callback(false, responseError)
             }
         })
         run(task: task, callback: callback)
