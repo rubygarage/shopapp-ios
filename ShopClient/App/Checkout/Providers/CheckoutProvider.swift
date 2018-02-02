@@ -1,38 +1,35 @@
 //
-//  CheckoutTableDataSource.swift
+//  CheckoutProvider.swift
 //  ShopClient
 //
-//  Created by Evgeniy Antonov on 12/20/17.
-//  Copyright © 2017 Evgeniy Antonov. All rights reserved.
+//  Created by Evgeniy Antonov on 2/2/18.
+//  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
 import UIKit
 
-protocol CheckoutCombinedDelegate: CheckoutTableDataSourceProtocol, CheckoutShippingAddressAddCellDelegate, CheckoutShippingAddressEditCellDelegate, CheckoutPaymentAddCellDelegate, CheckoutTableDelegateProtocol, CheckoutCartTableViewCellDelegate, CheckoutCreditCardEditTableCellDelegate, CheckoutShippingOptionsEnabledTableCellDelegate, PaymentTypeViewControllerDelegate, CheckoutSelectedTypeTableCellDelegate, CheckoutBillingAddressEditCellDelegate {}
-
-protocol CheckoutTableDataSourceProtocol: class {
-    func cartProducts() -> [CartProduct]
-    func shippingAddress() -> Address?
-    func billingAddress() -> Address?
-    func creditCard() -> CreditCard?
-    func availableShippingRates() -> [ShippingRate]?
-    func selectedPaymentType() -> PaymentType?
+class CheckoutProvider: NSObject {
+    var checkout: Checkout?
+    var cartProducts: [CartProduct] = []
+    var billingAddress: Address?
+    var creditCard: CreditCard?
+    var selectedPaymentType: PaymentType?
+    
+    weak var delegate: CheckoutCombinedDelegate?
 }
 
-class CheckoutTableDataSource: NSObject, UITableViewDataSource {
-    weak var delegate: CheckoutCombinedDelegate?
-    
-    // MARK: - UITableViewDataSource
-    
+// MARK: - UITableViewDataSource
+
+extension CheckoutProvider: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return delegate?.selectedPaymentType() == .creditCard ? CheckoutSection.allValues.count : CheckoutSection.valuesWithoutShippingOptions.count
+        return selectedPaymentType == .creditCard ? CheckoutSection.allValues.count : CheckoutSection.valuesWithoutShippingOptions.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == CheckoutSection.shippingOptions.rawValue {
-            return delegate?.availableShippingRates()?.count ?? 1
+            return checkout?.availableShippingRates?.count ?? 1
         } else if section == CheckoutSection.payment.rawValue {
-            return delegate?.selectedPaymentType() == .creditCard ? PaymentAddCellType.allValues.count : 1
+            return selectedPaymentType == .creditCard ? PaymentAddCellType.allValues.count : 1
         }
         return 1
     }
@@ -52,19 +49,17 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
         }
     }
     
-    // MARK: - Private
-    
     private func cartCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutCartTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutCartTableViewCell.self), for: indexPath) as! CheckoutCartTableViewCell
-        if let images = delegate?.cartProducts().map({ $0.productVariant?.image ?? Image() }), let productVariantIds = delegate?.cartProducts().map({ $0.productVariant?.id ?? "" }) {
-            cell.configure(with: images, productVariantIds: productVariantIds)
-            cell.cellDelegate = delegate
-        }
+        let images = cartProducts.map({ $0.productVariant?.image ?? Image() })
+        let productVariantIds = cartProducts.map({ $0.productVariant?.id ?? "" })
+        cell.configure(with: images, productVariantIds: productVariantIds)
+        cell.cellDelegate = delegate
         return cell
     }
     
     private func shippingAddressCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        if let shippingAddress = delegate?.shippingAddress() {
+        if let shippingAddress = checkout?.shippingAddress {
             return shippingAddressEditCell(with: tableView, indexPath: indexPath, address: shippingAddress)
         } else {
             return shippingAddressAddCell(with: tableView, indexPath: indexPath)
@@ -98,7 +93,7 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     }
     
     private func paymentTypeCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        if let selectedType = delegate?.selectedPaymentType() {
+        if let selectedType = selectedPaymentType {
             return paymentEditCell(with: tableView, indexPath: indexPath, selectedType: selectedType)
         } else {
             return paymentAddCell(with: tableView, indexPath: indexPath)
@@ -121,7 +116,7 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     }
     
     private func paymentCardCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        if let card = delegate?.creditCard() {
+        if let card = creditCard {
             return paymentCardEditCell(with: tableView, indexPath: indexPath, creditCard: card)
         } else {
             return paymentAddCell(with: tableView, indexPath: indexPath)
@@ -136,7 +131,7 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     }
     
     private func paymentBillingAddressCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        if let address = delegate?.billingAddress() {
+        if let address = billingAddress {
             return paymentBillingAddressEditCell(with: tableView, indexPath: indexPath, address: address)
         } else {
             return paymentAddCell(with: tableView, indexPath: indexPath)
@@ -151,9 +146,9 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     }
     
     private func shippingOptionsCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        if delegate?.shippingAddress() != nil, let rates = delegate?.availableShippingRates(), let currencyCode = delegate?.checkout()?.currencyCode {
+        if checkout?.shippingAddress != nil, let rates = checkout?.availableShippingRates, let currencyCode = checkout?.currencyCode {
             let rate = rates[indexPath.row]
-            let selected = delegate?.checkout()?.shippingLine?.handle == rate.handle
+            let selected = checkout?.shippingLine?.handle == rate.handle
             return shippingOptionsEnabledCell(with: tableView, indexPath: indexPath, rate: rate, currencyCode: currencyCode, selected: selected)
         } else {
             return shippingOptionsDisabledCell(with: tableView, indexPath: indexPath)
@@ -169,5 +164,41 @@ class CheckoutTableDataSource: NSObject, UITableViewDataSource {
     
     private func shippingOptionsDisabledCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingOptionsDisabledTableCell {
         return tableView.dequeueReusableCell(withIdentifier: String(describing: CheckoutShippingOptionsDisabledTableCell.self), for: indexPath) as! CheckoutShippingOptionsDisabledTableCell
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension CheckoutProvider: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if checkout != nil, section == CheckoutSection.shippingOptions.rawValue {
+            return PaymentDetailsFooterView.height
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch section {
+        case CheckoutSection.cart.rawValue:
+            let view = SeeAllTableHeaderView(type: .myCart, separatorVisible: true)
+            view.hideSeeAllButton()
+            return view
+        case CheckoutSection.shippingAddress.rawValue:
+            return BoldTitleTableHeaderView(type: .shippingAddress)
+        case CheckoutSection.payment.rawValue:
+            return BoldTitleTableHeaderView(type: .payment)
+        case CheckoutSection.shippingOptions.rawValue:
+            let disabled = checkout?.availableShippingRates == nil
+            return BoldTitleTableHeaderView(type: .shippingOptions, disabled: disabled)
+        default:
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if let checkout = checkout, section == CheckoutSection.shippingOptions.rawValue {
+            return PaymentDetailsFooterView(checkout: checkout)
+        }
+        return nil
     }
 }

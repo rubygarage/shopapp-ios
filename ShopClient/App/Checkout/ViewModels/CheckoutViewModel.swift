@@ -39,7 +39,7 @@ class CheckoutViewModel: BaseViewModel {
     var billingAddress = Variable<Address?>(nil)
     var selectedType = Variable<PaymentType?>(nil)
     var checkoutSuccedded = PublishSubject<()>()
-    var cartItems = [CartProduct]()
+    var cartItems = Variable<[CartProduct]>([])
     var order: Order?
     var selectedProductVariant: ProductVariant!
     
@@ -53,7 +53,7 @@ class CheckoutViewModel: BaseViewModel {
                     event(.error(error))
                 }
                 if let result = result {
-                    strongSelf.cartItems = result
+                    strongSelf.cartItems.value = result
                     event(.success(result))
                 }
             })
@@ -147,7 +147,7 @@ class CheckoutViewModel: BaseViewModel {
     func productVariant(with productVariantId: String) -> ProductVariant? {
         var variant: ProductVariant?
         
-        cartItems.forEach {
+        cartItems.value.forEach {
             if let productVariant = $0.productVariant, productVariant.id == productVariantId {
                 variant = productVariant
             }
