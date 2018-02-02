@@ -26,7 +26,8 @@ extension PaymentTypeProvider: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PaymentTypeTableViewCell.self), for: indexPath) as! PaymentTypeTableViewCell
+        let cellName = String(describing: PaymentTypeTableViewCell.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! PaymentTypeTableViewCell
         let type = PaymentType(rawValue: indexPath.row)!
         let selected = selectedPaymentType == type
         cell.configure(with: type, selected: selected)
