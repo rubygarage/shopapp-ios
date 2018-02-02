@@ -9,11 +9,9 @@
 import RxSwift
 
 class SearchViewModel: GridCollectionViewModel {
-    private let categoryListUseCase = CategoryListUseCase()
     private let productListUseCase = ProductListUseCase()
     
     var searchPhrase = Variable<String>("")
-    var categories = Variable<[Category]>([])
     
     func reloadData() {
         paginationValue = nil
@@ -23,21 +21,6 @@ class SearchViewModel: GridCollectionViewModel {
     func loadNextPage() {
         paginationValue = products.value.last?.paginationValue
         loadRemoteData()
-    }
-    
-    func loadCategories() {
-        state.onNext(.loading(showHud: true))
-        categoryListUseCase.getCategoryList { [weak self] (catogories, error) in
-            guard let strongSelf = self else {
-                return
-            }
-            if let error = error {
-                strongSelf.state.onNext(.error(error: error))
-            } else if let categories = catogories {
-                strongSelf.categories.value = categories
-                strongSelf.state.onNext(.content)
-            }
-        }
     }
     
     func clearResult() {
