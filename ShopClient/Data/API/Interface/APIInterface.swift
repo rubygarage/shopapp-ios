@@ -13,11 +13,15 @@ enum SortingValue: Int {
     case name
     case popular
     case type
+    case priceHighToLow
+    case priceLowToHigh
     
     static let allValues = ["SortingValue.CreatedAt".localizable,
                             "SortingValue.Name".localizable,
                             "SortingValue.Popular".localizable,
-                            "SortingValue.Type".localizable]
+                            "SortingValue.Type".localizable,
+                            "SortingValue.PriceHighToLow".localizable,
+                            "SortingValue.PriceLowToHigh".localizable]
 }
 
 protocol APIInterface {

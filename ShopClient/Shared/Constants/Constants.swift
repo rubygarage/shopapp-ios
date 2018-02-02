@@ -54,6 +54,7 @@ struct SegueIdentifiers {
     static let toPaymentType = "toPaymentType"
     static let toCreditCard = "toCreditCard"
     static let toSuccessCheckout = "toSuccessCheckout"
+    static let toSortVariants = "toSortVariants"
 }
 
 struct Layer {
