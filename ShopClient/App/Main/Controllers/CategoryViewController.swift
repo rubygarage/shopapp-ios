@@ -104,7 +104,7 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel> {
     // MARK: - GridCollectionProviderDelegate
     
     override func provider(_ provider: GridCollectionProvider, didScroll scrollView: UIScrollView) {
-        guard scrollView.contentSize.height - scrollView.frame.size.height >= scrollView.contentOffset.y && scrollView.contentInset.top + scrollView.contentOffset.y > 0 else {
+        guard (scrollView.contentSize.height - scrollView.frame.size.height >= scrollView.contentOffset.y) && (scrollView.contentInset.top + scrollView.contentOffset.y > 0) else {
             return
         }
         if lastScrollOffset == nil {
