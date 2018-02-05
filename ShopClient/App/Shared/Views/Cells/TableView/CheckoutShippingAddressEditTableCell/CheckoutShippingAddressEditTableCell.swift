@@ -36,9 +36,7 @@ class CheckoutShippingAddressEditTableCell: UITableViewCell {
     func setEditButtonVisible(_ visible: Bool) {
         editButton.isHidden = !visible
     }
-    
-    // MARK: - Private
-    
+        
     private func setupViews() {
         editButton?.setTitle("Button.Edit".localizable.uppercased(), for: .normal)
     }
