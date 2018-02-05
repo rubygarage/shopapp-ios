@@ -23,7 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="386" height="70"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t6e-3D-hgV" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
-                                <rect key="frame" x="40" y="11.5" width="306" height="47"/>
+                                <rect key="frame" x="6" y="11.5" width="374" height="47"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="W1l-KZ-kH1"/>
@@ -37,9 +37,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="t6e-3D-hgV" firstAttribute="leading" secondItem="5XU-KX-Dhu" secondAttribute="leading" constant="40" id="2SY-iq-SY3"/>
+                            <constraint firstItem="t6e-3D-hgV" firstAttribute="leading" secondItem="5XU-KX-Dhu" secondAttribute="leading" constant="6" id="2SY-iq-SY3"/>
                             <constraint firstItem="t6e-3D-hgV" firstAttribute="centerY" secondItem="5XU-KX-Dhu" secondAttribute="centerY" id="4pm-Zi-SDV"/>
-                            <constraint firstAttribute="trailing" secondItem="t6e-3D-hgV" secondAttribute="trailing" constant="40" id="hN5-FP-ed4"/>
+                            <constraint firstAttribute="trailing" secondItem="t6e-3D-hgV" secondAttribute="trailing" constant="6" id="hN5-FP-ed4"/>
                             <constraint firstAttribute="height" constant="70" id="wjV-eo-rTe"/>
                         </constraints>
                     </view>
