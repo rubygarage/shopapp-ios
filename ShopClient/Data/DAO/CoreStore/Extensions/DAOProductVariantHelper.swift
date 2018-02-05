@@ -10,13 +10,17 @@ import CoreStore
 
 extension ProductVariantEntity {
     func update(with item: ProductVariant?, transaction: AsynchronousDataTransaction) {
-        id = item?.id
-        price = item?.price
-        title = item?.title
-        available = item?.available ?? false
-        productId = item?.productId
+        guard let item = item else {
+            return
+        }
         
-        if let selectedOptions = item?.selectedOptions {
+        id = item.id
+        price = NSDecimalNumber(decimal: item.price ?? Decimal())
+        title = item.title
+        available = item.available
+        productId = item.productId
+        
+        if let selectedOptions = item.selectedOptions {
             selectedOptions.forEach {
                 let variantOptionEntity: VariantOptionEntity = transaction.create(Into<VariantOptionEntity>())
                 variantOptionEntity.update(with: $0)
@@ -24,7 +28,7 @@ extension ProductVariantEntity {
             }
         }
         
-        if let imageItem = item?.image {
+        if let imageItem = item.image {
             let predicate = NSPredicate(format: "id = %@", imageItem.id)
             let imageEntity: ImageEntity? = transaction.fetchOrCreate(predicate: predicate)
             imageEntity?.update(with: imageItem)

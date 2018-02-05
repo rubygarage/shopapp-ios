@@ -60,7 +60,7 @@
     <entity name="ProductVariantEntity" representedClassName="ProductVariantEntity" syncable="YES" codeGenerationType="class">
         <attribute name="available" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
-        <attribute name="price" attributeType="String" syncable="YES"/>
+        <attribute name="price" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
         <attribute name="productId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="cartProduct" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CartProductEntity" inverseName="productVariant" inverseEntity="CartProductEntity" syncable="YES"/>

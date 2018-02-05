@@ -62,7 +62,7 @@ class CartViewModel: BaseViewModel {
     }
     
     func calculateTotalPrice() -> Float {
-        let allPrices = data.value.map({ Float($0.quantity) * (Float($0.productVariant?.price ?? "") ?? 1) })
+        let allPrices = data.value.map({ Float($0.quantity) * NSDecimalNumber(decimal: $0.productVariant?.price ?? Decimal()).floatValue })
         return allPrices.reduce(0, +)
     }
     

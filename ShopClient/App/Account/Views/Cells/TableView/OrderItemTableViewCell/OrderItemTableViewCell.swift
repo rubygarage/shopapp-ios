@@ -48,7 +48,7 @@ class OrderItemTableViewCell: UITableViewCell {
         }
         
         let formatter = NumberFormatter.formatter(with: currencyCode)
-        let price = NSDecimalNumber(string: productVariant.price!)
+        let price = NSDecimalNumber(decimal: productVariant.price ?? Decimal())
         let totalPrice = NSDecimalNumber(value: price.doubleValue * Double(orderItem.quantity!))
         
         totalPriceLabel.text = formatter.string(from: totalPrice)

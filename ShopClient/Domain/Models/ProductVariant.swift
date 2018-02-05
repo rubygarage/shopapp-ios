@@ -11,7 +11,7 @@ import Foundation
 class ProductVariant: NSObject {
     var id = ""
     var title: String?
-    var price: String?
+    var price: Decimal?
     var available: Bool = false
     var image: Image?
     var selectedOptions: [VariantOption]?

@@ -12,6 +12,8 @@ class Product: NSObject {
     var id = ""
     var title: String?
     var productDescription: String?
+    var price: Decimal?
+    var hasAlternativePrice: Bool = false
     var currency: String?
     var discount: String?
     var images: [Image]?
@@ -24,9 +26,4 @@ class Product: NSObject {
     var additionalDescription: String?
     var variants: [ProductVariant]?
     var options: [ProductOption]?
-    
-    // MARK: - additional
-    var lowestPrice: String {
-        return variants?.sorted(by: { $0.price ?? "" < $1.price ?? "" }).first?.price ?? ""
-    }
 }
