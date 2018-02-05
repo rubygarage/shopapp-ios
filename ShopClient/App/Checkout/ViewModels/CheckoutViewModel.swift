@@ -193,7 +193,7 @@ class CheckoutViewModel: BaseViewModel {
     private func payByCreditCard() {
         if let checkout = checkout.value, let card = creditCard.value, let billingAddress = billingAddress.value {
             state.onNext(.loading(showHud: true))
-            checkoutUseCase.pay(with: card, checkout: checkout, billingAddress: billingAddress, callback: paymentCallback())
+            checkoutUseCase.pay(with: card, checkout: checkout, billingAddress: billingAddress, customerEmail: customerEmail.value, callback: paymentCallback())
         }
     }
     
