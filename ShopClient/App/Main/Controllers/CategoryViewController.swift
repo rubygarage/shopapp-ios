@@ -23,7 +23,7 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel> {
     
     var categoryId: String!
     
-    override var emptyDataView: UIView {
+    override var customEmptyDataView: UIView {
         return CategoryEmptyDataView(frame: view.frame)
     }
     

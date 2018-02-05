@@ -23,13 +23,15 @@ enum ViewState {
 }
 
 class BaseViewController<T: BaseViewModel>: UIViewController {
+    private var emptyDataView: UIView!
+    
     private(set) var disposeBag = DisposeBag()
     private(set) var loadingView = LoadingView()
     private(set) var errorView = ErrorView()
     
     var viewModel: T!
 
-    var emptyDataView: UIView {
+    var customEmptyDataView: UIView {
         return UIView()
     }
     
@@ -51,6 +53,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
     
     private func setupViews() {
         addBackButtonIfNeeded()
+        emptyDataView = customEmptyDataView
         loadingView.frame = view.frame
         errorView.frame = view.frame
         errorView.delegate = self

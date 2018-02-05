@@ -89,6 +89,8 @@
 		0BADF10F20288D370013DA67 /* OrderListEmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BADF10E20288D370013DA67 /* OrderListEmptyDataView.xib */; };
 		0BADF1122028946F0013DA67 /* CategoryEmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BADF1112028946F0013DA67 /* CategoryEmptyDataView.swift */; };
 		0BADF1142028947B0013DA67 /* CategoryEmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BADF1132028947B0013DA67 /* CategoryEmptyDataView.xib */; };
+		0BADF11720289A980013DA67 /* SearchEmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BADF11620289A980013DA67 /* SearchEmptyDataView.swift */; };
+		0BADF11920289AA40013DA67 /* SearchEmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BADF11820289AA40013DA67 /* SearchEmptyDataView.xib */; };
 		0BCE89212022178700C6B3AD /* CategoryListCollectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE89202022178700C6B3AD /* CategoryListCollectionProvider.swift */; };
 		0BCE892420222C6600C6B3AD /* GridCollectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE892320222C6600C6B3AD /* GridCollectionProvider.swift */; };
 		0BD5EB3D1FF3F1830076C01B /* CustomerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5EB3C1FF3F1830076C01B /* CustomerUseCase.swift */; };
@@ -403,6 +405,8 @@
 		0BADF10E20288D370013DA67 /* OrderListEmptyDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderListEmptyDataView.xib; sourceTree = "<group>"; };
 		0BADF1112028946F0013DA67 /* CategoryEmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEmptyDataView.swift; sourceTree = "<group>"; };
 		0BADF1132028947B0013DA67 /* CategoryEmptyDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryEmptyDataView.xib; sourceTree = "<group>"; };
+		0BADF11620289A980013DA67 /* SearchEmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEmptyDataView.swift; sourceTree = "<group>"; };
+		0BADF11820289AA40013DA67 /* SearchEmptyDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchEmptyDataView.xib; sourceTree = "<group>"; };
 		0BCE89202022178700C6B3AD /* CategoryListCollectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCollectionProvider.swift; sourceTree = "<group>"; };
 		0BCE892320222C6600C6B3AD /* GridCollectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionProvider.swift; sourceTree = "<group>"; };
 		0BD5EB3C1FF3F1830076C01B /* CustomerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerUseCase.swift; sourceTree = "<group>"; };
@@ -1090,6 +1094,7 @@
 				0B9B1E461FF53B6D00FECA8E /* Cells */,
 				0BADF110202894550013DA67 /* CategoryEmptyDataView */,
 				0B2F3EC82005261000FB40A4 /* Headers */,
+				0BADF11520289A830013DA67 /* SearchEmptyDataView */,
 				61236D5E1FEAA84600D64198 /* SearchTitleView */,
 			);
 			path = View;
@@ -1179,6 +1184,15 @@
 				0BADF1132028947B0013DA67 /* CategoryEmptyDataView.xib */,
 			);
 			path = CategoryEmptyDataView;
+			sourceTree = "<group>";
+		};
+		0BADF11520289A830013DA67 /* SearchEmptyDataView */ = {
+			isa = PBXGroup;
+			children = (
+				0BADF11620289A980013DA67 /* SearchEmptyDataView.swift */,
+				0BADF11820289AA40013DA67 /* SearchEmptyDataView.xib */,
+			);
+			path = SearchEmptyDataView;
 			sourceTree = "<group>";
 		};
 		0BCE892220222C4B00C6B3AD /* Providers */ = {
@@ -2158,6 +2172,7 @@
 				614142C61F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib in Resources */,
 				61236D621FEAA88800D64198 /* SearchTitleView.xib in Resources */,
 				6133DAD41FB21A7900156971 /* CartButtonView.xib in Resources */,
+				0BADF11920289AA40013DA67 /* SearchEmptyDataView.xib in Resources */,
 				0BA6305F1FFE57E0007088B8 /* OrderFooterView.xib in Resources */,
 				0BED64CC201605FD006CF968 /* SwitchTableViewCell.xib in Resources */,
 				61FC3DAA1F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.xib in Resources */,
@@ -2519,6 +2534,7 @@
 				613258611FD6EA4C00513854 /* SeeAllTableHeaderView.swift in Sources */,
 				0B5BA4F320233B2200FF8FCA /* CategoryListViewController.swift in Sources */,
 				0B94264F1FFE1CD100A986AB /* ShopifyOrderAdapter.swift in Sources */,
+				0BADF11720289A980013DA67 /* SearchEmptyDataView.swift in Sources */,
 				61BF1EB21FAB59980098B9AA /* ErrorView.swift in Sources */,
 				61E76E231FB471DB00AE5FB4 /* CartTableViewCell.swift in Sources */,
 				61A1D4351FC5877D00E1B673 /* CreditCard.swift in Sources */,

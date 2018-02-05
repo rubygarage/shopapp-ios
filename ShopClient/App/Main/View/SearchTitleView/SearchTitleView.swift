@@ -42,6 +42,8 @@ class SearchTitleView: TextFieldWrapper {
 
     private let disposeBag = DisposeBag()
     
+    private var previousSearchPhrase: String?
+    
     private var state: SearchState = .default {
         didSet {
             updateViews(animated: true)
@@ -97,11 +99,14 @@ class SearchTitleView: TextFieldWrapper {
         
         textFieldResults.asObservable()
             .skip(1)
-            .subscribe(onNext: { [weak self] _ in
+            .subscribe(onNext: { [weak self] text in
                 guard let strongSelf = self, let delegate = strongSelf.delegate else {
                     return
                 }
-                delegate.viewDidChangeSearchPhrase(strongSelf)
+                if let previousSearchPhrase = strongSelf.previousSearchPhrase, text != previousSearchPhrase {
+                    delegate.viewDidChangeSearchPhrase(strongSelf)
+                }
+                strongSelf.previousSearchPhrase = text
             })
             .disposed(by: disposeBag)
     }
