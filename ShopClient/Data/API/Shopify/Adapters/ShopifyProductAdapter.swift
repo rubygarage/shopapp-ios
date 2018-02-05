@@ -42,7 +42,7 @@ extension Product {
         additionalDescription = item.descriptionHtml
         
         let imagesNodes = item.images.edges.map({ $0.node })
-        var imagesArray = [Image]()
+        var imagesArray: [Image] = []
         for imageNode in imagesNodes {
             if let image = Image(with: imageNode) {
                 imagesArray.append(image)
@@ -51,7 +51,7 @@ extension Product {
         images = imagesArray
         
         let variantsNodes = item.variants.edges.map({ $0.node })
-        var variantsArray = [ProductVariant]()
+        var variantsArray: [ProductVariant] = []
         for variantNode in variantsNodes {
             if let variant = ProductVariant(with: variantNode, productId: item.id, productImage: item.images.edges.first?.node, isShortVariant: isShortVariant) {
                 variantsArray.append(variant)
@@ -66,7 +66,7 @@ extension Product {
         }
 
         let optionsNodes = item.options
-        var optionsArray = [ProductOption]()
+        var optionsArray: [ProductOption] = []
         for optionNode in optionsNodes {
             if let option = ProductOption(with: optionNode) {
                 optionsArray.append(option)

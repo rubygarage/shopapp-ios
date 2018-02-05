@@ -26,7 +26,7 @@ extension ProductVariant {
         available = item.availableForSale
         image = Image(with: item.image) ?? Image(with: productImage)
         let selectedOptions = item.selectedOptions
-        var selectedOptionsArray = [VariantOption]()
+        var selectedOptionsArray: [VariantOption] = []
         for selectedOption in selectedOptions {
             if let variantOption = VariantOption(variantObject: selectedOption) {
                 selectedOptionsArray.append(variantOption)
