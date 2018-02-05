@@ -88,8 +88,7 @@ class CartTableViewCell: SwipeTableViewCell {
         }
         let currency = item.currency ?? ""
         let formatter = NumberFormatter.formatter(with: currency)
-        let priceString = item.productVariant?.price ?? ""
-        let price = NSDecimalNumber(string: priceString)
+        let price = NSDecimalNumber(decimal: item.productVariant?.price ?? Decimal())
         let quantity = Double(item.quantity)
         let totalPrice = NSDecimalNumber(value: price.doubleValue * quantity)
         totalPriceLabel.text = formatter.string(from: totalPrice)
@@ -103,8 +102,7 @@ class CartTableViewCell: SwipeTableViewCell {
         }
         let currency = item.currency ?? ""
         let formatter = NumberFormatter.formatter(with: currency)
-        let priceString = item.productVariant?.price ?? ""
-        let price = NSDecimalNumber(string: priceString)
+        let price = NSDecimalNumber(decimal: item.productVariant?.price ?? Decimal())
         let localizedString = "Label.PriceEach".localizable
         let formattedPrice = formatter.string(from: price) ?? ""
         pricePerOneItemLabel.text = String.localizedStringWithFormat(localizedString, formattedPrice)

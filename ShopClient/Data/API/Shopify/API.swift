@@ -983,14 +983,14 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         return { (query: Storefront.ProductConnectionQuery) in
             query.edges({ $0
                 .cursor()
-                .node(self.productQuery())
+                .node(self.productQuery(variantsPriceNeeded: true))
             })
         }
     }
     
-    private func productQuery(additionalInfoNedded: Bool = false) -> (Storefront.ProductQuery) -> Void {
+    private func productQuery(additionalInfoNedded: Bool = false, variantsPriceNeeded: Bool = false) -> (Storefront.ProductQuery) -> Void {
         let imageCount = additionalInfoNedded ? kShopifyItemsMaxCount : 1
-        let variantsCount = additionalInfoNedded ? kShopifyItemsMaxCount : 1
+        let variantsCount = additionalInfoNedded || variantsPriceNeeded ? kShopifyItemsMaxCount : 1
         
         return { (query: Storefront.ProductQuery) in
             query.id()
@@ -1003,7 +1003,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
             query.updatedAt()
             query.tags()
             query.images(first: imageCount, self.imageConnectionQuery())
-            query.variants(first: variantsCount, self.variantConnectionQuery())
+            query.variants(first: variantsCount, variantsPriceNeeded ? self.shortVariantConnectionQuery() : self.variantConnectionQuery())
             query.options(self.optionQuery())
         }
     }
@@ -1040,6 +1040,14 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         }
     }
     
+    private func shortVariantConnectionQuery() -> (Storefront.ProductVariantConnectionQuery) -> Void {
+        return { (query: Storefront.ProductVariantConnectionQuery) in
+            query.edges({ $0
+                .node(self.shortProductVariantQuery())
+            })
+        }
+    }
+    
     private func productVariantQuery() -> (Storefront.ProductVariantQuery) -> Void {
         return { (query: Storefront.ProductVariantQuery) in
             query.id()
@@ -1060,6 +1068,12 @@ class API: NSObject, APIInterface, PaySessionDelegate {
             query.image(self.imageQuery())
             query.selectedOptions(self.selectedOptionQuery())
             query.product(self.shortProductQuery())
+        }
+    }
+    
+    private func shortProductVariantQuery() -> (Storefront.ProductVariantQuery) -> Void {
+        return { (query: Storefront.ProductVariantQuery) in
+            query.price()
         }
     }
     

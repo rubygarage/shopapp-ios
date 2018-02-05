@@ -26,8 +26,9 @@ class GridCollectionViewCell: UICollectionViewCell {
         titleLabel.text = item.title
         let formatter = NumberFormatter.formatter(with: item.currency!)
         let localizedString = "Label.PriceFrom".localizable
-        let price = NSDecimalNumber(string: item.lowestPrice)
-        priceLabel.text = String.localizedStringWithFormat(localizedString, formatter.string(from: price)!)
+        let price = NSDecimalNumber(decimal: item.price ?? Decimal())
+        let formattedPrice = formatter.string(from: price)!
+        priceLabel.text = item.hasAlternativePrice ? String.localizedStringWithFormat(localizedString, formattedPrice) : formattedPrice
     }
 }
 

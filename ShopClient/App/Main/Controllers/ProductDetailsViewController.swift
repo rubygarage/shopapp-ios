@@ -190,7 +190,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
             return
         }
         let formatter = NumberFormatter.formatter(with: viewModel.currency!)
-        let price = NSDecimalNumber(string: variant.price!)
+        let price = NSDecimalNumber(decimal: variant.price ?? Decimal())
         priceLabel.text = formatter.string(from: price)
     }
     

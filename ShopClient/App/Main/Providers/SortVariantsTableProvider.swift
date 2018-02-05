@@ -43,7 +43,7 @@ extension SortVariantsTableProvider: UITableViewDelegate {
         guard let delegate = delegate else {
             return
         }
-        var variant = variants[indexPath.row] == selectedVariant ? nil : variants[indexPath.row]
+        let variant = variants[indexPath.row] == selectedVariant ? nil : variants[indexPath.row]
         delegate.provider(self, didSelect: variant)
     }
 }
