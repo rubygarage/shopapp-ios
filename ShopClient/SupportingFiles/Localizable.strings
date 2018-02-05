@@ -98,6 +98,7 @@
 "Label.FullName" = "%@ %@";
 "Label.Phone" = "Tel: %@";
 "Label.YourCartIsEmpty" = "Your cart is empty :(";
+"Label.NoOrdersYet" = "You have no orders yet";
 "Label.AcceptPoliciesAttributed" = "By creating your account, you accept our Privacy Policy and Terms of Service";
 "Label.N/A" = "N/A";
 "Label.Promo" = "Accept promotion emails";
