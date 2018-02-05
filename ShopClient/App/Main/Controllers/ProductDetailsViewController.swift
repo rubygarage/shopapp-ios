@@ -48,7 +48,6 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
     
     private var detailImagesController: ImagesCarouselViewController!
     private var productOptionsViewController: ProductOptionsViewController!
-    private var productAddedToCart = false
     
     var productId: String!
     var productVariant: ProductVariant!
@@ -68,7 +67,6 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
         super.viewWillAppear(animated)
         
         updateNavigationBar()
-        resetAddToCartButtonIfNeeded()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -86,14 +84,6 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
     }
     
     // MARK: - Setup
-    
-    fileprivate func resetAddToCartButtonIfNeeded() {
-        guard productAddedToCart else {
-            return
-        }
-        productAddedToCart = false
-        addToCartButton.setTitle("Button.AddToCart".localizable.uppercased(), for: .normal)
-    }
     
     private func setupViews() {
         quantityTitleLabel.text = "Label.Quantity".localizable
@@ -195,9 +185,6 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
     }
     
     private func populateAddToCartButton(variant: ProductVariant?) {
-        guard !productAddedToCart else {
-            return
-        }
         let variantAvailable = variant != nil
         addToCartButton.isEnabled = variantAvailable
         UIView.animate(withDuration: kAddToCartChangesAnimationDuration, animations: {
@@ -214,10 +201,6 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
         addCartBarButton()
     }
     
-    private func openCartController() {
-        showCartController()
-    }
-    
     private func addProductToCart() {
         viewModel.addToCart
             .subscribe(onNext: { [weak self] success in
@@ -225,24 +208,14 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
                     return
                 }
                 strongSelf.updateNavigationBar()
-                strongSelf.updateAddToCartButton()
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func updateAddToCartButton() {
-        productAddedToCart = true
-        addToCartButton.setTitle("Button.AddedToCart".localizable.uppercased(), for: .normal)
     }
 
     // MARK: - Actions
     
     @IBAction func addToCartButtonDidPress(_ sender: UIButton) {
-        if productAddedToCart {
-            openCartController()
-        } else {
-            addProductToCart()
-        }
+        addProductToCart()
     }
     
     @IBAction func quantityEditingDidBegin(_ sender: UITextField) {
@@ -294,7 +267,6 @@ extension ProductDetailsViewController: ProductOptionsControllerDelegate {
     
     func viewController(_ viewController: ProductOptionsViewController, didSelect option: (name: String, value: String)) {
         viewModel.selectOption(with: option.name, value: option.value)
-        resetAddToCartButtonIfNeeded()
     }
 }
 
