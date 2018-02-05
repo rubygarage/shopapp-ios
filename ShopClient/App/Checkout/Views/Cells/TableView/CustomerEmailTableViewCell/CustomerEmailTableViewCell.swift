@@ -11,6 +11,12 @@ import UIKit
 class CustomerEmailTableViewCell: UITableViewCell {
     @IBOutlet private weak var emailTextFieldView: InputTextFieldView!
     
+    weak var delegate: InputTextFieldViewDelegate? {
+        didSet {
+            emailTextFieldView?.delegate = delegate
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

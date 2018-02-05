@@ -14,7 +14,8 @@ class CheckoutTableProvider: NSObject {
     var billingAddress: Address?
     var creditCard: CreditCard?
     var selectedPaymentType: PaymentType?
-    var customerEmail: String?
+    var customerHasEmail = false
+    var customerEmail = ""
     
     weak var delegate: CheckoutCombinedDelegate?
 }
@@ -23,7 +24,9 @@ class CheckoutTableProvider: NSObject {
 
 extension CheckoutTableProvider: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return selectedPaymentType == .creditCard ? CheckoutSection.allValues.count : CheckoutSection.valuesWithoutShippingOptions.count
+//        return selectedPaymentType == .creditCard ? CheckoutSection.allValues.count : CheckoutSection.valuesWithoutShippingOptions.count
+        
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -71,6 +74,7 @@ extension CheckoutTableProvider: UITableViewDataSource {
     private func customerEmailCell(with tableView: UITableView, indexPath: IndexPath) -> CustomerEmailTableViewCell {
         let cellName = String(describing: CustomerEmailTableViewCell.self)
         let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! CustomerEmailTableViewCell
+        cell.delegate = delegate
         return cell
     }
     

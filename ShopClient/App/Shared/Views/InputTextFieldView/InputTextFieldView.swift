@@ -28,6 +28,10 @@ enum InputTextFieldViewKeybordType: Int {
     case cvv        // 7
 }
 
+protocol InputTextFieldViewDelegate: class {
+    func textFieldView(_ view: InputTextFieldView, didUpdate text: String)
+}
+
 private let kUnderlineViewAlphaDefault: CGFloat = 0.2
 private let kUnderlineViewAlphaHighlighted: CGFloat = 1
 private let kUnderlineViewHeightDefault: CGFloat = 1
@@ -49,6 +53,8 @@ class InputTextFieldView: TextFieldWrapper {
             setupKeyboardCorrection(with: keyboardType)
         }
     }
+    
+    weak var delegate: InputTextFieldViewDelegate?
     
     var state: InputTextFieldViewState = .normal {
         didSet {
@@ -151,6 +157,10 @@ class InputTextFieldView: TextFieldWrapper {
     
     @IBAction func editingDidEnd(_ sender: UITextField) {
         state = .normal
+        guard let text = textField.text else {
+            return
+        }
+        delegate?.textFieldView(self, didUpdate: text)
     }
     
     @IBAction func editingChanged(_ sender: UITextField) {
@@ -184,5 +194,10 @@ extension InputTextFieldView: UITextFieldDelegate {
         default:
             return true
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        endEditing(true)
+        return true
     }
 }

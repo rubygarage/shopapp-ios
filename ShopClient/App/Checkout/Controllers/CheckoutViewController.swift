@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CheckoutCombinedDelegate: CheckoutShippingAddressAddCellDelegate, CheckoutShippingAddressEditCellDelegate, CheckoutPaymentAddCellDelegate, CheckoutCartTableViewCellDelegate, CheckoutCreditCardEditTableCellDelegate, CheckoutShippingOptionsEnabledTableCellDelegate, PaymentTypeViewControllerDelegate, CheckoutSelectedTypeTableCellDelegate, CheckoutBillingAddressEditCellDelegate {}
+protocol CheckoutCombinedDelegate: CheckoutShippingAddressAddCellDelegate, CheckoutShippingAddressEditCellDelegate, CheckoutPaymentAddCellDelegate, CheckoutCartTableViewCellDelegate, CheckoutCreditCardEditTableCellDelegate, CheckoutShippingOptionsEnabledTableCellDelegate, PaymentTypeViewControllerDelegate, CheckoutSelectedTypeTableCellDelegate, CheckoutBillingAddressEditCellDelegate, InputTextFieldViewDelegate {}
 
 private let kPlaceOrderButtonColorEnabled = UIColor(red: 0, green: 0.48, blue: 1, alpha: 1)
 private let kPlaceOrderButtonColorDisabled = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
@@ -39,32 +39,41 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     }
     
     private func setupTableView() {
-        let cartNib = UINib(nibName: String(describing: CheckoutCartTableViewCell.self), bundle: nil)
-        tableView?.register(cartNib, forCellReuseIdentifier: String(describing: CheckoutCartTableViewCell.self))
+        let cartCellName = String(describing: CheckoutCartTableViewCell.self)
+        let cartNib = UINib(nibName: cartCellName, bundle: nil)
+        tableView?.register(cartNib, forCellReuseIdentifier: cartCellName)
         
-        let shippingAddressAddNib = UINib(nibName: String(describing: CheckoutShippingAddressAddTableViewCell.self), bundle: nil)
-        tableView.register(shippingAddressAddNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressAddTableViewCell.self))
+        let shippingAddressAddCellName = String(describing: CheckoutShippingAddressAddTableViewCell.self)
+        let shippingAddressAddNib = UINib(nibName: shippingAddressAddCellName, bundle: nil)
+        tableView.register(shippingAddressAddNib, forCellReuseIdentifier: shippingAddressAddCellName)
         
-        let shippingAddressEditNib = UINib(nibName: String(describing: CheckoutShippingAddressEditTableCell.self), bundle: nil)
-        tableView.register(shippingAddressEditNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self))
+        let shippingAddressEditCellName = String(describing: CheckoutShippingAddressEditTableCell.self)
+        let shippingAddressEditNib = UINib(nibName: shippingAddressEditCellName, bundle: nil)
+        tableView.register(shippingAddressEditNib, forCellReuseIdentifier: shippingAddressEditCellName)
         
-        let paymentAddNib = UINib(nibName: String(describing: CheckoutPaymentAddTableViewCell.self), bundle: nil)
-        tableView.register(paymentAddNib, forCellReuseIdentifier: String(describing: CheckoutPaymentAddTableViewCell.self))
+        let paymentAddCellName = String(describing: CheckoutPaymentAddTableViewCell.self)
+        let paymentAddNib = UINib(nibName: paymentAddCellName, bundle: nil)
+        tableView.register(paymentAddNib, forCellReuseIdentifier: paymentAddCellName)
         
-        let paymentTypeNib = UINib(nibName: String(describing: CheckoutSelectedTypeTableViewCell.self), bundle: nil)
-        tableView?.register(paymentTypeNib, forCellReuseIdentifier: String(describing: CheckoutSelectedTypeTableViewCell.self))
+        let paymentTypeCellName = String(describing: CheckoutSelectedTypeTableViewCell.self)
+        let paymentTypeNib = UINib(nibName: paymentTypeCellName, bundle: nil)
+        tableView?.register(paymentTypeNib, forCellReuseIdentifier: paymentTypeCellName)
         
-        let paymentCreditCardEditNib = UINib(nibName: String(describing: CheckoutCreditCardEditTableViewCell.self), bundle: nil)
-        tableView.register(paymentCreditCardEditNib, forCellReuseIdentifier: String(describing: CheckoutCreditCardEditTableViewCell.self))
+        let paymentCreditCardEditCellName = String(describing: CheckoutCreditCardEditTableViewCell.self)
+        let paymentCreditCardEditNib = UINib(nibName: paymentCreditCardEditCellName, bundle: nil)
+        tableView.register(paymentCreditCardEditNib, forCellReuseIdentifier: paymentCreditCardEditCellName)
         
-        let paymentBillingAddressEditNib = UINib(nibName: String(describing: CheckoutBillingAddressEditTableViewCell.self), bundle: nil)
-        tableView.register(paymentBillingAddressEditNib, forCellReuseIdentifier: String(describing: CheckoutBillingAddressEditTableViewCell.self))
+        let paymentBillingAddressEditCellName = String(describing: CheckoutBillingAddressEditTableViewCell.self)
+        let paymentBillingAddressEditNib = UINib(nibName: paymentBillingAddressEditCellName, bundle: nil)
+        tableView.register(paymentBillingAddressEditNib, forCellReuseIdentifier: paymentBillingAddressEditCellName)
         
-        let shippingOptionsDisabledNib = UINib(nibName: String(describing: CheckoutShippingOptionsDisabledTableViewCell.self), bundle: nil)
-        tableView.register(shippingOptionsDisabledNib, forCellReuseIdentifier: String(describing: CheckoutShippingOptionsDisabledTableViewCell.self))
+        let shippingOptionsDisabledCellName = String(describing: CheckoutShippingOptionsDisabledTableViewCell.self)
+        let shippingOptionsDisabledNib = UINib(nibName: shippingOptionsDisabledCellName, bundle: nil)
+        tableView.register(shippingOptionsDisabledNib, forCellReuseIdentifier: shippingOptionsDisabledCellName)
         
-        let shiippingOptionsEnabledNib = UINib(nibName: String(describing: CheckoutShippingOptionsEnabledTableViewCell.self), bundle: nil)
-        tableView.register(shiippingOptionsEnabledNib, forCellReuseIdentifier: String(describing: CheckoutShippingOptionsEnabledTableViewCell.self))
+        let shiippingOptionsEnabledCellName = String(describing: CheckoutShippingOptionsEnabledTableViewCell.self)
+        let shiippingOptionsEnabledNib = UINib(nibName: shiippingOptionsEnabledCellName, bundle: nil)
+        tableView.register(shiippingOptionsEnabledNib, forCellReuseIdentifier: shiippingOptionsEnabledCellName)
         
         let customerEmailCellName = String(describing: CustomerEmailTableViewCell.self)
         let customerEmailNib = UINib(nibName: customerEmailCellName, bundle: nil)
@@ -114,6 +123,24 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
                     return
                 }
                 strongSelf.tableProvider.cartProducts = cartProducts
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.customerHasEmail
+            .subscribe(onNext: { [weak self] customerHasEmail in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.tableProvider.customerHasEmail = customerHasEmail
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.customerEmail.asObservable()
+            .subscribe(onNext: { [weak self] email in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.tableProvider.customerEmail = email
             })
             .disposed(by: disposeBag)
         
@@ -294,5 +321,14 @@ extension CheckoutViewController: CreditCardControllerDelegate {
         tableProvider.creditCard = card
         reloadTable()
         navigationController?.popToViewController(self, animated: true)
+    }
+}
+
+// MARK: - InputTextFieldViewDelegate
+
+extension CheckoutViewController: InputTextFieldViewDelegate {
+    func textFieldView(_ view: InputTextFieldView, didUpdate text: String) {
+        viewModel.customerEmail.value = text
+        tableProvider.customerEmail = text
     }
 }
