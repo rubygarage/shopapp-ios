@@ -87,6 +87,8 @@
 		0BA630791FFFC554007088B8 /* OrderItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA630781FFFC554007088B8 /* OrderItemTableViewCell.swift */; };
 		0BADF10D20288D2D0013DA67 /* OrderListEmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BADF10C20288D2D0013DA67 /* OrderListEmptyDataView.swift */; };
 		0BADF10F20288D370013DA67 /* OrderListEmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BADF10E20288D370013DA67 /* OrderListEmptyDataView.xib */; };
+		0BADF1122028946F0013DA67 /* CategoryEmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BADF1112028946F0013DA67 /* CategoryEmptyDataView.swift */; };
+		0BADF1142028947B0013DA67 /* CategoryEmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BADF1132028947B0013DA67 /* CategoryEmptyDataView.xib */; };
 		0BCE89212022178700C6B3AD /* CategoryListCollectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE89202022178700C6B3AD /* CategoryListCollectionProvider.swift */; };
 		0BCE892420222C6600C6B3AD /* GridCollectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE892320222C6600C6B3AD /* GridCollectionProvider.swift */; };
 		0BD5EB3D1FF3F1830076C01B /* CustomerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5EB3C1FF3F1830076C01B /* CustomerUseCase.swift */; };
@@ -399,6 +401,8 @@
 		0BA630781FFFC554007088B8 /* OrderItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemTableViewCell.swift; sourceTree = "<group>"; };
 		0BADF10C20288D2D0013DA67 /* OrderListEmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListEmptyDataView.swift; sourceTree = "<group>"; };
 		0BADF10E20288D370013DA67 /* OrderListEmptyDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderListEmptyDataView.xib; sourceTree = "<group>"; };
+		0BADF1112028946F0013DA67 /* CategoryEmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEmptyDataView.swift; sourceTree = "<group>"; };
+		0BADF1132028947B0013DA67 /* CategoryEmptyDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryEmptyDataView.xib; sourceTree = "<group>"; };
 		0BCE89202022178700C6B3AD /* CategoryListCollectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCollectionProvider.swift; sourceTree = "<group>"; };
 		0BCE892320222C6600C6B3AD /* GridCollectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionProvider.swift; sourceTree = "<group>"; };
 		0BD5EB3C1FF3F1830076C01B /* CustomerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerUseCase.swift; sourceTree = "<group>"; };
@@ -1084,6 +1088,7 @@
 			children = (
 				61E266611FB21A1600A274E5 /* CartButtonView */,
 				0B9B1E461FF53B6D00FECA8E /* Cells */,
+				0BADF110202894550013DA67 /* CategoryEmptyDataView */,
 				0B2F3EC82005261000FB40A4 /* Headers */,
 				61236D5E1FEAA84600D64198 /* SearchTitleView */,
 			);
@@ -1165,6 +1170,15 @@
 				0BADF10E20288D370013DA67 /* OrderListEmptyDataView.xib */,
 			);
 			path = OrderListEmptyDataView;
+			sourceTree = "<group>";
+		};
+		0BADF110202894550013DA67 /* CategoryEmptyDataView */ = {
+			isa = PBXGroup;
+			children = (
+				0BADF1112028946F0013DA67 /* CategoryEmptyDataView.swift */,
+				0BADF1132028947B0013DA67 /* CategoryEmptyDataView.xib */,
+			);
+			path = CategoryEmptyDataView;
 			sourceTree = "<group>";
 		};
 		0BCE892220222C4B00C6B3AD /* Providers */ = {
@@ -2136,6 +2150,7 @@
 				6119478C1FD964A6008BE9C6 /* Navigation.storyboard in Resources */,
 				61E4E63B1F56C868001C6E01 /* Assets.xcassets in Resources */,
 				6180AC031F72CD14007768F2 /* Localizable.strings in Resources */,
+				0BADF1142028947B0013DA67 /* CategoryEmptyDataView.xib in Resources */,
 				0B6D15642024848B000DDA14 /* SortVariantTableViewCell.xib in Resources */,
 				61BF1EB01FAB598C0098B9AA /* ErrorView.xib in Resources */,
 				0B9426571FFE468C00A986AB /* OrderHeaderView.xib in Resources */,
@@ -2443,6 +2458,7 @@
 				6196CF981F9F9A2200F823AD /* ProductVariant.swift in Sources */,
 				61DA4B881F614BBC00444F64 /* SearchViewController.swift in Sources */,
 				0B4EA34A1FFBBFF6000C7A80 /* ForgotPasswordViewController.swift in Sources */,
+				0BADF1122028946F0013DA67 /* CategoryEmptyDataView.swift in Sources */,
 				61ED88F31F7170C9006BDA79 /* GridCollectionViewCell.swift in Sources */,
 				0B5BA4EF20230A0800FF8FCA /* LastArrivalsTableCellProvider.swift in Sources */,
 				618B4D551FE2F3900001F68D /* UIColor+Custom.swift in Sources */,

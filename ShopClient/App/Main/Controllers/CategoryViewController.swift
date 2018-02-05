@@ -23,6 +23,10 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel> {
     
     var categoryId: String!
     
+    override var emptyDataView: UIView {
+        return CategoryEmptyDataView(frame: view.frame)
+    }
+    
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
