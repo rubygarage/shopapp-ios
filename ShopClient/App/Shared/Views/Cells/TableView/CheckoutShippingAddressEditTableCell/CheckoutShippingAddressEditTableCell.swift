@@ -56,7 +56,7 @@ class CheckoutShippingAddressEditTableCell: UITableViewCell {
     
     // MARK: - Actions
     
-    @IBAction func editTapped(_ sender: UIButton) {
+    @IBAction func editButtonDidPress(_ sender: UIButton) {
         delegate?.tableViewCellDidTapEditShippingAddress(self)
     }
 }
