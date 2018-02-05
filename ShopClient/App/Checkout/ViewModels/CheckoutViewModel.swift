@@ -12,12 +12,13 @@ import RxSwift
 
 enum CheckoutSection: Int {
     case cart
+    case customerEmail
     case shippingAddress
     case payment
     case shippingOptions
     
-    static let allValues = [cart, shippingAddress, payment, shippingOptions]
-    static let valuesWithoutShippingOptions = [cart, shippingAddress, payment]
+    static let allValues = [cart, customerEmail, shippingAddress, payment, shippingOptions]
+    static let valuesWithoutShippingOptions = [cart, customerEmail, shippingAddress, payment]
 }
 
 enum PaymentType: Int {

@@ -24,29 +24,26 @@ class CheckoutTableProvider: NSObject {
 
 extension CheckoutTableProvider: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-//        return selectedPaymentType == .creditCard ? CheckoutSection.allValues.count : CheckoutSection.valuesWithoutShippingOptions.count
-        
-        return 1
+        return selectedPaymentType == .creditCard ? CheckoutSection.allValues.count : CheckoutSection.valuesWithoutShippingOptions.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        /*
-        if section == CheckoutSection.shippingOptions.rawValue {
+        if section == CheckoutSection.customerEmail.rawValue {
+            return customerHasEmail ? 0 : 1
+        } else if section == CheckoutSection.shippingOptions.rawValue {
             return checkout?.availableShippingRates?.count ?? 1
         } else if section == CheckoutSection.payment.rawValue {
             return selectedPaymentType == .creditCard ? PaymentAddCellType.allValues.count : 1
         }
         return 1
- */
-        
-        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        /*
         switch indexPath.section {
         case CheckoutSection.cart.rawValue:
             return cartCell(with: tableView, indexPath: indexPath)
+        case CheckoutSection.customerEmail.rawValue:
+            return customerEmailCell(with: tableView, indexPath: indexPath)
         case CheckoutSection.shippingAddress.rawValue:
             return shippingAddressCell(with: tableView, indexPath: indexPath)
         case CheckoutSection.payment.rawValue:
@@ -56,9 +53,6 @@ extension CheckoutTableProvider: UITableViewDataSource {
         default:
             return UITableViewCell()
         }
- */
-        
-        return customerEmailCell(with: tableView, indexPath: indexPath)
     }
     
     private func cartCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutCartTableViewCell {
@@ -211,6 +205,8 @@ extension CheckoutTableProvider: UITableViewDelegate {
             let view = SeeAllTableHeaderView(type: .myCart, separatorVisible: true)
             view.hideSeeAllButton()
             return view
+        case CheckoutSection.customerEmail.rawValue:
+            return customerHasEmail ? nil : BoldTitleTableHeaderView(type: .customerEmail)
         case CheckoutSection.shippingAddress.rawValue:
             return BoldTitleTableHeaderView(type: .shippingAddress)
         case CheckoutSection.payment.rawValue:
