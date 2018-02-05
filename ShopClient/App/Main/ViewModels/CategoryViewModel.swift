@@ -40,7 +40,7 @@ class CategoryViewModel: GridCollectionViewModel {
                 strongSelf.state.onNext(.error(error: error))
             } else if let category = result {
                 strongSelf.updateData(category: category)
-                strongSelf.updateSuccessState(with: category.products?.count)
+                category.products?.isEmpty ?? true ? strongSelf.state.onNext(.empty) : strongSelf.state.onNext(.content)
             }
             strongSelf.canLoadMore = result?.products?.count ?? 0 == kItemsPerPage
         }
@@ -52,14 +52,6 @@ class CategoryViewModel: GridCollectionViewModel {
         }
         updateProducts(products: items)
         canLoadMore = products.value.count == kItemsPerPage
-    }
-    
-    private func updateSuccessState(with itemsCount: Int?) {
-        if let itemsCount = itemsCount, itemsCount > 0 {
-            state.onNext(.content)
-        } else {
-            state.onNext(.empty)
-        }
     }
     
     // MARK: - BaseViewModel

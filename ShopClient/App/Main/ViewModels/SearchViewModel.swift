@@ -43,17 +43,9 @@ class SearchViewModel: GridCollectionViewModel {
                 strongSelf.state.onNext(.error(error: error))
             } else if let products = products {
                 strongSelf.updateProducts(products: products)
-                strongSelf.updateSuccessState(with: products.count)
+                products.isEmpty && !strongSelf.searchPhrase.value.isEmpty ? strongSelf.state.onNext(.empty) : strongSelf.state.onNext(.content)
             }
             strongSelf.canLoadMore = products?.count ?? 0 == kItemsPerPage
-        }
-    }
-    
-    private func updateSuccessState(with itemsCount: Int) {
-        if itemsCount > 0 || searchPhrase.value.isEmpty {
-            state.onNext(.content)
-        } else {
-            state.onNext(.empty)
         }
     }
     

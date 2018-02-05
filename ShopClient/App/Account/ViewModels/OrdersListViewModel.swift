@@ -49,7 +49,7 @@ class OrdersListViewModel: BasePaginationViewModel {
                 strongSelf.state.onNext(.error(error: error))
             } else if let order = order {
                 strongSelf.updateOrders(with: order)
-                strongSelf.updateSuccessState(with: order.count)
+                order.isEmpty ? strongSelf.state.onNext(.empty) : strongSelf.state.onNext(.content)
             }
             strongSelf.canLoadMore = order?.count ?? 0 == kItemsPerPage
         }
@@ -60,14 +60,6 @@ class OrdersListViewModel: BasePaginationViewModel {
             items.value.removeAll()
         }
         items.value += orders
-    }
-    
-    private func updateSuccessState(with itemsCount: Int) {
-        if itemsCount > 0 {
-            state.onNext(.content)
-        } else {
-            state.onNext(.empty)
-        }
     }
     
     // MARK: - BaseViewModel
