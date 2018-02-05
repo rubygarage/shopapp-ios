@@ -8,6 +8,10 @@
 
 import RxSwift
 
+protocol AddressFormControllerlDelegate: class {
+    func viewController(_ controller: AddressFormViewController, didFill address: Address)
+}
+
 class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     @IBOutlet private weak var countryTextFieldView: InputTextFieldView!
     @IBOutlet private weak var nameTextFieldView: InputTextFieldView!
@@ -22,7 +26,7 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     
     var address: Address?
     
-    weak var delegate: AddressFormViewModelDelegate?
+    weak var delegate: AddressFormControllerlDelegate?
     
     // MARK: - View controller lifecycle
     
@@ -52,7 +56,6 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     
     private func setupViewModel() {
         viewModel.address = address
-        viewModel.delegate = delegate
         
         countryTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.countryText)
@@ -96,6 +99,15 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
                     return
                 }
                 strongSelf.submitButton.isEnabled = isValid
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.filledAddress
+            .subscribe(onNext: { [weak self] address in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.delegate?.viewController(strongSelf, didFill: address)
             })
             .disposed(by: disposeBag)
         

@@ -6,26 +6,21 @@
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
-import UIKit
-
-protocol CheckoutAddressFormModelDelegate: class {
-    func viewModelDidUpdateShippingAddress(_ model: CheckoutAddressFormViewModel)
-    func viewModel(_ model: CheckoutAddressFormViewModel, didFill billingAddress: Address)
-}
+import RxSwift
 
 class CheckoutAddressFormViewModel: BaseViewModel {
     private let checkoutUseCase = CheckoutUseCase()
     
+    var updatedShippingAddress = PublishSubject<Void>()
+    var filledBillingAddress = PublishSubject<Address>()
     var checkoutId: String!
     var addressType: AddressListType = .shipping
-    
-    weak var delegate: CheckoutAddressFormModelDelegate?
     
     func updateAddress(with address: Address) {
         if addressType == .shipping {
             updateCheckoutShippingAddress(with: address)
         } else {
-            delegate?.viewModel(self, didFill: address)
+            filledBillingAddress.onNext(address)
         }
     }
     
@@ -38,7 +33,7 @@ class CheckoutAddressFormViewModel: BaseViewModel {
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
             } else if let success = success, success == true {
-                strongSelf.delegate?.viewModelDidUpdateShippingAddress(strongSelf)
+                strongSelf.updatedShippingAddress.onNext()
             } else {
                 strongSelf.state.onNext(.error(error: RepoError()))
             }

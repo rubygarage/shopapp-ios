@@ -13,11 +13,15 @@ enum AddressAction {
     case edit
 }
 
+protocol CustomerAddressFormControllerDelegate: class {
+    func viewController(_ controller: CustomerAddressFormViewController, didUpdate address: Address)
+}
+
 class CustomerAddressFormViewController: BaseViewController<CustomerAddressFormViewModel> {
     var selectedAddress: Address?
     var addressAction: AddressAction = .add
     
-    weak var delegate: CustomerAddressFormModelDelegate?
+    weak var delegate: CustomerAddressFormControllerDelegate?
     
     // MARK: - View controller lifecycle
     
@@ -43,12 +47,19 @@ class CustomerAddressFormViewController: BaseViewController<CustomerAddressFormV
     }
     
     private func setupViewModel() {
-        viewModel.delegate = delegate
+        viewModel.filledAddress
+            .subscribe(onNext: { [weak self] address in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.delegate?.viewController(strongSelf, didUpdate: address)
+            })
+        .disposed(by: disposeBag)
     }
 }
 
-extension CustomerAddressFormViewController: AddressFormViewModelDelegate {
-    func viewModel(_ model: AddressFormViewModel, didFill address: Address) {
+extension CustomerAddressFormViewController: AddressFormControllerlDelegate {
+    func viewController(_ controller: AddressFormViewController, didFill address: Address) {
         if addressAction == .add {
             viewModel.addCustomerAddress(with: address)
         } else {

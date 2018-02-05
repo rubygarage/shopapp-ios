@@ -17,8 +17,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var placeOrderButton: UIButton!
     
-    private var destinationAddressType: AddressListType = .shipping
-    
+    fileprivate var destinationAddressType: AddressListType = .shipping
     fileprivate var tableProvider: CheckoutTableProvider!
     
     override func viewDidLoad() {
@@ -127,38 +126,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         navigationController?.popToViewController(self, animated: true)
     }
     
-    private func shippingAddressListCompletion() -> AddressListCompletion {
-        return { [weak self] address in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.viewModel.updateCheckoutShippingAddress(with: address)
-        }
-    }
-    
-    private func billingAddressListCompletion() -> AddressListCompletion {
-        return { [weak self] address in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.viewModel.billingAddress.value = address
-            strongSelf.tableProvider.billingAddress = address
-            strongSelf.reloadTable()
-        }
-    }
-    
-    private func creditCardCompletion() -> CreditCardCompletion {
-        return { [weak self] (card) in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.viewModel.creditCard.value = card
-            strongSelf.tableProvider.creditCard = card
-            strongSelf.reloadTable()
-            strongSelf.navigationController?.popToViewController(strongSelf, animated: true)
-        }
-    }
-    
     fileprivate func reloadTable() {
         tableView?.reloadData()
     }
@@ -181,7 +148,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             addressListViewController.addressListType = destinationAddressType
             let isAddressTypeShipping = destinationAddressType == .shipping
             addressListViewController.selectedAddress = isAddressTypeShipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
-            addressListViewController.completion = isAddressTypeShipping ? shippingAddressListCompletion() : billingAddressListCompletion()
+            addressListViewController.delegate = self
         } else if let paymentTypeViewController = segue.destination as? PaymentTypeViewController, let checkout = viewModel.checkout.value {
             paymentTypeViewController.checkout = checkout
             paymentTypeViewController.delegate = self
@@ -193,7 +160,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             }
         } else if let creditCardFormController = segue.destination as? CreditCardViewController {
             creditCardFormController.card = viewModel.creditCard.value
-            creditCardFormController.completion = creditCardCompletion()
+            creditCardFormController.delegate = self
         } else if let checkoutAddressFormController = segue.destination as? CheckoutAddressFormViewController {
             checkoutAddressFormController.checkoutId = viewModel.checkout.value?.id
             checkoutAddressFormController.addressType = destinationAddressType
@@ -285,17 +252,42 @@ extension CheckoutViewController: CheckoutBillingAddressEditCellDelegate {
     }
 }
 
-// MARK: - CheckoutAddressFormDelegate
+// MARK: - CheckoutAddressFormControllerDelegate
 
-extension CheckoutViewController: CheckoutAddressFormModelDelegate {
-    func viewModelDidUpdateShippingAddress(_ model: CheckoutAddressFormViewModel) {
+extension CheckoutViewController: CheckoutAddressFormControllerDelegate {
+    func viewControllerDidUpdateShippingAddress(_ controller: CheckoutAddressFormViewController) {
         viewModel.getCheckout()
         navigationController?.popToViewController(self, animated: true)
     }
     
-    func viewModel(_ model: CheckoutAddressFormViewModel, didFill billingAddress: Address) {
+    func viewController(_ controller: CheckoutAddressFormViewController, didFill billingAddress: Address) {
         viewModel.billingAddress.value = billingAddress
         tableProvider.billingAddress = billingAddress
+        reloadTable()
+        navigationController?.popToViewController(self, animated: true)
+    }
+}
+
+// MARK: - AddressListControllerDelegate
+
+extension CheckoutViewController: AddressListControllerDelegate {
+    func viewController(_ controller: AddressListViewController, didSelect address: Address) {
+        if destinationAddressType == .shipping {
+            viewModel.updateCheckoutShippingAddress(with: address)
+        } else {
+            viewModel.billingAddress.value = address
+            tableProvider.billingAddress = address
+            reloadTable()
+        }
+    }
+}
+
+// MARK: - CreditCardControllerDelegate
+
+extension CheckoutViewController: CreditCardControllerDelegate {
+    func viewController(_ controller: CreditCardViewController, didFilled card: CreditCard) {
+        viewModel.creditCard.value = card
+        tableProvider.creditCard = card
         reloadTable()
         navigationController?.popToViewController(self, animated: true)
     }

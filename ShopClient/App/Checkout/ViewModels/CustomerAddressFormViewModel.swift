@@ -6,17 +6,13 @@
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
-import UIKit
-
-protocol CustomerAddressFormModelDelegate: class {
-    func viewModel(_ model: CustomerAddressFormViewModel, didUpdate address: Address)
-}
+import RxSwift
 
 class CustomerAddressFormViewModel: BaseViewModel {
     private let addAddressUseCase = AddAddressUseCase()
     private let updateAddressUseCase = UpdateAddressUseCase()
     
-    weak var delegate: CustomerAddressFormModelDelegate?
+    var filledAddress = PublishSubject<Address>()
     
     func addCustomerAddress(with address: Address) {
         state.onNext(.loading(showHud: true))
@@ -28,7 +24,7 @@ class CustomerAddressFormViewModel: BaseViewModel {
                 strongSelf.state.onNext(.error(error: error))
             } else {
                 strongSelf.state.onNext(.content)
-                strongSelf.delegate?.viewModel(strongSelf, didUpdate: address)
+                strongSelf.filledAddress.onNext(address)
             }
         }
     }
@@ -43,7 +39,7 @@ class CustomerAddressFormViewModel: BaseViewModel {
                 strongSelf.state.onNext(.error(error: error))
             } else {
                 strongSelf.state.onNext(.content)
-                strongSelf.delegate?.viewModel(strongSelf, didUpdate: address)
+                strongSelf.filledAddress.onNext(address)
             }
         }
     }

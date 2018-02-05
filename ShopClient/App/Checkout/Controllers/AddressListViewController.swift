@@ -13,6 +13,10 @@ enum AddressListType {
     case billing
 }
 
+protocol AddressListControllerDelegate: class {
+    func viewController(_ controller: AddressListViewController, didSelect address: Address)
+}
+
 class AddressListViewController: BaseViewController<AddressListViewModel> {
     @IBOutlet private weak var tableView: UITableView!
     
@@ -23,8 +27,9 @@ class AddressListViewController: BaseViewController<AddressListViewModel> {
     fileprivate var needToUpdate = false
     
     var selectedAddress: Address?
-    var completion: AddressListCompletion?
     var addressListType: AddressListType = .shipping
+    
+    weak var delegate: AddressListControllerDelegate?
     
     // MARK: - View conttroller lifecycle
     
@@ -65,7 +70,6 @@ class AddressListViewController: BaseViewController<AddressListViewModel> {
     
     private func setupViewModel() {
         viewModel.selectedAddress = selectedAddress
-        viewModel.completion = completion
         
         viewModel.customerAddresses.asObservable()
             .subscribe(onNext: { [weak self] addresses in
@@ -85,6 +89,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel> {
                 if strongSelf.addressListType == .billing {
                     strongSelf.destinationAddress = address
                 }
+                strongSelf.delegate?.viewController(strongSelf, didSelect: address)
             })
             .disposed(by: disposeBag)
     }
@@ -128,10 +133,10 @@ extension AddressListViewController: AddressListTableCellDelegate {
     }
 }
 
-// MARK: - CustomerAddressFormDelegate
+// MARK: - CustomerAddressFormControllerDelegate
 
-extension AddressListViewController: CustomerAddressFormModelDelegate {
-    func viewModel(_ model: CustomerAddressFormViewModel, didUpdate address: Address) {
+extension AddressListViewController: CustomerAddressFormControllerDelegate {
+    func viewController(_ controller: CustomerAddressFormViewController, didUpdate address: Address) {
         if needToUpdate {
             viewModel.updateCheckoutShippingAddress(with: address)
         } else {

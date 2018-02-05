@@ -8,10 +8,6 @@
 
 import RxSwift
 
-protocol AddressFormViewModelDelegate: class {
-    func viewModel(_ model: AddressFormViewModel, didFill address: Address)
-}
-
 class AddressFormViewModel: BaseViewModel {
     var countryText = Variable<String>("")
     var firstNameText = Variable<String>("")
@@ -22,10 +18,9 @@ class AddressFormViewModel: BaseViewModel {
     var stateText = Variable<String>("")
     var zipText = Variable<String>("")
     var phoneText = Variable<String>("")
+    var filledAddress = PublishSubject<Address>()
     var address: Address?
-    
-    weak var delegate: AddressFormViewModelDelegate?
-    
+        
     private var requiredTextFields: [Observable<String>] {
         return [countryText, firstNameText, lastNameText, addressText, cityText, zipText, phoneText].map({ $0.asObservable() })
     }
@@ -60,7 +55,7 @@ class AddressFormViewModel: BaseViewModel {
     }
         
     private func submitAction() {
-        delegate?.viewModel(self, didFill: getAddress())
+        filledAddress.onNext(getAddress())
     }
  
     private func getAddress() -> Address {

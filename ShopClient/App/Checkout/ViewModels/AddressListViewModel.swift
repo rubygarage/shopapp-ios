@@ -8,8 +8,6 @@
 
 import RxSwift
 
-typealias AddressListCompletion = (_ address: Address) -> Void
-
 class AddressListViewModel: BaseViewModel {
     private let customerUseCase = CustomerUseCase()
     private let updateDefaultAddressUseCase = UpdateDefaultAddressUseCase()
@@ -19,7 +17,6 @@ class AddressListViewModel: BaseViewModel {
     var customerDefaultAddress = Variable<Address?>(nil)
     var didSelectAddress = PublishSubject<Address>()
     var selectedAddress: Address?
-    var completion: AddressListCompletion?
     
     func loadCustomerAddresses() {
         state.onNext(.loading(showHud: true))
@@ -44,7 +41,6 @@ class AddressListViewModel: BaseViewModel {
     func updateCheckoutShippingAddress(with address: Address) {
         selectedAddress = address
         loadCustomerAddresses()
-        completion?(address)
         didSelectAddress.onNext(address)
     }
     

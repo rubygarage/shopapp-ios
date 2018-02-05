@@ -8,12 +8,17 @@
 
 import UIKit
 
+protocol CheckoutAddressFormControllerDelegate: class {
+    func viewControllerDidUpdateShippingAddress(_ controller: CheckoutAddressFormViewController)
+    func viewController(_ controller: CheckoutAddressFormViewController, didFill billingAddress: Address)
+}
+
 class CheckoutAddressFormViewController: BaseViewController<CheckoutAddressFormViewModel> {    
     var checkoutId: String!
     var addressType: AddressListType = .shipping
     var address: Address?
     
-    weak var delegate: CheckoutAddressFormModelDelegate?
+    weak var delegate: CheckoutAddressFormControllerDelegate?
     
     // MARK: - View controller lifecycle
     
@@ -32,7 +37,24 @@ class CheckoutAddressFormViewController: BaseViewController<CheckoutAddressFormV
     private func setupViewModel() {
         viewModel.checkoutId = checkoutId
         viewModel.addressType = addressType
-        viewModel.delegate = delegate
+        
+        viewModel.updatedShippingAddress
+            .subscribe(onNext: { [weak self] _ in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.delegate?.viewControllerDidUpdateShippingAddress(strongSelf)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.filledBillingAddress
+            .subscribe(onNext: { [weak self] address in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.delegate?.viewController(strongSelf, didFill: address)
+            })
+            .disposed(by: disposeBag)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -43,8 +65,8 @@ class CheckoutAddressFormViewController: BaseViewController<CheckoutAddressFormV
     }
 }
 
-extension CheckoutAddressFormViewController: AddressFormViewModelDelegate {
-    func viewModel(_ model: AddressFormViewModel, didFill address: Address) {
+extension CheckoutAddressFormViewController: AddressFormControllerlDelegate {
+    func viewController(_ controller: AddressFormViewController, didFill address: Address) {
         viewModel.updateAddress(with: address)
     }
 }

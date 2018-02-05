@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CreditCardControllerDelegate: class {
+    func viewController(_ controller: CreditCardViewController, didFilled card: CreditCard)
+}
+
 class CreditCardViewController: BaseViewController<CreditCardViewModel> {
     @IBOutlet private weak var holderNameTextFieldView: InputTextFieldView!
     @IBOutlet private weak var cardNumberTextFieldView: InputTextFieldView!
@@ -18,7 +22,7 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
     @IBOutlet private weak var submitButton: BlackButton!
     
     var card: CreditCard?
-    var completion: CreditCardCompletion?
+    weak var delegate: CreditCardControllerDelegate?
     
     override func viewDidLoad() {
         viewModel = CreditCardViewModel()
@@ -40,7 +44,6 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
     
     private func setupViewModel() {
         viewModel.card = card
-        viewModel.completion = completion
         
         holderNameTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.holderNameText)
@@ -71,10 +74,6 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
             })
             .disposed(by: disposeBag)
         
-        submitButton.rx.tap
-            .bind(to: viewModel.submitTapped)
-            .disposed(by: disposeBag)
-        
         viewModel.holderNameErrorMessage
             .subscribe(onNext: { [weak self] errorMessage in
                 guard let strongSelf = self else {
@@ -91,6 +90,19 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
                 }
                 strongSelf.cardNumberTextFieldView.errorMessage = errorMessage
             })
+            .disposed(by: disposeBag)
+        
+        viewModel.filledCard
+            .subscribe(onNext: { [weak self] card in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.delegate?.viewController(strongSelf, didFilled: card)
+            })
+            .disposed(by: disposeBag)
+        
+        submitButton.rx.tap
+            .bind(to: viewModel.submitTapped)
             .disposed(by: disposeBag)
     }
     
