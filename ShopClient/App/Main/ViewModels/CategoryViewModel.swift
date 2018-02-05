@@ -12,7 +12,7 @@ class CategoryViewModel: GridCollectionViewModel {
     private let categoryUseCase = CategoryUseCase()
     
     var categoryId: String!
-    var selectedSortingValue = SortingValue.createdAt
+    var selectedSortingValue = SortingValue.name
     
     func reloadData() {
         paginationValue = nil
@@ -24,10 +24,14 @@ class CategoryViewModel: GridCollectionViewModel {
         loadRemoteData()
     }
     
+    func clearResult() {
+        updateProducts(products: [])
+    }
+    
     private func loadRemoteData() {
         let showHud = products.value.isEmpty
         state.onNext(.loading(showHud: showHud))
-        let reverse = selectedSortingValue == .createdAt
+        let reverse = selectedSortingValue == .createdAt || selectedSortingValue == .priceHighToLow
         categoryUseCase.getCategory(with: categoryId, paginationValue: paginationValue, sortingValue: selectedSortingValue, reverse: reverse) { [weak self] (result, error) in
             guard let strongSelf = self else {
                 return

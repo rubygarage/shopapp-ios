@@ -691,6 +691,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
             return Storefront.ProductSortKeys.relevance
         case SortingValue.type:
             return Storefront.ProductSortKeys.productType
+        default:
+            return nil
         }
     }
     
@@ -701,10 +703,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         switch key! {
         case SortingValue.createdAt:
             return Storefront.ProductCollectionSortKeys.created
-        case SortingValue.name:
-            return Storefront.ProductCollectionSortKeys.title
-        case SortingValue.popular:
-            return Storefront.ProductCollectionSortKeys.relevance
+        case SortingValue.priceHighToLow, SortingValue.priceLowToHigh:
+            return Storefront.ProductCollectionSortKeys.price
         default:
             return nil
         }

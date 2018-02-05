@@ -8,7 +8,19 @@
 
 import UIKit
 
+private let kSortByViewChangesAnimationDuration: TimeInterval = 0.3
+
 class CategoryViewController: GridCollectionViewController<CategoryViewModel> {
+    @IBOutlet private weak var sortByLabel: UILabel!
+    @IBOutlet private weak var sortByViewTopLayoutConstraint: NSLayoutConstraint!
+    
+    @IBOutlet fileprivate weak var sortByView: UIView!
+    
+    fileprivate var lastScrollOffset: CGFloat?
+    fileprivate var positiveScrollOffset: CGFloat = 0
+    fileprivate var negativeScrollOffset: CGFloat = 0
+    fileprivate var isSortByViewCollapsed = false
+    
     var categoryId: String!
     
     // MARK: - View controller lifecycle
@@ -17,6 +29,7 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel> {
         viewModel = CategoryViewModel()
         super.viewDidLoad()
         
+        setupViews()
         setupViewModel()
         loadData()
     }
@@ -27,7 +40,31 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel> {
         updateNavigationBar()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let sortVariantsViewController = segue.destination as? SortVariantsViewController {
+            sortVariantsViewController.delegate = self
+            sortVariantsViewController.selectedSortingValue = viewModel.selectedSortingValue
+        }
+    }
+    
     // MARK: - Setup
+    
+    fileprivate func loadData() {
+        viewModel.reloadData()
+    }
+    
+    fileprivate func updateSortByView(isHidden: Bool) {
+        sortByViewTopLayoutConstraint.constant = isHidden ? -sortByView.frame.size.height : 0
+        UIView.animate(withDuration: kSortByViewChangesAnimationDuration, animations: {
+            self.view.layoutIfNeeded()
+        })
+        isSortByViewCollapsed = !isSortByViewCollapsed
+    }
+    
+    private func setupViews() {
+        sortByLabel.text = "Label.SortBy".localizable.uppercased()
+        collectionView.contentInset = GridCollectionViewCell.sortableCollectionViewInsets
+    }
     
     private func updateNavigationBar() {
         addCartBarButton()
@@ -48,8 +85,10 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel> {
             .disposed(by: disposeBag)
     }
     
-    private func loadData() {
-        viewModel.reloadData()
+    // MARK: - Actions
+    
+    @IBAction func sortByViewDidTap(_ sender: UITapGestureRecognizer) {
+        performSegue(withIdentifier: SegueIdentifiers.toSortVariants, sender: self)
     }
     
     // MARK: - BasePaginationViewController
@@ -60,5 +99,40 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel> {
     
     override func infinityScrollHandler() {
         viewModel.loadNextPage()
+    }
+    
+    // MARK: - GridCollectionProviderDelegate
+    
+    override func provider(_ provider: GridCollectionProvider, didScroll scrollView: UIScrollView) {
+        guard (scrollView.contentSize.height - scrollView.frame.size.height >= scrollView.contentOffset.y) && (scrollView.contentInset.top + scrollView.contentOffset.y > 0) else {
+            return
+        }
+        if lastScrollOffset == nil {
+            lastScrollOffset = scrollView.contentOffset.y
+        }
+        let delta = scrollView.contentOffset.y - lastScrollOffset!
+        lastScrollOffset = scrollView.contentOffset.y
+        if delta > 0 {
+            positiveScrollOffset += delta
+            negativeScrollOffset = 0
+        } else {
+            negativeScrollOffset += delta
+            positiveScrollOffset = 0
+        }
+        if positiveScrollOffset >= sortByView.frame.size.height && !isSortByViewCollapsed {
+            updateSortByView(isHidden: true)
+        } else if abs(negativeScrollOffset) >= sortByView.frame.size.height && isSortByViewCollapsed {
+            updateSortByView(isHidden: false)
+        }
+    }
+}
+
+// MARK: - SortVariantsControllerDelegate
+
+extension CategoryViewController: SortVariantsControllerDelegate {
+    func viewController(_ viewController: SortVariantsViewController, didSelect sortingValue: SortingValue) {
+        viewModel.selectedSortingValue = sortingValue
+        viewModel.clearResult()
+        loadData()
     }
 }

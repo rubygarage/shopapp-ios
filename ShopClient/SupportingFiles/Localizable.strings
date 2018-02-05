@@ -70,10 +70,9 @@
 "Button.ViewOrderDetails" = "View order Details";
 "Button.ContinueShopping" = "Continue shopping";
 
-"SortingValue.Name" = "By name";
-"SortingValue.CreatedAt" = "By date";
-"SortingValue.Popular" = "By popularity";
-"SortingValue.Type" = "By type";
+"SortingValue.CreatedAt" = "Newes first";
+"SortingValue.PriceHighToLow" = "Price High to Low";
+"SortingValue.PriceLowToHigh" = "Price Low to High";
 
 "Label.PriceFrom" = "From %@";
 "Label.Quantity" = "QTY:";
@@ -95,7 +94,7 @@
 "Label.MyCart" = "My Cart";
 "Label.RelatedItems" = "Related Items";
 "Label.SignInToShop" = "Sign In to shop and view orders";
-"Label.SortBy" = "Sort by:";
+"Label.SortBy" = "Sort by";
 "Label.Welcome" = "Welcome";
 "Label.FullName" = "%@ %@";
 "Label.Phone" = "Tel: %@";

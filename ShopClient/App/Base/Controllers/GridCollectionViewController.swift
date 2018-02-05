@@ -50,4 +50,7 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
         selectedProduct = product
         performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
+    
+    func provider(_ provider: GridCollectionProvider, didScroll scrollView: UIScrollView) {
+    }
 }

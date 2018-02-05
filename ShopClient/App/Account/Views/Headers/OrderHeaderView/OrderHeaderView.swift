@@ -61,6 +61,8 @@ class OrderHeaderView: UIView {
         dateLabel.text = String(format: dateFormat, order.createdAt!.longDescription)
     }
     
+    // MARK: - Actions
+    
     func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
         delegate?.headerView(self, didTapWith: section)
     }

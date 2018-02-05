@@ -14,17 +14,6 @@ extension UIViewController {
         let tabbarController = appDelegate.window?.rootViewController as? UITabBarController
         tabbarController?.selectedIndex = 0
     }
-
-    func showCategorySortingController(with items: [String], selectedItem: String, delegate: SortModalControllerProtocol?) {
-        let sortController = UIStoryboard.sortModal().instantiateViewController(withIdentifier: ControllerIdentifier.sortModal) as! SortModalViewController
-        sortController.sortItems = items
-        sortController.selectedSortItem = selectedItem
-        sortController.delegate = delegate
-        
-        sortController.modalPresentationStyle = .overCurrentContext
-        sortController.modalTransitionStyle = .crossDissolve
-        present(sortController, animated: true)
-    }
     
     func showCartController() {
         let cartNavigationController = UIStoryboard.cart().instantiateInitialViewController()!

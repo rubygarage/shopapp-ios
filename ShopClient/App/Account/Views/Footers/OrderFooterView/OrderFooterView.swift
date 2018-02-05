@@ -67,6 +67,8 @@ class OrderFooterView: UIView {
         priceLabel.text = formatter.string(from: totalPrice)
     }
     
+    // MARK: - Actions
+    
     func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
         delegate?.footerView(self, didTapWith: section)
     }
