@@ -66,6 +66,10 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         let shiippingOptionsEnabledNib = UINib(nibName: String(describing: CheckoutShippingOptionsEnabledTableViewCell.self), bundle: nil)
         tableView.register(shiippingOptionsEnabledNib, forCellReuseIdentifier: String(describing: CheckoutShippingOptionsEnabledTableViewCell.self))
         
+        let customerEmailCellName = String(describing: CustomerEmailTableViewCell.self)
+        let customerEmailNib = UINib(nibName: customerEmailCellName, bundle: nil)
+        tableView.register(customerEmailNib, forCellReuseIdentifier: customerEmailCellName)
+        
         tableProvider = CheckoutTableProvider()
         tableProvider.delegate = self
         tableView.dataSource = tableProvider

@@ -27,15 +27,20 @@ extension CheckoutTableProvider: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        /*
         if section == CheckoutSection.shippingOptions.rawValue {
             return checkout?.availableShippingRates?.count ?? 1
         } else if section == CheckoutSection.payment.rawValue {
             return selectedPaymentType == .creditCard ? PaymentAddCellType.allValues.count : 1
         }
         return 1
+ */
+        
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        /*
         switch indexPath.section {
         case CheckoutSection.cart.rawValue:
             return cartCell(with: tableView, indexPath: indexPath)
@@ -48,6 +53,9 @@ extension CheckoutTableProvider: UITableViewDataSource {
         default:
             return UITableViewCell()
         }
+ */
+        
+        return customerEmailCell(with: tableView, indexPath: indexPath)
     }
     
     private func cartCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutCartTableViewCell {
@@ -57,6 +65,12 @@ extension CheckoutTableProvider: UITableViewDataSource {
         let productVariantIds = cartProducts.map({ $0.productVariant?.id ?? "" })
         cell.configure(with: images, productVariantIds: productVariantIds)
         cell.cellDelegate = delegate
+        return cell
+    }
+    
+    private func customerEmailCell(with tableView: UITableView, indexPath: IndexPath) -> CustomerEmailTableViewCell {
+        let cellName = String(describing: CustomerEmailTableViewCell.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! CustomerEmailTableViewCell
         return cell
     }
     
