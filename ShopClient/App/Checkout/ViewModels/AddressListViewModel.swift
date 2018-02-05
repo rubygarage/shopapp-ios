@@ -19,7 +19,7 @@ class AddressListViewModel: BaseViewModel {
     var selectedAddress: Address?
     
     func loadCustomerAddresses() {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading())
         customerUseCase.getCustomer { [weak self] (customer, _) in
             guard let strongSelf = self else {
                 return
@@ -45,7 +45,7 @@ class AddressListViewModel: BaseViewModel {
     }
     
     func deleteCustomerAddress(with address: Address, isSelected: Bool) {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading())
         deleteAddressUseCase.deleteCustomerAddress(with: address.id) { [weak self] (success, error) in
             guard let strongSelf = self else {
                 return
@@ -60,7 +60,7 @@ class AddressListViewModel: BaseViewModel {
     }
     
     func updateCustomerDefaultAddress(with address: Address) {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading())
         updateDefaultAddressUseCase.updateDefaultAddress(with: address.id) { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return

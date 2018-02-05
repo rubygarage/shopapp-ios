@@ -16,7 +16,7 @@ class CartViewModel: BaseViewModel {
     var data = Variable<[CartProduct]>([])
     
     func loadData() {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading())
         cartProductListUseCase.getCartProductList { [weak self] (cartProducts, error) in
             guard let strongSelf = self else {
                 return
@@ -32,7 +32,7 @@ class CartViewModel: BaseViewModel {
     
     func removeCardProduct(at index: Int) {
         let cartProduct = data.value[index]
-        state.onNext(.loading(showHud: false))
+        state.onNext(ViewState.make.loading(showHud: false))
         deleteCartProductUseCase.deleteProductFromCart(productVariantId: cartProduct.productVariant?.id) { [weak self] (success, error) in
             guard let strongSelf = self else {
                 return
@@ -47,7 +47,7 @@ class CartViewModel: BaseViewModel {
     }
     
     func update(cartProduct: CartProduct, quantity: Int) {
-        state.onNext(.loading(showHud: false))
+        state.onNext(ViewState.make.loading(showHud: false))
         changeCartProductUseCase.changeCartProductQuantity(productVariantId: cartProduct.productVariant?.id, quantity: quantity) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return

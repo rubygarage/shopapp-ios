@@ -33,7 +33,7 @@ class SettingsViewModel: BaseViewModel {
     }
     
     private func getCustomer() {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading())
         customerUseCase.getCustomer { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return
@@ -48,7 +48,7 @@ class SettingsViewModel: BaseViewModel {
     }
     
     private func update(_ customer: Customer) {
-        state.onNext(.loading(showHud: false))
+        state.onNext(ViewState.make.loading(showHud: false))
         updateCustomUseCase.updateCustomer(with: customer.promo) { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return

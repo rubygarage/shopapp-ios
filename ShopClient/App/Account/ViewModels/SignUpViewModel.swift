@@ -67,7 +67,7 @@ class SignUpViewModel: BaseViewModel {
     }
     
     private func signUp() {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading())
         signUpUseCase.signUp(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), password: passwordText.value, phone: phoneText.value.orNil()) { [weak self] (success, error) in
             guard let strongSelf = self else {
                 return

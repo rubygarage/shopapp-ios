@@ -15,7 +15,7 @@ class ArticleDetailsViewModel: BaseViewModel {
     var data = PublishSubject<(article: Article, baseUrl: URL)>()
 
     func loadData() {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading())
         articleUseCase.getArticle(with: articleId) { [weak self] (result, error) in
             guard let strongSelf = self else {
                 return

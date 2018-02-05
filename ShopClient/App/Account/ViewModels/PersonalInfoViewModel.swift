@@ -54,7 +54,7 @@ class PersonalInfoViewModel: BaseViewModel {
     }
     
     private func getCustomer() {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading())
         customerUseCase.getCustomer { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return
@@ -86,7 +86,7 @@ class PersonalInfoViewModel: BaseViewModel {
     }
     
     private func saveChanges() {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading())
         updateCustomUseCase.updateCustomer(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), phone: phoneText.value.orNil()) { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return

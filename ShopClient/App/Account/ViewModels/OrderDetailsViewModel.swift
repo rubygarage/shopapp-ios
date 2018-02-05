@@ -15,7 +15,7 @@ class OrderDetailsViewModel: BaseViewModel {
     var data = Variable<Order?>(nil)
     
     func loadOrder() {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading())
         orderUseCase.getOrder(with: orderId) { [weak self] (order, error) in
             guard let strongSelf = self else {
                 return
