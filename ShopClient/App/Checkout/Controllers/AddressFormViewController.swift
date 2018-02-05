@@ -8,6 +8,10 @@
 
 import RxSwift
 
+protocol AddressFormControllerlDelegate: class {
+    func viewController(_ controller: AddressFormViewController, didFill address: Address)
+}
+
 class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     @IBOutlet private weak var countryTextFieldView: InputTextFieldView!
     @IBOutlet private weak var nameTextFieldView: InputTextFieldView!
@@ -21,7 +25,10 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     @IBOutlet private weak var submitButton: BlackButton!
     
     var address: Address?
-    var completion: AddressFormCompletion?
+    
+    weak var delegate: AddressFormControllerlDelegate?
+    
+    // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         viewModel = AddressFormViewModel()
@@ -32,9 +39,9 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
         populateViewsIfNeeded()
     }
     
-    private func setupViews() {
-        title = "ControllerTitle.AddNewAddress".localizable
-        
+    // MARK: - Setup
+    
+    private func setupViews() {        
         countryTextFieldView.placeholder = "Placeholder.Country".localizable.required.uppercased()
         nameTextFieldView.placeholder = "Placeholder.Name".localizable.required.uppercased()
         lastNameTextFieldView.placeholder = "Placeholder.LastName".localizable.required.uppercased()
@@ -49,7 +56,6 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     
     private func setupViewModel() {
         viewModel.address = address
-        viewModel.completion = completion
         
         countryTextFieldView.rx.value.map({ $0 ?? "" })
             .bind(to: viewModel.countryText)
@@ -89,18 +95,24 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
         
         viewModel.isAddressValid
             .subscribe(onNext: { [weak self] (isValid) in
-                self?.submitButton.isEnabled = isValid
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.submitButton.isEnabled = isValid
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.filledAddress
+            .subscribe(onNext: { [weak self] address in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.delegate?.viewController(strongSelf, didFill: address)
             })
             .disposed(by: disposeBag)
         
         submitButton.rx.tap
             .bind(to: viewModel.submitTapped)
-            .disposed(by: disposeBag)
-        
-        viewModel.addressSubmitted
-            .subscribe(onNext: { [weak self] _ in
-                self?.navigationController?.popViewController(animated: true)
-            })
             .disposed(by: disposeBag)
     }
     

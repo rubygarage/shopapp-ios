@@ -1,5 +1,5 @@
 //
-//  CheckoutSelectedTypeTableCell.swift
+//  CheckoutSelectedTypeTableViewCell.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 1/24/18.
@@ -8,16 +8,16 @@
 
 import UIKit
 
-protocol CheckoutSelectedTypeTableCellProtocol: class {
-    func didTapEditPaymentType()
+protocol CheckoutSelectedTypeTableCellDelegate: class {
+    func tableViewCellDidTapEditPaymentType(_ cell: CheckoutSelectedTypeTableViewCell)
 }
 
-class CheckoutSelectedTypeTableCell: UITableViewCell {
+class CheckoutSelectedTypeTableViewCell: UITableViewCell {
     @IBOutlet private weak var paymentTypeImage: UIImageView!
     @IBOutlet private weak var paymentTypeLabel: UILabel!
     @IBOutlet private weak var editButton: UIButton!
     
-    weak var delegate: CheckoutSelectedTypeTableCellProtocol?
+    weak var delegate: CheckoutSelectedTypeTableCellDelegate?
     
     // MARK: - View lifecycle
     
@@ -45,7 +45,7 @@ class CheckoutSelectedTypeTableCell: UITableViewCell {
     
     // MARK: - Actions
     
-    @IBAction func editTapped(_ sender: UIButton) {
-        delegate?.didTapEditPaymentType()
+    @IBAction func editButtonDidPress(_ sender: UIButton) {
+        delegate?.tableViewCellDidTapEditPaymentType(self)
     }
 }

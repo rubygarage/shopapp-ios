@@ -8,18 +8,17 @@
 
 import UIKit
 
+protocol CheckoutCombinedDelegate: CheckoutShippingAddressAddCellDelegate, CheckoutShippingAddressEditCellDelegate, CheckoutPaymentAddCellDelegate, CheckoutCartTableViewCellDelegate, CheckoutCreditCardEditTableCellDelegate, CheckoutShippingOptionsEnabledTableCellDelegate, PaymentTypeViewControllerDelegate, CheckoutSelectedTypeTableCellDelegate, CheckoutBillingAddressEditCellDelegate {}
+
 private let kPlaceOrderButtonColorEnabled = UIColor(red: 0, green: 0.48, blue: 1, alpha: 1)
 private let kPlaceOrderButtonColorDisabled = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
 
-class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCombinedProtocol {
+class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCombinedDelegate {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var placeOrderButton: UIButton!
     
-    private var tableDataSource: CheckoutTableDataSource!
-    // swiftlint:disable weak_delegate
-    private var tableDelegate: CheckoutTableDelegate!
-    // swiftlint:enable weak_delegate
-    private var destinationAddressType: AddressListType = .shipping
+    fileprivate var destinationAddressType: AddressListType = .shipping
+    fileprivate var tableProvider: CheckoutTableProvider!
     
     override func viewDidLoad() {
         viewModel = CheckoutViewModel()
@@ -43,58 +42,74 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         let cartNib = UINib(nibName: String(describing: CheckoutCartTableViewCell.self), bundle: nil)
         tableView?.register(cartNib, forCellReuseIdentifier: String(describing: CheckoutCartTableViewCell.self))
         
-        let shippingAddressAddNib = UINib(nibName: String(describing: CheckoutShippingAddressAddTableCell.self), bundle: nil)
-        tableView.register(shippingAddressAddNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressAddTableCell.self))
+        let shippingAddressAddNib = UINib(nibName: String(describing: CheckoutShippingAddressAddTableViewCell.self), bundle: nil)
+        tableView.register(shippingAddressAddNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressAddTableViewCell.self))
         
         let shippingAddressEditNib = UINib(nibName: String(describing: CheckoutShippingAddressEditTableCell.self), bundle: nil)
         tableView.register(shippingAddressEditNib, forCellReuseIdentifier: String(describing: CheckoutShippingAddressEditTableCell.self))
         
-        let paymentAddNib = UINib(nibName: String(describing: CheckoutPaymentAddTableCell.self), bundle: nil)
-        tableView.register(paymentAddNib, forCellReuseIdentifier: String(describing: CheckoutPaymentAddTableCell.self))
+        let paymentAddNib = UINib(nibName: String(describing: CheckoutPaymentAddTableViewCell.self), bundle: nil)
+        tableView.register(paymentAddNib, forCellReuseIdentifier: String(describing: CheckoutPaymentAddTableViewCell.self))
         
-        let paymentTypeNib = UINib(nibName: String(describing: CheckoutSelectedTypeTableCell.self), bundle: nil)
-        tableView?.register(paymentTypeNib, forCellReuseIdentifier: String(describing: CheckoutSelectedTypeTableCell.self))
+        let paymentTypeNib = UINib(nibName: String(describing: CheckoutSelectedTypeTableViewCell.self), bundle: nil)
+        tableView?.register(paymentTypeNib, forCellReuseIdentifier: String(describing: CheckoutSelectedTypeTableViewCell.self))
         
-        let paymentCreditCardEditNib = UINib(nibName: String(describing: CheckoutCreditCardEditTableCell.self), bundle: nil)
-        tableView.register(paymentCreditCardEditNib, forCellReuseIdentifier: String(describing: CheckoutCreditCardEditTableCell.self))
+        let paymentCreditCardEditNib = UINib(nibName: String(describing: CheckoutCreditCardEditTableViewCell.self), bundle: nil)
+        tableView.register(paymentCreditCardEditNib, forCellReuseIdentifier: String(describing: CheckoutCreditCardEditTableViewCell.self))
         
-        let paymentBillingAddressEditNib = UINib(nibName: String(describing: CheckoutBillingAddressEditTableCell.self), bundle: nil)
-        tableView.register(paymentBillingAddressEditNib, forCellReuseIdentifier: String(describing: CheckoutBillingAddressEditTableCell.self))
+        let paymentBillingAddressEditNib = UINib(nibName: String(describing: CheckoutBillingAddressEditTableViewCell.self), bundle: nil)
+        tableView.register(paymentBillingAddressEditNib, forCellReuseIdentifier: String(describing: CheckoutBillingAddressEditTableViewCell.self))
         
-        let shiippingOptionsDisabledNib = UINib(nibName: String(describing: CheckoutShippingOptionsDisabledTableCell.self), bundle: nil)
-        tableView.register(shiippingOptionsDisabledNib, forCellReuseIdentifier: String(describing: CheckoutShippingOptionsDisabledTableCell.self))
+        let shippingOptionsDisabledNib = UINib(nibName: String(describing: CheckoutShippingOptionsDisabledTableViewCell.self), bundle: nil)
+        tableView.register(shippingOptionsDisabledNib, forCellReuseIdentifier: String(describing: CheckoutShippingOptionsDisabledTableViewCell.self))
         
-        let shiippingOptionsEnabledNib = UINib(nibName: String(describing: CheckoutShippingOptionsEnabledTableCell.self), bundle: nil)
-        tableView.register(shiippingOptionsEnabledNib, forCellReuseIdentifier: String(describing: CheckoutShippingOptionsEnabledTableCell.self))
+        let shiippingOptionsEnabledNib = UINib(nibName: String(describing: CheckoutShippingOptionsEnabledTableViewCell.self), bundle: nil)
+        tableView.register(shiippingOptionsEnabledNib, forCellReuseIdentifier: String(describing: CheckoutShippingOptionsEnabledTableViewCell.self))
         
-        tableDataSource = CheckoutTableDataSource()
-        tableDataSource.delegate = self
-        tableView?.dataSource = tableDataSource
-        
-        tableDelegate = CheckoutTableDelegate()
-        tableDelegate.delegate = self
-        tableView?.delegate = tableDelegate
+        tableProvider = CheckoutTableProvider()
+        tableProvider.delegate = self
+        tableView.dataSource = tableProvider
+        tableView.delegate = tableProvider
         
         tableView?.contentInset = TableView.defaultContentInsets
     }
     
     private func setupViewModel() {
         viewModel.checkout.asObservable()
-            .subscribe(onNext: { [weak self] _ in
-                self?.tableView.reloadData()
+            .subscribe(onNext: { [weak self] checkout in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.tableProvider.checkout = checkout
+                strongSelf.tableView.reloadData()
             })
             .disposed(by: disposeBag)
         
         viewModel.isCheckoutValid
             .subscribe(onNext: { [weak self] enabled in
-                self?.placeOrderButton.isEnabled = enabled
-                self?.placeOrderButton.backgroundColor = enabled ? kPlaceOrderButtonColorEnabled : kPlaceOrderButtonColorDisabled
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.placeOrderButton.isEnabled = enabled
+                strongSelf.placeOrderButton.backgroundColor = enabled ? kPlaceOrderButtonColorEnabled : kPlaceOrderButtonColorDisabled
             })
             .disposed(by: disposeBag)
         
         viewModel.checkoutSuccedded
             .subscribe(onNext: { [weak self] _ in
-                self?.performSegue(withIdentifier: SegueIdentifiers.toSuccessCheckout, sender: self)
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.performSegue(withIdentifier: SegueIdentifiers.toSuccessCheckout, sender: strongSelf)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.cartItems.asObservable()
+            .subscribe(onNext: { [weak self] cartProducts in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.tableProvider.cartProducts = cartProducts
             })
             .disposed(by: disposeBag)
         
@@ -103,68 +118,13 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             .disposed(by: disposeBag)
     }
     
-    // MARK: - Private
-    
     private func loadData() {
-        viewModel.loadData(with: disposeBag)
+        viewModel.loadData()
     }
     
     private func closeAddressFormController() {
         navigationController?.popToViewController(self, animated: true)
     }
-    
-    private func shippingAddressFormCompletion() -> AddressFormCompletion {
-        return { [weak self] address in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.viewModel.updateCheckoutShippingAddress(with: address)
-        }
-    }
-    
-    private func billingAddressFormCompletion() -> AddressFormCompletion {
-        return { [weak self] address in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.viewModel.billingAddress.value = address
-            strongSelf.reloadTable()
-        }
-    }
-    
-    private func shippingAddressListCompletion() -> AddressListCompletion {
-        return { [weak self] address in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.navigationController?.popViewController(animated: true)
-            strongSelf.viewModel.updateCheckoutShippingAddress(with: address)
-        }
-    }
-    
-    private func billingAddressListCompletion() -> AddressListCompletion {
-        return { [weak self] address in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.viewModel.billingAddress.value = address
-            strongSelf.reloadTable()
-            strongSelf.navigationController?.popViewController(animated: true)
-        }
-    }
-    
-    private func creditCardCompletion() -> CreditCardCompletion {
-        return { [weak self] (card) in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.viewModel.creditCard.value = card
-            strongSelf.reloadTable()
-            strongSelf.navigationController?.popToViewController(strongSelf, animated: true)
-        }
-    }
-    
-    // MARK: - Fileprivate
     
     fileprivate func reloadTable() {
         tableView?.reloadData()
@@ -172,12 +132,10 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     
     fileprivate func openAddressesController(with type: AddressListType) {
         destinationAddressType = type
-        viewModel.getLoginStatus { (isLogged) in
-            if isLogged {
-                performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
-            } else {
-                performSegue(withIdentifier: SegueIdentifiers.toAddressForm, sender: self)
-            }
+        if viewModel.customerLogged.value {
+            performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
+        } else {
+            performSegue(withIdentifier: SegueIdentifiers.toCheckoutAddressForm, sender: self)
         }
     }
     
@@ -189,11 +147,8 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         } else if let addressListViewController = segue.destination as? AddressListViewController {
             addressListViewController.addressListType = destinationAddressType
             let isAddressTypeShipping = destinationAddressType == .shipping
-            addressListViewController.selectedAddress = isAddressTypeShipping ? shippingAddress() : billingAddress()
-            addressListViewController.completion = isAddressTypeShipping ? shippingAddressListCompletion() : billingAddressListCompletion()
-        } else if let addressFormViewController = segue.destination as? AddressFormViewController {
-            addressFormViewController.address = destinationAddressType == .shipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
-            addressFormViewController.completion = destinationAddressType == .shipping ? shippingAddressFormCompletion() : billingAddressFormCompletion()
+            addressListViewController.selectedAddress = isAddressTypeShipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
+            addressListViewController.delegate = self
         } else if let paymentTypeViewController = segue.destination as? PaymentTypeViewController, let checkout = viewModel.checkout.value {
             paymentTypeViewController.checkout = checkout
             paymentTypeViewController.delegate = self
@@ -205,16 +160,21 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             }
         } else if let creditCardFormController = segue.destination as? CreditCardViewController {
             creditCardFormController.card = viewModel.creditCard.value
-            creditCardFormController.completion = creditCardCompletion()
+            creditCardFormController.delegate = self
+        } else if let checkoutAddressFormController = segue.destination as? CheckoutAddressFormViewController {
+            checkoutAddressFormController.checkoutId = viewModel.checkout.value?.id
+            checkoutAddressFormController.addressType = destinationAddressType
+            checkoutAddressFormController.address = destinationAddressType == .shipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
+            checkoutAddressFormController.delegate = self
         }
     }
 }
 
-// MARK: - CheckoutPaymentAddCellProtocol
+// MARK: - CheckoutPaymentAddCellDelegate
 
-extension CheckoutViewController: CheckoutPaymentAddCellProtocol {
-    func didTapAddPayment(type: PaymentAddCellType) {
-        switch type {
+extension CheckoutViewController: CheckoutPaymentAddCellDelegate {
+    func tableViewCell(_ cell: CheckoutPaymentAddTableViewCell, didTapAdd paymentType: PaymentAddCellType) {
+        switch paymentType {
         case PaymentAddCellType.type:
             performSegue(withIdentifier: SegueIdentifiers.toPaymentType, sender: self)
         case PaymentAddCellType.card:
@@ -225,19 +185,11 @@ extension CheckoutViewController: CheckoutPaymentAddCellProtocol {
     }
 }
 
-// MARK: - CheckoutSelectedTypeTableCellProtocol
+// MARK: - CheckoutSelectedTypeTableCellDelegate
 
-extension CheckoutViewController: CheckoutSelectedTypeTableCellProtocol {
-    func didTapEditPaymentType() {
+extension CheckoutViewController: CheckoutSelectedTypeTableCellDelegate {
+    func tableViewCellDidTapEditPaymentType(_ cell: CheckoutSelectedTypeTableViewCell) {
         performSegue(withIdentifier: SegueIdentifiers.toPaymentType, sender: self)
-    }
-}
-
-// MARK: - CheckoutTableDelegateProtocol
-
-extension CheckoutViewController: CheckoutTableDelegateProtocol {
-    func checkout() -> Checkout? {
-        return viewModel.checkout.value
     }
 }
 
@@ -250,79 +202,93 @@ extension CheckoutViewController: CheckoutCartTableViewCellDelegate {
     }
 }
 
-// MARK: - CheckoutTableDataSourceProtocol
+// MARK: - CheckoutShippingAddressAddCellDelegate
 
-extension CheckoutViewController: CheckoutTableDataSourceProtocol {
-    func cartProducts() -> [CartProduct] {
-        return viewModel.cartItems
-    }
-    
-    func shippingAddress() -> Address? {
-        return viewModel.checkout.value?.shippingAddress
-    }
-    
-    func billingAddress() -> Address? {
-        return viewModel.billingAddress.value
-    }
-    
-    func creditCard() -> CreditCard? {
-        return viewModel.creditCard.value
-    }
-    
-    func availableShippingRates() -> [ShippingRate]? {
-        return viewModel.checkout.value?.availableShippingRates
-    }
-    
-    func selectedPaymentType() -> PaymentType? {
-        return viewModel.selectedType.value
-    }
-}
-
-// MARK: - CheckoutShippingAddressAddCellProtocol
-
-extension CheckoutViewController: CheckoutShippingAddressAddCellProtocol {
-    func didTapAddNewAddress() {
+extension CheckoutViewController: CheckoutShippingAddressAddCellDelegate {
+    func tableViewCellDidTapAddNewAddress(_ cell: CheckoutShippingAddressAddTableViewCell) {
         openAddressesController(with: .shipping)
     }
 }
 
-// MARK: - CheckoutShippingOptionsEnabledTableCellProtocol
+// MARK: - CheckoutShippingOptionsEnabledTableCellDelegate
 
-extension CheckoutViewController: CheckoutShippingOptionsEnabledTableCellProtocol {
-    func didSelect(shippingRate: ShippingRate) {
+extension CheckoutViewController: CheckoutShippingOptionsEnabledTableCellDelegate {
+    func tableViewCell(_ cell: CheckoutShippingOptionsEnabledTableViewCell, didSelect shippingRate: ShippingRate) {
         viewModel.updateShippingRate(with: shippingRate)
     }
 }
 
-// MARK: - PaymentTypeViewControllerProtocol
+// MARK: - PaymentTypeViewControllerDelegate
 
-extension CheckoutViewController: PaymentTypeViewControllerProtocol {
-    func didSelect(paymentType: PaymentType) {
+extension CheckoutViewController: PaymentTypeViewControllerDelegate {
+    func viewController(_ viewController: PaymentTypeViewController, didSelect paymentType: PaymentType) {
         viewModel.selectedType.value = paymentType
+        tableProvider.selectedPaymentType = paymentType
         reloadTable()
     }
 }
 
-// MARK: - CheckoutCreditCardEditTableCellProtocol
+// MARK: - CheckoutCreditCardEditTableCellDelegate
 
-extension CheckoutViewController: CheckoutCreditCardEditTableCellProtocol {
-    func didTapEditCard() {
+extension CheckoutViewController: CheckoutCreditCardEditTableCellDelegate {
+    func tableViewCellDidTapEditCard(_ cell: CheckoutCreditCardEditTableViewCell) {
         performSegue(withIdentifier: SegueIdentifiers.toCreditCard, sender: self)
     }
 }
 
-// MARK: - CheckoutShippingAddressEditCellProtocol
+// MARK: - CheckoutShippingAddressEditCellDelegate
 
-extension CheckoutViewController: CheckoutShippingAddressEditCellProtocol {
-    func didTapEditShippingAddress() {
+extension CheckoutViewController: CheckoutShippingAddressEditCellDelegate {
+    func tableViewCellDidTapEditShippingAddress(_ cell: CheckoutShippingAddressEditTableCell) {
         openAddressesController(with: .shipping)
     }
 }
 
-// MARK: - CheckoutBillingAddressEditCellProtocol
+// MARK: - CheckoutBillingAddressEditCellDelegate
 
-extension CheckoutViewController: CheckoutBillingAddressEditCellProtocol {
-    func didTapEditBillingAddress() {
+extension CheckoutViewController: CheckoutBillingAddressEditCellDelegate {
+    func tableViewCellDidTapEditBillingAddress(_ cell: CheckoutBillingAddressEditTableViewCell) {
         openAddressesController(with: .billing)
+    }
+}
+
+// MARK: - CheckoutAddressFormControllerDelegate
+
+extension CheckoutViewController: CheckoutAddressFormControllerDelegate {
+    func viewControllerDidUpdateShippingAddress(_ controller: CheckoutAddressFormViewController) {
+        viewModel.getCheckout()
+        navigationController?.popToViewController(self, animated: true)
+    }
+    
+    func viewController(_ controller: CheckoutAddressFormViewController, didFill billingAddress: Address) {
+        viewModel.billingAddress.value = billingAddress
+        tableProvider.billingAddress = billingAddress
+        reloadTable()
+        navigationController?.popToViewController(self, animated: true)
+    }
+}
+
+// MARK: - AddressListControllerDelegate
+
+extension CheckoutViewController: AddressListControllerDelegate {
+    func viewController(_ controller: AddressListViewController, didSelect address: Address) {
+        if destinationAddressType == .shipping {
+            viewModel.updateCheckoutShippingAddress(with: address)
+        } else {
+            viewModel.billingAddress.value = address
+            tableProvider.billingAddress = address
+            reloadTable()
+        }
+    }
+}
+
+// MARK: - CreditCardControllerDelegate
+
+extension CheckoutViewController: CreditCardControllerDelegate {
+    func viewController(_ controller: CreditCardViewController, didFilled card: CreditCard) {
+        viewModel.creditCard.value = card
+        tableProvider.creditCard = card
+        reloadTable()
+        navigationController?.popToViewController(self, animated: true)
     }
 }

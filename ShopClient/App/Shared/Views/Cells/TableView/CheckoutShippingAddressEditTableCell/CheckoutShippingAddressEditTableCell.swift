@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol CheckoutShippingAddressEditCellProtocol: class {
-    func didTapEditShippingAddress()
+protocol CheckoutShippingAddressEditCellDelegate: class {
+    func tableViewCellDidTapEditShippingAddress(_ cell: CheckoutShippingAddressEditTableCell)
 }
 
 class CheckoutShippingAddressEditTableCell: UITableViewCell {
@@ -18,7 +18,7 @@ class CheckoutShippingAddressEditTableCell: UITableViewCell {
     @IBOutlet private weak var phoneLabel: UILabel!
     @IBOutlet private weak var editButton: UIButton!
     
-    weak var delegate: CheckoutShippingAddressEditCellProtocol?
+    weak var delegate: CheckoutShippingAddressEditCellDelegate?
     
     // MARK: - View lifecycle
     
@@ -36,9 +36,7 @@ class CheckoutShippingAddressEditTableCell: UITableViewCell {
     func setEditButtonVisible(_ visible: Bool) {
         editButton.isHidden = !visible
     }
-    
-    // MARK: - Private
-    
+        
     private func setupViews() {
         editButton?.setTitle("Button.Edit".localizable.uppercased(), for: .normal)
     }
@@ -56,7 +54,7 @@ class CheckoutShippingAddressEditTableCell: UITableViewCell {
     
     // MARK: - Actions
     
-    @IBAction func editTapped(_ sender: UIButton) {
-        delegate?.didTapEditShippingAddress()
+    @IBAction func editButtonDidPress(_ sender: UIButton) {
+        delegate?.tableViewCellDidTapEditShippingAddress(self)
     }
 }

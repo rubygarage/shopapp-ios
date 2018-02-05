@@ -8,8 +8,6 @@
 
 import RxSwift
 
-typealias CreditCardCompletion = (_ card: CreditCard) -> Void
-
 class CreditCardViewModel: BaseViewModel {
     var holderNameText = Variable<String>("")
     var cardNumberText = Variable<String>("")
@@ -18,9 +16,9 @@ class CreditCardViewModel: BaseViewModel {
     var securityCodeText = Variable<String>("")
     var holderNameErrorMessage = PublishSubject<String>()
     var cardNumberErrorMessage = PublishSubject<String>()
+    var filledCard = PublishSubject<CreditCard>()
     var card: CreditCard?
-    var completion: CreditCardCompletion?
-        
+    
     var isCardDataValid: Observable<Bool> {
         return Observable.combineLatest(holderNameText.asObservable(), cardNumberText.asObservable(), monthExpirationText.asObservable(), yearExpirationText.asObservable(), securityCodeText.asObservable()) { holderName, cardNumber, monthExpiration, yearExpiration, securityCode in
             return holderName.hasAtLeastOneSymbol() && cardNumber.isValidAsCardNumber() && monthExpiration.hasAtLeastOneSymbol() && yearExpiration.hasAtLeastOneSymbol() && securityCode.isValidAsCVV()
@@ -28,7 +26,10 @@ class CreditCardViewModel: BaseViewModel {
     }
     var submitTapped: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
-            self?.validateData()
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.validateData()
         }
     }
     
@@ -52,7 +53,7 @@ class CreditCardViewModel: BaseViewModel {
     }
     
     private func submitAction() {
-        completion?(generateCreditCard())
+        filledCard.onNext(generateCreditCard())
     }
     
     private func processErrors() {

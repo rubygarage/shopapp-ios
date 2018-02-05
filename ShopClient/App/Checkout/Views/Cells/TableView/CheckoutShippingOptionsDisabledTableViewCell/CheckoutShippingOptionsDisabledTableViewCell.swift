@@ -1,5 +1,5 @@
 //
-//  CheckoutShippingOptionsDisabledTableCell.swift
+//  CheckoutShippingOptionsDisabledTableViewCell.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 1/18/18.
@@ -8,8 +8,10 @@
 
 import UIKit
 
-class CheckoutShippingOptionsDisabledTableCell: UITableViewCell {
+class CheckoutShippingOptionsDisabledTableViewCell: UITableViewCell {
     @IBOutlet private weak var addAddressLabel: UILabel!
+    
+    // MARK: - View lifecycle
     
     override func awakeFromNib() {
         super.awakeFromNib()

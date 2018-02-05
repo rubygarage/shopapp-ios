@@ -13,21 +13,22 @@ private let kUnderlineViewAlphaHighlighted: CGFloat = 1
 private let kUnderlineViewHeightDefault: CGFloat = 1
 private let kUnderlineViewHeightHighlighted: CGFloat = 2
 
-class ExpiryDatePicker: TextFieldWrapper, UIPickerViewDataSource, UIPickerViewDelegate {
+class ExpiryDatePicker: TextFieldWrapper {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var underlineView: UIView!
     @IBOutlet private weak var underlineViewHeight: NSLayoutConstraint!
 
     var pickerView = UIPickerView()
+    
     var placeholder: String {
         return ""
     }
-    
     var data: [String] {
         return [String]()
     }
     
-    // MARK: - initialization
+    // MARK: - View lifecycle
+    
     init() {
         super.init(frame: CGRect.zero)
         
@@ -69,31 +70,18 @@ class ExpiryDatePicker: TextFieldWrapper, UIPickerViewDataSource, UIPickerViewDe
         toolBar.sizeToFit()
         
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.doneTapped))
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonDidPress))
         toolBar.setItems([spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         
         textField.inputAccessoryView = toolBar
     }
     
-    // MARK: - actions
-    @objc private func doneTapped() {
+    // MARK: - Actions
+    
+    @objc private func doneButtonDidPress() {
         textField.text = data[pickerView.selectedRow(inComponent: 0)]
         textField.endEditing(true)
-    }
-    
-    // MARK: - UIPickerViewDataSource
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return data.count
-    }
-    
-    // MARK: - UIPickerViewDelegate
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return data[row]
     }
     
     @IBAction func textFieldEditingDidBegin(_ sender: UITextField) {
@@ -104,5 +92,25 @@ class ExpiryDatePicker: TextFieldWrapper, UIPickerViewDataSource, UIPickerViewDe
     @IBAction func textFieldEditingDidEnd(_ sender: UITextField) {
         underlineView.alpha = kUnderlineViewAlphaDefault
         underlineViewHeight.constant = kUnderlineViewHeightDefault
+    }
+}
+
+// MARK: - UIPickerViewDataSource
+
+extension ExpiryDatePicker: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return data.count
+    }
+}
+
+// MARK: - UIPickerViewDelegate
+
+extension ExpiryDatePicker: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return data[row]
     }
 }

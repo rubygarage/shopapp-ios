@@ -8,23 +8,22 @@
 
 import UIKit
 
-protocol PaymentTypeViewControllerProtocol: class {
-    func didSelect(paymentType: PaymentType)
+protocol PaymentTypeViewControllerDelegate: class {
+    func viewController(_ viewController: PaymentTypeViewController, didSelect paymentType: PaymentType)
 }
 
 class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
     @IBOutlet private weak var tableView: UITableView!
     
-    private var tableDataSource: PaymentTypeDataSource!
-    // swiftlint:disable weak_delegate
-    private var tableDelegate: PaymentTypeDelegate!
-    // swiftlint:enable weak_delegate
+    private var tableProvider: PaymentTypeProvider!
     private var destinationTitle: String!
     
     var checkout: Checkout!
     var selectedType: PaymentType?
     
-    weak var delegate: PaymentTypeViewControllerProtocol?
+    weak var delegate: PaymentTypeViewControllerDelegate?
+    
+    // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         viewModel = PaymentTypeViewModel()
@@ -34,6 +33,8 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
         setupTableView()
     }
     
+    // MARK: - Setup
+    
     private func setupViews() {
         title = "ControllerTitle.PaymentType".localizable
     }
@@ -42,13 +43,11 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
         let paymentTypeNib = UINib(nibName: String(describing: PaymentTypeTableViewCell.self), bundle: nil)
         tableView.register(paymentTypeNib, forCellReuseIdentifier: String(describing: PaymentTypeTableViewCell.self))
         
-        tableDataSource = PaymentTypeDataSource()
-        tableDataSource.delegate = self
-        tableView.dataSource = tableDataSource
-        
-        tableDelegate = PaymentTypeDelegate()
-        tableDelegate.delegate = self
-        tableView.delegate = tableDelegate
+        tableProvider = PaymentTypeProvider()
+        tableProvider.selectedPaymentType = selectedType
+        tableProvider.delegate = self
+        tableView.dataSource = tableProvider
+        tableView.delegate = tableProvider
         
         tableView.contentInset = TableView.paymentTypeContentInsets
     }
@@ -58,21 +57,13 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
     }
 }
 
-// MARK: - PaymentTypeDelegateProtocol
+// MARK: - PaymentTypeProviderDelegate
 
-extension PaymentTypeViewController: PaymentTypeDelegateProtocol {
-    func didSelectPayment(type: PaymentType) {
-        delegate?.didSelect(paymentType: type)
+extension PaymentTypeViewController: PaymentTypeProviderDelegate {
+    func provider(_ provider: PaymentTypeProvider, didSelect type: PaymentType) {
+        delegate?.viewController(self, didSelect: type)
         selectedType = type
         reloadTable()
         navigationController?.popViewController(animated: true)
-    }
-}
-
-// MARK: - PaymentTypeDataSourceProtocol
-
-extension PaymentTypeViewController: PaymentTypeDataSourceProtocol {
-    func selectedPaymentType() -> PaymentType? {
-        return selectedType
     }
 }

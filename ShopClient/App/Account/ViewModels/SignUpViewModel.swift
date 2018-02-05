@@ -87,4 +87,10 @@ class SignUpViewModel: BaseViewModel {
         }
         signUpSuccess.onNext(success)
     }
+    
+    // MARK: - BaseViewModel
+    
+    override func tryAgain() {
+        checkCresentials()
+    }
 }

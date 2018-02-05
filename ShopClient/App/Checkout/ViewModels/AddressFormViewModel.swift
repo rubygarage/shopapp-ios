@@ -8,8 +8,6 @@
 
 import RxSwift
 
-typealias AddressFormCompletion = (_ address: Address) -> Void
-
 class AddressFormViewModel: BaseViewModel {
     var countryText = Variable<String>("")
     var firstNameText = Variable<String>("")
@@ -20,10 +18,9 @@ class AddressFormViewModel: BaseViewModel {
     var stateText = Variable<String>("")
     var zipText = Variable<String>("")
     var phoneText = Variable<String>("")
-    var addressSubmitted = PublishSubject<()>()
+    var filledAddress = PublishSubject<Address>()
     var address: Address?
-    var completion: AddressFormCompletion?
-    
+        
     private var requiredTextFields: [Observable<String>] {
         return [countryText, firstNameText, lastNameText, addressText, cityText, zipText, phoneText].map({ $0.asObservable() })
     }
@@ -35,7 +32,10 @@ class AddressFormViewModel: BaseViewModel {
     }
     var submitTapped: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
-            self?.submitAction()
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.submitAction()
         }
     }
     
@@ -55,8 +55,7 @@ class AddressFormViewModel: BaseViewModel {
     }
         
     private func submitAction() {
-        completion?(getAddress())
-        addressSubmitted.onNext()
+        filledAddress.onNext(getAddress())
     }
  
     private func getAddress() -> Address {

@@ -8,15 +8,15 @@
 
 import UIKit
 
-protocol AddressListHeaderViewProtocol: class {
-    func didTapAddNewAddress()
+protocol AddressListHeaderViewDelegate: class {
+    func tableViewHeaderDidTapAddAddress(_ header: AddressListTableHeaderView)
 }
 
 class AddressListTableHeaderView: UIView {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var addNewAddressButton: BlackButton!
     
-    weak var delegate: AddressListHeaderViewProtocol?
+    weak var delegate: AddressListHeaderViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,6 +44,6 @@ class AddressListTableHeaderView: UIView {
     // MARK: - Actions
     
     @IBAction func addNewAddressTapped(_ sender: BlackButton) {
-        delegate?.didTapAddNewAddress()
+        delegate?.tableViewHeaderDidTapAddAddress(self)
     }
 }

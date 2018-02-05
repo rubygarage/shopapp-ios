@@ -1,5 +1,5 @@
 //
-//  CheckoutShippingOptionsEnabledTableCell.swift
+//  CheckoutShippingOptionsEnabledTableViewCell.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 1/18/18.
@@ -8,18 +8,18 @@
 
 import UIKit
 
-protocol CheckoutShippingOptionsEnabledTableCellProtocol: class {
-    func didSelect(shippingRate: ShippingRate)
+protocol CheckoutShippingOptionsEnabledTableCellDelegate: class {
+    func tableViewCell(_ cell: CheckoutShippingOptionsEnabledTableViewCell, didSelect shippingRate: ShippingRate)
 }
 
-class CheckoutShippingOptionsEnabledTableCell: UITableViewCell {
+class CheckoutShippingOptionsEnabledTableViewCell: UITableViewCell {
     @IBOutlet private weak var selectRateButton: UIButton!
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var titleLabel: UILabel!
     
     private var rate: ShippingRate!
     
-    weak var delegate: CheckoutShippingOptionsEnabledTableCellProtocol?
+    weak var delegate: CheckoutShippingOptionsEnabledTableCellDelegate?
     
     // MARK: - View Lifecycle
     
@@ -41,6 +41,6 @@ class CheckoutShippingOptionsEnabledTableCell: UITableViewCell {
     // MARK: - Actions
     
     @IBAction func selectShippingRateTapped(_ sender: UIButton) {
-        delegate?.didSelect(shippingRate: rate)
+        delegate?.tableViewCell(self, didSelect: rate)
     }
 }

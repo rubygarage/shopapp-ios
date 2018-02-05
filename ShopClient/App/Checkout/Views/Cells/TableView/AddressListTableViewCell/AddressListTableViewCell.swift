@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol AddressListTableViewCellProtocol: class {
-    func didTapSelect(with address: Address)
-    func didTapEdit(with address: Address)
-    func didTapDelete(with address: Address)
-    func didTapDefault(with address: Address)
+protocol AddressListTableCellDelegate: class {
+    func tableViewCell(_ cell: AddressListTableViewCell, didSelect address: Address)
+    func tableViewCell(_ cell: AddressListTableViewCell, didTapEdit address: Address)
+    func tableViewCell(_ cell: AddressListTableViewCell, didTapDelete address: Address)
+    func tableViewCell(_ cell: AddressListTableViewCell, didTapDefault address: Address)
 }
 
 class AddressListTableViewCell: UITableViewCell {
@@ -26,7 +26,7 @@ class AddressListTableViewCell: UITableViewCell {
     
     private var address: Address!
     
-    weak var delegate: AddressListTableViewCellProtocol?
+    weak var delegate: AddressListTableCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -56,25 +56,25 @@ class AddressListTableViewCell: UITableViewCell {
             phoneLabel.text = nil
         }
         selectButton.isSelected = isSelected
-        deleteButton.isEnabled = !isSelected
+        deleteButton.isEnabled = !isDefault
         defaultAddressButton.isEnabled = !isDefault
     }
     
     // MARK: - Actions
     
-    @IBAction func selectTapped(_ sender: UIButton) {
-        delegate?.didTapSelect(with: address)
+    @IBAction func selectButtonDidPress(_ sender: UIButton) {
+        delegate?.tableViewCell(self, didSelect: address)
     }
     
-    @IBAction func editTapped(_ sender: UIButton) {
-        delegate?.didTapEdit(with: address)
+    @IBAction func editButtonDidPress(_ sender: UIButton) {
+        delegate?.tableViewCell(self, didTapEdit: address)
     }
     
-    @IBAction func deleteTapped(_ sender: UIButton) {
-        delegate?.didTapDelete(with: address)
+    @IBAction func deleteButtonDidPress(_ sender: UIButton) {
+        delegate?.tableViewCell(self, didTapDelete: address)
     }
     
-    @IBAction func defaultAddressTapped(_ sender: UIButton) {
-        delegate?.didTapDefault(with: address)
+    @IBAction func defaultAddressButtonDidPress(_ sender: UIButton) {
+        delegate?.tableViewCell(self, didTapDefault: address)
     }
 }

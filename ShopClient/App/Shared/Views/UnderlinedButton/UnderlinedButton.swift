@@ -8,16 +8,16 @@
 
 import UIKit
 
-protocol UnderlinedButtonProtocol: class {
-    func didChangeState(isHighlighted: Bool)
+protocol UnderlinedButtonDelegate: class {
+    func underlinedButton(_ button: UnderlinedButton, didChangeState isHighlighted: Bool)
 }
 
 class UnderlinedButton: UIButton {
-    weak var delegate: UnderlinedButtonProtocol?
+    weak var delegate: UnderlinedButtonDelegate?
     
     override var isHighlighted: Bool {
         didSet {
-            delegate?.didChangeState(isHighlighted: isHighlighted)
+            delegate?.underlinedButton(self, didChangeState: isHighlighted)
         }
     }
     override var isEnabled: Bool {

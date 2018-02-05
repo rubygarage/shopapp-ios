@@ -1,5 +1,5 @@
 //
-//  CheckoutPaymentEditTableCell.swift
+//  CheckoutCreditCardEditTableViewCell.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 1/3/18.
@@ -8,17 +8,17 @@
 
 import UIKit
 
-protocol CheckoutCreditCardEditTableCellProtocol: class {
-    func didTapEditCard()
+protocol CheckoutCreditCardEditTableCellDelegate: class {
+    func tableViewCellDidTapEditCard(_ cell: CheckoutCreditCardEditTableViewCell)
 }
 
-class CheckoutCreditCardEditTableCell: UITableViewCell {
+class CheckoutCreditCardEditTableViewCell: UITableViewCell {
     @IBOutlet private weak var cardNumberLabel: UILabel!
     @IBOutlet private weak var expirationDateLabel: UILabel!
     @IBOutlet private weak var holderNameLabel: UILabel!
     @IBOutlet private weak var editButton: UIButton!
     
-    weak var delegate: CheckoutCreditCardEditTableCellProtocol?
+    weak var delegate: CheckoutCreditCardEditTableCellDelegate?
     
     // MARK: - View lifecycle
     
@@ -37,7 +37,7 @@ class CheckoutCreditCardEditTableCell: UITableViewCell {
     
     // MARK: - Actions
     
-    @IBAction func editTapped(_ sender: UIButton) {
-        delegate?.didTapEditCard()
+    @IBAction func editButtonDidPress(_ sender: UIButton) {
+        delegate?.tableViewCellDidTapEditCard(self)
     }
 }

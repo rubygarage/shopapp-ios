@@ -63,10 +63,10 @@ class LinkViewController: BaseViewController<ForgotPasswordViewModel> {
     }
 }
 
-// MARK: - UnderlinedButtonProtocol
+// MARK: - UnderlinedButtonDelegate
 
-extension LinkViewController: UnderlinedButtonProtocol {
-    func didChangeState(isHighlighted: Bool) {
+extension LinkViewController: UnderlinedButtonDelegate {
+    func underlinedButton(_ button: UnderlinedButton, didChangeState isHighlighted: Bool) {
         resendUnderlineView.isHidden = isHighlighted
     }
 }

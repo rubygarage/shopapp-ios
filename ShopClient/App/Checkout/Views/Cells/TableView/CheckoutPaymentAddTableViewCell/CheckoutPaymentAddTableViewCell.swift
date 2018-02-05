@@ -1,5 +1,5 @@
 //
-//  CheckoutPaymentAddTableCell.swift
+//  CheckoutPaymentAddTableViewCell.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 12/29/17.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol CheckoutPaymentAddCellProtocol: class {
-    func didTapAddPayment(type: PaymentAddCellType)
+protocol CheckoutPaymentAddCellDelegate: class {
+    func tableViewCell(_ cell: CheckoutPaymentAddTableViewCell, didTapAdd paymentType: PaymentAddCellType)
 }
 
 enum PaymentAddCellType: Int {
@@ -20,12 +20,12 @@ enum PaymentAddCellType: Int {
     static let allValues = [type, card, billingAddress]
 }
 
-class CheckoutPaymentAddTableCell: UITableViewCell {
+class CheckoutPaymentAddTableViewCell: UITableViewCell {
     @IBOutlet private weak var addPaymentButton: BlackButton!
     
     private var paymentRow: PaymentAddCellType = .type
     
-    weak var delegate: CheckoutPaymentAddCellProtocol?
+    weak var delegate: CheckoutPaymentAddCellDelegate?
     
     // MARK: - View lifecycle
     
@@ -50,6 +50,6 @@ class CheckoutPaymentAddTableCell: UITableViewCell {
     // MARK: - Actions
     
     @IBAction func addPaymentTapped(_ sender: BlackButton) {
-        delegate?.didTapAddPayment(type: paymentRow)
+        delegate?.tableViewCell(self, didTapAdd: paymentRow)
     }
 }

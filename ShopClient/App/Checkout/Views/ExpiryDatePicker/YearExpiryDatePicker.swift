@@ -14,7 +14,6 @@ class YearExpiryDatePicker: ExpiryDatePicker {
     override var placeholder: String {
         return NSLocalizedString("Placeholder.Year", comment: String())
     }
-    
     override var data: [String] {
         let currentYear = Calendar.current.component(.year, from: Date())
         var years = [String]()

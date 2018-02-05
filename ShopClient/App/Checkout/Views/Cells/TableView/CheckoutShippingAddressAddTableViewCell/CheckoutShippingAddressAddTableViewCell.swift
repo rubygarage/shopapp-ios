@@ -1,5 +1,5 @@
 //
-//  CheckoutShippingAddressAddTableCell.swift
+//  CheckoutShippingAddressAddTableViewCell.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 12/20/17.
@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol CheckoutShippingAddressAddCellProtocol: class {
-    func didTapAddNewAddress()
+protocol CheckoutShippingAddressAddCellDelegate: class {
+    func tableViewCellDidTapAddNewAddress(_ cell: CheckoutShippingAddressAddTableViewCell)
 }
 
-class CheckoutShippingAddressAddTableCell: UITableViewCell {
+class CheckoutShippingAddressAddTableViewCell: UITableViewCell {
     @IBOutlet private weak var addNewAddressButton: BlackButton!
     
-    weak var delegate: CheckoutShippingAddressAddCellProtocol?
+    weak var delegate: CheckoutShippingAddressAddCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,6 +31,6 @@ class CheckoutShippingAddressAddTableCell: UITableViewCell {
     
     // MARK: - actions
     @IBAction func addNewAddressTapped(_ sender: BlackButton) {
-        delegate?.didTapAddNewAddress()
+        delegate?.tableViewCellDidTapAddNewAddress(self)
     }
 }
