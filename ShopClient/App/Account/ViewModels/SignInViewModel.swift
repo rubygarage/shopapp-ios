@@ -53,7 +53,7 @@ class SignInViewModel: BaseViewModel {
     }
     
     private func signIn() {
-        state.onNext(ViewState.make.loading())
+        state.onNext(ViewState.make.loading(isTranslucent: true))
         loginUseCase.login(with: emailText.value, password: passwordText.value) { [weak self] (success, error) in
             guard let strongSelf = self else {
                 return

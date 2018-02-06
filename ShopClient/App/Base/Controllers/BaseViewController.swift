@@ -13,7 +13,7 @@ import RxSwift
 import Toaster
 
 private let kLoadingViewFillAlpha: CGFloat = 1
-private let kLoadingViewTranslucentAlpha: CGFloat = 0.5
+private let kLoadingViewTranslucentAlpha: CGFloat = 0.75
 private let kToastBottomOffset: CGFloat = 80
 private let kToastDuration: TimeInterval = 3
 

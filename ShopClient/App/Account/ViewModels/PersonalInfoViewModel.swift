@@ -86,7 +86,7 @@ class PersonalInfoViewModel: BaseViewModel {
     }
     
     private func saveChanges() {
-        state.onNext(ViewState.make.loading())
+        state.onNext(ViewState.make.loading(isTranslucent: true))
         updateCustomUseCase.updateCustomer(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), phone: phoneText.value.orNil()) { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return

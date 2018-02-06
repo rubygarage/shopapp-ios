@@ -18,8 +18,8 @@ class AddressListViewModel: BaseViewModel {
     var didSelectAddress = PublishSubject<Address>()
     var selectedAddress: Address?
     
-    func loadCustomerAddresses() {
-        state.onNext(ViewState.make.loading())
+    func loadCustomerAddresses(isTranslucentHud: Bool = false) {
+        state.onNext(ViewState.make.loading(isTranslucent: isTranslucentHud))
         customerUseCase.getCustomer { [weak self] (customer, _) in
             guard let strongSelf = self else {
                 return
@@ -40,12 +40,12 @@ class AddressListViewModel: BaseViewModel {
     
     func updateCheckoutShippingAddress(with address: Address) {
         selectedAddress = address
-        loadCustomerAddresses()
+        loadCustomerAddresses(isTranslucentHud: true)
         didSelectAddress.onNext(address)
     }
     
     func deleteCustomerAddress(with address: Address, isSelected: Bool) {
-        state.onNext(ViewState.make.loading())
+        state.onNext(ViewState.make.loading(isTranslucent: true))
         deleteAddressUseCase.deleteCustomerAddress(with: address.id) { [weak self] (success, error) in
             guard let strongSelf = self else {
                 return
@@ -60,7 +60,7 @@ class AddressListViewModel: BaseViewModel {
     }
     
     func updateCustomerDefaultAddress(with address: Address) {
-        state.onNext(ViewState.make.loading())
+        state.onNext(ViewState.make.loading(isTranslucent: true))
         updateDefaultAddressUseCase.updateDefaultAddress(with: address.id) { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return
@@ -79,7 +79,7 @@ class AddressListViewModel: BaseViewModel {
         if isSelected, let defaultAddress = customerDefaultAddress.value {
             updateCheckoutShippingAddress(with: defaultAddress)
         } else {
-            loadCustomerAddresses()
+            loadCustomerAddresses(isTranslucentHud: true)
         }
     }
     
