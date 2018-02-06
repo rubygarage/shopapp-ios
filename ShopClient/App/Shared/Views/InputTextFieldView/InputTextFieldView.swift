@@ -42,6 +42,7 @@ private let kPlaceholderAnimationDuration: TimeInterval = 0.15
 private let kPlaceholderPositionTopY: CGFloat = -25
 private let kPlaceholderFontSizeTop: CGFloat = 11
 private let kPlaceholderFontSizeDefault: CGFloat = 12
+private let kPlaceholderColorTop = UIColor.black.withAlphaComponent(0.5)
 
 class InputTextFieldView: TextFieldWrapper {
     @IBOutlet private weak var contentView: UIView!
@@ -183,7 +184,7 @@ class InputTextFieldView: TextFieldWrapper {
         }
         
         UIView.transition(with: placeholderLabel, duration: animationDuration, options: .transitionCrossDissolve, animations: {
-            self.placeholderLabel?.textColor = toTop ? UIColor.black.withAlphaComponent(0.5) : UIColor.black
+            self.placeholderLabel?.textColor = toTop ? kPlaceholderColorTop : UIColor.black
         })
     }
     
