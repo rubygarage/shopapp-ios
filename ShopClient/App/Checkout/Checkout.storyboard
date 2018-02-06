@@ -480,7 +480,7 @@
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_type_discover" translatesAutoresizingMaskIntoConstraints="NO" id="GRe-dU-IXl">
                                                         <rect key="frame" x="144" y="0.0" width="38" height="25"/>
                                                     </imageView>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_type_jbs_card" translatesAutoresizingMaskIntoConstraints="NO" id="kmW-ZD-LTE">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_type_jcb_card" translatesAutoresizingMaskIntoConstraints="NO" id="kmW-ZD-LTE">
                                                         <rect key="frame" x="192" y="0.0" width="38" height="25"/>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_type_dc_card" translatesAutoresizingMaskIntoConstraints="NO" id="umx-Bi-c7v">
@@ -752,7 +752,7 @@
         <image name="card_type_amex" width="38" height="25"/>
         <image name="card_type_dc_card" width="38" height="25"/>
         <image name="card_type_discover" width="38" height="25"/>
-        <image name="card_type_jbs_card" width="38" height="25"/>
+        <image name="card_type_jcb_card" width="38" height="25"/>
         <image name="card_type_master_card" width="38" height="25"/>
         <image name="card_type_visa" width="38" height="25"/>
         <image name="checkout_success" width="130" height="112"/>

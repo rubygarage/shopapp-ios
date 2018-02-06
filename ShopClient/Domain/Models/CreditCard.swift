@@ -6,9 +6,9 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-typealias CreditCardValidationType = (name: String, regex: String)
+typealias CreditCardValidationType = (name: String, regex: String, image: UIImage?)
 
 private let kMaskedNumberCountMax = 4
 private let kExpireYearShortCountMax = 2
@@ -22,15 +22,12 @@ class CreditCard: NSObject {
     var verificationCode = String()
     
     private var types: [CreditCardValidationType] {
-        return [(name: "Amex", regex: "^3[47][0-9]{5,}$"),
-                (name: "Visa", regex: "^4\\d{0,}$"),
-                (name: "MasterCard", regex: "^5[1-5]\\d{0,14}$"),
-                (name: "Maestro", regex: "^(?:5[0678]\\d\\d|6304|6390|67\\d\\d)\\d{8,15}$"),
-                (name: "Diners Club", regex: "^3(?:0[0-5]|[68][0-9])[0-9]{4,}$"),
-                (name: "JCB", regex: "^(?:2131|1800|35[0-9]{3})[0-9]{3,}$"),
-                (name: "Discover", regex: "^6(?:011|5[0-9]{2})[0-9]{3,}$"),
-                (name: "UnionPay", regex: "^62[0-5]\\d{13,16}$"),
-                (name: "Mir", regex: "^22[0-9]{1,14}$")]
+        return [(name: "Amex", regex: "^3[47][0-9]{5,}$", image: #imageLiteral(resourceName: "card_type_amex")),
+                (name: "Visa", regex: "^4\\d{0,}$", image: #imageLiteral(resourceName: "card_type_visa")),
+                (name: "MasterCard", regex: "^5[1-5]\\d{0,14}$", image: #imageLiteral(resourceName: "card_type_master_card")),
+                (name: "Diners Club", regex: "^3(?:0[0-5]|[68][0-9])[0-9]{4,}$", image: #imageLiteral(resourceName: "card_type_dc_card")),
+                (name: "JCB", regex: "^(?:2131|1800|35[0-9]{3})[0-9]{3,}$", image: #imageLiteral(resourceName: "card_type_jcb_card")),
+                (name: "Discover", regex: "^6(?:011|5[0-9]{2})[0-9]{3,}$", image: #imageLiteral(resourceName: "card_type_discover"))]
     }
     
     var maskedNumber: String {
@@ -49,6 +46,10 @@ class CreditCard: NSObject {
     }
     var cardTypeName: String {
         return type(for: cardNumber)?.name ?? ""
+    }
+    
+    var cardTypeImage: UIImage? {
+        return type(for: cardNumber)?.image
     }
     
     private func type(for: String) -> CreditCardValidationType? {
