@@ -28,8 +28,9 @@ enum InputTextFieldViewKeybordType: Int {
     case cvv        // 7
 }
 
-protocol InputTextFieldViewDelegate: class {
-    func textFieldView(_ view: InputTextFieldView, didUpdate text: String)
+@objc protocol InputTextFieldViewDelegate: class {
+    @objc optional func textFieldView(_ view: InputTextFieldView, didEndUpdate text: String)
+    @objc optional func textFieldView(_ view: InputTextFieldView, didUpdate text: String)
 }
 
 private let kUnderlineViewAlphaDefault: CGFloat = 0.2
@@ -165,7 +166,7 @@ class InputTextFieldView: TextFieldWrapper {
         guard let text = textField.text else {
             return
         }
-        delegate?.textFieldView(self, didUpdate: text)
+        delegate?.textFieldView?(self, didEndUpdate: text)
     }
     
     @IBAction func editingChanged(_ sender: UITextField) {
@@ -175,6 +176,10 @@ class InputTextFieldView: TextFieldWrapper {
         if keyboardType == InputTextFieldViewKeybordType.cardNumber.rawValue {
             textField.text = textField.text?.asCardMaskNumber()
         }
+        guard let text = textField.text else {
+            return
+        }
+        delegate?.textFieldView?(self, didUpdate: text)
     }
     
     @IBAction func showPasswordTapped(_ sender: UIButton) {

@@ -78,7 +78,7 @@ class CreditCardViewModel: BaseViewModel {
     }
 }
 
-internal extension String {
+extension String {
     func asShortMonth() -> String {
         return String(format: "%01d", Int(self)!)
     }

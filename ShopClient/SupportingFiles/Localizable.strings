@@ -135,6 +135,7 @@
 "Label.Checkout.AddShippingAddress" = "Please, add shipping address first";
 "Label.ThanksForShopping" = "Thanks for shopping with us!";
 "Label.YourOrderNumber" = "Your order number is %@";
+"Label.WeAccept" = "We Accept";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

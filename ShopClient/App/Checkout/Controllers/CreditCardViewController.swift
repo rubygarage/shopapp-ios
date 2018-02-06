@@ -12,7 +12,7 @@ protocol CreditCardControllerDelegate: class {
     func viewController(_ controller: CreditCardViewController, didFilled card: CreditCard)
 }
 
-class CreditCardViewController: BaseViewController<CreditCardViewModel> {
+class CreditCardViewController: BaseViewController<CreditCardViewModel>, InputTextFieldViewDelegate {
     @IBOutlet private weak var holderNameTextFieldView: InputTextFieldView!
     @IBOutlet private weak var cardNumberTextFieldView: InputTextFieldView!
     @IBOutlet private weak var securityCodeTextFieldView: InputTextFieldView!
@@ -20,6 +20,8 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
     @IBOutlet private weak var monthExpirationView: MonthExpiryDatePicker!
     @IBOutlet private weak var yearExpirationView: YearExpiryDatePicker!
     @IBOutlet private weak var submitButton: BlackButton!
+    @IBOutlet private weak var acceptedCardTypesLabel: UILabel!
+    @IBOutlet private weak var cardTypeImageView: UIImageView!
     
     var card: CreditCard?
     weak var delegate: CreditCardControllerDelegate?
@@ -37,9 +39,11 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
         title = "ControllerTitle.CreditCard".localizable
         holderNameTextFieldView.placeholder = "Placeholder.CardHolderName".localizable.required.uppercased()
         cardNumberTextFieldView.placeholder = "Placeholder.CardNumber".localizable.required.uppercased()
+        cardNumberTextFieldView.delegate = self
         securityCodeTextFieldView.placeholder = "Placeholder.CVV".localizable.required.uppercased()
         expirationDateLabel.text = "Label.ExpirationDate".localizable.required.uppercased()
         submitButton.setTitle("Button.PayWithThisCard".localizable.uppercased(), for: .normal)
+        acceptedCardTypesLabel.text = "Label.WeAccept".localizable.uppercased()
     }
     
     private func setupViewModel() {
@@ -116,5 +120,13 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
         monthExpirationView.text = card.expireMonth
         yearExpirationView.text = card.expireYear
         viewModel.updateFields()
+    }
+    
+    // MARK: - InputTextFieldViewDelegate
+    func textFieldView(_ view: InputTextFieldView, didUpdate text: String) {
+        guard let imageName = CreditCardValidator.cardImageName(for: text.asCardDefaultNumber()), let image = UIImage(named: imageName) else {
+            return
+        }
+        cardTypeImageView.image = image
     }
 }

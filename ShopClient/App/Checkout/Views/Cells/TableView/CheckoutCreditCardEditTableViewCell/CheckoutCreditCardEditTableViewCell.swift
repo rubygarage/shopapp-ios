@@ -13,6 +13,7 @@ protocol CheckoutCreditCardEditTableCellDelegate: class {
 }
 
 class CheckoutCreditCardEditTableViewCell: UITableViewCell {
+    @IBOutlet private weak var cardTypeImageView: UIImageView!
     @IBOutlet private weak var cardNumberLabel: UILabel!
     @IBOutlet private weak var expirationDateLabel: UILabel!
     @IBOutlet private weak var holderNameLabel: UILabel!
@@ -33,6 +34,7 @@ class CheckoutCreditCardEditTableViewCell: UITableViewCell {
         cardNumberLabel.text = creditCard.maskedNumber
         expirationDateLabel.text = creditCard.expirationDateLocalized
         holderNameLabel.text = creditCard.holderName
+        cardTypeImageView.image = UIImage(named: creditCard.cardImageName)
     }
     
     // MARK: - Actions

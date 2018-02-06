@@ -93,5 +93,6 @@ struct TableView {
 
 struct CreditCardLimit {
     static let cvvMaxCount = 3
+    static let cardNumberMinCount = 13
     static let cardNumberMaxCount = 19 // 16 digits + 3 spaces
 }

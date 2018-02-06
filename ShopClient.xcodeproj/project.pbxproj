@@ -204,6 +204,7 @@
 		615A97751FA0AF0000C6095D /* ShopifyAuthorAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615A97741FA0AF0000C6095D /* ShopifyAuthorAdapter.swift */; };
 		615F820B202894E400926BAF /* CustomerEmailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615F8209202894E400926BAF /* CustomerEmailTableViewCell.swift */; };
 		615F820C202894E400926BAF /* CustomerEmailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 615F820A202894E400926BAF /* CustomerEmailTableViewCell.xib */; };
+		615F820F2029EA8F00926BAF /* CreditCardValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615F820E2029EA8F00926BAF /* CreditCardValidator.swift */; };
 		616A8ADD1FE82F670013E41F /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616A8ADB1FE82F670013E41F /* CategoryCollectionViewCell.swift */; };
 		616A8ADE1FE82F670013E41F /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 616A8ADC1FE82F670013E41F /* CategoryCollectionViewCell.xib */; };
 		616CA6601FF2A0CF00FF14E2 /* CheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616CA65C1FF2A0CE00FF14E2 /* CheckoutViewModel.swift */; };
@@ -527,6 +528,7 @@
 		615A97741FA0AF0000C6095D /* ShopifyAuthorAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyAuthorAdapter.swift; sourceTree = "<group>"; };
 		615F8209202894E400926BAF /* CustomerEmailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerEmailTableViewCell.swift; sourceTree = "<group>"; };
 		615F820A202894E400926BAF /* CustomerEmailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerEmailTableViewCell.xib; sourceTree = "<group>"; };
+		615F820E2029EA8F00926BAF /* CreditCardValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardValidator.swift; sourceTree = "<group>"; };
 		616A8ADB1FE82F670013E41F /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		616A8ADC1FE82F670013E41F /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		616A8AE01FE82F930013E41F /* SearchTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTitleView.swift; sourceTree = "<group>"; };
@@ -1133,6 +1135,7 @@
 			isa = PBXGroup;
 			children = (
 				0BE6E4852006666300EAEC76 /* Extensions */,
+				615F820D2029EA7C00926BAF /* Validators */,
 				0BA6306D1FFFB101007088B8 /* Views */,
 			);
 			path = Shared;
@@ -1765,6 +1768,14 @@
 			path = CustomerEmailTableViewCell;
 			sourceTree = "<group>";
 		};
+		615F820D2029EA7C00926BAF /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				615F820E2029EA8F00926BAF /* CreditCardValidator.swift */,
+			);
+			path = Validators;
+			sourceTree = "<group>";
+		};
 		616A8ADA1FE82F3C0013E41F /* CategoryCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2353,6 +2364,7 @@
 				6119F2F21FA8D0A800564859 /* BasePaginationViewController.swift in Sources */,
 				614142C11F6AEF0400379BB9 /* HomeViewController.swift in Sources */,
 				0BADF10D20288D2D0013DA67 /* OrderListEmptyDataView.swift in Sources */,
+				615F820F2029EA8F00926BAF /* CreditCardValidator.swift in Sources */,
 				0BD75363201F6D1F00AB1FED /* AddAddressUseCase.swift in Sources */,
 				0BA630611FFE57E8007088B8 /* OrderFooterView.swift in Sources */,
 				618A43851F9F4F340066F053 /* ShopifyPolicyAdapter.swift in Sources */,
@@ -2466,8 +2478,6 @@
 				0BEF52D21FF66AD700E50080 /* ProductUseCase.swift in Sources */,
 				612812C520233F8F0048013B /* UpdateAddressUseCase.swift in Sources */,
 				0BED64D4201789E9006CF968 /* ChangePasswordViewController.swift in Sources */,
-				614142CA1F6AF26300379BB9 /* HomeTableDelegate.swift in Sources */,
-				616CA6711FF3D39D00FF14E2 /* AddressListDataSource.swift in Sources */,
 				614C561D1FC8628E00857116 /* Address.swift in Sources */,
 				0B4EA3661FFD2287000C7A80 /* OrderItem.swift in Sources */,
 				0BED64C2201603D4006CF968 /* SettingsViewModel.swift in Sources */,

@@ -392,7 +392,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8og-iE-j8B">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="518"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="588.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C19-Ol-Gq4" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="50" width="305" height="47"/>
@@ -418,6 +418,13 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="83I-EJ-IMo">
+                                                <rect key="frame" x="303" y="133.5" width="27" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="27" id="gYH-Sk-gdv"/>
+                                                    <constraint firstAttribute="height" constant="18" id="pkf-2H-fsw"/>
+                                                </constraints>
+                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="soR-NB-Ay3">
                                                 <rect key="frame" x="45" y="216" width="285" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -459,9 +466,48 @@
                                                     <constraint firstAttribute="height" constant="22" id="zka-Vd-rHQ"/>
                                                 </constraints>
                                             </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We accept" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rh-TN-hQl">
+                                                <rect key="frame" x="156.5" y="477" width="63" height="14.5"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PGc-lq-n8X">
+                                                <rect key="frame" x="48.5" y="507.5" width="278" height="25"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_type_visa" translatesAutoresizingMaskIntoConstraints="NO" id="a1b-Zv-7Ha">
+                                                        <rect key="frame" x="0.0" y="0.0" width="38" height="25"/>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_type_amex" translatesAutoresizingMaskIntoConstraints="NO" id="ZxN-MN-3OR">
+                                                        <rect key="frame" x="48" y="0.0" width="38" height="25"/>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_type_master_card" translatesAutoresizingMaskIntoConstraints="NO" id="kYd-eY-IHT">
+                                                        <rect key="frame" x="96" y="0.0" width="38" height="25"/>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_type_discover" translatesAutoresizingMaskIntoConstraints="NO" id="GRe-dU-IXl">
+                                                        <rect key="frame" x="144" y="0.0" width="38" height="25"/>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_type_jcb_card" translatesAutoresizingMaskIntoConstraints="NO" id="kmW-ZD-LTE">
+                                                        <rect key="frame" x="192" y="0.0" width="38" height="25"/>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_type_dc_card" translatesAutoresizingMaskIntoConstraints="NO" id="umx-Bi-c7v">
+                                                        <rect key="frame" x="240" y="0.0" width="38" height="25"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="ErY-cK-8Iy"/>
+                                                    <constraint firstItem="ZxN-MN-3OR" firstAttribute="width" secondItem="a1b-Zv-7Ha" secondAttribute="width" id="MXu-bO-ufa"/>
+                                                    <constraint firstItem="kYd-eY-IHT" firstAttribute="width" secondItem="a1b-Zv-7Ha" secondAttribute="width" id="NwZ-Fh-rcn"/>
+                                                    <constraint firstItem="kmW-ZD-LTE" firstAttribute="width" secondItem="a1b-Zv-7Ha" secondAttribute="width" id="dax-rw-IvR"/>
+                                                    <constraint firstAttribute="width" constant="278" id="guq-H3-u7q"/>
+                                                    <constraint firstItem="GRe-dU-IXl" firstAttribute="width" secondItem="a1b-Zv-7Ha" secondAttribute="width" id="rad-QJ-WzJ"/>
+                                                    <constraint firstItem="umx-Bi-c7v" firstAttribute="width" secondItem="a1b-Zv-7Ha" secondAttribute="width" id="x37-eR-tUz"/>
+                                                </constraints>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="83I-EJ-IMo" firstAttribute="centerY" secondItem="2VT-Bi-bf3" secondAttribute="centerY" constant="-3" id="0NV-Gi-F5w"/>
                                             <constraint firstItem="gtO-Uq-n9w" firstAttribute="leading" secondItem="8og-iE-j8B" secondAttribute="leading" constant="45" id="1Ea-40-IgG"/>
                                             <constraint firstItem="q4j-e1-ubP" firstAttribute="leading" secondItem="8og-iE-j8B" secondAttribute="leading" constant="35" id="2G6-3y-hlN"/>
                                             <constraint firstAttribute="trailing" secondItem="q4j-e1-ubP" secondAttribute="trailing" constant="35" id="2uP-po-sbm"/>
@@ -475,14 +521,19 @@
                                             <constraint firstItem="gtO-Uq-n9w" firstAttribute="top" secondItem="soR-NB-Ay3" secondAttribute="bottom" constant="27" id="T1T-P5-u5t"/>
                                             <constraint firstItem="soR-NB-Ay3" firstAttribute="leading" secondItem="8og-iE-j8B" secondAttribute="leading" constant="45" id="UeJ-w5-2Gv"/>
                                             <constraint firstItem="C19-Ol-Gq4" firstAttribute="leading" secondItem="8og-iE-j8B" secondAttribute="leading" constant="35" id="XB2-e9-ixZ"/>
+                                            <constraint firstItem="83I-EJ-IMo" firstAttribute="trailing" secondItem="2VT-Bi-bf3" secondAttribute="trailing" constant="-10" id="YRa-KC-bQG"/>
                                             <constraint firstItem="IVJ-Cf-REH" firstAttribute="top" secondItem="q4j-e1-ubP" secondAttribute="bottom" constant="47" id="aRs-Mw-MBm"/>
                                             <constraint firstItem="C19-Ol-Gq4" firstAttribute="top" secondItem="8og-iE-j8B" secondAttribute="top" constant="50" id="cmg-Hh-ANo"/>
                                             <constraint firstItem="q4j-e1-ubP" firstAttribute="top" secondItem="gtO-Uq-n9w" secondAttribute="bottom" constant="30" id="dk9-JN-6Pg"/>
+                                            <constraint firstItem="8rh-TN-hQl" firstAttribute="centerX" secondItem="8og-iE-j8B" secondAttribute="centerX" id="fA3-MG-bt1"/>
+                                            <constraint firstItem="PGc-lq-n8X" firstAttribute="centerX" secondItem="8og-iE-j8B" secondAttribute="centerX" id="hkd-5P-3Pu"/>
                                             <constraint firstItem="FXG-hk-yS2" firstAttribute="top" secondItem="gtO-Uq-n9w" secondAttribute="top" id="jjV-ZY-G2D"/>
-                                            <constraint firstAttribute="bottom" secondItem="IVJ-Cf-REH" secondAttribute="bottom" constant="65" id="m4p-ea-OLN"/>
                                             <constraint firstItem="IVJ-Cf-REH" firstAttribute="leading" secondItem="8og-iE-j8B" secondAttribute="leading" constant="45" id="res-5J-JrL"/>
+                                            <constraint firstItem="PGc-lq-n8X" firstAttribute="top" secondItem="8rh-TN-hQl" secondAttribute="bottom" constant="16" id="rpu-3M-wBY"/>
                                             <constraint firstAttribute="trailing" secondItem="C19-Ol-Gq4" secondAttribute="trailing" constant="35" id="rzZ-B4-jdK"/>
                                             <constraint firstAttribute="trailing" secondItem="FXG-hk-yS2" secondAttribute="trailing" constant="45" id="s0E-TH-yZc"/>
+                                            <constraint firstAttribute="bottom" secondItem="PGc-lq-n8X" secondAttribute="bottom" constant="56" id="yFf-iq-IFg"/>
+                                            <constraint firstItem="8rh-TN-hQl" firstAttribute="top" secondItem="IVJ-Cf-REH" secondAttribute="bottom" constant="24" id="z3y-GN-fOL"/>
                                             <constraint firstItem="FXG-hk-yS2" firstAttribute="width" secondItem="gtO-Uq-n9w" secondAttribute="width" id="zco-2z-maV"/>
                                         </constraints>
                                     </view>
@@ -506,7 +557,9 @@
                         <viewLayoutGuide key="safeArea" id="Wl7-7R-Rzq"/>
                     </view>
                     <connections>
+                        <outlet property="acceptedCardTypesLabel" destination="8rh-TN-hQl" id="Ay1-LM-i4s"/>
                         <outlet property="cardNumberTextFieldView" destination="2VT-Bi-bf3" id="9I6-ks-JaA"/>
+                        <outlet property="cardTypeImageView" destination="83I-EJ-IMo" id="a5m-KS-2Mz"/>
                         <outlet property="expirationDateLabel" destination="soR-NB-Ay3" id="soF-Qk-FpU"/>
                         <outlet property="holderNameTextFieldView" destination="C19-Ol-Gq4" id="euH-Hj-C1o"/>
                         <outlet property="monthExpirationView" destination="gtO-Uq-n9w" id="X9u-Dm-u7Q"/>
@@ -517,7 +570,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epd-Im-XuG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1490" y="959"/>
+            <point key="canvasLocation" x="1488.8" y="958.4707646176912"/>
         </scene>
         <!--Checkout Address Form View Controller-->
         <scene sceneID="wxm-Wb-CYC">
@@ -706,6 +759,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="card_type_amex" width="38" height="25"/>
+        <image name="card_type_dc_card" width="38" height="25"/>
+        <image name="card_type_discover" width="38" height="25"/>
+        <image name="card_type_jcb_card" width="38" height="25"/>
+        <image name="card_type_master_card" width="38" height="25"/>
+        <image name="card_type_visa" width="38" height="25"/>
         <image name="checkout_success" width="130" height="112"/>
     </resources>
     <inferredMetricsTieBreakers>
