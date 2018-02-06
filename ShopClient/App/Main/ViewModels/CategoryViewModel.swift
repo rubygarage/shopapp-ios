@@ -40,7 +40,7 @@ class CategoryViewModel: GridCollectionViewModel {
                 strongSelf.state.onNext(.error(error: error))
             } else if let category = result {
                 strongSelf.updateData(category: category)
-                strongSelf.state.onNext(.content)
+                category.products?.isEmpty ?? true ? strongSelf.state.onNext(.empty) : strongSelf.state.onNext(.content)
             }
             strongSelf.canLoadMore = result?.products?.count ?? 0 == kItemsPerPage
         }

@@ -49,7 +49,7 @@ class OrdersListViewModel: BasePaginationViewModel {
                 strongSelf.state.onNext(.error(error: error))
             } else if let order = order {
                 strongSelf.updateOrders(with: order)
-                strongSelf.state.onNext(.content)
+                order.isEmpty ? strongSelf.state.onNext(.empty) : strongSelf.state.onNext(.content)
             }
             strongSelf.canLoadMore = order?.count ?? 0 == kItemsPerPage
         }

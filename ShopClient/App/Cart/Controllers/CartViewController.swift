@@ -18,7 +18,7 @@ class CartViewController: BaseViewController<CartViewModel> {
     
     fileprivate var selectedProductVariant: ProductVariant!
     
-    override var emptyDataView: UIView {
+    override var customEmptyDataView: UIView {
         let emptyView = CartEmptyDataView(frame: view.frame)
         emptyView.delegate = self
         return emptyView

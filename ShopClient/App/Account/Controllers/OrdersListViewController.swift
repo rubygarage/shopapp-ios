@@ -13,6 +13,12 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
     
     fileprivate var selectedOrder: Order?
     fileprivate var selectedProductVariant: ProductVariant!
+    
+    override var customEmptyDataView: UIView {
+        let emptyView = OrderListEmptyDataView(frame: view.frame)
+        emptyView.delegate = self
+        return emptyView
+    }
 
     // MARK: - View controller lifecycle
     
@@ -78,6 +84,15 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
     
     override func infinityScrollHandler() {
         viewModel.loadNextPage()
+    }
+}
+
+// MARK: - OrderListEmptyDataViewDelegate
+
+extension OrdersListViewController: OrderListEmptyDataViewDelegate {
+    func viewDidTapStartShopping(_ view: OrderListEmptyDataView) {
+        setHomeController()
+        navigationController?.popViewController(animated: false)
     }
 }
 

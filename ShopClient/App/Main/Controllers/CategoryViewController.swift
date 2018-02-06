@@ -23,6 +23,10 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel> {
     
     var categoryId: String!
     
+    override var customEmptyDataView: UIView {
+        return CategoryEmptyDataView(frame: view.frame)
+    }
+    
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
@@ -44,6 +48,8 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel> {
         if let sortVariantsViewController = segue.destination as? SortVariantsViewController {
             sortVariantsViewController.delegate = self
             sortVariantsViewController.selectedSortingValue = viewModel.selectedSortingValue
+        } else if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
+            productDetailsViewController.productId = selectedProduct!.id
         }
     }
     

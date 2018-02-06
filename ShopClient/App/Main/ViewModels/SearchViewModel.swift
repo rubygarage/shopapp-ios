@@ -25,11 +25,13 @@ class SearchViewModel: GridCollectionViewModel {
     
     func clearResult() {
         updateProducts(products: [])
+        state.onNext(.content)
     }
     
     private func loadRemoteData() {
         guard !searchPhrase.value.isEmpty else {
             updateProducts(products: [])
+            state.onNext(.content)
             return
         }
         state.onNext(.loading(showHud: false))
@@ -39,9 +41,9 @@ class SearchViewModel: GridCollectionViewModel {
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if let productsArray = products {
-                strongSelf.updateProducts(products: productsArray)
-                strongSelf.state.onNext(.content)
+            } else if let products = products {
+                strongSelf.updateProducts(products: products)
+                products.isEmpty && !strongSelf.searchPhrase.value.isEmpty ? strongSelf.state.onNext(.empty) : strongSelf.state.onNext(.content)
             }
             strongSelf.canLoadMore = products?.count ?? 0 == kItemsPerPage
         }

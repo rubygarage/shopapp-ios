@@ -25,7 +25,7 @@ class CartViewModel: BaseViewModel {
                 strongSelf.state.onNext(.error(error: error))
             } else if let cartProducts = cartProducts {
                 strongSelf.data.value = cartProducts
-                strongSelf.updateSuccessState(with: cartProducts.count)
+                cartProducts.isEmpty ? strongSelf.state.onNext(.empty) : strongSelf.state.onNext(.content)
             }
         }
     }
@@ -39,9 +39,9 @@ class CartViewModel: BaseViewModel {
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if let success = success {
-                success ? strongSelf.removeFromData(with: cartProduct) : ()
-                strongSelf.updateSuccessState(with: strongSelf.data.value.count)
+            } else if let success = success, success {
+                strongSelf.removeFromData(with: cartProduct)
+                strongSelf.data.value.isEmpty ? strongSelf.state.onNext(.empty) : strongSelf.state.onNext(.content)
             }
         }
     }
@@ -71,14 +71,6 @@ class CartViewModel: BaseViewModel {
             return
         }
         data.value.remove(at: index)
-    }
-    
-    private func updateSuccessState(with itemsCount: Int?) {
-        if let itemsCount = itemsCount, itemsCount > 0 {
-            state.onNext(.content)
-        } else {
-            state.onNext(.empty)
-        }
     }
 
     // MARK: - BaseViewModel

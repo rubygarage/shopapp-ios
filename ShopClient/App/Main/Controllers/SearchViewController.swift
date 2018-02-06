@@ -17,6 +17,10 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
     
     fileprivate var selectedCategory: Category?
     
+    override var customEmptyDataView: UIView {
+        return SearchEmptyDataView(frame: view.frame)
+    }
+    
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
