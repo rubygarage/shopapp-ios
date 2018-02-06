@@ -199,6 +199,13 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             checkoutAddressFormController.delegate = self
         }
     }
+    
+    // MARK: - InputTextFieldViewDelegate
+    
+    func textFieldView(_ view: InputTextFieldView, didEndUpdate text: String) {
+        viewModel.customerEmail.value = text
+        tableProvider.customerEmail = text
+    }
 }
 
 // MARK: - CheckoutPaymentAddCellDelegate
@@ -321,14 +328,5 @@ extension CheckoutViewController: CreditCardControllerDelegate {
         tableProvider.creditCard = card
         reloadTable()
         navigationController?.popToViewController(self, animated: true)
-    }
-}
-
-// MARK: - InputTextFieldViewDelegate
-
-extension CheckoutViewController: InputTextFieldViewDelegate {
-    func textFieldView(_ view: InputTextFieldView, didUpdate text: String) {
-        viewModel.customerEmail.value = text
-        tableProvider.customerEmail = text
     }
 }
