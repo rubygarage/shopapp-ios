@@ -6,9 +6,9 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-typealias CreditCardValidationType = (name: String, regex: String, image: UIImage?)
+typealias CreditCardValidationType = (name: String, regex: String, imageName: String)
 
 private let kMaskedNumberCountMax = 4
 private let kExpireYearShortCountMax = 2
@@ -38,7 +38,7 @@ class CreditCard: NSObject {
     var cardTypeName: String {
         return CreditCardValidator.cardTypeName(for: cardNumber) ?? ""
     }
-    var cardTypeImage: UIImage? {
-        return CreditCardValidator.cardTypeImage(for: cardNumber)
+    var cardImageName: String {
+        return CreditCardValidator.cardImageName(for: cardNumber) ?? ""
     }
 }

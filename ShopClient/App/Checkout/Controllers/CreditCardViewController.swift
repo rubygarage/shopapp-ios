@@ -124,6 +124,9 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel>, InputTe
     
     // MARK: - InputTextFieldViewDelegate
     func textFieldView(_ view: InputTextFieldView, didUpdate text: String) {
-        cardTypeImageView.image = CreditCardValidator.cardTypeImage(for: text.asCardDefaultNumber())
+        guard let imageName = CreditCardValidator.cardImageName(for: text.asCardDefaultNumber()), let image = UIImage(named: imageName) else {
+            return
+        }
+        cardTypeImageView.image = image
     }
 }

@@ -34,7 +34,7 @@ class CheckoutCreditCardEditTableViewCell: UITableViewCell {
         cardNumberLabel.text = creditCard.maskedNumber
         expirationDateLabel.text = creditCard.expirationDateLocalized
         holderNameLabel.text = creditCard.holderName
-        cardTypeImageView.image = creditCard.cardTypeImage
+        cardTypeImageView.image = UIImage(named: creditCard.cardImageName)
     }
     
     // MARK: - Actions
