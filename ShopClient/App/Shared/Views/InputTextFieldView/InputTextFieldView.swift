@@ -53,6 +53,11 @@ class InputTextFieldView: TextFieldWrapper {
             setupKeyboardCorrection(with: keyboardType)
         }
     }
+    @IBInspectable var hideShowPasswordButton: Bool = true {
+        didSet {
+            setupKeyboardSecureTextEntry(with: keyboardType)
+        }
+    }
     
     weak var delegate: InputTextFieldViewDelegate?
     
@@ -146,7 +151,7 @@ class InputTextFieldView: TextFieldWrapper {
     private func setupKeyboardSecureTextEntry(with type: Int) {
         let secureTextEntry = type == InputTextFieldViewKeybordType.password.rawValue || type == InputTextFieldViewKeybordType.cvv.rawValue
         textField?.isSecureTextEntry = secureTextEntry
-        showPasswordButton?.isHidden = type != InputTextFieldViewKeybordType.password.rawValue
+        showPasswordButton?.isHidden = type != InputTextFieldViewKeybordType.password.rawValue || hideShowPasswordButton == true
     }
     
     // MARK: - Actions

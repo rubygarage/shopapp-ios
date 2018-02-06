@@ -40,4 +40,8 @@ extension Repository: AuthentificationRepositoryInterface {
     func updateCustomer(with promo: Bool, callback: @escaping RepoCallback<Customer>) {
         APICore?.updateCustomer(with: promo, callback: callback)
     }
+    
+    func updateCustomer(with password: String, callback: @escaping RepoCallback<Customer>) {
+        APICore?.updateCustomer(with: password, callback: callback)
+    }
 }

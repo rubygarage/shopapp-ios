@@ -16,4 +16,8 @@ struct UpdateCustomUseCase {
     func updateCustomer(with email: String, firstName: String?, lastName: String?, phone: String?, _ callback: @escaping RepoCallback<Customer>) {
         Repository.shared.updateCustomer(with: email, firstName: firstName, lastName: lastName, phone: phone, callback: callback)
     }
+    
+    func updateCustomer(with password: String, _ callback: @escaping RepoCallback<Customer>) {
+        Repository.shared.updateCustomer(with: password, callback: callback)
+    }
 }

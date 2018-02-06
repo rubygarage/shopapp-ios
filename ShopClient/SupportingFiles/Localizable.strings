@@ -15,6 +15,7 @@
 "ControllerTitle.SignIn" = "Sign In";
 "ControllerTitle.SignUp" = "Sign Up";
 "ControllerTitle.ForgotPassword" = "Forgot Password";
+"ControllerTitle.SetNewPassword" = "Set New Password";
 "ControllerTitle.Checkout" = "Checkout";
 "ControllerTitle.MyOrders" = "My Orders";
 "ControllerTitle.OrderDetails" = "Order Details";
@@ -49,6 +50,7 @@
 "Button.Logout" = "Log Out";
 "Button.ChangePassword" = "Change Password";
 "Button.SaveChanges" = "Save Changes";
+"Button.Update" = "Update";
 "Button.CreateNewAccount" = "Create New Account";
 "Button.MyOrders" = "My Orders";
 "Button.PersonalInfo" = "Personal Info";
@@ -141,6 +143,7 @@
 "Error.InvalidExpiresDate" = "Invalid expires date";
 "Error.InvalidEmail" = "Please enter correct email address";
 "Error.InvalidPassword" = "Please enter correct password";
+"Error.PasswordsAreNotEquals" = "Passwords are not equals";
 
 "Placeholder.Email" = "Email";
 "Placeholder.Password" = "Password";
@@ -148,6 +151,8 @@
 "Placeholder.LastName" = "Last Name";
 "Placeholder.PhoneNumber" = "Phone number";
 "Placeholder.CreatePassword" = "Create a Password";
+"Placeholder.NewPassword" = "New Password";
+"Placeholder.ConfirmPassword" = "Confirm Password";
 "Placeholder.Search" = " Search";
 "Placeholder.Country" = "Country";
 "Placeholder.Address" = "Address";
