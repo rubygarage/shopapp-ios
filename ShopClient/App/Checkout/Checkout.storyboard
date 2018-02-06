@@ -418,6 +418,13 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="83I-EJ-IMo">
+                                                <rect key="frame" x="303" y="133.5" width="27" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="27" id="gYH-Sk-gdv"/>
+                                                    <constraint firstAttribute="height" constant="18" id="pkf-2H-fsw"/>
+                                                </constraints>
+                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="soR-NB-Ay3">
                                                 <rect key="frame" x="45" y="216" width="285" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -500,6 +507,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="83I-EJ-IMo" firstAttribute="centerY" secondItem="2VT-Bi-bf3" secondAttribute="centerY" constant="-3" id="0NV-Gi-F5w"/>
                                             <constraint firstItem="gtO-Uq-n9w" firstAttribute="leading" secondItem="8og-iE-j8B" secondAttribute="leading" constant="45" id="1Ea-40-IgG"/>
                                             <constraint firstItem="q4j-e1-ubP" firstAttribute="leading" secondItem="8og-iE-j8B" secondAttribute="leading" constant="35" id="2G6-3y-hlN"/>
                                             <constraint firstAttribute="trailing" secondItem="q4j-e1-ubP" secondAttribute="trailing" constant="35" id="2uP-po-sbm"/>
@@ -513,6 +521,7 @@
                                             <constraint firstItem="gtO-Uq-n9w" firstAttribute="top" secondItem="soR-NB-Ay3" secondAttribute="bottom" constant="27" id="T1T-P5-u5t"/>
                                             <constraint firstItem="soR-NB-Ay3" firstAttribute="leading" secondItem="8og-iE-j8B" secondAttribute="leading" constant="45" id="UeJ-w5-2Gv"/>
                                             <constraint firstItem="C19-Ol-Gq4" firstAttribute="leading" secondItem="8og-iE-j8B" secondAttribute="leading" constant="35" id="XB2-e9-ixZ"/>
+                                            <constraint firstItem="83I-EJ-IMo" firstAttribute="trailing" secondItem="2VT-Bi-bf3" secondAttribute="trailing" constant="-10" id="YRa-KC-bQG"/>
                                             <constraint firstItem="IVJ-Cf-REH" firstAttribute="top" secondItem="q4j-e1-ubP" secondAttribute="bottom" constant="47" id="aRs-Mw-MBm"/>
                                             <constraint firstItem="C19-Ol-Gq4" firstAttribute="top" secondItem="8og-iE-j8B" secondAttribute="top" constant="50" id="cmg-Hh-ANo"/>
                                             <constraint firstItem="q4j-e1-ubP" firstAttribute="top" secondItem="gtO-Uq-n9w" secondAttribute="bottom" constant="30" id="dk9-JN-6Pg"/>
@@ -550,6 +559,7 @@
                     <connections>
                         <outlet property="acceptedCardTypesLabel" destination="8rh-TN-hQl" id="Ay1-LM-i4s"/>
                         <outlet property="cardNumberTextFieldView" destination="2VT-Bi-bf3" id="9I6-ks-JaA"/>
+                        <outlet property="cardTypeImageView" destination="83I-EJ-IMo" id="a5m-KS-2Mz"/>
                         <outlet property="expirationDateLabel" destination="soR-NB-Ay3" id="soF-Qk-FpU"/>
                         <outlet property="holderNameTextFieldView" destination="C19-Ol-Gq4" id="euH-Hj-C1o"/>
                         <outlet property="monthExpirationView" destination="gtO-Uq-n9w" id="X9u-Dm-u7Q"/>

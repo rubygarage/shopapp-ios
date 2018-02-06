@@ -21,6 +21,7 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel>, InputTe
     @IBOutlet private weak var yearExpirationView: YearExpiryDatePicker!
     @IBOutlet private weak var submitButton: BlackButton!
     @IBOutlet private weak var acceptedCardTypesLabel: UILabel!
+    @IBOutlet private weak var cardTypeImageView: UIImageView!
     
     var card: CreditCard?
     weak var delegate: CreditCardControllerDelegate?
@@ -123,6 +124,6 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel>, InputTe
     
     // MARK: - InputTextFieldViewDelegate
     func textFieldView(_ view: InputTextFieldView, didUpdate text: String) {
-        // TODO:
+        cardTypeImageView.image = CreditCardValidator.type(for: text.asCardDefaultNumber())?.image
     }
 }
