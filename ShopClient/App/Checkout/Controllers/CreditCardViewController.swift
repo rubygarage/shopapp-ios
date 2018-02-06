@@ -133,6 +133,7 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel>, InputTe
     }
     
     // MARK: - InputTextFieldViewDelegate
+    
     func textFieldView(_ view: InputTextFieldView, didUpdate text: String) {
         populateCardTypeImage(with: text)
     }
