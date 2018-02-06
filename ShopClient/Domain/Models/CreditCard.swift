@@ -36,10 +36,9 @@ class CreditCard: NSObject {
         return String.localizedStringWithFormat(expireLocalized, expireMonth, expireYearShort)
     }
     var cardTypeName: String {
-        return CreditCardValidator.type(for: cardNumber)?.name ?? ""
+        return CreditCardValidator.cardTypeName(for: cardNumber) ?? ""
     }
-    
     var cardTypeImage: UIImage? {
-        return CreditCardValidator.type(for: cardNumber)?.image
+        return CreditCardValidator.cardTypeImage(for: cardNumber)
     }
 }

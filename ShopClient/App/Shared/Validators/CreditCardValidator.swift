@@ -6,7 +6,7 @@
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class CreditCardValidator: NSObject {
     private class var types: [CreditCardValidationType] {
@@ -18,7 +18,15 @@ class CreditCardValidator: NSObject {
                 (name: "Discover", regex: "^6(?:011|5[0-9]{2})[0-9]{3,}$", image: #imageLiteral(resourceName: "card_type_discover"))]
     }
     
-    class func type(for cardNumber: String) -> CreditCardValidationType? {
+    class func cardTypeName(for cardNumber: String) -> String? {
+        return type(for: cardNumber)?.name
+    }
+    
+    class func cardTypeImage(for cardNumber: String) -> UIImage? {
+        return type(for: cardNumber)?.image
+    }
+    
+    private class func type(for cardNumber: String) -> CreditCardValidationType? {
         for type in types {
             let predicate = NSPredicate(format: "SELF MATCHES %@", type.regex)
             if predicate.evaluate(with: cardNumber) {

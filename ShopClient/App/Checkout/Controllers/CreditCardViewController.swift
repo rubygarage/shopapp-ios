@@ -124,6 +124,6 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel>, InputTe
     
     // MARK: - InputTextFieldViewDelegate
     func textFieldView(_ view: InputTextFieldView, didUpdate text: String) {
-        cardTypeImageView.image = CreditCardValidator.type(for: text.asCardDefaultNumber())?.image
+        cardTypeImageView.image = CreditCardValidator.cardTypeImage(for: text.asCardDefaultNumber())
     }
 }
