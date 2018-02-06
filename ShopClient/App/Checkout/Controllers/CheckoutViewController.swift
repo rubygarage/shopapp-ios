@@ -132,6 +132,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
                     return
                 }
                 strongSelf.tableProvider.customerHasEmail = customerHasEmail
+                strongSelf.reloadTable()
             })
             .disposed(by: disposeBag)
         
