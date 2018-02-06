@@ -236,7 +236,7 @@ extension InputTextFieldView: UITextFieldDelegate {
         
         switch keyboardType {
         case InputTextFieldViewKeybordType.cardNumber.rawValue:
-            return generatedString.count <= CreditCardLimit.cardNumberMaxCount
+            return generatedString.asCardDefaultNumber().count <= CreditCardLimit.cardNumberMaxCount
         case InputTextFieldViewKeybordType.cvv.rawValue:
             return generatedString.count <= CreditCardLimit.cvvMaxCount
         default:
