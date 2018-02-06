@@ -34,7 +34,7 @@ class SearchViewModel: GridCollectionViewModel {
             state.onNext(.content)
             return
         }
-        state.onNext(.loading(showHud: false))
+        state.onNext(ViewState.make.loading(showHud: false))
         productListUseCase.getProductList(with: paginationValue, searchPhrase: searchPhrase.value) { [weak self] (products, error) in
             guard let strongSelf = self else {
                 return

@@ -45,7 +45,7 @@ class AccountViewModel: BaseViewModel {
     
     private func getCustomer() {
         let showHud = customer.value == nil
-        state.onNext(.loading(showHud: showHud))
+        state.onNext(ViewState.make.loading(showHud: showHud))
         customerUseCase.getCustomer { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return

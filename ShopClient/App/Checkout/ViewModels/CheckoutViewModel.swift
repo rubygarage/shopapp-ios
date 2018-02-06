@@ -64,7 +64,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     func loadData() {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading())
         loginUseCase.getLoginStatus { [weak self] (isLogged) in
             guard let strongSelf = self else {
                 return
@@ -75,7 +75,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     func getCheckout() {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading())
         let checkoutId = checkout.value?.id ?? ""
         checkoutUseCase.getCheckout(with: checkoutId) { [weak self] (result, error) in
             guard let strongSelf = self else {
@@ -91,7 +91,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     func updateCheckoutShippingAddress(with address: Address) {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading())
         let checkoutId = checkout.value?.id ?? ""
         checkoutUseCase.updateCheckoutShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
             guard let strongSelf = self else {
@@ -121,7 +121,7 @@ class CheckoutViewModel: BaseViewModel {
     
     func updateShippingRate(with rate: ShippingRate) {
         if let checkoutId = checkout.value?.id {
-            state.onNext(.loading(showHud: true))
+            state.onNext(ViewState.make.loading(isTranslucent: true))
             checkoutUseCase.updateShippingRate(with: checkoutId, rate: rate, callback: { [weak self] (result, error) in
                 guard let strongSelf = self else {
                     return
@@ -192,14 +192,14 @@ class CheckoutViewModel: BaseViewModel {
     
     private func payByCreditCard() {
         if let checkout = checkout.value, let card = creditCard.value, let billingAddress = billingAddress.value {
-            state.onNext(.loading(showHud: true))
+            state.onNext(ViewState.make.loading(isTranslucent: true))
             checkoutUseCase.pay(with: card, checkout: checkout, billingAddress: billingAddress, customerEmail: customerEmail.value, callback: paymentCallback())
         }
     }
     
     private func payByApplePay() {
         if let checkout = checkout.value {
-            state.onNext(.loading(showHud: true))
+            state.onNext(ViewState.make.loading(isTranslucent: true))
             checkoutUseCase.setupApplePay(with: checkout, callback: paymentCallback())
         }
     }

@@ -57,7 +57,7 @@ class ChangePasswordViewModel: BaseViewModel {
     }
     
     private func update() {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading(isTranslucent: true))
         updateCustomUseCase.updateCustomer(with: newPasswordText.value) { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return

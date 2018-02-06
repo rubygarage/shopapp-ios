@@ -30,7 +30,7 @@ class CategoryViewModel: GridCollectionViewModel {
     
     private func loadRemoteData() {
         let showHud = products.value.isEmpty
-        state.onNext(.loading(showHud: showHud))
+        state.onNext(ViewState.make.loading(showHud: showHud))
         let reverse = selectedSortingValue == .createdAt || selectedSortingValue == .priceHighToLow
         categoryUseCase.getCategory(with: categoryId, paginationValue: paginationValue, sortingValue: selectedSortingValue, reverse: reverse) { [weak self] (result, error) in
             guard let strongSelf = self else {

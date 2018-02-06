@@ -43,7 +43,7 @@ class ForgotPasswordViewModel: BaseViewModel {
     }
     
     private func resetPassword() {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading(isTranslucent: true))
         resetPasswordUseCase.resetPassword(with: emailText.value) { [weak self] (success, error) in
             guard let strongSelf = self else {
                 return

@@ -25,7 +25,7 @@ class CategoryListViewModel: BasePaginationViewModel {
     
     private func loadRemoteData() {
         let showHud = items.value.isEmpty
-        state.onNext(.loading(showHud: showHud))
+        state.onNext(ViewState.make.loading(showHud: showHud))
         categoryListUseCase.getCategoryList { [weak self] (catogories, error) in
             guard let strongSelf = self else {
                 return

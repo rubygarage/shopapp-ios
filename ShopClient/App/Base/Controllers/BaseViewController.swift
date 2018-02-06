@@ -12,14 +12,26 @@ import RxCocoa
 import RxSwift
 import Toaster
 
+private let kLoadingViewFillAlpha: CGFloat = 1
+private let kLoadingViewTranslucentAlpha: CGFloat = 0.75
 private let kToastBottomOffset: CGFloat = 80
 private let kToastDuration: TimeInterval = 3
 
 enum ViewState {
-    case loading(showHud: Bool)
+    case loading(showHud: Bool, isTranslucent: Bool)
     case content
     case error(error: RepoError?)
     case empty
+    
+    enum Builder {
+        static func loading(showHud: Bool = true, isTranslucent: Bool = false) -> ViewState {
+            return ViewState.loading(showHud: showHud, isTranslucent: isTranslucent)
+        }
+    }
+
+    static var make: ViewState.Builder.Type {
+        return ViewState.Builder.self
+    }
 }
 
 class BaseViewController<T: BaseViewModel>: UIViewController {
@@ -77,17 +89,18 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
             setContentState()
         case .error(let error):
             setErrorState(with: error)
-        case .loading(let showHud):
-            setLoadingState(showHud: showHud)
+        case .loading(let showHud, let isTranslucent):
+            setLoadingState(showHud: showHud, isTranslucent: isTranslucent)
         case .empty:
             setEmptyState()
         }
     }
     
-    private func setLoadingState(showHud: Bool) {
+    private func setLoadingState(showHud: Bool, isTranslucent: Bool) {
         errorView.removeFromSuperview()
         emptyDataView.removeFromSuperview()
         if showHud {
+            loadingView.alpha = isTranslucent ? kLoadingViewTranslucentAlpha : kLoadingViewFillAlpha
             view.addSubview(loadingView)
         }
     }

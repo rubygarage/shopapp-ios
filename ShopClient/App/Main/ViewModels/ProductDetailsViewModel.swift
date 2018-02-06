@@ -53,7 +53,7 @@ class ProductDetailsViewModel: BaseViewModel {
     }
 
     func loadData() {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading())
         productUseCase.getProduct(with: productId) { [weak self] (product, error) in
             guard let strongSelf = self else {
                 return
@@ -132,7 +132,7 @@ class ProductDetailsViewModel: BaseViewModel {
     }
     
     private func loadRelatedItems() {
-        state.onNext(.loading(showHud: false))
+        state.onNext(ViewState.make.loading(showHud: false))
         productListUseCase.getProductList(with: nil, sortingValue: SortingValue.type, keyPhrase: product.value?.type, reverse: false) { [weak self] (products, error) in
             guard let strongSelf = self else {
                 return

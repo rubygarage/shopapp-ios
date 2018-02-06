@@ -15,7 +15,7 @@ class CustomerAddressFormViewModel: BaseViewModel {
     var filledAddress = PublishSubject<Address>()
     
     func addCustomerAddress(with address: Address) {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading(isTranslucent: true))
         addAddressUseCase.addAddress(with: address) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
@@ -30,7 +30,7 @@ class CustomerAddressFormViewModel: BaseViewModel {
     }
     
     func updateCustomerAddress(with address: Address) {
-        state.onNext(.loading(showHud: true))
+        state.onNext(ViewState.make.loading(isTranslucent: true))
         updateAddressUseCase.updateCustomerAddress(with: address) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return

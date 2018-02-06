@@ -69,7 +69,7 @@ class HomeViewModel: BasePaginationViewModel {
     
     func loadData() {
         let showHud = data.value.latestProducts.isEmpty && data.value.popularProducts.isEmpty && data.value.articles.isEmpty
-        state.onNext(.loading(showHud: showHud))
+        state.onNext(ViewState.make.loading(showHud: showHud))
         Single.zip(productsSingle, popularSingle, articlesSingle)
             .subscribe(onSuccess: { [weak self] (latestProducts, popularProducts, articles) in
                 guard let strongSelf = self else {
