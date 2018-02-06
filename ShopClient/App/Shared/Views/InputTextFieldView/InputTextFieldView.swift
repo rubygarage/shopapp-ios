@@ -40,6 +40,8 @@ private let kUnderlineViewHeightHighlighted: CGFloat = 2
 private let kErrorColor = UIColor(displayP3Red: 0.89, green: 0.31, blue: 0.31, alpha: 1)
 private let kPlaceholderAnimationDuration: TimeInterval = 0.15
 private let kPlaceholderPositionTopY: CGFloat = -25
+private let kPlaceholderFontSizeTop: CGFloat = 11
+private let kPlaceholderFontSizeDefault: CGFloat = 12
 
 class InputTextFieldView: TextFieldWrapper {
     @IBOutlet private weak var contentView: UIView!
@@ -173,6 +175,8 @@ class InputTextFieldView: TextFieldWrapper {
         let animationDuration = animated ? kPlaceholderAnimationDuration : 0
         let placeholderVerticalPosition: CGFloat = toTop ? kPlaceholderPositionTopY : 0
         placeholderVerticallyConstraint?.constant = placeholderVerticalPosition
+        let fontSize = toTop ? kPlaceholderFontSizeTop : kPlaceholderFontSizeDefault
+        self.placeholderLabel.font = UIFont.systemFont(ofSize: fontSize)
         
         UIView.animate(withDuration: animationDuration) {
             self.layoutIfNeeded()

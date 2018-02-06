@@ -24,6 +24,7 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel>, InputTe
     @IBOutlet private weak var cardTypeImageView: UIImageView!
     
     var card: CreditCard?
+    
     weak var delegate: CreditCardControllerDelegate?
     
     override func viewDidLoad() {
@@ -124,9 +125,10 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel>, InputTe
     
     // MARK: - InputTextFieldViewDelegate
     func textFieldView(_ view: InputTextFieldView, didUpdate text: String) {
-        guard let imageName = CreditCardValidator.cardImageName(for: text.asCardDefaultNumber()), let image = UIImage(named: imageName) else {
+        guard let imageName = CreditCardValidator.cardImageName(for: text.asCardDefaultNumber()) else {
+            cardTypeImageView.image = nil
             return
         }
-        cardTypeImageView.image = image
+        cardTypeImageView.image = UIImage(named: imageName)
     }
 }
