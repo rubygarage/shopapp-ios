@@ -18,17 +18,18 @@ class ChangePasswordViewModel: BaseViewModel {
     var updateSuccess = PublishSubject<Bool>()
     
     var updateButtonEnabled: Observable<Bool> {
-        return Observable.combineLatest(newPasswordText.asObservable(), confirmPasswordText.asObservable()) { newEmail, confirmPassword in
+        return Observable.combineLatest(newPasswordText.asObservable(), confirmPasswordText.asObservable()) { (newEmail, confirmPassword) in
             newEmail.hasAtLeastOneSymbol() && confirmPassword.hasAtLeastOneSymbol()
         }
     }
     var updatePressed: AnyObserver<()> {
         return AnyObserver { [weak self] _ in
-            self?.checkValidation()
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.checkValidation()
         }
     }
-    
-    // MARK: - Private
     
     private func checkValidation() {
         let newPasswordIsValid = newPasswordText.value.isValidAsPassword()
@@ -58,13 +59,15 @@ class ChangePasswordViewModel: BaseViewModel {
     private func update() {
         state.onNext(.loading(showHud: true))
         updateCustomUseCase.updateCustomer(with: newPasswordText.value) { [weak self] (customer, error) in
+            guard let strongSelf = self else {
+                return
+            }
             if let error = error {
-                self?.state.onNext(.error(error: error))
+                strongSelf.state.onNext(.error(error: error))
+            } else if customer != nil {
+                strongSelf.state.onNext(.content)
             }
-            if customer != nil {
-                self?.state.onNext(.content)
-            }
-            self?.updateSuccess.onNext(error == nil && customer != nil)
+            strongSelf.updateSuccess.onNext(error == nil && customer != nil)
         }
     }
 }

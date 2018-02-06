@@ -82,7 +82,10 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
         
         changePasswordButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                self?.performSegue(withIdentifier: SegueIdentifiers.toChangePassword, sender: self)
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.performSegue(withIdentifier: SegueIdentifiers.toChangePassword, sender: strongSelf)
             })
             .disposed(by: disposeBag)
         

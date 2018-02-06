@@ -44,13 +44,19 @@ class ChangePasswordViewController: BaseViewController<ChangePasswordViewModel> 
         
         viewModel.newPasswordErrorMessage
             .subscribe(onNext: { [weak self] errorMessage in
-                self?.newPasswordTextFieldView.errorMessage = errorMessage
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.newPasswordTextFieldView.errorMessage = errorMessage
             })
             .disposed(by: disposeBag)
         
         viewModel.confirmPasswordErrorMessage
             .subscribe(onNext: { [weak self] errorMessage in
-                self?.confirmPasswordTextFieldView.errorMessage = errorMessage
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.confirmPasswordTextFieldView.errorMessage = errorMessage
             })
             .disposed(by: disposeBag)
         
@@ -60,15 +66,19 @@ class ChangePasswordViewController: BaseViewController<ChangePasswordViewModel> 
         
         viewModel.updateButtonEnabled
             .subscribe(onNext: { [weak self] enabled in
-                self?.updateButton.isEnabled = enabled
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.updateButton.isEnabled = enabled
             })
             .disposed(by: disposeBag)
         
         viewModel.updateSuccess.asObservable()
             .subscribe(onNext: { [weak self] success in
-                if success {
-                    self?.dismiss(animated: true)
+                guard let strongSelf = self, success else {
+                    return
                 }
+                strongSelf.dismiss(animated: true)
             })
             .disposed(by: disposeBag)
     }
