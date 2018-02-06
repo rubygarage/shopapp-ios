@@ -20,6 +20,7 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
     @IBOutlet private weak var monthExpirationView: MonthExpiryDatePicker!
     @IBOutlet private weak var yearExpirationView: YearExpiryDatePicker!
     @IBOutlet private weak var submitButton: BlackButton!
+    @IBOutlet private weak var acceptedCardTypesLabel: UILabel!
     
     var card: CreditCard?
     weak var delegate: CreditCardControllerDelegate?
@@ -40,6 +41,7 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel> {
         securityCodeTextFieldView.placeholder = "Placeholder.CVV".localizable.required.uppercased()
         expirationDateLabel.text = "Label.ExpirationDate".localizable.required.uppercased()
         submitButton.setTitle("Button.PayWithThisCard".localizable.uppercased(), for: .normal)
+        acceptedCardTypesLabel.text = "Label.WeAccept".localizable.uppercased()
     }
     
     private func setupViewModel() {
