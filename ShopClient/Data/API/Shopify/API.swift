@@ -584,7 +584,18 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     
     private func updateCustomer(with token: String, password: String, callback: @escaping RepoCallback<Customer>) {
         let query = customerUpdateQuery(with: token, password: password)
-        updateCustomer(with: query, callback: callback)
+        updateCustomer(with: query) { [weak self] (customer, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            if let customer = customer {
+                strongSelf.login(with: customer.email, password: password, callback: { (_, error) in
+                    callback(customer, error)
+                })
+            } else {
+                callback(nil, error)
+            }
+        }
     }
     
     private func updateCustomer(with query: Storefront.MutationQuery, callback: @escaping RepoCallback<Customer>) {
