@@ -365,20 +365,16 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         run(task: task, callback: callback)
     }
     
-    func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, callback: @escaping RepoCallback<Order>) {
-        if let email = sessionData().email {
-            updateCheckout(with: checkout.id, email: email, completion: { [weak self] (success, error) in
-                if success == true {
-                    self?.createCardVault(with: card, checkout: checkout, billingAddress: billingAddress, callback: callback)
-                } else if let responseError = RepoError(with: error) {
-                    callback(nil, responseError)
-                } else {
-                    callback(nil, RepoError())
-                }
-            })
-        } else {
-            callback(nil, RepoError())
-        }
+    func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, customerEmail: String, callback: @escaping RepoCallback<Order>) {
+        updateCheckout(with: checkout.id, email: customerEmail, completion: { [weak self] (success, error) in
+            if success == true {
+                self?.createCardVault(with: card, checkout: checkout, billingAddress: billingAddress, callback: callback)
+            } else if let responseError = RepoError(with: error) {
+                callback(nil, responseError)
+            } else {
+                callback(nil, RepoError())
+            }
+        })
     }
     
     func setupApplePay(with checkout: Checkout, callback: @escaping RepoCallback<Order>) {

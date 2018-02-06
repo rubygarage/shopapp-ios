@@ -200,6 +200,8 @@
 		615A97711FA09EAB00C6095D /* ShopifyCategoryAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615A97701FA09EAB00C6095D /* ShopifyCategoryAdapter.swift */; };
 		615A97731FA0AD0500C6095D /* ShopifyArticleAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615A97721FA0AD0500C6095D /* ShopifyArticleAdapter.swift */; };
 		615A97751FA0AF0000C6095D /* ShopifyAuthorAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615A97741FA0AF0000C6095D /* ShopifyAuthorAdapter.swift */; };
+		615F820B202894E400926BAF /* CustomerEmailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615F8209202894E400926BAF /* CustomerEmailTableViewCell.swift */; };
+		615F820C202894E400926BAF /* CustomerEmailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 615F820A202894E400926BAF /* CustomerEmailTableViewCell.xib */; };
 		616A8ADD1FE82F670013E41F /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616A8ADB1FE82F670013E41F /* CategoryCollectionViewCell.swift */; };
 		616A8ADE1FE82F670013E41F /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 616A8ADC1FE82F670013E41F /* CategoryCollectionViewCell.xib */; };
 		616CA6601FF2A0CF00FF14E2 /* CheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616CA65C1FF2A0CE00FF14E2 /* CheckoutViewModel.swift */; };
@@ -519,6 +521,8 @@
 		615A97701FA09EAB00C6095D /* ShopifyCategoryAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyCategoryAdapter.swift; sourceTree = "<group>"; };
 		615A97721FA0AD0500C6095D /* ShopifyArticleAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyArticleAdapter.swift; sourceTree = "<group>"; };
 		615A97741FA0AF0000C6095D /* ShopifyAuthorAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyAuthorAdapter.swift; sourceTree = "<group>"; };
+		615F8209202894E400926BAF /* CustomerEmailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerEmailTableViewCell.swift; sourceTree = "<group>"; };
+		615F820A202894E400926BAF /* CustomerEmailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerEmailTableViewCell.xib; sourceTree = "<group>"; };
 		616A8ADB1FE82F670013E41F /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		616A8ADC1FE82F670013E41F /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		616A8AE01FE82F930013E41F /* SearchTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTitleView.swift; sourceTree = "<group>"; };
@@ -792,6 +796,7 @@
 				0B24F0B220074D7400F13224 /* CheckoutShippingAddressAddTableViewCell */,
 				61D33AC42008F8C900228E86 /* CheckoutShippingOptionsDisabledTableViewCell */,
 				61AB7D2D2010CB4000DB9D44 /* CheckoutShippingOptionsEnabledTableViewCell */,
+				615F8208202894CD00926BAF /* CustomerEmailTableViewCell */,
 				0B24F0BD20074D7400F13224 /* PaymentTypeTableViewCell */,
 			);
 			path = TableView;
@@ -1745,6 +1750,15 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		615F8208202894CD00926BAF /* CustomerEmailTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				615F8209202894E400926BAF /* CustomerEmailTableViewCell.swift */,
+				615F820A202894E400926BAF /* CustomerEmailTableViewCell.xib */,
+			);
+			path = CustomerEmailTableViewCell;
+			sourceTree = "<group>";
+		};
 		616A8ADA1FE82F3C0013E41F /* CategoryCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2154,6 +2168,7 @@
 				0B24F0DB20074D7500F13224 /* CheckoutCreditCardEditTableViewCell.xib in Resources */,
 				61A54BF91FF5254900D4D151 /* AccountFooterView.xib in Resources */,
 				0B24F0D420074D7500F13224 /* PaymentTypeTableViewCell.xib in Resources */,
+				615F820C202894E400926BAF /* CustomerEmailTableViewCell.xib in Resources */,
 				0B24F0EC20074F1A00F13224 /* InputTextFieldView.xib in Resources */,
 				61236D3D1FEA6E2500D64198 /* Checkout.storyboard in Resources */,
 				61AB7D312010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableViewCell.xib in Resources */,
@@ -2353,6 +2368,7 @@
 				61C2ABC51FBB240A00A1E170 /* SignInViewModel.swift in Sources */,
 				61C2ABC01FBB10C600A1E170 /* String+Validator.swift in Sources */,
 				611A4F37200CF6B700F1F645 /* LineItem.swift in Sources */,
+				615F820B202894E400926BAF /* CustomerEmailTableViewCell.swift in Sources */,
 				0BCE89212022178700C6B3AD /* CategoryListCollectionProvider.swift in Sources */,
 				61C2ABBE1FBAEC7800A1E170 /* ShopifyRepoErrorAdapter.swift in Sources */,
 				6118DF261FB496070044A519 /* UIView+Shadow.swift in Sources */,

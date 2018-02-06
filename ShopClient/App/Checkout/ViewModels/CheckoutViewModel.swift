@@ -12,12 +12,13 @@ import RxSwift
 
 enum CheckoutSection: Int {
     case cart
+    case customerEmail
     case shippingAddress
     case payment
     case shippingOptions
     
-    static let allValues = [cart, shippingAddress, payment, shippingOptions]
-    static let valuesWithoutShippingOptions = [cart, shippingAddress, payment]
+    static let allValues = [cart, customerEmail, shippingAddress, payment, shippingOptions]
+    static let valuesWithoutShippingOptions = [cart, customerEmail, shippingAddress, payment]
 }
 
 enum PaymentType: Int {
@@ -40,7 +41,9 @@ class CheckoutViewModel: BaseViewModel {
     var selectedType = Variable<PaymentType?>(nil)
     var cartItems = Variable<[CartProduct]>([])
     var customerLogged = Variable<Bool>(false)
-    var checkoutSuccedded = PublishSubject<()>()
+    var checkoutSuccedded = PublishSubject<Void>()
+    var customerHasEmail = PublishSubject<Bool>()
+    var customerEmail = Variable<String>("")
     var order: Order?
     var selectedProductVariant: ProductVariant!
     
@@ -53,9 +56,9 @@ class CheckoutViewModel: BaseViewModel {
         }
     }
     var isCheckoutValid: Observable<Bool> {
-        return Observable.combineLatest(selectedType.asObservable(), checkout.asObservable(), creditCard.asObservable(), billingAddress.asObservable()) { (type, checkout, card, address) in
+        return Observable.combineLatest(selectedType.asObservable(), checkout.asObservable(), creditCard.asObservable(), billingAddress.asObservable(), customerEmail.asObservable()) { (type, checkout, card, address, customerEmail) in
             let applePayCondition = type == .applePay
-            let creditCardCondition = type == .creditCard && checkout != nil && card != nil && address != nil && checkout?.shippingLine != nil
+            let creditCardCondition = type == .creditCard && checkout != nil && card != nil && address != nil && checkout?.shippingLine != nil && customerEmail.isValidAsEmail()
             return applePayCondition || creditCardCondition
         }
     }
@@ -166,6 +169,10 @@ class CheckoutViewModel: BaseViewModel {
             guard let strongSelf = self else {
                 return
             }
+            if let email = customer?.email {
+                strongSelf.customerHasEmail.onNext(true)
+                strongSelf.customerEmail.value = email
+            }
             if let address = customer?.defaultAddress {
                 strongSelf.updateCheckoutShippingAddress(with: address)
             } else {
@@ -186,7 +193,7 @@ class CheckoutViewModel: BaseViewModel {
     private func payByCreditCard() {
         if let checkout = checkout.value, let card = creditCard.value, let billingAddress = billingAddress.value {
             state.onNext(.loading(showHud: true))
-            checkoutUseCase.pay(with: card, checkout: checkout, billingAddress: billingAddress, callback: paymentCallback())
+            checkoutUseCase.pay(with: card, checkout: checkout, billingAddress: billingAddress, customerEmail: customerEmail.value, callback: paymentCallback())
         }
     }
     

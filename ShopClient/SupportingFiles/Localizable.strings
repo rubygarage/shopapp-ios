@@ -81,6 +81,7 @@
 "Label.TotalTax" = "Total tax: %.2f %@";
 "Label.TotalPrice" = "Total price: %.2f %@";
 "Label.PriceInfo" = "%@\n%@\n%@\n%@";
+"Label.CustomerEmail" = "Customer Email";
 "Label.ShippingAddress" = "Shipping Address";
 "Label.PaymentInformation" = "Payment Information";
 "Label.BillingAddress" = "Billing Address";
