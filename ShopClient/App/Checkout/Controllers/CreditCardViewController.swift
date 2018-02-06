@@ -120,15 +120,20 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel>, InputTe
         securityCodeTextFieldView.text = card.verificationCode
         monthExpirationView.text = card.expireMonth
         yearExpirationView.text = card.expireYear
+        populateCardTypeImage(with: card.cardNumber)
         viewModel.updateFields()
     }
     
-    // MARK: - InputTextFieldViewDelegate
-    func textFieldView(_ view: InputTextFieldView, didUpdate text: String) {
-        guard let imageName = CreditCardValidator.cardImageName(for: text.asCardDefaultNumber()) else {
+    private func populateCardTypeImage(with cardNumber: String) {
+        guard let imageName = CreditCardValidator.cardImageName(for: cardNumber.asCardDefaultNumber()) else {
             cardTypeImageView.image = nil
             return
         }
         cardTypeImageView.image = UIImage(named: imageName)
+    }
+    
+    // MARK: - InputTextFieldViewDelegate
+    func textFieldView(_ view: InputTextFieldView, didUpdate text: String) {
+        populateCardTypeImage(with: text)
     }
 }
