@@ -11,6 +11,7 @@ import UIKit
 class ProductsListViewController: GridCollectionViewController<ProductsListViewModel> {
     var sortingValue: SortingValue!
     var keyPhrase: String?
+    var excludePhrase: String?
     
     // MARK: - View controller lifecycle
     
@@ -37,6 +38,7 @@ class ProductsListViewController: GridCollectionViewController<ProductsListViewM
     private func setupViewModel() {
         viewModel.sortingValue = sortingValue
         viewModel.keyPhrase = keyPhrase
+        viewModel.excludePhrase = excludePhrase
         
         viewModel.products.asObservable()
             .subscribe(onNext: { [weak self] products in

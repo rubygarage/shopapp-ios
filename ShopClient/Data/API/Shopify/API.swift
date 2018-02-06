@@ -9,14 +9,17 @@
 import MobileBuySDK
 import KeychainSwift
 
-private let kShopifyStorefrontAccessToken = "d83bb4318082bb2bba17783cffae7d4e"
-private let kShopifyStorefrontURL = "setefu.myshopify.com"
+private let kShopifyStorefrontAccessToken = "2098ab2fb06659df83ccf0f6df678dc6"
+private let kShopifyStorefrontURL = "palkomin.myshopify.com"
 private let kShopifyItemsMaxCount: Int32 = 250
-private let kShopifyStoreName = "setefu"
+private let kShopifyStoreName = "palkomin"
 private let kMerchantID = "merchant.com.rubygarage.shopclient.test.temp"
 private let kShopifyPaymetTypeApplePay = "apple_pay"
 private let kShopifyRetryFinite = 10
-
+private let kShopifyQueryAndOperator = "AND"
+private let kShopifyQueryNotOperator = "NOT"
+private let kShopifyQueryTitleField = "title"
+private let kShopifyQueryProductTypeField = "product_type"
 private let kHttpsUrlPrefix = "https://www."
 
 class API: NSObject, APIInterface, PaySessionDelegate {
@@ -61,8 +64,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     
     // MARK: - Products
     
-    func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, keyPhrase: String?, reverse: Bool, callback: @escaping RepoCallback<[Product]>) {
-        let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: nil, sortBy: sortBy, keyPhrase: keyPhrase, reverse: reverse)
+    func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, keyPhrase: String?, excludePhrase: String?, reverse: Bool, callback: @escaping RepoCallback<[Product]>) {
+        let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: nil, sortBy: sortBy, keyPhrase: keyPhrase, excludePhrase: excludePhrase, reverse: reverse)
         let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             var products = [Product]()
             let currency = response?.shop.paymentSettings.currencyCode.rawValue
@@ -92,7 +95,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     }
     
     func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping RepoCallback<[Product]>) {
-        let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: searchQuery, sortBy: .name, keyPhrase: nil, reverse: false)
+        let query = productsListQuery(with: perPage, after: paginationValue, searchPhrase: searchQuery, sortBy: .name, keyPhrase: nil, excludePhrase: nil, reverse: false)
         let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             var products = [Product]()
             let currency = response?.shop.paymentSettings.currencyCode.rawValue
@@ -732,12 +735,12 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     }
     
     // MARK: - Queries building
-    
-    private func productsListQuery(with perPage: Int, after: Any?, searchPhrase: String?, sortBy: SortingValue?, keyPhrase: String?, reverse: Bool) -> Storefront.QueryRootQuery {
+
+    private func productsListQuery(with perPage: Int, after: Any?, searchPhrase: String?, sortBy: SortingValue?, keyPhrase: String?, excludePhrase: String?, reverse: Bool) -> Storefront.QueryRootQuery {
         let sortKey = productSortValue(for: sortBy)
         var query = searchPhrase
-        if let keyPhrase = keyPhrase, let sortKey = sortKey, sortKey == Storefront.ProductSortKeys.productType {
-            query = "product_type:'\(keyPhrase)'"
+        if let keyPhrase = keyPhrase, let excludePhrase = excludePhrase, let sortKey = sortKey, sortKey == Storefront.ProductSortKeys.productType {
+            query = "\(kShopifyQueryNotOperator) \(kShopifyQueryTitleField):\"\(excludePhrase)\" \(kShopifyQueryAndOperator) \(kShopifyQueryProductTypeField):\"\(keyPhrase)\""
         }
         
         return Storefront.buildQuery { $0
