@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,6 +19,8 @@
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="vfE-Ua-dpU"/>
                 <outlet property="errorMesageLabel" destination="tpe-ay-ykK" id="IEP-Sr-QtP"/>
+                <outlet property="placeholderLabel" destination="VV2-Mg-NFB" id="LTQ-Fx-Iga"/>
+                <outlet property="placeholderVerticallyConstraint" destination="dHC-a1-4dk" id="la3-OX-wbC"/>
                 <outlet property="showPasswordButton" destination="zaT-ur-DyI" id="MBc-L4-1ju"/>
                 <outlet property="textField" destination="ROM-R5-qtb" id="iES-i7-V60"/>
                 <outlet property="underlineView" destination="9uj-kk-0sc" id="vsT-fJ-h32"/>
@@ -30,7 +32,7 @@
             <rect key="frame" x="0.0" y="0.0" width="436" height="48"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Place" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ROM-R5-qtb">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ROM-R5-qtb">
                     <rect key="frame" x="10" y="5" width="416" height="38"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="textColor"/>
@@ -64,12 +66,34 @@
                         <action selector="showPasswordTapped:" destination="-1" eventType="touchUpInside" id="EA3-Ut-W3W"/>
                     </connections>
                 </button>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efm-Jn-6oL" userLabel="Placeholder View">
+                    <rect key="frame" x="10" y="9" width="416" height="30"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VV2-Mg-NFB">
+                            <rect key="frame" x="0.0" y="0.0" width="416" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="5Qs-vm-WpJ"/>
+                        <constraint firstItem="VV2-Mg-NFB" firstAttribute="top" secondItem="efm-Jn-6oL" secondAttribute="top" id="RaM-zb-8jq"/>
+                        <constraint firstAttribute="trailing" secondItem="VV2-Mg-NFB" secondAttribute="trailing" id="fLj-ic-d87"/>
+                        <constraint firstItem="VV2-Mg-NFB" firstAttribute="leading" secondItem="efm-Jn-6oL" secondAttribute="leading" id="y97-hU-BoM"/>
+                        <constraint firstAttribute="bottom" secondItem="VV2-Mg-NFB" secondAttribute="bottom" id="zce-Sy-DIn"/>
+                    </constraints>
+                </view>
             </subviews>
             <constraints>
+                <constraint firstItem="efm-Jn-6oL" firstAttribute="leading" secondItem="ROM-R5-qtb" secondAttribute="leading" id="7Xg-O7-jzI"/>
                 <constraint firstItem="ROM-R5-qtb" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="5" id="CMI-DA-L0E"/>
                 <constraint firstItem="ROM-R5-qtb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="CUP-xs-pjr"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zaT-ur-DyI" secondAttribute="trailing" id="Exm-53-Kca"/>
+                <constraint firstItem="efm-Jn-6oL" firstAttribute="trailing" secondItem="ROM-R5-qtb" secondAttribute="trailing" id="Q3Y-Cb-Fa5"/>
                 <constraint firstItem="9uj-kk-0sc" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" constant="-10" id="THU-lm-d5p"/>
+                <constraint firstItem="efm-Jn-6oL" firstAttribute="centerY" secondItem="ROM-R5-qtb" secondAttribute="centerY" id="dHC-a1-4dk"/>
                 <constraint firstItem="zaT-ur-DyI" firstAttribute="centerY" secondItem="ROM-R5-qtb" secondAttribute="centerY" id="ki9-XV-JFn"/>
                 <constraint firstItem="tpe-ay-ykK" firstAttribute="top" secondItem="9uj-kk-0sc" secondAttribute="bottom" constant="3" id="mG4-yn-sxH"/>
                 <constraint firstItem="9uj-kk-0sc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="ngJ-xy-yiQ"/>

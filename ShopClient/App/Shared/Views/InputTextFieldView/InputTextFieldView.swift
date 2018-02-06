@@ -38,6 +38,8 @@ private let kUnderlineViewAlphaHighlighted: CGFloat = 1
 private let kUnderlineViewHeightDefault: CGFloat = 1
 private let kUnderlineViewHeightHighlighted: CGFloat = 2
 private let kErrorColor = UIColor(displayP3Red: 0.89, green: 0.31, blue: 0.31, alpha: 1)
+private let kPlaceholderAnimationDuration: TimeInterval = 0.15
+private let kPlaceholderPositionTopY: CGFloat = -25
 
 class InputTextFieldView: TextFieldWrapper {
     @IBOutlet private weak var contentView: UIView!
@@ -45,6 +47,8 @@ class InputTextFieldView: TextFieldWrapper {
     @IBOutlet private weak var underlineViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var errorMesageLabel: UILabel!
     @IBOutlet private weak var showPasswordButton: UIButton!
+    @IBOutlet private weak var placeholderLabel: UILabel!
+    @IBOutlet private weak var placeholderVerticallyConstraint: NSLayoutConstraint!
     
     @IBInspectable var keyboardType: Int = InputTextFieldViewKeybordType.name.rawValue {
         didSet {
@@ -62,6 +66,11 @@ class InputTextFieldView: TextFieldWrapper {
     
     weak var delegate: InputTextFieldViewDelegate?
     
+    override var text: String? {
+        didSet {
+            setPlaceholderPosition()
+        }
+    }
     var state: InputTextFieldViewState = .normal {
         didSet {
             updateUI()
@@ -76,7 +85,7 @@ class InputTextFieldView: TextFieldWrapper {
     }
     var placeholder: String? {
         didSet {
-            textField?.attributedPlaceholder = NSAttributedString(string: placeholder ?? String(), attributes: [NSForegroundColorAttributeName: UIColor.black])
+            placeholderLabel.text = placeholder
         }
     }
     
@@ -155,10 +164,32 @@ class InputTextFieldView: TextFieldWrapper {
         showPasswordButton?.isHidden = type != InputTextFieldViewKeybordType.password.rawValue || hideShowPasswordButton == true
     }
     
+    private func setPlaceholderPosition() {
+        let toTop = text?.isEmpty == false
+        updatePlaceholderPosition(toTop: toTop, animated: false)
+    }
+    
+    private func updatePlaceholderPosition(toTop: Bool, animated: Bool) {
+        let animationDuration = animated ? kPlaceholderAnimationDuration : 0
+        let placeholderVerticalPosition: CGFloat = toTop ? kPlaceholderPositionTopY : 0
+        placeholderVerticallyConstraint?.constant = placeholderVerticalPosition
+        
+        UIView.animate(withDuration: animationDuration) {
+            self.layoutIfNeeded()
+        }
+        
+        UIView.transition(with: placeholderLabel, duration: animationDuration, options: .transitionCrossDissolve, animations: {
+            self.placeholderLabel?.textColor = toTop ? UIColor.black.withAlphaComponent(0.5) : UIColor.black
+        })
+    }
+    
     // MARK: - Actions
     
     @IBAction func editingDidBegin(_ sender: UITextField) {
         state = .highlighted
+        if placeholderVerticallyConstraint.constant == 0 {
+            updatePlaceholderPosition(toTop: true, animated: true)
+        }
     }
     
     @IBAction func editingDidEnd(_ sender: UITextField) {
@@ -167,6 +198,9 @@ class InputTextFieldView: TextFieldWrapper {
             return
         }
         delegate?.textFieldView?(self, didEndUpdate: text)
+        if text.isEmpty {
+            updatePlaceholderPosition(toTop: false, animated: true)
+        }
     }
     
     @IBAction func editingChanged(_ sender: UITextField) {
