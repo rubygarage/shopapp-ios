@@ -106,7 +106,7 @@ extension OrdersDetailsTableProvider: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == OrdersDetailsSection.paymentInformation.rawValue ? kPaymentDetailsFooterViewHeight : 0
+        return section == OrdersDetailsSection.paymentInformation.rawValue ? kPaymentDetailsFooterViewHeight : TableView.headerFooterMinHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

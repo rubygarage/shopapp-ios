@@ -49,7 +49,7 @@ class PopularTableViewCell: UITableViewCell {
         collectionView.dataSource = collectionProvider
         collectionView.delegate = collectionProvider
         
-        collectionView.contentInset = GridCollectionViewCell.collectionViewInsets
+        collectionView.contentInset = GridCollectionViewCell.popularCollectionViewInsets
     }
     
     private func updateCollectionViewHeight() {

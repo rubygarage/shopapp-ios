@@ -51,7 +51,7 @@ extension AccountTableProvider: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return customer != nil ? kAccountFooterViewHeight : 0.0
+        return customer != nil ? kAccountFooterViewHeight : TableView.headerFooterMinHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

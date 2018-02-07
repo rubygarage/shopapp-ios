@@ -167,7 +167,7 @@
         <!--Order Details View Controller-->
         <scene sceneID="tYG-db-tzb">
             <objects>
-                <viewController storyboardIdentifier="OrderDetailsControllerIdentifier" id="ZjV-3t-aY7" customClass="OrderDetailsViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OrderDetailsControllerIdentifier" hidesBottomBarWhenPushed="YES" id="ZjV-3t-aY7" customClass="OrderDetailsViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LqB-4u-yY9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -180,9 +180,9 @@
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="VUd-pq-Zdd" firstAttribute="top" secondItem="LqB-4u-yY9" secondAttribute="top" id="35L-hr-w4T"/>
+                            <constraint firstItem="VUd-pq-Zdd" firstAttribute="bottom" secondItem="xyT-4h-bDe" secondAttribute="bottom" id="GOU-nF-tbQ"/>
                             <constraint firstItem="VUd-pq-Zdd" firstAttribute="trailing" secondItem="xyT-4h-bDe" secondAttribute="trailing" id="Wxu-wg-APJ"/>
                             <constraint firstItem="VUd-pq-Zdd" firstAttribute="leading" secondItem="xyT-4h-bDe" secondAttribute="leading" id="cWD-xC-kRa"/>
-                            <constraint firstAttribute="bottom" secondItem="VUd-pq-Zdd" secondAttribute="bottom" id="pqX-Ys-cFc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xyT-4h-bDe"/>
                     </view>
@@ -193,7 +193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtP-yV-pI6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2097" y="2286"/>
+            <point key="canvasLocation" x="2096.8000000000002" y="2285.307346326837"/>
         </scene>
         <!--Personal Info View Controller-->
         <scene sceneID="Mf5-6b-ts8">
