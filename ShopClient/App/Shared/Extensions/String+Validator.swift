@@ -27,7 +27,8 @@ extension String {
     }
     
     func isValidAsCardNumber() -> Bool {
-        return count >= CreditCardLimit.cardNumberMinCount && count <= CreditCardLimit.cardNumberMaxCount
+        let numbersCount = asCardDefaultNumber().count
+        return numbersCount >= CreditCardLimit.cardNumberMinCount && numbersCount <= CreditCardLimit.cardNumberMaxCount
     }
     
     func isValidAsCVV() -> Bool {
