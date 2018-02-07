@@ -12,6 +12,8 @@ import AvatarImageView
 
 private let kAvatarTextSizeFactor: CGFloat = 0.4
 
+let kAccountLoggedHeaderViewHeight: CGFloat = 248
+
 private struct CustomerImageConfig: AvatarImageViewConfiguration {
     let shape: Shape = .circle
     let bgColor: UIColor? = UIColor.black

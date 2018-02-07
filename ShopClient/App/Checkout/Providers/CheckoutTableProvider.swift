@@ -196,7 +196,7 @@ extension CheckoutTableProvider: UITableViewDelegate {
         guard checkout != nil, section == CheckoutSection.shippingOptions.rawValue else {
             return 0
         }
-        return PaymentDetailsFooterView.height
+        return kPaymentDetailsFooterViewHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

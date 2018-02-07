@@ -19,6 +19,8 @@ enum BoldTitleViewType {
 private let kTopMarginDefault: CGFloat = 15
 private let kTopMarginPayment: CGFloat = 4
 
+let kBoldTitleTableHeaderViewHeight: CGFloat = 75
+
 class BoldTitleTableHeaderView: UIView {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var headerTitleLabel: UILabel!

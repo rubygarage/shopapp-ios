@@ -8,6 +8,8 @@
 
 import UIKit
 
+let kAccountFooterViewHeight: CGFloat = 65
+
 protocol AccountFooterDelegate: class {
     func footerViewDidTapLogout(_ footerView: AccountFooterView)
 }

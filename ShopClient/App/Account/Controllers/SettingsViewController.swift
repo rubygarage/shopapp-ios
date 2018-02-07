@@ -37,6 +37,7 @@ class SettingsViewController: BaseViewController<SettingsViewModel> {
         tableView.register(cellNib, forCellReuseIdentifier: cellName)
         
         tableProvider = SettingsTableProvider()
+        tableProvider.delegate = self
         tableView.dataSource = tableProvider
         
         tableView.contentInset = TableView.defaultContentInsets

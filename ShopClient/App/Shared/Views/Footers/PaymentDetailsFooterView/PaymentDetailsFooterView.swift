@@ -8,6 +8,8 @@
 
 import UIKit
 
+let kPaymentDetailsFooterViewHeight: CGFloat = 175
+
 class PaymentDetailsFooterView: UIView {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var subtotalLabel: UILabel!
@@ -18,8 +20,6 @@ class PaymentDetailsFooterView: UIView {
     @IBOutlet private weak var discountValueLabel: UILabel!
     @IBOutlet private weak var shippingValueLabel: UILabel!
     @IBOutlet private weak var totalValueLabel: UILabel!
-    
-    static let height = CGFloat(175)
     
     // MARK: - View lifecycle
     

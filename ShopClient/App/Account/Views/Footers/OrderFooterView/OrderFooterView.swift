@@ -8,6 +8,8 @@
 
 import UIKit
 
+let kOrderFooterViewHeight: CGFloat = 60
+
 protocol OrderFooterDelegate: class {
     func footerView(_ footerView: OrderFooterView, didTapWith section: Int)
 }
