@@ -51,6 +51,10 @@ extension CartTableProvider: UITableViewDelegate {
         delegate.provider(self, didSelect: productVariant)
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return kCartHeaderViewHeader
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return CartHeaderView(productsCounts: cartProducts.count, totalPrice: totalPrice, currency: currency)
     }

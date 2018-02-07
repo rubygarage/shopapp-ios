@@ -8,6 +8,8 @@
 
 import UIKit
 
+let kCartHeaderViewHeader: CGFloat = 76
+
 class CartHeaderView: UIView {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var totalItemsCountLabel: UILabel!
