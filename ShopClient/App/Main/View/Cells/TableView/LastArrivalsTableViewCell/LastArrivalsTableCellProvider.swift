@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let kLastArrivalsTableCellSize = CGSize(width: 200, height: 215)
+private let kLastArrivalsTableCellSize = CGSize(width: 200, height: 200)
 
 protocol LastArrivalsTableCellProviderDelegate: class {
     func provider(_ provider: LastArrivalsTableCellProvider, didSelect product: Product)
