@@ -13,6 +13,7 @@ class ProductsListViewModel: GridCollectionViewModel {
     
     var sortingValue: SortingValue!
     var keyPhrase: String?
+    var excludePhrase: String?
     
     func reloadData() {
         paginationValue = nil
@@ -28,7 +29,7 @@ class ProductsListViewModel: GridCollectionViewModel {
         let showHud = products.value.isEmpty
         state.onNext(ViewState.make.loading(showHud: showHud))
         let reverse = sortingValue == .createdAt
-        productListUseCase.getProductList(with: paginationValue, sortingValue: sortingValue, keyPhrase: keyPhrase, reverse: reverse) { [weak self] (products, error) in
+        productListUseCase.getProductList(with: paginationValue, sortingValue: sortingValue, keyPhrase: keyPhrase, excludePhrase: excludePhrase, reverse: reverse) { [weak self] (products, error) in
             guard let strongSelf = self else {
                 return
             }

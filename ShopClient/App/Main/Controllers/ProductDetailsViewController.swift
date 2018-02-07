@@ -80,6 +80,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
             productsListViewController.title = "Label.RelatedItems".localizable
             productsListViewController.sortingValue = .type
             productsListViewController.keyPhrase = viewModel.product.value?.type
+            productsListViewController.excludePhrase = viewModel.product.value?.title
         }
     }
     
