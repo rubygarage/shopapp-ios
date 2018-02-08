@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let kOptionCollectionViewAdditionalHeight = CGFloat(30.0)
+private let kOptionCollectionViewAdditionalHeight = CGFloat(20.0)
 
 let kOptionCollectionViewHeaderHeight = CGFloat(46.0)
 let kOptionCollectionViewCellHeight = CGFloat(31.0)

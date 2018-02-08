@@ -8,6 +8,10 @@
 
 import UIKit
 
+private let kTitleViewAlphaDefault: CGFloat = 1
+private let kTitleViewAlphaHidden: CGFloat = 0
+private let kTitleViewInset: CGFloat = 8
+private let kTitleViewHeight: CGFloat = 44
 private let kAnimationDuration: TimeInterval = 0.3
 
 class SearchViewController: GridCollectionViewController<SearchViewModel> {
@@ -36,6 +40,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
         super.viewWillAppear(animated)
         
         updateNavigationBar()
+        showTitleViewIfNeeded()
         
         navigationController?.removeShadow()
         navigationController?.navigationBar.barTintColor = UIColor.backgroundDefault
@@ -54,8 +59,10 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
         } else if let categoryViewController = segue.destination as? CategoryViewController {
             categoryViewController.title = selectedCategory!.title
             categoryViewController.categoryId = selectedCategory!.id
+            hideTitleViewIfNeeded()
         } else if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
             productDetailsViewController.productId = selectedProduct!.id
+            hideTitleViewIfNeeded()
         }
     }
     
@@ -72,8 +79,32 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
     }
     
     private func updateNavigationBar() {
-        navigationItem.titleView = titleView
         titleView.updateCartBarItem()
+        guard titleView.superview == nil else {
+            return
+        }
+        titleView.frame.origin = CGPoint(x: kTitleViewInset, y: 0)
+        titleView.frame.size = CGSize(width: view.frame.size.width - kTitleViewInset * 2, height: kTitleViewHeight)
+        navigationController?.navigationBar.addSubview(titleView)
+        titleView.alpha = kTitleViewAlphaDefault
+    }
+    
+    private func showTitleViewIfNeeded() {
+        guard titleView.alpha == kTitleViewAlphaHidden else {
+            return
+        }
+        UIView.animate(withDuration: kAnimationDuration, animations: {
+            self.titleView.alpha = kTitleViewAlphaDefault
+        })
+    }
+    
+    private func hideTitleViewIfNeeded() {
+        guard titleView.alpha == kTitleViewAlphaDefault else {
+            return
+        }
+        UIView.animate(withDuration: kAnimationDuration, animations: {
+            self.titleView.alpha = kTitleViewAlphaHidden
+        })
     }
     
     private func setupViews() {

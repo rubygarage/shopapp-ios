@@ -42,7 +42,7 @@
                             </connections>
                         </textField>
                     </subviews>
-                    <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="JgY-Vb-rAM" firstAttribute="top" secondItem="eEb-OC-fAH" secondAttribute="top" constant="1" id="4yT-hC-fSD"/>
                         <constraint firstItem="JgY-Vb-rAM" firstAttribute="leading" secondItem="eEb-OC-fAH" secondAttribute="leading" priority="750" id="SpN-9t-Fec"/>
@@ -91,7 +91,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Tio-2b-Alh" firstAttribute="centerY" secondItem="JgY-Vb-rAM" secondAttribute="centerY" id="1V6-Yl-3E5"/>
                 <constraint firstItem="Xfu-WH-a1H" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="3FG-7A-uk1"/>
