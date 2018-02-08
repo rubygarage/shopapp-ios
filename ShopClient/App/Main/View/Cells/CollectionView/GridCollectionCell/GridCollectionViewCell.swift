@@ -42,15 +42,12 @@ extension GridCollectionViewCell {
         let roundedCellheight = CGFloat(lroundf(cellHeight))
         return CGSize(width: cellWidth, height: roundedCellheight)
     }
-    
     class var defaultCollectionViewInsets: UIEdgeInsets {
         return UIEdgeInsets(top: kCollectionViewMarginVertical, left: kCollectionViewMarginHorizontal, bottom: kCollectionViewMarginVertical, right: kCollectionViewMarginHorizontal)
     }
-    
     class var popularCollectionViewInsets: UIEdgeInsets {
         return UIEdgeInsets(top: 0.0, left: kCollectionViewMarginHorizontal, bottom: 0.0, right: kCollectionViewMarginHorizontal)
     }
-    
     class var sortableCollectionViewInsets: UIEdgeInsets {
         return UIEdgeInsets(top: kCollectionViewMarginTop, left: kCollectionViewMarginHorizontal, bottom: kCollectionViewMarginVertical, right: kCollectionViewMarginHorizontal)
     }
