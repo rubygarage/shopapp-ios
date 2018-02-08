@@ -125,10 +125,10 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
         guard let customer = customer else {
             return
         }
-        nameTextFieldView.textField.text = customer.firstName
-        lastNameTextFieldView.textField.text = customer.lastName
-        emailTextFieldView.textField.text = customer.email
-        phoneTextFieldView.textField.text = customer.phone
+        nameTextFieldView.text = customer.firstName
+        lastNameTextFieldView.text = customer.lastName
+        emailTextFieldView.text = customer.email
+        phoneTextFieldView.text = customer.phone
     }
     
     private func loadData() {
