@@ -821,15 +821,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcw-eZ-Tl8">
-                                <rect key="frame" x="0.0" y="4" width="375" height="1"/>
-                                <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="nah-hE-DPE"/>
-                                </constraints>
-                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Wpc-tz-HHC">
-                                <rect key="frame" x="0.0" y="5" width="375" height="103"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="qtA-Xy-gc7">
                                     <size key="itemSize" width="0.0" height="31"/>
@@ -839,16 +832,23 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcw-eZ-Tl8">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="nah-hE-DPE"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="JQA-5i-Ec3" firstAttribute="trailing" secondItem="Wpc-tz-HHC" secondAttribute="trailing" id="48b-az-hFC"/>
                             <constraint firstItem="Xcw-eZ-Tl8" firstAttribute="leading" secondItem="qQC-3O-Pzq" secondAttribute="leading" id="AJk-w3-91P"/>
-                            <constraint firstItem="Xcw-eZ-Tl8" firstAttribute="top" secondItem="JQA-5i-Ec3" secondAttribute="top" constant="4" id="Cwc-ZV-Erp"/>
+                            <constraint firstItem="Xcw-eZ-Tl8" firstAttribute="top" secondItem="JQA-5i-Ec3" secondAttribute="top" id="Cwc-ZV-Erp"/>
+                            <constraint firstItem="Wpc-tz-HHC" firstAttribute="trailing" secondItem="JQA-5i-Ec3" secondAttribute="trailing" id="DE0-os-eeU"/>
                             <constraint firstAttribute="trailing" secondItem="Xcw-eZ-Tl8" secondAttribute="trailing" id="JBd-VQ-gjp"/>
-                            <constraint firstItem="Wpc-tz-HHC" firstAttribute="top" secondItem="Xcw-eZ-Tl8" secondAttribute="bottom" id="d3d-de-rlc"/>
-                            <constraint firstItem="Wpc-tz-HHC" firstAttribute="leading" secondItem="JQA-5i-Ec3" secondAttribute="leading" id="lAJ-Pp-x4A"/>
-                            <constraint firstItem="JQA-5i-Ec3" firstAttribute="bottom" secondItem="Wpc-tz-HHC" secondAttribute="bottom" constant="20" id="sJo-2t-CzY"/>
+                            <constraint firstItem="Wpc-tz-HHC" firstAttribute="leading" secondItem="JQA-5i-Ec3" secondAttribute="leading" id="JpF-Pe-BDJ"/>
+                            <constraint firstItem="Wpc-tz-HHC" firstAttribute="top" secondItem="JQA-5i-Ec3" secondAttribute="top" id="Zxi-si-8wU"/>
+                            <constraint firstItem="Wpc-tz-HHC" firstAttribute="bottom" secondItem="JQA-5i-Ec3" secondAttribute="bottom" id="gWF-hr-gnk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JQA-5i-Ec3"/>
                     </view>
@@ -859,7 +859,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7fs-YN-mBL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="135" y="4278"/>
+            <point key="canvasLocation" x="133.59999999999999" y="4277.3613193403298"/>
         </scene>
         <!--Category List View Controller-->
         <scene sceneID="q9u-qQ-kIX">
@@ -911,7 +911,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="RyX-CT-HJC"/>
-        <segue reference="OyI-Tn-rEV"/>
-        <segue reference="Dq7-PS-rRI"/>
+        <segue reference="DJ8-dD-zkt"/>
+        <segue reference="L85-9n-ESO"/>
     </inferredMetricsTieBreakers>
 </document>
