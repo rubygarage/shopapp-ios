@@ -76,7 +76,7 @@
         <!--Search View Controller-->
         <scene sceneID="jcf-4Q-ME9">
             <objects>
-                <viewController storyboardIdentifier="SearchControllerIdentifier" id="sGy-X8-OnQ" customClass="SearchViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="sGy-X8-OnQ" customClass="SearchViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Ah-z4-Bre"/>
                         <viewControllerLayoutGuide type="bottom" id="Kge-Wu-jQW"/>
@@ -910,7 +910,7 @@
         <image name="search_selected" width="27" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RyX-CT-HJC"/>
+        <segue reference="Uoy-sz-tWO"/>
         <segue reference="DJ8-dD-zkt"/>
         <segue reference="L85-9n-ESO"/>
     </inferredMetricsTieBreakers>

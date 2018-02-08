@@ -8,7 +8,20 @@
 
 import UIKit
 
+private let kTitleViewAlphaDefault: CGFloat = 1
+private let kTitleViewAlphaHidded: CGFloat = 0
+private let kTitleViewInset: CGFloat = 8
+private let kTitleViewHeight: CGFloat = 44
 private let kAnimationDuration: TimeInterval = 0.3
+
+/*
+ private let kUnderlineViewAlphaDefault: CGFloat = 0.2
+ private let kUnderlineViewAlphaHighlighted: CGFloat = 1
+ private let kUnderlineViewHeightDefault: CGFloat = 1
+ private let kUnderlineViewHeightHighlighted: CGFloat = 2
+ private let kErrorColor = UIColor(displayP3Red: 0.89, green: 0.31, blue: 0.31, alpha: 1)
+ private let kPlaceholderAnimationDuration: TimeInterval = 0.15
+ */
 
 class SearchViewController: GridCollectionViewController<SearchViewModel> {
     @IBOutlet private weak var categoryListContainerView: UIView!
@@ -36,6 +49,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
         super.viewWillAppear(animated)
         
         updateNavigationBar()
+        showTitleViewIfNeeded()
         
         navigationController?.removeShadow()
         navigationController?.navigationBar.barTintColor = UIColor.backgroundDefault
@@ -54,8 +68,10 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
         } else if let categoryViewController = segue.destination as? CategoryViewController {
             categoryViewController.title = selectedCategory!.title
             categoryViewController.categoryId = selectedCategory!.id
+            hideTitleViewIfNeeded()
         } else if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
             productDetailsViewController.productId = selectedProduct!.id
+            hideTitleViewIfNeeded()
         }
     }
     
@@ -72,8 +88,32 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
     }
     
     private func updateNavigationBar() {
-        navigationItem.titleView = titleView
         titleView.updateCartBarItem()
+        guard titleView.superview == nil else {
+            return
+        }
+        titleView.frame.origin = CGPoint(x: kTitleViewInset, y: 0)
+        titleView.frame.size = CGSize(width: view.frame.size.width - kTitleViewInset * 2, height: kTitleViewHeight)
+        self.navigationController?.navigationBar.addSubview(self.titleView)
+        titleView.alpha = kTitleViewAlphaDefault
+    }
+    
+    private func showTitleViewIfNeeded() {
+        guard titleView.alpha == kTitleViewAlphaHidded else {
+            return
+        }
+        UIView.animate(withDuration: kAnimationDuration, animations: {
+            self.titleView.alpha = kTitleViewAlphaDefault
+        })
+    }
+    
+    private func hideTitleViewIfNeeded() {
+        guard titleView.alpha == kTitleViewAlphaDefault else {
+            return
+        }
+        UIView.animate(withDuration: kAnimationDuration, animations: {
+            self.titleView.alpha = kTitleViewAlphaHidded
+        })
     }
     
     private func setupViews() {
