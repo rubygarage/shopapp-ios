@@ -17,6 +17,7 @@ class CheckoutAddressFormViewController: BaseViewController<CheckoutAddressFormV
     var checkoutId: String!
     var addressType: AddressListType = .shipping
     var address: Address?
+    var addressAction: AddressAction = .add
     
     weak var delegate: CheckoutAddressFormControllerDelegate?
     
@@ -31,7 +32,7 @@ class CheckoutAddressFormViewController: BaseViewController<CheckoutAddressFormV
     }
     
     private func setupViews() {
-        title = "ControllerTitle.AddNewAddress".localizable
+        title = addressAction == .add ? "ControllerTitle.AddNewAddress".localizable : "ControllerTitle.EditAddress".localizable
     }
     
     private func setupViewModel() {

@@ -43,7 +43,7 @@ class CustomerAddressFormViewController: BaseViewController<CustomerAddressFormV
     // MARK: - Setup
     
     private func setupViews() {
-        title = "ControllerTitle.AddNewAddress".localizable
+        title = addressAction == .add ? "ControllerTitle.AddNewAddress".localizable : "ControllerTitle.EditAddress".localizable
     }
     
     private func setupViewModel() {

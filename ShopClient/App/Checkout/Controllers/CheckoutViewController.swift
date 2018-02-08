@@ -196,8 +196,10 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         } else if let checkoutAddressFormController = segue.destination as? CheckoutAddressFormViewController {
             checkoutAddressFormController.checkoutId = viewModel.checkout.value?.id
             checkoutAddressFormController.addressType = destinationAddressType
-            checkoutAddressFormController.address = destinationAddressType == .shipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
+            let address = destinationAddressType == .shipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
+            checkoutAddressFormController.address = address
             checkoutAddressFormController.delegate = self
+            checkoutAddressFormController.addressAction = address == nil ? .add : .edit
         }
     }
     

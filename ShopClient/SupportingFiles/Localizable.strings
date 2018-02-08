@@ -21,6 +21,7 @@
 "ControllerTitle.OrderDetails" = "Order Details";
 "ControllerTitle.PersonalInfo" = "Personal Info";
 "ControllerTitle.AddNewAddress" = "Add New Address";
+"ControllerTitle.EditAddress" = "Edit Address";
 "ControllerTitle.ShippingAddress" = "Shipping Address";
 "ControllerTitle.BillingAddress" = "Billing Address";
 "ControllerTitle.PaymentType" = "Payment Type";
