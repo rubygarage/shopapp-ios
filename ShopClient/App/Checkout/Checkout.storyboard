@@ -13,7 +13,7 @@
         <!--Checkout View Controller-->
         <scene sceneID="Csf-kA-Wwy">
             <objects>
-                <viewController storyboardIdentifier="CheckoutControllerIdentifier" id="MDv-XD-ZMR" customClass="CheckoutViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CheckoutControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="MDv-XD-ZMR" customClass="CheckoutViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iHH-Hu-qii">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -42,7 +42,7 @@
                                     <constraint firstAttribute="trailing" secondItem="ta6-JQ-eSm" secondAttribute="trailing" id="rLc-5C-dNN"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="pyA-b5-EGg" customClass="TPKeyboardAvoidingTableView">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="pyA-b5-EGg" customClass="TPKeyboardAvoidingTableView">
                                 <rect key="frame" x="0.0" y="64" width="375" height="553"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
@@ -73,7 +73,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWy-vV-BzK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-50" y="125"/>
+            <point key="canvasLocation" x="-52" y="94"/>
         </scene>
         <!--ProductsDetailControllerIdentifier-->
         <scene sceneID="wkd-wm-JoU">
@@ -81,7 +81,7 @@
                 <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="ProductsDetailControllerIdentifier" id="RiA-xA-2z5" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dt9-7w-B8P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="124"/>
+            <point key="canvasLocation" x="601" y="93"/>
         </scene>
         <!--Address List View Controller-->
         <scene sceneID="TCC-fX-Ngj">
@@ -91,7 +91,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="7x0-g5-3yi">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="7x0-g5-3yi">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
@@ -117,7 +117,7 @@
         <!--Customer Address Form View Controller-->
         <scene sceneID="qJ8-Ap-8Ij">
             <objects>
-                <viewController id="6es-8c-np4" customClass="CustomerAddressFormViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="6es-8c-np4" customClass="CustomerAddressFormViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Z2e-rJ-Up0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -146,7 +146,7 @@
         <!--Address Form View Controller-->
         <scene sceneID="l9L-mQ-41u">
             <objects>
-                <viewController storyboardIdentifier="AddressFormControllerIdentifier" id="zXe-Cz-Abu" customClass="AddressFormViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddressFormControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="zXe-Cz-Abu" customClass="AddressFormViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RB3-75-HF5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="760"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -356,7 +356,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="HdE-8d-3A9">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="plain" rowHeight="60" estimatedRowHeight="60" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="HdE-8d-3A9">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
@@ -575,20 +575,25 @@
         <!--Checkout Address Form View Controller-->
         <scene sceneID="wxm-Wb-CYC">
             <objects>
-                <viewController id="ECB-Z1-FXx" customClass="CheckoutAddressFormViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ECB-Z1-FXx" customClass="CheckoutAddressFormViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PDJ-sS-IOU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIq-hm-Svu">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oIq-hm-Svu">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="zXe-Cz-Abu" kind="embed" id="f5t-mt-yo3"/>
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="oIq-hm-Svu" firstAttribute="trailing" secondItem="yYt-PD-4Zb" secondAttribute="trailing" id="RRY-7d-22v"/>
+                            <constraint firstItem="oIq-hm-Svu" firstAttribute="top" secondItem="PDJ-sS-IOU" secondAttribute="top" id="SoQ-uN-Zpl"/>
+                            <constraint firstItem="oIq-hm-Svu" firstAttribute="bottom" secondItem="yYt-PD-4Zb" secondAttribute="bottom" id="Vgt-nj-lpf"/>
+                            <constraint firstItem="oIq-hm-Svu" firstAttribute="leading" secondItem="yYt-PD-4Zb" secondAttribute="leading" id="hgv-A4-hFu"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="yYt-PD-4Zb"/>
                     </view>
                 </viewController>
@@ -713,7 +718,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ezj-Ev-J7P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1101.5999999999999" y="1685.3073463268368"/>
+            <point key="canvasLocation" x="721" y="1709"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vHW-0u-vIS">
@@ -737,7 +742,7 @@
                 <viewControllerPlaceholder storyboardName="Account" referencedIdentifier="OrderDetailsControllerIdentifier" id="ww9-it-wZB" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Wb-4x-kn3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1798" y="1685"/>
+            <point key="canvasLocation" x="1370" y="1708"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IWA-vI-qO6">
@@ -755,7 +760,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mf5-eo-tko" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-50" y="-633"/>
+            <point key="canvasLocation" x="-51" y="-726"/>
         </scene>
     </scenes>
     <resources>
@@ -768,7 +773,7 @@
         <image name="checkout_success" width="130" height="112"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mEQ-Aq-uhp"/>
-        <segue reference="dnR-TS-EYt"/>
+        <segue reference="f5t-mt-yo3"/>
+        <segue reference="uNy-8M-tPD"/>
     </inferredMetricsTieBreakers>
 </document>

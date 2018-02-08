@@ -192,9 +192,20 @@ extension CheckoutTableProvider: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension CheckoutTableProvider: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case CheckoutSection.cart.rawValue:
+            return kSeeAllTableHeaderViewHeight
+        case CheckoutSection.customerEmail.rawValue:
+            return customerHasEmail ? TableView.headerFooterMinHeight : kBoldTitleTableHeaderViewHeight
+        default:
+            return kBoldTitleTableHeaderViewHeight
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         guard checkout != nil, section == CheckoutSection.shippingOptions.rawValue else {
-            return 0
+            return TableView.headerFooterMinHeight
         }
         return kPaymentDetailsFooterViewHeight
     }

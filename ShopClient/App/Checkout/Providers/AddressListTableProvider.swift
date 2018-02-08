@@ -36,6 +36,10 @@ extension AddressListTableProvider: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension AddressListTableProvider: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return kAddressListTableHeaderViewHeight
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = AddressListTableHeaderView(frame: CGRect.zero)
         view.delegate = delegate

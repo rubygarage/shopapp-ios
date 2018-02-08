@@ -112,6 +112,15 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
             .disposed(by: disposeBag)
         
         submitButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
+        
+        submitButton.rx.tap
             .bind(to: viewModel.submitTapped)
             .disposed(by: disposeBag)
     }

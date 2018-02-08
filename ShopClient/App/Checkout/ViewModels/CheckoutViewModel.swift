@@ -75,7 +75,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     func getCheckout() {
-        state.onNext(ViewState.make.loading())
+        state.onNext(ViewState.make.loading(isTranslucent: true))
         let checkoutId = checkout.value?.id ?? ""
         checkoutUseCase.getCheckout(with: checkoutId) { [weak self] (result, error) in
             guard let strongSelf = self else {
