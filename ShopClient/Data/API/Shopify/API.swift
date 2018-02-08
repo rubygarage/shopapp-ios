@@ -1504,7 +1504,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
 
     func paySession(_ paySession: PaySession, didAuthorizePayment authorization: PayAuthorization, checkout: PayCheckout, completeTransaction: @escaping (PaySession.TransactionStatus) -> Void) {
         let idempotencyKey = UUID().uuidString
-        if let email = sessionData().email {
+        if let email = authorization.shippingAddress.email {
             updateCheckout(with: checkout.id, email: email, completion: { [weak self] (success, error) in
                 self?.completeCheckout(checkout, billingAddress: authorization.billingAddress, applePayToken: authorization.token, idempotencyToken: idempotencyKey, completion: { (order, error) in
                     if let order = order {
@@ -1516,6 +1516,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
                     }
                 })
             })
+        } else {
+            completeTransaction(.failure)
         }
     }
 
