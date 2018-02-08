@@ -14,15 +14,6 @@ private let kTitleViewInset: CGFloat = 8
 private let kTitleViewHeight: CGFloat = 44
 private let kAnimationDuration: TimeInterval = 0.3
 
-/*
- private let kUnderlineViewAlphaDefault: CGFloat = 0.2
- private let kUnderlineViewAlphaHighlighted: CGFloat = 1
- private let kUnderlineViewHeightDefault: CGFloat = 1
- private let kUnderlineViewHeightHighlighted: CGFloat = 2
- private let kErrorColor = UIColor(displayP3Red: 0.89, green: 0.31, blue: 0.31, alpha: 1)
- private let kPlaceholderAnimationDuration: TimeInterval = 0.15
- */
-
 class SearchViewController: GridCollectionViewController<SearchViewModel> {
     @IBOutlet private weak var categoryListContainerView: UIView!
     
