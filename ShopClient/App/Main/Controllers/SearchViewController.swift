@@ -9,7 +9,7 @@
 import UIKit
 
 private let kTitleViewAlphaDefault: CGFloat = 1
-private let kTitleViewAlphaHidded: CGFloat = 0
+private let kTitleViewAlphaHidden: CGFloat = 0
 private let kTitleViewInset: CGFloat = 8
 private let kTitleViewHeight: CGFloat = 44
 private let kAnimationDuration: TimeInterval = 0.3
@@ -85,12 +85,12 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
         }
         titleView.frame.origin = CGPoint(x: kTitleViewInset, y: 0)
         titleView.frame.size = CGSize(width: view.frame.size.width - kTitleViewInset * 2, height: kTitleViewHeight)
-        self.navigationController?.navigationBar.addSubview(self.titleView)
+        navigationController?.navigationBar.addSubview(titleView)
         titleView.alpha = kTitleViewAlphaDefault
     }
     
     private func showTitleViewIfNeeded() {
-        guard titleView.alpha == kTitleViewAlphaHidded else {
+        guard titleView.alpha == kTitleViewAlphaHidden else {
             return
         }
         UIView.animate(withDuration: kAnimationDuration, animations: {
@@ -103,7 +103,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
             return
         }
         UIView.animate(withDuration: kAnimationDuration, animations: {
-            self.titleView.alpha = kTitleViewAlphaHidded
+            self.titleView.alpha = kTitleViewAlphaHidden
         })
     }
     
