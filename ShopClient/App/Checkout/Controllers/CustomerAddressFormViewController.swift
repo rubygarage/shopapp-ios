@@ -8,18 +8,11 @@
 
 import UIKit
 
-enum AddressAction {
-    case add
-    case edit
-}
-
 protocol CustomerAddressFormControllerDelegate: class {
     func viewController(_ controller: CustomerAddressFormViewController, didUpdate address: Address)
 }
 
-class CustomerAddressFormViewController: BaseViewController<CustomerAddressFormViewModel> {
-    var selectedAddress: Address?
-    var addressAction: AddressAction = .add
+class CustomerAddressFormViewController: BaseAddressFormViewController<CustomerAddressFormViewModel> {
     
     weak var delegate: CustomerAddressFormControllerDelegate?
     
@@ -29,7 +22,6 @@ class CustomerAddressFormViewController: BaseViewController<CustomerAddressFormV
         viewModel = CustomerAddressFormViewModel()
         super.viewDidLoad()
 
-        setupViews()
         setupViewModel()
     }
     
@@ -41,10 +33,6 @@ class CustomerAddressFormViewController: BaseViewController<CustomerAddressFormV
     }
     
     // MARK: - Setup
-    
-    private func setupViews() {
-        title = "ControllerTitle.AddNewAddress".localizable
-    }
     
     private func setupViewModel() {
         viewModel.filledAddress

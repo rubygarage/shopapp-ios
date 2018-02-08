@@ -13,10 +13,9 @@ protocol CheckoutAddressFormControllerDelegate: class {
     func viewController(_ controller: CheckoutAddressFormViewController, didFill billingAddress: Address)
 }
 
-class CheckoutAddressFormViewController: BaseViewController<CheckoutAddressFormViewModel> {    
+class CheckoutAddressFormViewController: BaseAddressFormViewController<CheckoutAddressFormViewModel> {
     var checkoutId: String!
     var addressType: AddressListType = .shipping
-    var address: Address?
     
     weak var delegate: CheckoutAddressFormControllerDelegate?
     
@@ -26,13 +25,17 @@ class CheckoutAddressFormViewController: BaseViewController<CheckoutAddressFormV
         viewModel = CheckoutAddressFormViewModel()
         super.viewDidLoad()
 
-        setupViews()
         setupViewModel()
     }
     
-    private func setupViews() {
-        title = "ControllerTitle.AddNewAddress".localizable
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let addressFormController = segue.destination as? AddressFormViewController {
+            addressFormController.address = selectedAddress
+            addressFormController.delegate = self
+        }
     }
+    
+    // MARK: - Setup
     
     private func setupViewModel() {
         viewModel.checkoutId = checkoutId
@@ -55,13 +58,6 @@ class CheckoutAddressFormViewController: BaseViewController<CheckoutAddressFormV
                 strongSelf.delegate?.viewController(strongSelf, didFill: address)
             })
             .disposed(by: disposeBag)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let addressFormController = segue.destination as? AddressFormViewController {
-            addressFormController.address = address
-            addressFormController.delegate = self
-        }
     }
 }
 
