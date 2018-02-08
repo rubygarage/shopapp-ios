@@ -197,7 +197,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             checkoutAddressFormController.checkoutId = viewModel.checkout.value?.id
             checkoutAddressFormController.addressType = destinationAddressType
             let address = destinationAddressType == .shipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
-            checkoutAddressFormController.address = address
+            checkoutAddressFormController.selectedAddress = address
             checkoutAddressFormController.delegate = self
             checkoutAddressFormController.addressAction = address == nil ? .add : .edit
         }
