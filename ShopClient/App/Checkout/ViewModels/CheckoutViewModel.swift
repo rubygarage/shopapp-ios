@@ -25,7 +25,8 @@ enum PaymentType: Int {
     case creditCard
     case applePay
     
-    static let allValues = PKPaymentAuthorizationController.canMakePayments() ? [creditCard, applePay] : [creditCard]
+    static let supportedNetworks: [PKPaymentNetwork] = [.visa, .masterCard, .amex]
+    static let allValues = PKPaymentAuthorizationController.canMakePayments() && PKPaymentAuthorizationViewController.canMakePayments(usingNetworks: supportedNetworks) ? [creditCard, applePay] : [creditCard]
 }
 
 class CheckoutViewModel: BaseViewModel {
@@ -47,12 +48,17 @@ class CheckoutViewModel: BaseViewModel {
     var order: Order?
     var selectedProductVariant: ProductVariant!
     
-    var placeOrderPressed: AnyObserver<()> {
-        return AnyObserver { [weak self] _ in
-            guard let strongSelf = self else {
-                return
+    var placeOrderPressed: AnyObserver<Void> {
+        return AnyObserver { [weak self] event in
+            switch event {
+            case .next(_):
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.placeOrderAction()
+            default:
+                break
             }
-            strongSelf.placeOrderAction()
         }
     }
     var isCheckoutValid: Observable<Bool> {

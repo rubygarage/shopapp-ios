@@ -13,6 +13,10 @@ extension UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let tabbarController = appDelegate.window?.rootViewController as? UITabBarController
         tabbarController?.selectedIndex = 0
+        
+        if let navigationController = tabbarController?.viewControllers?.first as? NavigationController {
+            navigationController.popToRootViewController(animated: false)
+        }
     }
     
     func showCartController() {

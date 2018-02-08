@@ -9,6 +9,8 @@
 import MobileBuySDK
 import KeychainSwift
 
+typealias PaymentByApplePayResponse = (order: Order?, error: RepoError?)
+
 private let kShopifyStorefrontAccessToken = "2098ab2fb06659df83ccf0f6df678dc6"
 private let kShopifyStorefrontURL = "palkomin.myshopify.com"
 private let kShopifyItemsMaxCount: Int32 = 250
@@ -26,6 +28,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     private var client: Graph.Client?
     private var paySession: PaySession?
     private var paymentByApplePayCompletion: RepoCallback<Order>?
+    private var paymentByApplePayResponse: PaymentByApplePayResponse?
     
     override init() {
         super.init()
@@ -1506,23 +1509,27 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         let idempotencyKey = UUID().uuidString
         if let email = authorization.shippingAddress.email {
             updateCheckout(with: checkout.id, email: email, completion: { [weak self] (success, error) in
-                self?.completeCheckout(checkout, billingAddress: authorization.billingAddress, applePayToken: authorization.token, idempotencyToken: idempotencyKey, completion: { (order, error) in
+                self?.completeCheckout(checkout, billingAddress: authorization.billingAddress, applePayToken: authorization.token, idempotencyToken: idempotencyKey, completion: { [weak self] (order, error) in
+                    guard let strongSelf = self else {
+                        return
+                    }
                     if let order = order {
-                        self?.paymentByApplePayCompletion?(order, nil)
+                        strongSelf.paymentByApplePayResponse = (order, nil)
                         completeTransaction(.success)
                     } else {
-                        self?.paymentByApplePayCompletion?(nil, error)
+                        strongSelf.paymentByApplePayResponse = (nil, error)
                         completeTransaction(.failure)
                     }
                 })
             })
         } else {
+            paymentByApplePayResponse = (nil, RepoError())
             completeTransaction(.failure)
         }
     }
 
     func paySessionDidFinish(_ paySession: PaySession) {
-        paymentByApplePayCompletion?(nil, nil)
+        paymentByApplePayCompletion?(paymentByApplePayResponse?.order, paymentByApplePayResponse?.error)
     }
     
     // MARK: - Pay session delegate additional methods
