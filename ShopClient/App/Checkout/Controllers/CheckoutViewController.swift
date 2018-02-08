@@ -84,7 +84,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         tableView.dataSource = tableProvider
         tableView.delegate = tableProvider
         
-        tableView?.contentInset = TableView.defaultContentInsets
+        tableView.contentInset = TableView.defaultContentInsets
     }
     
     private func setupViewModel() {

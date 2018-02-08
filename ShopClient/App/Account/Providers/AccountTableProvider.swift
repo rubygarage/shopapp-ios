@@ -46,6 +46,14 @@ extension AccountTableProvider: UITableViewDelegate {
         delegate.provider(self, didSelect: policy)
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return customer != nil ? kAccountLoggedHeaderViewHeight : kAccountNotLoggedHeaderViewHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return customer != nil ? kAccountFooterViewHeight : TableView.headerFooterMinHeight
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let customer = customer {
             let view = AccountLoggedHeaderView(frame: CGRect.zero, customer: customer)

@@ -8,6 +8,8 @@
 
 import UIKit
 
+let kAddressListTableHeaderViewHeight: CGFloat = 90
+
 protocol AddressListHeaderViewDelegate: class {
     func tableViewHeaderDidTapAddAddress(_ header: AddressListTableHeaderView)
 }

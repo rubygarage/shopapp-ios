@@ -95,6 +95,10 @@ extension HomeTableProvider: UITableViewDelegate {
         delegate.provider(self, didSelect: article)
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return kBoldTitleTableHeaderViewHeight
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var type: SeeAllViewType
         var isNeedToHideSeeAllButton = false

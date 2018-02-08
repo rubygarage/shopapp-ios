@@ -56,6 +56,14 @@ extension OrdersListTableProvider: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension OrdersListTableProvider: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return kOrderHeaderViewHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return kOrderFooterViewHeight
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard !orders.isEmpty else {
             return nil

@@ -20,6 +20,8 @@ enum SeeAllViewType {
     case relatedItems
 }
 
+let kSeeAllTableHeaderViewHeight: CGFloat = 75
+
 class SeeAllTableHeaderView: UIView {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var sectionTitleLabel: UILabel!

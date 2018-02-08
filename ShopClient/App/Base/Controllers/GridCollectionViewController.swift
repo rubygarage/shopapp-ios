@@ -41,7 +41,7 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
         collectionView.dataSource = collectionProvider
         collectionView.delegate = collectionProvider
         
-        collectionView.contentInset = GridCollectionViewCell.collectionViewInsets
+        collectionView.contentInset = GridCollectionViewCell.defaultCollectionViewInsets
     }
     
     // MARK: - GridCollectionProviderDelegate

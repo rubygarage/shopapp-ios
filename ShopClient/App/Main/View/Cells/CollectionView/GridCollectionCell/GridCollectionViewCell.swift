@@ -10,6 +10,7 @@ import UIKit
 
 private let kNumberOfColumns: CGFloat = 2
 private let kCollectionViewMarginTop: CGFloat = 60
+private let kCollectionViewMarginVertical: CGFloat = 20
 private let kCollectionViewMarginHorizontal: CGFloat = 7
 private let kCellRatio: CGFloat = 210 / 185
 
@@ -41,12 +42,13 @@ extension GridCollectionViewCell {
         let roundedCellheight = CGFloat(lroundf(cellHeight))
         return CGSize(width: cellWidth, height: roundedCellheight)
     }
-    
-    class var collectionViewInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: kCollectionViewMarginHorizontal, bottom: 0, right: kCollectionViewMarginHorizontal)
+    class var defaultCollectionViewInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: kCollectionViewMarginVertical, left: kCollectionViewMarginHorizontal, bottom: kCollectionViewMarginVertical, right: kCollectionViewMarginHorizontal)
     }
-    
+    class var popularCollectionViewInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: 0.0, left: kCollectionViewMarginHorizontal, bottom: 0.0, right: kCollectionViewMarginHorizontal)
+    }
     class var sortableCollectionViewInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: kCollectionViewMarginTop, left: kCollectionViewMarginHorizontal, bottom: 0, right: kCollectionViewMarginHorizontal)
+        return UIEdgeInsets(top: kCollectionViewMarginTop, left: kCollectionViewMarginHorizontal, bottom: kCollectionViewMarginVertical, right: kCollectionViewMarginHorizontal)
     }
 }

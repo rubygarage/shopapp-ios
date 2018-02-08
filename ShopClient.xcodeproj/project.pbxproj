@@ -2689,7 +2689,7 @@
 		};
 		617041FC20174AB00063E369 /* Debug Dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 44F8B7515BF619E43CFDB7BC /* Pods-ShopClient.debug dev.xcconfig */;
+			baseConfigurationReference = 38B8C07405420E82AD6AAA3E /* Pods-ShopClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ShopClient/ShopClient.entitlements;
@@ -2757,7 +2757,7 @@
 		};
 		617041FE20174AB90063E369 /* Release Dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 10E281FAD9DA10419027D25A /* Pods-ShopClient.release dev.xcconfig */;
+			baseConfigurationReference = 10BBCCE808D12F6C873F9215 /* Pods-ShopClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ShopClient/ShopClient.entitlements;

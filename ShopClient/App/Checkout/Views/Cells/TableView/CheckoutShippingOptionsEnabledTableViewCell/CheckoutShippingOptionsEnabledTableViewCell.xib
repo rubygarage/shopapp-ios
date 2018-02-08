@@ -23,14 +23,14 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o2d-yv-L0O">
                         <rect key="frame" x="0.0" y="0.0" width="420" height="58.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yx4-Uu-HWw">
-                                <rect key="frame" x="58" y="20" width="72" height="18.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Price Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yx4-Uu-HWw">
+                                <rect key="frame" x="58" y="21.5" width="72" height="16"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Title Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q34-ts-8oB">
-                                <rect key="frame" x="137" y="21.5" width="267" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Title Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q34-ts-8oB">
+                                <rect key="frame" x="137" y="22" width="267" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -51,12 +51,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="iKd-h6-7qd" firstAttribute="top" secondItem="o2d-yv-L0O" secondAttribute="top" id="BOh-eP-f0D"/>
+                            <constraint firstAttribute="height" constant="58.5" id="Cdn-ns-ee6"/>
                             <constraint firstAttribute="trailing" secondItem="Q34-ts-8oB" secondAttribute="trailing" constant="16" id="JSe-Uj-4SW"/>
-                            <constraint firstItem="Yx4-Uu-HWw" firstAttribute="top" secondItem="o2d-yv-L0O" secondAttribute="top" constant="20" id="M24-VM-wTS"/>
+                            <constraint firstItem="Yx4-Uu-HWw" firstAttribute="centerY" secondItem="o2d-yv-L0O" secondAttribute="centerY" id="TUt-nN-dUN"/>
                             <constraint firstItem="iKd-h6-7qd" firstAttribute="leading" secondItem="o2d-yv-L0O" secondAttribute="leading" id="boh-cd-cdk"/>
                             <constraint firstAttribute="bottom" secondItem="iKd-h6-7qd" secondAttribute="bottom" id="cxg-h2-zbZ"/>
                             <constraint firstItem="Q34-ts-8oB" firstAttribute="leading" secondItem="Yx4-Uu-HWw" secondAttribute="trailing" constant="7" id="dFy-bz-v9r"/>
-                            <constraint firstAttribute="bottom" secondItem="Yx4-Uu-HWw" secondAttribute="bottom" constant="20" id="fGJ-bT-bJG"/>
                             <constraint firstItem="Q34-ts-8oB" firstAttribute="centerY" secondItem="Yx4-Uu-HWw" secondAttribute="centerY" id="ka1-tN-TyL"/>
                             <constraint firstItem="Yx4-Uu-HWw" firstAttribute="leading" secondItem="iKd-h6-7qd" secondAttribute="trailing" id="uE7-Sm-L1w"/>
                         </constraints>

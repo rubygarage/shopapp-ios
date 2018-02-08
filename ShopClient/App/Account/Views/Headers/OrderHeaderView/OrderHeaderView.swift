@@ -8,6 +8,8 @@
 
 import UIKit
 
+let kOrderHeaderViewHeight: CGFloat = 75
+
 protocol OrderHeaderDelegate: class {
     func headerView(_ headerView: OrderHeaderView, didTapWith section: Int)
 }

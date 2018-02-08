@@ -101,6 +101,14 @@ extension OrdersDetailsTableProvider: UITableViewDelegate {
         delegate.provider(self, didSelect: productVariant)
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == OrdersDetailsSection.header.rawValue ? kOrderHeaderViewHeight : kBoldTitleTableHeaderViewHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == OrdersDetailsSection.paymentInformation.rawValue ? kPaymentDetailsFooterViewHeight : TableView.headerFooterMinHeight
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var view = UIView()
         
@@ -127,9 +135,5 @@ extension OrdersDetailsTableProvider: UITableViewDelegate {
             return nil
         }
         return PaymentDetailsFooterView(order: order)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == OrdersDetailsSection.paymentInformation.rawValue ? PaymentDetailsFooterView.height : 0
     }
 }

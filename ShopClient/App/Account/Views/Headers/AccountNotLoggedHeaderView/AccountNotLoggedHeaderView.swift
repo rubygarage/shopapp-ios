@@ -8,6 +8,8 @@
 
 import UIKit
 
+let kAccountNotLoggedHeaderViewHeight: CGFloat = 180
+
 protocol AccountNotLoggedHeaderDelegate: class {
     func headerViewDidTapSignIn(_ headerView: AccountNotLoggedHeaderView)
     func headerViewDidTapCreateNewAccount(_ headerView: AccountNotLoggedHeaderView)
