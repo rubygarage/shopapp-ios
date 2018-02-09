@@ -19,10 +19,8 @@ class SignUpViewModel: BaseViewModel {
     var phoneText = Variable<String>("")
     var emailErrorMessage = PublishSubject<String>()
     var passwordErrorMessage = PublishSubject<String>()
-    var signUpSuccess = PublishSubject<Bool>()
+    var signUpSuccess = PublishSubject<Void>()
     var policies = Variable<(privacyPolicy: Policy?, termsOfService: Policy?)>(privacyPolicy: nil, termsOfService: nil)
-    
-    weak var delegate: AuthenticationProtocol?
     
     var signUpButtonEnabled: Observable<Bool> {
         return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { (email, password) in
@@ -74,18 +72,11 @@ class SignUpViewModel: BaseViewModel {
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if let success = success {
-                strongSelf.notifyAboutSignUpResult(success: success)
+            } else if let success = success, success {
                 strongSelf.state.onNext(.content)
+                strongSelf.signUpSuccess.onNext()
             }
         }
-    }
-    
-    private func notifyAboutSignUpResult(success: Bool) {
-        if success {
-            delegate?.didAuthorize()
-        }
-        signUpSuccess.onNext(success)
     }
     
     // MARK: - BaseViewModel

@@ -20,13 +20,10 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
     
     private var selectedPolicy: Policy?
     
-    weak var delegate: AuthenticationProtocol?
-    
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         viewModel = SignUpViewModel()
-        viewModel.delegate = delegate
         super.viewDidLoad()
 
         setupViews()
@@ -120,8 +117,8 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
             .disposed(by: disposeBag)
         
         viewModel.signUpSuccess.asObservable()
-            .subscribe(onNext: { [weak self] success in
-                guard let strongSelf = self, success else {
+            .subscribe(onNext: { [weak self] _ in
+                guard let strongSelf = self else {
                     return
                 }
                 strongSelf.dismiss(animated: true)

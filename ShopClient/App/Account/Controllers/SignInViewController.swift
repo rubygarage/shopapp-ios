@@ -14,13 +14,10 @@ class SignInViewController: BaseViewController<SignInViewModel> {
     @IBOutlet private weak var forgotButton: UIButton!
     @IBOutlet private weak var signInButton: BlackButton!
     
-    weak var delegate: AuthenticationProtocol?
-    
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         viewModel = SignInViewModel()
-        viewModel.delegate = delegate
         super.viewDidLoad()
         
         setupViews()
@@ -88,8 +85,8 @@ class SignInViewController: BaseViewController<SignInViewModel> {
             .disposed(by: disposeBag)
         
         viewModel.signInSuccess.asObservable()
-            .subscribe(onNext: { [weak self] success in
-                guard let strongSelf = self, success else {
+            .subscribe(onNext: { [weak self] _ in
+                guard let strongSelf = self else {
                     return
                 }
                 strongSelf.dismiss(animated: true)

@@ -48,17 +48,12 @@ class CheckoutViewModel: BaseViewModel {
     var order: Order?
     var selectedProductVariant: ProductVariant!
     
-    var placeOrderPressed: AnyObserver<Void> {
-        return AnyObserver { [weak self] event in
-            switch event {
-            case .next(_):
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.placeOrderAction()
-            default:
-                break
+    var placeOrderPressed: AnyObserver<()> {
+        return AnyObserver { [weak self] _ in
+            guard let strongSelf = self else {
+                return
             }
+            strongSelf.placeOrderAction()
         }
     }
     var isCheckoutValid: Observable<Bool> {

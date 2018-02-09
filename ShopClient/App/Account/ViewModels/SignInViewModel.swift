@@ -15,10 +15,8 @@ class SignInViewModel: BaseViewModel {
     var passwordText = Variable<String>("")
     var emailErrorMessage = PublishSubject<String>()
     var passwordErrorMessage = PublishSubject<String>()
-    var signInSuccess = PublishSubject<Bool>()
-    
-    weak var delegate: AuthenticationProtocol?
-    
+    var signInSuccess = PublishSubject<Void>()
+        
     var signInButtonEnabled: Observable<Bool> {
         return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { (email, password) in
             email.hasAtLeastOneSymbol() && password.hasAtLeastOneSymbol()
@@ -60,17 +58,10 @@ class SignInViewModel: BaseViewModel {
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if let success = success {
-                strongSelf.notifyAboutSignInResult(success: success)
+            } else if let success = success, success {
                 strongSelf.state.onNext(.content)
+                strongSelf.signInSuccess.onNext()
             }
         }
-    }
-    
-    private func notifyAboutSignInResult(success: Bool) {
-        if success {
-            delegate?.didAuthorize()
-        }
-        signInSuccess.onNext(success)
     }
 }

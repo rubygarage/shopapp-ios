@@ -1530,6 +1530,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
 
     func paySessionDidFinish(_ paySession: PaySession) {
         paymentByApplePayCompletion?(paymentByApplePayResponse?.order, paymentByApplePayResponse?.error)
+        paymentByApplePayCompletion = nil
     }
     
     // MARK: - Pay session delegate additional methods
