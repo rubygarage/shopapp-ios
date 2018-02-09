@@ -72,10 +72,16 @@ class SignUpViewModel: BaseViewModel {
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if let success = success, success {
+            } else if let success = success {
                 strongSelf.state.onNext(.content)
-                strongSelf.signUpSuccess.onNext()
+                strongSelf.notifyAboutSignUpResultIfNeeded(success: success)
             }
+        }
+    }
+    
+    private func notifyAboutSignUpResultIfNeeded(success: Bool) {
+        if success {
+            signUpSuccess.onNext()
         }
     }
     

@@ -58,10 +58,16 @@ class SignInViewModel: BaseViewModel {
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if let success = success, success {
+            } else if let success = success {
                 strongSelf.state.onNext(.content)
-                strongSelf.signInSuccess.onNext()
+                strongSelf.notifyAboutSignInResultIfNeeded(success: success)
             }
+        }
+    }
+    
+    private func notifyAboutSignInResultIfNeeded(success: Bool) {
+        if success {
+            signInSuccess.onNext()
         }
     }
 }
