@@ -20,12 +20,17 @@ class ForgotPasswordViewModel: BaseViewModel {
             email.hasAtLeastOneSymbol()
         }
     }
-    var resetPasswordPressed: AnyObserver<()> {
-        return AnyObserver { [weak self] _ in
-            guard let strongSelf = self else {
-                return
+    var resetPasswordPressed: AnyObserver<Void> {
+        return AnyObserver { [weak self] event in
+            switch event {
+            case .next:
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.checkCresentials()
+            default:
+                break
             }
-            strongSelf.checkCresentials()
         }
     }
     

@@ -30,12 +30,17 @@ class AddressFormViewModel: BaseViewModel {
             return textFields.map({ $0.isEmpty == false }).filter({ $0 == false }).isEmpty
         })
     }
-    var submitTapped: AnyObserver<()> {
-        return AnyObserver { [weak self] _ in
-            guard let strongSelf = self else {
-                return
+    var submitTapped: AnyObserver<Void> {
+        return AnyObserver { [weak self] event in
+            switch event {
+            case .next:
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.submitAction()
+            default:
+                break
             }
-            strongSelf.submitAction()
         }
     }
     

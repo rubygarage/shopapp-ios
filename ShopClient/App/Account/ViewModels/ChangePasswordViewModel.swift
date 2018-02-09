@@ -22,12 +22,17 @@ class ChangePasswordViewModel: BaseViewModel {
             newEmail.hasAtLeastOneSymbol() && confirmPassword.hasAtLeastOneSymbol()
         }
     }
-    var updatePressed: AnyObserver<()> {
-        return AnyObserver { [weak self] _ in
-            guard let strongSelf = self else {
-                return
+    var updatePressed: AnyObserver<Void> {
+        return AnyObserver { [weak self] event in
+            switch event {
+            case .next:
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.checkValidation()
+            default:
+                break
             }
-            strongSelf.checkValidation()
         }
     }
     
