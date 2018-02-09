@@ -37,6 +37,8 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
         setupViews()
         setupViewModel()
         populateViewsIfNeeded()
+        
+        viewModel.getCountries()
     }
     
     // MARK: - Setup

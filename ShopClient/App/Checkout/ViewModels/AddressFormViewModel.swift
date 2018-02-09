@@ -9,6 +9,12 @@
 import RxSwift
 
 class AddressFormViewModel: BaseViewModel {
+    private let countriesUseCase = CountriesUseCase()
+    
+    private var requiredTextFields: [Observable<String>] {
+        return [countryText, firstNameText, lastNameText, addressText, cityText, zipText, phoneText].map({ $0.asObservable() })
+    }
+    
     var countryText = Variable<String>("")
     var firstNameText = Variable<String>("")
     var lastNameText = Variable<String>("")
@@ -20,10 +26,6 @@ class AddressFormViewModel: BaseViewModel {
     var phoneText = Variable<String>("")
     var filledAddress = PublishSubject<Address>()
     var address: Address?
-        
-    private var requiredTextFields: [Observable<String>] {
-        return [countryText, firstNameText, lastNameText, addressText, cityText, zipText, phoneText].map({ $0.asObservable() })
-    }
     
     var isAddressValid: Observable<Bool> {
         return Observable.combineLatest(requiredTextFields, { (textFields) in
@@ -40,6 +42,20 @@ class AddressFormViewModel: BaseViewModel {
                 strongSelf.submitAction()
             default:
                 break
+            }
+        }
+    }
+    
+    func getCountries() {
+        state.onNext(ViewState.make.loading(isTranslucent: true))
+        countriesUseCase.getCountries { [weak self] (countries, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            if let error = error {
+                strongSelf.state.onNext(.error(error: error))
+            } else if countries != nil {
+                strongSelf.state.onNext(.content)
             }
         }
     }

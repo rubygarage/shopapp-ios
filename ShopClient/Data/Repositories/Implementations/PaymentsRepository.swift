@@ -52,4 +52,8 @@ extension Repository {
     func setupApplePay(with checkout: Checkout, customerEmail: String, callback: @escaping RepoCallback<Order>) {
         APICore?.setupApplePay(with: checkout, customerEmail: customerEmail, callback: callback)
     }
+    
+    func getCountries(callback: @escaping RepoCallback<[Country]>) {
+        APICore?.getCountries(callback: callback)
+    }
 }
