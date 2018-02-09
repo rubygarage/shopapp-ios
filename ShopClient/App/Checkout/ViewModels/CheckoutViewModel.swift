@@ -25,7 +25,8 @@ enum PaymentType: Int {
     case creditCard
     case applePay
     
-    static let allValues = PKPaymentAuthorizationController.canMakePayments() ? [creditCard, applePay] : [creditCard]
+    static let supportedNetworks: [PKPaymentNetwork] = [.visa, .masterCard, .amex]
+    static let allValues = PKPaymentAuthorizationController.canMakePayments() && PKPaymentAuthorizationViewController.canMakePayments(usingNetworks: supportedNetworks) ? [creditCard, applePay] : [creditCard]
 }
 
 class CheckoutViewModel: BaseViewModel {
