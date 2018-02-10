@@ -27,8 +27,7 @@ extension SortVariantsTableProvider: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellName = String(describing: SortVariantTableViewCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! SortVariantTableViewCell
+        let cell: SortVariantTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
         let variant = variants[indexPath.row]
         let isVariantSelected = variant == selectedVariant
         cell.configure(with: variant, selected: isVariantSelected)

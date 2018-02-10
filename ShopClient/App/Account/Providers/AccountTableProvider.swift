@@ -27,8 +27,7 @@ extension AccountTableProvider: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellName = String(describing: AccountTableViewCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! AccountTableViewCell
+        let cell: AccountTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
         let policy = policies[indexPath.row]
         cell.configure(with: policy)
         return cell

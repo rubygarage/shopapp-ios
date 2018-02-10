@@ -49,8 +49,7 @@ extension SettingsTableProvider: UITableViewDataSource {
     }
     
     private func switchCell(with tableView: UITableView, indexPath: IndexPath) -> SwitchTableViewCell {
-        let cellName = String(describing: SwitchTableViewCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! SwitchTableViewCell
+        let cell: SwitchTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
         cell.delegate = delegate
         if let promo = promo {
             cell.configure(with: indexPath, description: promo.description, state: promo.state)

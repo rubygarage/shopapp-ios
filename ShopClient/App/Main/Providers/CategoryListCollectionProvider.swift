@@ -26,8 +26,7 @@ extension CategoryListCollectionProvider: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cellName = String(describing: CategoryCollectionViewCell.self)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as! CategoryCollectionViewCell
+        let cell: CategoryCollectionViewCell = collectionView.dequeueReusableCellForIndexPath(indexPath)
         let category = categories[indexPath.row]
         cell.configure(with: category)
         return cell

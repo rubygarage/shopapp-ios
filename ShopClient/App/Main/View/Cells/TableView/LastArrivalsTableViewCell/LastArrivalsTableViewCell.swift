@@ -37,9 +37,7 @@ class LastArrivalsTableViewCell: UITableViewCell {
     }
     
     private func setupCollectionView() {
-        let cellName = String(describing: LastArrivalsCollectionViewCell.self)
-        let nib = UINib(nibName: cellName, bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: cellName)
+        collectionView.registerNibForCell(LastArrivalsCollectionViewCell.self)
         
         collectionProvider = LastArrivalsTableCellProvider()
         collectionProvider.delegate = self

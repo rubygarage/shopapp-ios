@@ -32,10 +32,8 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
     // MARK: - Setup
     
     private func setupCollectionView() {
-        let cellName = String(describing: GridCollectionViewCell.self)
-        let nib = UINib(nibName: cellName, bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: cellName)
-        
+        collectionView.registerNibForCell(GridCollectionViewCell.self)
+
         collectionProvider = GridCollectionProvider()
         collectionProvider.delegate = self
         collectionView.dataSource = collectionProvider

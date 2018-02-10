@@ -38,8 +38,7 @@ extension OrdersListTableProvider: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellName = String(describing: CheckoutCartTableViewCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! CheckoutCartTableViewCell
+        let cell: CheckoutCartTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
         var images: [Image] = []
         var productVariantIds: [String] = []
         let order = orders[indexPath.section]

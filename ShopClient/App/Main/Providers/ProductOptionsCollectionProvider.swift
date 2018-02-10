@@ -29,8 +29,7 @@ extension ProductOptionsCollectionProvider: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cellName = String(describing: ProductOptionsCollectionViewCell.self)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as! ProductOptionsCollectionViewCell
+        let cell: ProductOptionsCollectionViewCell = collectionView.dequeueReusableCellForIndexPath(indexPath)
         let values = options[indexPath.section].values ?? []
         let selectedValue = selectedOptions[indexPath.section].value
         cell.configure(with: values, selectedValue: selectedValue, delegate: delegate)
@@ -38,8 +37,7 @@ extension ProductOptionsCollectionProvider: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let viewName = String(describing: ProductOptionHeaderView.self)
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: viewName, for: indexPath) as! ProductOptionHeaderView
+        let headerView: ProductOptionHeaderView = collectionView.dequeueReusableSupplementaryViewForIndexPath(indexPath, of: UICollectionElementKindSectionHeader)
         let text = options[indexPath.section].name ?? ""
         headerView.configure(with: text)
         return headerView

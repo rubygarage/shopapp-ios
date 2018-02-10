@@ -42,9 +42,7 @@ class ProductOptionsCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupCollectionView() {
-        let cellName = String(describing: ProductOptionCollectionViewCell.self)
-        let nib = UINib(nibName: cellName, bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: cellName)
+        collectionView.registerNibForCell(ProductOptionCollectionViewCell.self)
 
         collectionProvider = ProductOptionCollectionCellProvider()
         collectionProvider.delegate = self
