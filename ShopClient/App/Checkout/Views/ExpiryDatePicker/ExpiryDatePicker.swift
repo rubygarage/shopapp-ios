@@ -14,7 +14,6 @@ private let kUnderlineViewHeightDefault: CGFloat = 1
 private let kUnderlineViewHeightHighlighted: CGFloat = 2
 
 class ExpiryDatePicker: TextFieldWrapper {
-    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var underlineView: UIView!
     @IBOutlet private weak var underlineViewHeight: NSLayoutConstraint!
 
@@ -42,11 +41,7 @@ class ExpiryDatePicker: TextFieldWrapper {
     }
     
     private func commonInit() {
-        Bundle.main.loadNibNamed(String(describing: ExpiryDatePicker.self), owner: self)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+        loadFromNib()
         setupViews()
     }
     

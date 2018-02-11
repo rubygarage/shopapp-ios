@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountNotLoggedHeaderView" customModule="ShopClient" customModuleProvider="target">
             <connections>
-                <outlet property="contentView" destination="iN0-l3-epB" id="Vea-1E-Ujt"/>
                 <outlet property="createAccountUnderlinedView" destination="pLH-tW-YR9" id="nLS-dD-WeY"/>
                 <outlet property="createNewAccountButton" destination="9kd-ki-Xoh" id="clg-R0-cRx"/>
                 <outlet property="signInButton" destination="IkS-af-Cpl" id="SJC-8Y-7ui"/>

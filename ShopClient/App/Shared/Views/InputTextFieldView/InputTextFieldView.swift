@@ -45,7 +45,6 @@ private let kPlaceholderFontSizeDefault: CGFloat = 12
 private let kPlaceholderColorTop = UIColor.black.withAlphaComponent(0.5)
 
 class InputTextFieldView: TextFieldWrapper {
-    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var underlineView: UIView!
     @IBOutlet private weak var underlineViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var errorMesageLabel: UILabel!
@@ -109,11 +108,8 @@ class InputTextFieldView: TextFieldWrapper {
     // MARK: - Setup
     
     private func commonInit() {
-        Bundle.main.loadNibNamed(String(describing: InputTextFieldView.self), owner: self)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+        loadFromNib()
+
         textField?.delegate = self
         setupViews()
         updateUI()

@@ -14,6 +14,6 @@ extension UIView {
     }
 
     var nameOfClass: String {
-        return String(describing: self)
+        return String(describing: type(of: self))
     }
 }

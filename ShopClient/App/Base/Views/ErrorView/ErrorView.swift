@@ -13,7 +13,6 @@ protocol ErrorViewDelegate: class {
 }
 
 class ErrorView: UIView {
-    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var errorTextLabel: UILabel!
     @IBOutlet private weak var errorImageView: UIImageView!
     @IBOutlet private weak var tryAgainButton: UIButton!
@@ -43,11 +42,7 @@ class ErrorView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        let viewName = String(describing: ErrorView.self)
-        Bundle.main.loadNibNamed(viewName, owner: self)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        loadFromNib()
     }
     
     private func updateUI() {

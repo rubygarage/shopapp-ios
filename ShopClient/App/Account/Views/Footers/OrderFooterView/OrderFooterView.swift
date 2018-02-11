@@ -15,7 +15,6 @@ protocol OrderFooterDelegate: class {
 }
 
 class OrderFooterView: UIView {
-    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var itemsLabel: UILabel!
     @IBOutlet private weak var countLabel: UILabel!
     @IBOutlet private weak var totalLabel: UILabel!
@@ -44,12 +43,7 @@ class OrderFooterView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        let viewName = String(describing: OrderFooterView.self)
-        Bundle.main.loadNibNamed(viewName, owner: self)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+        loadFromNib()
         setupViews()
     }
     

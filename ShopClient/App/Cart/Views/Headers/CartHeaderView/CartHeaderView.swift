@@ -11,7 +11,6 @@ import UIKit
 let kCartHeaderViewHeader: CGFloat = 76
 
 class CartHeaderView: UIView {
-    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var totalItemsCountLabel: UILabel!
     @IBOutlet private weak var totalPriceLabel: UILabel!
     
@@ -33,11 +32,7 @@ class CartHeaderView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        let viewName = String(describing: CartHeaderView.self)
-        Bundle.main.loadNibNamed(viewName, owner: self)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        loadFromNib()
     }
     
     private func populateViews(with productsCount: Int, totalPrice: Float, currency: String) {

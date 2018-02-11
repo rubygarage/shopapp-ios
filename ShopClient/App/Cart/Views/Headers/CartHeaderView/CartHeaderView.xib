@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CartHeaderView" customModule="ShopClient" customModuleProvider="target">
             <connections>
-                <outlet property="contentView" destination="iN0-l3-epB" id="T7Z-ov-8aH"/>
                 <outlet property="totalItemsCountLabel" destination="vgd-NB-sGY" id="ecm-3G-9yX"/>
                 <outlet property="totalPriceLabel" destination="aZe-de-8we" id="lcC-Zg-ieq"/>
             </connections>

@@ -13,7 +13,6 @@ protocol OrderListEmptyDataViewDelegate: class {
 }
 
 class OrderListEmptyDataView: UIView {
-    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var emptyOrderListLabel: UILabel!
     @IBOutlet private weak var startShoppingButton: UIButton!
     
@@ -36,12 +35,7 @@ class OrderListEmptyDataView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        let viewName = String(describing: OrderListEmptyDataView.self)
-        Bundle.main.loadNibNamed(viewName, owner: self)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+        loadFromNib()
         setupViews()
     }
     

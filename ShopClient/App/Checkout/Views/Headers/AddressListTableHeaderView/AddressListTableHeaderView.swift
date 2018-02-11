@@ -15,7 +15,6 @@ protocol AddressListHeaderViewDelegate: class {
 }
 
 class AddressListTableHeaderView: UIView {
-    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var addNewAddressButton: BlackButton!
     
     weak var delegate: AddressListHeaderViewDelegate?
@@ -31,11 +30,7 @@ class AddressListTableHeaderView: UIView {
     }
     
     private func commonInit() {
-        Bundle.main.loadNibNamed(String(describing: AddressListTableHeaderView.self), owner: self)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+        loadFromNib()
         setupViews()
     }
     

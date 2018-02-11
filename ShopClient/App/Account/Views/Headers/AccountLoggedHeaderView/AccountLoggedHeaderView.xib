@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountLoggedHeaderView" customModule="ShopClient" customModuleProvider="target">
             <connections>
-                <outlet property="contentView" destination="iN0-l3-epB" id="pax-J0-TBt"/>
                 <outlet property="customerImageView" destination="NGO-zl-TiJ" id="NII-80-Hkf"/>
                 <outlet property="customerNameLabel" destination="0qI-g8-usP" id="vgs-Ej-gSr"/>
                 <outlet property="myOrdersButton" destination="yKi-KC-Gg9" id="tln-Q2-7tz"/>

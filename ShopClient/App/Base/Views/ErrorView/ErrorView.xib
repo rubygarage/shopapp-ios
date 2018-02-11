@@ -13,7 +13,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ErrorView" customModule="ShopClient" customModuleProvider="target">
             <connections>
-                <outlet property="contentView" destination="iN0-l3-epB" id="SCZ-sd-Vsk"/>
                 <outlet property="errorImageView" destination="aXQ-jJ-eL2" id="msw-RU-8Gr"/>
                 <outlet property="errorTextLabel" destination="T0m-Dg-Z0e" id="XiZ-Vz-PqR"/>
                 <outlet property="tryAgainButton" destination="VSi-2c-9yV" id="HBI-o4-dch"/>

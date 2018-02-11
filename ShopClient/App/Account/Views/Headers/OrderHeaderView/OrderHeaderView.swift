@@ -15,7 +15,6 @@ protocol OrderHeaderDelegate: class {
 }
 
 class OrderHeaderView: UIView {
-    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var numberLabel: UILabel!
     @IBOutlet private weak var dateLabel: UILabel!
     
@@ -42,12 +41,7 @@ class OrderHeaderView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        let viewName = String(describing: OrderHeaderView.self)
-        Bundle.main.loadNibNamed(viewName, owner: self)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+        loadFromNib()
         setupViews()
     }
     

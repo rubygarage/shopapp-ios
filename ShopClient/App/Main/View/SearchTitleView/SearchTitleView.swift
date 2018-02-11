@@ -82,11 +82,7 @@ class SearchTitleView: TextFieldWrapper {
     }
     
     private func commonInit() {
-        let viewName = String(describing: SearchTitleView.self)
-        Bundle.main.loadNibNamed(viewName, owner: self)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        loadFromNib()
         setupViews()
     }
     

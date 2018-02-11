@@ -17,7 +17,6 @@
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
-                <outlet property="contentView" destination="iN0-l3-epB" id="vfE-Ua-dpU"/>
                 <outlet property="errorMesageLabel" destination="tpe-ay-ykK" id="IEP-Sr-QtP"/>
                 <outlet property="placeholderLabel" destination="VV2-Mg-NFB" id="LTQ-Fx-Iga"/>
                 <outlet property="placeholderVerticallyConstraint" destination="dHC-a1-4dk" id="la3-OX-wbC"/>
