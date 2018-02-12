@@ -34,7 +34,6 @@ protocol AccountLoggedHeaderDelegate: class {
 }
 
 class AccountLoggedHeaderView: UIView {
-    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var myOrdersButton: UIButton!
     @IBOutlet private weak var personalInfoButton: UIButton!
     @IBOutlet private weak var welcomeLabel: UILabel!
@@ -66,12 +65,7 @@ class AccountLoggedHeaderView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        let viewName = String(describing: AccountLoggedHeaderView.self)
-        Bundle.main.loadNibNamed(viewName, owner: self)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+        loadFromNib()
         setupViews()
     }
     

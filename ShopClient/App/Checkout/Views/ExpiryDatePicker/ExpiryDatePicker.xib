@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExpiryDatePicker" customModule="ShopClient" customModuleProvider="target">
             <connections>
-                <outlet property="contentView" destination="iN0-l3-epB" id="lKo-v8-i6j"/>
                 <outlet property="textField" destination="mxt-PH-xQT" id="AIv-pA-4uR"/>
                 <outlet property="underlineView" destination="MRg-op-MCh" id="G6z-N4-G1b"/>
                 <outlet property="underlineViewHeight" destination="wSx-w1-UAS" id="fwg-pW-NHn"/>

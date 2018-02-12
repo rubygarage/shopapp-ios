@@ -59,24 +59,21 @@ extension HomeTableProvider: UITableViewDataSource {
     }
     
     private func lastArrivalsCell(with tableView: UITableView, indexPath: IndexPath) -> LastArrivalsTableViewCell {
-        let cellName = String(describing: LastArrivalsTableViewCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! LastArrivalsTableViewCell
+        let cell: LastArrivalsTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
         cell.delegate = delegate
         cell.configure(with: lastArrivalsProducts)
         return cell
     }
     
     private func popularCell(with tableView: UITableView, indexPath: IndexPath) -> PopularTableViewCell {
-        let cellName = String(describing: PopularTableViewCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! PopularTableViewCell
+        let cell: PopularTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
         cell.delegate = delegate
         cell.configure(with: popularProducts)
         return cell
     }
     
     private func newInBlogCell(with tableView: UITableView, indexPath: IndexPath) -> ArticleTableViewCell {
-        let cellName = String(describing: ArticleTableViewCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! ArticleTableViewCell
+        let cell: ArticleTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
         let article = articles[indexPath.row]
         let separatorHidden = indexPath.row == articles.count - 1
         cell.configure(with: article, separatorHidden: separatorHidden)

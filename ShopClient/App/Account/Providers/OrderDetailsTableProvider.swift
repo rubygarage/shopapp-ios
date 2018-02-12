@@ -72,8 +72,7 @@ extension OrdersDetailsTableProvider: UITableViewDataSource {
     }
     
     private func orderItemCell(with tableView: UITableView, indexPath: IndexPath) -> OrderItemTableViewCell {
-        let cellName = String(describing: OrderItemTableViewCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! OrderItemTableViewCell
+        let cell: OrderItemTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
         if let order = order, let item = order.items?[indexPath.row], let currencyCode = order.currencyCode {
             cell.configure(with: item, currencyCode: currencyCode)
         }
@@ -81,8 +80,7 @@ extension OrdersDetailsTableProvider: UITableViewDataSource {
     }
     
     private func shippingAddressCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingAddressEditTableCell {
-        let cellName = String(describing: CheckoutShippingAddressEditTableCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! CheckoutShippingAddressEditTableCell
+        let cell: CheckoutShippingAddressEditTableCell = tableView.dequeueReusableCellForIndexPath(indexPath)
         if let address = order?.shippingAddress {
             cell.configure(with: address)
             cell.setEditButtonVisible(false)

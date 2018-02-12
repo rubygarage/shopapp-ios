@@ -13,7 +13,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderListEmptyDataView" customModule="ShopClient" customModuleProvider="target">
             <connections>
-                <outlet property="contentView" destination="tfL-J1-rsd" id="tIb-RJ-7qD"/>
                 <outlet property="emptyOrderListLabel" destination="zhh-CH-rmN" id="hTH-hm-2Sa"/>
                 <outlet property="startShoppingButton" destination="asY-8J-f9u" id="sm9-b4-SOy"/>
             </connections>

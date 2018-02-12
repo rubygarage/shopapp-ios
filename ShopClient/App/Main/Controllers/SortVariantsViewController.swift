@@ -40,9 +40,7 @@ class SortVariantsViewController: UIViewController {
     }
 
     private func setupTableView() {
-        let cellName = String(describing: SortVariantTableViewCell.self)
-        let nib = UINib(nibName: cellName, bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: cellName)
+        tableView.registerNibForCell(SortVariantTableViewCell.self)
         
         tableProvider = SortVariantsTableProvider()
         tableProvider.delegate = self

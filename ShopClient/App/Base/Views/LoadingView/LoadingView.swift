@@ -9,8 +9,6 @@
 import UIKit
 
 class LoadingView: UIView {
-    @IBOutlet private var contentView: UIView!
-    
     // MARK: - View lifecycle
     
     override init(frame: CGRect) {
@@ -28,10 +26,6 @@ class LoadingView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        let viewName = String(describing: LoadingView.self)
-        Bundle.main.loadNibNamed(viewName, owner: self)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        loadFromNib()
     }
 }

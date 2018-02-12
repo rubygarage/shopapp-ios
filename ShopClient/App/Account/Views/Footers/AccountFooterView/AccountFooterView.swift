@@ -15,7 +15,6 @@ protocol AccountFooterDelegate: class {
 }
 
 class AccountFooterView: UIView {
-    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var logoutButton: UnderlinedButton!
     
     @IBOutlet fileprivate weak var logoutUnderlineView: UIView!
@@ -39,12 +38,7 @@ class AccountFooterView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        let viewName = String(describing: AccountFooterView.self)
-        Bundle.main.loadNibNamed(viewName, owner: self)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+        loadFromNib()
         setupViews()
     }
     

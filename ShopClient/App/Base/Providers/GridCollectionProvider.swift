@@ -30,8 +30,7 @@ extension GridCollectionProvider: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cellName = String(describing: GridCollectionViewCell.self)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as! GridCollectionViewCell
+        let cell: GridCollectionViewCell = collectionView.dequeueReusableCellForIndexPath(indexPath)
         let product = products[indexPath.row]
         cell.configure(with: product)
         

@@ -26,8 +26,7 @@ extension ArticlesListTableProvider: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellName = String(describing: ArticleTableViewCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! ArticleTableViewCell
+        let cell: ArticleTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
         let article = articles[indexPath.row]
         let separatorHidden = indexPath.row == articles.count - 1
         cell.configure(with: article, separatorHidden: separatorHidden)

@@ -40,9 +40,7 @@ class ImagesCarouselViewController: UIViewController {
     // MARK: - Setup
     
     private func setupCollectionView() {
-        let cellName = String(describing: DetailsImagesCollectionViewCell.self)
-        let nib = UINib(nibName: cellName, bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: cellName)
+        collectionView.registerNibForCell(DetailsImagesCollectionViewCell.self)
         
         collectionProvider = ImagesCarouselCollectionProvider()
         collectionProvider.delegate = self

@@ -28,8 +28,7 @@ extension LastArrivalsTableCellProvider: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cellname = String(describing: LastArrivalsCollectionViewCell.self)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellname, for: indexPath) as! LastArrivalsCollectionViewCell
+        let cell: LastArrivalsCollectionViewCell = collectionView.dequeueReusableCellForIndexPath(indexPath)
         let product = products[indexPath.row]
         cell.configure(with: product)
         

@@ -31,16 +31,13 @@ class CategoryListViewController: BaseCollectionViewController<CategoryListViewM
     // MARK: - Setup
     
     private func setupViews() {
-         let cellName = String(describing: CategoryCollectionViewCell.self)
-         let nib = UINib(nibName: cellName, bundle: nil)
-         collectionView.register(nib, forCellWithReuseIdentifier: cellName)
+        collectionView.registerNibForCell(CategoryCollectionViewCell.self)
          
-         collectionProvider = CategoryListCollectionProvider()
-         collectionProvider.delegate = self
-         collectionView.dataSource = collectionProvider
-         collectionView.delegate = collectionProvider
-         
-         collectionView.contentInset = CategoryCollectionViewCell.collectionViewInsets
+        collectionProvider = CategoryListCollectionProvider()
+        collectionProvider.delegate = self
+        collectionView.dataSource = collectionProvider
+        collectionView.delegate = collectionProvider
+        collectionView.contentInset = CategoryCollectionViewCell.collectionViewInsets
     }
     
     private func setupViewModel() {

@@ -15,7 +15,7 @@
                 <outlet property="backButton" destination="Xfu-WH-a1H" id="cMu-hE-Mqy"/>
                 <outlet property="cartButtonView" destination="Tio-2b-Alh" id="v4A-ms-vdc"/>
                 <outlet property="clearButton" destination="C7k-ft-Fxc" id="Dbc-RI-6W7"/>
-                <outlet property="contentView" destination="iN0-l3-epB" id="0T5-CA-rtx"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="V9Y-A8-CnQ"/>
                 <outlet property="textField" destination="JgY-Vb-rAM" id="KWL-7h-2Zv"/>
                 <outlet property="underLineView" destination="5Ab-xH-1Xy" id="w0m-we-MNW"/>
                 <outlet property="underlineLeftMargin" destination="ftg-td-fVt" id="w9l-jl-CzK"/>

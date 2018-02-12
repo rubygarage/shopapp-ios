@@ -40,8 +40,7 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
     }
     
     private func setupTableView() {
-        let paymentTypeNib = UINib(nibName: String(describing: PaymentTypeTableViewCell.self), bundle: nil)
-        tableView.register(paymentTypeNib, forCellReuseIdentifier: String(describing: PaymentTypeTableViewCell.self))
+        tableView.registerNibForCell(PaymentTypeTableViewCell.self)
         
         tableProvider = PaymentTypeProvider()
         tableProvider.selectedPaymentType = selectedType

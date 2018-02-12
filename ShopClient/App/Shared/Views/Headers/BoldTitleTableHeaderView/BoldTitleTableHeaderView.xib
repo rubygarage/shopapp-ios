@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BoldTitleTableHeaderView" customModule="ShopClient" customModuleProvider="target">
             <connections>
-                <outlet property="contentView" destination="iN0-l3-epB" id="DVs-PE-xaa"/>
                 <outlet property="headerTitleLabel" destination="q9Q-Fy-vQ0" id="LYM-rX-7Ax"/>
                 <outlet property="topMarginConstraint" destination="fWQ-Gu-24z" id="SP4-Bz-IYw"/>
             </connections>

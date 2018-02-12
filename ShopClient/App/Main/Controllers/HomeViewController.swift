@@ -61,17 +61,9 @@ class HomeViewController: BaseTableViewController<HomeViewModel> {
     }
     
     private func setupTableView() {
-        let lastArrivalsCellName = String(describing: LastArrivalsTableViewCell.self)
-        let lastArrivalsNib = UINib(nibName: lastArrivalsCellName, bundle: nil)
-        tableView.register(lastArrivalsNib, forCellReuseIdentifier: lastArrivalsCellName)
-        
-        let popularCellName = String(describing: PopularTableViewCell.self)
-        let popularNib = UINib(nibName: popularCellName, bundle: nil)
-        tableView.register(popularNib, forCellReuseIdentifier: popularCellName)
-        
-        let newInBlogCellName = String(describing: ArticleTableViewCell.self)
-        let newInBlogNib = UINib(nibName: newInBlogCellName, bundle: nil)
-        tableView.register(newInBlogNib, forCellReuseIdentifier: newInBlogCellName)
+        tableView.registerNibForCell(LastArrivalsTableViewCell.self)
+        tableView.registerNibForCell(PopularTableViewCell.self)
+        tableView.registerNibForCell(ArticleTableViewCell.self)
                 
         tableProvider = HomeTableProvider()
         tableProvider.delegate = self

@@ -30,8 +30,7 @@ extension CartTableProvider: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellName = String(describing: CartTableViewCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! CartTableViewCell
+        let cell: CartTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
         let cartProduct = cartProducts[indexPath.row]
         cell.configure(with: cartProduct)
         cell.cellDelegate = delegate

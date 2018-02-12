@@ -27,8 +27,7 @@ extension ImagesCarouselCollectionProvider: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cellName = String(describing: DetailsImagesCollectionViewCell.self)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as! DetailsImagesCollectionViewCell
+        let cell: DetailsImagesCollectionViewCell = collectionView.dequeueReusableCellForIndexPath(indexPath)
         let image = images[indexPath.row]
         cell.configure(with: image)
         return cell

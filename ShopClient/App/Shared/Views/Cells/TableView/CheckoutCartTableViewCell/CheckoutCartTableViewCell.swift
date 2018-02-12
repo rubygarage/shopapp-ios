@@ -46,8 +46,7 @@ class CheckoutCartTableViewCell: UITableViewCell {
     }
     
     private func setupCollectionView() {
-        let cartNib = UINib(nibName: String(describing: CheckoutCartCollectionCell.self), bundle: nil)
-        collectionView.register(cartNib, forCellWithReuseIdentifier: String(describing: CheckoutCartCollectionCell.self))
+        collectionView.registerNibForCell(CheckoutCartCollectionCell.self)
         
         collectionDataSource = CheckoutCartCollectionDataSource()
         collectionDataSource.delegate = self

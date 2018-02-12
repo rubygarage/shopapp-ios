@@ -66,8 +66,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
     private func setupViews() {
         addBackButtonIfNeeded()
         emptyDataView = customEmptyDataView
-        loadingView.frame = view.frame
-        errorView.frame = view.frame
+
         errorView.delegate = self
         ToastView.appearance().bottomOffsetPortrait = kToastBottomOffset
     }
@@ -101,7 +100,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
         emptyDataView.removeFromSuperview()
         if showHud {
             loadingView.alpha = isTranslucent ? kLoadingViewTranslucentAlpha : kLoadingViewFillAlpha
-            view.addSubview(loadingView)
+            addSubviewAndConstraints(subview: loadingView)
         }
     }
     
@@ -128,7 +127,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
     private func setEmptyState() {
         errorView.removeFromSuperview()
         loadingView.removeFromSuperview()
-        view.addSubview(emptyDataView)
+        addSubviewAndConstraints(subview: emptyDataView)
     }
     
     private func process(criticalError: CriticalError?) {
@@ -147,17 +146,29 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
     private func process(contentError: ContentError?) {
         loadingView.removeFromSuperview()
         errorView.error = contentError
-        view.addSubview(errorView)
+        addSubviewAndConstraints(subview: errorView)
     }
     
     private func process(networkError: NetworkError?) {
         loadingView.removeFromSuperview()
         errorView.error = networkError
-        view.addSubview(errorView)
+        addSubviewAndConstraints(subview: errorView)
     }
     
     private func process(defaultError: RepoError?) {
         loadingView.removeFromSuperview()
+    }
+
+    // MARK: - Subviews
+
+    private func addSubviewAndConstraints(subview: UIView) {
+        view.addSubview(subview)
+
+        subview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        subview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        subview.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        subview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        subview.translatesAutoresizingMaskIntoConstraints = false
     }
 }
 

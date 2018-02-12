@@ -58,9 +58,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel> {
     }
     
     private func setupTableView() {
-        let cellName = String(describing: AddressListTableViewCell.self)
-        let cellNib = UINib(nibName: cellName, bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: cellName)
+        tableView.registerNibForCell(AddressListTableViewCell.self)
         
         tableProvider = AddressListTableProvider()
         tableProvider.delegate = self

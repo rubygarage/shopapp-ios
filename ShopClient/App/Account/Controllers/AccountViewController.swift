@@ -58,9 +58,7 @@ class AccountViewController: BaseViewController<AccountViewModel> {
     }
     
     private func setupTableView() {
-        let cellName = String(describing: AccountTableViewCell.self)
-        let cellNib = UINib(nibName: cellName, bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: cellName)
+        tableView.registerNibForCell(AccountTableViewCell.self)
         
         tableProvider = AccountTableProvider()
         tableProvider.delegate = self

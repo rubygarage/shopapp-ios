@@ -16,7 +16,6 @@ protocol AccountNotLoggedHeaderDelegate: class {
 }
 
 class AccountNotLoggedHeaderView: UIView {
-    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var signInButton: BlackButton!
     @IBOutlet private weak var signInLabel: UILabel!
     @IBOutlet private weak var createNewAccountButton: UnderlinedButton!
@@ -42,12 +41,7 @@ class AccountNotLoggedHeaderView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        let viewName = String(describing: AccountNotLoggedHeaderView.self)
-        Bundle.main.loadNibNamed(viewName, owner: self)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+        loadFromNib()
         setupViews()
     }
     

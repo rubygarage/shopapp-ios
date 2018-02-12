@@ -64,9 +64,7 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
     }
     
     private func setupTableView() {
-        let cellName = String(describing: CheckoutCartTableViewCell.self)
-        let cartNib = UINib(nibName: cellName, bundle: nil)
-        tableView.register(cartNib, forCellReuseIdentifier: cellName)
+        tableView.registerNibForCell(CheckoutCartTableViewCell.self)
         
         tableProvider = OrdersListTableProvider()
         tableProvider.delegate = self

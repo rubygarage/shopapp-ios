@@ -32,9 +32,7 @@ class SettingsViewController: BaseViewController<SettingsViewModel> {
     }
     
     private func setupTableView() {
-        let cellName = String(describing: SwitchTableViewCell.self)
-        let cellNib = UINib(nibName: cellName, bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: cellName)
+        tableView.registerNibForCell(SwitchTableViewCell.self)
         
         tableProvider = SettingsTableProvider()
         tableProvider.delegate = self

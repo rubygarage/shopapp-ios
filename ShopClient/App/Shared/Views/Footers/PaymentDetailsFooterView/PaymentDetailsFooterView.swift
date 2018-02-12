@@ -11,7 +11,6 @@ import UIKit
 let kPaymentDetailsFooterViewHeight: CGFloat = 175
 
 class PaymentDetailsFooterView: UIView {
-    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var subtotalLabel: UILabel!
     @IBOutlet private weak var discountLabel: UILabel!
     @IBOutlet private weak var shippingLabel: UILabel!
@@ -46,11 +45,7 @@ class PaymentDetailsFooterView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        Bundle.main.loadNibNamed(String(describing: PaymentDetailsFooterView.self), owner: self)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+        loadFromNib()
         setupViews()
     }
     

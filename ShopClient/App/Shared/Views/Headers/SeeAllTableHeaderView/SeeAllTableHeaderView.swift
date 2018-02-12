@@ -23,7 +23,6 @@ enum SeeAllViewType {
 let kSeeAllTableHeaderViewHeight: CGFloat = 75
 
 class SeeAllTableHeaderView: UIView {
-    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var sectionTitleLabel: UILabel!
     @IBOutlet private weak var separatprHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var seeAllButton: UIButton!
@@ -51,11 +50,7 @@ class SeeAllTableHeaderView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        Bundle.main.loadNibNamed(String(describing: SeeAllTableHeaderView.self), owner: self)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+        loadFromNib()
         populateViews()
     }
     

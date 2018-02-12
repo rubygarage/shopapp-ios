@@ -24,8 +24,7 @@ extension AddressListTableProvider: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellName = String(describing: AddressListTableViewCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! AddressListTableViewCell
+        let cell: AddressListTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
         let addressTuple = addresses[indexPath.row]
         cell.configure(with: addressTuple.address, isSelected: addressTuple.isSelected, isDefault: addressTuple.isDefault)
         cell.delegate = delegate

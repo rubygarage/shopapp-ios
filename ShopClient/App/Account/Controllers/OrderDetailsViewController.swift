@@ -42,13 +42,8 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
     }
     
     private func setupTableView() {
-        let orderItemCellName = String(describing: OrderItemTableViewCell.self)
-        let orderItemNib = UINib(nibName: orderItemCellName, bundle: nil)
-        tableView.register(orderItemNib, forCellReuseIdentifier: orderItemCellName)
-        
-        let checkoutShippingAddressEditCellname = String(describing: CheckoutShippingAddressEditTableCell.self)
-        let shippingAddressEditNib = UINib(nibName: checkoutShippingAddressEditCellname, bundle: nil)
-        tableView.register(shippingAddressEditNib, forCellReuseIdentifier: checkoutShippingAddressEditCellname)
+        tableView.registerNibForCell(OrderItemTableViewCell.self)
+        tableView.registerNibForCell(CheckoutShippingAddressEditTableCell.self)
         
         tableProvider = OrdersDetailsTableProvider()
         tableProvider.delegate = self

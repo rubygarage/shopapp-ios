@@ -9,7 +9,6 @@
 import UIKit
 
 class CategoryEmptyDataView: UIView {
-    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var emptyCategoryLabel: UILabel!
     
     // MARK: - View lifecycle
@@ -29,12 +28,7 @@ class CategoryEmptyDataView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        let viewName = String(describing: CategoryEmptyDataView.self)
-        Bundle.main.loadNibNamed(viewName, owner: self)
-        addSubview(contentView)
-        contentView.frame = self.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+        loadFromNib()
         setupViews()
     }
     

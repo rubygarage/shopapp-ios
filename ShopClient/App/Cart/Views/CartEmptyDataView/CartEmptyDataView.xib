@@ -13,7 +13,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CartEmptyDataView" customModule="ShopClient" customModuleProvider="target">
             <connections>
-                <outlet property="contentView" destination="iN0-l3-epB" id="zKc-dw-20U"/>
                 <outlet property="emptyCartLabel" destination="qqK-N2-Wld" id="8G0-f4-GOU"/>
                 <outlet property="startShoppingButton" destination="GMK-i1-6MW" id="Fyc-rT-9G4"/>
             </connections>

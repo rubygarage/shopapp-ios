@@ -40,9 +40,7 @@ class PopularTableViewCell: UITableViewCell {
     }
     
     private func setupCollectionView() {
-        let cellName = String(describing: GridCollectionViewCell.self)
-        let nib = UINib(nibName: cellName, bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: cellName)
+        collectionView.registerNibForCell(GridCollectionViewCell.self)
         
         collectionProvider = PopularTableCellProvider()
         collectionProvider.delegate = self

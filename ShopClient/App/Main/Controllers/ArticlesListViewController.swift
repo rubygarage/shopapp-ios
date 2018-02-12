@@ -55,9 +55,7 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
     }
     
     private func setupTableView() {
-        let cellName = String(describing: ArticleTableViewCell.self)
-        let articleNib = UINib(nibName: cellName, bundle: nil)
-        tableView.register(articleNib, forCellReuseIdentifier: cellName)
+        tableView.registerNibForCell(ArticleTableViewCell.self)
         
         tableProvider = ArticlesListTableProvider()
         tableProvider.delegate = self

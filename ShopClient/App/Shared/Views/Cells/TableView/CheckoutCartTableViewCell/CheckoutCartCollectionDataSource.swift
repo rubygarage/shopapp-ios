@@ -25,7 +25,7 @@ extension CheckoutCartCollectionDataSource: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CheckoutCartCollectionCell.self), for: indexPath) as! CheckoutCartCollectionCell
+        let cell: CheckoutCartCollectionCell = collectionView.dequeueReusableCellForIndexPath(indexPath)
         
         if let item = delegate?.item(at: indexPath.row) {
             cell.configure(with: item.image, productVariantId: item.productVariantId)

@@ -51,9 +51,7 @@ class CartViewController: BaseViewController<CartViewModel> {
     }
     
     private func setupTableView() {
-        let cellName = String(describing: CartTableViewCell.self)
-        let cartCellNib = UINib(nibName: cellName, bundle: nil)
-        tableView.register(cartCellNib, forCellReuseIdentifier: cellName)
+        tableView.registerNibForCell(CartTableViewCell.self)
         
         tableProvider = CartTableProvider()
         tableProvider.delegate = self

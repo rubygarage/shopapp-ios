@@ -29,8 +29,7 @@ extension ProductOptionCollectionCellProvider: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cellName = String(describing: ProductOptionCollectionViewCell.self)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as! ProductOptionCollectionViewCell
+        let cell: ProductOptionCollectionViewCell = collectionView.dequeueReusableCellForIndexPath(indexPath)
         let value = values[indexPath.row]
         let isSelectedValue = value == selectedValue
         cell.configure(with: value, selected: isSelectedValue)

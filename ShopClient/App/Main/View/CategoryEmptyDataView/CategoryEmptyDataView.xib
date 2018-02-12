@@ -13,7 +13,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CategoryEmptyDataView" customModule="ShopClient" customModuleProvider="target">
             <connections>
-                <outlet property="contentView" destination="Y9s-Wp-X3K" id="dTe-F0-uMw"/>
                 <outlet property="emptyCategoryLabel" destination="KAd-MG-fbR" id="xUr-3a-8Ab"/>
             </connections>
         </placeholder>
