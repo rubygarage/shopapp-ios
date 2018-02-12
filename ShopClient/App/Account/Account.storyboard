@@ -42,6 +42,7 @@
                         <segue destination="GpK-nH-9eS" kind="show" identifier="toOrdersList" id="Sly-3A-odQ"/>
                         <segue destination="Vuw-Re-lYh" kind="show" identifier="toAccountSettings" id="mdc-0i-wrK"/>
                         <segue destination="ekz-Gg-Wge" kind="show" identifier="toPersonalInfo" id="JJX-Gk-0Pk"/>
+                        <segue destination="LvS-Gi-IGH" kind="show" identifier="toAddressList" id="Sjd-dI-nwg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIy-lA-im1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1000,7 +1001,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="kKv-9n-zM3">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                         </subviews>
@@ -1022,7 +1023,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a0Y-Ex-jfP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4510" y="1494"/>
+            <point key="canvasLocation" x="4292" y="1494"/>
         </scene>
         <!--Customer Address Form View Controller-->
         <scene sceneID="rcV-4E-5dD">
@@ -1033,7 +1034,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ou1-TP-gsz">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <connections>
                                     <segue destination="thf-4R-F97" kind="embed" id="tUF-c5-ZCD"/>
                                 </connections>
@@ -1051,7 +1052,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="anb-Th-rWz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4511" y="2285"/>
+            <point key="canvasLocation" x="4292" y="2284"/>
         </scene>
         <!--Address Form View Controller-->
         <scene sceneID="YZy-yW-g5f">
@@ -1249,7 +1250,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kvo-Xg-Hit" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4510" y="3095"/>
+            <point key="canvasLocation" x="4292" y="3094"/>
         </scene>
     </scenes>
     <resources>

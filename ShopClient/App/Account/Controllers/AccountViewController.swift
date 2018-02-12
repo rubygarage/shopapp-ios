@@ -127,6 +127,10 @@ extension AccountViewController: AccountLoggedHeaderDelegate {
     func headerViewDidTapPersonalInfo(_ headerView: AccountLoggedHeaderView) {
         performSegue(withIdentifier: SegueIdentifiers.toPersonalInfo, sender: self)
     }
+    
+    func headerViewDidTapShippingAddress(_ headerView: AccountLoggedHeaderView) {
+        performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
+    }
 }
 
 // MARK: - AccountFooterViewDelegate
