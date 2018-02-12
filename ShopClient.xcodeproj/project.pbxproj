@@ -793,8 +793,6 @@
 		0B24F0E320074F1900F13224 /* Pickers */ = {
 			isa = PBXGroup;
 			children = (
-				0B24F0E520074F1900F13224 /* BasePicker.swift */,
-				0B24F0E420074F1900F13224 /* BasePicker.xib */,
 				0B24F0E620074F1900F13224 /* YearExpiryDatePicker.swift */,
 				0B24F0E720074F1900F13224 /* MonthExpiryDatePicker.swift */,
 			);
@@ -866,6 +864,15 @@
 				0B3AB6F0203199AF00F46A8F /* PlaceholderedTextField.swift */,
 			);
 			path = PlaceholderedTextField;
+			sourceTree = "<group>";
+		};
+		0B3AB6F22031C03C00F46A8F /* BasePicker */ = {
+			isa = PBXGroup;
+			children = (
+				0B24F0E520074F1900F13224 /* BasePicker.swift */,
+				0B24F0E420074F1900F13224 /* BasePicker.xib */,
+			);
+			path = BasePicker;
 			sourceTree = "<group>";
 		};
 		0B69B55A2008FFDC00F071E3 /* CollectionView */ = {
@@ -947,6 +954,7 @@
 		0B69B564200CEFDB00F071E3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0B3AB6F22031C03C00F46A8F /* BasePicker */,
 				61BF1EAE1FAB597C0098B9AA /* ErrorView */,
 				61BF1EA91FAB56C00098B9AA /* LoadingView */,
 				0B3AB6EF203199AF00F46A8F /* PlaceholderedTextField */,

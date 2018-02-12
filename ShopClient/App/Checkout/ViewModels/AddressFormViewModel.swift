@@ -11,6 +11,12 @@ import RxSwift
 class AddressFormViewModel: BaseViewModel {
     private let countriesUseCase = CountriesUseCase()
     
+    private var countries: [Country] = [] {
+        didSet {
+            namesOfCountries.onNext(countries.map { $0.name })
+        }
+    }
+    
     private var requiredTextFields: [Observable<String>] {
         return [countryText, firstNameText, lastNameText, addressText, cityText, zipText, phoneText].map({ $0.asObservable() })
     }
@@ -24,6 +30,8 @@ class AddressFormViewModel: BaseViewModel {
     var stateText = Variable<String>("")
     var zipText = Variable<String>("")
     var phoneText = Variable<String>("")
+    var namesOfCountries = PublishSubject<[String]>()
+    var namesOfStates = PublishSubject<[String]>()
     var filledAddress = PublishSubject<Address>()
     var address: Address?
     
@@ -54,9 +62,19 @@ class AddressFormViewModel: BaseViewModel {
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if countries != nil {
+            } else if let countries = countries {
                 strongSelf.state.onNext(.content)
+                strongSelf.countries = countries
             }
+        }
+    }
+    
+    func updateStates(with nameOfCountry: String) {
+        if let country = countries.filter({ $0.name == nameOfCountry }).first, !country.states.isEmpty {
+            namesOfStates.onNext(country.states.map { $0.name })
+        } else {
+            stateText.value = ""
+            namesOfStates.onNext([])
         }
     }
     

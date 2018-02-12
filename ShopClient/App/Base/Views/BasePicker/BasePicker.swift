@@ -16,10 +16,17 @@ private let kUnderlineViewHeightHighlighted: CGFloat = 2
 class BasePicker: PlaceholderedTextField {
     @IBOutlet private weak var underlineView: UIView!
     @IBOutlet private weak var underlineViewHeight: NSLayoutConstraint!
-    
-    private var customData: [String]?
 
     var pickerView = UIPickerView()
+    
+    var customData: [String]? {
+        didSet {
+            pickerView.reloadAllComponents()
+            if let customData = customData, let text = text {
+                pickerView.selectRow(customData.index(of: text) ?? 0, inComponent: 0, animated: false)
+            }
+        }
+    }
     
     var initialPlaceholder: String {
         return ""
@@ -30,7 +37,11 @@ class BasePicker: PlaceholderedTextField {
     
     override var text: String? {
         didSet {
+            guard let text = text else {
+                return
+            }
             setPlaceholderPosition()
+            pickerView.selectRow(data.index(of: text) ?? 0, inComponent: 0, animated: false)
         }
     }
     
@@ -49,17 +60,11 @@ class BasePicker: PlaceholderedTextField {
     }
     
     private func commonInit() {
-        let nibName = String(describing: BasePicker.self)
-        loadFromNib(with: nibName)
+        loadFromNib(with: BasePicker.nameOfClass)
         setupViews()
     }
     
     // MARK: - Setup
-    
-    func setCustomData(_ data: [String]) {
-        customData = data
-        pickerView.reloadAllComponents()
-    }
     
     private func setupViews() {
         pickerView.dataSource = self
