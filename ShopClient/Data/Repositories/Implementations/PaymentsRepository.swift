@@ -49,7 +49,7 @@ extension Repository {
         APICore?.pay(with: card, checkout: checkout, billingAddress: billingAddress, customerEmail: customerEmail, callback: callback)
     }
     
-    func setupApplePay(with checkout: Checkout, callback: @escaping RepoCallback<Order>) {
-        APICore?.setupApplePay(with: checkout, callback: callback)
+    func setupApplePay(with checkout: Checkout, customerEmail: String, callback: @escaping RepoCallback<Order>) {
+        APICore?.setupApplePay(with: checkout, customerEmail: customerEmail, callback: callback)
     }
 }

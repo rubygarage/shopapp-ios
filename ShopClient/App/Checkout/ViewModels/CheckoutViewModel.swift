@@ -63,7 +63,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     var isCheckoutValid: Observable<Bool> {
         return Observable.combineLatest(selectedType.asObservable(), checkout.asObservable(), creditCard.asObservable(), billingAddress.asObservable(), customerEmail.asObservable()) { (type, checkout, card, address, customerEmail) in
-            let applePayCondition = type == .applePay
+            let applePayCondition = type == .applePay && customerEmail.isValidAsEmail()
             let creditCardCondition = type == .creditCard && checkout != nil && card != nil && address != nil && checkout?.shippingLine != nil && customerEmail.isValidAsEmail()
             return applePayCondition || creditCardCondition
         }
@@ -206,7 +206,7 @@ class CheckoutViewModel: BaseViewModel {
     private func payByApplePay() {
         if let checkout = checkout.value {
             state.onNext(ViewState.make.loading(isTranslucent: true))
-            checkoutUseCase.setupApplePay(with: checkout, callback: paymentCallback())
+            checkoutUseCase.setupApplePay(with: checkout, customerEmail: customerEmail.value, callback: paymentCallback())
         }
     }
     
