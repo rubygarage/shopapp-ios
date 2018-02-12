@@ -1065,7 +1065,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="740"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TVg-Bx-Nsh">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="701"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="634"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MrP-xB-r99" customClass="BasePicker" customModule="ShopClient" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="70" width="285" height="22"/>
@@ -1122,11 +1122,11 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mBg-1Y-Mg3" customClass="BasePicker" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="45" y="430" width="285" height="22"/>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mBg-1Y-Mg3" customClass="BasePicker" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="45" y="385" width="285" height="0.0"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="22" id="Hye-Vm-oYz"/>
+                                                    <constraint firstAttribute="height" id="Hye-Vm-oYz"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e3Y-12-AGT" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
@@ -1142,7 +1142,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Do1-dZ-oqr" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="35" y="554" width="305" height="47"/>
+                                                <rect key="frame" x="35" y="487" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="47" id="1HO-PD-yyR"/>
@@ -1154,7 +1154,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="db1-bm-Bn0" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="35" y="482" width="305" height="47"/>
+                                                <rect key="frame" x="35" y="415" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="47" id="Yot-FW-hSa"/>
@@ -1166,7 +1166,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8OA-2b-Bf2" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="35" y="631" width="305" height="50"/>
+                                                <rect key="frame" x="35" y="564" width="305" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="lsq-Yd-Ii9"/>
@@ -1186,7 +1186,7 @@
                                             <constraint firstItem="twU-8g-m7M" firstAttribute="top" secondItem="L7a-16-Bh0" secondAttribute="bottom" constant="25" id="EKf-V7-MxF"/>
                                             <constraint firstItem="e3Y-12-AGT" firstAttribute="top" secondItem="ZDl-Ub-9Lu" secondAttribute="bottom" constant="25" id="IYz-lb-GnN"/>
                                             <constraint firstItem="ZDl-Ub-9Lu" firstAttribute="leading" secondItem="twU-8g-m7M" secondAttribute="leading" id="Ie6-sh-cVh"/>
-                                            <constraint firstItem="mBg-1Y-Mg3" firstAttribute="top" secondItem="e3Y-12-AGT" secondAttribute="bottom" constant="45" id="LRn-Lb-KeQ"/>
+                                            <constraint firstItem="mBg-1Y-Mg3" firstAttribute="top" secondItem="e3Y-12-AGT" secondAttribute="bottom" id="LRn-Lb-KeQ"/>
                                             <constraint firstItem="mBg-1Y-Mg3" firstAttribute="leading" secondItem="TVg-Bx-Nsh" secondAttribute="leading" constant="45" id="LWa-wN-kCJ"/>
                                             <constraint firstItem="ReC-ok-n4X" firstAttribute="top" secondItem="L7a-16-Bh0" secondAttribute="top" id="LyQ-aI-3ig"/>
                                             <constraint firstItem="ZDl-Ub-9Lu" firstAttribute="trailing" secondItem="twU-8g-m7M" secondAttribute="trailing" id="Mc5-Xm-GDY"/>
@@ -1241,6 +1241,8 @@
                         <outlet property="nameTextFieldView" destination="L7a-16-Bh0" id="7Ti-tK-6xZ"/>
                         <outlet property="phoneTextFieldView" destination="Do1-dZ-oqr" id="2yc-TS-bNY"/>
                         <outlet property="statePicker" destination="mBg-1Y-Mg3" id="Ulv-KE-Wdn"/>
+                        <outlet property="statePickerHeightLayoutConstraint" destination="Hye-Vm-oYz" id="TTW-jT-eSH"/>
+                        <outlet property="statePickerTopLayoutConstraint" destination="LRn-Lb-KeQ" id="x5M-zE-0kk"/>
                         <outlet property="submitButton" destination="8OA-2b-Bf2" id="V1U-ta-ULx"/>
                         <outlet property="zipCodeTextFieldView" destination="db1-bm-Bn0" id="Jml-t8-VuV"/>
                     </connections>

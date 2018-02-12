@@ -150,7 +150,7 @@
 
 "Placeholder.Email" = "Email";
 "Placeholder.Password" = "Password";
-"Placeholder.Name" = "Name";
+"Placeholder.Name" = "First Name";
 "Placeholder.LastName" = "Last Name";
 "Placeholder.PhoneNumber" = "Phone number";
 "Placeholder.CreatePassword" = "Create a Password";
