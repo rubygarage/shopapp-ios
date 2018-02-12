@@ -63,12 +63,12 @@
                     <connections>
                         <outlet property="placeOrderButton" destination="ta6-JQ-eSm" id="yFW-x8-nNg"/>
                         <outlet property="tableView" destination="pyA-b5-EGg" id="4nf-Ch-xLB"/>
-                        <segue destination="Yjd-px-Jvs" kind="show" identifier="toAddressList" id="dnR-TS-EYt"/>
                         <segue destination="c3v-9W-mKd" kind="show" identifier="toPaymentType" id="CGV-uG-Hxc"/>
                         <segue destination="RiA-xA-2z5" kind="show" identifier="toProductDetails" id="zB2-WO-his"/>
                         <segue destination="cpJ-cT-Uv8" kind="presentation" identifier="toSuccessCheckout" id="2Ja-VQ-reW"/>
                         <segue destination="35q-zi-ACv" kind="show" identifier="toCreditCard" id="O98-nT-rIz"/>
                         <segue destination="ECB-Z1-FXx" kind="show" identifier="toCheckoutAddressForm" id="Git-Pw-MRS"/>
+                        <segue destination="R8i-Cl-uIP" kind="show" identifier="toAddressList" id="xn3-AE-ncH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWy-vV-BzK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -83,271 +83,21 @@
             </objects>
             <point key="canvasLocation" x="601" y="93"/>
         </scene>
-        <!--Address List View Controller-->
-        <scene sceneID="TCC-fX-Ngj">
+        <!--AddressListControllerIdentifier-->
+        <scene sceneID="6uV-sU-hWQ">
             <objects>
-                <viewController storyboardIdentifier="AddressListControllerIdentifier" id="Yjd-px-Jvs" customClass="AddressListViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="u5y-FF-R9D">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="7x0-g5-3yi">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="7x0-g5-3yi" firstAttribute="bottom" secondItem="4SW-mg-dCV" secondAttribute="bottom" id="0OY-sF-Qx0"/>
-                            <constraint firstItem="7x0-g5-3yi" firstAttribute="top" secondItem="u5y-FF-R9D" secondAttribute="top" id="27y-H8-V24"/>
-                            <constraint firstItem="7x0-g5-3yi" firstAttribute="trailing" secondItem="4SW-mg-dCV" secondAttribute="trailing" id="Gfy-ly-wBM"/>
-                            <constraint firstItem="7x0-g5-3yi" firstAttribute="leading" secondItem="4SW-mg-dCV" secondAttribute="leading" id="urb-hb-sKa"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="4SW-mg-dCV"/>
-                    </view>
-                    <connections>
-                        <outlet property="tableView" destination="7x0-g5-3yi" id="Imt-Lf-dDG"/>
-                        <segue destination="6es-8c-np4" kind="show" identifier="toCustomerAddressForm" id="eHF-aH-7Li"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0dC-mI-bYZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardIdentifier="AddressListControllerIdentifier" storyboardName="Account" referencedIdentifier="AddressListControllerIdentifier" id="R8i-Cl-uIP" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3DI-Os-nBl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-831" y="961"/>
+            <point key="canvasLocation" x="-831" y="671"/>
         </scene>
-        <!--Customer Address Form View Controller-->
-        <scene sceneID="qJ8-Ap-8Ij">
+        <!--AddressFormControllerIdentifier-->
+        <scene sceneID="MGg-pO-s8Z">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="6es-8c-np4" customClass="CustomerAddressFormViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Z2e-rJ-Up0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wg2-8b-fWK">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <connections>
-                                    <segue destination="zXe-Cz-Abu" kind="embed" id="mEQ-Aq-uhp"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="wg2-8b-fWK" firstAttribute="bottom" secondItem="n4Z-kk-Q7K" secondAttribute="bottom" id="1yO-bY-4lB"/>
-                            <constraint firstItem="wg2-8b-fWK" firstAttribute="leading" secondItem="n4Z-kk-Q7K" secondAttribute="leading" id="3Zt-lk-FGa"/>
-                            <constraint firstItem="wg2-8b-fWK" firstAttribute="trailing" secondItem="n4Z-kk-Q7K" secondAttribute="trailing" id="kTF-nZ-UTv"/>
-                            <constraint firstItem="wg2-8b-fWK" firstAttribute="top" secondItem="Z2e-rJ-Up0" secondAttribute="top" id="pxe-Ia-dUu"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="n4Z-kk-Q7K"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ntM-4w-pKZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Account" referencedIdentifier="AddressFormControllerIdentifier" id="WCe-Hs-g8Y" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="55T-kC-9Py" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-831.20000000000005" y="1665.5172413793105"/>
-        </scene>
-        <!--Address Form View Controller-->
-        <scene sceneID="l9L-mQ-41u">
-            <objects>
-                <viewController storyboardIdentifier="AddressFormControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="zXe-Cz-Abu" customClass="AddressFormViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="RB3-75-HF5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="760"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZeE-7k-k5e" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="20" width="375" height="740"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYb-Aq-v0z">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="696"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOS-In-oK0" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="35" y="45" width="305" height="47"/>
-                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="47" id="pKN-R4-QuY"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
-                                                        <integer key="value" value="5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WhS-xj-qZV" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="35" y="117" width="159.5" height="47"/>
-                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="47" id="Atc-vB-Ewy"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
-                                                        <integer key="value" value="2"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ln1-vf-fK0" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="180.5" y="117" width="159.5" height="47"/>
-                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="47" id="ybT-Go-WAi"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
-                                                        <integer key="value" value="2"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RVC-Bm-6zt" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="35" y="189" width="305" height="47"/>
-                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="47" id="OHv-gI-csr"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
-                                                        <integer key="value" value="5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LpL-5u-nWe" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="35" y="261" width="305" height="47"/>
-                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="47" id="8N3-lI-o4j"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
-                                                        <integer key="value" value="5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAe-Ea-YZ3" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="35" y="405" width="305" height="47"/>
-                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="47" id="ZGH-kx-cWG"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
-                                                        <integer key="value" value="5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TUA-OH-di7" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="35" y="333" width="305" height="47"/>
-                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="47" id="mbf-xT-sgC"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
-                                                        <integer key="value" value="5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xW3-Vj-wvc" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="35" y="549" width="305" height="47"/>
-                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="47" id="SYb-xu-EVV"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
-                                                        <integer key="value" value="3"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gMP-Rd-v2u" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="35" y="477" width="305" height="47"/>
-                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="47" id="pBd-ws-RqM"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
-                                                        <integer key="value" value="4"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LHI-fr-yve" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
-                                                <rect key="frame" x="35" y="626" width="305" height="50"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="KDD-Cq-kOF"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                <state key="normal" title="Button"/>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="ln1-vf-fK0" firstAttribute="width" secondItem="WhS-xj-qZV" secondAttribute="width" id="5PY-BV-LzL"/>
-                                            <constraint firstItem="xW3-Vj-wvc" firstAttribute="top" secondItem="gMP-Rd-v2u" secondAttribute="bottom" constant="25" id="8eu-lf-No4"/>
-                                            <constraint firstItem="LpL-5u-nWe" firstAttribute="top" secondItem="RVC-Bm-6zt" secondAttribute="bottom" constant="25" id="Caw-qD-eWW"/>
-                                            <constraint firstItem="WhS-xj-qZV" firstAttribute="top" secondItem="dOS-In-oK0" secondAttribute="bottom" constant="25" id="DQ6-T8-x1c"/>
-                                            <constraint firstItem="ln1-vf-fK0" firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" id="Fxd-tE-BEU"/>
-                                            <constraint firstItem="LHI-fr-yve" firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" id="Gto-11-Wgh"/>
-                                            <constraint firstItem="dOS-In-oK0" firstAttribute="top" secondItem="UYb-Aq-v0z" secondAttribute="top" constant="45" id="LVr-dI-YZ4"/>
-                                            <constraint firstItem="RVC-Bm-6zt" firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" id="Lpl-22-7gb"/>
-                                            <constraint firstItem="xW3-Vj-wvc" firstAttribute="leading" secondItem="dOS-In-oK0" secondAttribute="leading" id="Mcp-ya-Ht7"/>
-                                            <constraint firstItem="WhS-xj-qZV" firstAttribute="leading" secondItem="dOS-In-oK0" secondAttribute="leading" id="QJh-Ng-DT0"/>
-                                            <constraint firstItem="LpL-5u-nWe" firstAttribute="leading" secondItem="dOS-In-oK0" secondAttribute="leading" id="Qhf-S6-Tra"/>
-                                            <constraint firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" constant="35" id="UxC-Y0-pUW"/>
-                                            <constraint firstItem="eAe-Ea-YZ3" firstAttribute="top" secondItem="TUA-OH-di7" secondAttribute="bottom" constant="25" id="Vqc-Vl-iGB"/>
-                                            <constraint firstItem="xW3-Vj-wvc" firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" id="Xj0-Mq-NDP"/>
-                                            <constraint firstItem="dOS-In-oK0" firstAttribute="leading" secondItem="UYb-Aq-v0z" secondAttribute="leading" constant="35" id="ZJO-h5-xu9"/>
-                                            <constraint firstItem="LHI-fr-yve" firstAttribute="top" secondItem="xW3-Vj-wvc" secondAttribute="bottom" constant="30" id="ZK0-ii-O3X"/>
-                                            <constraint firstItem="RVC-Bm-6zt" firstAttribute="top" secondItem="WhS-xj-qZV" secondAttribute="bottom" constant="25" id="Zd1-iu-qfc"/>
-                                            <constraint firstItem="eAe-Ea-YZ3" firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" id="aAK-c4-Nv2"/>
-                                            <constraint firstItem="ln1-vf-fK0" firstAttribute="top" secondItem="WhS-xj-qZV" secondAttribute="top" id="aK0-mD-nDh"/>
-                                            <constraint firstItem="TUA-OH-di7" firstAttribute="top" secondItem="LpL-5u-nWe" secondAttribute="bottom" constant="25" id="dhK-n9-aR2"/>
-                                            <constraint firstItem="ln1-vf-fK0" firstAttribute="leading" secondItem="WhS-xj-qZV" secondAttribute="trailing" constant="-14" id="eaN-nu-YGD"/>
-                                            <constraint firstItem="TUA-OH-di7" firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" id="feq-cQ-2Xb"/>
-                                            <constraint firstItem="eAe-Ea-YZ3" firstAttribute="leading" secondItem="dOS-In-oK0" secondAttribute="leading" id="fnu-KF-EHR"/>
-                                            <constraint firstItem="gMP-Rd-v2u" firstAttribute="top" secondItem="eAe-Ea-YZ3" secondAttribute="bottom" constant="25" id="gXh-fU-LeH"/>
-                                            <constraint firstItem="LpL-5u-nWe" firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" id="l6E-Mb-zuV"/>
-                                            <constraint firstAttribute="bottom" secondItem="LHI-fr-yve" secondAttribute="bottom" constant="20" id="mg6-fl-vWJ"/>
-                                            <constraint firstItem="gMP-Rd-v2u" firstAttribute="trailing" secondItem="dOS-In-oK0" secondAttribute="trailing" id="nf7-2o-6FZ"/>
-                                            <constraint firstItem="RVC-Bm-6zt" firstAttribute="leading" secondItem="dOS-In-oK0" secondAttribute="leading" id="p9T-Im-zHq"/>
-                                            <constraint firstItem="gMP-Rd-v2u" firstAttribute="leading" secondItem="dOS-In-oK0" secondAttribute="leading" id="tfT-nT-NYJ"/>
-                                            <constraint firstItem="TUA-OH-di7" firstAttribute="leading" secondItem="dOS-In-oK0" secondAttribute="leading" id="xDa-TL-SGO"/>
-                                            <constraint firstItem="LHI-fr-yve" firstAttribute="leading" secondItem="dOS-In-oK0" secondAttribute="leading" id="zzf-fW-c9o"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="UYb-Aq-v0z" firstAttribute="top" secondItem="ZeE-7k-k5e" secondAttribute="top" id="AZ7-vD-1UB"/>
-                                    <constraint firstItem="UYb-Aq-v0z" firstAttribute="leading" secondItem="ZeE-7k-k5e" secondAttribute="leading" id="Ohh-95-gft"/>
-                                    <constraint firstAttribute="bottom" secondItem="UYb-Aq-v0z" secondAttribute="bottom" id="UFe-FM-aXe"/>
-                                    <constraint firstAttribute="trailing" secondItem="UYb-Aq-v0z" secondAttribute="trailing" id="mcz-OL-gua"/>
-                                    <constraint firstItem="UYb-Aq-v0z" firstAttribute="width" secondItem="ZeE-7k-k5e" secondAttribute="width" id="qYG-Vp-7Bb"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="ZeE-7k-k5e" firstAttribute="leading" secondItem="CSe-8P-BPB" secondAttribute="leading" id="Ase-hp-gbL"/>
-                            <constraint firstItem="ZeE-7k-k5e" firstAttribute="bottom" secondItem="CSe-8P-BPB" secondAttribute="bottom" id="Fsg-QL-rrC"/>
-                            <constraint firstItem="ZeE-7k-k5e" firstAttribute="top" secondItem="CSe-8P-BPB" secondAttribute="top" id="dU9-di-0dp"/>
-                            <constraint firstItem="ZeE-7k-k5e" firstAttribute="trailing" secondItem="CSe-8P-BPB" secondAttribute="trailing" id="rMZ-K2-joE"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="CSe-8P-BPB"/>
-                    </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="760"/>
-                    <connections>
-                        <outlet property="addressOptionalTextFieldView" destination="LpL-5u-nWe" id="a3E-zI-ev6"/>
-                        <outlet property="addressTextFieldView" destination="RVC-Bm-6zt" id="qta-iu-Zlc"/>
-                        <outlet property="cityTextFieldView" destination="TUA-OH-di7" id="a0A-Rw-vdz"/>
-                        <outlet property="countryTextFieldView" destination="dOS-In-oK0" id="DQ9-FW-Wzx"/>
-                        <outlet property="lastNameTextFieldView" destination="ln1-vf-fK0" id="rvD-dL-epg"/>
-                        <outlet property="nameTextFieldView" destination="WhS-xj-qZV" id="7ha-YQ-F35"/>
-                        <outlet property="phoneTextFieldView" destination="xW3-Vj-wvc" id="jos-ny-1Hk"/>
-                        <outlet property="stateTextFieldView" destination="eAe-Ea-YZ3" id="ygt-UN-WKr"/>
-                        <outlet property="submitButton" destination="LHI-fr-yve" id="CMK-FR-tvP"/>
-                        <outlet property="zipCodeTextFieldView" destination="gMP-Rd-v2u" id="iRA-pj-smS"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="218-Br-ENO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-50" y="1709"/>
+            <point key="canvasLocation" x="-51" y="1421"/>
         </scene>
         <!--Payment Type View Controller-->
         <scene sceneID="E5U-uh-pFk">
@@ -374,7 +124,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="HdE-8d-3A9" id="WpW-SP-7bx"/>
-                        <segue destination="Yjd-px-Jvs" kind="show" identifier="toAddressList" id="uNy-8M-tPD"/>
+                        <segue destination="R8i-Cl-uIP" kind="show" identifier="toAddressList" id="RzQ-hR-rkW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pi9-aR-oRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -576,6 +326,7 @@
         <!--Checkout Address Form View Controller-->
         <scene sceneID="wxm-Wb-CYC">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eYB-Oz-ddR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="ECB-Z1-FXx" customClass="CheckoutAddressFormViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PDJ-sS-IOU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -584,7 +335,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oIq-hm-Svu">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
-                                    <segue destination="zXe-Cz-Abu" kind="embed" id="f5t-mt-yo3"/>
+                                    <segue destination="WCe-Hs-g8Y" kind="embed" id="KVU-2w-98p"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -598,7 +349,6 @@
                         <viewLayoutGuide key="safeArea" id="yYt-PD-4Zb"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eYB-Oz-ddR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-50.399999999999999" y="960.2698650674663"/>
         </scene>
@@ -774,7 +524,6 @@
         <image name="checkout_success" width="130" height="112"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f5t-mt-yo3"/>
-        <segue reference="dnR-TS-EYt"/>
+        <segue reference="xn3-AE-ncH"/>
     </inferredMetricsTieBreakers>
 </document>
