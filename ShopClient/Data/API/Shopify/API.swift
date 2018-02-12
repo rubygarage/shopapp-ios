@@ -28,6 +28,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
     private var client: Graph.Client?
     private var paySession: PaySession?
     private var paymentByApplePayCompletion: RepoCallback<Order>?
+    private var paymentByApplePayCustomerEmail: String!
     private var paymentByApplePayResponse: PaymentByApplePayResponse?
     
     override init() {
@@ -391,8 +392,9 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         })
     }
     
-    func setupApplePay(with checkout: Checkout, callback: @escaping RepoCallback<Order>) {
+    func setupApplePay(with checkout: Checkout, customerEmail: String, callback: @escaping RepoCallback<Order>) {
         paymentByApplePayCompletion = callback
+        paymentByApplePayCustomerEmail = customerEmail
         getShopCurrency { [weak self] (response, _) in
             if let currencyCode = response?.currencyCode.rawValue, let countryCode = response?.countryCode.rawValue {
                 let payCheckout = checkout.payCheckout
@@ -1504,28 +1506,23 @@ class API: NSObject, APIInterface, PaySessionDelegate {
             }
         }
     }
-
+    
     func paySession(_ paySession: PaySession, didAuthorizePayment authorization: PayAuthorization, checkout: PayCheckout, completeTransaction: @escaping (PaySession.TransactionStatus) -> Void) {
         let idempotencyKey = UUID().uuidString
-        if let email = authorization.shippingAddress.email {
-            updateCheckout(with: checkout.id, email: email, completion: { [weak self] (success, error) in
-                self?.completeCheckout(checkout, billingAddress: authorization.billingAddress, applePayToken: authorization.token, idempotencyToken: idempotencyKey, completion: { [weak self] (order, error) in
-                    guard let strongSelf = self else {
-                        return
-                    }
-                    if let order = order {
-                        strongSelf.paymentByApplePayResponse = (order, nil)
-                        completeTransaction(.success)
-                    } else {
-                        strongSelf.paymentByApplePayResponse = (nil, error)
-                        completeTransaction(.failure)
-                    }
-                })
+        updateCheckout(with: checkout.id, email: paymentByApplePayCustomerEmail, completion: { [weak self] (success, error) in
+            self?.completeCheckout(checkout, billingAddress: authorization.billingAddress, applePayToken: authorization.token, idempotencyToken: idempotencyKey, completion: { [weak self] (order, error) in
+                guard let strongSelf = self else {
+                    return
+                }
+                if let order = order {
+                    strongSelf.paymentByApplePayResponse = (order, nil)
+                    completeTransaction(.success)
+                } else {
+                    strongSelf.paymentByApplePayResponse = (nil, error)
+                    completeTransaction(.failure)
+                }
             })
-        } else {
-            paymentByApplePayResponse = (nil, RepoError())
-            completeTransaction(.failure)
-        }
+        })
     }
 
     func paySessionDidFinish(_ paySession: PaySession) {
