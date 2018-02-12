@@ -8,11 +8,11 @@
 
 import UIKit
 
-extension UIView {
-    func loadFromNib() {
-        let view = Bundle.main.loadNibNamed(nameOfClass, owner: self)?.last as! UIView
+extension UIView {    
+    func loadFromNib(with nibName: String? = nil) {
+        let view = Bundle.main.loadNibNamed(nibName ?? nameOfClass, owner: self)?.last as! UIView
         addSubview(view)
-
+        
         view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
         view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
         view.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
