@@ -41,8 +41,7 @@ class ExpiryDatePicker: TextFieldWrapper {
     }
     
     private func commonInit() {
-        let nibName = String(describing: ExpiryDatePicker.self)
-        loadFromNib(with: nibName)
+        loadFromNib(with: ExpiryDatePicker.nameOfClass)
         setupViews()
     }
     
