@@ -22,12 +22,17 @@ class SignInViewModel: BaseViewModel {
             email.hasAtLeastOneSymbol() && password.hasAtLeastOneSymbol()
         }
     }
-    var loginPressed: AnyObserver<()> {
-        return AnyObserver { [weak self] _ in
-            guard let strongSelf = self else {
-                return
+    var loginPressed: AnyObserver<Void> {
+        return AnyObserver { [weak self] event in
+            switch event {
+            case .next:
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.checkCredentials()
+            default:
+                break
             }
-            strongSelf.checkCredentials()
         }
     }
     

@@ -27,12 +27,17 @@ class SignUpViewModel: BaseViewModel {
             email.hasAtLeastOneSymbol() && password.hasAtLeastOneSymbol()
         }
     }
-    var signUpPressed: AnyObserver<()> {
-        return AnyObserver { [weak self] _ in
-            guard let strongSelf = self else {
-                return
+    var signUpPressed: AnyObserver<Void> {
+        return AnyObserver { [weak self] event in
+            switch event {
+            case .next:
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.checkCresentials()
+            default:
+                break
             }
-            strongSelf.checkCresentials()
         }
     }
     
