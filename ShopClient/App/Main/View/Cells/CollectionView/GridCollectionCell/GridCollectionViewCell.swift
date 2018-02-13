@@ -37,7 +37,7 @@ extension GridCollectionViewCell {
     class var cellSize: CGSize {
         let screenWidth = UIScreen.main.bounds.size.width
         let collectionViewWidth = screenWidth - 2 * kCollectionViewMarginHorizontal
-        let cellWidth = collectionViewWidth / kNumberOfColumns
+        let cellWidth = (collectionViewWidth - kCollectionViewMarginHorizontal) / kNumberOfColumns
         let cellHeight = Float(cellWidth * kCellRatio)
         let roundedCellheight = CGFloat(lroundf(cellHeight))
         return CGSize(width: cellWidth, height: roundedCellheight)
@@ -47,6 +47,9 @@ extension GridCollectionViewCell {
     }
     class var popularCollectionViewInsets: UIEdgeInsets {
         return UIEdgeInsets(top: 0.0, left: kCollectionViewMarginHorizontal, bottom: 0.0, right: kCollectionViewMarginHorizontal)
+    }
+    class var searchCollectionViewInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: kCollectionViewMarginHorizontal, left: kCollectionViewMarginHorizontal, bottom: kCollectionViewMarginHorizontal, right: kCollectionViewMarginHorizontal)
     }
     class var sortableCollectionViewInsets: UIEdgeInsets {
         return UIEdgeInsets(top: kCollectionViewMarginTop, left: kCollectionViewMarginHorizontal, bottom: kCollectionViewMarginVertical, right: kCollectionViewMarginHorizontal)

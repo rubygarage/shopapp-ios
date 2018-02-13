@@ -109,6 +109,8 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
     
     private func setupViews() {
         titleView.delegate = self
+        
+        collectionView.contentInset = GridCollectionViewCell.searchCollectionViewInsets
     }
     
     private func setupViewModel() {
