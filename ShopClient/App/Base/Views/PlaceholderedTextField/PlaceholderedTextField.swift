@@ -38,7 +38,7 @@ class PlaceholderedTextField: TextFieldWrapper {
         let placeholderVerticalPosition: CGFloat = toTop ? kPlaceholderPositionTopY : 0
         placeholderVerticallyConstraint?.constant = placeholderVerticalPosition
         let fontSize = toTop ? kPlaceholderFontSizeTop : kPlaceholderFontSizeDefault
-        self.placeholderLabel.font = .systemFont(ofSize: fontSize)
+        placeholderLabel.font = .systemFont(ofSize: fontSize)
         
         UIView.animate(withDuration: animationDuration) {
             self.layoutIfNeeded()

@@ -143,8 +143,8 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
                 }
                 strongSelf.statePicker.customData = data
                 strongSelf.statePicker.isHidden = data.isEmpty
-                strongSelf.statePickerTopLayoutConstraint.constant = data.isEmpty ? 0.0 : kStatePickerTopConstraint
-                strongSelf.statePickerHeightLayoutConstraint.constant = data.isEmpty ? 0.0 : kStatePickerHeightConstraint
+                strongSelf.statePickerTopLayoutConstraint.constant = data.isEmpty ? 0 : kStatePickerTopConstraint
+                strongSelf.statePickerHeightLayoutConstraint.constant = data.isEmpty ? 0 : kStatePickerHeightConstraint
             })
             .disposed(by: disposeBag)
         
