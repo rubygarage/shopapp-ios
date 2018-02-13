@@ -73,6 +73,8 @@
 "Button.ContinueShopping" = "Continue shopping";
 "Button.Done" = "Done";
 "Button.ShippingAddress" = "Shipping Address";
+"Button.TryAgain" = "Try again";
+"Button.BackToShop" = "Back to shop";
 
 "SortingValue.CreatedAt" = "Newes first";
 "SortingValue.PriceHighToLow" = "Price High to Low";
@@ -139,6 +141,8 @@
 "Label.ThanksForShopping" = "Thanks for shopping with us!";
 "Label.YourOrderNumber" = "Your order number is %@";
 "Label.WeAccept" = "We Accept";
+"Label.SomethingHappened" = "Something happened...";
+"Label.PurchaseCouldntBeCompleted" = "Your purchse couldn't be completed";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";
