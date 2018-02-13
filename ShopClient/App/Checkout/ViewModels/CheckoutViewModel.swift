@@ -42,7 +42,7 @@ class CheckoutViewModel: BaseViewModel {
     var selectedType = Variable<PaymentType?>(nil)
     var cartItems = Variable<[CartProduct]>([])
     var customerLogged = Variable<Bool>(false)
-    var checkoutSuccedded = PublishSubject<Bool>()
+    var checkoutSucceeded = PublishSubject<Bool>()
     var customerHasEmail = PublishSubject<Bool>()
     var customerEmail = Variable<String>("")
     var order: Order?
@@ -218,7 +218,7 @@ class CheckoutViewModel: BaseViewModel {
             if let order = response {
                 strongSelf.clearCart(with: order)
             } else if error != nil {
-                strongSelf.checkoutSuccedded.onNext(false)
+                strongSelf.checkoutSucceeded.onNext(false)
                 strongSelf.state.onNext(.content)
             } else {
                 strongSelf.state.onNext(.content)
@@ -232,7 +232,7 @@ class CheckoutViewModel: BaseViewModel {
                 return
             }
             strongSelf.order = order
-            strongSelf.checkoutSuccedded.onNext(true)
+            strongSelf.checkoutSucceeded.onNext(true)
             strongSelf.state.onNext(.content)
         }
     }

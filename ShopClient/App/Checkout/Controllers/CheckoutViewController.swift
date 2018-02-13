@@ -79,7 +79,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             })
             .disposed(by: disposeBag)
         
-        viewModel.checkoutSuccedded
+        viewModel.checkoutSucceeded
             .subscribe(onNext: { [weak self] success in
                 guard let strongSelf = self else {
                     return

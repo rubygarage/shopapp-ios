@@ -34,11 +34,11 @@ class CheckoutFailureViewController: UIViewController {
     
     private func setupViews() {
         title = "ControllerTitle.Home".localizable
-        somethingHappendLabel?.text = "Label.SomethingHappened".localizable
-        purchaseErrorLabel?.text = "Label.PurchaseCouldntBeCompleted".localizable
-        tryAgainButton?.setTitle("Button.TryAgain".localizable.uppercased(), for: .normal)
-        backToShopButton?.setTitle("Button.BackToShop".localizable.uppercased(), for: .normal)
-        backToShopButton?.delegate = self
+        somethingHappendLabel.text = "Label.SomethingHappened".localizable
+        purchaseErrorLabel.text = "Label.PurchaseCouldntBeCompleted".localizable
+        tryAgainButton.setTitle("Button.TryAgain".localizable.uppercased(), for: .normal)
+        backToShopButton.setTitle("Button.BackToShop".localizable.uppercased(), for: .normal)
+        backToShopButton.delegate = self
     }
     
     // MARK: - Actions
@@ -59,6 +59,6 @@ class CheckoutFailureViewController: UIViewController {
 
 extension CheckoutFailureViewController: UnderlinedButtonDelegate {
     func underlinedButton(_ button: UnderlinedButton, didChangeState isHighlighted: Bool) {
-        backToShopUnderlineView?.isHidden = isHighlighted
+        backToShopUnderlineView.isHidden = isHighlighted
     }
 }
