@@ -8,12 +8,16 @@
 
 import UIKit
 
+private let kTitleLabelTrailingDefault: CGFloat = 151
+private let kTitleLabelTrailingWide: CGFloat = 16
+
 class ArticleTableViewCell: UITableViewCell {
     @IBOutlet private weak var articleImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var authorLabel: UILabel!
     @IBOutlet private weak var separatorView: UIView!
+    @IBOutlet private weak var titleLabelTrailingLayoutConstraint: NSLayoutConstraint!
     
     // MARK: - View lifecycle
     
@@ -26,7 +30,11 @@ class ArticleTableViewCell: UITableViewCell {
     // MARK: - Setup
     
     func configure(with item: Article, separatorHidden: Bool) {
-        articleImageView.set(image: item.image)
+        if let image = item.image {
+            articleImageView.set(image: image)
+        }
+        articleImageView.isHidden = item.image == nil
+        titleLabelTrailingLayoutConstraint.constant = item.image == nil ? kTitleLabelTrailingWide : kTitleLabelTrailingDefault
         titleLabel.text = item.title
         descriptionLabel.text = item.content
         authorLabel.text = item.author?.fullName

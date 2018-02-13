@@ -200,19 +200,19 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="E8X-x7-TTY">
-                                        <rect key="frame" x="15" y="395" width="345" height="21"/>
+                                        <rect key="frame" x="15" y="390" width="345" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="RpD-it-Hg8">
-                                        <rect key="frame" x="15" y="431" width="345" height="16"/>
+                                        <rect key="frame" x="15" y="426" width="345" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <webView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HO6-dp-DAG">
-                                        <rect key="frame" x="15" y="477" width="345" height="1"/>
+                                        <rect key="frame" x="15" y="472" width="345" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="cxs-si-zp0"/>
@@ -231,7 +231,7 @@
                                     <constraint firstItem="HO6-dp-DAG" firstAttribute="top" secondItem="RpD-it-Hg8" secondAttribute="bottom" constant="30" id="MaP-BW-WI3"/>
                                     <constraint firstItem="RpD-it-Hg8" firstAttribute="leading" secondItem="wqZ-PD-xbw" secondAttribute="leading" constant="15" id="Tdf-I3-S34"/>
                                     <constraint firstItem="RpD-it-Hg8" firstAttribute="top" secondItem="E8X-x7-TTY" secondAttribute="bottom" constant="15" id="VYX-6O-d4r"/>
-                                    <constraint firstItem="E8X-x7-TTY" firstAttribute="top" secondItem="1WT-Ge-0EH" secondAttribute="bottom" constant="20" id="gq1-EU-anm"/>
+                                    <constraint firstItem="E8X-x7-TTY" firstAttribute="top" secondItem="wqZ-PD-xbw" secondAttribute="top" constant="390" id="YMd-WF-cy9"/>
                                     <constraint firstAttribute="bottom" secondItem="HO6-dp-DAG" secondAttribute="bottom" constant="30" id="i4J-Cl-wub"/>
                                     <constraint firstAttribute="trailing" secondItem="RpD-it-Hg8" secondAttribute="trailing" constant="15" id="mFy-Sb-Nrw"/>
                                     <constraint firstItem="E8X-x7-TTY" firstAttribute="leading" secondItem="wqZ-PD-xbw" secondAttribute="leading" constant="15" id="vjZ-Dw-3Ll"/>
@@ -254,6 +254,7 @@
                         <outlet property="articleContentWidthLayoutConstraint" destination="iSE-7y-aL3" id="uHx-0w-KID"/>
                         <outlet property="articleImageView" destination="1WT-Ge-0EH" id="Ujb-3S-XGt"/>
                         <outlet property="articleTitleLabel" destination="E8X-x7-TTY" id="Cms-bk-iom"/>
+                        <outlet property="articleTitleLabelTopLayoutConstraint" destination="YMd-WF-cy9" id="Bre-jY-u33"/>
                         <outlet property="authorNameLabel" destination="RpD-it-Hg8" id="wra-z0-RaZ"/>
                     </connections>
                 </viewController>

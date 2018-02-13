@@ -116,7 +116,7 @@ extension OrdersDetailsTableProvider: UITableViewDelegate {
                 view = OrderHeaderView(section: section, order: order)
             }
         case OrdersDetailsSection.paymentInformation.rawValue:
-            view = BoldTitleTableHeaderView(type: .paymentInformation)
+            view = BoldTitleTableHeaderView(type: .details)
         case OrdersDetailsSection.shippingAddress.rawValue:
             if order?.shippingAddress != nil {
                 view = BoldTitleTableHeaderView(type: .shippingAddress)
