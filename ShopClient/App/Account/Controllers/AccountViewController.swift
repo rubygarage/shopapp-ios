@@ -139,5 +139,6 @@ extension AccountViewController: AccountFooterDelegate {
     func footerViewDidTapLogout(_ footerView: AccountFooterView) {
         viewModel.logout()
         updateNavigationBar()
+        showToast(with: "Alert.LoggedOut".localizable)
     }
 }

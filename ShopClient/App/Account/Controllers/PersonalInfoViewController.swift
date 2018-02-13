@@ -116,6 +116,7 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
                 guard let strongSelf = self else {
                     return
                 }
+                strongSelf.showToast(with: "Alert.ProfileChanged".localizable)
                 strongSelf.saveChangesButton.isEnabled = !success
             })
             .disposed(by: disposeBag)

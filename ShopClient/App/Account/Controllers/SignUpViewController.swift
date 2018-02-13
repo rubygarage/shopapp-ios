@@ -121,6 +121,7 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
                 guard let strongSelf = self else {
                     return
                 }
+                strongSelf.showToast(with: "Alert.Registered".localizable)
                 strongSelf.dismiss(animated: true)
             })
             .disposed(by: disposeBag)
