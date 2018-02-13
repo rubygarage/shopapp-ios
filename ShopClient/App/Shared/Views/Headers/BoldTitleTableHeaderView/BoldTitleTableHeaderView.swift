@@ -62,7 +62,7 @@ class BoldTitleTableHeaderView: UIView {
             headerTitleLabel.text = "Label.CustomerEmail".localizable
         case .shippingAddress:
             headerTitleLabel.text = "Label.ShippingAddress".localizable
-        case BoldTitleViewType.details:
+        case .details:
             headerTitleLabel.text = "Label.Details".localizable
         case .payment:
             headerTitleLabel.text = "Label.Payment".localizable
