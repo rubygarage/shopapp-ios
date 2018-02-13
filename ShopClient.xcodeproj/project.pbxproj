@@ -1319,8 +1319,12 @@
 		0BD5EB311FF3DDFA0076C01B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				610424291FC477D100EFEFDA /* AddressFormViewController.swift */,
+				616CA6671FF3BA9D00FF14E2 /* AddressListViewController.swift */,
 				617DE1841FB5E9E2004EEF9A /* AccountViewController.swift */,
+				615F8217202C653C00926BAF /* BaseAddressFormViewController.swift */,
 				0BED64D3201789E9006CF968 /* ChangePasswordViewController.swift */,
+				612812C0202224360048013B /* CustomerAddressFormViewController.swift */,
 				0B4EA3491FFBBFF6000C7A80 /* ForgotPasswordViewController.swift */,
 				0B4EA34D1FFCCC29000C7A80 /* LinkViewController.swift */,
 				0B4EA3511FFCFEE1000C7A80 /* OrderDetailsViewController.swift */,
@@ -1338,6 +1342,9 @@
 			isa = PBXGroup;
 			children = (
 				611947801FD87540008BE9C6 /* AccountViewModel.swift */,
+				6104242B1FC477F000EFEFDA /* AddressFormViewModel.swift */,
+				616CA6691FF3BAB800FF14E2 /* AddressListViewModel.swift */,
+				612812C2202224520048013B /* CustomerAddressFormViewModel.swift */,
 				0BED64D5201789F8006CF968 /* ChangePasswordViewModel.swift */,
 				0B4EA34B1FFBC00D000C7A80 /* ForgotPasswordViewModel.swift */,
 				0BA6305C1FFE56B3007088B8 /* OrderDetailsViewModel.swift */,
@@ -1548,14 +1555,10 @@
 		61005B3F2004E3D200351764 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				610424291FC477D100EFEFDA /* AddressFormViewController.swift */,
-				616CA6671FF3BA9D00FF14E2 /* AddressListViewController.swift */,
-				615F8217202C653C00926BAF /* BaseAddressFormViewController.swift */,
 				612812B42020DAEB0048013B /* CheckoutAddressFormViewController.swift */,
 				617041FF20175CEA0063E369 /* CheckoutSuccessViewController.swift */,
 				616CA65D1FF2A0CE00FF14E2 /* CheckoutViewController.swift */,
 				6182BA631FFBAE1500836979 /* CreditCardViewController.swift */,
-				612812C0202224360048013B /* CustomerAddressFormViewController.swift */,
 				61986AD41FF671BE005632D7 /* PaymentTypeViewController.swift */,
 			);
 			path = Controllers;
@@ -1564,12 +1567,9 @@
 		61005B402004E45E00351764 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				6104242B1FC477F000EFEFDA /* AddressFormViewModel.swift */,
-				616CA6691FF3BAB800FF14E2 /* AddressListViewModel.swift */,
 				612812B62020DBDA0048013B /* CheckoutAddressFormViewModel.swift */,
 				616CA65C1FF2A0CE00FF14E2 /* CheckoutViewModel.swift */,
 				6182BA651FFBAE2D00836979 /* CreditCardViewModel.swift */,
-				612812C2202224520048013B /* CustomerAddressFormViewModel.swift */,
 				61986AD61FF671FB005632D7 /* PaymentTypeViewModel.swift */,
 			);
 			path = ViewModels;

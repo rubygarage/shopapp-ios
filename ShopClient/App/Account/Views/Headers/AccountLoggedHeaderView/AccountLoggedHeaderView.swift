@@ -12,7 +12,7 @@ import AvatarImageView
 
 private let kAvatarTextSizeFactor: CGFloat = 0.4
 
-let kAccountLoggedHeaderViewHeight: CGFloat = 248
+let kAccountLoggedHeaderViewHeight: CGFloat = 312
 
 private struct CustomerImageConfig: AvatarImageViewConfiguration {
     let shape: Shape = .circle
@@ -31,6 +31,7 @@ private struct CustomerImageDataSource: AvatarImageViewDataSource {
 protocol AccountLoggedHeaderDelegate: class {
     func headerViewDidTapMyOrders(_ headerView: AccountLoggedHeaderView)
     func headerViewDidTapPersonalInfo(_ headerView: AccountLoggedHeaderView)
+    func headerViewDidTapShippingAddress(_ headerView: AccountLoggedHeaderView)
 }
 
 class AccountLoggedHeaderView: UIView {
@@ -38,6 +39,7 @@ class AccountLoggedHeaderView: UIView {
     @IBOutlet private weak var personalInfoButton: UIButton!
     @IBOutlet private weak var welcomeLabel: UILabel!
     @IBOutlet private weak var customerNameLabel: UILabel!
+    @IBOutlet private weak var shippingAddressButton: UIButton!
     
     @IBOutlet private weak var customerImageView: AvatarImageView! {
         didSet {
@@ -72,6 +74,7 @@ class AccountLoggedHeaderView: UIView {
     private func setupViews() {
         myOrdersButton.setTitle("Button.MyOrders".localizable, for: .normal)
         personalInfoButton.setTitle("Button.PersonalInfo".localizable, for: .normal)
+        shippingAddressButton.setTitle("Button.ShippingAddress".localizable, for: .normal)
         welcomeLabel.text = "Label.Welcome".localizable
     }
     
@@ -88,5 +91,9 @@ class AccountLoggedHeaderView: UIView {
     
     @IBAction func personalInfoButtonDidPress(_ sender: UIButton) {
         delegate?.headerViewDidTapPersonalInfo(self)
+    }
+    
+    @IBAction func shippingAddressButtonDidPress(_ sender: UIButton) {
+        delegate?.headerViewDidTapShippingAddress(self)
     }
 }

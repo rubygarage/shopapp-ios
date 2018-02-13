@@ -12,6 +12,7 @@ typealias AddressTuple = (address: Address, isSelected: Bool, isDefault: Bool)
 
 class AddressListTableProvider: NSObject {
     var addresses: [AddressTuple] = []
+    var showSelectionButton = false
     
     weak var delegate: (AddressListTableCellDelegate & AddressListHeaderViewDelegate)?
 }
@@ -26,7 +27,7 @@ extension AddressListTableProvider: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: AddressListTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
         let addressTuple = addresses[indexPath.row]
-        cell.configure(with: addressTuple.address, isSelected: addressTuple.isSelected, isDefault: addressTuple.isDefault)
+        cell.configure(with: addressTuple.address, isSelected: addressTuple.isSelected, isDefault: addressTuple.isDefault, showSelectionButton: showSelectionButton)
         cell.delegate = delegate
         return cell
     }

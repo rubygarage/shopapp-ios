@@ -72,6 +72,7 @@
 "Button.ViewOrderDetails" = "View order Details";
 "Button.ContinueShopping" = "Continue shopping";
 "Button.Done" = "Done";
+"Button.ShippingAddress" = "Shipping Address";
 
 "SortingValue.CreatedAt" = "Newes first";
 "SortingValue.PriceHighToLow" = "Price High to Low";

@@ -28,6 +28,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel> {
     
     var selectedAddress: Address?
     var addressListType: AddressListType = .shipping
+    var showSelectionButton = false
     
     weak var delegate: AddressListControllerDelegate?
     
@@ -61,6 +62,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel> {
         tableView.registerNibForCell(AddressListTableViewCell.self)
         
         tableProvider = AddressListTableProvider()
+        tableProvider.showSelectionButton = showSelectionButton
         tableProvider.delegate = self
         tableView.dataSource = tableProvider
         tableView.delegate = tableProvider
