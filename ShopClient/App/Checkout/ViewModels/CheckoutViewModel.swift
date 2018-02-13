@@ -217,8 +217,10 @@ class CheckoutViewModel: BaseViewModel {
             }
             if let order = response {
                 strongSelf.clearCart(with: order)
-            } else {
+            } else if error != nil {
                 strongSelf.checkoutSuccedded.onNext(false)
+                strongSelf.state.onNext(.content)
+            } else {
                 strongSelf.state.onNext(.content)
             }
         }
