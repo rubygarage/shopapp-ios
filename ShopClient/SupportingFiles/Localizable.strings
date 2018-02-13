@@ -88,7 +88,7 @@
 "Label.PriceInfo" = "%@\n%@\n%@\n%@";
 "Label.CustomerEmail" = "Customer Email";
 "Label.ShippingAddress" = "Shipping Address";
-"Label.PaymentInformation" = "Payment Information";
+"Label.Details" = "Details";
 "Label.BillingAddress" = "Billing Address";
 "Label.Payment" = "Payment";
 "Label.ShippingOptions" = "Shipping Options";

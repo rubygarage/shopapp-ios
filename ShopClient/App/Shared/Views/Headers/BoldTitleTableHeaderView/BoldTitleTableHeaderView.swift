@@ -11,7 +11,7 @@ import UIKit
 enum BoldTitleViewType {
     case customerEmail
     case shippingAddress
-    case paymentInformation
+    case details
     case payment
     case shippingOptions
 }
@@ -62,8 +62,8 @@ class BoldTitleTableHeaderView: UIView {
             headerTitleLabel.text = "Label.CustomerEmail".localizable
         case .shippingAddress:
             headerTitleLabel.text = "Label.ShippingAddress".localizable
-        case BoldTitleViewType.paymentInformation:
-            headerTitleLabel.text = "Label.PaymentInformation".localizable
+        case BoldTitleViewType.details:
+            headerTitleLabel.text = "Label.Details".localizable
         case .payment:
             headerTitleLabel.text = "Label.Payment".localizable
         case .shippingOptions:
