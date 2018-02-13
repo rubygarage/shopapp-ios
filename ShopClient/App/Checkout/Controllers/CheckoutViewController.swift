@@ -79,12 +79,13 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             })
             .disposed(by: disposeBag)
         
-        viewModel.checkoutSuccedded
-            .subscribe(onNext: { [weak self] _ in
+        viewModel.checkoutSucceeded
+            .subscribe(onNext: { [weak self] success in
                 guard let strongSelf = self else {
                     return
                 }
-                strongSelf.performSegue(withIdentifier: SegueIdentifiers.toSuccessCheckout, sender: strongSelf)
+                let segueIdentifier = success ? SegueIdentifiers.toSuccessCheckout : SegueIdentifiers.toFailureCheckout
+                strongSelf.performSegue(withIdentifier: segueIdentifier, sender: strongSelf)
             })
             .disposed(by: disposeBag)
         
@@ -161,6 +162,8 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             if let checkoutSuccessViewController = navigationController.viewControllers.first as? CheckoutSuccessViewController, let orderId = viewModel.order?.id, let orderNumber = viewModel.order?.number {
                 checkoutSuccessViewController.orderId = orderId
                 checkoutSuccessViewController.orderNumber = orderNumber
+            } else if let checkoutFailureViewController = navigationController.viewControllers.first as? CheckoutFailureViewController {
+                checkoutFailureViewController.delegate = self
             }
         } else if let creditCardFormController = segue.destination as? CreditCardViewController {
             creditCardFormController.card = viewModel.creditCard.value
@@ -303,5 +306,13 @@ extension CheckoutViewController: CreditCardControllerDelegate {
         tableProvider.creditCard = card
         reloadTable()
         navigationController?.popToViewController(self, animated: true)
+    }
+}
+
+// MARK: - CheckoutFailureViewControllerDelegate
+
+extension CheckoutViewController: CheckoutFailureViewControllerDelegate {
+    func viewControllerDidTapTryAgain(_ controller: CheckoutFailureViewController) {
+        viewModel.placeOrderAction()
     }
 }

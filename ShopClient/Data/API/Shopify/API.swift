@@ -406,6 +406,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
                 self?.paySession = PaySession(shopName: kShopifyStoreName, checkout: payCheckout, currency: payCurrency, merchantID: kMerchantID)
                 self?.paySession?.delegate = self
                 self?.paySession?.authorize()
+            } else {
+                callback(nil, ContentError())
             }
         }
     }
@@ -1542,7 +1544,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
 
     func paySessionDidFinish(_ paySession: PaySession) {
         paymentByApplePayCompletion?(paymentByApplePayResponse?.order, paymentByApplePayResponse?.error)
-        paymentByApplePayResponse = (nil, nil)
+        paymentByApplePayResponse = nil
         paymentByApplePayCompletion = nil
     }
     

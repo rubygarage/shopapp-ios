@@ -39,6 +39,7 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
     
     private func setupViews() {
         title = "ControllerTitle.OrderDetails".localizable
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "arrow_left"), style: .plain, target: self, action: #selector(self.backButtonDidPress))
     }
     
     private func setupTableView() {
@@ -69,6 +70,13 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
     
     private func loadData() {
         viewModel.loadOrder()
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func backButtonDidPress() {
+        setHomeController()
+        dismissModalStack()
     }
 }
 

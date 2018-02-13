@@ -69,6 +69,7 @@
                         <segue destination="35q-zi-ACv" kind="show" identifier="toCreditCard" id="O98-nT-rIz"/>
                         <segue destination="ECB-Z1-FXx" kind="show" identifier="toCheckoutAddressForm" id="Git-Pw-MRS"/>
                         <segue destination="R8i-Cl-uIP" kind="show" identifier="toAddressList" id="xn3-AE-ncH"/>
+                        <segue destination="vCe-Gk-sIc" kind="presentation" identifier="toFailureCheckout" id="R4U-7e-U0K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWy-vV-BzK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -323,10 +324,147 @@
             </objects>
             <point key="canvasLocation" x="1488.8" y="958.4707646176912"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wGd-ch-MnA">
+            <objects>
+                <navigationController id="vCe-Gk-sIc" customClass="NavigationController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SMz-Ke-fyY">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="m35-ub-LqT" kind="relationship" relationship="rootViewController" id="MzW-zw-IeE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eZd-H8-u4s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2270" y="961"/>
+        </scene>
+        <!--Checkout Failure View Controller-->
+        <scene sceneID="IRU-ai-39O">
+            <objects>
+                <viewController id="m35-ub-LqT" customClass="CheckoutFailureViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aOd-26-1JK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5aR-1m-NZO">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mex-Jo-j3L">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Smth happend" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1u-vN-iNW">
+                                                <rect key="frame" x="16" y="291" width="343" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkout_unsuccess" translatesAutoresizingMaskIntoConstraints="NO" id="oxt-SY-sqz">
+                                                <rect key="frame" x="100" y="124" width="174" height="145"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="145" id="aaq-aj-9JP"/>
+                                                    <constraint firstAttribute="width" constant="174" id="kKX-5c-och"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your purchse" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Q1-mz-rG5">
+                                                <rect key="frame" x="16" y="329" width="343" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIK-sG-Fgz" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="45" y="387" width="285" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="6Fj-GK-asI"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                <state key="normal" title="Try again">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="tryAgainButtonDidPress:" destination="m35-ub-LqT" eventType="touchUpInside" id="JeW-iS-vP5"/>
+                                                </connections>
+                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asS-J5-N12">
+                                                <rect key="frame" x="148.5" y="487" width="78" height="1"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="lzf-cr-GHG"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKy-Ko-sgh" customClass="UnderlinedButton" customModule="ShopClient" customModuleProvider="target">
+                                                <rect key="frame" x="138" y="462" width="98" height="25"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                                <state key="normal" title="Back to shop">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="backToShopButtonDidPress:" destination="m35-ub-LqT" eventType="touchUpInside" id="jwp-lb-Sep"/>
+                                                    <action selector="continueShoppingTapped:" destination="ve2-U7-Qzc" eventType="touchUpInside" id="TR5-S7-tDr"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hKy-Ko-sgh" secondAttribute="bottom" constant="50" id="1vM-jm-83T"/>
+                                            <constraint firstItem="asS-J5-N12" firstAttribute="top" secondItem="hKy-Ko-sgh" secondAttribute="bottom" id="1wv-a7-Ml5"/>
+                                            <constraint firstItem="1Q1-mz-rG5" firstAttribute="top" secondItem="P1u-vN-iNW" secondAttribute="bottom" constant="17" id="50i-tl-3Ux"/>
+                                            <constraint firstItem="P1u-vN-iNW" firstAttribute="top" secondItem="oxt-SY-sqz" secondAttribute="bottom" constant="22" id="9hQ-jZ-zTs"/>
+                                            <constraint firstItem="hKy-Ko-sgh" firstAttribute="top" secondItem="HIK-sG-Fgz" secondAttribute="bottom" constant="25" id="Gt7-bM-H4O"/>
+                                            <constraint firstAttribute="trailing" secondItem="1Q1-mz-rG5" secondAttribute="trailing" constant="16" id="Ttc-KX-InU"/>
+                                            <constraint firstItem="HIK-sG-Fgz" firstAttribute="top" secondItem="1Q1-mz-rG5" secondAttribute="bottom" constant="42" id="UmU-ua-XBe"/>
+                                            <constraint firstItem="asS-J5-N12" firstAttribute="leading" secondItem="hKy-Ko-sgh" secondAttribute="leading" constant="10" id="W2l-Qs-xR3"/>
+                                            <constraint firstAttribute="trailing" secondItem="P1u-vN-iNW" secondAttribute="trailing" constant="16" id="Wcn-0f-Iuf"/>
+                                            <constraint firstItem="1Q1-mz-rG5" firstAttribute="leading" secondItem="Mex-Jo-j3L" secondAttribute="leading" constant="16" id="cWg-U6-Vt5"/>
+                                            <constraint firstItem="P1u-vN-iNW" firstAttribute="centerY" secondItem="Mex-Jo-j3L" secondAttribute="centerY" id="h9W-Fn-2tR"/>
+                                            <constraint firstItem="HIK-sG-Fgz" firstAttribute="leading" secondItem="Mex-Jo-j3L" secondAttribute="leading" constant="45" id="lGI-Ps-CtX"/>
+                                            <constraint firstItem="asS-J5-N12" firstAttribute="trailing" secondItem="hKy-Ko-sgh" secondAttribute="trailing" constant="-10" id="lfB-OO-Ktj"/>
+                                            <constraint firstItem="hKy-Ko-sgh" firstAttribute="centerX" secondItem="Mex-Jo-j3L" secondAttribute="centerX" id="n1g-yV-j6K"/>
+                                            <constraint firstAttribute="trailing" secondItem="HIK-sG-Fgz" secondAttribute="trailing" constant="45" id="oOU-SP-8YV"/>
+                                            <constraint firstItem="P1u-vN-iNW" firstAttribute="leading" secondItem="Mex-Jo-j3L" secondAttribute="leading" constant="16" id="rwb-v5-IgE"/>
+                                            <constraint firstItem="oxt-SY-sqz" firstAttribute="centerX" secondItem="Mex-Jo-j3L" secondAttribute="centerX" id="tiK-Xg-dNv"/>
+                                            <constraint firstItem="oxt-SY-sqz" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Mex-Jo-j3L" secondAttribute="top" constant="50" id="uW8-Jw-a8Q"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Mex-Jo-j3L" firstAttribute="top" secondItem="5aR-1m-NZO" secondAttribute="top" id="1GA-am-iwE"/>
+                                    <constraint firstItem="Mex-Jo-j3L" firstAttribute="height" secondItem="5aR-1m-NZO" secondAttribute="height" id="8Kf-Ev-Upa"/>
+                                    <constraint firstAttribute="bottom" secondItem="Mex-Jo-j3L" secondAttribute="bottom" id="L7x-ap-z0f"/>
+                                    <constraint firstAttribute="trailing" secondItem="Mex-Jo-j3L" secondAttribute="trailing" id="c9t-oN-WFB"/>
+                                    <constraint firstItem="Mex-Jo-j3L" firstAttribute="leading" secondItem="5aR-1m-NZO" secondAttribute="leading" id="fuK-Gh-gnh"/>
+                                    <constraint firstItem="Mex-Jo-j3L" firstAttribute="width" secondItem="5aR-1m-NZO" secondAttribute="width" id="kf0-ja-W59"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="5aR-1m-NZO" firstAttribute="trailing" secondItem="7yQ-RE-TZN" secondAttribute="trailing" id="6nq-1r-cqd"/>
+                            <constraint firstItem="5aR-1m-NZO" firstAttribute="leading" secondItem="7yQ-RE-TZN" secondAttribute="leading" id="TJO-u7-vxU"/>
+                            <constraint firstItem="5aR-1m-NZO" firstAttribute="bottom" secondItem="7yQ-RE-TZN" secondAttribute="bottom" id="kZX-el-ZVW"/>
+                            <constraint firstItem="5aR-1m-NZO" firstAttribute="top" secondItem="7yQ-RE-TZN" secondAttribute="top" id="zXF-SZ-w5s"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7yQ-RE-TZN"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ciH-9q-Ot5"/>
+                    <connections>
+                        <outlet property="backToShopButton" destination="hKy-Ko-sgh" id="sfu-ng-O72"/>
+                        <outlet property="backToShopUnderlineView" destination="asS-J5-N12" id="vb3-sd-GC8"/>
+                        <outlet property="purchaseErrorLabel" destination="1Q1-mz-rG5" id="cgY-Us-rz9"/>
+                        <outlet property="somethingHappendLabel" destination="P1u-vN-iNW" id="f8f-Zv-7Wr"/>
+                        <outlet property="tryAgainButton" destination="HIK-sG-Fgz" id="mgR-bg-aDH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nJR-xd-UUs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2269.5999999999999" y="1707.7961019490256"/>
+        </scene>
         <!--Checkout Address Form View Controller-->
         <scene sceneID="wxm-Wb-CYC">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eYB-Oz-ddR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="ECB-Z1-FXx" customClass="CheckoutAddressFormViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PDJ-sS-IOU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -349,6 +487,7 @@
                         <viewLayoutGuide key="safeArea" id="yYt-PD-4Zb"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eYB-Oz-ddR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-50.399999999999999" y="960.2698650674663"/>
         </scene>
@@ -522,6 +661,7 @@
         <image name="card_type_master_card" width="38" height="25"/>
         <image name="card_type_visa" width="38" height="25"/>
         <image name="checkout_success" width="130" height="112"/>
+        <image name="checkout_unsuccess" width="171" height="138"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="xn3-AE-ncH"/>

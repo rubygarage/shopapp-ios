@@ -42,7 +42,7 @@ class CheckoutViewModel: BaseViewModel {
     var selectedType = Variable<PaymentType?>(nil)
     var cartItems = Variable<[CartProduct]>([])
     var customerLogged = Variable<Bool>(false)
-    var checkoutSuccedded = PublishSubject<Void>()
+    var checkoutSucceeded = PublishSubject<Bool>()
     var customerHasEmail = PublishSubject<Bool>()
     var customerEmail = Variable<String>("")
     var order: Order?
@@ -142,6 +142,15 @@ class CheckoutViewModel: BaseViewModel {
         }
     }
     
+    func placeOrderAction() {
+        switch selectedType.value! {
+        case PaymentType.creditCard:
+            payByCreditCard()
+        case PaymentType.applePay:
+            payByApplePay()
+        }
+    }
+    
     private func getCartItems() {
         cartProductListUseCase.getCartProductList({ [weak self] (result, error) in
             guard let strongSelf = self else {
@@ -187,15 +196,6 @@ class CheckoutViewModel: BaseViewModel {
         }
     }
     
-    private func placeOrderAction() {
-        switch selectedType.value! {
-        case PaymentType.creditCard:
-            payByCreditCard()
-        case PaymentType.applePay:
-            payByApplePay()
-        }
-    }
-    
     private func payByCreditCard() {
         if let checkout = checkout.value, let card = creditCard.value, let billingAddress = billingAddress.value {
             state.onNext(ViewState.make.loading(isTranslucent: true))
@@ -215,10 +215,11 @@ class CheckoutViewModel: BaseViewModel {
             guard let strongSelf = self else {
                 return
             }
-            if let error = error {
-                strongSelf.state.onNext(.error(error: error))
-            } else if let order = response {
+            if let order = response {
                 strongSelf.clearCart(with: order)
+            } else if error != nil {
+                strongSelf.checkoutSucceeded.onNext(false)
+                strongSelf.state.onNext(.content)
             } else {
                 strongSelf.state.onNext(.content)
             }
@@ -231,7 +232,7 @@ class CheckoutViewModel: BaseViewModel {
                 return
             }
             strongSelf.order = order
-            strongSelf.checkoutSuccedded.onNext()
+            strongSelf.checkoutSucceeded.onNext(true)
             strongSelf.state.onNext(.content)
         }
     }

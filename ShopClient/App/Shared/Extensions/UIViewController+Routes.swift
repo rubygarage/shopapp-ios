@@ -19,6 +19,14 @@ extension UIViewController {
         }
     }
     
+    func dismissModalStack() {
+        var controller = presentingViewController
+        while controller?.presentingViewController != nil {
+            controller = controller?.presentingViewController
+        }
+        controller?.dismiss(animated: true)
+    }
+    
     func showCartController() {
         let cartNavigationController = UIStoryboard.cart().instantiateInitialViewController()!
         present(cartNavigationController, animated: true)
