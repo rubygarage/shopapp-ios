@@ -74,7 +74,7 @@
 "Button.Done" = "Done";
 "Button.ShippingAddress" = "Shipping Address";
 
-"SortingValue.CreatedAt" = "Newes first";
+"SortingValue.CreatedAt" = "The Newest first";
 "SortingValue.PriceHighToLow" = "Price High to Low";
 "SortingValue.PriceLowToHigh" = "Price Low to High";
 
