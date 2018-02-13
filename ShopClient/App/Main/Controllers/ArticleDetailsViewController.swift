@@ -9,13 +9,21 @@
 import SafariServices
 import UIKit
 
+private let kArticleTitleLabelTopDefault: CGFloat = 20
+
 class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel>, UIWebViewDelegate {
     @IBOutlet private weak var articleImageView: UIImageView!
     @IBOutlet private weak var articleTitleLabel: UILabel!
     @IBOutlet private weak var authorNameLabel: UILabel!
-    @IBOutlet private weak var articleContentWebView: UIWebView!
     @IBOutlet private weak var articleContentHeightLayoutConstraint: NSLayoutConstraint!
     @IBOutlet private weak var articleContentWidthLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var articleTitleLabelTopLayoutConstraint: NSLayoutConstraint!
+    
+    @IBOutlet private weak var articleContentWebView: UIWebView! {
+        didSet {
+            articleContentWebView.scrollView.isScrollEnabled = false
+        }
+    }
     
     var articleId: String!
     
@@ -51,7 +59,12 @@ class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel>,
     }
     
     private func populateViews(with article: Article, baseUrl: URL) {
-        articleImageView.set(image: article.image)
+        articleTitleLabelTopLayoutConstraint.constant = kArticleTitleLabelTopDefault
+        if let image = article.image {
+            articleImageView.set(image: image)
+            articleTitleLabelTopLayoutConstraint.constant += articleImageView.frame.size.height
+        }
+        articleImageView.isHidden = article.image == nil
         articleTitleLabel.text = article.title
         authorNameLabel.text = article.author?.fullName
         guard let htmlString = article.contentHtml else {

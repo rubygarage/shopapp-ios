@@ -8,8 +8,8 @@
 
 import UIKit
 
-private let kCollectionViewMarginHorizontal: CGFloat = 13
-private let kCollectionViewMarginVertical: CGFloat = 20
+private let kCollectionViewMarginHorizontal: CGFloat = 4
+private let kCollectionViewMarginVertical: CGFloat = 4
 private let kNumberOfColumns: CGFloat = 2
 private let kCellRatio: CGFloat = 140 / 169
 

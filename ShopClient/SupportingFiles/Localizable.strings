@@ -30,6 +30,11 @@
 "Alert.Error" = "Error";
 "Alert.ChooseShippingRate" = "Choose shipping rate";
 "Alert.PriceInfo" = "Price info";
+"Alert.ProductAdded" = "Product has been added to cart";
+"Alert.Registered" = "You have been successfully registered and logged in";
+"Alert.LoggedIn" = "You have been successfully logged in";
+"Alert.ProfileChanged" = "Profile has been changed";
+"Alert.LoggedOut" = "You have been successfully logged out";
 
 "Button.Sort" = "Sort";
 "Button.AddToCart" = "Add to cart";
@@ -76,7 +81,7 @@
 "Button.TryAgain" = "Try again";
 "Button.BackToShop" = "Back to shop";
 
-"SortingValue.CreatedAt" = "Newes first";
+"SortingValue.CreatedAt" = "The Newest first";
 "SortingValue.PriceHighToLow" = "Price High to Low";
 "SortingValue.PriceLowToHigh" = "Price Low to High";
 
@@ -90,7 +95,7 @@
 "Label.PriceInfo" = "%@\n%@\n%@\n%@";
 "Label.CustomerEmail" = "Customer Email";
 "Label.ShippingAddress" = "Shipping Address";
-"Label.PaymentInformation" = "Payment Information";
+"Label.Details" = "Details";
 "Label.BillingAddress" = "Billing Address";
 "Label.Payment" = "Payment";
 "Label.ShippingOptions" = "Shipping Options";

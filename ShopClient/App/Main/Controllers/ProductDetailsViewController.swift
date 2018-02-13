@@ -209,6 +209,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
                     return
                 }
                 strongSelf.updateNavigationBar()
+                strongSelf.showToast(with: "Alert.ProductAdded".localizable)
             })
             .disposed(by: disposeBag)
     }

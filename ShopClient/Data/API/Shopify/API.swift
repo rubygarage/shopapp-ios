@@ -751,6 +751,8 @@ class API: NSObject, APIInterface, PaySessionDelegate {
             return Storefront.ProductCollectionSortKeys.created
         case SortingValue.priceHighToLow, SortingValue.priceLowToHigh:
             return Storefront.ProductCollectionSortKeys.price
+        case SortingValue.name:
+            return Storefront.ProductCollectionSortKeys.title
         default:
             return nil
         }

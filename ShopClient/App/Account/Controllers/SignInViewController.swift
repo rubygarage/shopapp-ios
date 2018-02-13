@@ -89,6 +89,7 @@ class SignInViewController: BaseViewController<SignInViewModel> {
                 guard let strongSelf = self else {
                     return
                 }
+                strongSelf.showToast(with: "Alert.LoggedIn".localizable)
                 strongSelf.dismiss(animated: true)
             })
             .disposed(by: disposeBag)

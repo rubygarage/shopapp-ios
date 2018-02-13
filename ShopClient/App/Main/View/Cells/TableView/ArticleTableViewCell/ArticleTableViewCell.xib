@@ -58,15 +58,15 @@
                     <constraint firstItem="VJR-O0-kSY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="CXQ-CK-QjQ"/>
                     <constraint firstAttribute="trailing" secondItem="jJe-77-1zK" secondAttribute="trailing" constant="16" id="Cfm-t8-C8H"/>
                     <constraint firstItem="hcg-zi-U7A" firstAttribute="top" secondItem="fYn-3Q-K27" secondAttribute="bottom" constant="9" id="CtT-Wj-nxy"/>
-                    <constraint firstItem="hqu-Q8-KPM" firstAttribute="leading" secondItem="fYn-3Q-K27" secondAttribute="trailing" constant="15" id="Fjn-ju-f4j"/>
                     <constraint firstItem="fYn-3Q-K27" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Kra-xY-VLF"/>
                     <constraint firstAttribute="bottom" secondItem="VJR-O0-kSY" secondAttribute="bottom" constant="17" id="RYU-dt-oJ2"/>
-                    <constraint firstItem="hqu-Q8-KPM" firstAttribute="leading" secondItem="hcg-zi-U7A" secondAttribute="trailing" constant="15" id="VMW-Hm-olL"/>
-                    <constraint firstItem="hqu-Q8-KPM" firstAttribute="leading" secondItem="VJR-O0-kSY" secondAttribute="trailing" constant="15" id="Xea-WZ-OdQ"/>
+                    <constraint firstAttribute="trailing" secondItem="fYn-3Q-K27" secondAttribute="trailing" constant="151" id="Svq-rO-vDZ"/>
+                    <constraint firstItem="VJR-O0-kSY" firstAttribute="trailing" secondItem="hcg-zi-U7A" secondAttribute="trailing" id="cks-Jq-3z8"/>
                     <constraint firstItem="hcg-zi-U7A" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="eHf-2s-7iG"/>
                     <constraint firstAttribute="bottom" secondItem="jJe-77-1zK" secondAttribute="bottom" id="hNh-os-e3L"/>
                     <constraint firstItem="jJe-77-1zK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hqu-Q8-KPM" secondAttribute="bottom" id="j0t-uf-W3q"/>
                     <constraint firstItem="VJR-O0-kSY" firstAttribute="top" secondItem="hcg-zi-U7A" secondAttribute="bottom" constant="6" id="nlt-JU-LJe"/>
+                    <constraint firstItem="hcg-zi-U7A" firstAttribute="trailing" secondItem="fYn-3Q-K27" secondAttribute="trailing" id="oZJ-Rw-8Fi"/>
                     <constraint firstItem="hqu-Q8-KPM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="p31-V4-fzP"/>
                     <constraint firstItem="jJe-77-1zK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="pyW-iy-Gh2"/>
                 </constraints>
@@ -77,6 +77,7 @@
                 <outlet property="descriptionLabel" destination="hcg-zi-U7A" id="Iv7-Fc-WxW"/>
                 <outlet property="separatorView" destination="jJe-77-1zK" id="spO-vP-oIG"/>
                 <outlet property="titleLabel" destination="fYn-3Q-K27" id="xjv-jE-DXO"/>
+                <outlet property="titleLabelTrailingLayoutConstraint" destination="Svq-rO-vDZ" id="qTp-dI-rtW"/>
             </connections>
             <point key="canvasLocation" x="150" y="107"/>
         </tableViewCell>
