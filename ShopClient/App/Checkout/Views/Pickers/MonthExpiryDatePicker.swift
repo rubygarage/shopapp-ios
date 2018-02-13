@@ -8,12 +8,12 @@
 
 import UIKit
 
-class MonthExpiryDatePicker: ExpiryDatePicker {
-    override var placeholder: String {
-        return NSLocalizedString("Placeholder.Month", comment: String())
+class MonthExpiryDatePicker: BasePicker {
+    override var initialPlaceholder: String {
+        return "Placeholder.Month".localizable
     }
     override var data: [String] {
-        var monthes = [String]()
+        var monthes: [String] = []
         for index in 1...Calendar.current.monthSymbols.count {
             monthes.append(index.asLongMonth())
         }
@@ -21,7 +21,7 @@ class MonthExpiryDatePicker: ExpiryDatePicker {
     }
 }
 
-internal extension Int {
+extension Int {
     func asLongMonth() -> String {
         return String(format: "%02d", self)
     }

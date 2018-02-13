@@ -23,6 +23,9 @@ target 'ShopClient' do
   pod 'UIImage+Additions', '~> 2.1'
   pod 'TTTAttributedLabel', '~> 2.0'
   
+  # Network
+  pod 'Alamofire', '~> 4.5'
+
   # Database
   pod 'CoreStore', '~> 4.2'
 

@@ -12,7 +12,6 @@ import KeychainSwift
 typealias PaymentByApplePayResponse = (order: Order?, error: RepoError?)
 
 private let kShopifyStorefrontAccessToken = "2098ab2fb06659df83ccf0f6df678dc6"
-private let kShopifyStorefrontURL = "palkomin.myshopify.com"
 private let kShopifyItemsMaxCount: Int32 = 250
 private let kShopifyStoreName = "palkomin"
 private let kMerchantID = "merchant.com.rubygarage.shopclient.test.temp"
@@ -22,9 +21,13 @@ private let kShopifyQueryAndOperator = "AND"
 private let kShopifyQueryNotOperator = "NOT"
 private let kShopifyQueryTitleField = "title"
 private let kShopifyQueryProductTypeField = "product_type"
-private let kHttpsUrlPrefix = "https://www."
+private let kWwwUrlPrefix = "www."
+
+let kHttpsUrlPrefix = "https://"
+let kShopifyStorefrontURL = "palkomin.myshopify.com"
 
 class API: NSObject, APIInterface, PaySessionDelegate {
+    private var adminApi = ShopifyAPI()
     private var client: Graph.Client?
     private var paySession: PaySession?
     private var paymentByApplePayCompletion: RepoCallback<Order>?
@@ -171,7 +174,7 @@ class API: NSObject, APIInterface, PaySessionDelegate {
         let query = articleRootQuery(id: id)
         let task = client?.queryGraphWith(query, completionHandler: { [weak self] (response, error) in
             let responseError = self?.process(error: error)
-            guard let article = Article(with: response?.node as? Storefront.Article), let baseUrl = URL(string: kHttpsUrlPrefix + kShopifyStorefrontURL) else {
+            guard let article = Article(with: response?.node as? Storefront.Article), let baseUrl = URL(string: kHttpsUrlPrefix + kWwwUrlPrefix + kShopifyStorefrontURL) else {
                 callback(nil, responseError)
                 return
             }
@@ -418,6 +421,18 @@ class API: NSObject, APIInterface, PaySessionDelegate {
             callback(response?.shop.paymentSettings, RepoError(with: error))
         })
         run(task: task, callback: callback)
+    }
+    
+    func getCountries(callback: @escaping RepoCallback<[Country]>) {
+        adminApi.getCountries { (countries, error) in
+            if let countries = countries {
+                callback(countries, nil)
+            } else if let error = error {
+                callback(nil, error)
+            } else {
+                callback(nil, ContentError())
+            }
+        }
     }
     
     // MARK: - Orders

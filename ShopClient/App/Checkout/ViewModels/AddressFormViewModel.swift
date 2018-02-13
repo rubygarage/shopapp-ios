@@ -9,6 +9,18 @@
 import RxSwift
 
 class AddressFormViewModel: BaseViewModel {
+    private let countriesUseCase = CountriesUseCase()
+    
+    private var countries: [Country] = [] {
+        didSet {
+            namesOfCountries.onNext(countries.map { $0.name })
+        }
+    }
+    
+    private var requiredTextFields: [Observable<String>] {
+        return [countryText, firstNameText, lastNameText, addressText, cityText, zipText, phoneText].map({ $0.asObservable() })
+    }
+    
     var countryText = Variable<String>("")
     var firstNameText = Variable<String>("")
     var lastNameText = Variable<String>("")
@@ -18,12 +30,10 @@ class AddressFormViewModel: BaseViewModel {
     var stateText = Variable<String>("")
     var zipText = Variable<String>("")
     var phoneText = Variable<String>("")
+    var namesOfCountries = PublishSubject<[String]>()
+    var namesOfStates = PublishSubject<[String]>()
     var filledAddress = PublishSubject<Address>()
     var address: Address?
-        
-    private var requiredTextFields: [Observable<String>] {
-        return [countryText, firstNameText, lastNameText, addressText, cityText, zipText, phoneText].map({ $0.asObservable() })
-    }
     
     var isAddressValid: Observable<Bool> {
         return Observable.combineLatest(requiredTextFields, { (textFields) in
@@ -41,6 +51,30 @@ class AddressFormViewModel: BaseViewModel {
             default:
                 break
             }
+        }
+    }
+    
+    func getCountries() {
+        state.onNext(ViewState.make.loading(isTranslucent: true))
+        countriesUseCase.getCountries { [weak self] (countries, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            if let error = error {
+                strongSelf.state.onNext(.error(error: error))
+            } else if let countries = countries {
+                strongSelf.state.onNext(.content)
+                strongSelf.countries = countries
+            }
+        }
+    }
+    
+    func updateStates(with nameOfCountry: String) {
+        if let country = countries.filter({ $0.name == nameOfCountry }).first, !country.states.isEmpty {
+            namesOfStates.onNext(country.states.map { $0.name })
+        } else {
+            stateText.value = ""
+            namesOfStates.onNext([])
         }
     }
     

@@ -38,19 +38,12 @@ private let kUnderlineViewAlphaHighlighted: CGFloat = 1
 private let kUnderlineViewHeightDefault: CGFloat = 1
 private let kUnderlineViewHeightHighlighted: CGFloat = 2
 private let kErrorColor = UIColor(displayP3Red: 0.89, green: 0.31, blue: 0.31, alpha: 1)
-private let kPlaceholderAnimationDuration: TimeInterval = 0.15
-private let kPlaceholderPositionTopY: CGFloat = -25
-private let kPlaceholderFontSizeTop: CGFloat = 11
-private let kPlaceholderFontSizeDefault: CGFloat = 12
-private let kPlaceholderColorTop = UIColor.black.withAlphaComponent(0.5)
 
-class InputTextFieldView: TextFieldWrapper {
+class InputTextFieldView: PlaceholderedTextField {
     @IBOutlet private weak var underlineView: UIView!
     @IBOutlet private weak var underlineViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var errorMesageLabel: UILabel!
     @IBOutlet private weak var showPasswordButton: UIButton!
-    @IBOutlet private weak var placeholderLabel: UILabel!
-    @IBOutlet private weak var placeholderVerticallyConstraint: NSLayoutConstraint!
     
     @IBInspectable var keyboardType: Int = InputTextFieldViewKeybordType.name.rawValue {
         didSet {
@@ -83,11 +76,6 @@ class InputTextFieldView: TextFieldWrapper {
             state = .error
             errorMesageLabel.text = errorMessage
             updateUI()
-        }
-    }
-    var placeholder: String? {
-        didSet {
-            placeholderLabel.text = placeholder
         }
     }
     
@@ -161,27 +149,6 @@ class InputTextFieldView: TextFieldWrapper {
         let secureTextEntry = type == InputTextFieldViewKeybordType.password.rawValue || type == InputTextFieldViewKeybordType.cvv.rawValue
         textField?.isSecureTextEntry = secureTextEntry
         showPasswordButton?.isHidden = type != InputTextFieldViewKeybordType.password.rawValue || hideShowPasswordButton == true
-    }
-    
-    private func setPlaceholderPosition() {
-        let toTop = text?.isEmpty == false
-        updatePlaceholderPosition(toTop: toTop, animated: false)
-    }
-    
-    private func updatePlaceholderPosition(toTop: Bool, animated: Bool) {
-        let animationDuration = animated ? kPlaceholderAnimationDuration : 0
-        let placeholderVerticalPosition: CGFloat = toTop ? kPlaceholderPositionTopY : 0
-        placeholderVerticallyConstraint?.constant = placeholderVerticalPosition
-        let fontSize = toTop ? kPlaceholderFontSizeTop : kPlaceholderFontSizeDefault
-        self.placeholderLabel.font = UIFont.systemFont(ofSize: fontSize)
-        
-        UIView.animate(withDuration: animationDuration) {
-            self.layoutIfNeeded()
-        }
-        
-        UIView.transition(with: placeholderLabel, duration: animationDuration, options: .transitionCrossDissolve, animations: {
-            self.placeholderLabel?.textColor = toTop ? kPlaceholderColorTop : UIColor.black
-        })
     }
     
     // MARK: - Actions

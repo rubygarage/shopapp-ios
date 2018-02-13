@@ -71,6 +71,7 @@
 "Button.PayWithThisCard" = "Pay with this card";
 "Button.ViewOrderDetails" = "View order Details";
 "Button.ContinueShopping" = "Continue shopping";
+"Button.Done" = "Done";
 
 "SortingValue.CreatedAt" = "Newes first";
 "SortingValue.PriceHighToLow" = "Price High to Low";
@@ -149,7 +150,7 @@
 
 "Placeholder.Email" = "Email";
 "Placeholder.Password" = "Password";
-"Placeholder.Name" = "Name";
+"Placeholder.Name" = "First Name";
 "Placeholder.LastName" = "Last Name";
 "Placeholder.PhoneNumber" = "Phone number";
 "Placeholder.CreatePassword" = "Create a Password";
