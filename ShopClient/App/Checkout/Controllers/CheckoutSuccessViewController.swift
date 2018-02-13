@@ -47,14 +47,6 @@ class CheckoutSuccessViewController: UIViewController {
         dismissModalStack()
     }
     
-    private func dismissModalStack() {
-        var controller = presentingViewController
-        while controller?.presentingViewController != nil {
-            controller = controller?.presentingViewController
-        }
-        controller?.dismiss(animated: true)
-    }
-    
     // MARK: - Segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

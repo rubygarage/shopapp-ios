@@ -326,7 +326,6 @@
         <!--Checkout Address Form View Controller-->
         <scene sceneID="wxm-Wb-CYC">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eYB-Oz-ddR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="ECB-Z1-FXx" customClass="CheckoutAddressFormViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PDJ-sS-IOU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -349,6 +348,7 @@
                         <viewLayoutGuide key="safeArea" id="yYt-PD-4Zb"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eYB-Oz-ddR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-50.399999999999999" y="960.2698650674663"/>
         </scene>
