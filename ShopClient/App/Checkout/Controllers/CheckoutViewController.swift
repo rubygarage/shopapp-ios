@@ -151,6 +151,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             addressListViewController.addressListType = destinationAddressType
             let isAddressTypeShipping = destinationAddressType == .shipping
             addressListViewController.selectedAddress = isAddressTypeShipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
+            addressListViewController.showSelectionButton = true
             addressListViewController.delegate = self
         } else if let paymentTypeViewController = segue.destination as? PaymentTypeViewController, let checkout = viewModel.checkout.value {
             paymentTypeViewController.checkout = checkout
