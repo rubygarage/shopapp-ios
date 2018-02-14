@@ -139,7 +139,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     fileprivate func openAddressesController(with type: AddressListType) {
         destinationAddressType = type
         if viewModel.customerLogged.value {
-            performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
+            performSegue(withIdentifier: SegueIdentifiers.toCheckoutAddressList, sender: self)
         } else {
             performSegue(withIdentifier: SegueIdentifiers.toCheckoutAddressForm, sender: self)
         }
@@ -150,12 +150,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
             productDetailsViewController.productVariant = viewModel.selectedProductVariant
-        } else if let addressListViewController = segue.destination as? AddressListViewController {
-            addressListViewController.addressListType = destinationAddressType
-            let isAddressTypeShipping = destinationAddressType == .shipping
-            addressListViewController.selectedAddress = isAddressTypeShipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
-            addressListViewController.showSelectionButton = true
-            addressListViewController.delegate = self
         } else if let paymentTypeViewController = segue.destination as? PaymentTypeViewController, let checkout = viewModel.checkout.value {
             paymentTypeViewController.checkout = checkout
             paymentTypeViewController.delegate = self
@@ -177,6 +171,12 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             checkoutAddressFormController.selectedAddress = address
             checkoutAddressFormController.delegate = self
             checkoutAddressFormController.addressAction = address == nil ? .add : .edit
+        } else if let checkoutAddressListViewController = segue.destination as? CheckoutAddressListViewController {
+            checkoutAddressListViewController.addressListType = destinationAddressType
+            let isAddressTypeShipping = destinationAddressType == .shipping
+            checkoutAddressListViewController.selectedAddress = isAddressTypeShipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
+            checkoutAddressListViewController.showSelectionButton = true
+            checkoutAddressListViewController.delegate = self
         }
     }
     
@@ -289,7 +289,7 @@ extension CheckoutViewController: CheckoutAddressFormControllerDelegate {
 // MARK: - AddressListControllerDelegate
 
 extension CheckoutViewController: AddressListControllerDelegate {
-    func viewController(_ controller: AddressListViewController, didSelect address: Address) {
+    func viewController(didSelect address: Address) {
         if destinationAddressType == .shipping {
             viewModel.updateCheckoutShippingAddress(with: address)
         } else {

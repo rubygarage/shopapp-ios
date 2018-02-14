@@ -45,7 +45,7 @@ class AddressListViewModel: BaseViewModel {
         didSelectAddress.onNext(address)
     }
     
-    func deleteCustomerAddress(with address: Address, isSelected: Bool) {
+    func deleteCustomerAddress(with address: Address) {
         state.onNext(ViewState.make.loading(isTranslucent: true))
         deleteAddressUseCase.deleteCustomerAddress(with: address.id) { [weak self] (success, error) in
             guard let strongSelf = self else {
@@ -54,7 +54,7 @@ class AddressListViewModel: BaseViewModel {
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
             } else if let success = success {
-                strongSelf.processDeleteAddressResponse(with: success, isSelected: isSelected)
+                strongSelf.processDeleteAddressResponse(with: success)
                 strongSelf.state.onNext(.content)
             }
         }
@@ -76,12 +76,8 @@ class AddressListViewModel: BaseViewModel {
         }
     }
     
-    private func processDeleteAddressResponse(with success: Bool, isSelected: Bool) {
-        if isSelected, let defaultAddress = customerDefaultAddress.value {
-            updateCheckoutShippingAddress(with: defaultAddress)
-        } else {
-            loadCustomerAddresses(isTranslucentHud: true)
-        }
+    func processDeleteAddressResponse(with isSelected: Bool) {
+        // Method to override
     }
     
     private func processSelectedAddressUpdatingResponse(with address: Address, isSelected: Bool) {

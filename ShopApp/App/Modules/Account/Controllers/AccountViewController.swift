@@ -131,7 +131,7 @@ extension AccountViewController: AccountLoggedHeaderDelegate {
     }
     
     func headerViewDidTapShippingAddress(_ headerView: AccountLoggedHeaderView) {
-        performSegue(withIdentifier: SegueIdentifiers.toAddressList, sender: self)
+        performSegue(withIdentifier: SegueIdentifiers.toAccountAddressList, sender: self)
     }
 }
 

@@ -68,8 +68,8 @@
                         <segue destination="cpJ-cT-Uv8" kind="presentation" identifier="toSuccessCheckout" id="2Ja-VQ-reW"/>
                         <segue destination="35q-zi-ACv" kind="show" identifier="toCreditCard" id="O98-nT-rIz"/>
                         <segue destination="ECB-Z1-FXx" kind="show" identifier="toCheckoutAddressForm" id="Git-Pw-MRS"/>
-                        <segue destination="R8i-Cl-uIP" kind="show" identifier="toAddressList" id="xn3-AE-ncH"/>
                         <segue destination="vCe-Gk-sIc" kind="presentation" identifier="toFailureCheckout" id="R4U-7e-U0K"/>
+                        <segue destination="xSx-Ui-7AL" kind="show" identifier="toCheckoutAddressList" id="vAQ-xD-UeL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWy-vV-BzK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -84,13 +84,13 @@
             </objects>
             <point key="canvasLocation" x="601" y="93"/>
         </scene>
-        <!--AddressListControllerIdentifier-->
-        <scene sceneID="6uV-sU-hWQ">
+        <!--CustomerAddressFormControllerIdentifier-->
+        <scene sceneID="Jbf-bt-nfC">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="AddressListControllerIdentifier" storyboardName="Account" referencedIdentifier="AddressListControllerIdentifier" id="R8i-Cl-uIP" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3DI-Os-nBl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Account" referencedIdentifier="CustomerAddressFormControllerIdentifier" id="86Q-RI-HMc" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yh4-Nv-wU7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-831" y="671"/>
+            <point key="canvasLocation" x="-821" y="1411"/>
         </scene>
         <!--AddressFormControllerIdentifier-->
         <scene sceneID="MGg-pO-s8Z">
@@ -125,7 +125,6 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="HdE-8d-3A9" id="WpW-SP-7bx"/>
-                        <segue destination="R8i-Cl-uIP" kind="show" identifier="toAddressList" id="RzQ-hR-rkW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pi9-aR-oRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -462,6 +461,37 @@
             </objects>
             <point key="canvasLocation" x="2269.5999999999999" y="1707.7961019490256"/>
         </scene>
+        <!--Checkout Address List View Controller-->
+        <scene sceneID="aDG-Ct-2ha">
+            <objects>
+                <viewController id="xSx-Ui-7AL" customClass="CheckoutAddressListViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BVy-Nn-2we">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="3t3-mI-31c">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3t3-mI-31c" firstAttribute="trailing" secondItem="oLc-jh-h1C" secondAttribute="trailing" id="Mn2-wW-tBo"/>
+                            <constraint firstItem="3t3-mI-31c" firstAttribute="bottom" secondItem="oLc-jh-h1C" secondAttribute="bottom" id="evJ-bJ-Hpu"/>
+                            <constraint firstItem="3t3-mI-31c" firstAttribute="leading" secondItem="oLc-jh-h1C" secondAttribute="leading" id="p8a-hV-SjJ"/>
+                            <constraint firstItem="3t3-mI-31c" firstAttribute="top" secondItem="oLc-jh-h1C" secondAttribute="top" id="vkR-xJ-pJA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="oLc-jh-h1C"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="3t3-mI-31c" id="kxP-pi-DTj"/>
+                        <segue destination="86Q-RI-HMc" kind="show" identifier="toCustomerAddressForm" id="Row-n3-rSu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aJX-vI-WEd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-820" y="957.57121439280365"/>
+        </scene>
         <!--Checkout Address Form View Controller-->
         <scene sceneID="wxm-Wb-CYC">
             <objects>
@@ -663,7 +693,4 @@
         <image name="checkout_success" width="130" height="112"/>
         <image name="checkout_unsuccess" width="171" height="138"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="xn3-AE-ncH"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -16,10 +16,11 @@ enum AddressListType {
 }
 
 protocol AddressListControllerDelegate: class {
-    func viewController(_ controller: AddressListViewController, didSelect address: Address)
+    // TODO:
+    func viewController(didSelect address: Address)
 }
 
-class AddressListViewController: BaseViewController<AddressListViewModel> {
+class AddressListViewController<T: AddressListViewModel>: BaseViewController<T> {
     @IBOutlet private weak var tableView: UITableView!
     
     private var tableProvider: AddressListTableProvider!
@@ -37,7 +38,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel> {
     // MARK: - View conttroller lifecycle
     
     override func viewDidLoad() {
-        viewModel = AddressListViewModel()
+//        viewModel = AddressListViewModel()
         super.viewDidLoad()
 
         setupViews()
@@ -91,7 +92,7 @@ class AddressListViewController: BaseViewController<AddressListViewModel> {
                 if strongSelf.addressListType == .billing {
                     strongSelf.destinationAddress = address
                 }
-                strongSelf.delegate?.viewController(strongSelf, didSelect: address)
+                strongSelf.delegate?.viewController(didSelect: address)
             })
             .disposed(by: disposeBag)
     }
@@ -126,8 +127,7 @@ extension AddressListViewController: AddressListTableCellDelegate {
     }
     
     func tableViewCell(_ cell: AddressListTableViewCell, didTapDelete address: Address) {
-        let isSelected = viewModel.selectedAddress?.isEqual(to: address) ?? false
-        viewModel.deleteCustomerAddress(with: address, isSelected: isSelected)
+        viewModel.deleteCustomerAddress(with: address)
     }
     
     func tableViewCell(_ cell: AddressListTableViewCell, didTapDefault address: Address) {
