@@ -20,7 +20,7 @@ extension DAO {
             var item = transaction.fetchOne(From<CartProductEntity>(), Where(predicate))
             if item != nil {
                 let itemQuantity = item?.quantity ?? 0
-                item?.quantity = itemQuantity + Int16(cartProduct.quantity)
+                item?.quantity = itemQuantity + Int64(cartProduct.quantity)
             } else {
                 item = transaction.create(Into<CartProductEntity>())
                 item?.update(with: cartProduct, transaction: transaction)
@@ -68,7 +68,7 @@ extension DAO {
         let predicate = getPredicate(with: productVariantId)
         CoreStore.perform(asynchronous: { (transaction) in
             let item: CartProductEntity? = transaction.fetchOrCreate(predicate: predicate)
-            item?.quantity = Int16(quantity)
+            item?.quantity = Int64(quantity)
         }, completion: { (result) in
             switch result {
             case .success:

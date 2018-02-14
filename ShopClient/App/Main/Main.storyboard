@@ -406,38 +406,22 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YxC-Df-lAk">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPo-Xd-N4H" customClass="QuantityTextFieldView" customModule="ShopClient" customModuleProvider="target">
                                                 <rect key="frame" x="138" y="15" width="60" height="20"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="60" id="LUI-qc-M9z"/>
-                                                    <constraint firstAttribute="height" constant="20" id="ZaF-RW-OdI"/>
-                                                </constraints>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
-                                                <connections>
-                                                    <action selector="quantityEditingDidBegin:" destination="2iw-CM-RMu" eventType="editingDidBegin" id="eYK-pa-tIX"/>
-                                                    <action selector="quantityEditingDidEnd:" destination="2iw-CM-RMu" eventType="editingDidEnd" id="Cvo-Q0-b7C"/>
-                                                </connections>
-                                            </textField>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oZT-mY-e3D">
-                                                <rect key="frame" x="138" y="35" width="60" height="1"/>
-                                                <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="bAm-kk-GVt"/>
+                                                    <constraint firstAttribute="height" constant="20" id="Fbr-12-mLf"/>
+                                                    <constraint firstAttribute="width" constant="60" id="Xw2-p3-ocK"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="HPo-Xd-N4H" firstAttribute="centerY" secondItem="kV7-D8-BJ1" secondAttribute="centerY" constant="-3" id="9rG-FX-Nbi"/>
                                             <constraint firstAttribute="bottom" secondItem="kV7-D8-BJ1" secondAttribute="bottom" constant="20" id="A2g-5H-Lfg"/>
-                                            <constraint firstItem="YxC-Df-lAk" firstAttribute="centerY" secondItem="kV7-D8-BJ1" secondAttribute="centerY" constant="-3" id="Fg3-MW-igw"/>
-                                            <constraint firstItem="oZT-mY-e3D" firstAttribute="trailing" secondItem="YxC-Df-lAk" secondAttribute="trailing" id="TsA-5s-2Z8"/>
-                                            <constraint firstItem="oZT-mY-e3D" firstAttribute="leading" secondItem="YxC-Df-lAk" secondAttribute="leading" id="Twn-2v-3V6"/>
+                                            <constraint firstItem="HPo-Xd-N4H" firstAttribute="leading" secondItem="kV7-D8-BJ1" secondAttribute="trailing" constant="30" id="dqa-6A-EPt"/>
                                             <constraint firstItem="kV7-D8-BJ1" firstAttribute="leading" secondItem="yyt-6B-eUF" secondAttribute="leading" constant="20" id="h8W-tF-Ppd"/>
-                                            <constraint firstItem="YxC-Df-lAk" firstAttribute="leading" secondItem="kV7-D8-BJ1" secondAttribute="trailing" constant="30" id="vT1-4R-Roq"/>
                                             <constraint firstItem="kV7-D8-BJ1" firstAttribute="top" secondItem="yyt-6B-eUF" secondAttribute="top" constant="20" id="xF0-1G-D7A"/>
-                                            <constraint firstItem="oZT-mY-e3D" firstAttribute="top" secondItem="YxC-Df-lAk" secondAttribute="bottom" id="yg7-Pa-O1l"/>
                                         </constraints>
                                     </view>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="39V-FZ-fv4">
@@ -649,9 +633,8 @@
                         <outlet property="detailImagesContainer" destination="Ifp-Jb-DEo" id="NEx-f4-ioM"/>
                         <outlet property="optionsContainerViewHeightConstraint" destination="lVY-Vz-JGJ" id="b6i-NH-k7Z"/>
                         <outlet property="priceLabel" destination="40U-Lo-b1L" id="6bb-3l-k40"/>
-                        <outlet property="quantityTextField" destination="YxC-Df-lAk" id="KlK-xU-NU9"/>
+                        <outlet property="quantityTextFieldView" destination="HPo-Xd-N4H" id="urN-Zv-gA9"/>
                         <outlet property="quantityTitleLabel" destination="kV7-D8-BJ1" id="ybL-G3-KKl"/>
-                        <outlet property="quantityUnderlineView" destination="oZT-mY-e3D" id="frt-fw-2qh"/>
                         <outlet property="relatedItemsHeaderView" destination="Abb-dJ-X8r" id="tUP-2K-Okt"/>
                         <outlet property="relatedItemsView" destination="yXx-nC-ut5" id="PRK-Zm-upu"/>
                         <outlet property="titleLabel" destination="8kP-Rw-ZOm" id="zGb-Cf-th2"/>
@@ -665,7 +648,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-362" y="3413"/>
+            <point key="canvasLocation" x="-362.39999999999998" y="3412.8935532233886"/>
         </scene>
         <!--Category View Controller-->
         <scene sceneID="oaF-9p-ART">

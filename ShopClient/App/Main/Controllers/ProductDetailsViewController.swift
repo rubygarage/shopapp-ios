@@ -31,7 +31,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var quantityTitleLabel: UILabel!
-    @IBOutlet private weak var quantityTextField: UITextField!
+    @IBOutlet private weak var quantityTextFieldView: QuantityTextFieldView!    
     @IBOutlet private weak var quantityUnderlineView: UIView!
     @IBOutlet private weak var addToCartButton: UIButton!
     @IBOutlet private weak var bottomView: UIView!
@@ -99,7 +99,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
         viewModel.productId = productId
         viewModel.productVariant = productVariant
         
-        quantityTextField.rx.text.map { Int($0 ?? "") ?? 1 }
+        quantityTextFieldView.rx.value.map { Int($0 ?? "") ?? 1 }
             .bind(to: viewModel.quantity)
             .disposed(by: disposeBag)
         

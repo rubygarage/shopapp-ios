@@ -11,8 +11,6 @@ import UIKit
 import SwipeCellKit
 
 private let kCartProductQuantityMin = 1
-private let kCartProductQuantityMax = 999
-private let kQuantityUnderlineColorDefault = UIColor(displayP3Red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
 
 protocol CartTableCellDelegate: class {
     func tableViewCell(_ tableViewCell: CartTableViewCell, didUpdateCartProduct cartProduct: CartProduct, with quantity: Int)
@@ -123,7 +121,7 @@ class CartTableViewCell: SwipeTableViewCell {
     }
     
     @IBAction func quantityEditingDidEnd(_ sender: UITextField) {
-        quantityUnderlineView.backgroundColor = kQuantityUnderlineColorDefault
+//        quantityUnderlineView.backgroundColor = kQuantityUnderlineColorDefault
         guard let cartProduct = cartProduct else {
             return
         }
