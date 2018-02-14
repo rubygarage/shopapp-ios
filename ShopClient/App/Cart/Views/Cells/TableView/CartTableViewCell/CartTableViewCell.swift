@@ -10,8 +10,6 @@ import UIKit
 
 import SwipeCellKit
 
-private let kCartProductQuantityMin = 1
-
 protocol CartTableCellDelegate: class {
     func tableViewCell(_ tableViewCell: CartTableViewCell, didUpdateCartProduct cartProduct: CartProduct, with quantity: Int)
 }
@@ -20,8 +18,7 @@ class CartTableViewCell: SwipeTableViewCell {
     @IBOutlet private weak var variantImageView: UIImageView!
     @IBOutlet private weak var variantTitleLabel: UILabel!
     @IBOutlet private weak var quantityLabel: UILabel!
-    @IBOutlet private weak var quantityTextField: UITextField!
-    @IBOutlet private weak var quantityUnderlineView: UIView!
+    @IBOutlet private weak var quantityTextFieldView: QuantityTextFieldView!
     @IBOutlet private weak var totalPriceLabel: UILabel!
     
     @IBOutlet private weak var pricePerOneItemLabel: UILabel! {
@@ -55,9 +52,8 @@ class CartTableViewCell: SwipeTableViewCell {
     
     private func setup() {
         selectionStyle = .none
-        
         quantityLabel.text = "Label.Quantity".localizable
-        quantityTextField.delegate = self
+        quantityTextFieldView.delegate = self
     }
     
     private func populateImageView(with item: CartProduct?) {
@@ -76,7 +72,7 @@ class CartTableViewCell: SwipeTableViewCell {
     
     private func populateQuantity(with item: CartProduct?) {
         let quantity = item?.quantity ?? 0
-        quantityTextField.text = "\(quantity)"
+        quantityTextFieldView.text = "\(quantity)"
     }
     
     private func popualateTotalPrice(with item: CartProduct?) {
@@ -106,38 +102,15 @@ class CartTableViewCell: SwipeTableViewCell {
         pricePerOneItemLabel.text = String.localizedStringWithFormat(localizedString, formattedPrice)
         pricePerOneItemLabel.isHidden = false
     }
-    
-    private func check(quantity: Int) -> Int {
-        guard quantity < kCartProductQuantityMin else {
-            return quantity
-        }
-        return kCartProductQuantityMin
-    }
-    
-    // MARK: - Actions
-    
-    @IBAction func quantityEditingDidBegin(_ sender: UITextField) {
-        quantityUnderlineView.backgroundColor = .black
-    }
-    
-    @IBAction func quantityEditingDidEnd(_ sender: UITextField) {
-//        quantityUnderlineView.backgroundColor = kQuantityUnderlineColorDefault
+}
+
+// MARK: - QuantityTextFieldViewDelegate
+
+extension CartTableViewCell: QuantityTextFieldViewDelegate {
+    func quantityTextFieldView(_ view: QuantityTextFieldView, didEndEditingWith quantity: Int) {
         guard let cartProduct = cartProduct else {
             return
         }
-        let quantityString = sender.text ?? ""
-        let quantity = (quantityString as NSString).integerValue
-        let checkedQuantity = check(quantity: quantity)
-        cellDelegate?.tableViewCell(self, didUpdateCartProduct: cartProduct, with: checkedQuantity)
-    }
-}
-
-// MARK: - UITextFieldDelegate
-
-extension CartTableViewCell: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let formattedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
-        let formattedQuantity = (formattedText as NSString?)?.integerValue ?? 0
-        return formattedQuantity <= kCartProductQuantityMax
+        cellDelegate?.tableViewCell(self, didUpdateCartProduct: cartProduct, with: quantity)
     }
 }

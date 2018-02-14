@@ -22,10 +22,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oel-1l-ubD">
-                    <rect key="frame" x="0.0" y="0.0" width="269" height="72"/>
+                    <rect key="frame" x="0.0" y="0.0" width="269" height="70"/>
                     <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="done"/>
                     <connections>
                         <action selector="quantityEditingDidBegin:" destination="-1" eventType="editingDidBegin" id="AM4-xP-ZJw"/>
                         <action selector="quantityEditingDidEnd:" destination="-1" eventType="editingDidEnd" id="tx6-L2-dRo"/>
@@ -47,7 +47,7 @@
                 <constraint firstItem="2fg-EL-Res" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Kv5-Xd-GPM"/>
                 <constraint firstItem="2fg-EL-Res" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="b9y-BV-QiR"/>
                 <constraint firstItem="2fg-EL-Res" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="jPU-zD-Bj1"/>
-                <constraint firstItem="2fg-EL-Res" firstAttribute="top" secondItem="Oel-1l-ubD" secondAttribute="bottom" id="xF6-6W-9lM"/>
+                <constraint firstItem="2fg-EL-Res" firstAttribute="top" secondItem="Oel-1l-ubD" secondAttribute="bottom" constant="2" id="xF6-6W-9lM"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
