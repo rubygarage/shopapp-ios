@@ -75,6 +75,10 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
     // MARK: - Actions
     
     @objc private func backButtonDidPress() {
+        guard let index = navigationController?.viewControllers.index(of: self), navigationController?.viewControllers[index - 1] is CheckoutSuccessViewController else {
+            navigationController?.popViewController(animated: true)
+            return
+        }
         setHomeController()
         dismissModalStack()
     }
