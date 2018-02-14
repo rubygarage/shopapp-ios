@@ -54,10 +54,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="08T-P4-X5N" customClass="QuantityTextFieldView" customModule="ShopClient" customModuleProvider="target">
-                        <rect key="frame" x="175.5" y="95" width="60" height="20"/>
+                        <rect key="frame" x="175.5" y="85" width="60" height="40"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="ExK-OE-uuP"/>
+                            <constraint firstAttribute="height" constant="40" id="ExK-OE-uuP"/>
                             <constraint firstAttribute="width" constant="60" id="Gdl-eU-cCt"/>
                         </constraints>
                     </view>
