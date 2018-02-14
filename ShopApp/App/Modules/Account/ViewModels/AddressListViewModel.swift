@@ -39,12 +39,6 @@ class AddressListViewModel: BaseViewModel {
         return (address, selected, isDefault)
     }
     
-    func updateCheckoutShippingAddress(with address: Address) {
-        selectedAddress = address
-        loadCustomerAddresses(isTranslucentHud: true)
-        didSelectAddress.onNext(address)
-    }
-    
     func deleteCustomerAddress(with address: Address) {
         state.onNext(ViewState.make.loading(isTranslucent: true))
         deleteAddressUseCase.deleteCustomerAddress(with: address.id) { [weak self] (success, error) in

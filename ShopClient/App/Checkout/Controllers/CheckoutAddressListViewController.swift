@@ -9,11 +9,16 @@
 import UIKit
 
 class CheckoutAddressListViewController: AddressListViewController<CheckoutAddressListViewModel> {
-
+    var checkoutId: String!
+    
     override func viewDidLoad() {
         viewModel = CheckoutAddressListViewModel()
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setupViewModel()
+    }
+    
+    private func setupViewModel() {
+        viewModel.checkoutId = checkoutId
     }
 }

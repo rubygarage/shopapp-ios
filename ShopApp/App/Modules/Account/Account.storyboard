@@ -1012,7 +1012,7 @@
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="kKv-9n-zM3" firstAttribute="leading" secondItem="FMj-3L-ygo" secondAttribute="leading" id="4yw-lx-aHa"/>
                             <constraint firstItem="kKv-9n-zM3" firstAttribute="trailing" secondItem="FMj-3L-ygo" secondAttribute="trailing" id="EpX-Ya-BIv"/>

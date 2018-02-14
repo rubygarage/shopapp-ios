@@ -32,6 +32,12 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
         loadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.getCheckout()
+    }
+    
     // MARK: - Setup
     
     private func setupViews() {
@@ -172,6 +178,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             checkoutAddressFormController.delegate = self
             checkoutAddressFormController.addressAction = address == nil ? .add : .edit
         } else if let checkoutAddressListViewController = segue.destination as? CheckoutAddressListViewController {
+            checkoutAddressListViewController.checkoutId = viewModel.checkout.value?.id
             checkoutAddressListViewController.addressListType = destinationAddressType
             let isAddressTypeShipping = destinationAddressType == .shipping
             checkoutAddressListViewController.selectedAddress = isAddressTypeShipping ? viewModel.checkout.value?.shippingAddress : viewModel.billingAddress.value
@@ -289,14 +296,10 @@ extension CheckoutViewController: CheckoutAddressFormControllerDelegate {
 // MARK: - AddressListControllerDelegate
 
 extension CheckoutViewController: AddressListControllerDelegate {
-    func viewController(didSelect address: Address) {
-        if destinationAddressType == .shipping {
-            viewModel.updateCheckoutShippingAddress(with: address)
-        } else {
-            viewModel.billingAddress.value = address
-            tableProvider.billingAddress = address
-            reloadTable()
-        }
+    func viewController(didSelect billingAddress: Address) {
+        viewModel.billingAddress.value = billingAddress
+        tableProvider.billingAddress = billingAddress
+        reloadTable()
     }
 }
 

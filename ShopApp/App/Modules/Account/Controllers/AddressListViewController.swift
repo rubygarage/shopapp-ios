@@ -16,8 +16,7 @@ enum AddressListType {
 }
 
 protocol AddressListControllerDelegate: class {
-    // TODO:
-    func viewController(didSelect address: Address)
+    func viewController(didSelect billingAddress: Address)
 }
 
 class AddressListViewController<T: AddressListViewModel>: BaseViewController<T> {
@@ -38,7 +37,6 @@ class AddressListViewController<T: AddressListViewModel>: BaseViewController<T> 
     // MARK: - View conttroller lifecycle
     
     override func viewDidLoad() {
-//        viewModel = AddressListViewModel()
         super.viewDidLoad()
 
         setupViews()
@@ -100,6 +98,10 @@ class AddressListViewController<T: AddressListViewModel>: BaseViewController<T> 
     private func loadData() {
         viewModel.loadCustomerAddresses()
     }
+    
+    fileprivate func reloadTable() {
+        tableView.reloadData()
+    }
 }
 
 // MARK: - AddressListHeaderViewDelegate
@@ -116,7 +118,14 @@ extension AddressListViewController: AddressListHeaderViewDelegate {
 
 extension AddressListViewController: AddressListTableCellDelegate {
     func tableViewCell(_ cell: AddressListTableViewCell, didSelect address: Address) {
-        viewModel.updateCheckoutShippingAddress(with: address)
+        if let model = viewModel as? CheckoutAddressListViewModel, addressListType == .shipping {
+            model.updateCheckoutShippingAddress(with: address)
+        } else if addressListType == .billing {
+            selectedAddress = address
+            viewModel.selectedAddress = address
+            viewModel.loadCustomerAddresses(isTranslucentHud: true)
+            delegate?.viewController(didSelect: address)
+        }
     }
     
     func tableViewCell(_ cell: AddressListTableViewCell, didTapEdit address: Address) {
@@ -139,11 +148,21 @@ extension AddressListViewController: AddressListTableCellDelegate {
 
 extension AddressListViewController: CustomerAddressFormControllerDelegate {
     func viewController(_ controller: CustomerAddressFormViewController, didUpdate address: Address) {
-        if needToUpdate {
-            viewModel.updateCheckoutShippingAddress(with: address)
+        if needToUpdate, let model = viewModel as? CheckoutAddressListViewModel, addressListType == .shipping {
+            model.updateCheckoutShippingAddress(with: address)
+        } else if addressListType == .billing {
+            selectedAddress = address
+            viewModel.selectedAddress = address
+            viewModel.loadCustomerAddresses(isTranslucentHud: true)
+            delegate?.viewController(didSelect: address)
         } else {
-            viewModel.loadCustomerAddresses()
+            viewModel.loadCustomerAddresses(isTranslucentHud: true)
         }
+        navigationController?.popToViewController(self, animated: true)
+    }
+    
+    func viewController(_ controller: CustomerAddressFormViewController, didAdd address: Address) {
+        viewModel.loadCustomerAddresses(isTranslucentHud: true)
         navigationController?.popToViewController(self, animated: true)
     }
 }

@@ -12,6 +12,7 @@ import ShopApp_Gateway
 
 protocol CustomerAddressFormControllerDelegate: class {
     func viewController(_ controller: CustomerAddressFormViewController, didUpdate address: Address)
+    func viewController(_ controller: CustomerAddressFormViewController, didAdd address: Address)
 }
 
 class CustomerAddressFormViewController: BaseAddressFormViewController<CustomerAddressFormViewModel> {
@@ -42,7 +43,11 @@ class CustomerAddressFormViewController: BaseAddressFormViewController<CustomerA
                 guard let strongSelf = self else {
                     return
                 }
-                strongSelf.delegate?.viewController(strongSelf, didUpdate: address)
+                if strongSelf.addressAction == .add {
+                    strongSelf.delegate?.viewController(strongSelf, didAdd: address)
+                } else {
+                    strongSelf.delegate?.viewController(strongSelf, didUpdate: address)
+                }
             })
         .disposed(by: disposeBag)
     }

@@ -14,6 +14,6 @@ class AccountAddressListViewController: AddressListViewController<AccountAddress
         viewModel = AccountAddressListViewModel()
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // TODO:
     }
 }
