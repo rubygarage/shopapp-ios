@@ -32,7 +32,6 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var quantityTitleLabel: UILabel!
     @IBOutlet private weak var quantityTextFieldView: QuantityTextFieldView!    
-    @IBOutlet private weak var quantityUnderlineView: UIView!
     @IBOutlet private weak var addToCartButton: UIButton!
     @IBOutlet private weak var bottomView: UIView!
     @IBOutlet private weak var relatedItemsHeaderView: SeeAllTableHeaderView!
@@ -218,14 +217,6 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
     
     @IBAction func addToCartButtonDidPress(_ sender: UIButton) {
         addProductToCart()
-    }
-    
-    @IBAction func quantityEditingDidBegin(_ sender: UITextField) {
-        quantityUnderlineView.backgroundColor = UIColor.black
-    }
-    
-    @IBAction func quantityEditingDidEnd(_ sender: UITextField) {
-        quantityUnderlineView.backgroundColor = kQuantityUnderlineColorDefault
     }
     
     @IBAction func descriptionContainerDidTap(_ sender: UITapGestureRecognizer) {

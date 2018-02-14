@@ -19,8 +19,8 @@ extension DAO {
         CoreStore.perform(asynchronous: { (transaction) in
             var item = transaction.fetchOne(From<CartProductEntity>(), Where(predicate))
             if item != nil {
-                let itemQuantity = item?.quantity ?? 0
-                item?.quantity = itemQuantity + Int64(cartProduct.quantity)
+                let newQuantity = Int(item?.quantity ?? 0) + cartProduct.quantity
+                item?.quantity = Int64(newQuantity < kCartProductQuantityMax ? newQuantity : kCartProductQuantityMax)
             } else {
                 item = transaction.create(Into<CartProductEntity>())
                 item?.update(with: cartProduct, transaction: transaction)
