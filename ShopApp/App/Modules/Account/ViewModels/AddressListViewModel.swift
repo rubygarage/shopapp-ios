@@ -39,7 +39,7 @@ class AddressListViewModel: BaseViewModel {
         return (address, selected, isDefault)
     }
     
-    func deleteCustomerAddress(with address: Address) {
+    func deleteCustomerAddress(with address: Address, type: AddressListType) {
         state.onNext(ViewState.make.loading(isTranslucent: true))
         deleteAddressUseCase.deleteCustomerAddress(with: address.id) { [weak self] (success, error) in
             guard let strongSelf = self else {
@@ -47,8 +47,11 @@ class AddressListViewModel: BaseViewModel {
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if let success = success {
-                strongSelf.processDeleteAddressResponse(with: success)
+            } else if let success = success, success {
+                let selected = strongSelf.selectedAddress?.isEqual(to: address) ?? false
+                strongSelf.processDeleteAddressResponse(with: selected, type: type)
+                strongSelf.state.onNext(.content)
+            } else {
                 strongSelf.state.onNext(.content)
             }
         }
@@ -70,7 +73,7 @@ class AddressListViewModel: BaseViewModel {
         }
     }
     
-    func processDeleteAddressResponse(with isSelected: Bool) {
+    func processDeleteAddressResponse(with isSelected: Bool, type: AddressListType) {
         loadCustomerAddresses(isTranslucentHud: true)
     }
     

@@ -90,6 +90,9 @@ class AddressListViewController<T: AddressListViewModel>: BaseViewController<T> 
                 strongSelf.selectedAddress = address
                 strongSelf.viewModel.selectedAddress = address
                 strongSelf.viewModel.loadCustomerAddresses(isTranslucentHud: true)
+                if strongSelf.addressListType == .billing {
+                    strongSelf.delegate?.viewController(didSelectBillingAddress: address)
+                }
             })
             .disposed(by: disposeBag)
     }
@@ -148,7 +151,7 @@ extension AddressListViewController: AddressListTableCellDelegate {
     }
     
     func tableViewCell(_ cell: AddressListTableViewCell, didTapDelete address: Address) {
-        viewModel.deleteCustomerAddress(with: address)
+        viewModel.deleteCustomerAddress(with: address, type: addressListType)
     }
     
     func tableViewCell(_ cell: AddressListTableViewCell, didTapDefault address: Address) {

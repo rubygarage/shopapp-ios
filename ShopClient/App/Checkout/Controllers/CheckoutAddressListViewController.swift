@@ -6,7 +6,7 @@
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
-import UIKit
+import RxSwift
 
 class CheckoutAddressListViewController: AddressListViewController<CheckoutAddressListViewModel> {
     var checkoutId: String!
@@ -20,5 +20,16 @@ class CheckoutAddressListViewController: AddressListViewController<CheckoutAddre
     
     private func setupViewModel() {
         viewModel.checkoutId = checkoutId
+        
+        viewModel.didSelectBillingAddress
+            .subscribe(onNext: { [weak self] address in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.selectedAddress = address
+                strongSelf.viewModel.selectedAddress = address
+                strongSelf.delegate?.viewController(didSelectBillingAddress: address)
+            })
+            .disposed(by: disposeBag)
     }
 }

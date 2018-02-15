@@ -6,16 +6,17 @@
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
-import UIKit
+import RxSwift
 
 class CheckoutAddressListViewModel: AddressListViewModel {
     private let checkoutUseCase = CheckoutUseCase()
     
+    var didSelectBillingAddress = PublishSubject<Address>()
     var checkoutId: String!
     
-    override func processDeleteAddressResponse(with isSelected: Bool) {
+    override func processDeleteAddressResponse(with isSelected: Bool, type: AddressListType) {
         if isSelected, let defaultAddress = customerDefaultAddress.value {
-            updateCheckoutShippingAddress(with: defaultAddress)
+            setDefaultAddress(with: defaultAddress, type: type)
         } else {
             loadCustomerAddresses(isTranslucentHud: true)
         }
@@ -36,6 +37,15 @@ class CheckoutAddressListViewModel: AddressListViewModel {
             } else {
                 strongSelf.state.onNext(.error(error: RepoError()))
             }
+        }
+    }
+    
+    private func setDefaultAddress(with address: Address, type: AddressListType) {
+        if type == .shipping {
+            updateCheckoutShippingAddress(with: address)
+        } else {
+            didSelectBillingAddress.onNext(address)
+            loadCustomerAddresses(isTranslucentHud: true)
         }
     }
 }
