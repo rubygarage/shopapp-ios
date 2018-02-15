@@ -273,8 +273,8 @@
 		8E3215BF20300C4A00CA4FB4 /* UIView+LoadFromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3215BE20300C4A00CA4FB4 /* UIView+LoadFromNib.swift */; };
 		8E45017820179C0600D4CF6E /* TextFieldWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E45017720179C0600D4CF6E /* TextFieldWrapper.swift */; };
 		8E5EFA832035BA5000FD718B /* CartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5EFA822035BA4F00FD718B /* CartRepository.swift */; };
-		8E5EFAD72035F2BF00FD718B /* ShopClient_Gateway.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E5EFAD02035F2BF00FD718B /* ShopClient_Gateway.framework */; };
-		8E5EFAD92035F2BF00FD718B /* ShopClient_Gateway.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E5EFAD02035F2BF00FD718B /* ShopClient_Gateway.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8E5EFAD72035F2BF00FD718B /* ShopClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E5EFAD02035F2BF00FD718B /* ShopClient.framework */; };
+		8E5EFAD92035F2BF00FD718B /* ShopClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E5EFAD02035F2BF00FD718B /* ShopClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8E5EFB142035F34400FD718B /* PaymentsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5EFAF12035F34200FD718B /* PaymentsRepository.swift */; };
 		8E5EFB152035F34400FD718B /* OrderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5EFAF22035F34200FD718B /* OrderRepository.swift */; };
 		8E5EFB162035F34400FD718B /* RepoCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5EFAF32035F34200FD718B /* RepoCallback.swift */; };
@@ -317,16 +317,6 @@
 		E48C459A560E7DC50BF69226 /* Pods_ShopClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9DA8ECD13CBDF3EE2618FE4 /* Pods_ShopClient.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		8E5EFB362035F35700FD718B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 61E4E6281F56C868001C6E01 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8E5EFACF2035F2BF00FD718B;
-			remoteInfo = ShopClient_Gateway;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		8E5EFAD82035F2BF00FD718B /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -334,7 +324,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8E5EFAD92035F2BF00FD718B /* ShopClient_Gateway.framework in Embed Frameworks */,
+				8E5EFAD92035F2BF00FD718B /* ShopClient.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -597,7 +587,7 @@
 		61CEAA6D1F5ED16E0016FBD7 /* UIViewController+Routes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Routes.swift"; sourceTree = "<group>"; };
 		61D7A2851F7A9FBF00031093 /* UIViewController+BarButtonItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+BarButtonItems.swift"; sourceTree = "<group>"; };
 		61DA4B871F614BBC00444F64 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		61E4E6301F56C868001C6E01 /* ShopClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		61E4E6301F56C868001C6E01 /* ShopClient_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopClient_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E4E6331F56C868001C6E01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61E4E63A1F56C868001C6E01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		61E4E63D1F56C868001C6E01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -623,7 +613,7 @@
 		8E3215BE20300C4A00CA4FB4 /* UIView+LoadFromNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+LoadFromNib.swift"; sourceTree = "<group>"; };
 		8E45017720179C0600D4CF6E /* TextFieldWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWrapper.swift; sourceTree = "<group>"; };
 		8E5EFA822035BA4F00FD718B /* CartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartRepository.swift; sourceTree = "<group>"; };
-		8E5EFAD02035F2BF00FD718B /* ShopClient_Gateway.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ShopClient_Gateway.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E5EFAD02035F2BF00FD718B /* ShopClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ShopClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E5EFAF12035F34200FD718B /* PaymentsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentsRepository.swift; sourceTree = "<group>"; };
 		8E5EFAF22035F34200FD718B /* OrderRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderRepository.swift; sourceTree = "<group>"; };
 		8E5EFAF32035F34200FD718B /* RepoCallback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoCallback.swift; sourceTree = "<group>"; };
@@ -672,7 +662,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E5EFAD72035F2BF00FD718B /* ShopClient_Gateway.framework in Frameworks */,
+				8E5EFAD72035F2BF00FD718B /* ShopClient.framework in Frameworks */,
 				E48C459A560E7DC50BF69226 /* Pods_ShopClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1933,8 +1923,8 @@
 		61E4E6311F56C868001C6E01 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				61E4E6301F56C868001C6E01 /* ShopClient.app */,
-				8E5EFAD02035F2BF00FD718B /* ShopClient_Gateway.framework */,
+				61E4E6301F56C868001C6E01 /* ShopClient_App.app */,
+				8E5EFAD02035F2BF00FD718B /* ShopClient.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2104,9 +2094,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		61E4E62F1F56C868001C6E01 /* ShopClient */ = {
+		61E4E62F1F56C868001C6E01 /* ShopClient_App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 61E4E6421F56C868001C6E01 /* Build configuration list for PBXNativeTarget "ShopClient" */;
+			buildConfigurationList = 61E4E6421F56C868001C6E01 /* Build configuration list for PBXNativeTarget "ShopClient_App" */;
 			buildPhases = (
 				055932378C28D17C2085824C /* [CP] Check Pods Manifest.lock */,
 				61E4E62C1F56C868001C6E01 /* Sources */,
@@ -2121,16 +2111,15 @@
 			buildRules = (
 			);
 			dependencies = (
-				8E5EFB372035F35700FD718B /* PBXTargetDependency */,
 			);
-			name = ShopClient;
+			name = ShopClient_App;
 			productName = ShopClient;
-			productReference = 61E4E6301F56C868001C6E01 /* ShopClient.app */;
+			productReference = 61E4E6301F56C868001C6E01 /* ShopClient_App.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8E5EFACF2035F2BF00FD718B /* ShopClient_Gateway */ = {
+		8E5EFACF2035F2BF00FD718B /* ShopClient */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8E5EFADE2035F2BF00FD718B /* Build configuration list for PBXNativeTarget "ShopClient_Gateway" */;
+			buildConfigurationList = 8E5EFADE2035F2BF00FD718B /* Build configuration list for PBXNativeTarget "ShopClient" */;
 			buildPhases = (
 				8E5EFACB2035F2BF00FD718B /* Sources */,
 				8E5EFACC2035F2BF00FD718B /* Frameworks */,
@@ -2141,9 +2130,9 @@
 			);
 			dependencies = (
 			);
-			name = ShopClient_Gateway;
+			name = ShopClient;
 			productName = ShopClient_Gateway;
-			productReference = 8E5EFAD02035F2BF00FD718B /* ShopClient_Gateway.framework */;
+			productReference = 8E5EFAD02035F2BF00FD718B /* ShopClient.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -2187,8 +2176,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				61E4E62F1F56C868001C6E01 /* ShopClient */,
-				8E5EFACF2035F2BF00FD718B /* ShopClient_Gateway */,
+				61E4E62F1F56C868001C6E01 /* ShopClient_App */,
+				8E5EFACF2035F2BF00FD718B /* ShopClient */,
 			);
 		};
 /* End PBXProject section */
@@ -2324,17 +2313,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ShopClient/Pods-ShopClient-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AvatarImageView/AvatarImageView.framework",
 				"${BUILT_PRODUCTS_DIR}/CoreStore/CoreStore.framework",
-				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/Mobile-Buy-SDK/MobileBuySDK.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SKPhotoBrowser/SKPhotoBrowser.framework",
-				"${BUILT_PRODUCTS_DIR}/ShopClient_Shopify/ShopClient_Shopify.framework",
 				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
@@ -2344,17 +2329,13 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AvatarImageView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreStore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MobileBuySDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SKPhotoBrowser.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ShopClient_Shopify.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
@@ -2646,14 +2627,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		8E5EFB372035F35700FD718B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8E5EFACF2035F2BF00FD718B /* ShopClient_Gateway */;
-			targetProxy = 8E5EFB362035F35700FD718B /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		61E4E63C1F56C868001C6E01 /* LaunchScreen.storyboard */ = {
@@ -3090,7 +3063,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		61E4E6421F56C868001C6E01 /* Build configuration list for PBXNativeTarget "ShopClient" */ = {
+		61E4E6421F56C868001C6E01 /* Build configuration list for PBXNativeTarget "ShopClient_App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				61E4E6431F56C868001C6E01 /* Debug */,
@@ -3101,7 +3074,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8E5EFADE2035F2BF00FD718B /* Build configuration list for PBXNativeTarget "ShopClient_Gateway" */ = {
+		8E5EFADE2035F2BF00FD718B /* Build configuration list for PBXNativeTarget "ShopClient" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8E5EFADA2035F2BF00FD718B /* Debug */,

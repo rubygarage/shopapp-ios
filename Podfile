@@ -35,7 +35,7 @@ target 'ShopClient' do
   pod 'SwiftLint', '~> 0.24'
 
   # ShopClient
-  pod 'ShopClient_Shopify', :path => 'Shopify'
+  # pod 'ShopClient_Shopify', :path => 'Shopify'
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|
