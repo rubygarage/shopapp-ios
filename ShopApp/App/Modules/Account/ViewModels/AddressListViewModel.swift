@@ -71,7 +71,7 @@ class AddressListViewModel: BaseViewModel {
     }
     
     func processDeleteAddressResponse(with isSelected: Bool) {
-        // Method to override
+        loadCustomerAddresses(isTranslucentHud: true)
     }
     
     private func processSelectedAddressUpdatingResponse(with address: Address, isSelected: Bool) {

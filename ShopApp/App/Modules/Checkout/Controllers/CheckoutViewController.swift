@@ -296,9 +296,9 @@ extension CheckoutViewController: CheckoutAddressFormControllerDelegate {
 // MARK: - AddressListControllerDelegate
 
 extension CheckoutViewController: AddressListControllerDelegate {
-    func viewController(didSelect billingAddress: Address) {
-        viewModel.billingAddress.value = billingAddress
-        tableProvider.billingAddress = billingAddress
+    func viewController(didSelectBillingAddress address: Address) {
+        viewModel.billingAddress.value = address
+        tableProvider.billingAddress = address
         reloadTable()
     }
 }

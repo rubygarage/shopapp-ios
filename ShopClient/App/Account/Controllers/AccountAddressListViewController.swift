@@ -13,7 +13,5 @@ class AccountAddressListViewController: AddressListViewController<AccountAddress
     override func viewDidLoad() {
         viewModel = AccountAddressListViewModel()
         super.viewDidLoad()
-
-        // TODO:
     }
 }

@@ -31,6 +31,7 @@ class CheckoutAddressListViewModel: AddressListViewModel {
                 strongSelf.state.onNext(.error(error: error))
             } else if let success = success, success == true {
                 strongSelf.selectedAddress = address
+                strongSelf.didSelectAddress.onNext(address)
                 strongSelf.loadCustomerAddresses(isTranslucentHud: true)
             } else {
                 strongSelf.state.onNext(.error(error: RepoError()))

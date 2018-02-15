@@ -16,7 +16,7 @@ enum AddressListType {
 }
 
 protocol AddressListControllerDelegate: class {
-    func viewController(didSelect billingAddress: Address)
+    func viewController(didSelectBillingAddress address: Address)
 }
 
 class AddressListViewController<T: AddressListViewModel>: BaseViewController<T> {
@@ -87,10 +87,9 @@ class AddressListViewController<T: AddressListViewModel>: BaseViewController<T> 
                 guard let strongSelf = self else {
                     return
                 }
-                if strongSelf.addressListType == .billing {
-                    strongSelf.destinationAddress = address
-                }
-                strongSelf.delegate?.viewController(didSelect: address)
+                strongSelf.selectedAddress = address
+                strongSelf.viewModel.selectedAddress = address
+                strongSelf.viewModel.loadCustomerAddresses(isTranslucentHud: true)
             })
             .disposed(by: disposeBag)
     }
@@ -99,8 +98,21 @@ class AddressListViewController<T: AddressListViewModel>: BaseViewController<T> 
         viewModel.loadCustomerAddresses()
     }
     
-    fileprivate func reloadTable() {
-        tableView.reloadData()
+    func update(shippingAddress: Address) {
+        if needToUpdate, let model = viewModel as? CheckoutAddressListViewModel {
+            model.updateCheckoutShippingAddress(with: shippingAddress)
+        } else {
+            viewModel.loadCustomerAddresses(isTranslucentHud: true)
+        }
+    }
+    
+    func update(billingAddress: Address) {
+        if needToUpdate {
+            selectedAddress = billingAddress
+            viewModel.selectedAddress = billingAddress
+            delegate?.viewController(didSelectBillingAddress: billingAddress)
+        }
+        viewModel.loadCustomerAddresses(isTranslucentHud: true)
     }
 }
 
@@ -124,7 +136,7 @@ extension AddressListViewController: AddressListTableCellDelegate {
             selectedAddress = address
             viewModel.selectedAddress = address
             viewModel.loadCustomerAddresses(isTranslucentHud: true)
-            delegate?.viewController(didSelect: address)
+            delegate?.viewController(didSelectBillingAddress: address)
         }
     }
     
@@ -148,15 +160,10 @@ extension AddressListViewController: AddressListTableCellDelegate {
 
 extension AddressListViewController: CustomerAddressFormControllerDelegate {
     func viewController(_ controller: CustomerAddressFormViewController, didUpdate address: Address) {
-        if needToUpdate, let model = viewModel as? CheckoutAddressListViewModel, addressListType == .shipping {
-            model.updateCheckoutShippingAddress(with: address)
-        } else if addressListType == .billing {
-            selectedAddress = address
-            viewModel.selectedAddress = address
-            viewModel.loadCustomerAddresses(isTranslucentHud: true)
-            delegate?.viewController(didSelect: address)
+        if addressListType == .shipping {
+            update(shippingAddress: address)
         } else {
-            viewModel.loadCustomerAddresses(isTranslucentHud: true)
+            update(billingAddress: address)
         }
         navigationController?.popToViewController(self, animated: true)
     }

@@ -8,8 +8,4 @@
 
 import UIKit
 
-class AccountAddressListViewModel: AddressListViewModel {
-    override func processDeleteAddressResponse(with isSelected: Bool) {
-        loadCustomerAddresses(isTranslucentHud: true)
-    }
-}
+class AccountAddressListViewModel: AddressListViewModel {}
