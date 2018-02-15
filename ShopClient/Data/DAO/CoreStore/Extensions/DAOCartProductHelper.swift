@@ -12,7 +12,7 @@ extension CartProductEntity {
     func update(with item: CartProduct, transaction: AsynchronousDataTransaction) {
         productId = item.productId
         productTitle = item.productTitle
-        quantity = Int16(item.quantity)
+        quantity = Int64(item.quantity)
         currency = item.currency
         
         let predicate = NSPredicate(format: "id = %@", item.productVariant?.id ?? "")
