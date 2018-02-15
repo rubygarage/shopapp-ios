@@ -9,6 +9,8 @@
 import UIKit
 import WebKit
 
+import ShopClient_Gateway
+
 private let kTextViewContentInsets = UIEdgeInsets(top: 28, left: 16, bottom: 28, right: 16)
 private let kTextViewContentOffset = CGPoint(x: -16, y: -28)
 

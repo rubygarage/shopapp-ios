@@ -7,11 +7,12 @@
 //
 
 import RxSwift
+import ShopClient_Gateway
 
 class CategoryListViewModel: BasePaginationViewModel {
     private let categoryListUseCase = CategoryListUseCase()
     
-    var items = Variable<[Category]>([])
+    var items = Variable<[ShopClient_Gateway.Category]>([])
     
     func reloadData() {
         paginationValue = nil
@@ -40,7 +41,7 @@ class CategoryListViewModel: BasePaginationViewModel {
         }
     }
     
-    private func updateCategories(with categories: [Category]) {
+    private func updateCategories(with categories: [ShopClient_Gateway.Category]) {
         if paginationValue == nil {
             items.value.removeAll()
         }

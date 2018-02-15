@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol CheckoutCartCollectionDataSourceDelegate: class {
     func itemsCount() -> Int
     func item(at index: Int) -> (image: Image, productVariantId: String)

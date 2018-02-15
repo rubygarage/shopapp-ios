@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import ShopClient_Gateway
 
 class AccountViewModel: BaseViewModel {
     private let customerUseCase = CustomerUseCase()

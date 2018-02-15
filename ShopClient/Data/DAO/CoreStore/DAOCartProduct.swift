@@ -7,6 +7,7 @@
 //
 
 import CoreStore
+import ShopClient_Gateway
 
 extension DAO {
     func getCartProductList() -> [CartProduct] {        

@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 let kOrderFooterViewHeight: CGFloat = 60
 
 protocol OrderFooterDelegate: class {

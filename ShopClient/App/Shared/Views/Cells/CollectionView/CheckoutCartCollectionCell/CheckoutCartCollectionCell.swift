@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 private let kCellSize = CGSize(width: 111, height: 98)
 
 class CheckoutCartCollectionCell: UICollectionViewCell {

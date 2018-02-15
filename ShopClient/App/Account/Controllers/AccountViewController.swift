@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 class AccountViewController: BaseViewController<AccountViewModel> {
     @IBOutlet private weak var tableView: UITableView!
     

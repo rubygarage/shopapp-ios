@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 class LastArrivalsCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var productImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!

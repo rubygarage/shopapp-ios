@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
     @IBOutlet private weak var tableView: UITableView!
     

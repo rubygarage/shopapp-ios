@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import ShopClient_Gateway
 
 class CheckoutAddressFormViewModel: BaseViewModel {
     private let checkoutUseCase = CheckoutUseCase()

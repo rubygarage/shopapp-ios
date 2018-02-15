@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 private let kTitleLabelTrailingDefault: CGFloat = 151
 private let kTitleLabelTrailingWide: CGFloat = 16
 

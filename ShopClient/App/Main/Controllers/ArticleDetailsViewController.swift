@@ -9,6 +9,8 @@
 import SafariServices
 import UIKit
 
+import ShopClient_Gateway
+
 private let kArticleTitleLabelTopDefault: CGFloat = 20
 
 class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel>, UIWebViewDelegate {

@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 private let kNumberOfColumns: CGFloat = 2
 private let kCollectionViewMarginTop: CGFloat = 80
 private let kCollectionViewMarginVertical: CGFloat = 20

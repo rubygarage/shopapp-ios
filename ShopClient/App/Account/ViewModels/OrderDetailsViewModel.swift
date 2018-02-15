@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import ShopClient_Gateway
 
 class OrderDetailsViewModel: BaseViewModel {
     private let orderUseCase = OrderUseCase()

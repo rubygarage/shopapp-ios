@@ -6,10 +6,16 @@
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 struct ChangeCartProductUseCase {
+    private let repository: CartRepository!
+
+    init() {
+        self.repository = nil
+    }
+
     func changeCartProductQuantity(productVariantId: String?, quantity: Int, _ callback: @escaping RepoCallback<CartProduct>) {
-        Repository.shared.changeCartProductQuantity(with: productVariantId, quantity: quantity, callback: callback)
+        repository.changeCartProductQuantity(with: productVariantId, quantity: quantity, callback: callback)
     }
 }

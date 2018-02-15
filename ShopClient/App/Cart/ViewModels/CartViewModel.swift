@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import ShopClient_Gateway
 
 class CartViewModel: BaseViewModel {
     private let cartProductListUseCase = CartProductListUseCase()
@@ -67,7 +68,7 @@ class CartViewModel: BaseViewModel {
     }
     
     private func removeFromData(with item: CartProduct) {
-        guard let index = data.value.index(of: item) else {
+        guard let index = data.value.index(where: { $0.productId == item.productId }) else {
             return
         }
         data.value.remove(at: index)

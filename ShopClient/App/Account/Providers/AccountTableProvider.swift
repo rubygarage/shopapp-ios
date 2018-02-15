@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol AccountTableProviderDelegate: class {
     func provider(_ provider: AccountTableProvider, didSelect policy: Policy)
 }

@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol PopularTableCellDelegate: class {
     func tableViewCell(_ tableViewCell: PopularTableViewCell, didSelect product: Product)
 }

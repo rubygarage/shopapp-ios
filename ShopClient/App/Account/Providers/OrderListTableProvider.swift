@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol OrdersListTableProviderDelegate: class {
     func provider(_ provider: OrdersListTableProvider, didSelect order: Order)
 }

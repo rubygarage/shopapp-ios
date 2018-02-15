@@ -8,6 +8,8 @@
 
 import RxSwift
 
+import ShopClient_Gateway
+
 typealias SelectedVariant = (variant: ProductVariant?, allOptions: [ProductOption], selectedOptions: [SelectedOption], currency: String)
 
 class ProductDetailsViewModel: BaseViewModel {

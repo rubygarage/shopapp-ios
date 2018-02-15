@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol ErrorViewDelegate: class {
     func viewDidTapTryAgain(_ view: ErrorView)
 }
@@ -47,7 +49,7 @@ class ErrorView: UIView {
     
     private func updateUI() {
         errorImageView.isHidden = error is NetworkError == false
-        errorTextLabel.text = error?.errorMessage
+        errorTextLabel.text = error is NetworkError ? error?.localizedMessage : "Error.NoConnection".localizable
     }
     
     // MARK: - Actions

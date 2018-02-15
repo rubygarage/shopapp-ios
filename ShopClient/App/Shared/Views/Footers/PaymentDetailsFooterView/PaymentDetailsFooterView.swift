@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 let kPaymentDetailsFooterViewHeight: CGFloat = 175
 
 class PaymentDetailsFooterView: UIView {

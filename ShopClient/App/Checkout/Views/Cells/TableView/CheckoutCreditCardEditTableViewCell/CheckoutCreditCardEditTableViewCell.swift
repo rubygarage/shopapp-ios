@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol CheckoutCreditCardEditTableCellDelegate: class {
     func tableViewCellDidTapEditCard(_ cell: CheckoutCreditCardEditTableViewCell)
 }

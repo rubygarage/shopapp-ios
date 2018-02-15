@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol AddressListTableCellDelegate: class {
     func tableViewCell(_ cell: AddressListTableViewCell, didSelect address: Address)
     func tableViewCell(_ cell: AddressListTableViewCell, didTapEdit address: Address)

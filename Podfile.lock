@@ -14,6 +14,10 @@ PODS:
   - SDWebImage (4.2.2):
     - SDWebImage/Core (= 4.2.2)
   - SDWebImage/Core (4.2.2)
+  - ShopClient_Shopify (0.0.1):
+    - Alamofire (~> 4.5)
+    - KeychainSwift (~> 10.0)
+    - Mobile-Buy-SDK (~> 3.1)
   - SKPhotoBrowser (5.0.0)
   - SwiftLint (0.24.0)
   - SwipeCellKit (2.0.0)
@@ -24,17 +28,15 @@ PODS:
   - UIScrollView-InfiniteScroll (1.0.2)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.5)
   - AvatarImageView (~> 2.1)
   - CoreStore (~> 4.2)
   - Crashlytics (~> 3.9)
   - Fabric (~> 1.7)
-  - KeychainSwift (~> 10.0)
   - MBProgressHUD (~> 1.0)
-  - Mobile-Buy-SDK (~> 3.1)
   - RxCocoa (~> 4.1)
   - RxSwift (~> 4.1)
   - SDWebImage (~> 4.1)
+  - ShopClient_Shopify (from `Shopify`)
   - SKPhotoBrowser (~> 5.0)
   - SwiftLint (~> 0.24)
   - SwipeCellKit (~> 2.0)
@@ -43,6 +45,10 @@ DEPENDENCIES:
   - TTTAttributedLabel (~> 2.0)
   - UIImage+Additions (~> 2.1)
   - UIScrollView-InfiniteScroll (~> 1.0)
+
+EXTERNAL SOURCES:
+  ShopClient_Shopify:
+    :path: Shopify
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
@@ -56,6 +62,7 @@ SPEC CHECKSUMS:
   RxCocoa: fd0862fd2df95fa55562ad28ffd2522c25eb4a85
   RxSwift: c6e3b1c7b325c7d121cd4327e9d98b7ed746b570
   SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
+  ShopClient_Shopify: f9e5a284fe37587a99e9880d1370931f74602521
   SKPhotoBrowser: fe936f878955a568c726bf05d14e1d2717d91ce0
   SwiftLint: a014c92b4664e8b13f380f8640a51bb1733778ba
   SwipeCellKit: 349c61ffde96ac3ae51c2691a03e421b5b29ee98
@@ -65,6 +72,6 @@ SPEC CHECKSUMS:
   UIImage+Additions: da531911c34e298b46b567a28df03bb098af1389
   UIScrollView-InfiniteScroll: c132d6d5851daff229ab4a1060ccf70a05a051c9
 
-PODFILE CHECKSUM: 97ff453851a35180a047695323c8e50d8fd48260
+PODFILE CHECKSUM: ce905ed9b07d594c90ece45f8ff0118078e98f63
 
 COCOAPODS: 1.3.1

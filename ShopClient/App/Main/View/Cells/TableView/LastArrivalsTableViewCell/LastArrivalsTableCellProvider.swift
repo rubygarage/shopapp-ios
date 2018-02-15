@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 private let kLastArrivalsTableCellSize = CGSize(width: 200, height: 200)
 
 protocol LastArrivalsTableCellProviderDelegate: class {

@@ -6,17 +6,23 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 typealias LoginStatusCallback = (_ isLoggedIn: Bool) -> Void
 
 struct LoginUseCase {
+    private let repository: Repository!
+
+    init() {
+        self.repository = nil
+    }
+
     func login(with email: String, password: String, _ callback: @escaping RepoCallback<Bool>) {
-        Repository.shared.login(with: email, password: password, callback: callback)
+        repository.login(with: email, password: password, callback: callback)
     }
     
     func getLoginStatus(_ callback: LoginStatusCallback) {
-        let isLoggedIn = Repository.shared.isLoggedIn()
+        let isLoggedIn = repository.isLoggedIn()
         callback(isLoggedIn)
     }
 }

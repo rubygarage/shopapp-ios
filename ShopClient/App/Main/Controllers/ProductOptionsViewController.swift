@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 private let kOptionCollectionViewAdditionalHeight = CGFloat(20.0)
 
 let kOptionCollectionViewHeaderHeight = CGFloat(46.0)

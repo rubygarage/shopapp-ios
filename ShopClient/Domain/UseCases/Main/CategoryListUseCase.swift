@@ -6,10 +6,16 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 struct CategoryListUseCase {
+    private let repository: Repository!
+
+    init() {
+        self.repository = nil
+    }
+
     func getCategoryList(_ callback: @escaping RepoCallback<[Category]>) {
-        Repository.shared.getCategoryList(callback: callback)
+        repository.getCategoryList(perPage: kItemsPerPage, paginationValue: nil, sortBy: nil, reverse: false, callback: callback)
     }
 }

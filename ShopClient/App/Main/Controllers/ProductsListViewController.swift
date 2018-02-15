@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 class ProductsListViewController: GridCollectionViewController<ProductsListViewModel> {
     var sortingValue: SortingValue!
     var keyPhrase: String?

@@ -6,10 +6,16 @@
 //  Copyright © 2018 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 struct ResetPasswordUseCase {
+    private let repository: Repository!
+
+    init() {
+        self.repository = nil
+    }
+
     func resetPassword(with email: String, _ callback: @escaping RepoCallback<Bool>) {
-        Repository.shared.resetPassword(with: email, callback: callback)
+        repository.resetPassword(with: email, callback: callback)
     }
 }

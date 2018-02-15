@@ -10,6 +10,7 @@ import UIKit
 
 import RxCocoa
 import RxSwift
+import ShopClient_Gateway
 import Toaster
 
 private let kLoadingViewFillAlpha: CGFloat = 1
@@ -132,7 +133,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
     
     private func process(criticalError: CriticalError?) {
         loadingView.removeFromSuperview()
-        showToast(with: criticalError?.errorMessage)
+        showToast(with: criticalError?.localizedMessage)
         if self is HomeViewController == false {
             setHomeController()
         }
@@ -140,7 +141,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
     
     private func process(nonCriticalError: NonCriticalError?) {
         loadingView.removeFromSuperview()
-        showToast(with: nonCriticalError?.errorMessage)
+        showToast(with: nonCriticalError?.localizedMessage)
     }
     
     private func process(contentError: ContentError?) {

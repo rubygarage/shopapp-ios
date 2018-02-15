@@ -9,6 +9,7 @@
 import Foundation
 
 import SDWebImage
+import ShopClient_Gateway
 
 extension UIImageView {
     func set(image remoteImage: Image?, initialContentMode: UIViewContentMode = .center) {

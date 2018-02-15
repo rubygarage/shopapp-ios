@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol ImagesCarouselCollectionProviderDelegate: class {
     func provider(_ provider: ImagesCarouselCollectionProvider, didScrollToImageAt index: Int)
 }

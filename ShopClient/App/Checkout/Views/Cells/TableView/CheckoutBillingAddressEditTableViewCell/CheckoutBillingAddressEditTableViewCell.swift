@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol CheckoutBillingAddressEditCellDelegate: class {
     func tableViewCellDidTapEditBillingAddress(_ cell: CheckoutBillingAddressEditTableViewCell)
 }

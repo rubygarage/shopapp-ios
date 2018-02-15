@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import ShopClient_Gateway
 
 class AddressListViewModel: BaseViewModel {
     private let customerUseCase = CustomerUseCase()

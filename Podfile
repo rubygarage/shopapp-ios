@@ -8,9 +8,6 @@ target 'ShopClient' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for ShopClient
-  pod 'Mobile-Buy-SDK', '~> 3.1'
-
   # UI
   pod 'SDWebImage', '~> 4.1'
   pod 'MBProgressHUD', '~> 1.0'
@@ -22,9 +19,6 @@ target 'ShopClient' do
   pod 'SwipeCellKit', '~> 2.0'
   pod 'UIImage+Additions', '~> 2.1'
   pod 'TTTAttributedLabel', '~> 2.0'
-  
-  # Network
-  pod 'Alamofire', '~> 4.5'
 
   # Database
   pod 'CoreStore', '~> 4.2'
@@ -33,15 +27,15 @@ target 'ShopClient' do
   pod 'RxSwift', '~> 4.1'
   pod 'RxCocoa', '~> 4.1'
 
-  # Secutity
-  pod 'KeychainSwift', '~> 10.0'
-
   # Crash&Beta
   pod 'Fabric', '~> 1.7'
   pod 'Crashlytics', '~> 3.9'
-  
+
   # Developer tools
   pod 'SwiftLint', '~> 0.24'
+
+  # ShopClient
+  pod 'ShopClient_Shopify', :path => 'Shopify'
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|

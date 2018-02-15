@@ -8,6 +8,7 @@
 
 import UIKit
 
+import ShopClient_Gateway
 import SKPhotoBrowser
 
 extension UIViewController {

@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel> {
     private var tableProvider: ArticlesListTableProvider!
     

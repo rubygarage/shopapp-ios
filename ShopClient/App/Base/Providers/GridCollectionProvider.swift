@@ -8,12 +8,14 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 private let kGridNumberOfColumns: CGFloat = 2
 private let kCellImageRatio: CGFloat = 16 / 9
 
-@objc protocol GridCollectionProviderDelegate: class {
+protocol GridCollectionProviderDelegate: class {
     func provider(_ provider: GridCollectionProvider, didSelect product: Product)
-    @objc optional func provider(_ provider: GridCollectionProvider, didScroll scrollView: UIScrollView)
+    func provider(_ provider: GridCollectionProvider, didScroll scrollView: UIScrollView)
 }
 
 class GridCollectionProvider: NSObject {
@@ -50,7 +52,7 @@ extension GridCollectionProvider: UICollectionViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        delegate?.provider?(self, didScroll: scrollView)
+        delegate?.provider(self, didScroll: scrollView)
     }
 }
 

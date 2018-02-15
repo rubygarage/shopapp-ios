@@ -7,6 +7,7 @@
 //
 
 import CoreStore
+import ShopClient_Gateway
 
 extension ImageEntity {
     func update(with item: Image?) {

@@ -8,12 +8,14 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol CategoryListCollectionProviderDelegate: class {
-    func provider(_ provider: CategoryListCollectionProvider, didSelect category: Category)
+    func provider(_ provider: CategoryListCollectionProvider, didSelect category: ShopClient_Gateway.Category)
 }
 
 class CategoryListCollectionProvider: NSObject {
-    var categories: [Category] = []
+    var categories: [ShopClient_Gateway.Category] = []
     
     weak var delegate: CategoryListCollectionProviderDelegate?
 }

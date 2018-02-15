@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol PopularTableCellProviderDelegate: class {
     func provider(_ provider: PopularTableCellProvider, didSelect product: Product)
 }

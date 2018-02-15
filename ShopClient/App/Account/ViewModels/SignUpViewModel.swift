@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import ShopClient_Gateway
 
 class SignUpViewModel: BaseViewModel {
     private let shopUseCase = ShopUseCase()

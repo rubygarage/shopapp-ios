@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 let kOrderHeaderViewHeight: CGFloat = 75
 
 protocol OrderHeaderDelegate: class {

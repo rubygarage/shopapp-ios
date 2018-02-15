@@ -6,10 +6,16 @@
 //  Copyright © 2018 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 struct OrderUseCase {
+    private let repository: Repository!
+
+    init() {
+        self.repository = nil
+    }
+
     func getOrder(with id: String, _ callback: @escaping RepoCallback<Order>) {
-        Repository.shared.getOrder(id: id, callback: callback)
+        repository.getOrder(id: id, callback: callback)
     }
 }

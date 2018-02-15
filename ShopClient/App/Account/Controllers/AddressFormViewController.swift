@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import ShopClient_Gateway
 
 private let kStatePickerTopConstraint: CGFloat = 45
 private let kStatePickerHeightConstraint: CGFloat = 22

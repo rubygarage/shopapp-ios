@@ -6,7 +6,7 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 extension ProductVariant {
     convenience init?(with variant: ProductVariantEntity?) {

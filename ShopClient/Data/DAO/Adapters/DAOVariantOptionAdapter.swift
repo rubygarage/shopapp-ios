@@ -6,7 +6,7 @@
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 extension VariantOption {
     convenience init?(with option: VariantOptionEntity?) {

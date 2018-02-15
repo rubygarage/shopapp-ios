@@ -6,10 +6,16 @@
 //  Copyright © 2018 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 struct OrderListUseCase {
+    private let repository: Repository!
+
+    init() {
+        self.repository = nil
+    }
+
     func getOrderList(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Order]>) {
-        Repository.shared.getOrderList(paginationValue: paginationValue, callback: callback)
+        repository.getOrderList(perPage: kItemsPerPage, paginationValue: paginationValue, callback: callback)
     }
 }

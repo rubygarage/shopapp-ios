@@ -8,6 +8,8 @@
 
 import RxSwift
 
+import ShopClient_Gateway
+
 class GridCollectionViewModel: BasePaginationViewModel {
     var products = Variable<[Product]>([])
     

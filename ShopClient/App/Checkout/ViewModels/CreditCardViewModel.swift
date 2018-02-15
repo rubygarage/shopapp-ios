@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import ShopClient_Gateway
 
 class CreditCardViewModel: BaseViewModel {
     var holderNameText = Variable<String>("")

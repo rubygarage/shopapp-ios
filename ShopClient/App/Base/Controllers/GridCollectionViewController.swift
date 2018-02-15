@@ -8,6 +8,7 @@
 
 import UIKit
 
+import ShopClient_Gateway
 import UIScrollView_InfiniteScroll
 
 class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionViewController<T>, GridCollectionProviderDelegate {

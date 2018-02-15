@@ -7,6 +7,7 @@
 //
 
 import CoreStore
+import ShopClient_Gateway
 
 extension CartProductEntity {
     func update(with item: CartProduct, transaction: AsynchronousDataTransaction) {

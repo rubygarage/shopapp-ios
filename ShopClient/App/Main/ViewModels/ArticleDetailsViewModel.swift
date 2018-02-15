@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import ShopClient_Gateway
 
 class ArticleDetailsViewModel: BaseViewModel {
     private let articleUseCase = ArticleUseCase()

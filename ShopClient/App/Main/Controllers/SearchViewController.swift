@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 private let kTitleViewAlphaDefault: CGFloat = 1
 private let kTitleViewAlphaHidden: CGFloat = 0
 private let kTitleViewInset: CGFloat = 8
@@ -19,7 +21,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
     
     private let titleView = SearchTitleView()
     
-    fileprivate var selectedCategory: Category?
+    fileprivate var selectedCategory: ShopClient_Gateway.Category?
     
     override var customEmptyDataView: UIView {
         return SearchEmptyDataView(frame: view.frame)
@@ -155,7 +157,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
 // MARK: - CategoryListControllerDelegate
 
 extension SearchViewController: CategoryListControllerDelegate {
-    func viewController(_ viewController: CategoryListViewController, didSelect category: Category) {
+    func viewController(_ viewController: CategoryListViewController, didSelect category: ShopClient_Gateway.Category) {
         selectedCategory = category
         performSegue(withIdentifier: SegueIdentifiers.toCategory, sender: self)
     }

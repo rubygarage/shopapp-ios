@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 class AccountTableViewCell: UITableViewCell {
     @IBOutlet private weak var policyTitleLabel: UILabel!
     

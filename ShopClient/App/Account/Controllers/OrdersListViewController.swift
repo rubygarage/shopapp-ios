@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
     private var tableProvider: OrdersListTableProvider!
     

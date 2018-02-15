@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol CheckoutCartTableViewCellDelegate: class {
     func didSelectItem(with productVariantId: String, at index: Int)
 }

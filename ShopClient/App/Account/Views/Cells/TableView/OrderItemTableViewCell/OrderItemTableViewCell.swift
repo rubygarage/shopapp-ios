@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 class OrderItemTableViewCell: UITableViewCell {
     @IBOutlet private weak var itemImageView: UIImageView!
     @IBOutlet private weak var totalPriceLabel: UILabel!
@@ -68,8 +70,8 @@ class OrderItemTableViewCell: UITableViewCell {
         options.forEach {
             let text = String.localizedStringWithFormat("Label.Order.Option".localizable, $0.name, $0.value)
             subtitle.append(text)
-            
-            if options.last != $0 {
+
+            if options.last?.value != $0.value {
                 subtitle.append("\n")
             }
         }

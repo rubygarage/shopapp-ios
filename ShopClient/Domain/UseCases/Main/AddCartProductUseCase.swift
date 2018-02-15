@@ -6,10 +6,16 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 struct AddCartProductUseCase {
+    private let repository: CartRepository!
+
+    init() {
+        self.repository = nil
+    }
+
     func addCartProduct(_ cartProduct: CartProduct, _ callback: @escaping RepoCallback<CartProduct>) {
-        Repository.shared.addCartProduct(cartProduct: cartProduct, callback: callback)
+        repository.addCartProduct(cartProduct: cartProduct, callback: callback)
     }
 }

@@ -6,10 +6,16 @@
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 struct CountriesUseCase {
+    private let repository: Repository!
+
+    init() {
+        self.repository = nil
+    }
+
     func getCountries(_ callback: @escaping RepoCallback<[Country]>) {
-        Repository.shared.getCountries(callback: callback)
+        repository.getCountries(callback: callback)
     }
 }

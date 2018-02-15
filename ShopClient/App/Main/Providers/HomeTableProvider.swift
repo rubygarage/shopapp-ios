@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 private enum HomeSection: Int {
     case lastArrivals
     case popular

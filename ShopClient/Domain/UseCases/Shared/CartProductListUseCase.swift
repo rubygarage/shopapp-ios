@@ -6,10 +6,16 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 struct CartProductListUseCase {
+    private let repository: CartRepository!
+
+    init() {
+        self.repository = nil
+    }
+
     func getCartProductList(_ callback: @escaping RepoCallback<[CartProduct]>) {
-        Repository.shared.getCartProductList(callback: callback)
+        repository.getCartProductList(callback: callback)
     }
 }

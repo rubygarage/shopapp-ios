@@ -9,6 +9,7 @@
 import UIKit
 
 import AvatarImageView
+import ShopClient_Gateway
 
 private let kAvatarTextSizeFactor: CGFloat = 0.4
 

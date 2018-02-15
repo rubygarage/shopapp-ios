@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol LastArrivalsTableCellDelegate: class {
     func tableViewCell(_ tableViewCell: LastArrivalsTableViewCell, didSelect product: Product)
 }

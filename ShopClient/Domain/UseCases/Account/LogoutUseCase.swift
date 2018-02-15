@@ -6,11 +6,17 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 struct LogoutUseCase {
+    private let repository: Repository!
+
+    init() {
+        self.repository = nil
+    }
+
     func logout(_ callback: @escaping (_ isLoggedOut: Bool) -> Void) {
-        Repository.shared.logout { (success, _) in
+        repository.logout { (success, _) in
             callback(success == true)
         }
     }

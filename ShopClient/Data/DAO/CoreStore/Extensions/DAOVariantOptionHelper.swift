@@ -6,7 +6,7 @@
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 extension VariantOptionEntity {
     func update(with item: VariantOption?) {

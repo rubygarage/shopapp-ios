@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol PaymentTypeViewControllerDelegate: class {
     func viewController(_ viewController: PaymentTypeViewController, didSelect paymentType: PaymentType)
 }

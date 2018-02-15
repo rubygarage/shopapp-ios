@@ -6,11 +6,17 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 struct ShopUseCase {
+    private let repository: Repository!
+
+    init() {
+        self.repository = nil
+    }
+
     func getShop(_ callback: @escaping (_ shop: Shop) -> Void) {
-        Repository.shared.getShop { (shop, _) in
+        repository.getShop { (shop, _) in
             if let shop = shop {
                 callback(shop)
             }

@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 private enum OrdersDetailsSection: Int {
     case header
     case paymentInformation

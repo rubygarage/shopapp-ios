@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
     @IBOutlet private weak var nameTextFieldView: InputTextFieldView!
     @IBOutlet private weak var lastNameTextFieldView: InputTextFieldView!

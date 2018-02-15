@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol CheckoutCombinedDelegate: CheckoutShippingAddressAddCellDelegate, CheckoutShippingAddressEditCellDelegate, CheckoutPaymentAddCellDelegate, CheckoutCartTableViewCellDelegate, CheckoutCreditCardEditTableCellDelegate, CheckoutShippingOptionsEnabledTableCellDelegate, PaymentTypeViewControllerDelegate, CheckoutSelectedTypeTableCellDelegate, CheckoutBillingAddressEditCellDelegate, InputTextFieldViewDelegate {}
 
 private let kPlaceOrderButtonColorEnabled = UIColor(red: 0, green: 0.48, blue: 1, alpha: 1)

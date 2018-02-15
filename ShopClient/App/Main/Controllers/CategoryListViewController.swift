@@ -8,8 +8,10 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol CategoryListControllerDelegate: class {
-    func viewController(_ viewController: CategoryListViewController, didSelect category: Category)
+    func viewController(_ viewController: CategoryListViewController, didSelect category: ShopClient_Gateway.Category)
 }
 
 class CategoryListViewController: BaseCollectionViewController<CategoryListViewModel> {
@@ -71,7 +73,7 @@ class CategoryListViewController: BaseCollectionViewController<CategoryListViewM
 // MARK: - SearchCollectionProviderDelegate
 
 extension CategoryListViewController: CategoryListCollectionProviderDelegate {
-    func provider(_ provider: CategoryListCollectionProvider, didSelect category: Category) {
+    func provider(_ provider: CategoryListCollectionProvider, didSelect category: ShopClient_Gateway.Category) {
         delegate?.viewController(self, didSelect: category)
     }
 }

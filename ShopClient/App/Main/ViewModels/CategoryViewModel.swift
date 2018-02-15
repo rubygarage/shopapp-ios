@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import ShopClient_Gateway
 
 class CategoryViewModel: GridCollectionViewModel {
     private let categoryUseCase = CategoryUseCase()
@@ -46,7 +47,7 @@ class CategoryViewModel: GridCollectionViewModel {
         }
     }
     
-    private func updateData(category: Category) {
+    private func updateData(category: ShopClient_Gateway.Category) {
         guard let items = category.products else {
             return
         }

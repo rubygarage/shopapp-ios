@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol CheckoutAddressFormControllerDelegate: class {
     func viewControllerDidUpdateShippingAddress(_ controller: CheckoutAddressFormViewController)
     func viewController(_ controller: CheckoutAddressFormViewController, didFill billingAddress: Address)

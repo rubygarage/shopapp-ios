@@ -10,6 +10,7 @@ import UIKit
 
 import RxCocoa
 import RxSwift
+import ShopClient_Gateway
 
 class HomeViewController: BaseTableViewController<HomeViewModel> {
     private var tableProvider: HomeTableProvider!

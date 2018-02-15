@@ -6,6 +6,8 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
+import ShopClient_Gateway
+
 extension Image {
     convenience init?(with image: ImageEntity?) {
         if image == nil {

@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol SortVariantsControllerDelegate: class {
     func viewController(_ viewController: SortVariantsViewController, didSelect sortingValue: SortingValue)
 }

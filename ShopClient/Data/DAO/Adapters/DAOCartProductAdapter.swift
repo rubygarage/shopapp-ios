@@ -6,7 +6,7 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 extension CartProduct {
     convenience init?(with product: Product?, productQuantity: Int, variant: ProductVariant?) {

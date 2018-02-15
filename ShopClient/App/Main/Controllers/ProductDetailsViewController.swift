@@ -10,6 +10,7 @@ import UIKit
 
 import RxCocoa
 import RxSwift
+import ShopClient_Gateway
 import TPKeyboardAvoiding
 
 private let kQuantityUnderlineColorDefault = UIColor(red: 0.92, green: 0.92, blue: 0.92, alpha: 1)

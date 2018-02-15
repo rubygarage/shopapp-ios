@@ -7,6 +7,7 @@
 //
 
 import CoreStore
+import ShopClient_Gateway
 
 extension ProductVariantEntity {
     func update(with item: ProductVariant?, transaction: AsynchronousDataTransaction) {

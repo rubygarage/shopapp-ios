@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 private let kCollectionViewMarginHorizontal: CGFloat = 4
 private let kCollectionViewMarginVertical: CGFloat = 4
 private let kNumberOfColumns: CGFloat = 2
@@ -19,7 +21,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Setup
     
-    func configure(with category: Category) {
+    func configure(with category: ShopClient_Gateway.Category) {
         categoryTitleLabel.text = category.title
         categoryImageView.set(image: category.image, initialContentMode: .top)
     }

@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import ShopClient_Gateway
 
 class HomeViewModel: BasePaginationViewModel {
     private let disposeBag = DisposeBag()

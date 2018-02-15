@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 private let kSortByViewChangesAnimationDuration: TimeInterval = 0.3
 
 class CategoryViewController: GridCollectionViewController<CategoryViewModel> {

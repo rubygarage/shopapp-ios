@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol ImagesCarouselViewControllerDelegate: class {
     func viewController(_ viewController: ImagesCarouselViewController, didTapImageAt index: Int)
 }

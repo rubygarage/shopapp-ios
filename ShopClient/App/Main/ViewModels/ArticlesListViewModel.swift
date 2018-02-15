@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import ShopClient_Gateway
 
 class ArticlesListViewModel: BasePaginationViewModel {
     private let articleListUseCase = ArticleListUseCase()

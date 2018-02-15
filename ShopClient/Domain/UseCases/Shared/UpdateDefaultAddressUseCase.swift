@@ -6,10 +6,16 @@
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 struct UpdateDefaultAddressUseCase {
+    private let repository: Repository!
+
+    init() {
+        self.repository = nil
+    }
+
     func updateDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Customer>) {
-        Repository.shared.updateCustomerDefaultAddress(with: addressId, callback: callback)
+        repository.updateCustomerDefaultAddress(with: addressId, callback: callback)
     }
 }

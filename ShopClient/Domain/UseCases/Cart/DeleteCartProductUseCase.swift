@@ -6,10 +6,16 @@
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 struct DeleteCartProductUseCase {
+    private let repository: CartRepository!
+
+    init() {
+        self.repository = nil
+    }
+    
     func deleteProductFromCart(productVariantId: String?, _ callback: @escaping RepoCallback<Bool>) {
-        Repository.shared.deleteProductFromCart(with: productVariantId, callback: callback)
+        repository.deleteProductFromCart(with: productVariantId, callback: callback)
     }
 }

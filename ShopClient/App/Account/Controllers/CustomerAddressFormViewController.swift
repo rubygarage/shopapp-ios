@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol CustomerAddressFormControllerDelegate: class {
     func viewController(_ controller: CustomerAddressFormViewController, didUpdate address: Address)
 }

@@ -9,6 +9,7 @@
 import UIKit
 
 import SwipeCellKit
+import ShopClient_Gateway
 
 protocol CartTableCellDelegate: class {
     func tableViewCell(_ tableViewCell: CartTableViewCell, didUpdateCartProduct cartProduct: CartProduct, with quantity: Int)

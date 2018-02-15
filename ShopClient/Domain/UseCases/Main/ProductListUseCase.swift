@@ -6,24 +6,30 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 private let kPopuarSectionItemsMaxCount = 4
 
 struct ProductListUseCase {
+    private let repository: Repository!
+
+    init() {
+        self.repository = nil
+    }
+
     func getLastArrivalProductList(_ callback: @escaping RepoCallback<[Product]>) {
-        Repository.shared.getProductList(sortBy: SortingValue.createdAt, reverse: true, callback: callback)
+        repository.getProductList(perPage: kItemsPerPage, paginationValue: nil, sortBy: SortingValue.createdAt, keyPhrase: nil, excludePhrase: nil, reverse: true, callback: callback)
     }
     
     func getPopularProductList(_ callback: @escaping RepoCallback<[Product]>) {
-        Repository.shared.getProductList(perPage: kPopuarSectionItemsMaxCount, sortBy: SortingValue.popular, callback: callback)
+        repository.getProductList(perPage: kPopuarSectionItemsMaxCount, paginationValue: nil, sortBy: SortingValue.popular, keyPhrase: nil, excludePhrase: nil, reverse: false, callback: callback)
     }
     
     func getProductList(with paginationValue: Any?, sortingValue: SortingValue, keyPhrase: String? = nil, excludePhrase: String? = nil, reverse: Bool, _ callback: @escaping RepoCallback<[Product]>) {
-        Repository.shared.getProductList(paginationValue: paginationValue, sortBy: sortingValue, keyPhrase: keyPhrase, excludePhrase: excludePhrase, reverse: reverse, callback: callback)
+        repository.getProductList(perPage: kItemsPerPage, paginationValue: paginationValue, sortBy: sortingValue, keyPhrase: keyPhrase, excludePhrase: excludePhrase, reverse: reverse, callback: callback)
     }
     
     func getProductList(with paginationValue: Any?, searchPhrase: String, _ callback: @escaping RepoCallback<[Product]>) {
-        Repository.shared.searchProducts(paginationValue: paginationValue, searchQuery: searchPhrase, callback: callback)
+        repository.searchProducts(perPage: kItemsPerPage, paginationValue: paginationValue, searchQuery: searchPhrase, callback: callback)
     }
 }

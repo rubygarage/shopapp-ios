@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import ShopClient_Gateway
 
 class ProductsListViewModel: GridCollectionViewModel {
     private let productListUseCase = ProductListUseCase()

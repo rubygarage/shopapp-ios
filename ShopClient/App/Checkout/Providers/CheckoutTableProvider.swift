@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 class CheckoutTableProvider: NSObject {
     var checkout: Checkout?
     var cartProducts: [CartProduct] = []

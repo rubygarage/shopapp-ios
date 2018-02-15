@@ -6,18 +6,24 @@
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 struct UpdateCustomUseCase {
+    private let repository: Repository!
+
+    init() {
+        self.repository = nil
+    }
+
     func updateCustomer(with promo: Bool, _ callback: @escaping RepoCallback<Customer>) {
-        Repository.shared.updateCustomer(with: promo, callback: callback)
+        repository.updateCustomer(with: promo, callback: callback)
     }
     
     func updateCustomer(with email: String, firstName: String?, lastName: String?, phone: String?, _ callback: @escaping RepoCallback<Customer>) {
-        Repository.shared.updateCustomer(with: email, firstName: firstName, lastName: lastName, phone: phone, callback: callback)
+        repository.updateCustomer(with: email, firstName: firstName, lastName: lastName, phone: phone, callback: callback)
     }
     
     func updateCustomer(with password: String, _ callback: @escaping RepoCallback<Customer>) {
-        Repository.shared.updateCustomer(with: password, callback: callback)
+        repository.updateCustomer(with: password, callback: callback)
     }
 }

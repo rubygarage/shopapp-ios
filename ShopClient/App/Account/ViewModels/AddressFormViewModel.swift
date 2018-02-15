@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import ShopClient_Gateway
 
 class AddressFormViewModel: BaseViewModel {
     private let countriesUseCase = CountriesUseCase()

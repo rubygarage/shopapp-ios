@@ -6,10 +6,16 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 struct SignUpUseCase {
+    private let repository: Repository!
+
+    init() {
+        self.repository = nil
+    }
+
     func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, _ callback: @escaping RepoCallback<Bool>) {
-        Repository.shared.signUp(with: email, firstName: firstName, lastName: lastName, password: password, phone: phone, callback: callback)
+        repository.signUp(with: email, firstName: firstName, lastName: lastName, password: password, phone: phone, callback: callback)
     }
 }

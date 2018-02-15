@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import ShopClient_Gateway
 
 class SettingsViewModel: BaseViewModel {
     private let loginUseCase = LoginUseCase()

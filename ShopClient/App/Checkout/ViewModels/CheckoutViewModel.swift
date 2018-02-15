@@ -9,6 +9,7 @@
 import PassKit
 
 import RxSwift
+import ShopClient_Gateway
 
 enum CheckoutSection: Int {
     case cart

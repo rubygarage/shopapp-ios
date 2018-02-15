@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 class DetailsImagesCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var productImageView: UIImageView!
 

@@ -6,10 +6,16 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
+import ShopClient_Gateway
 
 struct CustomerUseCase {
+    private let repository: Repository!
+
+    init() {
+        self.repository = nil
+    }
+
     func getCustomer(_ callback: @escaping RepoCallback<Customer>) {
-        Repository.shared.getCustomer(callback: callback)
+        repository.getCustomer(callback: callback)
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import ShopClient_Gateway
 import TTTAttributedLabel
 
 class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLabelDelegate {

@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 protocol CreditCardControllerDelegate: class {
     func viewController(_ controller: CreditCardViewController, didFilled card: CreditCard)
 }

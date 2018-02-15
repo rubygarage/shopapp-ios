@@ -8,6 +8,7 @@
 
 import UIKit
 
+import ShopClient_Gateway
 import SwipeCellKit
 
 protocol CartTableProviderDelegate: class {

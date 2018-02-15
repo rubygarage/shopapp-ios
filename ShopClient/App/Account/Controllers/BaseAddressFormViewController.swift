@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopClient_Gateway
+
 enum AddressAction {
     case add
     case edit
