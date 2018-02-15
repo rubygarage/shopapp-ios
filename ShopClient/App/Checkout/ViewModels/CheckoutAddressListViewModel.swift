@@ -8,7 +8,7 @@
 
 import RxSwift
 
-class CheckoutAddressListViewModel: AddressListViewModel {
+class CheckoutAddressListViewModel: BaseAddressListViewModel {
     private let checkoutUseCase = CheckoutUseCase()
     
     var didSelectBillingAddress = PublishSubject<Address>()

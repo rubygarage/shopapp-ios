@@ -8,12 +8,12 @@
 
 import UIKit
 
-class AccountAddressListViewController: AddressListViewController<AddressListViewModel> {
+class AccountAddressListViewController: BaseAddressListViewController<BaseAddressListViewModel> {
     
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = AddressListViewModel()
+        viewModel = BaseAddressListViewModel()
         super.viewDidLoad()
     }
 }

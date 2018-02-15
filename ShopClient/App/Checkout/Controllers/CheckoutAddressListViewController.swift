@@ -8,7 +8,7 @@
 
 import RxSwift
 
-class CheckoutAddressListViewController: AddressListViewController<CheckoutAddressListViewModel> {
+class CheckoutAddressListViewController: BaseAddressListViewController<CheckoutAddressListViewModel> {
     var checkoutId: String!
     
     override func viewDidLoad() {

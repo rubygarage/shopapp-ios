@@ -295,7 +295,7 @@ extension CheckoutViewController: CheckoutAddressFormControllerDelegate {
 
 // MARK: - AddressListControllerDelegate
 
-extension CheckoutViewController: AddressListControllerDelegate {
+extension CheckoutViewController: BaseAddressListControllerDelegate {
     func viewController(didSelectBillingAddress address: Address) {
         viewModel.billingAddress.value = address
         tableProvider.billingAddress = address
