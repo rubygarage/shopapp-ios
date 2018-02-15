@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountNotLoggedHeaderView" customModule="ShopClient" customModuleProvider="target">
+            <connections>
+                <outlet property="createAccountUnderlinedView" destination="pLH-tW-YR9" id="nLS-dD-WeY"/>
+                <outlet property="createNewAccountButton" destination="9kd-ki-Xoh" id="clg-R0-cRx"/>
+                <outlet property="signInButton" destination="IkS-af-Cpl" id="SJC-8Y-7ui"/>
+                <outlet property="signInLabel" destination="fqP-nM-JO9" id="7a8-gO-PYb"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IkS-af-Cpl" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
+                    <rect key="frame" x="45" y="60" width="285" height="50"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="fox-Wq-z2a"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="signInButtonDidPress:" destination="-1" eventType="touchUpInside" id="R8z-lB-f2l"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqP-nM-JO9">
+                    <rect key="frame" x="45" y="30" width="285" height="15"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kd-ki-Xoh" customClass="UnderlinedButton" customModule="ShopClient" customModuleProvider="target">
+                    <rect key="frame" x="157" y="130" width="61" height="25"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                    <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="createNewAccountButtonDidPress:" destination="-1" eventType="touchUpInside" id="RlC-YL-bTg"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pLH-tW-YR9">
+                    <rect key="frame" x="167" y="155" width="41" height="1"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="pfM-CE-ywT"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="fqP-nM-JO9" secondAttribute="trailing" constant="45" id="369-bz-WVx"/>
+                <constraint firstItem="pLH-tW-YR9" firstAttribute="top" secondItem="9kd-ki-Xoh" secondAttribute="bottom" id="3RD-c0-wt1"/>
+                <constraint firstItem="fqP-nM-JO9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="45" id="FfO-QG-kmZ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="IkS-af-Cpl" secondAttribute="trailing" constant="45" id="QT1-qf-GBB"/>
+                <constraint firstItem="IkS-af-Cpl" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="60" id="VAg-tT-qaY"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="pLH-tW-YR9" secondAttribute="bottom" constant="24" id="dcP-Ee-y1k"/>
+                <constraint firstItem="IkS-af-Cpl" firstAttribute="top" secondItem="fqP-nM-JO9" secondAttribute="bottom" constant="15" id="fUS-zP-GzD"/>
+                <constraint firstItem="pLH-tW-YR9" firstAttribute="leading" secondItem="9kd-ki-Xoh" secondAttribute="leading" constant="10" id="lIx-dv-fwD"/>
+                <constraint firstItem="pLH-tW-YR9" firstAttribute="trailing" secondItem="9kd-ki-Xoh" secondAttribute="trailing" constant="-10" id="pbu-lU-tvz"/>
+                <constraint firstItem="IkS-af-Cpl" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="45" id="qLv-qT-rxW"/>
+                <constraint firstItem="fqP-nM-JO9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="t7C-QA-9wI"/>
+                <constraint firstItem="9kd-ki-Xoh" firstAttribute="centerX" secondItem="IkS-af-Cpl" secondAttribute="centerX" id="xPn-fE-iOX"/>
+                <constraint firstItem="9kd-ki-Xoh" firstAttribute="top" secondItem="IkS-af-Cpl" secondAttribute="bottom" constant="20" id="zDj-NF-SER"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="51.5" y="-176.5"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,24 @@
+//
+//  SearchTitleViewModel.swift
+//  ShopClient
+//
+//  Created by Radyslav Krechet on 1/2/18.
+//  Copyright © 2018 Evgeniy Antonov. All rights reserved.
+//
+
+import RxSwift
+
+class CartButtonViewModel {
+    private let cartProductListUseCase = CartProductListUseCase()
+    
+    var cartItemsCount = PublishSubject<Int>()
+    
+    func getCartItemsCount() {
+        cartProductListUseCase.getCartProductList { [weak self] (products, _) in
+            guard let strongSelf = self, let products = products else {
+                return
+            }
+            strongSelf.cartItemsCount.onNext(products.count)
+        }
+    }
+}
