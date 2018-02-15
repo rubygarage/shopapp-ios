@@ -46,7 +46,7 @@ class AddressListViewController<T: AddressListViewModel>: BaseViewController<T> 
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let customerAddressFormController = segue.destination as? CustomerAddressFormViewController {
+        if let customerAddressFormController = segue.destination as? AccountAddressFormViewController {
             customerAddressFormController.selectedAddress = destinationAddress
             customerAddressFormController.delegate = self
             customerAddressFormController.addressAction = destinationAddressAction
@@ -159,10 +159,10 @@ extension AddressListViewController: AddressListTableCellDelegate {
     }
 }
 
-// MARK: - CustomerAddressFormControllerDelegate
+// MARK: - AccountAddressFormControllerDelegate
 
-extension AddressListViewController: CustomerAddressFormControllerDelegate {
-    func viewController(_ controller: CustomerAddressFormViewController, didUpdate address: Address) {
+extension AddressListViewController: AccountAddressFormControllerDelegate {
+    func viewController(_ controller: AccountAddressFormViewController, didUpdate address: Address) {
         if addressListType == .shipping {
             update(shippingAddress: address)
         } else {
@@ -171,7 +171,7 @@ extension AddressListViewController: CustomerAddressFormControllerDelegate {
         navigationController?.popToViewController(self, animated: true)
     }
     
-    func viewController(_ controller: CustomerAddressFormViewController, didAdd address: Address) {
+    func viewController(_ controller: AccountAddressFormViewController, didAdd address: Address) {
         viewModel.loadCustomerAddresses(isTranslucentHud: true)
         navigationController?.popToViewController(self, animated: true)
     }

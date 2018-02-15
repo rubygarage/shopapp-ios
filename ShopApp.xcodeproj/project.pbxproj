@@ -156,8 +156,8 @@
 		6124BCE31F73C2880099E879 /* PolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6124BCE21F73C2880099E879 /* PolicyViewController.swift */; };
 		612812B52020DAEB0048013B /* CheckoutAddressFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612812B42020DAEB0048013B /* CheckoutAddressFormViewController.swift */; };
 		612812B72020DBDA0048013B /* CheckoutAddressFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612812B62020DBDA0048013B /* CheckoutAddressFormViewModel.swift */; };
-		612812C1202224360048013B /* CustomerAddressFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612812C0202224360048013B /* CustomerAddressFormViewController.swift */; };
-		612812C3202224520048013B /* CustomerAddressFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612812C2202224520048013B /* CustomerAddressFormViewModel.swift */; };
+		612812C1202224360048013B /* AccountAddressFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612812C0202224360048013B /* AccountAddressFormViewController.swift */; };
+		612812C3202224520048013B /* AccountAddressFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612812C2202224520048013B /* AccountAddressFormViewModel.swift */; };
 		612812C520233F8F0048013B /* UpdateAddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612812C420233F8F0048013B /* UpdateAddressUseCase.swift */; };
 		612812C7202345710048013B /* DeleteAddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612812C6202345710048013B /* DeleteAddressUseCase.swift */; };
 		612812CA202381100048013B /* AddressListTableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612812C9202381100048013B /* AddressListTableProvider.swift */; };
@@ -274,7 +274,6 @@
 		61EC8D7320334CEC0001FF2B /* CheckoutAddressListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EC8D7220334CEC0001FF2B /* CheckoutAddressListViewController.swift */; };
 		61EC8D7520334D070001FF2B /* CheckoutAddressListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EC8D7420334D070001FF2B /* CheckoutAddressListViewModel.swift */; };
 		61EC8D7720334DE50001FF2B /* AccountAddressListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EC8D7620334DE50001FF2B /* AccountAddressListViewController.swift */; };
-		61EC8D7920334DFB0001FF2B /* AccountAddressListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EC8D7820334DFB0001FF2B /* AccountAddressListViewModel.swift */; };
 		61ED11551FED058E00A0F35D /* ShopifyAddressAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ED11541FED058E00A0F35D /* ShopifyAddressAdapter.swift */; };
 		61ED88EA1F7112FD006BDA79 /* UIViewController+ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ED88E91F7112FD006BDA79 /* UIViewController+ImageViewer.swift */; };
 		61ED88F31F7170C9006BDA79 /* GridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ED88F11F7170C9006BDA79 /* GridCollectionViewCell.swift */; };
@@ -519,8 +518,8 @@
 		6124BCE21F73C2880099E879 /* PolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolicyViewController.swift; sourceTree = "<group>"; };
 		612812B42020DAEB0048013B /* CheckoutAddressFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutAddressFormViewController.swift; sourceTree = "<group>"; };
 		612812B62020DBDA0048013B /* CheckoutAddressFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutAddressFormViewModel.swift; sourceTree = "<group>"; };
-		612812C0202224360048013B /* CustomerAddressFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerAddressFormViewController.swift; sourceTree = "<group>"; };
-		612812C2202224520048013B /* CustomerAddressFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerAddressFormViewModel.swift; sourceTree = "<group>"; };
+		612812C0202224360048013B /* AccountAddressFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAddressFormViewController.swift; sourceTree = "<group>"; };
+		612812C2202224520048013B /* AccountAddressFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAddressFormViewModel.swift; sourceTree = "<group>"; };
 		612812C420233F8F0048013B /* UpdateAddressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAddressUseCase.swift; sourceTree = "<group>"; };
 		612812C6202345710048013B /* DeleteAddressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAddressUseCase.swift; sourceTree = "<group>"; };
 		612812C9202381100048013B /* AddressListTableProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListTableProvider.swift; sourceTree = "<group>"; };
@@ -637,7 +636,6 @@
 		61EC8D7220334CEC0001FF2B /* CheckoutAddressListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutAddressListViewController.swift; sourceTree = "<group>"; };
 		61EC8D7420334D070001FF2B /* CheckoutAddressListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutAddressListViewModel.swift; sourceTree = "<group>"; };
 		61EC8D7620334DE50001FF2B /* AccountAddressListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAddressListViewController.swift; sourceTree = "<group>"; };
-		61EC8D7820334DFB0001FF2B /* AccountAddressListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAddressListViewModel.swift; sourceTree = "<group>"; };
 		61ED11541FED058E00A0F35D /* ShopifyAddressAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyAddressAdapter.swift; sourceTree = "<group>"; };
 		61ED88E91F7112FD006BDA79 /* UIViewController+ImageViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ImageViewer.swift"; sourceTree = "<group>"; };
 		61ED88F11F7170C9006BDA79 /* GridCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1408,12 +1406,13 @@
 		0BD5EB311FF3DDFA0076C01B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				612812C0202224360048013B /* AccountAddressFormViewController.swift */,
+				61EC8D7620334DE50001FF2B /* AccountAddressListViewController.swift */,
 				610424291FC477D100EFEFDA /* AddressFormViewController.swift */,
 				616CA6671FF3BA9D00FF14E2 /* AddressListViewController.swift */,
 				617DE1841FB5E9E2004EEF9A /* AccountViewController.swift */,
 				615F8217202C653C00926BAF /* BaseAddressFormViewController.swift */,
 				0BED64D3201789E9006CF968 /* ChangePasswordViewController.swift */,
-				612812C0202224360048013B /* CustomerAddressFormViewController.swift */,
 				0B4EA3491FFBBFF6000C7A80 /* ForgotPasswordViewController.swift */,
 				0B4EA34D1FFCCC29000C7A80 /* LinkViewController.swift */,
 				0B4EA3511FFCFEE1000C7A80 /* OrderDetailsViewController.swift */,
@@ -1423,7 +1422,6 @@
 				0BED64BF201603C6006CF968 /* SettingsViewController.swift */,
 				61C2ABC21FBB23D500A1E170 /* SignInViewController.swift */,
 				617DE1891FB5F1F0004EEF9A /* SignUpViewController.swift */,
-				61EC8D7620334DE50001FF2B /* AccountAddressListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1431,10 +1429,10 @@
 		0BD5EB321FF3DDFF0076C01B /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				612812C2202224520048013B /* AccountAddressFormViewModel.swift */,
 				611947801FD87540008BE9C6 /* AccountViewModel.swift */,
 				6104242B1FC477F000EFEFDA /* AddressFormViewModel.swift */,
 				616CA6691FF3BAB800FF14E2 /* AddressListViewModel.swift */,
-				612812C2202224520048013B /* CustomerAddressFormViewModel.swift */,
 				0BED64D5201789F8006CF968 /* ChangePasswordViewModel.swift */,
 				0B4EA34B1FFBC00D000C7A80 /* ForgotPasswordViewModel.swift */,
 				0BA6305C1FFE56B3007088B8 /* OrderDetailsViewModel.swift */,
@@ -1443,7 +1441,6 @@
 				0BED64C1201603D3006CF968 /* SettingsViewModel.swift */,
 				61C2ABC41FBB240A00A1E170 /* SignInViewModel.swift */,
 				617DE18B1FB5F23D004EEF9A /* SignUpViewModel.swift */,
-				61EC8D7820334DFB0001FF2B /* AccountAddressListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1645,12 +1642,12 @@
 			isa = PBXGroup;
 			children = (
 				612812B42020DAEB0048013B /* CheckoutAddressFormViewController.swift */,
+				61EC8D7220334CEC0001FF2B /* CheckoutAddressListViewController.swift */,
 				61EC8D682033185C0001FF2B /* CheckoutFailureViewController.swift */,
 				617041FF20175CEA0063E369 /* CheckoutSuccessViewController.swift */,
 				616CA65D1FF2A0CE00FF14E2 /* CheckoutViewController.swift */,
 				6182BA631FFBAE1500836979 /* CreditCardViewController.swift */,
 				61986AD41FF671BE005632D7 /* PaymentTypeViewController.swift */,
-				61EC8D7220334CEC0001FF2B /* CheckoutAddressListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1659,10 +1656,10 @@
 			isa = PBXGroup;
 			children = (
 				612812B62020DBDA0048013B /* CheckoutAddressFormViewModel.swift */,
+				61EC8D7420334D070001FF2B /* CheckoutAddressListViewModel.swift */,
 				616CA65C1FF2A0CE00FF14E2 /* CheckoutViewModel.swift */,
 				6182BA651FFBAE2D00836979 /* CreditCardViewModel.swift */,
 				61986AD61FF671FB005632D7 /* PaymentTypeViewModel.swift */,
-				61EC8D7420334D070001FF2B /* CheckoutAddressListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -2719,7 +2716,7 @@
 				61AB7D302010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableViewCell.swift in Sources */,
 				0B24F0F120074F1A00F13224 /* YearExpiryDatePicker.swift in Sources */,
 				0B953D572021B7A600DD32DE /* ImagesCarouselCollectionProvider.swift in Sources */,
-				612812C3202224520048013B /* CustomerAddressFormViewModel.swift in Sources */,
+				612812C3202224520048013B /* AccountAddressFormViewModel.swift in Sources */,
 				615F8218202C653C00926BAF /* BaseAddressFormViewController.swift in Sources */,
 				0B24F0EE20074F1A00F13224 /* UnderlinedButton.swift in Sources */,
 				8ED91FB4203461F600E9692A /* SortingValue+Details.swift in Sources */,
@@ -2826,7 +2823,7 @@
 				0BA630791FFFC554007088B8 /* OrderItemTableViewCell.swift in Sources */,
 				61986AD71FF671FB005632D7 /* PaymentTypeViewModel.swift in Sources */,
 				0B24F0DD20074D7500F13224 /* AddressListTableViewCell.swift in Sources */,
-				612812C1202224360048013B /* CustomerAddressFormViewController.swift in Sources */,
+				612812C1202224360048013B /* AccountAddressFormViewController.swift in Sources */,
 				61BF1EA81FAB397D0098B9AA /* BaseViewModel.swift in Sources */,
 				612812C7202345710048013B /* DeleteAddressUseCase.swift in Sources */,
 				61EC8D7320334CEC0001FF2B /* CheckoutAddressListViewController.swift in Sources */,

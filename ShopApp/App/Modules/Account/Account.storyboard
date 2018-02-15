@@ -1032,10 +1032,10 @@
             </objects>
             <point key="canvasLocation" x="4292" y="1494"/>
         </scene>
-        <!--Customer Address Form View Controller-->
+        <!--Account Address Form View Controller-->
         <scene sceneID="rcV-4E-5dD">
             <objects>
-                <viewController storyboardIdentifier="CustomerAddressFormControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="Sxz-cw-IQL" customClass="CustomerAddressFormViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountAddressFormControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="Sxz-cw-IQL" customClass="AccountAddressFormViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2VM-s4-pd0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
