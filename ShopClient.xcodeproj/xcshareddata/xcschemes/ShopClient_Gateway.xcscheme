@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8E5EFACF2035F2BF00FD718B"
-               BuildableName = "ShopClient.framework"
-               BlueprintName = "ShopClient"
+               BuildableName = "ShopClient_Gateway.framework"
+               BlueprintName = "ShopClient_Gateway"
                ReferencedContainer = "container:ShopClient.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -48,8 +48,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8E5EFACF2035F2BF00FD718B"
-            BuildableName = "ShopClient.framework"
-            BlueprintName = "ShopClient"
+            BuildableName = "ShopClient_Gateway.framework"
+            BlueprintName = "ShopClient_Gateway"
             ReferencedContainer = "container:ShopClient.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -66,8 +66,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8E5EFACF2035F2BF00FD718B"
-            BuildableName = "ShopClient.framework"
-            BlueprintName = "ShopClient"
+            BuildableName = "ShopClient_Gateway.framework"
+            BlueprintName = "ShopClient_Gateway"
             ReferencedContainer = "container:ShopClient.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
