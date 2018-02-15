@@ -50,7 +50,6 @@ class InputTextFieldView: PlaceholderedTextField {
             setupKeyboardType(with: keyboardType)
             setupKeyboardSecureTextEntry(with: keyboardType)
             setupKeyboardCapitalization(with: keyboardType)
-            setupKeyboardCorrection(with: keyboardType)
         }
     }
     @IBInspectable var hideShowPasswordButton: Bool = true {
@@ -139,10 +138,6 @@ class InputTextFieldView: PlaceholderedTextField {
         default:
             textField?.autocapitalizationType = .sentences
         }
-    }
-    
-    private func setupKeyboardCorrection(with type: Int) {
-        textField?.autocorrectionType = type == InputTextFieldViewKeybordType.email.rawValue ? .no : .yes
     }
     
     private func setupKeyboardSecureTextEntry(with type: Int) {

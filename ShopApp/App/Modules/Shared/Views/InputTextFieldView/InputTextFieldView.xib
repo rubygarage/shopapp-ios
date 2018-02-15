@@ -36,7 +36,7 @@
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                     <connections>
                         <action selector="editingChanged:" destination="-1" eventType="editingChanged" id="YRJ-3P-NvJ"/>
                         <action selector="editingDidBegin:" destination="-1" eventType="editingDidBegin" id="EM5-lI-Gtm"/>
