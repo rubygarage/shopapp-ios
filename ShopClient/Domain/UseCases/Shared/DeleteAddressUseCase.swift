@@ -8,12 +8,8 @@
 
 import ShopClient_Gateway
 
-struct DeleteAddressUseCase {
-    private let repository: Repository!
-
-    init() {
-        self.repository = nil
-    }
+class DeleteAddressUseCase {
+    private lazy var repository = AppDelegate.getRepository()
 
     func deleteCustomerAddress(with addressId: String, callback: @escaping RepoCallback<Bool>) {
         repository.deleteCustomerAddress(with: addressId, callback: callback)

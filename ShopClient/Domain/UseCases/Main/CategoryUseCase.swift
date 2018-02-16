@@ -8,12 +8,8 @@
 
 import ShopClient_Gateway
 
-struct CategoryUseCase {
-    private let repository: Repository!
-
-    init() {
-        self.repository = nil
-    }
+class CategoryUseCase {
+    private lazy var repository = AppDelegate.getRepository()
 
     func getCategory(with id: String, paginationValue: Any?, sortingValue: SortingValue, reverse: Bool, _ callback: @escaping RepoCallback<Category>) {
         repository.getCategoryDetails(id: id, perPage: kItemsPerPage, paginationValue: paginationValue, sortBy: sortingValue, reverse: reverse, callback: callback)

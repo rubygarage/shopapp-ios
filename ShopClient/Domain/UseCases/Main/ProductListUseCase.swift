@@ -7,15 +7,12 @@
 //
 
 import ShopClient_Gateway
+import Shopify
 
 private let kPopuarSectionItemsMaxCount = 4
 
-struct ProductListUseCase {
-    private let repository: Repository!
-
-    init() {
-        self.repository = nil
-    }
+class ProductListUseCase {
+    private lazy var repository = AppDelegate.getRepository()
 
     func getLastArrivalProductList(_ callback: @escaping RepoCallback<[Product]>) {
         repository.getProductList(perPage: kItemsPerPage, paginationValue: nil, sortBy: SortingValue.createdAt, keyPhrase: nil, excludePhrase: nil, reverse: true, callback: callback)

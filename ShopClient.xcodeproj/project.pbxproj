@@ -267,6 +267,11 @@
 		61ED88F71F7171F1006BDA79 /* GridCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ED88F61F7171F1006BDA79 /* GridCollectionViewController.swift */; };
 		61FC3DA91F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC3DA71F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift */; };
 		61FC3DAA1F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61FC3DA81F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.xib */; };
+		8E2E6A4A203664DC00A5BC97 /* Buy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2E6A45203664DC00A5BC97 /* Buy.framework */; };
+		8E2E6A4B203664DC00A5BC97 /* Shopify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2E6A46203664DC00A5BC97 /* Shopify.framework */; };
+		8E2E6A4C203664DC00A5BC97 /* Pay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2E6A47203664DC00A5BC97 /* Pay.framework */; };
+		8E2E6A4D203664DC00A5BC97 /* KeychainSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2E6A48203664DC00A5BC97 /* KeychainSwift.framework */; };
+		8E2E6A4E203664DC00A5BC97 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2E6A49203664DC00A5BC97 /* Alamofire.framework */; };
 		8E3215B7202E062500CA4FB4 /* UIView+NameOfClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3215B6202E062500CA4FB4 /* UIView+NameOfClass.swift */; };
 		8E3215B9202E08F500CA4FB4 /* UITableView+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3215B8202E08F500CA4FB4 /* UITableView+Cells.swift */; };
 		8E3215BD202E139500CA4FB4 /* UICollectionView+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3215BC202E139500CA4FB4 /* UICollectionView+Cells.swift */; };
@@ -607,6 +612,11 @@
 		61FC3DA71F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductOptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		61FC3DA81F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductOptionCollectionViewCell.xib; sourceTree = "<group>"; };
 		61FFEDB82007C27E00775FBA /* ShopClient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShopClient.entitlements; sourceTree = "<group>"; };
+		8E2E6A45203664DC00A5BC97 /* Buy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Buy.framework; path = dependencies/Carthage/Build/iOS/Buy.framework; sourceTree = "<group>"; };
+		8E2E6A46203664DC00A5BC97 /* Shopify.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Shopify.framework; path = dependencies/Carthage/Build/iOS/Shopify.framework; sourceTree = "<group>"; };
+		8E2E6A47203664DC00A5BC97 /* Pay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pay.framework; path = dependencies/Carthage/Build/iOS/Pay.framework; sourceTree = "<group>"; };
+		8E2E6A48203664DC00A5BC97 /* KeychainSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainSwift.framework; path = dependencies/Carthage/Build/iOS/KeychainSwift.framework; sourceTree = "<group>"; };
+		8E2E6A49203664DC00A5BC97 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = dependencies/Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		8E3215B6202E062500CA4FB4 /* UIView+NameOfClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+NameOfClass.swift"; sourceTree = "<group>"; };
 		8E3215B8202E08F500CA4FB4 /* UITableView+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Cells.swift"; sourceTree = "<group>"; };
 		8E3215BC202E139500CA4FB4 /* UICollectionView+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Cells.swift"; sourceTree = "<group>"; };
@@ -662,6 +672,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E2E6A4A203664DC00A5BC97 /* Buy.framework in Frameworks */,
+				8E2E6A4B203664DC00A5BC97 /* Shopify.framework in Frameworks */,
+				8E2E6A4C203664DC00A5BC97 /* Pay.framework in Frameworks */,
+				8E2E6A4D203664DC00A5BC97 /* KeychainSwift.framework in Frameworks */,
+				8E2E6A4E203664DC00A5BC97 /* Alamofire.framework in Frameworks */,
 				8E5EFAD72035F2BF00FD718B /* ShopClient_Gateway.framework in Frameworks */,
 				E48C459A560E7DC50BF69226 /* Pods_ShopClient.framework in Frameworks */,
 			);
@@ -2075,6 +2090,11 @@
 		C1A3D849B4890913206CAEDC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E2E6A49203664DC00A5BC97 /* Alamofire.framework */,
+				8E2E6A45203664DC00A5BC97 /* Buy.framework */,
+				8E2E6A48203664DC00A5BC97 /* KeychainSwift.framework */,
+				8E2E6A47203664DC00A5BC97 /* Pay.framework */,
+				8E2E6A46203664DC00A5BC97 /* Shopify.framework */,
 				C9DA8ECD13CBDF3EE2618FE4 /* Pods_ShopClient.framework */,
 			);
 			name = Frameworks;
@@ -2107,6 +2127,7 @@
 				8E3A6F2A20078145001ADB11 /* SwiftLint */,
 				0BA630641FFE7B8C007088B8 /* Fabric */,
 				8E5EFAD82035F2BF00FD718B /* Embed Frameworks */,
+				8E2E6A4F2036654200A5BC97 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2347,6 +2368,29 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShopClient/Pods-ShopClient-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		8E2E6A4F2036654200A5BC97 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/dependencies/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/dependencies/Carthage/Build/iOS/Buy.framework",
+				"$(SRCROOT)/dependencies/Carthage/Build/iOS/KeychainSwift.framework",
+				"$(SRCROOT)/dependencies/Carthage/Build/iOS/Pay.framework",
+				"$(SRCROOT)/dependencies/Carthage/Build/iOS/Shopify.framework",
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Buy.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeychainSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Pay.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Shopify.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 		8E3A6F2A20078145001ADB11 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2708,6 +2752,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K2WTD52A5C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/dependencies/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ShopClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "$(inherited) \"-D\" \"DEV\"";
@@ -2778,6 +2826,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K2WTD52A5C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/dependencies/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ShopClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "$(inherited) \"-D\" \"DEV\"";
@@ -2904,6 +2956,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K2WTD52A5C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/dependencies/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ShopClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.ShopClient.test.temp;
@@ -2924,6 +2980,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K2WTD52A5C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/dependencies/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ShopClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.ShopClient.test.temp;

@@ -8,12 +8,8 @@
 
 import ShopClient_Gateway
 
-struct ArticleUseCase {
-    private let repository: Repository!
-
-    init() {
-        self.repository = nil
-    }
+class ArticleUseCase {
+    private lazy var repository = AppDelegate.getRepository()
 
     func getArticle(with id: String, _ callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>) {
         repository.getArticle(id: id, callback: callback)

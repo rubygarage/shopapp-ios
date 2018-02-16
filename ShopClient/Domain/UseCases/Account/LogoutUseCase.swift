@@ -8,12 +8,8 @@
 
 import ShopClient_Gateway
 
-struct LogoutUseCase {
-    private let repository: Repository!
-
-    init() {
-        self.repository = nil
-    }
+class LogoutUseCase {
+    private lazy var repository = AppDelegate.getRepository()
 
     func logout(_ callback: @escaping (_ isLoggedOut: Bool) -> Void) {
         repository.logout { (success, _) in

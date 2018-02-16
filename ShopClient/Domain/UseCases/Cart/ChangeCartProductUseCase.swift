@@ -8,12 +8,8 @@
 
 import ShopClient_Gateway
 
-struct ChangeCartProductUseCase {
-    private let repository: CartRepository!
-
-    init() {
-        self.repository = nil
-    }
+class ChangeCartProductUseCase {
+    private lazy var repository = AppDelegate.getCartRepository()
 
     func changeCartProductQuantity(productVariantId: String?, quantity: Int, _ callback: @escaping RepoCallback<CartProduct>) {
         repository.changeCartProductQuantity(with: productVariantId, quantity: quantity, callback: callback)

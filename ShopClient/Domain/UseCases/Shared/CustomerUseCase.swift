@@ -8,12 +8,8 @@
 
 import ShopClient_Gateway
 
-struct CustomerUseCase {
-    private let repository: Repository!
-
-    init() {
-        self.repository = nil
-    }
+class CustomerUseCase {
+    private lazy var repository = AppDelegate.getRepository()
 
     func getCustomer(_ callback: @escaping RepoCallback<Customer>) {
         repository.getCustomer(callback: callback)

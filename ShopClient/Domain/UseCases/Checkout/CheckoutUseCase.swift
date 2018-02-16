@@ -8,12 +8,8 @@
 
 import ShopClient_Gateway
 
-struct CheckoutUseCase {
-    private let repository: Repository!
-
-    init() {
-        self.repository = nil
-    }
+class CheckoutUseCase {
+    private lazy var repository = AppDelegate.getRepository()
 
     func getCheckout(with checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
         repository.getCheckout(with: checkoutId, callback: callback)

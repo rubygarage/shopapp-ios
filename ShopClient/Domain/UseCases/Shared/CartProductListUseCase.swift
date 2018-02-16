@@ -8,12 +8,8 @@
 
 import ShopClient_Gateway
 
-struct CartProductListUseCase {
-    private let repository: CartRepository!
-
-    init() {
-        self.repository = nil
-    }
+class CartProductListUseCase {
+    private lazy var repository = AppDelegate.getCartRepository()
 
     func getCartProductList(_ callback: @escaping RepoCallback<[CartProduct]>) {
         repository.getCartProductList(callback: callback)

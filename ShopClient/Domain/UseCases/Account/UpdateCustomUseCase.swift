@@ -8,12 +8,8 @@
 
 import ShopClient_Gateway
 
-struct UpdateCustomUseCase {
-    private let repository: Repository!
-
-    init() {
-        self.repository = nil
-    }
+class UpdateCustomUseCase {
+    private lazy var repository = AppDelegate.getRepository()
 
     func updateCustomer(with promo: Bool, _ callback: @escaping RepoCallback<Customer>) {
         repository.updateCustomer(with: promo, callback: callback)

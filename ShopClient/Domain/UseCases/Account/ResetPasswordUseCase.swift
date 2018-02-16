@@ -8,12 +8,8 @@
 
 import ShopClient_Gateway
 
-struct ResetPasswordUseCase {
-    private let repository: Repository!
-
-    init() {
-        self.repository = nil
-    }
+class ResetPasswordUseCase {
+    private lazy var repository = AppDelegate.getRepository()
 
     func resetPassword(with email: String, _ callback: @escaping RepoCallback<Bool>) {
         repository.resetPassword(with: email, callback: callback)

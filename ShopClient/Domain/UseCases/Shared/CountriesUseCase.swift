@@ -8,12 +8,8 @@
 
 import ShopClient_Gateway
 
-struct CountriesUseCase {
-    private let repository: Repository!
-
-    init() {
-        self.repository = nil
-    }
+class CountriesUseCase {
+    private lazy var repository = AppDelegate.getRepository()
 
     func getCountries(_ callback: @escaping RepoCallback<[Country]>) {
         repository.getCountries(callback: callback)

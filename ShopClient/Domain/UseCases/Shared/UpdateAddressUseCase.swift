@@ -8,12 +8,8 @@
 
 import ShopClient_Gateway
 
-struct UpdateAddressUseCase {
-    private let repository: Repository!
-
-    init() {
-        self.repository = nil
-    }
+class UpdateAddressUseCase {
+    private lazy var repository = AppDelegate.getRepository()
 
     func updateCustomerAddress(with address: Address, callback: @escaping RepoCallback<Bool>) {
         repository.updateCustomerAddress(with: address, callback: callback)
