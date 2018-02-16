@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "ShopApp_Gateway"
-  s.version      = "0.0.1"
+  s.version      = "1.0"
   s.summary      = "ShopApp Gateway description"
 
   # This description is used to generate tags and improve search results.
@@ -80,7 +80,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/plzen/shopapp-ios.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/plzen/shopapp-ios.git", :branch => "feature/split_app_for_distribution" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
