@@ -1,5 +1,0 @@
-git "file:///Users/mvoronin/projects/ios/ShopClient" "feature/split_app_for_distribution"
-
-github "Shopify/mobile-buy-sdk-ios" ~> 3.1
-github "evgenyneu/keychain-swift" ~> 10.0
-github "Alamofire/Alamofire" ~> 4.5
