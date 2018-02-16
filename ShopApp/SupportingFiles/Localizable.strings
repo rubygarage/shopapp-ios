@@ -30,11 +30,11 @@
 "Alert.Error" = "Error";
 "Alert.ChooseShippingRate" = "Choose shipping rate";
 "Alert.PriceInfo" = "Price info";
-"Alert.ProductAdded" = "Product has been added to cart";
+"Alert.ProductAdded" = "Product added to cart";
 "Alert.Registered" = "You have been successfully registered and logged in";
 "Alert.LoggedIn" = "You have been successfully logged in";
-"Alert.ProfileChanged" = "Profile has been changed";
 "Alert.LoggedOut" = "You have been successfully logged out";
+"Alert.ProfileChanged" = "Profile has been changed";
 
 "Button.Sort" = "Sort";
 "Button.AddToCart" = "Add to cart";
