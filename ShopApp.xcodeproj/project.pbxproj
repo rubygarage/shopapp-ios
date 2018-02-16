@@ -308,6 +308,8 @@
 		8E5EFB332035F34400FD718B /* ProductRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5EFB112035F34300FD718B /* ProductRepository.swift */; };
 		8E5EFB342035F34400FD718B /* ArticleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5EFB122035F34300FD718B /* ArticleRepository.swift */; };
 		8E5EFB352035F34400FD718B /* ShopClient_Gateway.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E5EFB132035F34400FD718B /* ShopClient_Gateway.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8E93DC472037332D00820FC5 /* QuantityTextFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E93DC452037332D00820FC5 /* QuantityTextFieldView.xib */; };
+		8E93DC482037332D00820FC5 /* QuantityTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E93DC462037332D00820FC5 /* QuantityTextFieldView.swift */; };
 		8ED91FAE203460B200E9692A /* Address+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED91FAD203460B200E9692A /* Address+Details.swift */; };
 		8ED91FB0203460FD00E9692A /* Customer+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED91FAF203460FD00E9692A /* Customer+Details.swift */; };
 		8ED91FB22034612700E9692A /* CreditCard+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED91FB12034612700E9692A /* CreditCard+Details.swift */; };
@@ -647,6 +649,8 @@
 		8E5EFB112035F34300FD718B /* ProductRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductRepository.swift; sourceTree = "<group>"; };
 		8E5EFB122035F34300FD718B /* ArticleRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleRepository.swift; sourceTree = "<group>"; };
 		8E5EFB132035F34400FD718B /* ShopClient_Gateway.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopClient_Gateway.h; sourceTree = "<group>"; };
+		8E93DC452037332D00820FC5 /* QuantityTextFieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuantityTextFieldView.xib; sourceTree = "<group>"; };
+		8E93DC462037332D00820FC5 /* QuantityTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuantityTextFieldView.swift; sourceTree = "<group>"; };
 		8ED91FAD203460B200E9692A /* Address+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Address+Details.swift"; sourceTree = "<group>"; };
 		8ED91FAF203460FD00E9692A /* Customer+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Customer+Details.swift"; sourceTree = "<group>"; };
 		8ED91FB12034612700E9692A /* CreditCard+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreditCard+Details.swift"; sourceTree = "<group>"; };
@@ -1177,12 +1181,12 @@
 		0BA6306D1FFFB101007088B8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				61EC8D7A20344EE40001FF2B /* QuantityTextFieldView */,
 				0B24F0E820074F1900F13224 /* BlackButton */,
 				0B69B55C200CB1BE00F071E3 /* Cells */,
 				0BA6306E1FFFB10A007088B8 /* Footers */,
 				0B69B569200CF1A700F071E3 /* Headers */,
 				0B24F0DE20074F1900F13224 /* InputTextFieldView */,
+				8E93DC442037332D00820FC5 /* QuantityTextFieldView */,
 				0B24F0E120074F1900F13224 /* UnderlinedButton */,
 			);
 			path = Views;
@@ -1946,15 +1950,6 @@
 			path = CartTableViewCell;
 			sourceTree = "<group>";
 		};
-		61EC8D7A20344EE40001FF2B /* QuantityTextFieldView */ = {
-			isa = PBXGroup;
-			children = (
-				61EC8D7B20344F0A0001FF2B /* QuantityTextFieldView.swift */,
-				61EC8D7D20344F230001FF2B /* QuantityTextFieldView.xib */,
-			);
-			path = QuantityTextFieldView;
-			sourceTree = "<group>";
-		};
 		61ED88F01F7170C9006BDA79 /* GridCollectionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2028,6 +2023,15 @@
 				8E5EFB102035F34300FD718B /* Article.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		8E93DC442037332D00820FC5 /* QuantityTextFieldView */ = {
+			isa = PBXGroup;
+			children = (
+				8E93DC452037332D00820FC5 /* QuantityTextFieldView.xib */,
+				8E93DC462037332D00820FC5 /* QuantityTextFieldView.swift */,
+			);
+			path = QuantityTextFieldView;
 			sourceTree = "<group>";
 		};
 		8ED91FAC2034609300E9692A /* Models */ = {
@@ -2189,7 +2193,6 @@
 				0B24F0EC20074F1A00F13224 /* InputTextFieldView.xib in Resources */,
 				61236D3D1FEA6E2500D64198 /* Checkout.storyboard in Resources */,
 				61AB7D312010CB5700DB9D44 /* CheckoutShippingOptionsEnabledTableViewCell.xib in Resources */,
-				61EC8D7E20344F230001FF2B /* QuantityTextFieldView.xib in Resources */,
 				61A54BF41FF5253E00D4D151 /* AccountTableViewCell.xib in Resources */,
 				61BF1EAD1FAB56E40098B9AA /* LoadingView.xib in Resources */,
 				61E4E63E1F56C868001C6E01 /* LaunchScreen.storyboard in Resources */,
@@ -2229,6 +2232,7 @@
 				0BADF10F20288D370013DA67 /* OrderListEmptyDataView.xib in Resources */,
 				61B94C111F82409300B6887C /* ProductOptionHeaderView.xib in Resources */,
 				0BE6E4822006444100EAEC76 /* ProductOptionsCollectionViewCell.xib in Resources */,
+				8E93DC472037332D00820FC5 /* QuantityTextFieldView.xib in Resources */,
 				0BA630701FFFB159007088B8 /* PaymentDetailsFooterView.xib in Resources */,
 				61BA58C71FE14A9F00BF1586 /* PopularTableViewCell.xib in Resources */,
 				61719B9D1FC2FCEE007B6ED0 /* CartHeaderView.xib in Resources */,
@@ -2316,18 +2320,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ShopApp/Pods-ShopApp-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AvatarImageView/AvatarImageView.framework",
 				"${BUILT_PRODUCTS_DIR}/CoreStore/CoreStore.framework",
-				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/Mobile-Buy-SDK/MobileBuySDK.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SKPhotoBrowser/SKPhotoBrowser.framework",
-				"${BUILT_PRODUCTS_DIR}/ShopApp_Gateway/ShopApp_Gateway.framework",
-				"${BUILT_PRODUCTS_DIR}/ShopApp_Shopify/ShopApp_Shopify.framework",
 				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
@@ -2337,18 +2336,13 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AvatarImageView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreStore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MobileBuySDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SKPhotoBrowser.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ShopApp_Gateway.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ShopApp_Shopify.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
@@ -2442,6 +2436,7 @@
 				61E8A2211FAC99F50092EDC1 /* BasePaginationViewModel.swift in Sources */,
 				0BED64D22016401D006CF968 /* PersonalInfoViewModel.swift in Sources */,
 				61B94C101F82409300B6887C /* ProductOptionHeaderView.swift in Sources */,
+				8E93DC482037332D00820FC5 /* QuantityTextFieldView.swift in Sources */,
 				616CA6611FF2A0CF00FF14E2 /* CheckoutViewController.swift in Sources */,
 				0BD5EB3F1FF3F1900076C01B /* ShopUseCase.swift in Sources */,
 				0B953D532021AC8600DD32DE /* ArticleListTableProvider.swift in Sources */,
@@ -2490,7 +2485,6 @@
 				6133DAD21FB21A6F00156971 /* CartButtonView.swift in Sources */,
 				0B4EA3481FFBBF9D000C7A80 /* ResetPasswordUseCase.swift in Sources */,
 				61E76E1B1FB46C0200AE5FB4 /* DAOImageHelper.swift in Sources */,
-				61EC8D7C20344F0A0001FF2B /* QuantityTextFieldView.swift in Sources */,
 				6152B1241F7914E800045A42 /* ArticlesListViewController.swift in Sources */,
 				61E76E1F1FB4704900AE5FB4 /* DAOImageAdapter.swift in Sources */,
 				614142C51F6AF15B00379BB9 /* LastArrivalsTableViewCell.swift in Sources */,
