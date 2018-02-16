@@ -148,4 +148,4 @@ whitelist_rules:
 #  - yoda_condition
 
 included:
-  - ShopClient
+  - ShopApp

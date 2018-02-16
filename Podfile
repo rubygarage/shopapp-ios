@@ -4,7 +4,7 @@ platform :ios, '10.0'
 # Ignore all warnings from all pods
 inhibit_all_warnings!
 
-target 'ShopClient' do
+target 'ShopApp' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
@@ -33,6 +33,9 @@ target 'ShopClient' do
 
   # Developer tools
   pod 'SwiftLint', '~> 0.24'
+
+  # Shopify
+  pod 'ShopApp_Shopify', :path => '../ShopClient_Shopify'
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|
