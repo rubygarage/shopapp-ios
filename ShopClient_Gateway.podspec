@@ -15,9 +15,9 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = "ShopClient_Gateway"
+  s.name         = "ShopApp_Gateway"
   s.version      = "0.0.1"
-  s.summary      = "ShopClient Gateway description"
+  s.summary      = "ShopApp Gateway description"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
     wqeqwewqe
                    DESC
 
-  s.homepage     = "https://github.com/rubygarage/ShopClient"
+  s.homepage     = "https://github.com/plzen/shopapp-ios"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -80,7 +80,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/rubygarage/ShopClient.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/plzen/shopapp-ios.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
