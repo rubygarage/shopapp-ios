@@ -267,18 +267,12 @@
 		61ED88F71F7171F1006BDA79 /* GridCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ED88F61F7171F1006BDA79 /* GridCollectionViewController.swift */; };
 		61FC3DA91F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC3DA71F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift */; };
 		61FC3DAA1F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61FC3DA81F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.xib */; };
-		8E2E6A4A203664DC00A5BC97 /* Buy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2E6A45203664DC00A5BC97 /* Buy.framework */; };
-		8E2E6A4B203664DC00A5BC97 /* Shopify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2E6A46203664DC00A5BC97 /* Shopify.framework */; };
-		8E2E6A4C203664DC00A5BC97 /* Pay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2E6A47203664DC00A5BC97 /* Pay.framework */; };
-		8E2E6A4D203664DC00A5BC97 /* KeychainSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2E6A48203664DC00A5BC97 /* KeychainSwift.framework */; };
-		8E2E6A4E203664DC00A5BC97 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2E6A49203664DC00A5BC97 /* Alamofire.framework */; };
 		8E3215B7202E062500CA4FB4 /* UIView+NameOfClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3215B6202E062500CA4FB4 /* UIView+NameOfClass.swift */; };
 		8E3215B9202E08F500CA4FB4 /* UITableView+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3215B8202E08F500CA4FB4 /* UITableView+Cells.swift */; };
 		8E3215BD202E139500CA4FB4 /* UICollectionView+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3215BC202E139500CA4FB4 /* UICollectionView+Cells.swift */; };
 		8E3215BF20300C4A00CA4FB4 /* UIView+LoadFromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3215BE20300C4A00CA4FB4 /* UIView+LoadFromNib.swift */; };
 		8E45017820179C0600D4CF6E /* TextFieldWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E45017720179C0600D4CF6E /* TextFieldWrapper.swift */; };
 		8E5EFA832035BA5000FD718B /* CartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5EFA822035BA4F00FD718B /* CartRepository.swift */; };
-		8E5EFAD72035F2BF00FD718B /* ShopClient_Gateway.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E5EFAD02035F2BF00FD718B /* ShopClient_Gateway.framework */; };
 		8E5EFAD92035F2BF00FD718B /* ShopClient_Gateway.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E5EFAD02035F2BF00FD718B /* ShopClient_Gateway.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8E5EFB142035F34400FD718B /* PaymentsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5EFAF12035F34200FD718B /* PaymentsRepository.swift */; };
 		8E5EFB152035F34400FD718B /* OrderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5EFAF22035F34200FD718B /* OrderRepository.swift */; };
@@ -321,6 +315,16 @@
 		8ED91FCC20358A5E00E9692A /* AppCartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED91FCB20358A5E00E9692A /* AppCartRepository.swift */; };
 		E48C459A560E7DC50BF69226 /* Pods_ShopClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9DA8ECD13CBDF3EE2618FE4 /* Pods_ShopClient.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8E2E6A54203702A400A5BC97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 61E4E6281F56C868001C6E01 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E5EFACF2035F2BF00FD718B;
+			remoteInfo = ShopClient_Gateway;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		8E5EFAD82035F2BF00FD718B /* Embed Frameworks */ = {
@@ -617,6 +621,7 @@
 		8E2E6A47203664DC00A5BC97 /* Pay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pay.framework; path = dependencies/Carthage/Build/iOS/Pay.framework; sourceTree = "<group>"; };
 		8E2E6A48203664DC00A5BC97 /* KeychainSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainSwift.framework; path = dependencies/Carthage/Build/iOS/KeychainSwift.framework; sourceTree = "<group>"; };
 		8E2E6A49203664DC00A5BC97 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = dependencies/Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		8E2E6A522036FBBF00A5BC97 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = dependencies/Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
 		8E3215B6202E062500CA4FB4 /* UIView+NameOfClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+NameOfClass.swift"; sourceTree = "<group>"; };
 		8E3215B8202E08F500CA4FB4 /* UITableView+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Cells.swift"; sourceTree = "<group>"; };
 		8E3215BC202E139500CA4FB4 /* UICollectionView+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Cells.swift"; sourceTree = "<group>"; };
@@ -672,12 +677,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E2E6A4A203664DC00A5BC97 /* Buy.framework in Frameworks */,
-				8E2E6A4B203664DC00A5BC97 /* Shopify.framework in Frameworks */,
-				8E2E6A4C203664DC00A5BC97 /* Pay.framework in Frameworks */,
-				8E2E6A4D203664DC00A5BC97 /* KeychainSwift.framework in Frameworks */,
-				8E2E6A4E203664DC00A5BC97 /* Alamofire.framework in Frameworks */,
-				8E5EFAD72035F2BF00FD718B /* ShopClient_Gateway.framework in Frameworks */,
 				E48C459A560E7DC50BF69226 /* Pods_ShopClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2090,6 +2089,7 @@
 		C1A3D849B4890913206CAEDC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E2E6A522036FBBF00A5BC97 /* SDWebImage.framework */,
 				8E2E6A49203664DC00A5BC97 /* Alamofire.framework */,
 				8E2E6A45203664DC00A5BC97 /* Buy.framework */,
 				8E2E6A48203664DC00A5BC97 /* KeychainSwift.framework */,
@@ -2127,11 +2127,11 @@
 				8E3A6F2A20078145001ADB11 /* SwiftLint */,
 				0BA630641FFE7B8C007088B8 /* Fabric */,
 				8E5EFAD82035F2BF00FD718B /* Embed Frameworks */,
-				8E2E6A4F2036654200A5BC97 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8E2E6A55203702A400A5BC97 /* PBXTargetDependency */,
 			);
 			name = ShopClient;
 			productName = ShopClient;
@@ -2368,29 +2368,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShopClient/Pods-ShopClient-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		8E2E6A4F2036654200A5BC97 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/dependencies/Carthage/Build/iOS/Alamofire.framework",
-				"$(SRCROOT)/dependencies/Carthage/Build/iOS/Buy.framework",
-				"$(SRCROOT)/dependencies/Carthage/Build/iOS/KeychainSwift.framework",
-				"$(SRCROOT)/dependencies/Carthage/Build/iOS/Pay.framework",
-				"$(SRCROOT)/dependencies/Carthage/Build/iOS/Shopify.framework",
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Buy.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeychainSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Pay.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Shopify.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 		8E3A6F2A20078145001ADB11 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2671,6 +2648,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8E2E6A55203702A400A5BC97 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E5EFACF2035F2BF00FD718B /* ShopClient_Gateway */;
+			targetProxy = 8E2E6A54203702A400A5BC97 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		61E4E63C1F56C868001C6E01 /* LaunchScreen.storyboard */ = {

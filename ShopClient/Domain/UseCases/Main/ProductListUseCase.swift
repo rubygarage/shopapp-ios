@@ -7,7 +7,6 @@
 //
 
 import ShopClient_Gateway
-import Shopify
 
 private let kPopuarSectionItemsMaxCount = 4
 
