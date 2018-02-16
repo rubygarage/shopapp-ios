@@ -6,8 +6,8 @@
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import ShopClient_Gateway
 
 typealias ApiJson = [String: AnyObject]
 

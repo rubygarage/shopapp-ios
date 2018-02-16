@@ -1,1 +1,4 @@
-git "file:///Users/mvoronin/projects/ios/ShopClient" "66fc9ae1564dc965b51eca7c578d35b0bf84c671"
+git "file:///Users/mvoronin/projects/ios/ShopClient" "e3c90c1289ae6b0783b5c845e44e1356c583fe75"
+github "Alamofire/Alamofire" "4.6.0"
+github "Shopify/mobile-buy-sdk-ios" "3.1.3"
+github "evgenyneu/keychain-swift" "10.0.0"

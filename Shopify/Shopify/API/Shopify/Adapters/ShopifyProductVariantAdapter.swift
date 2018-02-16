@@ -6,7 +6,7 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import MobileBuySDK
+import Buy
 import ShopClient_Gateway
 
 struct ShopifyProductVariantAdapter {

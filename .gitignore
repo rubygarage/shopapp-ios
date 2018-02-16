@@ -51,9 +51,9 @@ Pods/
 # Carthage
 #
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
-Shopify/Carthage/Checkouts
+Carthage/Checkouts
 
-Shopify/Carthage/Build
+Carthage/Build
 
 # fastlane
 #

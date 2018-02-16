@@ -6,8 +6,8 @@
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import ShopClient_Gateway
 
 private let kShopifyAdminApiKey = "d64eae31336ae451296daf24f52b0327"
 private let kShopifyAdminPassword = "b54086c46fe6825198e4542a96499d51"

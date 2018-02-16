@@ -6,8 +6,9 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import MobileBuySDK
+import Buy
 import KeychainSwift
+import Pay
 import ShopClient_Gateway
 
 typealias PaymentByApplePayResponse = (order: Order?, error: RepoError?)
