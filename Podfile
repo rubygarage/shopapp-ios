@@ -4,12 +4,9 @@ platform :ios, '10.0'
 # Ignore all warnings from all pods
 inhibit_all_warnings!
 
-target 'ShopClient' do
+target 'ShopApp' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-
-  # Pods for ShopClient
-  pod 'Mobile-Buy-SDK', '~> 3.1'
 
   # UI
   pod 'SDWebImage', '~> 4.1'
@@ -22,9 +19,6 @@ target 'ShopClient' do
   pod 'SwipeCellKit', '~> 2.0'
   pod 'UIImage+Additions', '~> 2.1'
   pod 'TTTAttributedLabel', '~> 2.0'
-  
-  # Network
-  pod 'Alamofire', '~> 4.5'
 
   # Database
   pod 'CoreStore', '~> 4.2'
@@ -33,15 +27,15 @@ target 'ShopClient' do
   pod 'RxSwift', '~> 4.1'
   pod 'RxCocoa', '~> 4.1'
 
-  # Secutity
-  pod 'KeychainSwift', '~> 10.0'
-
   # Crash&Beta
   pod 'Fabric', '~> 1.7'
   pod 'Crashlytics', '~> 3.9'
-  
+
   # Developer tools
   pod 'SwiftLint', '~> 0.24'
+
+  # Shopify
+  pod 'ShopApp_Shopify', :path => '../ShopClient_Shopify'
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|
