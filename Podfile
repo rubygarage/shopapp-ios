@@ -34,9 +34,6 @@ target 'ShopApp' do
   # Developer tools
   pod 'SwiftLint', '~> 0.24'
 
-  # Shopify
-  pod 'ShopApp_Shopify', :path => '../ShopClient_Shopify'
-
   post_install do |installer|
     installer.pods_project.targets.each do |target|
       if ['AvatarImageView', 'SKPhotoBrowser', 'SwipeCellKit'].include? target.name
@@ -47,4 +44,8 @@ target 'ShopApp' do
     end
   end
 
+  target 'ShopAppTests' do
+    pod 'Quick', '~> 1.2'
+    pod 'Nimble', '~> 7.0'
+  end
 end

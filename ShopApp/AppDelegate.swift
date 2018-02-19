@@ -41,9 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Private
 
-    private func setupRepository() {
-
-    }
+    private func setupRepository() {}
 
     private func setupCartRepository() {
         cartRepository = AppCartRepository(dao: DAO())

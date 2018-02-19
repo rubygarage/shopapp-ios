@@ -12,9 +12,14 @@ import ShopApp_Gateway
 class SettingsViewModel: BaseViewModel {
     private let loginUseCase = LoginUseCase()
     private let customerUseCase = CustomerUseCase()
-    private let updateCustomUseCase = UpdateCustomUseCase()
+    
+    private var updateCustomerUseCase: UpdateCustomerUseCase
     
     var customer = Variable<Customer?>(nil)
+    
+    init(updateCustomerUseCase: UpdateCustomerUseCase) {
+        self.updateCustomerUseCase = updateCustomerUseCase
+    }
     
     func loadCustomer() {
         loginUseCase.getLoginStatus { isLoggedIn in
@@ -50,7 +55,7 @@ class SettingsViewModel: BaseViewModel {
     
     private func update(_ customer: Customer) {
         state.onNext(ViewState.make.loading(showHud: false))
-        updateCustomUseCase.updateCustomer(with: customer.promo) { [weak self] (customer, error) in
+        updateCustomerUseCase.updateCustomer(with: customer.promo) { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return
             }

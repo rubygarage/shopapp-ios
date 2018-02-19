@@ -9,7 +9,7 @@
 import RxSwift
 
 class ChangePasswordViewModel: BaseViewModel {
-    private let updateCustomUseCase = UpdateCustomUseCase()
+    private var updateCustomerUseCase: UpdateCustomerUseCase
     
     var newPasswordText = Variable<String>("")
     var confirmPasswordText = Variable<String>("")
@@ -34,6 +34,12 @@ class ChangePasswordViewModel: BaseViewModel {
                 break
             }
         }
+    }
+    
+    init(updateCustomerUseCase: UpdateCustomerUseCase) {
+        self.updateCustomerUseCase = updateCustomerUseCase
+        
+        super.init()
     }
     
     private func checkValidation() {
@@ -63,7 +69,7 @@ class ChangePasswordViewModel: BaseViewModel {
     
     private func update() {
         state.onNext(ViewState.make.loading(isTranslucent: true))
-        updateCustomUseCase.updateCustomer(with: newPasswordText.value) { [weak self] (customer, error) in
+        updateCustomerUseCase.updateCustomer(with: newPasswordText.value) { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return
             }

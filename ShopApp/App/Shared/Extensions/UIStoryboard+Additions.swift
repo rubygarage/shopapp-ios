@@ -1,5 +1,5 @@
 //
-//  Storyboard+Additions.swift
+//  UIStoryboard+Additions.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 9/5/17.
@@ -9,8 +9,8 @@
 import UIKit
 
 extension UIStoryboard {
-    class func sortModal() -> UIStoryboard {
-        return UIStoryboard(name: "SortModal", bundle: nil)
+    class var account: UIStoryboard {
+        return UIStoryboard(name: "Account", bundle: nil)
     }
     
     class func cart() -> UIStoryboard {
