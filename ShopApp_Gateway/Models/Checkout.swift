@@ -17,7 +17,7 @@ public class Checkout {
     public var availableShippingRates: [ShippingRate]?
     public var shippingAddress: Address?
     public var currencyCode: String?
-    public var lineItems = [LineItem]()
+    public var lineItems: [LineItem] = []
 
     public init() {}
 }
