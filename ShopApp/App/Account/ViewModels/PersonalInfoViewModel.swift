@@ -12,7 +12,8 @@ import ShopApp_Gateway
 class PersonalInfoViewModel: BaseViewModel {
     private let loginUseCase = LoginUseCase()
     private let customerUseCase = CustomerUseCase()
-    private let updateCustomUseCase = UpdateCustomUseCase()
+    
+    private var updateCustomerUseCase: UpdateCustomerUseCase
     
     var canChangeEmail = true
     var customer = Variable<Customer?>(nil)
@@ -49,6 +50,10 @@ class PersonalInfoViewModel: BaseViewModel {
                 break
             }
         }
+    }
+    
+    init(updateCustomerUseCase: UpdateCustomerUseCase) {
+        self.updateCustomerUseCase = updateCustomerUseCase
     }
     
     func loadCustomer() {
@@ -93,7 +98,7 @@ class PersonalInfoViewModel: BaseViewModel {
     
     private func saveChanges() {
         state.onNext(ViewState.make.loading(isTranslucent: true))
-        updateCustomUseCase.updateCustomer(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), phone: phoneText.value.orNil()) { [weak self] (customer, error) in
+        updateCustomerUseCase.updateCustomer(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), phone: phoneText.value.orNil()) { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return
             }

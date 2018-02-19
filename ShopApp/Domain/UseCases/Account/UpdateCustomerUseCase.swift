@@ -1,5 +1,5 @@
 //
-//  UpdateCustomUseCase.swift
+//  UpdateCustomerUseCase.swift
 //  ShopClient
 //
 //  Created by Radyslav Krechet on 1/22/18.
@@ -8,8 +8,12 @@
 
 import ShopApp_Gateway
 
-class UpdateCustomUseCase {
-    private lazy var repository = AppDelegate.getRepository()
+class UpdateCustomerUseCase {
+    private var repository: ShopApp_Gateway.AuthentificationRepository
+    
+    init(repository: ShopApp_Gateway.AuthentificationRepository) {
+        self.repository = repository
+    }
 
     func updateCustomer(with promo: Bool, _ callback: @escaping RepoCallback<Customer>) {
         repository.updateCustomer(with: promo, callback: callback)

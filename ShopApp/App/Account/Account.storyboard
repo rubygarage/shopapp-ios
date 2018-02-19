@@ -13,7 +13,7 @@
         <!--Account View Controller-->
         <scene sceneID="wh2-c5-XWd">
             <objects>
-                <viewController storyboardIdentifier="AccountControllerIdentifier" id="cev-ft-aNr" customClass="AccountViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountControllerIdentifier" id="cev-ft-aNr" customClass="AccountViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="F2Q-Z4-0C3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -52,7 +52,7 @@
         <!--Navigation Controller-->
         <scene sceneID="eZB-DS-ZFv">
             <objects>
-                <navigationController storyboardIdentifier="AccountNavigationController" id="F1m-Lv-M3l" customClass="NavigationController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AccountNavigationController" id="F1m-Lv-M3l" customClass="NavigationController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="account_default" selectedImage="account_selected" id="oQe-qM-avp">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -73,7 +73,7 @@
         <!--Policy View Controller-->
         <scene sceneID="xzY-dd-RIo">
             <objects>
-                <viewController storyboardIdentifier="PolicyControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="ejd-jT-O3e" customClass="PolicyViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PolicyControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="ejd-jT-O3e" customClass="PolicyViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mPf-Wp-UC5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -106,7 +106,7 @@
         <!--Orders List View Controller-->
         <scene sceneID="NSC-q9-Wy6">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="GpK-nH-9eS" customClass="OrdersListViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="GpK-nH-9eS" customClass="OrdersListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xkh-Tx-kfn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -138,7 +138,7 @@
         <!--Settings View Controller-->
         <scene sceneID="3wp-c9-FLE">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="Vuw-Re-lYh" customClass="SettingsViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="Vuw-Re-lYh" customClass="SettingsViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DUO-oY-njh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -168,7 +168,7 @@
         <!--Order Details View Controller-->
         <scene sceneID="tYG-db-tzb">
             <objects>
-                <viewController storyboardIdentifier="OrderDetailsControllerIdentifier" hidesBottomBarWhenPushed="YES" id="ZjV-3t-aY7" customClass="OrderDetailsViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OrderDetailsControllerIdentifier" hidesBottomBarWhenPushed="YES" id="ZjV-3t-aY7" customClass="OrderDetailsViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LqB-4u-yY9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -199,7 +199,7 @@
         <!--Personal Info View Controller-->
         <scene sceneID="Mf5-6b-ts8">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="ekz-Gg-Wge" customClass="PersonalInfoViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="ekz-Gg-Wge" customClass="PersonalInfoViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Aju-d4-PMl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -210,7 +210,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7tw-ZN-MX5">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcq-TF-fx0" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcq-TF-fx0" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="110" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -222,7 +222,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWH-ma-ydi" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWH-ma-ydi" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="43" width="150.5" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -234,7 +234,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8vp-gX-ShV" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8vp-gX-ShV" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="189" y="43" width="150.5" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -246,7 +246,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="796-pn-4ld" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="796-pn-4ld" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="177" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -258,7 +258,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJk-cr-DM5" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJk-cr-DM5" customClass="BlackButton" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="314" width="285" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -269,7 +269,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRs-43-afl" customClass="UnderlinedButton" customModule="ShopClient" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRs-43-afl" customClass="UnderlinedButton" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="157" y="256" width="61" height="25"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                 <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
@@ -354,7 +354,7 @@
         <!--Navigation Controller-->
         <scene sceneID="51l-9g-jWe">
             <objects>
-                <navigationController id="Cad-5T-gjI" customClass="NavigationController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="Cad-5T-gjI" customClass="NavigationController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IfL-mG-zLQ">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -370,7 +370,7 @@
         <!--Change Password View Controller-->
         <scene sceneID="bsT-WZ-QCy">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="jPT-l7-Tfp" customClass="ChangePasswordViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChangePasswordControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="jPT-l7-Tfp" customClass="ChangePasswordViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XyH-NR-RV8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -381,7 +381,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="glU-eU-JFW">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pV7-js-FBa" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pV7-js-FBa" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="110" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -391,9 +391,11 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
                                                         <integer key="value" value="1"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="confirmPassword"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oU7-l9-yOf" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oU7-l9-yOf" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="43" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -404,9 +406,11 @@
                                                         <integer key="value" value="1"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="hideShowPasswordButton" value="NO"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="newPassword"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityElement" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xo5-F8-IbM" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xo5-F8-IbM" customClass="BlackButton" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="177" width="285" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -416,6 +420,9 @@
                                                 <state key="normal" title="Button">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="update"/>
+                                                </userDefinedRuntimeAttributes>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -464,7 +471,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="O3U-Bi-uN4">
             <objects>
-                <viewController storyboardIdentifier="SignUpControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="stL-pA-iqo" customClass="SignUpViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="stL-pA-iqo" customClass="SignUpViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jEQ-ow-oLx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -475,7 +482,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7q-MC-CDL">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qwo-0k-0PZ" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qwo-0k-0PZ" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="43" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -487,7 +494,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VPd-tJ-IiL" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VPd-tJ-IiL" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="110" width="150.5" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -499,7 +506,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9cl-xB-xLA" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9cl-xB-xLA" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="189.5" y="110" width="150.5" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -511,7 +518,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="taH-6o-eIT" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="taH-6o-eIT" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="177" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -523,7 +530,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cXW-aO-4Pj" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cXW-aO-4Pj" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="244" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -536,7 +543,7 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="hideShowPasswordButton" value="NO"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXD-ef-Qqf" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXD-ef-Qqf" customClass="BlackButton" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="344" width="285" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -618,7 +625,7 @@
         <!--Sign In View Controller-->
         <scene sceneID="dRb-ur-MBF">
             <objects>
-                <viewController storyboardIdentifier="SignInControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="ssr-Cc-aVQ" customClass="SignInViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="ssr-Cc-aVQ" customClass="SignInViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BNs-dB-XG2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -629,7 +636,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h3k-8d-YRC">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HvH-xF-sge" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HvH-xF-sge" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="43" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -641,7 +648,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BWD-hy-fte" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BWD-hy-fte" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="110" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -654,7 +661,7 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="hideShowPasswordButton" value="NO"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Yw-Za-fpb" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Yw-Za-fpb" customClass="BlackButton" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="210" width="285" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -725,7 +732,7 @@
         <!--Forgot Password View Controller-->
         <scene sceneID="iJa-sR-ZOx">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ngi-jF-uUl" customClass="ForgotPasswordViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ngi-jF-uUl" customClass="ForgotPasswordViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qYu-Yv-Nz0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -736,7 +743,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C9n-jb-IeJ">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSC-Ak-eUx" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSC-Ak-eUx" customClass="BlackButton" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="186.5" width="285" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -768,7 +775,7 @@
                                             <constraint firstAttribute="trailing" secondItem="uSC-Ak-eUx" secondAttribute="trailing" constant="45" id="xqd-Ga-Ydu"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y2X-oB-lXq" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y2X-oB-lXq" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                         <rect key="frame" x="35" y="119.5" width="305" height="47"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -834,7 +841,7 @@
         <!--Sign In-->
         <scene sceneID="oBI-Jw-63J">
             <objects>
-                <navigationController id="zdO-YG-cfs" customClass="NavigationController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="zdO-YG-cfs" customClass="NavigationController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Sign In" image="tabbar_login" id="Jpv-ro-WzQ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CuT-EC-z2N">
@@ -853,7 +860,7 @@
         <!--Sign Up-->
         <scene sceneID="41F-7N-HMS">
             <objects>
-                <navigationController id="tL0-Uj-cJq" customClass="NavigationController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="tL0-Uj-cJq" customClass="NavigationController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Sign Up" image="tabbar_sign_up" id="PBh-aQ-fyr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sEC-Gs-17H">
@@ -872,7 +879,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Sfo-9X-pI2">
             <objects>
-                <navigationController id="V0g-nm-qj8" customClass="NavigationController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="V0g-nm-qj8" customClass="NavigationController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="l3F-Ft-lQi">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -890,7 +897,7 @@
         <!--Link View Controller-->
         <scene sceneID="KaW-24-Urc">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="NPd-X3-dk2" customClass="LinkViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="NPd-X3-dk2" customClass="LinkViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JIO-34-mHr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -943,7 +950,7 @@
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayF-80-Ljj" customClass="UnderlinedButton" customModule="ShopClient" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayF-80-Ljj" customClass="UnderlinedButton" customModule="ShopApp" customModuleProvider="target">
                                 <rect key="frame" x="156.5" y="276.5" width="61" height="25"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
@@ -995,7 +1002,7 @@
         <!--Address List View Controller-->
         <scene sceneID="kQf-CL-MXB">
             <objects>
-                <viewController storyboardIdentifier="AddressListControllerIdentifier" id="LvS-Gi-IGH" customClass="AddressListViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddressListControllerIdentifier" id="LvS-Gi-IGH" customClass="AddressListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JWC-V8-DqR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1028,7 +1035,7 @@
         <!--Customer Address Form View Controller-->
         <scene sceneID="rcV-4E-5dD">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Sxz-cw-IQL" customClass="CustomerAddressFormViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Sxz-cw-IQL" customClass="CustomerAddressFormViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2VM-s4-pd0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1057,7 +1064,7 @@
         <!--Address Form View Controller-->
         <scene sceneID="YZy-yW-g5f">
             <objects>
-                <viewController storyboardIdentifier="AddressFormControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="thf-4R-F97" customClass="AddressFormViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddressFormControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="thf-4R-F97" customClass="AddressFormViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jpf-OC-XqX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="760"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1068,14 +1075,14 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TVg-Bx-Nsh">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="634"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MrP-xB-r99" customClass="BasePicker" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MrP-xB-r99" customClass="BasePicker" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="70" width="285" height="22"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="NRg-aI-mgJ"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L7a-16-Bh0" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L7a-16-Bh0" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="122" width="159.5" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1087,7 +1094,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ReC-ok-n4X" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ReC-ok-n4X" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="180.5" y="122" width="159.5" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1099,7 +1106,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="twU-8g-m7M" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="twU-8g-m7M" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="194" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1111,7 +1118,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZDl-Ub-9Lu" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZDl-Ub-9Lu" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="266" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1123,14 +1130,14 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mBg-1Y-Mg3" customClass="BasePicker" customModule="ShopClient" customModuleProvider="target">
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mBg-1Y-Mg3" customClass="BasePicker" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="385" width="285" height="0.0"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" id="Hye-Vm-oYz"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e3Y-12-AGT" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e3Y-12-AGT" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="338" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1142,7 +1149,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Do1-dZ-oqr" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Do1-dZ-oqr" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="487" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1154,7 +1161,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="db1-bm-Bn0" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="db1-bm-Bn0" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="415" width="305" height="47"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1166,7 +1173,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8OA-2b-Bf2" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8OA-2b-Bf2" customClass="BlackButton" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="564" width="305" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>

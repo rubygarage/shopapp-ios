@@ -16,7 +16,9 @@ class SettingsViewController: BaseViewController<SettingsViewModel> {
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = SettingsViewModel()
+        let repository = AppDelegate.getRepository()
+        let updateCustomerUseCase = UpdateCustomerUseCase(repository: repository)
+        viewModel = SettingsViewModel(updateCustomerUseCase: updateCustomerUseCase)
         super.viewDidLoad()
         
         updateNavigationBar()
