@@ -100,8 +100,8 @@ class BaseAddressListViewController<T: BaseAddressListViewModel>: BaseViewContro
     }
     
     func update(shippingAddress: Address) {
-        if needToUpdate, let model = viewModel as? CheckoutAddressListViewModel {
-            model.updateCheckoutShippingAddress(with: shippingAddress)
+        if needToUpdate, let viewModel = viewModel as? CheckoutAddressListViewModel {
+            viewModel.updateCheckoutShippingAddress(with: shippingAddress)
         } else {
             viewModel.loadCustomerAddresses(isTranslucentHud: true)
         }
@@ -131,8 +131,8 @@ extension BaseAddressListViewController: AddressListHeaderViewDelegate {
 
 extension BaseAddressListViewController: AddressListTableCellDelegate {
     func tableViewCell(_ cell: AddressListTableViewCell, didSelect address: Address) {
-        if let model = viewModel as? CheckoutAddressListViewModel, addressListType == .shipping {
-            model.updateCheckoutShippingAddress(with: address)
+        if let viewModel = viewModel as? CheckoutAddressListViewModel, addressListType == .shipping {
+            viewModel.updateCheckoutShippingAddress(with: address)
         } else if addressListType == .billing {
             selectedAddress = address
             viewModel.selectedAddress = address
