@@ -36,7 +36,7 @@ class BaseTableViewController<T: BasePaginationViewModel>: BasePaginationViewCon
     }
     
     private func setupInfinityScroll() {
-        tableView?.setShouldShowInfiniteScrollHandler { [weak self] _ -> Bool in
+        tableView?.setShouldShowInfiniteScrollHandler { [weak self] _ in
             guard let strongSelf = self else {
                 return false
             }

@@ -13,11 +13,6 @@ import RxSwift
 import ShopApp_Gateway
 import Toaster
 
-private let kLoadingViewFillAlpha: CGFloat = 1
-private let kLoadingViewTranslucentAlpha: CGFloat = 0.75
-private let kToastBottomOffset: CGFloat = 80
-private let kToastDuration: TimeInterval = 3
-
 enum ViewState {
     case loading(showHud: Bool, isTranslucent: Bool)
     case content
@@ -36,6 +31,11 @@ enum ViewState {
 }
 
 class BaseViewController<T: BaseViewModel>: UIViewController {
+    private let loadingViewFillAlpha: CGFloat = 1
+    private let loadingViewTranslucentAlpha: CGFloat = 0.75
+    private let toastBottomOffset: CGFloat = 80
+    private let toastDuration: TimeInterval = 3
+    
     private var emptyDataView: UIView!
     
     private(set) var disposeBag = DisposeBag()
@@ -60,7 +60,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
     // MARK: - Setup
     
     func showToast(with message: String?) {
-        let toast = Toast(text: message, duration: kToastDuration)
+        let toast = Toast(text: message, duration: toastDuration)
         toast.show()
     }
     
@@ -69,7 +69,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
         emptyDataView = customEmptyDataView
 
         errorView.delegate = self
-        ToastView.appearance().bottomOffsetPortrait = kToastBottomOffset
+        ToastView.appearance().bottomOffsetPortrait = toastBottomOffset
     }
     
     private func subscribeViewState() {
@@ -100,7 +100,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
         errorView.removeFromSuperview()
         emptyDataView.removeFromSuperview()
         if showHud {
-            loadingView.alpha = isTranslucent ? kLoadingViewTranslucentAlpha : kLoadingViewFillAlpha
+            loadingView.alpha = isTranslucent ? loadingViewTranslucentAlpha : loadingViewFillAlpha
             addSubviewAndConstraints(subview: loadingView)
         }
     }

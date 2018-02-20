@@ -28,8 +28,7 @@ class NavigationControllerSpec: QuickSpec {
             }
             
             it("should have correct images in navigation bar") {
-                let shadowColor = UIColor.black.withAlphaComponent(0.12)
-                let shadowImage = UIImage.add_image(with: shadowColor)
+                let shadowImage = UIImage.add_image(with: Colors.shadowImage)
                 let backgroundImage = UIImage.add_image(with: .white)
                 expect(navigationController.navigationBar.shadowImage).to(equal(shadowImage))
                 expect(navigationController.navigationBar.backgroundImage(for: .default)).to(equal(backgroundImage))

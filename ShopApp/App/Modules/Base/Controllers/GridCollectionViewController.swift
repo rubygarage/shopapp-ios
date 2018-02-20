@@ -12,7 +12,7 @@ import ShopApp_Gateway
 import UIScrollView_InfiniteScroll
 
 class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionViewController<T>, GridCollectionProviderDelegate {
-    private(set) var collectionProvider: GridCollectionProvider!
+    private(set) var collectionProvider = GridCollectionProvider()
     
     var selectedProduct: Product?
     
@@ -35,7 +35,6 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
     private func setupCollectionView() {
         collectionView?.registerNibForCell(GridCollectionViewCell.self)
 
-        collectionProvider = GridCollectionProvider()
         collectionProvider.delegate = self
         collectionView?.dataSource = collectionProvider
         collectionView?.delegate = collectionProvider
