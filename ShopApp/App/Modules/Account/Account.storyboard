@@ -42,7 +42,7 @@
                         <segue destination="GpK-nH-9eS" kind="show" identifier="toOrdersList" id="Sly-3A-odQ"/>
                         <segue destination="Vuw-Re-lYh" kind="show" identifier="toAccountSettings" id="mdc-0i-wrK"/>
                         <segue destination="ekz-Gg-Wge" kind="show" identifier="toPersonalInfo" id="JJX-Gk-0Pk"/>
-                        <segue destination="LvS-Gi-IGH" kind="show" identifier="toAddressList" id="Sjd-dI-nwg"/>
+                        <segue destination="LvS-Gi-IGH" kind="show" identifier="toAccountAddressList" id="Sjd-dI-nwg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIy-lA-im1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -999,10 +999,10 @@
             </objects>
             <point key="canvasLocation" x="-191" y="4537"/>
         </scene>
-        <!--Address List View Controller-->
+        <!--Account Address List View Controller-->
         <scene sceneID="kQf-CL-MXB">
             <objects>
-                <viewController storyboardIdentifier="AddressListControllerIdentifier" id="LvS-Gi-IGH" customClass="AddressListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddressListControllerIdentifier" id="LvS-Gi-IGH" customClass="AccountAddressListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JWC-V8-DqR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1012,7 +1012,7 @@
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="kKv-9n-zM3" firstAttribute="leading" secondItem="FMj-3L-ygo" secondAttribute="leading" id="4yw-lx-aHa"/>
                             <constraint firstItem="kKv-9n-zM3" firstAttribute="trailing" secondItem="FMj-3L-ygo" secondAttribute="trailing" id="EpX-Ya-BIv"/>
@@ -1032,10 +1032,10 @@
             </objects>
             <point key="canvasLocation" x="4292" y="1494"/>
         </scene>
-        <!--Customer Address Form View Controller-->
+        <!--Account Address Form View Controller-->
         <scene sceneID="rcV-4E-5dD">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Sxz-cw-IQL" customClass="CustomerAddressFormViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountAddressFormControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="Sxz-cw-IQL" customClass="AccountAddressFormViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2VM-s4-pd0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1268,6 +1268,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Edi-8c-pdA"/>
-        <segue reference="2Th-4v-kuF"/>
+        <segue reference="9Y3-HY-brn"/>
     </inferredMetricsTieBreakers>
 </document>

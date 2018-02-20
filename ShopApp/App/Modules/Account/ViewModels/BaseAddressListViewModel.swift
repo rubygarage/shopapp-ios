@@ -1,5 +1,5 @@
 //
-//  AddressListViewModel.swift
+//  BaseAddressListViewModel.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 12/27/17.
@@ -9,7 +9,7 @@
 import RxSwift
 import ShopApp_Gateway
 
-class AddressListViewModel: BaseViewModel {
+class BaseAddressListViewModel: BaseViewModel {
     private let customerUseCase = CustomerUseCase()
     private let updateDefaultAddressUseCase = UpdateDefaultAddressUseCase()
     private let deleteAddressUseCase = DeleteAddressUseCase()

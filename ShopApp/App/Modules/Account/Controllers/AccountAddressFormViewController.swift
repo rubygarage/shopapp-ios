@@ -1,5 +1,5 @@
 //
-//  CustomerAddressFormViewController.swift
+//  AccountAddressFormViewController.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 1/31/18.
@@ -10,19 +10,18 @@ import UIKit
 
 import ShopApp_Gateway
 
-protocol CustomerAddressFormControllerDelegate: class {
-    func viewController(_ controller: CustomerAddressFormViewController, didUpdate address: Address)
-    func viewController(_ controller: CustomerAddressFormViewController, didAdd address: Address)
+protocol AccountAddressFormControllerDelegate: class {
+    func viewController(_ controller: AccountAddressFormViewController, didUpdate address: Address)
+    func viewController(_ controller: AccountAddressFormViewController, didAdd address: Address)
 }
 
-class CustomerAddressFormViewController: BaseAddressFormViewController<CustomerAddressFormViewModel> {
-    
-    weak var delegate: CustomerAddressFormControllerDelegate?
+class AccountAddressFormViewController: BaseAddressFormViewController<AccountAddressFormViewModel> {
+    weak var delegate: AccountAddressFormControllerDelegate?
     
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = CustomerAddressFormViewModel()
+        viewModel = AccountAddressFormViewModel()
         super.viewDidLoad()
 
         setupViewModel()
@@ -53,7 +52,7 @@ class CustomerAddressFormViewController: BaseAddressFormViewController<CustomerA
     }
 }
 
-extension CustomerAddressFormViewController: AddressFormControllerlDelegate {
+extension AccountAddressFormViewController: AddressFormControllerlDelegate {
     func viewController(_ controller: AddressFormViewController, didFill address: Address) {
         if addressAction == .add {
             viewModel.addCustomerAddress(with: address)

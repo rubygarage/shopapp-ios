@@ -1,5 +1,5 @@
 //
-//  AddressListViewController.swift
+//  BaseAddressListViewController.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 12/27/17.
@@ -15,14 +15,14 @@ enum AddressListType {
     case billing
 }
 
-protocol AddressListControllerDelegate: class {
+protocol BaseAddressListControllerDelegate: class {
     func viewController(didSelectBillingAddress address: Address)
 }
 
-class AddressListViewController<T: AddressListViewModel>: BaseViewController<T> {
+class BaseAddressListViewController<T: BaseAddressListViewModel>: BaseViewController<T> {
     @IBOutlet private weak var tableView: UITableView!
     
-    private var tableProvider: AddressListTableProvider!
+    private var tableProvider: BaseAddressListTableProvider!
     
     fileprivate var destinationAddress: Address?
     fileprivate var destinationAddressAction: AddressAction = .add
@@ -32,7 +32,7 @@ class AddressListViewController<T: AddressListViewModel>: BaseViewController<T> 
     var addressListType: AddressListType = .shipping
     var showSelectionButton = false
     
-    weak var delegate: AddressListControllerDelegate?
+    weak var delegate: BaseAddressListControllerDelegate?
     
     // MARK: - View conttroller lifecycle
     
@@ -62,7 +62,7 @@ class AddressListViewController<T: AddressListViewModel>: BaseViewController<T> 
     private func setupTableView() {
         tableView.registerNibForCell(AddressListTableViewCell.self)
         
-        tableProvider = AddressListTableProvider()
+        tableProvider = BaseAddressListTableProvider()
         tableProvider.showSelectionButton = showSelectionButton
         tableProvider.delegate = self
         tableView.dataSource = tableProvider
@@ -102,8 +102,8 @@ class AddressListViewController<T: AddressListViewModel>: BaseViewController<T> 
     }
     
     func update(shippingAddress: Address) {
-        if needToUpdate, let model = viewModel as? CheckoutAddressListViewModel {
-            model.updateCheckoutShippingAddress(with: shippingAddress)
+        if needToUpdate, let viewModel = viewModel as? CheckoutAddressListViewModel {
+            viewModel.updateCheckoutShippingAddress(with: shippingAddress)
         } else {
             viewModel.loadCustomerAddresses(isTranslucentHud: true)
         }
@@ -121,7 +121,7 @@ class AddressListViewController<T: AddressListViewModel>: BaseViewController<T> 
 
 // MARK: - AddressListHeaderViewDelegate
 
-extension AddressListViewController: AddressListHeaderViewDelegate {
+extension BaseAddressListViewController: AddressListHeaderViewDelegate {
     func tableViewHeaderDidTapAddAddress(_ header: AddressListTableHeaderView) {
         destinationAddress = nil
         destinationAddressAction = .add
@@ -131,10 +131,10 @@ extension AddressListViewController: AddressListHeaderViewDelegate {
 
 // MARK: - AddressListTableViewCellDelegate
 
-extension AddressListViewController: AddressListTableCellDelegate {
+extension BaseAddressListViewController: AddressListTableCellDelegate {
     func tableViewCell(_ cell: AddressListTableViewCell, didSelect address: Address) {
-        if let model = viewModel as? CheckoutAddressListViewModel, addressListType == .shipping {
-            model.updateCheckoutShippingAddress(with: address)
+        if let viewModel = viewModel as? CheckoutAddressListViewModel, addressListType == .shipping {
+            viewModel.updateCheckoutShippingAddress(with: address)
         } else if addressListType == .billing {
             selectedAddress = address
             viewModel.selectedAddress = address
@@ -161,7 +161,7 @@ extension AddressListViewController: AddressListTableCellDelegate {
 
 // MARK: - AccountAddressFormControllerDelegate
 
-extension AddressListViewController: AccountAddressFormControllerDelegate {
+extension BaseAddressListViewController: AccountAddressFormControllerDelegate {
     func viewController(_ controller: AccountAddressFormViewController, didUpdate address: Address) {
         if addressListType == .shipping {
             update(shippingAddress: address)
