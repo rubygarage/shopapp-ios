@@ -9,7 +9,11 @@
 import ShopApp_Gateway
 
 class ArticleListUseCase {
-    private lazy var repository = AppDelegate.getRepository()
+    private let repository: ArticleRepository
+
+    init(repository: ArticleRepository) {
+        self.repository = repository
+    }
 
     func getReverseArticleList(_ callback: @escaping RepoCallback<[Article]>) {
         repository.getArticleList(perPage: kItemsPerPage, paginationValue: nil, sortBy: nil, reverse: true, callback: callback)

@@ -25,7 +25,6 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = OrdersListViewModel()
         super.viewDidLoad()
         
         setupViews()

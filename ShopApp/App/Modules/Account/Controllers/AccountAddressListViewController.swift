@@ -10,10 +10,4 @@ import UIKit
 
 class AccountAddressListViewController: BaseAddressListViewController<BaseAddressListViewModel> {
     
-    // MARK: - View controller lifecycle
-    
-    override func viewDidLoad() {
-        viewModel = BaseAddressListViewModel()
-        super.viewDidLoad()
-    }
 }

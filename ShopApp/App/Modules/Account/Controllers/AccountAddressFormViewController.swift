@@ -21,7 +21,6 @@ class AccountAddressFormViewController: BaseAddressFormViewController<AccountAdd
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = AccountAddressFormViewModel()
         super.viewDidLoad()
 
         setupViewModel()

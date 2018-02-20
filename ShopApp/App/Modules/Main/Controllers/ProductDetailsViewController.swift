@@ -12,6 +12,7 @@ import RxCocoa
 import RxSwift
 import ShopApp_Gateway
 import SKPhotoBrowser
+import SwinjectStoryboard
 import TPKeyboardAvoiding
 
 private let kQuantityUnderlineColorDefault = UIColor(red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
@@ -56,7 +57,6 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = ProductDetailsViewModel()
         super.viewDidLoad()
 
         setupViews()
@@ -285,7 +285,8 @@ extension ProductDetailsViewController: LastArrivalsTableCellDelegate {
         guard let navigationController = navigationController else {
             return
         }
-        let productDetailsViewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.productDetails) as! ProductDetailsViewController
+        let storyboard = SwinjectStoryboard.create(name: StoryboardNames.main, bundle: nil, container: AppDelegate.getAssembler().resolver)
+        let productDetailsViewController = storyboard.instantiateViewController(withIdentifier: ControllerIdentifiers.productDetails) as! ProductDetailsViewController
         productDetailsViewController.productId = product.id
         navigationController.pushViewController(productDetailsViewController, animated: true)
     }

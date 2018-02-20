@@ -10,7 +10,7 @@ import RxSwift
 import ShopApp_Gateway
 
 class AddressFormViewModel: BaseViewModel {
-    private let countriesUseCase = CountriesUseCase()
+    private let countriesUseCase: CountriesUseCase
     
     private var countries: [Country] = [] {
         didSet {
@@ -53,6 +53,10 @@ class AddressFormViewModel: BaseViewModel {
                 break
             }
         }
+    }
+
+    init(countriesUseCase: CountriesUseCase) {
+        self.countriesUseCase = countriesUseCase
     }
     
     func getCountries() {

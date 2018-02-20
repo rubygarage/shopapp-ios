@@ -31,11 +31,11 @@ enum PaymentType: Int {
 }
 
 class CheckoutViewModel: BaseViewModel {
-    private let checkoutUseCase = CheckoutUseCase()
-    private let cartProductListUseCase = CartProductListUseCase()
-    private let deleteCartProductsUseCase = DeleteCartProductsUseCase()
-    private let customerUseCase = CustomerUseCase()
-    private let loginUseCase = LoginUseCase()
+    private let checkoutUseCase: CheckoutUseCase
+    private let cartProductListUseCase: CartProductListUseCase
+    private let deleteCartProductsUseCase: DeleteCartProductsUseCase
+    private let customerUseCase: CustomerUseCase
+    private let loginUseCase: LoginUseCase
     
     var checkout = Variable<Checkout?>(nil)
     var creditCard = Variable<CreditCard?>(nil)
@@ -68,6 +68,14 @@ class CheckoutViewModel: BaseViewModel {
             let creditCardCondition = type == .creditCard && checkout != nil && card != nil && address != nil && checkout?.shippingLine != nil && customerEmail.isValidAsEmail()
             return applePayCondition || creditCardCondition
         }
+    }
+
+    init(checkoutUseCase: CheckoutUseCase, cartProductListUseCase: CartProductListUseCase, deleteCartProductsUseCase: DeleteCartProductsUseCase, customerUseCase: CustomerUseCase, loginUseCase: LoginUseCase) {
+        self.checkoutUseCase = checkoutUseCase
+        self.cartProductListUseCase = cartProductListUseCase
+        self.deleteCartProductsUseCase = deleteCartProductsUseCase
+        self.customerUseCase = customerUseCase
+        self.loginUseCase = loginUseCase
     }
     
     func loadData() {

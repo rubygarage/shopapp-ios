@@ -28,7 +28,6 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = PaymentTypeViewModel()
         super.viewDidLoad()
 
         setupViews()

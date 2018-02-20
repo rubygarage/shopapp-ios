@@ -10,11 +10,17 @@ import RxSwift
 import ShopApp_Gateway
 
 class CartViewModel: BaseViewModel {
-    private let cartProductListUseCase = CartProductListUseCase()
-    private let deleteCartProductUseCase = DeleteCartProductUseCase()
-    private let changeCartProductUseCase = ChangeCartProductUseCase()
+    private let cartProductListUseCase: CartProductListUseCase
+    private let deleteCartProductUseCase: DeleteCartProductUseCase
+    private let changeCartProductUseCase: ChangeCartProductUseCase
     
     var data = Variable<[CartProduct]>([])
+
+    init(cartProductListUseCase: CartProductListUseCase, deleteCartProductUseCase: DeleteCartProductUseCase, changeCartProductUseCase: ChangeCartProductUseCase) {
+        self.cartProductListUseCase = cartProductListUseCase
+        self.deleteCartProductUseCase = deleteCartProductUseCase
+        self.changeCartProductUseCase = changeCartProductUseCase
+    }
     
     func loadData() {
         state.onNext(ViewState.make.loading())

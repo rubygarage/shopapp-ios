@@ -8,6 +8,10 @@ target 'ShopApp' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
+  # DI
+  pod 'Swinject', '~> 2.2'
+  pod 'SwinjectStoryboard', '~> 1.1'
+
   # UI
   pod 'SDWebImage', '~> 4.1'
   pod 'MBProgressHUD', '~> 1.0'

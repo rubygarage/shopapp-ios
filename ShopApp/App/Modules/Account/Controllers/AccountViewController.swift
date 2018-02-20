@@ -20,7 +20,6 @@ class AccountViewController: BaseViewController<AccountViewModel> {
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = AccountViewModel()
         super.viewDidLoad()
         
         setupTableView()

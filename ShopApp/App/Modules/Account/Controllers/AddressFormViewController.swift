@@ -37,7 +37,6 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = AddressFormViewModel()
         super.viewDidLoad()
 
         setupViews()

@@ -32,7 +32,6 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel> {
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = CategoryViewModel()
         super.viewDidLoad()
         
         setupViews()

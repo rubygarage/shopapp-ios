@@ -11,7 +11,11 @@ import ShopApp_Gateway
 typealias LoginStatusCallback = (_ isLoggedIn: Bool) -> Void
 
 class LoginUseCase {
-    private lazy var repository = AppDelegate.getRepository()
+    private let repository: AuthentificationRepository
+
+    init(repository: AuthentificationRepository) {
+        self.repository = repository
+    }
 
     func login(with email: String, password: String, _ callback: @escaping RepoCallback<Bool>) {
         repository.login(with: email, password: password, callback: callback)

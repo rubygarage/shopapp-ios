@@ -9,7 +9,11 @@
 import ShopApp_Gateway
 
 class OrderListUseCase {
-    private lazy var repository = AppDelegate.getRepository()
+    private let repository: OrderRepository
+
+    init(repository: OrderRepository) {
+        self.repository = repository
+    }
 
     func getOrderList(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Order]>) {
         repository.getOrderList(perPage: kItemsPerPage, paginationValue: paginationValue, callback: callback)

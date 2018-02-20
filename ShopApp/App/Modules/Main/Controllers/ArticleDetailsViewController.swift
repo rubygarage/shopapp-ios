@@ -32,7 +32,6 @@ class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel>,
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = ArticleDetailsViewModel()
         super.viewDidLoad()
 
         setupViews()

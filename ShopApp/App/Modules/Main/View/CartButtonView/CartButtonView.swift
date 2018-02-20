@@ -9,6 +9,7 @@
 import UIKit
 
 import RxSwift
+import Swinject
 
 private let kItemsCountViewCornerRadius: CGFloat = 7
 
@@ -17,7 +18,7 @@ class CartButtonView: UIView {
     @IBOutlet private weak var itemsCountBackgroundView: UIView!
     
     private let disposeBag = DisposeBag()
-    private var viewModel = CartButtonViewModel()
+    private let viewModel = AppDelegate.getAssembler().resolver.resolve(CartButtonViewModel.self)!
     
     // MARK: - View lifecycle
     

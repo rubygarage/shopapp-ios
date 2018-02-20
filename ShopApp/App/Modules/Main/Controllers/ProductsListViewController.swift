@@ -18,7 +18,6 @@ class ProductsListViewController: GridCollectionViewController<ProductsListViewM
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = ProductsListViewModel()
         super.viewDidLoad()
 
         setupViewModel()

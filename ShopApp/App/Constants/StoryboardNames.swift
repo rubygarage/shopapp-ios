@@ -12,4 +12,5 @@ struct StoryboardNames {
     static let account = "Account"
     static let cart = "Cart"
     static let main = "Main"
+    static let navigation = "Navigation"
 }

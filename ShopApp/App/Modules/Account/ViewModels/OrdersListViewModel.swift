@@ -10,9 +10,13 @@ import RxSwift
 import ShopApp_Gateway
 
 class OrdersListViewModel: BasePaginationViewModel {
-    private let orderListUseCase = OrderListUseCase()
+    private let orderListUseCase: OrderListUseCase
     
     var items = Variable<[Order]>([])
+
+    init(orderListUseCase: OrderListUseCase) {
+        self.orderListUseCase = orderListUseCase
+    }
     
     func reloadData() {
         paginationValue = nil

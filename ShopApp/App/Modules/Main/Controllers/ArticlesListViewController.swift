@@ -18,7 +18,6 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = ArticlesListViewModel()
         super.viewDidLoad()
 
         setupViews()

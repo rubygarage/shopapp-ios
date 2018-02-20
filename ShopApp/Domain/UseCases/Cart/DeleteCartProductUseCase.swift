@@ -9,7 +9,11 @@
 import ShopApp_Gateway
 
 class DeleteCartProductUseCase {
-    private lazy var repository = AppDelegate.getCartRepository()
+    private let repository: CartRepository
+
+    init(repository: CartRepository) {
+        self.repository = repository
+    }
     
     func deleteProductFromCart(productVariantId: String?, _ callback: @escaping RepoCallback<Bool>) {
         repository.deleteProductFromCart(with: productVariantId, callback: callback)

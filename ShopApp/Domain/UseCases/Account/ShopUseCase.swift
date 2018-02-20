@@ -9,7 +9,11 @@
 import ShopApp_Gateway
 
 class ShopUseCase {
-    private lazy var repository = AppDelegate.getRepository()
+    private let repository: ShopRepository
+
+    init(repository: ShopRepository) {
+        self.repository = repository
+    }
 
     func getShop(_ callback: @escaping (_ shop: Shop) -> Void) {
         repository.getShop { (shop, _) in

@@ -28,7 +28,6 @@ class CartViewController: BaseViewController<CartViewModel> {
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = CartViewModel()
         super.viewDidLoad()
 
         setupViews()

@@ -8,6 +8,8 @@
 
 import UIKit
 
+import SwinjectStoryboard
+
 extension UIViewController {
     func setHomeController() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -28,7 +30,8 @@ extension UIViewController {
     }
     
     func showCartController() {
-        let cartNavigationController = UIStoryboard(name: StoryboardNames.cart, bundle: nil).instantiateInitialViewController()!
+        let storyboard = SwinjectStoryboard.create(name: StoryboardNames.cart, bundle: nil, container: AppDelegate.getAssembler().resolver)
+        let cartNavigationController = storyboard.instantiateInitialViewController()!
         present(cartNavigationController, animated: true)
     }
 }

@@ -11,17 +11,22 @@ import UIKit
 import CoreStore
 import Fabric
 import Crashlytics
-import ShopApp_Gateway
+import Swinject
+import SwinjectStoryboard
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    private var repository: Repository!
-    private var cartRepository: CartRepository!
+    private let assembler = Assembler()
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
+        // Prevent launching app in unit tests
+        if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
+            return false
+        }
         
         #if !DEV
             Fabric.with([Crashlytics.self])
@@ -33,27 +38,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(error)
         }
 
-        setupCartRepository()
-        setupRepository()
+        // Disabled logging due errors with Swift 3
+        // https://github.com/Swinject/Swinject/issues/218
+        Container.loggingFunction = nil
+
+        assembler.apply(assemblies: [
+            DataAssembly(),
+            DomainAssembly(),
+            MainAssembly(),
+            AccountAssembly(),
+            CartAssembly(),
+            CheckoutAssembly()
+        ])
+
+        window = UIWindow(frame: UIScreen.main.bounds)
+
+        let storyboard = SwinjectStoryboard.create(name: StoryboardNames.navigation, bundle: nil, container: assembler.resolver)
+        let rootViewController = storyboard.instantiateInitialViewController()
+
+        window?.rootViewController = rootViewController
+        window?.makeKeyAndVisible()
 
         return true
     }
 
-    // MARK: - Private
-
-    private func setupRepository() {}
-
-    private func setupCartRepository() {
-        cartRepository = AppCartRepository(dao: DAO())
-    }
-
     // MARK: - Public static
 
-    static func getRepository() -> Repository {
-        return (UIApplication.shared.delegate as! AppDelegate).repository
-    }
-
-    static func getCartRepository() -> CartRepository {
-        return (UIApplication.shared.delegate as! AppDelegate).cartRepository
+    static func getAssembler() -> Assembler {
+        return (UIApplication.shared.delegate as! AppDelegate).assembler
     }
 }

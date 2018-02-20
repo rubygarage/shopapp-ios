@@ -10,10 +10,14 @@ import RxSwift
 import ShopApp_Gateway
 
 class ArticleDetailsViewModel: BaseViewModel {
-    private let articleUseCase = ArticleUseCase()
+    private let articleUseCase: ArticleUseCase
 
     var articleId: String!
     var data = PublishSubject<(article: Article, baseUrl: URL)>()
+
+    init(articleUseCase: ArticleUseCase) {
+        self.articleUseCase = articleUseCase
+    }
 
     func loadData() {
         state.onNext(ViewState.make.loading())

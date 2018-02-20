@@ -9,7 +9,11 @@
 import ShopApp_Gateway
 
 class CustomerUseCase {
-    private lazy var repository = AppDelegate.getRepository()
+    private let repository: AuthentificationRepository
+
+    init(repository: AuthentificationRepository) {
+        self.repository = repository
+    }
 
     func getCustomer(_ callback: @escaping RepoCallback<Customer>) {
         repository.getCustomer(callback: callback)

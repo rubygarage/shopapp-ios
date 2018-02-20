@@ -15,7 +15,7 @@
         <!--Home View Controller-->
         <scene sceneID="JQ6-LH-JE6">
             <objects>
-                <viewController storyboardIdentifier="HomeControllerIdentifier" id="Mxb-8l-KNp" customClass="HomeViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeControllerIdentifier" id="Mxb-8l-KNp" customClass="HomeViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="M3e-ax-loq"/>
                         <viewControllerLayoutGuide type="bottom" id="DhW-Yn-Pmv"/>
@@ -55,7 +55,7 @@
         <!--Navigation Controller-->
         <scene sceneID="DIq-a3-4pg">
             <objects>
-                <navigationController storyboardIdentifier="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="h6m-1c-jl6" customClass="NavigationController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="h6m-1c-jl6" customClass="NavigationController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="home_default" selectedImage="home_selected" id="s7u-R4-XEL">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -76,7 +76,7 @@
         <!--Search View Controller-->
         <scene sceneID="jcf-4Q-ME9">
             <objects>
-                <viewController storyboardIdentifier="SearchControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="sGy-X8-OnQ" customClass="SearchViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="sGy-X8-OnQ" customClass="SearchViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Ah-z4-Bre"/>
                         <viewControllerLayoutGuide type="bottom" id="Kge-Wu-jQW"/>
@@ -133,7 +133,7 @@
         <!--Navigation Controller-->
         <scene sceneID="7TK-6h-Kmr">
             <objects>
-                <navigationController storyboardIdentifier="SearchNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="glJ-sw-9JO" customClass="NavigationController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SearchNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="glJ-sw-9JO" customClass="NavigationController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="search_default" selectedImage="search_selected" id="Riz-uj-0kd">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -154,7 +154,7 @@
         <!--Articles List View Controller-->
         <scene sceneID="4PG-ly-VQy">
             <objects>
-                <viewController storyboardIdentifier="ArticlesListControllerIdentifier" hidesBottomBarWhenPushed="YES" id="gX3-Ek-1Eq" customClass="ArticlesListViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ArticlesListControllerIdentifier" hidesBottomBarWhenPushed="YES" id="gX3-Ek-1Eq" customClass="ArticlesListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Zw-fe-q6O">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -185,7 +185,7 @@
         <!--Article Details View Controller-->
         <scene sceneID="JPx-lR-wHh">
             <objects>
-                <viewController storyboardIdentifier="ArticleDetailsControllerIdentifier" hidesBottomBarWhenPushed="YES" id="Zke-0H-d8m" customClass="ArticleDetailsViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ArticleDetailsControllerIdentifier" hidesBottomBarWhenPushed="YES" id="Zke-0H-d8m" customClass="ArticleDetailsViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IRB-M1-rwQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -265,7 +265,7 @@
         <!--Products List View Controller-->
         <scene sceneID="W83-mX-1ZD">
             <objects>
-                <viewController storyboardIdentifier="ProductsListControllerIdentifier" hidesBottomBarWhenPushed="YES" id="FIW-QV-u9O" customClass="ProductsListViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductsListControllerIdentifier" hidesBottomBarWhenPushed="YES" id="FIW-QV-u9O" customClass="ProductsListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uO2-eS-gid">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -303,7 +303,7 @@
         <!--Sort Variants View Controller-->
         <scene sceneID="E88-lX-VLj">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="6to-Yf-TlA" customClass="SortVariantsViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="6to-Yf-TlA" customClass="SortVariantsViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ekb-4M-mMO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -345,7 +345,7 @@
         <!--Product Details View Controller-->
         <scene sceneID="1Xf-iN-5gh">
             <objects>
-                <viewController storyboardIdentifier="ProductsDetailControllerIdentifier" hidesBottomBarWhenPushed="YES" id="2iw-CM-RMu" customClass="ProductDetailsViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductsDetailControllerIdentifier" hidesBottomBarWhenPushed="YES" id="2iw-CM-RMu" customClass="ProductDetailsViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Oqg-pM-8Wd"/>
                         <viewControllerLayoutGuide type="bottom" id="2T8-WI-wyF"/>
@@ -406,7 +406,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPo-Xd-N4H" customClass="QuantityTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPo-Xd-N4H" customClass="QuantityTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="138" y="8" width="60" height="40"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -499,7 +499,7 @@
                                             <constraint firstItem="3BV-lT-OBn" firstAttribute="centerY" secondItem="wUn-wL-MNB" secondAttribute="centerY" id="i8Q-CQ-NOU"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Abb-dJ-X8r" customClass="SeeAllTableHeaderView" customModule="ShopClient" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Abb-dJ-X8r" customClass="SeeAllTableHeaderView" customModule="ShopApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="773" width="375" height="75"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -513,7 +513,7 @@
                                             <constraint firstAttribute="height" constant="15" id="ajO-k5-BUI"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXx-nC-ut5" customClass="LastArrivalsTableViewCell" customModule="ShopClient" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXx-nC-ut5" customClass="LastArrivalsTableViewCell" customModule="ShopApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="848" width="375" height="200"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G4F-1a-1wF">
@@ -653,7 +653,7 @@
         <!--Category View Controller-->
         <scene sceneID="oaF-9p-ART">
             <objects>
-                <viewController storyboardIdentifier="CategoryControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="GSM-jj-cBr" customClass="CategoryViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategoryControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="GSM-jj-cBr" customClass="CategoryViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p95-hk-brZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -739,7 +739,7 @@
         <!--Images Carousel View Controller-->
         <scene sceneID="dO1-DG-Fra">
             <objects>
-                <viewController storyboardIdentifier="ImagesCarouselControllerIdentifier" id="PT4-ez-VtB" customClass="ImagesCarouselViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImagesCarouselControllerIdentifier" id="PT4-ez-VtB" customClass="ImagesCarouselViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YAP-35-Rhx"/>
                         <viewControllerLayoutGuide type="bottom" id="gOk-yq-9Sk"/>
@@ -800,7 +800,7 @@
         <!--Product Options View Controller-->
         <scene sceneID="Rw2-4Q-5k7">
             <objects>
-                <viewController storyboardIdentifier="ProductOptionsControllerIdentifier" id="IKV-uy-Adi" customClass="ProductOptionsViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductOptionsControllerIdentifier" id="IKV-uy-Adi" customClass="ProductOptionsViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qQC-3O-Pzq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -848,7 +848,7 @@
         <!--Category List View Controller-->
         <scene sceneID="q9u-qQ-kIX">
             <objects>
-                <viewController id="OmR-vh-hda" customClass="CategoryListViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="OmR-vh-hda" customClass="CategoryListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0aG-Oy-cGM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -894,8 +894,8 @@
         <image name="search_selected" width="27" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Uoy-sz-tWO"/>
-        <segue reference="DJ8-dD-zkt"/>
+        <segue reference="RyX-CT-HJC"/>
+        <segue reference="OyI-Tn-rEV"/>
         <segue reference="L85-9n-ESO"/>
     </inferredMetricsTieBreakers>
 </document>

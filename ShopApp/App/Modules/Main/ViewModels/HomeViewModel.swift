@@ -10,10 +10,10 @@ import RxSwift
 import ShopApp_Gateway
 
 class HomeViewModel: BasePaginationViewModel {
+    private let articleListUseCase: ArticleListUseCase
+    private let productListUseCase: ProductListUseCase
     private let disposeBag = DisposeBag()
-    private let articleListUseCase = ArticleListUseCase()
-    private let productListUseCase = ProductListUseCase()
-    
+
     private var productsSingle: Single<[Product]?> {
         return Single.create(subscribe: { [weak self] single in
             guard let strongSelf = self else {
@@ -62,10 +62,13 @@ class HomeViewModel: BasePaginationViewModel {
     
     var data = Variable<(latestProducts: [Product], popularProducts: [Product], articles: [Article])>(latestProducts: [], popularProducts: [], articles: [])
     
-    override init() {
+    init(articleListUseCase: ArticleListUseCase, productListUseCase: ProductListUseCase) {
+        self.articleListUseCase = articleListUseCase
+        self.productListUseCase = productListUseCase
+
         super.init()
         
-        canLoadMore = false
+        self.canLoadMore = false
     }
     
     func loadData() {

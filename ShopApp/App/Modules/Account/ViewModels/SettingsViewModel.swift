@@ -10,15 +10,16 @@ import RxSwift
 import ShopApp_Gateway
 
 class SettingsViewModel: BaseViewModel {
-    private let loginUseCase = LoginUseCase()
-    private let customerUseCase = CustomerUseCase()
-    
     private var updateCustomerUseCase: UpdateCustomerUseCase
+    private let loginUseCase: LoginUseCase
+    private let customerUseCase: CustomerUseCase
     
     var customer = Variable<Customer?>(nil)
     
-    init(updateCustomerUseCase: UpdateCustomerUseCase) {
+    init(updateCustomerUseCase: UpdateCustomerUseCase, loginUseCase: LoginUseCase, customerUseCase: CustomerUseCase) {
         self.updateCustomerUseCase = updateCustomerUseCase
+        self.loginUseCase = loginUseCase
+        self.customerUseCase = customerUseCase
     }
     
     func loadCustomer() {

@@ -22,7 +22,6 @@ class CategoryListViewController: BaseCollectionViewController<CategoryListViewM
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = CategoryListViewModel()
         super.viewDidLoad()
         
         setupViews()

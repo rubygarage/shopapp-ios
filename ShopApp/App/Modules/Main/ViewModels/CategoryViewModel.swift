@@ -10,10 +10,14 @@ import RxSwift
 import ShopApp_Gateway
 
 class CategoryViewModel: GridCollectionViewModel {
-    private let categoryUseCase = CategoryUseCase()
+    private let categoryUseCase: CategoryUseCase
     
     var categoryId: String!
     var selectedSortingValue = SortingValue.name
+
+    init(categoryUseCase: CategoryUseCase) {
+        self.categoryUseCase = categoryUseCase
+    }
     
     func reloadData() {
         paginationValue = nil
