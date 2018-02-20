@@ -82,13 +82,13 @@ class ChangePasswordViewModelSpec: QuickSpec {
                     
                     viewModel.newPasswordErrorMessage
                         .subscribe(onNext: { errorMessage in
-                            expect(errorMessage).to(equal("Error.InvalidPassword".localizable))
+                            expect(errorMessage).toEventually(equal("Error.InvalidPassword".localizable))
                         })
                         .disposed(by: disposeBag)
                     
                     viewModel.confirmPasswordErrorMessage
                         .subscribe(onNext: { errorMessage in
-                            expect(errorMessage).to(equal("Error.InvalidPassword".localizable))
+                            expect(errorMessage).toEventually(equal("Error.InvalidPassword".localizable))
                         })
                         .disposed(by: disposeBag)
                     
@@ -102,7 +102,7 @@ class ChangePasswordViewModelSpec: QuickSpec {
                     
                     viewModel.confirmPasswordErrorMessage
                         .subscribe(onNext: { errorMessage in
-                            expect(errorMessage).to(equal("Error.PasswordsAreNotEquals".localizable))
+                            expect(errorMessage).toEventually(equal("Error.PasswordsAreNotEquals".localizable))
                         })
                         .disposed(by: disposeBag)
                     

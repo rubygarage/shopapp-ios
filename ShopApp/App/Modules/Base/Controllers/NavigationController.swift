@@ -21,8 +21,8 @@ class NavigationController: UINavigationController {
     // MARK: - Setup
     
     private func setup() {
-        navigationBar.tintColor = UIColor.black
-        navigationBar.barTintColor = UIColor.white
+        navigationBar.tintColor = .black
+        navigationBar.barTintColor = .white
         addShadow()
     }
 }

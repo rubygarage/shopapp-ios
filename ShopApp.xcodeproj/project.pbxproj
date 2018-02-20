@@ -72,6 +72,12 @@
 		0B7CEF8E203C01F800FAA32C /* CreditCardLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEF8D203C01F800FAA32C /* CreditCardLimit.swift */; };
 		0B7CEF90203C024600FAA32C /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEF8F203C024600FAA32C /* TableView.swift */; };
 		0B7CEF92203C025D00FAA32C /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEF91203C025D00FAA32C /* Layer.swift */; };
+		0B7CEF9B203C0E5500FAA32C /* BaseViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEF9A203C0E5500FAA32C /* BaseViewControllerSpec.swift */; };
+		0B7CEF9D203C0EA700FAA32C /* NavigationControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEF9C203C0EA700FAA32C /* NavigationControllerSpec.swift */; };
+		0B7CEF9F203C0EB400FAA32C /* TabBarControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEF9E203C0EB400FAA32C /* TabBarControllerSpec.swift */; };
+		0B7CEFA5203C57BB00FAA32C /* BaseTableViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEFA4203C57BB00FAA32C /* BaseTableViewControllerSpec.swift */; };
+		0B7CEFA7203C59CE00FAA32C /* BaseCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEFA6203C59CE00FAA32C /* BaseCollectionViewControllerSpec.swift */; };
+		0B7CEFA9203C5E1E00FAA32C /* GridCollectionViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEFA8203C5E1E00FAA32C /* GridCollectionViewModelSpec.swift */; };
 		0B9426551FFE468100A986AB /* OrderHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9426541FFE468100A986AB /* OrderHeaderView.swift */; };
 		0B9426571FFE468C00A986AB /* OrderHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B9426561FFE468C00A986AB /* OrderHeaderView.xib */; };
 		0B953D502020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B953D4F2020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift */; };
@@ -429,6 +435,12 @@
 		0B7CEF8D203C01F800FAA32C /* CreditCardLimit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardLimit.swift; sourceTree = "<group>"; };
 		0B7CEF8F203C024600FAA32C /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		0B7CEF91203C025D00FAA32C /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
+		0B7CEF9A203C0E5500FAA32C /* BaseViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerSpec.swift; sourceTree = "<group>"; };
+		0B7CEF9C203C0EA700FAA32C /* NavigationControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerSpec.swift; sourceTree = "<group>"; };
+		0B7CEF9E203C0EB400FAA32C /* TabBarControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllerSpec.swift; sourceTree = "<group>"; };
+		0B7CEFA4203C57BB00FAA32C /* BaseTableViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewControllerSpec.swift; sourceTree = "<group>"; };
+		0B7CEFA6203C59CE00FAA32C /* BaseCollectionViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewControllerSpec.swift; sourceTree = "<group>"; };
+		0B7CEFA8203C5E1E00FAA32C /* GridCollectionViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewModelSpec.swift; sourceTree = "<group>"; };
 		0B9426541FFE468100A986AB /* OrderHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHeaderView.swift; sourceTree = "<group>"; };
 		0B9426561FFE468C00A986AB /* OrderHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderHeaderView.xib; sourceTree = "<group>"; };
 		0B953D4F2020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlStringMultimediaCompressor.swift; sourceTree = "<group>"; };
@@ -1052,6 +1064,7 @@
 			isa = PBXGroup;
 			children = (
 				0B7CEF79203B15B900FAA32C /* Account */,
+				0B7CEF93203C0DD400FAA32C /* Base */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1148,6 +1161,51 @@
 				0BA6306B1FFFB06A007088B8 /* Shared */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		0B7CEF93203C0DD400FAA32C /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				0B7CEF94203C0DE100FAA32C /* Controllers */,
+				0B7CEF95203C0DE700FAA32C /* Providers */,
+				0B7CEF96203C0DEC00FAA32C /* ViewModels */,
+				0B7CEF97203C0DF100FAA32C /* Views */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		0B7CEF94203C0DE100FAA32C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0B7CEFA6203C59CE00FAA32C /* BaseCollectionViewControllerSpec.swift */,
+				0B7CEFA4203C57BB00FAA32C /* BaseTableViewControllerSpec.swift */,
+				0B7CEF9A203C0E5500FAA32C /* BaseViewControllerSpec.swift */,
+				0B7CEF9C203C0EA700FAA32C /* NavigationControllerSpec.swift */,
+				0B7CEF9E203C0EB400FAA32C /* TabBarControllerSpec.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0B7CEF95203C0DE700FAA32C /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		0B7CEF96203C0DEC00FAA32C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				0B7CEFA8203C5E1E00FAA32C /* GridCollectionViewModelSpec.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0B7CEF97203C0DF100FAA32C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		0B9426521FFE461C00A986AB /* OrderHeaderView */ = {
@@ -2600,8 +2658,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B7CEF9D203C0EA700FAA32C /* NavigationControllerSpec.swift in Sources */,
 				0B7CEF7F203B175600FAA32C /* ChangePasswordViewModelSpec.swift in Sources */,
+				0B7CEFA5203C57BB00FAA32C /* BaseTableViewControllerSpec.swift in Sources */,
 				0B7CEF84203B1F8E00FAA32C /* AuthentificationRepositoryMock.swift in Sources */,
+				0B7CEFA9203C5E1E00FAA32C /* GridCollectionViewModelSpec.swift in Sources */,
+				0B7CEF9F203C0EB400FAA32C /* TabBarControllerSpec.swift in Sources */,
+				0B7CEF9B203C0E5500FAA32C /* BaseViewControllerSpec.swift in Sources */,
+				0B7CEFA7203C59CE00FAA32C /* BaseCollectionViewControllerSpec.swift in Sources */,
 				0B7CEF76203B155400FAA32C /* UpdateCustomerUseCaseMock.swift in Sources */,
 				0B7CEF7D203B15DF00FAA32C /* ChangePasswordViewControllerSpec.swift in Sources */,
 				0B7CEF70203B0B3500FAA32C /* QuickSpec+View.swift in Sources */,

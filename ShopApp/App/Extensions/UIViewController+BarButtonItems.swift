@@ -16,7 +16,7 @@ extension UIViewController {
     }
     
     func addBackButtonIfNeeded() {
-        if navigationController?.viewControllers.first != self {
+        if let navigationController = navigationController, navigationController.viewControllers.first != self {
             navigationItem.leftBarButtonItem = backButton()
         }
     }
