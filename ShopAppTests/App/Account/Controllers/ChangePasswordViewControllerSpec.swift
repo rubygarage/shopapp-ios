@@ -20,7 +20,7 @@ class ChangePasswordViewControllerSpec: QuickSpec {
         var updateButton: BlackButton!
         
         beforeEach {
-            viewController = UIStoryboard.account.instantiateViewController(withIdentifier: ControllerIdentifier.changePassword) as! ChangePasswordViewController
+            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.changePassword) as! ChangePasswordViewController
             
             newPasswordTextFieldView = self.findView(withAccessibilityLabel: "newPassword", in: viewController.view) as! InputTextFieldView
             confirmPasswordTextFieldView = self.findView(withAccessibilityLabel: "confirmPassword", in: viewController.view) as! InputTextFieldView
