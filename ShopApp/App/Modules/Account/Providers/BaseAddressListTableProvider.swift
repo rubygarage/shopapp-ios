@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopApp_Gateway
+
 typealias AddressTuple = (address: Address, isSelected: Bool, isDefault: Bool)
 
 class BaseAddressListTableProvider: NSObject {

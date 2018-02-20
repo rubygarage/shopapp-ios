@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import ShopApp_Gateway
 
 class AccountAddressFormViewModel: BaseViewModel {
     private let addAddressUseCase = AddAddressUseCase()

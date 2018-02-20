@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ShopApp_Gateway
+
 enum AddressListType {
     case shipping
     case billing
