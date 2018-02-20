@@ -220,7 +220,7 @@ extension CheckoutViewController: CheckoutSelectedTypeTableCellDelegate {
 // MARK: - CheckoutCartTableViewCellDelegate
 
 extension CheckoutViewController: CheckoutCartTableViewCellDelegate {
-    func didSelectItem(with productVariantId: String, at index: Int) {
+    func tableViewCell(_ cell: CheckoutCartTableViewCell, didSelect productVariantId: String, at index: Int) {
         viewModel.selectedProductVariant = viewModel.productVariant(with: productVariantId)
         performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
