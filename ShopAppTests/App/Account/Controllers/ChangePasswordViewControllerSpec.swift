@@ -31,7 +31,7 @@ class ChangePasswordViewControllerSpec: QuickSpec {
         
         describe("when view loaded") {
             it("should have a view model with correct type") {
-                expect(viewController.viewModel).to(beAKindOf(ChangePasswordViewModel.self))
+                expect(viewController.viewModel).to(beAnInstanceOf(ChangePasswordViewModel.self))
             }
             
             it("should have a title with correct text") {
@@ -110,13 +110,13 @@ class ChangePasswordViewControllerSpec: QuickSpec {
                     
                     viewController.viewModel.newPasswordErrorMessage
                         .subscribe(onNext: { _ in
-                            expect(newPasswordTextFieldView.errorMessage).to(equal("Error.InvalidPassword".localizable))
+                            expect(newPasswordTextFieldView.errorMessage).toEventually(equal("Error.InvalidPassword".localizable))
                         })
                         .disposed(by: disposeBag)
                     
                     viewController.viewModel.confirmPasswordErrorMessage
                         .subscribe(onNext: { _ in
-                            expect(confirmPasswordTextFieldView.errorMessage).to(equal("Error.InvalidPassword".localizable))
+                            expect(confirmPasswordTextFieldView.errorMessage).toEventually(equal("Error.InvalidPassword".localizable))
                         })
                         .disposed(by: disposeBag)
                     
@@ -131,7 +131,7 @@ class ChangePasswordViewControllerSpec: QuickSpec {
                     
                     viewController.viewModel.confirmPasswordErrorMessage
                         .subscribe(onNext: { _ in
-                            expect(confirmPasswordTextFieldView.errorMessage).to(equal("Error.PasswordsAreNotEquals".localizable))
+                            expect(confirmPasswordTextFieldView.errorMessage).toEventually(equal("Error.PasswordsAreNotEquals".localizable))
                         })
                         .disposed(by: disposeBag)
                     
