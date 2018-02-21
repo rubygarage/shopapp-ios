@@ -38,20 +38,20 @@ class ChangePasswordViewControllerSpec: QuickSpec {
             }
             
             it("should have a title with correct text") {
-                expect(viewController.title).to(equal("ControllerTitle.SetNewPassword".localizable))
+                expect(viewController.title) == "ControllerTitle.SetNewPassword".localizable
             }
             
             it("should have a close button") {
-                expect(viewController.navigationItem.rightBarButtonItem?.image).to(equal(#imageLiteral(resourceName: "cross")))
+                expect(viewController.navigationItem.rightBarButtonItem?.image) == #imageLiteral(resourceName: "cross")
             }
             
             it("should have text filed views with correct placeholders") {
-                expect(newPasswordTextFieldView.placeholder).to(equal("Placeholder.NewPassword".localizable.required.uppercased()))
-                expect(confirmPasswordTextFieldView.placeholder).to(equal("Placeholder.ConfirmPassword".localizable.required.uppercased()))
+                expect(newPasswordTextFieldView.placeholder) == "Placeholder.NewPassword".localizable.required.uppercased()
+                expect(confirmPasswordTextFieldView.placeholder) == "Placeholder.ConfirmPassword".localizable.required.uppercased()
             }
             
             it("should have an update button with correct title") {
-                expect(updateButton.title(for: .normal)).to(equal("Button.Update".localizable.uppercased()))
+                expect(updateButton.title(for: .normal)) == "Button.Update".localizable.uppercased()
             }
         }
         
@@ -74,7 +74,7 @@ class ChangePasswordViewControllerSpec: QuickSpec {
                     
                     viewController.viewModel.updateButtonEnabled
                         .subscribe(onNext: { _ in
-                            expect(updateButton.isEnabled).toEventually(beTrue())
+                            expect(updateButton.isEnabled) == true
                         })
                         .disposed(by: disposeBag)
                 }
@@ -87,7 +87,7 @@ class ChangePasswordViewControllerSpec: QuickSpec {
                     
                     viewController.viewModel.updateButtonEnabled
                         .subscribe(onNext: { _ in
-                            expect(updateButton.isEnabled).toEventually(beFalse())
+                            expect(updateButton.isEnabled) == false
                         })
                         .disposed(by: disposeBag)
                 }

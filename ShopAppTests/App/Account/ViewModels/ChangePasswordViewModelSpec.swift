@@ -25,8 +25,8 @@ class ChangePasswordViewModelSpec: QuickSpec {
         
         describe("when view model initialized") {
             it("should have variables with a correct initial values") {
-                expect(viewModel.newPasswordText.value).to(equal(""))
-                expect(viewModel.confirmPasswordText.value).to(equal(""))
+                expect(viewModel.newPasswordText.value) == ""
+                expect(viewModel.confirmPasswordText.value) == ""
             }
         }
         
@@ -46,7 +46,7 @@ class ChangePasswordViewModelSpec: QuickSpec {
                     
                     viewModel.updateButtonEnabled
                         .subscribe(onNext: { enabled in
-                            expect(enabled).toEventually(beTrue())
+                            expect(enabled) == true
                         })
                         .disposed(by: disposeBag)
                 }
@@ -58,7 +58,7 @@ class ChangePasswordViewModelSpec: QuickSpec {
                     
                     viewModel.updateButtonEnabled
                         .subscribe(onNext: { enabled in
-                            expect(enabled).toEventually(beFalse())
+                            expect(enabled) == false
                         })
                         .disposed(by: disposeBag)
                 }

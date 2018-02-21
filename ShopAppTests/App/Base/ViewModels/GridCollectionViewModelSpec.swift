@@ -23,7 +23,7 @@ class GridCollectionViewModelSpec: QuickSpec {
         
         describe("when view model initialized") {
             it("should have variable with a correct initial value") {
-                expect(viewModel.products.value.isEmpty).to(beTrue())
+                expect(viewModel.products.value.isEmpty) == true
             }
         }
         
@@ -36,7 +36,7 @@ class GridCollectionViewModelSpec: QuickSpec {
                     viewModel.products.value = products
                     viewModel.updateProducts(products: products)
                 
-                    expect(viewModel.products.value.count).to(equal(1))
+                    expect(viewModel.products.value.count) == 1
                 }
             }
             
@@ -46,7 +46,7 @@ class GridCollectionViewModelSpec: QuickSpec {
                     viewModel.products.value = products
                     viewModel.updateProducts(products: products)
 
-                    expect(viewModel.products.value.count).to(equal(2))
+                    expect(viewModel.products.value.count) == 2
                 }
             }
         }

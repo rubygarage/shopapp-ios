@@ -34,7 +34,7 @@ class BaseViewControllerSpec: QuickSpec {
             }
             
             it("should have correct offset in toast view's appearance") {
-                expect(ToastView.appearance().bottomOffsetPortrait).to(equal(80))
+                expect(ToastView.appearance().bottomOffsetPortrait) == 80
             }
         }
         
@@ -171,7 +171,7 @@ class BaseViewControllerSpec: QuickSpec {
                             .subscribe(onNext: { _ in
                                 expect(viewController.view.subviews.contains(viewController.loadingView)).toEventually(beFalse())
                                 expect(viewController.view.subviews.contains(viewController.errorView)).toEventually(beFalse())
-                                expect(ToastCenter.default.currentToast).toNotEventually(beNil())
+                                expect(ToastCenter.default.currentToast).toEventuallyNot(beNil())
                             })
                             .disposed(by: disposeBag)
                         
@@ -187,11 +187,11 @@ class BaseViewControllerSpec: QuickSpec {
                             .subscribe(onNext: { _ in
                                 expect(viewController.view.subviews.contains(viewController.loadingView)).toEventually(beFalse())
                                 expect(viewController.view.subviews.contains(viewController.errorView)).toEventually(beFalse())
-                                expect(ToastCenter.default.currentToast).toNotEventually(beNil())
+                                expect(ToastCenter.default.currentToast).toEventuallyNot(beNil())
                             })
                             .disposed(by: disposeBag)
                         
-                        let error = CriticalError.init(with: nil, message: "")
+                        let error = CriticalError(with: nil, message: "")
                         let state = ViewState.error(error: error)
                         viewController.viewModel.state.onNext(state)
                     }

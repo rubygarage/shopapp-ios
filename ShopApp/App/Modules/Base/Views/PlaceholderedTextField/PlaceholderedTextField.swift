@@ -8,17 +8,17 @@
 
 import UIKit
 
-private let kPlaceholderAnimationDuration: TimeInterval = 0.15
-private let kPlaceholderPositionTopY: CGFloat = -25
-private let kPlaceholderFontSizeTop: CGFloat = 11
-private let kPlaceholderFontSizeDefault: CGFloat = 12
-private let kPlaceholderColorTop = UIColor.black.withAlphaComponent(0.5)
-
 class PlaceholderedTextField: TextFieldWrapper {
     // swiftlint:disable private_outlet
     @IBOutlet fileprivate(set) weak var placeholderLabel: UILabel!
     @IBOutlet fileprivate(set) weak var placeholderVerticallyConstraint: NSLayoutConstraint!
     // swiftlint:enable private_outlet
+    
+    private let placeholderAnimationDuration: TimeInterval = 0.15
+    private let placeholderPositionTopY: CGFloat = -25
+    private let placeholderFontSizeTop: CGFloat = 11
+    private let placeholderFontSizeDefault: CGFloat = 12
+    private let placeholderColorTop = UIColor.black.withAlphaComponent(0.5)
     
     var placeholder: String? {
         didSet {
@@ -34,10 +34,10 @@ class PlaceholderedTextField: TextFieldWrapper {
     }
     
     func updatePlaceholderPosition(toTop: Bool, animated: Bool) {
-        let animationDuration = animated ? kPlaceholderAnimationDuration : 0
-        let placeholderVerticalPosition: CGFloat = toTop ? kPlaceholderPositionTopY : 0
+        let animationDuration = animated ? placeholderAnimationDuration : 0
+        let placeholderVerticalPosition: CGFloat = toTop ? placeholderPositionTopY : 0
         placeholderVerticallyConstraint?.constant = placeholderVerticalPosition
-        let fontSize = toTop ? kPlaceholderFontSizeTop : kPlaceholderFontSizeDefault
+        let fontSize = toTop ? placeholderFontSizeTop : placeholderFontSizeDefault
         placeholderLabel.font = .systemFont(ofSize: fontSize)
         
         UIView.animate(withDuration: animationDuration) {
@@ -45,7 +45,7 @@ class PlaceholderedTextField: TextFieldWrapper {
         }
         
         UIView.transition(with: placeholderLabel, duration: animationDuration, options: .transitionCrossDissolve, animations: {
-            self.placeholderLabel?.textColor = toTop ? kPlaceholderColorTop : .black
+            self.placeholderLabel.textColor = toTop ? self.placeholderColorTop : .black
         })
     }
 }
