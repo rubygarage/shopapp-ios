@@ -27,17 +27,17 @@ class ErrorViewSpec: QuickSpec {
             tryAgainButton = self.findView(withAccessibilityLabel: "tryAgain", in: view) as! UIButton
         }
         
-        describe("") {
-            context("") {
-                it("") {
+        describe("when error set") {
+            context("with type network") {
+                it("needs to hide image and setup text") {
                     view.error = NetworkError()
                     expect(errorImageView.isHidden) == false
                     expect(errorTextLabel.text) == "Error.Unknown".localizable
                 }
             }
             
-            context("") {
-                it("") {
+            context("with type not network") {
+                it("needs to show image and setup text") {
                     view.error = RepoError()
                     expect(errorImageView.isHidden) == true
                     expect(errorTextLabel.text) == "Error.NoConnection".localizable
@@ -45,8 +45,8 @@ class ErrorViewSpec: QuickSpec {
             }
         }
         
-        describe("") {
-            it("") {
+        describe("when try again pressed") {
+            it("needs to perform delegate method") {
                 let delegateMock = ErrorViewDelegateMock()
                 view.delegate = delegateMock
                 tryAgainButton.sendActions(for: .touchUpInside)

@@ -26,27 +26,27 @@ class BasePickerSpec: QuickSpec {
             underlineView = self.findView(withAccessibilityLabel: "underline", in: view)
         }
         
-        describe("") {
-            it("") {
+        describe("when view initialized") {
+            it("should have correct picker view") {
                 expect(view.pickerView.backgroundColor) == .white
                 expect(view.pickerView.numberOfComponents) == 1
                 expect(view.pickerView.numberOfRows(inComponent: 0)) == 0
             }
             
-            it("") {
+            it("should have correct text filed") {
                 expect(textField.tintColor) == .clear
                 expect(textField.inputView) === view.pickerView
             }
             
-            it("") {
+            it("should have correct placeholder") {
                 expect(placeholderLabel.text) == ""
             }
             
-            it("") {
+            it("should have correct underline view") {
                 expect(underlineView.alpha) ≈ 0.2
             }
             
-            it("") {
+            it("should have correct tool bar for text field") {
                 let toolBar = textField.inputAccessoryView as! UIToolbar
                 
                 expect(toolBar.barStyle.rawValue) == UIBarStyle.default.rawValue
@@ -58,9 +58,9 @@ class BasePickerSpec: QuickSpec {
             }
         }
         
-        describe("") {
-            context("") {
-                it("") {
+        describe("when custom data set") {
+            context("if it haven't text") {
+                it("needs to update picker components") {
                     view.text = nil
                     view.customData = ["first"]
                     
@@ -69,8 +69,8 @@ class BasePickerSpec: QuickSpec {
                 }
             }
             
-            context("") {
-                it("") {
+            context("if it have text") {
+                it("needs to update picker components and select needed row") {
                     view.text = "second"
                     view.customData = ["first", "second"]
                     
@@ -80,22 +80,35 @@ class BasePickerSpec: QuickSpec {
             }
         }
         
-        describe("") {
-            it("") {
+        describe("when text changed") {
+            beforeEach {
                 view.customData = ["first", "second"]
-                view.text = "second"
-                
-                expect(view.pickerView.selectedRow(inComponent: 0)) == 1
+            }
+            
+            context("if it haven't text in data") {
+                it("needs to select first row") {
+                    view.text = "third"
+                    
+                    expect(view.pickerView.selectedRow(inComponent: 0)) == 0
+                }
+            }
+            
+            context("if it have text in data") {
+                it("needs to select needed row") {
+                    view.text = "second"
+                    
+                    expect(view.pickerView.selectedRow(inComponent: 0)) == 1
+                }
             }
         }
         
-        describe("") {
+        describe("when text field editing changed") {
             beforeEach {
                 textField.sendActions(for: .editingDidBegin)
             }
             
-            context("") {
-                it("") {
+            context("if it have to begin") {
+                it("needs to setup underline view") {
                     view.layoutIfNeeded() // calls layoutSubviews, that calls updateConstraintsIfNeeded
                     
                     expect(underlineView.alpha) == 1
@@ -103,8 +116,8 @@ class BasePickerSpec: QuickSpec {
                 }
             }
             
-            context("") {
-                it("") {
+            context("if it have to end") {
+                it("needs to setup underline view") {
                     textField.sendActions(for: .editingDidEnd)
                     view.layoutIfNeeded() // calls layoutSubviews, that calls updateConstraintsIfNeeded
                     
@@ -114,10 +127,10 @@ class BasePickerSpec: QuickSpec {
             }
         }
         
-        describe("") {
-            it("") {
-                view.text = "second"
+        describe("when done pressed") {
+            it("needs to setup text field") {
                 view.customData = ["first", "second"]
+                view.pickerView.selectRow(1, inComponent: 0, animated: false)
                 
                 let toolBar = textField.inputAccessoryView as! UIToolbar
                 let doneItem = toolBar.items?.last
