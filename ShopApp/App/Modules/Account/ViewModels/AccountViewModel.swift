@@ -10,13 +10,20 @@ import RxSwift
 import ShopApp_Gateway
 
 class AccountViewModel: BaseViewModel {
-    private let customerUseCase = CustomerUseCase()
-    private let loginUseCase = LoginUseCase()
-    private let logoutUseCase = LogoutUseCase()
-    private let shopUseCase = ShopUseCase()
+    private let customerUseCase: CustomerUseCase
+    private let loginUseCase: LoginUseCase
+    private let logoutUseCase: LogoutUseCase
+    private let shopUseCase: ShopUseCase
     
     var policies = Variable<[Policy]>([])
     var customer = Variable<Customer?>(nil)
+
+    init(customerUseCase: CustomerUseCase, loginUseCase: LoginUseCase, logoutUseCase: LogoutUseCase, shopUseCase: ShopUseCase) {
+        self.customerUseCase = customerUseCase
+        self.loginUseCase = loginUseCase
+        self.logoutUseCase = logoutUseCase
+        self.shopUseCase = shopUseCase
+    }
     
     func loadCustomer() {
         loginUseCase.getLoginStatus { isLoggedIn in

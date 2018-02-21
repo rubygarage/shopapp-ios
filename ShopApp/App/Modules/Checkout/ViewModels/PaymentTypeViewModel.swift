@@ -9,7 +9,11 @@
 import UIKit
 
 class PaymentTypeViewModel: BaseViewModel {
-    private let checkoutUseCase = CheckoutUseCase()
+    private let checkoutUseCase: CheckoutUseCase
     
     var selectedType: PaymentType?
+
+    init(checkoutUseCase: CheckoutUseCase) {
+        self.checkoutUseCase = checkoutUseCase
+    }
 }

@@ -10,11 +10,16 @@ import RxSwift
 import ShopApp_Gateway
 
 class CheckoutAddressListViewModel: BaseAddressListViewModel {
-    private let checkoutUseCase = CheckoutUseCase()
+    private var checkoutUseCase: CheckoutUseCase
     
     var didSelectBillingAddress = PublishSubject<Address>()
     var checkoutId: String!
-    
+
+    init(customerUseCase: CustomerUseCase, updateDefaultAddressUseCase: UpdateDefaultAddressUseCase, deleteAddressUseCase: DeleteAddressUseCase, checkoutUseCase: CheckoutUseCase) {
+        self.checkoutUseCase = checkoutUseCase
+        super.init(customerUseCase: customerUseCase, updateDefaultAddressUseCase: updateDefaultAddressUseCase, deleteAddressUseCase: deleteAddressUseCase)
+    }
+
     override func processDeleteAddressResponse(with isSelected: Bool, type: AddressListType) {
         if isSelected, let defaultAddress = customerDefaultAddress.value {
             setDefaultAddress(with: defaultAddress, type: type)

@@ -9,7 +9,11 @@
 import ShopApp_Gateway
 
 class LogoutUseCase {
-    private lazy var repository = AppDelegate.getRepository()
+    private let repository: AuthentificationRepository
+
+    init(repository: AuthentificationRepository) {
+        self.repository = repository
+    }
 
     func logout(_ callback: @escaping (_ isLoggedOut: Bool) -> Void) {
         repository.logout { (success, _) in

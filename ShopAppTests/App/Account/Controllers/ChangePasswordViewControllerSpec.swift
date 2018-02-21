@@ -21,6 +21,9 @@ class ChangePasswordViewControllerSpec: QuickSpec {
         
         beforeEach {
             viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.changePassword) as! ChangePasswordViewController
+            let repository = AuthentificationRepositoryMock()
+            let updateCustomerUseCaseMock = UpdateCustomerUseCaseMock(repository: repository)
+            viewController.viewModel = ChangePasswordViewModel(updateCustomerUseCase: updateCustomerUseCaseMock)
             
             newPasswordTextFieldView = self.findView(withAccessibilityLabel: "newPassword", in: viewController.view) as! InputTextFieldView
             confirmPasswordTextFieldView = self.findView(withAccessibilityLabel: "confirmPassword", in: viewController.view) as! InputTextFieldView

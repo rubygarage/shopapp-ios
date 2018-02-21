@@ -9,7 +9,11 @@
 import ShopApp_Gateway
 
 class AddAddressUseCase {
-    private lazy var repository = AppDelegate.getRepository()
+    private let repository: PaymentsRepository
+
+    init(repository: PaymentsRepository) {
+        self.repository = repository
+    }
 
     func addAddress(with address: Address, callback: @escaping RepoCallback<String>) {
         repository.addCustomerAddress(with: address, callback: callback)

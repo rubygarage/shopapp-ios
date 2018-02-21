@@ -10,14 +10,20 @@ import RxSwift
 import ShopApp_Gateway
 
 class BaseAddressListViewModel: BaseViewModel {
-    private let customerUseCase = CustomerUseCase()
-    private let updateDefaultAddressUseCase = UpdateDefaultAddressUseCase()
-    private let deleteAddressUseCase = DeleteAddressUseCase()
+    private let customerUseCase: CustomerUseCase
+    private let updateDefaultAddressUseCase: UpdateDefaultAddressUseCase
+    private let deleteAddressUseCase: DeleteAddressUseCase
     
     var customerAddresses = Variable<[Address]>([])
     var customerDefaultAddress = Variable<Address?>(nil)
     var didSelectAddress = PublishSubject<Address>()
     var selectedAddress: Address?
+
+    init(customerUseCase: CustomerUseCase, updateDefaultAddressUseCase: UpdateDefaultAddressUseCase, deleteAddressUseCase: DeleteAddressUseCase) {
+        self.customerUseCase = customerUseCase
+        self.updateDefaultAddressUseCase = updateDefaultAddressUseCase
+        self.deleteAddressUseCase = deleteAddressUseCase
+    }
     
     func loadCustomerAddresses(isTranslucentHud: Bool = false) {
         state.onNext(ViewState.make.loading(isTranslucent: isTranslucentHud))

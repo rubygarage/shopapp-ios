@@ -9,7 +9,7 @@
 import RxSwift
 
 class SignInViewModel: BaseViewModel {
-    private let loginUseCase = LoginUseCase()
+    private let loginUseCase: LoginUseCase
     
     var emailText = Variable<String>("")
     var passwordText = Variable<String>("")
@@ -34,6 +34,10 @@ class SignInViewModel: BaseViewModel {
                 break
             }
         }
+    }
+
+    init(loginUseCase: LoginUseCase) {
+        self.loginUseCase = loginUseCase
     }
     
     private func checkCredentials() {

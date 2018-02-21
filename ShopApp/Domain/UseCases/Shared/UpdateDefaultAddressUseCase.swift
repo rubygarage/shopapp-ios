@@ -9,7 +9,11 @@
 import ShopApp_Gateway
 
 class UpdateDefaultAddressUseCase {
-    private lazy var repository = AppDelegate.getRepository()
+    private let repository: PaymentsRepository
+
+    init(repository: PaymentsRepository) {
+        self.repository = repository
+    }
 
     func updateDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Customer>) {
         repository.updateCustomerDefaultAddress(with: addressId, callback: callback)

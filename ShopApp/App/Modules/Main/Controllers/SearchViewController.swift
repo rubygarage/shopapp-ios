@@ -30,7 +30,6 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = SearchViewModel()
         super.viewDidLoad()
         
         setupViews()

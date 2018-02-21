@@ -10,10 +10,14 @@ import RxSwift
 import ShopApp_Gateway
 
 class OrderDetailsViewModel: BaseViewModel {
-    private let orderUseCase = OrderUseCase()
+    private let orderUseCase: OrderUseCase
     
     var orderId: String!
     var data = Variable<Order?>(nil)
+
+    init(orderUseCase: OrderUseCase) {
+        self.orderUseCase = orderUseCase
+    }
     
     func loadOrder() {
         state.onNext(ViewState.make.loading())

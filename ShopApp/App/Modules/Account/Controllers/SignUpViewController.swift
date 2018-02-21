@@ -24,7 +24,6 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = SignUpViewModel()
         super.viewDidLoad()
 
         setupViews()

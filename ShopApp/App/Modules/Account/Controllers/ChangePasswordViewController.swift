@@ -16,9 +16,6 @@ class ChangePasswordViewController: BaseViewController<ChangePasswordViewModel> 
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        let repository = AppDelegate.getRepository()
-        let updateCustomerUseCase = UpdateCustomerUseCase(repository: repository)
-        viewModel = ChangePasswordViewModel(updateCustomerUseCase: updateCustomerUseCase)
         super.viewDidLoad()
         
         setupViews()

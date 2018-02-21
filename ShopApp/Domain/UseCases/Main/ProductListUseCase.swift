@@ -11,7 +11,11 @@ import ShopApp_Gateway
 private let kPopuarSectionItemsMaxCount = 4
 
 class ProductListUseCase {
-    private lazy var repository = AppDelegate.getRepository()
+    private let repository: ProductRepository
+
+    init(repository: ProductRepository) {
+        self.repository = repository
+    }
 
     func getLastArrivalProductList(_ callback: @escaping RepoCallback<[Product]>) {
         repository.getProductList(perPage: kItemsPerPage, paginationValue: nil, sortBy: SortingValue.createdAt, keyPhrase: nil, excludePhrase: nil, reverse: true, callback: callback)

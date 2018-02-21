@@ -9,7 +9,11 @@
 import ShopApp_Gateway
 
 class CountriesUseCase {
-    private lazy var repository = AppDelegate.getRepository()
+    private let repository: PaymentsRepository
+
+    init(repository: PaymentsRepository) {
+        self.repository = repository
+    }
 
     func getCountries(_ callback: @escaping RepoCallback<[Country]>) {
         repository.getCountries(callback: callback)

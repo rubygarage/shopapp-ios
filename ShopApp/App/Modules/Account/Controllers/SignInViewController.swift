@@ -17,7 +17,6 @@ class SignInViewController: BaseViewController<SignInViewModel> {
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = SignInViewModel()
         super.viewDidLoad()
         
         setupViews()

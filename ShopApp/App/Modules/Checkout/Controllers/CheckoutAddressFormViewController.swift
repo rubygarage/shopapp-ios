@@ -24,7 +24,6 @@ class CheckoutAddressFormViewController: BaseAddressFormViewController<CheckoutA
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = CheckoutAddressFormViewModel()
         super.viewDidLoad()
 
         setupViewModel()

@@ -21,9 +21,8 @@ class HomeViewController: BaseTableViewController<HomeViewModel> {
     fileprivate var selectedArticle: Article?
     
     // MARK: - View controller lifecycle
-    
+
     override func viewDidLoad() {
-        viewModel = HomeViewModel()
         super.viewDidLoad()
         
         setupTableView()

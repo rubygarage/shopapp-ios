@@ -10,8 +10,8 @@ import RxSwift
 import ShopApp_Gateway
 
 class SignUpViewModel: BaseViewModel {
-    private let shopUseCase = ShopUseCase()
-    private let signUpUseCase = SignUpUseCase()
+    private let shopUseCase: ShopUseCase
+    private let signUpUseCase: SignUpUseCase
     
     var emailText = Variable<String>("")
     var firstNameText = Variable<String>("")
@@ -40,6 +40,11 @@ class SignUpViewModel: BaseViewModel {
                 break
             }
         }
+    }
+
+    init(shopUseCase: ShopUseCase, signUpUseCase: SignUpUseCase) {
+        self.shopUseCase = shopUseCase
+        self.signUpUseCase = signUpUseCase
     }
     
     func loadPolicies() {

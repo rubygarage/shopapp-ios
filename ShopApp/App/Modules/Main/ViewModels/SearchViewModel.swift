@@ -9,9 +9,13 @@
 import RxSwift
 
 class SearchViewModel: GridCollectionViewModel {
-    private let productListUseCase = ProductListUseCase()
+    private let productListUseCase: ProductListUseCase
     
     var searchPhrase = Variable<String>("")
+
+    init(productListUseCase: ProductListUseCase) {
+        self.productListUseCase = productListUseCase
+    }
     
     func reloadData() {
         paginationValue = nil

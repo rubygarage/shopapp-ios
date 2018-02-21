@@ -9,7 +9,11 @@
 import ShopApp_Gateway
 
 class CheckoutUseCase {
-    private lazy var repository = AppDelegate.getRepository()
+    private let repository: PaymentsRepository
+
+    init(repository: PaymentsRepository) {
+        self.repository = repository
+    }
 
     func getCheckout(with checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
         repository.getCheckout(with: checkoutId, callback: callback)

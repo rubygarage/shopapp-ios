@@ -38,8 +38,6 @@ class ChangePasswordViewModel: BaseViewModel {
     
     init(updateCustomerUseCase: UpdateCustomerUseCase) {
         self.updateCustomerUseCase = updateCustomerUseCase
-        
-        super.init()
     }
     
     private func checkValidation() {

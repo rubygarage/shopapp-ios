@@ -17,7 +17,11 @@ public class RepoError: Error {
     
     public init?(with error: Error?) {
         if let error = error {
-            errorMessage = error.localizedDescription
+            if error is RepoError {
+                errorMessage = (error as! RepoError).errorMessage ?? error.localizedDescription
+            } else {
+                errorMessage = error.localizedDescription
+            }
         } else {
             return nil
         }

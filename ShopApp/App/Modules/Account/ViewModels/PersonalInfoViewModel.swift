@@ -10,10 +10,9 @@ import RxSwift
 import ShopApp_Gateway
 
 class PersonalInfoViewModel: BaseViewModel {
-    private let loginUseCase = LoginUseCase()
-    private let customerUseCase = CustomerUseCase()
-    
-    private var updateCustomerUseCase: UpdateCustomerUseCase
+    private let updateCustomerUseCase: UpdateCustomerUseCase
+    private let loginUseCase: LoginUseCase
+    private let customerUseCase: CustomerUseCase
     
     var canChangeEmail = true
     var customer = Variable<Customer?>(nil)
@@ -52,8 +51,10 @@ class PersonalInfoViewModel: BaseViewModel {
         }
     }
     
-    init(updateCustomerUseCase: UpdateCustomerUseCase) {
+    init(updateCustomerUseCase: UpdateCustomerUseCase, loginUseCase: LoginUseCase, customerUseCase: CustomerUseCase) {
         self.updateCustomerUseCase = updateCustomerUseCase
+        self.loginUseCase = loginUseCase
+        self.customerUseCase = customerUseCase
     }
     
     func loadCustomer() {

@@ -12,9 +12,9 @@ import ShopApp_Gateway
 typealias SelectedVariant = (variant: ProductVariant?, allOptions: [ProductOption], selectedOptions: [SelectedOption], currency: String)
 
 class ProductDetailsViewModel: BaseViewModel {
-    private let addCartProductUseCase = AddCartProductUseCase()
-    private let productUseCase = ProductUseCase()
-    private let productListUseCase = ProductListUseCase()
+    private let addCartProductUseCase: AddCartProductUseCase
+    private let productUseCase: ProductUseCase
+    private let productListUseCase: ProductListUseCase
     
     private var productOptions: [ProductOption] = []
     private var selectedOptions: [SelectedOption] = []
@@ -51,6 +51,12 @@ class ProductDetailsViewModel: BaseViewModel {
             }
             return Disposables.create()
         })
+    }
+
+    init(addCartProductUseCase: AddCartProductUseCase, productUseCase: ProductUseCase, productListUseCase: ProductListUseCase) {
+        self.addCartProductUseCase = addCartProductUseCase
+        self.productUseCase = productUseCase
+        self.productListUseCase = productListUseCase
     }
 
     func loadData() {

@@ -9,9 +9,9 @@
 import ShopApp_Gateway
 
 class UpdateCustomerUseCase {
-    private var repository: ShopApp_Gateway.AuthentificationRepository
+    private var repository: AuthentificationRepository
     
-    init(repository: ShopApp_Gateway.AuthentificationRepository) {
+    init(repository: AuthentificationRepository) {
         self.repository = repository
     }
 

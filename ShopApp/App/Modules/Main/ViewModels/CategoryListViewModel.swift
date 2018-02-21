@@ -10,9 +10,13 @@ import RxSwift
 import ShopApp_Gateway
 
 class CategoryListViewModel: BasePaginationViewModel {
-    private let categoryListUseCase = CategoryListUseCase()
+    private let categoryListUseCase: CategoryListUseCase
     
     var items = Variable<[ShopApp_Gateway.Category]>([])
+
+    init(categoryListUseCase: CategoryListUseCase) {
+        self.categoryListUseCase = categoryListUseCase
+    }
     
     func reloadData() {
         paginationValue = nil

@@ -12,7 +12,6 @@ class CheckoutAddressListViewController: BaseAddressListViewController<CheckoutA
     var checkoutId: String!
     
     override func viewDidLoad() {
-        viewModel = CheckoutAddressListViewModel()
         super.viewDidLoad()
 
         setupViewModel()

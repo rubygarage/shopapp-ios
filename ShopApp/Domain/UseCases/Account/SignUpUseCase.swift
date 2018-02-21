@@ -9,7 +9,11 @@
 import ShopApp_Gateway
 
 class SignUpUseCase {
-    private lazy var repository = AppDelegate.getRepository()
+    private let repository: AuthentificationRepository
+
+    init(repository: AuthentificationRepository) {
+        self.repository = repository
+    }
 
     func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, _ callback: @escaping RepoCallback<Bool>) {
         repository.signUp(with: email, firstName: firstName, lastName: lastName, password: password, phone: phone, callback: callback)

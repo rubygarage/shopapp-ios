@@ -10,10 +10,15 @@ import RxSwift
 import ShopApp_Gateway
 
 class AccountAddressFormViewModel: BaseViewModel {
-    private let addAddressUseCase = AddAddressUseCase()
-    private let updateAddressUseCase = UpdateAddressUseCase()
+    private let addAddressUseCase: AddAddressUseCase
+    private let updateAddressUseCase: UpdateAddressUseCase
     
     var filledAddress = PublishSubject<Address>()
+
+    init(addAddressUseCase: AddAddressUseCase, updateAddressUseCase: UpdateAddressUseCase) {
+        self.addAddressUseCase = addAddressUseCase
+        self.updateAddressUseCase = updateAddressUseCase
+    }
     
     func addCustomerAddress(with address: Address) {
         state.onNext(ViewState.make.loading(isTranslucent: true))

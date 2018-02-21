@@ -9,9 +9,13 @@
 import RxSwift
 
 class CartButtonViewModel {
-    private let cartProductListUseCase = CartProductListUseCase()
+    private let cartProductListUseCase: CartProductListUseCase
     
     var cartItemsCount = PublishSubject<Int>()
+
+    init(cartProductListUseCase: CartProductListUseCase) {
+        self.cartProductListUseCase = cartProductListUseCase
+    }
     
     func getCartItemsCount() {
         cartProductListUseCase.getCartProductList { [weak self] (products, _) in

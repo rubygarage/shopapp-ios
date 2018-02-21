@@ -23,7 +23,6 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     fileprivate var tableProvider: CheckoutTableProvider!
     
     override func viewDidLoad() {
-        viewModel = CheckoutViewModel()
         super.viewDidLoad()
 
         setupViews()

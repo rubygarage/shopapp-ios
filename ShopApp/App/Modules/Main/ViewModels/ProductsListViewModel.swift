@@ -10,11 +10,15 @@ import RxSwift
 import ShopApp_Gateway
 
 class ProductsListViewModel: GridCollectionViewModel {
-    private let productListUseCase = ProductListUseCase()
+    private let productListUseCase: ProductListUseCase
     
     var sortingValue: SortingValue!
     var keyPhrase: String?
     var excludePhrase: String?
+
+    init(productListUseCase: ProductListUseCase) {
+        self.productListUseCase = productListUseCase
+    }
     
     func reloadData() {
         paginationValue = nil

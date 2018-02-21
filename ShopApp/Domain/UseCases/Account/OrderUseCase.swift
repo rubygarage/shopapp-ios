@@ -9,7 +9,11 @@
 import ShopApp_Gateway
 
 class OrderUseCase {
-    private lazy var repository = AppDelegate.getRepository()
+    private let repository: OrderRepository
+
+    init(repository: OrderRepository) {
+        self.repository = repository
+    }
 
     func getOrder(with id: String, _ callback: @escaping RepoCallback<Order>) {
         repository.getOrder(id: id, callback: callback)

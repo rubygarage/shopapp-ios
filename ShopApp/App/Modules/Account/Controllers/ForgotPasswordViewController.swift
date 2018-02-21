@@ -20,7 +20,6 @@ class ForgotPasswordViewController: BaseViewController<ForgotPasswordViewModel> 
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
-        viewModel = ForgotPasswordViewModel()
         super.viewDidLoad()
         
         setupViews()

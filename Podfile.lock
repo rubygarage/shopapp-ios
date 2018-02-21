@@ -15,6 +15,9 @@ PODS:
   - SDWebImage/Core (4.2.3)
   - SKPhotoBrowser (5.0.0)
   - SwiftLint (0.24.0)
+  - Swinject (2.2.0)
+  - SwinjectStoryboard (1.1.2):
+    - Swinject (~> 2.1)
   - SwipeCellKit (2.0.0)
   - Toaster (2.1.1)
   - TPKeyboardAvoiding (1.3.2)
@@ -35,6 +38,8 @@ DEPENDENCIES:
   - SDWebImage (~> 4.1)
   - SKPhotoBrowser (~> 5.0)
   - SwiftLint (~> 0.24)
+  - Swinject (~> 2.2)
+  - SwinjectStoryboard (~> 1.1)
   - SwipeCellKit (~> 2.0)
   - Toaster (~> 2.1)
   - TPKeyboardAvoiding (~> 1.3)
@@ -55,6 +60,8 @@ SPEC CHECKSUMS:
   SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
   SKPhotoBrowser: fe936f878955a568c726bf05d14e1d2717d91ce0
   SwiftLint: a014c92b4664e8b13f380f8640a51bb1733778ba
+  Swinject: 4ca48bca7de5f398229a26abe1ac902b9f3ee541
+  SwinjectStoryboard: 92e75763c3299cdf627bef98a5180dc894864336
   SwipeCellKit: 349c61ffde96ac3ae51c2691a03e421b5b29ee98
   Toaster: a6c9532de1ded8105e77376f7dffeb2e12b46dbb
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
@@ -62,6 +69,6 @@ SPEC CHECKSUMS:
   UIImage+Additions: da531911c34e298b46b567a28df03bb098af1389
   UIScrollView-InfiniteScroll: c132d6d5851daff229ab4a1060ccf70a05a051c9
 
-PODFILE CHECKSUM: ec03fa979fe79396056c9c3cc57145f932d009de
+PODFILE CHECKSUM: a52804355ee43ff75f322449891fc5618ddc3337
 
 COCOAPODS: 1.3.1

@@ -30,7 +30,6 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel>, InputTe
     weak var delegate: CreditCardControllerDelegate?
     
     override func viewDidLoad() {
-        viewModel = CreditCardViewModel()
         super.viewDidLoad()
 
         setupViews()

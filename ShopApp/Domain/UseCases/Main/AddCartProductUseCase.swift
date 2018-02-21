@@ -9,7 +9,11 @@
 import ShopApp_Gateway
 
 class AddCartProductUseCase {
-    private lazy var repository = AppDelegate.getCartRepository()
+    private let repository: CartRepository
+
+    init(repository: CartRepository) {
+        self.repository = repository
+    }
 
     func addCartProduct(_ cartProduct: CartProduct, _ callback: @escaping RepoCallback<CartProduct>) {
         repository.addCartProduct(cartProduct: cartProduct, callback: callback)

@@ -10,12 +10,16 @@ import RxSwift
 import ShopApp_Gateway
 
 class CheckoutAddressFormViewModel: BaseViewModel {
-    private let checkoutUseCase = CheckoutUseCase()
+    private let checkoutUseCase: CheckoutUseCase
     
     var updatedShippingAddress = PublishSubject<Void>()
     var filledBillingAddress = PublishSubject<Address>()
     var checkoutId: String!
     var addressType: AddressListType = .shipping
+
+    init(checkoutUseCase: CheckoutUseCase) {
+        self.checkoutUseCase = checkoutUseCase
+    }
     
     func updateAddress(with address: Address) {
         if addressType == .shipping {
