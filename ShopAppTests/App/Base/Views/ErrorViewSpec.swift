@@ -28,36 +28,30 @@ class ErrorViewSpec: QuickSpec {
         }
         
         describe("") {
-            it("") {
-                view.error = NetworkError()
-                expect(errorImageView.isHidden) == false
-                expect(errorTextLabel.text) == "Error.Unknown".localizable
+            context("") {
+                it("") {
+                    view.error = NetworkError()
+                    expect(errorImageView.isHidden) == false
+                    expect(errorTextLabel.text) == "Error.Unknown".localizable
+                }
             }
             
-            it("") {
-                view.error = RepoError()
-                expect(errorImageView.isHidden) == true
-                expect(errorTextLabel.text) == "Error.NoConnection".localizable
+            context("") {
+                it("") {
+                    view.error = RepoError()
+                    expect(errorImageView.isHidden) == true
+                    expect(errorTextLabel.text) == "Error.NoConnection".localizable
+                }
             }
         }
         
         describe("") {
             it("") {
-                class DelegateMock: ErrorViewDelegate {
-                    private var view: ErrorView!
-                    
-                    init(view: ErrorView) {
-                        self.view = view
-                    }
-                    
-                    func viewDidTapTryAgain(_ view: ErrorView) {
-                        expect(view) === self.view
-                    }
-                }
-                
-                let delegateMock = DelegateMock(view: view)
+                let delegateMock = ErrorViewDelegateMock()
                 view.delegate = delegateMock
                 tryAgainButton.sendActions(for: .touchUpInside)
+                
+                expect(delegateMock.view) === view
             }
         }
     }

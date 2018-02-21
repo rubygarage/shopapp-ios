@@ -110,7 +110,7 @@ class BasePicker: PlaceholderedTextField {
     
     @IBAction func textFieldEditingDidEnd(_ sender: UITextField) {
         underlineView.alpha = underlineViewAlphaDefault
-        underlineViewHeight.constant = underlineViewHeightDefault
+        underlineViewHeight.constant = underlineViewHeightDefault        
     }
 }
 
