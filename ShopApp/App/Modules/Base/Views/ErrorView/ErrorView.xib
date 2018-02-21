@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ErrorView" customModule="ShopClient" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ErrorView" customModule="ShopApp" customModuleProvider="target">
             <connections>
                 <outlet property="errorImageView" destination="aXQ-jJ-eL2" id="msw-RU-8Gr"/>
                 <outlet property="errorTextLabel" destination="T0m-Dg-Z0e" id="XiZ-Vz-PqR"/>
@@ -28,6 +28,9 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="errorText"/>
+                    </userDefinedRuntimeAttributes>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSi-2c-9yV">
                     <rect key="frame" x="129" y="255.5" width="90" height="30"/>
@@ -35,6 +38,9 @@
                         <constraint firstAttribute="width" constant="90" id="w4b-mo-X0J"/>
                     </constraints>
                     <state key="normal" title="Try again"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="tryAgain"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="tryAgainButtonDidTap:" destination="-1" eventType="touchUpInside" id="XuE-0b-fJ0"/>
                     </connections>
@@ -45,6 +51,10 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="aXQ-jJ-eL2" secondAttribute="height" multiplier="1:1" id="KZG-Zn-71J"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="errorImage"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>

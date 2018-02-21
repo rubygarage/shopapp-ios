@@ -8,14 +8,14 @@
 
 import UIKit
 
-private let kUnderlineViewAlphaDefault: CGFloat = 0.2
-private let kUnderlineViewAlphaHighlighted: CGFloat = 1
-private let kUnderlineViewHeightDefault: CGFloat = 1
-private let kUnderlineViewHeightHighlighted: CGFloat = 2
-
 class BasePicker: PlaceholderedTextField {
     @IBOutlet private weak var underlineView: UIView!
     @IBOutlet private weak var underlineViewHeight: NSLayoutConstraint!
+    
+    private let underlineViewAlphaDefault: CGFloat = 0.2
+    private let underlineViewAlphaHighlighted: CGFloat = 1
+    private let underlineViewHeightDefault: CGFloat = 1
+    private let underlineViewHeightHighlighted: CGFloat = 2
 
     var pickerView = UIPickerView()
     
@@ -73,7 +73,7 @@ class BasePicker: PlaceholderedTextField {
         textField.tintColor = .clear
         textField.inputView = pickerView
         placeholderLabel.text = initialPlaceholder.uppercased()
-        underlineView.alpha = kUnderlineViewAlphaDefault
+        underlineView.alpha = underlineViewAlphaDefault
         addToolbar()
     }
     
@@ -104,13 +104,13 @@ class BasePicker: PlaceholderedTextField {
     }
     
     @IBAction func textFieldEditingDidBegin(_ sender: UITextField) {
-        underlineView.alpha = kUnderlineViewAlphaHighlighted
-        underlineViewHeight.constant = kUnderlineViewHeightHighlighted
+        underlineView.alpha = underlineViewAlphaHighlighted
+        underlineViewHeight.constant = underlineViewHeightHighlighted
     }
     
     @IBAction func textFieldEditingDidEnd(_ sender: UITextField) {
-        underlineView.alpha = kUnderlineViewAlphaDefault
-        underlineViewHeight.constant = kUnderlineViewHeightDefault
+        underlineView.alpha = underlineViewAlphaDefault
+        underlineViewHeight.constant = underlineViewHeightDefault
     }
 }
 

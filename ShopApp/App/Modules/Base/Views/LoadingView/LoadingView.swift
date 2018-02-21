@@ -9,6 +9,7 @@
 import UIKit
 
 class LoadingView: UIView {
+    
     // MARK: - View lifecycle
     
     override init(frame: CGRect) {

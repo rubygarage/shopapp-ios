@@ -78,6 +78,7 @@
 		0B7CEFA5203C57BB00FAA32C /* BaseTableViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEFA4203C57BB00FAA32C /* BaseTableViewControllerSpec.swift */; };
 		0B7CEFA7203C59CE00FAA32C /* BaseCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEFA6203C59CE00FAA32C /* BaseCollectionViewControllerSpec.swift */; };
 		0B7CEFA9203C5E1E00FAA32C /* GridCollectionViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEFA8203C5E1E00FAA32C /* GridCollectionViewModelSpec.swift */; };
+		0B7CEFAD203C76FD00FAA32C /* ErrorViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEFAC203C76FD00FAA32C /* ErrorViewSpec.swift */; };
 		0B9426551FFE468100A986AB /* OrderHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9426541FFE468100A986AB /* OrderHeaderView.swift */; };
 		0B9426571FFE468C00A986AB /* OrderHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B9426561FFE468C00A986AB /* OrderHeaderView.xib */; };
 		0B953D502020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B953D4F2020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift */; };
@@ -441,6 +442,7 @@
 		0B7CEFA4203C57BB00FAA32C /* BaseTableViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewControllerSpec.swift; sourceTree = "<group>"; };
 		0B7CEFA6203C59CE00FAA32C /* BaseCollectionViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewControllerSpec.swift; sourceTree = "<group>"; };
 		0B7CEFA8203C5E1E00FAA32C /* GridCollectionViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewModelSpec.swift; sourceTree = "<group>"; };
+		0B7CEFAC203C76FD00FAA32C /* ErrorViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewSpec.swift; sourceTree = "<group>"; };
 		0B9426541FFE468100A986AB /* OrderHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHeaderView.swift; sourceTree = "<group>"; };
 		0B9426561FFE468C00A986AB /* OrderHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderHeaderView.xib; sourceTree = "<group>"; };
 		0B953D4F2020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlStringMultimediaCompressor.swift; sourceTree = "<group>"; };
@@ -1204,6 +1206,7 @@
 		0B7CEF97203C0DF100FAA32C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0B7CEFAC203C76FD00FAA32C /* ErrorViewSpec.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2664,6 +2667,7 @@
 				0B7CEF84203B1F8E00FAA32C /* AuthentificationRepositoryMock.swift in Sources */,
 				0B7CEFA9203C5E1E00FAA32C /* GridCollectionViewModelSpec.swift in Sources */,
 				0B7CEF9F203C0EB400FAA32C /* TabBarControllerSpec.swift in Sources */,
+				0B7CEFAD203C76FD00FAA32C /* ErrorViewSpec.swift in Sources */,
 				0B7CEF9B203C0E5500FAA32C /* BaseViewControllerSpec.swift in Sources */,
 				0B7CEFA7203C59CE00FAA32C /* BaseCollectionViewControllerSpec.swift in Sources */,
 				0B7CEF76203B155400FAA32C /* UpdateCustomerUseCaseMock.swift in Sources */,

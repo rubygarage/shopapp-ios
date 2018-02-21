@@ -191,7 +191,7 @@ class BaseViewControllerSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
-                        let error = CriticalError.init(with: nil, message: "")
+                        let error = CriticalError(with: nil, message: "")
                         let state = ViewState.error(error: error)
                         viewController.viewModel.state.onNext(state)
                     }
