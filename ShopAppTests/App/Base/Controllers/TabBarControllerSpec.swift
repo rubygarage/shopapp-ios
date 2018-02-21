@@ -25,8 +25,8 @@ class TabBarControllerSpec: QuickSpec {
             it("should have correct images in tab bar's appearance") {
                 let shadowImage = UIImage.add_image(with: Colors.shadowImage)
                 let backgroundImage = UIImage.add_image(with: Colors.barBackground)
-                expect(UITabBar.appearance().shadowImage).to(equal(shadowImage))
-                expect(UITabBar.appearance().backgroundImage).to(equal(backgroundImage))
+                expect(UITabBar.appearance().shadowImage) == shadowImage
+                expect(UITabBar.appearance().backgroundImage) == backgroundImage
             }
         }
     }

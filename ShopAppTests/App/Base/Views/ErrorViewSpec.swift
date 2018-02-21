@@ -30,14 +30,14 @@ class ErrorViewSpec: QuickSpec {
         describe("") {
             it("") {
                 view.error = NetworkError()
-                expect(errorImageView.isHidden).to(beFalse())
-                expect(errorTextLabel.text).to(equal("Error.Unknown".localizable))
+                expect(errorImageView.isHidden) == false
+                expect(errorTextLabel.text) == "Error.Unknown".localizable
             }
             
             it("") {
                 view.error = RepoError()
-                expect(errorImageView.isHidden).to(beTrue())
-                expect(errorTextLabel.text).to(equal("Error.NoConnection".localizable))
+                expect(errorImageView.isHidden) == true
+                expect(errorTextLabel.text) == "Error.NoConnection".localizable
             }
         }
         
@@ -51,7 +51,7 @@ class ErrorViewSpec: QuickSpec {
                     }
                     
                     func viewDidTapTryAgain(_ view: ErrorView) {
-                        expect(view).toEventually(equal(self.view))
+                        expect(view) === self.view
                     }
                 }
                 

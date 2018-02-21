@@ -32,7 +32,7 @@ class BaseCollectionViewControllerSpec: QuickSpec {
                 viewController.refreshControl?.beginRefreshing()
                 viewController.stopLoadAnimating()
                 
-                expect(viewController.refreshControl?.isRefreshing).to(beFalse())
+                expect(viewController.refreshControl?.isRefreshing) == false
             }
         }
     }

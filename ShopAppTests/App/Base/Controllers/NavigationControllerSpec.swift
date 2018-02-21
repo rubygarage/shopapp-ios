@@ -23,19 +23,19 @@ class NavigationControllerSpec: QuickSpec {
         
         describe("when view loaded") {
             it("should have correct tint colors in navigation bar") {
-                expect(navigationController.navigationBar.tintColor).to(equal(.black))
-                expect(navigationController.navigationBar.barTintColor).to(equal(.white))
+                expect(navigationController.navigationBar.tintColor) == .black
+                expect(navigationController.navigationBar.barTintColor) == .white
             }
             
             it("should have correct images in navigation bar") {
                 let shadowImage = UIImage.add_image(with: Colors.shadowImage)
                 let backgroundImage = UIImage.add_image(with: .white)
-                expect(navigationController.navigationBar.shadowImage).to(equal(shadowImage))
-                expect(navigationController.navigationBar.backgroundImage(for: .default)).to(equal(backgroundImage))
+                expect(navigationController.navigationBar.shadowImage) == shadowImage
+                expect(navigationController.navigationBar.backgroundImage(for: .default)) == backgroundImage
             }
             
             it("should have correct translucency in navigation bar") {
-                expect(navigationController.navigationBar.isTranslucent).to(beFalse())
+                expect(navigationController.navigationBar.isTranslucent) == false
             }
         }
     }
