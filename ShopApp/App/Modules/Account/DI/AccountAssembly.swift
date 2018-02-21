@@ -11,7 +11,7 @@ import Swinject
 class AccountAssembly: Assembly {
     func assemble(container: Container) {
 
-        // View controllers
+        // MARK: - View controllers
 
         container.storyboardInitCompleted(AccountAddressFormViewController.self) { r, c in
             c.viewModel = r.resolve(AccountAddressFormViewModel.self)!
@@ -65,7 +65,7 @@ class AccountAssembly: Assembly {
             c.viewModel = r.resolve(SignUpViewModel.self)!
         }
 
-        // View models
+        // MARK: - View models
 
         container.register(BaseAddressListViewModel.self) { r in
             return BaseAddressListViewModel(customerUseCase: r.resolve(CustomerUseCase.self)!,

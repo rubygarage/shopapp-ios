@@ -11,13 +11,13 @@ import Swinject
 class CartAssembly: Assembly {
     func assemble(container: Container) {
 
-        // View controllers
+        // MARK: - View controllers
 
         container.storyboardInitCompleted(CartViewController.self) { r, c in
             c.viewModel = r.resolve(CartViewModel.self)!
         }
 
-        // View models
+        // MARK: - View models
 
         container.register(CartViewModel.self) { r in
             return CartViewModel(cartProductListUseCase: r.resolve(CartProductListUseCase.self)!,

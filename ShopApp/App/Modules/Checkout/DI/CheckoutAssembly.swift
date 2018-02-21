@@ -11,7 +11,7 @@ import Swinject
 class CheckoutAssembly: Assembly {
     func assemble(container: Container) {
 
-        // View controllers
+        // MARK: - View controllers
 
         container.storyboardInitCompleted(CheckoutAddressFormViewController.self) { r, c in
             c.viewModel = r.resolve(CheckoutAddressFormViewModel.self)!
@@ -33,7 +33,7 @@ class CheckoutAssembly: Assembly {
             c.viewModel = r.resolve(PaymentTypeViewModel.self)!
         }
 
-        // View models
+        // MARK: - View models
 
         container.register(CheckoutAddressFormViewModel.self) { r in
             return CheckoutAddressFormViewModel(checkoutUseCase: r.resolve(CheckoutUseCase.self)!)

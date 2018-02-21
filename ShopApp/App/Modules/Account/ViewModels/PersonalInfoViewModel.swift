@@ -10,7 +10,7 @@ import RxSwift
 import ShopApp_Gateway
 
 class PersonalInfoViewModel: BaseViewModel {
-    private var updateCustomerUseCase: UpdateCustomerUseCase
+    private let updateCustomerUseCase: UpdateCustomerUseCase
     private let loginUseCase: LoginUseCase
     private let customerUseCase: CustomerUseCase
     

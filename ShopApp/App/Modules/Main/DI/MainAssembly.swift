@@ -11,7 +11,7 @@ import Swinject
 class MainAssembly: Assembly {
     func assemble(container: Container) {
 
-        // View controllers
+        // MARK: - View controllers
 
         container.storyboardInitCompleted(ArticleDetailsViewController.self) { r, c in
             c.viewModel = r.resolve(ArticleDetailsViewModel.self)!
@@ -45,7 +45,7 @@ class MainAssembly: Assembly {
             c.viewModel = r.resolve(SearchViewModel.self)!
         }
 
-        // View models
+        // MARK: - View models
 
         container.register(ArticleDetailsViewModel.self) { r in
             return ArticleDetailsViewModel(articleUseCase: r.resolve(ArticleUseCase.self)!)

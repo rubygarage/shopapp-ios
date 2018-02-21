@@ -12,7 +12,7 @@ import ShopApp_Gateway
 class DomainAssembly: Assembly {
     func assemble(container: Container) {
 
-        // Account
+        // MARK: - Account
 
         container.register(LoginUseCase.self) { r in
             return LoginUseCase(repository: r.resolve(Repository.self)!)
@@ -46,7 +46,7 @@ class DomainAssembly: Assembly {
             return UpdateCustomerUseCase(repository: r.resolve(Repository.self)!)
         }
 
-        // Cart
+        // MARK: - Cart
 
         container.register(ChangeCartProductUseCase.self) { r in
             return ChangeCartProductUseCase(repository: r.resolve(CartRepository.self)!)
@@ -56,7 +56,7 @@ class DomainAssembly: Assembly {
             return DeleteCartProductUseCase(repository: r.resolve(CartRepository.self)!)
         }
 
-        // Checkout
+        // MARK: - Checkout
 
         container.register(CheckoutUseCase.self) { r in
             return CheckoutUseCase(repository: r.resolve(Repository.self)!)
@@ -66,7 +66,7 @@ class DomainAssembly: Assembly {
             return DeleteCartProductsUseCase(repository: r.resolve(CartRepository.self)!)
         }
 
-        // Main
+        // MARK: - Main
 
         container.register(AddCartProductUseCase.self) { r in
             return AddCartProductUseCase(repository: r.resolve(CartRepository.self)!)
@@ -96,7 +96,7 @@ class DomainAssembly: Assembly {
             return ProductUseCase(repository: r.resolve(Repository.self)!)
         }
 
-        // Shared
+        // MARK: - Shared
 
         container.register(AddAddressUseCase.self) { r in
             return AddAddressUseCase(repository: r.resolve(Repository.self)!)
