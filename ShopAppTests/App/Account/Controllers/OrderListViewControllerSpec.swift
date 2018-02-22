@@ -21,7 +21,7 @@ class OrderListViewControllerSpec: QuickSpec {
             viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.orderList) as! OrdersListViewController
             let repository = OrderRepositoryMock()
             let orderListUseCaseMock = OrderListUseCaseMock(repository: repository)
-            viewController.viewModel = OrdersListViewModel(orderListUseCase: orderListUseCaseMock)
+            viewController.viewModel = OrdersListViewModelMock(orderListUseCase: orderListUseCaseMock)
             navigationController = NavigationController(rootViewController: UIViewController())
             navigationController.pushViewController(viewController, animated: false)
             _ = viewController.view
@@ -29,7 +29,7 @@ class OrderListViewControllerSpec: QuickSpec {
         
         describe("when view loaded") {
             it("should have a correct view model type") {
-                expect(viewController.viewModel).to(beAnInstanceOf(OrdersListViewModel.self))
+                expect(viewController.viewModel).to(beAKindOf(OrdersListViewModel.self))
             }
             
             it("should have correct title") {
@@ -46,6 +46,22 @@ class OrderListViewControllerSpec: QuickSpec {
             
             it("should have correct content inset of table view") {
                 expect(viewController.tableView.contentInset) == TableView.defaultContentInsets
+            }
+        }
+        
+        describe("when data loaded") {
+            var disposeBag: DisposeBag!
+            
+            beforeEach {
+                disposeBag = DisposeBag()
+            }
+            
+            it("should have correct tableView sections counts") {
+                viewController.viewModel.items.asObservable()
+                    .subscribe(onNext: { items in
+                        expect(viewController.tableView.numberOfSections) == items.count
+                    })
+                .disposed(by: disposeBag)
             }
         }
     }

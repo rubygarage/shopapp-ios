@@ -184,6 +184,7 @@
 		614142D31F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614142D11F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.swift */; };
 		614142D41F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 614142D21F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.xib */; };
 		614ED7D2203EE23A00435708 /* OrderRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614ED7D1203EE23A00435708 /* OrderRepositoryMock.swift */; };
+		614ED7D5203EF85800435708 /* OrdersListViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614ED7D4203EF85800435708 /* OrdersListViewModelMock.swift */; };
 		6152B1241F7914E800045A42 /* ArticlesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6152B1231F7914E800045A42 /* ArticlesListViewController.swift */; };
 		61534F301F73EE5E00F24189 /* ProductsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61534F2F1F73EE5E00F24189 /* ProductsListViewController.swift */; };
 		615F820B202894E400926BAF /* CustomerEmailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615F8209202894E400926BAF /* CustomerEmailTableViewCell.swift */; };
@@ -560,6 +561,7 @@
 		614142D11F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastArrivalsCollectionViewCell.swift; sourceTree = "<group>"; };
 		614142D21F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LastArrivalsCollectionViewCell.xib; sourceTree = "<group>"; };
 		614ED7D1203EE23A00435708 /* OrderRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderRepositoryMock.swift; sourceTree = "<group>"; };
+		614ED7D4203EF85800435708 /* OrdersListViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersListViewModelMock.swift; sourceTree = "<group>"; };
 		6152B1231F7914E800045A42 /* ArticlesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesListViewController.swift; sourceTree = "<group>"; };
 		61534F2F1F73EE5E00F24189 /* ProductsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsListViewController.swift; sourceTree = "<group>"; };
 		615F8209202894E400926BAF /* CustomerEmailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerEmailTableViewCell.swift; sourceTree = "<group>"; };
@@ -1148,6 +1150,7 @@
 		0B7CEF7B203B15C500FAA32C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				614ED7D3203EF79400435708 /* Mocks */,
 				617D688D203C5EF3001E8940 /* OrderListViewModelSpec.swift */,
 				0B7CEF7E203B175600FAA32C /* ChangePasswordViewModelSpec.swift */,
 			);
@@ -1864,6 +1867,14 @@
 				6119478B1FD964A6008BE9C6 /* Navigation.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		614ED7D3203EF79400435708 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				614ED7D4203EF85800435708 /* OrdersListViewModelMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		615F8208202894CD00926BAF /* CustomerEmailTableViewCell */ = {
@@ -2761,6 +2772,7 @@
 				0B7CEFA7203C59CE00FAA32C /* BaseCollectionViewControllerSpec.swift in Sources */,
 				614ED7D2203EE23A00435708 /* OrderRepositoryMock.swift in Sources */,
 				0B7CEF76203B155400FAA32C /* UpdateCustomerUseCaseMock.swift in Sources */,
+				614ED7D5203EF85800435708 /* OrdersListViewModelMock.swift in Sources */,
 				0B7CEF7D203B15DF00FAA32C /* ChangePasswordViewControllerSpec.swift in Sources */,
 				617D688E203C5EF3001E8940 /* OrderListViewModelSpec.swift in Sources */,
 				61997774203D97D100C70172 /* OrdersListTableProviderDelegateMock.swift in Sources */,
