@@ -15,15 +15,18 @@ import RxSwift
 class ChangePasswordViewControllerSpec: QuickSpec {
     override func spec() {
         var viewController: ChangePasswordViewController!
+        var viewModelMock: ChangePasswordViewModelMock!
         var newPasswordTextFieldView: InputTextFieldView!
         var confirmPasswordTextFieldView: InputTextFieldView!
         var updateButton: BlackButton!
         
         beforeEach {
             viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.changePassword) as! ChangePasswordViewController
+            
             let repository = AuthentificationRepositoryMock()
             let updateCustomerUseCaseMock = UpdateCustomerUseCaseMock(repository: repository)
-            viewController.viewModel = ChangePasswordViewModel(updateCustomerUseCase: updateCustomerUseCaseMock)
+            viewModelMock = ChangePasswordViewModelMock(updateCustomerUseCase: updateCustomerUseCaseMock)
+            viewController.viewModel = viewModelMock
             
             newPasswordTextFieldView = self.findView(withAccessibilityLabel: "newPassword", in: viewController.view) as! InputTextFieldView
             confirmPasswordTextFieldView = self.findView(withAccessibilityLabel: "confirmPassword", in: viewController.view) as! InputTextFieldView
@@ -33,10 +36,6 @@ class ChangePasswordViewControllerSpec: QuickSpec {
         }
         
         describe("when view loaded") {
-            it("should have a view model with correct type") {
-                expect(viewController.viewModel).to(beAnInstanceOf(ChangePasswordViewModel.self))
-            }
-            
             it("should have a title with correct text") {
                 expect(viewController.title) == "ControllerTitle.SetNewPassword".localizable
             }
@@ -60,17 +59,11 @@ class ChangePasswordViewControllerSpec: QuickSpec {
             
             beforeEach {
                 disposeBag = DisposeBag()
-                
-                newPasswordTextFieldView.textField.text = "p"
-                newPasswordTextFieldView.textField.sendActions(for: .editingChanged)
-                confirmPasswordTextFieldView.textField.text = ""
-                confirmPasswordTextFieldView.textField.sendActions(for: .editingChanged)
             }
             
             context("if it have at least one symbol in each text field view") {
                 it("needs to enable update button") {
-                    confirmPasswordTextFieldView.textField.text = "p"
-                    confirmPasswordTextFieldView.textField.sendActions(for: .editingChanged)
+                    viewModelMock.makeUpdateButtonEnabled()
                     
                     viewController.viewModel.updateButtonEnabled
                         .subscribe(onNext: { _ in
@@ -82,8 +75,7 @@ class ChangePasswordViewControllerSpec: QuickSpec {
             
             context("if it doesn't have symbols in both text variables") {
                 it("needs to disable update button") {
-                    newPasswordTextFieldView.textField.text = ""
-                    newPasswordTextFieldView.textField.sendActions(for: .editingChanged)
+                    viewModelMock.makeUpdateButtonDisabled()
                     
                     viewController.viewModel.updateButtonEnabled
                         .subscribe(onNext: { _ in
@@ -93,24 +85,16 @@ class ChangePasswordViewControllerSpec: QuickSpec {
                 }
             }
         }
-        
+
         describe("when update button pressed") {
             var disposeBag: DisposeBag!
             
             beforeEach {
                 disposeBag = DisposeBag()
-                
-                newPasswordTextFieldView.textField.text = "password"
-                confirmPasswordTextFieldView.textField.text = "password"
             }
             
             context("if it have not valid password texts") {
                 it("needs to show error messages about not valid password texts") {
-                    newPasswordTextFieldView.textField.text = "pass"
-                    newPasswordTextFieldView.textField.sendActions(for: .editingChanged)
-                    confirmPasswordTextFieldView.textField.text = "pas"
-                    confirmPasswordTextFieldView.textField.sendActions(for: .editingChanged)
-                    
                     viewController.viewModel.newPasswordErrorMessage
                         .subscribe(onNext: { _ in
                             expect(newPasswordTextFieldView.errorMessage).toEventually(equal("Error.InvalidPassword".localizable))
@@ -123,22 +107,19 @@ class ChangePasswordViewControllerSpec: QuickSpec {
                         })
                         .disposed(by: disposeBag)
                     
-                    updateButton.sendActions(for: .touchUpInside)
+                    viewModelMock.makeNotValidPasswordTexts()
                 }
             }
             
             context("if it have not equals password texts") {
                 it("needs to show error message about not equals password texts") {
-                    confirmPasswordTextFieldView.textField.text = "passwor"
-                    confirmPasswordTextFieldView.textField.sendActions(for: .editingChanged)
-                    
                     viewController.viewModel.confirmPasswordErrorMessage
                         .subscribe(onNext: { _ in
                             expect(confirmPasswordTextFieldView.errorMessage).toEventually(equal("Error.PasswordsAreNotEquals".localizable))
                         })
                         .disposed(by: disposeBag)
                     
-                    updateButton.sendActions(for: .touchUpInside)
+                    viewModelMock.makeNotEqualsPasswordTexts()
                 }
             }
         }

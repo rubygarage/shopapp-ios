@@ -16,11 +16,13 @@ import Toaster
 
 class BaseViewControllerSpec: QuickSpec {
     override func spec() {
+        let viewModelMock = BaseViewModelMock()
+        
         var viewController: BaseViewController<BaseViewModel>!
         
         beforeEach {
             viewController = BaseViewController()
-            viewController.viewModel = BaseViewModel()
+            viewController.viewModel = viewModelMock
             _ = viewController.view
         }
         
@@ -54,7 +56,7 @@ class BaseViewControllerSpec: QuickSpec {
                         })
                         .disposed(by: disposeBag)
                     
-                    viewController.viewModel.state.onNext(ViewState.content)
+                    viewModelMock.setContentState()
                 }
             }
             
@@ -67,7 +69,7 @@ class BaseViewControllerSpec: QuickSpec {
                         })
                         .disposed(by: disposeBag)
                     
-                    viewController.viewModel.state.onNext(ViewState.empty)
+                    viewModelMock.setEmptyState()
                 }
             }
             
@@ -81,8 +83,7 @@ class BaseViewControllerSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
-                        let state = ViewState.loading(showHud: false, isTranslucent: false)
-                        viewController.viewModel.state.onNext(state)
+                        viewModelMock.setLoadingState(showHud: false)
                     }
                 }
                 
@@ -96,8 +97,7 @@ class BaseViewControllerSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
-                        let state = ViewState.loading(showHud: true, isTranslucent: false)
-                        viewController.viewModel.state.onNext(state)
+                        viewModelMock.setLoadingState()
                     }
                 }
                 
@@ -111,8 +111,7 @@ class BaseViewControllerSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
-                        let state = ViewState.loading(showHud: true, isTranslucent: true)
-                        viewController.viewModel.state.onNext(state)
+                        viewModelMock.setLoadingState(showHud: true, isTranslucent: true)
                     }
                 }
             }
@@ -127,9 +126,7 @@ class BaseViewControllerSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
-                        let error = RepoError()
-                        let state = ViewState.error(error: error)
-                        viewController.viewModel.state.onNext(state)
+                        viewModelMock.setRepoErrorState()
                     }
                 }
                 
@@ -143,9 +140,7 @@ class BaseViewControllerSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
-                        let error = ContentError()
-                        let state = ViewState.error(error: error)
-                        viewController.viewModel.state.onNext(state)
+                        viewModelMock.setContentErrorState()
                     }
                 }
                 
@@ -159,9 +154,7 @@ class BaseViewControllerSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
-                        let error = NetworkError()
-                        let state = ViewState.error(error: error)
-                        viewController.viewModel.state.onNext(state)
+                        viewModelMock.setNetworkErrorState()
                     }
                 }
                 
@@ -175,9 +168,7 @@ class BaseViewControllerSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
-                        let error = NonCriticalError()
-                        let state = ViewState.error(error: error)
-                        viewController.viewModel.state.onNext(state)
+                        viewModelMock.setNonCriticalErrorState()
                     }
                 }
                 
@@ -191,9 +182,7 @@ class BaseViewControllerSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
-                        let error = CriticalError(with: nil, message: "")
-                        let state = ViewState.error(error: error)
-                        viewController.viewModel.state.onNext(state)
+                        viewModelMock.setCriticalErrorState()
                     }
                 }
             }
