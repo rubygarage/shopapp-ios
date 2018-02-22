@@ -13,6 +13,8 @@ import ShopApp_Gateway
 class ErrorViewDelegateMock: ErrorViewDelegate {
     var view: ErrorView?
     
+    // MARK: - ErrorViewDelegate
+    
     func viewDidTapTryAgain(_ view: ErrorView) {
         self.view = view
     }

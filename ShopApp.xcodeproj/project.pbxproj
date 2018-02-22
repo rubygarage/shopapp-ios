@@ -117,6 +117,8 @@
 		0BE6E4822006444100EAEC76 /* ProductOptionsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BE6E4812006444100EAEC76 /* ProductOptionsCollectionViewCell.xib */; };
 		0BE6E484200644C800EAEC76 /* ProductOptionsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE6E483200644C800EAEC76 /* ProductOptionsCollectionViewCell.swift */; };
 		0BE6E4872006667600EAEC76 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE6E4862006667600EAEC76 /* String+Localization.swift */; };
+		0BE96561203EA86F00308CA9 /* GridCollectionProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE96560203EA86F00308CA9 /* GridCollectionProviderSpec.swift */; };
+		0BE96564203ECD2400308CA9 /* GridCollectionProviderDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE96563203ECD2400308CA9 /* GridCollectionProviderDelegateMock.swift */; };
 		0BEAB6542010D4B20084AA53 /* UIImageView+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEAB6532010D4B20084AA53 /* UIImageView+Network.swift */; };
 		0BEAB6562010E1A50084AA53 /* String+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEAB6552010E1A50084AA53 /* String+Placeholder.swift */; };
 		0BED64C0201603C6006CF968 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BED64BF201603C6006CF968 /* SettingsViewController.swift */; };
@@ -493,6 +495,8 @@
 		0BE6E4812006444100EAEC76 /* ProductOptionsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductOptionsCollectionViewCell.xib; sourceTree = "<group>"; };
 		0BE6E483200644C800EAEC76 /* ProductOptionsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductOptionsCollectionViewCell.swift; sourceTree = "<group>"; };
 		0BE6E4862006667600EAEC76 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
+		0BE96560203EA86F00308CA9 /* GridCollectionProviderSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionProviderSpec.swift; sourceTree = "<group>"; };
+		0BE96563203ECD2400308CA9 /* GridCollectionProviderDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionProviderDelegateMock.swift; sourceTree = "<group>"; };
 		0BEAB6532010D4B20084AA53 /* UIImageView+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Network.swift"; sourceTree = "<group>"; };
 		0BEAB6552010E1A50084AA53 /* String+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Placeholder.swift"; sourceTree = "<group>"; };
 		0BED64BF201603C6006CF968 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -1216,6 +1220,15 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		0B7CEF95203C0DE700FAA32C /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				0BE96562203ECD0C00308CA9 /* Mocks */,
+				0BE96560203EA86F00308CA9 /* GridCollectionProviderSpec.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
 		0B7CEF96203C0DEC00FAA32C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -1620,6 +1633,14 @@
 				0B5BA4F02023126200FF8FCA /* ProductOptionsCollectionCellProvider.swift */,
 			);
 			path = ProductOptionsCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		0BE96562203ECD0C00308CA9 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				0BE96563203ECD2400308CA9 /* GridCollectionProviderDelegateMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		0BEAB64F200E5E970084AA53 /* Cells */ = {
@@ -2766,6 +2787,8 @@
 				0B7CEF7F203B175600FAA32C /* ChangePasswordViewModelSpec.swift in Sources */,
 				617D6890203C5F5A001E8940 /* OrderListViewControllerSpec.swift in Sources */,
 				0B7CEF84203B1F8E00FAA32C /* AuthentificationRepositoryMock.swift in Sources */,
+				0BE96564203ECD2400308CA9 /* GridCollectionProviderDelegateMock.swift in Sources */,
+				0BE96561203EA86F00308CA9 /* GridCollectionProviderSpec.swift in Sources */,
 				0B7CEFA9203C5E1E00FAA32C /* GridCollectionViewModelSpec.swift in Sources */,
 				0B7CEF9F203C0EB400FAA32C /* TabBarControllerSpec.swift in Sources */,
 				0B7CEF9B203C0E5500FAA32C /* BaseViewControllerSpec.swift in Sources */,

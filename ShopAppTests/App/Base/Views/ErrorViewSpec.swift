@@ -20,7 +20,7 @@ class ErrorViewSpec: QuickSpec {
         var tryAgainButton: UIButton!
         
         beforeEach {
-            view = ErrorView(frame: UIScreen.main.bounds)
+            view = ErrorView()
             
             errorTextLabel = self.findView(withAccessibilityLabel: "errorText", in: view) as! UILabel
             errorImageView = self.findView(withAccessibilityLabel: "errorImage", in: view) as! UIImageView
