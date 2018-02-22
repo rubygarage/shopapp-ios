@@ -38,7 +38,7 @@ class OrderListViewModelSpec: QuickSpec {
             
             context("if not full page loaded") {
                 it("should present loaded items") {
-                    orderListUseCaseMock.isLessThenConstant = true
+                    orderListUseCaseMock.isOrderCountLessThenConstant = true
                     viewModel.reloadData()
                     
                     viewModel.items.asObservable()
@@ -53,7 +53,7 @@ class OrderListViewModelSpec: QuickSpec {
             
             context("if full page loaded") {
                 it("should present loaded items") {
-                    orderListUseCaseMock.isLessThenConstant = false
+                    orderListUseCaseMock.isOrderCountLessThenConstant = false
                     viewModel.reloadData()
                     
                     viewModel.items.asObservable()
@@ -75,7 +75,7 @@ class OrderListViewModelSpec: QuickSpec {
             }
             
             it("should present loaded items") {
-                orderListUseCaseMock.isLessThenConstant = false
+                orderListUseCaseMock.isOrderCountLessThenConstant = false
                 viewModel.reloadData()
                 viewModel.loadNextPage()
                 
@@ -96,7 +96,7 @@ class OrderListViewModelSpec: QuickSpec {
             }
             
             it("should present loaded items") {
-                orderListUseCaseMock.isLessThenConstant = true
+                orderListUseCaseMock.isOrderCountLessThenConstant = true
                 viewModel.tryAgain()
                 
                 viewModel.items.asObservable()

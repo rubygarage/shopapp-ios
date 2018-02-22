@@ -11,11 +11,11 @@ import ShopApp_Gateway
 @testable import ShopApp
 
 class OrderListUseCaseMock: OrderListUseCase {
-    var isLessThenConstant = true
+    var isOrderCountLessThenConstant = true
     var returnOrderWithVariant = false
     
     override func getOrderList(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Order]>) {
-        let ordersCount = isLessThenConstant ? 5 : 10
+        let ordersCount = isOrderCountLessThenConstant ? 5 : 10
         var orders: [Order] = []
         for index in 1...ordersCount {
             let order = generatedOrder(with: index)
