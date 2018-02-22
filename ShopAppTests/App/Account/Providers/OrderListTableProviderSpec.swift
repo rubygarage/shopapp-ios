@@ -133,8 +133,6 @@ class OrderListTableProviderSpec: QuickSpec {
             it("should select product variant") {
                 let providerDelegateMock = OrdersListTableProviderDelegateMock()
                 tableProvider.delegate = providerDelegateMock
-                expect(providerDelegateMock.selectedProductVariantId).to(beNil())
-                expect(providerDelegateMock.selectedIndex).to(beNil())
                 
                 let indexPath = IndexPath(row: 0, section: 0)
                 let cell = tableProvider.tableView(tableView, cellForRowAt: indexPath) as! CheckoutCartTableViewCell
