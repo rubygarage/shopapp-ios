@@ -1,5 +1,5 @@
 //
-//  OrdersListTableProviderMock.swift
+//  OrdersListTableProviderDelegateMock.swift
 //  ShopAppTests
 //
 //  Created by Evgeniy Antonov on 2/21/18.
@@ -12,7 +12,7 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class OrdersListTableProviderMock: NSObject, OrdersListTableProviderDelegate, CheckoutCartTableViewCellDelegate {
+class OrdersListTableProviderDelegateMock: NSObject, OrdersListTableProviderDelegate, CheckoutCartTableViewCellDelegate {
     var selectedOrder: Order?
     var selectedProductVariantId: String?
     var selectedIndex: Int?

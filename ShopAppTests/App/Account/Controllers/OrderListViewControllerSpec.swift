@@ -40,8 +40,12 @@ class OrderListViewControllerSpec: QuickSpec {
                 expect(viewController.navigationItem.leftBarButtonItem?.image) == #imageLiteral(resourceName: "arrow_left")
             }
             
-            it("should have refresh control") {
-                expect(viewController.refreshControl).toNot(beNil())
+            it("should have default empty data view") {
+                expect(viewController.customEmptyDataView).to(beAnInstanceOf(OrderListEmptyDataView.self))
+            }
+            
+            it("should have correct content inset of table view") {
+                expect(viewController.tableView.contentInset) == TableView.defaultContentInsets
             }
         }
     }

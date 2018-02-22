@@ -25,7 +25,7 @@ class OrderListViewModelSpec: QuickSpec {
         
         describe("when view model initialized") {
             it("should have variables with correct initial values") {
-                expect(viewModel.items.value.isEmpty).to(beTrue())
+                expect(viewModel.items.value.isEmpty) == true
             }
         }
         

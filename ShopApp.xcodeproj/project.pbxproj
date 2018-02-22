@@ -228,7 +228,7 @@
 		61986AD51FF671BE005632D7 /* PaymentTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61986AD41FF671BE005632D7 /* PaymentTypeViewController.swift */; };
 		61986AD71FF671FB005632D7 /* PaymentTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61986AD61FF671FB005632D7 /* PaymentTypeViewModel.swift */; };
 		6199776E203C952100C70172 /* OrderListTableProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6199776D203C952100C70172 /* OrderListTableProviderSpec.swift */; };
-		61997774203D97D100C70172 /* OrdersListTableProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61997773203D97D100C70172 /* OrdersListTableProviderMock.swift */; };
+		61997774203D97D100C70172 /* OrdersListTableProviderDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61997773203D97D100C70172 /* OrdersListTableProviderDelegateMock.swift */; };
 		61A2AC731FACC2B2005FAD54 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A2AC721FACC2B2005FAD54 /* SearchViewModel.swift */; };
 		61A5072F1F7E79FB004504EF /* ImagesCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A5072C1F7E79FB004504EF /* ImagesCarouselViewController.swift */; };
 		61A507341F7E7A35004504EF /* ProductOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A507331F7E7A35004504EF /* ProductOptionsViewController.swift */; };
@@ -604,7 +604,7 @@
 		61986AD41FF671BE005632D7 /* PaymentTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTypeViewController.swift; sourceTree = "<group>"; };
 		61986AD61FF671FB005632D7 /* PaymentTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTypeViewModel.swift; sourceTree = "<group>"; };
 		6199776D203C952100C70172 /* OrderListTableProviderSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListTableProviderSpec.swift; sourceTree = "<group>"; };
-		61997773203D97D100C70172 /* OrdersListTableProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersListTableProviderMock.swift; sourceTree = "<group>"; };
+		61997773203D97D100C70172 /* OrdersListTableProviderDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersListTableProviderDelegateMock.swift; sourceTree = "<group>"; };
 		61A2AC721FACC2B2005FAD54 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		61A5072C1F7E79FB004504EF /* ImagesCarouselViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesCarouselViewController.swift; sourceTree = "<group>"; };
 		61A507331F7E7A35004504EF /* ProductOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOptionsViewController.swift; sourceTree = "<group>"; };
@@ -1961,7 +1961,7 @@
 		61997772203D97D100C70172 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				61997773203D97D100C70172 /* OrdersListTableProviderMock.swift */,
+				61997773203D97D100C70172 /* OrdersListTableProviderDelegateMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -2763,7 +2763,7 @@
 				0B7CEF76203B155400FAA32C /* UpdateCustomerUseCaseMock.swift in Sources */,
 				0B7CEF7D203B15DF00FAA32C /* ChangePasswordViewControllerSpec.swift in Sources */,
 				617D688E203C5EF3001E8940 /* OrderListViewModelSpec.swift in Sources */,
-				61997774203D97D100C70172 /* OrdersListTableProviderMock.swift in Sources */,
+				61997774203D97D100C70172 /* OrdersListTableProviderDelegateMock.swift in Sources */,
 				0B7CEF70203B0B3500FAA32C /* QuickSpec+View.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
