@@ -14,7 +14,8 @@ import RxSwift
 
 class OrderListViewModelSpec: QuickSpec {
     override func spec() {
-        let orderListUseCaseMock = OrderListUseCaseMock()
+        let repository = OrderRepositoryMock()
+        let orderListUseCaseMock = OrderListUseCaseMock(repository: repository)
         
         var viewModel: OrdersListViewModel!
         

@@ -77,9 +77,6 @@
 		0B7CEF9F203C0EB400FAA32C /* TabBarControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEF9E203C0EB400FAA32C /* TabBarControllerSpec.swift */; };
 		0B7CEFA7203C59CE00FAA32C /* BaseCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEFA6203C59CE00FAA32C /* BaseCollectionViewControllerSpec.swift */; };
 		0B7CEFA9203C5E1E00FAA32C /* GridCollectionViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEFA8203C5E1E00FAA32C /* GridCollectionViewModelSpec.swift */; };
-		0B7CEFAD203C76FD00FAA32C /* ErrorViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEFAC203C76FD00FAA32C /* ErrorViewSpec.swift */; };
-		0B902C7F203D61CE005B0A66 /* BasePickerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B902C7E203D61CE005B0A66 /* BasePickerSpec.swift */; };
-		0B902C82203D8DCD005B0A66 /* ErrorViewDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B902C81203D8DCD005B0A66 /* ErrorViewDelegateMock.swift */; };
 		0B9426551FFE468100A986AB /* OrderHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9426541FFE468100A986AB /* OrderHeaderView.swift */; };
 		0B9426571FFE468C00A986AB /* OrderHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B9426561FFE468C00A986AB /* OrderHeaderView.xib */; };
 		0B953D502020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B953D4F2020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift */; };
@@ -186,6 +183,7 @@
 		614142C61F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 614142C41F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib */; };
 		614142D31F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614142D11F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.swift */; };
 		614142D41F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 614142D21F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.xib */; };
+		614ED7D2203EE23A00435708 /* OrderRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614ED7D1203EE23A00435708 /* OrderRepositoryMock.swift */; };
 		6152B1241F7914E800045A42 /* ArticlesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6152B1231F7914E800045A42 /* ArticlesListViewController.swift */; };
 		61534F301F73EE5E00F24189 /* ProductsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61534F2F1F73EE5E00F24189 /* ProductsListViewController.swift */; };
 		615F820B202894E400926BAF /* CustomerEmailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615F8209202894E400926BAF /* CustomerEmailTableViewCell.swift */; };
@@ -454,9 +452,6 @@
 		0B7CEFA4203C57BB00FAA32C /* BaseTableViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewControllerSpec.swift; sourceTree = "<group>"; };
 		0B7CEFA6203C59CE00FAA32C /* BaseCollectionViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewControllerSpec.swift; sourceTree = "<group>"; };
 		0B7CEFA8203C5E1E00FAA32C /* GridCollectionViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewModelSpec.swift; sourceTree = "<group>"; };
-		0B7CEFAC203C76FD00FAA32C /* ErrorViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewSpec.swift; sourceTree = "<group>"; };
-		0B902C7E203D61CE005B0A66 /* BasePickerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePickerSpec.swift; sourceTree = "<group>"; };
-		0B902C81203D8DCD005B0A66 /* ErrorViewDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewDelegateMock.swift; sourceTree = "<group>"; };
 		0B9426541FFE468100A986AB /* OrderHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHeaderView.swift; sourceTree = "<group>"; };
 		0B9426561FFE468C00A986AB /* OrderHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderHeaderView.xib; sourceTree = "<group>"; };
 		0B953D4F2020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlStringMultimediaCompressor.swift; sourceTree = "<group>"; };
@@ -564,6 +559,7 @@
 		614142C41F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LastArrivalsTableViewCell.xib; sourceTree = "<group>"; };
 		614142D11F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastArrivalsCollectionViewCell.swift; sourceTree = "<group>"; };
 		614142D21F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LastArrivalsCollectionViewCell.xib; sourceTree = "<group>"; };
+		614ED7D1203EE23A00435708 /* OrderRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderRepositoryMock.swift; sourceTree = "<group>"; };
 		6152B1231F7914E800045A42 /* ArticlesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesListViewController.swift; sourceTree = "<group>"; };
 		61534F2F1F73EE5E00F24189 /* ProductsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsListViewController.swift; sourceTree = "<group>"; };
 		615F8209202894E400926BAF /* CustomerEmailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerEmailTableViewCell.swift; sourceTree = "<group>"; };
@@ -1178,6 +1174,7 @@
 			isa = PBXGroup;
 			children = (
 				0B7CEF83203B1F8E00FAA32C /* AuthentificationRepositoryMock.swift */,
+				614ED7D1203EE23A00435708 /* OrderRepositoryMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1222,24 +1219,6 @@
 				0B7CEFA8203C5E1E00FAA32C /* GridCollectionViewModelSpec.swift */,
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		0B7CEF97203C0DF100FAA32C /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				0B902C80203D8DC2005B0A66 /* Mocks */,
-				0B902C7E203D61CE005B0A66 /* BasePickerSpec.swift */,
-				0B7CEFAC203C76FD00FAA32C /* ErrorViewSpec.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		0B902C80203D8DC2005B0A66 /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				0B902C81203D8DCD005B0A66 /* ErrorViewDelegateMock.swift */,
-			);
-			path = Mocks;
 			sourceTree = "<group>";
 		};
 		0B9426521FFE461C00A986AB /* OrderHeaderView */ = {
@@ -2774,16 +2753,13 @@
 				6199776E203C952100C70172 /* OrderListTableProviderSpec.swift in Sources */,
 				617D688C203C5E74001E8940 /* OrderListUseCaseMock.swift in Sources */,
 				0B7CEF7F203B175600FAA32C /* ChangePasswordViewModelSpec.swift in Sources */,
-				0B902C82203D8DCD005B0A66 /* ErrorViewDelegateMock.swift in Sources */,
-				0B7CEFA5203C57BB00FAA32C /* BaseTableViewControllerSpec.swift in Sources */,
 				617D6890203C5F5A001E8940 /* OrderListViewControllerSpec.swift in Sources */,
 				0B7CEF84203B1F8E00FAA32C /* AuthentificationRepositoryMock.swift in Sources */,
 				0B7CEFA9203C5E1E00FAA32C /* GridCollectionViewModelSpec.swift in Sources */,
 				0B7CEF9F203C0EB400FAA32C /* TabBarControllerSpec.swift in Sources */,
-				0B7CEFAD203C76FD00FAA32C /* ErrorViewSpec.swift in Sources */,
 				0B7CEF9B203C0E5500FAA32C /* BaseViewControllerSpec.swift in Sources */,
-				0B902C7F203D61CE005B0A66 /* BasePickerSpec.swift in Sources */,
 				0B7CEFA7203C59CE00FAA32C /* BaseCollectionViewControllerSpec.swift in Sources */,
+				614ED7D2203EE23A00435708 /* OrderRepositoryMock.swift in Sources */,
 				0B7CEF76203B155400FAA32C /* UpdateCustomerUseCaseMock.swift in Sources */,
 				0B7CEF7D203B15DF00FAA32C /* ChangePasswordViewControllerSpec.swift in Sources */,
 				617D688E203C5EF3001E8940 /* OrderListViewModelSpec.swift in Sources */,
