@@ -11,7 +11,7 @@ import UIKit
 import ShopApp_Gateway
 
 protocol CheckoutCartTableViewCellDelegate: class {
-    func didSelectItem(with productVariantId: String, at index: Int)
+    func tableViewCell(_ cell: CheckoutCartTableViewCell, didSelect productVariantId: String, at index: Int)
 }
 
 class CheckoutCartTableViewCell: UITableViewCell {
@@ -76,6 +76,7 @@ extension CheckoutCartTableViewCell: CheckoutCartCollectionDataSourceDelegate {
 
 extension CheckoutCartTableViewCell: CheckoutCartCollectionDelegateProtocol {
     func didSelectItem(with productVariantId: String) {
-        cellDelegate?.didSelectItem(with: productVariantId, at: index)
+        cellDelegate?.tableViewCell(self, didSelect: productVariantId, at: index)
+
     }
 }

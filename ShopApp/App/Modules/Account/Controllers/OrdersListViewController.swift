@@ -107,7 +107,7 @@ extension OrdersListViewController: OrdersListTableProviderDelegate {
 // MARK: - CheckoutCartTableViewCellDelegate
 
 extension OrdersListViewController: CheckoutCartTableViewCellDelegate {
-    func didSelectItem(with productVariantId: String, at index: Int) {
+    func tableViewCell(_ cell: CheckoutCartTableViewCell, didSelect productVariantId: String, at index: Int) {
         selectedProductVariant = viewModel.productVariant(with: productVariantId, at: index)
         if selectedProductVariant != nil {
             performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)

@@ -106,7 +106,7 @@
         <!--Orders List View Controller-->
         <scene sceneID="NSC-q9-Wy6">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="GpK-nH-9eS" customClass="OrdersListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OrderListControllerIdentifier" hidesBottomBarWhenPushed="YES" id="GpK-nH-9eS" customClass="OrdersListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xkh-Tx-kfn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1267,7 +1267,7 @@
         <image name="tabbar_sign_up" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Edi-8c-pdA"/>
-        <segue reference="2Th-4v-kuF"/>
+        <segue reference="0WY-zz-qIc"/>
+        <segue reference="9Y3-HY-brn"/>
     </inferredMetricsTieBreakers>
 </document>
