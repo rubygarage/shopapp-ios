@@ -6,6 +6,10 @@ xcode_scheme: ShopApp
 before_install:
   - pod repo update
 
+cache:
+  - bundler
+  - cocoapods
+
 notifications:
   slack:
     rooms:
