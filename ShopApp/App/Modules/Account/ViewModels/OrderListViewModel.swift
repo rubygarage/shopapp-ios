@@ -1,5 +1,5 @@
 //
-//  OrdersListViewModel.swift
+//  OrderListViewModel.swift
 //  ShopClient
 //
 //  Created by Radyslav Krechet on 1/3/18.
@@ -9,7 +9,7 @@
 import RxSwift
 import ShopApp_Gateway
 
-class OrdersListViewModel: BasePaginationViewModel {
+class OrderListViewModel: BasePaginationViewModel {
     private let orderListUseCase: OrderListUseCase
     
     var items = Variable<[Order]>([])

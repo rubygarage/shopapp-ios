@@ -1,5 +1,5 @@
 //
-//  OrdersListViewController.swift
+//  OrderListViewController.swift
 //  ShopClient
 //
 //  Created by Radyslav Krechet on 1/3/18.
@@ -10,8 +10,8 @@ import UIKit
 
 import ShopApp_Gateway
 
-class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
-    private var tableProvider: OrdersListTableProvider!
+class OrderListViewController: BaseTableViewController<OrderListViewModel> {
+    var tableProvider: OrderListTableProvider!
     
     fileprivate var selectedOrder: Order?
     fileprivate var selectedProductVariant: ProductVariant!
@@ -67,7 +67,6 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
     private func setupTableView() {
         tableView.registerNibForCell(CheckoutCartTableViewCell.self)
         
-        tableProvider = OrdersListTableProvider()
         tableProvider.delegate = self
         tableView.dataSource = tableProvider
         tableView.delegate = tableProvider
@@ -88,17 +87,17 @@ class OrdersListViewController: BaseTableViewController<OrdersListViewModel> {
 
 // MARK: - OrderListEmptyDataViewDelegate
 
-extension OrdersListViewController: OrderListEmptyDataViewDelegate {
+extension OrderListViewController: OrderListEmptyDataViewDelegate {
     func viewDidTapStartShopping(_ view: OrderListEmptyDataView) {
         setHomeController()
         navigationController?.popViewController(animated: false)
     }
 }
 
-// MARK: - OrdersListTableProviderDelegate
+// MARK: - OrderListTableProviderDelegate
 
-extension OrdersListViewController: OrdersListTableProviderDelegate {
-    func provider(_ provider: OrdersListTableProvider, didSelect order: Order) {
+extension OrderListViewController: OrderListTableProviderDelegate {
+    func provider(_ provider: OrderListTableProvider, didSelect order: Order) {
         selectedOrder = order
         performSegue(withIdentifier: SegueIdentifiers.toOrderDetails, sender: self)
     }
@@ -106,7 +105,7 @@ extension OrdersListViewController: OrdersListTableProviderDelegate {
 
 // MARK: - CheckoutCartTableViewCellDelegate
 
-extension OrdersListViewController: CheckoutCartTableViewCellDelegate {
+extension OrderListViewController: CheckoutCartTableViewCellDelegate {
     func tableViewCell(_ cell: CheckoutCartTableViewCell, didSelect productVariantId: String, at index: Int) {
         selectedProductVariant = viewModel.productVariant(with: productVariantId, at: index)
         if selectedProductVariant != nil {

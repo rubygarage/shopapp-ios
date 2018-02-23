@@ -14,11 +14,11 @@ import ShopApp_Gateway
 
 class OrderListTableProviderSpec: QuickSpec {
     override func spec() {
-        var tableProvider: OrdersListTableProvider!
+        var tableProvider: OrderListTableProvider!
         var tableView: UITableView!
         
         beforeEach {
-            tableProvider = OrdersListTableProvider()
+            tableProvider = OrderListTableProvider()
             tableView = UITableView()
             tableView.registerNibForCell(CheckoutCartTableViewCell.self)
             tableView.dataSource = tableProvider
@@ -108,7 +108,7 @@ class OrderListTableProviderSpec: QuickSpec {
             }
             
             it("should select order") {
-                let providerDelegateMock = OrdersListTableProviderDelegateMock()
+                let providerDelegateMock = OrderListTableProviderDelegateMock()
                 tableProvider.delegate = providerDelegateMock
                 
                 let header = tableProvider.tableView(tableView, viewForHeaderInSection: 0) as! OrderHeaderView
@@ -131,7 +131,7 @@ class OrderListTableProviderSpec: QuickSpec {
             }
             
             it("should select product variant") {
-                let providerDelegateMock = OrdersListTableProviderDelegateMock()
+                let providerDelegateMock = OrderListTableProviderDelegateMock()
                 tableProvider.delegate = providerDelegateMock
                 
                 let indexPath = IndexPath(row: 0, section: 0)

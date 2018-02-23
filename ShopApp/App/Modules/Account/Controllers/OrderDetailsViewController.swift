@@ -13,11 +13,10 @@ import ShopApp_Gateway
 class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
     @IBOutlet private weak var tableView: UITableView!
     
-    private var tableProvider: OrdersDetailsTableProvider!
-    
     fileprivate var selectedProductVariant: ProductVariant!
     
     var orderId: String!
+    var tableProvider: OrderDetailsTableProvider!
     
     // MARK: - View controller lifecycle
     
@@ -46,7 +45,6 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
         tableView.registerNibForCell(OrderItemTableViewCell.self)
         tableView.registerNibForCell(CheckoutShippingAddressEditTableCell.self)
         
-        tableProvider = OrdersDetailsTableProvider()
         tableProvider.delegate = self
         tableView.dataSource = tableProvider
         tableView.delegate = tableProvider
@@ -86,8 +84,8 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
 
 // MARK: - OrdersDetailsTableProviderDelegate
 
-extension OrderDetailsViewController: OrdersDetailsTableProviderDelegate {
-    func provider(_ provider: OrdersDetailsTableProvider, didSelect productVariant: ProductVariant) {
+extension OrderDetailsViewController: OrderDetailsTableProviderDelegate {
+    func provider(_ provider: OrderDetailsTableProvider, didSelect productVariant: ProductVariant) {
         selectedProductVariant = productVariant
         performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }

@@ -1,5 +1,5 @@
 //
-//  OrdersListTableProviderDelegateMock.swift
+//  OrderListTableProviderDelegateMock.swift
 //  ShopAppTests
 //
 //  Created by Evgeniy Antonov on 2/21/18.
@@ -12,14 +12,14 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class OrdersListTableProviderDelegateMock: NSObject, OrdersListTableProviderDelegate, CheckoutCartTableViewCellDelegate {
+class OrderListTableProviderDelegateMock: NSObject, OrderListTableProviderDelegate, CheckoutCartTableViewCellDelegate {
     var selectedOrder: Order?
     var selectedProductVariantId: String?
     var selectedIndex: Int?
     
-    // MARK: - OrdersListTableProviderDelegate
+    // MARK: - OrderListTableProviderDelegate
     
-    func provider(_ provider: OrdersListTableProvider, didSelect order: Order) {
+    func provider(_ provider: OrderListTableProvider, didSelect order: Order) {
         selectedOrder = order
     }
     

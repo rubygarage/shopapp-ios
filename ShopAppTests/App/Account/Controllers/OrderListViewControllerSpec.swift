@@ -14,22 +14,28 @@ import RxSwift
 
 class OrderListViewControllerSpec: QuickSpec {
     override func spec() {
-        var viewController: OrdersListViewController!
+        var viewController: OrderListViewController!
         var navigationController: NavigationController!
+        var tableProvider: OrderListTableProvider!
+        var viewModel: OrderListViewModelMock!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.orderList) as! OrdersListViewController
+            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.orderList) as! OrderListViewController
             let repository = OrderRepositoryMock()
             let orderListUseCaseMock = OrderListUseCaseMock(repository: repository)
-            viewController.viewModel = OrdersListViewModelMock(orderListUseCase: orderListUseCaseMock)
+            viewModel = OrderListViewModelMock(orderListUseCase: orderListUseCaseMock)
+            viewController.viewModel = viewModel
+            tableProvider = OrderListTableProvider()
+            viewController.tableProvider = tableProvider
             navigationController = NavigationController(rootViewController: UIViewController())
             navigationController.pushViewController(viewController, animated: false)
+            
             _ = viewController.view
         }
         
         describe("when view loaded") {
             it("should have a correct view model type") {
-                expect(viewController.viewModel).to(beAKindOf(OrdersListViewModel.self))
+                expect(viewController.viewModel).to(beAKindOf(OrderListViewModel.self))
             }
             
             it("should have correct title") {
@@ -56,12 +62,31 @@ class OrderListViewControllerSpec: QuickSpec {
                 disposeBag = DisposeBag()
             }
             
-            it("should have correct tableView sections counts") {
-                viewController.viewModel.items.asObservable()
-                    .subscribe(onNext: { items in
-                        expect(viewController.tableView.numberOfSections) == items.count
-                    })
-                .disposed(by: disposeBag)
+            context("if data is empty") {
+                it("should have tableView without data") {
+                    viewController.viewModel.items.asObservable()
+                        .subscribe(onNext: { items in
+                            expect(viewController.refreshControl?.isRefreshing) == false
+                            expect(viewController.tableView.numberOfSections) == 0
+                            expect(tableProvider.orders) === items
+                        })
+                        .disposed(by: disposeBag)
+                }
+            }
+            
+            context("if data isn't empty") {
+                it("should have tableView with data") {
+                    viewModel.isNeedToReturnData = true
+                    viewModel.reloadData()
+                    
+                    viewController.viewModel.items.asObservable()
+                        .subscribe(onNext: { items in
+                            expect(viewController.refreshControl?.isRefreshing) == false
+                            expect(viewController.tableView.numberOfSections) == items.count
+                            expect(tableProvider.orders) === items
+                        })
+                        .disposed(by: disposeBag)
+                }
             }
         }
     }

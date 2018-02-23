@@ -39,7 +39,7 @@
                         <segue destination="ejd-jT-O3e" kind="show" identifier="toPolicy" id="2Th-4v-kuF"/>
                         <segue destination="tL0-Uj-cJq" kind="presentation" identifier="toSignUp" id="EcH-ry-AKT"/>
                         <segue destination="zdO-YG-cfs" kind="presentation" identifier="toSignIn" id="taI-5h-oyg"/>
-                        <segue destination="GpK-nH-9eS" kind="show" identifier="toOrdersList" id="Sly-3A-odQ"/>
+                        <segue destination="GpK-nH-9eS" kind="show" identifier="toOrderList" id="Sly-3A-odQ"/>
                         <segue destination="Vuw-Re-lYh" kind="show" identifier="toAccountSettings" id="mdc-0i-wrK"/>
                         <segue destination="ekz-Gg-Wge" kind="show" identifier="toPersonalInfo" id="JJX-Gk-0Pk"/>
                         <segue destination="LvS-Gi-IGH" kind="show" identifier="toAccountAddressList" id="Sjd-dI-nwg"/>
@@ -103,10 +103,10 @@
             </objects>
             <point key="canvasLocation" x="1357.5999999999999" y="1493.7031484257873"/>
         </scene>
-        <!--Orders List View Controller-->
+        <!--Order List View Controller-->
         <scene sceneID="NSC-q9-Wy6">
             <objects>
-                <viewController storyboardIdentifier="OrderListControllerIdentifier" hidesBottomBarWhenPushed="YES" id="GpK-nH-9eS" customClass="OrdersListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OrderListControllerIdentifier" hidesBottomBarWhenPushed="YES" id="GpK-nH-9eS" customClass="OrderListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xkh-Tx-kfn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -176,6 +176,9 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="VUd-pq-Zdd">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="orderDetailTableView"/>
+                                </userDefinedRuntimeAttributes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1267,7 +1270,7 @@
         <image name="tabbar_sign_up" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0WY-zz-qIc"/>
+        <segue reference="Edi-8c-pdA"/>
         <segue reference="9Y3-HY-brn"/>
     </inferredMetricsTieBreakers>
 </document>

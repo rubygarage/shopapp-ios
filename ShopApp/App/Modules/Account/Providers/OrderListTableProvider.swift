@@ -10,14 +10,14 @@ import UIKit
 
 import ShopApp_Gateway
 
-protocol OrdersListTableProviderDelegate: class {
-    func provider(_ provider: OrdersListTableProvider, didSelect order: Order)
+protocol OrderListTableProviderDelegate: class {
+    func provider(_ provider: OrderListTableProvider, didSelect order: Order)
 }
 
-class OrdersListTableProvider: NSObject {
+class OrderListTableProvider: NSObject {
     var orders: [Order] = []
     
-    weak var delegate: (OrdersListTableProviderDelegate & CheckoutCartTableViewCellDelegate)?
+    weak var delegate: (OrderListTableProviderDelegate & CheckoutCartTableViewCellDelegate)?
     
     fileprivate func selectOrder(at index: Int) {
         guard let delegate = delegate else {
@@ -30,7 +30,7 @@ class OrdersListTableProvider: NSObject {
 
 // MARK: - UITableViewDataSource
 
-extension OrdersListTableProvider: UITableViewDataSource {
+extension OrderListTableProvider: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return orders.count
     }
@@ -56,7 +56,7 @@ extension OrdersListTableProvider: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension OrdersListTableProvider: UITableViewDelegate {
+extension OrderListTableProvider: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return kOrderHeaderViewHeight
     }
@@ -86,7 +86,7 @@ extension OrdersListTableProvider: UITableViewDelegate {
 
 // MARK: - OrderHeaderViewDelegate
 
-extension OrdersListTableProvider: OrderHeaderDelegate {
+extension OrderListTableProvider: OrderHeaderDelegate {
     func headerView(_ headerView: OrderHeaderView, didTapWith section: Int) {
         selectOrder(at: section)
     }
@@ -94,7 +94,7 @@ extension OrdersListTableProvider: OrderHeaderDelegate {
 
 // MARK: - OrderFooterViewDelegate
 
-extension OrdersListTableProvider: OrderFooterDelegate {
+extension OrderListTableProvider: OrderFooterDelegate {
     func footerView(_ footerView: OrderFooterView, didTapWith section: Int) {
         selectOrder(at: section)
     }

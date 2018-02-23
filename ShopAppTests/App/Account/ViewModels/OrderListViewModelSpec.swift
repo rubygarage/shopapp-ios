@@ -17,10 +17,10 @@ class OrderListViewModelSpec: QuickSpec {
         let repository = OrderRepositoryMock()
         let orderListUseCaseMock = OrderListUseCaseMock(repository: repository)
         
-        var viewModel: OrdersListViewModel!
+        var viewModel: OrderListViewModel!
         
         beforeEach {
-            viewModel = OrdersListViewModel(orderListUseCase: orderListUseCaseMock)
+            viewModel = OrderListViewModel(orderListUseCase: orderListUseCaseMock)
         }
         
         describe("when view model initialized") {

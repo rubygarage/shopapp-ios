@@ -19,7 +19,7 @@ struct SegueIdentifiers {
     static let toPolicy = "toPolicy"
     static let toSignIn = "toSignIn"
     static let toSignUp = "toSignUp"
-    static let toOrdersList = "toOrdersList"
+    static let toOrderList = "toOrderList"
     static let toOrderDetails = "toOrderDetails"
     static let toPersonalInfo = "toPersonalInfo"
     static let toChangePassword = "toChangePassword"

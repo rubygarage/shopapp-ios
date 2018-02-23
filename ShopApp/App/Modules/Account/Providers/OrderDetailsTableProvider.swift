@@ -10,7 +10,7 @@ import UIKit
 
 import ShopApp_Gateway
 
-private enum OrdersDetailsSection: Int {
+private enum OrderDetailsSection: Int {
     case header
     case paymentInformation
     case shippingAddress
@@ -18,25 +18,25 @@ private enum OrdersDetailsSection: Int {
     static let allValues = [header, paymentInformation, shippingAddress]
 }
 
-protocol OrdersDetailsTableProviderDelegate: class {
-    func provider(_ provider: OrdersDetailsTableProvider, didSelect productVariant: ProductVariant)
+protocol OrderDetailsTableProviderDelegate: class {
+    func provider(_ provider: OrderDetailsTableProvider, didSelect productVariant: ProductVariant)
 }
 
-class OrdersDetailsTableProvider: NSObject {
+class OrderDetailsTableProvider: NSObject {
     var order: Order?
     
-    weak var delegate: OrdersDetailsTableProviderDelegate?
+    weak var delegate: OrderDetailsTableProviderDelegate?
 }
 
 // MARK: - UITableViewDataSource
 
-extension OrdersDetailsTableProvider: UITableViewDataSource {
+extension OrderDetailsTableProvider: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard order != nil else {
             return 0
         }
         
-        return OrdersDetailsSection.allValues.count
+        return OrderDetailsSection.allValues.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,9 +47,9 @@ extension OrdersDetailsTableProvider: UITableViewDataSource {
         var numberOfRows = 0
         
         switch section {
-        case OrdersDetailsSection.paymentInformation.rawValue:
+        case OrderDetailsSection.paymentInformation.rawValue:
             numberOfRows = order.items?.count ?? 0
-        case OrdersDetailsSection.shippingAddress.rawValue:
+        case OrderDetailsSection.shippingAddress.rawValue:
             numberOfRows = order.shippingAddress != nil ? 1 : 0
         default:
             break
@@ -62,9 +62,9 @@ extension OrdersDetailsTableProvider: UITableViewDataSource {
         var cell = UITableViewCell()
         
         switch indexPath.section {
-        case OrdersDetailsSection.paymentInformation.rawValue:
+        case OrderDetailsSection.paymentInformation.rawValue:
             cell = orderItemCell(with: tableView, indexPath: indexPath)
-        case OrdersDetailsSection.shippingAddress.rawValue:
+        case OrderDetailsSection.shippingAddress.rawValue:
             cell = shippingAddressCell(with: tableView, indexPath: indexPath)
         default:
             break
@@ -93,33 +93,33 @@ extension OrdersDetailsTableProvider: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension OrdersDetailsTableProvider: UITableViewDelegate {
+extension OrderDetailsTableProvider: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let delegate = delegate, indexPath.section == OrdersDetailsSection.paymentInformation.rawValue, let order = order, let item = order.items?[indexPath.row], let productVariant = item.productVariant else {
+        guard let delegate = delegate, indexPath.section == OrderDetailsSection.paymentInformation.rawValue, let order = order, let item = order.items?[indexPath.row], let productVariant = item.productVariant else {
             return
         }
         delegate.provider(self, didSelect: productVariant)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == OrdersDetailsSection.header.rawValue ? kOrderHeaderViewHeight : kBoldTitleTableHeaderViewHeight
+        return section == OrderDetailsSection.header.rawValue ? kOrderHeaderViewHeight : kBoldTitleTableHeaderViewHeight
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == OrdersDetailsSection.paymentInformation.rawValue ? kPaymentDetailsFooterViewHeight : TableView.headerFooterMinHeight
+        return section == OrderDetailsSection.paymentInformation.rawValue ? kPaymentDetailsFooterViewHeight : TableView.headerFooterMinHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var view = UIView()
         
         switch section {
-        case OrdersDetailsSection.header.rawValue:
+        case OrderDetailsSection.header.rawValue:
             if let order = order {
                 view = OrderHeaderView(section: section, order: order)
             }
-        case OrdersDetailsSection.paymentInformation.rawValue:
+        case OrderDetailsSection.paymentInformation.rawValue:
             view = BoldTitleTableHeaderView(type: .details)
-        case OrdersDetailsSection.shippingAddress.rawValue:
+        case OrderDetailsSection.shippingAddress.rawValue:
             if order?.shippingAddress != nil {
                 view = BoldTitleTableHeaderView(type: .shippingAddress)
             }
@@ -131,7 +131,7 @@ extension OrdersDetailsTableProvider: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard let order = order, section == OrdersDetailsSection.paymentInformation.rawValue else {
+        guard let order = order, section == OrderDetailsSection.paymentInformation.rawValue else {
             return nil
         }
         return PaymentDetailsFooterView(order: order)

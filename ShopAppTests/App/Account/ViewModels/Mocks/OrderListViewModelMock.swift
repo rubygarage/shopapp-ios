@@ -1,5 +1,5 @@
 //
-//  OrdersListViewModelMock.swift
+//  OrderListViewModelMock.swift
 //  ShopAppTests
 //
 //  Created by Evgeniy Antonov on 2/22/18.
@@ -11,8 +11,12 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class OrdersListViewModelMock: OrdersListViewModel {
+class OrderListViewModelMock: OrderListViewModel {
+    var isNeedToReturnData = false
+    
     override func reloadData() {
-        items.value = [Order()]
+        if isNeedToReturnData {
+            items.value = [Order()]
+        }
     }
 }

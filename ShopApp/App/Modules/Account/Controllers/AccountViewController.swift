@@ -122,7 +122,7 @@ extension AccountViewController: AccountNotLoggedHeaderDelegate {
 
 extension AccountViewController: AccountLoggedHeaderDelegate {
     func headerViewDidTapMyOrders(_ headerView: AccountLoggedHeaderView) {
-        performSegue(withIdentifier: SegueIdentifiers.toOrdersList, sender: self)
+        performSegue(withIdentifier: SegueIdentifiers.toOrderList, sender: self)
     }
     
     func headerViewDidTapPersonalInfo(_ headerView: AccountLoggedHeaderView) {

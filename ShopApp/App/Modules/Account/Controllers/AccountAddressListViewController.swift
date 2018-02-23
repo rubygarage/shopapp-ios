@@ -8,6 +8,4 @@
 
 import UIKit
 
-class AccountAddressListViewController: BaseAddressListViewController<BaseAddressListViewModel> {
-    
-}
+class AccountAddressListViewController: BaseAddressListViewController<BaseAddressListViewModel> {}

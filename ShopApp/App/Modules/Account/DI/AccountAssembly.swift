@@ -43,10 +43,12 @@ class AccountAssembly: Assembly {
 
         container.storyboardInitCompleted(OrderDetailsViewController.self) { r, c in
             c.viewModel = r.resolve(OrderDetailsViewModel.self)!
+            c.tableProvider = r.resolve(OrderDetailsTableProvider.self)!
         }
 
-        container.storyboardInitCompleted(OrdersListViewController.self) { r, c in
-            c.viewModel = r.resolve(OrdersListViewModel.self)!
+        container.storyboardInitCompleted(OrderListViewController.self) { r, c in
+            c.viewModel = r.resolve(OrderListViewModel.self)!
+            c.tableProvider = r.resolve(OrderListTableProvider.self)!
         }
 
         container.storyboardInitCompleted(PersonalInfoViewController.self) { r, c in
@@ -101,8 +103,8 @@ class AccountAssembly: Assembly {
             return OrderDetailsViewModel(orderUseCase: r.resolve(OrderUseCase.self)!)
         }
 
-        container.register(OrdersListViewModel.self) { r in
-            return OrdersListViewModel(orderListUseCase: r.resolve(OrderListUseCase.self)!)
+        container.register(OrderListViewModel.self) { r in
+            return OrderListViewModel(orderListUseCase: r.resolve(OrderListUseCase.self)!)
         }
 
         container.register(PersonalInfoViewModel.self) { r in
@@ -124,6 +126,16 @@ class AccountAssembly: Assembly {
         container.register(SignUpViewModel.self) { r in
             return SignUpViewModel(shopUseCase: r.resolve(ShopUseCase.self)!,
                                    signUpUseCase: r.resolve(SignUpUseCase.self)!)
+        }
+        
+        // MARK: - Providers
+        
+        container.register(OrderDetailsTableProvider.self) { _ in
+            return OrderDetailsTableProvider()
+        }
+        
+        container.register(OrderListTableProvider.self) { _ in
+            return OrderListTableProvider()
         }
     }
 }

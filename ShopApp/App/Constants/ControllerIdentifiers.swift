@@ -33,4 +33,5 @@ struct ControllerIdentifiers {
     static let creditCard = "CreditCardControllerIdentifier"
     static let changePassword = "ChangePasswordControllerIdentifier"
     static let orderList = "OrderListControllerIdentifier"
+    static let orderDetails = "OrderDetailsControllerIdentifier"
 }
