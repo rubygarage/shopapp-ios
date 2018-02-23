@@ -7,7 +7,9 @@ before_install:
   - pod repo update
 
 notifications:
-  slack: shopclientapp:EBh1k4fcosP8EYhbD1R0S2qm
+  slack:
+    rooms:
+      - shopclientapp:EBh1k4fcosP8EYhbD1R0S2qm#ios
   email: false
 
 script:
