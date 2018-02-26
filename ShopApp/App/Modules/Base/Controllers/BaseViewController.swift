@@ -73,7 +73,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
     }
     
     private func subscribeViewState() {
-        viewModel.state
+        viewModel?.state
             .subscribe(onNext: { [weak self] state in
                 guard let strongSelf = self else {
                     return
@@ -177,6 +177,6 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
 
 extension BaseViewController: ErrorViewDelegate {
     func viewDidTapTryAgain(_ view: ErrorView) {
-        viewModel.tryAgain()
+        viewModel?.tryAgain()
     }
 }

@@ -8,7 +8,6 @@
 
 import Nimble
 import Quick
-import RxSwift
 import ShopApp_Gateway
 import Toaster
 
@@ -41,77 +40,51 @@ class BaseViewControllerSpec: QuickSpec {
         }
         
         describe("when view state changed") {
-            var disposeBag: DisposeBag!
-            
-            beforeEach {
-                disposeBag = DisposeBag()
-            }
-            
             context("if it content state") {
                 it("needs to hide all state views") {
-                    viewController.viewModel.state
-                        .subscribe(onNext: { _ in
-                            expect(viewController.view.subviews.contains(viewController.loadingView)).toEventually(beFalse())
-                            expect(viewController.view.subviews.contains(viewController.errorView)).toEventually(beFalse())
-                        })
-                        .disposed(by: disposeBag)
-                    
                     viewModelMock.setContentState()
+                    
+                    expect(viewController.view.subviews.contains(viewController.loadingView)) == false
+                    expect(viewController.view.subviews.contains(viewController.errorView)) == false
                 }
             }
             
             context("if it empty state") {
                 it("needs to hide all state views but empty") {
-                    viewController.viewModel.state
-                        .subscribe(onNext: { _ in
-                            expect(viewController.view.subviews.contains(viewController.loadingView)).toEventually(beFalse())
-                            expect(viewController.view.subviews.contains(viewController.errorView)).toEventually(beFalse())
-                        })
-                        .disposed(by: disposeBag)
-                    
                     viewModelMock.setEmptyState()
+                    
+                    expect(viewController.view.subviews.contains(viewController.loadingView)) == false
+                    expect(viewController.view.subviews.contains(viewController.errorView)) == false
                 }
             }
             
             context("if it loading state") {
                 context("without hud") {
                     it("needs to hide all state views") {
-                        viewController.viewModel.state
-                            .subscribe(onNext: { _ in
-                                expect(viewController.view.subviews.contains(viewController.loadingView)).toEventually(beFalse())
-                                expect(viewController.view.subviews.contains(viewController.errorView)).toEventually(beFalse())
-                            })
-                            .disposed(by: disposeBag)
-                        
                         viewModelMock.setLoadingState(showHud: false)
+                        
+                        expect(viewController.view.subviews.contains(viewController.loadingView)) == false
+                        expect(viewController.view.subviews.contains(viewController.errorView)) == false
                     }
                 }
                 
                 context("with hud") {
                     it("needs to hide all state views but loading") {
-                        viewController.viewModel.state
-                            .subscribe(onNext: { _ in
-                                expect(viewController.view.subviews.contains(viewController.loadingView)).toEventually(beTrue())
-                                expect(viewController.loadingView.alpha).toEventually(equal(1))
-                                expect(viewController.view.subviews.contains(viewController.errorView)).toEventually(beFalse())
-                            })
-                            .disposed(by: disposeBag)
-                        
                         viewModelMock.setLoadingState()
+                        
+                        expect(viewController.view.subviews.contains(viewController.loadingView)) == true
+                        expect(viewController.loadingView.alpha) == 1
+                        expect(viewController.view.subviews.contains(viewController.errorView)) == false
                     }
                 }
                 
                 context("with translucent hud") {
                     it("needs to hide all state views but translucent loading") {
-                        viewController.viewModel.state
-                            .subscribe(onNext: { _ in
-                                expect(viewController.view.subviews.contains(viewController.loadingView)).toEventually(beTrue())
-                                expect(viewController.loadingView.alpha).toEventually(equal(0.75))
-                                expect(viewController.view.subviews.contains(viewController.errorView)).toEventually(beFalse())
-                            })
-                            .disposed(by: disposeBag)
-                        
                         viewModelMock.setLoadingState(showHud: true, isTranslucent: true)
+                        
+                        expect(viewController.view.subviews.contains(viewController.loadingView)) == true
+                        expect(viewController.loadingView.alpha) == 0.75
+                        expect(viewController.view.subviews.contains(viewController.errorView)) == false
                     }
                 }
             }
@@ -119,70 +92,50 @@ class BaseViewControllerSpec: QuickSpec {
             context("if it error state") {
                 context("with type repo") {
                     it("needs to hide all state views") {
-                        viewController.viewModel.state
-                            .subscribe(onNext: { _ in
-                                expect(viewController.view.subviews.contains(viewController.loadingView)).toEventually(beFalse())
-                                expect(viewController.view.subviews.contains(viewController.errorView)).toEventually(beFalse())
-                            })
-                            .disposed(by: disposeBag)
-                        
                         viewModelMock.setRepoErrorState()
+                        
+                        expect(viewController.view.subviews.contains(viewController.loadingView)) == false
+                        expect(viewController.view.subviews.contains(viewController.errorView)) == false
                     }
                 }
                 
                 context("with type content") {
                     it("needs to hide all state views but error") {
-                        viewController.viewModel.state
-                            .subscribe(onNext: { _ in
-                                expect(viewController.view.subviews.contains(viewController.loadingView)).toEventually(beFalse())
-                                expect(viewController.view.subviews.contains(viewController.errorView)).toEventually(beTrue())
-                                expect(viewController.errorView.error).toEventually(beAnInstanceOf(ContentError.self))
-                            })
-                            .disposed(by: disposeBag)
-                        
                         viewModelMock.setContentErrorState()
+                        
+                        expect(viewController.view.subviews.contains(viewController.loadingView)) == false
+                        expect(viewController.view.subviews.contains(viewController.errorView)) == true
+                        expect(viewController.errorView.error).to(beAnInstanceOf(ContentError.self))
                     }
                 }
                 
                 context("with type network") {
                     it("needs to hide all state views but error") {
-                        viewController.viewModel.state
-                            .subscribe(onNext: { _ in
-                                expect(viewController.view.subviews.contains(viewController.loadingView)).toEventually(beFalse())
-                                expect(viewController.view.subviews.contains(viewController.errorView)).toEventually(beTrue())
-                                expect(viewController.errorView.error).toEventually(beAnInstanceOf(NetworkError.self))
-                            })
-                            .disposed(by: disposeBag)
-                        
                         viewModelMock.setNetworkErrorState()
+                        
+                        expect(viewController.view.subviews.contains(viewController.loadingView)) == false
+                        expect(viewController.view.subviews.contains(viewController.errorView)) == true
+                        expect(viewController.errorView.error).to(beAnInstanceOf(NetworkError.self))
                     }
                 }
                 
                 context("with type non critical") {
                     it("needs to hide all state views and show toast") {
-                        viewController.viewModel.state
-                            .subscribe(onNext: { _ in
-                                expect(viewController.view.subviews.contains(viewController.loadingView)).toEventually(beFalse())
-                                expect(viewController.view.subviews.contains(viewController.errorView)).toEventually(beFalse())
-                                expect(ToastCenter.default.currentToast).toEventuallyNot(beNil())
-                            })
-                            .disposed(by: disposeBag)
-                        
                         viewModelMock.setNonCriticalErrorState()
+                        
+                        expect(viewController.view.subviews.contains(viewController.loadingView)) == false
+                        expect(viewController.view.subviews.contains(viewController.errorView)) == false
+                        expect(ToastCenter.default.currentToast).toNot(beNil())
                     }
                 }
                 
                 context("with type critical") {
                     it("needs to hide all state views and show toast") {
-                        viewController.viewModel.state
-                            .subscribe(onNext: { _ in
-                                expect(viewController.view.subviews.contains(viewController.loadingView)).toEventually(beFalse())
-                                expect(viewController.view.subviews.contains(viewController.errorView)).toEventually(beFalse())
-                                expect(ToastCenter.default.currentToast).toEventuallyNot(beNil())
-                            })
-                            .disposed(by: disposeBag)
-                        
                         viewModelMock.setCriticalErrorState()
+                        
+                        expect(viewController.view.subviews.contains(viewController.loadingView)) == false
+                        expect(viewController.view.subviews.contains(viewController.errorView)) == false
+                        expect(ToastCenter.default.currentToast).toNot(beNil())
                     }
                 }
             }

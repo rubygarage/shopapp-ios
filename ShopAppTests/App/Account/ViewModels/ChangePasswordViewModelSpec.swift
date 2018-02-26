@@ -14,8 +14,8 @@ import RxSwift
 
 class ChangePasswordViewModelSpec: QuickSpec {
     override func spec() {
-        let repository = AuthentificationRepositoryMock()
-        let updateCustomerUseCaseMock = UpdateCustomerUseCaseMock(repository: repository)
+        let repositoryMock = AuthentificationRepositoryMock()
+        let updateCustomerUseCaseMock = UpdateCustomerUseCaseMock(repository: repositoryMock)
         
         var viewModel: ChangePasswordViewModel!
         
@@ -138,6 +138,29 @@ class ChangePasswordViewModelSpec: QuickSpec {
                         viewModel.updatePressed.onNext()
                     }
                 }
+            }
+        }
+        
+        describe("when try again and if have valid and equals password texts and success reset password") {
+            var disposeBag: DisposeBag!
+            
+            beforeEach {
+                disposeBag = DisposeBag()
+                
+                viewModel.newPasswordText.value = "password"
+                viewModel.confirmPasswordText.value = "password"
+            }
+            
+            it("needs to dismiss view controller") {
+                updateCustomerUseCaseMock.isNeedToReturnError = false
+                
+                viewModel.updateSuccess
+                    .subscribe(onNext: { success in
+                        expect(success).toEventually(beTrue())
+                    })
+                    .disposed(by: disposeBag)
+                
+                viewModel.tryAgain()
             }
         }
     }

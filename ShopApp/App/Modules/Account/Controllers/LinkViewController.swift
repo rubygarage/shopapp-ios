@@ -52,6 +52,10 @@ class LinkViewController: BaseViewController<ForgotPasswordViewModel> {
     }
     
     private func setupViewModel() {
+        guard let viewModel = viewModel else {
+            return
+        }
+        
         emailText.asObservable()
             .bind(to: viewModel.emailText)
             .disposed(by: disposeBag)

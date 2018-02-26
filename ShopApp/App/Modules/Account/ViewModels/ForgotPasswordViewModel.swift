@@ -69,4 +69,10 @@ class ForgotPasswordViewModel: BaseViewModel {
     private func notifyAboutResetPassword(success: Bool) {
         resetPasswordSuccess.onNext(success)
     }
+    
+    // MARK: - BaseViewModel
+    
+    override func tryAgain() {
+        checkCresentials()
+    }
 }

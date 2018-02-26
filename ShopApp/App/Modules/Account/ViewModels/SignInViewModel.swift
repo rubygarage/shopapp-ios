@@ -79,4 +79,10 @@ class SignInViewModel: BaseViewModel {
             signInSuccess.onNext()
         }
     }
+    
+    // MARK: - BaseViewModel
+    
+    override func tryAgain() {
+        checkCredentials()
+    }
 }

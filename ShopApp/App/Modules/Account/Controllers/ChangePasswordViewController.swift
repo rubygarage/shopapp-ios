@@ -60,6 +60,15 @@ class ChangePasswordViewController: BaseViewController<ChangePasswordViewModel> 
             .disposed(by: disposeBag)
         
         updateButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
+        
+        updateButton.rx.tap
             .bind(to: viewModel.updatePressed)
             .disposed(by: disposeBag)
         

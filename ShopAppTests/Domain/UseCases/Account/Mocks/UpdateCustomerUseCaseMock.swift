@@ -29,6 +29,6 @@ class UpdateCustomerUseCaseMock: UpdateCustomerUseCase {
     }
     
     private func execute(callback: @escaping RepoCallback<Customer>) {
-        !isNeedToReturnError ? callback(customer, nil) : callback(nil, error)
+        isNeedToReturnError ? callback(nil, error) : callback(customer, nil)
     }
 }

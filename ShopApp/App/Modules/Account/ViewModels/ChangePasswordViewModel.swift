@@ -79,4 +79,10 @@ class ChangePasswordViewModel: BaseViewModel {
             strongSelf.updateSuccess.onNext(error == nil && customer != nil)
         }
     }
+    
+    // MARK: - BaseViewModel
+    
+    override func tryAgain() {
+        checkValidation()
+    }
 }

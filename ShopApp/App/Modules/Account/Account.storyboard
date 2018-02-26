@@ -495,6 +495,8 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
                                                         <integer key="value" value="0"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="email"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VPd-tJ-IiL" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
@@ -507,6 +509,8 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
                                                         <integer key="value" value="2"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="name"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9cl-xB-xLA" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
@@ -519,6 +523,8 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
                                                         <integer key="value" value="2"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="lastName"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="taH-6o-eIT" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
@@ -531,6 +537,8 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
                                                         <integer key="value" value="3"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="phone"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cXW-aO-4Pj" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
@@ -544,6 +552,8 @@
                                                         <integer key="value" value="1"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="hideShowPasswordButton" value="NO"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="password"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXD-ef-Qqf" customClass="BlackButton" customModule="ShopApp" customModuleProvider="target">
@@ -556,12 +566,18 @@
                                                 <state key="normal" title="Button">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="signUp"/>
+                                                </userDefinedRuntimeAttributes>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKj-4W-ndo" customClass="TTTAttributedLabel">
                                                 <rect key="frame" x="37" y="414" width="301" height="14"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="acceptPolicies"/>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -649,6 +665,8 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
                                                         <integer key="value" value="0"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="email"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BWD-hy-fte" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
@@ -662,6 +680,8 @@
                                                         <integer key="value" value="1"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="hideShowPasswordButton" value="NO"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="password"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Yw-Za-fpb" customClass="BlackButton" customModule="ShopApp" customModuleProvider="target">
@@ -674,11 +694,17 @@
                                                 <state key="normal" title="Button">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="signIn"/>
+                                                </userDefinedRuntimeAttributes>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPf-Mk-olq">
                                                 <rect key="frame" x="299" y="157" width="41" height="36.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <state key="normal" title="Button"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="forgot"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <segue destination="V0g-nm-qj8" kind="presentation" identifier="" id="1nU-HV-sgZ"/>
                                                 </connections>
@@ -735,7 +761,7 @@
         <!--Forgot Password View Controller-->
         <scene sceneID="iJa-sR-ZOx">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ngi-jF-uUl" customClass="ForgotPasswordViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ForgotPasswordControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="ngi-jF-uUl" customClass="ForgotPasswordViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qYu-Yv-Nz0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -756,18 +782,27 @@
                                                 <state key="normal" title="Button">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="forgotPassword"/>
+                                                </userDefinedRuntimeAttributes>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnj-vv-lEC">
                                                 <rect key="frame" x="35" y="42" width="305" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="title"/>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SXn-ql-BVn">
                                                 <rect key="frame" x="35" y="75" width="305" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="description"/>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
@@ -788,6 +823,8 @@
                                             <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
                                                 <integer key="value" value="0"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="email"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
@@ -810,6 +847,10 @@
                             </scrollView>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQQ-CT-mko">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="link"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <segue destination="NPd-X3-dk2" kind="embed" id="sGb-ip-ebl"/>
                                 </connections>
