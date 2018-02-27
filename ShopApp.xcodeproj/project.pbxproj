@@ -292,6 +292,7 @@
 		61CEAA6E1F5ED16E0016FBD7 /* UIViewController+Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CEAA6D1F5ED16E0016FBD7 /* UIViewController+Routes.swift */; };
 		61D7A2861F7A9FBF00031093 /* UIViewController+BarButtonItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D7A2851F7A9FBF00031093 /* UIViewController+BarButtonItems.swift */; };
 		61DA4B881F614BBC00444F64 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DA4B871F614BBC00444F64 /* SearchViewController.swift */; };
+		61DFE934204463D700ABF253 /* BaseAddressFormViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DFE933204463D700ABF253 /* BaseAddressFormViewControllerSpec.swift */; };
 		61E4E6341F56C868001C6E01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E4E6331F56C868001C6E01 /* AppDelegate.swift */; };
 		61E4E63B1F56C868001C6E01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61E4E63A1F56C868001C6E01 /* Assets.xcassets */; };
 		61E4E63E1F56C868001C6E01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61E4E63C1F56C868001C6E01 /* LaunchScreen.storyboard */; };
@@ -694,6 +695,7 @@
 		61CEAA6D1F5ED16E0016FBD7 /* UIViewController+Routes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Routes.swift"; sourceTree = "<group>"; };
 		61D7A2851F7A9FBF00031093 /* UIViewController+BarButtonItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+BarButtonItems.swift"; sourceTree = "<group>"; };
 		61DA4B871F614BBC00444F64 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		61DFE933204463D700ABF253 /* BaseAddressFormViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAddressFormViewControllerSpec.swift; sourceTree = "<group>"; };
 		61E4E6301F56C868001C6E01 /* ShopApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E4E6331F56C868001C6E01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61E4E63A1F56C868001C6E01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1169,6 +1171,7 @@
 		0B7CEF77203B15A800FAA32C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				61DFE933204463D700ABF253 /* BaseAddressFormViewControllerSpec.swift */,
 				0BE9658920442E0C00308CA9 /* ChangePasswordViewControllerSpec.swift */,
 				0BE9658A20442E0C00308CA9 /* ForgotPasswordViewControllerSpec.swift */,
 				0BE9658B20442E0D00308CA9 /* OrderDetailsViewControllerSpec.swift */,
@@ -1542,10 +1545,10 @@
 			children = (
 				612812C0202224360048013B /* AccountAddressFormViewController.swift */,
 				61EC8D7620334DE50001FF2B /* AccountAddressListViewController.swift */,
-				610424291FC477D100EFEFDA /* AddressFormViewController.swift */,
-				616CA6671FF3BA9D00FF14E2 /* BaseAddressListViewController.swift */,
 				617DE1841FB5E9E2004EEF9A /* AccountViewController.swift */,
+				610424291FC477D100EFEFDA /* AddressFormViewController.swift */,
 				615F8217202C653C00926BAF /* BaseAddressFormViewController.swift */,
+				616CA6671FF3BA9D00FF14E2 /* BaseAddressListViewController.swift */,
 				0BED64D3201789E9006CF968 /* ChangePasswordViewController.swift */,
 				0B4EA3491FFBBFF6000C7A80 /* ForgotPasswordViewController.swift */,
 				0B4EA34D1FFCCC29000C7A80 /* LinkViewController.swift */,
@@ -2849,6 +2852,7 @@
 				0B7CEF7F203B175600FAA32C /* ChangePasswordViewModelSpec.swift in Sources */,
 				614ED7E1203F34FC00435708 /* OrderDetailsTableProviderDelegateMock.swift in Sources */,
 				617D6890203C5F5A001E8940 /* OrderListViewControllerSpec.swift in Sources */,
+				61DFE934204463D700ABF253 /* BaseAddressFormViewControllerSpec.swift in Sources */,
 				0BE9658E20442E0D00308CA9 /* OrderDetailsViewControllerSpec.swift in Sources */,
 				0B7CEF84203B1F8E00FAA32C /* AuthentificationRepositoryMock.swift in Sources */,
 				0BE9656A203EEA3200308CA9 /* ChangePasswordViewModelMock.swift in Sources */,
