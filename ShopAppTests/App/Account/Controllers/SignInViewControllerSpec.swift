@@ -60,6 +60,16 @@ class SignInViewControllerSpec: QuickSpec {
         }
         
         describe("when email and password texts changed") {
+            it("needs to update variable of view model") {
+                emailTextFieldView.textField.text = "user@mail.com"
+                emailTextFieldView.textField.sendActions(for: .editingChanged)
+                passwordTextFieldView.textField.text = "password"
+                passwordTextFieldView.textField.sendActions(for: .editingChanged)
+                
+                expect(viewModelMock.emailText.value) == "user@mail.com"
+                expect(viewModelMock.passwordText.value) == "password"
+            }
+            
             context("if it have at least one symbol in each text field view") {
                 it("needs to enable sign in button") {
                     viewModelMock.makeSignInButtonEnabled()
@@ -88,6 +98,7 @@ class SignInViewControllerSpec: QuickSpec {
             context("if it have not valid email and password texts") {
                 it("needs to show error messages about not valid email and password texts") {
                     viewModelMock.makeNotValidEmailAndPasswordTexts()
+                    signInButton.sendActions(for: .touchUpInside)
                     
                     expect(emailTextFieldView.errorMessage) == "Error.InvalidEmail".localizable
                     expect(passwordTextFieldView.errorMessage) == "Error.InvalidPassword".localizable
@@ -96,7 +107,8 @@ class SignInViewControllerSpec: QuickSpec {
             
             context("if it have valid email and password texts") {
                 it("needs to sign in and show success toast") {
-                    viewModelMock.makeSuccessSignIn()
+                    viewModelMock.makeValidEmailAndPasswordTexts()
+                    signInButton.sendActions(for: .touchUpInside)
                     
                     expect(ToastCenter.default.currentToast).toNot(beNil())
                 }

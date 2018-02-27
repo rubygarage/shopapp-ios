@@ -17,7 +17,6 @@ class BaseTableViewControllerSpec: QuickSpec {
         
         beforeEach {
             viewController = BaseTableViewController()
-            viewController.viewModel = BasePaginationViewModel()
             _ = viewController.view
         }
         

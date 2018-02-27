@@ -24,12 +24,15 @@ class ChangePasswordViewModelMock: ChangePasswordViewModel {
     func makeNotValidPasswordTexts() {
         newPasswordText.value = "pass"
         confirmPasswordText.value = "pas"
-        updatePressed.onNext()
     }
     
     func makeNotEqualsPasswordTexts() {
         newPasswordText.value = "password"
         confirmPasswordText.value = "passwor"
-        updatePressed.onNext()
+    }
+    
+    func makeValidAndEqualsPasswordTexts() {
+        newPasswordText.value = "password"
+        confirmPasswordText.value = "password"
     }
 }

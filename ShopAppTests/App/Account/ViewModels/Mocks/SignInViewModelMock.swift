@@ -24,12 +24,10 @@ class SignInViewModelMock: SignInViewModel {
     func makeNotValidEmailAndPasswordTexts() {
         emailText.value = "user@mail"
         passwordText.value = "pass"
-        loginPressed.onNext()
     }
     
-    func makeSuccessSignIn() {
+    func makeValidEmailAndPasswordTexts() {
         emailText.value = "user@mail.com"
         passwordText.value = "password"
-        loginPressed.onNext()
     }
 }

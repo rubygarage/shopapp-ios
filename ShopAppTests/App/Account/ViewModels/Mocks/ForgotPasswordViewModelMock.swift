@@ -11,21 +11,31 @@ import RxSwift
 @testable import ShopApp
 
 class ForgotPasswordViewModelMock: ForgotPasswordViewModel {
-    func makeForgotPasswordButtonEnabled() {
-        emailText.value = "u"
-    }
+    var isResetPasswordButtonEnabled = Variable<Bool>(true)
+    var isResetPasswordPressed = false
     
-    func makeForgotPasswordButtonDisabled() {
-        emailText.value = ""
+    override var resetPasswordButtonEnabled: Observable<Bool> {
+        return isResetPasswordButtonEnabled.asObservable()
+    }
+    override var resetPasswordPressed: AnyObserver<Void> {
+        return AnyObserver { [weak self] event in
+            switch event {
+            case .next:
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.isResetPasswordPressed = true
+            default:
+                break
+            }
+        }
     }
     
     func makeNotValidEmailText() {
-        emailText.value = "user@mail"
-        resetPasswordPressed.onNext()
+        emailErrorMessage.onNext("Error.InvalidEmail".localizable)
     }
     
-    func makeSuccessResetPassword() {
-        emailText.value = "user@mail.com"
-        resetPasswordPressed.onNext()
+    func makeResetPasswordSuccess(_ success: Bool = true) {
+        resetPasswordSuccess.onNext(success)
     }
 }

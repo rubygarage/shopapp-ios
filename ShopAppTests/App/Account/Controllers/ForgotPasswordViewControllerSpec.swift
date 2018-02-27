@@ -64,17 +64,26 @@ class ForgotPasswordViewControllerSpec: QuickSpec {
         }
 
         describe("when email text changed") {
-            context("if it have at least one symbol in text field view") {
+            it("needs to update variable of view model") {
+                emailTextFieldView.textField.text = "user@mail.com"
+                emailTextFieldView.textField.sendActions(for: .editingChanged)
+                
+                expect(viewModelMock.emailText.value) == "user@mail.com"
+            }
+        }
+        
+        describe("when enabling of forgot password button changed") {
+            context("if it have at least one symbol in email text field view") {
                 it("needs to enable forgot password button") {
-                    viewModelMock.makeForgotPasswordButtonEnabled()
+                    viewModelMock.isResetPasswordButtonEnabled.value = true
                     
                     expect(forgotPasswordButton.isEnabled) == true
                 }
             }
             
-            context("if it doesn't have symbols in text variable") {
+            context("if it doesn't have symbols in email text field view") {
                 it("needs to disable forgot password button") {
-                    viewModelMock.makeForgotPasswordButtonDisabled()
+                    viewModelMock.isResetPasswordButtonEnabled.value = false
                     
                     expect(forgotPasswordButton.isEnabled) == false
                 }
@@ -82,26 +91,37 @@ class ForgotPasswordViewControllerSpec: QuickSpec {
         }
         
         describe("when update button pressed") {
-            it("needs to end editing") {
+            it("needs to end editing and notify view model") {
                 emailTextFieldView.textField.sendActions(for: .editingDidBegin)
                 forgotPasswordButton.sendActions(for: .touchUpInside)
                 
                 expect(viewController.isEditing) == false
+                expect(viewModelMock.isResetPasswordPressed) == true
             }
-            
-            context("if it have not valid email text") {
-                it("needs to show error messages about not valid email texts") {
-                    viewModelMock.makeNotValidEmailText()
+        }
+        
+        describe("when email text is not valid") {
+            it("needs to show error messages about not valid email text") {
+                viewModelMock.makeNotValidEmailText()
+                
+                expect(emailTextFieldView.errorMessage).toEventually(equal("Error.InvalidEmail".localizable))
+            }
+        }
+        
+        describe("when email text is valid") {
+            context("if reset password successed") {
+                it("needs to show link view") {
+                    viewModelMock.makeResetPasswordSuccess()
                     
-                    expect(emailTextFieldView.errorMessage) == "Error.InvalidEmail".localizable
+                    expect(linkView.isHidden) == false
                 }
             }
             
-            context("if it have valid email text") {
-                it("needs to reset password and show link view") {
-                    viewModelMock.makeSuccessResetPassword()
+            context("if reset password failed") {
+                it("needs to hide link view") {
+                    viewModelMock.makeResetPasswordSuccess(false)
                     
-                    expect(linkView.isHidden) == false
+                    expect(linkView.isHidden) == true
                 }
             }
         }

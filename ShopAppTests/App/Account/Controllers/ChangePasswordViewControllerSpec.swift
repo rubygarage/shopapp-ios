@@ -8,6 +8,7 @@
 
 import Nimble
 import Quick
+import RxSwift
 
 @testable import ShopApp
 
@@ -56,6 +57,16 @@ class ChangePasswordViewControllerSpec: QuickSpec {
         }
         
         describe("when password texts changed") {
+            it("needs to update variables of view model") {
+                newPasswordTextFieldView.textField.text = "password"
+                newPasswordTextFieldView.textField.sendActions(for: .editingChanged)
+                confirmPasswordTextFieldView.textField.text = "password"
+                confirmPasswordTextFieldView.textField.sendActions(for: .editingChanged)
+                
+                expect(viewModelMock.newPasswordText.value) == "password"
+                expect(viewModelMock.confirmPasswordText.value) == "password"
+            }
+            
             context("if it have at least one symbol in each text field view") {
                 it("needs to enable update button") {
                     viewModelMock.makeUpdateButtonEnabled()
@@ -84,6 +95,7 @@ class ChangePasswordViewControllerSpec: QuickSpec {
             context("if it have not valid password texts") {
                 it("needs to show error messages about not valid password texts") {
                     viewModelMock.makeNotValidPasswordTexts()
+                    updateButton.sendActions(for: .touchUpInside)
                     
                     expect(newPasswordTextFieldView.errorMessage) == "Error.InvalidPassword".localizable
                     expect(confirmPasswordTextFieldView.errorMessage) == "Error.InvalidPassword".localizable
@@ -93,8 +105,25 @@ class ChangePasswordViewControllerSpec: QuickSpec {
             context("if it have not equals password texts") {
                 it("needs to show error message about not equals password texts") {
                     viewModelMock.makeNotEqualsPasswordTexts()
+                    updateButton.sendActions(for: .touchUpInside)
                     
                     expect(confirmPasswordTextFieldView.errorMessage) == "Error.PasswordsAreNotEquals".localizable
+                }
+            }
+            
+            context("if it have valid and equals password texts") {
+                it("needs to change password and dismiss view controller") {
+                    let disposeBag = DisposeBag()
+                    
+                    viewModelMock.makeValidAndEqualsPasswordTexts()
+                    
+                    viewModelMock.updateSuccess.asObservable()
+                        .subscribe(onNext: { success in
+                            expect(success).toEventually(beTrue())
+                        })
+                        .disposed(by: disposeBag)
+                    
+                    updateButton.sendActions(for: .touchUpInside)
                 }
             }
         }

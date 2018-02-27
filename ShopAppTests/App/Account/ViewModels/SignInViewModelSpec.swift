@@ -110,16 +110,11 @@ class SignInViewModelSpec: QuickSpec {
         }
         
         describe("when try again and it have valid email and password texts and success sign in") {
-            var disposeBag: DisposeBag!
-            
-            beforeEach {
-                disposeBag = DisposeBag()
-                
+            it("needs to dismiss view controller and show success toast") {
+                let disposeBag = DisposeBag()
                 viewModel.emailText.value = "user@mail.com"
                 viewModel.passwordText.value = "password"
-            }
-            
-            it("needs to dismiss view controller and show success toast") {
+                
                 viewModel.signInSuccess
                     .subscribe({ event in
                         expect(event.element).toEventuallyNot(beNil())

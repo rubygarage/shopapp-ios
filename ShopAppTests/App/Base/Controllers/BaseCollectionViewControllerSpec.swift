@@ -17,7 +17,6 @@ class BaseCollectionViewControllerSpec: QuickSpec {
         
         beforeEach {
             viewController = BaseCollectionViewController()
-            viewController.viewModel = BasePaginationViewModel()
             _ = viewController.view
         }
         

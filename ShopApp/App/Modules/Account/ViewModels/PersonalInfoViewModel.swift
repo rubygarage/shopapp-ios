@@ -122,4 +122,10 @@ class PersonalInfoViewModel: BaseViewModel {
         emailText.value = customer.email
         phoneText.value = customer.phone ?? ""
     }
+    
+    // MARK: - BaseViewModel
+    
+    override func tryAgain() {
+        checkValidation()
+    }
 }

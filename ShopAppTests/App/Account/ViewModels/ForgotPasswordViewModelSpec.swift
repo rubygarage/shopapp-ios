@@ -84,20 +84,38 @@ class ForgotPasswordViewModelSpec: QuickSpec {
                 }
             }
             
-            context("if it have valid email text and success reset password") {
-                it("needs to dismiss view controller") {
-                    viewModel.resetPasswordSuccess
-                        .subscribe(onNext: { success in
-                            expect(success).toEventually(beTrue())
-                        })
-                        .disposed(by: disposeBag)
+            context("if it have valid email text") {
+                context("and success reset password") {
+                    it("needs to dismiss view controller") {
+                        resetPasswordUseCaseMock.isNeedToReturnError = false
+                        
+                        viewModel.resetPasswordSuccess
+                            .subscribe(onNext: { success in
+                                expect(success).toEventually(beTrue())
+                            })
+                            .disposed(by: disposeBag)
+                        
+                        viewModel.resetPasswordPressed.onNext()
+                    }
                     
-                    viewModel.resetPasswordPressed.onNext()
+                    context("but fail reset password") {
+                        it("needs to show error") {
+                            resetPasswordUseCaseMock.isNeedToReturnError = true
+                            
+                            viewModel.resetPasswordSuccess
+                                .subscribe(onNext: { success in
+                                    expect(success).toEventually(beFalse())
+                                })
+                                .disposed(by: disposeBag)
+                            
+                            viewModel.resetPasswordPressed.onNext()
+                        }
+                    }
                 }
             }
         }
         
-        describe("when try again and it have valid email text and success reset password") {
+        describe("when try again and it have valid email text") {
             var disposeBag: DisposeBag!
             
             beforeEach {
@@ -106,14 +124,32 @@ class ForgotPasswordViewModelSpec: QuickSpec {
                 viewModel.emailText.value = "user@mail.com"
             }
             
-            it("needs to dismiss view controller") {
-                viewModel.resetPasswordSuccess
-                    .subscribe(onNext: { success in
-                        expect(success).toEventually(beTrue())
-                    })
-                    .disposed(by: disposeBag)
+            context("if it have success reset password") {
+                it("needs to dismiss view controller") {
+                    resetPasswordUseCaseMock.isNeedToReturnError = false
+                    
+                    viewModel.resetPasswordSuccess
+                        .subscribe(onNext: { success in
+                            expect(success).toEventually(beTrue())
+                        })
+                        .disposed(by: disposeBag)
+                    
+                    viewModel.tryAgain()
+                }
                 
-                viewModel.tryAgain()
+                context("if it have fail reset password") {
+                    it("needs to show error") {
+                        resetPasswordUseCaseMock.isNeedToReturnError = true
+                        
+                        viewModel.resetPasswordSuccess
+                            .subscribe(onNext: { success in
+                                expect(success).toEventually(beFalse())
+                            })
+                            .disposed(by: disposeBag)
+                        
+                        viewModel.tryAgain()
+                    }
+                }
             }
         }
     }

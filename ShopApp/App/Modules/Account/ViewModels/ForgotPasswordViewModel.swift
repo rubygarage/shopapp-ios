@@ -59,15 +59,11 @@ class ForgotPasswordViewModel: BaseViewModel {
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if let success = success {
-                strongSelf.notifyAboutResetPassword(success: success)
+            } else if success != nil {
                 strongSelf.state.onNext(.content)
             }
+            strongSelf.resetPasswordSuccess.onNext(error == nil && success == true)
         }
-    }
-    
-    private func notifyAboutResetPassword(success: Bool) {
-        resetPasswordSuccess.onNext(success)
     }
     
     // MARK: - BaseViewModel

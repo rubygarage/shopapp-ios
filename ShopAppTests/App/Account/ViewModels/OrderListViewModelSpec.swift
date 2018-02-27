@@ -68,13 +68,8 @@ class OrderListViewModelSpec: QuickSpec {
         }
         
         describe("when next page loaded") {
-            var disposeBag: DisposeBag!
-            
-            beforeEach {
-                disposeBag = DisposeBag()
-            }
-            
             it("should present loaded items") {
+                let disposeBag = DisposeBag()
                 orderListUseCaseMock.isOrderCountLessThenConstant = false
                 viewModel.reloadData()
                 viewModel.loadNextPage()
@@ -89,13 +84,8 @@ class OrderListViewModelSpec: QuickSpec {
         }
         
         describe("when try again pressed") {
-            var disposeBag: DisposeBag!
-            
-            beforeEach {
-                disposeBag = DisposeBag()
-            }
-            
             it("should present loaded items") {
+                let disposeBag = DisposeBag()
                 orderListUseCaseMock.isOrderCountLessThenConstant = true
                 viewModel.tryAgain()
                 

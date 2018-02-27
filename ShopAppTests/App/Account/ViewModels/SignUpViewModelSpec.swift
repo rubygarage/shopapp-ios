@@ -117,16 +117,11 @@ class SignUpViewModelSpec: QuickSpec {
         }
         
         describe("when try again and it have valid email and password texts and success sign in") {
-            var disposeBag: DisposeBag!
-            
-            beforeEach {
-                disposeBag = DisposeBag()
-                
+            it("needs to dismiss view controller and show success toast") {
+                let disposeBag = DisposeBag()
                 viewModel.emailText.value = "user@mail.com"
                 viewModel.passwordText.value = "password"
-            }
-            
-            it("needs to dismiss view controller and show success toast") {
+                
                 viewModel.signUpSuccess
                     .subscribe({ event in
                         expect(event.element).toEventuallyNot(beNil())
@@ -138,13 +133,8 @@ class SignUpViewModelSpec: QuickSpec {
         }
         
         describe("when shop loaded") {
-            var disposeBag: DisposeBag!
-            
-            beforeEach {
-                disposeBag = DisposeBag()
-            }
-            
             it("needs to show accept policies label") {
+                let disposeBag = DisposeBag()
                 viewModel.loadPolicies()
                 
                 viewModel.policies.asObservable()

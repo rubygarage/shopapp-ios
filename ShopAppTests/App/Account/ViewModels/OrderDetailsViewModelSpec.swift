@@ -32,13 +32,8 @@ class OrderDetailsViewModelSpec: QuickSpec {
         }
         
         describe("when data loaded") {
-            var disposeBag: DisposeBag!
-            
-            beforeEach {
-                disposeBag = DisposeBag()
-            }
-            
             it("should present loaded order") {
+                let disposeBag = DisposeBag()
                 viewModel.loadOrder()
                 
                 viewModel.data.asObservable()
@@ -50,13 +45,8 @@ class OrderDetailsViewModelSpec: QuickSpec {
         }
         
         describe("when try again did press") {
-            var disposeBag: DisposeBag!
-            
-            beforeEach {
-                disposeBag = DisposeBag()
-            }
-            
             it("should present loaded order") {
+                let disposeBag = DisposeBag()
                 viewModel.tryAgain()
                 
                 viewModel.data.asObservable()

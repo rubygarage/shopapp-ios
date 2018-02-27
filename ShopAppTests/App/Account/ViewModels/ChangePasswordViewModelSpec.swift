@@ -142,16 +142,10 @@ class ChangePasswordViewModelSpec: QuickSpec {
         }
         
         describe("when try again and if have valid and equals password texts and success reset password") {
-            var disposeBag: DisposeBag!
-            
-            beforeEach {
-                disposeBag = DisposeBag()
-                
+            it("needs to dismiss view controller") {
+                let disposeBag = DisposeBag()
                 viewModel.newPasswordText.value = "password"
                 viewModel.confirmPasswordText.value = "password"
-            }
-            
-            it("needs to dismiss view controller") {
                 updateCustomerUseCaseMock.isNeedToReturnError = false
                 
                 viewModel.updateSuccess
