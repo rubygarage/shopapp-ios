@@ -181,7 +181,7 @@ class PersonalInfoViewModelSpec: QuickSpec {
                 }
                 
                 context("but fail save changes") {
-                    it("needs to show errpr") {
+                    it("needs to show error") {
                         updateCustomerUseCaseMock.isNeedToReturnError = true
                         
                         viewModel.saveChangesSuccess

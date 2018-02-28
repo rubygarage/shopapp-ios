@@ -117,8 +117,8 @@ class SignUpViewController: BaseViewController<SignUpViewModel>, TTTAttributedLa
             .disposed(by: disposeBag)
         
         viewModel.signUpSuccess.asObservable()
-            .subscribe(onNext: { [weak self] _ in
-                guard let strongSelf = self else {
+            .subscribe(onNext: { [weak self] success in
+                guard let strongSelf = self, success else {
                     return
                 }
                 strongSelf.showToast(with: "Alert.Registered".localizable)

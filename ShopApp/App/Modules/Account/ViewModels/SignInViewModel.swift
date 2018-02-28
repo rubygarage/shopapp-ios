@@ -15,7 +15,7 @@ class SignInViewModel: BaseViewModel {
     var passwordText = Variable<String>("")
     var emailErrorMessage = PublishSubject<String>()
     var passwordErrorMessage = PublishSubject<String>()
-    var signInSuccess = PublishSubject<Void>()
+    var signInSuccess = PublishSubject<Bool>()
         
     var signInButtonEnabled: Observable<Bool> {
         return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { (email, password) in
@@ -69,14 +69,8 @@ class SignInViewModel: BaseViewModel {
                 strongSelf.state.onNext(.error(error: error))
             } else if let success = success {
                 strongSelf.state.onNext(.content)
-                strongSelf.notifyAboutSignInResultIfNeeded(success: success)
+                strongSelf.signInSuccess.onNext(success)
             }
-        }
-    }
-    
-    private func notifyAboutSignInResultIfNeeded(success: Bool) {
-        if success {
-            signInSuccess.onNext()
         }
     }
     

@@ -20,7 +20,7 @@ class SignUpViewModel: BaseViewModel {
     var phoneText = Variable<String>("")
     var emailErrorMessage = PublishSubject<String>()
     var passwordErrorMessage = PublishSubject<String>()
-    var signUpSuccess = PublishSubject<Void>()
+    var signUpSuccess = PublishSubject<Bool>()
     var policies = Variable<(privacyPolicy: Policy?, termsOfService: Policy?)>(privacyPolicy: nil, termsOfService: nil)
     
     var signUpButtonEnabled: Observable<Bool> {
@@ -85,14 +85,8 @@ class SignUpViewModel: BaseViewModel {
                 strongSelf.state.onNext(.error(error: error))
             } else if let success = success {
                 strongSelf.state.onNext(.content)
-                strongSelf.notifyAboutSignUpResultIfNeeded(success: success)
+                strongSelf.signUpSuccess.onNext(success)
             }
-        }
-    }
-    
-    private func notifyAboutSignUpResultIfNeeded(success: Bool) {
-        if success {
-            signUpSuccess.onNext()
         }
     }
     

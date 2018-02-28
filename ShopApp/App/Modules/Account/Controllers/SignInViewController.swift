@@ -84,8 +84,8 @@ class SignInViewController: BaseViewController<SignInViewModel> {
             .disposed(by: disposeBag)
         
         viewModel.signInSuccess.asObservable()
-            .subscribe(onNext: { [weak self] _ in
-                guard let strongSelf = self else {
+            .subscribe(onNext: { [weak self] success in
+                guard let strongSelf = self, success else {
                     return
                 }
                 strongSelf.showToast(with: "Alert.LoggedIn".localizable)

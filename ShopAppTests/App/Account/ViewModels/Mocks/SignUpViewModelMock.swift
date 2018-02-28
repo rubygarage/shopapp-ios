@@ -15,29 +15,37 @@ class SignUpViewModelMock: SignUpViewModel {
     private let policy = Policy()
     
     var isNeedToReturnPolicies = false
+    var isSignUpButtonEnabled = Variable<Bool>(true)
+    var isSignUpPressed = false
+    
+    override var signUpButtonEnabled: Observable<Bool> {
+        return isSignUpButtonEnabled.asObservable()
+    }
+    override var signUpPressed: AnyObserver<Void> {
+        return AnyObserver { [weak self] event in
+            switch event {
+            case .next:
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.isSignUpPressed = true
+            default:
+                break
+            }
+        }
+    }
     
     override func loadPolicies() {
         let policies = isNeedToReturnPolicies ? (policy, policy) : (nil, nil)
         self.policies.value = policies
     }
     
-    func makeSignUpButtonEnabled() {
-        emailText.value = "u"
-        passwordText.value = "p"
-    }
-    
-    func makeSignUpButtonDisabled() {
-        emailText.value = ""
-        passwordText.value = ""
-    }
-    
     func makeNotValidEmailAndPasswordTexts() {
-        emailText.value = "user@mail"
-        passwordText.value = "pass"
+        emailErrorMessage.onNext("Error.InvalidEmail".localizable)
+        passwordErrorMessage.onNext("Error.InvalidPassword".localizable)
     }
     
-    func makeValidEmailAndPasswordTexts() {
-        emailText.value = "user@mail.com"
-        passwordText.value = "password"
+    func makeSignUpSuccessed() {
+        signUpSuccess.onNext(true)
     }
 }

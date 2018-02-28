@@ -84,10 +84,12 @@ class SignUpViewControllerSpec: QuickSpec {
                 expect(viewModelMock.emailText.value) == "user@mail.com"
                 expect(viewModelMock.passwordText.value) == "password"
             }
-            
+        }
+        
+        describe("when enabling of sign up button changed") {
             context("if it have at least one symbol in each text field view") {
                 it("needs to enable sign up button") {
-                    viewModelMock.makeSignUpButtonEnabled()
+                    viewModelMock.isSignUpButtonEnabled.value = true
                     
                     expect(signUpButton.isEnabled) == true
                 }
@@ -95,7 +97,7 @@ class SignUpViewControllerSpec: QuickSpec {
             
             context("if it doesn't have symbols in both text variables") {
                 it("needs to disable sign up button") {
-                    viewModelMock.makeSignUpButtonDisabled()
+                    viewModelMock.isSignUpButtonEnabled.value = false
                     
                     expect(signUpButton.isEnabled) == false
                 }
@@ -118,30 +120,33 @@ class SignUpViewControllerSpec: QuickSpec {
         }
         
         describe("when sign up button pressed") {
-            it("needs to end editing") {
+            it("needs to end editing and notify view model") {
                 emailTextFieldView.textField.sendActions(for: .editingDidBegin)
                 signUpButton.sendActions(for: .touchUpInside)
                 
                 expect(viewController.isEditing) == false
+                expect(viewModelMock.isSignUpPressed) == true
+            }
+        }
+        
+        describe("when email and password texts are not valid") {
+            it("needs to show error messages about not valid email and password texts") {
+                viewModelMock.makeNotValidEmailAndPasswordTexts()
+                
+                expect(emailTextFieldView.errorMessage) == "Error.InvalidEmail".localizable
+                expect(passwordTextFieldView.errorMessage) == "Error.InvalidPassword".localizable
+            }
+        }
+        
+        describe("when email and password texts are valid and sign up successed") {
+            it("needs to show success toast and dismiss view controller") {
+                viewModelMock.makeSignUpSuccessed()
+                
+                expect(ToastCenter.default.currentToast?.text) == "Alert.Registered".localizable
             }
             
-            context("if it have not valid email and password texts") {
-                it("needs to show error messages about not valid email and password texts") {
-                    viewModelMock.makeNotValidEmailAndPasswordTexts()
-                    signUpButton.sendActions(for: .touchUpInside)
-                    
-                    expect(emailTextFieldView.errorMessage).toEventually(equal("Error.InvalidEmail".localizable))
-                    expect(passwordTextFieldView.errorMessage).toEventually(equal("Error.InvalidPassword".localizable))
-                }
-            }
-            
-            context("if it have valid email and password texts") {
-                it("needs to sign in and show success toast") {
-                    viewModelMock.makeValidEmailAndPasswordTexts()
-                    signUpButton.sendActions(for: .touchUpInside)
-                    
-                    expect(ToastCenter.default.currentToast).toEventuallyNot(beNil())
-                }
+            afterEach {
+                ToastCenter.default.cancelAll()
             }
         }
         

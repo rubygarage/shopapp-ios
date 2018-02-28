@@ -49,7 +49,7 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
         
         viewModel.customer.asObservable()
             .subscribe(onNext: { [weak self] customer in
-                guard let strongSelf = self else {
+                guard let strongSelf = self, let customer = customer else {
                     return
                 }
                 strongSelf.populateViews(with: customer)
@@ -125,10 +125,7 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
             .disposed(by: disposeBag)
     }
     
-    private func populateViews(with customer: Customer?) {
-        guard let customer = customer else {
-            return
-        }
+    private func populateViews(with customer: Customer) {
         nameTextFieldView.text = customer.firstName
         lastNameTextFieldView.text = customer.lastName
         emailTextFieldView.text = customer.email

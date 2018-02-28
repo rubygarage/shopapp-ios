@@ -137,20 +137,16 @@ class PersonalInfoViewControllerSpec: QuickSpec {
             it("needs to show error messages about not valid email text") {
                 viewModelMock.makeNotValidEmailText()
                 
-                expect(emailTextFieldView.errorMessage).toEventually(equal("Error.InvalidEmail".localizable))
+                expect(emailTextFieldView.errorMessage) == "Error.InvalidEmail".localizable
             }
         }
         
         describe("when email text is valid") {
-            beforeEach {
-                ToastCenter.default.cancelAll()
-            }
-            
             context("if save changes successed") {
                 it("needs to show success toast and disable save changes button") {
                     viewModelMock.makeSaveChangesSuccess()
                     
-                    expect(ToastCenter.default.currentToast?.text).toEventually(equal("Alert.ProfileChanged".localizable))
+                    expect(ToastCenter.default.currentToast?.text) == "Alert.ProfileChanged".localizable
                     expect(saveChangesButton.isEnabled) == false
                 }
             }
@@ -159,7 +155,7 @@ class PersonalInfoViewControllerSpec: QuickSpec {
                 it("needs to enable save changes button") {
                     viewModelMock.makeSaveChangesSuccess(false)
                     
-                    expect(ToastCenter.default.currentToast).toEventually(beNil())
+                    expect(ToastCenter.default.currentToast).to(beNil())
                     expect(saveChangesButton.isEnabled) == true
                 }
             }

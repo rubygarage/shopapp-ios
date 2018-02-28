@@ -104,7 +104,7 @@ class ForgotPasswordViewControllerSpec: QuickSpec {
             it("needs to show error messages about not valid email text") {
                 viewModelMock.makeNotValidEmailText()
                 
-                expect(emailTextFieldView.errorMessage).toEventually(equal("Error.InvalidEmail".localizable))
+                expect(emailTextFieldView.errorMessage) == "Error.InvalidEmail".localizable
             }
         }
         

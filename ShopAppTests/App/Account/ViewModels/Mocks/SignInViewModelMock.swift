@@ -11,23 +11,32 @@ import RxSwift
 @testable import ShopApp
 
 class SignInViewModelMock: SignInViewModel {
-    func makeSignInButtonEnabled() {
-        emailText.value = "u"
-        passwordText.value = "p"
-    }
+    var isSignInButtonEnabled = Variable<Bool>(true)
+    var isLoginPressed = false
     
-    func makeSignInButtonDisabled() {
-        emailText.value = ""
-        passwordText.value = ""
+    override var signInButtonEnabled: Observable<Bool> {
+        return isSignInButtonEnabled.asObservable()
+    }
+    override var loginPressed: AnyObserver<Void> {
+        return AnyObserver { [weak self] event in
+            switch event {
+            case .next:
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.isLoginPressed = true
+            default:
+                break
+            }
+        }
     }
     
     func makeNotValidEmailAndPasswordTexts() {
-        emailText.value = "user@mail"
-        passwordText.value = "pass"
+        emailErrorMessage.onNext("Error.InvalidEmail".localizable)
+        passwordErrorMessage.onNext("Error.InvalidPassword".localizable)
     }
     
-    func makeValidEmailAndPasswordTexts() {
-        emailText.value = "user@mail.com"
-        passwordText.value = "password"
+    func makeSignInSuccessed() {
+        signInSuccess.onNext(true)
     }
 }

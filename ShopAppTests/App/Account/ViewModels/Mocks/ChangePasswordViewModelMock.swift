@@ -11,28 +11,36 @@ import RxSwift
 @testable import ShopApp
 
 class ChangePasswordViewModelMock: ChangePasswordViewModel {
-    func makeUpdateButtonEnabled() {
-        newPasswordText.value = "p"
-        confirmPasswordText.value = "p"
+    var isUpdateButtonEnabled = Variable<Bool>(true)
+    var isResetPasswordPressed = false
+
+    override var updateButtonEnabled: Observable<Bool> {
+        return isUpdateButtonEnabled.asObservable()
     }
-    
-    func makeUpdateButtonDisabled() {
-        newPasswordText.value = ""
-        confirmPasswordText.value = ""
+    override var updatePressed: AnyObserver<Void> {
+        return AnyObserver { [weak self] event in
+            switch event {
+            case .next:
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.isResetPasswordPressed = true
+            default:
+                break
+            }
+        }
     }
     
     func makeNotValidPasswordTexts() {
-        newPasswordText.value = "pass"
-        confirmPasswordText.value = "pas"
+        newPasswordErrorMessage.onNext("Error.InvalidPassword".localizable)
+        confirmPasswordErrorMessage.onNext("Error.InvalidPassword".localizable)
     }
     
     func makeNotEqualsPasswordTexts() {
-        newPasswordText.value = "password"
-        confirmPasswordText.value = "passwor"
+        confirmPasswordErrorMessage.onNext("Error.PasswordsAreNotEquals".localizable)
     }
     
-    func makeValidAndEqualsPasswordTexts() {
-        newPasswordText.value = "password"
-        confirmPasswordText.value = "password"
+    func makeChangedPasswordSuccess(_ success: Bool = true) {
+        updateSuccess.onNext(success)
     }
 }

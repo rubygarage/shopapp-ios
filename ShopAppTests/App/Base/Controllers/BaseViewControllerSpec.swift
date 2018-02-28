@@ -125,7 +125,7 @@ class BaseViewControllerSpec: QuickSpec {
                         
                         expect(viewController.view.subviews.contains(viewController.loadingView)) == false
                         expect(viewController.view.subviews.contains(viewController.errorView)) == false
-                        expect(ToastCenter.default.currentToast).toNot(beNil())
+                        expect(ToastCenter.default.currentToast?.text) == "Error.Unknown".localizable
                     }
                 }
                 
@@ -135,8 +135,12 @@ class BaseViewControllerSpec: QuickSpec {
                         
                         expect(viewController.view.subviews.contains(viewController.loadingView)) == false
                         expect(viewController.view.subviews.contains(viewController.errorView)) == false
-                        expect(ToastCenter.default.currentToast).toNot(beNil())
+                        expect(ToastCenter.default.currentToast?.text) == ""
                     }
+                }
+                
+                afterEach {
+                    ToastCenter.default.cancelAll()
                 }
             }
         }

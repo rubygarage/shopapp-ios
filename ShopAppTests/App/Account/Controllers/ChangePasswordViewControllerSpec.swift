@@ -66,18 +66,20 @@ class ChangePasswordViewControllerSpec: QuickSpec {
                 expect(viewModelMock.newPasswordText.value) == "password"
                 expect(viewModelMock.confirmPasswordText.value) == "password"
             }
-            
+        }
+        
+        describe("when enabling of update button changed") {
             context("if it have at least one symbol in each text field view") {
-                it("needs to enable update button") {
-                    viewModelMock.makeUpdateButtonEnabled()
+                it("needs to enable forgot password button") {
+                    viewModelMock.isUpdateButtonEnabled.value = true
                     
                     expect(updateButton.isEnabled) == true
                 }
             }
             
             context("if it doesn't have symbols in both text variables") {
-                it("needs to disable update button") {
-                    viewModelMock.makeUpdateButtonDisabled()
+                it("needs to disable forgot password button") {
+                    viewModelMock.isUpdateButtonEnabled.value = false
                     
                     expect(updateButton.isEnabled) == false
                 }
@@ -85,17 +87,19 @@ class ChangePasswordViewControllerSpec: QuickSpec {
         }
 
         describe("when update button pressed") {
-            it("needs to end editing") {
+            it("needs to end editing and notify view model") {
                 newPasswordTextFieldView.textField.sendActions(for: .editingDidBegin)
                 updateButton.sendActions(for: .touchUpInside)
                 
                 expect(viewController.isEditing) == false
+                expect(viewModelMock.isResetPasswordPressed) == true
             }
-            
+        }
+        
+        describe("when password texts are not correct") {
             context("if it have not valid password texts") {
                 it("needs to show error messages about not valid password texts") {
                     viewModelMock.makeNotValidPasswordTexts()
-                    updateButton.sendActions(for: .touchUpInside)
                     
                     expect(newPasswordTextFieldView.errorMessage) == "Error.InvalidPassword".localizable
                     expect(confirmPasswordTextFieldView.errorMessage) == "Error.InvalidPassword".localizable
@@ -105,25 +109,8 @@ class ChangePasswordViewControllerSpec: QuickSpec {
             context("if it have not equals password texts") {
                 it("needs to show error message about not equals password texts") {
                     viewModelMock.makeNotEqualsPasswordTexts()
-                    updateButton.sendActions(for: .touchUpInside)
                     
                     expect(confirmPasswordTextFieldView.errorMessage) == "Error.PasswordsAreNotEquals".localizable
-                }
-            }
-            
-            context("if it have valid and equals password texts") {
-                it("needs to change password and dismiss view controller") {
-                    let disposeBag = DisposeBag()
-                    
-                    viewModelMock.makeValidAndEqualsPasswordTexts()
-                    
-                    viewModelMock.updateSuccess.asObservable()
-                        .subscribe(onNext: { success in
-                            expect(success).toEventually(beTrue())
-                        })
-                        .disposed(by: disposeBag)
-                    
-                    updateButton.sendActions(for: .touchUpInside)
                 }
             }
         }
