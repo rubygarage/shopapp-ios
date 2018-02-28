@@ -21,12 +21,16 @@ class OrderListViewControllerSpec: QuickSpec {
         
         beforeEach {
             viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.orderList) as! OrderListViewController
-            let repository = OrderRepositoryMock()
-            let orderListUseCaseMock = OrderListUseCaseMock(repository: repository)
+            
+            let repositoryMock = OrderRepositoryMock()
+            let orderListUseCaseMock = OrderListUseCaseMock(repository: repositoryMock)
+            
             viewModel = OrderListViewModelMock(orderListUseCase: orderListUseCaseMock)
             viewController.viewModel = viewModel
+            
             tableProvider = OrderListTableProvider()
             viewController.tableProvider = tableProvider
+
             navigationController = NavigationController(rootViewController: UIViewController())
             navigationController.pushViewController(viewController, animated: false)
             

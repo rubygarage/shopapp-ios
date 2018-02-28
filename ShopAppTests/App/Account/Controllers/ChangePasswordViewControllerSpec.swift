@@ -46,7 +46,7 @@ class ChangePasswordViewControllerSpec: QuickSpec {
                 expect(viewController.navigationItem.rightBarButtonItem?.image) == #imageLiteral(resourceName: "cross")
             }
             
-            it("should have text filed views with correct placeholders") {
+            it("should have text field views with correct placeholders") {
                 expect(newPasswordTextFieldView.placeholder) == "Placeholder.NewPassword".localizable.required.uppercased()
                 expect(confirmPasswordTextFieldView.placeholder) == "Placeholder.ConfirmPassword".localizable.required.uppercased()
             }

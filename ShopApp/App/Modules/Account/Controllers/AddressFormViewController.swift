@@ -9,9 +9,6 @@
 import RxSwift
 import ShopApp_Gateway
 
-private let kStatePickerTopConstraint: CGFloat = 45
-private let kStatePickerHeightConstraint: CGFloat = 22
-
 protocol AddressFormControllerlDelegate: class {
     func viewController(_ controller: AddressFormViewController, didFill address: Address)
 }
@@ -29,6 +26,9 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     @IBOutlet private weak var submitButton: BlackButton!
     @IBOutlet private weak var statePickerTopLayoutConstraint: NSLayoutConstraint!
     @IBOutlet private weak var statePickerHeightLayoutConstraint: NSLayoutConstraint!
+    
+    private let statePickerTopConstraint: CGFloat = 45
+    private let statePickerHeightConstraint: CGFloat = 22
     
     var address: Address?
     
@@ -143,8 +143,8 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
                 }
                 strongSelf.statePicker.customData = data
                 strongSelf.statePicker.isHidden = data.isEmpty
-                strongSelf.statePickerTopLayoutConstraint.constant = data.isEmpty ? 0 : kStatePickerTopConstraint
-                strongSelf.statePickerHeightLayoutConstraint.constant = data.isEmpty ? 0 : kStatePickerHeightConstraint
+                strongSelf.statePickerTopLayoutConstraint.constant = data.isEmpty ? 0 : strongSelf.statePickerTopConstraint
+                strongSelf.statePickerHeightLayoutConstraint.constant = data.isEmpty ? 0 : strongSelf.statePickerHeightConstraint
             })
             .disposed(by: disposeBag)
         
