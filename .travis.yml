@@ -18,3 +18,6 @@ notifications:
 
 script:
   - xcodebuild -workspace ShopApp.xcworkspace -scheme ShopApp -configuration 'Debug' -sdk 'iphonesimulator11.2' -destination 'platform=iOS Simulator,name=iPhone 7' test | xcpretty -f `xcpretty-travis-formatter`
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
