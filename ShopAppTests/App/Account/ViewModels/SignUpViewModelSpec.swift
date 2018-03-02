@@ -100,18 +100,48 @@ class SignUpViewModelSpec: QuickSpec {
                 }
             }
             
-            context("if it have valid email and password texts and success sign in") {
-                it("needs to dismiss view controller and show success toast") {
+            context("if it have valid email and password texts") {
+                var states: [ViewState]!
+                
+                beforeEach {
+                    states = []
+                    
                     viewModel.emailText.value = "user@mail.com"
                     viewModel.passwordText.value = "password"
                     
-                    viewModel.signUpSuccess
-                        .subscribe({ event in
-                            expect(event.element).toEventuallyNot(beNil())
+                    viewModel.state
+                        .subscribe(onNext: { state in
+                            states.append(state)
                         })
                         .disposed(by: disposeBag)
-                    
-                    viewModel.signUpPressed.onNext()
+                }
+                
+                context("and sign in successed") {
+                    it("needs to dismiss view controller and show success toast") {
+                        viewModel.signUpSuccess
+                            .subscribe(onNext: { success in
+                                expect(success).toEventually(beTrue())
+                            })
+                            .disposed(by: disposeBag)
+                        
+                        signUpUseCaseMock.isNeedToReturnError = false
+                        viewModel.signUpPressed.onNext()
+                        
+                        expect(states.count) == 2
+                        expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                        expect(states.last) == ViewState.content
+                    }
+                }
+                
+                context("but sign in failed") {
+                    it("needs to show error") {
+                        signUpUseCaseMock.isNeedToReturnError = true
+                        viewModel.signUpPressed.onNext()
+                        
+                        expect(states.count) == 2
+                        expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                        expect(states.last) == ViewState.error(error: nil)
+                    }
                 }
             }
         }
@@ -119,12 +149,13 @@ class SignUpViewModelSpec: QuickSpec {
         describe("when try again and it have valid email and password texts and success sign in") {
             it("needs to dismiss view controller and show success toast") {
                 let disposeBag = DisposeBag()
+                signUpUseCaseMock.isNeedToReturnError = false
                 viewModel.emailText.value = "user@mail.com"
                 viewModel.passwordText.value = "password"
                 
                 viewModel.signUpSuccess
-                    .subscribe({ event in
-                        expect(event.element).toEventuallyNot(beNil())
+                    .subscribe(onNext: { success in
+                        expect(success).toEventually(beTrue())
                     })
                     .disposed(by: disposeBag)
                 

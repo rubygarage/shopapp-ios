@@ -13,7 +13,7 @@ import RxSwift
 import ShopApp_Gateway
 import Toaster
 
-enum ViewState {
+enum ViewState: Equatable {
     case loading(showHud: Bool, isTranslucent: Bool)
     case content
     case error(error: RepoError?)
@@ -27,6 +27,26 @@ enum ViewState {
 
     static var make: ViewState.Builder.Type {
         return ViewState.Builder.self
+    }
+    
+    // MARK: - Equatable
+    
+    static func == (lhs: ViewState, rhs: ViewState) -> Bool {
+        switch (lhs, rhs) {
+        case (.loading, .loading), (.content, .content), (.error, .error), (.empty, .empty):
+            return true
+        default:
+            return false
+        }
+    }
+    
+    static func != (lhs: ViewState, rhs: ViewState) -> Bool {
+        switch (lhs, rhs) {
+        case (.loading, .loading), (.content, .content), (.error, .error), (.empty, .empty):
+            return false
+        default:
+            return true
+        }
     }
 }
 

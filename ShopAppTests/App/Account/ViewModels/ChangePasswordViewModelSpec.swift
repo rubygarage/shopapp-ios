@@ -107,35 +107,59 @@ class ChangePasswordViewModelSpec: QuickSpec {
                         .disposed(by: disposeBag)
                     
                     viewModel.updatePressed.onNext()
+                    
+                    viewModel.state
+                        .subscribe(onNext: { state in
+                            expect(state) == ViewState.content
+                        })
+                        .disposed(by: disposeBag)
                 }
             }
             
             context("if it have valid and equals password texts") {
+                var states: [ViewState]!
+                
+                beforeEach {
+                    states = []
+                    
+                    viewModel.state
+                        .subscribe(onNext: { state in
+                            states.append(state)
+                        })
+                        .disposed(by: disposeBag)
+                }
+                
                 context("and customer's password changed") {
                     it("needs to dismiss view controller") {
-                        updateCustomerUseCaseMock.isNeedToReturnError = false
-                        
                         viewModel.updateSuccess
                             .subscribe(onNext: { success in
                                 expect(success).toEventually(beTrue())
                             })
                             .disposed(by: disposeBag)
                         
+                        updateCustomerUseCaseMock.isNeedToReturnError = false
                         viewModel.updatePressed.onNext()
+                        
+                        expect(states.count) == 2
+                        expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                        expect(states.last) == ViewState.content
                     }
                 }
                 
                 context("but customer's password doesn't changed") {
                     it("needs to show toast with error message") {
-                        updateCustomerUseCaseMock.isNeedToReturnError = true
-                        
                         viewModel.updateSuccess
                             .subscribe(onNext: { success in
                                 expect(success).toEventually(beFalse())
                             })
                             .disposed(by: disposeBag)
                         
+                        updateCustomerUseCaseMock.isNeedToReturnError = true
                         viewModel.updatePressed.onNext()
+                        
+                        expect(states.count) == 2
+                        expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                        expect(states.last) == ViewState.error(error: nil)
                     }
                 }
             }

@@ -161,14 +161,22 @@ class PersonalInfoViewModelSpec: QuickSpec {
             }
             
             context("if it have valid email text") {
+                var states: [ViewState]!
+                
                 beforeEach {
+                    states = []
+                    
                     viewModel.emailText.value = "user@mail.com"
+                    
+                    viewModel.state
+                        .subscribe(onNext: { state in
+                            states.append(state)
+                        })
+                        .disposed(by: disposeBag)
                 }
                 
                 context("and success save changes") {
                     it("needs to show success toast and disable save changes button") {
-                        updateCustomerUseCaseMock.isNeedToReturnError = false
-                        
                         viewModel.saveChangesSuccess
                             .subscribe(onNext: { enabled in
                                 expect(viewModel.customer.value).toEventuallyNot(beNil())
@@ -176,14 +184,17 @@ class PersonalInfoViewModelSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
+                        updateCustomerUseCaseMock.isNeedToReturnError = false
                         viewModel.saveChangesPressed.onNext()
+                        
+                        expect(states.count) == 2
+                        expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                        expect(states.last) == ViewState.content
                     }
                 }
                 
                 context("but fail save changes") {
                     it("needs to show error") {
-                        updateCustomerUseCaseMock.isNeedToReturnError = true
-                        
                         viewModel.saveChangesSuccess
                             .subscribe(onNext: { enabled in
                                 expect(viewModel.customer.value).toEventually(beNil())
@@ -191,7 +202,12 @@ class PersonalInfoViewModelSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
+                        updateCustomerUseCaseMock.isNeedToReturnError = true
                         viewModel.saveChangesPressed.onNext()
+                        
+                        expect(states.count) == 2
+                        expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                        expect(states.last) == ViewState.error(error: nil)
                     }
                 }
             }
@@ -238,6 +254,20 @@ class PersonalInfoViewModelSpec: QuickSpec {
         }
         
         describe("when customer loaded") {
+            var disposeBag: DisposeBag!
+            var states: [ViewState]!
+            
+            beforeEach {
+                disposeBag = DisposeBag()
+                states = []
+                
+                viewModel.state
+                    .subscribe(onNext: { state in
+                        states.append(state)
+                    })
+                    .disposed(by: disposeBag)
+            }
+            
             context("if it have success customer load") {
                 it("should have variables with a correct values") {
                     customerUseCaseMock.isNeedToReturnError = false
@@ -248,6 +278,9 @@ class PersonalInfoViewModelSpec: QuickSpec {
                     expect(viewModel.lastNameText.value) == "Last"
                     expect(viewModel.emailText.value) == "user@mail.com"
                     expect(viewModel.phoneText.value) == "+380990000000"
+                    expect(states.count) == 2
+                    expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                    expect(states.last) == ViewState.content
                 }
             }
             
@@ -261,6 +294,9 @@ class PersonalInfoViewModelSpec: QuickSpec {
                     expect(viewModel.lastNameText.value) == ""
                     expect(viewModel.emailText.value) == ""
                     expect(viewModel.phoneText.value) == ""
+                    expect(states.count) == 2
+                    expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                    expect(states.last) == ViewState.error(error: nil)
                 }
             }
         }

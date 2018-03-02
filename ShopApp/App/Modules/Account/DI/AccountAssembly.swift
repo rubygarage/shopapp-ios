@@ -57,6 +57,7 @@ class AccountAssembly: Assembly {
 
         container.storyboardInitCompleted(SettingsViewController.self) { r, c in
             c.viewModel = r.resolve(SettingsViewModel.self)!
+            c.tableProvider = r.resolve(SettingsTableProvider.self)!
         }
 
         container.storyboardInitCompleted(SignInViewController.self) { r, c in
@@ -136,6 +137,10 @@ class AccountAssembly: Assembly {
         
         container.register(OrderListTableProvider.self) { _ in
             return OrderListTableProvider()
+        }
+        
+        container.register(SettingsTableProvider.self) { _ in
+            return SettingsTableProvider()
         }
     }
 }

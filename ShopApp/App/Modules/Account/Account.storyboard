@@ -84,6 +84,9 @@
                                 <color key="textColor" red="0.5450980392" green="0.5450980392" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="policy"/>
+                                </userDefinedRuntimeAttributes>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -138,7 +141,7 @@
         <!--Settings View Controller-->
         <scene sceneID="3wp-c9-FLE">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="Vuw-Re-lYh" customClass="SettingsViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsControllerIdentifier" hidesBottomBarWhenPushed="YES" id="Vuw-Re-lYh" customClass="SettingsViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DUO-oY-njh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -146,6 +149,10 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" estimatedRowHeight="60" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="lFP-jN-Z1E">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="tableView"/>
+                                </userDefinedRuntimeAttributes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1367,7 +1374,7 @@
         <image name="tabbar_sign_up" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Edi-8c-pdA"/>
+        <segue reference="0WY-zz-qIc"/>
         <segue reference="9Y3-HY-brn"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -85,30 +85,48 @@ class ForgotPasswordViewModelSpec: QuickSpec {
             }
             
             context("if it have valid email text") {
+                var states: [ViewState]!
+                
+                beforeEach {
+                    states = []
+            
+                    viewModel.state
+                        .subscribe(onNext: { state in
+                            states.append(state)
+                        })
+                        .disposed(by: disposeBag)
+                }
+                
                 context("and success reset password") {
                     it("needs to dismiss view controller") {
-                        resetPasswordUseCaseMock.isNeedToReturnError = false
-                        
                         viewModel.resetPasswordSuccess
                             .subscribe(onNext: { success in
                                 expect(success).toEventually(beTrue())
                             })
                             .disposed(by: disposeBag)
                         
+                        resetPasswordUseCaseMock.isNeedToReturnError = false
                         viewModel.resetPasswordPressed.onNext()
+                        
+                        expect(states.count) == 2
+                        expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                        expect(states.last) == ViewState.content
                     }
                     
                     context("but fail reset password") {
                         it("needs to show error") {
-                            resetPasswordUseCaseMock.isNeedToReturnError = true
-                            
                             viewModel.resetPasswordSuccess
                                 .subscribe(onNext: { success in
                                     expect(success).toEventually(beFalse())
                                 })
                                 .disposed(by: disposeBag)
                             
+                            resetPasswordUseCaseMock.isNeedToReturnError = true
                             viewModel.resetPasswordPressed.onNext()
+                            
+                            expect(states.count) == 2
+                            expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                            expect(states.last) == ViewState.error(error: nil)
                         }
                     }
                 }

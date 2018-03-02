@@ -33,6 +33,7 @@ class SignUpViewControllerSpec: QuickSpec {
             let shopUseCase = ShopUseCaseMock(repository: shopRepositoryMock)
             let signUpUseCase = SignUpUseCaseMock(repository: authentificationRepositoryMock)
             viewModelMock = SignUpViewModelMock(shopUseCase: shopUseCase, signUpUseCase: signUpUseCase)
+            viewModelMock.isPoliciesLoadingStarted = false
             viewController.viewModel = viewModelMock
             
             emailTextFieldView = self.findView(withAccessibilityLabel: "email", in: viewController.view) as! InputTextFieldView
@@ -71,6 +72,10 @@ class SignUpViewControllerSpec: QuickSpec {
             
             it("should have accept policies label with correct text") {
                 expect(acceptPoliciesLabel.text) == "Label.AcceptPoliciesAttributed".localizable
+            }
+            
+            it("should load policies") {
+                expect(viewModelMock.isPoliciesLoadingStarted) == true
             }
         }
         

@@ -17,6 +17,7 @@ class SignUpViewModelMock: SignUpViewModel {
     var isNeedToReturnPolicies = false
     var isSignUpButtonEnabled = Variable<Bool>(true)
     var isSignUpPressed = false
+    var isPoliciesLoadingStarted = false
     
     override var signUpButtonEnabled: Observable<Bool> {
         return isSignUpButtonEnabled.asObservable()
@@ -36,6 +37,8 @@ class SignUpViewModelMock: SignUpViewModel {
     }
     
     override func loadPolicies() {
+        isPoliciesLoadingStarted = true
+        
         let policies = isNeedToReturnPolicies ? (policy, policy) : (nil, nil)
         self.policies.value = policies
     }

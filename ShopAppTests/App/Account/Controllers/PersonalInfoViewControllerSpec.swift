@@ -35,6 +35,7 @@ class PersonalInfoViewControllerSpec: QuickSpec {
             let loginUseCaseMock = LoginUseCaseMock(repository: repositoryMock)
             let customerUseCaseMock = CustomerUseCaseMock(repository: repositoryMock)
             viewModelMock = PersonalInfoViewModelMock(updateCustomerUseCase: updateCustomerUseCaseMock, loginUseCase: loginUseCaseMock, customerUseCase: customerUseCaseMock)
+            viewModelMock.isCustomerLoadingStarted = false
             viewController.viewModel = viewModelMock
             
             emailTextFieldView = self.findView(withAccessibilityLabel: "email", in: viewController.view) as! InputTextFieldView
@@ -77,6 +78,10 @@ class PersonalInfoViewControllerSpec: QuickSpec {
             
             it("should have correct setup view model") {
                 expect(viewModelMock.canChangeEmail) == false
+            }
+            
+            it("should load customer") {
+                expect(viewModelMock.isCustomerLoadingStarted) == true
             }
         }
         

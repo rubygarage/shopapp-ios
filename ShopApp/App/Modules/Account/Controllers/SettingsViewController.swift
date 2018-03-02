@@ -11,7 +11,7 @@ import UIKit
 class SettingsViewController: BaseViewController<SettingsViewModel> {
     @IBOutlet private weak var tableView: UITableView!
     
-    private var tableProvider: SettingsTableProvider!
+    var tableProvider: SettingsTableProvider!
     
     // MARK: - View controller lifecycle
     
@@ -33,7 +33,6 @@ class SettingsViewController: BaseViewController<SettingsViewModel> {
     private func setupTableView() {
         tableView.registerNibForCell(SwitchTableViewCell.self)
         
-        tableProvider = SettingsTableProvider()
         tableProvider.delegate = self
         tableView.dataSource = tableProvider
         
