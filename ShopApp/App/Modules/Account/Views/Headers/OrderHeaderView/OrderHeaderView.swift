@@ -10,8 +10,6 @@ import UIKit
 
 import ShopApp_Gateway
 
-private let kOrderHeaderViewDateFormat = "EEEE, MMM d, yyyy"
-
 let kOrderHeaderViewHeight: CGFloat = 75
 
 protocol OrderHeaderDelegate: class {
@@ -21,6 +19,8 @@ protocol OrderHeaderDelegate: class {
 class OrderHeaderView: UIView {
     @IBOutlet private weak var numberLabel: UILabel!
     @IBOutlet private weak var dateLabel: UILabel!
+    
+    private let orderHeaderViewDateFormat = "EEEE, MMM d, yyyy"
     
     private var section: Int!
     
@@ -60,7 +60,7 @@ class OrderHeaderView: UIView {
         
         let dateFormat = "Label.Order.Date".localizable
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = kOrderHeaderViewDateFormat
+        dateFormatter.dateFormat = orderHeaderViewDateFormat
         let dateString = dateFormatter.string(from: order.createdAt!)
         dateLabel.text = String(format: dateFormat, dateString)
     }
