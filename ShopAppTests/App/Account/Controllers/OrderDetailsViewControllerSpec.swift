@@ -19,7 +19,7 @@ class OrderDetailsViewControllerSpec: QuickSpec {
         var viewController: OrderDetailsViewController!
         var navigationController: NavigationController!
         var tableProvider: OrderDetailsTableProvider!
-        var viewModel: OrderDetailsViewModelMock!
+        var viewModelMock: OrderDetailsViewModelMock!
         var tableView: UITableView!
         
         beforeEach {
@@ -27,8 +27,8 @@ class OrderDetailsViewControllerSpec: QuickSpec {
             viewController.orderId = "order id"
             let repository = OrderRepositoryMock()
             let orderUseCaseMock = OrderUseCaseMock(repository: repository)
-            viewModel = OrderDetailsViewModelMock(orderUseCase: orderUseCaseMock)
-            viewController.viewModel = viewModel
+            viewModelMock = OrderDetailsViewModelMock(orderUseCase: orderUseCaseMock)
+            viewController.viewModel = viewModelMock
             tableProvider = OrderDetailsTableProvider()
             viewController.tableProvider = tableProvider
             navigationController = NavigationController(rootViewController: UIViewController())
@@ -52,7 +52,7 @@ class OrderDetailsViewControllerSpec: QuickSpec {
             }
             
             it("should have correct view model properties") {
-                expect(viewModel.orderId) == viewController.orderId
+                expect(viewModelMock.orderId) == viewController.orderId
             }
             
             it("should have correct content inset of table view") {
@@ -67,10 +67,17 @@ class OrderDetailsViewControllerSpec: QuickSpec {
                 disposeBag = DisposeBag()
             }
             
+            it("should start loading order") {
+                expect(viewModelMock.isLoadingOrderStarted) == true
+            }
+            
             context("if data is empty") {
                 it("should have tableView without data") {
+                    viewModelMock.makeEmptyData()
+                    viewModelMock.loadOrder()
+                    
                     viewController.viewModel.data.asObservable()
-                        .subscribe(onNext: { order in
+                        .subscribe(onNext: { _ in
                             expect(tableView.numberOfSections) == 0
                         })
                         .disposed(by: disposeBag)
@@ -79,8 +86,8 @@ class OrderDetailsViewControllerSpec: QuickSpec {
 
             context("if data isn't empty") {
                 it("should have tableView with data") {
-                    viewModel.prepareData()
-                    viewModel.loadOrder()
+                    viewModelMock.makeNotEmptyData()
+                    viewModelMock.loadOrder()
                     
                     viewController.viewModel.data.asObservable()
                         .subscribe(onNext: { order in

@@ -31,106 +31,231 @@ class OrderListViewModelSpec: QuickSpec {
         
         describe("when first page loaded") {
             var disposeBag: DisposeBag!
+            var states: [ViewState]!
             
             beforeEach {
                 disposeBag = DisposeBag()
+                states = []
+                
+                viewModel.state
+                    .subscribe(onNext: { state in
+                        states.append(state)
+                    })
+                    .disposed(by: disposeBag)
             }
             
             context("if not full page loaded") {
                 it("should present loaded items") {
                     orderListUseCaseMock.isOrderCountLessThenConstant = true
+                    orderListUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
-                    viewModel.items.asObservable()
-                        .subscribe(onNext: { orders in
-                            expect(orders.count) != kItemsPerPage
-                            expect(viewModel.paginationValue).to(beNil())
-                            expect(viewModel.canLoadMore) == false
-                        })
-                        .disposed(by: disposeBag)
+                    expect(viewModel.items.value.count) != kItemsPerPage
+                    expect(viewModel.paginationValue).to(beNil())
+                    expect(viewModel.canLoadMore) == false
+                    expect(states.count) == 2
+                    expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                    expect(states.last) == ViewState.content
                 }
             }
             
             context("if full page loaded") {
                 it("should present loaded items") {
                     orderListUseCaseMock.isOrderCountLessThenConstant = false
+                    orderListUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
-                    viewModel.items.asObservable()
-                        .subscribe(onNext: { orders in
-                            expect(orders.count) == kItemsPerPage
-                            expect(viewModel.paginationValue).to(beNil())
-                            expect(viewModel.canLoadMore) == true
-                        })
-                        .disposed(by: disposeBag)
+                    expect(viewModel.items.value.count) == kItemsPerPage
+                    expect(viewModel.paginationValue).to(beNil())
+                    expect(viewModel.canLoadMore) == true
+                    expect(states.count) == 2
+                    expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                    expect(states.last) == ViewState.content
+                }
+            }
+            
+            context("but error did occured") {
+                it("should not load items") {
+                    orderListUseCaseMock.isNeedToReturnError = true
+                    viewModel.reloadData()
+                    
+                    expect(viewModel.items.value.count) == 0
+                    expect(viewModel.paginationValue).to(beNil())
+                    expect(viewModel.canLoadMore) == false
+                    expect(states.count) == 2
+                    expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                    expect(states.last) == ViewState.error(error: nil)
                 }
             }
         }
         
         describe("when next page loaded") {
-            it("should present loaded items") {
-                let disposeBag = DisposeBag()
-                orderListUseCaseMock.isOrderCountLessThenConstant = false
-                viewModel.reloadData()
-                viewModel.loadNextPage()
+            var disposeBag: DisposeBag!
+            var states: [ViewState]!
+            
+            beforeEach {
+                disposeBag = DisposeBag()
+                states = []
+            }
+            
+            context("if data loaded successfully") {
+                it("should present loaded items") {
+                    orderListUseCaseMock.isOrderCountLessThenConstant = false
+                    orderListUseCaseMock.isNeedToReturnError = false
+                    viewModel.reloadData()
+                    
+                    viewModel.state
+                        .subscribe(onNext: { state in
+                            states.append(state)
+                        })
+                        .disposed(by: disposeBag)
+                    
+                    viewModel.loadNextPage()
+                    
+                    expect(viewModel.items.value.count) == kItemsPerPage * 2
+                    expect(viewModel.paginationValue as? String) == "pagination value"
+                    expect(states.count) == 2
+                    expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                    expect(states.last) == ViewState.content
+                }
+            }
+            
+            context("if error did occured") {
+                it("should not load any items") {
+                    orderListUseCaseMock.isNeedToReturnError = true
+                    viewModel.reloadData()
+                    
+                    viewModel.state
+                        .subscribe(onNext: { state in
+                            states.append(state)
+                        })
+                        .disposed(by: disposeBag)
+                    
+                    viewModel.loadNextPage()
+                    
+                    expect(viewModel.items.value.count) == 0
+                    expect(viewModel.paginationValue).to(beNil())
+                    expect(states.count) == 2
+                    expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                    expect(states.last) == ViewState.error(error: nil)
+                }
                 
-                viewModel.items.asObservable()
-                    .subscribe(onNext: { orders in
-                        expect(orders.count) == kItemsPerPage * 2
-                        expect(viewModel.paginationValue as? String) == "pagination value"
-                    })
-                    .disposed(by: disposeBag)
+                it("should load first page and have error during loading next page") {
+                    orderListUseCaseMock.isNeedToReturnError = false
+                    viewModel.reloadData()
+                    
+                    viewModel.state
+                        .subscribe(onNext: { state in
+                            states.append(state)
+                        })
+                        .disposed(by: disposeBag)
+                    
+                    orderListUseCaseMock.isNeedToReturnError = true
+                    viewModel.loadNextPage()
+                    
+                    expect(viewModel.items.value.count) == kItemsPerPage
+                    expect(viewModel.paginationValue as? String) == "pagination value"
+                    expect(states.count) == 2
+                    expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                    expect(states.last) == ViewState.error(error: nil)
+                }
             }
         }
         
         describe("when try again pressed") {
-            it("should present loaded items") {
-                let disposeBag = DisposeBag()
-                orderListUseCaseMock.isOrderCountLessThenConstant = true
-                viewModel.tryAgain()
+            var disposeBag: DisposeBag!
+            var states: [ViewState]!
+            
+            beforeEach {
+                disposeBag = DisposeBag()
+                states = []
                 
-                viewModel.items.asObservable()
-                    .subscribe(onNext: { orders in
-                        expect(orders.count) != kItemsPerPage
-                        expect(viewModel.paginationValue).to(beNil())
-                        expect(viewModel.canLoadMore) == false
+                viewModel.state
+                    .subscribe(onNext: { state in
+                        states.append(state)
                     })
                     .disposed(by: disposeBag)
+            }
+            
+            it("should present loaded items") {
+                orderListUseCaseMock.isOrderCountLessThenConstant = true
+                orderListUseCaseMock.isNeedToReturnError = false
+                viewModel.tryAgain()
+                
+                expect(viewModel.items.value.count) != kItemsPerPage
+                expect(viewModel.paginationValue).to(beNil())
+                expect(viewModel.canLoadMore) == false
+                expect(states.count) == 2
+                expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                expect(states.last) == ViewState.content
+            }
+            
+            it("should error did occured") {
+                orderListUseCaseMock.isNeedToReturnError = true
+                
+                viewModel.tryAgain()
+                
+                expect(viewModel.items.value.count) == 0
+                expect(viewModel.paginationValue).to(beNil())
+                expect(viewModel.canLoadMore) == false
+                expect(states.count) == 2
+                expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                expect(states.last) == ViewState.error(error: nil)
             }
         }
         
         describe("when product details did press") {
             var disposeBag: DisposeBag!
+            var states: [ViewState]!
             
             beforeEach {
                 disposeBag = DisposeBag()
+                states = []
+                
+                viewModel.state
+                    .subscribe(onNext: { state in
+                        states.append(state)
+                    })
+                    .disposed(by: disposeBag)
             }
             
             context("if product variant found") {
                 it("should find correct product variant") {
-                    orderListUseCaseMock.returnOrderWithVariant = true
+                    orderListUseCaseMock.isNeedToReturnOrderWithVariant = true
+                    orderListUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
-                    viewModel.items.asObservable()
-                        .subscribe(onNext: { _ in
-                            let variant = viewModel.productVariant(with: "product variant id", at: 0)
-                            expect(variant).toNot(beNil())
-                        })
-                        .disposed(by: disposeBag)
+                    let variant = viewModel.productVariant(with: "product variant id", at: 0)
+                    expect(variant).toNot(beNil())
+                    expect(states.count) == 2
+                    expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                    expect(states.last) == ViewState.content
                 }
             }
             
             context("if product variant not found") {
                 it("should not find correct product variant") {
-                    orderListUseCaseMock.returnOrderWithVariant = false
+                    orderListUseCaseMock.isNeedToReturnOrderWithVariant = false
+                    orderListUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
-                    viewModel.items.asObservable()
-                        .subscribe(onNext: { _ in
-                            let variant = viewModel.productVariant(with: "product variant id", at: 0)
-                            expect(variant).to(beNil())
-                        })
-                        .disposed(by: disposeBag)
+                    let variant = viewModel.productVariant(with: "product variant id", at: 0)
+                    expect(variant).to(beNil())
+                    expect(states.count) == 2
+                    expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                    expect(states.last) == ViewState.content
+                }
+            }
+            
+            context("but error did occured") {
+                it("should have error") {
+                    orderListUseCaseMock.isNeedToReturnError = true
+                    viewModel.reloadData()
+                    
+                    expect(viewModel.items.value.count) == 0
+                    expect(states.count) == 2
+                    expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
+                    expect(states.last) == ViewState.error(error: nil)
                 }
             }
         }

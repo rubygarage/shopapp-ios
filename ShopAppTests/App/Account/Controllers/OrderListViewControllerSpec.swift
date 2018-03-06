@@ -17,7 +17,7 @@ class OrderListViewControllerSpec: QuickSpec {
         var viewController: OrderListViewController!
         var navigationController: NavigationController!
         var tableProvider: OrderListTableProvider!
-        var viewModel: OrderListViewModelMock!
+        var viewModelMock: OrderListViewModelMock!
         
         beforeEach {
             viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.orderList) as! OrderListViewController
@@ -25,8 +25,8 @@ class OrderListViewControllerSpec: QuickSpec {
             let repositoryMock = OrderRepositoryMock()
             let orderListUseCaseMock = OrderListUseCaseMock(repository: repositoryMock)
             
-            viewModel = OrderListViewModelMock(orderListUseCase: orderListUseCaseMock)
-            viewController.viewModel = viewModel
+            viewModelMock = OrderListViewModelMock(orderListUseCase: orderListUseCaseMock)
+            viewController.viewModel = viewModelMock
             
             tableProvider = OrderListTableProvider()
             viewController.tableProvider = tableProvider
@@ -57,6 +57,10 @@ class OrderListViewControllerSpec: QuickSpec {
             it("should have correct content inset of table view") {
                 expect(viewController.tableView.contentInset) == TableView.defaultContentInsets
             }
+            
+            it("should start reload data") {
+                expect(viewModelMock.isReloadDataStarted) == true
+            }
         }
         
         describe("when data loaded") {
@@ -68,6 +72,9 @@ class OrderListViewControllerSpec: QuickSpec {
             
             context("if data is empty") {
                 it("should have tableView without data") {
+                    viewModelMock.isNeedToReturnData = false
+                    viewModelMock.reloadData()
+                    
                     viewController.viewModel.items.asObservable()
                         .subscribe(onNext: { items in
                             expect(viewController.refreshControl?.isRefreshing) == false
@@ -80,8 +87,8 @@ class OrderListViewControllerSpec: QuickSpec {
             
             context("if data isn't empty") {
                 it("should have tableView with data") {
-                    viewModel.isNeedToReturnData = true
-                    viewModel.reloadData()
+                    viewModelMock.isNeedToReturnData = true
+                    viewModelMock.reloadData()
                     
                     viewController.viewModel.items.asObservable()
                         .subscribe(onNext: { items in
@@ -91,6 +98,20 @@ class OrderListViewControllerSpec: QuickSpec {
                         })
                         .disposed(by: disposeBag)
                 }
+            }
+        }
+        
+        describe("when data refreshed or loaded next page") {
+            it("should refresh data") {
+                viewController.pullToRefreshHandler()
+                
+                expect(viewModelMock.isReloadDataStarted) == true
+            }
+            
+            it("should load next page") {
+                viewController.infinityScrollHandler()
+                
+                expect(viewModelMock.isLoadNextPageStarted) == true
             }
         }
     }

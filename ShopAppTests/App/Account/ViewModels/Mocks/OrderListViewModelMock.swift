@@ -13,10 +13,17 @@ import ShopApp_Gateway
 
 class OrderListViewModelMock: OrderListViewModel {
     var isNeedToReturnData = false
+    var isReloadDataStarted = false
+    var isLoadNextPageStarted = false
     
     override func reloadData() {
         if isNeedToReturnData {
             items.value = [Order()]
         }
+        isReloadDataStarted = true
+    }
+    
+    override func loadNextPage() {
+        isLoadNextPageStarted = true
     }
 }

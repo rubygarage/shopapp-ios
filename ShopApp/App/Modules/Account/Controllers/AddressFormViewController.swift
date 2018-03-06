@@ -43,7 +43,7 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
         setupViewModel()
         populateViewsIfNeeded()
         
-        viewModel.getCountries()
+        viewModel?.getCountries()
     }
     
     // MARK: - Setup
@@ -62,6 +62,10 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     }
     
     private func setupViewModel() {
+        guard let viewModel = viewModel else {
+            return
+        }
+        
         viewModel.address = address
         
         countryPicker.rx.value.map({ $0 ?? "" })
@@ -172,7 +176,7 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     }
     
     private func populateViewsIfNeeded() {
-        if let address = viewModel.address {
+        if let address = viewModel?.address {
             countryPicker.text = address.country
             nameTextFieldView.text = address.firstName
             lastNameTextFieldView.text = address.lastName

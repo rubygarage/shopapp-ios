@@ -13,12 +13,18 @@ import ShopApp_Gateway
 
 class OrderDetailsViewModelMock: OrderDetailsViewModel {
     var order: Order!
+    var isLoadingOrderStarted = false
     
     override func loadOrder() {
         data.value = order
+        isLoadingOrderStarted = true
     }
     
-    func prepareData() {
+    func makeEmptyData() {
+        order = nil
+    }
+    
+    func makeNotEmptyData() {
         order = Order()
         order.id = "order id"
         

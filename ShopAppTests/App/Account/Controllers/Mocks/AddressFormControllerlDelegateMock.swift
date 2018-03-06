@@ -6,7 +6,7 @@
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 import ShopApp_Gateway
 
