@@ -13,9 +13,9 @@ import ShopApp_Gateway
 class AccountViewController: BaseViewController<AccountViewModel> {
     @IBOutlet private weak var tableView: UITableView!
     
-    private var tableProvider: AccountTableProvider!
-    
     fileprivate var selectedPolicy: Policy?
+    
+    var tableProvider: AccountTableProvider!
     
     // MARK: - View controller lifecycle
     
@@ -24,7 +24,6 @@ class AccountViewController: BaseViewController<AccountViewModel> {
         
         setupTableView()
         setupViewModel()
-        loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,8 +59,8 @@ class AccountViewController: BaseViewController<AccountViewModel> {
     
     private func setupTableView() {
         tableView.registerNibForCell(AccountTableViewCell.self)
+        tableView.registerNibForHeaderFooterView(AccountFooterView.self)
         
-        tableProvider = AccountTableProvider()
         tableProvider.delegate = self
         tableView.dataSource = tableProvider
         tableView.delegate = tableProvider

@@ -71,7 +71,7 @@ extension AccountTableProvider: UITableViewDelegate {
         guard customer != nil else {
             return UIView()
         }
-        let view = AccountFooterView(frame: CGRect.zero)
+        let view: AccountFooterView = tableView.dequeueReusableHeaderFooterView()
         view.delegate = delegate
         return view
     }

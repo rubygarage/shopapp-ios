@@ -14,7 +14,7 @@ protocol AccountFooterDelegate: class {
     func footerViewDidTapLogout(_ footerView: AccountFooterView)
 }
 
-class AccountFooterView: UIView {
+class AccountFooterView: UITableViewHeaderFooterView {
     @IBOutlet private weak var logoutButton: UnderlinedButton!
     
     @IBOutlet fileprivate weak var logoutUnderlineView: UIView!
@@ -22,15 +22,9 @@ class AccountFooterView: UIView {
     weak var delegate: AccountFooterDelegate?
     
     // MARK: - View lifecycle
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        commonInit()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
         
         commonInit()
     }
@@ -38,7 +32,6 @@ class AccountFooterView: UIView {
     // MARK: - Setup
     
     private func commonInit() {
-        loadFromNib()
         setupViews()
     }
     

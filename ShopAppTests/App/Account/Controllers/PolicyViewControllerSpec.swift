@@ -36,14 +36,21 @@ class PolicyViewControllerSpec: QuickSpec {
                 expect(viewController.navigationItem.leftBarButtonItem?.image) == #imageLiteral(resourceName: "arrow_left")
             }
             
-            it("should have correct content inset and offset of policy text view") {
+            it("should have correct content inset of policy text view") {
                 expect(policyTextView.contentInset) == UIEdgeInsets(top: 28, left: 16, bottom: 28, right: 16)
-                expect(policyTextView.contentOffset) == CGPoint(x: -16, y: -28)
             }
             
             it("needs to set title and present body in text view") {
                 expect(viewController.title) == "Title"
                 expect(policyTextView.text) == "Body"
+            }
+        }
+        
+        describe("when view layouted subviews") {
+            it("should have correct content offset of policy text view") {
+                viewController.viewDidLayoutSubviews()
+                
+                expect(policyTextView.contentOffset) == CGPoint(x: -16, y: -28)
             }
         }
     }

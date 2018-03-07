@@ -51,6 +51,14 @@ class SettingsViewControllerSpec: QuickSpec {
                 expect(viewController.navigationItem.leftBarButtonItem?.image) == #imageLiteral(resourceName: "arrow_left")
             }
             
+            it("should have correct delegate of table provider") {
+                expect(tableProvider.delegate) === viewController
+            }
+            
+            it("should have correct data source of table view") {
+                expect(tableView.dataSource) === tableProvider
+            }
+            
             it("should have correct content inset of table view") {
                 expect(tableView.contentInset) == TableView.defaultContentInsets
             }

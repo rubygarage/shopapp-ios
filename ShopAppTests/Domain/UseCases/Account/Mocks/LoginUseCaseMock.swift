@@ -28,6 +28,6 @@ class LoginUseCaseMock: LoginUseCase {
     }
     
     private func execute(callback: LoginStatusCallback) {
-        isNeedToReturnError ? callback(false) : callback(true)
+        callback(!isNeedToReturnError)
     }
 }

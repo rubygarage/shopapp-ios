@@ -20,6 +20,8 @@ class ShopUseCaseMock: ShopUseCase {
     private func execute(callback: @escaping (_ shop: Shop) -> Void) {
         shop.privacyPolicy = Policy()
         shop.privacyPolicy?.body = "body"
+        shop.refundPolicy = Policy()
+        shop.refundPolicy?.body = "body"
         shop.termsOfService = Policy()
         shop.termsOfService?.body = "body"
         

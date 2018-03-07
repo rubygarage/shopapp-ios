@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountLoggedHeaderView" customModule="ShopClient" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountLoggedHeaderView" customModule="ShopApp" customModuleProvider="target">
             <connections>
                 <outlet property="customerImageView" destination="NGO-zl-TiJ" id="NII-80-Hkf"/>
                 <outlet property="customerNameLabel" destination="0qI-g8-usP" id="vgs-Ej-gSr"/>
@@ -36,6 +36,9 @@
                     <state key="normal" title="Button">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="myOrders"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="myOrdersButtonDidPress:" destination="-1" eventType="touchUpInside" id="nyG-DQ-OeK"/>
                     </connections>
@@ -53,18 +56,28 @@
                         <constraint firstAttribute="width" constant="60" id="7dD-RB-dfd"/>
                         <constraint firstAttribute="height" constant="60" id="Aab-3F-raJ"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="customerImage"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lyh-ON-oNS">
                     <rect key="frame" x="89" y="35" width="280" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="welcome"/>
+                    </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customer Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="0qI-g8-usP">
                     <rect key="frame" x="89" y="55" width="280" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="customerName"/>
+                    </userDefinedRuntimeAttributes>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZN6-2e-Do8">
                     <rect key="frame" x="0.0" y="173" width="389" height="60"/>
@@ -77,6 +90,9 @@
                     <state key="normal" title="Button">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="perosnalInfo"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="personalInfoButtonDidPress:" destination="-1" eventType="touchUpInside" id="GCJ-G0-Bde"/>
                     </connections>
@@ -99,6 +115,9 @@
                     <state key="normal" title="Button">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="shippingAddress"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="shippingAddressButtonDidPress:" destination="-1" eventType="touchUpInside" id="ltB-h1-RUg"/>
                     </connections>

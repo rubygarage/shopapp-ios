@@ -32,6 +32,7 @@ class AccountAssembly: Assembly {
 
         container.storyboardInitCompleted(AccountViewController.self) { r, c in
             c.viewModel = r.resolve(AccountViewModel.self)!
+            c.tableProvider = r.resolve(AccountTableProvider.self)!
         }
 
         container.storyboardInitCompleted(ForgotPasswordViewController.self) { r, c in
@@ -146,6 +147,10 @@ class AccountAssembly: Assembly {
         
         container.register(BaseAddressListTableProvider.self) { _ in
             return BaseAddressListTableProvider()
+        }
+        
+        container.register(AccountTableProvider.self) { _ in
+            return AccountTableProvider()
         }
     }
 }

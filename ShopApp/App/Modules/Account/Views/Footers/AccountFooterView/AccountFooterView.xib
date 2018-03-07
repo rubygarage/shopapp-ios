@@ -10,49 +10,65 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountFooterView" customModule="ShopClient" customModuleProvider="target">
-            <connections>
-                <outlet property="logoutButton" destination="j3d-Qo-oXY" id="gez-Pi-knh"/>
-                <outlet property="logoutUnderlineView" destination="qSr-M2-gaR" id="gdm-ZG-q8i"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="395" height="65"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+        <view contentMode="scaleToFill" id="P2P-rO-ooF" customClass="AccountFooterView" customModule="ShopApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j3d-Qo-oXY" customClass="UnderlinedButton" customModule="ShopClient" customModuleProvider="target">
-                    <rect key="frame" x="164" y="20" width="66" height="25"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                    <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
-                    <state key="normal" title="Log out">
-                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="logoutTapped:" destination="-1" eventType="touchUpInside" id="nZQ-Nu-NoR"/>
-                    </connections>
-                </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qSr-M2-gaR">
-                    <rect key="frame" x="174" y="45" width="46" height="1"/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nRY-tb-0o0">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="05T-ko-Kn6" customClass="UnderlinedButton" customModule="ShopApp" customModuleProvider="target">
+                            <rect key="frame" x="154" y="20" width="66" height="46"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                            <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                            <state key="normal" title="Log out">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="logout"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="logoutTapped:" destination="P2P-rO-ooF" eventType="touchUpInside" id="lir-w7-Gcf"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRl-O9-BpH">
+                            <rect key="frame" x="164" y="66" width="46" height="1"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="Fqx-Y1-me4"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="underline"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilituView" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="1" id="tEl-Ee-dov"/>
+                        <constraint firstItem="05T-ko-Kn6" firstAttribute="top" secondItem="nRY-tb-0o0" secondAttribute="top" constant="20" id="9WW-8n-Ly3"/>
+                        <constraint firstItem="WRl-O9-BpH" firstAttribute="top" secondItem="05T-ko-Kn6" secondAttribute="bottom" id="B0v-d1-dzi"/>
+                        <constraint firstAttribute="bottom" secondItem="WRl-O9-BpH" secondAttribute="bottom" constant="19" id="B9H-oi-a1w"/>
+                        <constraint firstItem="WRl-O9-BpH" firstAttribute="trailing" secondItem="05T-ko-Kn6" secondAttribute="trailing" constant="-10" id="Fca-ik-X87"/>
+                        <constraint firstItem="05T-ko-Kn6" firstAttribute="centerX" secondItem="nRY-tb-0o0" secondAttribute="centerX" id="MHL-74-xmX"/>
+                        <constraint firstItem="WRl-O9-BpH" firstAttribute="leading" secondItem="05T-ko-Kn6" secondAttribute="leading" constant="10" id="alE-H2-SHP"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="j3d-Qo-oXY" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="5Yq-r9-0Iv"/>
-                <constraint firstItem="j3d-Qo-oXY" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6Gn-sg-nHA"/>
-                <constraint firstItem="qSr-M2-gaR" firstAttribute="leading" secondItem="j3d-Qo-oXY" secondAttribute="leading" constant="10" id="Hqw-2C-n5y"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="qSr-M2-gaR" secondAttribute="bottom" constant="19" id="Uxh-H1-2a9"/>
-                <constraint firstItem="qSr-M2-gaR" firstAttribute="trailing" secondItem="j3d-Qo-oXY" secondAttribute="trailing" constant="-10" id="dcG-tV-sks"/>
-                <constraint firstItem="qSr-M2-gaR" firstAttribute="top" secondItem="j3d-Qo-oXY" secondAttribute="bottom" id="l9o-HJ-ar7"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="j3d-Qo-oXY" secondAttribute="bottom" constant="20" id="uFa-oG-0ed"/>
+                <constraint firstAttribute="bottom" secondItem="nRY-tb-0o0" secondAttribute="bottom" id="UOe-oH-vaK"/>
+                <constraint firstItem="AUv-ju-iyx" firstAttribute="trailing" secondItem="nRY-tb-0o0" secondAttribute="trailing" id="ag6-c2-FN0"/>
+                <constraint firstItem="nRY-tb-0o0" firstAttribute="top" secondItem="P2P-rO-ooF" secondAttribute="top" id="yVk-v1-l75"/>
+                <constraint firstItem="nRY-tb-0o0" firstAttribute="leading" secondItem="AUv-ju-iyx" secondAttribute="leading" id="yv1-GP-h6v"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="42.5" y="-253.5"/>
+            <viewLayoutGuide key="safeArea" id="AUv-ju-iyx"/>
+            <connections>
+                <outlet property="logoutButton" destination="05T-ko-Kn6" id="yuz-jT-dMk"/>
+                <outlet property="logoutUnderlineView" destination="WRl-O9-BpH" id="bDe-Hn-T0a"/>
+            </connections>
+            <point key="canvasLocation" x="36.5" y="139"/>
         </view>
     </objects>
 </document>

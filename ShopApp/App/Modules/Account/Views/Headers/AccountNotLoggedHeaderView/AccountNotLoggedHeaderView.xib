@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountNotLoggedHeaderView" customModule="ShopClient" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountNotLoggedHeaderView" customModule="ShopApp" customModuleProvider="target">
             <connections>
                 <outlet property="createAccountUnderlinedView" destination="pLH-tW-YR9" id="nLS-dD-WeY"/>
                 <outlet property="createNewAccountButton" destination="9kd-ki-Xoh" id="clg-R0-cRx"/>
@@ -23,7 +23,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IkS-af-Cpl" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IkS-af-Cpl" customClass="BlackButton" customModule="ShopApp" customModuleProvider="target">
                     <rect key="frame" x="45" y="60" width="285" height="50"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -31,6 +31,9 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                     <state key="normal" title="Button"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="signInButton"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="signInButtonDidPress:" destination="-1" eventType="touchUpInside" id="R8z-lB-f2l"/>
                     </connections>
@@ -40,14 +43,20 @@
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="signInLabel"/>
+                    </userDefinedRuntimeAttributes>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kd-ki-Xoh" customClass="UnderlinedButton" customModule="ShopClient" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kd-ki-Xoh" customClass="UnderlinedButton" customModule="ShopApp" customModuleProvider="target">
                     <rect key="frame" x="157" y="130" width="61" height="25"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                     <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                     <state key="normal" title="Button">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="createNewAccountButton"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="createNewAccountButtonDidPress:" destination="-1" eventType="touchUpInside" id="RlC-YL-bTg"/>
                     </connections>
@@ -58,6 +67,10 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="pfM-CE-ywT"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="createAccountUnderline"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
