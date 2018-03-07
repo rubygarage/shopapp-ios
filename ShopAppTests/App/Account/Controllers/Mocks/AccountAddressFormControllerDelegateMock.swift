@@ -12,11 +12,11 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class AccountAddressFormControllerDelegateMock: NSObject, AccountAddressFormControllerDelegate {
+class AccountAddressFormControllerDelegateMock: NSObject, AccountAddressFormControllerDelegate {    
     var updatedAddress: Address!
     var addedAddress: Address!
     
-    func viewController(_ controller: AccountAddressFormViewController, didUpdate address: Address) {
+    func viewController(_ controller: AccountAddressFormViewController, didUpdate address: Address, isSelectedAddress: Bool) {
         updatedAddress = address
     }
     

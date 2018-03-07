@@ -19,22 +19,22 @@ protocol BaseAddressListControllerDelegate: class {
     func viewController(didSelectBillingAddress address: Address)
 }
 
-class BaseAddressListViewController<T: BaseAddressListViewModel>: BaseViewController<T> {
-    @IBOutlet private weak var tableView: UITableView!
-    
-    private var tableProvider: BaseAddressListTableProvider!
+class BaseAddressListViewController<T: BaseAddressListViewModel>: BaseViewController<T>, AddressListHeaderViewDelegate, AddressListTableCellDelegate, AccountAddressFormControllerDelegate {
+    // swiftlint:disable private_outlet
+    @IBOutlet private(set) weak var tableView: UITableView!
+    // swiftlint:enable private_outlet
     
     fileprivate var destinationAddress: Address?
     fileprivate var destinationAddressAction: AddressAction = .add
-    fileprivate var needToUpdate = false
     
+    var tableProvider: BaseAddressListTableProvider!
     var selectedAddress: Address?
     var addressListType: AddressListType = .shipping
     var showSelectionButton = false
     
     weak var delegate: BaseAddressListControllerDelegate?
     
-    // MARK: - View conttroller lifecycle
+    // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +47,7 @@ class BaseAddressListViewController<T: BaseAddressListViewModel>: BaseViewContro
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let customerAddressFormController = segue.destination as? AccountAddressFormViewController {
+            customerAddressFormController.isSelectedAddress = destinationAddress?.isEqual(to: selectedAddress) ?? false
             customerAddressFormController.selectedAddress = destinationAddress
             customerAddressFormController.delegate = self
             customerAddressFormController.addressAction = destinationAddressAction
@@ -60,16 +61,21 @@ class BaseAddressListViewController<T: BaseAddressListViewModel>: BaseViewContro
     }
     
     private func setupTableView() {
+        guard let tableView = tableView else {
+            return
+        }
         tableView.registerNibForCell(AddressListTableViewCell.self)
         
-        tableProvider = BaseAddressListTableProvider()
         tableProvider.showSelectionButton = showSelectionButton
         tableProvider.delegate = self
         tableView.dataSource = tableProvider
-        tableView.delegate = tableProvider
+        tableView.delegate = tableProvider        
     }
     
     private func setupViewModel() {
+        guard let viewModel = viewModel else {
+            return
+        }
         viewModel.selectedAddress = selectedAddress
         
         viewModel.customerAddresses.asObservable()
@@ -78,7 +84,7 @@ class BaseAddressListViewController<T: BaseAddressListViewModel>: BaseViewContro
                     return
                 }
                 strongSelf.tableProvider.addresses = addresses.map({ strongSelf.viewModel.addressTuple(with: $0) })
-                strongSelf.tableView.reloadData()
+                strongSelf.tableView?.reloadData()
             })
             .disposed(by: disposeBag)
         
@@ -98,55 +104,39 @@ class BaseAddressListViewController<T: BaseAddressListViewModel>: BaseViewContro
     }
         
     private func loadData() {
-        viewModel.loadCustomerAddresses()
+        viewModel?.loadCustomerAddresses()
     }
     
-    func update(shippingAddress: Address) {
-        if needToUpdate, let viewModel = viewModel as? CheckoutAddressListViewModel {
-            viewModel.updateCheckoutShippingAddress(with: shippingAddress)
-        } else {
-            viewModel.loadCustomerAddresses(isTranslucentHud: true)
-        }
+    func update(shippingAddress: Address, isSelectedAddress: Bool) {
+        viewModel.loadCustomerAddresses(isTranslucentHud: true)
     }
     
-    func update(billingAddress: Address) {
-        if needToUpdate {
+    func update(billingAddress: Address, isSelectedAddress: Bool) {
+        if isSelectedAddress {
             selectedAddress = billingAddress
             viewModel.selectedAddress = billingAddress
             delegate?.viewController(didSelectBillingAddress: billingAddress)
         }
         viewModel.loadCustomerAddresses(isTranslucentHud: true)
     }
-}
-
-// MARK: - AddressListHeaderViewDelegate
-
-extension BaseAddressListViewController: AddressListHeaderViewDelegate {
+    
+    // MARK: - AddressListHeaderViewDelegate
+    
     func tableViewHeaderDidTapAddAddress(_ header: AddressListTableHeaderView) {
         destinationAddress = nil
         destinationAddressAction = .add
         performSegue(withIdentifier: SegueIdentifiers.toCustomerAddressForm, sender: self)
     }
-}
-
-// MARK: - AddressListTableViewCellDelegate
-
-extension BaseAddressListViewController: AddressListTableCellDelegate {
+    
+    // MARK: - AddressListTableCellDelegate
+    
     func tableViewCell(_ cell: AddressListTableViewCell, didSelect address: Address) {
-        if let viewModel = viewModel as? CheckoutAddressListViewModel, addressListType == .shipping {
-            viewModel.updateCheckoutShippingAddress(with: address)
-        } else if addressListType == .billing {
-            selectedAddress = address
-            viewModel.selectedAddress = address
-            viewModel.loadCustomerAddresses(isTranslucentHud: true)
-            delegate?.viewController(didSelectBillingAddress: address)
-        }
+        // Method to override
     }
     
     func tableViewCell(_ cell: AddressListTableViewCell, didTapEdit address: Address) {
         destinationAddress = address
         destinationAddressAction = .edit
-        needToUpdate = selectedAddress?.isEqual(to: address) ?? false
         performSegue(withIdentifier: SegueIdentifiers.toCustomerAddressForm, sender: self)
     }
     
@@ -157,16 +147,14 @@ extension BaseAddressListViewController: AddressListTableCellDelegate {
     func tableViewCell(_ cell: AddressListTableViewCell, didTapDefault address: Address) {
         viewModel.updateCustomerDefaultAddress(with: address)
     }
-}
-
-// MARK: - AccountAddressFormControllerDelegate
-
-extension BaseAddressListViewController: AccountAddressFormControllerDelegate {
-    func viewController(_ controller: AccountAddressFormViewController, didUpdate address: Address) {
+    
+    // MARK: - AccountAddressFormControllerDelegate
+    
+    func viewController(_ controller: AccountAddressFormViewController, didUpdate address: Address, isSelectedAddress: Bool) {
         if addressListType == .shipping {
-            update(shippingAddress: address)
+            update(shippingAddress: address, isSelectedAddress: isSelectedAddress)
         } else {
-            update(billingAddress: address)
+            update(billingAddress: address, isSelectedAddress: isSelectedAddress)
         }
         navigationController?.popToViewController(self, animated: true)
     }

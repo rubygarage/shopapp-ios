@@ -25,8 +25,10 @@ class BaseAddressListViewModel: BaseViewModel {
         self.deleteAddressUseCase = deleteAddressUseCase
     }
     
-    func loadCustomerAddresses(isTranslucentHud: Bool = false) {
-        state.onNext(ViewState.make.loading(isTranslucent: isTranslucentHud))
+    func loadCustomerAddresses(isTranslucentHud: Bool = false, continueLoading: Bool = false) {
+        if !continueLoading {
+            state.onNext(ViewState.make.loading(isTranslucent: isTranslucentHud))
+        }
         customerUseCase.getCustomer { [weak self] (customer, _) in
             guard let strongSelf = self else {
                 return
@@ -37,12 +39,6 @@ class BaseAddressListViewModel: BaseViewModel {
             }
             strongSelf.state.onNext(.content)
         }
-    }
-    
-    func addressTuple(with address: Address) -> AddressTuple {
-        let selected = selectedAddress?.isEqual(to: address) ?? false
-        let isDefault = customerDefaultAddress.value?.isEqual(to: address) ?? false
-        return (address, selected, isDefault)
     }
     
     func deleteCustomerAddress(with address: Address, type: AddressListType) {
@@ -56,7 +52,6 @@ class BaseAddressListViewModel: BaseViewModel {
             } else if let success = success, success {
                 let selected = strongSelf.selectedAddress?.isEqual(to: address) ?? false
                 strongSelf.processDeleteAddressResponse(with: selected, type: type)
-                strongSelf.state.onNext(.content)
             } else {
                 strongSelf.state.onNext(.content)
             }
@@ -79,8 +74,14 @@ class BaseAddressListViewModel: BaseViewModel {
         }
     }
     
+    func addressTuple(with address: Address) -> AddressTuple {
+        let selected = selectedAddress?.isEqual(to: address) ?? false
+        let isDefault = customerDefaultAddress.value?.isEqual(to: address) ?? false
+        return (address, selected, isDefault)
+    }
+    
     func processDeleteAddressResponse(with isSelected: Bool, type: AddressListType) {
-        loadCustomerAddresses(isTranslucentHud: true)
+        loadCustomerAddresses(isTranslucentHud: true, continueLoading: true)
     }
     
     private func processSelectedAddressUpdatingResponse(with address: Address, isSelected: Bool) {
@@ -91,7 +92,7 @@ class BaseAddressListViewModel: BaseViewModel {
 }
 
 internal extension Address {
-    func isEqual(to object: Address) -> Bool {
-        return fullName == object.fullName && fullAddress == object.fullAddress && phone == object.phone
+    func isEqual(to object: Address?) -> Bool {
+        return fullName == object?.fullName && fullAddress == object?.fullAddress && phone == object?.phone
     }
 }

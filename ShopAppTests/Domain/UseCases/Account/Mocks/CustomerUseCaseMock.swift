@@ -15,6 +15,7 @@ class CustomerUseCaseMock: CustomerUseCase {
     private let error = ContentError()
     
     var isNeedToReturnError = false
+    var isGetCustomerStarted = false
     
     override func getCustomer(_ callback: @escaping RepoCallback<Customer>) {
         customer.email = "user@mail.com"
@@ -22,10 +23,15 @@ class CustomerUseCaseMock: CustomerUseCase {
         customer.lastName = "Last"
         customer.phone = "+380990000000"
         
+        let customerAddress = Address()
+        customerAddress.id = "Customer address id"
+        customer.addresses = [customerAddress]
+        
         execute(callback: callback)
     }
     
     private func execute(callback: @escaping RepoCallback<Customer>) {
         isNeedToReturnError ? callback(nil, error) : callback(customer, nil)
+        isGetCustomerStarted = true
     }
 }

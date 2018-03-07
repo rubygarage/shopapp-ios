@@ -8,6 +8,8 @@
 
 import RxSwift
 
+import ShopApp_Gateway
+
 class CheckoutAddressListViewController: BaseAddressListViewController<CheckoutAddressListViewModel> {
     var checkoutId: String!
     
@@ -30,5 +32,26 @@ class CheckoutAddressListViewController: BaseAddressListViewController<CheckoutA
                 strongSelf.delegate?.viewController(didSelectBillingAddress: address)
             })
             .disposed(by: disposeBag)
+    }
+    
+    // MARK: - Overriding
+    
+    override func update(shippingAddress: Address, isSelectedAddress: Bool) {
+        if isSelectedAddress {
+            viewModel.updateCheckoutShippingAddress(with: shippingAddress)
+        } else {
+            super.update(shippingAddress: shippingAddress, isSelectedAddress: isSelectedAddress)
+        }
+    }
+    
+    override func tableViewCell(_ cell: AddressListTableViewCell, didSelect address: Address) {
+        if addressListType == .shipping {
+            viewModel.updateCheckoutShippingAddress(with: address)
+        } else {
+            selectedAddress = address
+            viewModel.selectedAddress = address
+            viewModel.loadCustomerAddresses(isTranslucentHud: true)
+            delegate?.viewController(didSelectBillingAddress: address)
+        }
     }
 }

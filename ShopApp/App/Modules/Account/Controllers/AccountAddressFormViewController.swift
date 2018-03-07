@@ -11,11 +11,13 @@ import UIKit
 import ShopApp_Gateway
 
 protocol AccountAddressFormControllerDelegate: class {
-    func viewController(_ controller: AccountAddressFormViewController, didUpdate address: Address)
+    func viewController(_ controller: AccountAddressFormViewController, didUpdate address: Address, isSelectedAddress: Bool)
     func viewController(_ controller: AccountAddressFormViewController, didAdd address: Address)
 }
 
 class AccountAddressFormViewController: BaseAddressFormViewController<AccountAddressFormViewModel> {
+    var isSelectedAddress = false
+    
     weak var delegate: AccountAddressFormControllerDelegate?
     
     // MARK: - View controller lifecycle
@@ -44,7 +46,7 @@ class AccountAddressFormViewController: BaseAddressFormViewController<AccountAdd
                 if strongSelf.addressAction == .add {
                     strongSelf.delegate?.viewController(strongSelf, didAdd: address)
                 } else {
-                    strongSelf.delegate?.viewController(strongSelf, didUpdate: address)
+                    strongSelf.delegate?.viewController(strongSelf, didUpdate: address, isSelectedAddress: strongSelf.isSelectedAddress)
                 }
             })
         .disposed(by: disposeBag)

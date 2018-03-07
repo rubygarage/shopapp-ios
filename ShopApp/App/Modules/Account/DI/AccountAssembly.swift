@@ -19,6 +19,7 @@ class AccountAssembly: Assembly {
 
         container.storyboardInitCompleted(AccountAddressListViewController.self) { r, c in
             c.viewModel = r.resolve(BaseAddressListViewModel.self)!
+            c.tableProvider = r.resolve(BaseAddressListTableProvider.self)!
         }
 
         container.storyboardInitCompleted(AddressFormViewController.self) { r, c in
@@ -141,6 +142,10 @@ class AccountAssembly: Assembly {
         
         container.register(SettingsTableProvider.self) { _ in
             return SettingsTableProvider()
+        }
+        
+        container.register(BaseAddressListTableProvider.self) { _ in
+            return BaseAddressListTableProvider()
         }
     }
 }

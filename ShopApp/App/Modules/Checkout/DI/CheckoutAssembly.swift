@@ -19,6 +19,7 @@ class CheckoutAssembly: Assembly {
 
         container.storyboardInitCompleted(CheckoutAddressListViewController.self) { r, c in
             c.viewModel = r.resolve(CheckoutAddressListViewModel.self)!
+            c.tableProvider = r.resolve(BaseAddressListTableProvider.self)!
         }
 
         container.storyboardInitCompleted(CheckoutViewController.self) { r, c in
@@ -60,6 +61,12 @@ class CheckoutAssembly: Assembly {
 
         container.register(PaymentTypeViewModel.self) { r in
             return PaymentTypeViewModel(checkoutUseCase: r.resolve(CheckoutUseCase.self)!)
+        }
+        
+        // MARK: - Providers
+        
+        container.register(BaseAddressListTableProvider.self) { _ in
+            return BaseAddressListTableProvider()
         }
     }
 }
