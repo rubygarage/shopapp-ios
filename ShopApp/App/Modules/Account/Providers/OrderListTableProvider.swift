@@ -14,7 +14,7 @@ protocol OrderListTableProviderDelegate: class {
     func provider(_ provider: OrderListTableProvider, didSelect order: Order)
 }
 
-class OrderListTableProvider: NSObject {
+class OrderListTableProvider: NSObject, UITableViewDataSource, UITableViewDelegate, OrderHeaderDelegate, OrderFooterDelegate {
     var orders: [Order] = []
     
     weak var delegate: (OrderListTableProviderDelegate & CheckoutCartTableViewCellDelegate)?
@@ -26,11 +26,9 @@ class OrderListTableProvider: NSObject {
         let order = orders[index]
         delegate.provider(self, didSelect: order)
     }
-}
 
-// MARK: - UITableViewDataSource
+    // MARK: - UITableViewDataSource
 
-extension OrderListTableProvider: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return orders.count
     }
@@ -52,11 +50,9 @@ extension OrderListTableProvider: UITableViewDataSource {
         cell.cellDelegate = delegate
         return cell
     }
-}
 
-// MARK: - UITableViewDelegate
+    // MARK: - UITableViewDelegate
 
-extension OrderListTableProvider: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return kOrderHeaderViewHeight
     }
@@ -82,19 +78,15 @@ extension OrderListTableProvider: UITableViewDelegate {
         view.delegate = self
         return view
     }
-}
 
-// MARK: - OrderHeaderViewDelegate
+    // MARK: - OrderHeaderViewDelegate
 
-extension OrderListTableProvider: OrderHeaderDelegate {
     func headerView(_ headerView: OrderHeaderView, didTapWith section: Int) {
         selectOrder(at: section)
     }
-}
 
-// MARK: - OrderFooterViewDelegate
+    // MARK: - OrderFooterViewDelegate
 
-extension OrderListTableProvider: OrderFooterDelegate {
     func footerView(_ footerView: OrderFooterView, didTapWith section: Int) {
         selectOrder(at: section)
     }

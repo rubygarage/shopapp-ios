@@ -18,15 +18,13 @@ protocol GridCollectionProviderDelegate: class {
     func provider(_ provider: GridCollectionProvider, didScroll scrollView: UIScrollView)
 }
 
-class GridCollectionProvider: NSObject {
+class GridCollectionProvider: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     var products: [Product] = []
     
     weak var delegate: GridCollectionProviderDelegate?
-}
 
-// MARK: - UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
 
-extension GridCollectionProvider: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return products.count
     }
@@ -38,11 +36,9 @@ extension GridCollectionProvider: UICollectionViewDataSource {
         
         return cell
     }
-}
 
-// MARK: - UICollectionViewDelegate
+    // MARK: - UICollectionViewDelegate
 
-extension GridCollectionProvider: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let delegate = delegate else {
             return
@@ -54,11 +50,9 @@ extension GridCollectionProvider: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.provider(self, didScroll: scrollView)
     }
-}
 
-// MARK: - UICollectionViewDelegateFlowLayout
+    // MARK: - UICollectionViewDelegateFlowLayout
 
-extension GridCollectionProvider: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return GridCollectionViewCell.cellSize
     }

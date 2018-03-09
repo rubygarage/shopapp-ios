@@ -26,6 +26,10 @@ class SignUpViewModelSpec: QuickSpec {
         }
         
         describe("when view model initialized") {
+            it("should have a correct superclass") {
+                expect(viewModel).to(beAKindOf(BaseViewModel.self))
+            }
+            
             it("should have variables with a correct initial values") {
                 expect(viewModel.emailText.value) == ""
                 expect(viewModel.firstNameText.value) == ""

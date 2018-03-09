@@ -36,6 +36,10 @@ class SignInViewControllerSpec: QuickSpec {
         }
         
         describe("when view loaded") {
+            it("should have a correct superclass") {
+                expect(viewController.isKind(of: BaseViewController<SignInViewModel>.self)) == true
+            }
+            
             it("should have a correct view model type") {
                 expect(viewController.viewModel).to(beAKindOf(SignInViewModel.self))
             }

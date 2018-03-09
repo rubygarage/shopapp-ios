@@ -14,16 +14,14 @@ protocol AccountTableProviderDelegate: class {
     func provider(_ provider: AccountTableProvider, didSelect policy: Policy)
 }
 
-class AccountTableProvider: NSObject {
+class AccountTableProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     var policies: [Policy] = []
     var customer: Customer?
     
     weak var delegate: (AccountTableProviderDelegate & AccountNotLoggedHeaderDelegate & AccountLoggedHeaderDelegate & AccountFooterDelegate)?
-}
 
-// MARK: - UITableViewDataSource
+    // MARK: - UITableViewDataSource
 
-extension AccountTableProvider: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return policies.count
     }
@@ -34,11 +32,9 @@ extension AccountTableProvider: UITableViewDataSource {
         cell.configure(with: policy)
         return cell
     }
-}
 
-// MARK: - UITableViewDelegate
+    // MARK: - UITableViewDelegate
 
-extension AccountTableProvider: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let delegate = delegate else {
             return

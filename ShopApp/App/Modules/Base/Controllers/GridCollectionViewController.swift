@@ -33,13 +33,13 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
     // MARK: - Setup
     
     private func setupCollectionView() {
-        collectionView?.registerNibForCell(GridCollectionViewCell.self)
+        collectionView.registerNibForCell(GridCollectionViewCell.self)
 
         collectionProvider.delegate = self
-        collectionView?.dataSource = collectionProvider
-        collectionView?.delegate = collectionProvider
+        collectionView.dataSource = collectionProvider
+        collectionView.delegate = collectionProvider
         
-        collectionView?.contentInset = GridCollectionViewCell.defaultCollectionViewInsets
+        collectionView.contentInset = GridCollectionViewCell.defaultCollectionViewInsets
     }
     
     // MARK: - GridCollectionProviderDelegate
@@ -50,5 +50,6 @@ class GridCollectionViewController<T: GridCollectionViewModel>: BaseCollectionVi
     }
     
     func provider(_ provider: GridCollectionProvider, didScroll scrollView: UIScrollView) {
+        // Method to override
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 import ShopApp_Gateway
 
-class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
+class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel>, UnderlinedButtonDelegate {
     @IBOutlet private weak var nameTextFieldView: InputTextFieldView!
     @IBOutlet private weak var lastNameTextFieldView: InputTextFieldView!
     @IBOutlet private weak var emailTextFieldView: InputTextFieldView!
@@ -135,11 +135,9 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel> {
     private func loadData() {
         viewModel.loadCustomer()
     }
-}
 
-// MARK: - UnderlinedButtonDelegate
+    // MARK: - UnderlinedButtonDelegate
 
-extension PersonalInfoViewController: UnderlinedButtonDelegate {
     func underlinedButton(_ button: UnderlinedButton, didChangeState isHighlighted: Bool) {
         changePasswordUnderlineView.isHidden = isHighlighted
     }

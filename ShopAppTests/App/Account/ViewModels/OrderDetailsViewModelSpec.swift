@@ -25,6 +25,10 @@ class OrderDetailsViewModelSpec: QuickSpec {
         }
         
         describe("when view model initialized") {
+            it("should have a correct superclass") {
+                expect(viewModel).to(beAKindOf(BaseViewModel.self))
+            }
+            
             it("should have variables with correct initial values") {
                 expect(viewModel.orderId) == "order id"
                 expect(viewModel.data.value).to(beNil())

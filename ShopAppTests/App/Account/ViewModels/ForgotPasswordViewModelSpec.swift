@@ -24,6 +24,10 @@ class ForgotPasswordViewModelSpec: QuickSpec {
         }
         
         describe("when view model initialized") {
+            it("should have a correct superclass") {
+                expect(viewModel).to(beAKindOf(BaseViewModel.self))
+            }
+            
             it("should have variable with a correct initial value") {
                 expect(viewModel.emailText.value) == ""
             }

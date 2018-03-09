@@ -24,6 +24,10 @@ class OrderListViewModelSpec: QuickSpec {
         }
         
         describe("when view model initialized") {
+            it("should have a correct superclass") {
+                expect(viewModel).to(beAKindOf(BasePaginationViewModel.self))
+            }
+            
             it("should have variables with correct initial values") {
                 expect(viewModel.items.value.isEmpty) == true
             }

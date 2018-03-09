@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BasePicker: PlaceholderedTextField {
+class BasePicker: PlaceholderedTextField, UIPickerViewDataSource, UIPickerViewDelegate {
     @IBOutlet private weak var underlineView: UIView!
     @IBOutlet private weak var underlineViewHeight: NSLayoutConstraint!
     
@@ -112,11 +112,9 @@ class BasePicker: PlaceholderedTextField {
         underlineView.alpha = underlineViewAlphaDefault
         underlineViewHeight.constant = underlineViewHeightDefault        
     }
-}
 
-// MARK: - UIPickerViewDataSource
+    // MARK: - UIPickerViewDataSource
 
-extension BasePicker: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -124,11 +122,9 @@ extension BasePicker: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return data.count
     }
-}
 
-// MARK: - UIPickerViewDelegate
+    // MARK: - UIPickerViewDelegate
 
-extension BasePicker: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return data[row]
     }

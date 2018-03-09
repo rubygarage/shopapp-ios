@@ -21,6 +21,12 @@ class AccountAddressFormViewModelSpec: QuickSpec {
         let updateAddressUseCaseMock = UpdateAddressUseCaseMock(repository: repositoryMock)
         let viewModel = AccountAddressFormViewModel(addAddressUseCase: addAddressUseCaseMock, updateAddressUseCase: updateAddressUseCaseMock)
         
+        describe("when view model initialized") {
+            it("should have a correct superclass") {
+                expect(viewModel).to(beAKindOf(BaseViewModel.self))
+            }
+        }
+        
         describe("when addresses changed") {
             var disposeBag: DisposeBag!
             var address: Address!

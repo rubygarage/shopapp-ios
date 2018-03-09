@@ -26,6 +26,10 @@ class SettingsViewModelSpec: QuickSpec {
         }
         
         describe("when view model initialized") {
+            it("should have a correct superclass") {
+                expect(viewModel).to(beAKindOf(BaseViewModel.self))
+            }
+            
             it("should have variable with correct initial value") {
                 expect(viewModel.customer.value).to(beNil())
             }

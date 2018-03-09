@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: BaseViewController<SettingsViewModel> {
+class SettingsViewController: BaseViewController<SettingsViewModel>, SwitchTableCellDelegate {
     @IBOutlet private weak var tableView: UITableView!
     
     var tableProvider: SettingsTableProvider!
@@ -58,11 +58,9 @@ class SettingsViewController: BaseViewController<SettingsViewModel> {
     private func loadData() {
         viewModel.loadCustomer()
     }
-}
 
-// MARK: - SwitchTableViewCellDelegate
+    // MARK: - SwitchTableViewCellDelegate
 
-extension SettingsViewController: SwitchTableCellDelegate {
     func tableViewCell(_ tableViewCell: SwitchTableViewCell, didChangeSwitchStateAt indexPath: IndexPath, with value: Bool) {
         switch indexPath.section {
         case SettingsSection.promo.rawValue:

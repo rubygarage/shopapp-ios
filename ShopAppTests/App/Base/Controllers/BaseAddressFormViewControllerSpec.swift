@@ -20,6 +20,10 @@ class BaseAddressFormViewControllerSpec: QuickSpec {
         }
         
         describe("when view controller initialized") {
+            it("should have a correct superclass") {
+                expect(viewController.isKind(of: BaseViewController<BaseViewModel>.self)) == true
+            }
+            
             context("if action type adding") {
                 it("should have a correct title") {
                     viewController.addressAction = .add
@@ -28,7 +32,6 @@ class BaseAddressFormViewControllerSpec: QuickSpec {
                     expect(viewController.title) == "ControllerTitle.AddNewAddress".localizable
                 }
             }
-            
             
             context("if action type editing") {
                 it("should have correct title") {

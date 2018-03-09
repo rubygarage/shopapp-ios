@@ -39,6 +39,10 @@ class OrderDetailsViewControllerSpec: QuickSpec {
         }
         
         describe("when view loaded") {
+            it("should have a correct superclass") {
+                expect(viewController.isKind(of: BaseViewController<OrderDetailsViewModel>.self)) == true
+            }
+            
             it("should have view model with correct type") {
                 expect(viewController.viewModel).to(beAKindOf(OrderDetailsViewModel.self))
             }
@@ -53,6 +57,15 @@ class OrderDetailsViewControllerSpec: QuickSpec {
             
             it("should have correct view model properties") {
                 expect(viewModelMock.orderId) == viewController.orderId
+            }
+            
+            it("should have correct delegate of table provider") {
+                expect(viewController.tableProvider.delegate) === viewController
+            }
+            
+            it("should have correct data source and delegate of table view") {
+                expect(tableView.dataSource) === tableProvider
+                expect(tableView.delegate) === tableProvider
             }
             
             it("should have correct content inset of table view") {

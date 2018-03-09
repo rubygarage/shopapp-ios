@@ -42,6 +42,10 @@ class LinkViewControllerSpec: QuickSpec {
         }
         
         describe("when view loaded") {
+            it("should have a correct superclass") {
+                expect(viewController.isKind(of: BaseViewController<ForgotPasswordViewModel>.self)) == true
+            }
+            
             it("should have a correct view model type") {
                 expect(viewController.viewModel).to(beAKindOf(ForgotPasswordViewModel.self))
             }
@@ -53,8 +57,9 @@ class LinkViewControllerSpec: QuickSpec {
                 expect(additionalDescriptionLabel.text) == "Label.ForgotPassword.LinkAdditionalDescription".localizable
             }
             
-            it("should have resend button with correct title") {
+            it("should have resend button with correct title and delegate") {
                 expect(resendButton.title(for: .normal)) == "Button.Resend".localizable.uppercased()
+                expect(resendButton.delegate) === viewController
             }
             
             it("should have email label with correct title") {

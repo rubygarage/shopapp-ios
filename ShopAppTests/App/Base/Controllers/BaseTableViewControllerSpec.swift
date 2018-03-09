@@ -13,16 +13,24 @@ import Quick
 
 class BaseTableViewControllerSpec: QuickSpec {
     override func spec() {
-        var viewController: BaseTableViewController<BasePaginationViewModel>!
+        var viewController: BaseTableViewControllerTest!
         
         beforeEach {
-            viewController = BaseTableViewController()
+            viewController = BaseTableViewControllerTest()
             _ = viewController.view
         }
         
         describe("when view loaded") {
+            it("should have a correct superclass") {
+                expect(viewController.isKind(of: BasePaginationViewController<BasePaginationViewModel>.self)) == true
+            }
+            
             it("should have refresh control") {
                 expect(viewController.refreshControl).toNot(beNil())
+            }
+            
+            it("should have table view with refresh control") {
+                expect(viewController.tableView.refreshControl) === viewController.refreshControl
             }
         }
         
@@ -34,5 +42,13 @@ class BaseTableViewControllerSpec: QuickSpec {
                 expect(viewController.refreshControl?.isRefreshing) == false
             }
         }
+    }
+}
+
+class BaseTableViewControllerTest: BaseTableViewController<BasePaginationViewModel> {
+    let testTableView = UITableView()
+    
+    override weak var tableView: UITableView! {
+        return testTableView
     }
 }

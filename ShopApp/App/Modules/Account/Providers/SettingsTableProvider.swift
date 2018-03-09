@@ -14,15 +14,13 @@ enum SettingsSection: Int {
     static let allValues = [promo]
 }
 
-class SettingsTableProvider: NSObject {
+class SettingsTableProvider: NSObject, UITableViewDataSource {
     var promo: (description: String, state: Bool)?
     
     weak var delegate: SwitchTableCellDelegate?
-}
 
-// MARK: - UITableViewDataSource
+    // MARK: - UITableViewDataSource
 
-extension SettingsTableProvider: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard promo != nil else {
             return 0

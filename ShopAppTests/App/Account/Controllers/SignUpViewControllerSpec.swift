@@ -46,6 +46,10 @@ class SignUpViewControllerSpec: QuickSpec {
         }
         
         describe("when view loaded") {
+            it("should have a correct superclass") {
+                expect(viewController.isKind(of: BaseViewController<SignUpViewModel>.self)) == true
+            }
+            
             it("should have a correct view model type") {
                 expect(viewController.viewModel).to(beAKindOf(SignUpViewModel.self))
             }
@@ -70,8 +74,9 @@ class SignUpViewControllerSpec: QuickSpec {
                 expect(signUpButton.title(for: .normal)) == "Button.CreateNewAccount".localizable.uppercased()
             }
             
-            it("should have accept policies label with correct text") {
+            it("should have accept policies label with correct text and delegate") {
                 expect(acceptPoliciesLabel.text) == "Label.AcceptPoliciesAttributed".localizable
+                expect(acceptPoliciesLabel.delegate) === viewController
             }
             
             it("should load policies") {

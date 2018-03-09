@@ -37,6 +37,10 @@ class ForgotPasswordViewControllerSpec: QuickSpec {
         }
         
         describe("when view loaded") {
+            it("should have a correct superclass") {
+                expect(viewController.isKind(of: BaseViewController<ForgotPasswordViewModel>.self)) == true
+            }
+            
             it("should have a correct view model type") {
                 expect(viewController.viewModel).to(beAKindOf(ForgotPasswordViewModel.self))
             }

@@ -10,7 +10,7 @@ import UIKit
 
 import ShopApp_Gateway
 
-class OrderListViewController: BaseTableViewController<OrderListViewModel> {
+class OrderListViewController: BaseTableViewController<OrderListViewModel>, OrderListEmptyDataViewDelegate, OrderListTableProviderDelegate, CheckoutCartTableViewCellDelegate {
     var tableProvider: OrderListTableProvider!
     
     fileprivate var selectedOrder: Order?
@@ -83,29 +83,23 @@ class OrderListViewController: BaseTableViewController<OrderListViewModel> {
     override func infinityScrollHandler() {
         viewModel.loadNextPage()
     }
-}
-
-// MARK: - OrderListEmptyDataViewDelegate
-
-extension OrderListViewController: OrderListEmptyDataViewDelegate {
+    
+    // MARK: - OrderListEmptyDataViewDelegate
+    
     func viewDidTapStartShopping(_ view: OrderListEmptyDataView) {
         setHomeController()
         navigationController?.popViewController(animated: false)
     }
-}
-
-// MARK: - OrderListTableProviderDelegate
-
-extension OrderListViewController: OrderListTableProviderDelegate {
+    
+    // MARK: - OrderListTableProviderDelegate
+    
     func provider(_ provider: OrderListTableProvider, didSelect order: Order) {
         selectedOrder = order
         performSegue(withIdentifier: SegueIdentifiers.toOrderDetails, sender: self)
     }
-}
-
-// MARK: - CheckoutCartTableViewCellDelegate
-
-extension OrderListViewController: CheckoutCartTableViewCellDelegate {
+    
+    // MARK: - CheckoutCartTableViewCellDelegate
+    
     func tableViewCell(_ cell: CheckoutCartTableViewCell, didSelect productVariantId: String, at index: Int) {
         selectedProductVariant = viewModel.productVariant(with: productVariantId, at: index)
         if selectedProductVariant != nil {

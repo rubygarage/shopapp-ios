@@ -38,6 +38,10 @@ class OrderListViewControllerSpec: QuickSpec {
         }
         
         describe("when view loaded") {
+            it("should have a correct superclass") {
+                expect(viewController.isKind(of: BaseTableViewController<OrderListViewModel>.self)) == true
+            }
+            
             it("should have a correct view model type") {
                 expect(viewController.viewModel).to(beAKindOf(OrderListViewModel.self))
             }
@@ -52,6 +56,15 @@ class OrderListViewControllerSpec: QuickSpec {
             
             it("should have default empty data view") {
                 expect(viewController.customEmptyDataView).to(beAnInstanceOf(OrderListEmptyDataView.self))
+            }
+            
+            it("should have correct delegate of table provider") {
+                expect(viewController.tableProvider.delegate) === viewController
+            }
+            
+            it("should have correct data source and delegate of table view") {
+                expect(viewController.tableView.dataSource) === tableProvider
+                expect(viewController.tableView.delegate) === tableProvider
             }
             
             it("should have correct content inset of table view") {

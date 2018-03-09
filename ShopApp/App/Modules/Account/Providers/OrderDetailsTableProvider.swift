@@ -22,15 +22,13 @@ protocol OrderDetailsTableProviderDelegate: class {
     func provider(_ provider: OrderDetailsTableProvider, didSelect productVariant: ProductVariant)
 }
 
-class OrderDetailsTableProvider: NSObject {
+class OrderDetailsTableProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     var order: Order?
     
     weak var delegate: OrderDetailsTableProviderDelegate?
-}
 
-// MARK: - UITableViewDataSource
+    // MARK: - UITableViewDataSource
 
-extension OrderDetailsTableProvider: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard order != nil else {
             return 0
@@ -89,11 +87,9 @@ extension OrderDetailsTableProvider: UITableViewDataSource {
         }
         return cell
     }
-}
 
-// MARK: - UITableViewDelegate
+    // MARK: - UITableViewDelegate
 
-extension OrderDetailsTableProvider: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let delegate = delegate, indexPath.section == OrderDetailsSection.paymentInformation.rawValue, let order = order, let item = order.items?[indexPath.row], let productVariant = item.productVariant else {
             return

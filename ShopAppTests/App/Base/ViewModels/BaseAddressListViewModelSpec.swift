@@ -30,6 +30,10 @@ class BaseAddressListViewModelSpec: QuickSpec {
         }
         
         describe("when view model initialized") {
+            it("should have a correct superclass") {
+                expect(viewModel).to(beAKindOf(BaseViewModel.self))
+            }
+            
             it("should have variables with correct initial values") {
                 expect(viewModel.selectedAddress).to(beNil())
                 expect(viewModel.customerAddresses.value.isEmpty) == true

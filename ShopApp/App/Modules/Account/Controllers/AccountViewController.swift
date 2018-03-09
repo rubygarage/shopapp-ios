@@ -10,7 +10,7 @@ import UIKit
 
 import ShopApp_Gateway
 
-class AccountViewController: BaseViewController<AccountViewModel> {
+class AccountViewController: BaseViewController<AccountViewModel>, AccountTableProviderDelegate, AccountNotLoggedHeaderDelegate, AccountLoggedHeaderDelegate, AccountFooterDelegate {
     @IBOutlet private weak var tableView: UITableView!
     
     fileprivate var selectedPolicy: Policy?
@@ -94,20 +94,16 @@ class AccountViewController: BaseViewController<AccountViewModel> {
     @objc private func settingsButtonDidPress() {
         performSegue(withIdentifier: SegueIdentifiers.toAccountSettings, sender: self)
     }
-}
-
-// MARK: - AccountTableProviderDelegate
-
-extension AccountViewController: AccountTableProviderDelegate {
+    
+    // MARK: - AccountTableProviderDelegate
+    
     func provider(_ provider: AccountTableProvider, didSelect policy: Policy) {
         selectedPolicy = policy
         performSegue(withIdentifier: SegueIdentifiers.toPolicy, sender: self)
     }
-}
-
-// MARK: - AccountNotLoggedHeaderDelegate
-
-extension AccountViewController: AccountNotLoggedHeaderDelegate {
+    
+    // MARK: - AccountNotLoggedHeaderDelegate
+    
     func headerViewDidTapSignIn(_ headerView: AccountNotLoggedHeaderView) {
         performSegue(withIdentifier: SegueIdentifiers.toSignIn, sender: self)
     }
@@ -115,11 +111,9 @@ extension AccountViewController: AccountNotLoggedHeaderDelegate {
     func headerViewDidTapCreateNewAccount(_ headerView: AccountNotLoggedHeaderView) {
         performSegue(withIdentifier: SegueIdentifiers.toSignUp, sender: self)
     }
-}
-
-// MARK: - AccountLoggedHeaderDelegate
-
-extension AccountViewController: AccountLoggedHeaderDelegate {
+    
+    // MARK: - AccountLoggedHeaderDelegate
+    
     func headerViewDidTapMyOrders(_ headerView: AccountLoggedHeaderView) {
         performSegue(withIdentifier: SegueIdentifiers.toOrderList, sender: self)
     }
@@ -131,11 +125,9 @@ extension AccountViewController: AccountLoggedHeaderDelegate {
     func headerViewDidTapShippingAddress(_ headerView: AccountLoggedHeaderView) {
         performSegue(withIdentifier: SegueIdentifiers.toAccountAddressList, sender: self)
     }
-}
-
-// MARK: - AccountFooterViewDelegate
-
-extension AccountViewController: AccountFooterDelegate {
+    
+    // MARK: - AccountFooterViewDelegate
+    
     func footerViewDidTapLogout(_ footerView: AccountFooterView) {
         viewModel.logout()
         updateNavigationBar()

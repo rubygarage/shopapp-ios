@@ -21,6 +21,10 @@ class GridCollectionViewModelSpec: QuickSpec {
         }
         
         describe("when view model initialized") {
+            it("should have a correct superclass") {
+                expect(viewModel).to(beAKindOf(BasePaginationViewModel.self))
+            }
+            
             it("should have variable with a correct initial value") {
                 expect(viewModel.products.value.isEmpty) == true
             }

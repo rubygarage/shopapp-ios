@@ -14,7 +14,7 @@ protocol AccountFooterDelegate: class {
     func footerViewDidTapLogout(_ footerView: AccountFooterView)
 }
 
-class AccountFooterView: UITableViewHeaderFooterView {
+class AccountFooterView: UITableViewHeaderFooterView, UnderlinedButtonDelegate {
     @IBOutlet private weak var logoutButton: UnderlinedButton!
     
     @IBOutlet fileprivate weak var logoutUnderlineView: UIView!
@@ -45,11 +45,9 @@ class AccountFooterView: UITableViewHeaderFooterView {
     @IBAction func logoutTapped(_ sender: UIButton) {
         delegate?.footerViewDidTapLogout(self)
     }
-}
 
-// MARK: - UnderlinedButtonDelegate
+    // MARK: - UnderlinedButtonDelegate
 
-extension AccountFooterView: UnderlinedButtonDelegate {
     func underlinedButton(_ button: UnderlinedButton, didChangeState isHighlighted: Bool) {
         logoutUnderlineView.isHidden = isHighlighted
     }

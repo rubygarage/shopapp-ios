@@ -20,6 +20,10 @@ class AddressFormViewModelSpec: QuickSpec {
         let viewModel = AddressFormViewModel(countriesUseCase: countriesUseCaseMock)
         
         describe("when view model initialized") {
+            it("should have a correct superclass") {
+                expect(viewModel).to(beAKindOf(BaseViewModel.self))
+            }
+            
             it("should have variables with correct initial values") {
                 expect(viewModel.address).to(beNil())
                 expect(viewModel.countryText.value) == ""

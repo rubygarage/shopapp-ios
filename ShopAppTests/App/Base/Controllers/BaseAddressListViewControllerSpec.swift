@@ -45,6 +45,10 @@ class BaseAddressListViewControllerSpec: QuickSpec {
         }
         
         describe("when view controller initialized") {
+            it("should have a correct superclass") {
+                expect(viewController.isKind(of: BaseViewController<BaseAddressListViewModel>.self)) == true
+            }
+            
             it("should have a correct view model type") {
                 viewController.selectedAddress = Address()
                 _ = viewController.view

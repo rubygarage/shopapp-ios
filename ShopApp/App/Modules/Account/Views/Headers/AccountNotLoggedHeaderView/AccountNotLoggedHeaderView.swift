@@ -15,7 +15,7 @@ protocol AccountNotLoggedHeaderDelegate: class {
     func headerViewDidTapCreateNewAccount(_ headerView: AccountNotLoggedHeaderView)
 }
 
-class AccountNotLoggedHeaderView: UIView {
+class AccountNotLoggedHeaderView: UIView, UnderlinedButtonDelegate {
     @IBOutlet private weak var signInButton: BlackButton!
     @IBOutlet private weak var signInLabel: UILabel!
     @IBOutlet private weak var createNewAccountButton: UnderlinedButton!
@@ -61,11 +61,9 @@ class AccountNotLoggedHeaderView: UIView {
     @IBAction func createNewAccountButtonDidPress(_ sender: UnderlinedButton) {
         delegate?.headerViewDidTapCreateNewAccount(self)
     }
-}
 
-// MARK: - UnderlinedButtonDelegate
+    // MARK: - UnderlinedButtonDelegate
 
-extension AccountNotLoggedHeaderView: UnderlinedButtonDelegate {
     func underlinedButton(_ button: UnderlinedButton, didChangeState isHighlighted: Bool) {
         createAccountUnderlinedView.isHidden = isHighlighted
     }

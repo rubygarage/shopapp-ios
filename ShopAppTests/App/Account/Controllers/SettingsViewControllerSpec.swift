@@ -21,9 +21,6 @@ class SettingsViewControllerSpec: QuickSpec {
         beforeEach {
             viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.settings) as! SettingsViewController
             
-            let navigationController = NavigationController(rootViewController: UIViewController())
-            navigationController.pushViewController(viewController, animated: false)
-            
             let repositoryMock = AuthentificationRepositoryMock()
             let updateCustomerUseCaseMock = UpdateCustomerUseCaseMock(repository: repositoryMock)
             let loginUseCaseMock = LoginUseCaseMock(repository: repositoryMock)
@@ -39,16 +36,16 @@ class SettingsViewControllerSpec: QuickSpec {
         }
         
         describe("when view loaded") {
+            it("should have a correct superclass") {
+                expect(viewController.isKind(of: BaseViewController<SettingsViewModel>.self)) == true
+            }
+            
             it("should have a correct view model type") {
                 expect(viewController.viewModel).to(beAKindOf(SettingsViewModel.self))
             }
             
             it("should have correct title") {
                 expect(viewController.title) == "ControllerTitle.Settings".localizable
-            }
-            
-            it("should have correct back button image") {
-                expect(viewController.navigationItem.leftBarButtonItem?.image) == #imageLiteral(resourceName: "arrow_left")
             }
             
             it("should have correct delegate of table provider") {

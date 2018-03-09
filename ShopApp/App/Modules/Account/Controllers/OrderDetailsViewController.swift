@@ -10,7 +10,7 @@ import UIKit
 
 import ShopApp_Gateway
 
-class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
+class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, OrderDetailsTableProviderDelegate {
     @IBOutlet private weak var tableView: UITableView!
     
     fileprivate var selectedProductVariant: ProductVariant!
@@ -80,11 +80,9 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel> {
         setHomeController()
         dismissModalStack()
     }
-}
-
-// MARK: - OrdersDetailsTableProviderDelegate
-
-extension OrderDetailsViewController: OrderDetailsTableProviderDelegate {
+    
+    // MARK: - OrderDetailsTableProviderDelegate
+    
     func provider(_ provider: OrderDetailsTableProvider, didSelect productVariant: ProductVariant) {
         selectedProductVariant = productVariant
         performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)

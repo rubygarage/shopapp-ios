@@ -39,18 +39,9 @@ enum ViewState: Equatable {
             return false
         }
     }
-    
-    static func != (lhs: ViewState, rhs: ViewState) -> Bool {
-        switch (lhs, rhs) {
-        case (.loading, .loading), (.content, .content), (.error, .error), (.empty, .empty):
-            return false
-        default:
-            return true
-        }
-    }
 }
 
-class BaseViewController<T: BaseViewModel>: UIViewController {
+class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewDelegate {
     private let loadingViewFillAlpha: CGFloat = 1
     private let loadingViewTranslucentAlpha: CGFloat = 0.75
     private let toastBottomOffset: CGFloat = 80
@@ -191,11 +182,9 @@ class BaseViewController<T: BaseViewModel>: UIViewController {
         subview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         subview.translatesAutoresizingMaskIntoConstraints = false
     }
-}
 
-// MARK: - ErrorViewDelegate
+    // MARK: - ErrorViewDelegate
 
-extension BaseViewController: ErrorViewDelegate {
     func viewDidTapTryAgain(_ view: ErrorView) {
         viewModel?.tryAgain()
     }

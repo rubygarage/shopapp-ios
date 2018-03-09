@@ -10,7 +10,7 @@ import UIKit
 
 import RxSwift
 
-class LinkViewController: BaseViewController<ForgotPasswordViewModel> {
+class LinkViewController: BaseViewController<ForgotPasswordViewModel>, UnderlinedButtonDelegate {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var emailLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
@@ -64,11 +64,9 @@ class LinkViewController: BaseViewController<ForgotPasswordViewModel> {
             .bind(to: viewModel.resetPasswordPressed)
             .disposed(by: disposeBag)
     }
-}
-
-// MARK: - UnderlinedButtonDelegate
-
-extension LinkViewController: UnderlinedButtonDelegate {
+    
+    // MARK: - UnderlinedButtonDelegate
+    
     func underlinedButton(_ button: UnderlinedButton, didChangeState isHighlighted: Bool) {
         resendUnderlineView.isHidden = isHighlighted
     }

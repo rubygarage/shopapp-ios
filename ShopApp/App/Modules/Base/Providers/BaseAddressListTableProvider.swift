@@ -12,16 +12,14 @@ import ShopApp_Gateway
 
 typealias AddressTuple = (address: Address, isSelected: Bool, isDefault: Bool)
 
-class BaseAddressListTableProvider: NSObject {
+class BaseAddressListTableProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     var addresses: [AddressTuple] = []
     var showSelectionButton = false
     
     weak var delegate: (AddressListTableCellDelegate & AddressListHeaderViewDelegate)?
-}
 
-// MARK: - UITableViewDataSource
+    // MARK: - UITableViewDataSource
 
-extension BaseAddressListTableProvider: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return addresses.count
     }
@@ -33,11 +31,9 @@ extension BaseAddressListTableProvider: UITableViewDataSource {
         cell.delegate = delegate
         return cell
     }
-}
 
-// MARK: - UITableViewDelegate
+    // MARK: - UITableViewDelegate
 
-extension BaseAddressListTableProvider: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return kAddressListTableHeaderViewHeight
     }

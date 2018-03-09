@@ -26,23 +26,23 @@ class BaseTableViewController<T: BasePaginationViewModel>: BasePaginationViewCon
     
     func stopLoadAnimating() {
         refreshControl?.endRefreshing()
-        tableView?.finishInfiniteScroll()
+        tableView.finishInfiniteScroll()
     }
     
     private func setupPullToRefresh() {
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(pullToRefreshHandler), for: .valueChanged)
-        tableView?.refreshControl = refreshControl
+        tableView.refreshControl = refreshControl
     }
     
     private func setupInfinityScroll() {
-        tableView?.setShouldShowInfiniteScrollHandler { [weak self] _ in
+        tableView.setShouldShowInfiniteScrollHandler { [weak self] _ in
             guard let strongSelf = self else {
                 return false
             }
             return strongSelf.viewModel.canLoadMore
         }
-        tableView?.addInfiniteScroll { [weak self] _ in
+        tableView.addInfiniteScroll { [weak self] _ in
             guard let strongSelf = self else {
                 return
             }

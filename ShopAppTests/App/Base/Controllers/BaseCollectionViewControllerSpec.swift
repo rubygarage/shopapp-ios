@@ -13,16 +13,24 @@ import Quick
 
 class BaseCollectionViewControllerSpec: QuickSpec {
     override func spec() {
-        var viewController: BaseCollectionViewController<BasePaginationViewModel>!
+        var viewController: BaseCollectionViewControllerTest!
         
         beforeEach {
-            viewController = BaseCollectionViewController()
+            viewController = BaseCollectionViewControllerTest()
             _ = viewController.view
         }
         
         describe("when view loaded") {
+            it("should have a correct superclass") {
+                expect(viewController.isKind(of: BasePaginationViewController<BasePaginationViewModel>.self)) == true
+            }
+            
             it("should have refresh control") {
                 expect(viewController.refreshControl).toNot(beNil())
+            }
+            
+            it("should have collection view with refresh control") {
+                expect(viewController.collectionView.refreshControl) === viewController.refreshControl
             }
         }
         
@@ -34,5 +42,17 @@ class BaseCollectionViewControllerSpec: QuickSpec {
                 expect(viewController.refreshControl?.isRefreshing) == false
             }
         }
+    }
+}
+
+class BaseCollectionViewControllerTest: BaseCollectionViewController<BasePaginationViewModel> {
+    let collectionViewLayout = UICollectionViewLayout()
+    
+    lazy var testCollectionView: UICollectionView = {
+        return UICollectionView(frame: CGRect.zero, collectionViewLayout: self.collectionViewLayout)
+    }()
+    
+    override weak var collectionView: UICollectionView! {
+        return testCollectionView
     }
 }

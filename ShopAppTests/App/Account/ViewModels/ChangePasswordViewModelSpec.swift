@@ -24,6 +24,10 @@ class ChangePasswordViewModelSpec: QuickSpec {
         }
         
         describe("when view model initialized") {
+            it("should have a correct superclass") {
+                expect(viewModel).to(beAKindOf(BaseViewModel.self))
+            }
+            
             it("should have variables with a correct initial values") {
                 expect(viewModel.newPasswordText.value) == ""
                 expect(viewModel.confirmPasswordText.value) == ""

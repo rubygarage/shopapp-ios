@@ -43,6 +43,10 @@ class AccountViewControllerSpec: QuickSpec {
                 viewController.viewWillAppear(false)
             }
             
+            it("should have a correct superclass") {
+                expect(viewController.isKind(of: BaseViewController<AccountViewModel>.self)) == true
+            }
+            
             it("should have a correct view model type") {
                 expect(viewController.viewModel).to(beAKindOf(AccountViewModel.self))
             }

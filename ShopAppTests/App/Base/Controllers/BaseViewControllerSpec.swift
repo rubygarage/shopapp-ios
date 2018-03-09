@@ -22,24 +22,51 @@ class BaseViewControllerSpec: QuickSpec {
         beforeEach {
             viewController = BaseViewController()
             viewController.viewModel = viewModelMock
-            _ = viewController.view
         }
         
         describe("when view loaded") {
-            it("shouldn't have left bar button item") {
-                expect(viewController.navigationItem.leftBarButtonItem).to(beNil())
-            }
-            
             it("should have default empty data view") {
+                _ = viewController.view
+                
                 expect(viewController.customEmptyDataView).to(beAnInstanceOf(UIView.self))
             }
             
+            it("should have correct error view delegate") {
+                _ = viewController.view
+                
+                expect(viewController.errorView.delegate) === viewController
+            }
+            
             it("should have correct offset in toast view's appearance") {
+                _ = viewController.view
+                
                 expect(ToastView.appearance().bottomOffsetPortrait) == 80
+            }
+            
+            context("if it pushed in navigation controller and not a root view controller") {
+                it("should have correct back button image") {
+                    let navigationController = NavigationController(rootViewController: UIViewController())
+                    navigationController.pushViewController(viewController, animated: false)
+                    _ = viewController.view
+                    
+                    expect(viewController.navigationItem.leftBarButtonItem?.image) == #imageLiteral(resourceName: "arrow_left")
+                }
+            }
+            
+            context("if it is a root view controller in navigation controller or hasn't navigation controller") {
+                it("shouldn't have left bar button item") {
+                    _ = viewController.view
+                    
+                    expect(viewController.navigationItem.leftBarButtonItem).to(beNil())
+                }
             }
         }
         
         describe("when view state changed") {
+            beforeEach {
+                _ = viewController.view
+            }
+            
             context("if it content state") {
                 it("needs to hide all state views") {
                     viewModelMock.setContentState()

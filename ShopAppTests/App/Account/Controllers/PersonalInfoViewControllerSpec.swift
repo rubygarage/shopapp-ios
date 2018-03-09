@@ -27,9 +27,6 @@ class PersonalInfoViewControllerSpec: QuickSpec {
         beforeEach {
             viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.personalInfo) as! PersonalInfoViewController
             
-            let navigationController = NavigationController(rootViewController: UIViewController())
-            navigationController.pushViewController(viewController, animated: false)
-            
             let repositoryMock = AuthentificationRepositoryMock()
             let updateCustomerUseCaseMock = UpdateCustomerUseCaseMock(repository: repositoryMock)
             let loginUseCaseMock = LoginUseCaseMock(repository: repositoryMock)
@@ -48,16 +45,16 @@ class PersonalInfoViewControllerSpec: QuickSpec {
         }
         
         describe("when view loaded") {
+            it("should have a correct superclass") {
+                expect(viewController.isKind(of: BaseViewController<PersonalInfoViewModel>.self)) == true
+            }
+            
             it("should have a correct view model type") {
                 expect(viewController.viewModel).to(beAKindOf(PersonalInfoViewModel.self))
             }
             
             it("should have a title with correct text") {
                 expect(viewController.title) == "ControllerTitle.PersonalInfo".localizable
-            }
-            
-            it("should have back button") {
-                expect(viewController.navigationItem.leftBarButtonItem?.image) == #imageLiteral(resourceName: "arrow_left")
             }
             
             it("should have text filed views with correct placeholders") {
@@ -74,6 +71,10 @@ class PersonalInfoViewControllerSpec: QuickSpec {
             it("should have buttons with correct titles") {
                 expect(changePasswordButton.title(for: .normal)) == "Button.ChangePassword".localizable.uppercased()
                 expect(saveChangesButton.title(for: .normal)) == "Button.SaveChanges".localizable.uppercased()
+            }
+            
+            it("should have correct delegate of change password button") {
+                expect(changePasswordButton.delegate) === viewController
             }
             
             it("should have correct setup view model") {

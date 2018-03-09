@@ -15,7 +15,7 @@ protocol AccountAddressFormControllerDelegate: class {
     func viewController(_ controller: AccountAddressFormViewController, didAdd address: Address)
 }
 
-class AccountAddressFormViewController: BaseAddressFormViewController<AccountAddressFormViewModel> {
+class AccountAddressFormViewController: BaseAddressFormViewController<AccountAddressFormViewModel>, AddressFormControllerlDelegate {
     var isSelectedAddress = false
     
     weak var delegate: AccountAddressFormControllerDelegate?
@@ -51,9 +51,9 @@ class AccountAddressFormViewController: BaseAddressFormViewController<AccountAdd
             })
         .disposed(by: disposeBag)
     }
-}
-
-extension AccountAddressFormViewController: AddressFormControllerlDelegate {
+    
+    // MARK: - AddressFormControllerlDelegate
+    
     func viewController(_ controller: AddressFormViewController, didFill address: Address) {
         if addressAction == .add {
             viewModel.addCustomerAddress(with: address)
