@@ -1,5 +1,5 @@
 //
-//  ArticlesListViewController.swift
+//  ArticleListViewController.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 9/25/17.
@@ -10,10 +10,10 @@ import UIKit
 
 import ShopApp_Gateway
 
-class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel> {
-    private var tableProvider: ArticlesListTableProvider!
-    
+class ArticleListViewController: BaseTableViewController<ArticleListViewModel>, ArticleListTableProviderDelegate {
     fileprivate var selectedArticle: Article?
+    
+    var tableProvider: ArticleListTableProvider!
     
     // MARK: - View controller lifecycle
     
@@ -39,7 +39,7 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
     }
     
     private func setupViewModel() {
-        viewModel?.items.asObservable()
+        viewModel.items.asObservable()
             .subscribe(onNext: { [weak self] articles in
                 guard let strongSelf = self else {
                     return
@@ -58,7 +58,6 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
     private func setupTableView() {
         tableView.registerNibForCell(ArticleTableViewCell.self)
         
-        tableProvider = ArticlesListTableProvider()
         tableProvider.delegate = self
         tableView.dataSource = tableProvider
         tableView.delegate = tableProvider
@@ -73,12 +72,10 @@ class ArticlesListViewController: BaseTableViewController<ArticlesListViewModel>
     override func infinityScrollHandler() {
         viewModel.loadNextPage()
     }
-}
 
-// MARK: - ArticlesListTableProviderDelegate
+    // MARK: - ArticleListTableProviderDelegate
 
-extension ArticlesListViewController: ArticlesListTableProviderDelegate {
-    func provider(_ provider: ArticlesListTableProvider, didSelect article: Article) {
+    func provider(_ provider: ArticleListTableProvider, didSelect article: Article) {
         selectedArticle = article
         performSegue(withIdentifier: SegueIdentifiers.toArticleDetails, sender: self)
     }

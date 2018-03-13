@@ -8,16 +8,12 @@
 
 import Nimble
 import Quick
-import RxSwift
 
 @testable import ShopApp
 
 class OrderDetailsViewControllerSpec: QuickSpec {
-    private let numberOfSections = 3
-    
     override func spec() {
         var viewController: OrderDetailsViewController!
-        var navigationController: NavigationController!
         var tableProvider: OrderDetailsTableProvider!
         var viewModelMock: OrderDetailsViewModelMock!
         var tableView: UITableView!
@@ -31,8 +27,6 @@ class OrderDetailsViewControllerSpec: QuickSpec {
             viewController.viewModel = viewModelMock
             tableProvider = OrderDetailsTableProvider()
             viewController.tableProvider = tableProvider
-            navigationController = NavigationController(rootViewController: UIViewController())
-            navigationController.pushViewController(viewController, animated: false)
             tableView = self.findView(withAccessibilityLabel: "orderDetailTableView", in: viewController.view) as! UITableView
             
             _ = viewController.view
@@ -49,10 +43,6 @@ class OrderDetailsViewControllerSpec: QuickSpec {
             
             it("should have correct title") {
                 expect(viewController.title) == "ControllerTitle.OrderDetails".localizable
-            }
-            
-            it("should have a back button") {
-                expect(viewController.navigationItem.leftBarButtonItem?.image) == #imageLiteral(resourceName: "arrow_left")
             }
             
             it("should have correct view model properties") {
@@ -74,12 +64,6 @@ class OrderDetailsViewControllerSpec: QuickSpec {
         }
         
         describe("when data loaded") {
-            var disposeBag: DisposeBag!
-            
-            beforeEach {
-                disposeBag = DisposeBag()
-            }
-            
             it("should start loading order") {
                 expect(viewModelMock.isLoadingOrderStarted) == true
             }
@@ -89,25 +73,18 @@ class OrderDetailsViewControllerSpec: QuickSpec {
                     viewModelMock.makeEmptyData()
                     viewModelMock.loadOrder()
                     
-                    viewController.viewModel.data.asObservable()
-                        .subscribe(onNext: { _ in
-                            expect(tableView.numberOfSections) == 0
-                        })
-                        .disposed(by: disposeBag)
+                    expect(tableProvider.order).to(beNil())
+                    expect(tableView.numberOfSections) == 0
                 }
             }
-
+            
             context("if data isn't empty") {
                 it("should have tableView with data") {
                     viewModelMock.makeNotEmptyData()
                     viewModelMock.loadOrder()
                     
-                    viewController.viewModel.data.asObservable()
-                        .subscribe(onNext: { order in
-                            expect(order) === tableProvider.order
-                            expect(tableView.numberOfSections) == self.numberOfSections
-                        })
-                        .disposed(by: disposeBag)
+                    expect(tableProvider.order).toNot(beNil())
+                    expect(tableView.numberOfSections) > 0
                 }
             }
         }

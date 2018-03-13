@@ -10,9 +10,6 @@ import UIKit
 
 import ShopApp_Gateway
 
-private let kTitleLabelTrailingDefault: CGFloat = 151
-private let kTitleLabelTrailingWide: CGFloat = 16
-
 class ArticleTableViewCell: UITableViewCell {
     @IBOutlet private weak var articleImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
@@ -20,6 +17,9 @@ class ArticleTableViewCell: UITableViewCell {
     @IBOutlet private weak var authorLabel: UILabel!
     @IBOutlet private weak var separatorView: UIView!
     @IBOutlet private weak var titleLabelTrailingLayoutConstraint: NSLayoutConstraint!
+    
+    private let titleLabelTrailingDefault: CGFloat = 151
+    private let titleLabelTrailingWide: CGFloat = 16
     
     // MARK: - View lifecycle
     
@@ -36,7 +36,7 @@ class ArticleTableViewCell: UITableViewCell {
             articleImageView.set(image: image)
         }
         articleImageView.isHidden = item.image == nil
-        titleLabelTrailingLayoutConstraint.constant = item.image == nil ? kTitleLabelTrailingWide : kTitleLabelTrailingDefault
+        titleLabelTrailingLayoutConstraint.constant = item.image == nil ? titleLabelTrailingWide : titleLabelTrailingDefault
         titleLabel.text = item.title
         descriptionLabel.text = item.content
         authorLabel.text = item.author?.fullName

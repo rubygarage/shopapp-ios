@@ -17,8 +17,9 @@ class MainAssembly: Assembly {
             c.viewModel = r.resolve(ArticleDetailsViewModel.self)!
         }
 
-        container.storyboardInitCompleted(ArticlesListViewController.self) { r, c in
-            c.viewModel = r.resolve(ArticlesListViewModel.self)!
+        container.storyboardInitCompleted(ArticleListViewController.self) { r, c in
+            c.viewModel = r.resolve(ArticleListViewModel.self)!
+            c.tableProvider = r.resolve(ArticleListTableProvider.self)!
         }
 
         container.storyboardInitCompleted(CategoryListViewController.self) { r, c in
@@ -51,8 +52,8 @@ class MainAssembly: Assembly {
             return ArticleDetailsViewModel(articleUseCase: r.resolve(ArticleUseCase.self)!)
         }
 
-        container.register(ArticlesListViewModel.self) { r in
-            return ArticlesListViewModel(articleListUseCase: r.resolve(ArticleListUseCase.self)!)
+        container.register(ArticleListViewModel.self) { r in
+            return ArticleListViewModel(articleListUseCase: r.resolve(ArticleListUseCase.self)!)
         }
 
         container.register(CategoryListViewModel.self) { r in
@@ -84,6 +85,12 @@ class MainAssembly: Assembly {
 
         container.register(CartButtonViewModel.self) { r in
             return CartButtonViewModel(cartProductListUseCase: r.resolve(CartProductListUseCase.self)!)
+        }
+        
+        // MARK: - Providers
+        
+        container.register(ArticleListTableProvider.self) { _ in
+            return ArticleListTableProvider()
         }
     }
 }

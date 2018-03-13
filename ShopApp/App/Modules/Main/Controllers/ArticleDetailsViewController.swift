@@ -11,8 +11,6 @@ import UIKit
 
 import ShopApp_Gateway
 
-private let kArticleTitleLabelTopDefault: CGFloat = 20
-
 class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel>, UIWebViewDelegate {
     @IBOutlet private weak var articleImageView: UIImageView!
     @IBOutlet private weak var articleTitleLabel: UILabel!
@@ -26,6 +24,8 @@ class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel>,
             articleContentWebView.scrollView.isScrollEnabled = false
         }
     }
+    
+    private let articleTitleLabelTopDefault: CGFloat = 20
     
     var articleId: String!
     
@@ -60,7 +60,7 @@ class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel>,
     }
     
     private func populateViews(with article: Article, baseUrl: URL) {
-        articleTitleLabelTopLayoutConstraint.constant = kArticleTitleLabelTopDefault
+        articleTitleLabelTopLayoutConstraint.constant = articleTitleLabelTopDefault
         if let image = article.image {
             articleImageView.set(image: image)
             articleTitleLabelTopLayoutConstraint.constant += articleImageView.frame.size.height

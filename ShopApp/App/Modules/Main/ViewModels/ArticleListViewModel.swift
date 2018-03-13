@@ -1,5 +1,5 @@
 //
-//  ArticlesListViewModel.swift
+//  ArticleListViewModel.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 11/3/17.
@@ -9,7 +9,7 @@
 import RxSwift
 import ShopApp_Gateway
 
-class ArticlesListViewModel: BasePaginationViewModel {
+class ArticleListViewModel: BasePaginationViewModel {
     private let articleListUseCase: ArticleListUseCase
     
     var items = Variable<[Article]>([])

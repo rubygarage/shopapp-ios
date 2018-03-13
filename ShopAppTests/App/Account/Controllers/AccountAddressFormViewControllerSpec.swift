@@ -8,7 +8,6 @@
 
 import Nimble
 import Quick
-import RxSwift
 
 import ShopApp_Gateway
 
@@ -31,9 +30,6 @@ class AccountAddressFormViewControllerSpec: QuickSpec {
             
             viewControllerDelegateMock = AccountAddressFormControllerDelegateMock()
             viewController.delegate = viewControllerDelegateMock
-            
-            let navigationController = NavigationController(rootViewController: UIViewController())
-            navigationController.pushViewController(viewController, animated: false)
         }
         
         describe("when view loaded") {
@@ -44,10 +40,6 @@ class AccountAddressFormViewControllerSpec: QuickSpec {
             
             it("should have a correct view model type") {
                 expect(viewController.viewModel).to(beAKindOf(AccountAddressFormViewModel.self))
-            }
-            
-            it("should have a back button") {
-                expect(viewController.navigationItem.leftBarButtonItem?.image) == #imageLiteral(resourceName: "arrow_left")
             }
         }
         

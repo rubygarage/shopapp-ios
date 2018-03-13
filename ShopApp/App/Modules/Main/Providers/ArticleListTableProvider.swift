@@ -10,19 +10,17 @@ import UIKit
 
 import ShopApp_Gateway
 
-protocol ArticlesListTableProviderDelegate: class {
-    func provider(_ provider: ArticlesListTableProvider, didSelect article: Article)
+protocol ArticleListTableProviderDelegate: class {
+    func provider(_ provider: ArticleListTableProvider, didSelect article: Article)
 }
 
-class ArticlesListTableProvider: NSObject {
+class ArticleListTableProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     var articles: [Article] = []
     
-    weak var delegate: ArticlesListTableProviderDelegate?
-}
+    weak var delegate: ArticleListTableProviderDelegate?
 
-// MARK: - UITableViewDataSource
+    // MARK: - UITableViewDataSource
 
-extension ArticlesListTableProvider: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
     }
@@ -34,11 +32,9 @@ extension ArticlesListTableProvider: UITableViewDataSource {
         cell.configure(with: article, separatorHidden: separatorHidden)
         return cell
     }
-}
 
-// MARK: - UITableViewDelegate
+    // MARK: - UITableViewDelegate
 
-extension ArticlesListTableProvider: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let delegate = delegate else {
             return

@@ -8,7 +8,6 @@
 
 import Nimble
 import Quick
-import RxSwift
 import ShopApp_Gateway
 
 @testable import ShopApp
@@ -196,13 +195,6 @@ class AddressFormViewControllerSpec: QuickSpec {
         }
         
         describe("when pickers did changes") {
-            var disposeBag: DisposeBag!
-            
-            beforeEach {
-                initData(addressNeeded: false)
-                disposeBag = DisposeBag()
-            }
-            
             it("should have correct view model namesOfCountries binding") {
                 viewModelMock.makeNameOfCountries(with: ["Country1"])
                 expect(countryPicker.customData) == ["Country1"]

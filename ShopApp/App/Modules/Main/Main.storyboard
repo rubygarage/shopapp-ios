@@ -151,10 +151,10 @@
             </objects>
             <point key="canvasLocation" x="-1555" y="24"/>
         </scene>
-        <!--Articles List View Controller-->
+        <!--Article List View Controller-->
         <scene sceneID="4PG-ly-VQy">
             <objects>
-                <viewController storyboardIdentifier="ArticlesListControllerIdentifier" hidesBottomBarWhenPushed="YES" id="gX3-Ek-1Eq" customClass="ArticlesListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ArticleListControllerIdentifier" hidesBottomBarWhenPushed="YES" id="gX3-Ek-1Eq" customClass="ArticleListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Zw-fe-q6O">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -198,18 +198,28 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="1WT-Ge-0EH" secondAttribute="height" multiplier="1:1" id="xBd-8P-KeN"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="image"/>
+                                        </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="E8X-x7-TTY">
                                         <rect key="frame" x="15" y="390" width="345" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="title"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="RpD-it-Hg8">
                                         <rect key="frame" x="15" y="426" width="345" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="author"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <webView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HO6-dp-DAG">
                                         <rect key="frame" x="15" y="472" width="345" height="1"/>
@@ -219,6 +229,10 @@
                                             <constraint firstAttribute="width" constant="345" id="iSE-7y-aL3"/>
                                         </constraints>
                                         <dataDetectorType key="dataDetectorTypes"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="webView"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </webView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -894,8 +908,8 @@
         <image name="search_selected" width="27" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RyX-CT-HJC"/>
+        <segue reference="Ucu-Sf-yUc"/>
         <segue reference="OyI-Tn-rEV"/>
-        <segue reference="L85-9n-ESO"/>
+        <segue reference="Dq7-PS-rRI"/>
     </inferredMetricsTieBreakers>
 </document>

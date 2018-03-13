@@ -1,8 +1,8 @@
 //
-//  OrderListViewControllerSpec.swift
+//  ArticleListViewControllerSpec.swift
 //  ShopAppTests
 //
-//  Created by Evgeniy Antonov on 2/20/18.
+//  Created by Radyslav Krechet on 3/12/18.
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
@@ -11,22 +11,22 @@ import Quick
 
 @testable import ShopApp
 
-class OrderListViewControllerSpec: QuickSpec {
+class ArticleListViewControllerSpec: QuickSpec {
     override func spec() {
-        var viewController: OrderListViewController!
-        var tableProvider: OrderListTableProvider!
-        var viewModelMock: OrderListViewModelMock!
+        var viewController: ArticleListViewController!
+        var tableProvider: ArticleListTableProvider!
+        var viewModelMock: ArticleListViewModelMock!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.orderList) as! OrderListViewController
+            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.articleList) as! ArticleListViewController
             
-            let repositoryMock = OrderRepositoryMock()
-            let orderListUseCaseMock = OrderListUseCaseMock(repository: repositoryMock)
+            let repository = ArticleRepositoryMock()
+            let articleListUseCaseMock = ArticleListUseCaseMock(repository: repository)
             
-            viewModelMock = OrderListViewModelMock(orderListUseCase: orderListUseCaseMock)
+            viewModelMock = ArticleListViewModelMock(articleListUseCase: articleListUseCaseMock)
             viewController.viewModel = viewModelMock
             
-            tableProvider = OrderListTableProvider()
+            tableProvider = ArticleListTableProvider()
             viewController.tableProvider = tableProvider
             
             _ = viewController.view
@@ -34,19 +34,15 @@ class OrderListViewControllerSpec: QuickSpec {
         
         describe("when view loaded") {
             it("should have a correct superclass") {
-                expect(viewController.isKind(of: BaseTableViewController<OrderListViewModel>.self)) == true
+                expect(viewController.isKind(of: BaseTableViewController<ArticleListViewModel>.self)) == true
             }
             
             it("should have a correct view model type") {
-                expect(viewController.viewModel).to(beAKindOf(OrderListViewModel.self))
+                expect(viewController.viewModel).to(beAKindOf(ArticleListViewModel.self))
             }
             
             it("should have correct title") {
-                expect(viewController.title) == "ControllerTitle.MyOrders".localizable
-            }
-            
-            it("should have default empty data view") {
-                expect(viewController.customEmptyDataView).to(beAnInstanceOf(OrderListEmptyDataView.self))
+                expect(viewController.title) == "ControllerTitle.BlogPosts".localizable
             }
             
             it("should have correct delegate of table provider") {
@@ -56,10 +52,6 @@ class OrderListViewControllerSpec: QuickSpec {
             it("should have correct data source and delegate of table view") {
                 expect(viewController.tableView.dataSource) === tableProvider
                 expect(viewController.tableView.delegate) === tableProvider
-            }
-            
-            it("should have correct content inset of table view") {
-                expect(viewController.tableView.contentInset) == TableView.defaultContentInsets
             }
             
             it("should start reload data") {
@@ -74,8 +66,8 @@ class OrderListViewControllerSpec: QuickSpec {
                     viewModelMock.reloadData()
                     
                     expect(viewController.refreshControl?.isRefreshing) == false
-                    expect(viewController.tableView.numberOfSections) == 0
-                    expect(tableProvider.orders.isEmpty) == true
+                    expect(viewController.tableView.numberOfRows(inSection: 0)) == 0
+                    expect(tableProvider.articles.isEmpty) == true
                 }
             }
             
@@ -85,8 +77,8 @@ class OrderListViewControllerSpec: QuickSpec {
                     viewModelMock.reloadData()
                     
                     expect(viewController.refreshControl?.isRefreshing) == false
-                    expect(viewController.tableView.numberOfSections) > 0
-                    expect(tableProvider.orders.isEmpty) == false
+                    expect(viewController.tableView.numberOfRows(inSection: 0)) > 0
+                    expect(tableProvider.articles.isEmpty) == false
                 }
             }
         }

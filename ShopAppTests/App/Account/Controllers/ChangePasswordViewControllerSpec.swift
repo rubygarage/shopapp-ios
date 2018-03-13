@@ -8,7 +8,6 @@
 
 import Nimble
 import Quick
-import RxSwift
 
 @testable import ShopApp
 
