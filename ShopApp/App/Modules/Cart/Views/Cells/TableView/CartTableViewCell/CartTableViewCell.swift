@@ -15,7 +15,7 @@ protocol CartTableCellDelegate: class {
     func tableViewCell(_ tableViewCell: CartTableViewCell, didUpdateCartProduct cartProduct: CartProduct, with quantity: Int)
 }
 
-class CartTableViewCell: SwipeTableViewCell {
+class CartTableViewCell: SwipeTableViewCell, QuantityTextFieldViewDelegate {
     @IBOutlet private weak var variantImageView: UIImageView!
     @IBOutlet private weak var variantTitleLabel: UILabel!
     @IBOutlet private weak var quantityLabel: UILabel!
@@ -28,7 +28,7 @@ class CartTableViewCell: SwipeTableViewCell {
         }
     }
     
-    var cartProduct: CartProduct?
+    private var cartProduct: CartProduct?
     
     weak var cellDelegate: CartTableCellDelegate?
     
@@ -47,7 +47,7 @@ class CartTableViewCell: SwipeTableViewCell {
         populateImageView(with: item)
         populateTitle(with: item)
         populateQuantity(with: item)
-        popualateTotalPrice(with: item)
+        populateTotalPrice(with: item)
         populatePricePerOne(with: item)
     }
     
@@ -76,7 +76,7 @@ class CartTableViewCell: SwipeTableViewCell {
         quantityTextFieldView.text = "\(quantity)"
     }
     
-    private func popualateTotalPrice(with item: CartProduct?) {
+    private func populateTotalPrice(with item: CartProduct?) {
         guard let item = item else {
             totalPriceLabel.text = nil
             return
@@ -103,11 +103,9 @@ class CartTableViewCell: SwipeTableViewCell {
         pricePerOneItemLabel.text = String.localizedStringWithFormat(localizedString, formattedPrice)
         pricePerOneItemLabel.isHidden = false
     }
-}
-
-// MARK: - QuantityTextFieldViewDelegate
-
-extension CartTableViewCell: QuantityTextFieldViewDelegate {
+    
+    // MARK: - QuantityTextFieldViewDelegate
+    
     func quantityTextFieldView(_ view: QuantityTextFieldView, didEndEditingWith quantity: Int) {
         guard let cartProduct = cartProduct else {
             return

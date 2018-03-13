@@ -22,8 +22,10 @@ class CartViewModel: BaseViewModel {
         self.changeCartProductUseCase = changeCartProductUseCase
     }
     
-    func loadData() {
-        state.onNext(ViewState.make.loading())
+    func loadData(showLoading: Bool = true) {
+        if showLoading {
+            state.onNext(ViewState.make.loading())
+        }
         cartProductListUseCase.getCartProductList { [weak self] (cartProducts, error) in
             guard let strongSelf = self else {
                 return
@@ -62,8 +64,7 @@ class CartViewModel: BaseViewModel {
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
             } else {
-                strongSelf.state.onNext(.content)
-                strongSelf.loadData()
+                strongSelf.loadData(showLoading: false)
             }
         }
     }

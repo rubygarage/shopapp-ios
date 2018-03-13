@@ -15,17 +15,17 @@ protocol CartTableProviderDelegate: class {
     func provider(_ provider: CartTableProvider, didSelect productVariant: ProductVariant)
 }
 
-class CartTableProvider: NSObject {
+class CartTableProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
+    let cartHeaderViewHeight: CGFloat = 76
+    
     var cartProducts: [CartProduct] = []
     var totalPrice = Float(0)
     var currency = ""
     
     weak var delegate: (CartTableProviderDelegate & CartTableCellDelegate & SwipeTableViewCellDelegate)?
-}
-
-// MARK: - UITableViewDataSource
-
-extension CartTableProvider: UITableViewDataSource {
+    
+    // MARK: - UITableViewDataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cartProducts.count
     }
@@ -39,11 +39,9 @@ extension CartTableProvider: UITableViewDataSource {
         
         return cell
     }
-}
-
-// MARK: - UITableViewDelegate
-
-extension CartTableProvider: UITableViewDelegate {
+    
+    // MARK: - UITableViewDelegate
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let delegate = delegate, let productVariant = cartProducts[indexPath.row].productVariant else {
             return
@@ -52,7 +50,7 @@ extension CartTableProvider: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return kCartHeaderViewHeader
+        return cartHeaderViewHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CartEmptyDataView" customModule="ShopClient" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CartEmptyDataView" customModule="ShopApp" customModuleProvider="target">
             <connections>
                 <outlet property="emptyCartLabel" destination="qqK-N2-Wld" id="8G0-f4-GOU"/>
                 <outlet property="startShoppingButton" destination="GMK-i1-6MW" id="Fyc-rT-9G4"/>
@@ -34,6 +34,9 @@
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="emptyCartLabel"/>
+                    </userDefinedRuntimeAttributes>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GMK-i1-6MW">
                     <rect key="frame" x="45" y="390" width="295" height="50"/>
@@ -45,6 +48,9 @@
                     <state key="normal" title="Button">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="startShoppingButton"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="startShoppingButtonDidPress:" destination="-1" eventType="touchUpInside" id="zao-0G-G8m"/>
                     </connections>

@@ -11,13 +11,13 @@ import UIKit
 import ShopApp_Gateway
 import SwipeCellKit
 
-class CartViewController: BaseViewController<CartViewModel> {
+class CartViewController: BaseViewController<CartViewModel>, CartEmptyDataViewDelegate, CartTableProviderDelegate, CartTableCellDelegate, SwipeTableViewCellDelegate {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var checkoutButton: BlackButton!
     
-    private var tableProvider: CartTableProvider!
-    
     fileprivate var selectedProductVariant: ProductVariant!
+    
+    var tableProvider: CartTableProvider!
     
     override var customEmptyDataView: UIView {
         let emptyView = CartEmptyDataView(frame: view.frame)
@@ -53,7 +53,6 @@ class CartViewController: BaseViewController<CartViewModel> {
     private func setupTableView() {
         tableView.registerNibForCell(CartTableViewCell.self)
         
-        tableProvider = CartTableProvider()
         tableProvider.delegate = self
         tableView.dataSource = tableProvider
         tableView.delegate = tableProvider
@@ -82,37 +81,29 @@ class CartViewController: BaseViewController<CartViewModel> {
     @IBAction func checkoutButtonDidPress(_ sender: BlackButton) {
         performSegue(withIdentifier: SegueIdentifiers.toCheckout, sender: self)
     }
-}
-
-// MARK: - CartEmptyDataViewDelegate
-
-extension CartViewController: CartEmptyDataViewDelegate {
+    
+    // MARK: - CartEmptyDataViewDelegate
+    
     func viewDidTapStartShopping(_ view: CartEmptyDataView) {
         setHomeController()
         dismiss(animated: true)
     }
-}
-
-// MARK: - CartTableProvider
-
-extension CartViewController: CartTableProviderDelegate {
+    
+    // MARK: - CartTableProvider
+    
     func provider(_ provider: CartTableProvider, didSelect productVariant: ProductVariant) {
         selectedProductVariant = productVariant
         performSegue(withIdentifier: SegueIdentifiers.toProductDetails, sender: self)
     }
-}
-
-// MARK: - CartTableCellDelegate
-
-extension CartViewController: CartTableCellDelegate {
+    
+    // MARK: - CartTableCellDelegate
+    
     func tableViewCell(_ tableViewCell: CartTableViewCell, didUpdateCartProduct cartProduct: CartProduct, with quantity: Int) {
         viewModel.update(cartProduct: cartProduct, quantity: quantity)
     }
-}
-
-// MARK: - SwipeTableViewCellDelegate
-
-extension CartViewController: SwipeTableViewCellDelegate {
+    
+    // MARK: - SwipeTableViewCellDelegate
+    
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else {
             return nil

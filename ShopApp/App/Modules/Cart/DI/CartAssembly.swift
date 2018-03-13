@@ -15,6 +15,7 @@ class CartAssembly: Assembly {
 
         container.storyboardInitCompleted(CartViewController.self) { r, c in
             c.viewModel = r.resolve(CartViewModel.self)!
+            c.tableProvider = r.resolve(CartTableProvider.self)!
         }
 
         // MARK: - View models
@@ -23,6 +24,12 @@ class CartAssembly: Assembly {
             return CartViewModel(cartProductListUseCase: r.resolve(CartProductListUseCase.self)!,
                                  deleteCartProductUseCase: r.resolve(DeleteCartProductUseCase.self)!,
                                  changeCartProductUseCase: r.resolve(ChangeCartProductUseCase.self)!)
+        }
+        
+        // MARK: - Providers
+        
+        container.register(CartTableProvider.self) { _ in
+            return CartTableProvider()
         }
     }
 }
