@@ -15,6 +15,11 @@ notifications:
     rooms:
       - shopclientapp:EBh1k4fcosP8EYhbD1R0S2qm#ios
   email: false
+  
+branches:
+  only:
+    - master
+    - develop
 
 script:
   - xcodebuild -workspace ShopApp.xcworkspace -scheme ShopApp -configuration 'Debug' -sdk 'iphonesimulator11.2' -destination 'platform=iOS Simulator,name=iPhone 7' test | xcpretty -f `xcpretty-travis-formatter`
