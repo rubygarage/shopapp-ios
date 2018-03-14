@@ -13,7 +13,7 @@ import RxSwift
 
 class TextFieldWrapper: UIView {
     // swiftlint:disable private_outlet
-    @IBOutlet fileprivate(set) weak var textField: UITextField!
+    @IBOutlet private(set) weak var textField: UITextField!
     // swiftlint:enable private_outlet
 
     var text: String? {

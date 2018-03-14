@@ -14,15 +14,13 @@ protocol CategoryListCollectionProviderDelegate: class {
     func provider(_ provider: CategoryListCollectionProvider, didSelect category: ShopApp_Gateway.Category)
 }
 
-class CategoryListCollectionProvider: NSObject {
+class CategoryListCollectionProvider: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     var categories: [ShopApp_Gateway.Category] = []
     
     weak var delegate: CategoryListCollectionProviderDelegate?
-}
 
-// MARK: - UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
 
-extension CategoryListCollectionProvider: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
     }
@@ -33,11 +31,9 @@ extension CategoryListCollectionProvider: UICollectionViewDataSource {
         cell.configure(with: category)
         return cell
     }
-}
 
-// MARK: - UICollectionViewDelegate
+    // MARK: - UICollectionViewDelegate
 
-extension CategoryListCollectionProvider: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let delegate = delegate else {
             return
@@ -45,11 +41,9 @@ extension CategoryListCollectionProvider: UICollectionViewDelegate {
         let category = categories[indexPath.row]
         delegate.provider(self, didSelect: category)
     }
-}
 
-// MARK: - UICollectionViewDelegateFlowLayout
+    // MARK: - UICollectionViewDelegateFlowLayout
 
-extension CategoryListCollectionProvider: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CategoryCollectionViewCell.cellSize
     }

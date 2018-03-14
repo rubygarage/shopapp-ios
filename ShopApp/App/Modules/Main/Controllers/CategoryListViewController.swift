@@ -14,8 +14,8 @@ protocol CategoryListControllerDelegate: class {
     func viewController(_ viewController: CategoryListViewController, didSelect category: ShopApp_Gateway.Category)
 }
 
-class CategoryListViewController: BaseCollectionViewController<CategoryListViewModel> {
-    private var collectionProvider: CategoryListCollectionProvider!
+class CategoryListViewController: BaseCollectionViewController<CategoryListViewModel>, CategoryListCollectionProviderDelegate {
+    var collectionProvider: CategoryListCollectionProvider!
     
     weak var delegate: CategoryListControllerDelegate?
     
@@ -33,8 +33,7 @@ class CategoryListViewController: BaseCollectionViewController<CategoryListViewM
     
     private func setupViews() {
         collectionView.registerNibForCell(CategoryCollectionViewCell.self)
-         
-        collectionProvider = CategoryListCollectionProvider()
+        
         collectionProvider.delegate = self
         collectionView.dataSource = collectionProvider
         collectionView.delegate = collectionProvider
@@ -67,11 +66,9 @@ class CategoryListViewController: BaseCollectionViewController<CategoryListViewM
     override func infinityScrollHandler() {
         viewModel.loadNextPage()
     }
-}
 
-// MARK: - SearchCollectionProviderDelegate
+    // MARK: - CategoryListCollectionProviderDelegate
 
-extension CategoryListViewController: CategoryListCollectionProviderDelegate {
     func provider(_ provider: CategoryListCollectionProvider, didSelect category: ShopApp_Gateway.Category) {
         delegate?.viewController(self, didSelect: category)
     }

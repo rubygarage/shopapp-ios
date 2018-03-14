@@ -13,7 +13,7 @@ import ShopApp_Gateway
 class AccountViewController: BaseViewController<AccountViewModel>, AccountTableProviderDelegate, AccountNotLoggedHeaderDelegate, AccountLoggedHeaderDelegate, AccountFooterDelegate {
     @IBOutlet private weak var tableView: UITableView!
     
-    fileprivate var selectedPolicy: Policy?
+    private var selectedPolicy: Policy?
     
     var tableProvider: AccountTableProvider!
     
@@ -41,7 +41,7 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableP
     
     // MARK: - Setup
     
-    fileprivate func updateNavigationBar() {
+    private func updateNavigationBar() {
         navigationItem.title = "ControllerTitle.Account".localizable
         
         if viewModel.customer.value != nil && navigationItem.rightBarButtonItem == nil {
@@ -52,7 +52,7 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableP
         }
     }
     
-    fileprivate func loadData() {
+    private func loadData() {
         viewModel.loadCustomer()
         viewModel.loadPolicies()
     }

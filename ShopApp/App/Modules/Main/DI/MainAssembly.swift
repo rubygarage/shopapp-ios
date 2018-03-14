@@ -24,6 +24,7 @@ class MainAssembly: Assembly {
 
         container.storyboardInitCompleted(CategoryListViewController.self) { r, c in
             c.viewModel = r.resolve(CategoryListViewModel.self)!
+            c.collectionProvider = r.resolve(CategoryListCollectionProvider.self)!
         }
 
         container.storyboardInitCompleted(CategoryViewController.self) { r, c in
@@ -91,6 +92,10 @@ class MainAssembly: Assembly {
         
         container.register(ArticleListTableProvider.self) { _ in
             return ArticleListTableProvider()
+        }
+        
+        container.register(CategoryListCollectionProvider.self) { _ in
+            return CategoryListCollectionProvider()
         }
     }
 }

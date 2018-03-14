@@ -24,8 +24,8 @@ class BaseAddressListViewController<T: BaseAddressListViewModel>: BaseViewContro
     @IBOutlet private(set) weak var tableView: UITableView!
     // swiftlint:enable private_outlet
     
-    fileprivate var destinationAddress: Address?
-    fileprivate var destinationAddressAction: AddressAction = .add
+    private var destinationAddress: Address?
+    private var destinationAddressAction: AddressAction = .add
     
     var tableProvider: BaseAddressListTableProvider!
     var selectedAddress: Address?

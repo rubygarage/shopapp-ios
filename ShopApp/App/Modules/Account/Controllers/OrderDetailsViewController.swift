@@ -13,7 +13,7 @@ import ShopApp_Gateway
 class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, OrderDetailsTableProviderDelegate {
     @IBOutlet private weak var tableView: UITableView!
     
-    fileprivate var selectedProductVariant: ProductVariant!
+    private var selectedProductVariant: ProductVariant!
     
     var orderId: String!
     var tableProvider: OrderDetailsTableProvider!

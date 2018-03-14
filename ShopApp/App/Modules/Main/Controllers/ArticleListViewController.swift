@@ -11,7 +11,7 @@ import UIKit
 import ShopApp_Gateway
 
 class ArticleListViewController: BaseTableViewController<ArticleListViewModel>, ArticleListTableProviderDelegate {
-    fileprivate var selectedArticle: Article?
+    private var selectedArticle: Article?
     
     var tableProvider: ArticleListTableProvider!
     

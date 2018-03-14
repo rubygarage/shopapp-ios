@@ -10,9 +10,6 @@ import UIKit
 
 import ShopApp_Gateway
 
-private let kGridNumberOfColumns: CGFloat = 2
-private let kCellImageRatio: CGFloat = 16 / 9
-
 protocol GridCollectionProviderDelegate: class {
     func provider(_ provider: GridCollectionProvider, didSelect product: Product)
     func provider(_ provider: GridCollectionProvider, didScroll scrollView: UIScrollView)

@@ -18,7 +18,7 @@ class CartButtonView: UIView {
     @IBOutlet private weak var itemsCountBackgroundView: UIView!
     
     private let disposeBag = DisposeBag()
-    private let viewModel = AppDelegate.getAssembler().resolver.resolve(CartButtonViewModel.self)!
+    private let viewModel = AppDelegate.getAssembler().resolver.resolve(CartButtonViewModel.self)
     
     // MARK: - View lifecycle
     
@@ -42,7 +42,7 @@ class CartButtonView: UIView {
         loadFromNib()
         populateViews()
         
-        viewModel.cartItemsCount.asObservable()
+        viewModel?.cartItemsCount.asObservable()
             .subscribe(onNext: { [weak self] cartItemsCount in
                 guard let strongSelf = self else {
                     return
@@ -51,7 +51,7 @@ class CartButtonView: UIView {
             })
             .disposed(by: disposeBag)
         
-        viewModel.getCartItemsCount()
+        viewModel?.getCartItemsCount()
     }
     
     private func setupViews() {

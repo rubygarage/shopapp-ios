@@ -19,8 +19,7 @@ class AccountNotLoggedHeaderView: UIView, UnderlinedButtonDelegate {
     @IBOutlet private weak var signInButton: BlackButton!
     @IBOutlet private weak var signInLabel: UILabel!
     @IBOutlet private weak var createNewAccountButton: UnderlinedButton!
-    
-    @IBOutlet fileprivate weak var createAccountUnderlinedView: UIView!
+    @IBOutlet private weak var createAccountUnderlinedView: UIView!
     
     weak var delegate: AccountNotLoggedHeaderDelegate?
     

@@ -40,6 +40,7 @@
 		0B24F0FD2007514500F13224 /* DetailsImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24F0FB2007514400F13224 /* DetailsImagesCollectionViewCell.swift */; };
 		0B2F3EC62004EA4000FB40A4 /* NumberFormatter+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2F3EC52004EA4000FB40A4 /* NumberFormatter+Currency.swift */; };
 		0B3AB6F1203199B000F46A8F /* PlaceholderedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3AB6F0203199AF00F46A8F /* PlaceholderedTextField.swift */; };
+		0B4275A220582490004FBFD6 /* CategoryEmptyDataViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4275A120582490004FBFD6 /* CategoryEmptyDataViewSpec.swift */; };
 		0B43716C204D66B400C086CF /* AccountViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B43716B204D66B400C086CF /* AccountViewControllerSpec.swift */; };
 		0B43716E204D674000C086CF /* AccountViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B43716D204D674000C086CF /* AccountViewModelMock.swift */; };
 		0B437170204D781D00C086CF /* OrderListEmptyDataViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B43716F204D781D00C086CF /* OrderListEmptyDataViewSpec.swift */; };
@@ -123,6 +124,19 @@
 		0B83E02D2056A4980037035D /* ArticleUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83E02C2056A4980037035D /* ArticleUseCaseMock.swift */; };
 		0B83E02F2056A9690037035D /* ArticleDetailsViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83E02E2056A9690037035D /* ArticleDetailsViewControllerSpec.swift */; };
 		0B83E0312056AF5C0037035D /* ArticleDetailsViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83E0302056AF5C0037035D /* ArticleDetailsViewModelMock.swift */; };
+		0B83E0332056C1C10037035D /* CategoryCollectionViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83E0322056C1C10037035D /* CategoryCollectionViewCellSpec.swift */; };
+		0B83E0352056CE500037035D /* CategoryListViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83E0342056CE500037035D /* CategoryListViewModelSpec.swift */; };
+		0B83E0372056CEAF0037035D /* CategoryRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83E0362056CEAF0037035D /* CategoryRepositoryMock.swift */; };
+		0B83E0392056CEE10037035D /* CategoryListUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83E0382056CEE10037035D /* CategoryListUseCaseMock.swift */; };
+		0B83E03B2056D1500037035D /* CategoryListCollectionProviderDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83E03A2056D1500037035D /* CategoryListCollectionProviderDelegateMock.swift */; };
+		0B83E03D2056D1AD0037035D /* CategoryListViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83E03C2056D1AD0037035D /* CategoryListViewModelMock.swift */; };
+		0B83E03F2056D1F80037035D /* CategoryListCollectionProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83E03E2056D1F80037035D /* CategoryListCollectionProviderSpec.swift */; };
+		0B83E0422056D87E0037035D /* CategoryListControllerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83E0412056D87E0037035D /* CategoryListControllerDelegateMock.swift */; };
+		0B83E0442056D9090037035D /* CategoryListViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83E0432056D9090037035D /* CategoryListViewControllerSpec.swift */; };
+		0B83E0462057C3F90037035D /* CategoryViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83E0452057C3F90037035D /* CategoryViewModelSpec.swift */; };
+		0B83E0482057C48E0037035D /* CategoryUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83E0472057C48E0037035D /* CategoryUseCaseMock.swift */; };
+		0B83E04A2057CA640037035D /* CategoryViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83E0492057CA640037035D /* CategoryViewModelMock.swift */; };
+		0B83E04D2057CFCE0037035D /* CategoryViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83E04C2057CFCE0037035D /* CategoryViewControllerSpec.swift */; };
 		0B9426551FFE468100A986AB /* OrderHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9426541FFE468100A986AB /* OrderHeaderView.swift */; };
 		0B9426571FFE468C00A986AB /* OrderHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B9426561FFE468C00A986AB /* OrderHeaderView.xib */; };
 		0B953D502020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B953D4F2020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift */; };
@@ -523,6 +537,7 @@
 		0B24F0FB2007514400F13224 /* DetailsImagesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsImagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		0B2F3EC52004EA4000FB40A4 /* NumberFormatter+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Currency.swift"; sourceTree = "<group>"; };
 		0B3AB6F0203199AF00F46A8F /* PlaceholderedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderedTextField.swift; sourceTree = "<group>"; };
+		0B4275A120582490004FBFD6 /* CategoryEmptyDataViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEmptyDataViewSpec.swift; sourceTree = "<group>"; };
 		0B43716B204D66B400C086CF /* AccountViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewControllerSpec.swift; sourceTree = "<group>"; };
 		0B43716D204D674000C086CF /* AccountViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModelMock.swift; sourceTree = "<group>"; };
 		0B43716F204D781D00C086CF /* OrderListEmptyDataViewSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderListEmptyDataViewSpec.swift; sourceTree = "<group>"; };
@@ -597,6 +612,19 @@
 		0B83E02C2056A4980037035D /* ArticleUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleUseCaseMock.swift; sourceTree = "<group>"; };
 		0B83E02E2056A9690037035D /* ArticleDetailsViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsViewControllerSpec.swift; sourceTree = "<group>"; };
 		0B83E0302056AF5C0037035D /* ArticleDetailsViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsViewModelMock.swift; sourceTree = "<group>"; };
+		0B83E0322056C1C10037035D /* CategoryCollectionViewCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCellSpec.swift; sourceTree = "<group>"; };
+		0B83E0342056CE500037035D /* CategoryListViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModelSpec.swift; sourceTree = "<group>"; };
+		0B83E0362056CEAF0037035D /* CategoryRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepositoryMock.swift; sourceTree = "<group>"; };
+		0B83E0382056CEE10037035D /* CategoryListUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListUseCaseMock.swift; sourceTree = "<group>"; };
+		0B83E03A2056D1500037035D /* CategoryListCollectionProviderDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCollectionProviderDelegateMock.swift; sourceTree = "<group>"; };
+		0B83E03C2056D1AD0037035D /* CategoryListViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModelMock.swift; sourceTree = "<group>"; };
+		0B83E03E2056D1F80037035D /* CategoryListCollectionProviderSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCollectionProviderSpec.swift; sourceTree = "<group>"; };
+		0B83E0412056D87E0037035D /* CategoryListControllerDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListControllerDelegateMock.swift; sourceTree = "<group>"; };
+		0B83E0432056D9090037035D /* CategoryListViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewControllerSpec.swift; sourceTree = "<group>"; };
+		0B83E0452057C3F90037035D /* CategoryViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModelSpec.swift; sourceTree = "<group>"; };
+		0B83E0472057C48E0037035D /* CategoryUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryUseCaseMock.swift; sourceTree = "<group>"; };
+		0B83E0492057CA640037035D /* CategoryViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModelMock.swift; sourceTree = "<group>"; };
+		0B83E04C2057CFCE0037035D /* CategoryViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewControllerSpec.swift; sourceTree = "<group>"; };
 		0B9426541FFE468100A986AB /* OrderHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHeaderView.swift; sourceTree = "<group>"; };
 		0B9426561FFE468C00A986AB /* OrderHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderHeaderView.xib; sourceTree = "<group>"; };
 		0B953D4F2020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlStringMultimediaCompressor.swift; sourceTree = "<group>"; };
@@ -1526,9 +1554,10 @@
 			children = (
 				0B83E01820566C1B0037035D /* ArticleRepositoryMock.swift */,
 				0B7CEF83203B1F8E00FAA32C /* AuthentificationRepositoryMock.swift */,
+				0B83E0362056CEAF0037035D /* CategoryRepositoryMock.swift */,
 				614ED7D1203EE23A00435708 /* OrderRepositoryMock.swift */,
-				0BE9657D204007A600308CA9 /* ShopRepositoryMock.swift */,
 				61E14D4C20405874000AB2CB /* PaymentsRepositoryMock.swift */,
+				0BE9657D204007A600308CA9 /* ShopRepositoryMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1580,6 +1609,7 @@
 			isa = PBXGroup;
 			children = (
 				0B83E02620567F3E0037035D /* Cells */,
+				0B4275A120582490004FBFD6 /* CategoryEmptyDataViewSpec.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1590,6 +1620,8 @@
 				0B83E01C205672D00037035D /* Mocks */,
 				0B83E02A2056A4470037035D /* ArticleDetailsViewModelSpec.swift */,
 				0B83E01420566B940037035D /* ArticleListViewModelSpec.swift */,
+				0B83E0342056CE500037035D /* CategoryListViewModelSpec.swift */,
+				0B83E0452057C3F90037035D /* CategoryViewModelSpec.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1599,6 +1631,7 @@
 			children = (
 				0B83E021205673420037035D /* Mocks */,
 				0B83E01F205673320037035D /* ArticleListTableProviderSpec.swift */,
+				0B83E03E2056D1F80037035D /* CategoryListCollectionProviderSpec.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -1606,8 +1639,11 @@
 		0B83E01320566B3A0037035D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0B83E0402056D8680037035D /* Mocks */,
 				0B83E02E2056A9690037035D /* ArticleDetailsViewControllerSpec.swift */,
 				0B83E024205675C20037035D /* ArticleListViewControllerSpec.swift */,
+				0B83E0432056D9090037035D /* CategoryListViewControllerSpec.swift */,
+				0B83E04C2057CFCE0037035D /* CategoryViewControllerSpec.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1625,6 +1661,8 @@
 			children = (
 				0B83E01A20566C6C0037035D /* ArticleListUseCaseMock.swift */,
 				0B83E02C2056A4980037035D /* ArticleUseCaseMock.swift */,
+				0B83E0382056CEE10037035D /* CategoryListUseCaseMock.swift */,
+				0B83E0472057C48E0037035D /* CategoryUseCaseMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1634,6 +1672,8 @@
 			children = (
 				0B83E0302056AF5C0037035D /* ArticleDetailsViewModelMock.swift */,
 				0B83E01D205672E60037035D /* ArticleListViewModelMock.swift */,
+				0B83E03C2056D1AD0037035D /* CategoryListViewModelMock.swift */,
+				0B83E0492057CA640037035D /* CategoryViewModelMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1642,6 +1682,7 @@
 			isa = PBXGroup;
 			children = (
 				0B83E022205673510037035D /* ArticleListTableProviderDelegateMock.swift */,
+				0B83E03A2056D1500037035D /* CategoryListCollectionProviderDelegateMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1649,6 +1690,7 @@
 		0B83E02620567F3E0037035D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				0B83E04B2057CEBD0037035D /* CollectionView */,
 				0B83E02720567F420037035D /* TableView */,
 			);
 			path = Cells;
@@ -1660,6 +1702,22 @@
 				0B83E02820567F4C0037035D /* ArticleTableViewCellSpec.swift */,
 			);
 			path = TableView;
+			sourceTree = "<group>";
+		};
+		0B83E0402056D8680037035D /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				0B83E0412056D87E0037035D /* CategoryListControllerDelegateMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		0B83E04B2057CEBD0037035D /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				0B83E0322056C1C10037035D /* CategoryCollectionViewCellSpec.swift */,
+			);
+			path = CollectionView;
 			sourceTree = "<group>";
 		};
 		0B9426521FFE461C00A986AB /* OrderHeaderView */ = {
@@ -3417,14 +3475,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				6122F5D52052A60400F574BB /* DeleteCartProductUseCaseMock.swift in Sources */,
+				0B83E0422056D87E0037035D /* CategoryListControllerDelegateMock.swift in Sources */,
 				0B5768E2204D47FB0001738D /* AccountTableProviderSpec.swift in Sources */,
 				0BE9659020442F0E00308CA9 /* OrderListViewModelMock.swift in Sources */,
+				0B83E0352056CE500037035D /* CategoryListViewModelSpec.swift in Sources */,
 				0B764720204809AF0019D2CE /* SwitchTableViewCellMock.swift in Sources */,
 				0B83E00E20504FE60037035D /* PlaceholderedTextFieldSpec.swift in Sources */,
 				0BE9658F20442EF100308CA9 /* OrderListTableProviderDelegateMock.swift in Sources */,
 				0BE965B12045AFF900308CA9 /* BasePickerSpec.swift in Sources */,
 				6199776E203C952100C70172 /* OrderListTableProviderSpec.swift in Sources */,
 				0B5768D5204D3B040001738D /* OrderListViewControllerSpec.swift in Sources */,
+				0B83E03F2056D1F80037035D /* CategoryListCollectionProviderSpec.swift in Sources */,
 				0BE965862040704C00308CA9 /* ResetPasswordUseCaseMock.swift in Sources */,
 				6122F5D420528E7C00F574BB /* CartViewModelMock.swift in Sources */,
 				617D688C203C5E74001E8940 /* OrderListUseCaseMock.swift in Sources */,
@@ -3450,6 +3511,7 @@
 				0B7647152046F9330019D2CE /* SettingsViewModelSpec.swift in Sources */,
 				0BE9658420406F2400308CA9 /* ForgotPasswordViewModelMock.swift in Sources */,
 				0BE965A2204534A500308CA9 /* PersonalInfoViewModelMock.swift in Sources */,
+				0B83E0332056C1C10037035D /* CategoryCollectionViewCellSpec.swift in Sources */,
 				0B76471B2047E2100019D2CE /* SettingsViewModelMock.swift in Sources */,
 				0B43716E204D674000C086CF /* AccountViewModelMock.swift in Sources */,
 				0B5768DA204D3B040001738D /* SignUpViewControllerSpec.swift in Sources */,
@@ -3473,19 +3535,23 @@
 				0B83E0312056AF5C0037035D /* ArticleDetailsViewModelMock.swift in Sources */,
 				0B76471720470EA30019D2CE /* SettingsTableProviderSpec.swift in Sources */,
 				614ED7D2203EE23A00435708 /* OrderRepositoryMock.swift in Sources */,
+				0B83E04D2057CFCE0037035D /* CategoryViewControllerSpec.swift in Sources */,
 				0BE965B02045AFF900308CA9 /* ErrorViewDelegateMock.swift in Sources */,
 				61BA33FB204839B40054FCA7 /* BaseAddressListTableProviderDelegateMock.swift in Sources */,
+				0B83E0482057C48E0037035D /* CategoryUseCaseMock.swift in Sources */,
 				614C80B62046DAA7006A99E0 /* UpdateAddressUseCaseMock.swift in Sources */,
 				61BA33F9204832B70054FCA7 /* BaseAddressListTableProviderSpec.swift in Sources */,
 				0BE965B22045AFF900308CA9 /* ErrorViewSpec.swift in Sources */,
 				0B43716C204D66B400C086CF /* AccountViewControllerSpec.swift in Sources */,
 				0B83E00C20504D690037035D /* TextFieldWrapperSpec.swift in Sources */,
 				0B83E02920567F4C0037035D /* ArticleTableViewCellSpec.swift in Sources */,
+				0B83E04A2057CA640037035D /* CategoryViewModelMock.swift in Sources */,
 				0B83E025205675C20037035D /* ArticleListViewControllerSpec.swift in Sources */,
 				614C80C02046DC63006A99E0 /* NavigationControllerSpec.swift in Sources */,
 				0B7CEF76203B155400FAA32C /* UpdateCustomerUseCaseMock.swift in Sources */,
 				0BE9658820440E9D00308CA9 /* ForgotPasswordViewModelSpec.swift in Sources */,
 				6122F5D120528D2400F574BB /* CartViewControllerSpec.swift in Sources */,
+				0B83E0392056CEE10037035D /* CategoryListUseCaseMock.swift in Sources */,
 				0B764725204841450019D2CE /* OrderItemTableViewCellSpec.swift in Sources */,
 				0BE9659E2044608B00308CA9 /* PersonalInfoViewModelSpec.swift in Sources */,
 				0BE9657A2040056F00308CA9 /* SignUpUseCaseMock.swift in Sources */,
@@ -3498,6 +3564,7 @@
 				614ED7DF203F0D9500435708 /* OrderDetailsViewModelMock.swift in Sources */,
 				0B764723204809E80019D2CE /* SwitchTableCellDelegateMock.swift in Sources */,
 				614C80CE2046F983006A99E0 /* AccountAddressFormControllerDelegateMock.swift in Sources */,
+				0B83E0372056CEAF0037035D /* CategoryRepositoryMock.swift in Sources */,
 				611607E120480557000A12D6 /* DeleteAddressUseCaseMock.swift in Sources */,
 				0B5768D7204D3B040001738D /* PolicyViewControllerSpec.swift in Sources */,
 				617D688E203C5EF3001E8940 /* OrderListViewModelSpec.swift in Sources */,
@@ -3516,6 +3583,7 @@
 				0BE9657C204005F200308CA9 /* ShopUseCaseMock.swift in Sources */,
 				0B83E01520566B940037035D /* ArticleListViewModelSpec.swift in Sources */,
 				614C80C92046DC6B006A99E0 /* GridCollectionViewModelSpec.swift in Sources */,
+				0B4275A220582490004FBFD6 /* CategoryEmptyDataViewSpec.swift in Sources */,
 				0B83E01B20566C6C0037035D /* ArticleListUseCaseMock.swift in Sources */,
 				0B437170204D781D00C086CF /* OrderListEmptyDataViewSpec.swift in Sources */,
 				0BE96574203FF7CE00308CA9 /* SignInViewModelSpec.swift in Sources */,
@@ -3523,9 +3591,11 @@
 				0B83DFFB204EBCCC0037035D /* AccountTableViewCellSpec.swift in Sources */,
 				0B7CEF70203B0B3500FAA32C /* QuickSpec+View.swift in Sources */,
 				6122F5DB2052D6BB00F574BB /* CartTableViewCellSpec.swift in Sources */,
+				0B83E0442056D9090037035D /* CategoryListViewControllerSpec.swift in Sources */,
 				614C80BF2046DC63006A99E0 /* BaseViewControllerSpec.swift in Sources */,
 				6122F5E12052FF8300F574BB /* CartHeaderViewSpec.swift in Sources */,
 				0B5768D0204D3B040001738D /* BaseAddressFormViewControllerSpec.swift in Sources */,
+				0B83E03D2056D1AD0037035D /* CategoryListViewModelMock.swift in Sources */,
 				0B83DFFD204EC0130037035D /* AccountFooterViewSpec.swift in Sources */,
 				614ED7DB203F0A7500435708 /* OrderDetailsViewModelSpec.swift in Sources */,
 				6186C31420501B0E0057B221 /* CartViewModelSpec.swift in Sources */,
@@ -3534,7 +3604,9 @@
 				614ED7DD203F0CBD00435708 /* OrderUseCaseMock.swift in Sources */,
 				614C80B42046DA6C006A99E0 /* AddAddressUseCaseMock.swift in Sources */,
 				0B83E02D2056A4980037035D /* ArticleUseCaseMock.swift in Sources */,
+				0B83E03B2056D1500037035D /* CategoryListCollectionProviderDelegateMock.swift in Sources */,
 				611607DF204804C5000A12D6 /* UpdateDefaultAddressUseCaseMock.swift in Sources */,
+				0B83E0462057C3F90037035D /* CategoryViewModelSpec.swift in Sources */,
 				0B5768DE204D3D680001738D /* LogoutUseCaseMock.swift in Sources */,
 				6186C320205034390057B221 /* CartTableProviderSpec.swift in Sources */,
 				6185BEA820567EBB009C1E33 /* CartEmptyDataViewSpec.swift in Sources */,

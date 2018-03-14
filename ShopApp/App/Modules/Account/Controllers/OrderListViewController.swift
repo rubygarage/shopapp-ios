@@ -13,8 +13,8 @@ import ShopApp_Gateway
 class OrderListViewController: BaseTableViewController<OrderListViewModel>, OrderListEmptyDataViewDelegate, OrderListTableProviderDelegate, CheckoutCartTableViewCellDelegate {
     var tableProvider: OrderListTableProvider!
     
-    fileprivate var selectedOrder: Order?
-    fileprivate var selectedProductVariant: ProductVariant!
+    private var selectedOrder: Order?
+    private var selectedProductVariant: ProductVariant!
     
     override var customEmptyDataView: UIView {
         let emptyView = OrderListEmptyDataView(frame: view.frame)
@@ -43,7 +43,7 @@ class OrderListViewController: BaseTableViewController<OrderListViewModel>, Orde
     
     // MARK: - Setup
     
-    fileprivate func loadData() {
+    private func loadData() {
         viewModel.reloadData()
     }
     

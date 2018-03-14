@@ -13,6 +13,7 @@ struct ControllerIdentifiers {
     static let productDetails = "ProductsDetailControllerIdentifier"
     static let menu = "MenuControllerIdentifier"
     static let search = "SearchControllerIdentifier"
+    static let categoryList = "CategoryListControllerIdentifier"
     static let category = "CategoryControllerIdentifier"
     static let policy = "PolicyControllerIdentifier"
     static let productsList = "ProductsListControllerIdentifier"

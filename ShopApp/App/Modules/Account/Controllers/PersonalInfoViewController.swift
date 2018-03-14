@@ -17,8 +17,7 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel>, Und
     @IBOutlet private weak var phoneTextFieldView: InputTextFieldView!
     @IBOutlet private weak var changePasswordButton: UnderlinedButton!
     @IBOutlet private weak var saveChangesButton: BlackButton!
-    
-    @IBOutlet fileprivate weak var changePasswordUnderlineView: UIView!
+    @IBOutlet private weak var changePasswordUnderlineView: UIView!
     
     // MARK: - View controller lifecycle
     

@@ -10,18 +10,17 @@ import UIKit
 
 import ShopApp_Gateway
 
-private let kSortByViewChangesAnimationDuration: TimeInterval = 0.3
-
-class CategoryViewController: GridCollectionViewController<CategoryViewModel> {
+class CategoryViewController: GridCollectionViewController<CategoryViewModel>, SortVariantsControllerDelegate {
     @IBOutlet private weak var sortByLabel: UILabel!
     @IBOutlet private weak var sortByViewTopLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var sortByView: UIView!
     
-    @IBOutlet fileprivate weak var sortByView: UIView!
+    private let sortByViewChangesAnimationDuration: TimeInterval = 0.3
     
-    fileprivate var lastScrollOffset: CGFloat?
-    fileprivate var positiveScrollOffset: CGFloat = 0
-    fileprivate var negativeScrollOffset: CGFloat = 0
-    fileprivate var isSortByViewCollapsed = false
+    private var lastScrollOffset: CGFloat?
+    private var positiveScrollOffset: CGFloat = 0
+    private var negativeScrollOffset: CGFloat = 0
+    private var isSortByViewCollapsed = false
     
     var categoryId: String!
     
@@ -56,13 +55,13 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel> {
     
     // MARK: - Setup
     
-    fileprivate func loadData() {
+    private func loadData() {
         viewModel.reloadData()
     }
     
-    fileprivate func updateSortByView(isHidden: Bool) {
+    private func updateSortByView(isHidden: Bool) {
         sortByViewTopLayoutConstraint.constant = isHidden ? -sortByView.frame.size.height : 0
-        UIView.animate(withDuration: kSortByViewChangesAnimationDuration, animations: {
+        UIView.animate(withDuration: sortByViewChangesAnimationDuration, animations: {
             self.view.layoutIfNeeded()
         })
         isSortByViewCollapsed = !isSortByViewCollapsed
@@ -132,11 +131,9 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel> {
             updateSortByView(isHidden: false)
         }
     }
-}
 
-// MARK: - SortVariantsControllerDelegate
+    // MARK: - SortVariantsControllerDelegate
 
-extension CategoryViewController: SortVariantsControllerDelegate {
     func viewController(_ viewController: SortVariantsViewController, didSelect sortingValue: SortingValue) {
         viewModel.selectedSortingValue = sortingValue
         viewModel.clearResult()

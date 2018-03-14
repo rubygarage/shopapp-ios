@@ -19,7 +19,7 @@ class OrderListTableProvider: NSObject, UITableViewDataSource, UITableViewDelega
     
     weak var delegate: (OrderListTableProviderDelegate & CheckoutCartTableViewCellDelegate)?
     
-    fileprivate func selectOrder(at index: Int) {
+    private func selectOrder(at index: Int) {
         guard let delegate = delegate else {
             return
         }

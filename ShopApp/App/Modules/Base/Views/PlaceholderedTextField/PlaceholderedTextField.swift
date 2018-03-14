@@ -10,8 +10,8 @@ import UIKit
 
 class PlaceholderedTextField: TextFieldWrapper {
     // swiftlint:disable private_outlet
-    @IBOutlet fileprivate(set) weak var placeholderLabel: UILabel!
-    @IBOutlet fileprivate(set) weak var placeholderVerticallyConstraint: NSLayoutConstraint!
+    @IBOutlet private(set) weak var placeholderLabel: UILabel!
+    @IBOutlet private(set) weak var placeholderVerticallyConstraint: NSLayoutConstraint!
     // swiftlint:enable private_outlet
     
     private let placeholderAnimationDuration: TimeInterval = 0.15

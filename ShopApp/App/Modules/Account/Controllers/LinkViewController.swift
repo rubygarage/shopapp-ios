@@ -17,8 +17,7 @@ class LinkViewController: BaseViewController<ForgotPasswordViewModel>, Underline
     @IBOutlet private weak var additionalTitleLabel: UILabel!
     @IBOutlet private weak var additionalDescriptionLabel: UILabel!
     @IBOutlet private weak var resendButton: UnderlinedButton!
-    
-    @IBOutlet fileprivate weak var resendUnderlineView: UIView!
+    @IBOutlet private weak var resendUnderlineView: UIView!
     
     var emailText = Variable<String>("")
     

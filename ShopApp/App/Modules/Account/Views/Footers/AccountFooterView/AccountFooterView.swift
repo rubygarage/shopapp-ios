@@ -16,8 +16,7 @@ protocol AccountFooterDelegate: class {
 
 class AccountFooterView: UITableViewHeaderFooterView, UnderlinedButtonDelegate {
     @IBOutlet private weak var logoutButton: UnderlinedButton!
-    
-    @IBOutlet fileprivate weak var logoutUnderlineView: UIView!
+    @IBOutlet private weak var logoutUnderlineView: UIView!
     
     weak var delegate: AccountFooterDelegate?
     
