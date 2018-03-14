@@ -10,21 +10,19 @@ import UIKit
 
 import ShopApp_Gateway
 
-private let kLastArrivalsTableCellSize = CGSize(width: 200, height: 200)
-
 protocol LastArrivalsTableCellProviderDelegate: class {
     func provider(_ provider: LastArrivalsTableCellProvider, didSelect product: Product)
 }
 
-class LastArrivalsTableCellProvider: NSObject {
+class LastArrivalsTableCellProvider: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    private let lastArrivalsTableCellSize = CGSize(width: 200, height: 200)
+    
     var products: [Product] = []
     
     weak var delegate: LastArrivalsTableCellProviderDelegate?
-}
-
-// MARK: - UICollectionViewDataSource
-
-extension LastArrivalsTableCellProvider: UICollectionViewDataSource {
+    
+    // MARK: - UICollectionViewDataSource
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return products.count
     }
@@ -36,11 +34,9 @@ extension LastArrivalsTableCellProvider: UICollectionViewDataSource {
         
         return cell
     }
-}
-
-// MARK: - UICollectionViewDelegate
-
-extension LastArrivalsTableCellProvider: UICollectionViewDelegate {
+    
+    // MARK: - UICollectionViewDelegate
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let delegate = delegate else {
             return
@@ -48,12 +44,10 @@ extension LastArrivalsTableCellProvider: UICollectionViewDelegate {
         let product = products[indexPath.row]
         delegate.provider(self, didSelect: product)
     }
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout
-
-extension LastArrivalsTableCellProvider: UICollectionViewDelegateFlowLayout {
+    
+    // MARK: - UICollectionViewDelegateFlowLayout
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return kLastArrivalsTableCellSize
+        return lastArrivalsTableCellSize
     }
 }

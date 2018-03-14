@@ -14,15 +14,13 @@ protocol PopularTableCellProviderDelegate: class {
     func provider(_ provider: PopularTableCellProvider, didSelect product: Product)
 }
 
-class PopularTableCellProvider: NSObject {
+class PopularTableCellProvider: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     var products: [Product] = []
     
     weak var delegate: PopularTableCellProviderDelegate?
-}
-
-// MARK: - UICollectionViewDataSource
-
-extension PopularTableCellProvider: UICollectionViewDataSource {
+    
+    // MARK: - UICollectionViewDataSource
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return products.count
     }
@@ -33,11 +31,9 @@ extension PopularTableCellProvider: UICollectionViewDataSource {
         cell.configure(with: product)
         return cell
     }
-}
-
-// MARK: - UICollectionViewDelegate
-
-extension PopularTableCellProvider: UICollectionViewDelegate {
+    
+    // MARK: - UICollectionViewDelegate
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let delegate = delegate else {
             return
@@ -45,11 +41,9 @@ extension PopularTableCellProvider: UICollectionViewDelegate {
         let product = products[indexPath.row]
         delegate.provider(self, didSelect: product)
     }
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout
-
-extension PopularTableCellProvider: UICollectionViewDelegateFlowLayout {
+    
+    // MARK: - UICollectionViewDelegateFlowLayout
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return GridCollectionViewCell.cellSize
     }

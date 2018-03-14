@@ -14,7 +14,7 @@ protocol LastArrivalsTableCellDelegate: class {
     func tableViewCell(_ tableViewCell: LastArrivalsTableViewCell, didSelect product: Product)
 }
 
-class LastArrivalsTableViewCell: UITableViewCell {
+class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableCellProviderDelegate {
     @IBOutlet private weak var collectionView: UICollectionView!
     
     private var collectionProvider: LastArrivalsTableCellProvider!
@@ -46,12 +46,10 @@ class LastArrivalsTableViewCell: UITableViewCell {
         collectionView.dataSource = collectionProvider
         collectionView.delegate = collectionProvider
     }
-}
-
-// MARK: - LastArrivalsTableCellProviderDelegate
-
-extension LastArrivalsTableViewCell: LastArrivalsTableCellProviderDelegate {
+    
+    // MARK: - LastArrivalsTableCellProviderDelegate
+    
     func provider(_ provider: LastArrivalsTableCellProvider, didSelect product: Product) {
-         delegate?.tableViewCell(self, didSelect: product)
+        delegate?.tableViewCell(self, didSelect: product)
     }
 }

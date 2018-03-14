@@ -20,17 +20,15 @@ protocol HomeTableProviderDelegate: class {
     func provider(_ provider: HomeTableProvider, didSelect article: Article)
 }
 
-class HomeTableProvider: NSObject {
+class HomeTableProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     var lastArrivalsProducts: [Product] = []
     var popularProducts: [Product] = []
     var articles: [Article] = []
     
     weak var delegate: (HomeTableProviderDelegate & LastArrivalsTableCellDelegate & PopularTableCellDelegate & SeeAllHeaderViewProtocol)?
-}
-
-// MARK: - UITableViewDataSource
-
-extension HomeTableProvider: UITableViewDataSource {
+    
+    // MARK: - UITableViewDataSource
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         let lastArrivalsSectionCount = lastArrivalsProducts.isEmpty ? 0 : 1
         let popularSectionCount = popularProducts.isEmpty ? 0 : 1
@@ -81,11 +79,9 @@ extension HomeTableProvider: UITableViewDataSource {
         cell.configure(with: article, separatorHidden: separatorHidden)
         return cell
     }
-}
-
-// MARK: - UITableViewDelegate
-
-extension HomeTableProvider: UITableViewDelegate {
+    
+    // MARK: - UITableViewDelegate
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let delegate = delegate, indexPath.section == HomeSection.newInBlog.rawValue else {
             return

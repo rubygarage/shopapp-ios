@@ -12,6 +12,5 @@ import ShopApp_Gateway
 
 class OrderRepositoryMock: OrderRepository {
     func getOrderList(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {}
-    
     func getOrder(id: String, callback: @escaping RepoCallback<Order>) {}
 }

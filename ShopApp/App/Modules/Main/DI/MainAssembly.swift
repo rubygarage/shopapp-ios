@@ -33,6 +33,8 @@ class MainAssembly: Assembly {
 
         container.storyboardInitCompleted(HomeViewController.self) { r, c in
             c.viewModel = r.resolve(HomeViewModel.self)!
+            c.tableProvider = r.resolve(HomeTableProvider.self)!
+
         }
 
         container.storyboardInitCompleted(ProductDetailsViewController.self) { r, c in
@@ -96,6 +98,10 @@ class MainAssembly: Assembly {
         
         container.register(CategoryListCollectionProvider.self) { _ in
             return CategoryListCollectionProvider()
+	}
+
+        container.register(HomeTableProvider.self) { _ in
+            return HomeTableProvider()
         }
     }
 }

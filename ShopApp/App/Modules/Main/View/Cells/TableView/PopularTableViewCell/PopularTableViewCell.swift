@@ -14,7 +14,7 @@ protocol PopularTableCellDelegate: class {
     func tableViewCell(_ tableViewCell: PopularTableViewCell, didSelect product: Product)
 }
 
-class PopularTableViewCell: UITableViewCell {
+class PopularTableViewCell: UITableViewCell, PopularTableCellProviderDelegate {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
@@ -54,13 +54,11 @@ class PopularTableViewCell: UITableViewCell {
     
     private func updateCollectionViewHeight() {
         let cellHeight = GridCollectionViewCell.cellSize.height
-        self.collectionViewHeightConstraint.constant = self.products.count > 2 ? cellHeight * 2 : cellHeight
+        collectionViewHeightConstraint.constant = products.count > 2 ? cellHeight * 2 : cellHeight
     }
-}
-
-// MARK: - PopularCollectionProviderDelegate
-
-extension PopularTableViewCell: PopularTableCellProviderDelegate {
+    
+    // MARK: - PopularCollectionProviderDelegate
+    
     func provider(_ provider: PopularTableCellProvider, didSelect product: Product) {
         delegate?.tableViewCell(self, didSelect: product)
     }

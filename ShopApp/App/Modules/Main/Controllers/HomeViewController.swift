@@ -12,13 +12,13 @@ import RxCocoa
 import RxSwift
 import ShopApp_Gateway
 
-class HomeViewController: BaseTableViewController<HomeViewModel> {
-    private var tableProvider: HomeTableProvider!
+class HomeViewController: BaseTableViewController<HomeViewModel>, HomeTableProviderDelegate, LastArrivalsTableCellDelegate, PopularTableCellDelegate, SeeAllHeaderViewProtocol {
+    private var destinationTitle: String!
+    private var sortingValue: SortingValue!
+    private var selectedProduct: Product?
+    private var selectedArticle: Article?
     
-    fileprivate var destinationTitle: String!
-    fileprivate var sortingValue: SortingValue!
-    fileprivate var selectedProduct: Product?
-    fileprivate var selectedArticle: Article?
+    var tableProvider: HomeTableProvider!
     
     // MARK: - View controller lifecycle
 
@@ -65,7 +65,6 @@ class HomeViewController: BaseTableViewController<HomeViewModel> {
         tableView.registerNibForCell(PopularTableViewCell.self)
         tableView.registerNibForCell(ArticleTableViewCell.self)
                 
-        tableProvider = HomeTableProvider()
         tableProvider.delegate = self
         tableView.dataSource = tableProvider
         tableView.delegate = tableProvider
@@ -97,36 +96,28 @@ class HomeViewController: BaseTableViewController<HomeViewModel> {
     override func pullToRefreshHandler() {
         loadData()
     }
-}
-
-// MARK: - HomeTableProviderDelegate
-
-extension HomeViewController: HomeTableProviderDelegate {
+    
+    // MARK: - HomeTableProviderDelegate
+    
     func provider(_ provider: HomeTableProvider, didSelect article: Article) {
         selectedArticle = article
         performSegue(withIdentifier: SegueIdentifiers.toArticleDetails, sender: self)
     }
-}
-
-// MARK: - LastArrivalsTableViewCellDelegate
-
-extension HomeViewController: LastArrivalsTableCellDelegate {
+    
+    // MARK: - LastArrivalsTableViewCellDelegate
+    
     func tableViewCell(_ tableViewCell: LastArrivalsTableViewCell, didSelect product: Product) {
         openProductDetails(with: product)
     }
-}
-
-// MARK: - PopularTableViewCellDelegate
-
-extension HomeViewController: PopularTableCellDelegate {
+    
+    // MARK: - PopularTableViewCellDelegate
+    
     func tableViewCell(_ tableViewCell: PopularTableViewCell, didSelect product: Product) {
         openProductDetails(with: product)
     }
-}
-
-// MARK: - SeeAllHeaderViewProtocol
-
-extension HomeViewController: SeeAllHeaderViewProtocol {
+    
+    // MARK: - SeeAllHeaderViewProtocol
+    
     func didTapSeeAll(type: SeeAllViewType) {
         switch type {
         case .latestArrivals:
