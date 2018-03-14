@@ -14,11 +14,10 @@ protocol SortVariantsControllerDelegate: class {
     func viewController(_ viewController: SortVariantsViewController, didSelect sortingValue: SortingValue)
 }
 
-class SortVariantsViewController: UIViewController {
+class SortVariantsViewController: UIViewController, SortVariantsTableProviderDelegate, UIGestureRecognizerDelegate {
     @IBOutlet private weak var tableView: UITableView!
     
-    private var tableProvider: SortVariantsTableProvider!
-    
+    var tableProvider: SortVariantsTableProvider!
     var selectedSortingValue: SortingValue!
     
     weak var delegate: SortVariantsControllerDelegate?
@@ -44,7 +43,6 @@ class SortVariantsViewController: UIViewController {
     private func setupTableView() {
         tableView.registerNibForCell(SortVariantTableViewCell.self)
         
-        tableProvider = SortVariantsTableProvider()
         tableProvider.delegate = self
         tableView.dataSource = tableProvider
         tableView.delegate = tableProvider
@@ -65,11 +63,9 @@ class SortVariantsViewController: UIViewController {
     func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
         dismiss(animated: true)
     }
-}
 
-// MARK: - SortVariantsTableProviderDelegate
+    // MARK: - SortVariantsTableProviderDelegate
 
-extension SortVariantsViewController: SortVariantsTableProviderDelegate {
     func provider(_ provider: SortVariantsTableProvider, didSelect variant: String?) {
         guard let delegate = delegate else {
             return
@@ -83,11 +79,9 @@ extension SortVariantsViewController: SortVariantsTableProviderDelegate {
         delegate.viewController(self, didSelect: sortingValue)
         dismiss(animated: true)
     }
-}
 
-// MARK: - UIGestureRecognizerDelegate
+    // MARK: - UIGestureRecognizerDelegate
 
-extension SortVariantsViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         guard let view = touch.view, view == self.view else {
             return false

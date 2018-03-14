@@ -48,6 +48,10 @@ class MainAssembly: Assembly {
         container.storyboardInitCompleted(SearchViewController.self) { r, c in
             c.viewModel = r.resolve(SearchViewModel.self)!
         }
+        
+        container.storyboardInitCompleted(SortVariantsViewController.self) { r, c in
+            c.tableProvider = r.resolve(SortVariantsTableProvider.self)!
+        }
 
         // MARK: - View models
 
@@ -102,6 +106,10 @@ class MainAssembly: Assembly {
 
         container.register(HomeTableProvider.self) { _ in
             return HomeTableProvider()
+        }
+        
+        container.register(SortVariantsTableProvider.self) { _ in
+            return SortVariantsTableProvider()
         }
     }
 }
