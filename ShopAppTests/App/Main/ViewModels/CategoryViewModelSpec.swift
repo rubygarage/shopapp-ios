@@ -15,8 +15,8 @@ import ShopApp_Gateway
 
 class CategoryViewModelSpec: QuickSpec {
     override func spec() {
-        let repository = CategoryRepositoryMock()
-        let categoryUseCaseMock = CategoryUseCaseMock(repository: repository)
+        let repositoryMock = CategoryRepositoryMock()
+        let categoryUseCaseMock = CategoryUseCaseMock(repository: repositoryMock)
         
         var viewModel: CategoryViewModel!
         

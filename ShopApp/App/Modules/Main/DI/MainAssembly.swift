@@ -102,7 +102,7 @@ class MainAssembly: Assembly {
         
         container.register(CategoryListCollectionProvider.self) { _ in
             return CategoryListCollectionProvider()
-	}
+        }
 
         container.register(HomeTableProvider.self) { _ in
             return HomeTableProvider()

@@ -11,14 +11,27 @@ import UIKit
 import RxSwift
 import Swinject
 
-private let kItemsCountViewCornerRadius: CGFloat = 7
-
 class CartButtonView: UIView {
     @IBOutlet private weak var itemsCountLabel: UILabel!
     @IBOutlet private weak var itemsCountBackgroundView: UIView!
     
+    private let itemsCountViewCornerRadius: CGFloat = 7
     private let disposeBag = DisposeBag()
-    private let viewModel = AppDelegate.getAssembler().resolver.resolve(CartButtonViewModel.self)
+    
+    var viewModel: CartButtonViewModel! {
+        didSet {
+            viewModel.cartItemsCount.asObservable()
+                .subscribe(onNext: { [weak self] cartItemsCount in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    strongSelf.populateViews(with: cartItemsCount)
+                })
+                .disposed(by: disposeBag)
+            
+            viewModel.getCartItemsCount()
+        }
+    }
     
     // MARK: - View lifecycle
     
@@ -42,20 +55,13 @@ class CartButtonView: UIView {
         loadFromNib()
         populateViews()
         
-        viewModel?.cartItemsCount.asObservable()
-            .subscribe(onNext: { [weak self] cartItemsCount in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.populateViews(with: cartItemsCount)
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel?.getCartItemsCount()
+        if let viewModel = AppDelegate.getAssembler().resolver.resolve(CartButtonViewModel.self) {
+            self.viewModel = viewModel
+        }
     }
     
     private func setupViews() {
-        itemsCountBackgroundView.layer.cornerRadius = kItemsCountViewCornerRadius
+        itemsCountBackgroundView.layer.cornerRadius = itemsCountViewCornerRadius
     }
     
     private func populateViews(with itemsCount: Int = 0) {

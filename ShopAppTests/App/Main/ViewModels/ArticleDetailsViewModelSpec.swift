@@ -15,8 +15,8 @@ import ShopApp_Gateway
 
 class ArticleDetailsViewModelSpec: QuickSpec {
     override func spec() {
-        let repository = ArticleRepositoryMock()
-        let articleUseCaseMock = ArticleUseCaseMock(repository: repository)
+        let repositoryMock = ArticleRepositoryMock()
+        let articleUseCaseMock = ArticleUseCaseMock(repository: repositoryMock)
         
         var viewModel: ArticleDetailsViewModel!
         

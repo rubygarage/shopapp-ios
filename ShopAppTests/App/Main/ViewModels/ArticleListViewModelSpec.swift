@@ -14,8 +14,8 @@ import RxSwift
 
 class ArticleListViewModelSpec: QuickSpec {
     override func spec() {
-        let repository = ArticleRepositoryMock()
-        let articleListUseCaseMock = ArticleListUseCaseMock(repository: repository)
+        let repositoryMock = ArticleRepositoryMock()
+        let articleListUseCaseMock = ArticleListUseCaseMock(repository: repositoryMock)
         
         var viewModel: ArticleListViewModel!
         

@@ -14,8 +14,8 @@ import RxSwift
 
 class CategoryListViewModelSpec: QuickSpec {
     override func spec() {
-        let repository = CategoryRepositoryMock()
-        let categoryListUseCaseMock = CategoryListUseCaseMock(repository: repository)
+        let repositoryMock = CategoryRepositoryMock()
+        let categoryListUseCaseMock = CategoryListUseCaseMock(repository: repositoryMock)
         
         var viewModel: CategoryListViewModel!
         

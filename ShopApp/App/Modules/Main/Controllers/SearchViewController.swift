@@ -10,7 +10,7 @@ import UIKit
 
 import ShopApp_Gateway
 
-class SearchViewController: GridCollectionViewController<SearchViewModel>, CategoryListControllerDelegate, SearchTitleViewDelegate  {
+class SearchViewController: GridCollectionViewController<SearchViewModel>, CategoryListControllerDelegate, SearchTitleViewDelegate {
     @IBOutlet private weak var categoryListContainerView: UIView!
     
     private let titleViewAlphaDefault: CGFloat = 1
