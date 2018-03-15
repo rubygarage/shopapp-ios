@@ -34,8 +34,8 @@ class SearchViewModel: GridCollectionViewModel {
     
     private func loadRemoteData() {
         guard !searchPhrase.value.isEmpty else {
-            updateProducts(products: [])
-            state.onNext(.content)
+            clearResult()
+            
             return
         }
         state.onNext(ViewState.make.loading(showHud: false))
