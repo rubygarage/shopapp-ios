@@ -46,8 +46,8 @@ class CartButtonViewSpec: QuickSpec {
             }
         }
         
-        describe("") {
-            it("") {
+        describe("when cart item count got") {
+            it("needs to setup count label and background view") {
                 viewModelMock.isNeedToReturnCount = true
                 viewModelMock.getCartItemsCount()
                 
