@@ -23,14 +23,14 @@ class CartButtonViewModelSpec: QuickSpec {
             viewModel = CartButtonViewModel(cartProductListUseCase: cartProductListUseCaseMock)
         }
         
-        describe("") {
+        describe("when cart item count got") {
             var disposeBag: DisposeBag!
             
             beforeEach {
                 disposeBag = DisposeBag()
             }
             
-            it("") {
+            it("needs to notify subscriber") {
                 viewModel.getCartItemsCount()
                 
                 viewModel.cartItemsCount

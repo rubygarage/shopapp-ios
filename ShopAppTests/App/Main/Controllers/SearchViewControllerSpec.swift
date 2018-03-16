@@ -45,7 +45,7 @@ class SearchViewControllerSpec: QuickSpec {
                 expect(viewController.customEmptyDataView).to(beAnInstanceOf(SearchEmptyDataView.self))
             }
             
-            it("should have correct content inset of collection viwe") {
+            it("should have correct content inset of collection view") {
                 expect(viewController.collectionView.contentInset) == GridCollectionViewCell.searchCollectionViewInsets
             }
             
@@ -235,7 +235,7 @@ class SearchViewControllerSpec: QuickSpec {
             }
         }
         
-        describe("when title view' clear button pressed") {
+        describe("when title view's clear button pressed") {
             it("needs to clear search result") {
                 viewController.viewWillAppear(false)
                 
@@ -247,7 +247,7 @@ class SearchViewControllerSpec: QuickSpec {
             }
         }
         
-        describe("when title view' back button pressed") {
+        describe("when title view's back button pressed") {
             it("needs to clear search result and show category list") {
                 viewController.viewWillAppear(false)
                 
