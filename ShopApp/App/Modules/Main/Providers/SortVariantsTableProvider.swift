@@ -12,16 +12,14 @@ protocol SortVariantsTableProviderDelegate: class {
     func provider(_ provider: SortVariantsTableProvider, didSelect variant: String?)
 }
 
-class SortVariantsTableProvider: NSObject {
+class SortVariantsTableProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     var variants: [String] = []
     var selectedVariant = ""
     
     weak var delegate: SortVariantsTableProviderDelegate?
-}
 
-// MARK: - UITableViewDataSource
+    // MARK: - UITableViewDataSource
 
-extension SortVariantsTableProvider: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return variants.count
     }
@@ -33,11 +31,9 @@ extension SortVariantsTableProvider: UITableViewDataSource {
         cell.configure(with: variant, selected: isVariantSelected)
         return cell
     }
-}
 
-// MARK: - UITableViewDelegate
+    // MARK: - UITableViewDelegate
 
-extension SortVariantsTableProvider: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let delegate = delegate else {
             return

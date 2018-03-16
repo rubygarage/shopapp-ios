@@ -10,14 +10,6 @@ import UIKit
 
 import RxSwift
 
-private let kAnimationDuration: TimeInterval = 0.3
-private let kPlaceholderColorDefault = UIColor.black.withAlphaComponent(0.5)
-private let kUnderlineMarginDefault: CGFloat = 55
-private let kUnderlineMarginLeft: CGFloat = 40
-private let kUnderlineMarginRight: CGFloat = 10
-private let kBarItemWidth: CGFloat = 32
-private let kTextFieldDebounceDueTime = 0.3
-
 private enum SearchState {
     case `default`
     case editing
@@ -40,6 +32,12 @@ class SearchTitleView: TextFieldWrapper {
     @IBOutlet private weak var underlineRightMargin: NSLayoutConstraint!
     @IBOutlet private weak var clearButton: UIButton!
 
+    private let animationDuration: TimeInterval = 0.3
+    private let placeholderColorDefault = UIColor.black.withAlphaComponent(0.5)
+    private let underlineMarginDefault: CGFloat = 55
+    private let underlineMarginLeft: CGFloat = 40
+    private let underlineMarginRight: CGFloat = 10
+    private let textFieldDebounceDueTime = 0.3
     private let disposeBag = DisposeBag()
     
     private var previousSearchPhrase: String?
@@ -49,6 +47,8 @@ class SearchTitleView: TextFieldWrapper {
             updateViews(animated: true)
         }
     }
+    
+    fileprivate let barItemWidth: CGFloat = 32
     
     weak var delegate: SearchTitleViewDelegate?
     
@@ -89,12 +89,10 @@ class SearchTitleView: TextFieldWrapper {
     private func setupViews() {
         clearButton.setTitle("Button.Clear".localizable, for: .normal)
         
-        let textFieldResults = textField.rx.text
-            .debounce(kTextFieldDebounceDueTime, scheduler: MainScheduler.instance)
-            .observeOn(MainScheduler.instance)
-        
-        textFieldResults.asObservable()
+        textField.rx.text
             .skip(1)
+            .debounce(textFieldDebounceDueTime, scheduler: MainScheduler.instance)
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] text in
                 guard let strongSelf = self, let delegate = strongSelf.delegate else {
                     return
@@ -108,17 +106,17 @@ class SearchTitleView: TextFieldWrapper {
     }
     
     private func updateViews(animated: Bool) {
-        let animationDuration = animated ? kAnimationDuration : 0
+        let animationDuration = animated ? self.animationDuration : 0
         
         UIView.transition(with: contentView, duration: animationDuration, options: .transitionCrossDissolve, animations: {
             self.textField.attributedPlaceholder = self.state == .default ? self.attributedPlaceholderDefault() : self.attributedPlaceholderSelected()
             self.textField.textAlignment = self.state == .editing ? .left : .center
         })
         
-        UIView.animate(withDuration: kAnimationDuration) {
+        UIView.animate(withDuration: animationDuration) {
             self.underLineView.backgroundColor = self.state == .editing ? UIColor.black : Colors.underlineDefault
-            self.underlineLeftMargin.constant = self.state == .editing ? kUnderlineMarginLeft : kUnderlineMarginDefault
-            self.underlineRightMargin.constant = self.state == .editing ? kUnderlineMarginRight : kUnderlineMarginDefault
+            self.underlineLeftMargin.constant = self.state == .editing ? self.underlineMarginLeft : self.underlineMarginDefault
+            self.underlineRightMargin.constant = self.state == .editing ? self.underlineMarginRight : self.underlineMarginDefault
             self.backButton.isHidden = self.state == .default
             self.cartButtonView.isHidden = self.state == .editing
             self.layoutIfNeeded()
@@ -139,14 +137,14 @@ class SearchTitleView: TextFieldWrapper {
     
     private func attributedPlaceholderSelected() -> NSAttributedString {
         let placeholder = "Placeholder.Search".localizable
-        return NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: kPlaceholderColorDefault])
+        return NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: placeholderColorDefault])
     }
     
     private func updateClearButtonIfNeeded() {
         let text = textField.text ?? ""
         let clearButtonHidden = !(text.isEmpty == false && state == .editing)
         if clearButton.isHidden != clearButtonHidden {
-            UIView.transition(with: contentView, duration: kAnimationDuration, options: .transitionCrossDissolve, animations: {
+            UIView.transition(with: contentView, duration: animationDuration, options: .transitionCrossDissolve, animations: {
                 self.clearButton.isHidden = clearButtonHidden
             })
         }
@@ -191,7 +189,7 @@ class SearchTitleView: TextFieldWrapper {
 
 extension SearchTitleView {
     func cartBarItem() -> UIButton {
-        let cartView = CartButtonView(frame: CGRect(x: 0, y: 0, width: kBarItemWidth, height: kBarItemWidth))
+        let cartView = CartButtonView(frame: CGRect(x: 0, y: 0, width: barItemWidth, height: barItemWidth))
         cartView.isUserInteractionEnabled = false
         
         let button = UIButton(frame: cartView.frame)

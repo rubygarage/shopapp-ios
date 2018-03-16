@@ -102,6 +102,10 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pOG-TD-mXa">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="categoryList"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <segue destination="OmR-vh-hda" kind="embed" id="ODI-0W-BJz"/>
                                 </connections>
@@ -320,7 +324,7 @@
         <!--Sort Variants View Controller-->
         <scene sceneID="E88-lX-VLj">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="6to-Yf-TlA" customClass="SortVariantsViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SortModalControllerIdentifier" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="6to-Yf-TlA" customClass="SortVariantsViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ekb-4M-mMO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -331,6 +335,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="PlN-No-Tau"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="tableView"/>
+                                </userDefinedRuntimeAttributes>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="corner" translatesAutoresizingMaskIntoConstraints="NO" id="Zgx-g4-Pci">
                                 <rect key="frame" x="178" y="114" width="18" height="10"/>
@@ -922,7 +929,7 @@
         <image name="search_selected" width="27" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RyX-CT-HJC"/>
+        <segue reference="Ucu-Sf-yUc"/>
         <segue reference="OyI-Tn-rEV"/>
         <segue reference="L85-9n-ESO"/>
     </inferredMetricsTieBreakers>

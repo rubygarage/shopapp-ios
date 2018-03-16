@@ -34,37 +34,37 @@ class CategoryListViewController: BaseCollectionViewController<CategoryListViewM
     private func setupViews() {
         collectionView.registerNibForCell(CategoryCollectionViewCell.self)
         
-        collectionProvider.delegate = self
+        collectionProvider?.delegate = self
         collectionView.dataSource = collectionProvider
         collectionView.delegate = collectionProvider
         collectionView.contentInset = CategoryCollectionViewCell.collectionViewInsets
     }
     
     private func setupViewModel() {
-        viewModel.items.asObservable()
+        viewModel?.items.asObservable()
             .subscribe(onNext: { [weak self] categories in
                 guard let strongSelf = self else {
                     return
                 }
                 strongSelf.stopLoadAnimating()
-                strongSelf.collectionProvider.categories = categories
+                strongSelf.collectionProvider?.categories = categories
                 strongSelf.collectionView.reloadData()
             })
             .disposed(by: disposeBag)
     }
     
     private func loadData() {
-        viewModel.reloadData()
+        viewModel?.reloadData()
     }
     
     // MARK: - BasePaginationViewController
     
     override func pullToRefreshHandler() {
-        viewModel.reloadData()
+        viewModel?.reloadData()
     }
     
     override func infinityScrollHandler() {
-        viewModel.loadNextPage()
+        viewModel?.loadNextPage()
     }
 
     // MARK: - CategoryListCollectionProviderDelegate

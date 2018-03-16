@@ -10,18 +10,17 @@ import UIKit
 
 import ShopApp_Gateway
 
-private let kTitleViewAlphaDefault: CGFloat = 1
-private let kTitleViewAlphaHidden: CGFloat = 0
-private let kTitleViewInset: CGFloat = 8
-private let kTitleViewHeight: CGFloat = 44
-private let kAnimationDuration: TimeInterval = 0.3
-
-class SearchViewController: GridCollectionViewController<SearchViewModel> {
+class SearchViewController: GridCollectionViewController<SearchViewModel>, CategoryListControllerDelegate, SearchTitleViewDelegate {
     @IBOutlet private weak var categoryListContainerView: UIView!
     
+    private let titleViewAlphaDefault: CGFloat = 1
+    private let titleViewAlphaHidden: CGFloat = 0
+    private let titleViewInset: CGFloat = 8
+    private let titleViewHeight: CGFloat = 44
+    private let animationDuration: TimeInterval = 0.3
     private let titleView = SearchTitleView()
     
-    fileprivate var selectedCategory: ShopApp_Gateway.Category?
+    private var selectedCategory: ShopApp_Gateway.Category?
     
     override var customEmptyDataView: UIView {
         return SearchEmptyDataView(frame: view.frame)
@@ -69,12 +68,12 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
     
     // MARK: - Setup
     
-    fileprivate func updateCategoryListIfNeeded(isHidden: Bool) {
+    private func updateCategoryListIfNeeded(isHidden: Bool) {
         let alpha: CGFloat = isHidden ? 0 : 1
         guard categoryListContainerView.alpha != alpha else {
             return
         }
-        UIView.animate(withDuration: kAnimationDuration) {
+        UIView.animate(withDuration: animationDuration) {
             self.categoryListContainerView.alpha = alpha
         }
     }
@@ -84,27 +83,27 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
         guard titleView.superview == nil else {
             return
         }
-        titleView.frame.origin = CGPoint(x: kTitleViewInset, y: 0)
-        titleView.frame.size = CGSize(width: view.frame.size.width - kTitleViewInset * 2, height: kTitleViewHeight)
+        titleView.frame.origin = CGPoint(x: titleViewInset, y: 0)
+        titleView.frame.size = CGSize(width: view.frame.size.width - titleViewInset * 2, height: titleViewHeight)
         navigationController?.navigationBar.addSubview(titleView)
-        titleView.alpha = kTitleViewAlphaDefault
+        titleView.alpha = titleViewAlphaDefault
     }
     
     private func showTitleViewIfNeeded() {
-        guard titleView.alpha == kTitleViewAlphaHidden else {
+        guard titleView.alpha == titleViewAlphaHidden else {
             return
         }
-        UIView.animate(withDuration: kAnimationDuration, animations: {
-            self.titleView.alpha = kTitleViewAlphaDefault
+        UIView.animate(withDuration: animationDuration, animations: {
+            self.titleView.alpha = self.titleViewAlphaDefault
         })
     }
     
     private func hideTitleViewIfNeeded() {
-        guard titleView.alpha == kTitleViewAlphaDefault else {
+        guard titleView.alpha == titleViewAlphaDefault else {
             return
         }
-        UIView.animate(withDuration: kAnimationDuration, animations: {
-            self.titleView.alpha = kTitleViewAlphaHidden
+        UIView.animate(withDuration: animationDuration, animations: {
+            self.titleView.alpha = self.titleViewAlphaHidden
         })
     }
     
@@ -131,10 +130,6 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
             .disposed(by: disposeBag)
     }
     
-    private func loadData() {
-        viewModel.reloadData()
-    }
-    
     // MARK: - BasePaginationViewController
     
     override func pullToRefreshHandler() {
@@ -151,20 +146,16 @@ class SearchViewController: GridCollectionViewController<SearchViewModel> {
         titleView.endEditing(true)
         super.provider(provider, didSelect: product)
     }
-}
 
-// MARK: - CategoryListControllerDelegate
+    // MARK: - CategoryListControllerDelegate
 
-extension SearchViewController: CategoryListControllerDelegate {
     func viewController(_ viewController: CategoryListViewController, didSelect category: ShopApp_Gateway.Category) {
         selectedCategory = category
         performSegue(withIdentifier: SegueIdentifiers.toCategory, sender: self)
     }
-}
 
-// MARK: - SearchTitleViewDelegate
+    // MARK: - SearchTitleViewDelegate
 
-extension SearchViewController: SearchTitleViewDelegate {
     func viewDidBeginEditing(_ view: SearchTitleView) {
         updateCategoryListIfNeeded(isHidden: true)
     }
