@@ -130,10 +130,6 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Categ
             .disposed(by: disposeBag)
     }
     
-    private func loadData() {
-        viewModel.reloadData()
-    }
-    
     // MARK: - BasePaginationViewController
     
     override func pullToRefreshHandler() {

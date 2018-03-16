@@ -127,6 +127,9 @@
 		0B8445C2205AA2670009012A /* CartButtonViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8445C1205AA2670009012A /* CartButtonViewModelSpec.swift */; };
 		0B8445C4205AA5D20009012A /* CartButtonViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8445C3205AA5D20009012A /* CartButtonViewSpec.swift */; };
 		0B8445C7205AAD940009012A /* CartButtonViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8445C6205AAD940009012A /* CartButtonViewModelMock.swift */; };
+		0B8445C9205AB9BD0009012A /* SearchTitleViewDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8445C8205AB9BD0009012A /* SearchTitleViewDelegateMock.swift */; };
+		0B8445CB205ABB5A0009012A /* SearchViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8445CA205ABB5A0009012A /* SearchViewControllerSpec.swift */; };
+		0B8445CD205ABBF60009012A /* SearchViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8445CC205ABBF60009012A /* SearchViewModelMock.swift */; };
 		0B9426551FFE468100A986AB /* OrderHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9426541FFE468100A986AB /* OrderHeaderView.swift */; };
 		0B9426571FFE468C00A986AB /* OrderHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B9426561FFE468C00A986AB /* OrderHeaderView.xib */; };
 		0B953D502020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B953D4F2020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift */; };
@@ -646,6 +649,9 @@
 		0B8445C1205AA2670009012A /* CartButtonViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartButtonViewModelSpec.swift; sourceTree = "<group>"; };
 		0B8445C3205AA5D20009012A /* CartButtonViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartButtonViewSpec.swift; sourceTree = "<group>"; };
 		0B8445C6205AAD940009012A /* CartButtonViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartButtonViewModelMock.swift; sourceTree = "<group>"; };
+		0B8445C8205AB9BD0009012A /* SearchTitleViewDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTitleViewDelegateMock.swift; sourceTree = "<group>"; };
+		0B8445CA205ABB5A0009012A /* SearchViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SearchViewControllerSpec.swift; sourceTree = "<group>"; tabWidth = 4; };
+		0B8445CC205ABBF60009012A /* SearchViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelMock.swift; sourceTree = "<group>"; };
 		0B9426541FFE468100A986AB /* OrderHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHeaderView.swift; sourceTree = "<group>"; };
 		0B9426561FFE468C00A986AB /* OrderHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderHeaderView.xib; sourceTree = "<group>"; };
 		0B953D4F2020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlStringMultimediaCompressor.swift; sourceTree = "<group>"; };
@@ -1676,6 +1682,7 @@
 			isa = PBXGroup;
 			children = (
 				0B8445C6205AAD940009012A /* CartButtonViewModelMock.swift */,
+				0B8445C8205AB9BD0009012A /* SearchTitleViewDelegateMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -2395,6 +2402,7 @@
 				61ABAF69205977E100D73392 /* CategoryListViewModelMock.swift */,
 				61ABAF68205977E100D73392 /* CategoryViewModelMock.swift */,
 				61276E1620581BC400E2C3AF /* HomeViewModelMock.swift */,
+				0B8445CC205ABBF60009012A /* SearchViewModelMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -2431,6 +2439,7 @@
 				61ABAF5A205976F500D73392 /* CategoryListViewControllerSpec.swift */,
 				61ABAF59205976F500D73392 /* CategoryViewControllerSpec.swift */,
 				61276E2220581BC400E2C3AF /* HomeViewControllerSpec.swift */,
+				0B8445CA205ABB5A0009012A /* SearchViewControllerSpec.swift */,
 				0B67B46E205A5D8000337379 /* SortVariantsViewControllerSpec.swift */,
 			);
 			path = Controllers;
@@ -3665,6 +3674,7 @@
 				61BA33FB204839B40054FCA7 /* BaseAddressListTableProviderDelegateMock.swift in Sources */,
 				0B83E0482057C48E0037035D /* CategoryUseCaseMock.swift in Sources */,
 				614C80B62046DAA7006A99E0 /* UpdateAddressUseCaseMock.swift in Sources */,
+				0B8445CB205ABB5A0009012A /* SearchViewControllerSpec.swift in Sources */,
 				61BA33F9204832B70054FCA7 /* BaseAddressListTableProviderSpec.swift in Sources */,
 				0BE965B22045AFF900308CA9 /* ErrorViewSpec.swift in Sources */,
 				0B43716C204D66B400C086CF /* AccountViewControllerSpec.swift in Sources */,
@@ -3686,6 +3696,7 @@
 				614ED7D9203F0A5400435708 /* OrderDetailsTableProviderSpec.swift in Sources */,
 				614C80C32046DC63006A99E0 /* TabBarControllerSpec.swift in Sources */,
 				614ED7DF203F0D9500435708 /* OrderDetailsViewModelMock.swift in Sources */,
+				0B8445C9205AB9BD0009012A /* SearchTitleViewDelegateMock.swift in Sources */,
 				0B764723204809E80019D2CE /* SwitchTableCellDelegateMock.swift in Sources */,
 				614C80CE2046F983006A99E0 /* AccountAddressFormControllerDelegateMock.swift in Sources */,
 				61276E2920581BC400E2C3AF /* ArticleDetailsViewModelMock.swift in Sources */,
@@ -3724,6 +3735,7 @@
 				0B5768D0204D3B040001738D /* BaseAddressFormViewControllerSpec.swift in Sources */,
 				61ABAF5C205976F500D73392 /* CategoryListViewControllerSpec.swift in Sources */,
 				0B83DFFD204EC0130037035D /* AccountFooterViewSpec.swift in Sources */,
+				0B8445CD205ABBF60009012A /* SearchViewModelMock.swift in Sources */,
 				614ED7DB203F0A7500435708 /* OrderDetailsViewModelSpec.swift in Sources */,
 				6186C31420501B0E0057B221 /* CartViewModelSpec.swift in Sources */,
 				0BE965BA2045B10400308CA9 /* GridCollectionProviderSpec.swift in Sources */,
