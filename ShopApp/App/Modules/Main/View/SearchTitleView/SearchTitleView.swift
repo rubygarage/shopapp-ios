@@ -38,6 +38,7 @@ class SearchTitleView: TextFieldWrapper {
     private let underlineMarginLeft: CGFloat = 40
     private let underlineMarginRight: CGFloat = 10
     private let textFieldDebounceDueTime = 0.3
+    private let barItemWidth: CGFloat = 32
     private let disposeBag = DisposeBag()
     
     private var previousSearchPhrase: String?
@@ -47,8 +48,6 @@ class SearchTitleView: TextFieldWrapper {
             updateViews(animated: true)
         }
     }
-    
-    fileprivate let barItemWidth: CGFloat = 32
     
     weak var delegate: SearchTitleViewDelegate?
     
@@ -150,6 +149,17 @@ class SearchTitleView: TextFieldWrapper {
         }
     }
     
+    private func cartBarItem() -> UIButton {
+        let cartView = CartButtonView(frame: CGRect(x: 0, y: 0, width: barItemWidth, height: barItemWidth))
+        cartView.isUserInteractionEnabled = false
+        
+        let button = UIButton(frame: cartView.frame)
+        button.addSubview(cartView)
+        button.addTarget(self, action: #selector(cartButtonDidPress), for: .touchUpInside)
+        
+        return button
+    }
+    
     // MARK: - Actions
     
     @IBAction func backButtonDidPress(_ sender: UIButton) {
@@ -180,26 +190,13 @@ class SearchTitleView: TextFieldWrapper {
         delegate?.viewDidTapClear(self)
     }
     
+    @objc private func cartButtonDidPress() {
+        delegate?.viewDidTapCart(self)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first, touch.view != textField {
             textField.endEditing(true)
         }
-    }
-}
-
-extension SearchTitleView {
-    func cartBarItem() -> UIButton {
-        let cartView = CartButtonView(frame: CGRect(x: 0, y: 0, width: barItemWidth, height: barItemWidth))
-        cartView.isUserInteractionEnabled = false
-        
-        let button = UIButton(frame: cartView.frame)
-        button.addSubview(cartView)
-        button.addTarget(self, action: #selector(cartButtonDidPress), for: .touchUpInside)
-        
-        return button
-    }
-    
-    @objc private func cartButtonDidPress() {
-        delegate?.viewDidTapCart(self)
     }
 }

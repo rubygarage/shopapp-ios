@@ -35,6 +35,9 @@
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="textField"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="searchTextFieldEditingDidBegin:" destination="-1" eventType="editingDidBegin" id="ICM-VO-GFO"/>
                                 <action selector="searchTextFieldEditingDidChange:" destination="-1" eventType="editingChanged" id="Ql6-Qo-NAo"/>
@@ -88,6 +91,10 @@
                         <constraint firstAttribute="width" constant="32" id="1zh-RK-vza"/>
                         <constraint firstAttribute="height" constant="32" id="thK-sL-nJn"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="cart"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityLabel" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ab-xH-1Xy">
                     <rect key="frame" x="50" y="40" width="250" height="1"/>
@@ -95,6 +102,10 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="WT9-Vm-d8j"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityLabel" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="underline"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -105,8 +116,16 @@
                 <constraint firstItem="eEb-OC-fAH" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Lgb-Dk-Jw3"/>
                 <constraint firstItem="Xfu-WH-a1H" firstAttribute="centerY" secondItem="JgY-Vb-rAM" secondAttribute="centerY" id="Rmm-xb-aGW"/>
                 <constraint firstItem="C7k-ft-Fxc" firstAttribute="centerY" secondItem="JgY-Vb-rAM" secondAttribute="centerY" id="e87-uj-6BY"/>
-                <constraint firstItem="5Ab-xH-1Xy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="750" constant="50" id="ftg-td-fVt"/>
-                <constraint firstAttribute="trailing" secondItem="5Ab-xH-1Xy" secondAttribute="trailing" priority="750" constant="50" id="h5p-pt-Hro"/>
+                <constraint firstItem="5Ab-xH-1Xy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="750" constant="50" id="ftg-td-fVt">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="underlineLeft"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstAttribute="trailing" secondItem="5Ab-xH-1Xy" secondAttribute="trailing" priority="750" constant="50" id="h5p-pt-Hro">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="underlineRight"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="C7k-ft-Fxc" secondAttribute="trailing" id="j2N-ih-8m3"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Tio-2b-Alh" secondAttribute="trailing" constant="5" id="jK9-A4-vfv"/>
                 <constraint firstItem="eEb-OC-fAH" firstAttribute="leading" secondItem="Xfu-WH-a1H" secondAttribute="trailing" priority="750" id="lik-Xz-i6l"/>

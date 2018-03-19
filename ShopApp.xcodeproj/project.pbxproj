@@ -130,6 +130,7 @@
 		0B8445C9205AB9BD0009012A /* SearchTitleViewDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8445C8205AB9BD0009012A /* SearchTitleViewDelegateMock.swift */; };
 		0B8445CB205ABB5A0009012A /* SearchViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8445CA205ABB5A0009012A /* SearchViewControllerSpec.swift */; };
 		0B8445CD205ABBF60009012A /* SearchViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8445CC205ABBF60009012A /* SearchViewModelMock.swift */; };
+		0B8445CF205FDB890009012A /* SearchTitleViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8445CE205FDB890009012A /* SearchTitleViewSpec.swift */; };
 		0B9426551FFE468100A986AB /* OrderHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9426541FFE468100A986AB /* OrderHeaderView.swift */; };
 		0B9426571FFE468C00A986AB /* OrderHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B9426561FFE468C00A986AB /* OrderHeaderView.xib */; };
 		0B953D502020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B953D4F2020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift */; };
@@ -657,6 +658,7 @@
 		0B8445C8205AB9BD0009012A /* SearchTitleViewDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTitleViewDelegateMock.swift; sourceTree = "<group>"; };
 		0B8445CA205ABB5A0009012A /* SearchViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SearchViewControllerSpec.swift; sourceTree = "<group>"; tabWidth = 4; };
 		0B8445CC205ABBF60009012A /* SearchViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelMock.swift; sourceTree = "<group>"; };
+		0B8445CE205FDB890009012A /* SearchTitleViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTitleViewSpec.swift; sourceTree = "<group>"; };
 		0B9426541FFE468100A986AB /* OrderHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHeaderView.swift; sourceTree = "<group>"; };
 		0B9426561FFE468C00A986AB /* OrderHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderHeaderView.xib; sourceTree = "<group>"; };
 		0B953D4F2020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlStringMultimediaCompressor.swift; sourceTree = "<group>"; };
@@ -2472,6 +2474,7 @@
 				0B8445C1205AA2670009012A /* CartButtonViewModelSpec.swift */,
 				61ABAF6C205977F100D73392 /* CategoryEmptyDataViewSpec.swift */,
 				0B67B47A205A9F4300337379 /* SearchEmptyDataViewSpec.swift */,
+				0B8445CE205FDB890009012A /* SearchTitleViewSpec.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3641,6 +3644,7 @@
 				614C80B22046D930006A99E0 /* AccountAddressFormViewModelMock.swift in Sources */,
 				0B67B47B205A9F4300337379 /* SearchEmptyDataViewSpec.swift in Sources */,
 				0BE965A02044617600308CA9 /* CustomerUseCaseMock.swift in Sources */,
+				0B8445CF205FDB890009012A /* SearchTitleViewSpec.swift in Sources */,
 				0B7CEF84203B1F8E00FAA32C /* AuthentificationRepositoryMock.swift in Sources */,
 				0B5768DC204D3CA80001738D /* AccountViewModelSpec.swift in Sources */,
 				61276E3120581BC400E2C3AF /* HomeTableProviderSpec.swift in Sources */,
