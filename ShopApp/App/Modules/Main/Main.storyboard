@@ -340,7 +340,7 @@
                                 </userDefinedRuntimeAttributes>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="corner" translatesAutoresizingMaskIntoConstraints="NO" id="Zgx-g4-Pci">
-                                <rect key="frame" x="178" y="114" width="18" height="10"/>
+                                <rect key="frame" x="178.5" y="114" width="18" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="18" id="9I3-jk-lkh"/>
                                     <constraint firstAttribute="height" constant="10" id="or9-yO-kQN"/>
@@ -849,11 +849,17 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="carouselCollectionView"/>
+                                </userDefinedRuntimeAttributes>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ufw-fb-TTR">
                                 <rect key="frame" x="187.5" y="392" width="0.0" height="0.0"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="pageControl"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="pageControlValueDidChange:" destination="PT4-ez-VtB" eventType="valueChanged" id="JLu-A2-1Jd"/>
                                 </connections>

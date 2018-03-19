@@ -52,6 +52,10 @@ class MainAssembly: Assembly {
         container.storyboardInitCompleted(SortVariantsViewController.self) { r, c in
             c.tableProvider = r.resolve(SortVariantsTableProvider.self)!
         }
+        
+        container.storyboardInitCompleted(ImagesCarouselViewController.self) { r, c in
+            c.collectionProvider = r.resolve(ImagesCarouselCollectionProvider.self)!
+        }
 
         // MARK: - View models
 
@@ -110,6 +114,10 @@ class MainAssembly: Assembly {
         
         container.register(SortVariantsTableProvider.self) { _ in
             return SortVariantsTableProvider()
+        }
+        
+        container.register(ImagesCarouselCollectionProvider.self) { _ in
+            return ImagesCarouselCollectionProvider()
         }
     }
 }
