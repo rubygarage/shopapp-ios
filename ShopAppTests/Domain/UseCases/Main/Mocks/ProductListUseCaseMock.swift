@@ -2,7 +2,7 @@
 //  ProductListUseCaseMock.swift
 //  ShopAppTests
 //
-//  Created by Evgeniy Antonov on 3/12/18.
+//  Created by Evgeniy Antonov on 3/14/18.
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
@@ -16,6 +16,7 @@ class ProductListUseCaseMock: ProductListUseCase {
     var isProductCountLessThenConstant = true
     var isNeedToReturnEmptyProductList = false
     var isNeedToReturnError = false
+    var isGetProductListNeedToReturnError = false
     
     override func getLastArrivalProductList(_ callback: @escaping RepoCallback<[Product]>) {
         execute(with: [Product()], callback: callback)
@@ -25,7 +26,9 @@ class ProductListUseCaseMock: ProductListUseCase {
         execute(with: [Product()], callback: callback)
     }
     
-    override func getProductList(with paginationValue: Any?, sortingValue: SortingValue, keyPhrase: String? = nil, excludePhrase: String? = nil, reverse: Bool, _ callback: @escaping RepoCallback<[Product]>) {}
+    override func getProductList(with paginationValue: Any?, sortingValue: SortingValue, keyPhrase: String? = nil, excludePhrase: String? = nil, reverse: Bool, _ callback: @escaping RepoCallback<[Product]>) {
+        isGetProductListNeedToReturnError ? callback(nil, RepoError()) : callback([Product()], nil)
+    }
     
     override func getProductList(with paginationValue: Any?, searchPhrase: String, _ callback: @escaping RepoCallback<[Product]>) {
         guard !isNeedToReturnError && !isNeedToReturnEmptyProductList else {

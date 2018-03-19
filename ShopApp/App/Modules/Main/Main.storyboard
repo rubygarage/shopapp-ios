@@ -390,6 +390,9 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Ifp-Jb-DEo" secondAttribute="height" multiplier="375:392" id="cjy-CR-ZEP"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="detailImagesContainer"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <segue destination="PT4-ez-VtB" kind="embed" id="W1B-3O-xqI"/>
                                         </connections>
@@ -402,12 +405,18 @@
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="priceLabel"/>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="8kP-Rw-ZOm">
                                                 <rect key="frame" x="20" y="49" width="335" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="titleLabel"/>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -429,6 +438,9 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="quantityTitleLabel"/>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPo-Xd-N4H" customClass="QuantityTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="138" y="8" width="60" height="40"/>
@@ -437,6 +449,9 @@
                                                     <constraint firstAttribute="height" constant="40" id="Fbr-12-mLf"/>
                                                     <constraint firstAttribute="width" constant="60" id="Xw2-p3-ocK"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="quantityTextFieldView"/>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -451,8 +466,15 @@
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="39V-FZ-fv4">
                                         <rect key="frame" x="0.0" y="514" width="375" height="128"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="128" id="lVY-Vz-JGJ"/>
+                                            <constraint firstAttribute="height" constant="128" id="lVY-Vz-JGJ">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="optionsContainerViewHeightConstraint"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </constraint>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="containerView"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <segue destination="IKV-uy-Adi" kind="embed" id="VJ6-5f-Ewl"/>
                                         </connections>
@@ -486,6 +508,9 @@
                                                     <constraint firstAttribute="width" constant="10" id="FoJ-pG-IyW"/>
                                                     <constraint firstAttribute="height" constant="10" id="epd-0U-gYN"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="descriptionStateImageView"/>
+                                                </userDefinedRuntimeAttributes>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -501,6 +526,9 @@
                                             <constraint firstAttribute="height" constant="60" id="ma5-NR-6Xc"/>
                                             <constraint firstAttribute="bottom" secondItem="7os-fj-8bp" secondAttribute="bottom" id="oLA-kn-mRp"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="descriptionView"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="BVK-gf-1aC" appends="YES" id="sAb-Lx-4ag"/>
                                         </connections>
@@ -513,12 +541,19 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.54509803921568623" green="0.54509803921568623" blue="0.54509803921568623" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="descriptionLabel"/>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="3BV-lT-OBn" secondAttribute="trailing" constant="20" id="9R2-co-pBw"/>
-                                            <constraint firstAttribute="height" constant="56" id="GbI-xt-Tca"/>
+                                            <constraint firstAttribute="height" constant="56" id="GbI-xt-Tca">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="descriptionContainerViewHeightConstraint"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </constraint>
                                             <constraint firstItem="3BV-lT-OBn" firstAttribute="leading" secondItem="wUn-wL-MNB" secondAttribute="leading" constant="20" id="bNW-wN-QUn"/>
                                             <constraint firstItem="3BV-lT-OBn" firstAttribute="centerY" secondItem="wUn-wL-MNB" secondAttribute="centerY" id="i8Q-CQ-NOU"/>
                                         </constraints>
@@ -529,6 +564,9 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="V4M-ze-slU"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="relatedItemsHeaderView"/>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mt3-H2-8Lf">
                                         <rect key="frame" x="0.0" y="1048" width="375" height="15"/>
@@ -550,6 +588,9 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="collectionView"/>
+                                                </userDefinedRuntimeAttributes>
                                             </collectionView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -560,6 +601,9 @@
                                             <constraint firstAttribute="trailing" secondItem="G4F-1a-1wF" secondAttribute="trailing" id="D8t-e6-lnH"/>
                                             <constraint firstAttribute="bottom" secondItem="G4F-1a-1wF" secondAttribute="bottom" id="LSr-vf-5vV"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="relatedItemsView"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="collectionView" destination="G4F-1a-1wF" id="TO1-Sg-S5k"/>
                                         </connections>
@@ -604,6 +648,9 @@
                                     <constraint firstItem="VVf-pX-u6l" firstAttribute="top" secondItem="Ifp-Jb-DEo" secondAttribute="bottom" id="uk1-o1-sTO"/>
                                     <constraint firstItem="NGV-9J-R6U" firstAttribute="top" secondItem="Ifp-Jb-DEo" secondAttribute="top" id="weG-qA-ggE"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="contentView"/>
+                                </userDefinedRuntimeAttributes>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8y-La-p8d" userLabel="Bottom View">
                                 <rect key="frame" x="0.0" y="1150" width="375" height="50"/>
@@ -617,6 +664,9 @@
                                         <state key="disabled" title="This product">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="addToCartButton"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="addToCartButtonDidPress:" destination="2iw-CM-RMu" eventType="touchUpInside" id="HKe-jW-A5B"/>
                                         </connections>
@@ -630,6 +680,9 @@
                                     <constraint firstItem="B5D-4I-QGs" firstAttribute="top" secondItem="X8y-La-p8d" secondAttribute="top" id="pxP-l5-NwJ"/>
                                     <constraint firstItem="B5D-4I-QGs" firstAttribute="leading" secondItem="X8y-La-p8d" secondAttribute="leading" id="t8B-LC-Lp0"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="bottomView"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -667,6 +720,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hW1-rU-WGd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="BVK-gf-1aC">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="descriptionContainerDidTap"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="descriptionContainerDidTap:" destination="2iw-CM-RMu" id="fLP-HQ-TzR"/>
                     </connections>
@@ -930,7 +986,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ucu-Sf-yUc"/>
-        <segue reference="OyI-Tn-rEV"/>
-        <segue reference="L85-9n-ESO"/>
+        <segue reference="DJ8-dD-zkt"/>
+        <segue reference="Dq7-PS-rRI"/>
     </inferredMetricsTieBreakers>
 </document>

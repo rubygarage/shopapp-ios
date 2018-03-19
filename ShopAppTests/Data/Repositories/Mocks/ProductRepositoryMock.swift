@@ -2,7 +2,7 @@
 //  ProductRepositoryMock.swift
 //  ShopAppTests
 //
-//  Created by Evgeniy Antonov on 3/12/18.
+//  Created by Evgeniy Antonov on 3/14/18.
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 

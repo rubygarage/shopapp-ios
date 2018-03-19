@@ -22,7 +22,7 @@ class CartViewControllerSpec: QuickSpec {
         var checkoutButton: BlackButton!
         
         beforeEach {
-            viewController = UIStoryboard(name: "Cart", bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.cart) as! CartViewController
+            viewController = UIStoryboard(name: StoryboardNames.cart, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.cart) as! CartViewController
             
             let repositoryMock = CartRepositoryMock()
             let cartProductListUseCaseMock = CartProductListUseCaseMock(repository: repositoryMock)

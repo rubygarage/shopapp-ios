@@ -15,18 +15,9 @@ import SKPhotoBrowser
 import SwinjectStoryboard
 import TPKeyboardAvoiding
 
-private let kQuantityUnderlineColorDefault = UIColor(red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
-private let kBottomViewColorEnabled = UIColor(red: 0, green: 0.48, blue: 1, alpha: 1)
-private let kBottomViewColorDisabled = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
-private let kAddToCartChangesAnimationDuration: TimeInterval = 0.33
-private let kProductDescriptionHeaderHeight = CGFloat(60.0)
-private let kProductRelatedItemsHeight = CGFloat(291.0)
-private let kProductDescriptionHiddenHeight = CGFloat(0.0)
-private let kProductDescriptionAdditionalHeight = CGFloat(40.0)
-
 typealias SelectedOption = (name: String, value: String)
 
-class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> {
+class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerDelegate, ProductOptionsControllerDelegate, SeeAllHeaderViewProtocol, LastArrivalsTableCellDelegate {
     @IBOutlet private weak var contentView: TPKeyboardAvoidingScrollView!
     @IBOutlet private weak var detailImagesContainer: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
@@ -39,14 +30,21 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
     @IBOutlet private weak var bottomView: UIView!
     @IBOutlet private weak var relatedItemsHeaderView: SeeAllTableHeaderView!
     @IBOutlet private weak var relatedItemsView: LastArrivalsTableViewCell!
+    @IBOutlet private weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet private weak var descriptionContainerViewHeightConstraint: NSLayoutConstraint! {
         didSet {
-            descriptionContainerViewHeightConstraint.constant = kProductDescriptionHiddenHeight
+            descriptionContainerViewHeightConstraint.constant = productDescriptionHiddenHeight
         }
     }
     
-    @IBOutlet fileprivate weak var optionsContainerViewHeightConstraint: NSLayoutConstraint!
+    private let bottomViewColorEnabled = UIColor(red: 0, green: 0.48, blue: 1, alpha: 1)
+    private let bottomViewColorDisabled = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+    private let addToCartChangesAnimationDuration: TimeInterval = 0.33
+    private let productDescriptionHeaderHeight = CGFloat(60.0)
+    private let productRelatedItemsHeight = CGFloat(291.0)
+    private let productDescriptionHiddenHeight = CGFloat(0.0)
+    private let productDescriptionAdditionalHeight = CGFloat(40.0)
     
     private var detailImagesController: ImagesCarouselViewController!
     private var productOptionsViewController: ProductOptionsViewController!
@@ -189,8 +187,8 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
     private func populateAddToCartButton(variant: ProductVariant?) {
         let variantAvailable = variant != nil
         addToCartButton.isEnabled = variantAvailable
-        UIView.animate(withDuration: kAddToCartChangesAnimationDuration, animations: {
-            self.bottomView.backgroundColor = variantAvailable ? kBottomViewColorEnabled : kBottomViewColorDisabled
+        UIView.animate(withDuration: addToCartChangesAnimationDuration, animations: {
+            self.bottomView.backgroundColor = variantAvailable ? self.bottomViewColorEnabled : self.bottomViewColorDisabled
         })
     }
     
@@ -225,27 +223,25 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel> 
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
         let navigationBarHeight = navigationController?.navigationBar.frame.size.height ?? CGFloat(0.0)
         let barHeight = statusBarHeight + navigationBarHeight
-        let contentOffsetY = self.contentView.contentSize.height - barHeight - kProductDescriptionHeaderHeight - kProductRelatedItemsHeight
+        let contentOffsetY = self.contentView.contentSize.height - barHeight - productDescriptionHeaderHeight - productRelatedItemsHeight
         
-        let image = descriptionContainerViewHeightConstraint.constant != kProductDescriptionHiddenHeight ? #imageLiteral(resourceName: "plus") : #imageLiteral(resourceName: "minus")
+        let image = descriptionContainerViewHeightConstraint.constant != productDescriptionHiddenHeight ? #imageLiteral(resourceName: "plus") : #imageLiteral(resourceName: "minus")
         
-        let constant = descriptionContainerViewHeightConstraint.constant != kProductDescriptionHiddenHeight
-            ? kProductDescriptionHiddenHeight
-            : descriptionLabel.frame.size.height + kProductDescriptionAdditionalHeight
+        let constant = descriptionContainerViewHeightConstraint.constant != productDescriptionHiddenHeight
+            ? productDescriptionHiddenHeight
+            : descriptionLabel.frame.size.height + productDescriptionAdditionalHeight
         
         descriptionContainerViewHeightConstraint.constant = constant
         
-        UIView.animate(withDuration: kAddToCartChangesAnimationDuration, animations: {
+        UIView.animate(withDuration: addToCartChangesAnimationDuration, animations: {
             self.descriptionStateImageView.image = image
             self.contentView.contentOffset = CGPoint(x: 0.0, y: contentOffsetY)
             self.view.layoutIfNeeded()
         })
     }
-}
-
-// MARK: - ImagesCarouselViewControllerDelegate
-
-extension ProductDetailsViewController: ImagesCarouselViewControllerDelegate {
+    
+    // MARK: - ImagesCarouselViewControllerDelegate
+    
     func viewController(_ viewController: ImagesCarouselViewController, didTapImageAt index: Int) {
         guard let product = viewModel.product.value, let items = product.images else {
             return
@@ -256,11 +252,9 @@ extension ProductDetailsViewController: ImagesCarouselViewControllerDelegate {
         browser.initializePageIndex(index)
         present(browser, animated: true)
     }
-}
-
-// MARK: - ProductOptionsControllerDelegate
-
-extension ProductDetailsViewController: ProductOptionsControllerDelegate {
+    
+    // MARK: - ProductOptionsControllerDelegate
+    
     func viewController(_ viewController: ProductOptionsViewController, didCalculate height: CGFloat) {
         optionsContainerViewHeightConstraint.constant = height
     }
@@ -268,19 +262,15 @@ extension ProductDetailsViewController: ProductOptionsControllerDelegate {
     func viewController(_ viewController: ProductOptionsViewController, didSelect option: (name: String, value: String)) {
         viewModel.selectOption(with: option.name, value: option.value)
     }
-}
-
-// MARK: - SeeAllHeaderViewProtocol
-
-extension ProductDetailsViewController: SeeAllHeaderViewProtocol {
+    
+    // MARK: - SeeAllHeaderViewProtocol
+    
     func didTapSeeAll(type: SeeAllViewType) {
         performSegue(withIdentifier: SegueIdentifiers.toProductsList, sender: self)
     }
-}
-
-// MARK: - LastArrivalsTableViewCellDelegate
-
-extension ProductDetailsViewController: LastArrivalsTableCellDelegate {
+    
+    // MARK: - LastArrivalsTableViewCellDelegate
+    
     func tableViewCell(_ tableViewCell: LastArrivalsTableViewCell, didSelect product: Product) {
         guard let navigationController = navigationController else {
             return

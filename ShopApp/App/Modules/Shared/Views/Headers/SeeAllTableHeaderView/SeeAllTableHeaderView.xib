@@ -10,11 +10,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SeeAllTableHeaderView" customModule="ShopClient" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SeeAllTableHeaderView" customModule="ShopApp" customModuleProvider="target">
             <connections>
                 <outlet property="sectionTitleLabel" destination="Coh-f5-JVK" id="reR-8w-R7G"/>
                 <outlet property="seeAllButton" destination="nXX-sn-exf" id="lye-My-1I6"/>
-                <outlet property="separatprHeightConstraint" destination="V24-Nx-I84" id="TGv-8q-3k6"/>
+                <outlet property="separatorHeightConstraint" destination="V24-Nx-I84" id="e4q-g0-AcH"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -41,6 +41,9 @@
                             <state key="normal" title="Button" image="arrow_right">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="seeAllButton"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="seeAllTapped:" destination="-1" eventType="touchUpInside" id="kW6-6p-16t"/>
                             </connections>

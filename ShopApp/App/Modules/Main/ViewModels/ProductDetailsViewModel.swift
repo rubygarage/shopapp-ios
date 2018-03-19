@@ -73,7 +73,6 @@ class ProductDetailsViewModel: BaseViewModel {
                 if let productVariant = strongSelf.productVariant, let selectedOptions = productVariant.selectedOptions {
                     selectedOptions.forEach { strongSelf.selectOption(with: $0.name, value: $0.value) }
                 }
-                strongSelf.state.onNext(.content)
                 strongSelf.loadRelatedItems()
             }
         }
@@ -139,7 +138,6 @@ class ProductDetailsViewModel: BaseViewModel {
     }
     
     private func loadRelatedItems() {
-        state.onNext(ViewState.make.loading(showHud: false))
         productListUseCase.getProductList(with: nil, sortingValue: SortingValue.type, keyPhrase: product.value?.type, excludePhrase: product.value?.title, reverse: false) { [weak self] (products, error) in
             guard let strongSelf = self else {
                 return

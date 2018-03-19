@@ -20,7 +20,7 @@ class ArticleUseCaseMock: ArticleUseCase {
     
     override func getArticle(with id: String, _ callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>) {
         execute(callback: callback)
-        }
+    }
     
     private func execute(callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>) {
         isNeedToReturnError ? callback(nil, error) : callback(response, nil)

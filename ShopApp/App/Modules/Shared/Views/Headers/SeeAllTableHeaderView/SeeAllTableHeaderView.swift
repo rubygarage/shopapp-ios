@@ -24,7 +24,7 @@ let kSeeAllTableHeaderViewHeight: CGFloat = 75
 
 class SeeAllTableHeaderView: UIView {
     @IBOutlet private weak var sectionTitleLabel: UILabel!
-    @IBOutlet private weak var separatprHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var separatorHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var seeAllButton: UIButton!
     
     private var headerViewType = SeeAllViewType.relatedItems
@@ -55,7 +55,7 @@ class SeeAllTableHeaderView: UIView {
     }
     
     private func setupConstraints(separatorVisible: Bool) {
-        separatprHeightConstraint.constant = separatorVisible ? 1 : 0
+        separatorHeightConstraint.constant = separatorVisible ? 1 : 0
     }
     
     private func populateViews() {
