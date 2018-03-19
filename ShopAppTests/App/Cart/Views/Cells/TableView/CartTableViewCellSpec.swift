@@ -103,7 +103,7 @@ class CartTableViewCellSpec: QuickSpec {
                     productVariant.price = Decimal(floatLiteral: 15)
                     
                     let image = Image()
-                    image.src = "http://via.placeholder.com/350x150"
+                    image.src = "http://via.placeholder.com/100x100"
                     
                     cartProduct.productVariant = productVariant
                     

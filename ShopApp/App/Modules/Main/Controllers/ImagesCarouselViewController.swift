@@ -14,13 +14,11 @@ protocol ImagesCarouselViewControllerDelegate: class {
     func viewController(_ viewController: ImagesCarouselViewController, didTapImageAt index: Int)
 }
 
-class ImagesCarouselViewController: UIViewController {
+class ImagesCarouselViewController: UIViewController, ImagesCarouselCollectionProviderDelegate {
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var pageControl: UIPageControl!
     
-    @IBOutlet fileprivate weak var pageControl: UIPageControl!
-    
-    private var collectionProvider: ImagesCarouselCollectionProvider!
-    
+    var collectionProvider: ImagesCarouselCollectionProvider!
     var showingIndex: Int = 0
     
     var images: [Image] = [] {
@@ -44,16 +42,15 @@ class ImagesCarouselViewController: UIViewController {
     private func setupCollectionView() {
         collectionView.registerNibForCell(DetailsImagesCollectionViewCell.self)
         
-        collectionProvider = ImagesCarouselCollectionProvider()
-        collectionProvider.delegate = self
+        collectionProvider?.delegate = self
         collectionView.dataSource = collectionProvider
         collectionView.delegate = collectionProvider
     }
     
     private func updateViews() {
         setupPageControl()
-        collectionProvider.images = images
-        collectionProvider.sizeForCell = view.frame.size
+        collectionProvider?.images = images
+        collectionProvider?.sizeForCell = view.frame.size
         collectionView.reloadData()
     }
     
@@ -76,11 +73,9 @@ class ImagesCarouselViewController: UIViewController {
         showingIndex = sender.currentPage
         updateShowingImage(with: sender.currentPage)
     }
-}
-
-// MARK: - ImagesCarouselCollectionProviderDelegate
-
-extension ImagesCarouselViewController: ImagesCarouselCollectionProviderDelegate {
+    
+    // MARK: - ImagesCarouselCollectionProviderDelegate
+    
     func provider(_ provider: ImagesCarouselCollectionProvider, didScrollToImageAt index: Int) {
         pageControl.currentPage = index
         showingIndex = index
