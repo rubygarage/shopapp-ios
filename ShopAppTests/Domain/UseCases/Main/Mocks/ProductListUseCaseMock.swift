@@ -16,7 +16,6 @@ class ProductListUseCaseMock: ProductListUseCase {
     var isProductCountLessThenConstant = true
     var isNeedToReturnEmptyProductList = false
     var isNeedToReturnError = false
-    var isGetProductListNeedToReturnError = false
     
     override func getLastArrivalProductList(_ callback: @escaping RepoCallback<[Product]>) {
         execute(with: [Product()], callback: callback)
@@ -27,7 +26,14 @@ class ProductListUseCaseMock: ProductListUseCase {
     }
     
     override func getProductList(with paginationValue: Any?, sortingValue: SortingValue, keyPhrase: String? = nil, excludePhrase: String? = nil, reverse: Bool, _ callback: @escaping RepoCallback<[Product]>) {
-        isGetProductListNeedToReturnError ? callback(nil, RepoError()) : callback([Product()], nil)
+        guard !isNeedToReturnError else {
+            execute(callback: callback)
+            
+            return
+        }
+        
+        let products = generatedProducts()
+        execute(with: products, callback: callback)
     }
     
     override func getProductList(with paginationValue: Any?, searchPhrase: String, _ callback: @escaping RepoCallback<[Product]>) {
@@ -37,6 +43,11 @@ class ProductListUseCaseMock: ProductListUseCase {
             return
         }
         
+        let products = generatedProducts()
+        execute(with: products, callback: callback)
+    }
+    
+    private func generatedProducts() -> [Product] {
         let productCount = isProductCountLessThenConstant ? 5 : 10
         var products: [Product] = []
         
@@ -46,7 +57,7 @@ class ProductListUseCaseMock: ProductListUseCase {
             products.append(product)
         }
         
-        execute(with: products, callback: callback)
+        return products
     }
     
     private func execute(with products: [Product] = [], callback: @escaping RepoCallback<[Product]>) {

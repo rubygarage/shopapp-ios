@@ -1,5 +1,5 @@
 //
-//  ProductsListViewModel.swift
+//  ProductListViewModel.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 11/3/17.
@@ -9,7 +9,7 @@
 import RxSwift
 import ShopApp_Gateway
 
-class ProductsListViewModel: GridCollectionViewModel {
+class ProductListViewModel: GridCollectionViewModel {
     private let productListUseCase: ProductListUseCase
     
     var sortingValue: SortingValue!

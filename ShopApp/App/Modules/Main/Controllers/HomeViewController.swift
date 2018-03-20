@@ -37,9 +37,9 @@ class HomeViewController: BaseTableViewController<HomeViewModel>, HomeTableProvi
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let productsListViewController = segue.destination as? ProductsListViewController {
-            productsListViewController.title = destinationTitle
-            productsListViewController.sortingValue = sortingValue
+        if let productListViewController = segue.destination as? ProductListViewController {
+            productListViewController.title = destinationTitle
+            productListViewController.sortingValue = sortingValue
             destinationTitle = nil
         } else if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
             productDetailsViewController.productId = selectedProduct!.id
@@ -123,7 +123,7 @@ class HomeViewController: BaseTableViewController<HomeViewModel>, HomeTableProvi
         case .latestArrivals:
             destinationTitle = "ControllerTitle.LatestArrivals".localizable
             sortingValue = .createdAt
-            performSegue(withIdentifier: SegueIdentifiers.toProductsList, sender: self)
+            performSegue(withIdentifier: SegueIdentifiers.toProductList, sender: self)
         case .blogPosts:
             performSegue(withIdentifier: SegueIdentifiers.toArticlesList, sender: self)
         default:

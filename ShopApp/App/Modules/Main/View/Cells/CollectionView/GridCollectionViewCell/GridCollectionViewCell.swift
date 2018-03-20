@@ -10,17 +10,37 @@ import UIKit
 
 import ShopApp_Gateway
 
-private let kNumberOfColumns: CGFloat = 2
-private let kCollectionViewMarginTop: CGFloat = 80
-private let kCollectionViewMarginVertical: CGFloat = 20
-private let kCollectionViewMarginHorizontal: CGFloat = 7
-private let kCellRatio: CGFloat = 210 / 185
-
 class GridCollectionViewCell: UICollectionViewCell {
-    @IBOutlet private weak var detailsView: UIView!
     @IBOutlet private weak var productImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
+    
+    private static let numberOfColumns: CGFloat = 2
+    private static let collectionViewMarginTop: CGFloat = 80
+    private static let collectionViewMarginVertical: CGFloat = 20
+    private static let collectionViewMarginHorizontal: CGFloat = 7
+    private static let cellRatio: CGFloat = 210 / 185
+    
+    class var cellSize: CGSize {
+        let screenWidth = UIScreen.main.bounds.size.width
+        let collectionViewWidth = screenWidth - 2 * collectionViewMarginHorizontal
+        let cellWidth = (collectionViewWidth - collectionViewMarginHorizontal) / numberOfColumns
+        let cellHeight = Float(cellWidth * cellRatio)
+        let roundedCellheight = CGFloat(lroundf(cellHeight))
+        return CGSize(width: cellWidth, height: roundedCellheight)
+    }
+    class var defaultCollectionViewInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: collectionViewMarginVertical, left: collectionViewMarginHorizontal, bottom: collectionViewMarginVertical, right: collectionViewMarginHorizontal)
+    }
+    class var popularCollectionViewInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: 0.0, left: collectionViewMarginHorizontal, bottom: 0.0, right: collectionViewMarginHorizontal)
+    }
+    class var searchCollectionViewInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: collectionViewMarginHorizontal, left: collectionViewMarginHorizontal, bottom: collectionViewMarginHorizontal, right: collectionViewMarginHorizontal)
+    }
+    class var sortableCollectionViewInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: collectionViewMarginTop, left: collectionViewMarginHorizontal, bottom: collectionViewMarginVertical, right: collectionViewMarginHorizontal)
+    }
     
     // MARK: - Setup
 
@@ -32,28 +52,5 @@ class GridCollectionViewCell: UICollectionViewCell {
         let price = NSDecimalNumber(decimal: item.price ?? Decimal())
         let formattedPrice = formatter.string(from: price)!
         priceLabel.text = item.hasAlternativePrice ? String.localizedStringWithFormat(localizedString, formattedPrice) : formattedPrice
-    }
-}
-
-extension GridCollectionViewCell {
-    class var cellSize: CGSize {
-        let screenWidth = UIScreen.main.bounds.size.width
-        let collectionViewWidth = screenWidth - 2 * kCollectionViewMarginHorizontal
-        let cellWidth = (collectionViewWidth - kCollectionViewMarginHorizontal) / kNumberOfColumns
-        let cellHeight = Float(cellWidth * kCellRatio)
-        let roundedCellheight = CGFloat(lroundf(cellHeight))
-        return CGSize(width: cellWidth, height: roundedCellheight)
-    }
-    class var defaultCollectionViewInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: kCollectionViewMarginVertical, left: kCollectionViewMarginHorizontal, bottom: kCollectionViewMarginVertical, right: kCollectionViewMarginHorizontal)
-    }
-    class var popularCollectionViewInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: 0.0, left: kCollectionViewMarginHorizontal, bottom: 0.0, right: kCollectionViewMarginHorizontal)
-    }
-    class var searchCollectionViewInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: kCollectionViewMarginHorizontal, left: kCollectionViewMarginHorizontal, bottom: kCollectionViewMarginHorizontal, right: kCollectionViewMarginHorizontal)
-    }
-    class var sortableCollectionViewInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: kCollectionViewMarginTop, left: kCollectionViewMarginHorizontal, bottom: kCollectionViewMarginVertical, right: kCollectionViewMarginHorizontal)
     }
 }

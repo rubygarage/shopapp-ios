@@ -9,7 +9,7 @@
 import Foundation
 
 struct SegueIdentifiers {
-    static let toProductsList = "toProductsList"
+    static let toProductList = "toProductList"
     static let toProductDetails = "toProductDetails"
     static let toArticlesList = "toArticlesList"
     static let toArticleDetails = "toArticleDetails"

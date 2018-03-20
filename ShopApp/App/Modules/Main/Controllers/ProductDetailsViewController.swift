@@ -75,11 +75,11 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         } else if let productOptionsViewController = segue.destination as? ProductOptionsViewController {
             productOptionsViewController.delegate = self
             self.productOptionsViewController = productOptionsViewController
-        } else if let productsListViewController = segue.destination as? ProductsListViewController {
-            productsListViewController.title = "Label.RelatedItems".localizable
-            productsListViewController.sortingValue = .type
-            productsListViewController.keyPhrase = viewModel.product.value?.type
-            productsListViewController.excludePhrase = viewModel.product.value?.title
+        } else if let productListViewController = segue.destination as? ProductListViewController {
+            productListViewController.title = "Label.RelatedItems".localizable
+            productListViewController.sortingValue = .type
+            productListViewController.keyPhrase = viewModel.product.value?.type
+            productListViewController.excludePhrase = viewModel.product.value?.title
         }
     }
     
@@ -266,7 +266,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     // MARK: - SeeAllHeaderViewProtocol
     
     func didTapSeeAll(type: SeeAllViewType) {
-        performSegue(withIdentifier: SegueIdentifiers.toProductsList, sender: self)
+        performSegue(withIdentifier: SegueIdentifiers.toProductList, sender: self)
     }
     
     // MARK: - LastArrivalsTableViewCellDelegate

@@ -41,8 +41,8 @@ class MainAssembly: Assembly {
             c.viewModel = r.resolve(ProductDetailsViewModel.self)!
         }
 
-        container.storyboardInitCompleted(ProductsListViewController.self) { r, c in
-            c.viewModel = r.resolve(ProductsListViewModel.self)!
+        container.storyboardInitCompleted(ProductListViewController.self) { r, c in
+            c.viewModel = r.resolve(ProductListViewModel.self)!
         }
 
         container.storyboardInitCompleted(SearchViewController.self) { r, c in
@@ -86,8 +86,8 @@ class MainAssembly: Assembly {
                                            productListUseCase: r.resolve(ProductListUseCase.self)!)
         }
 
-        container.register(ProductsListViewModel.self) { r in
-            return ProductsListViewModel(productListUseCase: r.resolve(ProductListUseCase.self)!)
+        container.register(ProductListViewModel.self) { r in
+            return ProductListViewModel(productListUseCase: r.resolve(ProductListUseCase.self)!)
         }
 
         container.register(SearchViewModel.self) { r in

@@ -47,7 +47,7 @@
                         <outlet property="tableView" destination="WbR-Bw-vDS" id="BI7-bm-Lvl"/>
                         <segue destination="gX3-Ek-1Eq" kind="show" identifier="toArticlesList" id="YDI-H7-phA"/>
                         <segue destination="Zke-0H-d8m" kind="show" identifier="toArticleDetails" id="L85-9n-ESO"/>
-                        <segue destination="FIW-QV-u9O" kind="show" identifier="toProductsList" id="OyI-Tn-rEV"/>
+                        <segue destination="FIW-QV-u9O" kind="show" identifier="toProductList" id="OyI-Tn-rEV"/>
                         <segue destination="2iw-CM-RMu" kind="show" identifier="toProductDetails" id="RyX-CT-HJC"/>
                     </connections>
                 </viewController>
@@ -283,10 +283,10 @@
             </objects>
             <point key="canvasLocation" x="1558" y="3147"/>
         </scene>
-        <!--Products List View Controller-->
+        <!--Product List View Controller-->
         <scene sceneID="W83-mX-1ZD">
             <objects>
-                <viewController storyboardIdentifier="ProductsListControllerIdentifier" hidesBottomBarWhenPushed="YES" id="FIW-QV-u9O" customClass="ProductsListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductListControllerIdentifier" hidesBottomBarWhenPushed="YES" id="FIW-QV-u9O" customClass="ProductListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uO2-eS-gid">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -301,6 +301,9 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="collectionView"/>
+                                </userDefinedRuntimeAttributes>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -715,7 +718,7 @@
                         <outlet property="relatedItemsHeaderView" destination="Abb-dJ-X8r" id="tUP-2K-Okt"/>
                         <outlet property="relatedItemsView" destination="yXx-nC-ut5" id="PRK-Zm-upu"/>
                         <outlet property="titleLabel" destination="8kP-Rw-ZOm" id="zGb-Cf-th2"/>
-                        <segue destination="FIW-QV-u9O" kind="show" identifier="toProductsList" id="DJ8-dD-zkt"/>
+                        <segue destination="FIW-QV-u9O" kind="show" identifier="toProductList" id="DJ8-dD-zkt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hW1-rU-WGd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -991,8 +994,8 @@
         <image name="search_selected" width="27" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ucu-Sf-yUc"/>
-        <segue reference="DJ8-dD-zkt"/>
+        <segue reference="T0f-wT-zRb"/>
+        <segue reference="OyI-Tn-rEV"/>
         <segue reference="Dq7-PS-rRI"/>
     </inferredMetricsTieBreakers>
 </document>

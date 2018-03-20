@@ -1,5 +1,5 @@
 //
-//  ProductsListViewController.swift
+//  ProductListViewController.swift
 //  ShopClient
 //
 //  Created by Evgeniy Antonov on 9/21/17.
@@ -10,7 +10,7 @@ import UIKit
 
 import ShopApp_Gateway
 
-class ProductsListViewController: GridCollectionViewController<ProductsListViewModel> {
+class ProductListViewController: GridCollectionViewController<ProductListViewModel> {
     var sortingValue: SortingValue!
     var keyPhrase: String?
     var excludePhrase: String?
