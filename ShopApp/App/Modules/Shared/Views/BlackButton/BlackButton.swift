@@ -8,19 +8,19 @@
 
 import UIKit
 
-private let kButtonColorNormal = UIColor.black
-private let kButtonColorHighlited = UIColor.black.withAlphaComponent(0.8)
-private let kButtonColorDisabled = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
-
 class BlackButton: UIButton {
+    private let buttonColorNormal = UIColor.black
+    private let buttonColorHighlited = UIColor.black.withAlphaComponent(0.8)
+    private let buttonColorDisabled = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+    
     override open var isHighlighted: Bool {
         didSet {
-            backgroundColor = isHighlighted ? kButtonColorHighlited : kButtonColorNormal
+            backgroundColor = isHighlighted ? buttonColorHighlited : buttonColorNormal
         }
     }
     override var isEnabled: Bool {
         didSet {
-            backgroundColor = isEnabled ? kButtonColorNormal : kButtonColorDisabled
+            backgroundColor = isEnabled ? buttonColorNormal : buttonColorDisabled
             let titleColor = isEnabled ? UIColor.white : UIColor.gray
             setTitleColor(titleColor, for: .normal)
         }
@@ -43,6 +43,6 @@ class BlackButton: UIButton {
     // MARK: - Setup
     
     private func setup() {
-        backgroundColor = kButtonColorNormal
+        backgroundColor = buttonColorNormal
     }
 }

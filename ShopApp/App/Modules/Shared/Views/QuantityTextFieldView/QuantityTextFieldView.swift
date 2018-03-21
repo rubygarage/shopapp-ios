@@ -8,17 +8,17 @@
 
 import UIKit
 
-private let kCartProductQuantityMin = 1
-private let kQuantityUnderlineColorDefault = UIColor(displayP3Red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
-
 let kCartProductQuantityMax = 999
 
 protocol QuantityTextFieldViewDelegate: class {
     func quantityTextFieldView(_ view: QuantityTextFieldView, didEndEditingWith quantity: Int)
 }
 
-class QuantityTextFieldView: TextFieldWrapper {
+class QuantityTextFieldView: TextFieldWrapper, UITextFieldDelegate {
     @IBOutlet private weak var underlineView: UIView!
+    
+    private let cartProductQuantityMin = 1
+    private let quantityUnderlineColorDefault = UIColor(displayP3Red: 0.92, green: 0.92, blue: 0.92, alpha: 1)
 
     weak var delegate: QuantityTextFieldViewDelegate?
 
@@ -42,13 +42,6 @@ class QuantityTextFieldView: TextFieldWrapper {
         textField?.delegate = self
     }
 
-    private func check(quantity: Int) -> Int {
-        guard quantity < kCartProductQuantityMin else {
-            return quantity
-        }
-        return kCartProductQuantityMin
-    }
-
     // MARK: - Actions
 
     @IBAction func quantityEditingDidBegin(_ sender: UITextField) {
@@ -56,18 +49,18 @@ class QuantityTextFieldView: TextFieldWrapper {
     }
 
     @IBAction func quantityEditingDidEnd(_ sender: UITextField) {
-        underlineView.backgroundColor = kQuantityUnderlineColorDefault
+        underlineView.backgroundColor = quantityUnderlineColorDefault
 
         var quantity = (sender.text as NSString?)?.integerValue ?? 0
-        if quantity < kCartProductQuantityMin {
-            quantity = kCartProductQuantityMin
+        if quantity < cartProductQuantityMin {
+            quantity = cartProductQuantityMin
             textField.text = String(quantity)
         }
         delegate?.quantityTextFieldView(self, didEndEditingWith: quantity)
     }
-}
+    
+    // MARK: - UITextFieldDelegate
 
-extension QuantityTextFieldView: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let formattedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
         let formattedQuantity = (formattedText as NSString?)?.integerValue ?? 0

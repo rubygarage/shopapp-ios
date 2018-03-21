@@ -11,7 +11,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-enum InputTextFieldViewState {
+enum InputTextFieldViewState: Int {
     case normal
     case highlighted
     case error
@@ -33,16 +33,10 @@ enum InputTextFieldViewKeybordType: Int {
     @objc optional func textFieldView(_ view: InputTextFieldView, didUpdate text: String)
 }
 
-private let kUnderlineViewAlphaDefault: CGFloat = 0.2
-private let kUnderlineViewAlphaHighlighted: CGFloat = 1
-private let kUnderlineViewHeightDefault: CGFloat = 1
-private let kUnderlineViewHeightHighlighted: CGFloat = 2
-private let kErrorColor = UIColor(displayP3Red: 0.89, green: 0.31, blue: 0.31, alpha: 1)
-
-class InputTextFieldView: PlaceholderedTextField {
+class InputTextFieldView: PlaceholderedTextField, UITextFieldDelegate {
     @IBOutlet private weak var underlineView: UIView!
     @IBOutlet private weak var underlineViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var errorMesageLabel: UILabel!
+    @IBOutlet private weak var errorMessageLabel: UILabel!
     @IBOutlet private weak var showPasswordButton: UIButton!
     
     @IBInspectable var keyboardType: Int = InputTextFieldViewKeybordType.name.rawValue {
@@ -57,6 +51,12 @@ class InputTextFieldView: PlaceholderedTextField {
             setupKeyboardSecureTextEntry(with: keyboardType)
         }
     }
+    
+    private let underlineViewAlphaDefault: CGFloat = 0.2
+    private let underlineViewAlphaHighlighted: CGFloat = 1
+    private let underlineViewHeightDefault: CGFloat = 1
+    private let underlineViewHeightHighlighted: CGFloat = 2
+    private let errorColor = UIColor(displayP3Red: 0.89, green: 0.31, blue: 0.31, alpha: 1)
     
     weak var delegate: InputTextFieldViewDelegate?
     
@@ -73,7 +73,7 @@ class InputTextFieldView: PlaceholderedTextField {
     var errorMessage: String? {
         didSet {
             state = .error
-            errorMesageLabel.text = errorMessage
+            errorMessageLabel.text = errorMessage
             updateUI()
         }
     }
@@ -104,14 +104,14 @@ class InputTextFieldView: PlaceholderedTextField {
     
     private func setupViews() {
         backgroundColor = UIColor.clear
-        errorMesageLabel.textColor = kErrorColor
+        errorMessageLabel.textColor = errorColor
     }
     
     private func updateUI() {
-        underlineView.alpha = state == .normal ? kUnderlineViewAlphaDefault : kUnderlineViewAlphaHighlighted
-        underlineViewHeightConstraint.constant = state == .normal ? kUnderlineViewHeightDefault : kUnderlineViewHeightHighlighted
-        underlineView.backgroundColor = state == .error ? kErrorColor : UIColor.black
-        errorMesageLabel.isHidden = state != .error
+        underlineView.alpha = state == .normal ? underlineViewAlphaDefault : underlineViewAlphaHighlighted
+        underlineViewHeightConstraint.constant = state == .normal ? underlineViewHeightDefault : underlineViewHeightHighlighted
+        underlineView.backgroundColor = state == .error ? errorColor : UIColor.black
+        errorMessageLabel.isHidden = state != .error
     }
     
     private func setupKeyboardType(with type: Int) {
@@ -183,11 +183,9 @@ class InputTextFieldView: PlaceholderedTextField {
         showPasswordButton.isSelected = !showPasswordButton.isSelected
         textField?.isSecureTextEntry = !showPasswordButton.isSelected
     }
-}
 
-// MARK: - UITextFieldDelegate
+    // MARK: - UITextFieldDelegate
 
-extension InputTextFieldView: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let generatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) else {
             return true

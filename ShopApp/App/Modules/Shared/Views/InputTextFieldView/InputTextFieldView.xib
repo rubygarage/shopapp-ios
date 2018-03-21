@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
                     <integer key="value" value="0"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
-                <outlet property="errorMesageLabel" destination="tpe-ay-ykK" id="IEP-Sr-QtP"/>
+                <outlet property="errorMessageLabel" destination="tpe-ay-ykK" id="IEP-Sr-QtP"/>
                 <outlet property="placeholderLabel" destination="VV2-Mg-NFB" id="LTQ-Fx-Iga"/>
                 <outlet property="placeholderVerticallyConstraint" destination="dHC-a1-4dk" id="la3-OX-wbC"/>
                 <outlet property="showPasswordButton" destination="zaT-ur-DyI" id="MBc-L4-1ju"/>
@@ -37,6 +33,9 @@
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="textField"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="editingChanged:" destination="-1" eventType="editingChanged" id="YRJ-3P-NvJ"/>
                         <action selector="editingDidBegin:" destination="-1" eventType="editingDidBegin" id="EM5-lI-Gtm"/>
@@ -47,20 +46,34 @@
                     <rect key="frame" x="10" y="38" width="416" height="1"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="1" id="4L3-oc-idu"/>
+                        <constraint firstAttribute="height" constant="1" id="4L3-oc-idu">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="underlineHeight"/>
+                            </userDefinedRuntimeAttributes>
+                        </constraint>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="underline"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpe-ay-ykK">
                     <rect key="frame" x="10" y="42" width="416" height="13.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="errorMessage"/>
+                    </userDefinedRuntimeAttributes>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zaT-ur-DyI">
                     <rect key="frame" x="390" y="7.5" width="46" height="32"/>
                     <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                     <state key="normal" image="show_password_default"/>
                     <state key="selected" image="show_password_selected"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="showPassword"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="showPasswordTapped:" destination="-1" eventType="touchUpInside" id="EA3-Ut-W3W"/>
                     </connections>

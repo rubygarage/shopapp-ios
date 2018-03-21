@@ -44,6 +44,6 @@ class UnderlinedButton: UIButton {
     // MARK: - Setup
     
     private func setup() {
-        setTitleColor(UIColor.black, for: .normal)
+        setTitleColor(.black, for: .normal)
     }
 }

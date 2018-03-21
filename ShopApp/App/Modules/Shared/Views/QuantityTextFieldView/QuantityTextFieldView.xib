@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuantityTextFieldView" customModule="ShopClient" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuantityTextFieldView" customModule="ShopApp" customModuleProvider="target">
             <connections>
                 <outlet property="textField" destination="Oel-1l-ubD" id="QzS-sp-rom"/>
                 <outlet property="underlineView" destination="2fg-EL-Res" id="HV6-bE-ekl"/>
@@ -26,6 +26,9 @@
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="done"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="textField"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="quantityEditingDidBegin:" destination="-1" eventType="editingDidBegin" id="AM4-xP-ZJw"/>
                         <action selector="quantityEditingDidEnd:" destination="-1" eventType="editingDidEnd" id="tx6-L2-dRo"/>
@@ -37,6 +40,10 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="vgr-vt-z8Z"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="underline"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
