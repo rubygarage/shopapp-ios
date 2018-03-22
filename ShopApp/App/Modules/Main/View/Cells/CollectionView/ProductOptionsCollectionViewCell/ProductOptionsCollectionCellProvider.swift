@@ -8,22 +8,20 @@
 
 import UIKit
 
-private let kOptionCollectionViewCellAdditionalWidth = CGFloat(24.0)
-
-protocol ProductOptionCollectionCellProviderDelegate: class {
-    func provider(_ provider: ProductOptionCollectionCellProvider, didSelect value: String)
+protocol ProductOptionsCollectionCellProviderDelegate: class {
+    func provider(_ provider: ProductOptionsCollectionCellProvider, didSelect value: String)
 }
 
-class ProductOptionCollectionCellProvider: NSObject {
+class ProductOptionsCollectionCellProvider: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    private let optionCollectionViewCellAdditionalWidth = CGFloat(24.0)
+    
     var values: [String] = []
     var selectedValue = ""
     
-    weak var delegate: ProductOptionCollectionCellProviderDelegate?
-}
-
-// MARK: - UICollectionViewDataSource
-
-extension ProductOptionCollectionCellProvider: UICollectionViewDataSource {
+    weak var delegate: ProductOptionsCollectionCellProviderDelegate?
+    
+    // MARK: - UICollectionViewDataSource
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return values.count
     }
@@ -35,23 +33,19 @@ extension ProductOptionCollectionCellProvider: UICollectionViewDataSource {
         cell.configure(with: value, selected: isSelectedValue)
         return cell
     }
-}
-
-// MARK: - UICollectionViewDelegate
-
-extension ProductOptionCollectionCellProvider: UICollectionViewDelegate {
+    
+    // MARK: - UICollectionViewDelegate
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let text = values[indexPath.row]
         let font = UIFont.systemFont(ofSize: UIFont.labelFontSize)
         let attributes = [NSFontAttributeName: font]
-        let width = (text as NSString).size(attributes: attributes).width + kOptionCollectionViewCellAdditionalWidth
+        let width = (text as NSString).size(attributes: attributes).width + optionCollectionViewCellAdditionalWidth
         return CGSize(width: width, height: kOptionCollectionViewCellHeight)
     }
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout
-
-extension ProductOptionCollectionCellProvider: UICollectionViewDelegateFlowLayout {
+    
+    // MARK: - UICollectionViewDelegateFlowLayout
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let delegate = delegate else {
             return

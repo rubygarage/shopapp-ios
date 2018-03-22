@@ -53,7 +53,7 @@ class HomeViewModelSpec: QuickSpec {
             }
             
             context("if all data loaded successfully") {
-                it("should load data successfully", closure: {
+                it("should load data successfully") {
                     productListUseCaseMock.isNeedToReturnError = false
                     articleListUseCaseMock.isNeedToReturnError = false
                     articleListUseCaseMock.isArticleCountLessThenConstant = false
@@ -66,7 +66,7 @@ class HomeViewModelSpec: QuickSpec {
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.content
-                })
+                }
             }
             
             context("if all data loaded with error") {

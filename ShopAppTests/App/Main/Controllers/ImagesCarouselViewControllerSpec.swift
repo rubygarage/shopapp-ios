@@ -43,10 +43,10 @@ class ImagesCarouselViewControllerSpec: QuickSpec {
                 expect(collectionView.delegate) === collectionProvider
             }
             
-            it("should have correct initial properties", closure: {
+            it("should have correct initial properties") {
                 expect(viewController.showingIndex) == 0
                 expect(viewController.images.isEmpty) == true
-            })
+            }
             
             it("should have correct page control current page") {
                 expect(pageControl.currentPage) == 0
@@ -61,9 +61,9 @@ class ImagesCarouselViewControllerSpec: QuickSpec {
                 viewController.images = images
             }
             
-            it("should return correct items count", closure: {
+            it("should return correct items count") {
                 expect(collectionView.numberOfItems(inSection: 0)) == 1
-            })
+            }
             
             it("should have correct page control number of pages") {
                 expect(pageControl.numberOfPages) == images.count

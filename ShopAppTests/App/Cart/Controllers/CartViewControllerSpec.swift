@@ -40,10 +40,6 @@ class CartViewControllerSpec: QuickSpec {
         }
         
         describe("when view loaded") {
-            beforeEach {
-                _ = viewController.view
-            }
-            
             it("should have correct subclass type") {
                 expect(viewController.isKind(of: BaseViewController<CartViewModel>.self)) == true
             }
@@ -73,9 +69,9 @@ class CartViewControllerSpec: QuickSpec {
                 expect(tableView.delegate) === tableProvider
             }
             
-            it("should have correct checkout button", closure: {
+            it("should have correct checkout button") {
                 expect(checkoutButton.title(for: .normal)) == "Button.Checkout".localizable.uppercased()
-            })
+            }
             
             it("should have default empty data view") {
                 expect(viewController.customEmptyDataView).to(beAnInstanceOf(CartEmptyDataView.self))
@@ -87,10 +83,6 @@ class CartViewControllerSpec: QuickSpec {
         }
         
         describe("when data loaded") {
-            beforeEach {
-                _ = viewController.view
-            }
-            
             context("if data is empty") {
                 beforeEach {
                     viewModelMock.isNeedToReturnData = false
@@ -135,9 +127,7 @@ class CartViewControllerSpec: QuickSpec {
         }
         
         describe("when cart product quantity updated") {
-            it("should update cart product quantity", closure: {
-                _ = viewController.view
-                
+            it("should update cart product quantity") {
                 let cartProduct = CartProduct()
                 viewController.viewModel.data.value = [cartProduct]
                 
@@ -146,17 +136,15 @@ class CartViewControllerSpec: QuickSpec {
                 viewController.tableViewCell(cell, didUpdateCartProduct: cartProduct, with: 10)
                 
                 let item = viewController.viewModel.data.value.first
+                
                 expect(item?.quantity) == 10
                 expect(viewModelMock.isUpdateCartProductStarted) == true
                 expect(viewModelMock.isLoadDataStarted) == true
-                
-            })
+            }
         }
         
         describe("when delete cart product did press") {
             beforeEach {
-                _ = viewController.view
-                
                 viewModelMock.isNeedToReturnData = true
                 viewModelMock.loadData(showLoading: false)
             }

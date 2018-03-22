@@ -70,7 +70,7 @@ class BaseAddressListViewModelSpec: QuickSpec {
             }
             
             context("if error occured") {
-                it("should have an error", closure: {
+                it("should have an error") {
                     customerUseCaseMock.isNeedToReturnError = true
                     viewModel.loadCustomerAddresses()
                     
@@ -78,7 +78,7 @@ class BaseAddressListViewModelSpec: QuickSpec {
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.content
-                })
+                }
             }
         }
         

@@ -259,7 +259,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         optionsContainerViewHeightConstraint.constant = height
     }
     
-    func viewController(_ viewController: ProductOptionsViewController, didSelect option: (name: String, value: String)) {
+    func viewController(_ viewController: ProductOptionsViewController, didSelect option: SelectedOption) {
         viewModel.selectOption(with: option.name, value: option.value)
     }
     

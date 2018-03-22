@@ -27,9 +27,7 @@ class OrderDetailsViewControllerSpec: QuickSpec {
             viewController.viewModel = viewModelMock
             tableProvider = OrderDetailsTableProvider()
             viewController.tableProvider = tableProvider
-            tableView = self.findView(withAccessibilityLabel: "orderDetailTableView", in: viewController.view) as! UITableView
-            
-            _ = viewController.view
+            tableView = self.findView(withAccessibilityLabel: "orderDetailTableView", in: viewController.view) as! UITableView            
         }
         
         describe("when view loaded") {

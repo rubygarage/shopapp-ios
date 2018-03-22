@@ -32,8 +32,6 @@ class HomeViewControllerSpec: QuickSpec {
             viewController.tableProvider = tableProvider
             
             tableView = self.findView(withAccessibilityLabel: "tableView", in: viewController.view) as! UITableView
-            
-            _ = viewController.view
         }
         
         describe("when view loaded") {
@@ -87,25 +85,25 @@ class HomeViewControllerSpec: QuickSpec {
                 expect(viewController.tableProvider.articles.count) > 0
             }
             
-            it("should reload table view", closure: {
+            it("should reload table view") {
                 expect(tableView.visibleCells.isEmpty) == false
                 expect(tableView.numberOfSections) == 3
                 expect(tableView.numberOfRows(inSection: 0)) == 1
                 expect(tableView.numberOfRows(inSection: 1)) == 1
                 expect(tableView.numberOfRows(inSection: 2)) == 1
-            })
+            }
             
-            it("should stop show hud", closure: {
+            it("should stop show hud") {
                 expect(viewController.refreshControl?.isRefreshing) == false
-            })
+            }
         }
         
         describe("when data refreshed") {
-            it("should start loading data", closure: {
+            it("should start loading data") {
                 viewController.pullToRefreshHandler()
                 
                 expect(viewModelMock.isDataLoadingStarted) == true
-            })
+            }
         }
     }
 }

@@ -12,13 +12,12 @@ protocol ProductOptionsCollectionCellDelegate: class {
     func collectionViewCell(_ collectionViewCell: ProductOptionsCollectionViewCell, didSelectItemWith values: [String], selectedValue: String)
 }
 
-class ProductOptionsCollectionViewCell: UICollectionViewCell {
+class ProductOptionsCollectionViewCell: UICollectionViewCell, ProductOptionsCollectionCellProviderDelegate {
     @IBOutlet private weak var collectionView: UICollectionView!
     
-    private var collectionProvider: ProductOptionCollectionCellProvider!
+    private var collectionProvider: ProductOptionsCollectionCellProvider!
     private var selectedValue = ""
-    
-    fileprivate var values: [String] = []
+    private var values: [String] = []
     
     weak var delegate: ProductOptionsCollectionCellDelegate?
     
@@ -44,17 +43,15 @@ class ProductOptionsCollectionViewCell: UICollectionViewCell {
     private func setupCollectionView() {
         collectionView.registerNibForCell(ProductOptionCollectionViewCell.self)
 
-        collectionProvider = ProductOptionCollectionCellProvider()
+        collectionProvider = ProductOptionsCollectionCellProvider()
         collectionProvider.delegate = self
         collectionView.dataSource = collectionProvider
         collectionView.delegate = collectionProvider
     }
-}
-
-// MARK: - ProductOptionCollectionCellProviderDelegate
-
-extension ProductOptionsCollectionViewCell: ProductOptionCollectionCellProviderDelegate {
-    func provider(_ provider: ProductOptionCollectionCellProvider, didSelect value: String) {
+    
+    // MARK: - ProductOptionsCollectionCellProviderDelegate
+    
+    func provider(_ provider: ProductOptionsCollectionCellProvider, didSelect value: String) {
         delegate?.collectionViewCell(self, didSelectItemWith: values, selectedValue: value)
     }
 }

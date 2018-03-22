@@ -10,22 +10,21 @@ import UIKit
 
 import ShopApp_Gateway
 
-private let kOptionCollectionViewAdditionalHeight = CGFloat(20.0)
-
 let kOptionCollectionViewHeaderHeight = CGFloat(46.0)
 let kOptionCollectionViewCellHeight = CGFloat(31.0)
 
 protocol ProductOptionsControllerDelegate: class {
     func viewController(_ viewController: ProductOptionsViewController, didCalculate height: CGFloat)
-    func viewController(_ viewController: ProductOptionsViewController, didSelect option: (name: String, value: String))
+    func viewController(_ viewController: ProductOptionsViewController, didSelect option: SelectedOption)
 }
 
-class ProductOptionsViewController: UIViewController {
+class ProductOptionsViewController: UIViewController, ProductOptionsCollectionCellDelegate {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var collectionLayout: UICollectionViewFlowLayout!
     
-    private var collectionProvider: ProductOptionsCollectionProvider!
+    private let optionCollectionViewAdditionalHeight = CGFloat(20.0)
     
+    var collectionProvider: ProductOptionsCollectionProvider!
     var options: [ProductOption] = []
     
     var selectedOptions: [SelectedOption] = [] {
@@ -34,11 +33,11 @@ class ProductOptionsViewController: UIViewController {
                 delegate?.viewController(self, didCalculate: 0.0)
                 return
             }
-            let collectioViewHeight = (kOptionCollectionViewHeaderHeight + kOptionCollectionViewCellHeight) * CGFloat(options.count)
-            let additionalHeight = !options.isEmpty ? kOptionCollectionViewAdditionalHeight : 0.0
-            delegate?.viewController(self, didCalculate: collectioViewHeight + additionalHeight)
-            collectionProvider.options = options
-            collectionProvider.selectedOptions = selectedOptions
+            let collectionViewHeight = (kOptionCollectionViewHeaderHeight + kOptionCollectionViewCellHeight) * CGFloat(options.count)
+            let additionalHeight = !options.isEmpty ? optionCollectionViewAdditionalHeight : 0.0
+            delegate?.viewController(self, didCalculate: collectionViewHeight + additionalHeight)
+            collectionProvider?.options = options
+            collectionProvider?.selectedOptions = selectedOptions
             collectionView.reloadData()
         }
     }
@@ -57,16 +56,13 @@ class ProductOptionsViewController: UIViewController {
         collectionView.registerNibForCell(ProductOptionsCollectionViewCell.self)
         collectionView.registerNibForSupplementaryView(ProductOptionHeaderView.self, of: UICollectionElementKindSectionHeader)
 
-        collectionProvider = ProductOptionsCollectionProvider()
-        collectionProvider.delegate = self
+        collectionProvider?.delegate = self
         collectionView.dataSource = collectionProvider
         collectionView.delegate = collectionProvider
     }
-}
-
-// MARK: - ProductOptionsCollectionCellDelegate
-
-extension ProductOptionsViewController: ProductOptionsCollectionCellDelegate {
+    
+    // MARK: - ProductOptionsCollectionCellDelegate
+    
     func collectionViewCell(_ collectionViewCell: ProductOptionsCollectionViewCell, didSelectItemWith values: [String], selectedValue: String) {
         if let name = options.filter({ $0.values! == values }).first?.name {
             let option = (name: name, value: selectedValue)

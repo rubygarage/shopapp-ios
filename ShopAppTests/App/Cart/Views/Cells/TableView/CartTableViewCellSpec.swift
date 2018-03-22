@@ -45,9 +45,9 @@ class CartTableViewCellSpec: QuickSpec {
         }
         
         describe("when cell initialized") {
-            it("should have correct selection style", closure: {
+            it("should have correct selection style") {
                 expect(cell.selectionStyle.rawValue) == UITableViewCellSelectionStyle.none.rawValue
-            })
+            }
             
             it("should have correct label titles") {
                 expect(quantityLabel.text) == "Label.Quantity".localizable

@@ -10,24 +10,25 @@ import UIKit
 
 import ShopApp_Gateway
 
-private let kOptionsHeaderViewSize = CGSize(width: 0, height: kOptionCollectionViewHeaderHeight)
-
-class ProductOptionsCollectionProvider: NSObject {
+class ProductOptionsCollectionProvider: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    private let optionsHeaderViewSize = CGSize(width: 0, height: kOptionCollectionViewHeaderHeight)
+    
     var options: [ProductOption] = []
     var selectedOptions: [SelectedOption] = []
     
     weak var delegate: ProductOptionsCollectionCellDelegate?
-}
-
-// MARK: - UICollectionViewDataSource
-
-extension ProductOptionsCollectionProvider: UICollectionViewDataSource {
+    
+    // MARK: - UICollectionViewDataSource
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return options.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return options[section].values?.count ?? 0 > 1 ? 1 : 0
+        guard section < options.count, let values = options[section].values, values.count > 1 else {
+            return 0
+        }
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -44,13 +45,11 @@ extension ProductOptionsCollectionProvider: UICollectionViewDataSource {
         headerView.configure(with: text)
         return headerView
     }
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout
-
-extension ProductOptionsCollectionProvider: UICollectionViewDelegateFlowLayout {
+    
+    // MARK: - UICollectionViewDelegateFlowLayout
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return kOptionsHeaderViewSize
+        return optionsHeaderViewSize
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

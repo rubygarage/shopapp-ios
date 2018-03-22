@@ -114,9 +114,9 @@ class ProductDetailsViewControllerSpec: QuickSpec {
                 expect(relatedItemsHeaderView.delegate) === viewController
             }
             
-            it("should have gesture recognizers", closure: {
+            it("should have gesture recognizers") {
                 expect(descriptionView.gestureRecognizers?.isEmpty) == false
-            })
+            }
             
             it("should start data loading") {
                 expect(viewModelMock.isLoadDataStarted) == true

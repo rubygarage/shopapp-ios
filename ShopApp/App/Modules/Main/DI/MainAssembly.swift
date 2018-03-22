@@ -56,6 +56,10 @@ class MainAssembly: Assembly {
         container.storyboardInitCompleted(ImagesCarouselViewController.self) { r, c in
             c.collectionProvider = r.resolve(ImagesCarouselCollectionProvider.self)!
         }
+        
+        container.storyboardInitCompleted(ProductOptionsViewController.self) { r, c in
+            c.collectionProvider = r.resolve(ProductOptionsCollectionProvider.self)
+        }
 
         // MARK: - View models
 
@@ -118,6 +122,10 @@ class MainAssembly: Assembly {
         
         container.register(ImagesCarouselCollectionProvider.self) { _ in
             return ImagesCarouselCollectionProvider()
+        }
+        
+        container.register(ProductOptionsCollectionProvider.self) { _ in
+            return ProductOptionsCollectionProvider()
         }
     }
 }

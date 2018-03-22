@@ -50,10 +50,10 @@ class AccountAddressFormViewControllerSpec: QuickSpec {
                     _ = viewController.view
                 }
                 
-                it("should have correct child controller properties", closure: {
+                it("should have correct child controller properties") {
                     let childController = viewController.childViewControllers.first as? AddressFormViewController
                     expect(childController?.address).to(beNil())
-                })
+                }
             }
             
             context("if action is edit") {
