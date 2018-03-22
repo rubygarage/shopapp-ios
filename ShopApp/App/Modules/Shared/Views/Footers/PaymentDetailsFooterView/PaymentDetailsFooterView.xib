@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentDetailsFooterView" customModule="ShopClient" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentDetailsFooterView" customModule="ShopApp" customModuleProvider="target">
             <connections>
                 <outlet property="discountLabel" destination="vXw-DT-phg" id="Cpc-PG-BXy"/>
                 <outlet property="discountValueLabel" destination="jmk-PG-JEx" id="hPp-KJ-ENT"/>
@@ -38,24 +38,36 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="subtotal"/>
+                                    </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXw-DT-phg">
                                     <rect key="frame" x="0.0" y="26.5" width="35.5" height="26"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="discount"/>
+                                    </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gID-HO-CCn">
                                     <rect key="frame" x="0.0" y="52.5" width="35.5" height="26.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="shipping"/>
+                                    </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHS-0G-p1Z">
                                     <rect key="frame" x="0.0" y="79" width="35.5" height="26"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="total"/>
+                                    </userDefinedRuntimeAttributes>
                                 </label>
                             </subviews>
                         </stackView>
@@ -67,24 +79,36 @@
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="subtotalValue"/>
+                                    </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmk-PG-JEx">
                                     <rect key="frame" x="265.5" y="26.5" width="34" height="26"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="discountValue"/>
+                                    </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9al-f8-dCL">
                                     <rect key="frame" x="265.5" y="52.5" width="34" height="26.5"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="shippingValue"/>
+                                    </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW6-N6-OeQ">
                                     <rect key="frame" x="264" y="79" width="35.5" height="26"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="totalValue"/>
+                                    </userDefinedRuntimeAttributes>
                                 </label>
                             </subviews>
                         </stackView>

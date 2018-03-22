@@ -12,7 +12,7 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class HomeTableProviderDelegateMock: NSObject, HomeTableProviderDelegate, LastArrivalsTableCellDelegate, PopularTableCellDelegate, SeeAllHeaderViewProtocol {
+class HomeTableProviderDelegateMock: NSObject, HomeTableProviderDelegate, LastArrivalsTableCellDelegate, PopularTableCellDelegate, SeeAllHeaderViewDelegate {
     var provider: HomeTableProvider?
     var article: Article?
     
@@ -31,7 +31,7 @@ class HomeTableProviderDelegateMock: NSObject, HomeTableProviderDelegate, LastAr
     
     func tableViewCell(_ tableViewCell: PopularTableViewCell, didSelect product: Product) {}
     
-    // MARK: - SeeAllHeaderViewProtocol
+    // MARK: - SeeAllHeaderViewDelegate
     
-    func didTapSeeAll(type: SeeAllViewType) {}
+    func headerView(_ headerView: SeeAllTableHeaderView, didTapSeeAll type: SeeAllViewType) {}
 }

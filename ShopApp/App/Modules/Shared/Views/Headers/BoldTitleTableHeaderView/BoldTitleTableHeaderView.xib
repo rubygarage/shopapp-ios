@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BoldTitleTableHeaderView" customModule="ShopClient" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BoldTitleTableHeaderView" customModule="ShopApp" customModuleProvider="target">
             <connections>
                 <outlet property="headerTitleLabel" destination="q9Q-Fy-vQ0" id="LYM-rX-7Ax"/>
                 <outlet property="topMarginConstraint" destination="fWQ-Gu-24z" id="SP4-Bz-IYw"/>
@@ -25,8 +25,16 @@
                     <rect key="frame" x="0.0" y="0.0" width="449" height="15"/>
                     <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="15" id="fWQ-Gu-24z"/>
+                        <constraint firstAttribute="height" constant="15" id="fWQ-Gu-24z">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="topMargin"/>
+                            </userDefinedRuntimeAttributes>
+                        </constraint>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityLabel" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="top"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWU-W0-3fP">
                     <rect key="frame" x="0.0" y="16" width="449" height="60"/>
@@ -36,6 +44,9 @@
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="title"/>
+                            </userDefinedRuntimeAttributes>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

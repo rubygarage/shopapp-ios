@@ -25,7 +25,7 @@ class HomeTableProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     var popularProducts: [Product] = []
     var articles: [Article] = []
     
-    weak var delegate: (HomeTableProviderDelegate & LastArrivalsTableCellDelegate & PopularTableCellDelegate & SeeAllHeaderViewProtocol)?
+    weak var delegate: (HomeTableProviderDelegate & LastArrivalsTableCellDelegate & PopularTableCellDelegate & SeeAllHeaderViewDelegate)?
     
     // MARK: - UITableViewDataSource
     

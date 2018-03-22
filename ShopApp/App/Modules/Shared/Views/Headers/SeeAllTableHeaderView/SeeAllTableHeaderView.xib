@@ -30,6 +30,9 @@
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="title"/>
+                            </userDefinedRuntimeAttributes>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nXX-sn-exf">
                             <rect key="frame" x="303" y="17.5" width="82" height="26"/>
@@ -45,7 +48,7 @@
                                 <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="seeAllButton"/>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="seeAllTapped:" destination="-1" eventType="touchUpInside" id="kW6-6p-16t"/>
+                                <action selector="seeAllButtonDidPress:" destination="-1" eventType="touchUpInside" id="XVr-cp-gm2"/>
                             </connections>
                         </button>
                     </subviews>
@@ -62,8 +65,16 @@
                     <rect key="frame" x="0.0" y="75" width="401" height="1"/>
                     <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="1" id="V24-Nx-I84"/>
+                        <constraint firstAttribute="height" constant="1" id="V24-Nx-I84">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="separatorHeight"/>
+                            </userDefinedRuntimeAttributes>
+                        </constraint>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="separator"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

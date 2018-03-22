@@ -47,7 +47,7 @@ class OrderListTableProvider: NSObject, UITableViewDataSource, UITableViewDelega
             productVariantIds = items.map { $0.productVariant?.id ?? "" }
         }
         cell.configure(with: images, productVariantIds: productVariantIds, index: indexPath.section)
-        cell.cellDelegate = delegate
+        cell.delegate = delegate
         return cell
     }
 

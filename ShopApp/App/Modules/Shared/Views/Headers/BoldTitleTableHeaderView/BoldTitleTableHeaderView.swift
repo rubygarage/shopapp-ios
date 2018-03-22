@@ -16,14 +16,14 @@ enum BoldTitleViewType {
     case shippingOptions
 }
 
-private let kTopMarginDefault: CGFloat = 15
-private let kTopMarginPayment: CGFloat = 4
-
 let kBoldTitleTableHeaderViewHeight: CGFloat = 75
 
 class BoldTitleTableHeaderView: UIView {
     @IBOutlet private weak var headerTitleLabel: UILabel!
     @IBOutlet private weak var topMarginConstraint: NSLayoutConstraint!
+    
+    private let topMarginDefault: CGFloat = 15
+    private let topMarginPayment: CGFloat = 4
     
     private var headerViewType = BoldTitleViewType.shippingAddress
     
@@ -53,7 +53,7 @@ class BoldTitleTableHeaderView: UIView {
     
     private func setupConstraints() {
         let lowMarginSectionTypes: [BoldTitleViewType] = [.payment, .shippingOptions]
-        topMarginConstraint.constant = lowMarginSectionTypes.contains(headerViewType) ? kTopMarginPayment : kTopMarginDefault
+        topMarginConstraint.constant = lowMarginSectionTypes.contains(headerViewType) ? topMarginPayment : topMarginDefault
     }
     
     private func populateViews() {

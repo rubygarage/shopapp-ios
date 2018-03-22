@@ -14,19 +14,15 @@ protocol CheckoutCartTableViewCellDelegate: class {
     func tableViewCell(_ cell: CheckoutCartTableViewCell, didSelect productVariantId: String, at index: Int)
 }
 
-class CheckoutCartTableViewCell: UITableViewCell {
+class CheckoutCartTableViewCell: UITableViewCell, CheckoutCartCollectionProviderDelegate {
     @IBOutlet private weak var collectionView: UICollectionView!
     
-    private var collectionDataSource: CheckoutCartCollectionDataSource!
-    // swiftlint:disable weak_delegate
-    private var collectionDelegate: CheckoutCartCollectionDelegate!
-    // swiftlint:enable weak_delegate
+    private var collectionProvider: CheckoutCartCollectionProvider!
+    private var images: [Image]!
+    private var productVariantIds: [String]!
+    private var index = 0
     
-    fileprivate var images: [Image]!
-    fileprivate var productVariantIds: [String]!
-    fileprivate var index = 0
-    
-    weak var cellDelegate: CheckoutCartTableViewCellDelegate?
+    weak var delegate: CheckoutCartTableViewCellDelegate?
     
     // MARK: - View lifecycle
 
@@ -39,44 +35,28 @@ class CheckoutCartTableViewCell: UITableViewCell {
     // MARK: - Setup
     
     public func configure(with items: [Image], productVariantIds: [String], index: Int? = nil) {
-        images = items
-        self.productVariantIds = productVariantIds
+        setupCollectionView()
+        
+        collectionProvider.images = items
+        collectionProvider.productVariantIds = productVariantIds
+        
         if let index = index {
             self.index = index
         }
-        setupCollectionView()
     }
     
     private func setupCollectionView() {
         collectionView.registerNibForCell(CheckoutCartCollectionCell.self)
         
-        collectionDataSource = CheckoutCartCollectionDataSource()
-        collectionDataSource.delegate = self
-        collectionView.dataSource = collectionDataSource
-        
-        collectionDelegate = CheckoutCartCollectionDelegate()
-        collectionDelegate.delegate = self
-        collectionView.delegate = collectionDelegate
+        collectionProvider = CheckoutCartCollectionProvider()
+        collectionProvider.delegate = self
+        collectionView.dataSource = collectionProvider
+        collectionView.delegate = collectionProvider
     }
-}
 
-// MARK: - CheckoutCartCollectionDataSourceDelegate
+    // MARK: - CheckoutCartCollectionProviderDelegate
 
-extension CheckoutCartTableViewCell: CheckoutCartCollectionDataSourceDelegate {
-    func itemsCount() -> Int {
-        return images.count
-    }
-    
-    func item(at index: Int) -> (image: Image, productVariantId: String) {
-        return (image: images[index], productVariantId: productVariantIds[index])
-    }
-}
-
-// MARK: - CheckoutCartCollectionDelegateProtocol
-
-extension CheckoutCartTableViewCell: CheckoutCartCollectionDelegateProtocol {
-    func didSelectItem(with productVariantId: String) {
-        cellDelegate?.tableViewCell(self, didSelect: productVariantId, at: index)
-
+    func provider(_ provider: CheckoutCartCollectionProvider, didSelectItemWith productVariantId: String) {
+        delegate?.tableViewCell(self, didSelect: productVariantId, at: index)
     }
 }

@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol SeeAllHeaderViewProtocol: class {
-    func didTapSeeAll(type: SeeAllViewType)
+protocol SeeAllHeaderViewDelegate: class {
+    func headerView(_ headerView: SeeAllTableHeaderView, didTapSeeAll type: SeeAllViewType)
 }
 
 enum SeeAllViewType {
@@ -29,7 +29,7 @@ class SeeAllTableHeaderView: UIView {
     
     private var headerViewType = SeeAllViewType.relatedItems
     
-    weak var delegate: SeeAllHeaderViewProtocol?
+    weak var delegate: SeeAllHeaderViewDelegate?
     
     // MARK: - View lifecycle
     
@@ -84,7 +84,7 @@ class SeeAllTableHeaderView: UIView {
     
     // MARK: - Actions
     
-    @IBAction func seeAllTapped(_ sender: UIButton) {
-        delegate?.didTapSeeAll(type: headerViewType)
+    @IBAction func seeAllButtonDidPress(_ sender: UIButton) {
+        delegate?.headerView(self, didTapSeeAll: headerViewType)
     }
 }

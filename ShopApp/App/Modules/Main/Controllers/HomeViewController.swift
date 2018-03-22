@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 import ShopApp_Gateway
 
-class HomeViewController: BaseTableViewController<HomeViewModel>, HomeTableProviderDelegate, LastArrivalsTableCellDelegate, PopularTableCellDelegate, SeeAllHeaderViewProtocol {
+class HomeViewController: BaseTableViewController<HomeViewModel>, HomeTableProviderDelegate, LastArrivalsTableCellDelegate, PopularTableCellDelegate, SeeAllHeaderViewDelegate {
     private var destinationTitle: String!
     private var sortingValue: SortingValue!
     private var selectedProduct: Product?
@@ -116,9 +116,9 @@ class HomeViewController: BaseTableViewController<HomeViewModel>, HomeTableProvi
         openProductDetails(with: product)
     }
     
-    // MARK: - SeeAllHeaderViewProtocol
+    // MARK: - SeeAllHeaderViewDelegate
     
-    func didTapSeeAll(type: SeeAllViewType) {
+    func headerView(_ headerView: SeeAllTableHeaderView, didTapSeeAll type: SeeAllViewType) {
         switch type {
         case .latestArrivals:
             destinationTitle = "ControllerTitle.LatestArrivals".localizable

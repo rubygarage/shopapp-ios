@@ -136,7 +136,7 @@ class OrderListTableProviderSpec: QuickSpec {
                 
                 let indexPath = IndexPath(row: 0, section: 0)
                 let cell = tableProvider.tableView(tableView, cellForRowAt: indexPath) as! CheckoutCartTableViewCell
-                cell.cellDelegate?.tableViewCell(cell, didSelect: "product variant id", at: 0)
+                cell.delegate?.tableViewCell(cell, didSelect: "product variant id", at: 0)
                 expect(providerDelegateMock.selectedProductVariantId) == "product variant id"
                 expect(providerDelegateMock.selectedIndex) == 0
             }

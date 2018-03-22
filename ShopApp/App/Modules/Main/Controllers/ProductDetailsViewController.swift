@@ -17,7 +17,7 @@ import TPKeyboardAvoiding
 
 typealias SelectedOption = (name: String, value: String)
 
-class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerDelegate, ProductOptionsControllerDelegate, SeeAllHeaderViewProtocol, LastArrivalsTableCellDelegate {
+class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerDelegate, ProductOptionsControllerDelegate, SeeAllHeaderViewDelegate, LastArrivalsTableCellDelegate {
     @IBOutlet private weak var contentView: TPKeyboardAvoidingScrollView!
     @IBOutlet private weak var detailImagesContainer: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
@@ -263,9 +263,9 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         viewModel.selectOption(with: option.name, value: option.value)
     }
     
-    // MARK: - SeeAllHeaderViewProtocol
+    // MARK: - SeeAllHeaderViewDelegate
     
-    func didTapSeeAll(type: SeeAllViewType) {
+    func headerView(_ headerView: SeeAllTableHeaderView, didTapSeeAll type: SeeAllViewType) {
         performSegue(withIdentifier: SegueIdentifiers.toProductList, sender: self)
     }
     

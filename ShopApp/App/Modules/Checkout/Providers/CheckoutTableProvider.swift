@@ -62,7 +62,7 @@ extension CheckoutTableProvider: UITableViewDataSource {
         let images = cartProducts.map({ $0.productVariant?.image ?? Image() })
         let productVariantIds = cartProducts.map({ $0.productVariant?.id ?? "" })
         cell.configure(with: images, productVariantIds: productVariantIds)
-        cell.cellDelegate = delegate
+        cell.delegate = delegate
         return cell
     }
     
