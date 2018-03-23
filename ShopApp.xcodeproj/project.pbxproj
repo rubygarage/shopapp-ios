@@ -75,6 +75,7 @@
 		0B5BA4F12023126200FF8FCA /* ProductOptionsCollectionCellProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5BA4F02023126200FF8FCA /* ProductOptionsCollectionCellProvider.swift */; };
 		0B5BA4F320233B2200FF8FCA /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5BA4F220233B2200FF8FCA /* CategoryListViewController.swift */; };
 		0B5BA4F520233C7600FF8FCA /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5BA4F420233C7600FF8FCA /* CategoryListViewModel.swift */; };
+		0B5FDD982065519A00CAA670 /* CreditCardValidatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FDD972065519900CAA670 /* CreditCardValidatorSpec.swift */; };
 		0B67B46F205A5D8000337379 /* SortVariantsViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67B46E205A5D8000337379 /* SortVariantsViewControllerSpec.swift */; };
 		0B67B471205A5D8800337379 /* SortVariantsControllerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67B470205A5D8800337379 /* SortVariantsControllerDelegateMock.swift */; };
 		0B67B473205A5D9000337379 /* SortVariantsTableProviderDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67B472205A5D9000337379 /* SortVariantsTableProviderDelegateMock.swift */; };
@@ -633,6 +634,7 @@
 		0B5BA4F02023126200FF8FCA /* ProductOptionsCollectionCellProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductOptionsCollectionCellProvider.swift; sourceTree = "<group>"; };
 		0B5BA4F220233B2200FF8FCA /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
 		0B5BA4F420233C7600FF8FCA /* CategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
+		0B5FDD972065519900CAA670 /* CreditCardValidatorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditCardValidatorSpec.swift; sourceTree = "<group>"; };
 		0B67B46E205A5D8000337379 /* SortVariantsViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortVariantsViewControllerSpec.swift; sourceTree = "<group>"; };
 		0B67B470205A5D8800337379 /* SortVariantsControllerDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortVariantsControllerDelegateMock.swift; sourceTree = "<group>"; };
 		0B67B472205A5D9000337379 /* SortVariantsTableProviderDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortVariantsTableProviderDelegateMock.swift; sourceTree = "<group>"; };
@@ -709,11 +711,6 @@
 		0B8445FA2063DFD30009012A /* CheckoutCartCollectionProviderDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutCartCollectionProviderDelegateMock.swift; sourceTree = "<group>"; };
 		0B8445FC2063E2290009012A /* CheckoutCartCollectionProviderSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutCartCollectionProviderSpec.swift; sourceTree = "<group>"; };
 		0B8445FE2063F5E30009012A /* CheckoutCartCollectionCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutCartCollectionCellSpec.swift; sourceTree = "<group>"; };
-		0B8446022064E0E70009012A /* Address+DetailsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Address+DetailsSpec.swift"; sourceTree = "<group>"; };
-		0B8446042064E0F40009012A /* Customer+DetailsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Customer+DetailsSpec.swift"; sourceTree = "<group>"; };
-		0B8446062064E1190009012A /* CreditCard+DetailsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreditCard+DetailsSpec.swift"; sourceTree = "<group>"; };
-		0B8446082064E1250009012A /* RepoError+DetailsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RepoError+DetailsSpec.swift"; sourceTree = "<group>"; };
-		0B84460A2064E12F0009012A /* SortingValue+DetailsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SortingValue+DetailsSpec.swift"; sourceTree = "<group>"; };
 		0B9426541FFE468100A986AB /* OrderHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHeaderView.swift; sourceTree = "<group>"; };
 		0B9426561FFE468C00A986AB /* OrderHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderHeaderView.xib; sourceTree = "<group>"; };
 		0B953D4F2020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlStringMultimediaCompressor.swift; sourceTree = "<group>"; };
@@ -1388,6 +1385,14 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		0B5FDD962065519900CAA670 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0B5FDD972065519900CAA670 /* CreditCardValidatorSpec.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		0B69B55A2008FFDC00F071E3 /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1585,6 +1590,7 @@
 			isa = PBXGroup;
 			children = (
 				6130DE742063D09F00BAA833 /* Extensions */,
+				0B5FDD962065519900CAA670 /* Helpers */,
 				6130DE8A206525C600BAA833 /* Modules */,
 			);
 			path = App;
@@ -2555,11 +2561,6 @@
 		61236D561FEAA7AB00D64198 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				0B8446082064E1250009012A /* RepoError+DetailsSpec.swift */,
-				0B8446062064E1190009012A /* CreditCard+DetailsSpec.swift */,
-				0B8446042064E0F40009012A /* Customer+DetailsSpec.swift */,
-				0B8446022064E0E70009012A /* Address+DetailsSpec.swift */,
-				0B84460A2064E12F0009012A /* SortingValue+DetailsSpec.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -4045,6 +4046,7 @@
 				0B5768D0204D3B040001738D /* BaseAddressFormViewControllerSpec.swift in Sources */,
 				61ABAF5C205976F500D73392 /* CategoryListViewControllerSpec.swift in Sources */,
 				6130DE6B2062A1C100BAA833 /* ProductOptionsCollectionCellProviderSpec.swift in Sources */,
+				0B5FDD982065519A00CAA670 /* CreditCardValidatorSpec.swift in Sources */,
 				0B83DFFD204EC0130037035D /* AccountFooterViewSpec.swift in Sources */,
 				0B8445CD205ABBF60009012A /* SearchViewModelMock.swift in Sources */,
 				61CCF0C2206000B1004CF487 /* ImagesCarouselViewControllerSpec.swift in Sources */,
