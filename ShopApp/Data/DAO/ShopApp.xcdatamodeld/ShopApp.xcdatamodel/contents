@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D47" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CartProductEntity" representedClassName="CartProductEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="currency" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="productVariant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductVariantEntity" inverseName="cartProduct" inverseEntity="ProductVariantEntity" syncable="YES"/>
+    </entity>
+    <entity name="CategoryEntity" representedClassName="CategoryEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="additionalDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="categoryDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="paginationValue" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ImageEntity" inverseName="category" inverseEntity="ImageEntity" syncable="YES"/>
+        <relationship name="products" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductEntity" inverseName="category" inverseEntity="ProductEntity" syncable="YES"/>
+    </entity>
+    <entity name="ImageEntity" representedClassName="ImageEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="imageDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="src" attributeType="String" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="image" inverseEntity="CategoryEntity" syncable="YES"/>
+        <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductEntity" inverseName="images" inverseEntity="ProductEntity" syncable="YES"/>
+        <relationship name="productVariant" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductVariantEntity" inverseName="image" inverseEntity="ProductVariantEntity" syncable="YES"/>
+    </entity>
+    <entity name="PolicyEntity" representedClassName="PolicyEntity" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="PrivacyPolicyEntity" representedClassName="PrivacyPolicyEntity" parentEntity="PolicyEntity" syncable="YES" codeGenerationType="class">
+        <relationship name="shop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ShopEntity" inverseName="privacyPolicy" inverseEntity="ShopEntity" syncable="YES"/>
+    </entity>
+    <entity name="ProductEntity" representedClassName="ProductEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="additionalDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="discount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="paginationValue" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="productDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tags" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="vendor" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="products" inverseEntity="CategoryEntity" syncable="YES"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ImageEntity" inverseName="product" inverseEntity="ImageEntity" syncable="YES"/>
+        <relationship name="options" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductOptionEntity" inverseName="product" inverseEntity="ProductOptionEntity" syncable="YES"/>
+        <relationship name="variantBySelectedOptions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductVariantEntity" inverseName="productBySelectedOptions" inverseEntity="ProductVariantEntity" syncable="YES"/>
+        <relationship name="variants" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductVariantEntity" inverseName="product" inverseEntity="ProductVariantEntity" syncable="YES"/>
+    </entity>
+    <entity name="ProductOptionEntity" representedClassName="ProductOptionEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="values" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductEntity" inverseName="options" inverseEntity="ProductEntity" syncable="YES"/>
+    </entity>
+    <entity name="ProductVariantEntity" representedClassName="ProductVariantEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="available" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="price" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="productId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="cartProduct" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CartProductEntity" inverseName="productVariant" inverseEntity="CartProductEntity" syncable="YES"/>
+        <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ImageEntity" inverseName="productVariant" inverseEntity="ImageEntity" syncable="YES"/>
+        <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductEntity" inverseName="variants" inverseEntity="ProductEntity" syncable="YES"/>
+        <relationship name="productBySelectedOptions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductEntity" inverseName="variantBySelectedOptions" inverseEntity="ProductEntity" syncable="YES"/>
+        <relationship name="selectedOptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="VariantOptionEntity" inverseName="productVariant" inverseEntity="VariantOptionEntity" syncable="YES"/>
+    </entity>
+    <entity name="RefundPolicyEntity" representedClassName="RefundPolicyEntity" parentEntity="PolicyEntity" syncable="YES" codeGenerationType="class">
+        <relationship name="shop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ShopEntity" inverseName="refundPolicy" inverseEntity="ShopEntity" syncable="YES"/>
+    </entity>
+    <entity name="ShopEntity" representedClassName="ShopEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="currency" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shopDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="privacyPolicy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PrivacyPolicyEntity" inverseName="shop" inverseEntity="PrivacyPolicyEntity" syncable="YES"/>
+        <relationship name="refundPolicy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RefundPolicyEntity" inverseName="shop" inverseEntity="RefundPolicyEntity" syncable="YES"/>
+        <relationship name="termsOfService" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TermsOfServiceEntity" inverseName="shop" inverseEntity="TermsOfServiceEntity" syncable="YES"/>
+    </entity>
+    <entity name="TermsOfServiceEntity" representedClassName="TermsOfServiceEntity" parentEntity="PolicyEntity" syncable="YES" codeGenerationType="class">
+        <relationship name="shop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ShopEntity" inverseName="termsOfService" inverseEntity="ShopEntity" syncable="YES"/>
+    </entity>
+    <entity name="VariantOptionEntity" representedClassName="VariantOptionEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="productVariant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductVariantEntity" inverseName="selectedOptions" inverseEntity="ProductVariantEntity" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CartProductEntity" positionX="0" positionY="135" width="128" height="120"/>
+        <element name="CategoryEntity" positionX="-9" positionY="81" width="128" height="165"/>
+        <element name="ImageEntity" positionX="36" positionY="162" width="128" height="135"/>
+        <element name="PolicyEntity" positionX="18" positionY="153" width="128" height="90"/>
+        <element name="PrivacyPolicyEntity" positionX="0" positionY="162" width="128" height="60"/>
+        <element name="ProductEntity" positionX="-9" positionY="9" width="128" height="285"/>
+        <element name="ProductOptionEntity" positionX="-18" positionY="54" width="128" height="105"/>
+        <element name="ProductVariantEntity" positionX="-27" positionY="27" width="128" height="195"/>
+        <element name="RefundPolicyEntity" positionX="-36" positionY="45" width="128" height="60"/>
+        <element name="ShopEntity" positionX="-54" positionY="-9" width="128" height="135"/>
+        <element name="TermsOfServiceEntity" positionX="-18" positionY="63" width="128" height="60"/>
+        <element name="VariantOptionEntity" positionX="-9" positionY="126" width="128" height="90"/>
+    </elements>
+</model>
