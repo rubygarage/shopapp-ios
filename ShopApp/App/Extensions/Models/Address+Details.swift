@@ -10,8 +10,8 @@ import ShopApp_Gateway
 
 extension Address {
     var fullName: String {
-        let customerNameLocalized = "Label.FullName".localizable
-        return String.localizedStringWithFormat(customerNameLocalized, firstName ?? String(), lastName ?? String())
+        let addressNameLocalized = "Label.FullName".localizable
+        return String.localizedStringWithFormat(addressNameLocalized, firstName ?? "", lastName ?? "")
     }
 
     var fullAddress: String {
