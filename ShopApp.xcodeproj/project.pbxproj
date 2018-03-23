@@ -295,6 +295,8 @@
 		6130DE782063D48B00BAA833 /* String+LocalizationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6130DE772063D48B00BAA833 /* String+LocalizationSpec.swift */; };
 		6130DE7A2063E34D00BAA833 /* String+PlaceholderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6130DE792063E34D00BAA833 /* String+PlaceholderSpec.swift */; };
 		6130DE7C2063E43200BAA833 /* String+ValidatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6130DE7B2063E43200BAA833 /* String+ValidatorSpec.swift */; };
+		6130DE842065252800BAA833 /* TTTAttributedLabel+LinksSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6130DE832065252800BAA833 /* TTTAttributedLabel+LinksSpec.swift */; };
+		6130DE892065253D00BAA833 /* TTTAttributedLabelDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6130DE882065253C00BAA833 /* TTTAttributedLabelDelegateMock.swift */; };
 		6131D2381FB31395008330C0 /* CartProductDAOInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6131D2371FB31395008330C0 /* CartProductDAOInterface.swift */; };
 		6131D2451FB33F7D008330C0 /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6131D2441FB33F7D008330C0 /* DAO.swift */; };
 		6131D2471FB33FCB008330C0 /* DAOCartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6131D2461FB33FCB008330C0 /* DAOCartProduct.swift */; };
@@ -872,6 +874,8 @@
 		6130DE772063D48B00BAA833 /* String+LocalizationSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+LocalizationSpec.swift"; sourceTree = "<group>"; };
 		6130DE792063E34D00BAA833 /* String+PlaceholderSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+PlaceholderSpec.swift"; sourceTree = "<group>"; };
 		6130DE7B2063E43200BAA833 /* String+ValidatorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ValidatorSpec.swift"; sourceTree = "<group>"; };
+		6130DE832065252800BAA833 /* TTTAttributedLabel+LinksSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TTTAttributedLabel+LinksSpec.swift"; sourceTree = "<group>"; };
+		6130DE882065253C00BAA833 /* TTTAttributedLabelDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTTAttributedLabelDelegateMock.swift; sourceTree = "<group>"; };
 		6131D2371FB31395008330C0 /* CartProductDAOInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartProductDAOInterface.swift; sourceTree = "<group>"; };
 		6131D2441FB33F7D008330C0 /* DAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
 		6131D2461FB33FCB008330C0 /* DAOCartProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOCartProduct.swift; sourceTree = "<group>"; };
@@ -1581,11 +1585,7 @@
 			isa = PBXGroup;
 			children = (
 				6130DE742063D09F00BAA833 /* Extensions */,
-				0B7CEF79203B15B900FAA32C /* Account */,
-				0B7CEF93203C0DD400FAA32C /* Base */,
-				6186C30F20501A800057B221 /* Cart */,
-				61276E1120581BC400E2C3AF /* Main */,
-				0B8445D0206014050009012A /* Shared */,
+				6130DE8A206525C600BAA833 /* Modules */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -2738,13 +2738,35 @@
 		6130DE742063D09F00BAA833 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6130DE872065253C00BAA833 /* Mocks */,
 				0BE990ED2064F4310038DF04 /* Models */,
 				6130DE752063D0CD00BAA833 /* NumberFormatter+CurrencySpec.swift */,
 				6130DE772063D48B00BAA833 /* String+LocalizationSpec.swift */,
 				6130DE792063E34D00BAA833 /* String+PlaceholderSpec.swift */,
 				6130DE7B2063E43200BAA833 /* String+ValidatorSpec.swift */,
+				6130DE832065252800BAA833 /* TTTAttributedLabel+LinksSpec.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6130DE872065253C00BAA833 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				6130DE882065253C00BAA833 /* TTTAttributedLabelDelegateMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		6130DE8A206525C600BAA833 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				0B7CEF79203B15B900FAA32C /* Account */,
+				0B7CEF93203C0DD400FAA32C /* Base */,
+				6186C30F20501A800057B221 /* Cart */,
+				61276E1120581BC400E2C3AF /* Main */,
+				0B8445D0206014050009012A /* Shared */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		6131D2431FB33F48008330C0 /* CoreStore */ = {
@@ -3895,6 +3917,7 @@
 				61DFE93720449E3D00ABF253 /* AddressFormControllerlDelegateMock.swift in Sources */,
 				6130DE7A2063E34D00BAA833 /* String+PlaceholderSpec.swift in Sources */,
 				0B7647152046F9330019D2CE /* SettingsViewModelSpec.swift in Sources */,
+				6130DE842065252800BAA833 /* TTTAttributedLabel+LinksSpec.swift in Sources */,
 				0BE9658420406F2400308CA9 /* ForgotPasswordViewModelMock.swift in Sources */,
 				0BE965A2204534A500308CA9 /* PersonalInfoViewModelMock.swift in Sources */,
 				61ABAF5F2059770D00D73392 /* CategoryListControllerDelegateMock.swift in Sources */,
@@ -4053,6 +4076,7 @@
 				6130DE69206269EA00BAA833 /* ProductOptionsCollectionCellDelegateMock.swift in Sources */,
 				0BE96572203FF42E00308CA9 /* LoginUseCaseMock.swift in Sources */,
 				0B437176204D783400C086CF /* OrderHeaderDelegateMock.swift in Sources */,
+				6130DE892065253D00BAA833 /* TTTAttributedLabelDelegateMock.swift in Sources */,
 				6198CB482044155C007C0C7A /* AddressFormViewModelSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
