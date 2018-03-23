@@ -46,3 +46,6 @@ After that, you can add a new client to the [main ShopApp application](https://g
 * iOS 10+
 * XCode 9 for app development and submission to Apple App Store
 * Cocoapods to install all the dependencies
+
+## License
+ShopApp is licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
