@@ -34,7 +34,7 @@ class CheckoutCartTableViewCell: UITableViewCell, CheckoutCartCollectionProvider
     
     // MARK: - Setup
     
-    public func configure(with items: [Image], productVariantIds: [String], index: Int? = nil) {
+    func configure(with items: [Image], productVariantIds: [String], index: Int? = nil) {
         setupCollectionView()
         
         collectionProvider.images = items
