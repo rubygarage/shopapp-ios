@@ -21,17 +21,16 @@ private let kHtmlIframeAspectRation = CGFloat(1.5)
 
 struct HtmlStringMultimediaCompressor {
     static func compress(_ string: String, withMultimediaWidth width: CGFloat) -> String {
-        guard string.range(of: kHtmlImageTag) != nil || string.range(of: kHtmlIframeOpenTag) != nil else {
+        let isHaveImage = string.range(of: kHtmlImageTag) != nil
+        let isHaveIframe = string.range(of: kHtmlIframeOpenTag) != nil
+        guard isHaveImage || isHaveIframe else {
             return string
         }
-        let intermediateResultString = compress(string, withImageWidth: width)
-        return compress(intermediateResultString, withVideoWidth: width)
+        let intermediateResultString = isHaveImage ? compress(string, withImageWidth: width) : string
+        return isHaveIframe ? compress(intermediateResultString, withVideoWidth: width) : intermediateResultString
     }
     
     private static func compress(_ string: String, withImageWidth width: CGFloat) -> String {
-        guard string.range(of: kHtmlImageTag) != nil else {
-            return string
-        }
         var result = ""
         let style = String(format: kHtmlStyleWithMaxWidthFormat, width - kHtmlMarging)
         var temp = string
@@ -48,13 +47,10 @@ struct HtmlStringMultimediaCompressor {
                 break
             }
         }
-        return result.isEmpty ? string : result
+        return result
     }
     
     private static func compress(_ string: String, withVideoWidth width: CGFloat) -> String {
-        guard string.range(of: kHtmlIframeOpenTag) != nil else {
-            return string
-        }
         var result = ""
         var temp = string
         while let startRange = temp.range(of: kHtmlIframeOpenTag) {
@@ -81,6 +77,6 @@ struct HtmlStringMultimediaCompressor {
                 break
             }
         }
-        return result.isEmpty ? string : result
+        return result
     }
 }

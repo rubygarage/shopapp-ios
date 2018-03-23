@@ -75,7 +75,7 @@
 		0B5BA4F12023126200FF8FCA /* ProductOptionsCollectionCellProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5BA4F02023126200FF8FCA /* ProductOptionsCollectionCellProvider.swift */; };
 		0B5BA4F320233B2200FF8FCA /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5BA4F220233B2200FF8FCA /* CategoryListViewController.swift */; };
 		0B5BA4F520233C7600FF8FCA /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5BA4F420233C7600FF8FCA /* CategoryListViewModel.swift */; };
-		0B5FDD982065519A00CAA670 /* CreditCardValidatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FDD972065519900CAA670 /* CreditCardValidatorSpec.swift */; };
+		0B5FDD9B2065532800CAA670 /* HtmlStringMultimediaCompressorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FDD9A2065532800CAA670 /* HtmlStringMultimediaCompressorSpec.swift */; };
 		0B67B46F205A5D8000337379 /* SortVariantsViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67B46E205A5D8000337379 /* SortVariantsViewControllerSpec.swift */; };
 		0B67B471205A5D8800337379 /* SortVariantsControllerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67B470205A5D8800337379 /* SortVariantsControllerDelegateMock.swift */; };
 		0B67B473205A5D9000337379 /* SortVariantsTableProviderDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67B472205A5D9000337379 /* SortVariantsTableProviderDelegateMock.swift */; };
@@ -635,6 +635,7 @@
 		0B5BA4F220233B2200FF8FCA /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
 		0B5BA4F420233C7600FF8FCA /* CategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
 		0B5FDD972065519900CAA670 /* CreditCardValidatorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditCardValidatorSpec.swift; sourceTree = "<group>"; };
+		0B5FDD942065460800CAA670 /* HtmlStringMultimediaCompressorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlStringMultimediaCompressorSpec.swift; sourceTree = "<group>"; };
 		0B67B46E205A5D8000337379 /* SortVariantsViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortVariantsViewControllerSpec.swift; sourceTree = "<group>"; };
 		0B67B470205A5D8800337379 /* SortVariantsControllerDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortVariantsControllerDelegateMock.swift; sourceTree = "<group>"; };
 		0B67B472205A5D9000337379 /* SortVariantsTableProviderDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortVariantsTableProviderDelegateMock.swift; sourceTree = "<group>"; };
@@ -1883,6 +1884,15 @@
 				0B8445F22063A4490009012A /* CheckoutShippingAddressEditCellDelegateMock.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		0B8B4FD7206507540020DF29 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0B8B4FD8206507640020DF29 /* CreditCardValidatorSpec.swift */,
+				0B5FDD942065460800CAA670 /* HtmlStringMultimediaCompressorSpec.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		0B9426521FFE461C00A986AB /* OrderHeaderView */ = {
@@ -3922,6 +3932,7 @@
 				0BE9658420406F2400308CA9 /* ForgotPasswordViewModelMock.swift in Sources */,
 				0BE965A2204534A500308CA9 /* PersonalInfoViewModelMock.swift in Sources */,
 				61ABAF5F2059770D00D73392 /* CategoryListControllerDelegateMock.swift in Sources */,
+				0B5FDD9B2065532800CAA670 /* HtmlStringMultimediaCompressorSpec.swift in Sources */,
 				61276E2F20581BC400E2C3AF /* ArticleListTableProviderDelegateMock.swift in Sources */,
 				0B8445C2205AA2670009012A /* CartButtonViewModelSpec.swift in Sources */,
 				0B76471B2047E2100019D2CE /* SettingsViewModelMock.swift in Sources */,
