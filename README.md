@@ -4,6 +4,9 @@
 # ShopApp for iOS
 ShopApp connects with popular ecommerce platforms like Shopify, Magento, BigCommerce, and WooCommerce to transfer them into a mobile app for iOS and Android. 
 
+
+![ ](https://github.com/rubygarage/shopapp-ios/blob/master/assets/shopapp-main-screen.gif?raw=true)
+***
 So far, we’ve developed a [Shopify provider for iOS](https://github.com/rubygarage/shopapp-shopify-ios) and [Shopify provider for Android](https://github.com/rubygarage/shopapp-shopify-android).
 Currently we’re working on adding more providers and extending the features list, so stay in touch with our updates. 
 
