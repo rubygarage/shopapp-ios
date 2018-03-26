@@ -237,6 +237,8 @@
 		6104242C1FC477F000EFEFDA /* AddressFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6104242B1FC477F000EFEFDA /* AddressFormViewModel.swift */; };
 		6104CD0B2065330B00B780A0 /* UIColor+InitializationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6104CD0A2065330B00B780A0 /* UIColor+InitializationSpec.swift */; };
 		6104CD0D2065358300B780A0 /* UIImageView+NetworkSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6104CD0C2065358300B780A0 /* UIImageView+NetworkSpec.swift */; };
+		6104CD0F2065563A00B780A0 /* NavigationController+ShadowSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6104CD0E2065563A00B780A0 /* NavigationController+ShadowSpec.swift */; };
+		6104CD1120655FC500B780A0 /* UIView+NameOfClassSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6104CD1020655FC500B780A0 /* UIView+NameOfClassSpec.swift */; };
 		6106C6CB1F7A40F400E87486 /* ArticleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6106C6CA1F7A40F400E87486 /* ArticleDetailsViewController.swift */; };
 		610781F01FF63E130039355A /* AddressListTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610781EF1FF63E130039355A /* AddressListTableHeaderView.swift */; };
 		610781F21FF63E1B0039355A /* AddressListTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 610781F11FF63E1B0039355A /* AddressListTableHeaderView.xib */; };
@@ -815,6 +817,8 @@
 		6104242B1FC477F000EFEFDA /* AddressFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressFormViewModel.swift; sourceTree = "<group>"; };
 		6104CD0A2065330B00B780A0 /* UIColor+InitializationSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+InitializationSpec.swift"; sourceTree = "<group>"; };
 		6104CD0C2065358300B780A0 /* UIImageView+NetworkSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+NetworkSpec.swift"; sourceTree = "<group>"; };
+		6104CD0E2065563A00B780A0 /* NavigationController+ShadowSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationController+ShadowSpec.swift"; sourceTree = "<group>"; };
+		6104CD1020655FC500B780A0 /* UIView+NameOfClassSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+NameOfClassSpec.swift"; sourceTree = "<group>"; };
 		6106C6CA1F7A40F400E87486 /* ArticleDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsViewController.swift; sourceTree = "<group>"; };
 		610781EF1FF63E130039355A /* AddressListTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListTableHeaderView.swift; sourceTree = "<group>"; };
 		610781F11FF63E1B0039355A /* AddressListTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressListTableHeaderView.xib; sourceTree = "<group>"; };
@@ -2762,6 +2766,8 @@
 				6130DE832065252800BAA833 /* TTTAttributedLabel+LinksSpec.swift */,
 				6104CD0A2065330B00B780A0 /* UIColor+InitializationSpec.swift */,
 				6104CD0C2065358300B780A0 /* UIImageView+NetworkSpec.swift */,
+				6104CD0E2065563A00B780A0 /* NavigationController+ShadowSpec.swift */,
+				6104CD1020655FC500B780A0 /* UIView+NameOfClassSpec.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -4000,6 +4006,7 @@
 				614C80C02046DC63006A99E0 /* NavigationControllerSpec.swift in Sources */,
 				0B8445EC206298D40009012A /* SeeAllHeaderViewDelegateMock.swift in Sources */,
 				0B7CEF76203B155400FAA32C /* UpdateCustomerUseCaseMock.swift in Sources */,
+				6104CD1120655FC500B780A0 /* UIView+NameOfClassSpec.swift in Sources */,
 				0BE9658820440E9D00308CA9 /* ForgotPasswordViewModelSpec.swift in Sources */,
 				0BE990F72064F4310038DF04 /* CreditCard+DetailsSpec.swift in Sources */,
 				6130DE642061653000BAA833 /* ProductOptionsControllerDelegateMock.swift in Sources */,
@@ -4059,6 +4066,7 @@
 				0B7CEF70203B0B3500FAA32C /* QuickSpec+View.swift in Sources */,
 				6122F5DB2052D6BB00F574BB /* CartTableViewCellSpec.swift in Sources */,
 				614C80BF2046DC63006A99E0 /* BaseViewControllerSpec.swift in Sources */,
+				6104CD0F2065563A00B780A0 /* NavigationController+ShadowSpec.swift in Sources */,
 				616CF744205FFF9500DE14B1 /* ProductDetailsViewModelSpec.swift in Sources */,
 				614B6DEF205849AD0000356E /* PopularTableCellDelegateMock.swift in Sources */,
 				6122F5E12052FF8300F574BB /* CartHeaderViewSpec.swift in Sources */,
