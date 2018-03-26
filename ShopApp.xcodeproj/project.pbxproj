@@ -235,6 +235,8 @@
 		61005B492006102200351764 /* CheckoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61005B482006102200351764 /* CheckoutUseCase.swift */; };
 		6104242A1FC477D100EFEFDA /* AddressFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610424291FC477D100EFEFDA /* AddressFormViewController.swift */; };
 		6104242C1FC477F000EFEFDA /* AddressFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6104242B1FC477F000EFEFDA /* AddressFormViewModel.swift */; };
+		6104CD0B2065330B00B780A0 /* UIColor+InitializationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6104CD0A2065330B00B780A0 /* UIColor+InitializationSpec.swift */; };
+		6104CD0D2065358300B780A0 /* UIImageView+NetworkSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6104CD0C2065358300B780A0 /* UIImageView+NetworkSpec.swift */; };
 		6106C6CB1F7A40F400E87486 /* ArticleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6106C6CA1F7A40F400E87486 /* ArticleDetailsViewController.swift */; };
 		610781F01FF63E130039355A /* AddressListTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610781EF1FF63E130039355A /* AddressListTableHeaderView.swift */; };
 		610781F21FF63E1B0039355A /* AddressListTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 610781F11FF63E1B0039355A /* AddressListTableHeaderView.xib */; };
@@ -811,6 +813,8 @@
 		61005B482006102200351764 /* CheckoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutUseCase.swift; sourceTree = "<group>"; };
 		610424291FC477D100EFEFDA /* AddressFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressFormViewController.swift; sourceTree = "<group>"; };
 		6104242B1FC477F000EFEFDA /* AddressFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressFormViewModel.swift; sourceTree = "<group>"; };
+		6104CD0A2065330B00B780A0 /* UIColor+InitializationSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+InitializationSpec.swift"; sourceTree = "<group>"; };
+		6104CD0C2065358300B780A0 /* UIImageView+NetworkSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+NetworkSpec.swift"; sourceTree = "<group>"; };
 		6106C6CA1F7A40F400E87486 /* ArticleDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsViewController.swift; sourceTree = "<group>"; };
 		610781EF1FF63E130039355A /* AddressListTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListTableHeaderView.swift; sourceTree = "<group>"; };
 		610781F11FF63E1B0039355A /* AddressListTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressListTableHeaderView.xib; sourceTree = "<group>"; };
@@ -2756,6 +2760,8 @@
 				6130DE792063E34D00BAA833 /* String+PlaceholderSpec.swift */,
 				6130DE7B2063E43200BAA833 /* String+ValidatorSpec.swift */,
 				6130DE832065252800BAA833 /* TTTAttributedLabel+LinksSpec.swift */,
+				6104CD0A2065330B00B780A0 /* UIColor+InitializationSpec.swift */,
+				6104CD0C2065358300B780A0 /* UIImageView+NetworkSpec.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3960,11 +3966,13 @@
 				616CF745205FFF9500DE14B1 /* ProductListViewModelSpec.swift in Sources */,
 				0B437174204D782E00C086CF /* OrderHeaderViewSpec.swift in Sources */,
 				614C80C22046DC63006A99E0 /* BaseTableViewControllerSpec.swift in Sources */,
+				6104CD0D2065358300B780A0 /* UIImageView+NetworkSpec.swift in Sources */,
 				0B83E003204EC4600037035D /* AccountLoggedHeaderDelegateMock.swift in Sources */,
 				0B437172204D782300C086CF /* OrderListEmptyDataViewDelegateMock.swift in Sources */,
 				0B5768CF204D3B040001738D /* AddressFormViewControllerSpec.swift in Sources */,
 				0B8445E92062927F0009012A /* SeeAllTableHeaderViewSpec.swift in Sources */,
 				61ABAF6D205977F100D73392 /* CategoryEmptyDataViewSpec.swift in Sources */,
+				6104CD0B2065330B00B780A0 /* UIColor+InitializationSpec.swift in Sources */,
 				61E14D4D20405874000AB2CB /* PaymentsRepositoryMock.swift in Sources */,
 				0BE990F62064F4310038DF04 /* Customer+DetailsSpec.swift in Sources */,
 				6130DE6F2062AFC700BAA833 /* ProductOptionCollectionViewCellSpec.swift in Sources */,
