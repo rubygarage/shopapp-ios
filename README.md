@@ -51,4 +51,8 @@ After that, you can add a new client to the [main ShopApp application](https://g
 * Cocoapods to install all the dependencies
 
 ## License
-ShopApp is licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+The ShopApp Shopify for iOS provider is licensed under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0)
+***
+<a href="https://rubygarage.org/"><img src="https://github.com/rubygarage/shopapp-shopify-ios/blob/master/assets/rubygarage.png?raw=true" alt="RubyGarage Logo" width="415" height="128"></a>
+
+RubyGarage is a leading software development and consulting company in Eastern Europe. Our main expertise includes Ruby and Ruby on Rails, but we successfuly employ other technologies to deliver the best results to our clients. [Check out our portoflio](https://rubygarage.org/portfolio) for even more exciting works!
