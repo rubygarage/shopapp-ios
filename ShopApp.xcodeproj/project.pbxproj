@@ -75,7 +75,6 @@
 		0B5BA4F12023126200FF8FCA /* ProductOptionsCollectionCellProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5BA4F02023126200FF8FCA /* ProductOptionsCollectionCellProvider.swift */; };
 		0B5BA4F320233B2200FF8FCA /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5BA4F220233B2200FF8FCA /* CategoryListViewController.swift */; };
 		0B5BA4F520233C7600FF8FCA /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5BA4F420233C7600FF8FCA /* CategoryListViewModel.swift */; };
-		0B5FDD9B2065532800CAA670 /* HtmlStringMultimediaCompressorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FDD9A2065532800CAA670 /* HtmlStringMultimediaCompressorSpec.swift */; };
 		0B67B46F205A5D8000337379 /* SortVariantsViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67B46E205A5D8000337379 /* SortVariantsViewControllerSpec.swift */; };
 		0B67B471205A5D8800337379 /* SortVariantsControllerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67B470205A5D8800337379 /* SortVariantsControllerDelegateMock.swift */; };
 		0B67B473205A5D9000337379 /* SortVariantsTableProviderDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67B472205A5D9000337379 /* SortVariantsTableProviderDelegateMock.swift */; };
@@ -450,6 +449,8 @@
 		61C2ABC01FBB10C600A1E170 /* String+Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C2ABBF1FBB10C600A1E170 /* String+Validator.swift */; };
 		61C2ABC31FBB23D500A1E170 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C2ABC21FBB23D500A1E170 /* SignInViewController.swift */; };
 		61C2ABC51FBB240A00A1E170 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C2ABC41FBB240A00A1E170 /* SignInViewModel.swift */; };
+		61C64B8A20667D900037665C /* UIViewController+BarButtonItemsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C64B8920667D900037665C /* UIViewController+BarButtonItemsSpec.swift */; };
+		61C64B8E206688F50037665C /* HtmlStringMultimediaCompressorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C64B8C206688A10037665C /* HtmlStringMultimediaCompressorSpec.swift */; };
 		61C95E9B1FB3482400543B40 /* DAOCartProductHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C95E9A1FB3482300543B40 /* DAOCartProductHelper.swift */; };
 		61C95E9D1FB34B9F00543B40 /* DAOProductVariantHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C95E9C1FB34B9F00543B40 /* DAOProductVariantHelper.swift */; };
 		61C95E9F1FB3540B00543B40 /* CoreStoreTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C95E9E1FB3540B00543B40 /* CoreStoreTransaction.swift */; };
@@ -639,7 +640,6 @@
 		0B5BA4F220233B2200FF8FCA /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
 		0B5BA4F420233C7600FF8FCA /* CategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
 		0B5FDD972065519900CAA670 /* CreditCardValidatorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditCardValidatorSpec.swift; sourceTree = "<group>"; };
-		0B5FDD942065460800CAA670 /* HtmlStringMultimediaCompressorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlStringMultimediaCompressorSpec.swift; sourceTree = "<group>"; };
 		0B67B46E205A5D8000337379 /* SortVariantsViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortVariantsViewControllerSpec.swift; sourceTree = "<group>"; };
 		0B67B470205A5D8800337379 /* SortVariantsControllerDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortVariantsControllerDelegateMock.swift; sourceTree = "<group>"; };
 		0B67B472205A5D9000337379 /* SortVariantsTableProviderDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortVariantsTableProviderDelegateMock.swift; sourceTree = "<group>"; };
@@ -1042,6 +1042,8 @@
 		61C2ABBF1FBB10C600A1E170 /* String+Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validator.swift"; sourceTree = "<group>"; };
 		61C2ABC21FBB23D500A1E170 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		61C2ABC41FBB240A00A1E170 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		61C64B8920667D900037665C /* UIViewController+BarButtonItemsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+BarButtonItemsSpec.swift"; sourceTree = "<group>"; };
+		61C64B8C206688A10037665C /* HtmlStringMultimediaCompressorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HtmlStringMultimediaCompressorSpec.swift; sourceTree = "<group>"; };
 		61C95E9A1FB3482300543B40 /* DAOCartProductHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOCartProductHelper.swift; sourceTree = "<group>"; };
 		61C95E9C1FB34B9F00543B40 /* DAOProductVariantHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOProductVariantHelper.swift; sourceTree = "<group>"; };
 		61C95E9E1FB3540B00543B40 /* CoreStoreTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreStoreTransaction.swift; sourceTree = "<group>"; };
@@ -1398,6 +1400,7 @@
 			isa = PBXGroup;
 			children = (
 				0B5FDD972065519900CAA670 /* CreditCardValidatorSpec.swift */,
+				61C64B8C206688A10037665C /* HtmlStringMultimediaCompressorSpec.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1892,15 +1895,6 @@
 				0B8445F22063A4490009012A /* CheckoutShippingAddressEditCellDelegateMock.swift */,
 			);
 			path = Mocks;
-			sourceTree = "<group>";
-		};
-		0B8B4FD7206507540020DF29 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				0B8B4FD8206507640020DF29 /* CreditCardValidatorSpec.swift */,
-				0B5FDD942065460800CAA670 /* HtmlStringMultimediaCompressorSpec.swift */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		0B9426521FFE461C00A986AB /* OrderHeaderView */ = {
@@ -2764,6 +2758,7 @@
 				6130DE792063E34D00BAA833 /* String+PlaceholderSpec.swift */,
 				6130DE7B2063E43200BAA833 /* String+ValidatorSpec.swift */,
 				6130DE832065252800BAA833 /* TTTAttributedLabel+LinksSpec.swift */,
+				61C64B8920667D900037665C /* UIViewController+BarButtonItemsSpec.swift */,
 				6104CD0A2065330B00B780A0 /* UIColor+InitializationSpec.swift */,
 				6104CD0C2065358300B780A0 /* UIImageView+NetworkSpec.swift */,
 				6104CD0E2065563A00B780A0 /* NavigationController+ShadowSpec.swift */,
@@ -3886,6 +3881,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61C64B8E206688F50037665C /* HtmlStringMultimediaCompressorSpec.swift in Sources */,
 				0B8445EE20629BFD0009012A /* BoldTitleTableHeaderViewSpec.swift in Sources */,
 				6122F5D52052A60400F574BB /* DeleteCartProductUseCaseMock.swift in Sources */,
 				61276E2B20581BC400E2C3AF /* ArticleDetailsViewModelSpec.swift in Sources */,
@@ -3944,7 +3940,6 @@
 				0BE9658420406F2400308CA9 /* ForgotPasswordViewModelMock.swift in Sources */,
 				0BE965A2204534A500308CA9 /* PersonalInfoViewModelMock.swift in Sources */,
 				61ABAF5F2059770D00D73392 /* CategoryListControllerDelegateMock.swift in Sources */,
-				0B5FDD9B2065532800CAA670 /* HtmlStringMultimediaCompressorSpec.swift in Sources */,
 				61276E2F20581BC400E2C3AF /* ArticleListTableProviderDelegateMock.swift in Sources */,
 				0B8445C2205AA2670009012A /* CartButtonViewModelSpec.swift in Sources */,
 				0B76471B2047E2100019D2CE /* SettingsViewModelMock.swift in Sources */,
@@ -4025,6 +4020,7 @@
 				614ED7D9203F0A5400435708 /* OrderDetailsTableProviderSpec.swift in Sources */,
 				614C80C32046DC63006A99E0 /* TabBarControllerSpec.swift in Sources */,
 				61ABAF502059481700D73392 /* ProductUseCaseMock.swift in Sources */,
+				61C64B8A20667D900037665C /* UIViewController+BarButtonItemsSpec.swift in Sources */,
 				614ED7DF203F0D9500435708 /* OrderDetailsViewModelMock.swift in Sources */,
 				0B8445C9205AB9BD0009012A /* SearchTitleViewDelegateMock.swift in Sources */,
 				0B764723204809E80019D2CE /* SwitchTableCellDelegateMock.swift in Sources */,
@@ -4073,7 +4069,6 @@
 				0B5768D0204D3B040001738D /* BaseAddressFormViewControllerSpec.swift in Sources */,
 				61ABAF5C205976F500D73392 /* CategoryListViewControllerSpec.swift in Sources */,
 				6130DE6B2062A1C100BAA833 /* ProductOptionsCollectionCellProviderSpec.swift in Sources */,
-				0B5FDD982065519A00CAA670 /* CreditCardValidatorSpec.swift in Sources */,
 				0B83DFFD204EC0130037035D /* AccountFooterViewSpec.swift in Sources */,
 				0B8445CD205ABBF60009012A /* SearchViewModelMock.swift in Sources */,
 				61CCF0C2206000B1004CF487 /* ImagesCarouselViewControllerSpec.swift in Sources */,

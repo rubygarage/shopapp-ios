@@ -31,7 +31,7 @@ extension UIViewController {
         
         let button = UIButton(frame: cartView.frame)
         button.addSubview(cartView)
-        button.addTarget(self, action: #selector(self.cartButtonDodPress), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.cartButtonDidPress), for: .touchUpInside)
         
         return UIBarButtonItem(customView: button)
     }
@@ -50,7 +50,7 @@ extension UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc private func cartButtonDodPress() {
+    @objc private func cartButtonDidPress() {
         showCartController()
     }
     
