@@ -32,7 +32,7 @@ container.register(Repository.self) { _ in
 }
 ```
 
-to the file ShopApp/Data/DI/DataAssembly.swift. 
+to the file **ShopApp/Data/DI/DataAssembly.swift**. 
 
 4. As the result, you'll be able to open the project file and launch an app.
 
