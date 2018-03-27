@@ -16,7 +16,8 @@ class AccountViewModelSpec: QuickSpec {
     override func spec() {
         let authentificationRepositoryMock = AuthentificationRepositoryMock()
         let shopRepositoryMock = ShopRepositoryMock()
-        let customerUseCaseMock = CustomerUseCaseMock(repository: authentificationRepositoryMock)
+        let customerRepositoryMock = CustomerRepositoryMock()
+        let customerUseCaseMock = CustomerUseCaseMock(repository: customerRepositoryMock)
         let loginUseCaseMock = LoginUseCaseMock(repository: authentificationRepositoryMock)
         let logoutUseCaseMock = LogoutUseCaseMock(repository: authentificationRepositoryMock)
         let shopUseCaseMock = ShopUseCaseMock(repository: shopRepositoryMock)

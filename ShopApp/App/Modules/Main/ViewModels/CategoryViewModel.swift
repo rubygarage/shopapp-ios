@@ -1,6 +1,6 @@
 //
 //  CategoryViewModel.swift
-//  ShopClient
+//  ShopApp
 //
 //  Created by Evgeniy Antonov on 11/3/17.
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
@@ -45,7 +45,7 @@ class CategoryViewModel: GridCollectionViewModel {
                 strongSelf.state.onNext(.error(error: error))
             } else if let category = result {
                 strongSelf.updateData(category: category)
-                category.products?.isEmpty ?? true ? strongSelf.state.onNext(.empty) : strongSelf.state.onNext(.content)
+                strongSelf.products.value.isEmpty ? strongSelf.state.onNext(.empty) : strongSelf.state.onNext(.content)
             }
             strongSelf.canLoadMore = result?.products?.count ?? 0 == kItemsPerPage
         }
@@ -56,7 +56,6 @@ class CategoryViewModel: GridCollectionViewModel {
             return
         }
         updateProducts(products: items)
-        canLoadMore = products.value.count == kItemsPerPage
     }
     
     // MARK: - BaseViewModel

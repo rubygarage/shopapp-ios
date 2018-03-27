@@ -1,6 +1,6 @@
 //
 //  OrderListEmptyDataView.swift
-//  ShopClient
+//  ShopApp
 //
 //  Created by Radyslav Krechet on 2/5/18.
 //  Copyright © 2018 RubyGarage. All rights reserved.

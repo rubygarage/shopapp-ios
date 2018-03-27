@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ShopApp_Gateway"
-  s.version      = "1.0.2"
+  s.version      = "1.0.3"
   s.summary      = "ShopApp Gateway description"
   s.homepage     = "https://github.com/rubygarage/shopapp-ios"
   s.license      = { :type => "Apache License, Version 2.0", :file => "LICENSE.txt" }

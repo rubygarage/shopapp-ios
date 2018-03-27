@@ -21,11 +21,10 @@ class BaseAddressListViewModelSpec: QuickSpec {
         var updateDefaultAddressUseCaseMock: UpdateDefaultAddressUseCaseMock!
         
         beforeEach {
-            let authenticationRepositoryMock = AuthentificationRepositoryMock()
-            customerUseCaseMock = CustomerUseCaseMock(repository: authenticationRepositoryMock)
-            let paymentsRepositoryMock = PaymentsRepositoryMock()
-            updateDefaultAddressUseCaseMock = UpdateDefaultAddressUseCaseMock(repository: paymentsRepositoryMock)
-            deleteAddressUseCaseMock = DeleteAddressUseCaseMock(repository: paymentsRepositoryMock)
+            let repositoryMock = CustomerRepositoryMock()
+            customerUseCaseMock = CustomerUseCaseMock(repository: repositoryMock)
+            updateDefaultAddressUseCaseMock = UpdateDefaultAddressUseCaseMock(repository: repositoryMock)
+            deleteAddressUseCaseMock = DeleteAddressUseCaseMock(repository: repositoryMock)
             viewModel = BaseAddressListViewModel(customerUseCase: customerUseCaseMock, updateDefaultAddressUseCase: updateDefaultAddressUseCaseMock, deleteAddressUseCase: deleteAddressUseCaseMock)
         }
         

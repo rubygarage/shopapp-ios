@@ -1,6 +1,6 @@
 //
 //  AccountTableProvider.swift
-//  ShopClient
+//  ShopApp
 //
 //  Created by Radyslav Krechet on 1/29/18.
 //  Copyright © 2018 RubyGarage. All rights reserved.

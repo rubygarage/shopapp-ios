@@ -22,7 +22,7 @@ class AccountAddressFormViewControllerSpec: QuickSpec {
         beforeEach {
             viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.accountAddressForm) as! AccountAddressFormViewController
             
-            let repositoryMock = PaymentsRepositoryMock()
+            let repositoryMock = CustomerRepositoryMock()
             let addAddressUseCaseMock = AddAddressUseCaseMock(repository: repositoryMock)
             let updateAddressUseCaseMock = UpdateAddressUseCaseMock(repository: repositoryMock)
             viewModelMock = AccountAddressFormViewModelMock(addAddressUseCase: addAddressUseCaseMock, updateAddressUseCase: updateAddressUseCaseMock)

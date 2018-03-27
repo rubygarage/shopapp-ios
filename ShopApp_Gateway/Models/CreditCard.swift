@@ -1,6 +1,6 @@
 //
 //  CreditCard.swift
-//  ShopClient
+//  ShopApp_Gateway
 //
 //  Created by Evgeniy Antonov on 11/22/17.
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.

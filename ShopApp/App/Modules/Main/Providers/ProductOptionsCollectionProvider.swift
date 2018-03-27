@@ -1,6 +1,6 @@
 //
 //  ProductOptionsCollectionProvider.swift
-//  ShopClient
+//  ShopApp
 //
 //  Created by Radyslav Krechet on 1/31/18.
 //  Copyright © 2018 RubyGarage. All rights reserved.

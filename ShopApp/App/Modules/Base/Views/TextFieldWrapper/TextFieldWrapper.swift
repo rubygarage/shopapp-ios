@@ -1,6 +1,6 @@
 //
 //  TextFieldWrapper.swift
-//  ShopClient
+//  ShopApp
 //
 //  Created by Mykola Voronin on 1/23/18.
 //  Copyright © 2018 RubyGarage. All rights reserved.

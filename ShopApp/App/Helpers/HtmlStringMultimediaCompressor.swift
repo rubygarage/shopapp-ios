@@ -1,6 +1,6 @@
 //
 //  HtmlStringMultimediaCompressor.swift
-//  ShopClient
+//  ShopApp
 //
 //  Created by Radyslav Krechet on 1/30/18.
 //  Copyright © 2018 RubyGarage. All rights reserved.

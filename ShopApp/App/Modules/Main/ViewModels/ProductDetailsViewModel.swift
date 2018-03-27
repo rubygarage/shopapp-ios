@@ -1,6 +1,6 @@
 //
 //  ProductDetailsViewModel.swift
-//  ShopClient
+//  ShopApp
 //
 //  Created by Evgeniy Antonov on 11/6/17.
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
@@ -41,7 +41,7 @@ class ProductDetailsViewModel: BaseViewModel {
                 return Disposables.create()
             }
             let productQuantity = strongSelf.quantity.value
-            guard let cartProduct = CartProduct(with: strongSelf.product.value, productQuantity: productQuantity, variant: strongSelf.selectedProductVariant) else {
+            guard let cartProduct = CoreDataCartProductAdapter.adapt(product: strongSelf.product.value, productQuantity: productQuantity, variant: strongSelf.selectedProductVariant) else {
                 event.onNext(false)
                 return Disposables.create()
             }

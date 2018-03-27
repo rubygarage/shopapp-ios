@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  ShopClient
+//  ShopApp
 //
 //  Created by Evgeniy Antonov on 8/30/17.
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.

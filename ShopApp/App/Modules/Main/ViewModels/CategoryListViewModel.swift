@@ -1,6 +1,6 @@
 //
 //  CategoryListViewModel.swift
-//  ShopClient
+//  ShopApp
 //
 //  Created by Radyslav Krechet on 2/1/18.
 //  Copyright © 2018 RubyGarage. All rights reserved.
@@ -31,7 +31,7 @@ class CategoryListViewModel: BasePaginationViewModel {
     private func loadRemoteData() {
         let showHud = items.value.isEmpty
         state.onNext(ViewState.make.loading(showHud: showHud))
-        categoryListUseCase.getCategoryList { [weak self] (catogories, error) in
+        categoryListUseCase.getCategoryList(paginationValue: paginationValue) { [weak self] (catogories, error) in
             guard let strongSelf = self else {
                 return
             }
