@@ -1,6 +1,6 @@
 //
 //  LineItem.swift
-//  ShopClient
+//  ShopApp_Gateway
 //
 //  Created by Evgeniy Antonov on 1/15/18.
 //  Copyright © 2018 Evgeniy Antonov. All rights reserved.

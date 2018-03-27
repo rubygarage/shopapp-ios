@@ -7,7 +7,6 @@
 //
 
 import Swinject
-import ShopApp_Gateway
 
 class DomainAssembly: Assembly {
     func assemble(container: Container) {
@@ -15,35 +14,35 @@ class DomainAssembly: Assembly {
         // MARK: - Account
 
         container.register(LoginUseCase.self) { r in
-            return LoginUseCase(repository: r.resolve(Repository.self)!)
+            return LoginUseCase(repository: r.resolve(AuthentificationRepository.self)!)
         }
 
         container.register(LogoutUseCase.self) { r in
-            return LogoutUseCase(repository: r.resolve(Repository.self)!)
+            return LogoutUseCase(repository: r.resolve(AuthentificationRepository.self)!)
         }
 
         container.register(OrderUseCase.self) { r in
-            return OrderUseCase(repository: r.resolve(Repository.self)!)
+            return OrderUseCase(repository: r.resolve(OrderRepository.self)!)
         }
 
         container.register(OrderListUseCase.self) { r in
-            return OrderListUseCase(repository: r.resolve(Repository.self)!)
+            return OrderListUseCase(repository: r.resolve(OrderRepository.self)!)
         }
 
         container.register(ResetPasswordUseCase.self) { r in
-            return ResetPasswordUseCase(repository: r.resolve(Repository.self)!)
+            return ResetPasswordUseCase(repository: r.resolve(AuthentificationRepository.self)!)
         }
 
         container.register(ShopUseCase.self) { r in
-            return ShopUseCase(repository: r.resolve(Repository.self)!)
+            return ShopUseCase(repository: r.resolve(ShopRepository.self)!)
         }
 
         container.register(SignUpUseCase.self) { r in
-            return SignUpUseCase(repository: r.resolve(Repository.self)!)
+            return SignUpUseCase(repository: r.resolve(AuthentificationRepository.self)!)
         }
 
         container.register(UpdateCustomerUseCase.self) { r in
-            return UpdateCustomerUseCase(repository: r.resolve(Repository.self)!)
+            return UpdateCustomerUseCase(repository: r.resolve(CustomerRepository.self)!)
         }
 
         // MARK: - Cart
@@ -59,7 +58,7 @@ class DomainAssembly: Assembly {
         // MARK: - Checkout
 
         container.register(CheckoutUseCase.self) { r in
-            return CheckoutUseCase(repository: r.resolve(Repository.self)!)
+            return CheckoutUseCase(repository: r.resolve(PaymentsRepository.self)!)
         }
 
         container.register(DeleteCartProductsUseCase.self) { r in
@@ -73,33 +72,33 @@ class DomainAssembly: Assembly {
         }
 
         container.register(ArticleListUseCase.self) { r in
-            return ArticleListUseCase(repository: r.resolve(Repository.self)!)
+            return ArticleListUseCase(repository: r.resolve(ArticleRepository.self)!)
         }
 
         container.register(ArticleUseCase.self) { r in
-            return ArticleUseCase(repository: r.resolve(Repository.self)!)
+            return ArticleUseCase(repository: r.resolve(ArticleRepository.self)!)
         }
 
         container.register(CategoryListUseCase.self) { r in
-            return CategoryListUseCase(repository: r.resolve(Repository.self)!)
+            return CategoryListUseCase(repository: r.resolve(CategoryRepository.self)!)
         }
 
         container.register(CategoryUseCase.self) { r in
-            return CategoryUseCase(repository: r.resolve(Repository.self)!)
+            return CategoryUseCase(repository: r.resolve(CategoryRepository.self)!)
         }
 
         container.register(ProductListUseCase.self) { r in
-            return ProductListUseCase(repository: r.resolve(Repository.self)!)
+            return ProductListUseCase(repository: r.resolve(ProductRepository.self)!)
         }
 
         container.register(ProductUseCase.self) { r in
-            return ProductUseCase(repository: r.resolve(Repository.self)!)
+            return ProductUseCase(repository: r.resolve(ProductRepository.self)!)
         }
 
         // MARK: - Shared
 
         container.register(AddAddressUseCase.self) { r in
-            return AddAddressUseCase(repository: r.resolve(Repository.self)!)
+            return AddAddressUseCase(repository: r.resolve(CustomerRepository.self)!)
         }
 
         container.register(CartProductListUseCase.self) { r in
@@ -107,23 +106,23 @@ class DomainAssembly: Assembly {
         }
 
         container.register(CountriesUseCase.self) { r in
-            return CountriesUseCase(repository: r.resolve(Repository.self)!)
+            return CountriesUseCase(repository: r.resolve(PaymentsRepository.self)!)
         }
 
         container.register(CustomerUseCase.self) { r in
-            return CustomerUseCase(repository: r.resolve(Repository.self)!)
+            return CustomerUseCase(repository: r.resolve(CustomerRepository.self)!)
         }
 
         container.register(UpdateAddressUseCase.self) { r in
-            return UpdateAddressUseCase(repository: r.resolve(Repository.self)!)
+            return UpdateAddressUseCase(repository: r.resolve(CustomerRepository.self)!)
         }
 
         container.register(DeleteAddressUseCase.self) { r in
-            return DeleteAddressUseCase(repository: r.resolve(Repository.self)!)
+            return DeleteAddressUseCase(repository: r.resolve(CustomerRepository.self)!)
         }
 
         container.register(UpdateDefaultAddressUseCase.self) { r in
-            return UpdateDefaultAddressUseCase(repository: r.resolve(Repository.self)!)
+            return UpdateDefaultAddressUseCase(repository: r.resolve(CustomerRepository.self)!)
         }
     }
 }

@@ -1,6 +1,6 @@
 //
 //  SortVariantsTableProvider.swift
-//  ShopClient
+//  ShopApp
 //
 //  Created by Radyslav Krechet on 2/2/18.
 //  Copyright © 2018 RubyGarage. All rights reserved.

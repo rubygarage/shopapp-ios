@@ -14,7 +14,7 @@ import RxSwift
 
 class ChangePasswordViewModelSpec: QuickSpec {
     override func spec() {
-        let repositoryMock = AuthentificationRepositoryMock()
+        let repositoryMock = CustomerRepositoryMock()
         let updateCustomerUseCaseMock = UpdateCustomerUseCaseMock(repository: repositoryMock)
         
         var viewModel: ChangePasswordViewModel!

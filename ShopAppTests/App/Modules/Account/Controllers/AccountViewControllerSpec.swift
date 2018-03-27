@@ -23,8 +23,9 @@ class AccountViewControllerSpec: QuickSpec {
             viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.account) as! AccountViewController
             
             let authentificationRepositoryMock = AuthentificationRepositoryMock()
+            let customerRepositoryMock = CustomerRepositoryMock()
             let shopRepositoryMock = ShopRepositoryMock()
-            let customerUseCaseMock = CustomerUseCaseMock(repository: authentificationRepositoryMock)
+            let customerUseCaseMock = CustomerUseCaseMock(repository: customerRepositoryMock)
             let loginUseCaseMock = LoginUseCaseMock(repository: authentificationRepositoryMock)
             let logoutUseCaseMock = LogoutUseCaseMock(repository: authentificationRepositoryMock)
             let shopUseCaseMock = ShopUseCaseMock(repository: shopRepositoryMock)

@@ -22,7 +22,7 @@ class ChangePasswordViewControllerSpec: QuickSpec {
         beforeEach {
             viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.changePassword) as! ChangePasswordViewController
             
-            let repositoryMock = AuthentificationRepositoryMock()
+            let repositoryMock = CustomerRepositoryMock()
             let updateCustomerUseCaseMock = UpdateCustomerUseCaseMock(repository: repositoryMock)
             viewModelMock = ChangePasswordViewModelMock(updateCustomerUseCase: updateCustomerUseCaseMock)
             viewController.viewModel = viewModelMock

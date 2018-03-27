@@ -39,7 +39,7 @@ class DetailsImagesCollectionViewCellSpec: QuickSpec {
             
             beforeEach {
                 image = Image()
-                image.src = "http://via.placeholder.com/100x100"
+                image.src = "https://via.placeholder.com/100x100"
             }
             
             it("needs to set image") {

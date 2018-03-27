@@ -27,10 +27,11 @@ class PersonalInfoViewControllerSpec: QuickSpec {
         beforeEach {
             viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.personalInfo) as! PersonalInfoViewController
             
-            let repositoryMock = AuthentificationRepositoryMock()
-            let updateCustomerUseCaseMock = UpdateCustomerUseCaseMock(repository: repositoryMock)
-            let loginUseCaseMock = LoginUseCaseMock(repository: repositoryMock)
-            let customerUseCaseMock = CustomerUseCaseMock(repository: repositoryMock)
+            let authentificationRepositoryMock = AuthentificationRepositoryMock()
+            let customerRepositoryMock = CustomerRepositoryMock()
+            let updateCustomerUseCaseMock = UpdateCustomerUseCaseMock(repository: customerRepositoryMock)
+            let loginUseCaseMock = LoginUseCaseMock(repository: authentificationRepositoryMock)
+            let customerUseCaseMock = CustomerUseCaseMock(repository: customerRepositoryMock)
             viewModelMock = PersonalInfoViewModelMock(updateCustomerUseCase: updateCustomerUseCaseMock, loginUseCase: loginUseCaseMock, customerUseCase: customerUseCaseMock)
             viewModelMock.isCustomerLoadingStarted = false
             viewController.viewModel = viewModelMock

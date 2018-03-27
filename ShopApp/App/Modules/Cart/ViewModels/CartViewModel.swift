@@ -1,6 +1,6 @@
 //
 //  CartViewModel.swift
-//  ShopClient
+//  ShopApp
 //
 //  Created by Evgeniy Antonov on 11/8/17.
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.

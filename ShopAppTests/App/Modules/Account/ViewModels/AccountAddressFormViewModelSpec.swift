@@ -15,7 +15,7 @@ import ShopApp_Gateway
 
 class AccountAddressFormViewModelSpec: QuickSpec {
     override func spec() {
-        let repositoryMock = PaymentsRepositoryMock()
+        let repositoryMock = CustomerRepositoryMock()
         let addAddressUseCaseMock = AddAddressUseCaseMock(repository: repositoryMock)
         let updateAddressUseCaseMock = UpdateAddressUseCaseMock(repository: repositoryMock)
         let viewModel = AccountAddressFormViewModel(addAddressUseCase: addAddressUseCaseMock, updateAddressUseCase: updateAddressUseCaseMock)

@@ -1,6 +1,6 @@
 //
 //  CheckoutSelectedTypeTableViewCell.swift
-//  ShopClient
+//  ShopApp
 //
 //  Created by Evgeniy Antonov on 1/24/18.
 //  Copyright © 2018 RubyGarage. All rights reserved.

@@ -22,11 +22,10 @@ class BaseAddressListViewControllerSpec: QuickSpec {
         beforeEach {
             viewController = BaseAddressListViewControllerTest()
             
-            let authenticationRepositoryMock = AuthentificationRepositoryMock()
-            let customerUseCaseMock = CustomerUseCaseMock(repository: authenticationRepositoryMock)
-            let paymentsRepositoryMock = PaymentsRepositoryMock()
-            let updateDefaultAddressUseCaseMock = UpdateDefaultAddressUseCaseMock(repository: paymentsRepositoryMock)
-            let deleteAddressUseCaseMock = DeleteAddressUseCaseMock(repository: paymentsRepositoryMock)
+            let repositoryMock = CustomerRepositoryMock()
+            let customerUseCaseMock = CustomerUseCaseMock(repository: repositoryMock)
+            let updateDefaultAddressUseCaseMock = UpdateDefaultAddressUseCaseMock(repository: repositoryMock)
+            let deleteAddressUseCaseMock = DeleteAddressUseCaseMock(repository: repositoryMock)
             
             viewController.tableView.registerNibForCell(AddressListTableViewCell.self)
             

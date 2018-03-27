@@ -1,6 +1,6 @@
 //
 //  PaymentDetailsFooterView.swift
-//  ShopClient
+//  ShopApp
 //
 //  Created by Radyslav Krechet on 1/5/18.
 //  Copyright © 2018 Evgeniy Antonov. All rights reserved.
