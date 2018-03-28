@@ -56,6 +56,17 @@
 		0B24F0F62007506000F13224 /* StoryboardNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24F0F52007506000F13224 /* StoryboardNames.swift */; };
 		0B24F0FC2007514500F13224 /* DetailsImagesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B24F0FA2007514400F13224 /* DetailsImagesCollectionViewCell.xib */; };
 		0B24F0FD2007514500F13224 /* DetailsImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24F0FB2007514400F13224 /* DetailsImagesCollectionViewCell.swift */; };
+		0B2D85EF206B7BEE00D12ED7 /* APIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D85EE206B7BEE00D12ED7 /* APIMock.swift */; };
+		0B2D85F1206B7EBB00D12ED7 /* ShopAppArticleRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D85F0206B7EBB00D12ED7 /* ShopAppArticleRepositorySpec.swift */; };
+		0B2D85F3206B7F0700D12ED7 /* ShopAppAuthentificationRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D85F2206B7F0700D12ED7 /* ShopAppAuthentificationRepositorySpec.swift */; };
+		0B2D85F5206B7F1D00D12ED7 /* ShopAppCartRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D85F4206B7F1D00D12ED7 /* ShopAppCartRepositorySpec.swift */; };
+		0B2D85F7206B7F2700D12ED7 /* ShopAppCategoryRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D85F6206B7F2700D12ED7 /* ShopAppCategoryRepositorySpec.swift */; };
+		0B2D85F9206B7F3400D12ED7 /* ShopAppCustomerRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D85F8206B7F3400D12ED7 /* ShopAppCustomerRepositorySpec.swift */; };
+		0B2D85FB206B7F3F00D12ED7 /* ShopAppOrderRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D85FA206B7F3F00D12ED7 /* ShopAppOrderRepositorySpec.swift */; };
+		0B2D85FD206B7F4900D12ED7 /* ShopAppPaymentsRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D85FC206B7F4900D12ED7 /* ShopAppPaymentsRepositorySpec.swift */; };
+		0B2D85FF206B7F5700D12ED7 /* ShopAppProductRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D85FE206B7F5700D12ED7 /* ShopAppProductRepositorySpec.swift */; };
+		0B2D8601206B7F6500D12ED7 /* ShopAppShopRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D8600206B7F6500D12ED7 /* ShopAppShopRepositorySpec.swift */; };
+		0B2D8603206B815900D12ED7 /* DAOMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D8602206B815900D12ED7 /* DAOMock.swift */; };
 		0B2F3EC62004EA4000FB40A4 /* NumberFormatter+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2F3EC52004EA4000FB40A4 /* NumberFormatter+Currency.swift */; };
 		0B3AB6F1203199B000F46A8F /* PlaceholderedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3AB6F0203199AF00F46A8F /* PlaceholderedTextField.swift */; };
 		0B43716C204D66B400C086CF /* AccountViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B43716B204D66B400C086CF /* AccountViewControllerSpec.swift */; };
@@ -508,6 +519,7 @@
 		61ED88F71F7171F1006BDA79 /* GridCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ED88F61F7171F1006BDA79 /* GridCollectionViewController.swift */; };
 		61FC3DA91F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC3DA71F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift */; };
 		61FC3DAA1F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61FC3DA81F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.xib */; };
+		63527C74722183D42EA35E52 /* Pods_ShopApp_ShopAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D594F134F6B27B147CD34F /* Pods_ShopApp_ShopAppTests.framework */; };
 		8E131CA3203B3E5000EB2F63 /* DataAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E131CA2203B3E5000EB2F63 /* DataAssembly.swift */; };
 		8E131CA9203B43C500EB2F63 /* DomainAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E131CA8203B43C500EB2F63 /* DomainAssembly.swift */; };
 		8E131CB2203C71B200EB2F63 /* MainAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E131CB1203C71B200EB2F63 /* MainAssembly.swift */; };
@@ -553,8 +565,7 @@
 		8ED91FB22034612700E9692A /* CreditCard+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED91FB12034612700E9692A /* CreditCard+Details.swift */; };
 		8ED91FB4203461F600E9692A /* SortingValue+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED91FB3203461F600E9692A /* SortingValue+Details.swift */; };
 		8ED91FB6203462AF00E9692A /* RepoError+Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED91FB5203462AF00E9692A /* RepoError+Details.swift */; };
-		B80DEB3E6F0F3661CBDDE23B /* Pods_ShopApp_ShopAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 812625477E69520A6DDCE055 /* Pods_ShopApp_ShopAppTests.framework */; };
-		BAEE25BF3E0175234CD5A5DC /* Pods_ShopApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B24F44E26A706502AE3193 /* Pods_ShopApp.framework */; };
+		9271E750C207792EEBA76BC3 /* Pods_ShopApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2452D1727A22139DCFBCFA5D /* Pods_ShopApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -638,6 +649,17 @@
 		0B24F0F52007506000F13224 /* StoryboardNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardNames.swift; sourceTree = "<group>"; };
 		0B24F0FA2007514400F13224 /* DetailsImagesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailsImagesCollectionViewCell.xib; sourceTree = "<group>"; };
 		0B24F0FB2007514400F13224 /* DetailsImagesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsImagesCollectionViewCell.swift; sourceTree = "<group>"; };
+		0B2D85EE206B7BEE00D12ED7 /* APIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIMock.swift; sourceTree = "<group>"; };
+		0B2D85F0206B7EBB00D12ED7 /* ShopAppArticleRepositorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAppArticleRepositorySpec.swift; sourceTree = "<group>"; };
+		0B2D85F2206B7F0700D12ED7 /* ShopAppAuthentificationRepositorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAppAuthentificationRepositorySpec.swift; sourceTree = "<group>"; };
+		0B2D85F4206B7F1D00D12ED7 /* ShopAppCartRepositorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAppCartRepositorySpec.swift; sourceTree = "<group>"; };
+		0B2D85F6206B7F2700D12ED7 /* ShopAppCategoryRepositorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAppCategoryRepositorySpec.swift; sourceTree = "<group>"; };
+		0B2D85F8206B7F3400D12ED7 /* ShopAppCustomerRepositorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAppCustomerRepositorySpec.swift; sourceTree = "<group>"; };
+		0B2D85FA206B7F3F00D12ED7 /* ShopAppOrderRepositorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAppOrderRepositorySpec.swift; sourceTree = "<group>"; };
+		0B2D85FC206B7F4900D12ED7 /* ShopAppPaymentsRepositorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAppPaymentsRepositorySpec.swift; sourceTree = "<group>"; };
+		0B2D85FE206B7F5700D12ED7 /* ShopAppProductRepositorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAppProductRepositorySpec.swift; sourceTree = "<group>"; };
+		0B2D8600206B7F6500D12ED7 /* ShopAppShopRepositorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAppShopRepositorySpec.swift; sourceTree = "<group>"; };
+		0B2D8602206B815900D12ED7 /* DAOMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOMock.swift; sourceTree = "<group>"; };
 		0B2F3EC52004EA4000FB40A4 /* NumberFormatter+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Currency.swift"; sourceTree = "<group>"; };
 		0B3AB6F0203199AF00F46A8F /* PlaceholderedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderedTextField.swift; sourceTree = "<group>"; };
 		0B43716B204D66B400C086CF /* AccountViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewControllerSpec.swift; sourceTree = "<group>"; };
@@ -835,9 +857,7 @@
 		0BEF52D31FF66BE000E50080 /* AddCartProductUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCartProductUseCase.swift; sourceTree = "<group>"; };
 		0BEF52D51FF6997700E50080 /* CategoryListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListUseCase.swift; sourceTree = "<group>"; };
 		0BEF52D71FF69DC900E50080 /* CategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryUseCase.swift; sourceTree = "<group>"; };
-		24E63E20246DC2892B3741F7 /* Pods-ShopApp.release dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp.release dev.xcconfig"; path = "Pods/Target Support Files/Pods-ShopApp/Pods-ShopApp.release dev.xcconfig"; sourceTree = "<group>"; };
-		5746C3424F4A66C98BCFA6BC /* Pods-ShopApp-ShopAppTests.debug dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp-ShopAppTests.debug dev.xcconfig"; path = "Pods/Target Support Files/Pods-ShopApp-ShopAppTests/Pods-ShopApp-ShopAppTests.debug dev.xcconfig"; sourceTree = "<group>"; };
-		5949C33F60A0E5F5132A6B74 /* Pods-ShopApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShopApp/Pods-ShopApp.release.xcconfig"; sourceTree = "<group>"; };
+		2452D1727A22139DCFBCFA5D /* Pods_ShopApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShopApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61005B482006102200351764 /* CheckoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutUseCase.swift; sourceTree = "<group>"; };
 		610424291FC477D100EFEFDA /* AddressFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressFormViewController.swift; sourceTree = "<group>"; };
 		6104242B1FC477F000EFEFDA /* AddressFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressFormViewModel.swift; sourceTree = "<group>"; };
@@ -1107,7 +1127,8 @@
 		61FC3DA71F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductOptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		61FC3DA81F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductOptionCollectionViewCell.xib; sourceTree = "<group>"; };
 		61FFEDB82007C27E00775FBA /* ShopApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShopApp.entitlements; sourceTree = "<group>"; };
-		812625477E69520A6DDCE055 /* Pods_ShopApp_ShopAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShopApp_ShopAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		70AA11DD39E1C7F0640D1F85 /* Pods-ShopApp-ShopAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp-ShopAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShopApp-ShopAppTests/Pods-ShopApp-ShopAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		71A52213858EB8C92CD892C5 /* Pods-ShopApp-ShopAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp-ShopAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShopApp-ShopAppTests/Pods-ShopApp-ShopAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		8E131CA2203B3E5000EB2F63 /* DataAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAssembly.swift; sourceTree = "<group>"; };
 		8E131CA8203B43C500EB2F63 /* DomainAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainAssembly.swift; sourceTree = "<group>"; };
 		8E131CB1203C71B200EB2F63 /* MainAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAssembly.swift; sourceTree = "<group>"; };
@@ -1154,12 +1175,13 @@
 		8ED91FB12034612700E9692A /* CreditCard+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreditCard+Details.swift"; sourceTree = "<group>"; };
 		8ED91FB3203461F600E9692A /* SortingValue+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SortingValue+Details.swift"; sourceTree = "<group>"; };
 		8ED91FB5203462AF00E9692A /* RepoError+Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RepoError+Details.swift"; sourceTree = "<group>"; };
-		A8B94A83363EB9CB066C1E0F /* Pods-ShopApp.debug dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp.debug dev.xcconfig"; path = "Pods/Target Support Files/Pods-ShopApp/Pods-ShopApp.debug dev.xcconfig"; sourceTree = "<group>"; };
-		D7FB8969A931BBEAE35B1C2C /* Pods-ShopApp-ShopAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp-ShopAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShopApp-ShopAppTests/Pods-ShopApp-ShopAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		E5DBFD12EC44311FDD7B0782 /* Pods-ShopApp-ShopAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp-ShopAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShopApp-ShopAppTests/Pods-ShopApp-ShopAppTests.debug.xcconfig"; sourceTree = "<group>"; };
-		EADEEAD978E6FBFAB9B2E66D /* Pods-ShopApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShopApp/Pods-ShopApp.debug.xcconfig"; sourceTree = "<group>"; };
-		F0B24F44E26A706502AE3193 /* Pods_ShopApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShopApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F5EC22FA143ADB2FF183479F /* Pods-ShopApp-ShopAppTests.release dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp-ShopAppTests.release dev.xcconfig"; path = "Pods/Target Support Files/Pods-ShopApp-ShopAppTests/Pods-ShopApp-ShopAppTests.release dev.xcconfig"; sourceTree = "<group>"; };
+		91D594F134F6B27B147CD34F /* Pods_ShopApp_ShopAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShopApp_ShopAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A08BE9C4EDA4D44357774F6F /* Pods-ShopApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShopApp/Pods-ShopApp.release.xcconfig"; sourceTree = "<group>"; };
+		BDB93E0BA4D55C68C0184D44 /* Pods-ShopApp.debug dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp.debug dev.xcconfig"; path = "Pods/Target Support Files/Pods-ShopApp/Pods-ShopApp.debug dev.xcconfig"; sourceTree = "<group>"; };
+		C6285ED7EC76788636B840A0 /* Pods-ShopApp-ShopAppTests.release dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp-ShopAppTests.release dev.xcconfig"; path = "Pods/Target Support Files/Pods-ShopApp-ShopAppTests/Pods-ShopApp-ShopAppTests.release dev.xcconfig"; sourceTree = "<group>"; };
+		DCBF8D0581CEE4C99BD433C5 /* Pods-ShopApp-ShopAppTests.debug dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp-ShopAppTests.debug dev.xcconfig"; path = "Pods/Target Support Files/Pods-ShopApp-ShopAppTests/Pods-ShopApp-ShopAppTests.debug dev.xcconfig"; sourceTree = "<group>"; };
+		EB0308B87E4D118F1B403D5C /* Pods-ShopApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShopApp/Pods-ShopApp.debug.xcconfig"; sourceTree = "<group>"; };
+		F3BFB1F59606A336BF44AC60 /* Pods-ShopApp.release dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopApp.release dev.xcconfig"; path = "Pods/Target Support Files/Pods-ShopApp/Pods-ShopApp.release dev.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1167,7 +1189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B80DEB3E6F0F3661CBDDE23B /* Pods_ShopApp_ShopAppTests.framework in Frameworks */,
+				63527C74722183D42EA35E52 /* Pods_ShopApp_ShopAppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1175,7 +1197,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAEE25BF3E0175234CD5A5DC /* Pods_ShopApp.framework in Frameworks */,
+				9271E750C207792EEBA76BC3 /* Pods_ShopApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1189,15 +1211,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		08AC95128CC904D777D05F36 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F0B24F44E26A706502AE3193 /* Pods_ShopApp.framework */,
-				812625477E69520A6DDCE055 /* Pods_ShopApp_ShopAppTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		0B09558F2068FB0000CABE29 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1364,6 +1377,38 @@
 				0B24F0FA2007514400F13224 /* DetailsImagesCollectionViewCell.xib */,
 			);
 			path = DetailsImagesCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		0B2D85EA206B7BC300D12ED7 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				0B2D85EC206B7BDD00D12ED7 /* Mocks */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		0B2D85EB206B7BCA00D12ED7 /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				0B2D85ED206B7BE100D12ED7 /* Mocks */,
+			);
+			path = DAO;
+			sourceTree = "<group>";
+		};
+		0B2D85EC206B7BDD00D12ED7 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				0B2D85EE206B7BEE00D12ED7 /* APIMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		0B2D85ED206B7BE100D12ED7 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				0B2D8602206B815900D12ED7 /* DAOMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		0B2F3EC7200525EB00FB40A4 /* ProductOptionCollectionViewCell */ = {
@@ -1761,6 +1806,8 @@
 		0B7CEF80203B1F4C00FAA32C /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0B2D85EA206B7BC300D12ED7 /* API */,
+				0B2D85EB206B7BCA00D12ED7 /* DAO */,
 				0B7CEF81203B1F5500FAA32C /* Repositories */,
 			);
 			path = Data;
@@ -1770,6 +1817,15 @@
 			isa = PBXGroup;
 			children = (
 				0B7CEF82203B1F6100FAA32C /* Mocks */,
+				0B2D85F0206B7EBB00D12ED7 /* ShopAppArticleRepositorySpec.swift */,
+				0B2D85F2206B7F0700D12ED7 /* ShopAppAuthentificationRepositorySpec.swift */,
+				0B2D85F4206B7F1D00D12ED7 /* ShopAppCartRepositorySpec.swift */,
+				0B2D85F6206B7F2700D12ED7 /* ShopAppCategoryRepositorySpec.swift */,
+				0B2D85F8206B7F3400D12ED7 /* ShopAppCustomerRepositorySpec.swift */,
+				0B2D85FA206B7F3F00D12ED7 /* ShopAppOrderRepositorySpec.swift */,
+				0B2D85FC206B7F4900D12ED7 /* ShopAppPaymentsRepositorySpec.swift */,
+				0B2D85FE206B7F5700D12ED7 /* ShopAppProductRepositorySpec.swift */,
+				0B2D8600206B7F6500D12ED7 /* ShopAppShopRepositorySpec.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -2471,21 +2527,6 @@
 				0BEF52CE1FF6469900E50080 /* ArticleTableViewCell.xib */,
 			);
 			path = ArticleTableViewCell;
-			sourceTree = "<group>";
-		};
-		51BB2E6BC53607B414222D0B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				EADEEAD978E6FBFAB9B2E66D /* Pods-ShopApp.debug.xcconfig */,
-				A8B94A83363EB9CB066C1E0F /* Pods-ShopApp.debug dev.xcconfig */,
-				5949C33F60A0E5F5132A6B74 /* Pods-ShopApp.release.xcconfig */,
-				24E63E20246DC2892B3741F7 /* Pods-ShopApp.release dev.xcconfig */,
-				E5DBFD12EC44311FDD7B0782 /* Pods-ShopApp-ShopAppTests.debug.xcconfig */,
-				5746C3424F4A66C98BCFA6BC /* Pods-ShopApp-ShopAppTests.debug dev.xcconfig */,
-				D7FB8969A931BBEAE35B1C2C /* Pods-ShopApp-ShopAppTests.release.xcconfig */,
-				F5EC22FA143ADB2FF183479F /* Pods-ShopApp-ShopAppTests.release dev.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		61005B3E2004E3BB00351764 /* Checkout */ = {
@@ -3309,8 +3350,8 @@
 				8E5EFAD12035F2BF00FD718B /* ShopApp_Gateway */,
 				61E4E6311F56C868001C6E01 /* Products */,
 				61236D561FEAA7AB00D64198 /* Recovered References */,
-				51BB2E6BC53607B414222D0B /* Pods */,
-				08AC95128CC904D777D05F36 /* Frameworks */,
+				6D09C60E06047E771E2DC714 /* Pods */,
+				66F16120D40FB17B43592B71 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3365,6 +3406,30 @@
 				61B94C0F1F82409300B6887C /* ProductOptionHeaderView.xib */,
 			);
 			path = ProductOptionHeaderView;
+			sourceTree = "<group>";
+		};
+		66F16120D40FB17B43592B71 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2452D1727A22139DCFBCFA5D /* Pods_ShopApp.framework */,
+				91D594F134F6B27B147CD34F /* Pods_ShopApp_ShopAppTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6D09C60E06047E771E2DC714 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EB0308B87E4D118F1B403D5C /* Pods-ShopApp.debug.xcconfig */,
+				BDB93E0BA4D55C68C0184D44 /* Pods-ShopApp.debug dev.xcconfig */,
+				A08BE9C4EDA4D44357774F6F /* Pods-ShopApp.release.xcconfig */,
+				F3BFB1F59606A336BF44AC60 /* Pods-ShopApp.release dev.xcconfig */,
+				70AA11DD39E1C7F0640D1F85 /* Pods-ShopApp-ShopAppTests.debug.xcconfig */,
+				DCBF8D0581CEE4C99BD433C5 /* Pods-ShopApp-ShopAppTests.debug dev.xcconfig */,
+				71A52213858EB8C92CD892C5 /* Pods-ShopApp-ShopAppTests.release.xcconfig */,
+				C6285ED7EC76788636B840A0 /* Pods-ShopApp-ShopAppTests.release dev.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		8E131CA1203B3E2B00EB2F63 /* DI */ = {
@@ -3520,12 +3585,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0B7CEF6E203B0A7C00FAA32C /* Build configuration list for PBXNativeTarget "ShopAppTests" */;
 			buildPhases = (
-				2BB43E16D452B5A09183866B /* [CP] Check Pods Manifest.lock */,
+				2324F15F2B4F3011ACDFC289 /* [CP] Check Pods Manifest.lock */,
 				0B7CEF5F203B0A7C00FAA32C /* Sources */,
 				0B7CEF60203B0A7C00FAA32C /* Frameworks */,
 				0B7CEF61203B0A7C00FAA32C /* Resources */,
-				6ED327BCE24E8727E3E08DFA /* [CP] Embed Pods Frameworks */,
-				1276A1B1B3EAD135687988DD /* [CP] Copy Pods Resources */,
+				E8A66C6934B68F09CAE3C6C1 /* [CP] Embed Pods Frameworks */,
+				7A11D23D94FCC511DB207EDA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3541,15 +3606,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 61E4E6421F56C868001C6E01 /* Build configuration list for PBXNativeTarget "ShopApp" */;
 			buildPhases = (
-				9147C30FA37DB721AB45F7A6 /* [CP] Check Pods Manifest.lock */,
+				1C6E5D46CE003A63FD33CDE3 /* [CP] Check Pods Manifest.lock */,
 				61E4E62C1F56C868001C6E01 /* Sources */,
 				61E4E62D1F56C868001C6E01 /* Frameworks */,
 				61E4E62E1F56C868001C6E01 /* Resources */,
 				8E3A6F2A20078145001ADB11 /* SwiftLint */,
 				0BA630641FFE7B8C007088B8 /* Fabric */,
 				8E5EFAD82035F2BF00FD718B /* Embed Frameworks */,
-				2798A4486AAF5636404F475E /* [CP] Embed Pods Frameworks */,
-				5108B1500F864E3E1665F3E6 /* [CP] Copy Pods Resources */,
+				85875D19FC3CB4079F6B89D8 /* [CP] Embed Pods Frameworks */,
+				DD84A252FD944D99433F47B6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3730,7 +3795,43 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" ec1a2d2e6ae5cf3addf0ec8f67c34deb4a00cbea 1df1d0dc0136843e0575d1bb7de4fb6ea36a34d1b622696e6c4251ec6d9ce916";
 		};
-		1276A1B1B3EAD135687988DD /* [CP] Copy Pods Resources */ = {
+		1C6E5D46CE003A63FD33CDE3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ShopApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2324F15F2B4F3011ACDFC289 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ShopApp-ShopAppTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7A11D23D94FCC511DB207EDA /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3745,7 +3846,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShopApp-ShopAppTests/Pods-ShopApp-ShopAppTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2798A4486AAF5636404F475E /* [CP] Embed Pods Frameworks */ = {
+		85875D19FC3CB4079F6B89D8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3791,25 +3892,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShopApp/Pods-ShopApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2BB43E16D452B5A09183866B /* [CP] Check Pods Manifest.lock */ = {
+		8E3A6F2A20078145001ADB11 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = SwiftLint;
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ShopApp-ShopAppTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
 		};
-		5108B1500F864E3E1665F3E6 /* [CP] Copy Pods Resources */ = {
+		DD84A252FD944D99433F47B6 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3824,7 +3921,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShopApp/Pods-ShopApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6ED327BCE24E8727E3E08DFA /* [CP] Embed Pods Frameworks */ = {
+		E8A66C6934B68F09CAE3C6C1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3874,38 +3971,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShopApp-ShopAppTests/Pods-ShopApp-ShopAppTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8E3A6F2A20078145001ADB11 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
-		};
-		9147C30FA37DB721AB45F7A6 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ShopApp-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -3953,6 +4018,7 @@
 				614C80B22046D930006A99E0 /* AccountAddressFormViewModelMock.swift in Sources */,
 				0B67B47B205A9F4300337379 /* SearchEmptyDataViewSpec.swift in Sources */,
 				0BE965A02044617600308CA9 /* CustomerUseCaseMock.swift in Sources */,
+				0B2D85FB206B7F3F00D12ED7 /* ShopAppOrderRepositorySpec.swift in Sources */,
 				0B8445CF205FDB890009012A /* SearchTitleViewSpec.swift in Sources */,
 				0B7CEF84203B1F8E00FAA32C /* AuthentificationRepositoryMock.swift in Sources */,
 				0B5768DC204D3CA80001738D /* AccountViewModelSpec.swift in Sources */,
@@ -3978,6 +4044,7 @@
 				0B8445E0206136270009012A /* InputTextFieldViewSpec.swift in Sources */,
 				0B8445DC2060F8950009012A /* QuantityTextFieldViewSpec.swift in Sources */,
 				0B43716E204D674000C086CF /* AccountViewModelMock.swift in Sources */,
+				0B2D85FF206B7F5700D12ED7 /* ShopAppProductRepositorySpec.swift in Sources */,
 				0B8445D6206014D60009012A /* UnderlinedButtonSpec.swift in Sources */,
 				0B5768DA204D3B040001738D /* SignUpViewControllerSpec.swift in Sources */,
 				0B83E00A20504AA10037035D /* GridCollectionViewControllerSpec.swift in Sources */,
@@ -4003,8 +4070,10 @@
 				0B83E003204EC4600037035D /* AccountLoggedHeaderDelegateMock.swift in Sources */,
 				0B437172204D782300C086CF /* OrderListEmptyDataViewDelegateMock.swift in Sources */,
 				0B5768CF204D3B040001738D /* AddressFormViewControllerSpec.swift in Sources */,
+				0B2D85F3206B7F0700D12ED7 /* ShopAppAuthentificationRepositorySpec.swift in Sources */,
 				0B8445E92062927F0009012A /* SeeAllTableHeaderViewSpec.swift in Sources */,
 				61ABAF6D205977F100D73392 /* CategoryEmptyDataViewSpec.swift in Sources */,
+				0B2D8603206B815900D12ED7 /* DAOMock.swift in Sources */,
 				6104CD0B2065330B00B780A0 /* UIColor+InitializationSpec.swift in Sources */,
 				61E14D4D20405874000AB2CB /* PaymentsRepositoryMock.swift in Sources */,
 				0BE990F62064F4310038DF04 /* Customer+DetailsSpec.swift in Sources */,
@@ -4032,6 +4101,7 @@
 				61ABAF5820594A8F00D73392 /* ProductListUseCaseMock.swift in Sources */,
 				614C80C02046DC63006A99E0 /* NavigationControllerSpec.swift in Sources */,
 				0B8445EC206298D40009012A /* SeeAllHeaderViewDelegateMock.swift in Sources */,
+				0B2D85F5206B7F1D00D12ED7 /* ShopAppCartRepositorySpec.swift in Sources */,
 				0B7CEF76203B155400FAA32C /* UpdateCustomerUseCaseMock.swift in Sources */,
 				6104CD1120655FC500B780A0 /* UIView+NameOfClassSpec.swift in Sources */,
 				0BE9658820440E9D00308CA9 /* ForgotPasswordViewModelSpec.swift in Sources */,
@@ -4044,8 +4114,11 @@
 				0BE9657A2040056F00308CA9 /* SignUpUseCaseMock.swift in Sources */,
 				0BE9657E204007A600308CA9 /* ShopRepositoryMock.swift in Sources */,
 				6130DE7C2063E43200BAA833 /* String+ValidatorSpec.swift in Sources */,
+				0B2D85F1206B7EBB00D12ED7 /* ShopAppArticleRepositorySpec.swift in Sources */,
 				0BE96578204004D200308CA9 /* SignUpViewModelMock.swift in Sources */,
 				61BA33FD2049527F0054FCA7 /* BaseAddressListViewControllerSpec.swift in Sources */,
+				0B2D8601206B7F6500D12ED7 /* ShopAppShopRepositorySpec.swift in Sources */,
+				0B2D85EF206B7BEE00D12ED7 /* APIMock.swift in Sources */,
 				61E14D4F2040594F000AB2CB /* AddressFormViewModelMock.swift in Sources */,
 				6130DE6620625B2A00BAA833 /* ProductOptionsCollectionViewCellSpec.swift in Sources */,
 				61CCF0C820600597004CF487 /* ProductListViewModelMock.swift in Sources */,
@@ -4059,6 +4132,7 @@
 				614C80CE2046F983006A99E0 /* AccountAddressFormControllerDelegateMock.swift in Sources */,
 				61276E2920581BC400E2C3AF /* ArticleDetailsViewModelMock.swift in Sources */,
 				0B83E0372056CEAF0037035D /* CategoryRepositoryMock.swift in Sources */,
+				0B2D85FD206B7F4900D12ED7 /* ShopAppPaymentsRepositorySpec.swift in Sources */,
 				611607E120480557000A12D6 /* DeleteAddressUseCaseMock.swift in Sources */,
 				0B5768D7204D3B040001738D /* PolicyViewControllerSpec.swift in Sources */,
 				617D688E203C5EF3001E8940 /* OrderListViewModelSpec.swift in Sources */,
@@ -4083,6 +4157,7 @@
 				614C80C92046DC6B006A99E0 /* GridCollectionViewModelSpec.swift in Sources */,
 				0B83E01B20566C6C0037035D /* ArticleListUseCaseMock.swift in Sources */,
 				6130DE782063D48B00BAA833 /* String+LocalizationSpec.swift in Sources */,
+				0B2D85F9206B7F3400D12ED7 /* ShopAppCustomerRepositorySpec.swift in Sources */,
 				61CCF0C4206000BB004CF487 /* ImagesCarouselViewControllerDelegateMock.swift in Sources */,
 				0B437170204D781D00C086CF /* OrderListEmptyDataViewSpec.swift in Sources */,
 				614B6DF1205851210000356E /* PopularTableCellProviderSpec.swift in Sources */,
@@ -4104,6 +4179,7 @@
 				6130DE6B2062A1C100BAA833 /* ProductOptionsCollectionCellProviderSpec.swift in Sources */,
 				0B83DFFD204EC0130037035D /* AccountFooterViewSpec.swift in Sources */,
 				0B8445CD205ABBF60009012A /* SearchViewModelMock.swift in Sources */,
+				0B2D85F7206B7F2700D12ED7 /* ShopAppCategoryRepositorySpec.swift in Sources */,
 				61CCF0C2206000B1004CF487 /* ImagesCarouselViewControllerSpec.swift in Sources */,
 				0B8445DA2060F7E90009012A /* QuantityTextFieldViewDelegateMock.swift in Sources */,
 				614ED7DB203F0A7500435708 /* OrderDetailsViewModelSpec.swift in Sources */,
@@ -4446,7 +4522,7 @@
 /* Begin XCBuildConfiguration section */
 		0B7CEF6A203B0A7C00FAA32C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E5DBFD12EC44311FDD7B0782 /* Pods-ShopApp-ShopAppTests.debug.xcconfig */;
+			baseConfigurationReference = 70AA11DD39E1C7F0640D1F85 /* Pods-ShopApp-ShopAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -4471,7 +4547,7 @@
 		};
 		0B7CEF6B203B0A7C00FAA32C /* Debug Dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5746C3424F4A66C98BCFA6BC /* Pods-ShopApp-ShopAppTests.debug dev.xcconfig */;
+			baseConfigurationReference = DCBF8D0581CEE4C99BD433C5 /* Pods-ShopApp-ShopAppTests.debug dev.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -4496,7 +4572,7 @@
 		};
 		0B7CEF6C203B0A7C00FAA32C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D7FB8969A931BBEAE35B1C2C /* Pods-ShopApp-ShopAppTests.release.xcconfig */;
+			baseConfigurationReference = 71A52213858EB8C92CD892C5 /* Pods-ShopApp-ShopAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -4519,7 +4595,7 @@
 		};
 		0B7CEF6D203B0A7C00FAA32C /* Release Dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5EC22FA143ADB2FF183479F /* Pods-ShopApp-ShopAppTests.release dev.xcconfig */;
+			baseConfigurationReference = C6285ED7EC76788636B840A0 /* Pods-ShopApp-ShopAppTests.release dev.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -4598,7 +4674,7 @@
 		};
 		617041FC20174AB00063E369 /* Debug Dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A8B94A83363EB9CB066C1E0F /* Pods-ShopApp.debug dev.xcconfig */;
+			baseConfigurationReference = BDB93E0BA4D55C68C0184D44 /* Pods-ShopApp.debug dev.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -4668,7 +4744,7 @@
 		};
 		617041FE20174AB90063E369 /* Release Dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 24E63E20246DC2892B3741F7 /* Pods-ShopApp.release dev.xcconfig */;
+			baseConfigurationReference = F3BFB1F59606A336BF44AC60 /* Pods-ShopApp.release dev.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -4794,7 +4870,7 @@
 		};
 		61E4E6431F56C868001C6E01 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EADEEAD978E6FBFAB9B2E66D /* Pods-ShopApp.debug.xcconfig */;
+			baseConfigurationReference = EB0308B87E4D118F1B403D5C /* Pods-ShopApp.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -4814,7 +4890,7 @@
 		};
 		61E4E6441F56C868001C6E01 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5949C33F60A0E5F5132A6B74 /* Pods-ShopApp.release.xcconfig */;
+			baseConfigurationReference = A08BE9C4EDA4D44357774F6F /* Pods-ShopApp.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
