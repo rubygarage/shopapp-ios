@@ -41,11 +41,11 @@ class ShopAppArticleRepositorySpec: QuickSpec {
                     apiMock.isNeedToReturnError = false
                     
                     repository.getArticleList(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, reverse: reverse) { (result, error) in
-                        expect(apiMock.isGetArticleListSterted) == true
+                        expect(apiMock.isGetArticleListStarted) == true
                         
                         expect(apiMock.perPage) == perPage
                         expect(apiMock.paginationValue) == paginationValue
-                        expect(apiMock.perPage) == perPage
+                        expect(apiMock.sortBy?.rawValue) == sortBy.rawValue
                         expect(apiMock.reverse) == reverse
                         
                         expect(result).toNot(beNil())
@@ -59,11 +59,11 @@ class ShopAppArticleRepositorySpec: QuickSpec {
                     apiMock.isNeedToReturnError = true
                     
                     repository.getArticleList(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, reverse: reverse) { (result, error) in
-                        expect(apiMock.isGetArticleListSterted) == true
+                        expect(apiMock.isGetArticleListStarted) == true
                         
                         expect(apiMock.perPage) == perPage
                         expect(apiMock.paginationValue) == paginationValue
-                        expect(apiMock.perPage) == perPage
+                        expect(apiMock.sortBy?.rawValue) == sortBy.rawValue
                         expect(apiMock.reverse) == reverse
                         
                         expect(result).to(beNil())
@@ -85,7 +85,7 @@ class ShopAppArticleRepositorySpec: QuickSpec {
                     apiMock.isNeedToReturnError = false
                     
                     repository.getArticle(id: id) { (result, error) in
-                        expect(apiMock.isGetArticleSterted) == true
+                        expect(apiMock.isGetArticleStarted) == true
                         
                         expect(apiMock.id) == id
                         
@@ -100,7 +100,7 @@ class ShopAppArticleRepositorySpec: QuickSpec {
                     apiMock.isNeedToReturnError = true
                     
                     repository.getArticle(id: id) { (result, error) in
-                        expect(apiMock.isGetArticleSterted) == true
+                        expect(apiMock.isGetArticleStarted) == true
                         
                         expect(apiMock.id) == id
                         

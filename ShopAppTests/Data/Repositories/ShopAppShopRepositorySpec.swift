@@ -23,8 +23,32 @@ class ShopAppShopRepositorySpec: QuickSpec {
             repository = ShopAppShopRepository(api: apiMock)
         }
         
-        describe("") {
+        describe("when shop should be get") {
+            context("if callback has result") {
+                it("needs to handle result") {
+                    apiMock.isNeedToReturnError = false
+                    
+                    repository.getShop() { (result, error) in
+                        expect(apiMock.isGetShopInfoStarted) == true
+                        
+                        expect(result).toNot(beNil())
+                        expect(error).to(beNil())
+                    }
+                }
+            }
             
+            context("if callback has error") {
+                it("needs to handle error") {
+                    apiMock.isNeedToReturnError = true
+                    
+                    repository.getShop() { (result, error) in
+                        expect(apiMock.isGetShopInfoStarted) == true
+                        
+                        expect(result).to(beNil())
+                        expect(error).toNot(beNil())
+                    }
+                }
+            }
         }
     }
 }
