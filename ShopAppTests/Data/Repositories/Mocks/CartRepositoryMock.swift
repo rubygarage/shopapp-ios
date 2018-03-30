@@ -11,7 +11,7 @@ import ShopApp_Gateway
 @testable import ShopApp
 
 class CartRepositoryMock: CartRepository {
-    func getCartProductList(callback: @escaping RepoCallback<[CartProduct]>) {}
+    func getCartProductList(callback: @escaping ([CartProduct]?, RepoError?) -> Void) {}
     func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<CartProduct>) {}
     func deleteProductFromCart(with productVariantId: String?, callback: @escaping RepoCallback<Bool>) {}
     func deleteAllProductsFromCart(with callback: @escaping RepoCallback<Bool>) {}

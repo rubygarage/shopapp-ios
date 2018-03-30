@@ -16,7 +16,7 @@ class ShopAppCartRepository: CartRepository {
     }
 
     func getCartProductList(callback: @escaping RepoCallback<[CartProduct]>) {
-        callback(dao.getCartProductList(), nil)
+        dao.getCartProductList(callback: callback)
     }
     
     func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<CartProduct>) {
