@@ -17,13 +17,17 @@ To install the dependencies required for the application build, ShopApp uses Coc
 
 1. Add the following line to the Podfile:
 
-`pod “ShopApp_Shopify”, “~> 1.0”`
+```
+pod "ShopApp_Shopify", "~> 1.0"
+```
 
 2. Install all the dependencies:
 
-`pod install`
+```
+pod install
+```
 
-3. You'll also have to configure the provider to get an access to your online store. To get an access, follow the instructions on a provider's page <link>. 
+3. You'll also have to configure the provider to get an access to your online store. To get an access, follow the instructions on a provider's [page](https://github.com/rubygarage/shopapp-shopify-ios).
 
 Here's how to configure the Shopify provider. Add the following code:
 
@@ -42,7 +46,10 @@ to the file **ShopApp/Data/DI/DataAssembly.swift**.
 4. As the result, you'll be able to open the project file and launch an app.
 
 To create a client for another SaaS, you'll have to add the following pod:
-`pod 'ShopApp_Gateway', '~> 1.0.1'`  to the dependencies. 
+```
+pod 'ShopApp_Gateway', '~> 1.0.3'
+```
+to the dependencies. 
 
 5. Next, you have to create the class that'll work with the main application and implement the Repository protocol in it. 
 
