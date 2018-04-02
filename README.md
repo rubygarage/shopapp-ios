@@ -32,13 +32,14 @@ pod install
 Here's how to configure the Shopify provider. Add the following code:
 
 ```
-container.register(Repository.self) { _ in
-    return ShopifyRepository(apiKey: "API KEY",
+container.register(API.self) { _ in
+    return ShopifyAPI(apiKey: "API KEY",
         shopDomain: "SHOP DOMAIN",
         adminApiKey: "ADMIN API KEY",
         adminPassword: "ADMIN PASSWORD",
         applePayMerchantId: "APPLE PAY MERCHANT ID")
 }
+.inObjectScope(.container)
 ```
 
 to the file **ShopApp/Data/DI/DataAssembly.swift**. 
