@@ -62,7 +62,7 @@ class ShopAppCartRepositorySpec: QuickSpec {
                         
                         expect(daoMock.cartProduct) === cartProduct
                         
-                        expect(result).toNot(beNil())
+                        expect(result) == true
                         expect(error).to(beNil())
                     }
                 }
@@ -77,7 +77,7 @@ class ShopAppCartRepositorySpec: QuickSpec {
                         
                         expect(daoMock.cartProduct) === cartProduct
                         
-                        expect(result).to(beNil())
+                        expect(result) == false
                         expect(error).toNot(beNil())
                     }
                 }
@@ -169,7 +169,7 @@ class ShopAppCartRepositorySpec: QuickSpec {
                         expect(daoMock.productVariantId) == productVariantId
                         expect(daoMock.quantity) == quantity
                         
-                        expect(result).toNot(beNil())
+                        expect(result) == true
                         expect(error).to(beNil())
                     }
                 }
@@ -185,7 +185,7 @@ class ShopAppCartRepositorySpec: QuickSpec {
                         expect(daoMock.productVariantId) == productVariantId
                         expect(daoMock.quantity) == quantity
                         
-                        expect(result).to(beNil())
+                        expect(result) == false
                         expect(error).toNot(beNil())
                     }
                 }

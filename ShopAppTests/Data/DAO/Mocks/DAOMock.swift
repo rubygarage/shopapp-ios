@@ -24,12 +24,12 @@ class DAOMock: DAO {
         isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
     }
     
-    func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<CartProduct>) {
+    func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<Bool>) {
         isAddCartProductStarted = true
         
         self.cartProduct = cartProduct
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(CartProduct(), nil)
+        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
     func deleteProductFromCart(with productVariantId: String?, callback: @escaping RepoCallback<Bool>) {
@@ -46,12 +46,12 @@ class DAOMock: DAO {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
     }
     
-    func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<CartProduct>) {
+    func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<Bool>) {
         isChangeCartProductQuantityStarted = true
         
         self.productVariantId = productVariantId
         self.quantity = quantity
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(CartProduct(), nil)
+        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
 }

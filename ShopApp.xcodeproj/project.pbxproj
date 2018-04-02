@@ -205,6 +205,8 @@
 		0BB82C72206D27F10012C40A /* ProductVariantEntityUpdateServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB82C71206D27F10012C40A /* ProductVariantEntityUpdateServiceSpec.swift */; };
 		0BB82C74206D27FC0012C40A /* VariantOptionEntityUpdateServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB82C73206D27FC0012C40A /* VariantOptionEntityUpdateServiceSpec.swift */; };
 		0BB82C76206D28080012C40A /* ImageEntityUpdateServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB82C75206D28080012C40A /* ImageEntityUpdateServiceSpec.swift */; };
+		0BB82C79206E715A0012C40A /* CoreStore+TransactionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB82C78206E715A0012C40A /* CoreStore+TransactionSpec.swift */; };
+		0BB82C7B206E748F0012C40A /* CoreDataDAOSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB82C7A206E748F0012C40A /* CoreDataDAOSpec.swift */; };
 		0BC6875D202D980100E46D4C /* CountriesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6875C202D980000E46D4C /* CountriesUseCase.swift */; };
 		0BCE89212022178700C6B3AD /* CategoryListCollectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE89202022178700C6B3AD /* CategoryListCollectionProvider.swift */; };
 		0BCE892420222C6600C6B3AD /* GridCollectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE892320222C6600C6B3AD /* GridCollectionProvider.swift */; };
@@ -806,6 +808,8 @@
 		0BB82C71206D27F10012C40A /* ProductVariantEntityUpdateServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductVariantEntityUpdateServiceSpec.swift; sourceTree = "<group>"; };
 		0BB82C73206D27FC0012C40A /* VariantOptionEntityUpdateServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantOptionEntityUpdateServiceSpec.swift; sourceTree = "<group>"; };
 		0BB82C75206D28080012C40A /* ImageEntityUpdateServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEntityUpdateServiceSpec.swift; sourceTree = "<group>"; };
+		0BB82C78206E715A0012C40A /* CoreStore+TransactionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreStore+TransactionSpec.swift"; sourceTree = "<group>"; };
+		0BB82C7A206E748F0012C40A /* CoreDataDAOSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataDAOSpec.swift; sourceTree = "<group>"; };
 		0BC6875C202D980000E46D4C /* CountriesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesUseCase.swift; sourceTree = "<group>"; };
 		0BCE89202022178700C6B3AD /* CategoryListCollectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCollectionProvider.swift; sourceTree = "<group>"; };
 		0BCE892320222C6600C6B3AD /* GridCollectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionProvider.swift; sourceTree = "<group>"; };
@@ -2228,7 +2232,9 @@
 			isa = PBXGroup;
 			children = (
 				0BB82C63206CE4A80012C40A /* Adapters */,
+				0BB82C77206E713A0012C40A /* Extensions */,
 				0BB82C64206CE4AE0012C40A /* Helpers */,
+				0BB82C7A206E748F0012C40A /* CoreDataDAOSpec.swift */,
 				0BB82C6D206D18370012C40A /* CoreDataTestHelper.swift */,
 			);
 			path = CoreData;
@@ -2254,6 +2260,14 @@
 				0BB82C75206D28080012C40A /* ImageEntityUpdateServiceSpec.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		0BB82C77206E713A0012C40A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0BB82C78206E715A0012C40A /* CoreStore+TransactionSpec.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		0BCE892220222C4B00C6B3AD /* Providers */ = {
@@ -4195,6 +4209,7 @@
 				0B5768D7204D3B040001738D /* PolicyViewControllerSpec.swift in Sources */,
 				617D688E203C5EF3001E8940 /* OrderListViewModelSpec.swift in Sources */,
 				0B83E001204EC3AC0037035D /* AccountNotLoggedHeaderDelegateMock.swift in Sources */,
+				0BB82C7B206E748F0012C40A /* CoreDataDAOSpec.swift in Sources */,
 				61276E3020581BC400E2C3AF /* ArticleListTableProviderSpec.swift in Sources */,
 				0B437178204D783A00C086CF /* OrderFooterViewMock.swift in Sources */,
 				0B5768E0204D477B0001738D /* AccountTableProviderDelegateMock.swift in Sources */,
@@ -4239,6 +4254,7 @@
 				0B83DFFD204EC0130037035D /* AccountFooterViewSpec.swift in Sources */,
 				0B8445CD205ABBF60009012A /* SearchViewModelMock.swift in Sources */,
 				0B2D85F7206B7F2700D12ED7 /* ShopAppCategoryRepositorySpec.swift in Sources */,
+				0BB82C79206E715A0012C40A /* CoreStore+TransactionSpec.swift in Sources */,
 				61CCF0C2206000B1004CF487 /* ImagesCarouselViewControllerSpec.swift in Sources */,
 				0B8445DA2060F7E90009012A /* QuantityTextFieldViewDelegateMock.swift in Sources */,
 				614ED7DB203F0A7500435708 /* OrderDetailsViewModelSpec.swift in Sources */,

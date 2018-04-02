@@ -45,9 +45,8 @@ class ProductDetailsViewModel: BaseViewModel {
                 event.onNext(false)
                 return Disposables.create()
             }
-            strongSelf.addCartProductUseCase.addCartProduct(cartProduct) { (cartProduct, error) in
-                let success = cartProduct != nil && error == nil
-                event.onNext(success)
+            strongSelf.addCartProductUseCase.addCartProduct(cartProduct) { (success, _) in
+                event.onNext(success ?? false)
             }
             return Disposables.create()
         })

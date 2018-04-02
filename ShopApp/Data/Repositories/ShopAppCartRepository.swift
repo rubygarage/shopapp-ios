@@ -19,7 +19,7 @@ class ShopAppCartRepository: CartRepository {
         dao.getCartProductList(callback: callback)
     }
     
-    func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<CartProduct>) {
+    func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<Bool>) {
         dao.addCartProduct(cartProduct: cartProduct, callback: callback)
     }
     
@@ -31,7 +31,7 @@ class ShopAppCartRepository: CartRepository {
         dao.deleteAllProductsFromCart(with: callback)
     }
     
-    func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<CartProduct>) {
+    func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<Bool>) {
         dao.changeCartProductQuantity(with: productVariantId, quantity: quantity, callback: callback)
     }
 }

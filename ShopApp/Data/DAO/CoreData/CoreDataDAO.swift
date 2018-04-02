@@ -19,7 +19,7 @@ class CoreDataDAO: DAO {
             if let items = items {
                 cartProducts = items.map({ CoreDataCartProductAdapter.adapt(item: $0)! })
             }
-        }, completion: { (result) in
+        }, completion: { result in
             switch result {
             case .success:
                 callback(cartProducts, nil)
@@ -29,9 +29,8 @@ class CoreDataDAO: DAO {
         })
     }
     
-    func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<CartProduct>) {
+    func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<Bool>) {
         let predicate = getPredicate(with: cartProduct.productVariant?.id)
-        var callbackCartProduct: CartProduct?
         
         CoreStore.perform(asynchronous: { transaction in
             var item = transaction.fetchOne(From<CartProductEntity>(), Where(predicate))
@@ -43,14 +42,12 @@ class CoreDataDAO: DAO {
                 item = transaction.create(Into<CartProductEntity>())
                 CartProductEntityUpdateService.update(item, with: cartProduct, transaction: transaction)
             }
-            
-            callbackCartProduct = CoreDataCartProductAdapter.adapt(item: item)
-        }, completion: { (result) in
+        }, completion: { result in
             switch result {
             case .success:
-                callback(callbackCartProduct, nil)
+                callback(true, nil)
             case .failure(let error):
-                callback(nil, RepoError(with: error))
+                callback(false, RepoError(with: error))
             }
         })
     }
@@ -61,7 +58,7 @@ class CoreDataDAO: DAO {
         CoreStore.perform(asynchronous: { transaction in
             let item = transaction.fetchOne(From<CartProductEntity>(), Where(predicate))
             transaction.delete(item)
-        }, completion: { (result) in
+        }, completion: { result in
             switch result {
             case .success:
                 callback(true, nil)
@@ -74,7 +71,7 @@ class CoreDataDAO: DAO {
     func deleteAllProductsFromCart(with callback: @escaping RepoCallback<Bool>) {
         CoreStore.perform(asynchronous: { transaction in
             transaction.deleteAll(From<CartProductEntity>())
-        }, completion: { (result) in
+        }, completion: { result in
             switch result {
             case .success:
                 callback(true, nil)
@@ -84,21 +81,18 @@ class CoreDataDAO: DAO {
         })
     }
     
-    func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<CartProduct>) {
+    func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<Bool>) {
         let predicate = getPredicate(with: productVariantId)
-        var cartProduct: CartProduct?
         
         CoreStore.perform(asynchronous: { transaction in
             let item: CartProductEntity? = transaction.fetchOrCreate(predicate: predicate)
             item?.quantity = Int64(quantity)
-            
-            cartProduct = CoreDataCartProductAdapter.adapt(item: item)
-        }, completion: { (result) in
+        }, completion: { result in
             switch result {
             case .success:
-                callback(cartProduct, nil)
+                callback(true, nil)
             case .failure(let error):
-                callback(nil, RepoError(with: error))
+                callback(false, RepoError(with: error))
             }
         })
     }
