@@ -11,5 +11,12 @@ import ShopApp_Gateway
 @testable import ShopApp
 
 class ShopRepositoryMock: ShopRepository {
-    func getShop(callback: @escaping RepoCallback<Shop>) {}
+    var isNeedToReturnError = false
+    var isGetShopStarted = false
+    
+    func getShop(callback: @escaping RepoCallback<Shop>) {
+        isGetShopStarted = true
+        
+        isNeedToReturnError ? callback(nil, RepoError()) : callback(Shop(), nil)
+    }
 }
