@@ -191,6 +191,15 @@
 		0BA5DC122073909500668C99 /* CategoryUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5DC112073909500668C99 /* CategoryUseCaseSpec.swift */; };
 		0BA5DC14207390D800668C99 /* ProductListUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5DC13207390D800668C99 /* ProductListUseCaseSpec.swift */; };
 		0BA5DC17207390E900668C99 /* ProductUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5DC16207390E900668C99 /* ProductUseCaseSpec.swift */; };
+		0BA5DC192073AF8B00668C99 /* AddAddressUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5DC182073AF8B00668C99 /* AddAddressUseCaseSpec.swift */; };
+		0BA5DC1B2073AF9A00668C99 /* CartProductListUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5DC1A2073AF9A00668C99 /* CartProductListUseCaseSpec.swift */; };
+		0BA5DC1D2073AFA500668C99 /* CountriesUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5DC1C2073AFA500668C99 /* CountriesUseCaseSpec.swift */; };
+		0BA5DC1F2073AFB000668C99 /* CustomerUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5DC1E2073AFB000668C99 /* CustomerUseCaseSpec.swift */; };
+		0BA5DC212073AFBA00668C99 /* DeleteAddressUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5DC202073AFBA00668C99 /* DeleteAddressUseCaseSpec.swift */; };
+		0BA5DC232073AFC600668C99 /* UpdateAddressUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5DC222073AFC600668C99 /* UpdateAddressUseCaseSpec.swift */; };
+		0BA5DC252073AFD000668C99 /* UpdateDefaultAddressUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5DC242073AFD000668C99 /* UpdateDefaultAddressUseCaseSpec.swift */; };
+		0BA5DC272073C08D00668C99 /* CheckoutUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5DC262073C08D00668C99 /* CheckoutUseCaseSpec.swift */; };
+		0BA5DC292073C09800668C99 /* DeleteCartProductsUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5DC282073C09800668C99 /* DeleteCartProductsUseCaseSpec.swift */; };
 		0BA6305D1FFE56B3007088B8 /* OrderDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA6305C1FFE56B3007088B8 /* OrderDetailsViewModel.swift */; };
 		0BA6305F1FFE57E0007088B8 /* OrderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BA6305E1FFE57E0007088B8 /* OrderFooterView.xib */; };
 		0BA630611FFE57E8007088B8 /* OrderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA630601FFE57E8007088B8 /* OrderFooterView.swift */; };
@@ -811,6 +820,15 @@
 		0BA5DC112073909500668C99 /* CategoryUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryUseCaseSpec.swift; sourceTree = "<group>"; };
 		0BA5DC13207390D800668C99 /* ProductListUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListUseCaseSpec.swift; sourceTree = "<group>"; };
 		0BA5DC16207390E900668C99 /* ProductUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductUseCaseSpec.swift; sourceTree = "<group>"; };
+		0BA5DC182073AF8B00668C99 /* AddAddressUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressUseCaseSpec.swift; sourceTree = "<group>"; };
+		0BA5DC1A2073AF9A00668C99 /* CartProductListUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartProductListUseCaseSpec.swift; sourceTree = "<group>"; };
+		0BA5DC1C2073AFA500668C99 /* CountriesUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesUseCaseSpec.swift; sourceTree = "<group>"; };
+		0BA5DC1E2073AFB000668C99 /* CustomerUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerUseCaseSpec.swift; sourceTree = "<group>"; };
+		0BA5DC202073AFBA00668C99 /* DeleteAddressUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAddressUseCaseSpec.swift; sourceTree = "<group>"; };
+		0BA5DC222073AFC600668C99 /* UpdateAddressUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAddressUseCaseSpec.swift; sourceTree = "<group>"; };
+		0BA5DC242073AFD000668C99 /* UpdateDefaultAddressUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDefaultAddressUseCaseSpec.swift; sourceTree = "<group>"; };
+		0BA5DC262073C08D00668C99 /* CheckoutUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutUseCaseSpec.swift; sourceTree = "<group>"; };
+		0BA5DC282073C09800668C99 /* DeleteCartProductsUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCartProductsUseCaseSpec.swift; sourceTree = "<group>"; };
 		0BA6305C1FFE56B3007088B8 /* OrderDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewModel.swift; sourceTree = "<group>"; };
 		0BA6305E1FFE57E0007088B8 /* OrderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderFooterView.xib; sourceTree = "<group>"; };
 		0BA630601FFE57E8007088B8 /* OrderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderFooterView.swift; sourceTree = "<group>"; };
@@ -2611,6 +2629,8 @@
 		0BEAE19920724443001AE4F8 /* Checkout */ = {
 			isa = PBXGroup;
 			children = (
+				0BA5DC262073C08D00668C99 /* CheckoutUseCaseSpec.swift */,
+				0BA5DC282073C09800668C99 /* DeleteCartProductsUseCaseSpec.swift */,
 			);
 			path = Checkout;
 			sourceTree = "<group>";
@@ -2619,6 +2639,13 @@
 			isa = PBXGroup;
 			children = (
 				0BEAE19B207244BE001AE4F8 /* Mocks */,
+				0BA5DC182073AF8B00668C99 /* AddAddressUseCaseSpec.swift */,
+				0BA5DC1A2073AF9A00668C99 /* CartProductListUseCaseSpec.swift */,
+				0BA5DC1C2073AFA500668C99 /* CountriesUseCaseSpec.swift */,
+				0BA5DC1E2073AFB000668C99 /* CustomerUseCaseSpec.swift */,
+				0BA5DC202073AFBA00668C99 /* DeleteAddressUseCaseSpec.swift */,
+				0BA5DC222073AFC600668C99 /* UpdateAddressUseCaseSpec.swift */,
+				0BA5DC242073AFD000668C99 /* UpdateDefaultAddressUseCaseSpec.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -4132,10 +4159,12 @@
 				0BEAE1A220724B0A001AE4F8 /* OrderUseCaseSpec.swift in Sources */,
 				0BA5DC0C2073903A00668C99 /* ArticleListUseCaseSpec.swift in Sources */,
 				0B83E00E20504FE60037035D /* PlaceholderedTextFieldSpec.swift in Sources */,
+				0BA5DC212073AFBA00668C99 /* DeleteAddressUseCaseSpec.swift in Sources */,
 				0B67B473205A5D9000337379 /* SortVariantsTableProviderDelegateMock.swift in Sources */,
 				6130DE762063D0CD00BAA833 /* NumberFormatter+CurrencySpec.swift in Sources */,
 				61276E3A20582C3300E2C3AF /* LastArrivalsTableCellDelegateMock.swift in Sources */,
 				61276E2E20581BC400E2C3AF /* HomeTableProviderDelegateMock.swift in Sources */,
+				0BA5DC292073C09800668C99 /* DeleteCartProductsUseCaseSpec.swift in Sources */,
 				0BE9658F20442EF100308CA9 /* OrderListTableProviderDelegateMock.swift in Sources */,
 				0BE965B12045AFF900308CA9 /* BasePickerSpec.swift in Sources */,
 				61ABAF6B205977E100D73392 /* CategoryListViewModelMock.swift in Sources */,
@@ -4147,6 +4176,7 @@
 				6130DE6D2062AB1800BAA833 /* ProductOptionsCollectionCellProviderDelegateMock.swift in Sources */,
 				61CCF0BF20600077004CF487 /* DetailsImagesCollectionViewCellSpec.swift in Sources */,
 				6122F5D420528E7C00F574BB /* CartViewModelMock.swift in Sources */,
+				0BA5DC1D2073AFA500668C99 /* CountriesUseCaseSpec.swift in Sources */,
 				617D688C203C5E74001E8940 /* OrderListUseCaseMock.swift in Sources */,
 				0B7CEF7F203B175600FAA32C /* ChangePasswordViewModelSpec.swift in Sources */,
 				0BB82C66206CE4E00012C40A /* CoreDataCartProductAdapterSpec.swift in Sources */,
@@ -4214,10 +4244,12 @@
 				6130DE722062C27500BAA833 /* ProductOptionHeaderViewSpec.swift in Sources */,
 				0B83E01920566C1B0037035D /* ArticleRepositoryMock.swift in Sources */,
 				614C80C12046DC63006A99E0 /* BaseCollectionViewControllerSpec.swift in Sources */,
+				0BA5DC252073AFD000668C99 /* UpdateDefaultAddressUseCaseSpec.swift in Sources */,
 				6198CB4A20441602007C0C7A /* CountriesUseCaseMock.swift in Sources */,
 				614B6DEB205836CA0000356E /* LastArrivalsTableCellProviderDelegateMock.swift in Sources */,
 				616CF745205FFF9500DE14B1 /* ProductListViewModelSpec.swift in Sources */,
 				0B437174204D782E00C086CF /* OrderHeaderViewSpec.swift in Sources */,
+				0BA5DC232073AFC600668C99 /* UpdateAddressUseCaseSpec.swift in Sources */,
 				614C80C22046DC63006A99E0 /* BaseTableViewControllerSpec.swift in Sources */,
 				6104CD0D2065358300B780A0 /* UIImageView+NetworkSpec.swift in Sources */,
 				0B83E003204EC4600037035D /* AccountLoggedHeaderDelegateMock.swift in Sources */,
@@ -4257,6 +4289,7 @@
 				61ABAF5820594A8F00D73392 /* ProductListUseCaseMock.swift in Sources */,
 				614C80C02046DC63006A99E0 /* NavigationControllerSpec.swift in Sources */,
 				0B8445EC206298D40009012A /* SeeAllHeaderViewDelegateMock.swift in Sources */,
+				0BA5DC192073AF8B00668C99 /* AddAddressUseCaseSpec.swift in Sources */,
 				0B2D85F5206B7F1D00D12ED7 /* ShopAppCartRepositorySpec.swift in Sources */,
 				0B7CEF76203B155400FAA32C /* UpdateCustomerUseCaseMock.swift in Sources */,
 				6104CD1120655FC500B780A0 /* UIView+NameOfClassSpec.swift in Sources */,
@@ -4271,10 +4304,12 @@
 				0BE9657E204007A600308CA9 /* ShopRepositoryMock.swift in Sources */,
 				6130DE7C2063E43200BAA833 /* String+ValidatorSpec.swift in Sources */,
 				0B2D85F1206B7EBB00D12ED7 /* ShopAppArticleRepositorySpec.swift in Sources */,
+				0BA5DC1F2073AFB000668C99 /* CustomerUseCaseSpec.swift in Sources */,
 				0BE96578204004D200308CA9 /* SignUpViewModelMock.swift in Sources */,
 				61BA33FD2049527F0054FCA7 /* BaseAddressListViewControllerSpec.swift in Sources */,
 				0BB82C68206CE4EB0012C40A /* CoreDataImageAdapterSpec.swift in Sources */,
 				0BA5DC17207390E900668C99 /* ProductUseCaseSpec.swift in Sources */,
+				0BA5DC272073C08D00668C99 /* CheckoutUseCaseSpec.swift in Sources */,
 				0B2D8601206B7F6500D12ED7 /* ShopAppShopRepositorySpec.swift in Sources */,
 				0B2D85EF206B7BEE00D12ED7 /* APIMock.swift in Sources */,
 				61E14D4F2040594F000AB2CB /* AddressFormViewModelMock.swift in Sources */,
@@ -4328,6 +4363,7 @@
 				61CCF0BE20600065004CF487 /* ProductDetailsViewModelMock.swift in Sources */,
 				0B5768D3204D3B040001738D /* LinkViewControllerSpec.swift in Sources */,
 				0BA5DC08207377F300668C99 /* DeleteCartProductUseCaseSpec.swift in Sources */,
+				0BA5DC1B2073AF9A00668C99 /* CartProductListUseCaseSpec.swift in Sources */,
 				0B83DFFB204EBCCC0037035D /* AccountTableViewCellSpec.swift in Sources */,
 				0B7CEF70203B0B3500FAA32C /* QuickSpec+View.swift in Sources */,
 				6122F5DB2052D6BB00F574BB /* CartTableViewCellSpec.swift in Sources */,
