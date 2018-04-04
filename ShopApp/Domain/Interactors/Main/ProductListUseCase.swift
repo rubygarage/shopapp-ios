@@ -8,9 +8,8 @@
 
 import ShopApp_Gateway
 
-private let kPopuarSectionItemsMaxCount = 4
-
 class ProductListUseCase {
+    private let popuarSectionItemsMaxCount = 4
     private let repository: ProductRepository
 
     init(repository: ProductRepository) {
@@ -22,7 +21,7 @@ class ProductListUseCase {
     }
     
     func getPopularProductList(_ callback: @escaping RepoCallback<[Product]>) {
-        repository.getProductList(perPage: kPopuarSectionItemsMaxCount, paginationValue: nil, sortBy: SortingValue.popular, keyPhrase: nil, excludePhrase: nil, reverse: false, callback: callback)
+        repository.getProductList(perPage: popuarSectionItemsMaxCount, paginationValue: nil, sortBy: SortingValue.popular, keyPhrase: nil, excludePhrase: nil, reverse: false, callback: callback)
     }
     
     func getProductList(with paginationValue: Any?, sortingValue: SortingValue, keyPhrase: String? = nil, excludePhrase: String? = nil, reverse: Bool, _ callback: @escaping RepoCallback<[Product]>) {
