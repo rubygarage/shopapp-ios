@@ -19,7 +19,7 @@ extension Address {
         if let secondAddress = secondAddress, !secondAddress.isEmpty {
             result = [result, secondAddress].joined(separator: ", ")
         }
-        let adressParts = [city, zip, country].flatMap { $0 }
+        let adressParts = [city, zip, country?.name].flatMap { $0 }
         if !adressParts.isEmpty {
             let subresult = adressParts.joined(separator: ", ")
             result = [result, subresult].joined(separator: ", ")

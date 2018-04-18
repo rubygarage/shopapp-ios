@@ -9,6 +9,7 @@
 import Foundation
 
 public class Country {
+    public var id = ""
     public var name = ""
     public var states: [State] = []
 

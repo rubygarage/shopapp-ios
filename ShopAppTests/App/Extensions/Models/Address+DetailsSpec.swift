@@ -79,9 +79,12 @@ class Address_DetailsSpec: QuickSpec {
                     address.secondAddress = "Second address"
                     address.city = "City"
                     address.zip = "Zip"
-                    address.country = "Country"
                     
-                    expect(address.fullAddress) == [address.address!, address.secondAddress!, address.city!, address.zip!, address.country!].joined(separator: ", ")
+                    let country = Country()
+                    country.name = "Country"
+                    address.country = country
+                    
+                    expect(address.fullAddress) == [address.address!, address.secondAddress!, address.city!, address.zip!, address.country!.name].joined(separator: ", ")
                 }
             }
         }

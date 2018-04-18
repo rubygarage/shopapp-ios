@@ -25,10 +25,17 @@ class BaseAddressListViewModelMock: BaseAddressListViewModel {
             address.address = "address"
             address.secondAddress = "second address"
             address.city = "city"
-            address.country = "country"
-            address.state = "state"
             address.zip = "zip"
             address.phone = "phone"
+            
+            let country = Country()
+            country.name = "country"
+            address.country = country
+            
+            let state = State()
+            state.name = "state"
+            address.state = state
+            
             customerAddresses.value = [address]
         } else {
             customerAddresses.value = []

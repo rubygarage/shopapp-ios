@@ -9,6 +9,7 @@
 import Foundation
 
 public class State {
+    public var id = ""
     public var name = ""
 
     public init() {}

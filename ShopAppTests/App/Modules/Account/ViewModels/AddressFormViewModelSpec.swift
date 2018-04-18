@@ -109,10 +109,16 @@ class AddressFormViewModelSpec: QuickSpec {
                 address.address = "Address"
                 address.secondAddress = "Second address"
                 address.city = "City"
-                address.country = "Country"
-                address.state = "State"
                 address.zip = "Zip"
                 address.phone = "Phone"
+                
+                let country = Country()
+                country.name = "Country"
+                address.country = country
+                
+                let state = State()
+                state.name = "State"
+                address.state = state
             }
             
             it("should return address with correct fields") {
@@ -127,8 +133,8 @@ class AddressFormViewModelSpec: QuickSpec {
                         expect(filledAddress.address) == address.address
                         expect(filledAddress.secondAddress) == address.secondAddress
                         expect(filledAddress.city) == address.city
-                        expect(filledAddress.country) == address.country
-                        expect(filledAddress.state) == address.state
+                        expect(filledAddress.country?.name) == address.country?.name
+                        expect(filledAddress.state?.name) == address.state?.name
                         expect(filledAddress.zip) == address.zip
                         expect(filledAddress.phone) == address.phone
                     })
@@ -173,9 +179,12 @@ class AddressFormViewModelSpec: QuickSpec {
                     validAddress.lastName = "Last name"
                     validAddress.address = "Address"
                     validAddress.city = "City"
-                    validAddress.country = "Country"
                     validAddress.zip = "Zip"
                     validAddress.phone = "Phone"
+                    
+                    let country = Country()
+                    country.name = "country"
+                    validAddress.country = country
                 }
                 
                 it("should change address valid state to false") {

@@ -103,7 +103,7 @@ class AddressFormViewControllerSpec: QuickSpec {
                 
                 it("should have not empty pickers") {
                     expect(countryPicker.text) == "country"
-                    expect(statePicker.text) == "state"
+                    expect(statePicker.text) == ""
                 }
                 
                 it("should have not empty text fields") {
@@ -123,7 +123,7 @@ class AddressFormViewControllerSpec: QuickSpec {
                     expect(viewController.viewModel.addressText.value) == "address"
                     expect(viewController.viewModel.addressOptionalText.value) == "second address"
                     expect(viewController.viewModel.cityText.value) == "city"
-                    expect(viewController.viewModel.stateText.value) == "state"
+                    expect(viewController.viewModel.stateText.value) == ""
                     expect(viewController.viewModel.zipText.value) == "zip"
                     expect(viewController.viewModel.phoneText.value) == "phone"
                 }
@@ -286,10 +286,13 @@ class AddressFormViewControllerSpec: QuickSpec {
                 address.address = "address"
                 address.secondAddress = "second address"
                 address.city = "city"
-                address.country = "country"
-                address.state = "state"
                 address.zip = "zip"
                 address.phone = "phone"
+                
+                let country = Country()
+                country.name = "country"
+                address.country = country
+                
                 viewController.address = address
             }
             

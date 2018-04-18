@@ -28,6 +28,9 @@
 		0B0955B820691E4E00CABE29 /* ShopAppCustomerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0955B720691E4D00CABE29 /* ShopAppCustomerRepository.swift */; };
 		0B0955BB206936D900CABE29 /* CustomerRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0955BA206936D900CABE29 /* CustomerRepositoryMock.swift */; };
 		0B1AB004206A46C100A24E5B /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1AB003206A46C100A24E5B /* API.swift */; };
+		0B22067C208DF87C00E475F2 /* AddressRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B22067B208DF87C00E475F2 /* AddressRequestBody.swift */; };
+		0B22067E208E07AA00E475F2 /* AddressResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B22067D208E07AA00E475F2 /* AddressResponse.swift */; };
+		0B220680208E0B0000E475F2 /* MagentoAddressAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B22067F208E0B0000E475F2 /* MagentoAddressAdapter.swift */; };
 		0B24F0CC20074D7500F13224 /* CheckoutShippingAddressAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24F0B320074D7400F13224 /* CheckoutShippingAddressAddTableViewCell.swift */; };
 		0B24F0CD20074D7500F13224 /* CheckoutShippingAddressAddTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B24F0B420074D7400F13224 /* CheckoutShippingAddressAddTableViewCell.xib */; };
 		0B24F0CF20074D7500F13224 /* CheckoutCartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B24F0B720074D7400F13224 /* CheckoutCartTableViewCell.xib */; };
@@ -56,6 +59,9 @@
 		0B24F0F62007506000F13224 /* StoryboardNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24F0F52007506000F13224 /* StoryboardNames.swift */; };
 		0B24F0FC2007514500F13224 /* DetailsImagesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B24F0FA2007514400F13224 /* DetailsImagesCollectionViewCell.xib */; };
 		0B24F0FD2007514500F13224 /* DetailsImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24F0FB2007514400F13224 /* DetailsImagesCollectionViewCell.swift */; };
+		0B260720208DC0C5001AC77A /* MagentoCountryAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B26071F208DC0C5001AC77A /* MagentoCountryAdapter.swift */; };
+		0B260722208DC699001AC77A /* RegionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B260721208DC699001AC77A /* RegionResponse.swift */; };
+		0B260724208DC9A9001AC77A /* MagentoStateAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B260723208DC9A9001AC77A /* MagentoStateAdapter.swift */; };
 		0B2D85EF206B7BEE00D12ED7 /* APIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D85EE206B7BEE00D12ED7 /* APIMock.swift */; };
 		0B2D85F1206B7EBB00D12ED7 /* ShopAppArticleRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D85F0206B7EBB00D12ED7 /* ShopAppArticleRepositorySpec.swift */; };
 		0B2D85F3206B7F0700D12ED7 /* ShopAppAuthentificationRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D85F2206B7F0700D12ED7 /* ShopAppAuthentificationRepositorySpec.swift */; };
@@ -68,6 +74,8 @@
 		0B2D8601206B7F6500D12ED7 /* ShopAppShopRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D8600206B7F6500D12ED7 /* ShopAppShopRepositorySpec.swift */; };
 		0B2D8603206B815900D12ED7 /* DAOMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2D8602206B815900D12ED7 /* DAOMock.swift */; };
 		0B2F3EC62004EA4000FB40A4 /* NumberFormatter+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2F3EC52004EA4000FB40A4 /* NumberFormatter+Currency.swift */; };
+		0B39611C208A2C180034A446 /* MagentoPaymentsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B39611B208A2C180034A446 /* MagentoPaymentsRouter.swift */; };
+		0B39611E208A2D7A0034A446 /* CountryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B39611D208A2D7A0034A446 /* CountryResponse.swift */; };
 		0B3AB6F1203199B000F46A8F /* PlaceholderedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3AB6F0203199AF00F46A8F /* PlaceholderedTextField.swift */; };
 		0B43716C204D66B400C086CF /* AccountViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B43716B204D66B400C086CF /* AccountViewControllerSpec.swift */; };
 		0B43716E204D674000C086CF /* AccountViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B43716D204D674000C086CF /* AccountViewModelMock.swift */; };
@@ -106,6 +114,8 @@
 		0B5BA4F12023126200FF8FCA /* ProductOptionsCollectionCellProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5BA4F02023126200FF8FCA /* ProductOptionsCollectionCellProvider.swift */; };
 		0B5BA4F320233B2200FF8FCA /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5BA4F220233B2200FF8FCA /* CategoryListViewController.swift */; };
 		0B5BA4F520233C7600FF8FCA /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5BA4F420233C7600FF8FCA /* CategoryListViewModel.swift */; };
+		0B612F3720930EC3004C3F70 /* MagentoProductsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B612F3620930EC3004C3F70 /* MagentoProductsRouter.swift */; };
+		0B612F3A20931A38004C3F70 /* ProductsParametersBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B612F3920931A38004C3F70 /* ProductsParametersBuilder.swift */; };
 		0B67B46F205A5D8000337379 /* SortVariantsViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67B46E205A5D8000337379 /* SortVariantsViewControllerSpec.swift */; };
 		0B67B471205A5D8800337379 /* SortVariantsControllerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67B470205A5D8800337379 /* SortVariantsControllerDelegateMock.swift */; };
 		0B67B473205A5D9000337379 /* SortVariantsTableProviderDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67B472205A5D9000337379 /* SortVariantsTableProviderDelegateMock.swift */; };
@@ -137,6 +147,12 @@
 		0B7CEF8E203C01F800FAA32C /* CreditCardLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEF8D203C01F800FAA32C /* CreditCardLimit.swift */; };
 		0B7CEF90203C024600FAA32C /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEF8F203C024600FAA32C /* TableView.swift */; };
 		0B7CEF92203C025D00FAA32C /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7CEF91203C025D00FAA32C /* Layer.swift */; };
+		0B81CD672088BAA4000D91D4 /* MagentoCustomerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B81CD662088BAA4000D91D4 /* MagentoCustomerAdapter.swift */; };
+		0B81CD6C2088D1EE000D91D4 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B81CD6B2088D1EE000D91D4 /* Response.swift */; };
+		0B81CD6E2088D262000D91D4 /* GetCustomerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B81CD6D2088D262000D91D4 /* GetCustomerResponse.swift */; };
+		0B81CD702089C1B2000D91D4 /* UpdatePasswordRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B81CD6F2089C1B2000D91D4 /* UpdatePasswordRequestBody.swift */; };
+		0B81CD722089C7BF000D91D4 /* ResetPasswordRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B81CD712089C7BF000D91D4 /* ResetPasswordRequestBody.swift */; };
+		0B81CD742089D7B9000D91D4 /* UpdateCustomerRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B81CD732089D7B9000D91D4 /* UpdateCustomerRequestBody.swift */; };
 		0B83DFFB204EBCCC0037035D /* AccountTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83DFFA204EBCCC0037035D /* AccountTableViewCellSpec.swift */; };
 		0B83DFFD204EC0130037035D /* AccountFooterViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83DFFC204EC0130037035D /* AccountFooterViewSpec.swift */; };
 		0B83DFFF204EC0750037035D /* AccountFooterDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B83DFFE204EC0750037035D /* AccountFooterDelegateMock.swift */; };
@@ -208,6 +224,8 @@
 		0BA630721FFFB164007088B8 /* PaymentDetailsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA630711FFFB164007088B8 /* PaymentDetailsFooterView.swift */; };
 		0BA630751FFFC533007088B8 /* OrderItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BA630741FFFC533007088B8 /* OrderItemTableViewCell.xib */; };
 		0BA630791FFFC554007088B8 /* OrderItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA630781FFFC554007088B8 /* OrderItemTableViewCell.swift */; };
+		0BA8F3C0209B3B47000878C5 /* MagentoStoreRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA8F3BF209B3B47000878C5 /* MagentoStoreRouter.swift */; };
+		0BA8F3C2209B3C85000878C5 /* StoreConfigResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA8F3C1209B3C85000878C5 /* StoreConfigResponse.swift */; };
 		0BADF10D20288D2D0013DA67 /* OrderListEmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BADF10C20288D2D0013DA67 /* OrderListEmptyDataView.swift */; };
 		0BADF10F20288D370013DA67 /* OrderListEmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BADF10E20288D370013DA67 /* OrderListEmptyDataView.xib */; };
 		0BADF1122028946F0013DA67 /* CategoryEmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BADF1112028946F0013DA67 /* CategoryEmptyDataView.swift */; };
@@ -225,6 +243,7 @@
 		0BB82C76206D28080012C40A /* ImageEntityUpdateServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB82C75206D28080012C40A /* ImageEntityUpdateServiceSpec.swift */; };
 		0BB82C79206E715A0012C40A /* CoreStore+TransactionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB82C78206E715A0012C40A /* CoreStore+TransactionSpec.swift */; };
 		0BB82C7B206E748F0012C40A /* CoreDataDAOSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB82C7A206E748F0012C40A /* CoreDataDAOSpec.swift */; };
+		0BC4C1BC208891550027C6CB /* GetTokenRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4C1BB208891550027C6CB /* GetTokenRequestBody.swift */; };
 		0BC6875D202D980100E46D4C /* CountriesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6875C202D980000E46D4C /* CountriesUseCase.swift */; };
 		0BCE89212022178700C6B3AD /* CategoryListCollectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE89202022178700C6B3AD /* CategoryListCollectionProvider.swift */; };
 		0BCE892420222C6600C6B3AD /* GridCollectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE892320222C6600C6B3AD /* GridCollectionProvider.swift */; };
@@ -238,6 +257,14 @@
 		0BD75361201F520700AB1FED /* CartTableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD75360201F520700AB1FED /* CartTableProvider.swift */; };
 		0BD75363201F6D1F00AB1FED /* AddAddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD75362201F6D1F00AB1FED /* AddAddressUseCase.swift */; };
 		0BD75365201F6D2B00AB1FED /* UpdateDefaultAddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD75364201F6D2B00AB1FED /* UpdateDefaultAddressUseCase.swift */; };
+		0BE654722097320A008AFD5E /* GetProductListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE654712097320A008AFD5E /* GetProductListResponse.swift */; };
+		0BE6547420973479008AFD5E /* GetProductResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE6547320973479008AFD5E /* GetProductResponse.swift */; };
+		0BE6547620973606008AFD5E /* CustomAttributeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE6547520973606008AFD5E /* CustomAttributeResponse.swift */; };
+		0BE6547820973631008AFD5E /* AttributeValueResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE6547720973631008AFD5E /* AttributeValueResponse.swift */; };
+		0BE6547A2097374E008AFD5E /* GalleryEntryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE654792097374E008AFD5E /* GalleryEntryResponse.swift */; };
+		0BE6547C20973A07008AFD5E /* MagentoProductAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE6547B20973A07008AFD5E /* MagentoProductAdapter.swift */; };
+		0BE6547E2099F605008AFD5E /* PaginationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE6547D2099F605008AFD5E /* PaginationResponse.swift */; };
+		0BE65480209A0A3E008AFD5E /* MagentoImageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE6547F209A0A3E008AFD5E /* MagentoImageAdapter.swift */; };
 		0BE6E4822006444100EAEC76 /* ProductOptionsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BE6E4812006444100EAEC76 /* ProductOptionsCollectionViewCell.xib */; };
 		0BE6E484200644C800EAEC76 /* ProductOptionsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE6E483200644C800EAEC76 /* ProductOptionsCollectionViewCell.swift */; };
 		0BE6E4872006667600EAEC76 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE6E4862006667600EAEC76 /* String+Localization.swift */; };
@@ -297,6 +324,14 @@
 		0BEF52D41FF66BE000E50080 /* AddCartProductUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEF52D31FF66BE000E50080 /* AddCartProductUseCase.swift */; };
 		0BEF52D61FF6997700E50080 /* CategoryListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEF52D51FF6997700E50080 /* CategoryListUseCase.swift */; };
 		0BEF52D81FF69DC900E50080 /* CategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEF52D71FF69DC900E50080 /* CategoryUseCase.swift */; };
+		0BF29745208712D7002094B0 /* MagentoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF29744208712D7002094B0 /* MagentoAPI.swift */; };
+		0BF29749208725CE002094B0 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF29748208725CD002094B0 /* BaseAPI.swift */; };
+		0BF2974C208726D3002094B0 /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF2974B208726D3002094B0 /* SessionService.swift */; };
+		0BF2975120886521002094B0 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF2975020886521002094B0 /* BaseRouter.swift */; };
+		0BF29753208865A6002094B0 /* MagentoCustomerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF29752208865A6002094B0 /* MagentoCustomerRouter.swift */; };
+		0BF2975620887C0E002094B0 /* SignUpRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF2975520887C0E002094B0 /* SignUpRequestBody.swift */; };
+		0BF2975820887F4B002094B0 /* CustomerRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF2975720887F4B002094B0 /* CustomerRequestBody.swift */; };
+		0BF2975D20888747002094B0 /* RequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF2975C20888747002094B0 /* RequestBody.swift */; };
 		61005B492006102200351764 /* CheckoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61005B482006102200351764 /* CheckoutUseCase.swift */; };
 		6104242A1FC477D100EFEFDA /* AddressFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610424291FC477D100EFEFDA /* AddressFormViewController.swift */; };
 		6104242C1FC477F000EFEFDA /* AddressFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6104242B1FC477F000EFEFDA /* AddressFormViewModel.swift */; };
@@ -718,6 +753,9 @@
 		0B0955B720691E4D00CABE29 /* ShopAppCustomerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAppCustomerRepository.swift; sourceTree = "<group>"; };
 		0B0955BA206936D900CABE29 /* CustomerRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerRepositoryMock.swift; sourceTree = "<group>"; };
 		0B1AB003206A46C100A24E5B /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		0B22067B208DF87C00E475F2 /* AddressRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressRequestBody.swift; sourceTree = "<group>"; };
+		0B22067D208E07AA00E475F2 /* AddressResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressResponse.swift; sourceTree = "<group>"; };
+		0B22067F208E0B0000E475F2 /* MagentoAddressAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagentoAddressAdapter.swift; sourceTree = "<group>"; };
 		0B24F0B320074D7400F13224 /* CheckoutShippingAddressAddTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutShippingAddressAddTableViewCell.swift; sourceTree = "<group>"; };
 		0B24F0B420074D7400F13224 /* CheckoutShippingAddressAddTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutShippingAddressAddTableViewCell.xib; sourceTree = "<group>"; };
 		0B24F0B720074D7400F13224 /* CheckoutCartTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutCartTableViewCell.xib; sourceTree = "<group>"; };
@@ -746,6 +784,9 @@
 		0B24F0F52007506000F13224 /* StoryboardNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardNames.swift; sourceTree = "<group>"; };
 		0B24F0FA2007514400F13224 /* DetailsImagesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailsImagesCollectionViewCell.xib; sourceTree = "<group>"; };
 		0B24F0FB2007514400F13224 /* DetailsImagesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsImagesCollectionViewCell.swift; sourceTree = "<group>"; };
+		0B26071F208DC0C5001AC77A /* MagentoCountryAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagentoCountryAdapter.swift; sourceTree = "<group>"; };
+		0B260721208DC699001AC77A /* RegionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionResponse.swift; sourceTree = "<group>"; };
+		0B260723208DC9A9001AC77A /* MagentoStateAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagentoStateAdapter.swift; sourceTree = "<group>"; };
 		0B2D85EE206B7BEE00D12ED7 /* APIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIMock.swift; sourceTree = "<group>"; };
 		0B2D85F0206B7EBB00D12ED7 /* ShopAppArticleRepositorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAppArticleRepositorySpec.swift; sourceTree = "<group>"; };
 		0B2D85F2206B7F0700D12ED7 /* ShopAppAuthentificationRepositorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAppAuthentificationRepositorySpec.swift; sourceTree = "<group>"; };
@@ -758,6 +799,8 @@
 		0B2D8600206B7F6500D12ED7 /* ShopAppShopRepositorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAppShopRepositorySpec.swift; sourceTree = "<group>"; };
 		0B2D8602206B815900D12ED7 /* DAOMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOMock.swift; sourceTree = "<group>"; };
 		0B2F3EC52004EA4000FB40A4 /* NumberFormatter+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Currency.swift"; sourceTree = "<group>"; };
+		0B39611B208A2C180034A446 /* MagentoPaymentsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagentoPaymentsRouter.swift; sourceTree = "<group>"; };
+		0B39611D208A2D7A0034A446 /* CountryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryResponse.swift; sourceTree = "<group>"; };
 		0B3AB6F0203199AF00F46A8F /* PlaceholderedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderedTextField.swift; sourceTree = "<group>"; };
 		0B43716B204D66B400C086CF /* AccountViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewControllerSpec.swift; sourceTree = "<group>"; };
 		0B43716D204D674000C086CF /* AccountViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModelMock.swift; sourceTree = "<group>"; };
@@ -785,6 +828,8 @@
 		0B5BA4F220233B2200FF8FCA /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
 		0B5BA4F420233C7600FF8FCA /* CategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
 		0B5FDD972065519900CAA670 /* CreditCardValidatorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditCardValidatorSpec.swift; sourceTree = "<group>"; };
+		0B612F3620930EC3004C3F70 /* MagentoProductsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagentoProductsRouter.swift; sourceTree = "<group>"; };
+		0B612F3920931A38004C3F70 /* ProductsParametersBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsParametersBuilder.swift; sourceTree = "<group>"; };
 		0B67B46E205A5D8000337379 /* SortVariantsViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortVariantsViewControllerSpec.swift; sourceTree = "<group>"; };
 		0B67B470205A5D8800337379 /* SortVariantsControllerDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortVariantsControllerDelegateMock.swift; sourceTree = "<group>"; };
 		0B67B472205A5D9000337379 /* SortVariantsTableProviderDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortVariantsTableProviderDelegateMock.swift; sourceTree = "<group>"; };
@@ -819,6 +864,12 @@
 		0B7CEF8D203C01F800FAA32C /* CreditCardLimit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardLimit.swift; sourceTree = "<group>"; };
 		0B7CEF8F203C024600FAA32C /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		0B7CEF91203C025D00FAA32C /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
+		0B81CD662088BAA4000D91D4 /* MagentoCustomerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagentoCustomerAdapter.swift; sourceTree = "<group>"; };
+		0B81CD6B2088D1EE000D91D4 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		0B81CD6D2088D262000D91D4 /* GetCustomerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCustomerResponse.swift; sourceTree = "<group>"; };
+		0B81CD6F2089C1B2000D91D4 /* UpdatePasswordRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordRequestBody.swift; sourceTree = "<group>"; };
+		0B81CD712089C7BF000D91D4 /* ResetPasswordRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordRequestBody.swift; sourceTree = "<group>"; };
+		0B81CD732089D7B9000D91D4 /* UpdateCustomerRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCustomerRequestBody.swift; sourceTree = "<group>"; };
 		0B83DFFA204EBCCC0037035D /* AccountTableViewCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCellSpec.swift; sourceTree = "<group>"; };
 		0B83DFFC204EC0130037035D /* AccountFooterViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFooterViewSpec.swift; sourceTree = "<group>"; };
 		0B83DFFE204EC0750037035D /* AccountFooterDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFooterDelegateMock.swift; sourceTree = "<group>"; };
@@ -897,6 +948,8 @@
 		0BA630711FFFB164007088B8 /* PaymentDetailsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentDetailsFooterView.swift; sourceTree = "<group>"; };
 		0BA630741FFFC533007088B8 /* OrderItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderItemTableViewCell.xib; sourceTree = "<group>"; };
 		0BA630781FFFC554007088B8 /* OrderItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemTableViewCell.swift; sourceTree = "<group>"; };
+		0BA8F3BF209B3B47000878C5 /* MagentoStoreRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagentoStoreRouter.swift; sourceTree = "<group>"; };
+		0BA8F3C1209B3C85000878C5 /* StoreConfigResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreConfigResponse.swift; sourceTree = "<group>"; };
 		0BADF10C20288D2D0013DA67 /* OrderListEmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListEmptyDataView.swift; sourceTree = "<group>"; };
 		0BADF10E20288D370013DA67 /* OrderListEmptyDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderListEmptyDataView.xib; sourceTree = "<group>"; };
 		0BADF1112028946F0013DA67 /* CategoryEmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEmptyDataView.swift; sourceTree = "<group>"; };
@@ -914,6 +967,7 @@
 		0BB82C75206D28080012C40A /* ImageEntityUpdateServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEntityUpdateServiceSpec.swift; sourceTree = "<group>"; };
 		0BB82C78206E715A0012C40A /* CoreStore+TransactionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreStore+TransactionSpec.swift"; sourceTree = "<group>"; };
 		0BB82C7A206E748F0012C40A /* CoreDataDAOSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataDAOSpec.swift; sourceTree = "<group>"; };
+		0BC4C1BB208891550027C6CB /* GetTokenRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTokenRequestBody.swift; sourceTree = "<group>"; };
 		0BC6875C202D980000E46D4C /* CountriesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesUseCase.swift; sourceTree = "<group>"; };
 		0BCE89202022178700C6B3AD /* CategoryListCollectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCollectionProvider.swift; sourceTree = "<group>"; };
 		0BCE892320222C6600C6B3AD /* GridCollectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionProvider.swift; sourceTree = "<group>"; };
@@ -927,6 +981,14 @@
 		0BD75360201F520700AB1FED /* CartTableProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableProvider.swift; sourceTree = "<group>"; };
 		0BD75362201F6D1F00AB1FED /* AddAddressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressUseCase.swift; sourceTree = "<group>"; };
 		0BD75364201F6D2B00AB1FED /* UpdateDefaultAddressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDefaultAddressUseCase.swift; sourceTree = "<group>"; };
+		0BE654712097320A008AFD5E /* GetProductListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductListResponse.swift; sourceTree = "<group>"; };
+		0BE6547320973479008AFD5E /* GetProductResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductResponse.swift; sourceTree = "<group>"; };
+		0BE6547520973606008AFD5E /* CustomAttributeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAttributeResponse.swift; sourceTree = "<group>"; };
+		0BE6547720973631008AFD5E /* AttributeValueResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeValueResponse.swift; sourceTree = "<group>"; };
+		0BE654792097374E008AFD5E /* GalleryEntryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryEntryResponse.swift; sourceTree = "<group>"; };
+		0BE6547B20973A07008AFD5E /* MagentoProductAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagentoProductAdapter.swift; sourceTree = "<group>"; };
+		0BE6547D2099F605008AFD5E /* PaginationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationResponse.swift; sourceTree = "<group>"; };
+		0BE6547F209A0A3E008AFD5E /* MagentoImageAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagentoImageAdapter.swift; sourceTree = "<group>"; };
 		0BE6E4812006444100EAEC76 /* ProductOptionsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductOptionsCollectionViewCell.xib; sourceTree = "<group>"; };
 		0BE6E483200644C800EAEC76 /* ProductOptionsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductOptionsCollectionViewCell.swift; sourceTree = "<group>"; };
 		0BE6E4862006667600EAEC76 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
@@ -991,6 +1053,14 @@
 		0BEF52D31FF66BE000E50080 /* AddCartProductUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCartProductUseCase.swift; sourceTree = "<group>"; };
 		0BEF52D51FF6997700E50080 /* CategoryListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListUseCase.swift; sourceTree = "<group>"; };
 		0BEF52D71FF69DC900E50080 /* CategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryUseCase.swift; sourceTree = "<group>"; };
+		0BF29744208712D7002094B0 /* MagentoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagentoAPI.swift; sourceTree = "<group>"; };
+		0BF29748208725CD002094B0 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
+		0BF2974B208726D3002094B0 /* SessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionService.swift; sourceTree = "<group>"; };
+		0BF2975020886521002094B0 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		0BF29752208865A6002094B0 /* MagentoCustomerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagentoCustomerRouter.swift; sourceTree = "<group>"; };
+		0BF2975520887C0E002094B0 /* SignUpRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequestBody.swift; sourceTree = "<group>"; };
+		0BF2975720887F4B002094B0 /* CustomerRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerRequestBody.swift; sourceTree = "<group>"; };
+		0BF2975C20888747002094B0 /* RequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBody.swift; sourceTree = "<group>"; };
 		2452D1727A22139DCFBCFA5D /* Pods_ShopApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShopApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61005B482006102200351764 /* CheckoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutUseCase.swift; sourceTree = "<group>"; };
 		610424291FC477D100EFEFDA /* AddressFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressFormViewController.swift; sourceTree = "<group>"; };
@@ -1697,6 +1767,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		0B612F38209319E9004C3F70 /* ParametersBuilders */ = {
+			isa = PBXGroup;
+			children = (
+				0B612F3920931A38004C3F70 /* ProductsParametersBuilder.swift */,
+			);
+			path = ParametersBuilders;
+			sourceTree = "<group>";
+		};
 		0B69B55A2008FFDC00F071E3 /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2069,6 +2147,34 @@
 				0BE965A72045AFF800308CA9 /* Views */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		0B81CD692088D1CF000D91D4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0B81CD6A2088D1DD000D91D4 /* Responses */,
+				0BF2975420887A49002094B0 /* RequestBodies */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0B81CD6A2088D1DD000D91D4 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				0B22067D208E07AA00E475F2 /* AddressResponse.swift */,
+				0BE6547720973631008AFD5E /* AttributeValueResponse.swift */,
+				0B39611D208A2D7A0034A446 /* CountryResponse.swift */,
+				0BE6547520973606008AFD5E /* CustomAttributeResponse.swift */,
+				0BE654792097374E008AFD5E /* GalleryEntryResponse.swift */,
+				0B81CD6D2088D262000D91D4 /* GetCustomerResponse.swift */,
+				0BE654712097320A008AFD5E /* GetProductListResponse.swift */,
+				0BE6547320973479008AFD5E /* GetProductResponse.swift */,
+				0BE6547D2099F605008AFD5E /* PaginationResponse.swift */,
+				0B260721208DC699001AC77A /* RegionResponse.swift */,
+				0B81CD6B2088D1EE000D91D4 /* Response.swift */,
+				0BA8F3C1209B3C85000878C5 /* StoreConfigResponse.swift */,
+			);
+			path = Responses;
 			sourceTree = "<group>";
 		};
 		0B83E008205043FE0037035D /* Mocks */ = {
@@ -2484,6 +2590,7 @@
 		0BD5EB2E1FF3D8FB0076C01B /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0BF2973A20871206002094B0 /* API */,
 				61AFA3F11F9DFBE8004B9D53 /* DAO */,
 				8E131CA1203B3E2B00EB2F63 /* DI */,
 				8ED91FCD2035904C00E9692A /* Repositories */,
@@ -2825,6 +2932,76 @@
 				0BEF52CE1FF6469900E50080 /* ArticleTableViewCell.xib */,
 			);
 			path = ArticleTableViewCell;
+			sourceTree = "<group>";
+		};
+		0BF2973A20871206002094B0 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				0BF2973B20871237002094B0 /* Adapters */,
+				0BF2973E20871252002094B0 /* Alamofire */,
+				0B81CD692088D1CF000D91D4 /* Models */,
+				0BF2974A208726C7002094B0 /* Services */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		0BF2973B20871237002094B0 /* Adapters */ = {
+			isa = PBXGroup;
+			children = (
+				0B22067F208E0B0000E475F2 /* MagentoAddressAdapter.swift */,
+				0B26071F208DC0C5001AC77A /* MagentoCountryAdapter.swift */,
+				0B81CD662088BAA4000D91D4 /* MagentoCustomerAdapter.swift */,
+				0BE6547F209A0A3E008AFD5E /* MagentoImageAdapter.swift */,
+				0BE6547B20973A07008AFD5E /* MagentoProductAdapter.swift */,
+				0B260723208DC9A9001AC77A /* MagentoStateAdapter.swift */,
+			);
+			path = Adapters;
+			sourceTree = "<group>";
+		};
+		0BF2973E20871252002094B0 /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				0B612F38209319E9004C3F70 /* ParametersBuilders */,
+				0BF2974D20872BDE002094B0 /* Routers */,
+				0BF29748208725CD002094B0 /* BaseAPI.swift */,
+				0BF29744208712D7002094B0 /* MagentoAPI.swift */,
+			);
+			path = Alamofire;
+			sourceTree = "<group>";
+		};
+		0BF2974A208726C7002094B0 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0BF2974B208726D3002094B0 /* SessionService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		0BF2974D20872BDE002094B0 /* Routers */ = {
+			isa = PBXGroup;
+			children = (
+				0BF2975020886521002094B0 /* BaseRouter.swift */,
+				0BF29752208865A6002094B0 /* MagentoCustomerRouter.swift */,
+				0B39611B208A2C180034A446 /* MagentoPaymentsRouter.swift */,
+				0B612F3620930EC3004C3F70 /* MagentoProductsRouter.swift */,
+				0BA8F3BF209B3B47000878C5 /* MagentoStoreRouter.swift */,
+			);
+			path = Routers;
+			sourceTree = "<group>";
+		};
+		0BF2975420887A49002094B0 /* RequestBodies */ = {
+			isa = PBXGroup;
+			children = (
+				0B22067B208DF87C00E475F2 /* AddressRequestBody.swift */,
+				0BF2975720887F4B002094B0 /* CustomerRequestBody.swift */,
+				0BC4C1BB208891550027C6CB /* GetTokenRequestBody.swift */,
+				0BF2975C20888747002094B0 /* RequestBody.swift */,
+				0B81CD712089C7BF000D91D4 /* ResetPasswordRequestBody.swift */,
+				0BF2975520887C0E002094B0 /* SignUpRequestBody.swift */,
+				0B81CD732089D7B9000D91D4 /* UpdateCustomerRequestBody.swift */,
+				0B81CD6F2089C1B2000D91D4 /* UpdatePasswordRequestBody.swift */,
+			);
+			path = RequestBodies;
 			sourceTree = "<group>";
 		};
 		61005B3E2004E3BB00351764 /* Checkout */ = {
@@ -4073,6 +4250,7 @@
 				0B7CEF60203B0A7C00FAA32C /* Frameworks */,
 				0B7CEF61203B0A7C00FAA32C /* Resources */,
 				E8A66C6934B68F09CAE3C6C1 /* [CP] Embed Pods Frameworks */,
+				E016487CD0373AE481277CEA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4096,6 +4274,7 @@
 				0BA630641FFE7B8C007088B8 /* Fabric */,
 				8E5EFAD82035F2BF00FD718B /* Embed Frameworks */,
 				85875D19FC3CB4079F6B89D8 /* [CP] Embed Pods Frameworks */,
+				8341BF3531EC34B0D0155294 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4314,6 +4493,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8341BF3531EC34B0D0155294 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShopApp/Pods-ShopApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		85875D19FC3CB4079F6B89D8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4321,9 +4515,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ShopApp/Pods-ShopApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AvatarImageView/AvatarImageView.framework",
 				"${BUILT_PRODUCTS_DIR}/CoreStore/CoreStore.framework",
 				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -4340,9 +4536,11 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AvatarImageView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreStore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -4376,6 +4574,21 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
 		};
+		E016487CD0373AE481277CEA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShopApp-ShopAppTests/Pods-ShopApp-ShopAppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E8A66C6934B68F09CAE3C6C1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4383,9 +4596,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ShopApp-ShopAppTests/Pods-ShopApp-ShopAppTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AvatarImageView/AvatarImageView.framework",
 				"${BUILT_PRODUCTS_DIR}/CoreStore/CoreStore.framework",
 				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -4404,9 +4619,11 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AvatarImageView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreStore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -4776,6 +4993,7 @@
 				0BD75363201F6D1F00AB1FED /* AddAddressUseCase.swift in Sources */,
 				0B7CEF92203C025D00FAA32C /* Layer.swift in Sources */,
 				0BC6875D202D980100E46D4C /* CountriesUseCase.swift in Sources */,
+				0BF2974C208726D3002094B0 /* SessionService.swift in Sources */,
 				8E131CB2203C71B200EB2F63 /* MainAssembly.swift in Sources */,
 				0BA630611FFE57E8007088B8 /* OrderFooterView.swift in Sources */,
 				61A54BEF1FF5252600D4D151 /* AccountNotLoggedHeaderView.swift in Sources */,
@@ -4784,14 +5002,18 @@
 				0B4EA34E1FFCCC29000C7A80 /* LinkViewController.swift in Sources */,
 				611E737E2092284500F5658D /* CriticalErrorView.swift in Sources */,
 				0B0955B42068FC1A00CABE29 /* ShopAppCartRepository.swift in Sources */,
+				0B22067C208DF87C00E475F2 /* AddressRequestBody.swift in Sources */,
 				610781F01FF63E130039355A /* AddressListTableHeaderView.swift in Sources */,
 				61D7A2861F7A9FBF00031093 /* UIViewController+BarButtonItems.swift in Sources */,
 				61C95EA41FB38FC500543B40 /* CartViewController.swift in Sources */,
 				0BED64CB201605FD006CF968 /* SwitchTableViewCell.swift in Sources */,
+				0B81CD6C2088D1EE000D91D4 /* Response.swift in Sources */,
+				0BA8F3C2209B3C85000878C5 /* StoreConfigResponse.swift in Sources */,
 				8E5EFA832035BA5000FD718B /* CartRepository.swift in Sources */,
 				6104242C1FC477F000EFEFDA /* AddressFormViewModel.swift in Sources */,
 				0B09559C2068FB0000CABE29 /* CustomerRepository.swift in Sources */,
 				0B0955A02068FB0000CABE29 /* OrderRepository.swift in Sources */,
+				0BE6547E2099F605008AFD5E /* PaginationResponse.swift in Sources */,
 				611947811FD87540008BE9C6 /* AccountViewModel.swift in Sources */,
 				0B24F0F020074F1A00F13224 /* BasePicker.swift in Sources */,
 				61E8A21F1FAC93560092EDC1 /* ArticleListViewModel.swift in Sources */,
@@ -4799,11 +5021,13 @@
 				0B0955AF2068FC0B00CABE29 /* ShopAppOrderRepository.swift in Sources */,
 				617DE18A1FB5F1F0004EEF9A /* SignUpViewController.swift in Sources */,
 				61C2ABC51FBB240A00A1E170 /* SignInViewModel.swift in Sources */,
+				0B260722208DC699001AC77A /* RegionResponse.swift in Sources */,
 				61C2ABC01FBB10C600A1E170 /* String+Validator.swift in Sources */,
 				0B7CEF8A203C01CB00FAA32C /* ControllerIdentifiers.swift in Sources */,
 				615F820B202894E400926BAF /* CustomerEmailTableViewCell.swift in Sources */,
 				0BCE89212022178700C6B3AD /* CategoryListCollectionProvider.swift in Sources */,
 				0B2F3EC62004EA4000FB40A4 /* NumberFormatter+Currency.swift in Sources */,
+				0B39611C208A2C180034A446 /* MagentoPaymentsRouter.swift in Sources */,
 				616CA66A1FF3BAB800FF14E2 /* BaseAddressListViewModel.swift in Sources */,
 				61836C5B1FDACC9F000A6BA6 /* NavigationController.swift in Sources */,
 				0B24F0FD2007514500F13224 /* DetailsImagesCollectionViewCell.swift in Sources */,
@@ -4811,8 +5035,11 @@
 				61393A761FACC1AA0020C345 /* ProductListViewModel.swift in Sources */,
 				610C2CEE1FB1DF5B0007A1C3 /* ArticleDetailsViewModel.swift in Sources */,
 				61C95E9D1FB34B9F00543B40 /* ProductVariantEntityUpdateService.swift in Sources */,
+				0BE6547420973479008AFD5E /* GetProductResponse.swift in Sources */,
 				61A54BED1FF5252600D4D151 /* AccountLoggedHeaderView.swift in Sources */,
+				0BF29749208725CE002094B0 /* BaseAPI.swift in Sources */,
 				0B0955AE2068FC0B00CABE29 /* ShopAppShopRepository.swift in Sources */,
+				0B22067E208E07AA00E475F2 /* AddressResponse.swift in Sources */,
 				6170421C2019FAC00063E369 /* CheckoutBillingAddressEditTableViewCell.swift in Sources */,
 				0BD75361201F520700AB1FED /* CartTableProvider.swift in Sources */,
 				0B9B1E381FF4EB4700FECA8E /* LoginUseCase.swift in Sources */,
@@ -4824,6 +5051,7 @@
 				0BD75358201F41E900AB1FED /* AccountTableProvider.swift in Sources */,
 				0B4EA34C1FFBC00D000C7A80 /* ForgotPasswordViewModel.swift in Sources */,
 				0BD75365201F6D2B00AB1FED /* UpdateDefaultAddressUseCase.swift in Sources */,
+				0B260720208DC0C5001AC77A /* MagentoCountryAdapter.swift in Sources */,
 				0B7CEF8E203C01F800FAA32C /* CreditCardLimit.swift in Sources */,
 				0B24F0F62007506000F13224 /* StoryboardNames.swift in Sources */,
 				0BED64D6201789F8006CF968 /* ChangePasswordViewModel.swift in Sources */,
@@ -4833,10 +5061,12 @@
 				612812CC20238AA30048013B /* PaymentTypeProvider.swift in Sources */,
 				0B69B571200E1F3900F071E3 /* VariantOptionEntityUpdateService.swift in Sources */,
 				8E3265DC2037233600B3C50E /* ShopApp.xcdatamodeld in Sources */,
+				0B612F3720930EC3004C3F70 /* MagentoProductsRouter.swift in Sources */,
 				61A2AC731FACC2B2005FAD54 /* SearchViewModel.swift in Sources */,
 				0BEF52D61FF6997700E50080 /* CategoryListUseCase.swift in Sources */,
 				8E131CBB203C93B300EB2F63 /* CheckoutAssembly.swift in Sources */,
 				0B953D592021CD2300DD32DE /* ProductOptionsCollectionProvider.swift in Sources */,
+				0BF2975D20888747002094B0 /* RequestBody.swift in Sources */,
 				6182BA641FFBAE1500836979 /* CreditCardViewController.swift in Sources */,
 				61AB7D2B2010BD2900DB9D44 /* CheckoutShippingOptionsDisabledTableViewCell.swift in Sources */,
 				0BED64C0201603C6006CF968 /* SettingsViewController.swift in Sources */,
@@ -4853,6 +5083,7 @@
 				0B953D532021AC8600DD32DE /* ArticleListTableProvider.swift in Sources */,
 				0B6D155F2024843C000DDA14 /* SortVariantsViewController.swift in Sources */,
 				0B24F0D720074D7500F13224 /* CheckoutCartCollectionCell.swift in Sources */,
+				0BE6547820973631008AFD5E /* AttributeValueResponse.swift in Sources */,
 				6106C6CB1F7A40F400E87486 /* ArticleDetailsViewController.swift in Sources */,
 				8E3215B7202E062500CA4FB4 /* UIView+NameOfClass.swift in Sources */,
 				0BEF52C21FF5402900E50080 /* ProductListUseCase.swift in Sources */,
@@ -4860,12 +5091,15 @@
 				0B24F0F220074F1A00F13224 /* MonthExpiryDatePicker.swift in Sources */,
 				617042072018936D0063E369 /* DeleteCartProductsUseCase.swift in Sources */,
 				0B69B577200E2A0300F071E3 /* DeleteCartProductUseCase.swift in Sources */,
+				0B81CD702089C1B2000D91D4 /* UpdatePasswordRequestBody.swift in Sources */,
 				0B7CEF90203C024600FAA32C /* TableView.swift in Sources */,
 				0BEF52D81FF69DC900E50080 /* CategoryUseCase.swift in Sources */,
+				0B81CD742089D7B9000D91D4 /* UpdateCustomerRequestBody.swift in Sources */,
 				61C95E9B1FB3482400543B40 /* CartProductEntityUpdateService.swift in Sources */,
 				0BE6E4872006667600EAEC76 /* String+Localization.swift in Sources */,
 				618A09FA208DCFDD007C1B8F /* QuantityDropDownTableViewCell.swift in Sources */,
 				0BED64D020163FE5006CF968 /* PersonalInfoViewController.swift in Sources */,
+				0BE65480209A0A3E008AFD5E /* MagentoImageAdapter.swift in Sources */,
 				0B24F0CC20074D7500F13224 /* CheckoutShippingAddressAddTableViewCell.swift in Sources */,
 				618819B41FB3085600FECDCC /* CoreDataCartProductAdapter.swift in Sources */,
 				0B3AB6F1203199B000F46A8F /* PlaceholderedTextField.swift in Sources */,
@@ -4888,10 +5122,12 @@
 				612812C520233F8F0048013B /* UpdateAddressUseCase.swift in Sources */,
 				0BED64D4201789E9006CF968 /* ChangePasswordViewController.swift in Sources */,
 				0BED64C2201603D4006CF968 /* SettingsViewModel.swift in Sources */,
+				0B81CD672088BAA4000D91D4 /* MagentoCustomerAdapter.swift in Sources */,
 				617DE18C1FB5F23D004EEF9A /* SignUpViewModel.swift in Sources */,
 				0B24F0ED20074F1A00F13224 /* InputTextFieldView.swift in Sources */,
 				0B4EA3681FFD2702000C7A80 /* OrderListUseCase.swift in Sources */,
 				61986AD51FF671BE005632D7 /* PaymentTypeViewController.swift in Sources */,
+				0BF29745208712D7002094B0 /* MagentoAPI.swift in Sources */,
 				0B24F0D220074D7500F13224 /* CheckoutShippingAddressEditTableCell.swift in Sources */,
 				0B0955992068FB0000CABE29 /* ProductRepository.swift in Sources */,
 				0B09559B2068FB0000CABE29 /* PaymentsRepository.swift in Sources */,
@@ -4899,7 +5135,9 @@
 				61393A781FACC2450020C345 /* CategoryViewModel.swift in Sources */,
 				61087CAC1FB0BC9200D774BB /* ProductDetailsViewModel.swift in Sources */,
 				6104242A1FC477D100EFEFDA /* AddressFormViewController.swift in Sources */,
+				0B81CD722089C7BF000D91D4 /* ResetPasswordRequestBody.swift in Sources */,
 				6133DAD21FB21A6F00156971 /* CartButtonView.swift in Sources */,
+				0BF2975620887C0E002094B0 /* SignUpRequestBody.swift in Sources */,
 				0B4EA3481FFBBF9D000C7A80 /* ResetPasswordUseCase.swift in Sources */,
 				61E76E1B1FB46C0200AE5FB4 /* ImageEntityUpdateService.swift in Sources */,
 				6152B1241F7914E800045A42 /* ArticleListViewController.swift in Sources */,
@@ -4915,8 +5153,10 @@
 				616CA6601FF2A0CF00FF14E2 /* CheckoutViewModel.swift in Sources */,
 				61DA4B881F614BBC00444F64 /* SearchViewController.swift in Sources */,
 				0B4EA34A1FFBBFF6000C7A80 /* ForgotPasswordViewController.swift in Sources */,
+				0B39611E208A2D7A0034A446 /* CountryResponse.swift in Sources */,
 				0BADF1122028946F0013DA67 /* CategoryEmptyDataView.swift in Sources */,
 				8E131CA9203B43C500EB2F63 /* DomainAssembly.swift in Sources */,
+				0BF29753208865A6002094B0 /* MagentoCustomerRouter.swift in Sources */,
 				61ED88F31F7170C9006BDA79 /* GridCollectionViewCell.swift in Sources */,
 				0B5BA4EF20230A0800FF8FCA /* LastArrivalsTableCellProvider.swift in Sources */,
 				618B4D551FE2F3900001F68D /* UIColor+Initialization.swift in Sources */,
@@ -4932,11 +5172,15 @@
 				0B09559D2068FB0000CABE29 /* CategoryRepository.swift in Sources */,
 				0B24F0F420074F1A00F13224 /* CheckboxButton.swift in Sources */,
 				617042122018C3AC0063E369 /* CheckoutSelectedTypeTableViewCell.swift in Sources */,
+				0B81CD6E2088D262000D91D4 /* GetCustomerResponse.swift in Sources */,
 				0BA6305D1FFE56B3007088B8 /* OrderDetailsViewModel.swift in Sources */,
+				0B612F3A20931A38004C3F70 /* ProductsParametersBuilder.swift in Sources */,
 				0B24F0F320074F1A00F13224 /* BlackButton.swift in Sources */,
 				618A09FD208E061C007C1B8F /* UIViewController+Alert.swift in Sources */,
 				61EC8D7720334DE50001FF2B /* AccountAddressListViewController.swift in Sources */,
+				0BA8F3C0209B3B47000878C5 /* MagentoStoreRouter.swift in Sources */,
 				61EC8D692033185C0001FF2B /* CheckoutFailureViewController.swift in Sources */,
+				0BE6547620973606008AFD5E /* CustomAttributeResponse.swift in Sources */,
 				0BEF52D41FF66BE000E50080 /* AddCartProductUseCase.swift in Sources */,
 				0BEF52C61FF54A4E00E50080 /* CartProductListUseCase.swift in Sources */,
 				0B4EA3521FFCFEE1000C7A80 /* OrderDetailsViewController.swift in Sources */,
@@ -4945,6 +5189,7 @@
 				0B6D1566202484BB000DDA14 /* SortVariantsTableProvider.swift in Sources */,
 				61A507341F7E7A35004504EF /* ProductOptionsViewController.swift in Sources */,
 				0B5BA4F520233C7600FF8FCA /* CategoryListViewModel.swift in Sources */,
+				0BE6547C20973A07008AFD5E /* MagentoProductAdapter.swift in Sources */,
 				61FC3DA91F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift in Sources */,
 				612812CA202381100048013B /* BaseAddressListTableProvider.swift in Sources */,
 				61005B492006102200351764 /* CheckoutUseCase.swift in Sources */,
@@ -4955,16 +5200,19 @@
 				616CA6681FF3BA9D00FF14E2 /* BaseAddressListViewController.swift in Sources */,
 				0B024E6020230536001C7D59 /* PopularTableCellProvider.swift in Sources */,
 				618A0A07208F5790007C1B8F /* SplashViewModel.swift in Sources */,
+				0B260724208DC9A9001AC77A /* MagentoStateAdapter.swift in Sources */,
 				618B4D531FE2EF2E0001F68D /* TabBarController.swift in Sources */,
 				61393A721FACC1430020C345 /* GridCollectionViewModel.swift in Sources */,
 				61E4E6341F56C868001C6E01 /* AppDelegate.swift in Sources */,
 				0B24F0DA20074D7500F13224 /* CheckoutCreditCardEditTableViewCell.swift in Sources */,
 				61BA570A1FE040D900BF1586 /* CartEmptyDataView.swift in Sources */,
+				0BF2975120886521002094B0 /* BaseRouter.swift in Sources */,
 				8E3215BF20300C4A00CA4FB4 /* UIView+LoadFromNib.swift in Sources */,
 				0B9B1E3A1FF4EDB000FECA8E /* SignUpUseCase.swift in Sources */,
 				6131D2381FB31395008330C0 /* DAO.swift in Sources */,
 				0BD7535E201F4AE600AB1FED /* OrderDetailsTableProvider.swift in Sources */,
 				0BA630661FFE8BC4007088B8 /* OrderUseCase.swift in Sources */,
+				0BE654722097320A008AFD5E /* GetProductListResponse.swift in Sources */,
 				0BEF52CF1FF6469900E50080 /* ArticleTableViewCell.swift in Sources */,
 				6119F2E91FA88ABE00564859 /* HomeViewModel.swift in Sources */,
 				611E7383209336F100F5658D /* GrayButton.swift in Sources */,
@@ -4979,6 +5227,8 @@
 				61E76E231FB471DB00AE5FB4 /* CartTableViewCell.swift in Sources */,
 				8E3215BD202E139500CA4FB4 /* UICollectionView+Cells.swift in Sources */,
 				0BEAB6542010D4B20084AA53 /* UIImageView+Network.swift in Sources */,
+				0BF2975820887F4B002094B0 /* CustomerRequestBody.swift in Sources */,
+				0B220680208E0B0000E475F2 /* MagentoAddressAdapter.swift in Sources */,
 				61CEAA6E1F5ED16E0016FBD7 /* UIViewController+Routes.swift in Sources */,
 				0BED64CE20162A6E006CF968 /* UpdateCustomerUseCase.swift in Sources */,
 				61236D611FEAA88800D64198 /* SearchTitleView.swift in Sources */,
@@ -4987,6 +5237,7 @@
 				6182BA661FFBAE2D00836979 /* CreditCardViewModel.swift in Sources */,
 				6119F2F51FA9EA1F00564859 /* BaseTableViewController.swift in Sources */,
 				617DE1851FB5E9E2004EEF9A /* AccountViewController.swift in Sources */,
+				0BC4C1BC208891550027C6CB /* GetTokenRequestBody.swift in Sources */,
 				61E76E1D1FB46F1200AE5FB4 /* CoreDataProductVariantAdapter.swift in Sources */,
 				616A8ADD1FE82F670013E41F /* CategoryCollectionViewCell.swift in Sources */,
 				61EC8D7520334D070001FF2B /* CheckoutAddressListViewModel.swift in Sources */,
@@ -5002,6 +5253,7 @@
 				0B4EA3461FFB8EDC000C7A80 /* CartButtonViewModel.swift in Sources */,
 				8E45017820179C0600D4CF6E /* TextFieldWrapper.swift in Sources */,
 				61C2ABC31FBB23D500A1E170 /* SignInViewController.swift in Sources */,
+				0BE6547A2097374E008AFD5E /* GalleryEntryResponse.swift in Sources */,
 				61BF1EAB1FAB56D90098B9AA /* LoadingView.swift in Sources */,
 				0BEAB6562010E1A50084AA53 /* String+Placeholder.swift in Sources */,
 				613D41CC202495D3001ECF44 /* CheckoutTableProvider.swift in Sources */,

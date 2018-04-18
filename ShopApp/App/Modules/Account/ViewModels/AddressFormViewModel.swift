@@ -15,6 +15,10 @@ class AddressFormViewModel: BaseViewModel {
     private var countries: [Country] = [] {
         didSet {
             namesOfCountries.onNext(countries.map { $0.name })
+            
+            if !countryText.value.isEmpty {
+                updateStates(with: countryText.value)
+            }
         }
     }
     
@@ -87,13 +91,13 @@ class AddressFormViewModel: BaseViewModel {
         guard let address = address else {
             return
         }
-        countryText.value = address.country ?? ""
+        countryText.value = address.country?.name ?? ""
         firstNameText.value = address.firstName ?? ""
         lastNameText.value = address.lastName ?? ""
         addressText.value = address.address ?? ""
         addressOptionalText.value = address.secondAddress ?? ""
         cityText.value = address.city ?? ""
-        stateText.value = address.state ?? ""
+        stateText.value = address.state?.name ?? ""
         zipText.value = address.zip ?? ""
         phoneText.value = address.phone ?? ""
     }
@@ -105,15 +109,21 @@ class AddressFormViewModel: BaseViewModel {
     private func getAddress() -> Address {
         let address = Address()
         address.id = self.address?.id ?? ""
-        address.country = countryText.value.trimmingCharacters(in: .whitespaces)
         address.firstName = firstNameText.value.trimmingCharacters(in: .whitespaces)
         address.lastName = lastNameText.value.trimmingCharacters(in: .whitespaces)
         address.address = addressText.value.trimmingCharacters(in: .whitespaces)
         address.secondAddress = addressOptionalText.value.trimmingCharacters(in: .whitespaces)
         address.city = cityText.value.trimmingCharacters(in: .whitespaces)
-        address.state = stateText.value.trimmingCharacters(in: .whitespaces)
         address.zip = zipText.value.trimmingCharacters(in: .whitespaces)
         address.phone = phoneText.value.trimmingCharacters(in: .whitespaces)
+        
+        let country = Country()
+        country.name = countryText.value.trimmingCharacters(in: .whitespaces)
+        address.country = country
+        
+        let state = State()
+        state.name = stateText.value.trimmingCharacters(in: .whitespaces)
+        address.state = state
 
         return address
     }

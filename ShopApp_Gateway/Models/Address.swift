@@ -15,8 +15,8 @@ public class Address {
     public var address: String?
     public var secondAddress: String?
     public var city: String?
-    public var country: String?
-    public var state: String?
+    public var country: Country?
+    public var state: State?
     public var zip: String?
     public var phone: String?
 
