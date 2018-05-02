@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -211,7 +211,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="E8X-x7-TTY">
-                                        <rect key="frame" x="15" y="390" width="345" height="21"/>
+                                        <rect key="frame" x="15" y="390" width="345" height="21.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -220,7 +220,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="RpD-it-Hg8">
-                                        <rect key="frame" x="15" y="426" width="345" height="16"/>
+                                        <rect key="frame" x="15" y="426.5" width="345" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -229,7 +229,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <webView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HO6-dp-DAG">
-                                        <rect key="frame" x="15" y="472" width="345" height="1"/>
+                                        <rect key="frame" x="15" y="472.5" width="345" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="cxs-si-zp0"/>
@@ -445,23 +445,23 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="quantityTitleLabel"/>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPo-Xd-N4H" customClass="QuantityTextFieldView" customModule="ShopApp" customModuleProvider="target">
-                                                <rect key="frame" x="138" y="8" width="60" height="40"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YyF-xb-CP5" customClass="QuantityDropDownView" customModule="ShopApp" customModuleProvider="target">
+                                                <rect key="frame" x="138" y="13" width="65" height="30"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="Fbr-12-mLf"/>
-                                                    <constraint firstAttribute="width" constant="60" id="Xw2-p3-ocK"/>
+                                                    <constraint firstAttribute="width" constant="65" id="HKw-bp-Gbm"/>
+                                                    <constraint firstAttribute="height" constant="30" id="m3a-RT-KkT"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="quantityTextFieldView"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="quantityDropDownView"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="HPo-Xd-N4H" firstAttribute="centerY" secondItem="kV7-D8-BJ1" secondAttribute="centerY" id="9rG-FX-Nbi"/>
+                                            <constraint firstItem="YyF-xb-CP5" firstAttribute="leading" secondItem="kV7-D8-BJ1" secondAttribute="trailing" constant="30" id="6Fi-4z-r3p"/>
                                             <constraint firstAttribute="bottom" secondItem="kV7-D8-BJ1" secondAttribute="bottom" constant="20" id="A2g-5H-Lfg"/>
-                                            <constraint firstItem="HPo-Xd-N4H" firstAttribute="leading" secondItem="kV7-D8-BJ1" secondAttribute="trailing" constant="30" id="dqa-6A-EPt"/>
+                                            <constraint firstItem="YyF-xb-CP5" firstAttribute="centerY" secondItem="kV7-D8-BJ1" secondAttribute="centerY" id="BAr-Mg-7D9"/>
                                             <constraint firstItem="kV7-D8-BJ1" firstAttribute="leading" secondItem="yyt-6B-eUF" secondAttribute="leading" constant="20" id="h8W-tF-Ppd"/>
                                             <constraint firstItem="kV7-D8-BJ1" firstAttribute="top" secondItem="yyt-6B-eUF" secondAttribute="top" constant="20" id="xF0-1G-D7A"/>
                                         </constraints>
@@ -713,7 +713,7 @@
                         <outlet property="detailImagesContainer" destination="Ifp-Jb-DEo" id="NEx-f4-ioM"/>
                         <outlet property="optionsContainerViewHeightConstraint" destination="lVY-Vz-JGJ" id="b6i-NH-k7Z"/>
                         <outlet property="priceLabel" destination="40U-Lo-b1L" id="6bb-3l-k40"/>
-                        <outlet property="quantityTextFieldView" destination="HPo-Xd-N4H" id="urN-Zv-gA9"/>
+                        <outlet property="quantityDropDownView" destination="YyF-xb-CP5" id="9OX-0c-CMH"/>
                         <outlet property="quantityTitleLabel" destination="kV7-D8-BJ1" id="ybL-G3-KKl"/>
                         <outlet property="relatedItemsHeaderView" destination="Abb-dJ-X8r" id="tUP-2K-Okt"/>
                         <outlet property="relatedItemsView" destination="yXx-nC-ut5" id="PRK-Zm-upu"/>
@@ -997,8 +997,8 @@
         <image name="search_selected" width="27" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="T0f-wT-zRb"/>
-        <segue reference="OyI-Tn-rEV"/>
-        <segue reference="Dq7-PS-rRI"/>
+        <segue reference="RyX-CT-HJC"/>
+        <segue reference="DJ8-dD-zkt"/>
+        <segue reference="L85-9n-ESO"/>
     </inferredMetricsTieBreakers>
 </document>

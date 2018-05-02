@@ -35,6 +35,8 @@
 "Alert.LoggedIn" = "You have been successfully logged in";
 "Alert.LoggedOut" = "You have been successfully logged out";
 "Alert.ProfileChanged" = "Profile has been changed";
+"Alert.Quantity" = "Quantity";
+"Alert.EnterQuantity" = "Enter quantity";
 
 "Button.Sort" = "Sort";
 "Button.AddToCart" = "Add to cart";
@@ -148,6 +150,7 @@
 "Label.WeAccept" = "We Accept";
 "Label.SomethingHappened" = "Something happened...";
 "Label.PurchaseCouldntBeCompleted" = "Your purchse couldn't be completed";
+"Label.PlusMore" = "+ more";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

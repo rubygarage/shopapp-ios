@@ -102,6 +102,15 @@ class CartViewController: BaseViewController<CartViewModel>, CartEmptyDataViewDe
         viewModel.update(cartProduct: cartProduct, quantity: quantity)
     }
     
+    func tableViewCell(_ tableViewCell: CartTableViewCell, didSelectMoreFor cartProduct: CartProduct, with quantity: Int) {
+        showQuantityAlert(with: quantity) { [weak self] text in
+            guard let strongSelf = self, let newQuantity = Int(text) else {
+                return
+            }
+            strongSelf.viewModel.update(cartProduct: cartProduct, quantity: newQuantity)
+        }
+    }
+    
     // MARK: - SwipeTableViewCellDelegate
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {

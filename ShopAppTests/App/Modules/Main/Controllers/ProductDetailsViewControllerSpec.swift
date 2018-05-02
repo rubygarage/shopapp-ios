@@ -26,7 +26,7 @@ class ProductDetailsViewControllerSpec: QuickSpec {
         var descriptionLabel: UILabel!
         var priceLabel: UILabel!
         var quantityTitleLabel: UILabel!
-        var quantityTextFieldView: QuantityTextFieldView!
+        var quantityDropDownView: QuantityDropDownView!
         var addToCartButton: UIButton!
         var bottomView: UIView!
         var relatedItemsHeaderView: SeeAllTableHeaderView!
@@ -45,7 +45,7 @@ class ProductDetailsViewControllerSpec: QuickSpec {
             descriptionLabel = self.findView(withAccessibilityLabel: "descriptionLabel", in: viewController.view) as! UILabel
             priceLabel = self.findView(withAccessibilityLabel: "priceLabel", in: viewController.view) as! UILabel
             quantityTitleLabel = self.findView(withAccessibilityLabel: "quantityTitleLabel", in: viewController.view) as! UILabel
-            quantityTextFieldView = self.findView(withAccessibilityLabel: "quantityTextFieldView", in: viewController.view) as! QuantityTextFieldView
+            quantityDropDownView = self.findView(withAccessibilityLabel: "quantityDropDownView", in: viewController.view) as! QuantityDropDownView
             addToCartButton = self.findView(withAccessibilityLabel: "addToCartButton", in: viewController.view) as! UIButton
             bottomView = self.findView(withAccessibilityLabel: "bottomView", in: viewController.view)
             relatedItemsHeaderView = self.findView(withAccessibilityLabel: "relatedItemsHeaderView", in: viewController.view) as! SeeAllTableHeaderView
@@ -160,22 +160,22 @@ class ProductDetailsViewControllerSpec: QuickSpec {
             }
             
             it("should update quantity in view model") {
-                quantityTextFieldView.text = "5"
-                quantityTextFieldView.textField.sendActions(for: .editingDidEnd)
+                quantityDropDownView.text = "5"
+                quantityDropDownView.textField.sendActions(for: .editingDidEnd)
                 
                 expect(viewController.viewModel.quantity.value) == 5
             }
             
             it("should set default value to view model") {
-                quantityTextFieldView.text = nil
-                quantityTextFieldView.textField.sendActions(for: .editingDidEnd)
+                quantityDropDownView.text = nil
+                quantityDropDownView.textField.sendActions(for: .editingDidEnd)
                 
                 expect(viewController.viewModel.quantity.value) == 1
             }
             
             it("should set default value to view model") {
-                quantityTextFieldView.text = ""
-                quantityTextFieldView.textField.sendActions(for: .editingDidEnd)
+                quantityDropDownView.text = ""
+                quantityDropDownView.textField.sendActions(for: .editingDidEnd)
                 
                 expect(viewController.viewModel.quantity.value) == 1
             }

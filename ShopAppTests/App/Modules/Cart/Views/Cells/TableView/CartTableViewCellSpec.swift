@@ -16,7 +16,7 @@ class CartTableViewCellSpec: QuickSpec {
     override func spec() {
         var cell: CartTableViewCell!
         var quantityLabel: UILabel!
-        var quantityTextFieldView: QuantityTextFieldView!
+        var quantityDropDownView: QuantityDropDownView!
         var variantImageView: UIImageView!
         var variantTitleLabel: UILabel!
         var totalPriceLabel: UILabel!
@@ -37,7 +37,7 @@ class CartTableViewCellSpec: QuickSpec {
             cell.cellDelegate = delegateMock
             
             quantityLabel = self.findView(withAccessibilityLabel: "quantityLabel", in: cell) as! UILabel
-            quantityTextFieldView = self.findView(withAccessibilityLabel: "quantityTextFieldView", in: cell) as! QuantityTextFieldView
+            quantityDropDownView = self.findView(withAccessibilityLabel: "quantityDropDownView", in: cell) as! QuantityDropDownView
             variantImageView = self.findView(withAccessibilityLabel: "variantImageView", in: cell) as! UIImageView
             variantTitleLabel = self.findView(withAccessibilityLabel: "variantTitleLabel", in: cell) as! UILabel
             totalPriceLabel = self.findView(withAccessibilityLabel: "totalPriceLabel", in: cell) as! UILabel
@@ -54,7 +54,7 @@ class CartTableViewCellSpec: QuickSpec {
             }
             
             it("should have correct quantity text field delegate") {
-                expect(quantityTextFieldView.delegate) === cell
+                expect(quantityDropDownView.delegate) === cell
             }
             
             it("should have hidden price per one label") {
@@ -79,7 +79,7 @@ class CartTableViewCellSpec: QuickSpec {
                 }
                 
                 it("should have correct quantity label text") {
-                    expect(quantityTextFieldView.text) == "0"
+                    expect(quantityDropDownView.text) == "0"
                 }
                 
                 it("should have correct total price label text") {
@@ -119,7 +119,7 @@ class CartTableViewCellSpec: QuickSpec {
                 }
                 
                 it("should have correct quantity label text") {
-                    expect(quantityTextFieldView.text) == "10"
+                    expect(quantityDropDownView.text) == "10"
                 }
                 
                 it("should have correct total price label text") {
@@ -182,36 +182,33 @@ class CartTableViewCellSpec: QuickSpec {
         }
         
         describe("when quantity updated") {
-            context("if cart product exist") {
-                var cartProduct: CartProduct!
-                
-                beforeEach {
-                    cartProduct = CartProduct()
-                    cell.configure(with: cartProduct)
-                }
-                
-                it("should update cart product quantity") {
-                    quantityTextFieldView.text = "5"
-                    quantityTextFieldView.textField.sendActions(for: .editingDidEnd)
+            var cartProduct: CartProduct!
+            
+            beforeEach {
+                cartProduct = CartProduct()
+                cell.configure(with: cartProduct)
+            }
+            
+            context("if quantity less than 5") {
+                it("should notify delegate") {
+                    quantityDropDownView.text = "3"
+                    quantityDropDownView.textField.sendActions(for: .editingDidEnd)
                     
                     expect(delegateMock.cell) == cell
                     expect(delegateMock.updatedCartProduct) === cartProduct
-                    expect(delegateMock.updatedQuantity) == 5
+                    expect(delegateMock.updatedQuantity) == 3
                 }
             }
             
-            context("and if it nil") {
-                beforeEach {
-                    cell.configure(with: nil)
-                }
-                
-                it("should not update cart product quantity") {
-                    quantityTextFieldView.text = "5"
-                    quantityTextFieldView.textField.sendActions(for: .editingDidEnd)
+            context("if quantity more than 5") {
+                it("should notify delegate") {
+                    let count = 10
+                    let view = QuantityDropDownView()
+                    cell.quantityDropDownView(view, didSelectMoreWith: count)
                     
-                    expect(delegateMock.cell).to(beNil())
-                    expect(delegateMock.updatedCartProduct).to(beNil())
-                    expect(delegateMock.updatedQuantity) == 0
+                    expect(delegateMock.cell) == cell
+                    expect(delegateMock.updatedCartProduct) === cartProduct
+                    expect(delegateMock.updatedQuantity) == count
                 }
             }
         }
