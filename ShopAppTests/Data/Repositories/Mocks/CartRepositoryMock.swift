@@ -15,10 +15,12 @@ class CartRepositoryMock: CartRepository {
     var isGetCartProductListStarted = false
     var isAddCartProductStarted = false
     var isDeleteProductFromCartStarted = false
+    var isDeleteProductsFromCartStarted = false
     var isDeleteAllProductsFromCartStarted = false
     var isChangeCartProductQuantityStarted = false
     var cartProduct: CartProduct?
     var productVariantId: String?
+    var productVariantIds: [String?]?
     var quantity: Int?
     
     func getCartProductList(callback: @escaping ([CartProduct]?, RepoError?) -> Void) {
@@ -39,6 +41,14 @@ class CartRepositoryMock: CartRepository {
         isDeleteProductFromCartStarted = true
         
         self.productVariantId = productVariantId
+        
+        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+    }
+    
+    func deleteProductsFromCart(with productVariantIds: [String?], callback: @escaping RepoCallback<Bool>) {
+        isDeleteProductsFromCartStarted = true
+        
+        self.productVariantIds = productVariantIds
         
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }

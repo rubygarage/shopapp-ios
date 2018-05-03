@@ -16,6 +16,7 @@ class APIMock: API {
     var isGetProductListStarted = false
     var isGetProductStarted = false
     var isSearchProductsStarted = false
+    var isGetProductVariantListStarted = false
     var isGetCategoryListStarted = false
     var isGetCategoryStarted = false
     var isGetArticleListStarted = false
@@ -65,6 +66,7 @@ class APIMock: API {
     var checkout: Checkout?
     var billingAddress: Address?
     var customerEmail: String?
+    var ids: [String]?
     
     // MARK: - Shop
     
@@ -103,6 +105,14 @@ class APIMock: API {
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
         self.searchQuery = searchQuery
+        
+        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+    }
+    
+    func getProductVariantList(ids: [String], callback: @escaping RepoCallback<[ProductVariant]>) {
+        isGetProductVariantListStarted = true
+        
+        self.ids = ids
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
     }

@@ -26,4 +26,8 @@ public class ShopAppProductRepository: ProductRepository {
     public func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping RepoCallback<[Product]>) {
         api.searchProducts(perPage: perPage, paginationValue: paginationValue, searchQuery: searchQuery, callback: callback)
     }
+    
+    public func getProductVariantList(ids: [String], callback: @escaping RepoCallback<[ProductVariant]>) {
+        api.getProductVariantList(ids: ids, callback: callback)
+    }
 }

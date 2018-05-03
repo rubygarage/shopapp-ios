@@ -121,6 +121,40 @@ class CoreDataDAOSpec: QuickSpec {
             }
         }
         
+        describe("when cart products by ids should be delete") {
+            it("should delete selected entities") {
+                let productVariantId = "id1"
+                let productVariantToDeleteId = "id2"
+                let allProductVariantIds = [productVariantId, productVariantToDeleteId]
+                
+                waitUntil(timeout: 10) { done in
+                    CoreStore.perform(asynchronous: { transaction in
+                        allProductVariantIds.forEach({
+                            let entity = transaction.create(Into<CartProductEntity>())
+                            entity.productVariant = transaction.create(Into<ProductVariantEntity>())
+                            entity.productVariant?.id = $0
+                        })
+                    }, completion: { _ in
+                        dao.deleteProductsFromCart(with: [productVariantToDeleteId]) { (_, _) in
+                            var numberOfEntities: Int?
+                            var existProductVariantIds: [String?]?
+                            
+                            CoreStore.perform(asynchronous: { transaction in
+                                numberOfEntities = transaction.fetchCount(From<CartProductEntity>())
+                                let all = transaction.fetchAll(From<CartProductEntity>())
+                                existProductVariantIds = all?.map({ $0.productVariant?.id })
+                            }, completion: { _ in
+                                expect(numberOfEntities) == 1
+                                expect(existProductVariantIds).to(equal([productVariantId]))
+                                
+                                done()
+                            })
+                        }
+                    })
+                }
+            }
+        }
+        
         describe("when all cart products should be delete") {
             it("needs to delete all entities") {
                 waitUntil(timeout: 10) { done in

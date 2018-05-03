@@ -68,6 +68,24 @@ class CoreDataDAO: DAO {
         })
     }
     
+    func deleteProductsFromCart(with productVariantIds: [String?], callback: @escaping RepoCallback<Bool>) {
+        let ids: [String] = productVariantIds.filter({ $0 != nil }).map({ $0! })
+        let predicate = getPredicate(with: ids)
+        
+        CoreStore.perform(asynchronous: { transaction in
+            if let items = transaction.fetchAll(From<CartProductEntity>(), Where(predicate)) {
+                transaction.delete(items)
+            }
+        }, completion: { result in
+            switch result {
+            case .success:
+                callback(true, nil)
+            case .failure(let error):
+                callback(false, RepoError(with: error))
+            }
+        })
+    }
+    
     func deleteAllProductsFromCart(with callback: @escaping RepoCallback<Bool>) {
         CoreStore.perform(asynchronous: { transaction in
             transaction.deleteAll(From<CartProductEntity>())
@@ -100,5 +118,9 @@ class CoreDataDAO: DAO {
     private func getPredicate(with productVariantId: String?) -> NSPredicate {
         let variantId = productVariantId ?? ""
         return NSPredicate(format: "productVariant.id == %@", variantId)
+    }
+    
+    private func getPredicate(with productVariantsIds: [String]) -> NSPredicate {
+        return NSPredicate(format: "productVariant.id IN %@", productVariantsIds)
     }
 }

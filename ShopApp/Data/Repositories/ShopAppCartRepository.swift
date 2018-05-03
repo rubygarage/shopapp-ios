@@ -27,6 +27,10 @@ class ShopAppCartRepository: CartRepository {
         dao.deleteProductFromCart(with: productVariantId, callback: callback)
     }
     
+    func deleteProductsFromCart(with productVariantIds: [String?], callback: @escaping RepoCallback<Bool>) {
+        dao.deleteProductsFromCart(with: productVariantIds, callback: callback)
+    }
+    
     func deleteAllProductsFromCart(with callback: @escaping RepoCallback<Bool>) {
         dao.deleteAllProductsFromCart(with: callback)
     }

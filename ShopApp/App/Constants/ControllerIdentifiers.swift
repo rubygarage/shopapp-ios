@@ -41,4 +41,6 @@ struct ControllerIdentifiers {
     static let settings = "SettingsControllerIdentifier"
     static let accountAddressForm = "AccountAddressFormControllerIdentifier"
     static let imagesCarousel = "ImagesCarouselControllerIdentifier"
+    static let tabBar = "TabBarControllerIdentifier"
+    static let splash = "SplashControllerIdentifier"
 }

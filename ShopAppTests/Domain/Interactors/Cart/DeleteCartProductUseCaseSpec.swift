@@ -59,5 +59,43 @@ class DeleteCartProductUseCaseSpec: QuickSpec {
                 }
             }
         }
+        
+        describe("when products should be delete") {
+            var productVariantIds: [String?]!
+            
+            beforeEach {
+                productVariantIds = ["id"]
+            }
+            
+            context("if callback has result") {
+                it("needs to handle result") {
+                    repositoryMock.isNeedToReturnError = false
+                    
+                    useCase.deleteProductsFromCart(with: productVariantIds) { (result, error) in
+                        expect(repositoryMock.isDeleteProductsFromCartStarted) == true
+                        
+                        expect(repositoryMock.productVariantIds).to(equal(productVariantIds))
+                        
+                        expect(result) == true
+                        expect(error).to(beNil())
+                    }
+                }
+            }
+            
+            context("if callback has error") {
+                it("needs to handle error") {
+                    repositoryMock.isNeedToReturnError = true
+                    
+                    useCase.deleteProductsFromCart(with: productVariantIds) { (result, error) in
+                        expect(repositoryMock.isDeleteProductsFromCartStarted) == true
+                        
+                        expect(repositoryMock.productVariantIds).to(equal(productVariantIds))
+                        
+                        expect(result) == false
+                        expect(error).toNot(beNil())
+                    }
+                }
+            }
+        }
     }
 }

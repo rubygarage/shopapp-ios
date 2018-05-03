@@ -60,6 +60,10 @@ class MainAssembly: Assembly {
         container.storyboardInitCompleted(ProductOptionsViewController.self) { r, c in
             c.collectionProvider = r.resolve(ProductOptionsCollectionProvider.self)
         }
+        
+        container.storyboardInitCompleted(SplashViewController.self) { (r, c) in
+            c.viewModel = r.resolve(SplashViewModel.self)!
+        }
 
         // MARK: - View models
 
@@ -100,6 +104,12 @@ class MainAssembly: Assembly {
 
         container.register(CartButtonViewModel.self) { r in
             return CartButtonViewModel(cartProductListUseCase: r.resolve(CartProductListUseCase.self)!)
+        }
+        
+        container.register(SplashViewModel.self) { r in
+            return SplashViewModel(cartProductListUseCase: r.resolve(CartProductListUseCase.self)!,
+                                   cartValidationUseCase: r.resolve(CartValidationUseCase.self)!,
+                                   deleteCartProductUseCase: r.resolve(DeleteCartProductUseCase.self)!)
         }
         
         // MARK: - Providers

@@ -15,6 +15,7 @@ class ProductRepositoryMock: ProductRepository {
     var isGetProductListStarted = false
     var isGetProductStarted = false
     var isSearchProductsStarted = false
+    var isGetProductVariantListStarted = false
     var perPage: Int?
     var paginationValue: String?
     var sortBy: SortingValue?
@@ -23,6 +24,7 @@ class ProductRepositoryMock: ProductRepository {
     var reverse: Bool?
     var id: String?
     var searchQuery: String?
+    var ids: [String]?
     
     func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, keyPhrase: String?, excludePhrase: String?, reverse: Bool, callback: @escaping RepoCallback<[Product]>) {
         isGetProductListStarted = true
@@ -51,6 +53,14 @@ class ProductRepositoryMock: ProductRepository {
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
         self.searchQuery = searchQuery
+        
+        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+    }
+    
+    func getProductVariantList(ids: [String], callback: @escaping RepoCallback<[ProductVariant]>) {
+        isGetProductVariantListStarted = true
+        
+        self.ids = ids
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
     }

@@ -149,8 +149,10 @@
 "Label.YourOrderNumber" = "Your order number is %@";
 "Label.WeAccept" = "We Accept";
 "Label.SomethingHappened" = "Something happened...";
-"Label.PurchaseCouldntBeCompleted" = "Your purchse couldn't be completed";
+"Label.PurchaseCouldntBeCompleted" = "Your purchase couldn't be completed";
 "Label.PlusMore" = "+ more";
+"Label.ShopApp" = "ShopApp";
+"Label.Loading" = "Loading...";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

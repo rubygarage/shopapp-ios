@@ -122,6 +122,44 @@ class ShopAppCartRepositorySpec: QuickSpec {
             }
         }
         
+        describe("when selected cart products should be delete") {
+            var productVariantIds: [String?]!
+            
+            beforeEach {
+                productVariantIds = ["id"]
+            }
+            
+            context("if callback has result") {
+                it("needs to handle result") {
+                    daoMock.isNeedToReturnError = false
+                    
+                    repository.deleteProductsFromCart(with: productVariantIds) { (result, error) in
+                        expect(daoMock.isDeleteProductsFromCartStarted) == true
+                        
+                        expect(daoMock.productVariantIds).to(equal(productVariantIds))
+                        
+                        expect(result).toNot(beNil())
+                        expect(error).to(beNil())
+                    }
+                }
+            }
+            
+            context("if callback has error") {
+                it("needs to handle error") {
+                    daoMock.isNeedToReturnError = true
+                    
+                    repository.deleteProductsFromCart(with: productVariantIds) { (result, error) in
+                        expect(daoMock.isDeleteProductsFromCartStarted) == true
+                        
+                        expect(daoMock.productVariantIds).to(equal(productVariantIds))
+                        
+                        expect(result).to(beNil())
+                        expect(error).toNot(beNil())
+                    }
+                }
+            }
+        }
+        
         describe("when all cart products should be delete") {
             context("if callback has result") {
                 it("needs to handle result") {

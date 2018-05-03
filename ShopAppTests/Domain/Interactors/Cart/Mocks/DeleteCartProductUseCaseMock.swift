@@ -16,4 +16,8 @@ class DeleteCartProductUseCaseMock: DeleteCartProductUseCase {
     override func deleteProductFromCart(productVariantId: String?, _ callback: @escaping RepoCallback<Bool>) {
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
+    
+    override func deleteProductsFromCart(with productVariantIds: [String?], callback: @escaping RepoCallback<Bool>) {
+        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+    }
 }

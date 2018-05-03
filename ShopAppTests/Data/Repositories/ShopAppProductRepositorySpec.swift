@@ -163,5 +163,42 @@ class ShopAppProductRepositorySpec: QuickSpec {
                 }
             }
         }
+        
+        describe("when product variant list should be get") {
+            var ids: [String]!
+            
+            beforeEach {
+                ids = ["id1"]
+            }
+            
+            context("if callback has result") {
+                it("needs to handle result") {
+                    apiMock.isNeedToReturnError = false
+                    
+                    repository.getProductVariantList(ids: ids) { (result, error) in
+                        expect(apiMock.isGetProductVariantListStarted) == true
+                        
+                        expect(apiMock.ids) == ids
+                        
+                        expect(result).toNot(beNil())
+                        expect(error).to(beNil())
+                    }
+                }
+            }
+            context("if callback has error") {
+                it("needs to handle error") {
+                    apiMock.isNeedToReturnError = true
+                    
+                    repository.getProductVariantList(ids: ids) { (result, error) in
+                        expect(apiMock.isGetProductVariantListStarted) == true
+                        
+                        expect(apiMock.ids) == ids
+                        
+                        expect(result).to(beNil())
+                        expect(error).toNot(beNil())
+                    }
+                }
+            }
+        }
     }
 }
