@@ -8,6 +8,8 @@
 
 import Alamofire
 
+typealias FilterParameterPair = (field: String, value: String)
+
 enum FilterCondition: String {
     case equal = "eq"
     case notEqual = "neq"
@@ -39,12 +41,24 @@ class ProductsParametersBuilder {
     private var sortOrderParameters = Parameters()
     private var paginationParameters = Parameters()
     
-    func addFilterParameters(field: String, value: String, condition: FilterCondition = .equal) -> ProductsParametersBuilder {
+    func addFilterParameters(pair: FilterParameterPair, condition: FilterCondition = .equal) -> ProductsParametersBuilder {
         let index = String(filterParameters.count / filterParametersCount)
         
-        filterParameters[SearchCriteriasBuilder().addFilterGroupsCriteria(with: index, filterCriteria: .field).build()] = field
-        filterParameters[SearchCriteriasBuilder().addFilterGroupsCriteria(with: index, filterCriteria: .value).build()] = value
+        filterParameters[SearchCriteriasBuilder().addFilterGroupsCriteria(with: index, filterCriteria: .field).build()] = pair.field
+        filterParameters[SearchCriteriasBuilder().addFilterGroupsCriteria(with: index, filterCriteria: .value).build()] = pair.value
         filterParameters[SearchCriteriasBuilder().addFilterGroupsCriteria(with: index, filterCriteria: .conditionType).build()] = condition.rawValue
+        
+        return self
+    }
+    
+    func addFilterParameters(pairs: [FilterParameterPair], condition: FilterCondition = .equal) -> ProductsParametersBuilder {
+        let primaryIndex = String(filterParameters.count / filterParametersCount)
+        
+        for secondaryIndex in 0..<pairs.count {
+            filterParameters[SearchCriteriasBuilder().addFilterGroupsCriteria(with: primaryIndex, secondaryIndex: String(secondaryIndex), filterCriteria: .field).build()] = pairs[secondaryIndex].field
+            filterParameters[SearchCriteriasBuilder().addFilterGroupsCriteria(with: primaryIndex, secondaryIndex: String(secondaryIndex), filterCriteria: .value).build()] = pairs[secondaryIndex].value
+            filterParameters[SearchCriteriasBuilder().addFilterGroupsCriteria(with: primaryIndex, secondaryIndex: String(secondaryIndex), filterCriteria: .conditionType).build()] = condition.rawValue
+        }
         
         return self
     }
@@ -84,11 +98,11 @@ private class SearchCriteriasBuilder {
     
     private var searchCriterias: [String] = []
     
-    func addFilterGroupsCriteria(with index: String, filterCriteria: FilterCriteria) -> SearchCriteriasBuilder {
+    func addFilterGroupsCriteria(with primaryIndex: String, secondaryIndex: String? = nil, filterCriteria: FilterCriteria) -> SearchCriteriasBuilder {
         searchCriterias.append(SearchCriteria.filterGroups.rawValue)
-        searchCriterias.append(index)
+        searchCriterias.append(primaryIndex)
         searchCriterias.append(filters)
-        searchCriterias.append(defaultIndex)
+        searchCriterias.append(secondaryIndex ?? defaultIndex)
         searchCriterias.append(filterCriteria.rawValue)
         
         return self

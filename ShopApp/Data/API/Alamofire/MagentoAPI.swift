@@ -18,6 +18,7 @@ public class MagentoAPI: BaseAPI, API {
     private let searchValueFormat = "%%%@%%"
     private let typeIdField = "type_id"
     private let simpleValue = "simple"
+    private let skuField = "sku"
     private let unauthorizedStatusCode = 401
     private let sessionService = SessionService()
     
@@ -55,10 +56,12 @@ public class MagentoAPI: BaseAPI, API {
         if sortBy.rawValue == SortingValue.createdAt.rawValue {
             _ = builder.addSortOrderParameters(field: createdAtField, isRevers: reverse)
         } else if sortBy.rawValue == SortingValue.type.rawValue, let keyPhrase = keyPhrase {
-            _ = builder.addFilterParameters(field: attributeSetIdField, value: keyPhrase)
+            let attributeSetIdPair = (attributeSetIdField, keyPhrase)
+            _ = builder.addFilterParameters(pair: attributeSetIdPair)
             
             if let excludePhrase = excludePhrase {
-                _ = builder.addFilterParameters(field: nameField, value: excludePhrase, condition: .notEqual)
+                let namePair = (nameField, excludePhrase)
+                _ = builder.addFilterParameters(pair: namePair, condition: .notEqual)
             }
         }
 
@@ -98,8 +101,11 @@ public class MagentoAPI: BaseAPI, API {
     
     public func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping RepoCallback<[Product]>) {
         var currentPaginationValue = defaultPaginationValue
+        let nameValue = String(format: searchValueFormat, arguments: [searchQuery])
+        let namePair = (nameField, nameValue)
+        
         let builder = ProductsParametersBuilder()
-            .addFilterParameters(field: nameField, value: String(format: searchValueFormat, arguments: [searchQuery]), condition: .like)
+            .addFilterParameters(pair: namePair, condition: .like)
         
         if let paginationValue = paginationValue as? String, let castedPaginationValue = Int(paginationValue) {
             currentPaginationValue = castedPaginationValue
@@ -109,8 +115,41 @@ public class MagentoAPI: BaseAPI, API {
     }
     
     public func getProductVariantList(ids: [String], callback: @escaping RepoCallback<[ProductVariant]>) {
-        // TODO: Implement api method
-        callback([], nil)
+        getStoreConfigs { [weak self] (сurrency, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            
+            guard error == nil, let сurrency = сurrency else {
+                callback(nil, error ?? ContentError())
+                
+                return
+            }
+            
+            let typeIdPair = (strongSelf.typeIdField, strongSelf.simpleValue)
+            let skuPairs = ids.map { (strongSelf.skuField, $0) }
+            
+            let parameters = ProductsParametersBuilder()
+                .addFilterParameters(pair: typeIdPair)
+                .addFilterParameters(pairs: skuPairs)
+                .build()
+            
+            let route = MagentoProductsRoute.getProducts(parameters: parameters)
+            let request = MagentoProductsRouter(route: route)
+            
+            strongSelf.execute(request) { (response, error) in
+                guard error == nil, let json = response as? [String: Any], let response = GetProductListResponse.object(from: json) else {
+                    callback(nil, error ?? ContentError())
+                    
+                    return
+                }
+                
+                let products = response.items.map { MagentoProductAdapter.adapt($0, currency: сurrency) }
+                let productVariants = products.map { MagentoProductVariantAdapter.adapt($0) }
+                
+                callback(productVariants, nil)
+            }
+        }
     }
     
     // MARK: - Categories
@@ -617,8 +656,10 @@ public class MagentoAPI: BaseAPI, API {
                 return
             }
             
+            let typeIdPair = (strongSelf.typeIdField, strongSelf.simpleValue)
+            
             let parameters = builder
-                .addFilterParameters(field: strongSelf.typeIdField, value: strongSelf.simpleValue)
+                .addFilterParameters(pair: typeIdPair)
                 .addPaginationParameters(pageSize: perPage, currentPage: paginationValue)
                 .build()
             

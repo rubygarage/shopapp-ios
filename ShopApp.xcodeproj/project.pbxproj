@@ -226,6 +226,7 @@
 		0BA630791FFFC554007088B8 /* OrderItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA630781FFFC554007088B8 /* OrderItemTableViewCell.swift */; };
 		0BA8F3C0209B3B47000878C5 /* MagentoStoreRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA8F3BF209B3B47000878C5 /* MagentoStoreRouter.swift */; };
 		0BA8F3C2209B3C85000878C5 /* StoreConfigResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA8F3C1209B3C85000878C5 /* StoreConfigResponse.swift */; };
+		0BA8F3C4209C7083000878C5 /* MagentoProductVariantAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA8F3C3209C7083000878C5 /* MagentoProductVariantAdapter.swift */; };
 		0BADF10D20288D2D0013DA67 /* OrderListEmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BADF10C20288D2D0013DA67 /* OrderListEmptyDataView.swift */; };
 		0BADF10F20288D370013DA67 /* OrderListEmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BADF10E20288D370013DA67 /* OrderListEmptyDataView.xib */; };
 		0BADF1122028946F0013DA67 /* CategoryEmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BADF1112028946F0013DA67 /* CategoryEmptyDataView.swift */; };
@@ -950,6 +951,7 @@
 		0BA630781FFFC554007088B8 /* OrderItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemTableViewCell.swift; sourceTree = "<group>"; };
 		0BA8F3BF209B3B47000878C5 /* MagentoStoreRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagentoStoreRouter.swift; sourceTree = "<group>"; };
 		0BA8F3C1209B3C85000878C5 /* StoreConfigResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreConfigResponse.swift; sourceTree = "<group>"; };
+		0BA8F3C3209C7083000878C5 /* MagentoProductVariantAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagentoProductVariantAdapter.swift; sourceTree = "<group>"; };
 		0BADF10C20288D2D0013DA67 /* OrderListEmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListEmptyDataView.swift; sourceTree = "<group>"; };
 		0BADF10E20288D370013DA67 /* OrderListEmptyDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderListEmptyDataView.xib; sourceTree = "<group>"; };
 		0BADF1112028946F0013DA67 /* CategoryEmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEmptyDataView.swift; sourceTree = "<group>"; };
@@ -2953,6 +2955,7 @@
 				0B81CD662088BAA4000D91D4 /* MagentoCustomerAdapter.swift */,
 				0BE6547F209A0A3E008AFD5E /* MagentoImageAdapter.swift */,
 				0BE6547B20973A07008AFD5E /* MagentoProductAdapter.swift */,
+				0BA8F3C3209C7083000878C5 /* MagentoProductVariantAdapter.swift */,
 				0B260723208DC9A9001AC77A /* MagentoStateAdapter.swift */,
 			);
 			path = Adapters;
@@ -5089,6 +5092,7 @@
 				0BEF52C21FF5402900E50080 /* ProductListUseCase.swift in Sources */,
 				0B953D502020C4F500DD32DE /* HtmlStringMultimediaCompressor.swift in Sources */,
 				0B24F0F220074F1A00F13224 /* MonthExpiryDatePicker.swift in Sources */,
+				0BA8F3C4209C7083000878C5 /* MagentoProductVariantAdapter.swift in Sources */,
 				617042072018936D0063E369 /* DeleteCartProductsUseCase.swift in Sources */,
 				0B69B577200E2A0300F071E3 /* DeleteCartProductUseCase.swift in Sources */,
 				0B81CD702089C1B2000D91D4 /* UpdatePasswordRequestBody.swift in Sources */,
