@@ -37,6 +37,12 @@ class BaseViewControllerSpec: QuickSpec {
                 expect(viewController.errorView.delegate) === viewController
             }
             
+            it("should have correct critical error view delegate") {
+                _ = viewController.view
+                
+                expect(viewController.criticalErrorView.delegate) === viewController
+            }
+            
             it("should have correct offset in toast view's appearance") {
                 _ = viewController.view
                 
@@ -133,6 +139,7 @@ class BaseViewControllerSpec: QuickSpec {
                         expect(viewController.view.subviews.contains(viewController.loadingView)) == false
                         expect(viewController.view.subviews.contains(viewController.errorView)) == true
                         expect(viewController.errorView.error).to(beAnInstanceOf(ContentError.self))
+                        expect(viewController.view.subviews.contains(viewController.criticalErrorView)) == false
                     }
                 }
                 
@@ -143,6 +150,7 @@ class BaseViewControllerSpec: QuickSpec {
                         expect(viewController.view.subviews.contains(viewController.loadingView)) == false
                         expect(viewController.view.subviews.contains(viewController.errorView)) == true
                         expect(viewController.errorView.error).to(beAnInstanceOf(NetworkError.self))
+                        expect(viewController.view.subviews.contains(viewController.criticalErrorView)) == false
                     }
                 }
                 
@@ -152,17 +160,18 @@ class BaseViewControllerSpec: QuickSpec {
                         
                         expect(viewController.view.subviews.contains(viewController.loadingView)) == false
                         expect(viewController.view.subviews.contains(viewController.errorView)) == false
+                        expect(viewController.view.subviews.contains(viewController.criticalErrorView)) == false
                         expect(ToastCenter.default.currentToast?.text) == "Error.Unknown".localizable
                     }
                 }
                 
                 context("with type critical") {
-                    it("needs to hide all state views and show toast") {
+                    it("needs to hide all state views and show critical error view") {
                         viewModelMock.setCriticalErrorState()
                         
                         expect(viewController.view.subviews.contains(viewController.loadingView)) == false
                         expect(viewController.view.subviews.contains(viewController.errorView)) == false
-                        expect(ToastCenter.default.currentToast?.text) == ""
+                        expect(viewController.view.subviews.contains(viewController.criticalErrorView)) == true
                     }
                 }
                 

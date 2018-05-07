@@ -82,6 +82,7 @@
 "Button.ShippingAddress" = "Shipping Address";
 "Button.TryAgain" = "Try again";
 "Button.BackToShop" = "Back to shop";
+"Button.Back" = "Back";
 
 "SortingValue.CreatedAt" = "The Newest first";
 "SortingValue.PriceHighToLow" = "Price High to Low";
@@ -153,6 +154,8 @@
 "Label.PlusMore" = "+ more";
 "Label.ShopApp" = "ShopApp";
 "Label.Loading" = "Loading...";
+"Label.CouldNotFind" = "Could not find";
+"Label.CouldNotFindItem" = "Could not find %@";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

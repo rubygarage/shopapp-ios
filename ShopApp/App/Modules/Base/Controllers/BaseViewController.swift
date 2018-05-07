@@ -41,7 +41,7 @@ enum ViewState: Equatable {
     }
 }
 
-class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewDelegate {
+class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewDelegate, CriticalErrorViewDelegate {
     private let loadingViewFillAlpha: CGFloat = 1
     private let loadingViewTranslucentAlpha: CGFloat = 0.75
     private let toastBottomOffset: CGFloat = 80
@@ -52,6 +52,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewDelegate 
     private(set) var disposeBag = DisposeBag()
     private(set) var loadingView = LoadingView()
     private(set) var errorView = ErrorView()
+    private(set) var criticalErrorView = CriticalErrorView()
     
     var viewModel: T!
 
@@ -80,6 +81,21 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewDelegate 
         emptyDataView = customEmptyDataView
 
         errorView.delegate = self
+        criticalErrorView.delegate = self
+        
+        switch self {
+        case is ProductDetailsViewController:
+            criticalErrorView.itemType = .product
+        case is CategoryViewController:
+            criticalErrorView.itemType = .category
+        case is ArticleDetailsViewController:
+            criticalErrorView.itemType = .article
+        case is OrderDetailsViewController:
+            criticalErrorView.itemType = .order
+        default:
+            criticalErrorView.itemType = .default
+        }
+        
         ToastView.appearance().bottomOffsetPortrait = toastBottomOffset
     }
     
@@ -138,16 +154,16 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewDelegate 
     
     private func setEmptyState() {
         errorView.removeFromSuperview()
+        criticalErrorView.removeFromSuperview()
         loadingView.removeFromSuperview()
         addSubviewAndConstraints(subview: emptyDataView)
     }
     
     private func process(criticalError: CriticalError?) {
+        errorView.removeFromSuperview()
         loadingView.removeFromSuperview()
-        showToast(with: criticalError?.localizedMessage)
-        if self is HomeViewController == false {
-            setHomeController()
-        }
+        emptyDataView.removeFromSuperview()
+        addSubviewAndConstraints(subview: criticalErrorView)
     }
     
     private func process(nonCriticalError: NonCriticalError?) {
@@ -157,6 +173,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewDelegate 
     
     private func process(contentError: ContentError?) {
         loadingView.removeFromSuperview()
+        criticalErrorView.removeFromSuperview()
         errorView.error = contentError
         addSubviewAndConstraints(subview: errorView)
     }
@@ -164,6 +181,7 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewDelegate 
     private func process(networkError: NetworkError?) {
         loadingView.removeFromSuperview()
         errorView.error = networkError
+        criticalErrorView.removeFromSuperview()
         addSubviewAndConstraints(subview: errorView)
     }
     
@@ -187,5 +205,11 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewDelegate 
 
     func viewDidTapTryAgain(_ view: ErrorView) {
         viewModel?.tryAgain()
+    }
+    
+    // MARK: - CriticalErrorViewDelegate
+    
+    func criticalErrorViewDidTapBack(_ view: CriticalErrorView) {
+        navigationController?.popViewController(animated: true)
     }
 }

@@ -17,7 +17,7 @@ protocol ErrorViewDelegate: class {
 class ErrorView: UIView {
     @IBOutlet private weak var errorTextLabel: UILabel!
     @IBOutlet private weak var errorImageView: UIImageView!
-    @IBOutlet private weak var tryAgainButton: UIButton!
+    @IBOutlet private weak var tryAgainButton: GrayButton!
     
     weak var delegate: ErrorViewDelegate?
     
@@ -50,6 +50,7 @@ class ErrorView: UIView {
     private func updateUI() {
         errorImageView.isHidden = error is NetworkError == false
         errorTextLabel.text = error is NetworkError ? error?.localizedMessage : "Error.NoConnection".localizable
+        tryAgainButton.setTitle("Button.TryAgain".localizable.uppercased(), for: .normal)
     }
     
     // MARK: - Actions

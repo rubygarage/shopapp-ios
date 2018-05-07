@@ -321,6 +321,9 @@
 		611E73772090AF2100F5658D /* CartValidationUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611E73762090AF2100F5658D /* CartValidationUseCaseMock.swift */; };
 		611E73792090B19C00F5658D /* SplashViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611E73782090B19B00F5658D /* SplashViewModelSpec.swift */; };
 		611E737B2091BF3900F5658D /* CartValidationUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611E737A2091BF3900F5658D /* CartValidationUseCaseSpec.swift */; };
+		611E737E2092284500F5658D /* CriticalErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611E737D2092284500F5658D /* CriticalErrorView.swift */; };
+		611E73802092285500F5658D /* CriticalErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611E737F2092285500F5658D /* CriticalErrorView.xib */; };
+		611E7383209336F100F5658D /* GrayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611E7382209336F100F5658D /* GrayButton.swift */; };
 		6122F5D120528D2400F574BB /* CartViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122F5D020528D2400F574BB /* CartViewControllerSpec.swift */; };
 		6122F5D420528E7C00F574BB /* CartViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122F5D320528E7C00F574BB /* CartViewModelMock.swift */; };
 		6122F5D52052A60400F574BB /* DeleteCartProductUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6186C31920501C3D0057B221 /* DeleteCartProductUseCaseMock.swift */; };
@@ -419,6 +422,8 @@
 		616274092090AA04002CED6F /* SplashViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616274082090AA04002CED6F /* SplashViewControllerSpec.swift */; };
 		616A8ADD1FE82F670013E41F /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616A8ADB1FE82F670013E41F /* CategoryCollectionViewCell.swift */; };
 		616A8ADE1FE82F670013E41F /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 616A8ADC1FE82F670013E41F /* CategoryCollectionViewCell.xib */; };
+		616C600A2099F4CA00DC7486 /* CriticalErrorViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616C60092099F4CA00DC7486 /* CriticalErrorViewSpec.swift */; };
+		616C600C2099F99E00DC7486 /* CriticalErrorViewDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616C600B2099F99E00DC7486 /* CriticalErrorViewDelegateMock.swift */; };
 		616CA6601FF2A0CF00FF14E2 /* CheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616CA65C1FF2A0CE00FF14E2 /* CheckoutViewModel.swift */; };
 		616CA6611FF2A0CF00FF14E2 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616CA65D1FF2A0CE00FF14E2 /* CheckoutViewController.swift */; };
 		616CA6631FF2A2D900FF14E2 /* TTTAttributedLabel+Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616CA6621FF2A2D900FF14E2 /* TTTAttributedLabel+Links.swift */; };
@@ -967,6 +972,9 @@
 		611E73762090AF2100F5658D /* CartValidationUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartValidationUseCaseMock.swift; sourceTree = "<group>"; };
 		611E73782090B19B00F5658D /* SplashViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModelSpec.swift; sourceTree = "<group>"; };
 		611E737A2091BF3900F5658D /* CartValidationUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartValidationUseCaseSpec.swift; sourceTree = "<group>"; };
+		611E737D2092284500F5658D /* CriticalErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticalErrorView.swift; sourceTree = "<group>"; };
+		611E737F2092285500F5658D /* CriticalErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CriticalErrorView.xib; sourceTree = "<group>"; };
+		611E7382209336F100F5658D /* GrayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayButton.swift; sourceTree = "<group>"; };
 		6122F5D020528D2400F574BB /* CartViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewControllerSpec.swift; sourceTree = "<group>"; };
 		6122F5D320528E7C00F574BB /* CartViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModelMock.swift; sourceTree = "<group>"; };
 		6122F5DA2052D6BB00F574BB /* CartTableViewCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCellSpec.swift; sourceTree = "<group>"; };
@@ -1067,6 +1075,8 @@
 		616274082090AA04002CED6F /* SplashViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewControllerSpec.swift; sourceTree = "<group>"; };
 		616A8ADB1FE82F670013E41F /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		616A8ADC1FE82F670013E41F /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		616C60092099F4CA00DC7486 /* CriticalErrorViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticalErrorViewSpec.swift; sourceTree = "<group>"; };
+		616C600B2099F99E00DC7486 /* CriticalErrorViewDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticalErrorViewDelegateMock.swift; sourceTree = "<group>"; };
 		616CA65C1FF2A0CE00FF14E2 /* CheckoutViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewModel.swift; sourceTree = "<group>"; };
 		616CA65D1FF2A0CE00FF14E2 /* CheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		616CA6621FF2A2D900FF14E2 /* TTTAttributedLabel+Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TTTAttributedLabel+Links.swift"; sourceTree = "<group>"; };
@@ -1680,6 +1690,7 @@
 			isa = PBXGroup;
 			children = (
 				0B3AB6F22031C03C00F46A8F /* BasePicker */,
+				611E737C2092282200F5658D /* CriticalErrorView */,
 				61BF1EAE1FAB597C0098B9AA /* ErrorView */,
 				61BF1EA91FAB56C00098B9AA /* LoadingView */,
 				0B3AB6EF203199AF00F46A8F /* PlaceholderedTextField */,
@@ -2264,6 +2275,7 @@
 		0BA6306D1FFFB101007088B8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				611E7381209336D600F5658D /* GrayButton */,
 				0B24F0E820074F1900F13224 /* BlackButton */,
 				0B69B55C200CB1BE00F071E3 /* Cells */,
 				0BA6306E1FFFB10A007088B8 /* Footers */,
@@ -2562,6 +2574,7 @@
 			children = (
 				0BE965A82045AFF800308CA9 /* Mocks */,
 				0BE965AA2045AFF800308CA9 /* BasePickerSpec.swift */,
+				616C60092099F4CA00DC7486 /* CriticalErrorViewSpec.swift */,
 				0BE965AB2045AFF800308CA9 /* ErrorViewSpec.swift */,
 				0B83E00D20504FE60037035D /* PlaceholderedTextFieldSpec.swift */,
 				0B83E00B20504D690037035D /* TextFieldWrapperSpec.swift */,
@@ -2572,6 +2585,7 @@
 		0BE965A82045AFF800308CA9 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				616C600B2099F99E00DC7486 /* CriticalErrorViewDelegateMock.swift */,
 				0BE965A92045AFF800308CA9 /* ErrorViewDelegateMock.swift */,
 			);
 			path = Mocks;
@@ -2820,6 +2834,23 @@
 				610781F11FF63E1B0039355A /* AddressListTableHeaderView.xib */,
 			);
 			path = AddressListTableHeaderView;
+			sourceTree = "<group>";
+		};
+		611E737C2092282200F5658D /* CriticalErrorView */ = {
+			isa = PBXGroup;
+			children = (
+				611E737D2092284500F5658D /* CriticalErrorView.swift */,
+				611E737F2092285500F5658D /* CriticalErrorView.xib */,
+			);
+			path = CriticalErrorView;
+			sourceTree = "<group>";
+		};
+		611E7381209336D600F5658D /* GrayButton */ = {
+			isa = PBXGroup;
+			children = (
+				611E7382209336F100F5658D /* GrayButton.swift */,
+			);
+			path = GrayButton;
 			sourceTree = "<group>";
 		};
 		6122F5D220528E5F00F574BB /* Mocks */ = {
@@ -3937,6 +3968,7 @@
 				6180AC031F72CD14007768F2 /* Localizable.strings in Resources */,
 				0BADF1142028947B0013DA67 /* CategoryEmptyDataView.xib in Resources */,
 				61EA41E3208A23DB00E3F7AC /* QuantityDropDownView.xib in Resources */,
+				611E73802092285500F5658D /* CriticalErrorView.xib in Resources */,
 				0B6D15642024848B000DDA14 /* SortVariantTableViewCell.xib in Resources */,
 				61BF1EB01FAB598C0098B9AA /* ErrorView.xib in Resources */,
 				0B9426571FFE468C00A986AB /* OrderHeaderView.xib in Resources */,
@@ -4316,6 +4348,7 @@
 				0B83E0392056CEE10037035D /* CategoryListUseCaseMock.swift in Sources */,
 				0B764725204841450019D2CE /* OrderItemTableViewCellSpec.swift in Sources */,
 				0BE9659E2044608B00308CA9 /* PersonalInfoViewModelSpec.swift in Sources */,
+				616C600C2099F99E00DC7486 /* CriticalErrorViewDelegateMock.swift in Sources */,
 				0BE9657A2040056F00308CA9 /* SignUpUseCaseMock.swift in Sources */,
 				0BE9657E204007A600308CA9 /* ShopRepositoryMock.swift in Sources */,
 				6130DE7C2063E43200BAA833 /* String+ValidatorSpec.swift in Sources */,
@@ -4336,6 +4369,7 @@
 				614ED7D9203F0A5400435708 /* OrderDetailsTableProviderSpec.swift in Sources */,
 				614C80C32046DC63006A99E0 /* TabBarControllerSpec.swift in Sources */,
 				61ABAF502059481700D73392 /* ProductUseCaseMock.swift in Sources */,
+				616C600A2099F4CA00DC7486 /* CriticalErrorViewSpec.swift in Sources */,
 				61C64B8A20667D900037665C /* UIViewController+BarButtonItemsSpec.swift in Sources */,
 				616274092090AA04002CED6F /* SplashViewControllerSpec.swift in Sources */,
 				614ED7DF203F0D9500435708 /* OrderDetailsViewModelMock.swift in Sources */,
@@ -4459,6 +4493,7 @@
 				0BE6E484200644C800EAEC76 /* ProductOptionsCollectionViewCell.swift in Sources */,
 				8ED91FB22034612700E9692A /* CreditCard+Details.swift in Sources */,
 				0B4EA34E1FFCCC29000C7A80 /* LinkViewController.swift in Sources */,
+				611E737E2092284500F5658D /* CriticalErrorView.swift in Sources */,
 				0B0955B42068FC1A00CABE29 /* ShopAppCartRepository.swift in Sources */,
 				610781F01FF63E130039355A /* AddressListTableHeaderView.swift in Sources */,
 				61D7A2861F7A9FBF00031093 /* UIViewController+BarButtonItems.swift in Sources */,
@@ -4643,6 +4678,7 @@
 				0BA630661FFE8BC4007088B8 /* OrderUseCase.swift in Sources */,
 				0BEF52CF1FF6469900E50080 /* ArticleTableViewCell.swift in Sources */,
 				6119F2E91FA88ABE00564859 /* HomeViewModel.swift in Sources */,
+				611E7383209336F100F5658D /* GrayButton.swift in Sources */,
 				0B09559A2068FB0000CABE29 /* ArticleRepository.swift in Sources */,
 				612812B52020DAEB0048013B /* CheckoutAddressFormViewController.swift in Sources */,
 				0BA630721FFFB164007088B8 /* PaymentDetailsFooterView.swift in Sources */,
