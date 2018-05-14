@@ -388,6 +388,9 @@
 		614142C61F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 614142C41F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib */; };
 		614142D31F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614142D11F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.swift */; };
 		614142D41F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 614142D21F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.xib */; };
+		6141712820A9C68D002BEFD3 /* CheckboxButtonSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6141712320A9C68D002BEFD3 /* CheckboxButtonSpec.swift */; };
+		6141712920A9C68D002BEFD3 /* AddressListHeaderViewDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6141712620A9C68D002BEFD3 /* AddressListHeaderViewDelegateMock.swift */; };
+		6141712A20A9C68D002BEFD3 /* AddressListTableHeaderViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6141712720A9C68D002BEFD3 /* AddressListTableHeaderViewSpec.swift */; };
 		614B6DE920582FCE0000356E /* LastArrivalsTableCellProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614B6DE820582FCE0000356E /* LastArrivalsTableCellProviderSpec.swift */; };
 		614B6DEB205836CA0000356E /* LastArrivalsTableCellProviderDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614B6DEA205836CA0000356E /* LastArrivalsTableCellProviderDelegateMock.swift */; };
 		614B6DED205840D30000356E /* PopularTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614B6DEC205840D30000356E /* PopularTableViewCellSpec.swift */; };
@@ -572,8 +575,6 @@
 		61ED88F31F7170C9006BDA79 /* GridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ED88F11F7170C9006BDA79 /* GridCollectionViewCell.swift */; };
 		61ED88F41F7170C9006BDA79 /* GridCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61ED88F21F7170C9006BDA79 /* GridCollectionViewCell.xib */; };
 		61ED88F71F7171F1006BDA79 /* GridCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ED88F61F7171F1006BDA79 /* GridCollectionViewController.swift */; };
-		61F9BF2C209C7C3700D436F1 /* AddressListTableHeaderViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F9BF2B209C7C3700D436F1 /* AddressListTableHeaderViewSpec.swift */; };
-		61F9BF2F209C7F1D00D436F1 /* AddressListHeaderViewDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F9BF2E209C7F1D00D436F1 /* AddressListHeaderViewDelegateMock.swift */; };
 		61FC3DA91F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC3DA71F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift */; };
 		61FC3DAA1F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61FC3DA81F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.xib */; };
 		63527C74722183D42EA35E52 /* Pods_ShopApp_ShopAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D594F134F6B27B147CD34F /* Pods_ShopApp_ShopAppTests.framework */; };
@@ -1041,6 +1042,9 @@
 		614142C41F6AF15B00379BB9 /* LastArrivalsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LastArrivalsTableViewCell.xib; sourceTree = "<group>"; };
 		614142D11F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastArrivalsCollectionViewCell.swift; sourceTree = "<group>"; };
 		614142D21F6BD2A400379BB9 /* LastArrivalsCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LastArrivalsCollectionViewCell.xib; sourceTree = "<group>"; };
+		6141712320A9C68D002BEFD3 /* CheckboxButtonSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckboxButtonSpec.swift; sourceTree = "<group>"; };
+		6141712620A9C68D002BEFD3 /* AddressListHeaderViewDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressListHeaderViewDelegateMock.swift; sourceTree = "<group>"; };
+		6141712720A9C68D002BEFD3 /* AddressListTableHeaderViewSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressListTableHeaderViewSpec.swift; sourceTree = "<group>"; };
 		614B6DE820582FCE0000356E /* LastArrivalsTableCellProviderSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastArrivalsTableCellProviderSpec.swift; sourceTree = "<group>"; };
 		614B6DEA205836CA0000356E /* LastArrivalsTableCellProviderDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastArrivalsTableCellProviderDelegateMock.swift; sourceTree = "<group>"; };
 		614B6DEC205840D30000356E /* PopularTableViewCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTableViewCellSpec.swift; sourceTree = "<group>"; };
@@ -1234,8 +1238,6 @@
 		61ED88F11F7170C9006BDA79 /* GridCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCollectionViewCell.swift; sourceTree = "<group>"; };
 		61ED88F21F7170C9006BDA79 /* GridCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GridCollectionViewCell.xib; sourceTree = "<group>"; };
 		61ED88F61F7171F1006BDA79 /* GridCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCollectionViewController.swift; sourceTree = "<group>"; };
-		61F9BF2B209C7C3700D436F1 /* AddressListTableHeaderViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListTableHeaderViewSpec.swift; sourceTree = "<group>"; };
-		61F9BF2E209C7F1D00D436F1 /* AddressListHeaderViewDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListHeaderViewDelegateMock.swift; sourceTree = "<group>"; };
 		61FC3DA71F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductOptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		61FC3DA81F7EB43700DB0AD7 /* ProductOptionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductOptionCollectionViewCell.xib; sourceTree = "<group>"; };
 		61FFEDB82007C27E00775FBA /* ShopApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShopApp.entitlements; sourceTree = "<group>"; };
@@ -3123,7 +3125,7 @@
 				0B7CEF79203B15B900FAA32C /* Account */,
 				0B7CEF93203C0DD400FAA32C /* Base */,
 				6186C30F20501A800057B221 /* Cart */,
-				61F9BF28209C7C1200D436F1 /* Checkout */,
+				61F9BF1E209C72A600D436F1 /* Checkout */,
 				61276E1120581BC400E2C3AF /* Main */,
 				0B8445D0206014050009012A /* Shared */,
 			);
@@ -3177,6 +3179,32 @@
 				6119478B1FD964A6008BE9C6 /* Navigation.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		6141712220A9C68D002BEFD3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6141712320A9C68D002BEFD3 /* CheckboxButtonSpec.swift */,
+				6141712420A9C68D002BEFD3 /* Headers */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6141712420A9C68D002BEFD3 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				6141712520A9C68D002BEFD3 /* Mocks */,
+				6141712720A9C68D002BEFD3 /* AddressListTableHeaderViewSpec.swift */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		6141712520A9C68D002BEFD3 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				6141712620A9C68D002BEFD3 /* AddressListHeaderViewDelegateMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		614C80B92046DC63006A99E0 /* Controllers */ = {
@@ -3652,37 +3680,12 @@
 			path = GridCollectionViewCell;
 			sourceTree = "<group>";
 		};
-		61F9BF28209C7C1200D436F1 /* Checkout */ = {
+		61F9BF1E209C72A600D436F1 /* Checkout */ = {
 			isa = PBXGroup;
 			children = (
-				61F9BF29209C7C1D00D436F1 /* Views */,
+				6141712220A9C68D002BEFD3 /* Views */,
 			);
 			path = Checkout;
-			sourceTree = "<group>";
-		};
-		61F9BF29209C7C1D00D436F1 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				61F9BF2A209C7C2300D436F1 /* Headers */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		61F9BF2A209C7C2300D436F1 /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				61F9BF2D209C7F1000D436F1 /* Mocks */,
-				61F9BF2B209C7C3700D436F1 /* AddressListTableHeaderViewSpec.swift */,
-			);
-			path = Headers;
-			sourceTree = "<group>";
-		};
-		61F9BF2D209C7F1000D436F1 /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				61F9BF2E209C7F1D00D436F1 /* AddressListHeaderViewDelegateMock.swift */,
-			);
-			path = Mocks;
 			sourceTree = "<group>";
 		};
 		61FC3DA61F7EB41900DB0AD7 /* ProductOptionHeaderView */ = {
@@ -4254,8 +4257,10 @@
 				61ABAF6B205977E100D73392 /* CategoryListViewModelMock.swift in Sources */,
 				0BB82C6E206D18370012C40A /* CoreDataTestHelper.swift in Sources */,
 				6199776E203C952100C70172 /* OrderListTableProviderSpec.swift in Sources */,
+				6141712820A9C68D002BEFD3 /* CheckboxButtonSpec.swift in Sources */,
 				0B5768D5204D3B040001738D /* OrderListViewControllerSpec.swift in Sources */,
 				0B8445C7205AAD940009012A /* CartButtonViewModelMock.swift in Sources */,
+				6141712920A9C68D002BEFD3 /* AddressListHeaderViewDelegateMock.swift in Sources */,
 				0BE965862040704C00308CA9 /* ResetPasswordUseCaseMock.swift in Sources */,
 				6130DE6D2062AB1800BAA833 /* ProductOptionsCollectionCellProviderDelegateMock.swift in Sources */,
 				61CCF0BF20600077004CF487 /* DetailsImagesCollectionViewCellSpec.swift in Sources */,
@@ -4313,7 +4318,6 @@
 				0BB82C72206D27F10012C40A /* ProductVariantEntityUpdateServiceSpec.swift in Sources */,
 				0B83E00A20504AA10037035D /* GridCollectionViewControllerSpec.swift in Sources */,
 				0BEAE1A820724B4A001AE4F8 /* ShopUseCaseSpec.swift in Sources */,
-				61F9BF2C209C7C3700D436F1 /* AddressListTableHeaderViewSpec.swift in Sources */,
 				611E737B2091BF3900F5658D /* CartValidationUseCaseSpec.swift in Sources */,
 				61276E2D20581BC400E2C3AF /* ArticleListViewModelSpec.swift in Sources */,
 				61CCF0C3206000B4004CF487 /* ProductDetailsViewControllerSpec.swift in Sources */,
@@ -4410,7 +4414,6 @@
 				61ABAF502059481700D73392 /* ProductUseCaseMock.swift in Sources */,
 				616C600A2099F4CA00DC7486 /* CriticalErrorViewSpec.swift in Sources */,
 				61C64B8A20667D900037665C /* UIViewController+BarButtonItemsSpec.swift in Sources */,
-				61F9BF2F209C7F1D00D436F1 /* AddressListHeaderViewDelegateMock.swift in Sources */,
 				616274092090AA04002CED6F /* SplashViewControllerSpec.swift in Sources */,
 				614ED7DF203F0D9500435708 /* OrderDetailsViewModelMock.swift in Sources */,
 				0B8445C9205AB9BD0009012A /* SearchTitleViewDelegateMock.swift in Sources */,
@@ -4477,6 +4480,7 @@
 				0B8445DA2060F7E90009012A /* QuantityDropDownViewDelegateMock.swift in Sources */,
 				614ED7DB203F0A7500435708 /* OrderDetailsViewModelSpec.swift in Sources */,
 				61CCF0C6206003B1004CF487 /* ProductListViewControllerSpec.swift in Sources */,
+				6141712A20A9C68D002BEFD3 /* AddressListTableHeaderViewSpec.swift in Sources */,
 				616CF741205FFF1D00DE14B1 /* CartRepositoryMock.swift in Sources */,
 				6186C31420501B0E0057B221 /* CartViewModelSpec.swift in Sources */,
 				0BE965BA2045B10400308CA9 /* GridCollectionProviderSpec.swift in Sources */,
