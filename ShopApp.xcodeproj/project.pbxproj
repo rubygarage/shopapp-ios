@@ -528,6 +528,8 @@
 		61BF1EAD1FAB56E40098B9AA /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61BF1EAC1FAB56E40098B9AA /* LoadingView.xib */; };
 		61BF1EB01FAB598C0098B9AA /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61BF1EAF1FAB598C0098B9AA /* ErrorView.xib */; };
 		61BF1EB21FAB59980098B9AA /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF1EB11FAB59980098B9AA /* ErrorView.swift */; };
+		61C0611B20A9D04400250A1F /* MonthExpiryDatePickerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0611920A9D04400250A1F /* MonthExpiryDatePickerSpec.swift */; };
+		61C0611C20A9D04400250A1F /* YearExpiryDatePickerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0611A20A9D04400250A1F /* YearExpiryDatePickerSpec.swift */; };
 		61C2ABC01FBB10C600A1E170 /* String+Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C2ABBF1FBB10C600A1E170 /* String+Validator.swift */; };
 		61C2ABC31FBB23D500A1E170 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C2ABC21FBB23D500A1E170 /* SignInViewController.swift */; };
 		61C2ABC51FBB240A00A1E170 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C2ABC41FBB240A00A1E170 /* SignInViewModel.swift */; };
@@ -1194,6 +1196,8 @@
 		61BF1EAC1FAB56E40098B9AA /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		61BF1EAF1FAB598C0098B9AA /* ErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		61BF1EB11FAB59980098B9AA /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		61C0611920A9D04400250A1F /* MonthExpiryDatePickerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthExpiryDatePickerSpec.swift; sourceTree = "<group>"; };
+		61C0611A20A9D04400250A1F /* YearExpiryDatePickerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YearExpiryDatePickerSpec.swift; sourceTree = "<group>"; };
 		61C2ABBF1FBB10C600A1E170 /* String+Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validator.swift"; sourceTree = "<group>"; };
 		61C2ABC21FBB23D500A1E170 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		61C2ABC41FBB240A00A1E170 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
@@ -3186,6 +3190,7 @@
 			children = (
 				6141712320A9C68D002BEFD3 /* CheckboxButtonSpec.swift */,
 				6141712420A9C68D002BEFD3 /* Headers */,
+				61C0611820A9D04400250A1F /* Pickers */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3561,6 +3566,15 @@
 				61BF1EAF1FAB598C0098B9AA /* ErrorView.xib */,
 			);
 			path = ErrorView;
+			sourceTree = "<group>";
+		};
+		61C0611820A9D04400250A1F /* Pickers */ = {
+			isa = PBXGroup;
+			children = (
+				61C0611920A9D04400250A1F /* MonthExpiryDatePickerSpec.swift */,
+				61C0611A20A9D04400250A1F /* YearExpiryDatePickerSpec.swift */,
+			);
+			path = Pickers;
 			sourceTree = "<group>";
 		};
 		61C95E991FB347FE00543B40 /* Extensions */ = {
@@ -4405,6 +4419,7 @@
 				0B2D8601206B7F6500D12ED7 /* ShopAppShopRepositorySpec.swift in Sources */,
 				0B2D85EF206B7BEE00D12ED7 /* APIMock.swift in Sources */,
 				61E14D4F2040594F000AB2CB /* AddressFormViewModelMock.swift in Sources */,
+				61C0611B20A9D04400250A1F /* MonthExpiryDatePickerSpec.swift in Sources */,
 				6130DE6620625B2A00BAA833 /* ProductOptionsCollectionViewCellSpec.swift in Sources */,
 				611E73772090AF2100F5658D /* CartValidationUseCaseMock.swift in Sources */,
 				0BA5DC14207390D800668C99 /* ProductListUseCaseSpec.swift in Sources */,
@@ -4488,6 +4503,7 @@
 				0B83E005204EC4E20037035D /* AccountNotLoggedHeaderViewSpec.swift in Sources */,
 				61276E2820581BC400E2C3AF /* ArticleListViewModelMock.swift in Sources */,
 				0B8445F02062AAF70009012A /* PaymentDetailsFooterViewSpec.swift in Sources */,
+				61C0611C20A9D04400250A1F /* YearExpiryDatePickerSpec.swift in Sources */,
 				61CCF0C1206000A2004CF487 /* ImagesCarouselCollectionProviderDelegateMock.swift in Sources */,
 				0BB82C76206D28080012C40A /* ImageEntityUpdateServiceSpec.swift in Sources */,
 				614ED7DD203F0CBD00435708 /* OrderUseCaseMock.swift in Sources */,
