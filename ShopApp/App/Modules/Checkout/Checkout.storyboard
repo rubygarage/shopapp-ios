@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         <!--Checkout View Controller-->
         <scene sceneID="Csf-kA-Wwy">
             <objects>
-                <viewController storyboardIdentifier="CheckoutControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="MDv-XD-ZMR" customClass="CheckoutViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CheckoutControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="MDv-XD-ZMR" customClass="CheckoutViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iHH-Hu-qii">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -31,6 +31,9 @@
                                         <state key="disabled">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="placeOrderButton"/>
+                                        </userDefinedRuntimeAttributes>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -45,6 +48,9 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="pyA-b5-EGg" customClass="TPKeyboardAvoidingTableView">
                                 <rect key="frame" x="0.0" y="64" width="375" height="553"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="tableView"/>
+                                </userDefinedRuntimeAttributes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -103,7 +109,7 @@
         <!--Payment Type View Controller-->
         <scene sceneID="E5U-uh-pFk">
             <objects>
-                <viewController storyboardIdentifier="PaymentTypeControllerIdentifier" id="c3v-9W-mKd" customClass="PaymentTypeViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PaymentTypeControllerIdentifier" id="c3v-9W-mKd" customClass="PaymentTypeViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oLq-CS-0l8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -134,7 +140,7 @@
         <!--Credit Card View Controller-->
         <scene sceneID="tYZ-iz-I58">
             <objects>
-                <viewController storyboardIdentifier="CreditCardControllerIdentifier" id="35q-zi-ACv" customClass="CreditCardViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreditCardControllerIdentifier" id="35q-zi-ACv" customClass="CreditCardViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="685-nQ-1bX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -145,7 +151,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8og-iE-j8B">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="588.5"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C19-Ol-Gq4" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C19-Ol-Gq4" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="50" width="305" height="47"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -157,7 +163,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2VT-Bi-bf3" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2VT-Bi-bf3" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="122" width="305" height="47"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -182,7 +188,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IVJ-Cf-REH" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IVJ-Cf-REH" customClass="BlackButton" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="403" width="285" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -191,14 +197,14 @@
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                 <state key="normal" title="Button"/>
                                             </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtO-Uq-n9w" customClass="MonthExpiryDatePicker" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtO-Uq-n9w" customClass="MonthExpiryDatePicker" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="257" width="137.5" height="22"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="Cwc-b3-vUC"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q4j-e1-ubP" customClass="InputTextFieldView" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q4j-e1-ubP" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="309" width="305" height="47"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -210,7 +216,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FXG-hk-yS2" customClass="YearExpiryDatePicker" customModule="ShopClient" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FXG-hk-yS2" customClass="YearExpiryDatePicker" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="192.5" y="257" width="137.5" height="22"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -326,7 +332,7 @@
         <!--Navigation Controller-->
         <scene sceneID="wGd-ch-MnA">
             <objects>
-                <navigationController id="vCe-Gk-sIc" customClass="NavigationController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="vCe-Gk-sIc" customClass="NavigationController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SMz-Ke-fyY">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -342,7 +348,7 @@
         <!--Checkout Failure View Controller-->
         <scene sceneID="IRU-ai-39O">
             <objects>
-                <viewController id="m35-ub-LqT" customClass="CheckoutFailureViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="m35-ub-LqT" customClass="CheckoutFailureViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aOd-26-1JK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -372,7 +378,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIK-sG-Fgz" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIK-sG-Fgz" customClass="BlackButton" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="387" width="285" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -393,7 +399,7 @@
                                                     <constraint firstAttribute="height" constant="1" id="lzf-cr-GHG"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKy-Ko-sgh" customClass="UnderlinedButton" customModule="ShopClient" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKy-Ko-sgh" customClass="UnderlinedButton" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="138" y="462" width="98" height="25"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                 <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
@@ -464,7 +470,7 @@
         <!--Checkout Address List View Controller-->
         <scene sceneID="aDG-Ct-2ha">
             <objects>
-                <viewController id="xSx-Ui-7AL" customClass="CheckoutAddressListViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="xSx-Ui-7AL" customClass="CheckoutAddressListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BVy-Nn-2we">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -495,7 +501,7 @@
         <!--Checkout Address Form View Controller-->
         <scene sceneID="wxm-Wb-CYC">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ECB-Z1-FXx" customClass="CheckoutAddressFormViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ECB-Z1-FXx" customClass="CheckoutAddressFormViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PDJ-sS-IOU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -524,7 +530,7 @@
         <!--Checkout Success View Controller-->
         <scene sceneID="spq-u7-sXe">
             <objects>
-                <viewController id="ve2-U7-Qzc" customClass="CheckoutSuccessViewController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ve2-U7-Qzc" customClass="CheckoutSuccessViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0om-am-KCN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -554,7 +560,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fv-8j-747" customClass="BlackButton" customModule="ShopClient" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fv-8j-747" customClass="BlackButton" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="387" width="285" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -566,7 +572,7 @@
                                                     <segue destination="ww9-it-wZB" kind="show" id="QYh-P1-GFe"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pp8-jt-cQ1" customClass="UnderlinedButton" customModule="ShopClient" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pp8-jt-cQ1" customClass="UnderlinedButton" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="124" y="462" width="127" height="25"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                 <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
@@ -643,7 +649,7 @@
         <!--Navigation Controller-->
         <scene sceneID="vHW-0u-vIS">
             <objects>
-                <navigationController id="cpJ-cT-Uv8" customClass="NavigationController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="cpJ-cT-Uv8" customClass="NavigationController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="c9W-rx-wjI">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -667,7 +673,7 @@
         <!--Navigation Controller-->
         <scene sceneID="IWA-vI-qO6">
             <objects>
-                <navigationController storyboardIdentifier="CheckoutNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="0Bp-E9-LmT" customClass="NavigationController" customModule="ShopClient" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="CheckoutNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="0Bp-E9-LmT" customClass="NavigationController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bIQ-hb-0VL">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

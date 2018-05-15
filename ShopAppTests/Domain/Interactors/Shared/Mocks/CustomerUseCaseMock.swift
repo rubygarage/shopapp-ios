@@ -26,6 +26,7 @@ class CustomerUseCaseMock: CustomerUseCase {
         let customerAddress = Address()
         customerAddress.id = "Customer address id"
         customer.addresses = [customerAddress]
+        customer.defaultAddress = customerAddress
         
         execute(callback: callback)
     }

@@ -477,6 +477,7 @@
 		618B4D501FE2ECE20001F68D /* UINavigationController+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B4D4F1FE2ECE20001F68D /* UINavigationController+Shadow.swift */; };
 		618B4D531FE2EF2E0001F68D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B4D521FE2EF2E0001F68D /* TabBarController.swift */; };
 		618B4D551FE2F3900001F68D /* UIColor+Initialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B4D541FE2F3900001F68D /* UIColor+Initialization.swift */; };
+		618F9E6020A34B9A005803B6 /* CheckoutUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618F9E5F20A34B9A005803B6 /* CheckoutUseCaseMock.swift */; };
 		61986AD51FF671BE005632D7 /* PaymentTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61986AD41FF671BE005632D7 /* PaymentTypeViewController.swift */; };
 		61986AD71FF671FB005632D7 /* PaymentTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61986AD61FF671FB005632D7 /* PaymentTypeViewModel.swift */; };
 		6198CB482044155C007C0C7A /* AddressFormViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6198CB472044155C007C0C7A /* AddressFormViewModelSpec.swift */; };
@@ -547,6 +548,10 @@
 		61C0614120A9D16C00250A1F /* CheckoutBillingAddressEditTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0613020A9D16B00250A1F /* CheckoutBillingAddressEditTableViewCellSpec.swift */; };
 		61C0614520A9D4B100250A1F /* MonthExpiryDatePickerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0614320A9D4B100250A1F /* MonthExpiryDatePickerSpec.swift */; };
 		61C0614620A9D4B100250A1F /* YearExpiryDatePickerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0614420A9D4B100250A1F /* YearExpiryDatePickerSpec.swift */; };
+		61C0615720AAE9BA00250A1F /* CheckoutViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0615520AAE9BA00250A1F /* CheckoutViewModelMock.swift */; };
+		61C0615820AAE9BA00250A1F /* CheckoutViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0615620AAE9BA00250A1F /* CheckoutViewControllerSpec.swift */; };
+		61C0615B20AAE9C100250A1F /* CheckoutTableProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0615A20AAE9C100250A1F /* CheckoutTableProviderSpec.swift */; };
+		61C0615E20AAE9D100250A1F /* CheckoutViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0615D20AAE9D100250A1F /* CheckoutViewModelSpec.swift */; };
 		61C2ABC01FBB10C600A1E170 /* String+Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C2ABBF1FBB10C600A1E170 /* String+Validator.swift */; };
 		61C2ABC31FBB23D500A1E170 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C2ABC21FBB23D500A1E170 /* SignInViewController.swift */; };
 		61C2ABC51FBB240A00A1E170 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C2ABC41FBB240A00A1E170 /* SignInViewModel.swift */; };
@@ -1160,6 +1165,7 @@
 		618B4D4F1FE2ECE20001F68D /* UINavigationController+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Shadow.swift"; sourceTree = "<group>"; };
 		618B4D521FE2EF2E0001F68D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		618B4D541FE2F3900001F68D /* UIColor+Initialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Initialization.swift"; sourceTree = "<group>"; };
+		618F9E5F20A34B9A005803B6 /* CheckoutUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutUseCaseMock.swift; sourceTree = "<group>"; };
 		61986AD41FF671BE005632D7 /* PaymentTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTypeViewController.swift; sourceTree = "<group>"; };
 		61986AD61FF671FB005632D7 /* PaymentTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTypeViewModel.swift; sourceTree = "<group>"; };
 		6198CB472044155C007C0C7A /* AddressFormViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressFormViewModelSpec.swift; sourceTree = "<group>"; };
@@ -1232,6 +1238,10 @@
 		61C0613020A9D16B00250A1F /* CheckoutBillingAddressEditTableViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutBillingAddressEditTableViewCellSpec.swift; sourceTree = "<group>"; };
 		61C0614320A9D4B100250A1F /* MonthExpiryDatePickerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthExpiryDatePickerSpec.swift; sourceTree = "<group>"; };
 		61C0614420A9D4B100250A1F /* YearExpiryDatePickerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YearExpiryDatePickerSpec.swift; sourceTree = "<group>"; };
+		61C0615520AAE9BA00250A1F /* CheckoutViewModelMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewModelMock.swift; sourceTree = "<group>"; };
+		61C0615620AAE9BA00250A1F /* CheckoutViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewControllerSpec.swift; sourceTree = "<group>"; };
+		61C0615A20AAE9C100250A1F /* CheckoutTableProviderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutTableProviderSpec.swift; sourceTree = "<group>"; };
+		61C0615D20AAE9D100250A1F /* CheckoutViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewModelSpec.swift; sourceTree = "<group>"; };
 		61C2ABBF1FBB10C600A1E170 /* String+Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validator.swift"; sourceTree = "<group>"; };
 		61C2ABC21FBB23D500A1E170 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		61C2ABC41FBB240A00A1E170 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
@@ -2716,6 +2726,7 @@
 		0BEAE19920724443001AE4F8 /* Checkout */ = {
 			isa = PBXGroup;
 			children = (
+				618F9E5E20A34B85005803B6 /* Mocks */,
 				0BA5DC262073C08D00668C99 /* CheckoutUseCaseSpec.swift */,
 				0BA5DC282073C09800668C99 /* DeleteCartProductsUseCaseSpec.swift */,
 			);
@@ -3464,6 +3475,14 @@
 			path = QuantityDropDownTableViewCell;
 			sourceTree = "<group>";
 		};
+		618F9E5E20A34B85005803B6 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				618F9E5F20A34B9A005803B6 /* CheckoutUseCaseMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		61997769203C92BF00C70172 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
@@ -3652,6 +3671,39 @@
 			path = Pickers;
 			sourceTree = "<group>";
 		};
+		61C0615320AAE9BA00250A1F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				61C0615420AAE9BA00250A1F /* Mocks */,
+				61C0615620AAE9BA00250A1F /* CheckoutViewControllerSpec.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		61C0615420AAE9BA00250A1F /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				61C0615520AAE9BA00250A1F /* CheckoutViewModelMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		61C0615920AAE9C100250A1F /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				61C0615A20AAE9C100250A1F /* CheckoutTableProviderSpec.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		61C0615C20AAE9D100250A1F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				61C0615D20AAE9D100250A1F /* CheckoutViewModelSpec.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		61C95E991FB347FE00543B40 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -3772,6 +3824,9 @@
 		61F9BF1E209C72A600D436F1 /* Checkout */ = {
 			isa = PBXGroup;
 			children = (
+				61C0615320AAE9BA00250A1F /* Controllers */,
+				61C0615920AAE9C100250A1F /* Providers */,
+				61C0615C20AAE9D100250A1F /* ViewModels */,
 				6141712220A9C68D002BEFD3 /* Views */,
 			);
 			path = Checkout;
@@ -4354,6 +4409,7 @@
 				0BE965862040704C00308CA9 /* ResetPasswordUseCaseMock.swift in Sources */,
 				6130DE6D2062AB1800BAA833 /* ProductOptionsCollectionCellProviderDelegateMock.swift in Sources */,
 				61CCF0BF20600077004CF487 /* DetailsImagesCollectionViewCellSpec.swift in Sources */,
+				61C0615820AAE9BA00250A1F /* CheckoutViewControllerSpec.swift in Sources */,
 				6122F5D420528E7C00F574BB /* CartViewModelMock.swift in Sources */,
 				0BA5DC1D2073AFA500668C99 /* CountriesUseCaseSpec.swift in Sources */,
 				617D688C203C5E74001E8940 /* OrderListUseCaseMock.swift in Sources */,
@@ -4402,6 +4458,7 @@
 				0B76471B2047E2100019D2CE /* SettingsViewModelMock.swift in Sources */,
 				0B8445E0206136270009012A /* InputTextFieldViewSpec.swift in Sources */,
 				0B8445DC2060F8950009012A /* QuantityDropDownViewSpec.swift in Sources */,
+				618F9E6020A34B9A005803B6 /* CheckoutUseCaseMock.swift in Sources */,
 				0B43716E204D674000C086CF /* AccountViewModelMock.swift in Sources */,
 				0B2D85FF206B7F5700D12ED7 /* ShopAppProductRepositorySpec.swift in Sources */,
 				0B8445D6206014D60009012A /* UnderlinedButtonSpec.swift in Sources */,
@@ -4428,6 +4485,7 @@
 				0B83E01920566C1B0037035D /* ArticleRepositoryMock.swift in Sources */,
 				61C0613B20A9D16B00250A1F /* CheckoutPaymentAddTableViewCellSpec.swift in Sources */,
 				614C80C12046DC63006A99E0 /* BaseCollectionViewControllerSpec.swift in Sources */,
+				61C0615E20AAE9D100250A1F /* CheckoutViewModelSpec.swift in Sources */,
 				0BA5DC252073AFD000668C99 /* UpdateDefaultAddressUseCaseSpec.swift in Sources */,
 				6198CB4A20441602007C0C7A /* CountriesUseCaseMock.swift in Sources */,
 				61C0613A20A9D16B00250A1F /* CheckoutShippingAddressAddTableViewCellSpec.swift in Sources */,
@@ -4490,6 +4548,7 @@
 				0B83E0392056CEE10037035D /* CategoryListUseCaseMock.swift in Sources */,
 				0B764725204841450019D2CE /* OrderItemTableViewCellSpec.swift in Sources */,
 				0BE9659E2044608B00308CA9 /* PersonalInfoViewModelSpec.swift in Sources */,
+				61C0615B20AAE9C100250A1F /* CheckoutTableProviderSpec.swift in Sources */,
 				616C600C2099F99E00DC7486 /* CriticalErrorViewDelegateMock.swift in Sources */,
 				0BE9657A2040056F00308CA9 /* SignUpUseCaseMock.swift in Sources */,
 				0BE9657E204007A600308CA9 /* ShopRepositoryMock.swift in Sources */,
@@ -4590,6 +4649,7 @@
 				616CF741205FFF1D00DE14B1 /* CartRepositoryMock.swift in Sources */,
 				6186C31420501B0E0057B221 /* CartViewModelSpec.swift in Sources */,
 				0BE965BA2045B10400308CA9 /* GridCollectionProviderSpec.swift in Sources */,
+				61C0615720AAE9BA00250A1F /* CheckoutViewModelMock.swift in Sources */,
 				0B8445DE20610E030009012A /* InputTextFieldViewDelegateMock.swift in Sources */,
 				0B83E005204EC4E20037035D /* AccountNotLoggedHeaderViewSpec.swift in Sources */,
 				61276E2820581BC400E2C3AF /* ArticleListViewModelMock.swift in Sources */,

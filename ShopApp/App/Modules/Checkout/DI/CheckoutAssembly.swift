@@ -24,6 +24,7 @@ class CheckoutAssembly: Assembly {
 
         container.storyboardInitCompleted(CheckoutViewController.self) { r, c in
             c.viewModel = r.resolve(CheckoutViewModel.self)!
+            c.tableProvider = r.resolve(CheckoutTableProvider.self)!
         }
 
         container.storyboardInitCompleted(CreditCardViewController.self) { r, c in
@@ -67,6 +68,10 @@ class CheckoutAssembly: Assembly {
         
         container.register(BaseAddressListTableProvider.self) { _ in
             return BaseAddressListTableProvider()
+        }
+        
+        container.register(CheckoutTableProvider.self) { _ in
+            return CheckoutTableProvider()
         }
     }
 }

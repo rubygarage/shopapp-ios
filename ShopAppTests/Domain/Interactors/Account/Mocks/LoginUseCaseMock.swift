@@ -14,12 +14,15 @@ class LoginUseCaseMock: LoginUseCase {
     private let error = ContentError()
     
     var isNeedToReturnError = false
+    var isGetLoginStatusStarted = false
     
     override func login(with email: String, password: String, _ callback: @escaping RepoCallback<Bool>) {
         execute(callback: callback)
     }
     
     override func getLoginStatus(_ callback: LoginStatusCallback) {
+        isGetLoginStatusStarted = true
+        
         execute(callback: callback)
     }
     
