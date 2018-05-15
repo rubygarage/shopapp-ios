@@ -24,8 +24,7 @@ class CheckoutUseCaseMock: CheckoutUseCase {
     }
     
     override func updateCheckoutShippingAddress(with checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>) {
-        let error = isUpdateCheckoutShippingAddressNeedToReturnError ? RepoError() : nil
-        callback(!isUpdateCheckoutShippingAddressNeedToReturnError, error)
+        isUpdateCheckoutShippingAddressNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
     override func createCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {

@@ -161,6 +161,7 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
                                                         <integer key="value" value="2"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="holderNameTextFieldView"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2VT-Bi-bf3" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
@@ -173,6 +174,7 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
                                                         <integer key="value" value="6"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="cardNumberTextFieldView"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="83I-EJ-IMo">
@@ -181,12 +183,18 @@
                                                     <constraint firstAttribute="width" constant="27" id="gYH-Sk-gdv"/>
                                                     <constraint firstAttribute="height" constant="18" id="pkf-2H-fsw"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="cardTypeImageView"/>
+                                                </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="soR-NB-Ay3">
                                                 <rect key="frame" x="45" y="216" width="285" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="expirationDateLabel"/>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IVJ-Cf-REH" customClass="BlackButton" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="403" width="285" height="50"/>
@@ -196,6 +204,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                 <state key="normal" title="Button"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="submitButton"/>
+                                                </userDefinedRuntimeAttributes>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtO-Uq-n9w" customClass="MonthExpiryDatePicker" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="257" width="137.5" height="22"/>
@@ -203,6 +214,9 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="Cwc-b3-vUC"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="monthExpirationView"/>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q4j-e1-ubP" customClass="InputTextFieldView" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="35" y="309" width="305" height="47"/>
@@ -214,6 +228,7 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="keyboardType">
                                                         <integer key="value" value="7"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="securityCodeTextFieldView"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FXG-hk-yS2" customClass="YearExpiryDatePicker" customModule="ShopApp" customModuleProvider="target">
@@ -222,12 +237,18 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="zka-Vd-rHQ"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="yearExpirationView"/>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We accept" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rh-TN-hQl">
                                                 <rect key="frame" x="156.5" y="477" width="63" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                 <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="acceptedCardTypesLabel"/>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PGc-lq-n8X">
                                                 <rect key="frame" x="48.5" y="507.5" width="278" height="25"/>
@@ -348,7 +369,7 @@
         <!--Checkout Failure View Controller-->
         <scene sceneID="IRU-ai-39O">
             <objects>
-                <viewController id="m35-ub-LqT" customClass="CheckoutFailureViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CheckoutFailureControllerIdentifier" id="m35-ub-LqT" customClass="CheckoutFailureViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aOd-26-1JK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -364,6 +385,9 @@
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="somethingHappendLabel"/>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkout_unsuccess" translatesAutoresizingMaskIntoConstraints="NO" id="oxt-SY-sqz">
                                                 <rect key="frame" x="100" y="124" width="174" height="145"/>
@@ -377,6 +401,9 @@
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="purchaseErrorLabel"/>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIK-sG-Fgz" customClass="BlackButton" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="387" width="285" height="50"/>
@@ -388,6 +415,9 @@
                                                 <state key="normal" title="Try again">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="tryAgainButton"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="tryAgainButtonDidPress:" destination="m35-ub-LqT" eventType="touchUpInside" id="JeW-iS-vP5"/>
                                                 </connections>
@@ -398,6 +428,9 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="lzf-cr-GHG"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="backToShopUnderlineView"/>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKy-Ko-sgh" customClass="UnderlinedButton" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="138" y="462" width="98" height="25"/>
@@ -406,6 +439,9 @@
                                                 <state key="normal" title="Back to shop">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="backToShopButton"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="backToShopButtonDidPress:" destination="m35-ub-LqT" eventType="touchUpInside" id="jwp-lb-Sep"/>
                                                     <action selector="continueShoppingTapped:" destination="ve2-U7-Qzc" eventType="touchUpInside" id="TR5-S7-tDr"/>
@@ -470,7 +506,7 @@
         <!--Checkout Address List View Controller-->
         <scene sceneID="aDG-Ct-2ha">
             <objects>
-                <viewController id="xSx-Ui-7AL" customClass="CheckoutAddressListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CheckoutAddressListControllerIdentifier" id="xSx-Ui-7AL" customClass="CheckoutAddressListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BVy-Nn-2we">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -501,7 +537,7 @@
         <!--Checkout Address Form View Controller-->
         <scene sceneID="wxm-Wb-CYC">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ECB-Z1-FXx" customClass="CheckoutAddressFormViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CheckoutAddressFormControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="ECB-Z1-FXx" customClass="CheckoutAddressFormViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PDJ-sS-IOU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -530,7 +566,7 @@
         <!--Checkout Success View Controller-->
         <scene sceneID="spq-u7-sXe">
             <objects>
-                <viewController id="ve2-U7-Qzc" customClass="CheckoutSuccessViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CheckoutSuccessControllerIdentifier" id="ve2-U7-Qzc" customClass="CheckoutSuccessViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0om-am-KCN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -553,12 +589,18 @@
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="thanksForShoppingLabel"/>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your order num" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HdG-Wn-Pz8">
                                                 <rect key="frame" x="16" y="329" width="343" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="orderNumberLabel"/>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fv-8j-747" customClass="BlackButton" customModule="ShopApp" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="387" width="285" height="50"/>
@@ -568,6 +610,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                 <state key="normal" title="View order details"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="viewOrderDetailsButton"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <segue destination="ww9-it-wZB" kind="show" id="QYh-P1-GFe"/>
                                                 </connections>
@@ -579,6 +624,9 @@
                                                 <state key="normal" title="Continue shoping">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="continueShoppingButton"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="continueShoppingTapped:" destination="ve2-U7-Qzc" eventType="touchUpInside" id="Ql7-mg-1pt"/>
                                                 </connections>
@@ -589,6 +637,9 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="yN4-pE-FfO"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="continueShoppingUnderlineView"/>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>

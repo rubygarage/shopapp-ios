@@ -15,7 +15,7 @@ protocol CheckoutAddressFormControllerDelegate: class {
     func viewController(_ controller: CheckoutAddressFormViewController, didFill billingAddress: Address)
 }
 
-class CheckoutAddressFormViewController: BaseAddressFormViewController<CheckoutAddressFormViewModel> {
+class CheckoutAddressFormViewController: BaseAddressFormViewController<CheckoutAddressFormViewModel>, AddressFormControllerlDelegate {
     var checkoutId: String!
     var addressType: AddressListType = .shipping
     
@@ -60,9 +60,9 @@ class CheckoutAddressFormViewController: BaseAddressFormViewController<CheckoutA
             })
             .disposed(by: disposeBag)
     }
-}
-
-extension CheckoutAddressFormViewController: AddressFormControllerlDelegate {
+    
+    // MARK: - AddressFormControllerlDelegate
+    
     func viewController(_ controller: AddressFormViewController, didFill address: Address) {
         viewModel.updateAddress(with: address)
     }

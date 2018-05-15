@@ -10,7 +10,7 @@ import UIKit
 
 private let kOrderNumberColor = UIColor(red: 0, green: 0.48, blue: 1, alpha: 1)
 
-class CheckoutSuccessViewController: UIViewController {
+class CheckoutSuccessViewController: UIViewController, UnderlinedButtonDelegate {
     @IBOutlet private weak var thanksForShoppingLabel: UILabel!
     @IBOutlet private weak var orderNumberLabel: UILabel!
     @IBOutlet private weak var viewOrderDetailsButton: BlackButton!
@@ -54,6 +54,12 @@ class CheckoutSuccessViewController: UIViewController {
             orderDetailsViewController.orderId = orderId
         }
     }
+    
+    // MARK: - UnderlinedButtonDelegate
+    
+    func underlinedButton(_ button: UnderlinedButton, didChangeState isHighlighted: Bool) {
+        continueShoppingUnderlineView.isHidden = isHighlighted
+    }
 }
 
 fileprivate extension UILabel {
@@ -65,13 +71,5 @@ fileprivate extension UILabel {
         let range = (orderNumberLocalized as NSString).range(of: highlightedText)
         attributed.addAttribute(NSForegroundColorAttributeName, value: kOrderNumberColor, range: range)
         attributedText = attributed
-    }
-}
-
-// MARK: - UnderlinedButtonDelegate
-
-extension CheckoutSuccessViewController: UnderlinedButtonDelegate {
-    func underlinedButton(_ button: UnderlinedButton, didChangeState isHighlighted: Bool) {
-        continueShoppingUnderlineView.isHidden = isHighlighted
     }
 }

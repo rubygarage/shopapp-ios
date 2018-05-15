@@ -12,15 +12,13 @@ protocol PaymentTypeProviderDelegate: class {
     func provider(_ provider: PaymentTypeProvider, didSelect type: PaymentType)
 }
 
-class PaymentTypeProvider: NSObject {
+class PaymentTypeProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     var selectedPaymentType: PaymentType?
     
     weak var delegate: PaymentTypeProviderDelegate?
-}
-
-// MARK: - UITableViewDataSource
-
-extension PaymentTypeProvider: UITableViewDataSource {
+    
+    // MARK: - UITableViewDataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return PaymentType.allValues.count
     }
@@ -32,11 +30,9 @@ extension PaymentTypeProvider: UITableViewDataSource {
         cell.configure(with: type, selected: selected)
         return cell
     }
-}
-
-// MARK: - UITableViewDelegate
-
-extension PaymentTypeProvider: UITableViewDelegate {
+    
+    // MARK: - UITableViewDelegate
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let delegate = delegate, let type = PaymentType(rawValue: indexPath.row) else {
             return
