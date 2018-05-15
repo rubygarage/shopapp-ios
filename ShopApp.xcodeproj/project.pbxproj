@@ -528,8 +528,25 @@
 		61BF1EAD1FAB56E40098B9AA /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61BF1EAC1FAB56E40098B9AA /* LoadingView.xib */; };
 		61BF1EB01FAB598C0098B9AA /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61BF1EAF1FAB598C0098B9AA /* ErrorView.xib */; };
 		61BF1EB21FAB59980098B9AA /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF1EB11FAB59980098B9AA /* ErrorView.swift */; };
-		61C0611B20A9D04400250A1F /* MonthExpiryDatePickerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0611920A9D04400250A1F /* MonthExpiryDatePickerSpec.swift */; };
-		61C0611C20A9D04400250A1F /* YearExpiryDatePickerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0611A20A9D04400250A1F /* YearExpiryDatePickerSpec.swift */; };
+		61C0613120A9D16B00250A1F /* CheckoutShippingAddressAddCellDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0612020A9D16B00250A1F /* CheckoutShippingAddressAddCellDelegateMock.swift */; };
+		61C0613220A9D16B00250A1F /* AddressListTableCellDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0612120A9D16B00250A1F /* AddressListTableCellDelegateMock.swift */; };
+		61C0613320A9D16B00250A1F /* CheckoutBillingAddressEditCellDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0612220A9D16B00250A1F /* CheckoutBillingAddressEditCellDelegateMock.swift */; };
+		61C0613420A9D16B00250A1F /* CheckoutSelectedTypeTableCellDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0612320A9D16B00250A1F /* CheckoutSelectedTypeTableCellDelegateMock.swift */; };
+		61C0613520A9D16B00250A1F /* CheckoutCreditCardEditTableCellDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0612420A9D16B00250A1F /* CheckoutCreditCardEditTableCellDelegateMock.swift */; };
+		61C0613620A9D16B00250A1F /* CheckoutShippingOptionsEnabledTableCellDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0612520A9D16B00250A1F /* CheckoutShippingOptionsEnabledTableCellDelegateMock.swift */; };
+		61C0613720A9D16B00250A1F /* CheckoutPaymentAddCellDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0612620A9D16B00250A1F /* CheckoutPaymentAddCellDelegateMock.swift */; };
+		61C0613820A9D16B00250A1F /* CustomerEmailTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0612720A9D16B00250A1F /* CustomerEmailTableViewCellSpec.swift */; };
+		61C0613920A9D16B00250A1F /* CheckoutCreditCardEditTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0612820A9D16B00250A1F /* CheckoutCreditCardEditTableViewCellSpec.swift */; };
+		61C0613A20A9D16B00250A1F /* CheckoutShippingAddressAddTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0612920A9D16B00250A1F /* CheckoutShippingAddressAddTableViewCellSpec.swift */; };
+		61C0613B20A9D16B00250A1F /* CheckoutPaymentAddTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0612A20A9D16B00250A1F /* CheckoutPaymentAddTableViewCellSpec.swift */; };
+		61C0613C20A9D16C00250A1F /* CheckoutSelectedTypeTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0612B20A9D16B00250A1F /* CheckoutSelectedTypeTableViewCellSpec.swift */; };
+		61C0613D20A9D16C00250A1F /* PaymentTypeTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0612C20A9D16B00250A1F /* PaymentTypeTableViewCellSpec.swift */; };
+		61C0613E20A9D16C00250A1F /* CheckoutShippingOptionsEnabledTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0612D20A9D16B00250A1F /* CheckoutShippingOptionsEnabledTableViewCellSpec.swift */; };
+		61C0613F20A9D16C00250A1F /* AddressListTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0612E20A9D16B00250A1F /* AddressListTableViewCellSpec.swift */; };
+		61C0614020A9D16C00250A1F /* CheckoutShippingOptionsDisabledTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0612F20A9D16B00250A1F /* CheckoutShippingOptionsDisabledTableViewCellSpec.swift */; };
+		61C0614120A9D16C00250A1F /* CheckoutBillingAddressEditTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0613020A9D16B00250A1F /* CheckoutBillingAddressEditTableViewCellSpec.swift */; };
+		61C0614520A9D4B100250A1F /* MonthExpiryDatePickerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0614320A9D4B100250A1F /* MonthExpiryDatePickerSpec.swift */; };
+		61C0614620A9D4B100250A1F /* YearExpiryDatePickerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C0614420A9D4B100250A1F /* YearExpiryDatePickerSpec.swift */; };
 		61C2ABC01FBB10C600A1E170 /* String+Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C2ABBF1FBB10C600A1E170 /* String+Validator.swift */; };
 		61C2ABC31FBB23D500A1E170 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C2ABC21FBB23D500A1E170 /* SignInViewController.swift */; };
 		61C2ABC51FBB240A00A1E170 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C2ABC41FBB240A00A1E170 /* SignInViewModel.swift */; };
@@ -1196,8 +1213,25 @@
 		61BF1EAC1FAB56E40098B9AA /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		61BF1EAF1FAB598C0098B9AA /* ErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		61BF1EB11FAB59980098B9AA /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		61C0611920A9D04400250A1F /* MonthExpiryDatePickerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthExpiryDatePickerSpec.swift; sourceTree = "<group>"; };
-		61C0611A20A9D04400250A1F /* YearExpiryDatePickerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YearExpiryDatePickerSpec.swift; sourceTree = "<group>"; };
+		61C0612020A9D16B00250A1F /* CheckoutShippingAddressAddCellDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutShippingAddressAddCellDelegateMock.swift; sourceTree = "<group>"; };
+		61C0612120A9D16B00250A1F /* AddressListTableCellDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressListTableCellDelegateMock.swift; sourceTree = "<group>"; };
+		61C0612220A9D16B00250A1F /* CheckoutBillingAddressEditCellDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutBillingAddressEditCellDelegateMock.swift; sourceTree = "<group>"; };
+		61C0612320A9D16B00250A1F /* CheckoutSelectedTypeTableCellDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutSelectedTypeTableCellDelegateMock.swift; sourceTree = "<group>"; };
+		61C0612420A9D16B00250A1F /* CheckoutCreditCardEditTableCellDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutCreditCardEditTableCellDelegateMock.swift; sourceTree = "<group>"; };
+		61C0612520A9D16B00250A1F /* CheckoutShippingOptionsEnabledTableCellDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutShippingOptionsEnabledTableCellDelegateMock.swift; sourceTree = "<group>"; };
+		61C0612620A9D16B00250A1F /* CheckoutPaymentAddCellDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutPaymentAddCellDelegateMock.swift; sourceTree = "<group>"; };
+		61C0612720A9D16B00250A1F /* CustomerEmailTableViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerEmailTableViewCellSpec.swift; sourceTree = "<group>"; };
+		61C0612820A9D16B00250A1F /* CheckoutCreditCardEditTableViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutCreditCardEditTableViewCellSpec.swift; sourceTree = "<group>"; };
+		61C0612920A9D16B00250A1F /* CheckoutShippingAddressAddTableViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutShippingAddressAddTableViewCellSpec.swift; sourceTree = "<group>"; };
+		61C0612A20A9D16B00250A1F /* CheckoutPaymentAddTableViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutPaymentAddTableViewCellSpec.swift; sourceTree = "<group>"; };
+		61C0612B20A9D16B00250A1F /* CheckoutSelectedTypeTableViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutSelectedTypeTableViewCellSpec.swift; sourceTree = "<group>"; };
+		61C0612C20A9D16B00250A1F /* PaymentTypeTableViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTypeTableViewCellSpec.swift; sourceTree = "<group>"; };
+		61C0612D20A9D16B00250A1F /* CheckoutShippingOptionsEnabledTableViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutShippingOptionsEnabledTableViewCellSpec.swift; sourceTree = "<group>"; };
+		61C0612E20A9D16B00250A1F /* AddressListTableViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressListTableViewCellSpec.swift; sourceTree = "<group>"; };
+		61C0612F20A9D16B00250A1F /* CheckoutShippingOptionsDisabledTableViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutShippingOptionsDisabledTableViewCellSpec.swift; sourceTree = "<group>"; };
+		61C0613020A9D16B00250A1F /* CheckoutBillingAddressEditTableViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutBillingAddressEditTableViewCellSpec.swift; sourceTree = "<group>"; };
+		61C0614320A9D4B100250A1F /* MonthExpiryDatePickerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthExpiryDatePickerSpec.swift; sourceTree = "<group>"; };
+		61C0614420A9D4B100250A1F /* YearExpiryDatePickerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YearExpiryDatePickerSpec.swift; sourceTree = "<group>"; };
 		61C2ABBF1FBB10C600A1E170 /* String+Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validator.swift"; sourceTree = "<group>"; };
 		61C2ABC21FBB23D500A1E170 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		61C2ABC41FBB240A00A1E170 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
@@ -3189,8 +3223,9 @@
 			isa = PBXGroup;
 			children = (
 				6141712320A9C68D002BEFD3 /* CheckboxButtonSpec.swift */,
+				61C0611D20A9D16B00250A1F /* Cells */,
+				61C0614220A9D4B100250A1F /* Pickers */,
 				6141712420A9C68D002BEFD3 /* Headers */,
-				61C0611820A9D04400250A1F /* Pickers */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3568,11 +3603,51 @@
 			path = ErrorView;
 			sourceTree = "<group>";
 		};
-		61C0611820A9D04400250A1F /* Pickers */ = {
+		61C0611D20A9D16B00250A1F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				61C0611920A9D04400250A1F /* MonthExpiryDatePickerSpec.swift */,
-				61C0611A20A9D04400250A1F /* YearExpiryDatePickerSpec.swift */,
+				61C0611E20A9D16B00250A1F /* TableView */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		61C0611E20A9D16B00250A1F /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				61C0611F20A9D16B00250A1F /* Mocks */,
+				61C0612720A9D16B00250A1F /* CustomerEmailTableViewCellSpec.swift */,
+				61C0612820A9D16B00250A1F /* CheckoutCreditCardEditTableViewCellSpec.swift */,
+				61C0612920A9D16B00250A1F /* CheckoutShippingAddressAddTableViewCellSpec.swift */,
+				61C0612A20A9D16B00250A1F /* CheckoutPaymentAddTableViewCellSpec.swift */,
+				61C0612B20A9D16B00250A1F /* CheckoutSelectedTypeTableViewCellSpec.swift */,
+				61C0612C20A9D16B00250A1F /* PaymentTypeTableViewCellSpec.swift */,
+				61C0612D20A9D16B00250A1F /* CheckoutShippingOptionsEnabledTableViewCellSpec.swift */,
+				61C0612E20A9D16B00250A1F /* AddressListTableViewCellSpec.swift */,
+				61C0612F20A9D16B00250A1F /* CheckoutShippingOptionsDisabledTableViewCellSpec.swift */,
+				61C0613020A9D16B00250A1F /* CheckoutBillingAddressEditTableViewCellSpec.swift */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		61C0611F20A9D16B00250A1F /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				61C0612020A9D16B00250A1F /* CheckoutShippingAddressAddCellDelegateMock.swift */,
+				61C0612120A9D16B00250A1F /* AddressListTableCellDelegateMock.swift */,
+				61C0612220A9D16B00250A1F /* CheckoutBillingAddressEditCellDelegateMock.swift */,
+				61C0612320A9D16B00250A1F /* CheckoutSelectedTypeTableCellDelegateMock.swift */,
+				61C0612420A9D16B00250A1F /* CheckoutCreditCardEditTableCellDelegateMock.swift */,
+				61C0612520A9D16B00250A1F /* CheckoutShippingOptionsEnabledTableCellDelegateMock.swift */,
+				61C0612620A9D16B00250A1F /* CheckoutPaymentAddCellDelegateMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		61C0614220A9D4B100250A1F /* Pickers */ = {
+			isa = PBXGroup;
+			children = (
+				61C0614320A9D4B100250A1F /* MonthExpiryDatePickerSpec.swift */,
+				61C0614420A9D4B100250A1F /* YearExpiryDatePickerSpec.swift */,
 			);
 			path = Pickers;
 			sourceTree = "<group>";
@@ -4263,6 +4338,7 @@
 				0BA5DC212073AFBA00668C99 /* DeleteAddressUseCaseSpec.swift in Sources */,
 				0B67B473205A5D9000337379 /* SortVariantsTableProviderDelegateMock.swift in Sources */,
 				6130DE762063D0CD00BAA833 /* NumberFormatter+CurrencySpec.swift in Sources */,
+				61C0613320A9D16B00250A1F /* CheckoutBillingAddressEditCellDelegateMock.swift in Sources */,
 				61276E3A20582C3300E2C3AF /* LastArrivalsTableCellDelegateMock.swift in Sources */,
 				61276E2E20581BC400E2C3AF /* HomeTableProviderDelegateMock.swift in Sources */,
 				0BA5DC292073C09800668C99 /* DeleteCartProductsUseCaseSpec.swift in Sources */,
@@ -4317,6 +4393,7 @@
 				0B7647152046F9330019D2CE /* SettingsViewModelSpec.swift in Sources */,
 				0BEAE1A620724B36001AE4F8 /* ResetPasswordUseCaseSpec.swift in Sources */,
 				6130DE842065252800BAA833 /* TTTAttributedLabel+LinksSpec.swift in Sources */,
+				61C0613E20A9D16C00250A1F /* CheckoutShippingOptionsEnabledTableViewCellSpec.swift in Sources */,
 				0BE9658420406F2400308CA9 /* ForgotPasswordViewModelMock.swift in Sources */,
 				0BE965A2204534A500308CA9 /* PersonalInfoViewModelMock.swift in Sources */,
 				61ABAF5F2059770D00D73392 /* CategoryListControllerDelegateMock.swift in Sources */,
@@ -4340,6 +4417,7 @@
 				0BEAE1A020724AF7001AE4F8 /* LogoutUseCaseSpec.swift in Sources */,
 				0B5768D4204D3B040001738D /* OrderDetailsViewControllerSpec.swift in Sources */,
 				0B43717A204D783F00C086CF /* OrderFooterDelegateMock.swift in Sources */,
+				61C0613D20A9D16C00250A1F /* PaymentTypeTableViewCellSpec.swift in Sources */,
 				0BE96570203FF28A00308CA9 /* SignInViewModelMock.swift in Sources */,
 				614C80D220470381006A99E0 /* AccountAddressFormViewModelSpec.swift in Sources */,
 				61276E2A20581BC400E2C3AF /* HomeViewModelMock.swift in Sources */,
@@ -4348,9 +4426,11 @@
 				0BB82C6C206CE5000012C40A /* CoreDataVariantOptionAdapterSpec.swift in Sources */,
 				6130DE722062C27500BAA833 /* ProductOptionHeaderViewSpec.swift in Sources */,
 				0B83E01920566C1B0037035D /* ArticleRepositoryMock.swift in Sources */,
+				61C0613B20A9D16B00250A1F /* CheckoutPaymentAddTableViewCellSpec.swift in Sources */,
 				614C80C12046DC63006A99E0 /* BaseCollectionViewControllerSpec.swift in Sources */,
 				0BA5DC252073AFD000668C99 /* UpdateDefaultAddressUseCaseSpec.swift in Sources */,
 				6198CB4A20441602007C0C7A /* CountriesUseCaseMock.swift in Sources */,
+				61C0613A20A9D16B00250A1F /* CheckoutShippingAddressAddTableViewCellSpec.swift in Sources */,
 				614B6DEB205836CA0000356E /* LastArrivalsTableCellProviderDelegateMock.swift in Sources */,
 				616CF745205FFF9500DE14B1 /* ProductListViewModelSpec.swift in Sources */,
 				0B437174204D782E00C086CF /* OrderHeaderViewSpec.swift in Sources */,
@@ -4366,15 +4446,19 @@
 				0BA5DC122073909500668C99 /* CategoryUseCaseSpec.swift in Sources */,
 				0B8445E92062927F0009012A /* SeeAllTableHeaderViewSpec.swift in Sources */,
 				61ABAF6D205977F100D73392 /* CategoryEmptyDataViewSpec.swift in Sources */,
+				61C0614020A9D16C00250A1F /* CheckoutShippingOptionsDisabledTableViewCellSpec.swift in Sources */,
 				0B2D8603206B815900D12ED7 /* DAOMock.swift in Sources */,
 				6104CD0B2065330B00B780A0 /* UIColor+InitializationSpec.swift in Sources */,
 				61E14D4D20405874000AB2CB /* PaymentsRepositoryMock.swift in Sources */,
 				0BE990F62064F4310038DF04 /* Customer+DetailsSpec.swift in Sources */,
+				61C0613120A9D16B00250A1F /* CheckoutShippingAddressAddCellDelegateMock.swift in Sources */,
 				6130DE6F2062AFC700BAA833 /* ProductOptionCollectionViewCellSpec.swift in Sources */,
 				61ABAF5B205976F500D73392 /* CategoryViewControllerSpec.swift in Sources */,
 				61ABAF4E2059473B00D73392 /* AddCartProductUseCaseMock.swift in Sources */,
 				616CF740205FFF0700DE14B1 /* ProductRepositoryMock.swift in Sources */,
+				61C0613620A9D16B00250A1F /* CheckoutShippingOptionsEnabledTableCellDelegateMock.swift in Sources */,
 				0B76471720470EA30019D2CE /* SettingsTableProviderSpec.swift in Sources */,
+				61C0613F20A9D16C00250A1F /* AddressListTableViewCellSpec.swift in Sources */,
 				61ABAF4A20591AF900D73392 /* LastArrivalsCollectionViewCellSpec.swift in Sources */,
 				0B67B471205A5D8800337379 /* SortVariantsControllerDelegateMock.swift in Sources */,
 				614ED7D2203EE23A00435708 /* OrderRepositoryMock.swift in Sources */,
@@ -4392,6 +4476,7 @@
 				0B83E00C20504D690037035D /* TextFieldWrapperSpec.swift in Sources */,
 				61ABAF612059774F00D73392 /* CategoryListCollectionProviderSpec.swift in Sources */,
 				61ABAF5820594A8F00D73392 /* ProductListUseCaseMock.swift in Sources */,
+				61C0614620A9D4B100250A1F /* YearExpiryDatePickerSpec.swift in Sources */,
 				614C80C02046DC63006A99E0 /* NavigationControllerSpec.swift in Sources */,
 				0B8445EC206298D40009012A /* SeeAllHeaderViewDelegateMock.swift in Sources */,
 				0BA5DC192073AF8B00668C99 /* AddAddressUseCaseSpec.swift in Sources */,
@@ -4408,6 +4493,7 @@
 				616C600C2099F99E00DC7486 /* CriticalErrorViewDelegateMock.swift in Sources */,
 				0BE9657A2040056F00308CA9 /* SignUpUseCaseMock.swift in Sources */,
 				0BE9657E204007A600308CA9 /* ShopRepositoryMock.swift in Sources */,
+				61C0613420A9D16B00250A1F /* CheckoutSelectedTypeTableCellDelegateMock.swift in Sources */,
 				6130DE7C2063E43200BAA833 /* String+ValidatorSpec.swift in Sources */,
 				0B2D85F1206B7EBB00D12ED7 /* ShopAppArticleRepositorySpec.swift in Sources */,
 				0BA5DC1F2073AFB000668C99 /* CustomerUseCaseSpec.swift in Sources */,
@@ -4416,10 +4502,10 @@
 				0BB82C68206CE4EB0012C40A /* CoreDataImageAdapterSpec.swift in Sources */,
 				0BA5DC17207390E900668C99 /* ProductUseCaseSpec.swift in Sources */,
 				0BA5DC272073C08D00668C99 /* CheckoutUseCaseSpec.swift in Sources */,
+				61C0613220A9D16B00250A1F /* AddressListTableCellDelegateMock.swift in Sources */,
 				0B2D8601206B7F6500D12ED7 /* ShopAppShopRepositorySpec.swift in Sources */,
 				0B2D85EF206B7BEE00D12ED7 /* APIMock.swift in Sources */,
 				61E14D4F2040594F000AB2CB /* AddressFormViewModelMock.swift in Sources */,
-				61C0611B20A9D04400250A1F /* MonthExpiryDatePickerSpec.swift in Sources */,
 				6130DE6620625B2A00BAA833 /* ProductOptionsCollectionViewCellSpec.swift in Sources */,
 				611E73772090AF2100F5658D /* CartValidationUseCaseMock.swift in Sources */,
 				0BA5DC14207390D800668C99 /* ProductListUseCaseSpec.swift in Sources */,
@@ -4437,6 +4523,8 @@
 				0BB82C74206D27FC0012C40A /* VariantOptionEntityUpdateServiceSpec.swift in Sources */,
 				61276E2920581BC400E2C3AF /* ArticleDetailsViewModelMock.swift in Sources */,
 				0B83E0372056CEAF0037035D /* CategoryRepositoryMock.swift in Sources */,
+				61C0613920A9D16B00250A1F /* CheckoutCreditCardEditTableViewCellSpec.swift in Sources */,
+				61C0614520A9D4B100250A1F /* MonthExpiryDatePickerSpec.swift in Sources */,
 				0B2D85FD206B7F4900D12ED7 /* ShopAppPaymentsRepositorySpec.swift in Sources */,
 				611607E120480557000A12D6 /* DeleteAddressUseCaseMock.swift in Sources */,
 				0B5768D7204D3B040001738D /* PolicyViewControllerSpec.swift in Sources */,
@@ -4445,6 +4533,8 @@
 				0BB82C7B206E748F0012C40A /* CoreDataDAOSpec.swift in Sources */,
 				61276E3020581BC400E2C3AF /* ArticleListTableProviderSpec.swift in Sources */,
 				0B437178204D783A00C086CF /* OrderFooterViewMock.swift in Sources */,
+				61C0613820A9D16B00250A1F /* CustomerEmailTableViewCellSpec.swift in Sources */,
+				61C0614120A9D16C00250A1F /* CheckoutBillingAddressEditTableViewCellSpec.swift in Sources */,
 				0B5768E0204D477B0001738D /* AccountTableProviderDelegateMock.swift in Sources */,
 				0B5768D8204D3B040001738D /* SettingsViewControllerSpec.swift in Sources */,
 				61276E372058264900E2C3AF /* LastArrivalsTableViewCellSpec.swift in Sources */,
@@ -4461,6 +4551,7 @@
 				0BE9657C204005F200308CA9 /* ShopUseCaseMock.swift in Sources */,
 				6130DE602061194800BAA833 /* ProductOptionsCollectionProviderSpec.swift in Sources */,
 				614C80C92046DC6B006A99E0 /* GridCollectionViewModelSpec.swift in Sources */,
+				61C0613520A9D16B00250A1F /* CheckoutCreditCardEditTableCellDelegateMock.swift in Sources */,
 				0B83E01B20566C6C0037035D /* ArticleListUseCaseMock.swift in Sources */,
 				6130DE782063D48B00BAA833 /* String+LocalizationSpec.swift in Sources */,
 				0B2D85F9206B7F3400D12ED7 /* ShopAppCustomerRepositorySpec.swift in Sources */,
@@ -4503,7 +4594,6 @@
 				0B83E005204EC4E20037035D /* AccountNotLoggedHeaderViewSpec.swift in Sources */,
 				61276E2820581BC400E2C3AF /* ArticleListViewModelMock.swift in Sources */,
 				0B8445F02062AAF70009012A /* PaymentDetailsFooterViewSpec.swift in Sources */,
-				61C0611C20A9D04400250A1F /* YearExpiryDatePickerSpec.swift in Sources */,
 				61CCF0C1206000A2004CF487 /* ImagesCarouselCollectionProviderDelegateMock.swift in Sources */,
 				0BB82C76206D28080012C40A /* ImageEntityUpdateServiceSpec.swift in Sources */,
 				614ED7DD203F0CBD00435708 /* OrderUseCaseMock.swift in Sources */,
@@ -4512,12 +4602,14 @@
 				0B83E02D2056A4980037035D /* ArticleUseCaseMock.swift in Sources */,
 				611607DF204804C5000A12D6 /* UpdateDefaultAddressUseCaseMock.swift in Sources */,
 				0B5768DE204D3D680001738D /* LogoutUseCaseMock.swift in Sources */,
+				61C0613C20A9D16C00250A1F /* CheckoutSelectedTypeTableViewCellSpec.swift in Sources */,
 				6186C320205034390057B221 /* CartTableProviderSpec.swift in Sources */,
 				6185BEA820567EBB009C1E33 /* CartEmptyDataViewSpec.swift in Sources */,
 				6186C31C20501C730057B221 /* ChangeCartProductUseCaseMock.swift in Sources */,
 				6130DE6220614BF900BAA833 /* ProductOptionsViewControllerSpec.swift in Sources */,
 				6186C32320503D060057B221 /* CartTableProviderDelegateMock.swift in Sources */,
 				61EA97292090AC2C00D4EFFE /* SplashViewModelMock.swift in Sources */,
+				61C0613720A9D16B00250A1F /* CheckoutPaymentAddCellDelegateMock.swift in Sources */,
 				61ABAF662059777400D73392 /* CategoryListViewModelSpec.swift in Sources */,
 				61276E3520581BC400E2C3AF /* ArticleTableViewCellSpec.swift in Sources */,
 				0B67B475205A5D9E00337379 /* SortVariantsTableProviderSpec.swift in Sources */,
