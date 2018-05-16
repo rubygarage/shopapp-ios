@@ -48,7 +48,7 @@ to the file **ShopApp/Data/DI/DataAssembly.swift**.
 
 To create a client for another SaaS, you'll have to add the following pod:
 ```
-pod 'ShopApp_Gateway', '~> 1.0.3'
+pod 'ShopApp_Gateway', '~> 1.0.4'
 ```
 to the dependencies. 
 

@@ -50,7 +50,7 @@ DEPENDENCIES:
   - UIScrollView-InfiniteScroll (~> 1.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - AvatarImageView
     - CoreStore
     - Crashlytics
@@ -98,4 +98,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 90bec9d6bca10399874b51140fee24d1de0f50ed
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2
