@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CriticalErrorView" customModule="ShopApp" customModuleProvider="target">
+            <connections>
+                <outlet property="backButton" destination="CQO-9u-krR" id="Xhr-qR-a0R"/>
+                <outlet property="errorTitleLabel" destination="iGp-sO-IPE" id="jhr-bQ-gDt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="326" height="452"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQO-9u-krR" customClass="GrayButton" customModule="ShopApp" customModuleProvider="target">
+                    <rect key="frame" x="125.5" y="295" width="75" height="38"/>
+                    <color key="backgroundColor" white="0.84899553571428577" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                    <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
+                    <state key="normal" title="Back">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="backButton"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="backButtonDidPress:" destination="-1" eventType="touchUpInside" id="hHw-bS-2v2"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="item_not_found" translatesAutoresizingMaskIntoConstraints="NO" id="W9d-U2-Dai">
+                    <rect key="frame" x="109.5" y="127.5" width="107" height="107"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="107" id="8Cx-69-4M7"/>
+                        <constraint firstAttribute="width" constant="107" id="lfx-YJ-LeX"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error view" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGp-sO-IPE">
+                    <rect key="frame" x="125" y="254.5" width="77" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.33462611607142856" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="errorTitleLabel"/>
+                    </userDefinedRuntimeAttributes>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="iGp-sO-IPE" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="CDc-dL-cBU"/>
+                <constraint firstItem="iGp-sO-IPE" firstAttribute="top" secondItem="W9d-U2-Dai" secondAttribute="bottom" constant="20" id="JeT-Hu-Leg"/>
+                <constraint firstItem="CQO-9u-krR" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ptc-FG-Cmf"/>
+                <constraint firstItem="W9d-U2-Dai" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="0.8" id="ah7-5I-vAU"/>
+                <constraint firstItem="W9d-U2-Dai" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="buh-vN-dMl"/>
+                <constraint firstItem="CQO-9u-krR" firstAttribute="top" secondItem="iGp-sO-IPE" secondAttribute="bottom" constant="20" id="uHL-jX-90D"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="9" y="-54"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="item_not_found" width="107" height="107"/>
+    </resources>
+</document>

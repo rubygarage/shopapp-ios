@@ -21,4 +21,10 @@ class CartTableCellDelegateMock: NSObject, CartTableCellDelegate {
         updatedCartProduct = cartProduct
         updatedQuantity = quantity
     }
+    
+    func tableViewCell(_ tableViewCell: CartTableViewCell, didSelectMoreFor cartProduct: CartProduct, with quantity: Int) {
+        cell = tableViewCell
+        updatedCartProduct = cartProduct
+        updatedQuantity = quantity
+    }
 }

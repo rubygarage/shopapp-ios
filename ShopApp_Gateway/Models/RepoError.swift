@@ -33,6 +33,10 @@ public class RepoError: Error {
 }
 
 public class CriticalError: RepoError {
+    public override init() {
+        super.init()
+    }
+    
     public init?(with error: Error?, statusCode: Int?) {
         super.init(with: error)
         

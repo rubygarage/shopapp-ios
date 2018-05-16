@@ -14,12 +14,14 @@ protocol PaymentTypeViewControllerDelegate: class {
     func viewController(_ viewController: PaymentTypeViewController, didSelect paymentType: PaymentType)
 }
 
-class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
-    @IBOutlet private weak var tableView: UITableView!
+class PaymentTypeViewController: BaseViewController<BaseViewModel>, PaymentTypeProviderDelegate {
+    // swiftlint:disable private_outlet
+    @IBOutlet private(set) weak var tableView: UITableView!
+    // swiftlint:enable private_outlet
     
-    private var tableProvider: PaymentTypeProvider!
     private var destinationTitle: String!
     
+    var tableProvider: PaymentTypeProvider!
     var checkout: Checkout!
     var selectedType: PaymentType?
     
@@ -43,27 +45,20 @@ class PaymentTypeViewController: BaseViewController<PaymentTypeViewModel> {
     private func setupTableView() {
         tableView.registerNibForCell(PaymentTypeTableViewCell.self)
         
-        tableProvider = PaymentTypeProvider()
         tableProvider.selectedPaymentType = selectedType
         tableProvider.delegate = self
         tableView.dataSource = tableProvider
         tableView.delegate = tableProvider
         
-        tableView.contentInset = TableView.paymentTypeContentInsets
+        tableView.contentInset = TableView.defaultContentInsets
     }
-
-    fileprivate func reloadTable() {
-        tableView.reloadData()
-    }
-}
-
-// MARK: - PaymentTypeProviderDelegate
-
-extension PaymentTypeViewController: PaymentTypeProviderDelegate {
+    
+    // MARK: - PaymentTypeProviderDelegate
+    
     func provider(_ provider: PaymentTypeProvider, didSelect type: PaymentType) {
         delegate?.viewController(self, didSelect: type)
         selectedType = type
-        reloadTable()
+        tableView.reloadData()
         navigationController?.popViewController(animated: true)
     }
 }

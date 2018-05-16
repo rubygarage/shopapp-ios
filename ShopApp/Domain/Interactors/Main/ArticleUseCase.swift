@@ -6,7 +6,6 @@
 //  Copyright © 2017 Evgeniy Antonov. All rights reserved.
 //
 
-import Foundation
 import ShopApp_Gateway
 
 class ArticleUseCase {

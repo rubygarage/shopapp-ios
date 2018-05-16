@@ -94,6 +94,10 @@ class DomainAssembly: Assembly {
         container.register(ProductUseCase.self) { r in
             return ProductUseCase(repository: r.resolve(ProductRepository.self)!)
         }
+        
+        container.register(CartValidationUseCase.self) { r in
+            return CartValidationUseCase(repository: r.resolve(ProductRepository.self)!)
+        }
 
         // MARK: - Shared
 

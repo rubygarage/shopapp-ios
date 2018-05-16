@@ -35,6 +35,8 @@
 "Alert.LoggedIn" = "You have been successfully logged in";
 "Alert.LoggedOut" = "You have been successfully logged out";
 "Alert.ProfileChanged" = "Profile has been changed";
+"Alert.Quantity" = "Quantity";
+"Alert.EnterQuantity" = "Enter quantity";
 
 "Button.Sort" = "Sort";
 "Button.AddToCart" = "Add to cart";
@@ -80,6 +82,7 @@
 "Button.ShippingAddress" = "Shipping Address";
 "Button.TryAgain" = "Try again";
 "Button.BackToShop" = "Back to shop";
+"Button.Back" = "Back";
 
 "SortingValue.CreatedAt" = "The Newest first";
 "SortingValue.PriceHighToLow" = "Price High to Low";
@@ -147,7 +150,12 @@
 "Label.YourOrderNumber" = "Your order number is %@";
 "Label.WeAccept" = "We Accept";
 "Label.SomethingHappened" = "Something happened...";
-"Label.PurchaseCouldntBeCompleted" = "Your purchse couldn't be completed";
+"Label.PurchaseCouldntBeCompleted" = "Your purchase couldn't be completed";
+"Label.PlusMore" = "+ more";
+"Label.ShopApp" = "ShopApp";
+"Label.Loading" = "Loading...";
+"Label.CouldNotFind" = "Could not find";
+"Label.CouldNotFindItem" = "Could not find %@";
 
 "Error.Unknown" = "Unknown error";
 "Error.NoConnection" = "Check internet connection";

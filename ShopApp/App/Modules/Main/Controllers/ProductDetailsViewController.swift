@@ -17,7 +17,7 @@ import TPKeyboardAvoiding
 
 typealias SelectedOption = (name: String, value: String)
 
-class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerDelegate, ProductOptionsControllerDelegate, SeeAllHeaderViewDelegate, LastArrivalsTableCellDelegate {
+class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerDelegate, ProductOptionsControllerDelegate, SeeAllHeaderViewDelegate, LastArrivalsTableCellDelegate, QuantityDropDownViewDelegate {
     @IBOutlet private weak var contentView: TPKeyboardAvoidingScrollView!
     @IBOutlet private weak var detailImagesContainer: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
@@ -25,7 +25,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var quantityTitleLabel: UILabel!
-    @IBOutlet private weak var quantityTextFieldView: QuantityTextFieldView!    
+    @IBOutlet private weak var quantityDropDownView: QuantityDropDownView!
     @IBOutlet private weak var addToCartButton: UIButton!
     @IBOutlet private weak var bottomView: UIView!
     @IBOutlet private weak var relatedItemsHeaderView: SeeAllTableHeaderView!
@@ -89,6 +89,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         quantityTitleLabel.text = "Label.Quantity".localizable
         addToCartButton.setTitle("Button.AddToCart".localizable.uppercased(), for: .normal)
         addToCartButton.setTitle("Button.ProductTemporaryUnavailable".localizable.uppercased(), for: .disabled)
+        quantityDropDownView.delegate = self
         relatedItemsHeaderView.delegate = self
         relatedItemsHeaderView.hideSeparator()
         relatedItemsView.delegate = self
@@ -98,7 +99,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         viewModel.productId = productId
         viewModel.productVariant = productVariant
         
-        quantityTextFieldView.rx.value.map { Int($0 ?? "") ?? 1 }
+        quantityDropDownView.rx.value.map { Int($0 ?? "") ?? 1 }
             .bind(to: viewModel.quantity)
             .disposed(by: disposeBag)
         
@@ -279,5 +280,17 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         let productDetailsViewController = storyboard.instantiateViewController(withIdentifier: ControllerIdentifiers.productDetails) as! ProductDetailsViewController
         productDetailsViewController.productId = product.id
         navigationController.pushViewController(productDetailsViewController, animated: true)
+    }
+    
+    // MARK: - QuantityDropDownViewDelegate
+    
+    func quantityDropDownView(_ view: QuantityDropDownView, didSelectMoreWith quantity: Int) {
+        showQuantityAlert(with: quantity) { [weak self] text in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.quantityDropDownView.text = text
+            strongSelf.quantityDropDownView.textField.sendActions(for: .editingDidEnd)
+        }
     }
 }

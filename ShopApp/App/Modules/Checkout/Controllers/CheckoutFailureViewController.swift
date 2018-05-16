@@ -12,7 +12,7 @@ protocol CheckoutFailureViewControllerDelegate: class {
     func viewControllerDidTapTryAgain(_ controller: CheckoutFailureViewController)
 }
 
-class CheckoutFailureViewController: UIViewController {
+class CheckoutFailureViewController: UIViewController, UnderlinedButtonDelegate {
     @IBOutlet private weak var somethingHappendLabel: UILabel!
     @IBOutlet private weak var purchaseErrorLabel: UILabel!
     @IBOutlet private weak var tryAgainButton: BlackButton!
@@ -53,11 +53,9 @@ class CheckoutFailureViewController: UIViewController {
         setHomeController()
         dismissModalStack()
     }
-}
-
-// MARK: - UnderlinedButtonDelegate
-
-extension CheckoutFailureViewController: UnderlinedButtonDelegate {
+    
+    // MARK: - UnderlinedButtonDelegate
+    
     func underlinedButton(_ button: UnderlinedButton, didChangeState isHighlighted: Bool) {
         backToShopUnderlineView.isHidden = isHighlighted
     }

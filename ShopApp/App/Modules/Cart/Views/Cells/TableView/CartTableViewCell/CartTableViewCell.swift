@@ -13,13 +13,14 @@ import ShopApp_Gateway
 
 protocol CartTableCellDelegate: class {
     func tableViewCell(_ tableViewCell: CartTableViewCell, didUpdateCartProduct cartProduct: CartProduct, with quantity: Int)
+    func tableViewCell(_ tableViewCell: CartTableViewCell, didSelectMoreFor cartProduct: CartProduct, with quantity: Int)
 }
 
-class CartTableViewCell: SwipeTableViewCell, QuantityTextFieldViewDelegate {
+class CartTableViewCell: SwipeTableViewCell, QuantityDropDownViewDelegate {
     @IBOutlet private weak var variantImageView: UIImageView!
     @IBOutlet private weak var variantTitleLabel: UILabel!
     @IBOutlet private weak var quantityLabel: UILabel!
-    @IBOutlet private weak var quantityTextFieldView: QuantityTextFieldView!
+    @IBOutlet private weak var quantityDropDownView: QuantityDropDownView!
     @IBOutlet private weak var totalPriceLabel: UILabel!
     
     @IBOutlet private weak var pricePerOneItemLabel: UILabel! {
@@ -54,7 +55,7 @@ class CartTableViewCell: SwipeTableViewCell, QuantityTextFieldViewDelegate {
     private func setup() {
         selectionStyle = .none
         quantityLabel.text = "Label.Quantity".localizable
-        quantityTextFieldView.delegate = self
+        quantityDropDownView.delegate = self
     }
     
     private func populateImageView(with item: CartProduct?) {
@@ -73,7 +74,7 @@ class CartTableViewCell: SwipeTableViewCell, QuantityTextFieldViewDelegate {
     
     private func populateQuantity(with item: CartProduct?) {
         let quantity = item?.quantity ?? 0
-        quantityTextFieldView.text = "\(quantity)"
+        quantityDropDownView.text = "\(quantity)"
     }
     
     private func populateTotalPrice(with item: CartProduct?) {
@@ -104,12 +105,19 @@ class CartTableViewCell: SwipeTableViewCell, QuantityTextFieldViewDelegate {
         pricePerOneItemLabel.isHidden = false
     }
     
-    // MARK: - QuantityTextFieldViewDelegate
+    // MARK: - QuantityDropDownViewDelegate
     
-    func quantityTextFieldView(_ view: QuantityTextFieldView, didEndEditingWith quantity: Int) {
+    func quantityDropDownView(_ view: QuantityDropDownView, didChange quantity: Int) {
         guard let cartProduct = cartProduct else {
             return
         }
         cellDelegate?.tableViewCell(self, didUpdateCartProduct: cartProduct, with: quantity)
+    }
+    
+    func quantityDropDownView(_ view: QuantityDropDownView, didSelectMoreWith quantity: Int) {
+        guard let cartProduct = cartProduct else {
+            return
+        }
+        cellDelegate?.tableViewCell(self, didSelectMoreFor: cartProduct, with: quantity)
     }
 }

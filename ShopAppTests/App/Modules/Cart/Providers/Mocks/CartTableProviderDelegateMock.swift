@@ -25,6 +25,7 @@ class CartTableProviderDelegateMock: NSObject, CartTableProviderDelegate, CartTa
     // MARK: - CartTableCellDelegate
     
     func tableViewCell(_ tableViewCell: CartTableViewCell, didUpdateCartProduct cartProduct: CartProduct, with quantity: Int) {}
+    func tableViewCell(_ tableViewCell: CartTableViewCell, didSelectMoreFor cartProduct: CartProduct, with quantity: Int) {}
     
     // MARK: - SwipeTableViewCellDelegate
     

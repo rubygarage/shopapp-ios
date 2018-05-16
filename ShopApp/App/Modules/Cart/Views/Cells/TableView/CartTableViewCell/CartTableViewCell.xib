@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -65,15 +65,15 @@
                             <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="quantityLabel"/>
                         </userDefinedRuntimeAttributes>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="08T-P4-X5N" customClass="QuantityTextFieldView" customModule="ShopApp" customModuleProvider="target">
-                        <rect key="frame" x="175.5" y="85" width="60" height="40"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TPZ-qJ-W9R" customClass="QuantityDropDownView" customModule="ShopApp" customModuleProvider="target">
+                        <rect key="frame" x="175.5" y="88" width="65" height="30"/>
+                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="ExK-OE-uuP"/>
-                            <constraint firstAttribute="width" constant="60" id="Gdl-eU-cCt"/>
+                            <constraint firstAttribute="width" constant="65" id="4Hx-y9-zZf"/>
+                            <constraint firstAttribute="height" constant="30" id="7Qb-hH-nWR"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="quantityTextFieldView"/>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="quantityDropDownView"/>
                         </userDefinedRuntimeAttributes>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Price per one" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uEM-NP-sMh">
@@ -94,26 +94,26 @@
                     <constraint firstItem="bek-VO-0z8" firstAttribute="leading" secondItem="5Vj-i8-Mtr" secondAttribute="trailing" constant="16" id="9Ml-Ac-Cg2"/>
                     <constraint firstAttribute="bottom" secondItem="0oT-IM-xEz" secondAttribute="bottom" constant="2" id="EO2-Hy-UyU"/>
                     <constraint firstItem="De3-pI-6dx" firstAttribute="bottom" secondItem="5Vj-i8-Mtr" secondAttribute="bottom" constant="-3" id="Kc2-lv-nY0"/>
-                    <constraint firstItem="08T-P4-X5N" firstAttribute="leading" secondItem="De3-pI-6dx" secondAttribute="trailing" constant="6" id="MKh-0b-2Ug"/>
                     <constraint firstItem="coJ-Y3-cqL" firstAttribute="top" secondItem="bek-VO-0z8" secondAttribute="bottom" constant="7" id="MzN-Ns-rnc"/>
                     <constraint firstItem="0oT-IM-xEz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="NWO-re-Evv"/>
                     <constraint firstAttribute="trailing" secondItem="coJ-Y3-cqL" secondAttribute="trailing" constant="16" id="QdZ-PZ-ZpN"/>
                     <constraint firstItem="coJ-Y3-cqL" firstAttribute="leading" secondItem="5Vj-i8-Mtr" secondAttribute="trailing" constant="16" id="R9i-fl-qfZ"/>
+                    <constraint firstItem="TPZ-qJ-W9R" firstAttribute="leading" secondItem="De3-pI-6dx" secondAttribute="trailing" constant="6" id="ZDQ-sg-5NU"/>
                     <constraint firstItem="bek-VO-0z8" firstAttribute="top" secondItem="5Vj-i8-Mtr" secondAttribute="top" constant="3" id="Zp5-8m-1ad"/>
                     <constraint firstItem="5Vj-i8-Mtr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="cFC-1r-Kfm"/>
                     <constraint firstAttribute="trailing" secondItem="uEM-NP-sMh" secondAttribute="trailing" constant="16" id="gJq-lY-HCQ"/>
                     <constraint firstItem="uEM-NP-sMh" firstAttribute="centerY" secondItem="De3-pI-6dx" secondAttribute="centerY" id="gsr-am-Sfv"/>
                     <constraint firstItem="5Vj-i8-Mtr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="kNU-rh-Lud"/>
                     <constraint firstItem="0oT-IM-xEz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="lZd-Zf-BqX"/>
-                    <constraint firstItem="08T-P4-X5N" firstAttribute="centerY" secondItem="De3-pI-6dx" secondAttribute="centerY" constant="1.3" id="sH2-Ie-TP1"/>
+                    <constraint firstItem="TPZ-qJ-W9R" firstAttribute="centerY" secondItem="De3-pI-6dx" secondAttribute="centerY" id="obe-CE-E9j"/>
                     <constraint firstAttribute="trailing" secondItem="0oT-IM-xEz" secondAttribute="trailing" id="yrV-zN-6lX"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="pricePerOneItemLabel" destination="uEM-NP-sMh" id="fSE-Cg-nPN"/>
+                <outlet property="quantityDropDownView" destination="TPZ-qJ-W9R" id="PU3-tU-GUu"/>
                 <outlet property="quantityLabel" destination="De3-pI-6dx" id="7QQ-SN-AGM"/>
-                <outlet property="quantityTextFieldView" destination="08T-P4-X5N" id="La2-ls-O8h"/>
                 <outlet property="totalPriceLabel" destination="bek-VO-0z8" id="TXD-7N-MPC"/>
                 <outlet property="variantImageView" destination="5Vj-i8-Mtr" id="ZyG-ZT-0r5"/>
                 <outlet property="variantTitleLabel" destination="coJ-Y3-cqL" id="Hk9-9y-fYx"/>

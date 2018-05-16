@@ -10,7 +10,7 @@ import UIKit
 
 import ShopApp_Gateway
 
-class CheckoutTableProvider: NSObject {
+class CheckoutTableProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     var checkout: Checkout?
     var cartProducts: [CartProduct] = []
     var billingAddress: Address?
@@ -20,11 +20,9 @@ class CheckoutTableProvider: NSObject {
     var customerEmail = ""
     
     weak var delegate: CheckoutCombinedDelegate?
-}
-
-// MARK: - UITableViewDataSource
-
-extension CheckoutTableProvider: UITableViewDataSource {
+    
+    // MARK: - UITableViewDataSource
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return selectedPaymentType == .creditCard ? CheckoutSection.allValues.count : CheckoutSection.valuesWithoutShippingOptions.count
     }
@@ -179,11 +177,9 @@ extension CheckoutTableProvider: UITableViewDataSource {
     private func shippingOptionsDisabledCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutShippingOptionsDisabledTableViewCell {
         return tableView.dequeueReusableCellForIndexPath(indexPath) as CheckoutShippingOptionsDisabledTableViewCell
     }
-}
-
-// MARK: - UITableViewDelegate
-
-extension CheckoutTableProvider: UITableViewDelegate {
+    
+    // MARK: - UITableViewDelegate
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case CheckoutSection.cart.rawValue:

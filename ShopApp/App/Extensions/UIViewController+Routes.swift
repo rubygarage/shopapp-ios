@@ -11,6 +11,14 @@ import UIKit
 import SwinjectStoryboard
 
 extension UIViewController {
+    func setTabBarController() {
+        let storyboard = SwinjectStoryboard.create(name: StoryboardNames.navigation, bundle: nil, container: AppDelegate.getAssembler().resolver)
+        let tabBarController = storyboard.instantiateViewController(withIdentifier: ControllerIdentifiers.tabBar)
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = tabBarController
+    }
+    
     func setHomeController() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let tabbarController = appDelegate.window?.rootViewController as? UITabBarController

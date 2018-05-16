@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuantityDropDownView" customModule="ShopApp" customModuleProvider="target">
+            <connections>
+                <outlet property="textField" destination="Kvm-ZO-fYi" id="XcU-c0-s6m"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="289" height="87"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GVI-GV-5DQ" userLabel="Underline View">
+                    <rect key="frame" x="0.0" y="86" width="289" height="1"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="4Xz-4w-PpM"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="underlineView"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessibilityView" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kvm-ZO-fYi">
+                    <rect key="frame" x="3" y="0.0" width="140.5" height="87"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="textField"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="quantityEditingDidEnd:" destination="-1" eventType="editingDidEnd" id="UfH-hJ-g9y"/>
+                    </connections>
+                </textField>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_down" translatesAutoresizingMaskIntoConstraints="NO" id="OpS-3J-lCK">
+                    <rect key="frame" x="143.5" y="0.0" width="140.5" height="87"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="Kvm-ZO-fYi" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="1IX-uI-dPP"/>
+                <constraint firstItem="OpS-3J-lCK" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="3ds-DF-VhX"/>
+                <constraint firstItem="OpS-3J-lCK" firstAttribute="leading" secondItem="Kvm-ZO-fYi" secondAttribute="trailing" id="B3x-8R-RPx"/>
+                <constraint firstItem="Kvm-ZO-fYi" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Gvu-jt-dNB"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="GVI-GV-5DQ" secondAttribute="bottom" id="HEh-ju-j5c"/>
+                <constraint firstItem="GVI-GV-5DQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Omv-fH-BiJ"/>
+                <constraint firstAttribute="trailing" secondItem="OpS-3J-lCK" secondAttribute="trailing" constant="5" id="TiC-CS-Wh0"/>
+                <constraint firstItem="OpS-3J-lCK" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="ls4-7c-cF5"/>
+                <constraint firstAttribute="trailing" secondItem="GVI-GV-5DQ" secondAttribute="trailing" id="nBm-Ih-4fR"/>
+                <constraint firstItem="Kvm-ZO-fYi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="3" id="zN1-BW-mxo"/>
+                <constraint firstItem="Kvm-ZO-fYi" firstAttribute="width" secondItem="OpS-3J-lCK" secondAttribute="width" id="zmf-IO-OMn"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-9.5" y="-236.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="arrow_down" width="10" height="6"/>
+    </resources>
+</document>
