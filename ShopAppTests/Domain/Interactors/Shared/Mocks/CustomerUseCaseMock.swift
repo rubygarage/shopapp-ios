@@ -29,7 +29,10 @@ class CustomerUseCaseMock: CustomerUseCase {
         customerAddress.secondAddress = "Second address"
         customerAddress.city = "City"
         customerAddress.zip = "Zip"
-        customerAddress.country = "Country"
+        
+        let country = Country()
+        country.name = "Country"
+        customerAddress.country = country
         customer.addresses = [customerAddress]
         customer.defaultAddress = customerAddress
         

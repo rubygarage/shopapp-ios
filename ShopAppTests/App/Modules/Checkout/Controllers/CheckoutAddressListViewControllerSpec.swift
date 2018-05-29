@@ -49,7 +49,10 @@ class CheckoutAddressListViewControllerSpec: QuickSpec {
             address.secondAddress = "Second address"
             address.city = "City"
             address.zip = "Zip"
-            address.country = "Country"
+            
+            let country = Country()
+            country.name = "Country"
+            address.country = country
             
             _ = viewController.view
         }
