@@ -16,7 +16,7 @@ class CategoryListUseCaseMock: CategoryListUseCase {
     var isCategoryCountLessThenConstant = true
     var isNeedToReturnError = false
     
-    override func getCategoryList(paginationValue: Any?, _ callback: @escaping RepoCallback<[Category]>) {
+    override func getCategoryList(paginationValue: Any?, parentCategoryId: String? = nil, _ callback: @escaping RepoCallback<[Category]>) {
         guard !isNeedToReturnError else {
             execute(callback: callback)
             

@@ -15,6 +15,7 @@ public class Category {
     public var image: Image?
     public var updatedAt: Date?
     public var paginationValue: Any?
+    public var childrenCategories: [Category]?
     public var products: [Product]?
     public var additionalDescription: String?
 

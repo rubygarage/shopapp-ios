@@ -10,11 +10,10 @@ import ShopApp_Gateway
 
 struct MagentoImageAdapter {
     private static let imagePathNoSelection = "no_selection"
-    private static let defaultCatalogPath = "pub/media/catalog/product"
     private static let mediaTypeImage = "image"
     
-    static func adapt(_ imagePath: String) -> Image? {
-        guard imagePath != imagePathNoSelection, let src = buildSrc(with: BaseRouter.hostUrl, catalogPath: defaultCatalogPath, imagePath: imagePath) else {
+    static func adapt(_ imagePath: String, catalogPath: String) -> Image? {
+        guard imagePath != imagePathNoSelection, let src = buildSrc(with: BaseRouter.hostUrl, catalogPath: catalogPath, imagePath: imagePath) else {
             return nil
         }
         
@@ -25,8 +24,8 @@ struct MagentoImageAdapter {
         return image
     }
     
-    static func adapt(_ response: GalleryEntryResponse) -> Image? {
-        guard response.mediaType == mediaTypeImage, let src = buildSrc(with: BaseRouter.hostUrl, catalogPath: defaultCatalogPath, imagePath: response.file) else {
+    static func adapt(_ response: GalleryEntryResponse, catalogPath: String) -> Image? {
+        guard response.mediaType == mediaTypeImage, let src = buildSrc(with: BaseRouter.hostUrl, catalogPath: catalogPath, imagePath: response.file) else {
             return nil
         }
         
@@ -38,7 +37,7 @@ struct MagentoImageAdapter {
         return image
     }
     
-    private static func buildSrc(with hostUrl: String?, catalogPath: String, imagePath: String) -> String? {
+    static func buildSrc(with hostUrl: String?, catalogPath: String, imagePath: String) -> String? {
         guard let hostUrl = hostUrl else {
             return nil
         }

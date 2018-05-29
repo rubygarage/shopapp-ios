@@ -19,6 +19,9 @@ public class MagentoAPI: BaseAPI, API {
     private let typeIdField = "type_id"
     private let simpleValue = "simple"
     private let skuField = "sku"
+    private let parentCategoryId = "rootCategoryId"
+    private let categoryIdField = "category_id"
+    private let priceField = "price"
     private let unauthorizedStatusCode = 401
     private let sessionService = SessionService()
     
@@ -154,14 +157,76 @@ public class MagentoAPI: BaseAPI, API {
     
     // MARK: - Categories
     
-    public func getCategoryList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[ShopApp_Gateway.Category]>) {
-        // TODO: Implement api method
-        callback([], nil)
+    public func getCategoryList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, parentCategoryId: String?, callback: @escaping RepoCallback<[ShopApp_Gateway.Category]>) {
+        var parameters = Parameters()
+        
+        if let parentCategoryId = parentCategoryId {
+            parameters[parentCategoryId] = parentCategoryId
+        }
+        
+        let route = MagentoCategoriesRoute.getCategories(parameters: parameters)
+        let request = MagentoCategoriesRouter(route: route)
+        
+        execute(request) { (response, error) in
+            guard error == nil, let json = response as? [String: Any], let response = GetCategoryListResponse.object(from: json) else {
+                callback(nil, error ?? ContentError())
+                
+                return
+            }
+
+            callback(MagentoCategoryAdapter.adapt(response).childrenCategories, nil)
+        }
     }
     
     public func getCategoryDetails(id: String, perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<ShopApp_Gateway.Category>) {
-        // TODO: Implement api method
-        callback(nil, nil)
+        var currentPaginationValue = defaultPaginationValue
+        let categoryIdPair = (categoryIdField, id)
+        var fieldName: String?
+        
+        let builder = ProductsParametersBuilder()
+            .addFilterParameters(pair: categoryIdPair)
+        
+        if let sortBy = sortBy {
+            switch sortBy {
+            case .name:
+                fieldName = nameField
+            case .createdAt:
+                fieldName = createdAtField
+            case .priceHighToLow, .priceLowToHigh:
+                fieldName = priceField
+            default:
+                break
+            }
+        }
+        
+        if let fieldName = fieldName {
+            _ = builder.addSortOrderParameters(field: fieldName, isRevers: reverse)
+        }
+        
+        if let paginationValue = paginationValue as? String, let castedPaginationValue = Int(paginationValue) {
+            currentPaginationValue = castedPaginationValue
+        }
+        
+        getProductList(perPage: perPage, paginationValue: currentPaginationValue, builder: builder) { [weak self] (products, error) in
+            guard let strongSelf = self, let products = products, error == nil else {
+                callback(nil, error ?? ContentError())
+                
+                return
+            }
+            
+            let route = MagentoCategoriesRoute.getCategory(id: id)
+            let request = MagentoCategoriesRouter(route: route)
+            
+            strongSelf.execute(request) { (response, error) in
+                guard error == nil, let json = response as? [String: Any], let response = GetCategoryDetailsResponse.object(from: json) else {
+                    callback(nil, error ?? ContentError())
+                    
+                    return
+                }
+                
+                callback(MagentoCategoryAdapter.adapt(response, products: products), nil)
+            }
+        }
     }
     
     // MARK: - Articles
@@ -307,6 +372,7 @@ public class MagentoAPI: BaseAPI, API {
     
     public func updateCustomer(with promo: Bool, callback: @escaping RepoCallback<Customer>) {
         // There is no api to fetch newsletter subscription
+        callback(nil, nil)
     }
     
     public func updateCustomer(with password: String, callback: @escaping RepoCallback<Customer>) {
@@ -607,11 +673,13 @@ public class MagentoAPI: BaseAPI, API {
     // MARK: - Orders
     
     public func getOrderList(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
-        // TODO: Implement api method
+        // There is no api to fetch orders
+        callback([], nil)
     }
     
     public func getOrder(id: String, callback: @escaping RepoCallback<Order>) {
-        // TODO: Implement api method
+        // There is no api to fetch order
+        callback(nil, nil)
     }
     
     // MARK: - Private

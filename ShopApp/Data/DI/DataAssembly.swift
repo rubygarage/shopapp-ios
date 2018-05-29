@@ -8,7 +8,6 @@
 
 import Swinject
 import ShopApp_Gateway
-//import ShopApp_Shopify
 
 class DataAssembly: Assembly {
     func assemble(container: Container) {
@@ -19,15 +18,6 @@ class DataAssembly: Assembly {
             return MagentoAPI(shopDomain: "http://10.14.14.187/")
             }
             .inObjectScope(.container)
-        
-//        container.register(API.self) { _ in
-//            return ShopifyAPI(apiKey: "cbfba425f68cc86c478da31f88e590d6",
-//                              shopDomain: "shopapp-dev.myshopify.com",
-//                              adminApiKey: "be5f05b9103118c8901be9cccc6231fd",
-//                              adminPassword: "f803fa2862a3e9b30c114cd83ffe4e56",
-//                              applePayMerchantId: "APPLE PAY MERCHANT ID")
-//            }
-//            .inObjectScope(.container)
         
         container.register(DAO.self) { _ in
             return CoreDataDAO()

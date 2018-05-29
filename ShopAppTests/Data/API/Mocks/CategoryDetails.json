@@ -1,0 +1,46 @@
+{
+    "id":3,
+    "parent_id":2,
+    "name":"Gear",
+    "is_active":true,
+    "position":4,
+    "level":2,
+    "children":"4,5,6",
+    "created_at":"2018-05-21 08:00:10",
+    "updated_at":"2018-05-21 08:00:11",
+    "path":"1/2/3",
+    "available_sort_by":[
+
+    ],
+    "include_in_menu":true,
+    "custom_attributes":[
+        {
+            "attribute_code":"display_mode",
+            "value":"PAGE"
+        },
+        {
+            "attribute_code":"is_anchor",
+            "value":"0"
+        },
+        {
+            "attribute_code":"path",
+            "value":"1/2/3"
+        },
+        {
+            "attribute_code":"custom_layout_update",
+            "value":"<referenceContainer name=\"catalog.leftnav\" remove=\"true\"/>"
+        },
+        {
+            "attribute_code":"children_count",
+            "value":"3"
+        },
+        {
+            "attribute_code":"url_key",
+            "value":"gear"
+        },
+        {
+            "attribute_code":"url_path",
+            "value":"gear"
+        }
+    ]
+}

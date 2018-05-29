@@ -1,0 +1,16 @@
+[
+    {
+        "id":"AD",
+        "two_letter_abbreviation":"AD",
+        "three_letter_abbreviation":"AND",
+        "full_name_locale":"Andorra",
+        "full_name_english":"Andorra"
+    },
+    {
+        "id":"AE",
+        "two_letter_abbreviation":"AE",
+        "three_letter_abbreviation":"ARE",
+        "full_name_locale":"United Arab Emirates",
+        "full_name_english":"United Arab Emirates"
+    }
+]

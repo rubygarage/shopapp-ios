@@ -12,6 +12,7 @@ struct MagentoProductAdapter {
     private static let customAttributeDescriptionCode = "description"
     private static let customAttributeThumbnailCode = "thumbnail"
     private static let customAttributeImageCode = "image"
+    private static let imageCatalogPath = "pub/media/catalog/product"
     
     static func adapt(_ response: GetProductResponse, currency: String, paginationValue: Int? = nil) -> Product {
         let product = Product()
@@ -40,11 +41,11 @@ struct MagentoProductAdapter {
         
         var customAttributeImages: [Image] = []
         
-        if let thumbnailValue = response.customAttributes.filter({ $0.attributeCode == customAttributeThumbnailCode }).first?.value.data, let thumbnail = MagentoImageAdapter.adapt(thumbnailValue) {
+        if let thumbnailValue = response.customAttributes.filter({ $0.attributeCode == customAttributeThumbnailCode }).first?.value.data, let thumbnail = MagentoImageAdapter.adapt(thumbnailValue, catalogPath: imageCatalogPath) {
             customAttributeImages.append(thumbnail)
         }
         
-        if let imageValue = response.customAttributes.filter({ $0.attributeCode == customAttributeImageCode }).first?.value.data, let image = MagentoImageAdapter.adapt(imageValue) {
+        if let imageValue = response.customAttributes.filter({ $0.attributeCode == customAttributeImageCode }).first?.value.data, let image = MagentoImageAdapter.adapt(imageValue, catalogPath: imageCatalogPath) {
             customAttributeImages.append(image)
         }
         
@@ -54,7 +55,7 @@ struct MagentoProductAdapter {
             return product
         }
         
-        let mediaGalleryImages = mediaGalleryEntries.flatMap { MagentoImageAdapter.adapt($0) }
+        let mediaGalleryImages = mediaGalleryEntries.flatMap { MagentoImageAdapter.adapt($0, catalogPath: imageCatalogPath) }
         let productVariant = ProductVariant()
         productVariant.id = response.sku
         productVariant.title = response.name
@@ -68,14 +69,5 @@ struct MagentoProductAdapter {
         product.variants?.append(productVariant)
         
         return product
-    }
-}
-
-private extension String {
-    var htmlToAttributedString: NSAttributedString? {
-        return try? NSAttributedString(data: Data(utf8), options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil)
-    }
-    var htmlToString: String {
-        return htmlToAttributedString?.string ?? ""
     }
 }

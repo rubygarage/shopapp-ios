@@ -15,7 +15,7 @@ class CategoryListUseCase {
         self.repository = repository
     }
 
-    func getCategoryList(paginationValue: Any?, _ callback: @escaping RepoCallback<[Category]>) {
-        repository.getCategoryList(perPage: kItemsPerPage, paginationValue: paginationValue, sortBy: nil, reverse: false, callback: callback)
+    func getCategoryList(paginationValue: Any?, parentCategoryId: String? = nil, _ callback: @escaping RepoCallback<[Category]>) {
+        repository.getCategoryList(perPage: kItemsPerPage, paginationValue: paginationValue, sortBy: nil, reverse: false, parentCategoryId: parentCategoryId, callback: callback)
     }
 }

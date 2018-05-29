@@ -7,8 +7,6 @@ inhibit_all_warnings!
 target 'ShopApp' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  
-  #pod 'ShopApp_Shopify', :git => 'https://github.com/rubygarage/shopapp-shopify-ios.git', :branch => 'feature/magento_adapt'
 
   pod 'Alamofire', '~> 4.7'
   pod 'KeychainAccess', '~> 3.0'
@@ -57,5 +55,6 @@ target 'ShopApp' do
   target 'ShopAppTests' do
     pod 'Quick', '~> 1.2'
     pod 'Nimble', '~> 7.0'
+    pod 'OHHTTPStubs/Swift', '~> 6.1'
   end
 end

@@ -1,0 +1,20 @@
+[
+    {
+        "id":1,
+        "code":"default",
+        "website_id":1,
+        "locale":"en_US",
+        "base_currency_code":"USD",
+        "default_display_currency_code":"USD",
+        "timezone":"UTC",
+        "weight_unit":"lbs",
+        "base_url":"http://localhost/",
+        "base_link_url":"http://localhost/",
+        "base_static_url":"http://localhost/pub/static/version1526889694/",
+        "base_media_url":"http://localhost/pub/media/",
+        "secure_base_url":"https://localhost/",
+        "secure_base_link_url":"https://localhost/",
+        "secure_base_static_url":"https://localhost/pub/static/version1526889694/",
+        "secure_base_media_url":"https://localhost/pub/media/"
+    }
+]

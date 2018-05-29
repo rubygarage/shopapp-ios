@@ -17,7 +17,7 @@ struct CustomAttributeResponse: Response {
         case value
     }
     
-    public init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         attributeCode = try values.decode(String.self, forKey: .attributeCode)
         value = AttributeValueResponse()
