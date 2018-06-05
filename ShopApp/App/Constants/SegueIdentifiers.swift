@@ -15,6 +15,7 @@ struct SegueIdentifiers {
     static let toArticleDetails = "toArticleDetails"
     static let toCheckout = "toCheckout"
     static let toCategory = "toCategory"
+    static let toCategoryList = "toCategoryList"
     static let toAccountSettings = "toAccountSettings"
     static let toPolicy = "toPolicy"
     static let toSignIn = "toSignIn"

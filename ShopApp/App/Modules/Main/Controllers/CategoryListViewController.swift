@@ -9,6 +9,7 @@
 import UIKit
 
 import ShopApp_Gateway
+import SwinjectStoryboard
 
 protocol CategoryListControllerDelegate: class {
     func viewController(_ viewController: CategoryListViewController, didSelect category: ShopApp_Gateway.Category)
@@ -16,6 +17,7 @@ protocol CategoryListControllerDelegate: class {
 
 class CategoryListViewController: BaseCollectionViewController<CategoryListViewModel>, CategoryListCollectionProviderDelegate {
     var collectionProvider: CategoryListCollectionProvider!
+    var parentCategoryId: String?
     
     weak var delegate: CategoryListControllerDelegate?
     
@@ -41,6 +43,8 @@ class CategoryListViewController: BaseCollectionViewController<CategoryListViewM
     }
     
     private func setupViewModel() {
+        viewModel?.parentCategoryId = parentCategoryId
+        
         viewModel?.items.asObservable()
             .subscribe(onNext: { [weak self] categories in
                 guard let strongSelf = self else {

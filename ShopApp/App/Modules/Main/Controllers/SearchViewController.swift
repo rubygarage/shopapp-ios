@@ -55,6 +55,12 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Categ
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let categoryListViewController = segue.destination as? CategoryListViewController {
+            if let selectedCategory = selectedCategory {
+                categoryListViewController.title = selectedCategory.title
+                categoryListViewController.parentCategoryId = selectedCategory.id
+                hideTitleViewIfNeeded()
+            }
+            
             categoryListViewController.delegate = self
         } else if let categoryViewController = segue.destination as? CategoryViewController {
             categoryViewController.title = selectedCategory!.title
@@ -151,7 +157,12 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Categ
 
     func viewController(_ viewController: CategoryListViewController, didSelect category: ShopApp_Gateway.Category) {
         selectedCategory = category
-        performSegue(withIdentifier: SegueIdentifiers.toCategory, sender: self)
+        
+        if let childrenCategories = category.childrenCategories, !childrenCategories.isEmpty {
+            performSegue(withIdentifier: SegueIdentifiers.toCategoryList, sender: self)
+        } else {
+            performSegue(withIdentifier: SegueIdentifiers.toCategory, sender: self)
+        }
     }
 
     // MARK: - SearchTitleViewDelegate

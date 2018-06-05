@@ -161,7 +161,7 @@ public class MagentoAPI: BaseAPI, API {
         var parameters = Parameters()
         
         if let parentCategoryId = parentCategoryId {
-            parameters[parentCategoryId] = parentCategoryId
+            parameters[self.parentCategoryId] = parentCategoryId
         }
         
         let route = MagentoCategoriesRoute.getCategories(parameters: parameters)

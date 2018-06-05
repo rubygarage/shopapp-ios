@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -131,6 +131,7 @@
                         <outlet property="collectionView" destination="yWl-1j-1Lt" id="5fp-fi-NDK"/>
                         <segue destination="GSM-jj-cBr" kind="show" identifier="toCategory" id="sQi-O8-8uE"/>
                         <segue destination="2iw-CM-RMu" kind="show" identifier="toProductDetails" id="Uoy-sz-tWO"/>
+                        <segue destination="OmR-vh-hda" kind="show" identifier="toCategoryList" id="lHR-sl-IXp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FuP-Yr-BUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -953,11 +954,11 @@
             <objects>
                 <viewController storyboardIdentifier="CategoryListControllerIdentifier" id="OmR-vh-hda" customClass="CategoryListViewController" customModule="ShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0aG-Oy-cGM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2o3-Uy-08c">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="v48-Jp-HFz">
                                     <size key="itemSize" width="50" height="50"/>
@@ -997,8 +998,8 @@
         <image name="search_selected" width="27" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RyX-CT-HJC"/>
-        <segue reference="DJ8-dD-zkt"/>
+        <segue reference="lHR-sl-IXp"/>
+        <segue reference="Uoy-sz-tWO"/>
         <segue reference="OyI-Tn-rEV"/>
         <segue reference="L85-9n-ESO"/>
     </inferredMetricsTieBreakers>
