@@ -1,6 +1,5 @@
 PODS:
   - AvatarImageView (2.1.1)
-  - CoreStore (4.2.4)
   - Crashlytics (3.10.1):
     - Fabric (~> 1.7.5)
   - DropDown (2.3.1)
@@ -28,7 +27,6 @@ PODS:
 
 DEPENDENCIES:
   - AvatarImageView (~> 2.1)
-  - CoreStore (~> 4.2)
   - Crashlytics (~> 3.9)
   - DropDown (~> 2.0)
   - Fabric (~> 1.7)
@@ -52,7 +50,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AvatarImageView
-    - CoreStore
     - Crashlytics
     - DropDown
     - Fabric
@@ -75,7 +72,6 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AvatarImageView: 50618694f9ce37d07fd0250145e733b34197fb5b
-  CoreStore: 1b8a116d9e3f3e0e0be588b57bc4a7dbb5adf3d5
   Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
   DropDown: 20499c7b2731b0d21609af924e47c7677a2be50d
   Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
@@ -96,6 +92,6 @@ SPEC CHECKSUMS:
   "UIImage+Additions": da531911c34e298b46b567a28df03bb098af1389
   UIScrollView-InfiniteScroll: c132d6d5851daff229ab4a1060ccf70a05a051c9
 
-PODFILE CHECKSUM: 90bec9d6bca10399874b51140fee24d1de0f50ed
+PODFILE CHECKSUM: a3b644e8c495dc541f23904eb5d990ec93801f5e
 
 COCOAPODS: 1.5.2

@@ -43,6 +43,11 @@ class APIMock: API {
     var isGetCountriesStarted = false
     var isGetOrderListStarted = false
     var isGetOrderStarted = false
+    var isAddCartProductStarted = false
+    var isDeleteProductFromCartStarted = false
+    var isDeleteProductsFromCartStarted = false
+    var isDeleteAllProductsFromCartStarted = false
+    var isChangeCartProductQuantityStarted = false
     var perPage: Int?
     var paginationValue: String?
     var sortBy: SortingValue?
@@ -67,6 +72,10 @@ class APIMock: API {
     var billingAddress: Address?
     var customerEmail: String?
     var ids: [String]?
+    var cartProduct: CartProduct?
+    var productVariantId: String?
+    var productVariantIds: [String?]?
+    var quantity: Int?
     
     // MARK: - Shop
     
@@ -366,5 +375,50 @@ class APIMock: API {
         self.id = id
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Order(), nil)
+    }
+    
+    // MARK: - Cart
+    
+    func getCartProductList(callback: @escaping ([CartProduct]?, RepoError?) -> Void) {
+        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+    }
+    
+    func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<Bool>) {
+        isAddCartProductStarted = true
+        
+        self.cartProduct = cartProduct
+        
+        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+    }
+    
+    func deleteProductFromCart(with productVariantId: String?, callback: @escaping RepoCallback<Bool>) {
+        isDeleteProductFromCartStarted = true
+        
+        self.productVariantId = productVariantId
+        
+        isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
+    }
+    
+    func deleteProductsFromCart(with productVariantIds: [String?], callback: @escaping RepoCallback<Bool>) {
+        isDeleteProductsFromCartStarted = true
+        
+        self.productVariantIds = productVariantIds
+        
+        isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
+    }
+    
+    func deleteAllProductsFromCart(with callback: @escaping RepoCallback<Bool>) {
+        isDeleteAllProductsFromCartStarted = true
+        
+        isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
+    }
+    
+    func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<Bool>) {
+        isChangeCartProductQuantityStarted = true
+        
+        self.productVariantId = productVariantId
+        self.quantity = quantity
+        
+        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
 }

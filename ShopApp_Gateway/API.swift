@@ -65,4 +65,13 @@ public protocol API {
     
     func getOrderList(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>)
     func getOrder(id: String, callback: @escaping RepoCallback<Order>)
+    
+    // MARK: - Cart
+    
+    func getCartProductList(callback: @escaping RepoCallback<[CartProduct]>)
+    func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<Bool>)
+    func deleteProductFromCart(with productVariantId: String?, callback: @escaping RepoCallback<Bool>)
+    func deleteProductsFromCart(with productVariantIds: [String?], callback: @escaping RepoCallback<Bool>)
+    func deleteAllProductsFromCart(with callback: @escaping RepoCallback<Bool>)
+    func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<Bool>)
 }

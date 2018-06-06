@@ -12,13 +12,6 @@ import ShopApp_Gateway
 class DataAssembly: Assembly {
     func assemble(container: Container) {
         
-        // MARK: - Data
-        
-        container.register(DAO.self) { _ in
-            return CoreDataDAO()
-            }
-            .inObjectScope(.container)
-        
         // MARK: - Repositories
         
         container.register(ArticleRepository.self) { r in
@@ -32,7 +25,7 @@ class DataAssembly: Assembly {
             .inObjectScope(.container)
         
         container.register(CartRepository.self) { r in
-            return ShopAppCartRepository(dao: r.resolve(DAO.self)!)
+            return ShopAppCartRepository(api: r.resolve(API.self)!)
             }
             .inObjectScope(.container)
         

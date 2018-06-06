@@ -8,7 +8,6 @@
 
 import UIKit
 
-import CoreStore
 import Fabric
 import Crashlytics
 import Swinject
@@ -31,12 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if !DEV
             Fabric.with([Crashlytics.self])
         #endif
-        
-        do {
-            try CoreStore.addStorageAndWait()
-        } catch {
-            print(error)
-        }
 
         // Disabled logging due errors with Swift 3
         // https://github.com/Swinject/Swinject/issues/218
