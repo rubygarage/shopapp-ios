@@ -41,7 +41,7 @@ class ProductDetailsViewModel: BaseViewModel {
                 return Disposables.create()
             }
             let productQuantity = strongSelf.quantity.value
-            guard let cartProduct = CoreDataCartProductAdapter.adapt(product: strongSelf.product.value, productQuantity: productQuantity, variant: strongSelf.selectedProductVariant) else {
+            guard let cartProduct = CartProductAdapter.adapt(product: strongSelf.product.value, productQuantity: productQuantity, variant: strongSelf.selectedProductVariant) else {
                 event.onNext(false)
                 return Disposables.create()
             }

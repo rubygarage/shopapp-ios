@@ -28,9 +28,6 @@ target 'ShopApp' do
   pod 'TTTAttributedLabel', '~> 2.0'
   pod 'DropDown', '~> 2.0'
 
-  # Database
-  pod 'CoreStore', '~> 4.2'
-
   # Architecture
   pod 'RxSwift', '~> 4.1'
   pod 'RxCocoa', '~> 4.1'

@@ -689,6 +689,33 @@ public class MagentoAPI: BaseAPI, API {
         // There is no api to fetch order
         callback(nil, nil)
     }
+
+    // MARK: - Cart
+
+    public func getCartProductList(callback: @escaping RepoCallback<[CartProduct]>) {
+        // TODO: Implement api method
+        callback([], nil)
+    }
+
+    public func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<Bool>) {
+        // TODO: Implement api method
+    }
+
+    public func deleteProductFromCart(with productVariantId: String?, callback: @escaping RepoCallback<Bool>) {
+        // TODO: Implement api method
+    }
+
+    public func deleteProductsFromCart(with productVariantIds: [String?], callback: @escaping RepoCallback<Bool>) {
+        // TODO: Implement api method
+    }
+
+    public func deleteAllProductsFromCart(with callback: @escaping RepoCallback<Bool>) {
+        // TODO: Implement api method
+    }
+
+    public func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<Bool>) {
+        // TODO: Implement api method
+    }
     
     // MARK: - Private
     

@@ -15,7 +15,7 @@ class DataAssembly: Assembly {
         // MARK: - Data
         
         container.register(API.self) { _ in
-            return MagentoAPI(shopDomain: "http://10.14.14.187/")
+            return MagentoAPI(shopDomain: "http://10.14.14.22/")
             }
             .inObjectScope(.container)
         
@@ -23,12 +23,7 @@ class DataAssembly: Assembly {
             return r.resolve(API.self)!.getConfig()
             }
             .inObjectScope(.container)
-        
-        container.register(DAO.self) { _ in
-            return CoreDataDAO()
-            }
-            .inObjectScope(.container)
-        
+
         // MARK: - Repositories
         
         container.register(ArticleRepository.self) { r in
@@ -42,7 +37,7 @@ class DataAssembly: Assembly {
             .inObjectScope(.container)
         
         container.register(CartRepository.self) { r in
-            return ShopAppCartRepository(dao: r.resolve(DAO.self)!)
+            return ShopAppCartRepository(api: r.resolve(API.self)!)
             }
             .inObjectScope(.container)
         
