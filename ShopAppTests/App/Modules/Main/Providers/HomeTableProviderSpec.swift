@@ -19,7 +19,7 @@ class HomeTableProviderSpec: QuickSpec {
         var tableView: UITableView!
         
         beforeEach {
-            tableProvider = HomeTableProvider()
+            tableProvider = HomeTableProvider(isPopularEnabled: false, isBlogEnabled: false)
             tableView = UITableView()
             tableView.registerNibForCell(LastArrivalsTableViewCell.self)
             tableView.registerNibForCell(PopularTableViewCell.self)

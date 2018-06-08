@@ -32,7 +32,7 @@ class AccountViewControllerSpec: QuickSpec {
             viewModelMock = AccountViewModelMock(customerUseCase: customerUseCaseMock, loginUseCase: loginUseCaseMock, logoutUseCase: logoutUseCaseMock, shopUseCase: shopUseCaseMock)
             viewController.viewModel = viewModelMock
             
-            tableProvider = AccountTableProvider()
+            tableProvider = AccountTableProvider(isOrdersEnabled: false)
             viewController.tableProvider = tableProvider
             
             tableView = self.findView(withAccessibilityLabel: "tableView", in: viewController.view) as! UITableView
@@ -60,7 +60,7 @@ class AccountViewControllerSpec: QuickSpec {
                 expect(viewController.navigationItem.rightBarButtonItem).to(beNil())
             }
             
-            it("should have correct delegate of table provider") {
+            it("should have correct values of table provider") {
                 expect(tableProvider.delegate) === viewController
             }
             
@@ -91,7 +91,7 @@ class AccountViewControllerSpec: QuickSpec {
             
             it("needs to reload table view") {
                 expect(tableView.rectForHeader(inSection: 0).size.height) == kAccountLoggedHeaderViewHeight
-                expect(tableView.rectForFooter(inSection: 0).size.height) == kAccountFooterViewHeight
+                expect(tableView.rectForFooter(inSection: 1).size.height) == kAccountFooterViewHeight
             }
         }
         
@@ -117,7 +117,7 @@ class AccountViewControllerSpec: QuickSpec {
                 tableView.beginUpdates()
                 tableView.endUpdates()
 
-                let footerView = tableView.footerView(forSection: 0) as! AccountFooterView
+                let footerView = tableView.footerView(forSection: 1) as! AccountFooterView
                 let logoutButton = self.findView(withAccessibilityLabel: "logout", in: footerView) as! UIButton
                 logoutButton.sendActions(for: .touchUpInside)
                 

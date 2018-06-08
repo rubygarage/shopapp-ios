@@ -60,11 +60,7 @@ class MagentoStoreRouter: BaseRouter {
         urlRequest.httpMethod = method.rawValue
         urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
         urlRequest.allHTTPHeaderFields = headers
-        
-        if route == .getConfigs {
-            urlRequest.cachePolicy = .returnCacheDataElseLoad
-        }
-        
+
         return urlRequest
     }
 }

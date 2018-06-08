@@ -21,6 +21,7 @@ class LastArrivalsTableCellProviderSpec: QuickSpec {
             collectionProvider = LastArrivalsTableCellProvider()
             collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
             collectionView.registerNibForCell(LastArrivalsCollectionViewCell.self)
+            collectionView.registerNibForCell(GridCollectionViewCell.self)
             collectionView.dataSource = collectionProvider
             collectionView.delegate = collectionProvider
         }
@@ -55,19 +56,69 @@ class LastArrivalsTableCellProviderSpec: QuickSpec {
                 expect(rowsCount) == products.count
             }
             
-            it("should have correct cell size") {
-                let indexPath = IndexPath(row: 0, section: 0)
-                let cellSize = collectionProvider.collectionView(collectionView, layout: collectionView.collectionViewLayout, sizeForItemAt: indexPath)
+            context("and size for item returned") {
+                context("if layout is verical") {
+                    it("should have correct cell size") {
+                        collectionProvider.isVerticalLayout = true
+                        
+                        let indexPath = IndexPath(row: 0, section: 0)
+                        let cellSize = collectionProvider.collectionView(collectionView, layout: collectionView.collectionViewLayout, sizeForItemAt: indexPath)
+                        
+                        expect(cellSize) == GridCollectionViewCell.cellSize
+                    }
+                }
                 
-                expect(cellSize.width) == 200
-                expect(cellSize.height) == 200
+                context("if layout is horizontal") {
+                    it("should have correct cell size") {
+                        let indexPath = IndexPath(row: 0, section: 0)
+                        let cellSize = collectionProvider.collectionView(collectionView, layout: collectionView.collectionViewLayout, sizeForItemAt: indexPath)
+                        
+                        expect(cellSize.width) == 200
+                        expect(cellSize.height) == 200
+                    }
+                }
             }
             
-            it("should have correct cell class") {
-                let indexPath = IndexPath(row: 0, section: 0)
-                let cell = collectionProvider.collectionView(collectionView, cellForItemAt: indexPath)
+            context("and min line spacing for section returned") {
+                context("if layout is verical") {
+                    it("should have correct spacing") {
+                        collectionProvider.isVerticalLayout = true
+
+                        let spacing = collectionProvider.collectionView(collectionView, layout: collectionView.collectionViewLayout, minimumLineSpacingForSectionAt: 0)
+                        
+                        expect(spacing) == 0
+                    }
+                }
                 
-                expect(cell).to(beAnInstanceOf(LastArrivalsCollectionViewCell.self))
+                context("if layout is horizontal") {
+                    it("should have correct spacing") {
+                        let spacing = collectionProvider.collectionView(collectionView, layout: collectionView.collectionViewLayout, minimumLineSpacingForSectionAt: 0)
+                        
+                        expect(spacing) == 20
+                    }
+                }
+            }
+            
+            context("and cell for item returned") {
+                context("if layout is verical") {
+                    it("should have correct cell class") {
+                        collectionProvider.isVerticalLayout = true
+                        
+                        let indexPath = IndexPath(row: 0, section: 0)
+                        let cell = collectionProvider.collectionView(collectionView, cellForItemAt: indexPath)
+                        
+                        expect(cell).to(beAnInstanceOf(GridCollectionViewCell.self))
+                    }
+                }
+                
+                context("if layout is horizontal") {
+                    it("should have correct cell class") {
+                        let indexPath = IndexPath(row: 0, section: 0)
+                        let cell = collectionProvider.collectionView(collectionView, cellForItemAt: indexPath)
+                        
+                        expect(cell).to(beAnInstanceOf(LastArrivalsCollectionViewCell.self))
+                    }
+                }
             }
         }
         

@@ -18,7 +18,7 @@ class LastArrivalsTableViewCellSpec: QuickSpec {
         var collectionView: UICollectionView!
         
         beforeEach {
-            let provider = HomeTableProvider()
+            let provider = HomeTableProvider(isPopularEnabled: false, isBlogEnabled: false)
             let tableView = UITableView()
             tableView.registerNibForCell(LastArrivalsTableViewCell.self)
             tableView.dataSource = provider

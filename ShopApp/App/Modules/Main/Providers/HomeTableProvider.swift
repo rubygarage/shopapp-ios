@@ -24,8 +24,15 @@ class HomeTableProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     var lastArrivalsProducts: [Product] = []
     var popularProducts: [Product] = []
     var articles: [Article] = []
+    var isPopularEnabled: Bool
+    var isBlogEnabled: Bool
     
     weak var delegate: (HomeTableProviderDelegate & LastArrivalsTableCellDelegate & PopularTableCellDelegate & SeeAllHeaderViewDelegate)?
+    
+    init(isPopularEnabled: Bool, isBlogEnabled: Bool) {
+        self.isPopularEnabled = isPopularEnabled
+        self.isBlogEnabled = isBlogEnabled
+    }
     
     // MARK: - UITableViewDataSource
     
@@ -61,7 +68,7 @@ class HomeTableProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     private func lastArrivalsCell(with tableView: UITableView, indexPath: IndexPath) -> LastArrivalsTableViewCell {
         let cell: LastArrivalsTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
         cell.delegate = delegate
-        cell.configure(with: lastArrivalsProducts)
+        cell.configure(with: lastArrivalsProducts, isVerticalLayout: !isPopularEnabled && !isBlogEnabled)
         return cell
     }
     

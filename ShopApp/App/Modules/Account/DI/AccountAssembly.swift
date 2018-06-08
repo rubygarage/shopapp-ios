@@ -7,6 +7,7 @@
 //
 
 import Swinject
+import ShopApp_Gateway
 
 class AccountAssembly: Assembly {
     func assemble(container: Container) {
@@ -149,8 +150,8 @@ class AccountAssembly: Assembly {
             return BaseAddressListTableProvider()
         }
         
-        container.register(AccountTableProvider.self) { _ in
-            return AccountTableProvider()
+        container.register(AccountTableProvider.self) { r in
+            return AccountTableProvider(isOrdersEnabled: r.resolve(Config.self)!.isOrdersEnabled)
         }
     }
 }

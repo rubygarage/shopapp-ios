@@ -76,6 +76,10 @@ class APIMock: API {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Shop(), nil)
     }
     
+    func getConfig() -> Config {
+        return Config(isPopularEnabled: false, isBlogEnabled: false, isOrdersEnabled: false)
+    }
+    
     // MARK: - Products
     
     func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, keyPhrase: String?, excludePhrase: String?, reverse: Bool, callback: @escaping RepoCallback<[Product]>) {

@@ -64,7 +64,7 @@ class HomeViewController: BaseTableViewController<HomeViewModel>, HomeTableProvi
         tableView.registerNibForCell(LastArrivalsTableViewCell.self)
         tableView.registerNibForCell(PopularTableViewCell.self)
         tableView.registerNibForCell(ArticleTableViewCell.self)
-                
+        
         tableProvider.delegate = self
         tableView.dataSource = tableProvider
         tableView.delegate = tableProvider

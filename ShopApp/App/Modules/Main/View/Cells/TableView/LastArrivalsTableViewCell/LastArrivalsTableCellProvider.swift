@@ -16,8 +16,10 @@ protocol LastArrivalsTableCellProviderDelegate: class {
 
 class LastArrivalsTableCellProvider: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private let lastArrivalsTableCellSize = CGSize(width: 200, height: 200)
+    private let horizontalLayoutMinLineSpacing: CGFloat = 20
     
     var products: [Product] = []
+    var isVerticalLayout = false
     
     weak var delegate: LastArrivalsTableCellProviderDelegate?
     
@@ -28,11 +30,19 @@ class LastArrivalsTableCellProvider: NSObject, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: LastArrivalsCollectionViewCell = collectionView.dequeueReusableCellForIndexPath(indexPath)
         let product = products[indexPath.row]
-        cell.configure(with: product)
         
-        return cell
+        if isVerticalLayout {
+            let cell: GridCollectionViewCell = collectionView.dequeueReusableCellForIndexPath(indexPath)
+            cell.configure(with: product)
+            
+            return cell
+        } else {
+            let cell: LastArrivalsCollectionViewCell = collectionView.dequeueReusableCellForIndexPath(indexPath)
+            cell.configure(with: product)
+            
+            return cell
+        }
     }
     
     // MARK: - UICollectionViewDelegate
@@ -48,6 +58,10 @@ class LastArrivalsTableCellProvider: NSObject, UICollectionViewDataSource, UICol
     // MARK: - UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return lastArrivalsTableCellSize
+        return isVerticalLayout ? GridCollectionViewCell.cellSize : lastArrivalsTableCellSize
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return isVerticalLayout ? 0 : horizontalLayoutMinLineSpacing
     }
 }

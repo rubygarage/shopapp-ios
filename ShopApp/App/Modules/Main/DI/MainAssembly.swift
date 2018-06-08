@@ -7,6 +7,7 @@
 //
 
 import Swinject
+import ShopApp_Gateway
 
 class MainAssembly: Assembly {
     func assemble(container: Container) {
@@ -34,7 +35,6 @@ class MainAssembly: Assembly {
         container.storyboardInitCompleted(HomeViewController.self) { r, c in
             c.viewModel = r.resolve(HomeViewModel.self)!
             c.tableProvider = r.resolve(HomeTableProvider.self)!
-
         }
 
         container.storyboardInitCompleted(ProductDetailsViewController.self) { r, c in
@@ -122,8 +122,9 @@ class MainAssembly: Assembly {
             return CategoryListCollectionProvider()
         }
 
-        container.register(HomeTableProvider.self) { _ in
-            return HomeTableProvider()
+        container.register(HomeTableProvider.self) { r in
+            return HomeTableProvider(isPopularEnabled: r.resolve(Config.self)!.isPopularEnabled,
+                                     isBlogEnabled: r.resolve(Config.self)!.isBlogEnabled)
         }
         
         container.register(SortVariantsTableProvider.self) { _ in

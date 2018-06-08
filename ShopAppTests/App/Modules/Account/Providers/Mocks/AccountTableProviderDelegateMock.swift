@@ -12,15 +12,21 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class AccountTableProviderDelegateMock: NSObject, AccountTableProviderDelegate, AccountNotLoggedHeaderDelegate, AccountLoggedHeaderDelegate, AccountFooterDelegate {
+class AccountTableProviderDelegateMock: NSObject, AccountTableProviderDelegate, AccountNotLoggedHeaderDelegate, AccountFooterDelegate {
     var provider: AccountTableProvider?
     var policy: Policy?
+    var type: AccountCustomerSection?
     
     // MARK: - AccountTableProviderDelegate
     
     func provider(_ provider: AccountTableProvider, didSelect policy: Policy) {
         self.provider = provider
         self.policy = policy
+    }
+    
+    func provider(_ provider: AccountTableProvider, didSelect type: AccountCustomerSection) {
+        self.provider = provider
+        self.type = type
     }
     
     // MARK: - AccountNotLoggedHeaderDelegate

@@ -25,6 +25,10 @@ public class MagentoAPI: BaseAPI, API {
     private let unauthorizedStatusCode = 401
     private let sessionService = SessionService()
     
+    private lazy var config: Config = {
+        return Config(isPopularEnabled: false, isBlogEnabled: false, isOrdersEnabled: false)
+    }()
+    
     /**
      Initializer for Magento API.
      
@@ -42,6 +46,10 @@ public class MagentoAPI: BaseAPI, API {
     public func getShopInfo(callback: @escaping RepoCallback<Shop>) {
         // There is no api to fetch terms
         callback(nil, nil)
+    }
+    
+    public func getConfig() -> Config {
+        return config
     }
     
     // MARK: - Products

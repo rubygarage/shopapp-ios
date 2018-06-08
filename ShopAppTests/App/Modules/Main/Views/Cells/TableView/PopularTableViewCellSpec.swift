@@ -19,7 +19,7 @@ class PopularTableViewCellSpec: QuickSpec {
         var collectionViewHeightConstraint: NSLayoutConstraint!
         
         beforeEach {
-            let provider = HomeTableProvider()
+            let provider = HomeTableProvider(isPopularEnabled: false, isBlogEnabled: false)
             let tableView = UITableView()
             tableView.registerNibForCell(PopularTableViewCell.self)
             tableView.dataSource = provider

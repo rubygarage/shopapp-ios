@@ -34,6 +34,5 @@ class MagentoPaymentsRouterSpec: QuickSpec {
         expect(urlRequest?.url?.absoluteString) == urlString
         expect(urlRequest?.httpMethod) == HTTPMethod.get.rawValue
         expect(urlRequest?.allHTTPHeaderFields) == [:]
-        expect(urlRequest?.cachePolicy.rawValue) == NSURLRequest.CachePolicy.returnCacheDataElseLoad.rawValue
     }
 }

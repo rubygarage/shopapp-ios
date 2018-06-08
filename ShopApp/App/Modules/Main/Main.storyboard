@@ -610,6 +610,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="collectionView" destination="G4F-1a-1wF" id="TO1-Sg-S5k"/>
+                                            <outlet property="collectionViewHeightLayoutConstraint" destination="3bU-u7-9d3" id="aRo-B5-sQN"/>
                                         </connections>
                                     </view>
                                 </subviews>
@@ -999,8 +1000,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="lHR-sl-IXp"/>
-        <segue reference="Uoy-sz-tWO"/>
-        <segue reference="OyI-Tn-rEV"/>
+        <segue reference="RyX-CT-HJC"/>
+        <segue reference="DJ8-dD-zkt"/>
         <segue reference="L85-9n-ESO"/>
     </inferredMetricsTieBreakers>
 </document>

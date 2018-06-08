@@ -28,7 +28,7 @@ class HomeViewControllerSpec: QuickSpec {
             viewModelMock = HomeViewModelMock(articleListUseCase: articleListUseCaseMock, productListUseCase: productListUseCaseMock)
             viewController.viewModel = viewModelMock
             
-            tableProvider = HomeTableProvider()
+            tableProvider = HomeTableProvider(isPopularEnabled: false, isBlogEnabled: false)
             viewController.tableProvider = tableProvider
             
             tableView = self.findView(withAccessibilityLabel: "tableView", in: viewController.view) as! UITableView
@@ -47,7 +47,7 @@ class HomeViewControllerSpec: QuickSpec {
                 expect(viewController.tableProvider).to(beAnInstanceOf(HomeTableProvider.self))
             }
             
-            it("should have correct delegate of table provider") {
+            it("should have correct values of table provider") {
                 expect(tableProvider.delegate) === viewController
             }
             

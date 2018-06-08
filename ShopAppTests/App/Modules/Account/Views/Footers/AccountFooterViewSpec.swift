@@ -20,7 +20,7 @@ class AccountFooterViewSpec: QuickSpec {
         var logoutUnderlineView: UIView!
         
         beforeEach {
-            let provider = AccountTableProvider()
+            let provider = AccountTableProvider(isOrdersEnabled: false)
             let tableView = UITableView()
             tableView.dataSource = provider
             tableView.delegate = provider

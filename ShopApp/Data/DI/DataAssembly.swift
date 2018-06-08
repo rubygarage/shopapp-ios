@@ -19,6 +19,11 @@ class DataAssembly: Assembly {
             }
             .inObjectScope(.container)
         
+        container.register(Config.self) { r in
+            return r.resolve(API.self)!.getConfig()
+            }
+            .inObjectScope(.container)
+        
         container.register(DAO.self) { _ in
             return CoreDataDAO()
             }

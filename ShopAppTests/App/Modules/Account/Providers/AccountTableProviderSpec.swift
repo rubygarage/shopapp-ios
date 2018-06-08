@@ -18,7 +18,7 @@ class AccountTableProviderSpec: QuickSpec {
         var tableView: UITableView!
         
         beforeEach {
-            tableProvider = AccountTableProvider()
+            tableProvider = AccountTableProvider(isOrdersEnabled: false)
             tableView = UITableView()
             tableView.registerNibForCell(AccountTableViewCell.self)
             tableView.registerNibForHeaderFooterView(AccountFooterView.self)
@@ -27,34 +27,56 @@ class AccountTableProviderSpec: QuickSpec {
         }
 
         describe("when provider created") {
-            it("should return correct rows count") {
-                let rowsCount = tableProvider.tableView(tableView, numberOfRowsInSection: 0)
+            it("should return correct sections count") {
+                let numberOfSections = tableProvider.numberOfSections(in: tableView)
                 
-                expect(rowsCount) == 0
+                expect(numberOfSections) == 2
+            }
+            
+            it("should return correct rows count") {
+                (0...1).forEach {
+                    let rowsCount = tableProvider.tableView(tableView, numberOfRowsInSection: $0)
+                    
+                    expect(rowsCount) == 0
+                }
+            }
+            
+            it("should return correct cell class") {
+                let indexPath = IndexPath(row: 0, section: 0)
+                let cell = tableProvider.tableView(tableView, cellForRowAt: indexPath)
+                expect(cell).to(beAnInstanceOf(AccountTableViewCell.self))
             }
             
             it("should return correct header height") {
-                let headerHeight = tableProvider.tableView(tableView, heightForHeaderInSection: 0)
+                let customerHeaderHeight = tableProvider.tableView(tableView, heightForHeaderInSection: 0)
+                let policiesHeaderHeight = tableProvider.tableView(tableView, heightForHeaderInSection: 1)
                 
-                expect(headerHeight) == kAccountNotLoggedHeaderViewHeight
+                expect(customerHeaderHeight) == kAccountNotLoggedHeaderViewHeight
+                expect(policiesHeaderHeight) == 10
             }
             
             it("should return correct footer height") {
-                let footerHeight = tableProvider.tableView(tableView, heightForFooterInSection: 0)
-                
-                expect(footerHeight) == TableView.headerFooterMinHeight
+                (0...1).forEach {
+                    let footerHeight = tableProvider.tableView(tableView, heightForFooterInSection: $0)
+                    
+                    expect(footerHeight) == TableView.headerFooterMinHeight
+                }
             }
             
             it("should return correct header class type") {
-                let header = tableProvider.tableView(tableView, viewForHeaderInSection: 0)
+                let customerHeader = tableProvider.tableView(tableView, viewForHeaderInSection: 0)
+                let policiesHeader = tableProvider.tableView(tableView, viewForHeaderInSection: 1)
                 
-                expect(header).to(beAnInstanceOf(AccountNotLoggedHeaderView.self))
+                expect(customerHeader).to(beAnInstanceOf(AccountNotLoggedHeaderView.self))
+                expect(policiesHeader).to(beAnInstanceOf(UIView.self))
             }
             
             it("should return correct footer class type") {
-                let footer = tableProvider.tableView(tableView, viewForFooterInSection: 0)
-                
-                expect(footer).to(beAnInstanceOf(UIView.self))
+                (0...1).forEach {
+                    let footer = tableProvider.tableView(tableView, viewForFooterInSection: $0)
+                    
+                    expect(footer).to(beAnInstanceOf(UIView.self))
+                }
             }
         }
         
@@ -67,13 +89,13 @@ class AccountTableProviderSpec: QuickSpec {
             }
             
             it("should return correct rows count") {
-                let rowsCount = tableProvider.tableView(tableView, numberOfRowsInSection: 0)
+                let rowsCount = tableProvider.tableView(tableView, numberOfRowsInSection: 1)
                 
                 expect(rowsCount) == policies.count
             }
 
             it("should return correct cell class") {
-                let indexPath = IndexPath(row: 0, section: 0)
+                let indexPath = IndexPath(row: 0, section: 1)
                 let cell = tableProvider.tableView(tableView, cellForRowAt: indexPath)
                 
                 expect(cell).to(beAnInstanceOf(AccountTableViewCell.self))
@@ -92,7 +114,7 @@ class AccountTableProviderSpec: QuickSpec {
             }
             
             it("should return correct footer height") {
-                let footerHeight = tableProvider.tableView(tableView, heightForFooterInSection: 0)
+                let footerHeight = tableProvider.tableView(tableView, heightForFooterInSection: 1)
                 
                 expect(footerHeight) == kAccountFooterViewHeight
             }
@@ -104,26 +126,66 @@ class AccountTableProviderSpec: QuickSpec {
             }
             
             it("should return correct footer class type") {
-                let footer = tableProvider.tableView(tableView, viewForFooterInSection: 0)
-                
+                let footer = tableProvider.tableView(tableView, viewForFooterInSection: 1)
+         
                 expect(footer).to(beAnInstanceOf(AccountFooterView.self))
             }
+            
+            context("and order enabled did set") {
+                context("and this value is true") {
+                    it("should return correct rows count") {
+                        tableProvider.isOrdersEnabled = true
+                        
+                        let rowsCount = tableProvider.tableView(tableView, numberOfRowsInSection: 0)
+                        
+                        expect(rowsCount) == 3
+                    }
+                }
+                
+                context("and this value is false") {
+                    it("should return correct rows count") {
+                        let rowsCount = tableProvider.tableView(tableView, numberOfRowsInSection: 0)
+                        
+                        expect(rowsCount) == 2
+                    }
+                }
+            }
         }
-        
+
         describe("when cell selected") {
-            it("needs to show policy") {
-                let policy = Policy()
-                let policies = [policy]
-                tableProvider.policies = policies
+            var delegateMock: AccountTableProviderDelegateMock!
+            
+            beforeEach {
+                tableProvider.customer = Customer()
                 
-                let delegateMock = AccountTableProviderDelegateMock()
+                delegateMock = AccountTableProviderDelegateMock()
                 tableProvider.delegate = delegateMock
-                
-                let indexPath = IndexPath(row: 0, section: 0)
-                tableProvider.tableView(tableView, didSelectRowAt: indexPath)
-                
-                expect(delegateMock.provider) === tableProvider
-                expect(delegateMock.policy) === policy
+            }
+            
+            context("if user select customer item") {
+                it("needs to open selected screen") {
+                    tableProvider.isOrdersEnabled = true
+                    
+                    let indexPath = IndexPath(row: 0, section: 0)
+                    tableProvider.tableView(tableView, didSelectRowAt: indexPath)
+                    
+                    expect(delegateMock.provider) === tableProvider
+                    expect(delegateMock.type?.rawValue) === AccountCustomerSection.orders.rawValue
+                }
+            }
+            
+            context("if user select policies item") {
+                it("needs to show policy") {
+                    let policy = Policy()
+                    let policies = [policy]
+                    tableProvider.policies = policies
+                    
+                    let indexPath = IndexPath(row: 0, section: 1)
+                    tableProvider.tableView(tableView, didSelectRowAt: indexPath)
+                    
+                    expect(delegateMock.provider) === tableProvider
+                    expect(delegateMock.policy) === policy
+                }
             }
         }
     }

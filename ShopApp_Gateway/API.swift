@@ -13,6 +13,7 @@ public protocol API {
     // MARK: - Shop
     
     func getShopInfo(callback: @escaping RepoCallback<Shop>)
+    func getConfig() -> Config
     
     // MARK: - Products
     

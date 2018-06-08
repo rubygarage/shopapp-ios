@@ -52,11 +52,7 @@ class MagentoPaymentsRouter: BaseRouter {
     override func buildRequest(with url: URL) throws -> URLRequest {
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
         urlRequest.httpMethod = method.rawValue
-        
-        if route == .getCountries {
-            urlRequest.cachePolicy = .returnCacheDataElseLoad
-        }
-        
+
         return try JSONEncoding.default.encode(urlRequest, with: parameters)
     }
 }

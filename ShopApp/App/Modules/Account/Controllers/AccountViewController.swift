@@ -10,7 +10,7 @@ import UIKit
 
 import ShopApp_Gateway
 
-class AccountViewController: BaseViewController<AccountViewModel>, AccountTableProviderDelegate, AccountNotLoggedHeaderDelegate, AccountLoggedHeaderDelegate, AccountFooterDelegate {
+class AccountViewController: BaseViewController<AccountViewModel>, AccountTableProviderDelegate, AccountNotLoggedHeaderDelegate, AccountFooterDelegate {
     @IBOutlet private weak var tableView: UITableView!
     
     private var selectedPolicy: Policy?
@@ -97,6 +97,17 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableP
     
     // MARK: - AccountTableProviderDelegate
     
+    func provider(_ provider: AccountTableProvider, didSelect type: AccountCustomerSection) {
+        switch type {
+        case .orders:
+            performSegue(withIdentifier: SegueIdentifiers.toOrderList, sender: self)
+        case .info:
+            performSegue(withIdentifier: SegueIdentifiers.toPersonalInfo, sender: self)
+        default:
+            performSegue(withIdentifier: SegueIdentifiers.toAccountAddressList, sender: self)
+        }
+    }
+    
     func provider(_ provider: AccountTableProvider, didSelect policy: Policy) {
         selectedPolicy = policy
         performSegue(withIdentifier: SegueIdentifiers.toPolicy, sender: self)
@@ -110,20 +121,6 @@ class AccountViewController: BaseViewController<AccountViewModel>, AccountTableP
     
     func headerViewDidTapCreateNewAccount(_ headerView: AccountNotLoggedHeaderView) {
         performSegue(withIdentifier: SegueIdentifiers.toSignUp, sender: self)
-    }
-    
-    // MARK: - AccountLoggedHeaderDelegate
-    
-    func headerViewDidTapMyOrders(_ headerView: AccountLoggedHeaderView) {
-        performSegue(withIdentifier: SegueIdentifiers.toOrderList, sender: self)
-    }
-    
-    func headerViewDidTapPersonalInfo(_ headerView: AccountLoggedHeaderView) {
-        performSegue(withIdentifier: SegueIdentifiers.toPersonalInfo, sender: self)
-    }
-    
-    func headerViewDidTapShippingAddress(_ headerView: AccountLoggedHeaderView) {
-        performSegue(withIdentifier: SegueIdentifiers.toAccountAddressList, sender: self)
     }
     
     // MARK: - AccountFooterViewDelegate

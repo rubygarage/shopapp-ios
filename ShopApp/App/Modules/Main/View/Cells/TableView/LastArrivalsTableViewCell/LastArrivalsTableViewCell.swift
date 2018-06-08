@@ -16,9 +16,24 @@ protocol LastArrivalsTableCellDelegate: class {
 
 class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableCellProviderDelegate {
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionViewHeightLayoutConstraint: NSLayoutConstraint!
+    
+    private let rowHeight: CGFloat = 200
+    private let numberOfRowsForVerticalLayout: CGFloat = 5
     
     private var collectionProvider: LastArrivalsTableCellProvider!
     private var products: [Product] = []
+    
+    private var verticalLayoutContentInset: UIEdgeInsets {
+        var contentInset = GridCollectionViewCell.defaultCollectionViewInsets
+        contentInset.top = 0
+        contentInset.bottom = 0
+        
+        return contentInset
+    }
+    private var verticalLayoutHeight: CGFloat {
+        return GridCollectionViewCell.cellSize.height * numberOfRowsForVerticalLayout
+    }
     
     weak var delegate: LastArrivalsTableCellDelegate?
     
@@ -32,14 +47,23 @@ class LastArrivalsTableViewCell: UITableViewCell, LastArrivalsTableCellProviderD
     
     // MARK: - Setup
     
-    func configure(with products: [Product]) {
+    func configure(with products: [Product], isVerticalLayout: Bool = false) {
         self.products = products
         collectionProvider.products = products
+        collectionProvider.isVerticalLayout = isVerticalLayout
+        collectionView.contentInset = isVerticalLayout ? verticalLayoutContentInset : .zero
+        collectionViewHeightLayoutConstraint.constant = isVerticalLayout ? verticalLayoutHeight : rowHeight
+        
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = isVerticalLayout ? .vertical : .horizontal
+        }
+        
         collectionView.reloadData()
     }
     
     private func setupCollectionView() {
         collectionView.registerNibForCell(LastArrivalsCollectionViewCell.self)
+        collectionView.registerNibForCell(GridCollectionViewCell.self)
         
         collectionProvider = LastArrivalsTableCellProvider()
         collectionProvider.delegate = self
