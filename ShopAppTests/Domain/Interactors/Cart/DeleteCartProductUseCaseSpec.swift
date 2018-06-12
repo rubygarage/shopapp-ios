@@ -33,7 +33,7 @@ class DeleteCartProductUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.deleteProductFromCart(productVariantId: productVariantId) { (result, error) in
+                    useCase.deleteCartProduct(productVariantId: productVariantId) { (result, error) in
                         expect(repositoryMock.isDeleteProductFromCartStarted) == true
                         
                         expect(repositoryMock.productVariantId) == productVariantId
@@ -48,7 +48,7 @@ class DeleteCartProductUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.deleteProductFromCart(productVariantId: productVariantId) { (result, error) in
+                    useCase.deleteCartProduct(productVariantId: productVariantId) { (result, error) in
                         expect(repositoryMock.isDeleteProductFromCartStarted) == true
                         
                         expect(repositoryMock.productVariantId) == productVariantId
@@ -61,7 +61,7 @@ class DeleteCartProductUseCaseSpec: QuickSpec {
         }
         
         describe("when products should be delete") {
-            var productVariantIds: [String?]!
+            var productVariantIds: [String]!
             
             beforeEach {
                 productVariantIds = ["id"]
@@ -71,7 +71,7 @@ class DeleteCartProductUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.deleteProductsFromCart(with: productVariantIds) { (result, error) in
+                    useCase.deleteCartProducts(productVariantIds: productVariantIds) { (result, error) in
                         expect(repositoryMock.isDeleteProductsFromCartStarted) == true
                         
                         expect(repositoryMock.productVariantIds).to(equal(productVariantIds))
@@ -86,7 +86,7 @@ class DeleteCartProductUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.deleteProductsFromCart(with: productVariantIds) { (result, error) in
+                    useCase.deleteCartProducts(productVariantIds: productVariantIds) { (result, error) in
                         expect(repositoryMock.isDeleteProductsFromCartStarted) == true
                         
                         expect(repositoryMock.productVariantIds).to(equal(productVariantIds))

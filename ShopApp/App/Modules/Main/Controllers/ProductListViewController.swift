@@ -11,9 +11,9 @@ import UIKit
 import ShopApp_Gateway
 
 class ProductListViewController: GridCollectionViewController<ProductListViewModel> {
-    var sortingValue: SortingValue!
-    var keyPhrase: String?
-    var excludePhrase: String?
+    var sortType: SortType!
+    var keyword: String?
+    var excludeKeyword: String?
     
     // MARK: - View controller lifecycle
     
@@ -37,9 +37,9 @@ class ProductListViewController: GridCollectionViewController<ProductListViewMod
     }
     
     private func setupViewModel() {
-        viewModel.sortingValue = sortingValue
-        viewModel.keyPhrase = keyPhrase
-        viewModel.excludePhrase = excludePhrase
+        viewModel.sortType = sortType
+        viewModel.keyword = keyword
+        viewModel.excludeKeyword = excludeKeyword
         
         viewModel.products.asObservable()
             .subscribe(onNext: { [weak self] products in

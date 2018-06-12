@@ -41,7 +41,7 @@ class SignUpUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.signUp(with: email, firstName: firstName, lastName: lastName, password: password, phone: phone) { (result, error) in
+                    useCase.signUp(firstName: firstName, lastName: lastName, email: email, password: password, phone: phone) { (result, error) in
                         expect(repositoryMock.isSignUpStarted) == true
                         
                         expect(repositoryMock.email) == email
@@ -60,7 +60,7 @@ class SignUpUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.signUp(with: email, firstName: firstName, lastName: lastName, password: password, phone: phone) { (result, error) in
+                    useCase.signUp(firstName: firstName, lastName: lastName, email: email, password: password, phone: phone) { (result, error) in
                         expect(repositoryMock.isSignUpStarted) == true
                         
                         expect(repositoryMock.email) == email

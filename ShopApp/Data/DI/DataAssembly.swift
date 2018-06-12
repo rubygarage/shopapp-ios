@@ -44,8 +44,8 @@ class DataAssembly: Assembly {
             }
             .inObjectScope(.container)
         
-        container.register(PaymentsRepository.self) { r in
-            return ShopAppPaymentsRepository(api: r.resolve(API.self)!)
+        container.register(PaymentRepository.self) { r in
+            return ShopAppPaymentRepository(api: r.resolve(API.self)!)
             }
             .inObjectScope(.container)
         
@@ -56,6 +56,11 @@ class DataAssembly: Assembly {
         
         container.register(ShopRepository.self) { r in
             return ShopAppShopRepository(api: r.resolve(API.self)!)
+            }
+            .inObjectScope(.container)
+
+        container.register(CountryRepository.self) { r in
+            return ShopAppCountryRepository(api: r.resolve(API.self)!)
             }
             .inObjectScope(.container)
     }

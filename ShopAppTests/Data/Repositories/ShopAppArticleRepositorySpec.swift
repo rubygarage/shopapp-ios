@@ -25,28 +25,25 @@ class ShopAppArticleRepositorySpec: QuickSpec {
         describe("when article list should be get") {
             var perPage: Int!
             var paginationValue: String!
-            var sortBy: SortingValue!
-            var reverse: Bool!
+            var sortBy: SortType!
             
             beforeEach {
                 perPage = 5
                 paginationValue = "pagination"
                 sortBy = .name
-                reverse = true
             }
             
             context("if callback has result") {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.getArticleList(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, reverse: reverse) { (result, error) in
+                    repository.getArticles(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy) { (result, error) in
                         expect(apiMock.isGetArticleListStarted) == true
                         
                         expect(apiMock.perPage) == perPage
                         expect(apiMock.paginationValue) == paginationValue
                         expect(apiMock.sortBy?.rawValue) == sortBy.rawValue
-                        expect(apiMock.reverse) == reverse
-                        
+
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
                     }
@@ -57,14 +54,13 @@ class ShopAppArticleRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.getArticleList(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, reverse: reverse) { (result, error) in
+                    repository.getArticles(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy) { (result, error) in
                         expect(apiMock.isGetArticleListStarted) == true
                         
                         expect(apiMock.perPage) == perPage
                         expect(apiMock.paginationValue) == paginationValue
                         expect(apiMock.sortBy?.rawValue) == sortBy.rawValue
-                        expect(apiMock.reverse) == reverse
-                        
+
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())
                     }

@@ -15,27 +15,27 @@ class ShopAppCartRepository: CartRepository {
         self.api = api
     }
 
-    func getCartProductList(callback: @escaping RepoCallback<[CartProduct]>) {
-        api.getCartProductList(callback: callback)
+    func getCartProducts(callback: @escaping RepoCallback<[CartProduct]>) {
+        api.getCartProducts(callback: callback)
     }
     
     func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<Bool>) {
         api.addCartProduct(cartProduct: cartProduct, callback: callback)
     }
     
-    func deleteProductFromCart(with productVariantId: String?, callback: @escaping RepoCallback<Bool>) {
-        api.deleteProductFromCart(with: productVariantId, callback: callback)
+    func deleteCartProduct(productVariantId: String, callback: @escaping RepoCallback<Bool>) {
+        api.deleteCartProduct(productVariantId: productVariantId, callback: callback)
     }
     
-    func deleteProductsFromCart(with productVariantIds: [String?], callback: @escaping RepoCallback<Bool>) {
-        api.deleteProductsFromCart(with: productVariantIds, callback: callback)
+    func deleteCartProducts(productVariantIds: [String], callback: @escaping RepoCallback<Bool>) {
+        api.deleteCartProducts(productVariantIds: productVariantIds, callback: callback)
     }
     
-    func deleteAllProductsFromCart(with callback: @escaping RepoCallback<Bool>) {
-        api.deleteAllProductsFromCart(with: callback)
+    func deleteAllCartProducts(callback: @escaping RepoCallback<Bool>) {
+        api.deleteAllCartProducts(callback: callback)
     }
     
-    func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<Bool>) {
-        api.changeCartProductQuantity(with: productVariantId, quantity: quantity, callback: callback)
+    func changeCartProductQuantity(productVariantId: String, quantity: Int, callback: @escaping RepoCallback<Bool>) {
+        api.changeCartProductQuantity(productVariantId: productVariantId, quantity: quantity, callback: callback)
     }
 }

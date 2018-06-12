@@ -33,7 +33,7 @@ class AddAddressUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.addAddress(with: address) { (result, error) in
+                    useCase.addAddress(address: address) { (result, error) in
                         expect(repositoryMock.isAddCustomerAddressStarted) == true
                         
                         expect(repositoryMock.address) === address
@@ -48,7 +48,7 @@ class AddAddressUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.addAddress(with: address) { (result, error) in
+                    useCase.addAddress(address: address) { (result, error) in
                         expect(repositoryMock.isAddCustomerAddressStarted) == true
                         
                         expect(repositoryMock.address) === address

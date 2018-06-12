@@ -9,8 +9,11 @@
 import ShopApp_Gateway
 
 protocol ProductRepository {
-    func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, keyPhrase: String?, excludePhrase: String?, reverse: Bool, callback: @escaping RepoCallback<[Product]>)
+    func getProducts(perPage: Int, paginationValue: Any?, sortBy: SortType?, keyword: String?, excludeKeyword: String?, callback: @escaping RepoCallback<[Product]>)
+
     func getProduct(id: String, callback: @escaping RepoCallback<Product>)
-    func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping RepoCallback<[Product]>)
-    func getProductVariantList(ids: [String], callback: @escaping RepoCallback<[ProductVariant]>)
+
+    func searchProducts(perPage: Int, paginationValue: Any?, query: String, callback: @escaping RepoCallback<[Product]>)
+
+    func getProductVariants(ids: [String], callback: @escaping RepoCallback<[ProductVariant]>)
 }

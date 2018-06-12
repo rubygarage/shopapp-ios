@@ -15,13 +15,13 @@ import ShopApp_Gateway
 class CheckoutAddressFormViewControllerSpec: QuickSpec {
     override func spec() {
         var viewController: CheckoutAddressFormViewController!
-        var repositoryMock: PaymentsRepositoryMock!
+        var repositoryMock: PaymentRepositoryMock!
         var viewModelMock: CheckoutAddressFormViewModelMock!
         
         beforeEach {
             viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.checkoutAddressForm) as! CheckoutAddressFormViewController
             
-            repositoryMock = PaymentsRepositoryMock()
+            repositoryMock = PaymentRepositoryMock()
             let checkoutUseCaseMock = CheckoutUseCaseMock(repository: repositoryMock)
             viewModelMock = CheckoutAddressFormViewModelMock(checkoutUseCase: checkoutUseCaseMock)
             viewController.viewModel = viewModelMock

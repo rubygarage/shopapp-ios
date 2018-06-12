@@ -16,29 +16,25 @@ class CategoryRepositoryMock: CategoryRepository {
     var isGetCategoryDetailsStarted = false
     var perPage: Int?
     var paginationValue: String?
-    var sortBy: SortingValue?
-    var reverse: Bool?
+    var sortBy: SortType?
     var id: String?
     
-    func getCategoryList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Category]>) {
+    func getCategories(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Category]>) {
         isGetCategoryListStarted = true
         
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
-        self.sortBy = sortBy
-        self.reverse = reverse
-        
+
         isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
     }
     
-    func getCategoryDetails(id: String, perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<Category>) {
+    func getCategory(id: String, perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping RepoCallback<Category>) {
         isGetCategoryDetailsStarted = true
         
         self.id = id
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
         self.sortBy = sortBy
-        self.reverse = reverse
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Category(), nil)
     }

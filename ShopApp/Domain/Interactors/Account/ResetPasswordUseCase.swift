@@ -16,6 +16,6 @@ class ResetPasswordUseCase {
     }
 
     func resetPassword(with email: String, _ callback: @escaping RepoCallback<Bool>) {
-        repository.resetPassword(with: email, callback: callback)
+        repository.resetPassword(email: email, callback: callback)
     }
 }

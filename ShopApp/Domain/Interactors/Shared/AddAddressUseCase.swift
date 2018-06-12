@@ -15,7 +15,7 @@ class AddAddressUseCase {
         self.repository = repository
     }
 
-    func addAddress(with address: Address, callback: @escaping RepoCallback<String>) {
-        repository.addCustomerAddress(with: address, callback: callback)
+    func addAddress(address: Address, callback: @escaping RepoCallback<String>) {
+        repository.addCustomerAddress(address: address, callback: callback)
     }
 }

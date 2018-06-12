@@ -9,10 +9,15 @@
 import ShopApp_Gateway
 
 protocol CartRepository {
-    func getCartProductList(callback: @escaping RepoCallback<[CartProduct]>)
+    func getCartProducts(callback: @escaping RepoCallback<[CartProduct]>)
+
     func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<Bool>)
-    func deleteProductFromCart(with productVariantId: String?, callback: @escaping RepoCallback<Bool>)
-    func deleteProductsFromCart(with productVariantIds: [String?], callback: @escaping RepoCallback<Bool>)
-    func deleteAllProductsFromCart(with callback: @escaping RepoCallback<Bool>)
-    func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<Bool>)
+
+    func deleteCartProduct(productVariantId: String, callback: @escaping RepoCallback<Bool>)
+
+    func deleteCartProducts(productVariantIds: [String], callback: @escaping RepoCallback<Bool>)
+
+    func deleteAllCartProducts(callback: @escaping RepoCallback<Bool>)
+
+    func changeCartProductQuantity(productVariantId: String, quantity: Int, callback: @escaping RepoCallback<Bool>)
 }

@@ -15,7 +15,7 @@ class OrderListUseCase {
         self.repository = repository
     }
 
-    func getOrderList(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Order]>) {
-        repository.getOrderList(perPage: kItemsPerPage, paginationValue: paginationValue, callback: callback)
+    func getOrders(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Order]>) {
+        repository.getOrders(perPage: kItemsPerPage, paginationValue: paginationValue, callback: callback)
     }
 }

@@ -9,6 +9,7 @@
 import ShopApp_Gateway
 
 protocol CategoryRepository {
-    func getCategoryList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Category]>)
-    func getCategoryDetails(id: String, perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<Category>)
+    func getCategories(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Category]>)
+
+    func getCategory(id: String, perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping RepoCallback<Category>)
 }

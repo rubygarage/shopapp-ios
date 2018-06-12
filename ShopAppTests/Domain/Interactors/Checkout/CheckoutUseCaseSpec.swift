@@ -15,10 +15,10 @@ import ShopApp_Gateway
 class CheckoutUseCaseSpec: QuickSpec {
     override func spec() {
         var useCase: CheckoutUseCase!
-        var repositoryMock: PaymentsRepositoryMock!
+        var repositoryMock: PaymentRepositoryMock!
         
         beforeEach {
-            repositoryMock = PaymentsRepositoryMock()
+            repositoryMock = PaymentRepositoryMock()
             useCase = CheckoutUseCase(repository: repositoryMock)
         }
         
@@ -33,7 +33,7 @@ class CheckoutUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getCheckout(with: checkoutId) { (result, error) in
+                    useCase.getCheckout(checkoutId: checkoutId) { (result, error) in
                         expect(repositoryMock.isGetCheckoutStarted) == true
                         
                         expect(repositoryMock.checkoutId) == checkoutId
@@ -48,7 +48,7 @@ class CheckoutUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.getCheckout(with: checkoutId) { (result, error) in
+                    useCase.getCheckout(checkoutId: checkoutId) { (result, error) in
                         expect(repositoryMock.isGetCheckoutStarted) == true
                         
                         expect(repositoryMock.checkoutId) == checkoutId
@@ -73,7 +73,7 @@ class CheckoutUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.updateCheckoutShippingAddress(with: checkoutId, address: address) { (result, error) in
+                    useCase.setShippingAddress(checkoutId: checkoutId, address: address) { (result, error) in
                         expect(repositoryMock.isUpdateShippingAddressStarted) == true
                         
                         expect(repositoryMock.checkoutId) == checkoutId
@@ -89,7 +89,7 @@ class CheckoutUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.updateCheckoutShippingAddress(with: checkoutId, address: address) { (result, error) in
+                    useCase.setShippingAddress(checkoutId: checkoutId, address: address) { (result, error) in
                         expect(repositoryMock.isUpdateShippingAddressStarted) == true
                         
                         expect(repositoryMock.checkoutId) == checkoutId
@@ -143,27 +143,27 @@ class CheckoutUseCaseSpec: QuickSpec {
         describe("when user should pay") {
             var card: CreditCard!
             var checkout: Checkout!
-            var billingAddress: Address!
-            var customerEmail: String!
+            var address: Address!
+            var email: String!
             
             beforeEach {
                 card = CreditCard()
                 checkout = Checkout()
-                billingAddress = Address()
-                customerEmail = "user@mail.com"
+                address = Address()
+                email = "user@mail.com"
             }
             
             context("if callback has result") {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.pay(with: card, checkout: checkout, billingAddress: billingAddress, customerEmail: customerEmail) { (result, error) in
+                    useCase.completeCheckout(checkout: checkout, email: email, address: address, card: card) { (result, error) in
                         expect(repositoryMock.isPayStarted) == true
                         
                         expect(repositoryMock.card) === card
                         expect(repositoryMock.checkout) === checkout
-                        expect(repositoryMock.billingAddress) === billingAddress
-                        expect(repositoryMock.customerEmail) == customerEmail
+                        expect(repositoryMock.billingAddress) === address
+                        expect(repositoryMock.email) == email
                         
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -175,13 +175,13 @@ class CheckoutUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.pay(with: card, checkout: checkout, billingAddress: billingAddress, customerEmail: customerEmail) { (result, error) in
+                    useCase.completeCheckout(checkout: checkout, email: email, address: address, card: card) { (result, error) in
                         expect(repositoryMock.isPayStarted) == true
                         
                         expect(repositoryMock.card) === card
                         expect(repositoryMock.checkout) === checkout
-                        expect(repositoryMock.billingAddress) === billingAddress
-                        expect(repositoryMock.customerEmail) == customerEmail
+                        expect(repositoryMock.billingAddress) === address
+                        expect(repositoryMock.email) == email
                         
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())
@@ -192,22 +192,22 @@ class CheckoutUseCaseSpec: QuickSpec {
         
         describe("when apple pay should be setup") {
             var checkout: Checkout!
-            var customerEmail: String!
+            var email: String!
             
             beforeEach {
                 checkout = Checkout()
-                customerEmail = "user@mail.com"
+                email = "user@mail.com"
             }
             
             context("if callback has result") {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.setupApplePay(with: checkout, customerEmail: customerEmail) { (result, error) in
+                    useCase.setupApplePay(checkout: checkout, email: email) { (result, error) in
                         expect(repositoryMock.isSetupApplePayStarted) == true
                         
                         expect(repositoryMock.checkout) === checkout
-                        expect(repositoryMock.customerEmail) == customerEmail
+                        expect(repositoryMock.email) == email
                         
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -219,11 +219,11 @@ class CheckoutUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.setupApplePay(with: checkout, customerEmail: customerEmail) { (result, error) in
+                    useCase.setupApplePay(checkout: checkout, email: email) { (result, error) in
                         expect(repositoryMock.isSetupApplePayStarted) == true
                         
                         expect(repositoryMock.checkout) === checkout
-                        expect(repositoryMock.customerEmail) == customerEmail
+                        expect(repositoryMock.email) == email
                         
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())
@@ -234,22 +234,22 @@ class CheckoutUseCaseSpec: QuickSpec {
         
         describe("when shipping rate should be update") {
             var checkoutId: String!
-            var rate: ShippingRate!
+            var shippingRate: ShippingRate!
             
             beforeEach {
                 checkoutId = "id"
-                rate = ShippingRate()
+                shippingRate = ShippingRate()
             }
             
             context("if callback has result") {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.updateShippingRate(with: checkoutId, rate: rate) { (result, error) in
+                    useCase.setShippingRate(checkoutId: checkoutId, shippingRate: shippingRate) { (result, error) in
                         expect(repositoryMock.isUpdateCheckoutStarted) == true
                         
                         expect(repositoryMock.checkoutId) == checkoutId
-                        expect(repositoryMock.rate) === rate
+                        expect(repositoryMock.shippingRate) === shippingRate
                         
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -261,11 +261,11 @@ class CheckoutUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.updateShippingRate(with: checkoutId, rate: rate) { (result, error) in
+                    useCase.setShippingRate(checkoutId: checkoutId, shippingRate: shippingRate) { (result, error) in
                         expect(repositoryMock.isUpdateCheckoutStarted) == true
                         
                         expect(repositoryMock.checkoutId) == checkoutId
-                        expect(repositoryMock.rate) === rate
+                        expect(repositoryMock.shippingRate) === shippingRate
                         
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())

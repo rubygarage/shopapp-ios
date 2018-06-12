@@ -18,23 +18,21 @@ class ProductRepositoryMock: ProductRepository {
     var isGetProductVariantListStarted = false
     var perPage: Int?
     var paginationValue: String?
-    var sortBy: SortingValue?
-    var keyPhrase: String?
-    var excludePhrase: String?
-    var reverse: Bool?
+    var sortBy: SortType?
+    var keyword: String?
+    var excludeKeyword: String?
     var id: String?
-    var searchQuery: String?
+    var query: String?
     var ids: [String]?
     
-    func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, keyPhrase: String?, excludePhrase: String?, reverse: Bool, callback: @escaping RepoCallback<[Product]>) {
+    func getProducts(perPage: Int, paginationValue: Any?, sortBy: SortType?, keyword: String?, excludeKeyword: String?, callback: @escaping RepoCallback<[Product]>) {
         isGetProductListStarted = true
         
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
         self.sortBy = sortBy
-        self.keyPhrase = keyPhrase
-        self.excludePhrase = excludePhrase
-        self.reverse = reverse
+        self.keyword = keyword
+        self.excludeKeyword = excludeKeyword
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
     }
@@ -47,17 +45,17 @@ class ProductRepositoryMock: ProductRepository {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Product(), nil)
     }
     
-    func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping RepoCallback<[Product]>) {
+    func searchProducts(perPage: Int, paginationValue: Any?, query: String, callback: @escaping RepoCallback<[Product]>) {
         isSearchProductsStarted = true
         
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
-        self.searchQuery = searchQuery
+        self.query = query
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
     }
     
-    func getProductVariantList(ids: [String], callback: @escaping RepoCallback<[ProductVariant]>) {
+    func getProductVariants(ids: [String], callback: @escaping RepoCallback<[ProductVariant]>) {
         isGetProductVariantListStarted = true
         
         self.ids = ids

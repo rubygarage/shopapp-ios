@@ -18,7 +18,7 @@ class CartButtonViewModel {
     }
     
     func getCartItemsCount() {
-        cartProductListUseCase.getCartProductList { [weak self] (products, _) in
+        cartProductListUseCase.getCartProducts { [weak self] (products, _) in
             guard let strongSelf = self, let products = products else {
                 return
             }

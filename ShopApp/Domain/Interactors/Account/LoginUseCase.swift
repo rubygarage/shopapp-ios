@@ -17,12 +17,11 @@ class LoginUseCase {
         self.repository = repository
     }
 
-    func login(with email: String, password: String, _ callback: @escaping RepoCallback<Bool>) {
-        repository.login(with: email, password: password, callback: callback)
+    func signIn(email: String, password: String, _ callback: @escaping RepoCallback<Bool>) {
+        repository.signIn(email: email, password: password, callback: callback)
     }
     
-    func getLoginStatus(_ callback: LoginStatusCallback) {
-        let isLoggedIn = repository.isLoggedIn()
-        callback(isLoggedIn)
+    func isSignedIn(_ callback: @escaping RepoCallback<Bool>) {
+        repository.isSignedIn(callback: callback)
     }
 }

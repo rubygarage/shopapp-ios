@@ -15,11 +15,7 @@ class ArticleListUseCase {
         self.repository = repository
     }
 
-    func getReverseArticleList(_ callback: @escaping RepoCallback<[Article]>) {
-        repository.getArticleList(perPage: kItemsPerPage, paginationValue: nil, sortBy: nil, reverse: true, callback: callback)
-    }
-
-    func getArticleList(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Article]>) {
-        repository.getArticleList(perPage: kItemsPerPage, paginationValue: paginationValue, sortBy: SortingValue.createdAt, reverse: true, callback: callback)
+    func getArticles(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Article]>) {
+        repository.getArticles(perPage: kItemsPerPage, paginationValue: paginationValue, sortBy: SortType.createdAt, callback: callback)
     }
 }

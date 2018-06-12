@@ -14,12 +14,12 @@ import ShopApp_Gateway
 
 class SortVariantsControllerDelegateMock: NSObject, SortVariantsControllerDelegate {
     var viewController: SortVariantsViewController?
-    var sortingValue: SortingValue?
+    var sortType: SortType?
     
     // MARK: - SortVariantsControllerDelegate
     
-    func viewController(_ viewController: SortVariantsViewController, didSelect sortingValue: SortingValue) {
+    func viewController(_ viewController: SortVariantsViewController, didSelect sortType: SortType) {
         self.viewController = viewController
-        self.sortingValue = sortingValue
+        self.sortType = sortType
     }
 }

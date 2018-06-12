@@ -27,7 +27,7 @@ class CartProductListUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getCartProductList() { (result, error) in
+                    useCase.getCartProducts() { (result, error) in
                         expect(repositoryMock.isGetCartProductListStarted) == true
                         
                         expect(result).toNot(beNil())
@@ -40,7 +40,7 @@ class CartProductListUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.getCartProductList() { (result, error) in
+                    useCase.getCartProducts() { (result, error) in
                         expect(repositoryMock.isGetCartProductListStarted) == true
                         
                         expect(result).to(beNil())

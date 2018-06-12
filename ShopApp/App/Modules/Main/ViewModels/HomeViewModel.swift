@@ -19,7 +19,7 @@ class HomeViewModel: BasePaginationViewModel {
             guard let strongSelf = self else {
                 return Disposables.create()
             }
-            strongSelf.productListUseCase.getLastArrivalProductList { (products, error) in
+            strongSelf.productListUseCase.getLastArrivalProducts { (products, error) in
                 if let error = error {
                     single(.error(error))
                 } else if let products = products {
@@ -34,7 +34,7 @@ class HomeViewModel: BasePaginationViewModel {
             guard let strongSelf = self else {
                 return Disposables.create()
             }
-            strongSelf.productListUseCase.getPopularProductList { (products, error) in
+            strongSelf.productListUseCase.getPopularProducts { (products, error) in
                 if let error = error {
                     single(.error(error))
                 } else if let products = products {
@@ -49,7 +49,8 @@ class HomeViewModel: BasePaginationViewModel {
             guard let strongSelf = self else {
                 return Disposables.create()
             }
-            strongSelf.articleListUseCase.getReverseArticleList { (articles, error) in
+
+            strongSelf.articleListUseCase.getArticles(with: nil) { (articles, error) in
                 if let error = error {
                     single(.error(error))
                 } else if let articles = articles {

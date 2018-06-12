@@ -13,7 +13,7 @@ import ShopApp_Gateway
 class CartValidationUseCaseMock: CartValidationUseCase {
     var isNeedToReturnError = false
     
-    override func getProductVariantList(ids: [String], _ callback: @escaping RepoCallback<[ProductVariant]>) {
+    override func getProductVariants(ids: [String], _ callback: @escaping RepoCallback<[ProductVariant]>) {
         isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
     }
 }

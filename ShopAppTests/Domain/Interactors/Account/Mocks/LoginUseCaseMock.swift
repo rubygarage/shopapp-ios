@@ -16,11 +16,11 @@ class LoginUseCaseMock: LoginUseCase {
     var isNeedToReturnError = false
     var isGetLoginStatusStarted = false
     
-    override func login(with email: String, password: String, _ callback: @escaping RepoCallback<Bool>) {
+    override func signIn(email: String, password: String, _ callback: @escaping RepoCallback<Bool>) {
         execute(callback: callback)
     }
     
-    override func getLoginStatus(_ callback: LoginStatusCallback) {
+    override func isSignedIn(_ callback: @escaping RepoCallback<Bool>) {
         isGetLoginStatusStarted = true
         
         execute(callback: callback)

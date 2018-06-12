@@ -22,7 +22,7 @@ class AccountAddressFormViewModel: BaseViewModel {
     
     func addCustomerAddress(with address: Address) {
         state.onNext(ViewState.make.loading(isTranslucent: true))
-        addAddressUseCase.addAddress(with: address) { [weak self] (_, error) in
+        addAddressUseCase.addAddress(address: address) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }
@@ -37,7 +37,7 @@ class AccountAddressFormViewModel: BaseViewModel {
     
     func updateCustomerAddress(with address: Address) {
         state.onNext(ViewState.make.loading(isTranslucent: true))
-        updateAddressUseCase.updateCustomerAddress(with: address) { [weak self] (_, error) in
+        updateAddressUseCase.updateCustomerAddress(address: address) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }

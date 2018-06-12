@@ -35,7 +35,7 @@ class OrderListUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getOrderList(with: paginationValue) { (result, error) in
+                    useCase.getOrders(with: paginationValue) { (result, error) in
                         expect(repositoryMock.isGetOrderListStarted) == true
                         
                         expect(repositoryMock.perPage) == perPage
@@ -51,7 +51,7 @@ class OrderListUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getOrderList(with: paginationValue) { (result, error) in
+                    useCase.getOrders(with: paginationValue) { (result, error) in
                         expect(repositoryMock.isGetOrderListStarted) == true
                         
                         expect(repositoryMock.perPage) == perPage

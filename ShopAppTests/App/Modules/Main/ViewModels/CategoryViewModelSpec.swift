@@ -31,7 +31,7 @@ class CategoryViewModelSpec: QuickSpec {
             
             it("should have correct initial values") {
                 expect(viewModel.categoryId).to(beNil())
-                expect(viewModel.selectedSortingValue.rawValue) == SortingValue.name.rawValue
+                expect(viewModel.selectedSortType.rawValue) == SortType.name.rawValue
             }
         }
         

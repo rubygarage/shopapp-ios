@@ -58,11 +58,15 @@ class PersonalInfoViewModel: BaseViewModel {
     }
     
     func loadCustomer() {
-        loginUseCase.getLoginStatus { isLoggedIn in
-            if isLoggedIn {
-                getCustomer()
+        loginUseCase.isSignedIn({ [weak self] (isSignedIn, _) in
+            guard let strongSelf = self else {
+                return
             }
-        }
+
+            if let isSignedIn = isSignedIn, isSignedIn {
+                strongSelf.getCustomer()
+            }
+        })
     }
     
     private func getCustomer() {
@@ -99,7 +103,7 @@ class PersonalInfoViewModel: BaseViewModel {
     
     private func saveChanges() {
         state.onNext(ViewState.make.loading(isTranslucent: true))
-        updateCustomerUseCase.updateCustomer(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), phone: phoneText.value.orNil()) { [weak self] (customer, error) in
+        updateCustomerUseCase.updateCustomer(firstName: firstNameText.value, lastName: lastNameText.value, phone: phoneText.value) { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return
             }

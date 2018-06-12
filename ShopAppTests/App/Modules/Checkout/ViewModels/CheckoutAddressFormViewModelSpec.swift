@@ -15,7 +15,7 @@ import ShopApp_Gateway
 
 class CheckoutAddressFormViewModelSpec: QuickSpec {
     override func spec() {
-        let repositoryMock = PaymentsRepositoryMock()
+        let repositoryMock = PaymentRepositoryMock()
         let checkoutUseCaseMock = CheckoutUseCaseMock(repository: repositoryMock)
         let viewModel = CheckoutAddressFormViewModel(checkoutUseCase: checkoutUseCaseMock)
         

@@ -18,18 +18,16 @@ class ArticleRepositoryMock: ArticleRepository {
     var isGetArticleStarted = false
     var perPage: Int?
     var paginationValue: String?
-    var sortBy: SortingValue?
-    var reverse: Bool?
+    var sortBy: SortType?
     var id: String?
     
-    func getArticleList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Article]>) {
+    func getArticles(perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping RepoCallback<[Article]>) {
         isGetArticleListStarted = true
         
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
         self.sortBy = sortBy
-        self.reverse = reverse
-        
+
         isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
     }
     

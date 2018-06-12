@@ -15,8 +15,8 @@ class ShopAppArticleRepository: ArticleRepository {
         self.api = api
     }
     
-    func getArticleList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Article]>) {
-        api.getArticleList(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, reverse: reverse, callback: callback)
+    func getArticles(perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping RepoCallback<[Article]>) {
+        api.getArticles(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, callback: callback)
     }
     
     func getArticle(id: String, callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>) {

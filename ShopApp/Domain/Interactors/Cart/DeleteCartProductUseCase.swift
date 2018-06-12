@@ -15,11 +15,11 @@ class DeleteCartProductUseCase {
         self.repository = repository
     }
     
-    func deleteProductFromCart(productVariantId: String?, _ callback: @escaping RepoCallback<Bool>) {
-        repository.deleteProductFromCart(with: productVariantId, callback: callback)
+    func deleteCartProduct(productVariantId: String, _ callback: @escaping RepoCallback<Bool>) {
+        repository.deleteCartProduct(productVariantId: productVariantId, callback: callback)
     }
     
-    func deleteProductsFromCart(with productVariantIds: [String?], callback: @escaping RepoCallback<Bool>) {
-        repository.deleteProductsFromCart(with: productVariantIds, callback: callback)
+    func deleteCartProducts(productVariantIds: [String], callback: @escaping RepoCallback<Bool>) {
+        repository.deleteCartProducts(productVariantIds: productVariantIds, callback: callback)
     }
 }

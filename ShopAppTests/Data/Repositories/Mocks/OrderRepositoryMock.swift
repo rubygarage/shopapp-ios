@@ -18,7 +18,7 @@ class OrderRepositoryMock: OrderRepository {
     var paginationValue: String?
     var id: String?
     
-    func getOrderList(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
+    func getOrders(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
         isGetOrderListStarted = true
         
         self.perPage = perPage

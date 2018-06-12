@@ -20,8 +20,8 @@ class CheckoutAddressListViewModelSpec: QuickSpec {
         let updateDefaultAddressUseCaseMock = UpdateDefaultAddressUseCaseMock(repository: customerRepositoryMock)
         let deleteAddressUseCaseMock = DeleteAddressUseCaseMock(repository: customerRepositoryMock)
         
-        let paymentsRepositoryMock = PaymentsRepositoryMock()
-        let checkoutUseCaseMock = CheckoutUseCaseMock(repository: paymentsRepositoryMock)
+        let paymentRepositoryMock = PaymentRepositoryMock()
+        let checkoutUseCaseMock = CheckoutUseCaseMock(repository: paymentRepositoryMock)
         
         let viewModel = CheckoutAddressListViewModel(customerUseCase: customerUseCaseMock, updateDefaultAddressUseCase: updateDefaultAddressUseCaseMock, deleteAddressUseCase: deleteAddressUseCaseMock, checkoutUseCase: checkoutUseCaseMock)
         

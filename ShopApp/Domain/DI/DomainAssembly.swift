@@ -58,7 +58,7 @@ class DomainAssembly: Assembly {
         // MARK: - Checkout
 
         container.register(CheckoutUseCase.self) { r in
-            return CheckoutUseCase(repository: r.resolve(PaymentsRepository.self)!)
+            return CheckoutUseCase(repository: r.resolve(PaymentRepository.self)!)
         }
 
         container.register(DeleteCartProductsUseCase.self) { r in
@@ -110,7 +110,7 @@ class DomainAssembly: Assembly {
         }
 
         container.register(CountriesUseCase.self) { r in
-            return CountriesUseCase(repository: r.resolve(PaymentsRepository.self)!)
+            return CountriesUseCase(repository: r.resolve(CountryRepository.self)!)
         }
 
         container.register(CustomerUseCase.self) { r in

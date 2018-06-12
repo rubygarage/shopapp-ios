@@ -13,7 +13,7 @@ class CategoryViewModel: GridCollectionViewModel {
     private let categoryUseCase: CategoryUseCase
     
     var categoryId: String!
-    var selectedSortingValue = SortingValue.name
+    var selectedSortType = SortType.name
 
     init(categoryUseCase: CategoryUseCase) {
         self.categoryUseCase = categoryUseCase
@@ -36,8 +36,8 @@ class CategoryViewModel: GridCollectionViewModel {
     private func loadRemoteData() {
         let showHud = products.value.isEmpty
         state.onNext(ViewState.make.loading(showHud: showHud))
-        let reverse = selectedSortingValue == .createdAt || selectedSortingValue == .priceHighToLow
-        categoryUseCase.getCategory(with: categoryId, paginationValue: paginationValue, sortingValue: selectedSortingValue, reverse: reverse) { [weak self] (result, error) in
+
+        categoryUseCase.getCategory(with: categoryId, paginationValue: paginationValue, sortType: selectedSortType) { [weak self] (result, error) in
             guard let strongSelf = self else {
                 return
             }

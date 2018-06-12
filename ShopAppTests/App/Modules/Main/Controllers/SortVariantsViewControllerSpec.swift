@@ -23,7 +23,7 @@ class SortVariantsViewControllerSpec: QuickSpec {
             
             tableProvider = SortVariantsTableProvider()
             viewController.tableProvider = tableProvider
-            viewController.selectedSortingValue = .name
+            viewController.selectedSortType = .name
             
             tableView = self.findView(withAccessibilityLabel: "tableView", in: viewController.view) as! UITableView
         }
@@ -43,8 +43,8 @@ class SortVariantsViewControllerSpec: QuickSpec {
             }
             
             it("should have correct data in provider") {
-                expect(tableProvider.variants) == ["SortingValue.CreatedAt".localizable, "SortingValue.PriceHighToLow".localizable, "SortingValue.PriceLowToHigh".localizable]
-                expect(tableProvider.selectedVariant) == "SortingValue.Name".localizable
+                expect(tableProvider.variants) == ["SortType.CreatedAt".localizable, "SortType.PriceHighToLow".localizable, "SortType.PriceLowToHigh".localizable]
+                expect(tableProvider.selectedVariant) == "SortType.Name".localizable
             }
             
             it("should have reloaded table view") {
@@ -67,20 +67,20 @@ class SortVariantsViewControllerSpec: QuickSpec {
                     tableView.delegate!.tableView!(tableView, didSelectRowAt: indexPath)
                     
                     expect(delegateMock.viewController) === viewController
-                    expect(delegateMock.sortingValue?.rawValue) == SortingValue.createdAt.rawValue
+                    expect(delegateMock.sortType?.rawValue) == SortType.createdAt.rawValue
                 }
             }
             
             context("if user selects variant that has been selected") {
                 it("needs to deselect variant") {
-                    tableProvider.selectedVariant = "SortingValue.CreatedAt".localizable
+                    tableProvider.selectedVariant = "SortType.CreatedAt".localizable
                     
                     let indexPath = IndexPath(row: 0, section: 0)
                     tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
                     tableView.delegate!.tableView!(tableView, didSelectRowAt: indexPath)
                     
                     expect(delegateMock.viewController) === viewController
-                    expect(delegateMock.sortingValue?.rawValue) == SortingValue.name.rawValue
+                    expect(delegateMock.sortType?.rawValue) == SortType.name.rawValue
                 }
             }
         }

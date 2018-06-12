@@ -77,9 +77,9 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
             self.productOptionsViewController = productOptionsViewController
         } else if let productListViewController = segue.destination as? ProductListViewController {
             productListViewController.title = "Label.RelatedItems".localizable
-            productListViewController.sortingValue = .type
-            productListViewController.keyPhrase = viewModel.product.value?.type
-            productListViewController.excludePhrase = viewModel.product.value?.title
+            productListViewController.sortType = .type
+            productListViewController.keyword = viewModel.product.value?.type
+            productListViewController.excludeKeyword = viewModel.product.value?.title
         }
     }
     

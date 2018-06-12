@@ -30,9 +30,9 @@ class ProductListViewModelSpec: QuickSpec {
             }
             
             it("should have correct initial values") {
-                expect(viewModel.sortingValue).to(beNil())
-                expect(viewModel.keyPhrase).to(beNil())
-                expect(viewModel.excludePhrase).to(beNil())
+                expect(viewModel.sortType).to(beNil())
+                expect(viewModel.keyword).to(beNil())
+                expect(viewModel.excludeKeyword).to(beNil())
             }
         }
         
@@ -41,7 +41,7 @@ class ProductListViewModelSpec: QuickSpec {
             var states: [ViewState]!
             
             beforeEach {
-                viewModel.sortingValue = .createdAt
+                viewModel.sortType = .createdAt
                 
                 disposeBag = DisposeBag()
                 states = []
@@ -93,7 +93,7 @@ class ProductListViewModelSpec: QuickSpec {
             var states: [ViewState]!
             
             beforeEach {
-                viewModel.sortingValue = .createdAt
+                viewModel.sortType = .createdAt
                 
                 let product = Product()
                 product.paginationValue = "Pagination value"
@@ -149,7 +149,7 @@ class ProductListViewModelSpec: QuickSpec {
             var states: [ViewState]!
             
             beforeEach {
-                viewModel.sortingValue = .createdAt
+                viewModel.sortType = .createdAt
                 
                 disposeBag = DisposeBag()
                 states = []

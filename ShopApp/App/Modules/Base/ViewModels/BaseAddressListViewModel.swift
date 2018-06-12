@@ -43,7 +43,7 @@ class BaseAddressListViewModel: BaseViewModel {
     
     func deleteCustomerAddress(with address: Address, type: AddressListType) {
         state.onNext(ViewState.make.loading(isTranslucent: true))
-        deleteAddressUseCase.deleteCustomerAddress(with: address.id) { [weak self] (success, error) in
+        deleteAddressUseCase.deleteCustomerAddress(addressId: address.id) { [weak self] (success, error) in
             guard let strongSelf = self else {
                 return
             }

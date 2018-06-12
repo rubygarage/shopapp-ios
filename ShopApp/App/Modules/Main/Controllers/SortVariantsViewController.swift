@@ -11,14 +11,14 @@ import UIKit
 import ShopApp_Gateway
 
 protocol SortVariantsControllerDelegate: class {
-    func viewController(_ viewController: SortVariantsViewController, didSelect sortingValue: SortingValue)
+    func viewController(_ viewController: SortVariantsViewController, didSelect sortType: SortType)
 }
 
 class SortVariantsViewController: UIViewController, SortVariantsTableProviderDelegate, UIGestureRecognizerDelegate {
     @IBOutlet private weak var tableView: UITableView!
     
     var tableProvider: SortVariantsTableProvider!
-    var selectedSortingValue: SortingValue!
+    var selectedSortType: SortType!
     
     weak var delegate: SortVariantsControllerDelegate?
 
@@ -49,12 +49,12 @@ class SortVariantsViewController: UIViewController, SortVariantsTableProviderDel
     }
     
     private func loadData() {
-        let allValues = SortingValue.allValues
-        let createdAt = allValues[SortingValue.createdAt.rawValue]
-        let priceHighToLow = allValues[SortingValue.priceHighToLow.rawValue]
-        let priceLowToHigh = allValues[SortingValue.priceLowToHigh.rawValue]
+        let allValues = SortType.allValues
+        let createdAt = allValues[SortType.createdAt.rawValue]
+        let priceHighToLow = allValues[SortType.priceHighToLow.rawValue]
+        let priceLowToHigh = allValues[SortType.priceLowToHigh.rawValue]
         tableProvider.variants = [createdAt, priceHighToLow, priceLowToHigh]
-        tableProvider.selectedVariant = allValues[selectedSortingValue.rawValue]
+        tableProvider.selectedVariant = allValues[selectedSortType.rawValue]
         tableView.reloadData()
     }
     
@@ -70,13 +70,13 @@ class SortVariantsViewController: UIViewController, SortVariantsTableProviderDel
         guard let delegate = delegate else {
             return
         }
-        let sortingValue: SortingValue!
-        if let variant = variant, let index = SortingValue.allValues.index(of: variant) {
-            sortingValue = SortingValue(rawValue: index) ?? .name
+        let sortType: SortType!
+        if let variant = variant, let index = SortType.allValues.index(of: variant) {
+            sortType = SortType(rawValue: index) ?? .name
         } else {
-            sortingValue = .name
+            sortType = .name
         }
-        delegate.viewController(self, didSelect: sortingValue)
+        delegate.viewController(self, didSelect: sortType)
         dismiss(animated: true)
     }
 

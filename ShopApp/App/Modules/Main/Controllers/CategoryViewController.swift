@@ -47,7 +47,7 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel>, S
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let sortVariantsViewController = segue.destination as? SortVariantsViewController {
             sortVariantsViewController.delegate = self
-            sortVariantsViewController.selectedSortingValue = viewModel.selectedSortingValue
+            sortVariantsViewController.selectedSortType = viewModel.selectedSortType
         } else if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
             productDetailsViewController.productId = selectedProduct!.id
         }
@@ -134,8 +134,8 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel>, S
 
     // MARK: - SortVariantsControllerDelegate
 
-    func viewController(_ viewController: SortVariantsViewController, didSelect sortingValue: SortingValue) {
-        viewModel.selectedSortingValue = sortingValue
+    func viewController(_ viewController: SortVariantsViewController, didSelect sortType: SortType) {
+        viewModel.selectedSortType = sortType
         viewModel.clearResult()
         loadData()
     }

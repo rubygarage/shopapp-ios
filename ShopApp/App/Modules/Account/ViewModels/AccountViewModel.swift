@@ -26,11 +26,15 @@ class AccountViewModel: BaseViewModel {
     }
     
     func loadCustomer() {
-        loginUseCase.getLoginStatus { isLoggedIn in
-            if isLoggedIn {
-                getCustomer()
+        loginUseCase.isSignedIn({ [weak self] (isSignedIn, _) in
+            guard let strongSelf = self else {
+                return
             }
-        }
+
+            if let isSignedIn = isSignedIn, isSignedIn {
+                strongSelf.getCustomer()
+            }
+        })
     }
     
     func loadPolicies() {
@@ -43,7 +47,7 @@ class AccountViewModel: BaseViewModel {
     }
     
     func logout() {
-        logoutUseCase.logout { [weak self] isLoggedOut in
+        logoutUseCase.signOut { [weak self] isLoggedOut in
             guard let strongSelf = self, isLoggedOut else {
                 return
             }

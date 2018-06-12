@@ -15,8 +15,8 @@ class LogoutUseCase {
         self.repository = repository
     }
 
-    func logout(_ callback: @escaping (_ isLoggedOut: Bool) -> Void) {
-        repository.logout { (success, _) in
+    func signOut(_ callback: @escaping (_ isLoggedOut: Bool) -> Void) {
+        repository.signOut { (success, _) in
             callback(success == true)
         }
     }
