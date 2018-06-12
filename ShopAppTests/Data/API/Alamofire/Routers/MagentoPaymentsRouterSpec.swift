@@ -33,6 +33,6 @@ class MagentoPaymentsRouterSpec: QuickSpec {
     private func check(_ urlRequest: URLRequest?, with urlString: String) {
         expect(urlRequest?.url?.absoluteString) == urlString
         expect(urlRequest?.httpMethod) == HTTPMethod.get.rawValue
-        expect(urlRequest?.allHTTPHeaderFields) == [:]
+        expect(urlRequest?.allHTTPHeaderFields) == [BaseRouter.cacheControlMaxAgeKey: "3600"]
     }
 }

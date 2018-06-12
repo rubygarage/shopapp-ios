@@ -16,14 +16,19 @@ import ShopApp_Gateway
 
 class BaseAPISpec: QuickSpec {
     override func spec() {
+        let key = "key"
+        let value = "value"
+        let jsonObject = [key: value]
         let host = "httpbin.org"
         let url = URL(string: "https://" + host)!
-        let request = URLRequest(url: url)
         
+        var request = URLRequest(url: url)
+        var cacheServiceMock: CacheServiceMock!
         var api: BaseAPI!
         
         beforeEach {
-            api = BaseAPI()
+            cacheServiceMock = CacheServiceMock()
+            api = BaseAPI(cacheService: cacheServiceMock)
         }
         
         describe("when execute method used") {
@@ -52,8 +57,6 @@ class BaseAPISpec: QuickSpec {
             context("if response has error without message") {
                 it("needs to return error") {
                     stub(condition: isHost(host)) { _ in
-                        let jsonObject = ["key": "value"]
-                        
                         return OHHTTPStubsResponse(jsonObject: jsonObject, statusCode: 100, headers: nil)
                     }
                     
@@ -70,22 +73,41 @@ class BaseAPISpec: QuickSpec {
             }
             
             context("if response has value") {
-                it("needs to return value") {
-                    let key = "key"
-                    let value = "value"
-                    
-                    stub(condition: isHost(host)) { _ in
-                        let jsonObject = [key: value]
+                beforeEach {
+                    request.allHTTPHeaderFields = [BaseRouter.cacheControlMaxAgeKey: "20"]
+                }
+                
+                context("and value isn't cached") {
+                    it("needs to cache value and return it") {
+                        stub(condition: isHost(host)) { _ in
+                            return OHHTTPStubsResponse(jsonObject: jsonObject, statusCode: 200, headers: nil)
+                        }
                         
-                        return OHHTTPStubsResponse(jsonObject: jsonObject, statusCode: 200, headers: nil)
+                        waitUntil { done in
+                            api.execute(request) { (response, error) in
+                                expect((response as? [String: Any])?[key] as? String) == value
+                                expect(error).to(beNil())
+                                expect(cacheServiceMock.object as? [String: String]) == jsonObject
+                                expect(cacheServiceMock.key) == url.absoluteString
+                                expect(cacheServiceMock.maxAge) == 20
+                                
+                                done()
+                            }
+                        }
                     }
-                    
-                    waitUntil { done in
-                        api.execute(request) { (response, error) in
-                            expect((response as? [String: Any])?[key] as? String) == value
-                            expect(error).to(beNil())
-                            
-                            done()
+                }
+                
+                context("and value is cached") {
+                    it("needs to restore value from cache and return it") {
+                        cacheServiceMock.object = jsonObject
+                        
+                        waitUntil { done in
+                            api.execute(request) { (response, error) in
+                                expect((response as? [String: Any])?[key] as? String) == value
+                                expect(error).to(beNil())
+                                
+                                done()
+                            }
                         }
                     }
                 }

@@ -28,6 +28,9 @@
 		0B0955B820691E4E00CABE29 /* ShopAppCustomerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0955B720691E4D00CABE29 /* ShopAppCustomerRepository.swift */; };
 		0B0955BB206936D900CABE29 /* CustomerRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0955BA206936D900CABE29 /* CustomerRepositoryMock.swift */; };
 		0B1AB004206A46C100A24E5B /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1AB003206A46C100A24E5B /* API.swift */; };
+		0B1C690C20CE638400924BED /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1C690B20CE638400924BED /* CacheService.swift */; };
+		0B1C690E20CECC2300924BED /* CacheServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1C690D20CECC2300924BED /* CacheServiceSpec.swift */; };
+		0B1C691120CFE58B00924BED /* CacheServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1C691020CFE58B00924BED /* CacheServiceMock.swift */; };
 		0B22067C208DF87C00E475F2 /* AddressRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B22067B208DF87C00E475F2 /* AddressRequestBody.swift */; };
 		0B22067E208E07AA00E475F2 /* AddressResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B22067D208E07AA00E475F2 /* AddressResponse.swift */; };
 		0B220680208E0B0000E475F2 /* MagentoAddressAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B22067F208E0B0000E475F2 /* MagentoAddressAdapter.swift */; };
@@ -780,6 +783,9 @@
 		0B0955B720691E4D00CABE29 /* ShopAppCustomerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAppCustomerRepository.swift; sourceTree = "<group>"; };
 		0B0955BA206936D900CABE29 /* CustomerRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerRepositoryMock.swift; sourceTree = "<group>"; };
 		0B1AB003206A46C100A24E5B /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		0B1C690B20CE638400924BED /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
+		0B1C690D20CECC2300924BED /* CacheServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheServiceSpec.swift; sourceTree = "<group>"; };
+		0B1C691020CFE58B00924BED /* CacheServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheServiceMock.swift; sourceTree = "<group>"; };
 		0B22067B208DF87C00E475F2 /* AddressRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressRequestBody.swift; sourceTree = "<group>"; };
 		0B22067D208E07AA00E475F2 /* AddressResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressResponse.swift; sourceTree = "<group>"; };
 		0B22067F208E0B0000E475F2 /* MagentoAddressAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagentoAddressAdapter.swift; sourceTree = "<group>"; };
@@ -1543,6 +1549,14 @@
 				0B0955982068FB0000CABE29 /* ShopRepository.swift */,
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		0B1C690F20CFE56500924BED /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				0B1C691020CFE58B00924BED /* CacheServiceMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		0B24F0B220074D7400F13224 /* CheckoutShippingAddressAddTableViewCell */ = {
@@ -2637,6 +2651,8 @@
 		0BCD807320A9CA76009FAF75 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0B1C690F20CFE56500924BED /* Mocks */,
+				0B1C690D20CECC2300924BED /* CacheServiceSpec.swift */,
 				0B43FECE20ADBE4E0090CA4C /* SessionServiceSpec.swift */,
 			);
 			path = Services;
@@ -3082,6 +3098,7 @@
 		0BF2974A208726C7002094B0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0B1C690B20CE638400924BED /* CacheService.swift */,
 				0BF2974B208726D3002094B0 /* SessionService.swift */,
 			);
 			path = Services;
@@ -4712,6 +4729,7 @@
 				0B8445EE20629BFD0009012A /* BoldTitleTableHeaderViewSpec.swift in Sources */,
 				6122F5D52052A60400F574BB /* DeleteCartProductUseCaseMock.swift in Sources */,
 				61276E2B20581BC400E2C3AF /* ArticleDetailsViewModelSpec.swift in Sources */,
+				0B1C691120CFE58B00924BED /* CacheServiceMock.swift in Sources */,
 				0B5768E2204D47FB0001738D /* AccountTableProviderSpec.swift in Sources */,
 				0BE9659020442F0E00308CA9 /* OrderListViewModelMock.swift in Sources */,
 				0B764720204809AF0019D2CE /* SwitchTableViewCellMock.swift in Sources */,
@@ -4832,6 +4850,7 @@
 				616CF745205FFF9500DE14B1 /* ProductListViewModelSpec.swift in Sources */,
 				0B437174204D782E00C086CF /* OrderHeaderViewSpec.swift in Sources */,
 				0BA5DC232073AFC600668C99 /* UpdateAddressUseCaseSpec.swift in Sources */,
+				0B1C690E20CECC2300924BED /* CacheServiceSpec.swift in Sources */,
 				614C80C22046DC63006A99E0 /* BaseTableViewControllerSpec.swift in Sources */,
 				6104CD0D2065358300B780A0 /* UIImageView+NetworkSpec.swift in Sources */,
 				0BEAE1A420724B22001AE4F8 /* OrderListUseCaseSpec.swift in Sources */,
@@ -5113,6 +5132,7 @@
 				610C2CEE1FB1DF5B0007A1C3 /* ArticleDetailsViewModel.swift in Sources */,
 				0BCD806A20A46361009FAF75 /* MagentoCategoryAdapter.swift in Sources */,
 				0BE6547420973479008AFD5E /* GetProductResponse.swift in Sources */,
+				0B1C690C20CE638400924BED /* CacheService.swift in Sources */,
 				61A54BED1FF5252600D4D151 /* AccountLoggedHeaderView.swift in Sources */,
 				0BF29749208725CE002094B0 /* BaseAPI.swift in Sources */,
 				0B0955AE2068FC0B00CABE29 /* ShopAppShopRepository.swift in Sources */,

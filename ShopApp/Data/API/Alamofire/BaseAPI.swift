@@ -13,8 +13,17 @@ public class BaseAPI {
     private let okStatusCode = 200
     private let multipleChoicesStatusCode = 300
     private let errorMessageKey = "message"
-    private let sessionManager = SessionManager(configuration: .default)
-    private let reachabilityManager = NetworkReachabilityManager()
+    private let sessionManager: SessionManager
+    private let reachabilityManager: NetworkReachabilityManager?
+    private let cacheService: CacheService
+    
+    init(sessionManager: SessionManager = SessionManager(configuration: .default), reachabilityManager: NetworkReachabilityManager? = NetworkReachabilityManager(), cacheService: CacheService = CacheService()) {
+        self.sessionManager = sessionManager
+        self.sessionManager.startRequestsImmediately = false
+        
+        self.reachabilityManager = reachabilityManager
+        self.cacheService = cacheService
+    }
     
     func execute(_ request: URLRequestConvertible, callback: @escaping RepoCallback<Any>) {
         if reachabilityManager?.isReachable ?? false == true {
@@ -26,6 +35,14 @@ public class BaseAPI {
     }
     
     private func response(with request: DataRequest, callback: @escaping RepoCallback<Any>) {
+        let value = cachedResponse(ofRequest: request)
+        
+        guard value == nil else {
+            callback(value!, nil)
+            
+            return
+        }
+        
         request.responseJSON { [weak self] response in
             guard let strongSelf = self else {
                 return
@@ -37,8 +54,24 @@ public class BaseAPI {
                 return
             }
             
+            strongSelf.storeResponseIfNeeded(response: response, request: request)
+            
             callback(value, nil)
+        }.resume()
+    }
+
+    private func storeResponseIfNeeded(response: DataResponse<Any>, request: DataRequest) {
+        if let maxAgeString = request.request?.value(forHTTPHeaderField: BaseRouter.cacheControlMaxAgeKey), let maxAge = TimeInterval(maxAgeString), let key = request.request?.url?.absoluteString, let object = response.value {
+            cacheService.setObject(object, forKey: key, maxAge: maxAge)
         }
+    }
+    
+    private func cachedResponse(ofRequest request: DataRequest) -> Any? {
+        guard request.request?.value(forHTTPHeaderField: BaseRouter.cacheControlMaxAgeKey) != nil, let key = request.request?.url?.absoluteString else {
+            return nil
+        }
+
+        return cacheService.object(forKey: key)
     }
     
     private func buildError(with response: DataResponse<Any>, callback: @escaping RepoCallback<Any>) {

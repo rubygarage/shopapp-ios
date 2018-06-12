@@ -35,6 +35,6 @@ class MagentoStoreRouterSpec: QuickSpec {
         
         expect(urlRequest?.url?.absoluteString) == urlString
         expect(urlRequest?.httpMethod) == HTTPMethod.get.rawValue
-        expect(urlRequest?.allHTTPHeaderFields) == [router.contentTypeKey: router.contentTypeJsonValue]
+        expect(urlRequest?.allHTTPHeaderFields) == [router.contentTypeKey: router.contentTypeJsonValue, BaseRouter.cacheControlMaxAgeKey: "3600"]
     }
 }

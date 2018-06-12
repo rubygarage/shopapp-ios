@@ -10,6 +10,8 @@ import Alamofire
 import ShopApp_Gateway
 
 class BaseRouter: URLRequestConvertible {
+    static let cacheControlMaxAgeKey = "Cache-Control-Max-Age"
+    
     static var hostUrl: String?
     static var baseUrl: String?
     
@@ -17,6 +19,8 @@ class BaseRouter: URLRequestConvertible {
     let contentTypeJsonValue = "application/json"
     let authorizationKey = "Authorization"
     let authorizationBearerValue = "Bearer %@"
+    let shortCacheMaxAge = "60"
+    let longCacheMaxAge = "3600"
     
     func buildRequest(with url: URL) throws -> URLRequest {
         return URLRequest(url: url)
