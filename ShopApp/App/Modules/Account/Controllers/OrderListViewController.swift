@@ -10,14 +10,15 @@ import UIKit
 
 import ShopApp_Gateway
 
-class OrderListViewController: BaseTableViewController<OrderListViewModel>, OrderListEmptyDataViewDelegate, OrderListTableProviderDelegate, CheckoutCartTableViewCellDelegate {
+class OrderListViewController: BaseTableViewController<OrderListViewModel>, EmptyDataViewDelegate, OrderListTableProviderDelegate, CheckoutCartTableViewCellDelegate {
     var tableProvider: OrderListTableProvider!
     
     private var selectedOrder: Order?
     private var selectedProductVariant: ProductVariant!
     
     override var customEmptyDataView: UIView {
-        let emptyView = OrderListEmptyDataView(frame: view.frame)
+        let emptyView = EmptyDataView(frame: view.frame)
+        emptyView.setup(image: #imageLiteral(resourceName: "orders_empty"), text: "Label.NoOrdersYet".localizable, buttonTitle: "Button.StartShopping".localizable.uppercased())
         emptyView.delegate = self
         return emptyView
     }
@@ -84,9 +85,9 @@ class OrderListViewController: BaseTableViewController<OrderListViewModel>, Orde
         viewModel.loadNextPage()
     }
     
-    // MARK: - OrderListEmptyDataViewDelegate
+    // MARK: - EmptyDataViewDelegate
     
-    func viewDidTapStartShopping(_ view: OrderListEmptyDataView) {
+    func emptyDataViewDidTapButton(_ view: EmptyDataView) {
         setHomeController()
         navigationController?.popViewController(animated: false)
     }

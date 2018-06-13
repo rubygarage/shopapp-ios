@@ -23,7 +23,9 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Categ
     private var selectedCategory: ShopApp_Gateway.Category?
     
     override var customEmptyDataView: UIView {
-        return SearchEmptyDataView(frame: view.frame)
+        let emptyView = EmptyDataView(frame: view.frame)
+        emptyView.setup(image: #imageLiteral(resourceName: "search_empty"), text: "Label.NoResultFound".localizable)
+        return emptyView
     }
     
     // MARK: - View controller lifecycle

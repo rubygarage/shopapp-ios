@@ -41,8 +41,13 @@ class SearchViewControllerSpec: QuickSpec {
                 expect(viewController.viewModel).to(beAKindOf(SearchViewModel.self))
             }
             
-            it("should have default empty data view") {
-                expect(viewController.customEmptyDataView).to(beAnInstanceOf(SearchEmptyDataView.self))
+            it("should have empty data view with correct settings") {
+                let imageView = self.findView(withAccessibilityLabel: "imageView", in: viewController.customEmptyDataView) as? UIImageView
+                let label = self.findView(withAccessibilityLabel: "label", in: viewController.customEmptyDataView) as? UILabel
+                
+                expect(viewController.customEmptyDataView).to(beAnInstanceOf(EmptyDataView.self))
+                expect(imageView?.image) == #imageLiteral(resourceName: "search_empty")
+                expect(label?.text) == "Label.NoResultFound".localizable
             }
             
             it("should have correct content inset of collection view") {

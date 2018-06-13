@@ -48,8 +48,13 @@ class CategoryViewControllerSpec: QuickSpec {
                 expect(viewController.viewModel).to(beAKindOf(CategoryViewModel.self))
             }
             
-            it("should have default empty data view") {
-                expect(viewController.customEmptyDataView).to(beAnInstanceOf(CategoryEmptyDataView.self))
+            it("should have empty data view with correct settings") {
+                let imageView = self.findView(withAccessibilityLabel: "imageView", in: viewController.customEmptyDataView) as? UIImageView
+                let label = self.findView(withAccessibilityLabel: "label", in: viewController.customEmptyDataView) as? UILabel
+                
+                expect(viewController.customEmptyDataView).to(beAnInstanceOf(EmptyDataView.self))
+                expect(imageView?.image) == #imageLiteral(resourceName: "category_empty")
+                expect(label?.text) == "Label.NoProductYet".localizable
             }
             
             it("should have correct text sort by label") {

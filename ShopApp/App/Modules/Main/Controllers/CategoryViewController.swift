@@ -25,7 +25,9 @@ class CategoryViewController: GridCollectionViewController<CategoryViewModel>, S
     var categoryId: String!
     
     override var customEmptyDataView: UIView {
-        return CategoryEmptyDataView(frame: view.frame)
+        let emptyView = EmptyDataView(frame: view.frame)
+        emptyView.setup(image: #imageLiteral(resourceName: "category_empty"), text: "Label.NoProductYet".localizable)
+        return emptyView
     }
     
     // MARK: - View controller lifecycle

@@ -11,7 +11,7 @@ import UIKit
 import ShopApp_Gateway
 import SwipeCellKit
 
-class CartViewController: BaseViewController<CartViewModel>, CartEmptyDataViewDelegate, CartTableProviderDelegate, CartTableCellDelegate, SwipeTableViewCellDelegate {
+class CartViewController: BaseViewController<CartViewModel>, EmptyDataViewDelegate, CartTableProviderDelegate, CartTableCellDelegate, SwipeTableViewCellDelegate {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var checkoutButton: BlackButton!
     
@@ -20,7 +20,8 @@ class CartViewController: BaseViewController<CartViewModel>, CartEmptyDataViewDe
     var tableProvider: CartTableProvider!
     
     override var customEmptyDataView: UIView {
-        let emptyView = CartEmptyDataView(frame: view.frame)
+        let emptyView = EmptyDataView(frame: view.frame)
+        emptyView.setup(image: #imageLiteral(resourceName: "cart_empty"), text: "Label.YourCartIsEmpty".localizable, buttonTitle: "Button.StartShopping".localizable.uppercased())
         emptyView.delegate = self
         return emptyView
     }
@@ -82,9 +83,9 @@ class CartViewController: BaseViewController<CartViewModel>, CartEmptyDataViewDe
         performSegue(withIdentifier: SegueIdentifiers.toCheckout, sender: self)
     }
     
-    // MARK: - CartEmptyDataViewDelegate
+    // MARK: - EmptyDataViewDelegate
     
-    func viewDidTapStartShopping(_ view: CartEmptyDataView) {
+    func emptyDataViewDidTapButton(_ view: EmptyDataView) {
         setHomeController()
         dismiss(animated: true)
     }

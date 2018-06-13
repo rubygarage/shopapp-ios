@@ -73,8 +73,15 @@ class CartViewControllerSpec: QuickSpec {
                 expect(checkoutButton.title(for: .normal)) == "Button.Checkout".localizable.uppercased()
             }
             
-            it("should have default empty data view") {
-                expect(viewController.customEmptyDataView).to(beAnInstanceOf(CartEmptyDataView.self))
+            it("should have empty data view with correct settings") {
+                let imageView = self.findView(withAccessibilityLabel: "imageView", in: viewController.customEmptyDataView) as? UIImageView
+                let label = self.findView(withAccessibilityLabel: "label", in: viewController.customEmptyDataView) as? UILabel
+                let button = self.findView(withAccessibilityLabel: "button", in: viewController.customEmptyDataView) as? UIButton
+                
+                expect(viewController.customEmptyDataView).to(beAnInstanceOf(EmptyDataView.self))
+                expect(imageView?.image) == #imageLiteral(resourceName: "cart_empty")
+                expect(label?.text) == "Label.YourCartIsEmpty".localizable
+                expect(button?.title(for: .normal)) == "Button.StartShopping".localizable.uppercased()
             }
             
             it("should start loading data") {
