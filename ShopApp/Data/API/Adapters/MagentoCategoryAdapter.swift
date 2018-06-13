@@ -11,7 +11,7 @@ import ShopApp_Gateway
 struct MagentoCategoryAdapter {
     private static let customAttributeDescriptionCode = "description"
     private static let customAttributeImageCode = "image"
-    private static let imageCatalogPath = "pub/media/catalog/category"
+    private static let imageCatalogPath = "pub/media/catalog/category/"
     
     static func adapt(_ response: GetCategoryListResponse) -> Category {
         let category = Category()
@@ -24,6 +24,12 @@ struct MagentoCategoryAdapter {
         category.additionalDescription = ""
         
         return category
+    }
+    
+    static func update(_ category: Category, with childrenCategories: [Category]) {
+        category.childrenCategories?.forEach { childrenCategory in
+            childrenCategory.image = childrenCategories.filter({ $0.id == childrenCategory.id }).first?.image
+        }
     }
     
     static func adapt(_ response: GetCategoryDetailsResponse, products: [Product]) -> Category {

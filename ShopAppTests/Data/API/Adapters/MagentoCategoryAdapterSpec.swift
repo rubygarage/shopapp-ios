@@ -48,7 +48,7 @@ class MagentoCategoryAdapterSpec: QuickSpec {
                 expect(object.childrenCategories?.isEmpty) == true
                 expect(object.products?.first?.id) == product.id
                 expect(object.additionalDescription) == response.customAttributes.first?.value.data
-                expect(object.image?.id) == BaseRouter.hostUrl! + "pub/media/catalog/category" + response.customAttributes.last!.value.data!
+                expect(object.image?.id) == BaseRouter.hostUrl! + "pub/media/catalog/category/" + response.customAttributes.last!.value.data!
             }
         }
     }

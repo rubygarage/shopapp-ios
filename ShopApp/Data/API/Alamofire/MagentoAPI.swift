@@ -174,15 +174,39 @@ public class MagentoAPI: BaseAPI, API {
 
         let route = MagentoCategoriesRoute.getCategories(parameters: parameters)
         let request = MagentoCategoriesRouter(route: route)
-
-        execute(request) { (response, error) in
-            guard error == nil, let json = response as? [String: Any], let response = GetCategoryListResponse.object(from: json) else {
+        
+        execute(request) { [weak self] (response, error) in
+            guard let strongSelf = self, error == nil, let json = response as? [String: Any], let response = GetCategoryListResponse.object(from: json) else {
                 callback(nil, error ?? ContentError())
 
                 return
             }
+            
+            let group = DispatchGroup()
+            let category = MagentoCategoryAdapter.adapt(response)
+            var childrenCategories: [ShopApp_Gateway.Category] = []
+            
+            category.childrenCategories?.forEach {
+                group.enter()
 
-            callback(MagentoCategoryAdapter.adapt(response).childrenCategories, nil)
+                strongSelf.getCategory(id: $0.id) { (response, error) in
+                    guard error == nil, let response = response else {
+                        callback(nil, error ?? ContentError())
+                        
+                        return
+                    }
+                    
+                    childrenCategories.append(MagentoCategoryAdapter.adapt(response, products: []))
+                    
+                    group.leave()
+                }
+            }
+            
+            group.notify(queue: .main) {
+                MagentoCategoryAdapter.update(category, with: childrenCategories)
+                
+                callback(category.childrenCategories, nil)
+            }
         }
     }
 
@@ -227,11 +251,8 @@ public class MagentoAPI: BaseAPI, API {
                 return
             }
 
-            let route = MagentoCategoriesRoute.getCategory(id: id)
-            let request = MagentoCategoriesRouter(route: route)
-
-            strongSelf.execute(request) { (response, error) in
-                guard error == nil, let json = response as? [String: Any], let response = GetCategoryDetailsResponse.object(from: json) else {
+            strongSelf.getCategory(id: id) { (response, error) in
+                guard error == nil, let response = response else {
                     callback(nil, error ?? ContentError())
 
                     return
@@ -797,6 +818,21 @@ public class MagentoAPI: BaseAPI, API {
             }
 
             callback(response.first?.сurrencyСode ?? "", nil)
+        }
+    }
+    
+    private func getCategory(id: String, callback: @escaping RepoCallback<GetCategoryDetailsResponse>) {
+        let route = MagentoCategoriesRoute.getCategory(id: id)
+        let request = MagentoCategoriesRouter(route: route)
+        
+        execute(request) { (response, error) in
+            guard error == nil, let json = response as? [String: Any], let response = GetCategoryDetailsResponse.object(from: json) else {
+                callback(nil, error ?? ContentError())
+                
+                return
+            }
+            
+            callback(response, nil)
         }
     }
 }
