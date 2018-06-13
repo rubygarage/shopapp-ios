@@ -38,8 +38,7 @@ class CategoryListUseCaseSpec: QuickSpec {
                         
                         expect(repositoryMock.perPage) == kItemsPerPage
                         expect(repositoryMock.paginationValue) == paginationValue
-                        expect(repositoryMock.reverse) == false
-                        
+
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
                     }
@@ -55,7 +54,6 @@ class CategoryListUseCaseSpec: QuickSpec {
                         
                         expect(repositoryMock.perPage) == kItemsPerPage
                         expect(repositoryMock.paginationValue) == paginationValue
-                        expect(repositoryMock.reverse) == false
                         
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())

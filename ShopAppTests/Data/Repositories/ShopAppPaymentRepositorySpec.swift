@@ -12,14 +12,14 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class ShopAppPaymentsRepositorySpec: QuickSpec {
+class ShopAppPaymentRepositorySpec: QuickSpec {
     override func spec() {
-        var repository: ShopAppPaymentsRepository!
+        var repository: ShopAppPaymentRepository!
         var apiMock: APIMock!
         
         beforeEach {
             apiMock = APIMock()
-            repository = ShopAppPaymentsRepository(api: apiMock)
+            repository = ShopAppPaymentRepository(api: apiMock)
         }
         
         describe("when checkout should be create") {
@@ -71,7 +71,7 @@ class ShopAppPaymentsRepositorySpec: QuickSpec {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.getCheckout(with: checkoutId) { (result, error) in
+                    repository.getCheckout(checkoutId: checkoutId) { (result, error) in
                         expect(apiMock.isGetCheckoutStarted) == true
                         
                         expect(apiMock.checkoutId) == checkoutId
@@ -86,7 +86,7 @@ class ShopAppPaymentsRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.getCheckout(with: checkoutId) { (result, error) in
+                    repository.getCheckout(checkoutId: checkoutId) { (result, error) in
                         expect(apiMock.isGetCheckoutStarted) == true
                         
                         expect(apiMock.checkoutId) == checkoutId
@@ -111,7 +111,7 @@ class ShopAppPaymentsRepositorySpec: QuickSpec {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.updateShippingAddress(with: checkoutId, address: address) { (result, error) in
+                    repository.setShippingAddress(checkoutId: checkoutId, address: address) { (result, error) in
                         expect(apiMock.isUpdateShippingAddressStarted) == true
                         
                         expect(apiMock.checkoutId) == checkoutId
@@ -127,7 +127,7 @@ class ShopAppPaymentsRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.updateShippingAddress(with: checkoutId, address: address) { (result, error) in
+                    repository.setShippingAddress(checkoutId: checkoutId, address: address) { (result, error) in
                         expect(apiMock.isUpdateShippingAddressStarted) == true
                         
                         expect(apiMock.checkoutId) == checkoutId
@@ -151,7 +151,7 @@ class ShopAppPaymentsRepositorySpec: QuickSpec {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.getShippingRates(with: checkoutId) { (result, error) in
+                    repository.getShippingRates(checkoutId: checkoutId) { (result, error) in
                         expect(apiMock.isGetShippingRatesStarted) == true
                         
                         expect(apiMock.checkoutId) == checkoutId
@@ -166,7 +166,7 @@ class ShopAppPaymentsRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.getShippingRates(with: checkoutId) { (result, error) in
+                    repository.getShippingRates(checkoutId: checkoutId) { (result, error) in
                         expect(apiMock.isGetShippingRatesStarted) == true
                         
                         expect(apiMock.checkoutId) == checkoutId
@@ -179,11 +179,11 @@ class ShopAppPaymentsRepositorySpec: QuickSpec {
         }
         
         describe("when checkout should be update") {
-            var rate: ShippingRate!
+            var shippingRate: ShippingRate!
             var checkoutId: String!
             
             beforeEach {
-                rate = ShippingRate()
+                shippingRate = ShippingRate()
                 checkoutId = ""
             }
             
@@ -191,10 +191,10 @@ class ShopAppPaymentsRepositorySpec: QuickSpec {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.updateCheckout(with: rate, checkoutId: checkoutId) { (result, error) in
+                    repository.setShippingRate(checkoutId: checkoutId, shippingRate: shippingRate) { (result, error) in
                         expect(apiMock.isUpdateCheckoutStarted) == true
                         
-                        expect(apiMock.rate) === rate
+                        expect(apiMock.shippingRate) === shippingRate
                         expect(apiMock.checkoutId) == checkoutId
                         
                         expect(result).toNot(beNil())
@@ -207,10 +207,10 @@ class ShopAppPaymentsRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.updateCheckout(with: rate, checkoutId: checkoutId) { (result, error) in
+                    repository.setShippingRate(checkoutId: checkoutId, shippingRate: shippingRate) { (result, error) in
                         expect(apiMock.isUpdateCheckoutStarted) == true
                         
-                        expect(apiMock.rate) === rate
+                        expect(apiMock.shippingRate) === shippingRate
                         expect(apiMock.checkoutId) == checkoutId
                         
                         expect(result).to(beNil())
@@ -223,27 +223,27 @@ class ShopAppPaymentsRepositorySpec: QuickSpec {
         describe("when user should pay") {
             var card: CreditCard!
             var checkout: Checkout!
-            var billingAddress: Address!
-            var customerEmail: String!
+            var address: Address!
+            var email: String!
             
             beforeEach {
                 card = CreditCard()
                 checkout = Checkout()
-                billingAddress = Address()
-                customerEmail = "user@mail.com"
+                address = Address()
+                email = "user@mail.com"
             }
             
             context("if callback has result") {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.pay(with: card, checkout: checkout, billingAddress: billingAddress, customerEmail: customerEmail) { (result, error) in
+                    repository.completeCheckout(checkout: checkout, email: email, address: address, card: card) { (result, error) in
                         expect(apiMock.isPayStarted) == true
                         
                         expect(apiMock.card) === card
                         expect(apiMock.checkout) === checkout
-                        expect(apiMock.billingAddress) === billingAddress
-                        expect(apiMock.customerEmail) == customerEmail
+                        expect(apiMock.billingAddress) === address
+                        expect(apiMock.email) == email
                         
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -255,13 +255,13 @@ class ShopAppPaymentsRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.pay(with: card, checkout: checkout, billingAddress: billingAddress, customerEmail: customerEmail) { (result, error) in
+                    repository.completeCheckout(checkout: checkout, email: email, address: address, card: card) { (result, error) in
                         expect(apiMock.isPayStarted) == true
                         
                         expect(apiMock.card) === card
                         expect(apiMock.checkout) === checkout
-                        expect(apiMock.billingAddress) === billingAddress
-                        expect(apiMock.customerEmail) == customerEmail
+                        expect(apiMock.billingAddress) === address
+                        expect(apiMock.email) == email
                         
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())
@@ -272,22 +272,22 @@ class ShopAppPaymentsRepositorySpec: QuickSpec {
         
         describe("when apple pay should be setup") {
             var checkout: Checkout!
-            var customerEmail: String!
+            var email: String!
             
             beforeEach {
                 checkout = Checkout()
-                customerEmail = "user@mail.com"
+                email = "user@mail.com"
             }
             
             context("if callback has result") {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.setupApplePay(with: checkout, customerEmail: customerEmail) { (result, error) in
+                    repository.setupApplePay(checkout: checkout, email: email) { (result, error) in
                         expect(apiMock.isSetupApplePayStarted) == true
                         
                         expect(apiMock.checkout) === checkout
-                        expect(apiMock.customerEmail) == customerEmail
+                        expect(apiMock.email) == email
                         
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -299,39 +299,11 @@ class ShopAppPaymentsRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.setupApplePay(with: checkout, customerEmail: customerEmail) { (result, error) in
+                    repository.setupApplePay(checkout: checkout, email: email) { (result, error) in
                         expect(apiMock.isSetupApplePayStarted) == true
                         
                         expect(apiMock.checkout) === checkout
-                        expect(apiMock.customerEmail) == customerEmail
-                        
-                        expect(result).to(beNil())
-                        expect(error).toNot(beNil())
-                    }
-                }
-            }
-        }
-        
-        describe("when countries should be get") {
-            context("if callback has result") {
-                it("needs to handle result") {
-                    apiMock.isNeedToReturnError = false
-                    
-                    repository.getCountries() { (result, error) in
-                        expect(apiMock.isGetCountriesStarted) == true
-                        
-                        expect(result).toNot(beNil())
-                        expect(error).to(beNil())
-                    }
-                }
-            }
-            
-            context("if callback has error") {
-                it("needs to handle error") {
-                    apiMock.isNeedToReturnError = true
-                    
-                    repository.getCountries() { (result, error) in
-                        expect(apiMock.isGetCountriesStarted) == true
+                        expect(apiMock.email) == email
                         
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())

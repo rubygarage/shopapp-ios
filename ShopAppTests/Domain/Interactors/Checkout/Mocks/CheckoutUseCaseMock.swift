@@ -19,11 +19,11 @@ class CheckoutUseCaseMock: CheckoutUseCase {
     var returnedOrder: Order?
     var returnedCheckout: Checkout?
     
-    override func getCheckout(with checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
+    override func getCheckout(checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
         isGetCheckoutNeedToReturnError ? callback(nil, RepoError()) : callback(returnedCheckout, nil)
     }
     
-    override func updateCheckoutShippingAddress(with checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>) {
+    override func setShippingAddress(checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>) {
         isUpdateCheckoutShippingAddressNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
@@ -31,19 +31,19 @@ class CheckoutUseCaseMock: CheckoutUseCase {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(returnedCheckout, nil)
     }
     
-    override func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, customerEmail: String, callback: @escaping RepoCallback<Order>) {
+    override func completeCheckout(checkout: Checkout, email: String, address: Address, card: CreditCard, callback: @escaping RepoCallback<Order>) {
         isPayWithCreditCardStarted = true
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(returnedOrder, nil)
     }
     
-    override func setupApplePay(with checkout: Checkout, customerEmail: String, callback: @escaping RepoCallback<Order>) {
+    override func setupApplePay(checkout: Checkout, email: String, callback: @escaping RepoCallback<Order>) {
         isSetupApplePayStarted = true
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(returnedOrder, nil)
     }
     
-    override func updateShippingRate(with checkoutId: String, rate: ShippingRate, callback: @escaping RepoCallback<Checkout>) {
+    override func setShippingRate(checkoutId: String, shippingRate: ShippingRate, callback: @escaping RepoCallback<Checkout>) {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(returnedCheckout, nil)
     }
 }

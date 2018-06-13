@@ -22,40 +22,6 @@ class ArticleListUseCaseSpec: QuickSpec {
             useCase = ArticleListUseCase(repository: repositoryMock)
         }
         
-        describe("when reversed article list should be get") {
-            context("if callback has result") {
-                it("needs to handle result") {
-                    repositoryMock.isNeedToReturnError = false
-                    
-                    useCase.getReverseArticleList() { (result, error) in
-                        expect(repositoryMock.isGetArticleListStarted) == true
-                        
-                        expect(repositoryMock.perPage) == kItemsPerPage
-                        expect(repositoryMock.reverse) == true
-                        
-                        expect(result).toNot(beNil())
-                        expect(error).to(beNil())
-                    }
-                }
-            }
-            
-            context("if callback has error") {
-                it("needs to handle error") {
-                    repositoryMock.isNeedToReturnError = true
-                    
-                    useCase.getReverseArticleList() { (result, error) in
-                        expect(repositoryMock.isGetArticleListStarted) == true
-                        
-                        expect(repositoryMock.perPage) == kItemsPerPage
-                        expect(repositoryMock.reverse) == true
-                        
-                        expect(result).to(beNil())
-                        expect(error).toNot(beNil())
-                    }
-                }
-            }
-        }
-        
         describe("when article list should be get") {
             var paginationValue: String!
             
@@ -67,14 +33,13 @@ class ArticleListUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getArticleList(with: paginationValue) { (result, error) in
+                    useCase.getArticles(with: paginationValue) { (result, error) in
                         expect(repositoryMock.isGetArticleListStarted) == true
                         
                         expect(repositoryMock.perPage) == kItemsPerPage
                         expect(repositoryMock.paginationValue) == paginationValue
-                        expect(repositoryMock.sortBy?.rawValue) == SortingValue.createdAt.rawValue
-                        expect(repositoryMock.reverse) == true
-                        
+                        expect(repositoryMock.sortBy?.rawValue) == SortType.createdAt.rawValue
+
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
                     }
@@ -85,13 +50,12 @@ class ArticleListUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.getArticleList(with: paginationValue) { (result, error) in
+                    useCase.getArticles(with: paginationValue) { (result, error) in
                         expect(repositoryMock.isGetArticleListStarted) == true
                         
                         expect(repositoryMock.perPage) == kItemsPerPage
                         expect(repositoryMock.paginationValue) == paginationValue
-                        expect(repositoryMock.sortBy?.rawValue) == SortingValue.createdAt.rawValue
-                        expect(repositoryMock.reverse) == true
+                        expect(repositoryMock.sortBy?.rawValue) == SortType.createdAt.rawValue
                         
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())

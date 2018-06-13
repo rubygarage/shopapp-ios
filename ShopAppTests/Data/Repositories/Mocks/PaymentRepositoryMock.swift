@@ -10,7 +10,7 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class PaymentsRepositoryMock: PaymentsRepository {
+class PaymentRepositoryMock: PaymentRepository {
     var isNeedToReturnError = false
     var isCreateCheckoutStarted = false
     var isGetCheckoutStarted = false
@@ -19,15 +19,14 @@ class PaymentsRepositoryMock: PaymentsRepository {
     var isUpdateCheckoutStarted = false
     var isPayStarted = false
     var isSetupApplePayStarted = false
-    var isGetCountriesStarted = false
     var cartProducts: [CartProduct]?
     var checkoutId: String?
     var address: Address?
-    var rate: ShippingRate?
+    var shippingRate: ShippingRate?
     var card: CreditCard?
     var checkout: Checkout?
     var billingAddress: Address?
-    var customerEmail: String?
+    var email: String?
     
     func createCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
         isCreateCheckoutStarted = true
@@ -37,7 +36,7 @@ class PaymentsRepositoryMock: PaymentsRepository {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Checkout(), nil)
     }
     
-    func getCheckout(with checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
+    func getCheckout(checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
         isGetCheckoutStarted = true
         
         self.checkoutId = checkoutId
@@ -45,7 +44,7 @@ class PaymentsRepositoryMock: PaymentsRepository {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Checkout(), nil)
     }
     
-    func updateShippingAddress(with checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>) {
+    func setShippingAddress(checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>) {
         isUpdateShippingAddressStarted = true
         
         self.checkoutId = checkoutId
@@ -54,7 +53,7 @@ class PaymentsRepositoryMock: PaymentsRepository {
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
-    func getShippingRates(with checkoutId: String, callback: @escaping RepoCallback<[ShippingRate]>) {
+    func getShippingRates(checkoutId: String, callback: @escaping RepoCallback<[ShippingRate]>) {
         isGetShippingRatesStarted = true
         
         self.checkoutId = checkoutId
@@ -62,38 +61,32 @@ class PaymentsRepositoryMock: PaymentsRepository {
         isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
     }
     
-    func updateCheckout(with rate: ShippingRate, checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
+    func setShippingRate(checkoutId: String, shippingRate: ShippingRate, callback: @escaping RepoCallback<Checkout>) {
         isUpdateCheckoutStarted = true
         
-        self.rate = rate
+        self.shippingRate = shippingRate
         self.checkoutId = checkoutId
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Checkout(), nil)
     }
     
-    func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, customerEmail: String, callback: @escaping RepoCallback<Order>) {
+    func completeCheckout(checkout: Checkout, email: String, address: Address, card: CreditCard, callback: @escaping RepoCallback<Order>) {
         isPayStarted = true
         
         self.card = card
         self.checkout = checkout
-        self.billingAddress = billingAddress
-        self.customerEmail = customerEmail
+        self.billingAddress = address
+        self.email = email
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Order(), nil)
     }
     
-    func setupApplePay(with checkout: Checkout, customerEmail: String, callback: @escaping RepoCallback<Order>) {
+    func setupApplePay(checkout: Checkout, email: String, callback: @escaping RepoCallback<Order>) {
         isSetupApplePayStarted = true
         
         self.checkout = checkout
-        self.customerEmail = customerEmail
+        self.email = email
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Order(), nil)
-    }
-    
-    func getCountries(callback: @escaping RepoCallback<[Country]>) {
-        isGetCountriesStarted = true
-        
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
     }
 }

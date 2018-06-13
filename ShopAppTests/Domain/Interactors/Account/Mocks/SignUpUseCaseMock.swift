@@ -15,7 +15,7 @@ class SignUpUseCaseMock: SignUpUseCase {
     
     var isNeedToReturnError = false
     
-    override func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, _ callback: @escaping RepoCallback<Bool>) {
+    override func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, _ callback: @escaping RepoCallback<Bool>) {
         execute(callback: callback)
     }
     

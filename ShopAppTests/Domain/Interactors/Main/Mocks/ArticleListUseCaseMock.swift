@@ -15,12 +15,8 @@ class ArticleListUseCaseMock: ArticleListUseCase {
     
     var isArticleCountLessThenConstant = true
     var isNeedToReturnError = false
-    
-    override func getReverseArticleList(_ callback: @escaping RepoCallback<[Article]>) {
-        execute(with: callback)
-    }
-    
-    override func getArticleList(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Article]>) {
+
+    override func getArticles(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Article]>) {
         execute(with: callback)
     }
     

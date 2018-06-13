@@ -9,70 +9,104 @@
 import Foundation
 
 public protocol API {
-    
+
+    // MARK: - Config
+
+    func getConfig() -> Config
+
     // MARK: - Shop
     
-    func getShopInfo(callback: @escaping RepoCallback<Shop>)
-    func getConfig() -> Config
+    func getShop(callback: @escaping RepoCallback<Shop>)
     
     // MARK: - Products
     
-    func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, keyPhrase: String?, excludePhrase: String?, reverse: Bool, callback: @escaping RepoCallback<[Product]>)
+    func getProducts(perPage: Int, paginationValue: Any?, sortBy: SortType?, keyword: String?, excludeKeyword: String?, callback: @escaping RepoCallback<[Product]>)
+
     func getProduct(id: String, callback: @escaping RepoCallback<Product>)
-    func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping RepoCallback<[Product]>)
-    func getProductVariantList(ids: [String], callback: @escaping RepoCallback<[ProductVariant]>)
+
+    func searchProducts(perPage: Int, paginationValue: Any?, query: String, callback: @escaping RepoCallback<[Product]>)
+
+    func getProductVariants(ids: [String], callback: @escaping RepoCallback<[ProductVariant]>)
     
     // MARK: - Categories
     
-    func getCategoryList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, parentCategoryId: String?, callback: @escaping RepoCallback<[ShopApp_Gateway.Category]>)
-    func getCategoryDetails(id: String, perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<ShopApp_Gateway.Category>)
+    func getCategories(perPage: Int, paginationValue: Any?, parentCategoryId: String?, callback: @escaping RepoCallback<[Category]>)
+
+    func getCategory(id: String, perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping RepoCallback<Category>)
     
     // MARK: - Articles
     
-    func getArticleList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Article]>)
+    func getArticles(perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping RepoCallback<[Article]>)
+
     func getArticle(id: String, callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>)
     
     // MARK: - Authentification
     
-    func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, callback: @escaping RepoCallback<Bool>)
-    func login(with email: String, password: String, callback: @escaping RepoCallback<Bool>)
-    func logout(callback: RepoCallback<Bool>)
-    func isLoggedIn() -> Bool
-    func resetPassword(with email: String, callback: @escaping RepoCallback<Bool>)
+    func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, callback: @escaping RepoCallback<Bool>)
+
+    func signIn(email: String, password: String, callback: @escaping RepoCallback<Bool>)
+
+    func signOut(callback: @escaping RepoCallback<Bool>)
+
+    func isSignedIn(callback: @escaping RepoCallback<Bool>)
+
+    func resetPassword(email: String, callback: @escaping RepoCallback<Bool>)
     
     // MARK: - Customer
     
     func getCustomer(callback: @escaping RepoCallback<Customer>)
-    func updateCustomer(with email: String, firstName: String?, lastName: String?, phone: String?, callback: @escaping RepoCallback<Customer>)
-    func updateCustomer(with promo: Bool, callback: @escaping RepoCallback<Customer>)
-    func updateCustomer(with password: String, callback: @escaping RepoCallback<Customer>)
-    func addCustomerAddress(with address: Address, callback: @escaping RepoCallback<String>)
-    func updateCustomerAddress(with address: Address, callback: @escaping RepoCallback<Bool>)
-    func updateCustomerDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Customer>)
-    func deleteCustomerAddress(with addressId: String, callback: @escaping RepoCallback<Bool>)
+
+    func updateCustomer(firstName: String, lastName: String, phone: String, callback: @escaping RepoCallback<Customer>)
+
+    func updateCustomerSettings(isAcceptMarketing: Bool, callback: @escaping RepoCallback<Customer>)
+
+    func updatePassword(password: String, callback: @escaping RepoCallback<Customer>)
+
+    func addCustomerAddress(address: Address, callback: @escaping RepoCallback<String>)
+
+    func updateCustomerAddress(address: Address, callback: @escaping RepoCallback<Bool>)
+
+    func setDefaultShippingAddress(addressId: String, callback: @escaping RepoCallback<Customer>)
+
+    func deleteCustomerAddress(addressId: String, callback: @escaping RepoCallback<Bool>)
     
     // MARK: - Payments
     
     func createCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>)
-    func getCheckout(with checkoutId: String, callback: @escaping RepoCallback<Checkout>)
-    func updateShippingAddress(with checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>)
-    func getShippingRates(with checkoutId: String, callback: @escaping RepoCallback<[ShippingRate]>)
-    func updateCheckout(with rate: ShippingRate, checkoutId: String, callback: @escaping RepoCallback<Checkout>)
-    func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, customerEmail: String, callback: @escaping RepoCallback<Order>)
-    func setupApplePay(with checkout: Checkout, customerEmail: String, callback: @escaping RepoCallback<Order>)
+
+    func getCheckout(checkoutId: String, callback: @escaping RepoCallback<Checkout>)
+
+    func setShippingAddress(checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>)
+
+    func getShippingRates(checkoutId: String, callback: @escaping RepoCallback<[ShippingRate]>)
+
+    func setShippingRate(checkoutId: String, shippingRate: ShippingRate, callback: @escaping RepoCallback<Checkout>)
+
+    func completeCheckout(checkout: Checkout, email: String, address: Address, card: CreditCard, callback: @escaping RepoCallback<Order>)
+
+    func setupApplePay(checkout: Checkout, email: String, callback: @escaping RepoCallback<Order>)
+
+    // MARK: - Countries
+
     func getCountries(callback: @escaping RepoCallback<[Country]>)
     
     // MARK: - Orders
     
-    func getOrderList(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>)
+    func getOrders(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>)
+
     func getOrder(id: String, callback: @escaping RepoCallback<Order>)
     
     // MARK: - Cart
     
-    func getCartProductList(callback: @escaping RepoCallback<[CartProduct]>)
+    func getCartProducts(callback: @escaping RepoCallback<[CartProduct]>)
+
     func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<Bool>)
-    func deleteProductFromCart(with productVariantId: String?, callback: @escaping RepoCallback<Bool>)
-    func deleteProductsFromCart(with productVariantIds: [String?], callback: @escaping RepoCallback<Bool>)
-    func deleteAllProductsFromCart(with callback: @escaping RepoCallback<Bool>)
-    func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<Bool>)
+
+    func deleteCartProduct(productVariantId: String, callback: @escaping RepoCallback<Bool>)
+
+    func deleteCartProducts(productVariantIds: [String], callback: @escaping RepoCallback<Bool>)
+
+    func deleteAllCartProducts(callback: @escaping RepoCallback<Bool>)
+
+    func changeCartProductQuantity(productVariantId: String, quantity: Int, callback: @escaping RepoCallback<Bool>)
 }

@@ -23,9 +23,13 @@ class SettingsViewModel: BaseViewModel {
     }
     
     func loadCustomer() {
-        loginUseCase.getLoginStatus { isLoggedIn in
-            if isLoggedIn {
-                getCustomer()
+        loginUseCase.isSignedIn { [weak self] (isSignedIn, _) in
+            guard let strongSelf = self else {
+                return
+            }
+
+            if let isSignedIn = isSignedIn, isSignedIn {
+                strongSelf.getCustomer()
             }
         }
     }
@@ -56,7 +60,7 @@ class SettingsViewModel: BaseViewModel {
     
     private func update(_ customer: Customer) {
         state.onNext(ViewState.make.loading(showHud: false))
-        updateCustomerUseCase.updateCustomer(with: customer.promo) { [weak self] (customer, error) in
+        updateCustomerUseCase.updateCustomerSettings(isAcceptMarketing: customer.promo) { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return
             }

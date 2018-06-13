@@ -84,9 +84,9 @@
 "Button.BackToShop" = "Back to shop";
 "Button.Back" = "Back";
 
-"SortingValue.CreatedAt" = "The Newest first";
-"SortingValue.PriceHighToLow" = "Price High to Low";
-"SortingValue.PriceLowToHigh" = "Price Low to High";
+"SortType.CreatedAt" = "The Newest first";
+"SortType.PriceHighToLow" = "Price High to Low";
+"SortType.PriceLowToHigh" = "Price Low to High";
 
 "Label.PriceFrom" = "From %@";
 "Label.Quantity" = "QTY:";

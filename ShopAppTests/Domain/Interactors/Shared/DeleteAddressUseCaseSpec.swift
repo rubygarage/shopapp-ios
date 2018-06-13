@@ -33,7 +33,7 @@ class DeleteAddressUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.deleteCustomerAddress(with: addressId) { (result, error) in
+                    useCase.deleteCustomerAddress(addressId: addressId) { (result, error) in
                         expect(repositoryMock.isDeleteCustomerAddressStarted) == true
                         
                         expect(repositoryMock.addressId) == addressId
@@ -48,7 +48,7 @@ class DeleteAddressUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.deleteCustomerAddress(with: addressId) { (result, error) in
+                    useCase.deleteCustomerAddress(addressId: addressId) { (result, error) in
                         expect(repositoryMock.isDeleteCustomerAddressStarted) == true
                         
                         expect(repositoryMock.addressId) == addressId

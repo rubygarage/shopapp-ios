@@ -13,7 +13,7 @@ import ShopApp_Gateway
 class AddAddressUseCaseMock: AddAddressUseCase {
     var isNeedToReturnError = false
     
-    override func addAddress(with address: Address, callback: @escaping RepoCallback<String>) {
+    override func addAddress(address: Address, callback: @escaping RepoCallback<String>) {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(address.id, nil)
     }
 }

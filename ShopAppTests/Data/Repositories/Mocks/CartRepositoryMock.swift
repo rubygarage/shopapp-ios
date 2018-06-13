@@ -23,7 +23,7 @@ class CartRepositoryMock: CartRepository {
     var productVariantIds: [String?]?
     var quantity: Int?
     
-    func getCartProductList(callback: @escaping ([CartProduct]?, RepoError?) -> Void) {
+    func getCartProducts(callback: @escaping ([CartProduct]?, RepoError?) -> Void) {
         isGetCartProductListStarted = true
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
@@ -37,7 +37,7 @@ class CartRepositoryMock: CartRepository {
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
-    func deleteProductFromCart(with productVariantId: String?, callback: @escaping RepoCallback<Bool>) {
+    func deleteCartProduct(productVariantId: String, callback: @escaping RepoCallback<Bool>) {
         isDeleteProductFromCartStarted = true
         
         self.productVariantId = productVariantId
@@ -45,7 +45,7 @@ class CartRepositoryMock: CartRepository {
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
-    func deleteProductsFromCart(with productVariantIds: [String?], callback: @escaping RepoCallback<Bool>) {
+    func deleteCartProducts(productVariantIds: [String], callback: @escaping RepoCallback<Bool>) {
         isDeleteProductsFromCartStarted = true
         
         self.productVariantIds = productVariantIds
@@ -53,13 +53,13 @@ class CartRepositoryMock: CartRepository {
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
-    func deleteAllProductsFromCart(with callback: @escaping RepoCallback<Bool>) {
+    func deleteAllCartProducts(callback: @escaping RepoCallback<Bool>) {
         isDeleteAllProductsFromCartStarted = true
         
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
-    func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<Bool>) {
+    func changeCartProductQuantity(productVariantId: String, quantity: Int, callback: @escaping RepoCallback<Bool>) {
         isChangeCartProductQuantityStarted = true
         
         self.productVariantId = productVariantId

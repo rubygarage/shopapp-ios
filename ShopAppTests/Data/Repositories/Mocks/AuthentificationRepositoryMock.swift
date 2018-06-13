@@ -23,7 +23,7 @@ class AuthentificationRepositoryMock: AuthentificationRepository {
     var password: String?
     var phone: String?
     
-    func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, callback: @escaping RepoCallback<Bool>) {
+    func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, callback: @escaping RepoCallback<Bool>) {
         isSignUpStarted = true
         
         self.email = email
@@ -35,7 +35,7 @@ class AuthentificationRepositoryMock: AuthentificationRepository {
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
-    func login(with email: String, password: String, callback: @escaping RepoCallback<Bool>) {
+    func signIn(email: String, password: String, callback: @escaping RepoCallback<Bool>) {
         isLoginStarted = true
         
         self.email = email
@@ -44,19 +44,19 @@ class AuthentificationRepositoryMock: AuthentificationRepository {
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
-    func logout(callback: RepoCallback<Bool>) {
+    func signOut(callback: @escaping RepoCallback<Bool>) {
         isLogoutStarted = true
         
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
-    func isLoggedIn() -> Bool {
+    func isSignedIn(callback: @escaping RepoCallback<Bool>) {
         isGetLoginStatusStarted = true
         
-        return !isNeedToReturnError
+        return isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
-    func resetPassword(with email: String, callback: @escaping RepoCallback<Bool>) {
+    func resetPassword(email: String, callback: @escaping RepoCallback<Bool>) {
         isResetPasswordStarted = true
         
         self.email = email

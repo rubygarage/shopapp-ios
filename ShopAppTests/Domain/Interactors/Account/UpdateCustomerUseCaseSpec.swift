@@ -23,20 +23,20 @@ class UpdateCustomerUseCaseSpec: QuickSpec {
         }
         
         describe("when user's promo should be update") {
-            var promo: Bool!
+            var isAcceptMarketing: Bool!
             
             beforeEach {
-                promo = true
+                isAcceptMarketing = true
             }
             
             context("if callback has result") {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.updateCustomer(with: promo) { (result, error) in
+                    useCase.updateCustomerSettings(isAcceptMarketing: isAcceptMarketing) { (result, error) in
                         expect(repositoryMock.isUpdateCustomerPromoStarted) == true
                         
-                        expect(repositoryMock.promo) == promo
+                        expect(repositoryMock.isAcceptMarketing) == isAcceptMarketing
                         
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -48,10 +48,10 @@ class UpdateCustomerUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.updateCustomer(with: promo) { (result, error) in
+                    useCase.updateCustomerSettings(isAcceptMarketing: isAcceptMarketing) { (result, error) in
                         expect(repositoryMock.isUpdateCustomerPromoStarted) == true
                         
-                        expect(repositoryMock.promo) == promo
+                        expect(repositoryMock.isAcceptMarketing) == isAcceptMarketing
                         
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())
@@ -61,13 +61,11 @@ class UpdateCustomerUseCaseSpec: QuickSpec {
         }
         
         describe("when user's info should be update") {
-            var email: String!
             var firstName: String!
             var lastName: String!
             var phone: String!
             
             beforeEach {
-                email = "user@mail.com"
                 firstName = "First"
                 lastName = "Last"
                 phone = "phone"
@@ -77,10 +75,9 @@ class UpdateCustomerUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.updateCustomer(with: email, firstName: firstName, lastName: lastName, phone: phone) { (result, error) in
+                    useCase.updateCustomer(firstName: firstName, lastName: lastName, phone: phone) { (result, error) in
                         expect(repositoryMock.isUpdateCustomerInfoStarted) == true
                         
-                        expect(repositoryMock.email) == email
                         expect(repositoryMock.firstName) == firstName
                         expect(repositoryMock.lastName) == lastName
                         expect(repositoryMock.phone) == phone
@@ -95,10 +92,9 @@ class UpdateCustomerUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.updateCustomer(with: email, firstName: firstName, lastName: lastName, phone: phone) { (result, error) in
+                    useCase.updateCustomer(firstName: firstName, lastName: lastName, phone: phone) { (result, error) in
                         expect(repositoryMock.isUpdateCustomerInfoStarted) == true
                         
-                        expect(repositoryMock.email) == email
                         expect(repositoryMock.firstName) == firstName
                         expect(repositoryMock.lastName) == lastName
                         expect(repositoryMock.phone) == phone
@@ -121,7 +117,7 @@ class UpdateCustomerUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.updateCustomer(with: password) { (result, error) in
+                    useCase.updatePassword(password: password) { (result, error) in
                         expect(repositoryMock.isUpdateCustomerPasswordStarted) == true
                         
                         expect(repositoryMock.password) == password
@@ -136,7 +132,7 @@ class UpdateCustomerUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.updateCustomer(with: password) { (result, error) in
+                    useCase.updatePassword(password: password) { (result, error) in
                         expect(repositoryMock.isUpdateCustomerPasswordStarted) == true
                         
                         expect(repositoryMock.password) == password

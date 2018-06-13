@@ -9,9 +9,9 @@
 import ShopApp_Gateway
 
 class CountriesUseCase {
-    private let repository: PaymentsRepository
+    private let repository: CountryRepository
 
-    init(repository: PaymentsRepository) {
+    init(repository: CountryRepository) {
         self.repository = repository
     }
 

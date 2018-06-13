@@ -15,7 +15,7 @@ class CartProductListUseCaseMock: CartProductListUseCase {
     var isNeedToReturnEmptyData = false
     var isNeedToReturnQuantity = false
     
-    override func getCartProductList(_ callback: @escaping RepoCallback<[CartProduct]>) {
+    override func getCartProducts(_ callback: @escaping RepoCallback<[CartProduct]>) {
         if isNeedToReturnError {
             callback(nil, RepoError())
         } else {

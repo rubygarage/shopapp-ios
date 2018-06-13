@@ -30,7 +30,7 @@ class CheckoutAddressListViewModel: BaseAddressListViewModel {
     
     func updateCheckoutShippingAddress(with address: Address) {
         state.onNext(ViewState.make.loading())
-        checkoutUseCase.updateCheckoutShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
+        checkoutUseCase.setShippingAddress(checkoutId: checkoutId, address: address) { [weak self] (success, error) in
             guard let strongSelf = self else {
                 return
             }

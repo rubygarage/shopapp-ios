@@ -23,7 +23,7 @@ class SplashViewModel: BaseViewModel {
     }
     
     func loadData() {
-        cartProductListUseCase.getCartProductList { [weak self] (products, error) in
+        cartProductListUseCase.getCartProducts { [weak self] (products, error) in
             guard let strongSelf = self else {
                 return
             }
@@ -38,7 +38,7 @@ class SplashViewModel: BaseViewModel {
     }
     
     private func loadProductVariants(ids: [String]) {
-        cartValidationUseCase.getProductVariantList(ids: ids) { [weak self] (productVariants, error) in
+        cartValidationUseCase.getProductVariants(ids: ids) { [weak self] (productVariants, error) in
             guard let strongSelf = self else {
                 return
             }
@@ -53,7 +53,7 @@ class SplashViewModel: BaseViewModel {
     
     private func filterProductVariants(localIds: [String], remoteIds: [String]) {
         let excludedIds = localIds.filter({ !remoteIds.contains($0) })
-        deleteCartProductUseCase.deleteProductsFromCart(with: excludedIds) { [weak self] (_, _) in
+        deleteCartProductUseCase.deleteCartProducts(productVariantIds: excludedIds) { [weak self] (_, _) in
             guard let strongSelf = self else {
                 return
             }

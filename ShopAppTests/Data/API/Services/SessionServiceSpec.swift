@@ -50,7 +50,7 @@ class SessionServiceSpec: QuickSpec {
                 it("needs to return false") {
                     UserDefaults.standard.set(nil, forKey: loggedInStatusKey)
                     
-                    expect(service.isLoggedIn) == false
+                    expect(service.isSignedIn) == false
                 }
             }
             
@@ -59,7 +59,7 @@ class SessionServiceSpec: QuickSpec {
                     service.save(token: token, email: email, password: password)
                     keychain[tokenKey] = nil
                     
-                    expect(service.isLoggedIn) == false
+                    expect(service.isSignedIn) == false
                 }
             }
             
@@ -67,7 +67,7 @@ class SessionServiceSpec: QuickSpec {
                 it("needs to return true") {
                     service.save(token: token, email: email, password: password)
                     
-                    expect(service.isLoggedIn) == true
+                    expect(service.isSignedIn) == true
                 }
             }
         }

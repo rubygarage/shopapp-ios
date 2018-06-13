@@ -46,7 +46,7 @@ class OrderListViewModel: BasePaginationViewModel {
     private func loadRemoteData() {
         let showHud = items.value.isEmpty
         state.onNext(ViewState.make.loading(showHud: showHud))
-        orderListUseCase.getOrderList(with: paginationValue) { [weak self] (order, error) in
+        orderListUseCase.getOrders(with: paginationValue) { [weak self] (order, error) in
             guard let strongSelf = self else {
                 return
             }

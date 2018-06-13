@@ -13,7 +13,7 @@ import ShopApp_Gateway
 class LogoutUseCaseMock: LogoutUseCase {
     var isNeedToReturnError = false
     
-    override func logout(_ callback: @escaping (_ isLoggedOut: Bool) -> Void) {
+    override func signOut(_ callback: @escaping (_ isLoggedOut: Bool) -> Void) {
         execute(callback: callback)
     }
     

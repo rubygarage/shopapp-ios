@@ -91,7 +91,7 @@ class CartViewModelSpec: QuickSpec {
         describe("when card product removed") {
             var disposeBag: DisposeBag!
             var states: [ViewState]!
-            let cartProduct = CartProduct()
+            let cartProduct = getCartProductMock(productVariantId: "1")
             
             beforeEach {
                 disposeBag = DisposeBag()
@@ -106,7 +106,8 @@ class CartViewModelSpec: QuickSpec {
             
             context("if cart product removed successfully") {
                 it("should remove cart product") {
-                    viewModel.data.value = [cartProduct, CartProduct()]
+                    let secondCartProduct = self.getCartProductMock(productVariantId: "2")
+                    viewModel.data.value = [cartProduct, secondCartProduct]
                     deleteCartProductUseCaseMock.isNeedToReturnError = false
                     viewModel.removeCardProduct(at: 0)
                     
@@ -153,7 +154,7 @@ class CartViewModelSpec: QuickSpec {
         describe("when cart product updated") {
             var disposeBag: DisposeBag!
             var states: [ViewState]!
-            let cartProduct = CartProduct()
+            let cartProduct = getCartProductMock(productVariantId: "1")
             
             beforeEach {
                 viewModel.data.value = [cartProduct]
@@ -268,5 +269,14 @@ class CartViewModelSpec: QuickSpec {
                 expect(states.last) == ViewState.content
             }
         }
+    }
+
+    private func getCartProductMock(productVariantId: String) -> CartProduct {
+        let productVariant = ProductVariant()
+        productVariant.id = productVariantId
+
+        let cartProduct = CartProduct()
+        cartProduct.productVariant = productVariant
+        return cartProduct
     }
 }

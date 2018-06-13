@@ -27,7 +27,7 @@ class LogoutUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.logout() { result in
+                    useCase.signOut() { result in
                         expect(repositoryMock.isLogoutStarted) == true
                         
                         expect(result) == true
@@ -39,7 +39,7 @@ class LogoutUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.logout() { result in
+                    useCase.signOut() { result in
                         expect(repositoryMock.isLogoutStarted) == true
                         
                         expect(result) == false

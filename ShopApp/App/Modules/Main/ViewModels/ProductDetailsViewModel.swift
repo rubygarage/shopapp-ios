@@ -137,7 +137,7 @@ class ProductDetailsViewModel: BaseViewModel {
     }
     
     private func loadRelatedItems() {
-        productListUseCase.getProductList(with: nil, sortingValue: SortingValue.type, keyPhrase: product.value?.type, excludePhrase: product.value?.title, reverse: false) { [weak self] (products, error) in
+        productListUseCase.getProducts(with: nil, sortBy: SortType.type, keyword: product.value?.type, excludeKeyword: product.value?.title) { [weak self] (products, error) in
             guard let strongSelf = self else {
                 return
             }

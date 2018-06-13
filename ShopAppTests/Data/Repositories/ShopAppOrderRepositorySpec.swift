@@ -35,7 +35,7 @@ class ShopAppOrderRepositorySpec: QuickSpec {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.getOrderList(perPage: perPage, paginationValue: paginationValue) { (result, error) in
+                    repository.getOrders(perPage: perPage, paginationValue: paginationValue) { (result, error) in
                         expect(apiMock.isGetOrderListStarted) == true
                         
                         expect(apiMock.perPage) == perPage
@@ -51,7 +51,7 @@ class ShopAppOrderRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.getOrderList(perPage: perPage, paginationValue: paginationValue) { (result, error) in
+                    repository.getOrders(perPage: perPage, paginationValue: paginationValue) { (result, error) in
                         expect(apiMock.isGetOrderListStarted) == true
                         
                         expect(apiMock.perPage) == perPage

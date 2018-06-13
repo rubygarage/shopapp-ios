@@ -25,34 +25,31 @@ class ShopAppProductRepositorySpec: QuickSpec {
         describe("when product list should be get") {
             var perPage: Int!
             var paginationValue: String!
-            var sortBy: SortingValue!
-            var keyPhrase: String!
-            var excludePhrase: String!
-            var reverse: Bool!
-            
+            var sortBy: SortType!
+            var keyword: String!
+            var excludeKeyword: String!
+
             beforeEach {
                 perPage = 5
                 paginationValue = "pagination"
                 sortBy = .name
-                keyPhrase = "key"
-                excludePhrase = "exclude"
-                reverse = true
+                keyword = "key"
+                excludeKeyword = "exclude"
             }
             
             context("if callback has result") {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.getProductList(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, keyPhrase: keyPhrase, excludePhrase: excludePhrase, reverse: reverse) { (result, error) in
+                    repository.getProducts(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, keyword: keyword, excludeKeyword: excludeKeyword) { (result, error) in
                         expect(apiMock.isGetProductListStarted) == true
                         
                         expect(apiMock.perPage) == perPage
                         expect(apiMock.paginationValue) == paginationValue
                         expect(apiMock.sortBy?.rawValue) == sortBy.rawValue
-                        expect(apiMock.keyPhrase) == keyPhrase
-                        expect(apiMock.excludePhrase) == excludePhrase
-                        expect(apiMock.reverse) == reverse
-                        
+                        expect(apiMock.keyword) == keyword
+                        expect(apiMock.excludeKeyword) == excludeKeyword
+
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
                     }
@@ -63,16 +60,15 @@ class ShopAppProductRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.getProductList(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, keyPhrase: keyPhrase, excludePhrase: excludePhrase, reverse: reverse) { (result, error) in
+                    repository.getProducts(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, keyword: keyword, excludeKeyword: excludeKeyword) { (result, error) in
                         expect(apiMock.isGetProductListStarted) == true
                         
                         expect(apiMock.perPage) == perPage
                         expect(apiMock.paginationValue) == paginationValue
                         expect(apiMock.sortBy?.rawValue) == sortBy.rawValue
-                        expect(apiMock.keyPhrase) == keyPhrase
-                        expect(apiMock.excludePhrase) == excludePhrase
-                        expect(apiMock.reverse) == reverse
-                        
+                        expect(apiMock.keyword) == keyword
+                        expect(apiMock.excludeKeyword) == excludeKeyword
+
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())
                     }
@@ -121,24 +117,24 @@ class ShopAppProductRepositorySpec: QuickSpec {
         describe("when product should be search") {
             var perPage: Int!
             var paginationValue: String!
-            var searchQuery: String!
+            var query: String!
             
             beforeEach {
                 perPage = 5
                 paginationValue = "pagination"
-                searchQuery = "search"
+                query = "search"
             }
             
             context("if callback has result") {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.searchProducts(perPage: perPage, paginationValue: paginationValue, searchQuery: searchQuery) { (result, error) in
+                    repository.searchProducts(perPage: perPage, paginationValue: paginationValue, query: query) { (result, error) in
                         expect(apiMock.isSearchProductsStarted) == true
                         
                         expect(apiMock.perPage) == perPage
                         expect(apiMock.paginationValue) == paginationValue
-                        expect(apiMock.searchQuery) == searchQuery
+                        expect(apiMock.query) == query
                         
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -150,12 +146,12 @@ class ShopAppProductRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.searchProducts(perPage: perPage, paginationValue: paginationValue, searchQuery: searchQuery) { (result, error) in
+                    repository.searchProducts(perPage: perPage, paginationValue: paginationValue, query: query) { (result, error) in
                         expect(apiMock.isSearchProductsStarted) == true
                         
                         expect(apiMock.perPage) == perPage
                         expect(apiMock.paginationValue) == paginationValue
-                        expect(apiMock.searchQuery) == searchQuery
+                        expect(apiMock.query) == query
                         
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())
@@ -175,7 +171,7 @@ class ShopAppProductRepositorySpec: QuickSpec {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.getProductVariantList(ids: ids) { (result, error) in
+                    repository.getProductVariants(ids: ids) { (result, error) in
                         expect(apiMock.isGetProductVariantListStarted) == true
                         
                         expect(apiMock.ids) == ids
@@ -189,7 +185,7 @@ class ShopAppProductRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.getProductVariantList(ids: ids) { (result, error) in
+                    repository.getProductVariants(ids: ids) { (result, error) in
                         expect(apiMock.isGetProductVariantListStarted) == true
                         
                         expect(apiMock.ids) == ids

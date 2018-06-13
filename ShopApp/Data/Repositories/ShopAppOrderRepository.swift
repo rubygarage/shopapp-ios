@@ -15,8 +15,8 @@ public class ShopAppOrderRepository: OrderRepository {
         self.api = api
     }
     
-    public func getOrderList(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
-        api.getOrderList(perPage: perPage, paginationValue: paginationValue, callback: callback)
+    public func getOrders(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
+        api.getOrders(perPage: perPage, paginationValue: paginationValue, callback: callback)
     }
     
     public func getOrder(id: String, callback: @escaping RepoCallback<Order>) {

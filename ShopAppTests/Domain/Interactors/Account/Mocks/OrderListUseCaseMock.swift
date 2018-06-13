@@ -15,7 +15,7 @@ class OrderListUseCaseMock: OrderListUseCase {
     var isNeedToReturnOrderWithVariant = false
     var isNeedToReturnError = false
     
-    override func getOrderList(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Order]>) {
+    override func getOrders(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Order]>) {
         if isNeedToReturnError {
             callback(nil, RepoError())
         } else {

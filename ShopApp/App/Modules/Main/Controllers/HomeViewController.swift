@@ -14,7 +14,7 @@ import ShopApp_Gateway
 
 class HomeViewController: BaseTableViewController<HomeViewModel>, HomeTableProviderDelegate, LastArrivalsTableCellDelegate, PopularTableCellDelegate, SeeAllHeaderViewDelegate {
     private var destinationTitle: String!
-    private var sortingValue: SortingValue!
+    private var sortType: SortType!
     private var selectedProduct: Product?
     private var selectedArticle: Article?
     
@@ -39,7 +39,7 @@ class HomeViewController: BaseTableViewController<HomeViewModel>, HomeTableProvi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let productListViewController = segue.destination as? ProductListViewController {
             productListViewController.title = destinationTitle
-            productListViewController.sortingValue = sortingValue
+            productListViewController.sortType = sortType
             destinationTitle = nil
         } else if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
             productDetailsViewController.productId = selectedProduct!.id
@@ -122,7 +122,7 @@ class HomeViewController: BaseTableViewController<HomeViewModel>, HomeTableProvi
         switch type {
         case .latestArrivals:
             destinationTitle = "ControllerTitle.LatestArrivals".localizable
-            sortingValue = .createdAt
+            sortType = .createdAt
             performSegue(withIdentifier: SegueIdentifiers.toProductList, sender: self)
         case .blogPosts:
             performSegue(withIdentifier: SegueIdentifiers.toArticlesList, sender: self)

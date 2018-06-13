@@ -38,15 +38,15 @@ class ProductListViewViewControllerSpec: QuickSpec {
             }
             
             it("should have correct initial values") {
-                expect(viewController.sortingValue).to(beNil())
-                expect(viewController.keyPhrase).to(beNil())
-                expect(viewController.excludePhrase).to(beNil())
+                expect(viewController.sortType).to(beNil())
+                expect(viewController.keyword).to(beNil())
+                expect(viewController.excludeKeyword).to(beNil())
             }
             
             it("should setup view model") {
-                expect(viewController.viewModel.sortingValue).to(beNil())
-                expect(viewController.viewModel.keyPhrase).to(beNil())
-                expect(viewController.viewModel.excludePhrase).to(beNil())
+                expect(viewController.viewModel.sortType).to(beNil())
+                expect(viewController.viewModel.keyword).to(beNil())
+                expect(viewController.viewModel.excludeKeyword).to(beNil())
             }
             
             it("should have cart button") {

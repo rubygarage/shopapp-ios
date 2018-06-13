@@ -24,7 +24,7 @@ struct SessionService {
         return (token, email, password)
     }
     
-    var isLoggedIn: Bool {
+    var isSignedIn: Bool {
         guard UserDefaults.standard.value(forKey: loggedInStatusKey) as? Bool != nil else {
             removeData()
 

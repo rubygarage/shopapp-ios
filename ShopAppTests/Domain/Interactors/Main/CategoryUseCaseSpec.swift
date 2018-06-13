@@ -25,28 +25,25 @@ class CategoryUseCaseSpec: QuickSpec {
         describe("when category should be get") {
             var id: String!
             var paginationValue: String!
-            var sortingValue: SortingValue!
-            var reverse: Bool!
-            
+            var sortType: SortType!
+
             beforeEach {
                 id = "id"
                 paginationValue = "pagination"
-                sortingValue = .name
-                reverse = true
+                sortType = .name
             }
             
             context("if callback has result") {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getCategory(with: id, paginationValue: paginationValue, sortingValue: sortingValue, reverse: reverse) { (result, error) in
+                    useCase.getCategory(with: id, paginationValue: paginationValue, sortType: sortType) { (result, error) in
                         expect(repositoryMock.isGetCategoryDetailsStarted) == true
                         
                         expect(repositoryMock.id) == id
                         expect(repositoryMock.perPage) == kItemsPerPage
                         expect(repositoryMock.paginationValue) == paginationValue
-                        expect(repositoryMock.sortBy?.rawValue) == sortingValue.rawValue
-                        expect(repositoryMock.reverse) == reverse
+                        expect(repositoryMock.sortBy?.rawValue) == sortType.rawValue
                         
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -58,15 +55,14 @@ class CategoryUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.getCategory(with: id, paginationValue: paginationValue, sortingValue: sortingValue, reverse: reverse) { (result, error) in
+                    useCase.getCategory(with: id, paginationValue: paginationValue, sortType: sortType) { (result, error) in
                         expect(repositoryMock.isGetCategoryDetailsStarted) == true
                         
                         expect(repositoryMock.id) == id
                         expect(repositoryMock.perPage) == kItemsPerPage
                         expect(repositoryMock.paginationValue) == paginationValue
-                        expect(repositoryMock.sortBy?.rawValue) == sortingValue.rawValue
-                        expect(repositoryMock.reverse) == reverse
-                        
+                        expect(repositoryMock.sortBy?.rawValue) == sortType.rawValue
+
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())
                     }

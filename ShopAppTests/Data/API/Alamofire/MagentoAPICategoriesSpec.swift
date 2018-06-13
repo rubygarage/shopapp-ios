@@ -37,7 +37,7 @@ class MagentoAPICategoriesSpec: MagentoAPIBaseSpec {
                     self.stubResponse(withErrorMessage: errorMessage)
                     
                     waitUntil { done in
-                        self.api.getCategoryList(perPage: 10, paginationValue: nil, sortBy: nil, reverse: false, parentCategoryId: nil) { (response, error) in
+                        self.api.getCategories(perPage: 10, paginationValue: nil, parentCategoryId: nil) { (response, error) in
                             self.checkUnsuccessResponse(response, error: error, errorMessage: errorMessage)
                             
                             done()
@@ -51,7 +51,7 @@ class MagentoAPICategoriesSpec: MagentoAPIBaseSpec {
                     self.stubResponse(withObject: categoryListJson)
                     
                     waitUntil { done in
-                        self.api.getCategoryList(perPage: 10, paginationValue: nil, sortBy: nil, reverse: false, parentCategoryId: "id") { (response, error) in
+                        self.api.getCategories(perPage: 10, paginationValue: nil, parentCategoryId: "id") { (response, error) in
                             self.checkSuccessResponse(response, error: error, array: childrenCategories)
                             
                             done()
@@ -68,7 +68,7 @@ class MagentoAPICategoriesSpec: MagentoAPIBaseSpec {
                         self.stubResponse(withObjects: responseObjects, indexOfError: index)
                         
                         waitUntil { done in
-                            self.api.getCategoryDetails(id: "id", perPage: 10, paginationValue: "2", sortBy: .name, reverse: false) { (response, error) in
+                            self.api.getCategory(id: "id", perPage: 10, paginationValue: "2", sortBy: .name) { (response, error) in
                                 self.checkUnsuccessResponse(response, error: error)
                                 
                                 done()
@@ -83,7 +83,7 @@ class MagentoAPICategoriesSpec: MagentoAPIBaseSpec {
                     self.stubResponse(withObjects: responseObjects)
                     
                     waitUntil { done in
-                        self.api.getCategoryDetails(id: "id", perPage: 10, paginationValue: "2", sortBy: .createdAt, reverse: false) { (response, error) in
+                        self.api.getCategory(id: "id", perPage: 10, paginationValue: "2", sortBy: .createdAt) { (response, error) in
                             expect(response?.id) == categoryId
                             expect(response?.products?.count) == products.count
                             expect(error).to(beNil())

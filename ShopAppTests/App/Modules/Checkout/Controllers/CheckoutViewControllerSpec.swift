@@ -28,8 +28,8 @@ class CheckoutViewControllerSpec: QuickSpec {
         beforeEach {
             viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.checkout) as! CheckoutViewController
             
-            let paymentsRepositoryMock = PaymentsRepositoryMock()
-            checkoutUseCaseMock = CheckoutUseCaseMock(repository: paymentsRepositoryMock)
+            let paymentRepositoryMock = PaymentRepositoryMock()
+            checkoutUseCaseMock = CheckoutUseCaseMock(repository: paymentRepositoryMock)
             
             let cartRepositoryMock = CartRepositoryMock()
             cartProductListUseCaseMock = CartProductListUseCaseMock(repository: cartRepositoryMock)

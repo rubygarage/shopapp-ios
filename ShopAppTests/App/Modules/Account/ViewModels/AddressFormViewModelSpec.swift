@@ -15,7 +15,7 @@ import ShopApp_Gateway
 
 class AddressFormViewModelSpec: QuickSpec {
     override func spec() {
-        let repositoryMock = PaymentsRepositoryMock()
+        let repositoryMock = CountryRepositoryMock()
         let countriesUseCaseMock = CountriesUseCaseMock(repository: repositoryMock)
         let viewModel = AddressFormViewModel(countriesUseCase: countriesUseCaseMock)
         

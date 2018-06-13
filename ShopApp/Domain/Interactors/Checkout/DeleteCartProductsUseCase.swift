@@ -16,6 +16,6 @@ class DeleteCartProductsUseCase {
     }
 
     func clearCart(_ callback: @escaping RepoCallback<Bool>) {
-        repository.deleteAllProductsFromCart(with: callback)
+        repository.deleteAllCartProducts(callback: callback)
     }
 }

@@ -23,8 +23,8 @@ class CheckoutViewModelSpec: QuickSpec {
         var loginUseCaseMock: LoginUseCaseMock!
         
         beforeEach {
-            let paymentsRepositoryMock = PaymentsRepositoryMock()
-            checkoutUseCaseMock = CheckoutUseCaseMock(repository: paymentsRepositoryMock)
+            let paymentRepositoryMock = PaymentRepositoryMock()
+            checkoutUseCaseMock = CheckoutUseCaseMock(repository: paymentRepositoryMock)
             
             let cartRepositoryMock = CartRepositoryMock()
             cartProductListUseCaseMock = CartProductListUseCaseMock(repository: cartRepositoryMock)

@@ -271,7 +271,7 @@ class AddressFormViewControllerSpec: QuickSpec {
         func initData(addressNeeded: Bool) {
             viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.addressForm) as! AddressFormViewController
             
-            let repositoryMock = PaymentsRepositoryMock()
+            let repositoryMock = CountryRepositoryMock()
             let countriesUseCaseMock = CountriesUseCaseMock(repository: repositoryMock)
             viewModelMock = AddressFormViewModelMock(countriesUseCase: countriesUseCaseMock)
             viewController.viewModel = viewModelMock

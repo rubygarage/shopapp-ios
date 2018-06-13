@@ -16,15 +16,15 @@ class UpdateCustomerUseCaseMock: UpdateCustomerUseCase {
     
     var isNeedToReturnError = false
     
-    override func updateCustomer(with promo: Bool, _ callback: @escaping RepoCallback<Customer>) {
+    override func updateCustomerSettings(isAcceptMarketing: Bool, _ callback: @escaping RepoCallback<Customer>) {
         execute(callback: callback)
     }
     
-    override func updateCustomer(with email: String, firstName: String?, lastName: String?, phone: String?, _ callback: @escaping RepoCallback<Customer>) {
+    override func updateCustomer(firstName: String, lastName: String, phone: String, _ callback: @escaping RepoCallback<Customer>) {
         execute(callback: callback)
     }
     
-    override func updateCustomer(with password: String, _ callback: @escaping RepoCallback<Customer>) {
+    override func updatePassword(password: String, _ callback: @escaping RepoCallback<Customer>) {
         execute(callback: callback)
     }
     

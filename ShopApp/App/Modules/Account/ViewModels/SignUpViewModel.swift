@@ -77,7 +77,7 @@ class SignUpViewModel: BaseViewModel {
     
     private func signUp() {
         state.onNext(ViewState.make.loading(isTranslucent: true))
-        signUpUseCase.signUp(with: emailText.value, firstName: firstNameText.value.orNil(), lastName: lastNameText.value.orNil(), password: passwordText.value, phone: phoneText.value.orNil()) { [weak self] (success, error) in
+        signUpUseCase.signUp(firstName: firstNameText.value, lastName: lastNameText.value, email: emailText.value, password: passwordText.value, phone: phoneText.value) { [weak self] (success, error) in
             guard let strongSelf = self else {
                 return
             }

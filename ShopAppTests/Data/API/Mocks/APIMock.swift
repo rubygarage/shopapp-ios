@@ -50,36 +50,35 @@ class APIMock: API {
     var isChangeCartProductQuantityStarted = false
     var perPage: Int?
     var paginationValue: String?
-    var sortBy: SortingValue?
+    var sortBy: SortType?
     var reverse: Bool?
     var id: String?
-    var keyPhrase: String?
-    var excludePhrase: String?
-    var searchQuery: String?
+    var keyword: String?
+    var excludeKeyword: String?
+    var query: String?
     var email: String?
     var firstName: String?
     var lastName: String?
     var password: String?
     var phone: String?
-    var promo: Bool?
+    var isAcceptMarketing: Bool?
     var address: Address?
     var addressId: String?
     var cartProducts: [CartProduct]?
     var checkoutId: String?
-    var rate: ShippingRate?
+    var shippingRate: ShippingRate?
     var card: CreditCard?
     var checkout: Checkout?
     var billingAddress: Address?
-    var customerEmail: String?
     var ids: [String]?
     var cartProduct: CartProduct?
     var productVariantId: String?
     var productVariantIds: [String?]?
     var quantity: Int?
-    
+
     // MARK: - Shop
     
-    func getShopInfo(callback: @escaping RepoCallback<Shop>) {
+    func getShop(callback: @escaping RepoCallback<Shop>) {
         isGetShopInfoStarted = true
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Shop(), nil)
@@ -91,15 +90,14 @@ class APIMock: API {
     
     // MARK: - Products
     
-    func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, keyPhrase: String?, excludePhrase: String?, reverse: Bool, callback: @escaping RepoCallback<[Product]>) {
+    func getProducts(perPage: Int, paginationValue: Any?, sortBy: SortType?, keyword: String?, excludeKeyword: String?, callback: @escaping RepoCallback<[Product]>) {
         isGetProductListStarted = true
         
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
         self.sortBy = sortBy
-        self.keyPhrase = keyPhrase
-        self.excludePhrase = excludePhrase
-        self.reverse = reverse
+        self.keyword = keyword
+        self.excludeKeyword = excludeKeyword
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
     }
@@ -112,17 +110,17 @@ class APIMock: API {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Product(), nil)
     }
     
-    func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping RepoCallback<[Product]>) {
+    func searchProducts(perPage: Int, paginationValue: Any?, query: String, callback: @escaping RepoCallback<[Product]>) {
         isSearchProductsStarted = true
         
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
-        self.searchQuery = searchQuery
+        self.query = query
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
     }
     
-    func getProductVariantList(ids: [String], callback: @escaping RepoCallback<[ProductVariant]>) {
+    func getProductVariants(ids: [String], callback: @escaping RepoCallback<[ProductVariant]>) {
         isGetProductVariantListStarted = true
         
         self.ids = ids
@@ -132,38 +130,34 @@ class APIMock: API {
     
     // MARK: - Categories
     
-    func getCategoryList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, parentCategoryId: String?, callback: @escaping RepoCallback<[ShopApp_Gateway.Category]>) {
+    func getCategories(perPage: Int, paginationValue: Any?, parentCategoryId: String?, callback: @escaping RepoCallback<[ShopApp_Gateway.Category]>) {
         isGetCategoryListStarted = true
         
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
-        self.sortBy = sortBy
-        self.reverse = reverse
-        
+
         isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
     }
     
-    func getCategoryDetails(id: String, perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<ShopApp_Gateway.Category>) {
+    func getCategory(id: String, perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping RepoCallback<ShopApp_Gateway.Category>) {
         isGetCategoryStarted = true
         
         self.id = id
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
         self.sortBy = sortBy
-        self.reverse = reverse
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Category(), nil)
     }
     
     // MARK: - Articles
     
-    func getArticleList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, reverse: Bool, callback: @escaping RepoCallback<[Article]>) {
+    func getArticles(perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping RepoCallback<[Article]>) {
         isGetArticleListStarted = true
         
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
         self.sortBy = sortBy
-        self.reverse = reverse
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
     }
@@ -186,7 +180,7 @@ class APIMock: API {
     
     // MARK: - Authentification
     
-    func signUp(with email: String, firstName: String?, lastName: String?, password: String, phone: String?, callback: @escaping RepoCallback<Bool>) {
+    func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, callback: @escaping RepoCallback<Bool>) {
         isSignUpStarter = true
         
         self.email = email
@@ -198,7 +192,7 @@ class APIMock: API {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
     }
     
-    func login(with email: String, password: String, callback: @escaping RepoCallback<Bool>) {
+    func signIn(email: String, password: String, callback: @escaping RepoCallback<Bool>) {
         isLoginStarted = true
         
         self.email = email
@@ -207,17 +201,17 @@ class APIMock: API {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
     }
     
-    func logout(callback: RepoCallback<Bool>) {
+    func signOut(callback: @escaping RepoCallback<Bool>) {
         isLogoutStarted = true
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
     }
     
-    func isLoggedIn() -> Bool {
-        return !isNeedToReturnError
+    func isSignedIn(callback: @escaping RepoCallback<Bool>) {
+        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
-    func resetPassword(with email: String, callback: @escaping RepoCallback<Bool>) {
+    func resetPassword(email: String, callback: @escaping RepoCallback<Bool>) {
         isResetPasswordStarted = true
         
         self.email = email
@@ -233,10 +227,9 @@ class APIMock: API {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Customer(), nil)
     }
     
-    func updateCustomer(with email: String, firstName: String?, lastName: String?, phone: String?, callback: @escaping RepoCallback<Customer>) {
+    func updateCustomer(firstName: String, lastName: String, phone: String, callback: @escaping RepoCallback<Customer>) {
         isUpdateCustomerInfoStarted = true
         
-        self.email = email
         self.firstName = firstName
         self.lastName = lastName
         self.phone = phone
@@ -244,15 +237,15 @@ class APIMock: API {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Customer(), nil)
     }
     
-    func updateCustomer(with promo: Bool, callback: @escaping RepoCallback<Customer>) {
+    func updateCustomerSettings(isAcceptMarketing: Bool, callback: @escaping RepoCallback<Customer>) {
         isUpdateCustomerPromoStarted = true
         
-        self.promo = promo
+        self.isAcceptMarketing = isAcceptMarketing
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Customer(), nil)
     }
     
-    func updateCustomer(with password: String, callback: @escaping RepoCallback<Customer>) {
+    func updatePassword(password: String, callback: @escaping RepoCallback<Customer>) {
         isUpdateCustomerPasswordStarted = true
         
         self.password = password
@@ -260,7 +253,7 @@ class APIMock: API {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Customer(), nil)
     }
     
-    func addCustomerAddress(with address: Address, callback: @escaping RepoCallback<String>) {
+    func addCustomerAddress(address: Address, callback: @escaping RepoCallback<String>) {
         isAddCustomerAddressStarted = true
         
         self.address = address
@@ -268,7 +261,7 @@ class APIMock: API {
         isNeedToReturnError ? callback(nil, RepoError()) : callback("", nil)
     }
     
-    func updateCustomerAddress(with address: Address, callback: @escaping RepoCallback<Bool>) {
+    func updateCustomerAddress(address: Address, callback: @escaping RepoCallback<Bool>) {
         isUpdateCustomerAddressStarted = true
         
         self.address = address
@@ -276,7 +269,7 @@ class APIMock: API {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
     }
     
-    func updateCustomerDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Customer>) {
+    func setDefaultShippingAddress(addressId: String, callback: @escaping RepoCallback<Customer>) {
         isUpdateCustomerDefaultAddressStarted = true
         
         self.addressId = addressId
@@ -284,7 +277,7 @@ class APIMock: API {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Customer(), nil)
     }
     
-    func deleteCustomerAddress(with addressId: String, callback: @escaping RepoCallback<Bool>) {
+    func deleteCustomerAddress(addressId: String, callback: @escaping RepoCallback<Bool>) {
         isDeleteCustomerAddressStarted = true
         
         self.addressId = addressId
@@ -302,7 +295,7 @@ class APIMock: API {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Checkout(), nil)
     }
     
-    func getCheckout(with checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
+    func getCheckout(checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
         isGetCheckoutStarted = true
         
         self.checkoutId = checkoutId
@@ -310,7 +303,7 @@ class APIMock: API {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Checkout(), nil)
     }
     
-    func updateShippingAddress(with checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>) {
+    func setShippingAddress(checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>) {
         isUpdateShippingAddressStarted = true
         
         self.checkoutId = checkoutId
@@ -319,7 +312,7 @@ class APIMock: API {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
     }
     
-    func getShippingRates(with checkoutId: String, callback: @escaping RepoCallback<[ShippingRate]>) {
+    func getShippingRates(checkoutId: String, callback: @escaping RepoCallback<[ShippingRate]>) {
         isGetShippingRatesStarted = true
         
         self.checkoutId = checkoutId
@@ -327,31 +320,31 @@ class APIMock: API {
         isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
     }
     
-    func updateCheckout(with rate: ShippingRate, checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
+    func setShippingRate(checkoutId: String, shippingRate: ShippingRate, callback: @escaping RepoCallback<Checkout>) {
         isUpdateCheckoutStarted = true
         
-        self.rate = rate
+        self.shippingRate = shippingRate
         self.checkoutId = checkoutId
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Checkout(), nil)
     }
     
-    func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, customerEmail: String, callback: @escaping RepoCallback<Order>) {
+    func completeCheckout(checkout: Checkout, email: String, address: Address, card: CreditCard,  callback: @escaping RepoCallback<Order>) {
         isPayStarted = true
         
         self.card = card
         self.checkout = checkout
-        self.billingAddress = billingAddress
-        self.customerEmail = customerEmail
+        self.billingAddress = address
+        self.email = email
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Order(), nil)
     }
     
-    func setupApplePay(with checkout: Checkout, customerEmail: String, callback: @escaping RepoCallback<Order>) {
+    func setupApplePay(checkout: Checkout, email: String, callback: @escaping RepoCallback<Order>) {
         isSetupApplePayStarted = true
         
         self.checkout = checkout
-        self.customerEmail = customerEmail
+        self.email = email
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Order(), nil)
     }
@@ -364,7 +357,7 @@ class APIMock: API {
     
     // MARK: - Orders
     
-    func getOrderList(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
+    func getOrders(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
         isGetOrderListStarted = true
         
         self.perPage = perPage
@@ -383,7 +376,7 @@ class APIMock: API {
     
     // MARK: - Cart
     
-    func getCartProductList(callback: @escaping ([CartProduct]?, RepoError?) -> Void) {
+    func getCartProducts(callback: @escaping ([CartProduct]?, RepoError?) -> Void) {
         isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
     }
     
@@ -395,7 +388,7 @@ class APIMock: API {
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
-    func deleteProductFromCart(with productVariantId: String?, callback: @escaping RepoCallback<Bool>) {
+    func deleteCartProduct(productVariantId: String, callback: @escaping RepoCallback<Bool>) {
         isDeleteProductFromCartStarted = true
         
         self.productVariantId = productVariantId
@@ -403,7 +396,7 @@ class APIMock: API {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
     }
     
-    func deleteProductsFromCart(with productVariantIds: [String?], callback: @escaping RepoCallback<Bool>) {
+    func deleteCartProducts(productVariantIds: [String], callback: @escaping RepoCallback<Bool>) {
         isDeleteProductsFromCartStarted = true
         
         self.productVariantIds = productVariantIds
@@ -411,13 +404,13 @@ class APIMock: API {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
     }
     
-    func deleteAllProductsFromCart(with callback: @escaping RepoCallback<Bool>) {
+    func deleteAllCartProducts(callback: @escaping RepoCallback<Bool>) {
         isDeleteAllProductsFromCartStarted = true
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
     }
     
-    func changeCartProductQuantity(with productVariantId: String?, quantity: Int, callback: @escaping RepoCallback<Bool>) {
+    func changeCartProductQuantity(productVariantId: String, quantity: Int, callback: @escaping RepoCallback<Bool>) {
         isChangeCartProductQuantityStarted = true
         
         self.productVariantId = productVariantId

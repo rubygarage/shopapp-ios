@@ -15,19 +15,19 @@ public class ShopAppProductRepository: ProductRepository {
         self.api = api
     }
     
-    public func getProductList(perPage: Int, paginationValue: Any?, sortBy: SortingValue?, keyPhrase: String?, excludePhrase: String?, reverse: Bool, callback: @escaping RepoCallback<[Product]>) {
-        api.getProductList(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, keyPhrase: keyPhrase, excludePhrase: excludePhrase, reverse: reverse, callback: callback)
+    public func getProducts(perPage: Int, paginationValue: Any?, sortBy: SortType?, keyword: String?, excludeKeyword: String?, callback: @escaping RepoCallback<[Product]>) {
+        api.getProducts(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, keyword: keyword, excludeKeyword: excludeKeyword, callback: callback)
     }
     
     public func getProduct(id: String, callback: @escaping RepoCallback<Product>) {
         api.getProduct(id: id, callback: callback)
     }
     
-    public func searchProducts(perPage: Int, paginationValue: Any?, searchQuery: String, callback: @escaping RepoCallback<[Product]>) {
-        api.searchProducts(perPage: perPage, paginationValue: paginationValue, searchQuery: searchQuery, callback: callback)
+    public func searchProducts(perPage: Int, paginationValue: Any?, query: String, callback: @escaping RepoCallback<[Product]>) {
+        api.searchProducts(perPage: perPage, paginationValue: paginationValue, query: query, callback: callback)
     }
     
-    public func getProductVariantList(ids: [String], callback: @escaping RepoCallback<[ProductVariant]>) {
-        api.getProductVariantList(ids: ids, callback: callback)
+    public func getProductVariants(ids: [String], callback: @escaping RepoCallback<[ProductVariant]>) {
+        api.getProductVariants(ids: ids, callback: callback)
     }
 }

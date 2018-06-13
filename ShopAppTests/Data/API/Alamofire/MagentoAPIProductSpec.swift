@@ -35,7 +35,7 @@ class MagentoAPIProductSpec: MagentoAPIBaseSpec {
                         self.stubResponse(withObjects: productListResponseObjects, indexOfError: index)
                         
                         waitUntil { done in
-                            self.api.getProductList(perPage: 10, paginationValue: "2", sortBy: .createdAt, keyPhrase: nil, excludePhrase: nil, reverse: false) { (response, error) in
+                            self.api.getProducts(perPage: 10, paginationValue: "2", sortBy: .createdAt, keyword: nil, excludeKeyword: nil) { (response, error) in
                                 self.checkUnsuccessResponse(response, error: error)
                                 
                                 done()
@@ -51,7 +51,7 @@ class MagentoAPIProductSpec: MagentoAPIBaseSpec {
                         self.stubResponse(withObjects: productListResponseObjects)
                         
                         waitUntil { done in
-                            self.api.getProductList(perPage: 10, paginationValue: nil, sortBy: .popular, keyPhrase: nil, excludePhrase: nil, reverse: false) { (response, error) in
+                            self.api.getProducts(perPage: 10, paginationValue: nil, sortBy: .popular, keyword: nil, excludeKeyword: nil) { (response, error) in
                                 self.checkSuccessResponse(response, error: error, array: [])
                                 
                                 done()
@@ -65,7 +65,7 @@ class MagentoAPIProductSpec: MagentoAPIBaseSpec {
                         self.stubResponse(withObjects: productListResponseObjects)
                         
                         waitUntil { done in
-                            self.api.getProductList(perPage: 10, paginationValue: "2", sortBy: .createdAt, keyPhrase: nil, excludePhrase: nil, reverse: false) { (response, error) in
+                            self.api.getProducts(perPage: 10, paginationValue: "2", sortBy: .createdAt, keyword: nil, excludeKeyword: nil) { (response, error) in
                                 self.checkSuccessResponse(response, error: error, array: products)
                                 
                                 done()
@@ -79,7 +79,7 @@ class MagentoAPIProductSpec: MagentoAPIBaseSpec {
                         self.stubResponse(withObjects: productListResponseObjects)
                         
                         waitUntil { done in
-                            self.api.getProductList(perPage: 10, paginationValue: nil, sortBy: .type, keyPhrase: "key", excludePhrase: "exclude", reverse: false) { (response, error) in
+                            self.api.getProducts(perPage: 10, paginationValue: nil, sortBy: .type, keyword: "key", excludeKeyword: "exclude") { (response, error) in
                                 self.checkSuccessResponse(response, error: error, array: products)
                                 
                                 done()
@@ -130,7 +130,7 @@ class MagentoAPIProductSpec: MagentoAPIBaseSpec {
                         self.stubResponse(withObjects: productListResponseObjects, indexOfError: index)
                         
                         waitUntil { done in
-                            self.api.searchProducts(perPage: 10, paginationValue: "2", searchQuery: "search") { (response, error) in
+                            self.api.searchProducts(perPage: 10, paginationValue: "2", query: "search") { (response, error) in
                                 self.checkUnsuccessResponse(response, error: error)
                                 
                                 done()
@@ -145,7 +145,7 @@ class MagentoAPIProductSpec: MagentoAPIBaseSpec {
                     self.stubResponse(withObjects: productListResponseObjects)
                     
                     waitUntil { done in
-                        self.api.searchProducts(perPage: 10, paginationValue: "2", searchQuery: "search") { (response, error) in
+                        self.api.searchProducts(perPage: 10, paginationValue: "2", query: "search") { (response, error) in
                             self.checkSuccessResponse(response, error: error, array: products)
                             
                             done()
@@ -162,7 +162,7 @@ class MagentoAPIProductSpec: MagentoAPIBaseSpec {
                         self.stubResponse(withObjects: productListResponseObjects, indexOfError: index)
                         
                         waitUntil { done in
-                            self.api.getProductVariantList(ids: ["first_id", "second_id"]) { (response, error) in
+                            self.api.getProductVariants(ids: ["first_id", "second_id"]) { (response, error) in
                                 self.checkUnsuccessResponse(response, error: error)
                                 
                                 done()
@@ -177,7 +177,7 @@ class MagentoAPIProductSpec: MagentoAPIBaseSpec {
                     self.stubResponse(withObjects: productListResponseObjects)
                     
                     waitUntil { done in
-                        self.api.getProductVariantList(ids: ["first_id", "second_id"]) { (response, error) in
+                        self.api.getProductVariants(ids: ["first_id", "second_id"]) { (response, error) in
                             self.checkSuccessResponse(response, error: error, array: products)
                             
                             done()

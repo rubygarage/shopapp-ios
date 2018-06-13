@@ -35,7 +35,7 @@ class LoginUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.login(with: email, password: password) { (result, error) in
+                    useCase.signIn(email: email, password: password) { (result, error) in
                         expect(repositoryMock.isLoginStarted) == true
                         
                         expect(repositoryMock.email) == email
@@ -51,7 +51,7 @@ class LoginUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.login(with: email, password: password) { (result, error) in
+                    useCase.signIn(email: email, password: password) { (result, error) in
                         expect(repositoryMock.isLoginStarted) == true
                         
                         expect(repositoryMock.email) == email
@@ -69,10 +69,10 @@ class LoginUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getLoginStatus() { result in
+                    useCase.isSignedIn() { (isSignedIn, _) in
                         expect(repositoryMock.isGetLoginStatusStarted) == true
                         
-                        expect(result) == true
+                        expect(isSignedIn) == true
                     }
                 }
             }
@@ -81,10 +81,10 @@ class LoginUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.getLoginStatus() { result in
+                    useCase.isSignedIn() { (isSignedIn, _) in
                         expect(repositoryMock.isGetLoginStatusStarted) == true
                         
-                        expect(result) == false
+                        expect(isSignedIn) == false
                     }
                 }
             }

@@ -12,9 +12,9 @@ import ShopApp_Gateway
 class ProductListViewModel: GridCollectionViewModel {
     private let productListUseCase: ProductListUseCase
     
-    var sortingValue: SortingValue!
-    var keyPhrase: String?
-    var excludePhrase: String?
+    var sortType: SortType!
+    var keyword: String?
+    var excludeKeyword: String?
 
     init(productListUseCase: ProductListUseCase) {
         self.productListUseCase = productListUseCase
@@ -33,8 +33,7 @@ class ProductListViewModel: GridCollectionViewModel {
     private func loadRemoteData() {
         let showHud = products.value.isEmpty
         state.onNext(ViewState.make.loading(showHud: showHud))
-        let reverse = sortingValue == .createdAt
-        productListUseCase.getProductList(with: paginationValue, sortingValue: sortingValue, keyPhrase: keyPhrase, excludePhrase: excludePhrase, reverse: reverse) { [weak self] (products, error) in
+        productListUseCase.getProducts(with: paginationValue, sortBy: sortType, keyword: keyword, excludeKeyword: excludeKeyword) { [weak self] (products, error) in
             guard let strongSelf = self else {
                 return
             }

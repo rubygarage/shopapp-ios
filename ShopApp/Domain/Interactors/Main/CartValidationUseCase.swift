@@ -15,7 +15,7 @@ class CartValidationUseCase {
         self.repository = repository
     }
     
-    func getProductVariantList(ids: [String], _ callback: @escaping RepoCallback<[ProductVariant]>) {
-        repository.getProductVariantList(ids: ids, callback: callback)
+    func getProductVariants(ids: [String], _ callback: @escaping RepoCallback<[ProductVariant]>) {
+        repository.getProductVariants(ids: ids, callback: callback)
     }
 }

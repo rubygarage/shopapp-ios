@@ -19,31 +19,31 @@ class ShopAppCustomerRepository: CustomerRepository {
         api.getCustomer(callback: callback)
     }
     
-    func updateCustomer(with email: String, firstName: String?, lastName: String?, phone: String?, callback: @escaping RepoCallback<Customer>) {
-        api.updateCustomer(with: email, firstName: firstName, lastName: lastName, phone: phone, callback: callback)
+    func updateCustomer(firstName: String, lastName: String, phone: String, callback: @escaping RepoCallback<Customer>) {
+        api.updateCustomer(firstName: firstName, lastName: lastName, phone: phone, callback: callback)
     }
     
-    func updateCustomer(with promo: Bool, callback: @escaping RepoCallback<Customer>) {
-        api.updateCustomer(with: promo, callback: callback)
+    func updateCustomerSettings(isAcceptMarketing: Bool, callback: @escaping RepoCallback<Customer>) {
+        api.updateCustomerSettings(isAcceptMarketing: isAcceptMarketing, callback: callback)
     }
     
-    func updateCustomer(with password: String, callback: @escaping RepoCallback<Customer>) {
-        api.updateCustomer(with: password, callback: callback)
+    func updatePassword(password: String, callback: @escaping RepoCallback<Customer>) {
+        api.updatePassword(password: password, callback: callback)
     }
     
-    func addCustomerAddress(with address: Address, callback: @escaping RepoCallback<String>) {
-        api.addCustomerAddress(with: address, callback: callback)
+    func addCustomerAddress(address: Address, callback: @escaping RepoCallback<String>) {
+        api.addCustomerAddress(address: address, callback: callback)
     }
     
-    func updateCustomerAddress(with address: Address, callback: @escaping RepoCallback<Bool>) {
-        api.updateCustomerAddress(with: address, callback: callback)
+    func updateCustomerAddress(address: Address, callback: @escaping RepoCallback<Bool>) {
+        api.updateCustomerAddress(address: address, callback: callback)
     }
     
-    func updateCustomerDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Customer>) {
-        api.updateCustomerDefaultAddress(with: addressId, callback: callback)
+    func setDefaultShippingAddress(addressId: String, callback: @escaping RepoCallback<Customer>) {
+        api.setDefaultShippingAddress(addressId: addressId, callback: callback)
     }
     
-    func deleteCustomerAddress(with addressId: String, callback: @escaping RepoCallback<Bool>) {
-        api.deleteCustomerAddress(with: addressId, callback: callback)
+    func deleteCustomerAddress(addressId: String, callback: @escaping RepoCallback<Bool>) {
+        api.deleteCustomerAddress(addressId: addressId, callback: callback)
     }
 }

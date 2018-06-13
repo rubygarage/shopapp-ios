@@ -16,6 +16,6 @@ public class ShopAppShopRepository: ShopRepository {
     }
     
     public func getShop(callback: @escaping RepoCallback<Shop>) {
-        api.getShopInfo(callback: callback)
+        api.getShop(callback: callback)
     }
 }

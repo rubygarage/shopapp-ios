@@ -31,7 +31,7 @@ class ArticleListViewModel: BasePaginationViewModel {
     private func loadRemoteData() {
         let showHud = items.value.isEmpty
         state.onNext(ViewState.make.loading(showHud: showHud))
-        articleListUseCase.getArticleList(with: paginationValue) { [weak self] (articles, error) in
+        articleListUseCase.getArticles(with: paginationValue) { [weak self] (articles, error) in
             guard let strongSelf = self else {
                 return
             }

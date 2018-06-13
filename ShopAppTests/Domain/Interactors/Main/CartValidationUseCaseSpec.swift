@@ -32,7 +32,7 @@ class CartValidationUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getProductVariantList(ids: ids) { (result, error) in
+                    useCase.getProductVariants(ids: ids) { (result, error) in
                         expect(repositoryMock.isGetProductVariantListStarted) == true
                         
                         expect(repositoryMock.ids) == ids
@@ -47,7 +47,7 @@ class CartValidationUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.getProductVariantList(ids: ids) { (result, error) in
+                    useCase.getProductVariants(ids: ids) { (result, error) in
                         expect(repositoryMock.isGetProductVariantListStarted) == true
                         
                         expect(repositoryMock.ids) == ids

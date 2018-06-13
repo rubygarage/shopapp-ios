@@ -9,33 +9,33 @@
 import ShopApp_Gateway
 
 class CheckoutUseCase {
-    private let repository: PaymentsRepository
+    private let repository: PaymentRepository
 
-    init(repository: PaymentsRepository) {
+    init(repository: PaymentRepository) {
         self.repository = repository
     }
 
-    func getCheckout(with checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
-        repository.getCheckout(with: checkoutId, callback: callback)
+    func getCheckout(checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
+        repository.getCheckout(checkoutId: checkoutId, callback: callback)
     }
     
-    func updateCheckoutShippingAddress(with checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>) {
-        repository.updateShippingAddress(with: checkoutId, address: address, callback: callback)
+    func setShippingAddress(checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>) {
+        repository.setShippingAddress(checkoutId: checkoutId, address: address, callback: callback)
     }
     
     func createCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
         repository.createCheckout(cartProducts: cartProducts, callback: callback)
     }
     
-    func pay(with card: CreditCard, checkout: Checkout, billingAddress: Address, customerEmail: String, callback: @escaping RepoCallback<Order>) {
-        repository.pay(with: card, checkout: checkout, billingAddress: billingAddress, customerEmail: customerEmail, callback: callback)
+    func completeCheckout(checkout: Checkout, email: String, address: Address, card: CreditCard, callback: @escaping RepoCallback<Order>) {
+        repository.completeCheckout(checkout: checkout, email: email, address: address, card: card, callback: callback)
     }
     
-    func setupApplePay(with checkout: Checkout, customerEmail: String, callback: @escaping RepoCallback<Order>) {
-        repository.setupApplePay(with: checkout, customerEmail: customerEmail, callback: callback)
+    func setupApplePay(checkout: Checkout, email: String, callback: @escaping RepoCallback<Order>) {
+        repository.setupApplePay(checkout: checkout, email: email, callback: callback)
     }
     
-    func updateShippingRate(with checkoutId: String, rate: ShippingRate, callback: @escaping RepoCallback<Checkout>) {
-        repository.updateCheckout(with: rate, checkoutId: checkoutId, callback: callback)
+    func setShippingRate(checkoutId: String, shippingRate: ShippingRate, callback: @escaping RepoCallback<Checkout>) {
+        repository.setShippingRate(checkoutId: checkoutId, shippingRate: shippingRate, callback: callback)
     }
 }

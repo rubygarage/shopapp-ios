@@ -15,10 +15,10 @@ import ShopApp_Gateway
 class CountriesUseCaseSpec: QuickSpec {
     override func spec() {
         var useCase: CountriesUseCase!
-        var repositoryMock: PaymentsRepositoryMock!
+        var repositoryMock: CountryRepositoryMock!
         
         beforeEach {
-            repositoryMock = PaymentsRepositoryMock()
+            repositoryMock = CountryRepositoryMock()
             useCase = CountriesUseCase(repository: repositoryMock)
         }
         
