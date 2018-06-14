@@ -339,7 +339,7 @@ class ProductDetailsViewControllerSpec: QuickSpec {
                 viewController.descriptionContainerDidTap(descriptionContainerDidTapRecognizer)
                 
                 expect(descriptionStateImageView.image) == #imageLiteral(resourceName: "minus")
-                expect(descriptionContainerViewHeightConstraint.constant) == descriptionLabel.frame.size.height + 40 // 40 is a productDescriptionAdditionalHeight constant
+                expect(descriptionContainerViewHeightConstraint.constant) == ceil(descriptionLabel.frame.size.height) + 40 // 40 is a productDescriptionAdditionalHeight constant
                 
                 viewController.descriptionContainerDidTap(descriptionContainerDidTapRecognizer)
                 

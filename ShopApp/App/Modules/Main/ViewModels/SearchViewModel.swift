@@ -11,6 +11,8 @@ import RxSwift
 class SearchViewModel: GridCollectionViewModel {
     private let productListUseCase: ProductListUseCase
     
+    private var workItem: DispatchWorkItem?
+    
     var searchPhrase = Variable<String>("")
 
     init(productListUseCase: ProductListUseCase) {
@@ -38,19 +40,33 @@ class SearchViewModel: GridCollectionViewModel {
             
             return
         }
-        state.onNext(ViewState.make.loading(showHud: false))
-        productListUseCase.getProducts(with: paginationValue, searchPhrase: searchPhrase.value) { [weak self] (products, error) in
+        
+        workItem?.cancel()
+        
+        workItem = DispatchWorkItem { [weak self] in
             guard let strongSelf = self else {
                 return
             }
-            if let error = error {
-                strongSelf.state.onNext(.error(error: error))
-            } else if let products = products {
-                strongSelf.updateProducts(products: products)
-                products.isEmpty && !strongSelf.searchPhrase.value.isEmpty ? strongSelf.state.onNext(.empty) : strongSelf.state.onNext(.content)
+            
+            strongSelf.state.onNext(ViewState.make.loading(showHud: false))
+            
+            strongSelf.productListUseCase.getProducts(with: strongSelf.paginationValue, searchPhrase: strongSelf.searchPhrase.value) { [weak self] (products, error) in
+                guard let strongSelf = self else {
+                    return
+                }
+                
+                if let error = error {
+                    strongSelf.state.onNext(.error(error: error))
+                } else if let products = products {
+                    strongSelf.updateProducts(products: products)
+                    products.isEmpty && !strongSelf.searchPhrase.value.isEmpty ? strongSelf.state.onNext(.empty) : strongSelf.state.onNext(.content)
+                }
+                
+                strongSelf.canLoadMore = products?.count ?? 0 == kItemsPerPage
             }
-            strongSelf.canLoadMore = products?.count ?? 0 == kItemsPerPage
         }
+        
+        workItem?.perform()
     }
     
     // MARK: - BaseViewModel
