@@ -15,7 +15,7 @@ class ArticleUseCase {
         self.repository = repository
     }
 
-    func getArticle(with id: String, _ callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>) {
+    func getArticle(id: String, _ callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>) {
         repository.getArticle(id: id, callback: callback)
     }
 }

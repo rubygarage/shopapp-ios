@@ -32,10 +32,10 @@ enum PaymentType: Int {
 
 class CheckoutViewModel: BaseViewModel {
     private let checkoutUseCase: CheckoutUseCase
-    private let cartProductListUseCase: CartProductListUseCase
+    private let cartProductsUseCase: CartProductsUseCase
     private let deleteCartProductsUseCase: DeleteCartProductsUseCase
     private let customerUseCase: CustomerUseCase
-    private let loginUseCase: LoginUseCase
+    private let signInUseCase: SignInUseCase
     
     var checkout = Variable<Checkout?>(nil)
     var creditCard = Variable<CreditCard?>(nil)
@@ -70,17 +70,17 @@ class CheckoutViewModel: BaseViewModel {
         }
     }
 
-    init(checkoutUseCase: CheckoutUseCase, cartProductListUseCase: CartProductListUseCase, deleteCartProductsUseCase: DeleteCartProductsUseCase, customerUseCase: CustomerUseCase, loginUseCase: LoginUseCase) {
+    init(checkoutUseCase: CheckoutUseCase, cartProductsUseCase: CartProductsUseCase, deleteCartProductsUseCase: DeleteCartProductsUseCase, customerUseCase: CustomerUseCase, signInUseCase: SignInUseCase) {
         self.checkoutUseCase = checkoutUseCase
-        self.cartProductListUseCase = cartProductListUseCase
+        self.cartProductsUseCase = cartProductsUseCase
         self.deleteCartProductsUseCase = deleteCartProductsUseCase
         self.customerUseCase = customerUseCase
-        self.loginUseCase = loginUseCase
+        self.signInUseCase = signInUseCase
     }
     
     func loadData() {
         state.onNext(ViewState.make.loading())
-        loginUseCase.isSignedIn { [weak self] (isSignedIn, _) in
+        signInUseCase.isSignedIn { [weak self] (isSignedIn, _) in
             guard let strongSelf = self else {
                 return
             }
@@ -139,7 +139,7 @@ class CheckoutViewModel: BaseViewModel {
     func updateShippingRate(with shippingRate: ShippingRate) {
         if let checkoutId = checkout.value?.id {
             state.onNext(ViewState.make.loading(isTranslucent: true))
-            checkoutUseCase.setShippingRate(checkoutId: checkoutId, shippingRate: shippingRate, callback: { [weak self] (result, error) in
+            checkoutUseCase.setShippingRate(checkoutId: checkoutId, shippingRate: shippingRate) { [weak self] (result, error) in
                 guard let strongSelf = self else {
                     return
                 }
@@ -149,7 +149,7 @@ class CheckoutViewModel: BaseViewModel {
                     strongSelf.checkout.value = checkout
                     strongSelf.state.onNext(.content)
                 }
-            })
+            }
         }
     }
     
@@ -163,7 +163,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     private func getCartItems() {
-        cartProductListUseCase.getCartProducts({ [weak self] (result, error) in
+        cartProductsUseCase.getCartProducts({ [weak self] (result, error) in
             guard let strongSelf = self else {
                 return
             }
@@ -177,7 +177,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     private func createCheckout(cartItems: [CartProduct]) {
-        checkoutUseCase.createCheckout(cartProducts: cartItems, callback: { [weak self] (checkout, error) in
+        checkoutUseCase.createCheckout(cartProducts: cartItems) { [weak self] (checkout, error) in
             guard let strongSelf = self else {
                 return
             }
@@ -187,7 +187,7 @@ class CheckoutViewModel: BaseViewModel {
                 strongSelf.checkout.value = checkout
                 strongSelf.getCustomer()
             }
-        })
+        }
     }
     
     private func getCustomer() {

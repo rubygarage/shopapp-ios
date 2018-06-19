@@ -51,10 +51,10 @@ class CheckoutAssembly: Assembly {
 
         container.register(CheckoutViewModel.self) { r in
             return CheckoutViewModel(checkoutUseCase: r.resolve(CheckoutUseCase.self)!,
-                                     cartProductListUseCase: r.resolve(CartProductListUseCase.self)!,
+                                     cartProductsUseCase: r.resolve(CartProductsUseCase.self)!,
                                      deleteCartProductsUseCase: r.resolve(DeleteCartProductsUseCase.self)!,
                                      customerUseCase: r.resolve(CustomerUseCase.self)!,
-                                     loginUseCase: r.resolve(LoginUseCase.self)!)
+                                     signInUseCase: r.resolve(SignInUseCase.self)!)
         }
 
         container.register(CreditCardViewModel.self) { _ in

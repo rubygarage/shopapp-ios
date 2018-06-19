@@ -16,10 +16,10 @@ class CheckoutViewControllerSpec: QuickSpec {
     override func spec() {
         var viewController: CheckoutViewController!
         var checkoutUseCaseMock: CheckoutUseCaseMock!
-        var cartProductListUseCaseMock: CartProductListUseCaseMock!
+        var cartProductListUseCaseMock: CartProductsUseCaseMock!
         var deleteCartProductsUseCase: DeleteCartProductsUseCase!
         var customerUseCaseMock: CustomerUseCaseMock!
-        var loginUseCaseMock: LoginUseCaseMock!
+        var loginUseCaseMock: SignInUseCaseMock!
         var viewModelMock: CheckoutViewModelMock!
         var tableProvider: CheckoutTableProvider!
         var tableView: UITableView!
@@ -32,16 +32,16 @@ class CheckoutViewControllerSpec: QuickSpec {
             checkoutUseCaseMock = CheckoutUseCaseMock(repository: paymentRepositoryMock)
             
             let cartRepositoryMock = CartRepositoryMock()
-            cartProductListUseCaseMock = CartProductListUseCaseMock(repository: cartRepositoryMock)
+            cartProductListUseCaseMock = CartProductsUseCaseMock(repository: cartRepositoryMock)
             deleteCartProductsUseCase = DeleteCartProductsUseCase(repository: cartRepositoryMock)
             
             let customerRepositoryMock = CustomerRepositoryMock()
             customerUseCaseMock = CustomerUseCaseMock(repository: customerRepositoryMock)
             
             let authentificationRepositoryMock = AuthentificationRepositoryMock()
-            loginUseCaseMock = LoginUseCaseMock(repository: authentificationRepositoryMock)
+            loginUseCaseMock = SignInUseCaseMock(repository: authentificationRepositoryMock)
             
-            viewModelMock = CheckoutViewModelMock(checkoutUseCase: checkoutUseCaseMock, cartProductListUseCase: cartProductListUseCaseMock, deleteCartProductsUseCase: deleteCartProductsUseCase, customerUseCase: customerUseCaseMock, loginUseCase: loginUseCaseMock)
+            viewModelMock = CheckoutViewModelMock(checkoutUseCase: checkoutUseCaseMock, cartProductsUseCase: cartProductListUseCaseMock, deleteCartProductsUseCase: deleteCartProductsUseCase, customerUseCase: customerUseCaseMock, signInUseCase: loginUseCaseMock)
             viewController.viewModel = viewModelMock
             
             tableProvider = CheckoutTableProvider()

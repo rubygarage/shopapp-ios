@@ -1,5 +1,5 @@
 //
-//  OrderListUseCase.swift
+//  OrdersUseCase.swift
 //  ShopApp
 //
 //  Created by Radyslav Krechet on 1/3/18.
@@ -8,14 +8,14 @@
 
 import ShopApp_Gateway
 
-class OrderListUseCase {
+class OrdersUseCase {
     private let repository: OrderRepository
 
     init(repository: OrderRepository) {
         self.repository = repository
     }
 
-    func getOrders(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Order]>) {
+    func getOrders(paginationValue: Any?, _ callback: @escaping RepoCallback<[Order]>) {
         repository.getOrders(perPage: kItemsPerPage, paginationValue: paginationValue, callback: callback)
     }
 }

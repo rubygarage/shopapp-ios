@@ -1,5 +1,5 @@
 //
-//  LogoutUseCase.swift
+//  SignOutUseCase.swift
 //  ShopApp
 //
 //  Created by Radyslav Krechet on 12/27/17.
@@ -8,16 +8,14 @@
 
 import ShopApp_Gateway
 
-class LogoutUseCase {
+class SignOutUseCase {
     private let repository: AuthentificationRepository
 
     init(repository: AuthentificationRepository) {
         self.repository = repository
     }
 
-    func signOut(_ callback: @escaping (_ isLoggedOut: Bool) -> Void) {
-        repository.signOut { (success, _) in
-            callback(success == true)
-        }
+    func signOut(_ callback: @escaping RepoCallback<Void>) {
+        repository.signOut(callback: callback)
     }
 }

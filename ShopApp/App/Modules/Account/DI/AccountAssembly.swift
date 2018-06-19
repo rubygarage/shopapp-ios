@@ -89,8 +89,8 @@ class AccountAssembly: Assembly {
 
         container.register(AccountViewModel.self) { r in
             return AccountViewModel(customerUseCase: r.resolve(CustomerUseCase.self)!,
-                                    loginUseCase: r.resolve(LoginUseCase.self)!,
-                                    logoutUseCase: r.resolve(LogoutUseCase.self)!,
+                                    signInUseCase: r.resolve(SignInUseCase.self)!,
+                                    signOutUseCase: r.resolve(SignOutUseCase.self)!,
                                     shopUseCase: r.resolve(ShopUseCase.self)!)
         }
 
@@ -107,23 +107,23 @@ class AccountAssembly: Assembly {
         }
 
         container.register(OrderListViewModel.self) { r in
-            return OrderListViewModel(orderListUseCase: r.resolve(OrderListUseCase.self)!)
+            return OrderListViewModel(ordersUseCase: r.resolve(OrdersUseCase.self)!)
         }
 
         container.register(PersonalInfoViewModel.self) { r in
             return PersonalInfoViewModel(updateCustomerUseCase: r.resolve(UpdateCustomerUseCase.self)!,
-                                         loginUseCase: r.resolve(LoginUseCase.self)!,
+                                         signInUseCase: r.resolve(SignInUseCase.self)!,
                                          customerUseCase: r.resolve(CustomerUseCase.self)!)
         }
 
         container.register(SettingsViewModel.self) { r in
             return SettingsViewModel(updateCustomerUseCase: r.resolve(UpdateCustomerUseCase.self)!,
-                                     loginUseCase: r.resolve(LoginUseCase.self)!,
+                                     signInUseCase: r.resolve(SignInUseCase.self)!,
                                      customerUseCase: r.resolve(CustomerUseCase.self)!)
         }
 
         container.register(SignInViewModel.self) { r in
-            return SignInViewModel(loginUseCase: r.resolve(LoginUseCase.self)!)
+            return SignInViewModel(signInUseCase: r.resolve(SignInUseCase.self)!)
         }
 
         container.register(SignUpViewModel.self) { r in

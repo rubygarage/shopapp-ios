@@ -17,26 +17,26 @@ class CheckoutViewModelSpec: QuickSpec {
     override func spec() {
         var viewModel: CheckoutViewModel!
         var checkoutUseCaseMock: CheckoutUseCaseMock!
-        var cartProductListUseCaseMock: CartProductListUseCaseMock!
+        var cartProductListUseCaseMock: CartProductsUseCaseMock!
         var deleteCartProductsUseCase: DeleteCartProductsUseCase!
         var customerUseCaseMock: CustomerUseCaseMock!
-        var loginUseCaseMock: LoginUseCaseMock!
+        var signInUseCaseMock: SignInUseCaseMock!
         
         beforeEach {
             let paymentRepositoryMock = PaymentRepositoryMock()
             checkoutUseCaseMock = CheckoutUseCaseMock(repository: paymentRepositoryMock)
             
             let cartRepositoryMock = CartRepositoryMock()
-            cartProductListUseCaseMock = CartProductListUseCaseMock(repository: cartRepositoryMock)
+            cartProductListUseCaseMock = CartProductsUseCaseMock(repository: cartRepositoryMock)
             deleteCartProductsUseCase = DeleteCartProductsUseCase(repository: cartRepositoryMock)
             
             let customerRepositoryMock = CustomerRepositoryMock()
             customerUseCaseMock = CustomerUseCaseMock(repository: customerRepositoryMock)
             
             let authentificationRepositoryMock = AuthentificationRepositoryMock()
-            loginUseCaseMock = LoginUseCaseMock(repository: authentificationRepositoryMock)
+            signInUseCaseMock = SignInUseCaseMock(repository: authentificationRepositoryMock)
             
-            viewModel = CheckoutViewModel(checkoutUseCase: checkoutUseCaseMock, cartProductListUseCase: cartProductListUseCaseMock, deleteCartProductsUseCase: deleteCartProductsUseCase, customerUseCase: customerUseCaseMock, loginUseCase: loginUseCaseMock)
+            viewModel = CheckoutViewModel(checkoutUseCase: checkoutUseCaseMock, cartProductsUseCase: cartProductListUseCaseMock, deleteCartProductsUseCase: deleteCartProductsUseCase, customerUseCase: customerUseCaseMock, signInUseCase: signInUseCaseMock)
         }
         
         describe("when view model initialized") {
@@ -241,7 +241,7 @@ class CheckoutViewModelSpec: QuickSpec {
             
             context("if user isn't logged in") {
                 it("should return false") {
-                    loginUseCaseMock.isNeedToReturnError = true
+                    signInUseCaseMock.isNeedToReturnError = true
                     cartProductListUseCaseMock.isNeedToReturnError = true
                     
                     viewModel.loadData()
@@ -256,7 +256,7 @@ class CheckoutViewModelSpec: QuickSpec {
             
             context("if user is logged in") {
                 beforeEach {
-                    loginUseCaseMock.isNeedToReturnError = false
+                    signInUseCaseMock.isNeedToReturnError = false
                 }
                 
                 context("and 'get cart products list' success") {

@@ -14,7 +14,7 @@ typealias SelectedVariant = (variant: ProductVariant?, allOptions: [ProductOptio
 class ProductDetailsViewModel: BaseViewModel {
     private let addCartProductUseCase: AddCartProductUseCase
     private let productUseCase: ProductUseCase
-    private let productListUseCase: ProductListUseCase
+    private let productsUseCase: ProductsUseCase
     
     private var productOptions: [ProductOption] = []
     private var selectedOptions: [SelectedOption] = []
@@ -52,15 +52,15 @@ class ProductDetailsViewModel: BaseViewModel {
         })
     }
 
-    init(addCartProductUseCase: AddCartProductUseCase, productUseCase: ProductUseCase, productListUseCase: ProductListUseCase) {
+    init(addCartProductUseCase: AddCartProductUseCase, productUseCase: ProductUseCase, productsUseCase: ProductsUseCase) {
         self.addCartProductUseCase = addCartProductUseCase
         self.productUseCase = productUseCase
-        self.productListUseCase = productListUseCase
+        self.productsUseCase = productsUseCase
     }
 
     func loadData() {
         state.onNext(ViewState.make.loading())
-        productUseCase.getProduct(with: productId) { [weak self] (product, error) in
+        productUseCase.getProduct(id: productId) { [weak self] (product, error) in
             guard let strongSelf = self else {
                 return
             }
@@ -137,7 +137,7 @@ class ProductDetailsViewModel: BaseViewModel {
     }
     
     private func loadRelatedItems() {
-        productListUseCase.getProducts(with: nil, sortBy: SortType.type, keyword: product.value?.type, excludeKeyword: product.value?.title) { [weak self] (products, error) in
+        productsUseCase.getProducts(paginationValue: nil, sortBy: .type, keyword: product.value?.type, excludeKeyword: product.value?.title) { [weak self] (products, error) in
             guard let strongSelf = self else {
                 return
             }

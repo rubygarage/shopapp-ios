@@ -1,5 +1,5 @@
 //
-//  OrderListUseCaseMock.swift
+//  OrdersUseCaseMock.swift
 //  ShopAppTests
 //
 //  Created by Evgeniy Antonov on 2/20/18.
@@ -10,12 +10,12 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class OrderListUseCaseMock: OrderListUseCase {
+class OrdersUseCaseMock: OrdersUseCase {
     var isOrderCountLessThenConstant = true
     var isNeedToReturnOrderWithVariant = false
     var isNeedToReturnError = false
     
-    override func getOrders(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Order]>) {
+    override func getOrders(paginationValue: Any?, _ callback: @escaping RepoCallback<[Order]>) {
         if isNeedToReturnError {
             callback(nil, RepoError())
         } else {

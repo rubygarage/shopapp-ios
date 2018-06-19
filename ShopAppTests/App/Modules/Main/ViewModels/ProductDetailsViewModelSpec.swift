@@ -18,7 +18,7 @@ class ProductDetailsViewModelSpec: QuickSpec {
         var viewModel: ProductDetailsViewModel!
         var addCartProductUseCaseMock: AddCartProductUseCaseMock!
         var productUseCaseMock: ProductUseCaseMock!
-        var productListUseCaseMock: ProductListUseCaseMock!
+        var productsUseCaseMock: ProductsUseCaseMock!
         
         beforeEach {
             let cartRepositoryMock = CartRepositoryMock()
@@ -26,9 +26,9 @@ class ProductDetailsViewModelSpec: QuickSpec {
             
             let productRepositoryMock = ProductRepositoryMock()
             productUseCaseMock = ProductUseCaseMock(repository: productRepositoryMock)
-            productListUseCaseMock = ProductListUseCaseMock(repository: productRepositoryMock)
+            productsUseCaseMock = ProductsUseCaseMock(repository: productRepositoryMock)
             
-            viewModel = ProductDetailsViewModel(addCartProductUseCase: addCartProductUseCaseMock, productUseCase: productUseCaseMock, productListUseCase: productListUseCaseMock)
+            viewModel = ProductDetailsViewModel(addCartProductUseCase: addCartProductUseCaseMock, productUseCase: productUseCaseMock, productsUseCase: productsUseCaseMock)
         }
         
         describe("when view model initialized") {
@@ -73,7 +73,7 @@ class ProductDetailsViewModelSpec: QuickSpec {
                     beforeEach {
                         productUseCaseMock.returnedValue = product
                         productUseCaseMock.isNeedToReturnError = false
-                        productListUseCaseMock.isNeedToReturnError = false
+                        productsUseCaseMock.isNeedToReturnError = false
                     }
                     
                     it("should load product and related products") {
@@ -100,7 +100,7 @@ class ProductDetailsViewModelSpec: QuickSpec {
                         
                         productUseCaseMock.returnedValue = product
                         productUseCaseMock.isNeedToReturnError = false
-                        productListUseCaseMock.isNeedToReturnError = false
+                        productsUseCaseMock.isNeedToReturnError = false
                     }
                     
                     it("should load product and related products") {
@@ -133,7 +133,7 @@ class ProductDetailsViewModelSpec: QuickSpec {
 
                         productUseCaseMock.returnedValue = product
                         productUseCaseMock.isNeedToReturnError = false
-                        productListUseCaseMock.isNeedToReturnError = false
+                        productsUseCaseMock.isNeedToReturnError = false
                     }
                     
                     it("should load product and related products") {
@@ -154,7 +154,7 @@ class ProductDetailsViewModelSpec: QuickSpec {
                     beforeEach {
                         productUseCaseMock.returnedValue = product
                         productUseCaseMock.isNeedToReturnError = false
-                        productListUseCaseMock.isNeedToReturnError = true
+                        productsUseCaseMock.isNeedToReturnError = true
                     }
                     
                     it("should load product but shouldn't load related items") {
@@ -172,7 +172,7 @@ class ProductDetailsViewModelSpec: QuickSpec {
                 context("and if product loaded with error") {
                     beforeEach {
                         productUseCaseMock.isNeedToReturnError = true
-                        productListUseCaseMock.isNeedToReturnError = false
+                        productsUseCaseMock.isNeedToReturnError = false
                     }
                     
                     it("shouldn't load product and related items") {

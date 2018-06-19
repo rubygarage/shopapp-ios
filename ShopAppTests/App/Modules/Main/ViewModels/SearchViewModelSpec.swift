@@ -15,12 +15,12 @@ import RxSwift
 class SearchViewModelSpec: QuickSpec {
     override func spec() {
         let repositoryMock = ProductRepositoryMock()
-        let productListUseCaseMock = ProductListUseCaseMock(repository: repositoryMock)
+        let productsUseCaseMock = ProductsUseCaseMock(repository: repositoryMock)
         
         var viewModel: SearchViewModel!
         
         beforeEach {
-            viewModel = SearchViewModel(productListUseCase: productListUseCaseMock)
+            viewModel = SearchViewModel(productsUseCase: productsUseCaseMock)
         }
         
         describe("when view model initialized") {
@@ -41,8 +41,8 @@ class SearchViewModelSpec: QuickSpec {
                 disposeBag = DisposeBag()
                 states = []
                 
-                productListUseCaseMock.isNeedToReturnEmptyProductList = false
-                productListUseCaseMock.isNeedToReturnError = false
+                productsUseCaseMock.isNeedToReturnEmptyProductList = false
+                productsUseCaseMock.isNeedToReturnError = false
                 viewModel.searchPhrase.value = "phrase"
                 
                 viewModel.state
@@ -67,7 +67,7 @@ class SearchViewModelSpec: QuickSpec {
             
             context("if not items in loaded page") {
                 it("should present empty view") {
-                    productListUseCaseMock.isNeedToReturnEmptyProductList = true
+                    productsUseCaseMock.isNeedToReturnEmptyProductList = true
                     viewModel.reloadData()
                     
                     expect(viewModel.products.value.isEmpty) == true
@@ -81,7 +81,7 @@ class SearchViewModelSpec: QuickSpec {
             
             context("if not full page loaded") {
                 it("should present loaded items") {
-                    productListUseCaseMock.isProductCountLessThenConstant = true
+                    productsUseCaseMock.isProductCountLessThenConstant = true
                     viewModel.reloadData()
                     
                     expect(viewModel.products.value.count) != kItemsPerPage
@@ -95,7 +95,7 @@ class SearchViewModelSpec: QuickSpec {
             
             context("if full page loaded") {
                 it("should present loaded items") {
-                    productListUseCaseMock.isProductCountLessThenConstant = false
+                    productsUseCaseMock.isProductCountLessThenConstant = false
                     viewModel.reloadData()
                     
                     expect(viewModel.products.value.count) == kItemsPerPage
@@ -109,7 +109,7 @@ class SearchViewModelSpec: QuickSpec {
             
             context("if error did occured") {
                 it("should not present items") {
-                    productListUseCaseMock.isNeedToReturnError = true
+                    productsUseCaseMock.isNeedToReturnError = true
                     viewModel.reloadData()
                     
                     expect(viewModel.products.value.count) == 0
@@ -130,9 +130,9 @@ class SearchViewModelSpec: QuickSpec {
                 disposeBag = DisposeBag()
                 states = []
                 
-                productListUseCaseMock.isNeedToReturnEmptyProductList = false
-                productListUseCaseMock.isProductCountLessThenConstant = false
-                productListUseCaseMock.isNeedToReturnError = false
+                productsUseCaseMock.isNeedToReturnEmptyProductList = false
+                productsUseCaseMock.isProductCountLessThenConstant = false
+                productsUseCaseMock.isNeedToReturnError = false
                 viewModel.searchPhrase.value = "phrase"
             }
             
@@ -158,7 +158,7 @@ class SearchViewModelSpec: QuickSpec {
             
             context("if error did occured") {
                 it("should load first page and have error during loading next page") {
-                    productListUseCaseMock.isNeedToReturnError = false
+                    productsUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
                     viewModel.state
@@ -167,7 +167,7 @@ class SearchViewModelSpec: QuickSpec {
                         })
                         .disposed(by: disposeBag)
                     
-                    productListUseCaseMock.isNeedToReturnError = true
+                    productsUseCaseMock.isNeedToReturnError = true
                     viewModel.loadNextPage()
                     
                     expect(viewModel.products.value.count) == kItemsPerPage
@@ -211,9 +211,9 @@ class SearchViewModelSpec: QuickSpec {
                 disposeBag = DisposeBag()
                 states = []
                 
-                productListUseCaseMock.isNeedToReturnEmptyProductList = false
-                productListUseCaseMock.isProductCountLessThenConstant = true
-                productListUseCaseMock.isNeedToReturnError = false
+                productsUseCaseMock.isNeedToReturnEmptyProductList = false
+                productsUseCaseMock.isProductCountLessThenConstant = true
+                productsUseCaseMock.isNeedToReturnError = false
                 viewModel.searchPhrase.value = "phrase"
                 
                 viewModel.state
@@ -238,7 +238,7 @@ class SearchViewModelSpec: QuickSpec {
             
             context("if error did occured") {
                 it("should not present items") {
-                    productListUseCaseMock.isNeedToReturnError = true
+                    productsUseCaseMock.isNeedToReturnError = true
                     viewModel.tryAgain()
                     
                     expect(viewModel.products.value.count) == 0

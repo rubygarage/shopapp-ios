@@ -15,17 +15,17 @@ import ShopApp_Gateway
 
 class CartViewModelSpec: QuickSpec {
     override func spec() {
-        var cartProductListUseCaseMock: CartProductListUseCaseMock!
+        var cartProductsUseCaseMock: CartProductsUseCaseMock!
         var deleteCartProductUseCaseMock: DeleteCartProductUseCaseMock!
         var changeCartProductUseCaseMock: ChangeCartProductUseCaseMock!
         var viewModel: CartViewModel!
         
         beforeEach {
             let repositoryMock = CartRepositoryMock()
-            cartProductListUseCaseMock = CartProductListUseCaseMock(repository: repositoryMock)
+            cartProductsUseCaseMock = CartProductsUseCaseMock(repository: repositoryMock)
             deleteCartProductUseCaseMock = DeleteCartProductUseCaseMock(repository: repositoryMock)
             changeCartProductUseCaseMock = ChangeCartProductUseCaseMock(repository: repositoryMock)
-            viewModel = CartViewModel(cartProductListUseCase: cartProductListUseCaseMock, deleteCartProductUseCase: deleteCartProductUseCaseMock, changeCartProductUseCase: changeCartProductUseCaseMock)
+            viewModel = CartViewModel(cartProductsUseCase: cartProductsUseCaseMock, deleteCartProductUseCase: deleteCartProductUseCaseMock, changeCartProductUseCase: changeCartProductUseCaseMock)
         }
         
         describe("when view model imitialized") {
@@ -51,8 +51,8 @@ class CartViewModelSpec: QuickSpec {
             
             context("if data loaded successfully") {
                 it("should load data") {
-                    cartProductListUseCaseMock.isNeedToReturnError = false
-                    cartProductListUseCaseMock.isNeedToReturnEmptyData = false
+                    cartProductsUseCaseMock.isNeedToReturnError = false
+                    cartProductsUseCaseMock.isNeedToReturnEmptyData = false
                     viewModel.loadData()
                     
                     expect(viewModel.data.value.count) == 1
@@ -64,8 +64,8 @@ class CartViewModelSpec: QuickSpec {
             
             context("if data loaded successfully but have empty result") {
                 it("should load data and show empty view") {
-                    cartProductListUseCaseMock.isNeedToReturnError = false
-                    cartProductListUseCaseMock.isNeedToReturnEmptyData = true
+                    cartProductsUseCaseMock.isNeedToReturnError = false
+                    cartProductsUseCaseMock.isNeedToReturnEmptyData = true
                     viewModel.loadData()
                     
                     expect(viewModel.data.value.count) == 0
@@ -77,7 +77,7 @@ class CartViewModelSpec: QuickSpec {
             
             context("if error occured") {
                 it("should not load data") {
-                    cartProductListUseCaseMock.isNeedToReturnError = true
+                    cartProductsUseCaseMock.isNeedToReturnError = true
                     viewModel.loadData()
                     
                     expect(viewModel.data.value.count) == 0
@@ -171,8 +171,8 @@ class CartViewModelSpec: QuickSpec {
             context("if cart product updated successfully") {
                 it("should update cart product") {
                     changeCartProductUseCaseMock.isNeedToReturnError = false
-                    cartProductListUseCaseMock.isNeedToReturnError = false
-                    cartProductListUseCaseMock.isNeedToReturnQuantity = true
+                    cartProductsUseCaseMock.isNeedToReturnError = false
+                    cartProductsUseCaseMock.isNeedToReturnQuantity = true
                     viewModel.update(cartProduct: cartProduct, quantity: 5)
                     
                     expect(viewModel.data.value.count) == 1
@@ -186,8 +186,8 @@ class CartViewModelSpec: QuickSpec {
             context("if cart product updated but error occured during loading cart products") {
                 it("should have error") {
                     changeCartProductUseCaseMock.isNeedToReturnError = false
-                    cartProductListUseCaseMock.isNeedToReturnError = true
-                    cartProductListUseCaseMock.isNeedToReturnQuantity = false
+                    cartProductsUseCaseMock.isNeedToReturnError = true
+                    cartProductsUseCaseMock.isNeedToReturnQuantity = false
                     
                     viewModel.update(cartProduct: cartProduct, quantity: 5)
                     
@@ -202,8 +202,8 @@ class CartViewModelSpec: QuickSpec {
             context("if cart product didn't update") {
                 it("should have error") {
                     changeCartProductUseCaseMock.isNeedToReturnError = true
-                    cartProductListUseCaseMock.isNeedToReturnError = true
-                    cartProductListUseCaseMock.isNeedToReturnQuantity = false
+                    cartProductsUseCaseMock.isNeedToReturnError = true
+                    cartProductsUseCaseMock.isNeedToReturnQuantity = false
                     
                     viewModel.update(cartProduct: cartProduct, quantity: 5)
                     
@@ -260,7 +260,7 @@ class CartViewModelSpec: QuickSpec {
             }
             
             it("should load cart product items") {
-                cartProductListUseCaseMock.isNeedToReturnError = false
+                cartProductsUseCaseMock.isNeedToReturnError = false
                 viewModel.tryAgain()
                 
                 expect(viewModel.data.value.count) == 1

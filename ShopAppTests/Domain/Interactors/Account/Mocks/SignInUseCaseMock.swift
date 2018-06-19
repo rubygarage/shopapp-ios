@@ -1,5 +1,5 @@
 //
-//  LoginUseCaseMock.swift
+//  SignInUseCaseMock.swift
 //  ShopAppTests
 //
 //  Created by Radyslav Krechet on 2/23/18.
@@ -10,27 +10,19 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class LoginUseCaseMock: LoginUseCase {
+class SignInUseCaseMock: SignInUseCase {
     private let error = ContentError()
     
     var isNeedToReturnError = false
     var isGetLoginStatusStarted = false
     
-    override func signIn(email: String, password: String, _ callback: @escaping RepoCallback<Bool>) {
-        execute(callback: callback)
+    override func signIn(email: String, password: String, _ callback: @escaping RepoCallback<Void>) {
+        callback((), isNeedToReturnError ? error : nil)
     }
     
     override func isSignedIn(_ callback: @escaping RepoCallback<Bool>) {
         isGetLoginStatusStarted = true
         
-        execute(callback: callback)
-    }
-    
-    private func execute(callback: @escaping RepoCallback<Bool>) {
         isNeedToReturnError ? callback(nil, error) : callback(true, nil)
-    }
-    
-    private func execute(callback: LoginStatusCallback) {
-        callback(!isNeedToReturnError)
     }
 }

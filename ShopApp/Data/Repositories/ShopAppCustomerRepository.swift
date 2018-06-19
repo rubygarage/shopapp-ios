@@ -23,27 +23,27 @@ class ShopAppCustomerRepository: CustomerRepository {
         api.updateCustomer(firstName: firstName, lastName: lastName, phone: phone, callback: callback)
     }
     
-    func updateCustomerSettings(isAcceptMarketing: Bool, callback: @escaping RepoCallback<Customer>) {
+    func updateCustomerSettings(isAcceptMarketing: Bool, callback: @escaping RepoCallback<Void>) {
         api.updateCustomerSettings(isAcceptMarketing: isAcceptMarketing, callback: callback)
     }
     
-    func updatePassword(password: String, callback: @escaping RepoCallback<Customer>) {
+    func updatePassword(password: String, callback: @escaping RepoCallback<Void>) {
         api.updatePassword(password: password, callback: callback)
     }
     
-    func addCustomerAddress(address: Address, callback: @escaping RepoCallback<String>) {
+    func addCustomerAddress(address: Address, callback: @escaping RepoCallback<Void>) {
         api.addCustomerAddress(address: address, callback: callback)
     }
     
-    func updateCustomerAddress(address: Address, callback: @escaping RepoCallback<Bool>) {
+    func updateCustomerAddress(address: Address, callback: @escaping RepoCallback<Void>) {
         api.updateCustomerAddress(address: address, callback: callback)
     }
     
-    func setDefaultShippingAddress(id: String, callback: @escaping RepoCallback<Customer>) {
+    func setDefaultShippingAddress(id: String, callback: @escaping RepoCallback<Void>) {
         api.setDefaultShippingAddress(id: id, callback: callback)
     }
     
-    func deleteCustomerAddress(id: String, callback: @escaping RepoCallback<Bool>) {
+    func deleteCustomerAddress(id: String, callback: @escaping RepoCallback<Void>) {
         api.deleteCustomerAddress(id: id, callback: callback)
     }
 }

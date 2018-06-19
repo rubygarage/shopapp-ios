@@ -13,15 +13,15 @@ protocol CustomerRepository {
 
     func updateCustomer(firstName: String, lastName: String, phone: String, callback: @escaping RepoCallback<Customer>)
 
-    func updateCustomerSettings(isAcceptMarketing: Bool, callback: @escaping RepoCallback<Customer>)
+    func updateCustomerSettings(isAcceptMarketing: Bool, callback: @escaping RepoCallback<Void>)
 
-    func updatePassword(password: String, callback: @escaping RepoCallback<Customer>)
+    func updatePassword(password: String, callback: @escaping RepoCallback<Void>)
 
-    func addCustomerAddress(address: Address, callback: @escaping RepoCallback<String>)
+    func addCustomerAddress(address: Address, callback: @escaping RepoCallback<Void>)
 
-    func updateCustomerAddress(address: Address, callback: @escaping RepoCallback<Bool>)
+    func updateCustomerAddress(address: Address, callback: @escaping RepoCallback<Void>)
 
-    func setDefaultShippingAddress(id: String, callback: @escaping RepoCallback<Customer>)
+    func setDefaultShippingAddress(id: String, callback: @escaping RepoCallback<Void>)
 
-    func deleteCustomerAddress(id: String, callback: @escaping RepoCallback<Bool>)
+    func deleteCustomerAddress(id: String, callback: @escaping RepoCallback<Void>)
 }

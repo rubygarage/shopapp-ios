@@ -45,51 +45,49 @@ class CustomerRepositoryMock: CustomerRepository {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Customer(), nil)
     }
     
-    func updateCustomerSettings(isAcceptMarketing: Bool, callback: @escaping RepoCallback<Customer>) {
+    func updateCustomerSettings(isAcceptMarketing: Bool, callback: @escaping RepoCallback<Void>) {
         isUpdateCustomerPromoStarted = true
         
         self.isAcceptMarketing = isAcceptMarketing
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Customer(), nil)
+        isNeedToReturnError ? callback(nil, RepoError()) : callback((), nil)
     }
     
-    func updatePassword(password: String, callback: @escaping RepoCallback<Customer>) {
+    func updatePassword(password: String, callback: @escaping RepoCallback<Void>) {
         isUpdateCustomerPasswordStarted = true
         
         self.password = password
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Customer(), nil)
+        isNeedToReturnError ? callback(nil, RepoError()) : callback((), nil)
     }
     
-    func setDefaultShippingAddress(id: String, callback: @escaping RepoCallback<Customer>) {
+    func setDefaultShippingAddress(id: String, callback: @escaping RepoCallback<Void>) {
         isUpdateCustomerDefaultAddressStarted = true
-        
         addressId = id
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Customer(), nil)
+        isNeedToReturnError ? callback(nil, RepoError()) : callback((), nil)
     }
     
-    func updateCustomerAddress(address: Address, callback: @escaping RepoCallback<Bool>) {
+    func updateCustomerAddress(address: Address, callback: @escaping RepoCallback<Void>) {
         isUpdateCustomerAddressStarted = true
         
         self.address = address
         
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+        callback((), isNeedToReturnError ? RepoError() : nil)
     }
     
-    func addCustomerAddress(address: Address, callback: @escaping RepoCallback<String>) {
+    func addCustomerAddress(address: Address, callback: @escaping RepoCallback<Void>) {
         isAddCustomerAddressStarted = true
         
         self.address = address
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback("", nil)
+        isNeedToReturnError ? callback(nil, RepoError()) : callback((), nil)
     }
     
-    func deleteCustomerAddress(id: String, callback: @escaping RepoCallback<Bool>) {
+    func deleteCustomerAddress(id: String, callback: @escaping RepoCallback<Void>) {
         isDeleteCustomerAddressStarted = true
-        
         addressId = id
         
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+        callback((), isNeedToReturnError ? RepoError() : nil)
     }
 }

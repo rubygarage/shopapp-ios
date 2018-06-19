@@ -9,12 +9,12 @@
 import RxSwift
 
 class SearchViewModel: GridCollectionViewModel {
-    private let productListUseCase: ProductListUseCase
+    private let productsUseCase: ProductsUseCase
     
     var searchPhrase = Variable<String>("")
 
-    init(productListUseCase: ProductListUseCase) {
-        self.productListUseCase = productListUseCase
+    init(productsUseCase: ProductsUseCase) {
+        self.productsUseCase = productsUseCase
     }
     
     func reloadData() {
@@ -39,7 +39,7 @@ class SearchViewModel: GridCollectionViewModel {
             return
         }
         state.onNext(ViewState.make.loading(showHud: false))
-        productListUseCase.getProducts(with: paginationValue, searchPhrase: searchPhrase.value) { [weak self] (products, error) in
+        productsUseCase.getProducts(paginationValue: paginationValue, searchPhrase: searchPhrase.value) { [weak self] (products, error) in
             guard let strongSelf = self else {
                 return
             }

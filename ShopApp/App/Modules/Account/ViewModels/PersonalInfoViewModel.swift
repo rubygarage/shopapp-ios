@@ -11,7 +11,7 @@ import ShopApp_Gateway
 
 class PersonalInfoViewModel: BaseViewModel {
     private let updateCustomerUseCase: UpdateCustomerUseCase
-    private let loginUseCase: LoginUseCase
+    private let signInUseCase: SignInUseCase
     private let customerUseCase: CustomerUseCase
     
     var canChangeEmail = true
@@ -51,14 +51,14 @@ class PersonalInfoViewModel: BaseViewModel {
         }
     }
     
-    init(updateCustomerUseCase: UpdateCustomerUseCase, loginUseCase: LoginUseCase, customerUseCase: CustomerUseCase) {
+    init(updateCustomerUseCase: UpdateCustomerUseCase, signInUseCase: SignInUseCase, customerUseCase: CustomerUseCase) {
         self.updateCustomerUseCase = updateCustomerUseCase
-        self.loginUseCase = loginUseCase
+        self.signInUseCase = signInUseCase
         self.customerUseCase = customerUseCase
     }
     
     func loadCustomer() {
-        loginUseCase.isSignedIn({ [weak self] (isSignedIn, _) in
+        signInUseCase.isSignedIn({ [weak self] (isSignedIn, _) in
             guard let strongSelf = self else {
                 return
             }

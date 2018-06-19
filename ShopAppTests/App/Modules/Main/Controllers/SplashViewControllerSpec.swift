@@ -24,6 +24,7 @@ class SplashViewControllerSpec: QuickSpec {
             let repository = SetupProviderRepositoryMock()
             let setupProviderUseCaseMock = SetupProviderUseCaseMock(repository: repository)
             viewModelMock = SplashViewModelMock(setupProviderUseCase: setupProviderUseCaseMock)
+            
             viewController.viewModel = viewModelMock
             
             titleLabel = self.findView(withAccessibilityLabel: "titleLabel", in: viewController.view) as! UILabel

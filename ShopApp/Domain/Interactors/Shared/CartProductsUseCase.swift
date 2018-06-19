@@ -1,5 +1,5 @@
 //
-//  CartProductListUseCase.swift
+//  CartProductsUseCase.swift
 //  ShopApp
 //
 //  Created by Radyslav Krechet on 12/28/17.
@@ -8,7 +8,7 @@
 
 import ShopApp_Gateway
 
-class CartProductListUseCase {
+class CartProductsUseCase {
     private let repository: CartRepository
 
     init(repository: CartRepository) {

@@ -8,7 +8,7 @@
 
 import ShopApp_Gateway
 
-class CategoryListUseCase {
+class CategoriesUseCase {
     private let repository: CategoryRepository
 
     init(repository: CategoryRepository) {

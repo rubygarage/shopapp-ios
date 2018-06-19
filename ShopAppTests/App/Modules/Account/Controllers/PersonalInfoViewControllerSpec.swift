@@ -30,9 +30,9 @@ class PersonalInfoViewControllerSpec: QuickSpec {
             let authentificationRepositoryMock = AuthentificationRepositoryMock()
             let customerRepositoryMock = CustomerRepositoryMock()
             let updateCustomerUseCaseMock = UpdateCustomerUseCaseMock(repository: customerRepositoryMock)
-            let loginUseCaseMock = LoginUseCaseMock(repository: authentificationRepositoryMock)
+            let loginUseCaseMock = SignInUseCaseMock(repository: authentificationRepositoryMock)
             let customerUseCaseMock = CustomerUseCaseMock(repository: customerRepositoryMock)
-            viewModelMock = PersonalInfoViewModelMock(updateCustomerUseCase: updateCustomerUseCaseMock, loginUseCase: loginUseCaseMock, customerUseCase: customerUseCaseMock)
+            viewModelMock = PersonalInfoViewModelMock(updateCustomerUseCase: updateCustomerUseCaseMock, signInUseCase: loginUseCaseMock, customerUseCase: customerUseCaseMock)
             viewModelMock.isCustomerLoadingStarted = false
             viewController.viewModel = viewModelMock
             

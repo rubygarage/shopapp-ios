@@ -69,9 +69,9 @@ class ProductDetailsViewControllerSpec: QuickSpec {
             
             let productRepositoryMock = ProductRepositoryMock()
             let productUseCaseMock = ProductUseCaseMock(repository: productRepositoryMock)
-            let productListUseCaseMock = ProductListUseCaseMock(repository: productRepositoryMock)
+            let productListUseCaseMock = ProductsUseCaseMock(repository: productRepositoryMock)
             
-            viewModelMock = ProductDetailsViewModelMock(addCartProductUseCase: addCartProductUseCaseMock, productUseCase: productUseCaseMock, productListUseCase: productListUseCaseMock)
+            viewModelMock = ProductDetailsViewModelMock(addCartProductUseCase: addCartProductUseCaseMock, productUseCase: productUseCaseMock, productsUseCase: productListUseCaseMock)
             viewController.viewModel = viewModelMock
         }
         

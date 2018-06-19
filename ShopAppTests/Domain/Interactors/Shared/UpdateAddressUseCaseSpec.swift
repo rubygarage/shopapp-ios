@@ -33,12 +33,11 @@ class UpdateAddressUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.updateCustomerAddress(address: address) { (result, error) in
+                    useCase.updateCustomerAddress(address: address) { (_, error) in
                         expect(repositoryMock.isUpdateCustomerAddressStarted) == true
                         
                         expect(repositoryMock.address) === address
                         
-                        expect(result) == true
                         expect(error).to(beNil())
                     }
                 }
@@ -48,12 +47,11 @@ class UpdateAddressUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.updateCustomerAddress(address: address) { (result, error) in
+                    useCase.updateCustomerAddress(address: address) { (_, error) in
                         expect(repositoryMock.isUpdateCustomerAddressStarted) == true
                         
                         expect(repositoryMock.address) === address
                         
-                        expect(result) == false
                         expect(error).toNot(beNil())
                     }
                 }

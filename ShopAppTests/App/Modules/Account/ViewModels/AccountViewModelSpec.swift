@@ -18,14 +18,14 @@ class AccountViewModelSpec: QuickSpec {
         let shopRepositoryMock = ShopRepositoryMock()
         let customerRepositoryMock = CustomerRepositoryMock()
         let customerUseCaseMock = CustomerUseCaseMock(repository: customerRepositoryMock)
-        let loginUseCaseMock = LoginUseCaseMock(repository: authentificationRepositoryMock)
-        let logoutUseCaseMock = LogoutUseCaseMock(repository: authentificationRepositoryMock)
+        let signInUseCaseMock = SignInUseCaseMock(repository: authentificationRepositoryMock)
+        let signOutUseCaseMock = SignOutUseCaseMock(repository: authentificationRepositoryMock)
         let shopUseCaseMock = ShopUseCaseMock(repository: shopRepositoryMock)
         
         var viewModel: AccountViewModel!
         
         beforeEach {
-            viewModel = AccountViewModel(customerUseCase: customerUseCaseMock, loginUseCase: loginUseCaseMock, logoutUseCase: logoutUseCaseMock, shopUseCase: shopUseCaseMock)
+            viewModel = AccountViewModel(customerUseCase: customerUseCaseMock, signInUseCase: signInUseCaseMock, signOutUseCase: signOutUseCaseMock, shopUseCase: shopUseCaseMock)
         }
         
         describe("when view model initialized") {
@@ -95,7 +95,7 @@ class AccountViewModelSpec: QuickSpec {
             
             context("when log out successed") {
                 it("should have customer variable with a correct value") {
-                    logoutUseCaseMock.isNeedToReturnError = false
+                    signOutUseCaseMock.isNeedToReturnError = false
                     viewModel.logout()
                     
                     expect(viewModel.customer.value).to(beNil())
@@ -104,7 +104,7 @@ class AccountViewModelSpec: QuickSpec {
             
             context("when log out failed") {
                 it("should have customer variable with a correct value") {
-                    logoutUseCaseMock.isNeedToReturnError = true
+                    signOutUseCaseMock.isNeedToReturnError = true
                     viewModel.logout()
                     
                     expect(viewModel.customer.value).toNot(beNil())

@@ -15,12 +15,12 @@ import RxSwift
 class CategoryListViewModelSpec: QuickSpec {
     override func spec() {
         let repositoryMock = CategoryRepositoryMock()
-        let categoryListUseCaseMock = CategoryListUseCaseMock(repository: repositoryMock)
+        let categoriesUseCaseMock = CategoriesUseCaseMock(repository: repositoryMock)
         
         var viewModel: CategoryListViewModel!
         
         beforeEach {
-            viewModel = CategoryListViewModel(categoryListUseCase: categoryListUseCaseMock)
+            viewModel = CategoryListViewModel(categoriesUseCase: categoriesUseCaseMock)
         }
         
         describe("when view model initialized") {
@@ -50,8 +50,8 @@ class CategoryListViewModelSpec: QuickSpec {
             
             context("if not full page loaded") {
                 it("should present loaded items") {
-                    categoryListUseCaseMock.isCategoryCountLessThenConstant = true
-                    categoryListUseCaseMock.isNeedToReturnError = false
+                    categoriesUseCaseMock.isCategoryCountLessThenConstant = true
+                    categoriesUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
                     expect(viewModel.items.value.count) != kItemsPerPage
@@ -65,8 +65,8 @@ class CategoryListViewModelSpec: QuickSpec {
             
             context("if full page loaded") {
                 it("should present loaded items") {
-                    categoryListUseCaseMock.isCategoryCountLessThenConstant = false
-                    categoryListUseCaseMock.isNeedToReturnError = false
+                    categoriesUseCaseMock.isCategoryCountLessThenConstant = false
+                    categoriesUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
                     expect(viewModel.items.value.count) == kItemsPerPage
@@ -80,7 +80,7 @@ class CategoryListViewModelSpec: QuickSpec {
             
             context("if error did occured") {
                 it("should not present items") {
-                    categoryListUseCaseMock.isNeedToReturnError = true
+                    categoriesUseCaseMock.isNeedToReturnError = true
                     viewModel.reloadData()
                     
                     expect(viewModel.items.value.count) == 0
@@ -104,8 +104,8 @@ class CategoryListViewModelSpec: QuickSpec {
             
             context("if data loaded successfully") {
                 it("should present loaded items") {
-                    categoryListUseCaseMock.isCategoryCountLessThenConstant = false
-                    categoryListUseCaseMock.isNeedToReturnError = false
+                    categoriesUseCaseMock.isCategoryCountLessThenConstant = false
+                    categoriesUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
                     viewModel.state
@@ -126,8 +126,8 @@ class CategoryListViewModelSpec: QuickSpec {
             
             context("if error did occured") {
                 it("should load first page and have error during loading next page") {
-                    categoryListUseCaseMock.isCategoryCountLessThenConstant = false
-                    categoryListUseCaseMock.isNeedToReturnError = false
+                    categoriesUseCaseMock.isCategoryCountLessThenConstant = false
+                    categoriesUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
                     viewModel.state
@@ -136,7 +136,7 @@ class CategoryListViewModelSpec: QuickSpec {
                         })
                         .disposed(by: disposeBag)
                     
-                    categoryListUseCaseMock.isNeedToReturnError = true
+                    categoriesUseCaseMock.isNeedToReturnError = true
                     viewModel.loadNextPage()
                     
                     expect(viewModel.items.value.count) == kItemsPerPage
@@ -165,8 +165,8 @@ class CategoryListViewModelSpec: QuickSpec {
             
             context("if data loaded successfully") {
                 it("should present loaded items") {
-                    categoryListUseCaseMock.isCategoryCountLessThenConstant = true
-                    categoryListUseCaseMock.isNeedToReturnError = false
+                    categoriesUseCaseMock.isCategoryCountLessThenConstant = true
+                    categoriesUseCaseMock.isNeedToReturnError = false
                     viewModel.tryAgain()
                     
                     expect(viewModel.items.value.count) != kItemsPerPage
@@ -180,7 +180,7 @@ class CategoryListViewModelSpec: QuickSpec {
             
             context("if error did occured") {
                 it("should not present items") {
-                    categoryListUseCaseMock.isNeedToReturnError = true
+                    categoriesUseCaseMock.isNeedToReturnError = true
                     
                     viewModel.tryAgain()
                     

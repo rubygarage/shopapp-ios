@@ -11,19 +11,19 @@ import ShopApp_Gateway
 
 class SettingsViewModel: BaseViewModel {
     private var updateCustomerUseCase: UpdateCustomerUseCase
-    private let loginUseCase: LoginUseCase
+    private let signInUseCase: SignInUseCase
     private let customerUseCase: CustomerUseCase
     
     var customer = Variable<Customer?>(nil)
     
-    init(updateCustomerUseCase: UpdateCustomerUseCase, loginUseCase: LoginUseCase, customerUseCase: CustomerUseCase) {
+    init(updateCustomerUseCase: UpdateCustomerUseCase, signInUseCase: SignInUseCase, customerUseCase: CustomerUseCase) {
         self.updateCustomerUseCase = updateCustomerUseCase
-        self.loginUseCase = loginUseCase
+        self.signInUseCase = signInUseCase
         self.customerUseCase = customerUseCase
     }
     
     func loadCustomer() {
-        loginUseCase.isSignedIn { [weak self] (isSignedIn, _) in
+        signInUseCase.isSignedIn { [weak self] (isSignedIn, _) in
             guard let strongSelf = self else {
                 return
             }

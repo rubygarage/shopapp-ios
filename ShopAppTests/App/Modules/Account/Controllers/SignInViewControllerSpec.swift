@@ -25,8 +25,8 @@ class SignInViewControllerSpec: QuickSpec {
             viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.signIn) as! SignInViewController
             
             let repositoryMock = AuthentificationRepositoryMock()
-            let loginUseCaseMock = LoginUseCaseMock(repository: repositoryMock)
-            viewModelMock = SignInViewModelMock(loginUseCase: loginUseCaseMock)
+            let loginUseCaseMock = SignInUseCaseMock(repository: repositoryMock)
+            viewModelMock = SignInViewModelMock(signInUseCase: loginUseCaseMock)
             viewController.viewModel = viewModelMock
             
             emailTextFieldView = self.findView(withAccessibilityLabel: "email", in: viewController.view) as! InputTextFieldView

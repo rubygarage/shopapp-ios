@@ -1,5 +1,5 @@
 //
-//  OrderListUseCaseSpec.swift
+//  OrdersUseCaseSpec.swift
 //  ShopAppTests
 //
 //  Created by Radyslav Krechet on 4/2/18.
@@ -12,14 +12,14 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class OrderListUseCaseSpec: QuickSpec {
+class OrdersUseCaseSpec: QuickSpec {
     override func spec() {
-        var useCase: OrderListUseCase!
+        var useCase: OrdersUseCase!
         var repositoryMock: OrderRepositoryMock!
         
         beforeEach {
             repositoryMock = OrderRepositoryMock()
-            useCase = OrderListUseCase(repository: repositoryMock)
+            useCase = OrdersUseCase(repository: repositoryMock)
         }
         
         describe("when order list should be get") {
@@ -35,7 +35,7 @@ class OrderListUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getOrders(with: paginationValue) { (result, error) in
+                    useCase.getOrders(paginationValue: paginationValue) { (result, error) in
                         expect(repositoryMock.isGetOrderListStarted) == true
                         
                         expect(repositoryMock.perPage) == perPage
@@ -51,7 +51,7 @@ class OrderListUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getOrders(with: paginationValue) { (result, error) in
+                    useCase.getOrders(paginationValue: paginationValue) { (result, error) in
                         expect(repositoryMock.isGetOrderListStarted) == true
                         
                         expect(repositoryMock.perPage) == perPage

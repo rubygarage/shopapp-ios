@@ -1,5 +1,5 @@
 //
-//  ProductListUseCaseMock.swift
+//  ProductsUseCaseMock.swift
 //  ShopAppTests
 //
 //  Created by Evgeniy Antonov on 3/14/18.
@@ -10,7 +10,7 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class ProductListUseCaseMock: ProductListUseCase {
+class ProductsUseCaseMock: ProductsUseCase {
     private let error = ContentError()
     
     var isProductCountLessThenConstant = true
@@ -25,7 +25,7 @@ class ProductListUseCaseMock: ProductListUseCase {
         execute(with: [Product()], callback: callback)
     }
     
-    override func getProducts(with paginationValue: Any?, sortBy: SortType, keyword: String? = nil, excludeKeyword: String? = nil, _ callback: @escaping RepoCallback<[Product]>) {
+    override func getProducts(paginationValue: Any?, sortBy: SortType, keyword: String? = nil, excludeKeyword: String? = nil, _ callback: @escaping RepoCallback<[Product]>) {
         guard !isNeedToReturnError else {
             execute(callback: callback)
             
@@ -36,7 +36,7 @@ class ProductListUseCaseMock: ProductListUseCase {
         execute(with: products, callback: callback)
     }
     
-    override func getProducts(with paginationValue: Any?, searchPhrase: String, _ callback: @escaping RepoCallback<[Product]>) {
+    override func getProducts(paginationValue: Any?, searchPhrase: String, _ callback: @escaping RepoCallback<[Product]>) {
         guard !isNeedToReturnError && !isNeedToReturnEmptyProductList else {
             execute(callback: callback)
             

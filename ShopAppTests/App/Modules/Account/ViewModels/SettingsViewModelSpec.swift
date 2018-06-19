@@ -17,13 +17,13 @@ class SettingsViewModelSpec: QuickSpec {
         let authentificationRepositoryMock = AuthentificationRepositoryMock()
         let customerRepositoryMock = CustomerRepositoryMock()
         let updateCustomerUseCaseMock = UpdateCustomerUseCaseMock(repository: customerRepositoryMock)
-        let loginUseCaseMock = LoginUseCaseMock(repository: authentificationRepositoryMock)
+        let signInUseCaseMock = SignInUseCaseMock(repository: authentificationRepositoryMock)
         let customerUseCaseMock = CustomerUseCaseMock(repository: customerRepositoryMock)
         
         var viewModel: SettingsViewModel!
         
         beforeEach {
-            viewModel = SettingsViewModel(updateCustomerUseCase: updateCustomerUseCaseMock, loginUseCase: loginUseCaseMock, customerUseCase: customerUseCaseMock)
+            viewModel = SettingsViewModel(updateCustomerUseCase: updateCustomerUseCaseMock, signInUseCase: signInUseCaseMock, customerUseCase: customerUseCaseMock)
         }
         
         describe("when view model initialized") {

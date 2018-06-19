@@ -25,10 +25,10 @@ class CartViewControllerSpec: QuickSpec {
             viewController = UIStoryboard(name: StoryboardNames.cart, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.cart) as! CartViewController
             
             let repositoryMock = CartRepositoryMock()
-            let cartProductListUseCaseMock = CartProductListUseCaseMock(repository: repositoryMock)
+            let cartProductsUseCaseMock = CartProductsUseCaseMock(repository: repositoryMock)
             let deleteCartProductUseCaseMock = DeleteCartProductUseCaseMock(repository: repositoryMock)
             let changeCartProductUseCaseMock = ChangeCartProductUseCaseMock(repository: repositoryMock)
-            viewModelMock = CartViewModelMock(cartProductListUseCase: cartProductListUseCaseMock, deleteCartProductUseCase: deleteCartProductUseCaseMock, changeCartProductUseCase: changeCartProductUseCaseMock)
+            viewModelMock = CartViewModelMock(cartProductsUseCase: cartProductsUseCaseMock, deleteCartProductUseCase: deleteCartProductUseCaseMock, changeCartProductUseCase: changeCartProductUseCaseMock)
             viewController.viewModel = viewModelMock
             
             tableProvider = CartTableProvider()

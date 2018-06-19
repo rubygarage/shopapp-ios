@@ -1,5 +1,5 @@
 //
-//  ArticleListUseCaseMock.swift
+//  ArticlesUseCaseMock.swift
 //  ShopAppTests
 //
 //  Created by Radyslav Krechet on 3/12/18.
@@ -10,13 +10,13 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class ArticleListUseCaseMock: ArticleListUseCase {
+class ArticlesUseCaseMock: ArticlesUseCase {
     private let error = ContentError()
     
     var isArticleCountLessThenConstant = true
     var isNeedToReturnError = false
 
-    override func getArticles(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Article]>) {
+    override func getArticles(paginationValue: Any?, _ callback: @escaping RepoCallback<[Article]>) {
         execute(with: callback)
     }
     

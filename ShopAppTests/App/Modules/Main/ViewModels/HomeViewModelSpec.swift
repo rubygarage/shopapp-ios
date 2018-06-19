@@ -16,15 +16,15 @@ import ShopApp_Gateway
 class HomeViewModelSpec: QuickSpec {
     override func spec() {
         var viewModel: HomeViewModel!
-        var articleListUseCaseMock: ArticleListUseCaseMock!
-        var productListUseCaseMock: ProductListUseCaseMock!
+        var articlesUseCaseMock: ArticlesUseCaseMock!
+        var productsUseCaseMock: ProductsUseCaseMock!
         
         beforeEach {
             let articleRepositoryMock = ArticleRepositoryMock()
-            articleListUseCaseMock = ArticleListUseCaseMock(repository: articleRepositoryMock)
+            articlesUseCaseMock = ArticlesUseCaseMock(repository: articleRepositoryMock)
             let productRepositoryMock = ProductRepositoryMock()
-            productListUseCaseMock = ProductListUseCaseMock(repository: productRepositoryMock)
-            viewModel = HomeViewModel(articleListUseCase: articleListUseCaseMock, productListUseCase: productListUseCaseMock)
+            productsUseCaseMock = ProductsUseCaseMock(repository: productRepositoryMock)
+            viewModel = HomeViewModel(articlesUseCase: articlesUseCaseMock, productsUseCase: productsUseCaseMock)
         }
         
         describe("when view initialized") {
@@ -54,9 +54,9 @@ class HomeViewModelSpec: QuickSpec {
             
             context("if all data loaded successfully") {
                 it("should load data successfully") {
-                    productListUseCaseMock.isNeedToReturnError = false
-                    articleListUseCaseMock.isNeedToReturnError = false
-                    articleListUseCaseMock.isArticleCountLessThenConstant = false
+                    productsUseCaseMock.isNeedToReturnError = false
+                    articlesUseCaseMock.isNeedToReturnError = false
+                    articlesUseCaseMock.isArticleCountLessThenConstant = false
                     viewModel.loadData()
                     
                     expect(viewModel.data.value.latestProducts.count) == 1
@@ -71,8 +71,8 @@ class HomeViewModelSpec: QuickSpec {
             
             context("if all data loaded with error") {
                 it("shouldn't load data") {
-                    productListUseCaseMock.isNeedToReturnError = true
-                    articleListUseCaseMock.isNeedToReturnError = true
+                    productsUseCaseMock.isNeedToReturnError = true
+                    articlesUseCaseMock.isNeedToReturnError = true
                     viewModel.loadData()
                     
                     expect(viewModel.data.value.latestProducts.count) == 0
@@ -87,8 +87,8 @@ class HomeViewModelSpec: QuickSpec {
             
             context("if products loaded successfully but articles loaded with error") {
                 it("shouldn't load data") {
-                    productListUseCaseMock.isNeedToReturnError = false
-                    articleListUseCaseMock.isNeedToReturnError = true
+                    productsUseCaseMock.isNeedToReturnError = false
+                    articlesUseCaseMock.isNeedToReturnError = true
                     viewModel.loadData()
                     
                     expect(viewModel.data.value.latestProducts.count) == 0
@@ -103,8 +103,8 @@ class HomeViewModelSpec: QuickSpec {
             
             context("if articles loaded successfully but products loaded with error") {
                 it("shouldn't load data") {
-                    productListUseCaseMock.isNeedToReturnError = true
-                    articleListUseCaseMock.isNeedToReturnError = false
+                    productsUseCaseMock.isNeedToReturnError = true
+                    articlesUseCaseMock.isNeedToReturnError = false
                     viewModel.loadData()
                     
                     expect(viewModel.data.value.latestProducts.count) == 0
@@ -134,9 +134,9 @@ class HomeViewModelSpec: QuickSpec {
             }
             
             it("should load data") {
-                productListUseCaseMock.isNeedToReturnError = false
-                articleListUseCaseMock.isNeedToReturnError = false
-                articleListUseCaseMock.isArticleCountLessThenConstant = true
+                productsUseCaseMock.isNeedToReturnError = false
+                articlesUseCaseMock.isNeedToReturnError = false
+                articlesUseCaseMock.isArticleCountLessThenConstant = true
                 viewModel.loadData()
                 
                 expect(viewModel.data.value.latestProducts.count) == 1

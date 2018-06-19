@@ -33,7 +33,7 @@ class OrderUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getOrder(with: id) { (result, error) in
+                    useCase.getOrder(id: id) { (result, error) in
                         expect(repositoryMock.isGetOrderStarted) == true
                         
                         expect(repositoryMock.id) == id
@@ -48,7 +48,7 @@ class OrderUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.getOrder(with: id) { (result, error) in
+                    useCase.getOrder(id: id) { (result, error) in
                         expect(repositoryMock.isGetOrderStarted) == true
                         
                         expect(repositoryMock.id) == id

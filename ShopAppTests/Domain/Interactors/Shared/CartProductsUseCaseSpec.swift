@@ -1,5 +1,5 @@
 //
-//  ArticleUseCaseSpec.swift
+//  CartProductsUseCaseSpec.swift
 //  ShopAppTests
 //
 //  Created by Radyslav Krechet on 4/3/18.
@@ -12,31 +12,23 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class ArticleUseCaseSpec: QuickSpec {
+class CartProductsUseCaseSpec: QuickSpec {
     override func spec() {
-        var useCase: ArticleUseCase!
-        var repositoryMock: ArticleRepositoryMock!
+        var useCase: CartProductsUseCase!
+        var repositoryMock: CartRepositoryMock!
         
         beforeEach {
-            repositoryMock = ArticleRepositoryMock()
-            useCase = ArticleUseCase(repository: repositoryMock)
+            repositoryMock = CartRepositoryMock()
+            useCase = CartProductsUseCase(repository: repositoryMock)
         }
         
-        describe("when article should be get") {
-            var id: String!
-            
-            beforeEach {
-                id = "id"
-            }
-            
+        describe("when product list should be get from cart") {
             context("if callback has result") {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getArticle(id: id) { (result, error) in
-                        expect(repositoryMock.isGetArticleStarted) == true
-                        
-                        expect(repositoryMock.id) == id
+                    useCase.getCartProducts() { (result, error) in
+                        expect(repositoryMock.isGetCartProductListStarted) == true
                         
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -48,10 +40,8 @@ class ArticleUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.getArticle(id: id) { (result, error) in
-                        expect(repositoryMock.isGetArticleStarted) == true
-                        
-                        expect(repositoryMock.id) == id
+                    useCase.getCartProducts() { (result, error) in
+                        expect(repositoryMock.isGetCartProductListStarted) == true
                         
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())

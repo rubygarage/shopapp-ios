@@ -18,13 +18,13 @@ class PersonalInfoViewModelSpec: QuickSpec {
         let authentificationRepositoryMock = AuthentificationRepositoryMock()
         let customerRepositoryMock = CustomerRepositoryMock()
         let updateCustomerUseCaseMock = UpdateCustomerUseCaseMock(repository: customerRepositoryMock)
-        let loginUseCaseMock = LoginUseCaseMock(repository: authentificationRepositoryMock)
+        let signInUseCaseMock = SignInUseCaseMock(repository: authentificationRepositoryMock)
         let customerUseCaseMock = CustomerUseCaseMock(repository: customerRepositoryMock)
         
         var viewModel: PersonalInfoViewModel!
         
         beforeEach {
-            viewModel = PersonalInfoViewModel(updateCustomerUseCase: updateCustomerUseCaseMock, loginUseCase: loginUseCaseMock, customerUseCase: customerUseCaseMock)
+            viewModel = PersonalInfoViewModel(updateCustomerUseCase: updateCustomerUseCaseMock, signInUseCase: signInUseCaseMock, customerUseCase: customerUseCaseMock)
         }
         
         describe("when view model initialized") {

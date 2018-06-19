@@ -156,10 +156,8 @@ class BaseAddressListViewModelSpec: QuickSpec {
                 it("should update address") {
                     updateDefaultAddressUseCaseMock.isNeedToReturnError = false
                     viewModel.updateCustomerDefaultAddress(with: Address())
-                    
-                    expect(viewModel.customerDefaultAddress.value?.id) == "Customer default address id"
-                    expect(viewModel.customerAddresses.value.count) == 1
-                    expect(viewModel.customerAddresses.value.first?.id) == "Customer address id"
+
+                    expect(viewModel.customerAddresses.value.count) == 0
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: true)
                     expect(states.last) == ViewState.content

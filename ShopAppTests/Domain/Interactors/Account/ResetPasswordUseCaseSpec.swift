@@ -33,7 +33,7 @@ class ResetPasswordUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.resetPassword(with: email) { (result, error) in
+                    useCase.resetPassword(email: email) { (result, error) in
                         expect(repositoryMock.isResetPasswordStarted) == true
                         
                         expect(repositoryMock.email) == email
@@ -48,7 +48,7 @@ class ResetPasswordUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.resetPassword(with: email) { (result, error) in
+                    useCase.resetPassword(email: email) { (result, error) in
                         expect(repositoryMock.isResetPasswordStarted) == true
                         
                         expect(repositoryMock.email) == email

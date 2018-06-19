@@ -72,11 +72,11 @@ class MainAssembly: Assembly {
         }
 
         container.register(ArticleListViewModel.self) { r in
-            return ArticleListViewModel(articleListUseCase: r.resolve(ArticleListUseCase.self)!)
+            return ArticleListViewModel(articlesUseCase: r.resolve(ArticlesUseCase.self)!)
         }
 
         container.register(CategoryListViewModel.self) { r in
-            return CategoryListViewModel(categoryListUseCase: r.resolve(CategoryListUseCase.self)!)
+            return CategoryListViewModel(categoriesUseCase: r.resolve(CategoriesUseCase.self)!)
         }
 
         container.register(CategoryViewModel.self) { r in
@@ -84,26 +84,26 @@ class MainAssembly: Assembly {
         }
 
         container.register(HomeViewModel.self) { r in
-            return HomeViewModel(articleListUseCase: r.resolve(ArticleListUseCase.self)!,
-                                 productListUseCase: r.resolve(ProductListUseCase.self)!)
+            return HomeViewModel(articlesUseCase: r.resolve(ArticlesUseCase.self)!,
+                                 productsUseCase: r.resolve(ProductsUseCase.self)!)
         }
 
         container.register(ProductDetailsViewModel.self) { r in
             return ProductDetailsViewModel(addCartProductUseCase: r.resolve(AddCartProductUseCase.self)!,
                                            productUseCase: r.resolve(ProductUseCase.self)!,
-                                           productListUseCase: r.resolve(ProductListUseCase.self)!)
+                                           productsUseCase: r.resolve(ProductsUseCase.self)!)
         }
 
         container.register(ProductListViewModel.self) { r in
-            return ProductListViewModel(productListUseCase: r.resolve(ProductListUseCase.self)!)
+            return ProductListViewModel(productsUseCase: r.resolve(ProductsUseCase.self)!)
         }
 
         container.register(SearchViewModel.self) { r in
-            return SearchViewModel(productListUseCase: r.resolve(ProductListUseCase.self)!)
+            return SearchViewModel(productsUseCase: r.resolve(ProductsUseCase.self)!)
         }
 
         container.register(CartButtonViewModel.self) { r in
-            return CartButtonViewModel(cartProductListUseCase: r.resolve(CartProductListUseCase.self)!)
+            return CartButtonViewModel(cartProductsUseCase: r.resolve(CartProductsUseCase.self)!)
         }
         
         container.register(SplashViewModel.self) { r in

@@ -9,7 +9,7 @@
 import RxSwift
 
 class SignInViewModel: BaseViewModel {
-    private let loginUseCase: LoginUseCase
+    private let signInUseCase: SignInUseCase
     
     var emailText = Variable<String>("")
     var passwordText = Variable<String>("")
@@ -36,8 +36,8 @@ class SignInViewModel: BaseViewModel {
         }
     }
 
-    init(loginUseCase: LoginUseCase) {
-        self.loginUseCase = loginUseCase
+    init(signInUseCase: SignInUseCase) {
+        self.signInUseCase = signInUseCase
     }
     
     private func checkCredentials() {
@@ -61,15 +61,15 @@ class SignInViewModel: BaseViewModel {
     
     private func signIn() {
         state.onNext(ViewState.make.loading(isTranslucent: true))
-        loginUseCase.signIn(email: emailText.value, password: passwordText.value) { [weak self] (success, error) in
+        signInUseCase.signIn(email: emailText.value, password: passwordText.value) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if let success = success {
+            } else {
                 strongSelf.state.onNext(.content)
-                strongSelf.signInSuccess.onNext(success)
+                strongSelf.signInSuccess.onNext(true)
             }
         }
     }

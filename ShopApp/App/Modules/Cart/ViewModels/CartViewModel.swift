@@ -10,14 +10,14 @@ import RxSwift
 import ShopApp_Gateway
 
 class CartViewModel: BaseViewModel {
-    private let cartProductListUseCase: CartProductListUseCase
+    private let cartProductsUseCase: CartProductsUseCase
     private let deleteCartProductUseCase: DeleteCartProductUseCase
     private let changeCartProductUseCase: ChangeCartProductUseCase
     
     var data = Variable<[CartProduct]>([])
 
-    init(cartProductListUseCase: CartProductListUseCase, deleteCartProductUseCase: DeleteCartProductUseCase, changeCartProductUseCase: ChangeCartProductUseCase) {
-        self.cartProductListUseCase = cartProductListUseCase
+    init(cartProductsUseCase: CartProductsUseCase, deleteCartProductUseCase: DeleteCartProductUseCase, changeCartProductUseCase: ChangeCartProductUseCase) {
+        self.cartProductsUseCase = cartProductsUseCase
         self.deleteCartProductUseCase = deleteCartProductUseCase
         self.changeCartProductUseCase = changeCartProductUseCase
     }
@@ -26,7 +26,7 @@ class CartViewModel: BaseViewModel {
         if showLoading {
             state.onNext(ViewState.make.loading())
         }
-        cartProductListUseCase.getCartProducts { [weak self] (cartProducts, error) in
+        cartProductsUseCase.getCartProducts { [weak self] (cartProducts, error) in
             guard let strongSelf = self else {
                 return
             }

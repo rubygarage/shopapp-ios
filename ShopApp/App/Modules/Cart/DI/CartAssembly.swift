@@ -21,7 +21,7 @@ class CartAssembly: Assembly {
         // MARK: - View models
 
         container.register(CartViewModel.self) { r in
-            return CartViewModel(cartProductListUseCase: r.resolve(CartProductListUseCase.self)!,
+            return CartViewModel(cartProductsUseCase: r.resolve(CartProductsUseCase.self)!,
                                  deleteCartProductUseCase: r.resolve(DeleteCartProductUseCase.self)!,
                                  changeCartProductUseCase: r.resolve(ChangeCartProductUseCase.self)!)
         }

@@ -16,12 +16,12 @@ import ShopApp_Gateway
 class ProductListViewModelSpec: QuickSpec {
     override func spec() {
         var viewModel: ProductListViewModel!
-        var productListUseCase: ProductListUseCaseMock!
+        var productsUseCase: ProductsUseCaseMock!
         
         beforeEach {
             let productRepositoryMock = ProductRepositoryMock()
-            productListUseCase = ProductListUseCaseMock(repository: productRepositoryMock)
-            viewModel = ProductListViewModel(productListUseCase: productListUseCase)
+            productsUseCase = ProductsUseCaseMock(repository: productRepositoryMock)
+            viewModel = ProductListViewModel(productsUseCase: productsUseCase)
         }
         
         describe("when view model initialized") {
@@ -55,7 +55,7 @@ class ProductListViewModelSpec: QuickSpec {
             
             context("if data loaded successfully") {
                 beforeEach {
-                    productListUseCase.isNeedToReturnError = false
+                    productsUseCase.isNeedToReturnError = false
                 }
                 
                 it("should load data") {
@@ -72,7 +72,7 @@ class ProductListViewModelSpec: QuickSpec {
             
             context("if error did occured") {
                 beforeEach {
-                    productListUseCase.isNeedToReturnError = true
+                    productsUseCase.isNeedToReturnError = true
                 }
                 
                 it("shouldn't load data") {
@@ -111,7 +111,7 @@ class ProductListViewModelSpec: QuickSpec {
             
             context("if data loaded successfully") {
                 beforeEach {
-                    productListUseCase.isNeedToReturnError = false
+                    productsUseCase.isNeedToReturnError = false
                 }
                 
                 it("should load data") {
@@ -128,7 +128,7 @@ class ProductListViewModelSpec: QuickSpec {
             
             context("if error did occured") {
                 beforeEach {
-                    productListUseCase.isNeedToReturnError = true
+                    productsUseCase.isNeedToReturnError = true
                 }
                 
                 it("shouldn't load data") {
@@ -162,7 +162,7 @@ class ProductListViewModelSpec: QuickSpec {
             }
             
             it("should load data") {
-                productListUseCase.isNeedToReturnError = false
+                productsUseCase.isNeedToReturnError = false
                 viewModel.tryAgain()
                 
                 expect(viewModel.products.value.isEmpty) == false

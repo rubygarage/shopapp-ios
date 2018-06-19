@@ -1,5 +1,5 @@
 //
-//  ArticleUseCase.swift
+//  ArticlesUseCase.swift
 //  ShopApp
 //
 //  Created by Radyslav Krechet on 12/28/17.
@@ -8,14 +8,14 @@
 
 import ShopApp_Gateway
 
-class ArticleListUseCase {
+class ArticlesUseCase {
     private let repository: ArticleRepository
 
     init(repository: ArticleRepository) {
         self.repository = repository
     }
 
-    func getArticles(with paginationValue: Any?, _ callback: @escaping RepoCallback<[Article]>) {
-        repository.getArticles(perPage: kItemsPerPage, paginationValue: paginationValue, sortBy: SortType.createdAt, callback: callback)
+    func getArticles(paginationValue: Any?, _ callback: @escaping RepoCallback<[Article]>) {
+        repository.getArticles(perPage: kItemsPerPage, paginationValue: paginationValue, sortBy: .createdAt, callback: callback)
     }
 }

@@ -23,7 +23,7 @@ class AuthentificationRepositoryMock: AuthentificationRepository {
     var password: String?
     var phone: String?
     
-    func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, callback: @escaping RepoCallback<Bool>) {
+    func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, callback: @escaping RepoCallback<Void>) {
         isSignUpStarted = true
         
         self.email = email
@@ -32,22 +32,22 @@ class AuthentificationRepositoryMock: AuthentificationRepository {
         self.password = password
         self.phone = phone
         
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+        callback((), isNeedToReturnError ? RepoError() : nil)
     }
     
-    func signIn(email: String, password: String, callback: @escaping RepoCallback<Bool>) {
+    func signIn(email: String, password: String, callback: @escaping RepoCallback<Void>) {
         isLoginStarted = true
         
         self.email = email
         self.password = password
         
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+        callback((), isNeedToReturnError ? RepoError() : nil)
     }
     
-    func signOut(callback: @escaping RepoCallback<Bool>) {
+    func signOut(callback: @escaping RepoCallback<Void>) {
         isLogoutStarted = true
         
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+        callback((), isNeedToReturnError ? RepoError() : nil)
     }
     
     func isSignedIn(callback: @escaping RepoCallback<Bool>) {
@@ -56,11 +56,11 @@ class AuthentificationRepositoryMock: AuthentificationRepository {
         return isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
-    func resetPassword(email: String, callback: @escaping RepoCallback<Bool>) {
+    func resetPassword(email: String, callback: @escaping RepoCallback<Void>) {
         isResetPasswordStarted = true
         
         self.email = email
         
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+        callback((), isNeedToReturnError ? RepoError() : nil)
     }
 }

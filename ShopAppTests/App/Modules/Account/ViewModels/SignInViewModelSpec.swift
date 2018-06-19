@@ -15,12 +15,12 @@ import RxSwift
 class SignInViewModelSpec: QuickSpec {
     override func spec() {
         let repositoryMock = AuthentificationRepositoryMock()
-        let loginUseCaseMock = LoginUseCaseMock(repository: repositoryMock)
+        let signInUseCaseMock = SignInUseCaseMock(repository: repositoryMock)
         
         var viewModel: SignInViewModel!
         
         beforeEach {
-            viewModel = SignInViewModel(loginUseCase: loginUseCaseMock)
+            viewModel = SignInViewModel(signInUseCase: signInUseCaseMock)
         }
         
         describe("when view model initialized") {
@@ -121,7 +121,7 @@ class SignInViewModelSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
-                        loginUseCaseMock.isNeedToReturnError = false
+                        signInUseCaseMock.isNeedToReturnError = false
                         viewModel.loginPressed.onNext()
                         
                         expect(states.count) == 2
@@ -132,7 +132,7 @@ class SignInViewModelSpec: QuickSpec {
                 
                 context("but sign in failed") {
                     it("needs to show error") {
-                        loginUseCaseMock.isNeedToReturnError = true
+                        signInUseCaseMock.isNeedToReturnError = true
                         viewModel.loginPressed.onNext()
                         
                         expect(states.count) == 2
@@ -146,7 +146,7 @@ class SignInViewModelSpec: QuickSpec {
         describe("when try again and it have valid email and password texts and success sign in") {
             it("needs to dismiss view controller and show success toast") {
                 let disposeBag = DisposeBag()
-                loginUseCaseMock.isNeedToReturnError = false
+                signInUseCaseMock.isNeedToReturnError = false
                 viewModel.emailText.value = "user@mail.com"
                 viewModel.passwordText.value = "password"
                 

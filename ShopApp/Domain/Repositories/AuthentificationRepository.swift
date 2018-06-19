@@ -9,13 +9,13 @@
 import ShopApp_Gateway
 
 protocol AuthentificationRepository {
-    func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, callback: @escaping RepoCallback<Bool>)
+    func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, callback: @escaping RepoCallback<Void>)
 
-    func signIn(email: String, password: String, callback: @escaping RepoCallback<Bool>)
+    func signIn(email: String, password: String, callback: @escaping RepoCallback<Void>)
 
-    func signOut(callback: @escaping RepoCallback<Bool>)
+    func signOut(callback: @escaping RepoCallback<Void>)
 
     func isSignedIn(callback: @escaping RepoCallback<Bool>)
 
-    func resetPassword(email: String, callback: @escaping RepoCallback<Bool>)
+    func resetPassword(email: String, callback: @escaping RepoCallback<Void>)
 }

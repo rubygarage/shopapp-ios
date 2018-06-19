@@ -22,10 +22,10 @@ class HomeViewControllerSpec: QuickSpec {
             viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.home) as! HomeViewController
             
             let articleRepositoryMock = ArticleRepositoryMock()
-            let articleListUseCaseMock = ArticleListUseCaseMock(repository: articleRepositoryMock)
+            let articleListUseCaseMock = ArticlesUseCaseMock(repository: articleRepositoryMock)
             let productRepositoryMock = ProductRepositoryMock()
-            let productListUseCaseMock = ProductListUseCaseMock(repository: productRepositoryMock)
-            viewModelMock = HomeViewModelMock(articleListUseCase: articleListUseCaseMock, productListUseCase: productListUseCaseMock)
+            let productListUseCaseMock = ProductsUseCaseMock(repository: productRepositoryMock)
+            viewModelMock = HomeViewModelMock(articlesUseCase: articleListUseCaseMock, productsUseCase: productListUseCaseMock)
             viewController.viewModel = viewModelMock
             
             tableProvider = HomeTableProvider()

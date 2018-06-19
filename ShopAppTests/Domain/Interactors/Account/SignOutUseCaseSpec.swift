@@ -1,8 +1,8 @@
 //
-//  CartProductListUseCaseSpec.swift
+//  SignOutUseCaseSpec.swift
 //  ShopAppTests
 //
-//  Created by Radyslav Krechet on 4/3/18.
+//  Created by Radyslav Krechet on 4/2/18.
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
@@ -12,25 +12,24 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class CartProductListUseCaseSpec: QuickSpec {
+class SignOutUseCaseSpec: QuickSpec {
     override func spec() {
-        var useCase: CartProductListUseCase!
-        var repositoryMock: CartRepositoryMock!
+        var useCase: SignOutUseCase!
+        var repositoryMock: AuthentificationRepositoryMock!
         
         beforeEach {
-            repositoryMock = CartRepositoryMock()
-            useCase = CartProductListUseCase(repository: repositoryMock)
+            repositoryMock = AuthentificationRepositoryMock()
+            useCase = SignOutUseCase(repository: repositoryMock)
         }
         
-        describe("when product list should be get from cart") {
+        describe("when user should be logout") {
             context("if callback has result") {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getCartProducts() { (result, error) in
-                        expect(repositoryMock.isGetCartProductListStarted) == true
+                    useCase.signOut() { (_, error) in
+                        expect(repositoryMock.isLogoutStarted) == true
                         
-                        expect(result).toNot(beNil())
                         expect(error).to(beNil())
                     }
                 }
@@ -40,10 +39,9 @@ class CartProductListUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.getCartProducts() { (result, error) in
-                        expect(repositoryMock.isGetCartProductListStarted) == true
+                    useCase.signOut() { (_, error) in
+                        expect(repositoryMock.isLogoutStarted) == true
                         
-                        expect(result).to(beNil())
                         expect(error).toNot(beNil())
                     }
                 }

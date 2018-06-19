@@ -1,8 +1,8 @@
 //
-//  DeleteAddressUseCaseMock.swift
+//  SignOutUseCaseMock.swift
 //  ShopAppTests
 //
-//  Created by Evgeniy Antonov on 3/1/18.
+//  Created by Radyslav Krechet on 3/5/18.
 //  Copyright © 2018 RubyGarage. All rights reserved.
 //
 
@@ -10,10 +10,10 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class DeleteAddressUseCaseMock: DeleteAddressUseCase {
+class SignOutUseCaseMock: SignOutUseCase {
     var isNeedToReturnError = false
     
-    override func deleteCustomerAddress(id: String, callback: @escaping RepoCallback<Void>) {
+    override func signOut(_ callback: @escaping RepoCallback<Void>) {
         callback((), isNeedToReturnError ? RepoError() : nil)
     }
 }

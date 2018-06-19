@@ -21,8 +21,8 @@ class ProductListViewViewControllerSpec: QuickSpec {
             viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.productList) as! ProductListViewController
             
             let productRepositoryMock = ProductRepositoryMock()
-            let productListUseCase = ProductListUseCaseMock(repository: productRepositoryMock)
-            viewModelMock = ProductListViewModelMock(productListUseCase: productListUseCase)
+            let productListUseCase = ProductsUseCaseMock(repository: productRepositoryMock)
+            viewModelMock = ProductListViewModelMock(productsUseCase: productListUseCase)
             viewController.viewModel = viewModelMock
             
             collectionView = self.findView(withAccessibilityLabel: "collectionView", in: viewController.view) as! UICollectionView            

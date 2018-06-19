@@ -13,11 +13,11 @@ import ShopApp_Gateway
 class ShopUseCaseMock: ShopUseCase {
     private let shop = Shop()
     
-    override func getShop(_ callback: @escaping (_ shop: Shop) -> Void) {
+    override func getShop(_ callback: @escaping RepoCallback<Shop>) {
         execute(callback: callback)
     }
     
-    private func execute(callback: @escaping (_ shop: Shop) -> Void) {
+    private func execute(callback: @escaping RepoCallback<Shop>) {
         shop.privacyPolicy = Policy()
         shop.privacyPolicy?.body = "body"
         shop.refundPolicy = Policy()
@@ -25,6 +25,6 @@ class ShopUseCaseMock: ShopUseCase {
         shop.termsOfService = Policy()
         shop.termsOfService?.body = "body"
         
-        callback(shop)
+        callback(shop, nil)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  LoginUseCaseSpec.swift
+//  SignInUseCaseSpec.swift
 //  ShopAppTests
 //
 //  Created by Radyslav Krechet on 4/2/18.
@@ -12,14 +12,14 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class LoginUseCaseSpec: QuickSpec {
+class SignInUseCaseSpec: QuickSpec {
     override func spec() {
-        var useCase: LoginUseCase!
+        var useCase: SignInUseCase!
         var repositoryMock: AuthentificationRepositoryMock!
         
         beforeEach {
             repositoryMock = AuthentificationRepositoryMock()
-            useCase = LoginUseCase(repository: repositoryMock)
+            useCase = SignInUseCase(repository: repositoryMock)
         }
         
         describe("when user should be login") {
@@ -35,13 +35,12 @@ class LoginUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.signIn(email: email, password: password) { (result, error) in
+                    useCase.signIn(email: email, password: password) { (_, error) in
                         expect(repositoryMock.isLoginStarted) == true
                         
                         expect(repositoryMock.email) == email
                         expect(repositoryMock.password) == password
                         
-                        expect(result) == true
                         expect(error).to(beNil())
                     }
                 }
@@ -51,13 +50,12 @@ class LoginUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.signIn(email: email, password: password) { (result, error) in
+                    useCase.signIn(email: email, password: password) { (_, error) in
                         expect(repositoryMock.isLoginStarted) == true
                         
                         expect(repositoryMock.email) == email
                         expect(repositoryMock.password) == password
                         
-                        expect(result) == false
                         expect(error).toNot(beNil())
                     }
                 }

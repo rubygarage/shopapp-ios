@@ -1,5 +1,5 @@
 //
-//  CartProductListUseCaseMock.swift
+//  CartProductsUseCaseMock.swift
 //  ShopAppTests
 //
 //  Created by Evgeniy Antonov on 3/7/18.
@@ -10,7 +10,7 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class CartProductListUseCaseMock: CartProductListUseCase {
+class CartProductsUseCaseMock: CartProductsUseCase {
     var isNeedToReturnError = false
     var isNeedToReturnEmptyData = false
     var isNeedToReturnQuantity = false

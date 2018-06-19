@@ -18,7 +18,7 @@ class ArticleUseCaseMock: ArticleUseCase {
     
     var isNeedToReturnError = false
     
-    override func getArticle(with id: String, _ callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>) {
+    override func getArticle(id: String, _ callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>) {
         execute(callback: callback)
     }
     

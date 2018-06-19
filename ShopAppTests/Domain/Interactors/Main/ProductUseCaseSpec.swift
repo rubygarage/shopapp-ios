@@ -33,7 +33,7 @@ class ProductUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getProduct(with: id) { (result, error) in
+                    useCase.getProduct(id: id) { (result, error) in
                         expect(repositoryMock.isGetProductStarted) == true
                         
                         expect(repositoryMock.id) == id
@@ -48,7 +48,7 @@ class ProductUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.getProduct(with: id) { (result, error) in
+                    useCase.getProduct(id: id) { (result, error) in
                         expect(repositoryMock.isGetProductStarted) == true
                         
                         expect(repositoryMock.id) == id

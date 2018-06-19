@@ -16,19 +16,19 @@ class UpdateCustomerUseCaseMock: UpdateCustomerUseCase {
     
     var isNeedToReturnError = false
     
-    override func updateCustomerSettings(isAcceptMarketing: Bool, _ callback: @escaping RepoCallback<Customer>) {
+    override func updateCustomerSettings(isAcceptMarketing: Bool, _ callback: @escaping RepoCallback<Void>) {
         execute(callback: callback)
     }
     
     override func updateCustomer(firstName: String, lastName: String, phone: String, _ callback: @escaping RepoCallback<Customer>) {
-        execute(callback: callback)
-    }
-    
-    override func updatePassword(password: String, _ callback: @escaping RepoCallback<Customer>) {
-        execute(callback: callback)
-    }
-    
-    private func execute(callback: @escaping RepoCallback<Customer>) {
         isNeedToReturnError ? callback(nil, error) : callback(customer, nil)
+    }
+    
+    override func updatePassword(password: String, _ callback: @escaping RepoCallback<Void>) {
+        execute(callback: callback)
+    }
+    
+    private func execute(callback: @escaping RepoCallback<Void>) {
+        callback((), isNeedToReturnError ? error : nil)
     }
 }

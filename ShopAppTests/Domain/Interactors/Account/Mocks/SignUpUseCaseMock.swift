@@ -15,11 +15,11 @@ class SignUpUseCaseMock: SignUpUseCase {
     
     var isNeedToReturnError = false
     
-    override func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, _ callback: @escaping RepoCallback<Bool>) {
+    override func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, _ callback: @escaping RepoCallback<Void>) {
         execute(callback: callback)
     }
     
-    private func execute(callback: @escaping RepoCallback<Bool>) {
-        isNeedToReturnError ? callback(nil, error) : callback(true, nil)
+    private func execute(callback: @escaping RepoCallback<Void>) {
+        callback((), isNeedToReturnError ? error : nil)
     }
 }

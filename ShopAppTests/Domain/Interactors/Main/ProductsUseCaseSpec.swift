@@ -1,5 +1,5 @@
 //
-//  ProductListUseCaseSpec.swift
+//  ProductsUseCaseSpec.swift
 //  ShopAppTests
 //
 //  Created by Radyslav Krechet on 4/3/18.
@@ -12,14 +12,14 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class ProductListUseCaseSpec: QuickSpec {
+class ProductsUseCaseSpec: QuickSpec {
     override func spec() {
-        var useCase: ProductListUseCase!
+        var useCase: ProductsUseCase!
         var repositoryMock: ProductRepositoryMock!
         
         beforeEach {
             repositoryMock = ProductRepositoryMock()
-            useCase = ProductListUseCase(repository: repositoryMock)
+            useCase = ProductsUseCase(repository: repositoryMock)
         }
         
         describe("when last arrival product list should be get") {
@@ -107,7 +107,7 @@ class ProductListUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getProducts(with: paginationValue, sortBy: sortBy, keyword: keyword, excludeKeyword: excludeKeyword) { (result, error) in
+                    useCase.getProducts(paginationValue: paginationValue, sortBy: sortBy, keyword: keyword, excludeKeyword: excludeKeyword) { (result, error) in
                         expect(repositoryMock.isGetProductListStarted) == true
                         
                         expect(repositoryMock.perPage) == kItemsPerPage
@@ -126,7 +126,7 @@ class ProductListUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.getProducts(with: paginationValue, sortBy: sortBy, keyword: keyword, excludeKeyword: excludeKeyword) { (result, error) in
+                    useCase.getProducts(paginationValue: paginationValue, sortBy: sortBy, keyword: keyword, excludeKeyword: excludeKeyword) { (result, error) in
                         expect(repositoryMock.isGetProductListStarted) == true
                         
                         expect(repositoryMock.perPage) == kItemsPerPage
@@ -155,7 +155,7 @@ class ProductListUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getProducts(with: paginationValue, searchPhrase: searchPhrase) { (result, error) in
+                    useCase.getProducts(paginationValue: paginationValue, searchPhrase: searchPhrase) { (result, error) in
                         expect(repositoryMock.isSearchProductsStarted) == true
                         
                         expect(repositoryMock.perPage) == kItemsPerPage
@@ -172,7 +172,7 @@ class ProductListUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.getProducts(with: paginationValue, searchPhrase: searchPhrase) { (result, error) in
+                    useCase.getProducts(paginationValue: paginationValue, searchPhrase: searchPhrase) { (result, error) in
                         expect(repositoryMock.isSearchProductsStarted) == true
                         
                         expect(repositoryMock.perPage) == kItemsPerPage

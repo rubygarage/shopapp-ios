@@ -1,5 +1,5 @@
 //
-//  CategoryListUseCaseSpec.swift
+//  ArticlesUseCaseSpec.swift
 //  ShopAppTests
 //
 //  Created by Radyslav Krechet on 4/3/18.
@@ -12,17 +12,17 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class CategoryListUseCaseSpec: QuickSpec {
+class ArticlesUseCaseSpec: QuickSpec {
     override func spec() {
-        var useCase: CategoryListUseCase!
-        var repositoryMock: CategoryRepositoryMock!
+        var useCase: ArticlesUseCase!
+        var repositoryMock: ArticleRepositoryMock!
         
         beforeEach {
-            repositoryMock = CategoryRepositoryMock()
-            useCase = CategoryListUseCase(repository: repositoryMock)
+            repositoryMock = ArticleRepositoryMock()
+            useCase = ArticlesUseCase(repository: repositoryMock)
         }
         
-        describe("when category list should be get") {
+        describe("when article list should be get") {
             var paginationValue: String!
             
             beforeEach {
@@ -33,11 +33,12 @@ class CategoryListUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getCategoryList(paginationValue: paginationValue) { (result, error) in
-                        expect(repositoryMock.isGetCategoryListStarted) == true
+                    useCase.getArticles(paginationValue: paginationValue) { (result, error) in
+                        expect(repositoryMock.isGetArticleListStarted) == true
                         
                         expect(repositoryMock.perPage) == kItemsPerPage
                         expect(repositoryMock.paginationValue) == paginationValue
+                        expect(repositoryMock.sortBy?.rawValue) == SortType.createdAt.rawValue
 
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -49,11 +50,12 @@ class CategoryListUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.getCategoryList(paginationValue: paginationValue) { (result, error) in
-                        expect(repositoryMock.isGetCategoryListStarted) == true
+                    useCase.getArticles(paginationValue: paginationValue) { (result, error) in
+                        expect(repositoryMock.isGetArticleListStarted) == true
                         
                         expect(repositoryMock.perPage) == kItemsPerPage
                         expect(repositoryMock.paginationValue) == paginationValue
+                        expect(repositoryMock.sortBy?.rawValue) == SortType.createdAt.rawValue
                         
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())

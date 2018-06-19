@@ -16,7 +16,7 @@ class CategoryUseCaseMock: CategoryUseCase {
     var isProductCountLessThenConstant = true
     var isNeedToReturnError = false
     
-    override func getCategory(with id: String, paginationValue: Any?, sortType: SortType, _ callback: @escaping RepoCallback<Category>) {
+    override func getCategory(id: String, paginationValue: Any?, sortType: SortType, _ callback: @escaping RepoCallback<Category>) {
         guard !isNeedToReturnError else {
             execute(callback: callback)
             

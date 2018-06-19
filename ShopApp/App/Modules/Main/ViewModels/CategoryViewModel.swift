@@ -37,7 +37,7 @@ class CategoryViewModel: GridCollectionViewModel {
         let showHud = products.value.isEmpty
         state.onNext(ViewState.make.loading(showHud: showHud))
 
-        categoryUseCase.getCategory(with: categoryId, paginationValue: paginationValue, sortType: selectedSortType) { [weak self] (result, error) in
+        categoryUseCase.getCategory(id: categoryId, paginationValue: paginationValue, sortType: selectedSortType) { [weak self] (result, error) in
             guard let strongSelf = self else {
                 return
             }

@@ -1,5 +1,5 @@
 //
-//  CategoryListUseCaseMock.swift
+//  CategoriesUseCaseMock.swift
 //  ShopAppTests
 //
 //  Created by Radyslav Krechet on 3/12/18.
@@ -10,7 +10,7 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class CategoryListUseCaseMock: CategoryListUseCase {
+class CategoriesUseCaseMock: CategoriesUseCase {
     private let error = ContentError()
     
     var isCategoryCountLessThenConstant = true
