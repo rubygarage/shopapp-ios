@@ -10,5 +10,6 @@ import ShopApp_Gateway
 
 protocol ArticleRepository {
     func getArticles(perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping RepoCallback<[Article]>)
+    
     func getArticle(id: String, callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>)
 }

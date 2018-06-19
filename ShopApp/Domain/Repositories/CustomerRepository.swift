@@ -21,7 +21,7 @@ protocol CustomerRepository {
 
     func updateCustomerAddress(address: Address, callback: @escaping RepoCallback<Bool>)
 
-    func setDefaultShippingAddress(addressId: String, callback: @escaping RepoCallback<Customer>)
+    func setDefaultShippingAddress(id: String, callback: @escaping RepoCallback<Customer>)
 
-    func deleteCustomerAddress(addressId: String, callback: @escaping RepoCallback<Bool>)
+    func deleteCustomerAddress(id: String, callback: @escaping RepoCallback<Bool>)
 }

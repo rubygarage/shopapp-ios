@@ -61,10 +61,10 @@ class CustomerRepositoryMock: CustomerRepository {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Customer(), nil)
     }
     
-    func setDefaultShippingAddress(addressId: String, callback: @escaping RepoCallback<Customer>) {
+    func setDefaultShippingAddress(id: String, callback: @escaping RepoCallback<Customer>) {
         isUpdateCustomerDefaultAddressStarted = true
         
-        self.addressId = addressId
+        addressId = id
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Customer(), nil)
     }
@@ -85,10 +85,10 @@ class CustomerRepositoryMock: CustomerRepository {
         isNeedToReturnError ? callback(nil, RepoError()) : callback("", nil)
     }
     
-    func deleteCustomerAddress(addressId: String, callback: @escaping RepoCallback<Bool>) {
+    func deleteCustomerAddress(id: String, callback: @escaping RepoCallback<Bool>) {
         isDeleteCustomerAddressStarted = true
         
-        self.addressId = addressId
+        addressId = id
         
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }

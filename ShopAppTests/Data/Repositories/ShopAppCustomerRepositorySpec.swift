@@ -259,7 +259,7 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.setDefaultShippingAddress(addressId: addressId) { (result, error) in
+                    repository.setDefaultShippingAddress(id: addressId) { (result, error) in
                         expect(apiMock.isUpdateCustomerDefaultAddressStarted) == true
                         
                         expect(apiMock.addressId) == addressId
@@ -274,7 +274,7 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.setDefaultShippingAddress(addressId: addressId) { (result, error) in
+                    repository.setDefaultShippingAddress(id: addressId) { (result, error) in
                         expect(apiMock.isUpdateCustomerDefaultAddressStarted) == true
                         
                         expect(apiMock.addressId) == addressId
@@ -297,7 +297,7 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.deleteCustomerAddress(addressId: addressId) { (result, error) in
+                    repository.deleteCustomerAddress(id: addressId) { (result, error) in
                         expect(apiMock.isDeleteCustomerAddressStarted) == true
                         
                         expect(apiMock.addressId) == addressId
@@ -312,7 +312,7 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.deleteCustomerAddress(addressId: addressId) { (result, error) in
+                    repository.deleteCustomerAddress(id: addressId) { (result, error) in
                         expect(apiMock.isDeleteCustomerAddressStarted) == true
                         
                         expect(apiMock.addressId) == addressId

@@ -71,7 +71,7 @@ class ShopAppPaymentRepositorySpec: QuickSpec {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.getCheckout(checkoutId: checkoutId) { (result, error) in
+                    repository.getCheckout(id: checkoutId) { (result, error) in
                         expect(apiMock.isGetCheckoutStarted) == true
                         
                         expect(apiMock.checkoutId) == checkoutId
@@ -86,7 +86,7 @@ class ShopAppPaymentRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.getCheckout(checkoutId: checkoutId) { (result, error) in
+                    repository.getCheckout(id: checkoutId) { (result, error) in
                         expect(apiMock.isGetCheckoutStarted) == true
                         
                         expect(apiMock.checkoutId) == checkoutId

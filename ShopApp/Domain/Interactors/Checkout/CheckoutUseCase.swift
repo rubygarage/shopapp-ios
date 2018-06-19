@@ -15,8 +15,8 @@ class CheckoutUseCase {
         self.repository = repository
     }
 
-    func getCheckout(checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
-        repository.getCheckout(checkoutId: checkoutId, callback: callback)
+    func getCheckout(id: String, callback: @escaping RepoCallback<Checkout>) {
+        repository.getCheckout(id: id, callback: callback)
     }
     
     func setShippingAddress(checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>) {

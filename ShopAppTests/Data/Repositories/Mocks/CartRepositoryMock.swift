@@ -19,8 +19,8 @@ class CartRepositoryMock: CartRepository {
     var isDeleteAllProductsFromCartStarted = false
     var isChangeCartProductQuantityStarted = false
     var cartProduct: CartProduct?
-    var productVariantId: String?
-    var productVariantIds: [String?]?
+    var cartItemId: String?
+    var cartItemIds: [String?]?
     var quantity: Int?
     
     func getCartProducts(callback: @escaping ([CartProduct]?, RepoError?) -> Void) {
@@ -37,18 +37,18 @@ class CartRepositoryMock: CartRepository {
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
-    func deleteCartProduct(productVariantId: String, callback: @escaping RepoCallback<Bool>) {
+    func deleteCartProduct(cartItemId: String, callback: @escaping RepoCallback<Bool>) {
         isDeleteProductFromCartStarted = true
         
-        self.productVariantId = productVariantId
+        self.cartItemId = cartItemId
         
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
-    func deleteCartProducts(productVariantIds: [String], callback: @escaping RepoCallback<Bool>) {
+    func deleteCartProducts(cartItemIds: [String], callback: @escaping RepoCallback<Bool>) {
         isDeleteProductsFromCartStarted = true
         
-        self.productVariantIds = productVariantIds
+        self.cartItemIds = cartItemIds
         
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
@@ -59,10 +59,10 @@ class CartRepositoryMock: CartRepository {
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
-    func changeCartProductQuantity(productVariantId: String, quantity: Int, callback: @escaping RepoCallback<Bool>) {
+    func changeCartProductQuantity(cartItemId: String, quantity: Int, callback: @escaping RepoCallback<Bool>) {
         isChangeCartProductQuantityStarted = true
         
-        self.productVariantId = productVariantId
+        self.cartItemId = cartItemId
         self.quantity = quantity
         
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)

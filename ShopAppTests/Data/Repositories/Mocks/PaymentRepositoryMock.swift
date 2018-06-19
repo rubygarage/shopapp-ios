@@ -36,10 +36,10 @@ class PaymentRepositoryMock: PaymentRepository {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Checkout(), nil)
     }
     
-    func getCheckout(checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
+    func getCheckout(id: String, callback: @escaping RepoCallback<Checkout>) {
         isGetCheckoutStarted = true
         
-        self.checkoutId = checkoutId
+        checkoutId = id
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(Checkout(), nil)
     }

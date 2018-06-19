@@ -33,10 +33,10 @@ class DeleteCartProductUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.deleteCartProduct(productVariantId: productVariantId) { (result, error) in
+                    useCase.deleteCartProduct(cartItemId: productVariantId) { (result, error) in
                         expect(repositoryMock.isDeleteProductFromCartStarted) == true
                         
-                        expect(repositoryMock.productVariantId) == productVariantId
+                        expect(repositoryMock.cartItemId) == productVariantId
                         
                         expect(result) == true
                         expect(error).to(beNil())
@@ -48,48 +48,10 @@ class DeleteCartProductUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.deleteCartProduct(productVariantId: productVariantId) { (result, error) in
+                    useCase.deleteCartProduct(cartItemId: productVariantId) { (result, error) in
                         expect(repositoryMock.isDeleteProductFromCartStarted) == true
                         
-                        expect(repositoryMock.productVariantId) == productVariantId
-                        
-                        expect(result) == false
-                        expect(error).toNot(beNil())
-                    }
-                }
-            }
-        }
-        
-        describe("when products should be delete") {
-            var productVariantIds: [String]!
-            
-            beforeEach {
-                productVariantIds = ["id"]
-            }
-            
-            context("if callback has result") {
-                it("needs to handle result") {
-                    repositoryMock.isNeedToReturnError = false
-                    
-                    useCase.deleteCartProducts(productVariantIds: productVariantIds) { (result, error) in
-                        expect(repositoryMock.isDeleteProductsFromCartStarted) == true
-                        
-                        expect(repositoryMock.productVariantIds).to(equal(productVariantIds))
-                        
-                        expect(result) == true
-                        expect(error).to(beNil())
-                    }
-                }
-            }
-            
-            context("if callback has error") {
-                it("needs to handle error") {
-                    repositoryMock.isNeedToReturnError = true
-                    
-                    useCase.deleteCartProducts(productVariantIds: productVariantIds) { (result, error) in
-                        expect(repositoryMock.isDeleteProductsFromCartStarted) == true
-                        
-                        expect(repositoryMock.productVariantIds).to(equal(productVariantIds))
+                        expect(repositoryMock.cartItemId) == productVariantId
                         
                         expect(result) == false
                         expect(error).toNot(beNil())

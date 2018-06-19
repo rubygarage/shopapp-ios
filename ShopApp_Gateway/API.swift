@@ -9,6 +9,10 @@
 import Foundation
 
 public protocol API {
+    
+    // MARK: - Setup
+    
+    func setupProvider(callback: @escaping RepoCallback<Void>)
 
     // MARK: - Shop
     
@@ -62,15 +66,15 @@ public protocol API {
 
     func updateCustomerAddress(address: Address, callback: @escaping RepoCallback<Bool>)
 
-    func setDefaultShippingAddress(addressId: String, callback: @escaping RepoCallback<Customer>)
+    func setDefaultShippingAddress(id: String, callback: @escaping RepoCallback<Customer>)
 
-    func deleteCustomerAddress(addressId: String, callback: @escaping RepoCallback<Bool>)
+    func deleteCustomerAddress(id: String, callback: @escaping RepoCallback<Bool>)
     
     // MARK: - Payments
     
     func createCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>)
 
-    func getCheckout(checkoutId: String, callback: @escaping RepoCallback<Checkout>)
+    func getCheckout(id: String, callback: @escaping RepoCallback<Checkout>)
 
     func setShippingAddress(checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>)
 
@@ -98,11 +102,9 @@ public protocol API {
 
     func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<Bool>)
 
-    func deleteCartProduct(productVariantId: String, callback: @escaping RepoCallback<Bool>)
-
-    func deleteCartProducts(productVariantIds: [String], callback: @escaping RepoCallback<Bool>)
+    func deleteCartProduct(cartItemId: String, callback: @escaping RepoCallback<Bool>)
 
     func deleteAllCartProducts(callback: @escaping RepoCallback<Bool>)
 
-    func changeCartProductQuantity(productVariantId: String, quantity: Int, callback: @escaping RepoCallback<Bool>)
+    func changeCartProductQuantity(cartItemId: String, quantity: Int, callback: @escaping RepoCallback<Bool>)
 }

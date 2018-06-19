@@ -23,19 +23,15 @@ class ShopAppCartRepository: CartRepository {
         api.addCartProduct(cartProduct: cartProduct, callback: callback)
     }
     
-    func deleteCartProduct(productVariantId: String, callback: @escaping RepoCallback<Bool>) {
-        api.deleteCartProduct(productVariantId: productVariantId, callback: callback)
-    }
-    
-    func deleteCartProducts(productVariantIds: [String], callback: @escaping RepoCallback<Bool>) {
-        api.deleteCartProducts(productVariantIds: productVariantIds, callback: callback)
+    func deleteCartProduct(cartItemId: String, callback: @escaping RepoCallback<Bool>) {
+        api.deleteCartProduct(cartItemId: cartItemId, callback: callback)
     }
     
     func deleteAllCartProducts(callback: @escaping RepoCallback<Bool>) {
         api.deleteAllCartProducts(callback: callback)
     }
     
-    func changeCartProductQuantity(productVariantId: String, quantity: Int, callback: @escaping RepoCallback<Bool>) {
-        api.changeCartProductQuantity(productVariantId: productVariantId, quantity: quantity, callback: callback)
+    func changeCartProductQuantity(cartItemId: String, quantity: Int, callback: @escaping RepoCallback<Bool>) {
+        api.changeCartProductQuantity(cartItemId: cartItemId, quantity: quantity, callback: callback)
     }
 }

@@ -10,61 +10,27 @@ import RxSwift
 import ShopApp_Gateway
 
 class SplashViewModel: BaseViewModel {
-    private let cartProductListUseCase: CartProductListUseCase
-    private let cartValidationUseCase: CartValidationUseCase
-    private let deleteCartProductUseCase: DeleteCartProductUseCase
+    private let setupProviderUseCase: SetupProviderUseCase
     
-    var dataLoaded = PublishSubject<Void>()
+    var providerDidSetup = PublishSubject<Void>()
     
-    init(cartProductListUseCase: CartProductListUseCase, cartValidationUseCase: CartValidationUseCase, deleteCartProductUseCase: DeleteCartProductUseCase) {
-        self.cartProductListUseCase = cartProductListUseCase
-        self.cartValidationUseCase = cartValidationUseCase
-        self.deleteCartProductUseCase = deleteCartProductUseCase
+    init(setupProviderUseCase: SetupProviderUseCase) {
+        self.setupProviderUseCase = setupProviderUseCase
     }
     
-    func loadData() {
-        cartProductListUseCase.getCartProducts { [weak self] (products, error) in
+    func setupProvider() {
+        setupProviderUseCase.setupProvider { [weak self] (_, _) in
             guard let strongSelf = self else {
                 return
             }
             
-            let filteredProducts = products?.filter({ $0.productVariant?.id != nil })
-            if let ids = filteredProducts?.map({ $0.productVariant!.id}), !ids.isEmpty, error == nil {
-                strongSelf.loadProductVariants(ids: ids)
-            } else {
-                strongSelf.dataLoaded.onNext()
-            }
-        }
-    }
-    
-    private func loadProductVariants(ids: [String]) {
-        cartValidationUseCase.getProductVariants(ids: ids) { [weak self] (productVariants, error) in
-            guard let strongSelf = self else {
-                return
-            }
-            
-            if let remoteIds = productVariants?.map({ $0.id }), error == nil {
-                strongSelf.filterProductVariants(localIds: ids, remoteIds: remoteIds)
-            } else {
-                strongSelf.dataLoaded.onNext()
-            }
-        }
-    }
-    
-    private func filterProductVariants(localIds: [String], remoteIds: [String]) {
-        let excludedIds = localIds.filter({ !remoteIds.contains($0) })
-        deleteCartProductUseCase.deleteCartProducts(productVariantIds: excludedIds) { [weak self] (_, _) in
-            guard let strongSelf = self else {
-                return
-            }
-            
-            strongSelf.dataLoaded.onNext()
+            strongSelf.providerDidSetup.onNext()
         }
     }
     
     // MARK: - BaseViewModel
     
     override func tryAgain() {
-        loadData()
+        setupProvider()
     }
 }

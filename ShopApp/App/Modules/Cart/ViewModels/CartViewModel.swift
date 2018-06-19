@@ -40,14 +40,10 @@ class CartViewModel: BaseViewModel {
     }
     
     func removeCardProduct(at index: Int) {
-        let cartProduct = data.value[index]
-        guard let productVariantId = cartProduct.productVariant?.id else {
-            return
-        }
-
         state.onNext(ViewState.make.loading(showHud: false))
 
-        deleteCartProductUseCase.deleteCartProduct(productVariantId: productVariantId) { [weak self] (success, error) in
+        let cartProduct = data.value[index]
+        deleteCartProductUseCase.deleteCartProduct(cartItemId: cartProduct.cartItemId) { [weak self] (success, error) in
             guard let strongSelf = self else {
                 return
             }
@@ -61,13 +57,9 @@ class CartViewModel: BaseViewModel {
     }
     
     func update(cartProduct: CartProduct, quantity: Int) {
-        guard let productVariantId = cartProduct.productVariant?.id else {
-            return
-        }
-
         state.onNext(ViewState.make.loading(showHud: false))
 
-        changeCartProductUseCase.changeCartProductQuantity(productVariantId: productVariantId, quantity: quantity) { [weak self] (_, error) in
+        changeCartProductUseCase.changeCartProductQuantity(cartItemId: cartProduct.cartItemId, quantity: quantity) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }

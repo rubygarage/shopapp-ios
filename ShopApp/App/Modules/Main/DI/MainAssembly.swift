@@ -107,9 +107,7 @@ class MainAssembly: Assembly {
         }
         
         container.register(SplashViewModel.self) { r in
-            return SplashViewModel(cartProductListUseCase: r.resolve(CartProductListUseCase.self)!,
-                                   cartValidationUseCase: r.resolve(CartValidationUseCase.self)!,
-                                   deleteCartProductUseCase: r.resolve(DeleteCartProductUseCase.self)!)
+            return SplashViewModel(setupProviderUseCase: r.resolve(SetupProviderUseCase.self)!)
         }
         
         // MARK: - Providers

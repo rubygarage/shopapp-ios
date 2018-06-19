@@ -19,8 +19,8 @@ class ShopAppPaymentRepository: PaymentRepository {
         api.createCheckout(cartProducts: cartProducts, callback: callback)
     }
     
-    func getCheckout(checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
-        api.getCheckout(checkoutId: checkoutId, callback: callback)
+    func getCheckout(id: String, callback: @escaping RepoCallback<Checkout>) {
+        api.getCheckout(id: id, callback: callback)
     }
     
     func setShippingAddress(checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>) {

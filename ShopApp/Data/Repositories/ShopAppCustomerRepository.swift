@@ -39,11 +39,11 @@ class ShopAppCustomerRepository: CustomerRepository {
         api.updateCustomerAddress(address: address, callback: callback)
     }
     
-    func setDefaultShippingAddress(addressId: String, callback: @escaping RepoCallback<Customer>) {
-        api.setDefaultShippingAddress(addressId: addressId, callback: callback)
+    func setDefaultShippingAddress(id: String, callback: @escaping RepoCallback<Customer>) {
+        api.setDefaultShippingAddress(id: id, callback: callback)
     }
     
-    func deleteCustomerAddress(addressId: String, callback: @escaping RepoCallback<Bool>) {
-        api.deleteCustomerAddress(addressId: addressId, callback: callback)
+    func deleteCustomerAddress(id: String, callback: @escaping RepoCallback<Bool>) {
+        api.deleteCustomerAddress(id: id, callback: callback)
     }
 }

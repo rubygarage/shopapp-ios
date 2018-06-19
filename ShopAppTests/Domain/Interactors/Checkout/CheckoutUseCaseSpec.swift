@@ -33,7 +33,7 @@ class CheckoutUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getCheckout(checkoutId: checkoutId) { (result, error) in
+                    useCase.getCheckout(id: checkoutId) { (result, error) in
                         expect(repositoryMock.isGetCheckoutStarted) == true
                         
                         expect(repositoryMock.checkoutId) == checkoutId
@@ -48,7 +48,7 @@ class CheckoutUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.getCheckout(checkoutId: checkoutId) { (result, error) in
+                    useCase.getCheckout(id: checkoutId) { (result, error) in
                         expect(repositoryMock.isGetCheckoutStarted) == true
                         
                         expect(repositoryMock.checkoutId) == checkoutId

@@ -94,7 +94,7 @@ class CheckoutViewModel: BaseViewModel {
             return
         }
         state.onNext(ViewState.make.loading(isTranslucent: true))
-        checkoutUseCase.getCheckout(checkoutId: checkoutId) { [weak self] (result, error) in
+        checkoutUseCase.getCheckout(id: checkoutId) { [weak self] (result, error) in
             guard let strongSelf = self else {
                 return
             }

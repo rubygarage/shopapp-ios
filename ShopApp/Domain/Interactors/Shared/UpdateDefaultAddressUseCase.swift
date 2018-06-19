@@ -15,7 +15,7 @@ class UpdateDefaultAddressUseCase {
         self.repository = repository
     }
 
-    func updateDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Customer>) {
-        repository.setDefaultShippingAddress(addressId: addressId, callback: callback)
+    func updateDefaultAddress(id: String, callback: @escaping RepoCallback<Customer>) {
+        repository.setDefaultShippingAddress(id: id, callback: callback)
     }
 }

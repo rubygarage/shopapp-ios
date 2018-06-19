@@ -19,7 +19,7 @@ class CheckoutUseCaseMock: CheckoutUseCase {
     var returnedOrder: Order?
     var returnedCheckout: Checkout?
     
-    override func getCheckout(checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
+    override func getCheckout(id: String, callback: @escaping RepoCallback<Checkout>) {
         isGetCheckoutNeedToReturnError ? callback(nil, RepoError()) : callback(returnedCheckout, nil)
     }
     

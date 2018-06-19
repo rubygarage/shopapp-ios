@@ -63,5 +63,9 @@ class DataAssembly: Assembly {
             return ShopAppCountryRepository(api: r.resolve(API.self)!)
             }
             .inObjectScope(.container)
+        
+        container.register(SetupProviderRepository.self) { r in
+            return ShopAppSetupProviderRepository(api: r.resolve(API.self)!)
+        }
     }
 }

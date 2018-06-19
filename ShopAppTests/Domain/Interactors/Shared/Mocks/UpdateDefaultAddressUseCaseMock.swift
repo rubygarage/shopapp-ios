@@ -13,7 +13,7 @@ import ShopApp_Gateway
 class UpdateDefaultAddressUseCaseMock: UpdateDefaultAddressUseCase {
     var isNeedToReturnError = false
     
-    override func updateDefaultAddress(with addressId: String, callback: @escaping RepoCallback<Customer>) {
+    override func updateDefaultAddress(id: String, callback: @escaping RepoCallback<Customer>) {
         if isNeedToReturnError {
             callback(nil, RepoError())
         } else {

@@ -10,10 +10,10 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class CartValidationUseCaseMock: CartValidationUseCase {
+class SetupProviderUseCaseMock: SetupProviderUseCase {
     var isNeedToReturnError = false
     
-    override func getProductVariants(ids: [String], _ callback: @escaping RepoCallback<[ProductVariant]>) {
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+    override func setupProvider(callback: @escaping RepoCallback<Void>) {
+        isNeedToReturnError ? callback(nil, RepoError()) : callback(nil, nil)
     }
 }

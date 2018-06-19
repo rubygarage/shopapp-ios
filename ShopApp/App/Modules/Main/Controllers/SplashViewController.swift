@@ -17,7 +17,7 @@ class SplashViewController: BaseViewController<SplashViewModel> {
         
         setupViews()
         setupViewModel()
-        loadData()
+        setupProvider()
     }
     
     private func setupViews() {
@@ -26,7 +26,7 @@ class SplashViewController: BaseViewController<SplashViewModel> {
     }
     
     private func setupViewModel() {
-        viewModel.dataLoaded
+        viewModel.providerDidSetup
             .subscribe(onNext: { [weak self] _ in
                 guard let strongSelf = self else {
                     return
@@ -36,7 +36,7 @@ class SplashViewController: BaseViewController<SplashViewModel> {
         .disposed(by: disposeBag)
     }
     
-    private func loadData() {
-        viewModel.loadData()
+    private func setupProvider() {
+        viewModel.setupProvider()
     }
 }

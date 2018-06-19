@@ -11,7 +11,7 @@ import ShopApp_Gateway
 protocol PaymentRepository {
     func createCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>)
 
-    func getCheckout(checkoutId: String, callback: @escaping RepoCallback<Checkout>)
+    func getCheckout(id: String, callback: @escaping RepoCallback<Checkout>)
 
     func setShippingAddress(checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>)
     
