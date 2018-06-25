@@ -13,7 +13,7 @@ import ShopApp_Gateway
 class AddCartProductUseCaseMock: AddCartProductUseCase {
     var isNeedToReturnError = false
     
-    override func addCartProduct(_ cartProduct: CartProduct, _ callback: @escaping RepoCallback<Bool>) {
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+    override func addCartProduct(_ cartProduct: CartProduct, _ callback: @escaping ApiCallback<Void>) {
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
 }

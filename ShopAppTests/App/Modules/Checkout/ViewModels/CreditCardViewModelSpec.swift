@@ -133,14 +133,8 @@ class CreditCardViewModelSpec: QuickSpec {
         
         describe("when update fields called") {
             it("should update fields") {
-                let card = CreditCard()
-                card.firstName = "Holder"
-                card.lastName = "Name"
-                card.expireMonth = "12"
-                card.expireYear = "20"
-                card.verificationCode = "555"
+                let card = TestHelper.card
                 viewModel.card = card
-                
                 viewModel.updateFields()
                 
                 expect(viewModel.holderNameText.value) == card.firstName + " " + card.lastName

@@ -26,19 +26,18 @@ class AddCartProductUseCaseSpec: QuickSpec {
             var cartProduct: CartProduct!
             
             beforeEach {
-                cartProduct = CartProduct()
+                cartProduct = TestHelper.cartProductWithQuantityOne
             }
             
             context("if callback has result") {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.addCartProduct(cartProduct) { (result, error) in
+                    useCase.addCartProduct(cartProduct) { (_, error) in
                         expect(repositoryMock.isAddCartProductStarted) == true
                         
-                        expect(repositoryMock.cartProduct) === cartProduct
+                        expect(repositoryMock.cartProduct) == cartProduct
                         
-                        expect(result) == true
                         expect(error).to(beNil())
                     }
                 }
@@ -48,12 +47,11 @@ class AddCartProductUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.addCartProduct(cartProduct) { (result, error) in
+                    useCase.addCartProduct(cartProduct) { (_, error) in
                         expect(repositoryMock.isAddCartProductStarted) == true
                         
-                        expect(repositoryMock.cartProduct) === cartProduct
+                        expect(repositoryMock.cartProduct) == cartProduct
                         
-                        expect(result) == false
                         expect(error).toNot(beNil())
                     }
                 }

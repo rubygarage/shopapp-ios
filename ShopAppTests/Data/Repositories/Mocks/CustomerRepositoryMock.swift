@@ -29,65 +29,67 @@ class CustomerRepositoryMock: CustomerRepository {
     var addressId: String?
     var address: Address?
     
-    func getCustomer(callback: @escaping RepoCallback<Customer>) {
+    func getCustomer(callback: @escaping ApiCallback<Customer>) {
         isGetCustomerStarted = true
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Customer(), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(TestHelper.customerWithoutAcceptsMarketing, nil)
     }
     
-    func updateCustomer(firstName: String, lastName: String, phone: String, callback: @escaping RepoCallback<Customer>) {
+    func updateCustomer(firstName: String, lastName: String, phone: String, callback: @escaping ApiCallback<Customer>) {
         isUpdateCustomerInfoStarted = true
         
         self.firstName = firstName
         self.lastName = lastName
         self.phone = phone
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Customer(), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(TestHelper.customerWithoutAcceptsMarketing, nil)
     }
     
-    func updateCustomerSettings(isAcceptMarketing: Bool, callback: @escaping RepoCallback<Void>) {
+    func updateCustomerSettings(isAcceptMarketing: Bool, callback: @escaping ApiCallback<Void>) {
         isUpdateCustomerPromoStarted = true
         
         self.isAcceptMarketing = isAcceptMarketing
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback((), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback((), nil)
     }
     
-    func updatePassword(password: String, callback: @escaping RepoCallback<Void>) {
+    func updatePassword(password: String, callback: @escaping ApiCallback<Void>) {
         isUpdateCustomerPasswordStarted = true
         
         self.password = password
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback((), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback((), nil)
     }
     
-    func setDefaultShippingAddress(id: String, callback: @escaping RepoCallback<Void>) {
+    func setDefaultShippingAddress(id: String, callback: @escaping ApiCallback<Void>) {
         isUpdateCustomerDefaultAddressStarted = true
-        addressId = id
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback((), nil)
+        self.addressId = id
+        
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback((), nil)
     }
     
-    func updateCustomerAddress(address: Address, callback: @escaping RepoCallback<Void>) {
+    func updateCustomerAddress(address: Address, callback: @escaping ApiCallback<Void>) {
         isUpdateCustomerAddressStarted = true
         
         self.address = address
         
-        callback((), isNeedToReturnError ? RepoError() : nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
-    func addCustomerAddress(address: Address, callback: @escaping RepoCallback<Void>) {
+    func addCustomerAddress(address: Address, callback: @escaping ApiCallback<Void>) {
         isAddCustomerAddressStarted = true
         
         self.address = address
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback((), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback((), nil)
     }
     
-    func deleteCustomerAddress(id: String, callback: @escaping RepoCallback<Void>) {
+    func deleteCustomerAddress(id: String, callback: @escaping ApiCallback<Void>) {
         isDeleteCustomerAddressStarted = true
+        
         addressId = id
         
-        callback((), isNeedToReturnError ? RepoError() : nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
 }

@@ -26,7 +26,7 @@ class CheckoutAddressFormViewControllerSpec: QuickSpec {
             viewModelMock = CheckoutAddressFormViewModelMock(checkoutUseCase: checkoutUseCaseMock)
             viewController.viewModel = viewModelMock
             
-            viewController.selectedAddress = Address()
+            viewController.selectedAddress = TestHelper.fullAddress
             viewController.checkoutId = "Checkout id"
             viewController.addressType = .shipping
             
@@ -45,7 +45,7 @@ class CheckoutAddressFormViewControllerSpec: QuickSpec {
             
             it("should have correct child controller properties") {
                 let childController = viewController.childViewControllers.first as? AddressFormViewController
-                expect(childController?.address) === viewController.selectedAddress
+                expect(childController?.address) == viewController.selectedAddress
             }
         }
         
@@ -65,13 +65,13 @@ class CheckoutAddressFormViewControllerSpec: QuickSpec {
                 let delegateMock = CheckoutAddressFormControllerDelegateMock()
                 viewController.delegate = delegateMock
                 
-                let address = Address()
+                let address = TestHelper.fullAddress
                 viewModelMock.returnedAddress = address
                 
                 viewModelMock.updateBillingAddress()
                 
                 expect(delegateMock.controller) == viewController
-                expect(delegateMock.billingAddress) === address
+                expect(delegateMock.billingAddress) == address
             }
         }
         
@@ -80,11 +80,8 @@ class CheckoutAddressFormViewControllerSpec: QuickSpec {
                 let delegateMock = CheckoutAddressFormControllerDelegateMock()
                 viewController.delegate = delegateMock
                 
-                let addressFormViewController = viewController.childViewControllers.first as! AddressFormViewController//AddressFormViewController()
-                let address = Address()
-                
-                viewController.viewController(addressFormViewController, didFill: address)
-                
+                let addressFormViewController = viewController.childViewControllers.first as! AddressFormViewController
+                viewController.viewController(addressFormViewController, didFill: TestHelper.fullAddress)
                 
                 expect(delegateMock.controller) == viewController
             }

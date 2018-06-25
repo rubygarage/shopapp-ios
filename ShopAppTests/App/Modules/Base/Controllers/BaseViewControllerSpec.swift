@@ -125,7 +125,7 @@ class BaseViewControllerSpec: QuickSpec {
             context("if it error state") {
                 context("with type repo") {
                     it("needs to hide all state views") {
-                        viewModelMock.setRepoErrorState()
+                        viewModelMock.setEmptyErrorState()
                         
                         expect(viewController.view.subviews.contains(viewController.loadingView)) == false
                         expect(viewController.view.subviews.contains(viewController.errorView)) == false
@@ -138,7 +138,7 @@ class BaseViewControllerSpec: QuickSpec {
                         
                         expect(viewController.view.subviews.contains(viewController.loadingView)) == false
                         expect(viewController.view.subviews.contains(viewController.errorView)) == true
-                        expect(viewController.errorView.error).to(beAnInstanceOf(ContentError.self))
+                        expect(viewController.errorView.isNetworkError) == false
                         expect(viewController.view.subviews.contains(viewController.criticalErrorView)) == false
                     }
                 }
@@ -149,7 +149,7 @@ class BaseViewControllerSpec: QuickSpec {
                         
                         expect(viewController.view.subviews.contains(viewController.loadingView)) == false
                         expect(viewController.view.subviews.contains(viewController.errorView)) == true
-                        expect(viewController.errorView.error).to(beAnInstanceOf(NetworkError.self))
+                        expect(viewController.errorView.isNetworkError) == true
                         expect(viewController.view.subviews.contains(viewController.criticalErrorView)) == false
                     }
                 }
@@ -161,7 +161,7 @@ class BaseViewControllerSpec: QuickSpec {
                         expect(viewController.view.subviews.contains(viewController.loadingView)) == false
                         expect(viewController.view.subviews.contains(viewController.errorView)) == false
                         expect(viewController.view.subviews.contains(viewController.criticalErrorView)) == false
-                        expect(ToastCenter.default.currentToast?.text) == "Error.Unknown".localizable
+                        expect(ToastCenter.default.currentToast?.text) == "message"
                     }
                 }
                 

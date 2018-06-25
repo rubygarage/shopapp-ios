@@ -49,17 +49,9 @@ class OrderDetailsTableProviderSpec: QuickSpec {
         }
         
         describe("when data did set") {
-            var order: Order!
-            
-            beforeEach {
-                order = Order()
-                order.number = 1000
-                order.createdAt = Date()
-            }
-            
             context("if order without items and shipping address") {
                 beforeEach {
-                    tableProvider.order = order
+                    tableProvider.order = TestHelper.orderWithoutProducts
                 }
                 
                 it("should return correct sections count") {
@@ -75,7 +67,7 @@ class OrderDetailsTableProviderSpec: QuickSpec {
                     expect(secondSectionRowsCount) == 0
                     
                     let thirdSectionRowCount = tableProvider.tableView(tableView, numberOfRowsInSection: 2)
-                    expect(thirdSectionRowCount) == 0
+                    expect(thirdSectionRowCount) == 1
                 }
                 
                 it("shoud return correct header class type") {
@@ -86,26 +78,13 @@ class OrderDetailsTableProviderSpec: QuickSpec {
                     expect(headerSectionOne).to(beAnInstanceOf(BoldTitleTableHeaderView.self))
                     
                     let headerSectionTwo = tableProvider.tableView(tableView, viewForHeaderInSection: 2)
-                    expect(headerSectionTwo).to(beAnInstanceOf(UIView.self))
+                    expect(headerSectionTwo).to(beAnInstanceOf(BoldTitleTableHeaderView.self))
                 }
             }
             
             context("when order with items and shipping address") {
                 beforeEach {
-                    let orderItem = OrderItem()
-                    orderItem.quantity = 1
-                    order.items = [orderItem]
-                    
-                    let shippingAddress = Address()
-                    shippingAddress.address = "1A Main street"
-                    order.shippingAddress = shippingAddress
-                    
-                    order.currencyCode = "USD"
-                    order.subtotalPrice = Decimal(integerLiteral: 10)
-                    order.totalShippingPrice = Decimal(integerLiteral: 5)
-                    order.totalPrice = Decimal(integerLiteral: 15)
-                    
-                    tableProvider.order = order
+                    tableProvider.order = TestHelper.orderWithProducts
                 }
                 
                 it("should return correct rows count for sections") {
@@ -171,25 +150,10 @@ class OrderDetailsTableProviderSpec: QuickSpec {
         }
         
         describe("when product variant did selected") {
-            var order: Order!
             var providerDelegateMock: OrderDetailsTableProviderDelegateMock!
             
             beforeEach {
-                order = Order()
-                order.id = "order id"
-                order.number = 1000
-                order.createdAt = Date()
-                order.currencyCode = "USD"
-                order.totalPrice = Decimal(floatLiteral: 10)
-                
-                let productVariant = ProductVariant()
-                productVariant.id = "product variant id"
-                
-                let orderItem = OrderItem()
-                orderItem.productVariant = productVariant
-                order.items = [orderItem]
-                
-                tableProvider.order = order
+                tableProvider.order = TestHelper.orderWithProducts
                 
                 providerDelegateMock = OrderDetailsTableProviderDelegateMock()
                 tableProvider.delegate = providerDelegateMock
@@ -198,7 +162,7 @@ class OrderDetailsTableProviderSpec: QuickSpec {
             it("should select product variant") {
                 let indexPath = IndexPath(row: 0, section: 1)
                 tableProvider.tableView(tableView, didSelectRowAt: indexPath)
-                expect(providerDelegateMock.selectedProductVariant?.id) == "product variant id"
+                expect(providerDelegateMock.selectedProductVariant?.id) == TestHelper.orderWithProducts.orderProducts.first!.productVariant!.id
             }
         }
     }

@@ -50,19 +50,18 @@ class ShopAppCartRepositorySpec: QuickSpec {
             var cartProduct: CartProduct!
             
             beforeEach {
-                cartProduct = CartProduct()
+                cartProduct = TestHelper.cartProductWithQuantityOne
             }
             
             context("if callback has result") {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.addCartProduct(cartProduct: cartProduct) { (result, error) in
+                    repository.addCartProduct(cartProduct: cartProduct) { (_, error) in
                         expect(apiMock.isAddCartProductStarted) == true
                         
-                        expect(apiMock.cartProduct) === cartProduct
-                        
-                        expect(result) == true
+                        expect(apiMock.cartProduct) == cartProduct
+                    
                         expect(error).to(beNil())
                     }
                 }
@@ -72,12 +71,11 @@ class ShopAppCartRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.addCartProduct(cartProduct: cartProduct) { (result, error) in
+                    repository.addCartProduct(cartProduct: cartProduct) { (_, error) in
                         expect(apiMock.isAddCartProductStarted) == true
                         
-                        expect(apiMock.cartProduct) === cartProduct
-                        
-                        expect(result) == false
+                        expect(apiMock.cartProduct) == cartProduct
+        
                         expect(error).toNot(beNil())
                     }
                 }
@@ -115,7 +113,6 @@ class ShopAppCartRepositorySpec: QuickSpec {
                         
                         expect(apiMock.cartItemId) == productVariantId
                         
-                        expect(result).to(beNil())
                         expect(error).toNot(beNil())
                     }
                 }
@@ -143,7 +140,6 @@ class ShopAppCartRepositorySpec: QuickSpec {
                     repository.deleteAllCartProducts() { (result, error) in
                         expect(apiMock.isDeleteAllProductsFromCartStarted) == true
 
-                        expect(result).to(beNil())
                         expect(error).toNot(beNil())
                     }
                 }
@@ -163,13 +159,12 @@ class ShopAppCartRepositorySpec: QuickSpec {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.changeCartProductQuantity(cartItemId: productVariantId, quantity: quantity) { (result, error) in
+                    repository.changeCartProductQuantity(cartItemId: productVariantId, quantity: quantity) { (_, error) in
                         expect(apiMock.isChangeCartProductQuantityStarted) == true
                         
                         expect(apiMock.cartItemId) == productVariantId
                         expect(apiMock.quantity) == quantity
                         
-                        expect(result) == true
                         expect(error).to(beNil())
                     }
                 }
@@ -179,13 +174,12 @@ class ShopAppCartRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.changeCartProductQuantity(cartItemId: productVariantId, quantity: quantity) { (result, error) in
+                    repository.changeCartProductQuantity(cartItemId: productVariantId, quantity: quantity) { (_, error) in
                         expect(apiMock.isChangeCartProductQuantityStarted) == true
                         
                         expect(apiMock.cartItemId) == productVariantId
                         expect(apiMock.quantity) == quantity
                         
-                        expect(result) == false
                         expect(error).toNot(beNil())
                     }
                 }

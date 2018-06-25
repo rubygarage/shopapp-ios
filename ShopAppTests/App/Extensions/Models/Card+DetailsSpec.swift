@@ -1,5 +1,5 @@
 //
-//  CreditCard+DetailsSpec.swift
+//  Card+DetailsSpec.swift
 //  ShopAppTests
 //
 //  Created by Radyslav Krechet on 3/23/18.
@@ -12,13 +12,11 @@ import ShopApp_Gateway
 
 @testable import ShopApp
 
-class CreditCard_DetailsSpec: QuickSpec {
+class Card_DetailsSpec: QuickSpec {
     override func spec() {
         describe("when masked number used") {
             it("needs to return correct formatted string") {
-                let creditCard = CreditCard()
-                creditCard.cardNumber = "123 456 789 0123"
-                
+                let creditCard = TestHelper.card
                 let maskedNumberLocalized = "Label.CreditCard.MaskedNumber".localizable
                 let maskedNumber = String(creditCard.cardNumber.suffix(4))
                 
@@ -28,10 +26,7 @@ class CreditCard_DetailsSpec: QuickSpec {
         
         describe("when holder name used") {
             it("needs to return correct formatted string") {
-                let creditCard = CreditCard()
-                creditCard.firstName = "First"
-                creditCard.lastName = "Last"
-                
+                let creditCard = TestHelper.card
                 let holderNameLocalized = "Label.FullName".localizable
                 
                 expect(creditCard.holderName) == String.localizedStringWithFormat(holderNameLocalized, creditCard.firstName, creditCard.lastName)
@@ -40,10 +35,7 @@ class CreditCard_DetailsSpec: QuickSpec {
         
         describe("when expiration date localized used") {
             it("needs to return correct formatted string") {
-                let creditCard = CreditCard()
-                creditCard.expireMonth = "12"
-                creditCard.expireYear = "1234"
-                
+                let creditCard = TestHelper.card
                 let expireLocalized = "Label.CreditCard.ExpirationDate".localizable
                 let expireYearShort = String(creditCard.expireYear.suffix(2))
                 
@@ -53,8 +45,7 @@ class CreditCard_DetailsSpec: QuickSpec {
         
         describe("when card type name used") {
             it("needs to return correct formatted string") {
-                let creditCard = CreditCard()
-                creditCard.cardNumber = "4242424242424242"
+                let creditCard = TestHelper.card
                 
                 expect(creditCard.cardTypeName) == CreditCardValidator.cardTypeName(for: creditCard.cardNumber)
             }
@@ -62,8 +53,7 @@ class CreditCard_DetailsSpec: QuickSpec {
         
         describe("when card image name used") {
             it("needs to return correct formatted string") {
-                let creditCard = CreditCard()
-                creditCard.cardNumber = "4242424242424242"
+                let creditCard = TestHelper.card
                 
                 expect(creditCard.cardImageName) == CreditCardValidator.cardImageName(for: creditCard.cardNumber)
             }

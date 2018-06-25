@@ -15,7 +15,7 @@ class SetupProviderUseCase {
         self.repository = repository
     }
     
-    func setupProvider(callback: @escaping RepoCallback<Void>) {
+    func setupProvider(callback: @escaping ApiCallback<Void>) {
         repository.setupProvider(callback: callback)
     }
 }

@@ -15,7 +15,7 @@ class CategoryUseCase {
         self.repository = repository
     }
 
-    func getCategory(id: String, paginationValue: Any?, sortType: SortType, _ callback: @escaping RepoCallback<ShopApp_Gateway.Category>) {
+    func getCategory(id: String, paginationValue: Any?, sortType: SortType, _ callback: @escaping ApiCallback<ShopApp_Gateway.Category>) {
         repository.getCategory(id: id, perPage: kItemsPerPage, paginationValue: paginationValue, sortBy: sortType, callback: callback)
     }
 }

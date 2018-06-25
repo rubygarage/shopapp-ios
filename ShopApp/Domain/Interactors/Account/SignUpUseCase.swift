@@ -15,7 +15,7 @@ class SignUpUseCase {
         self.repository = repository
     }
 
-    func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, _ callback: @escaping RepoCallback<Void>) {
+    func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, _ callback: @escaping ApiCallback<Void>) {
         repository.signUp(firstName: firstName, lastName: lastName, email: email, password: password, phone: phone, callback: callback)
     }
 }

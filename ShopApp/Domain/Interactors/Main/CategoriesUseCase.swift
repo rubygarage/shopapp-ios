@@ -15,7 +15,7 @@ class CategoriesUseCase {
         self.repository = repository
     }
 
-    func getCategoryList(paginationValue: Any?, _ callback: @escaping RepoCallback<[ShopApp_Gateway.Category]>) {
+    func getCategoryList(paginationValue: Any?, _ callback: @escaping ApiCallback<[ShopApp_Gateway.Category]>) {
         repository.getCategories(perPage: kItemsPerPage, paginationValue: paginationValue, callback: callback)
     }
 }

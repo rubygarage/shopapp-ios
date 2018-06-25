@@ -94,6 +94,7 @@ class ArticleListViewModelSpec: QuickSpec {
         }
         
         describe("when next page loaded") {
+            let article = TestHelper.fullArticle
             var disposeBag: DisposeBag!
             var states: [ViewState]!
             
@@ -117,7 +118,7 @@ class ArticleListViewModelSpec: QuickSpec {
                     viewModel.loadNextPage()
                     
                     expect(viewModel.items.value.count) == kItemsPerPage * 2
-                    expect(viewModel.paginationValue as? String) == "pagination value"
+                    expect(viewModel.paginationValue as? String) == article.paginationValue
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.content
@@ -140,7 +141,7 @@ class ArticleListViewModelSpec: QuickSpec {
                     viewModel.loadNextPage()
                     
                     expect(viewModel.items.value.count) == kItemsPerPage
-                    expect(viewModel.paginationValue as? String) == "pagination value"
+                    expect(viewModel.paginationValue as? String) == article.paginationValue
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.error(error: nil)

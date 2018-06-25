@@ -117,7 +117,7 @@ class CategoryListViewModelSpec: QuickSpec {
                     viewModel.loadNextPage()
                     
                     expect(viewModel.items.value.count) == kItemsPerPage * 2
-                    expect(viewModel.paginationValue as? String) == "pagination value"
+                    expect(viewModel.paginationValue as? String) == TestHelper.categoryWithFiveProducts.paginationValue
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.content
@@ -140,7 +140,7 @@ class CategoryListViewModelSpec: QuickSpec {
                     viewModel.loadNextPage()
                     
                     expect(viewModel.items.value.count) == kItemsPerPage
-                    expect(viewModel.paginationValue as? String) == "pagination value"
+                    expect(viewModel.paginationValue as? String) == TestHelper.categoryWithFiveProducts.paginationValue
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.error(error: nil)

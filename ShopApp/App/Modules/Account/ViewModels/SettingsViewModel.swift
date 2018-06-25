@@ -35,12 +35,11 @@ class SettingsViewModel: BaseViewModel {
     }
     
     func setPromo(_ value: Bool) {
-        guard let customer = customer.value else {
+        guard customer.value != nil else {
             return
         }
         
-        customer.promo = value
-        update(customer)
+        update(value)
     }
     
     private func getCustomer() {
@@ -58,15 +57,15 @@ class SettingsViewModel: BaseViewModel {
         }
     }
     
-    private func update(_ customer: Customer) {
+    private func update(_ promo: Bool) {
         state.onNext(ViewState.make.loading(showHud: false))
-        updateCustomerUseCase.updateCustomerSettings(isAcceptMarketing: customer.promo) { [weak self] (customer, error) in
+        updateCustomerUseCase.updateCustomerSettings(isAcceptMarketing: promo) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if customer != nil {
+            } else {
                 strongSelf.state.onNext(.content)
             }
         }

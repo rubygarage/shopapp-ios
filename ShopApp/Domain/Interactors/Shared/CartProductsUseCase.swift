@@ -15,7 +15,7 @@ class CartProductsUseCase {
         self.repository = repository
     }
 
-    func getCartProducts(_ callback: @escaping RepoCallback<[CartProduct]>) {
+    func getCartProducts(_ callback: @escaping ApiCallback<[CartProduct]>) {
         repository.getCartProducts(callback: callback)
     }
 }

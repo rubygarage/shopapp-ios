@@ -93,25 +93,26 @@ class SettingsViewModelSpec: QuickSpec {
                     })
                     .disposed(by: disposeBag)
             }
-            
-            context("and it successed") {
-                it("needs to show content of screen") {
+            context("and it failed") {
+                it("needs to show error") {
                     updateCustomerUseCaseMock.isNeedToReturnError = true
+                    updateCustomerUseCaseMock.isNeedToReturnCustomerWithAcceptsMarketing = false
                     viewModel.setPromo(true)
                     
-                    expect(viewModel.customer.value?.promo) == true
+                    expect(viewModel.customer.value?.isAcceptsMarketing) == false
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.error(error: nil)
                 }
             }
             
-            context("and it failed") {
-                it("needs to show error") {
+            context("and it successed") {
+                it("needs to show content of screen") {
                     updateCustomerUseCaseMock.isNeedToReturnError = false
+                    updateCustomerUseCaseMock.isNeedToReturnCustomerWithAcceptsMarketing = true
                     viewModel.setPromo(true)
                     
-                    expect(viewModel.customer.value?.promo) == true
+                    expect(viewModel.customer.value?.isAcceptsMarketing) == false
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.content

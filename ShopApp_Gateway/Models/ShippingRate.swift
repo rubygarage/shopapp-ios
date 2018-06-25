@@ -8,10 +8,20 @@
 
 import Foundation
 
-public class ShippingRate {
-    public var title: String?
-    public var price: String?
-    public var handle = ""
+public struct ShippingRate: Equatable {
+    public let title: String
+    public let price: Decimal
+    public let handle: String
 
-    public init() {}
+    public init(title: String, price: Decimal, handle: String) {
+        self.title = title
+        self.price = price
+        self.handle = handle
+    }
+    
+    public static func == (lhs: ShippingRate, rhs: ShippingRate) -> Bool {
+        return lhs.title == rhs.title
+            && lhs.price == rhs.price
+            && lhs.handle == rhs.handle
+    }
 }

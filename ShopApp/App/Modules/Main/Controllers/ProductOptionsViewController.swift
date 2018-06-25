@@ -15,7 +15,7 @@ let kOptionCollectionViewCellHeight = CGFloat(31.0)
 
 protocol ProductOptionsControllerDelegate: class {
     func viewController(_ viewController: ProductOptionsViewController, didCalculate height: CGFloat)
-    func viewController(_ viewController: ProductOptionsViewController, didSelect option: SelectedOption)
+    func viewController(_ viewController: ProductOptionsViewController, didSelect option: VariantOption)
 }
 
 class ProductOptionsViewController: UIViewController, ProductOptionsCollectionCellDelegate {
@@ -27,9 +27,9 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionCe
     var collectionProvider: ProductOptionsCollectionProvider!
     var options: [ProductOption] = []
     
-    var selectedOptions: [SelectedOption] = [] {
+    var selectedOptions: [VariantOption] = [] {
         didSet {
-            if options.count == 1 && options.first!.values?.count == 1 {
+            if options.count == 1 && options.first!.values.count == 1 {
                 delegate?.viewController(self, didCalculate: 0.0)
                 return
             }
@@ -64,8 +64,8 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionCe
     // MARK: - ProductOptionsCollectionCellDelegate
     
     func collectionViewCell(_ collectionViewCell: ProductOptionsCollectionViewCell, didSelectItemWith values: [String], selectedValue: String) {
-        if let name = options.filter({ $0.values! == values }).first?.name {
-            let option = (name: name, value: selectedValue)
+        if let name = options.filter({ $0.values == values }).first?.name {
+            let option = VariantOption(name: name, value: selectedValue)
             delegate?.viewController(self, didSelect: option)
         }
     }

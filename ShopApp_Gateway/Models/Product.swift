@@ -8,24 +8,47 @@
 
 import Foundation
 
-public class Product {
-    public var id = ""
-    public var title: String?
-    public var productDescription: String?
-    public var price: Decimal?
-    public var hasAlternativePrice: Bool = false
-    public var currency: String?
-    public var discount: String?
-    public var images: [Image]?
-    public var type: String?
-    public var vendor: String?
-    public var createdAt: Date?
-    public var updatedAt: Date?
-    public var tags: [String]?
-    public var paginationValue: String?
-    public var additionalDescription: String?
-    public var variants: [ProductVariant]?
-    public var options: [ProductOption]?
-
-    public init() {}
+public struct Product: Equatable {
+    public let id: String
+    public let title: String
+    public let productDescription: String
+    public let currency: String
+    public let price: Decimal
+    public let hasAlternativePrice: Bool
+    public let discount: String?
+    public let type: String
+    public let images: [Image]
+    public let options: [ProductOption]
+    public let variants: [ProductVariant]
+    public let paginationValue: String?
+    
+    public init(id: String, title: String, productDescription: String, price: Decimal, hasAlternativePrice: Bool, currency: String, discount: String? = nil, images: [Image], type: String, paginationValue: String? = nil, variants: [ProductVariant], options: [ProductOption]) {
+        self.id = id
+        self.title = title
+        self.productDescription = productDescription
+        self.price = price
+        self.hasAlternativePrice = hasAlternativePrice
+        self.currency = currency
+        self.discount = discount
+        self.images = images
+        self.type = type
+        self.paginationValue = paginationValue
+        self.variants = variants
+        self.options = options
+    }
+    
+    public static func == (lhs: Product, rhs: Product) -> Bool {
+        return lhs.id == rhs.id
+            && lhs.title == rhs.title
+            && lhs.productDescription == rhs.productDescription
+            && lhs.price == rhs.price
+            && lhs.hasAlternativePrice == rhs.hasAlternativePrice
+            && lhs.currency == rhs.currency
+            && lhs.discount == rhs.discount
+            && lhs.images == rhs.images
+            && lhs.type == rhs.type
+            && lhs.paginationValue == rhs.paginationValue
+            && lhs.variants == rhs.variants
+            && lhs.options == rhs.options
+    }
 }

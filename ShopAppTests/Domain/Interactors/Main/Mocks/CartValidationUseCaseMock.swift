@@ -13,7 +13,7 @@ import ShopApp_Gateway
 class SetupProviderUseCaseMock: SetupProviderUseCase {
     var isNeedToReturnError = false
     
-    override func setupProvider(callback: @escaping RepoCallback<Void>) {
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(nil, nil)
+    override func setupProvider(callback: @escaping ApiCallback<Void>) {
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(nil, nil)
     }
 }

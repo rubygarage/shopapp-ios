@@ -21,7 +21,7 @@ class OrderDetailsViewModelSpec: QuickSpec {
         
         beforeEach {
             viewModel = OrderDetailsViewModel(orderUseCase: orderUseCase)
-            viewModel.orderId = "order id"
+            viewModel.orderId = "id"
         }
         
         describe("when view model initialized") {
@@ -30,7 +30,7 @@ class OrderDetailsViewModelSpec: QuickSpec {
             }
             
             it("should have variables with correct initial values") {
-                expect(viewModel.orderId) == "order id"
+                expect(viewModel.orderId) == "id"
                 expect(viewModel.data.value).to(beNil())
             }
         }
@@ -42,7 +42,7 @@ class OrderDetailsViewModelSpec: QuickSpec {
                 
                 viewModel.data.asObservable()
                     .subscribe(onNext: { order in
-                        expect(order?.id) == "order id"
+                        expect(order?.id) == TestHelper.orderWithProducts.id
                     })
                     .disposed(by: disposeBag)
             }
@@ -55,7 +55,7 @@ class OrderDetailsViewModelSpec: QuickSpec {
                 
                 viewModel.data.asObservable()
                     .subscribe(onNext: { order in
-                        expect(order?.id) == "order id"
+                        expect(order?.id) == TestHelper.orderWithProducts.id
                     })
                     .disposed(by: disposeBag)
             }

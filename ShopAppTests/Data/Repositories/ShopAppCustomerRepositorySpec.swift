@@ -174,7 +174,7 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
             var address: Address!
             
             beforeEach {
-                address = Address()
+                address = TestHelper.fullAddress
             }
             
             context("if callback has result") {
@@ -184,7 +184,7 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
                     repository.addCustomerAddress(address: address) { (result, error) in
                         expect(apiMock.isAddCustomerAddressStarted) == true
                         
-                        expect(apiMock.address) === address
+                        expect(apiMock.address) == address
                         
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -199,7 +199,7 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
                     repository.addCustomerAddress(address: address) { (_, error) in
                         expect(apiMock.isAddCustomerAddressStarted) == true
                         
-                        expect(apiMock.address) === address
+                        expect(apiMock.address) == address
                         
                         expect(error).toNot(beNil())
                     }
@@ -211,7 +211,7 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
             var address: Address!
             
             beforeEach {
-                address = Address()
+                address = TestHelper.fullAddress
             }
             
             context("if callback has result") {
@@ -221,7 +221,7 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
                     repository.updateCustomerAddress(address: address) { (result, error) in
                         expect(apiMock.isUpdateCustomerAddressStarted) == true
                         
-                        expect(apiMock.address) === address
+                        expect(apiMock.address) == address
                         
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -236,7 +236,7 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
                     repository.updateCustomerAddress(address: address) { (_, error) in
                         expect(apiMock.isUpdateCustomerAddressStarted) == true
                         
-                        expect(apiMock.address) === address
+                        expect(apiMock.address) == address
                         
                         expect(error).toNot(beNil())
                     }

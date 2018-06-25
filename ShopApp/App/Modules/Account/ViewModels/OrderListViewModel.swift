@@ -32,11 +32,9 @@ class OrderListViewModel: BasePaginationViewModel {
         var variant: ProductVariant?
         let order = items.value[index]
         
-        if let items = order.items {
-            items.forEach {
-                if let productVariant = $0.productVariant, productVariant.id == productVariantId {
-                    variant = productVariant
-                }
+        order.orderProducts.forEach {
+            if let productVariant = $0.productVariant, productVariant.id == productVariantId {
+                variant = productVariant
             }
         }
         

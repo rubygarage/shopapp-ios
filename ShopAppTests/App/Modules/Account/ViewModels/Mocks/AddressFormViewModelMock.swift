@@ -33,7 +33,7 @@ class AddressFormViewModelMock: AddressFormViewModel {
     }
     
     func makeSubmitAction() {
-        let address = Address()
+        let address = TestHelper.fullAddress
         filledAddress.onNext(address)
     }
     

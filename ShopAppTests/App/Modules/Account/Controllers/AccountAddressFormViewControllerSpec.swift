@@ -34,7 +34,7 @@ class AccountAddressFormViewControllerSpec: QuickSpec {
         
         describe("when view loaded") {
             beforeEach {
-                viewController.selectedAddress = Address()
+                viewController.selectedAddress = TestHelper.fullAddress
                 _ = viewController.view
             }
             
@@ -58,13 +58,13 @@ class AccountAddressFormViewControllerSpec: QuickSpec {
             
             context("if action is edit") {
                 beforeEach {
-                    viewController.selectedAddress = Address()
+                    viewController.selectedAddress = TestHelper.fullAddress
                     _ = viewController.view
                 }
                 
                 it("should have correct child controller properties") {
                     let childController = viewController.childViewControllers.first as? AddressFormViewController
-                    expect(childController?.address) === viewController.selectedAddress
+                    expect(childController?.address) == viewController.selectedAddress
                 }
             }
         }
@@ -73,7 +73,7 @@ class AccountAddressFormViewControllerSpec: QuickSpec {
             var address: Address!
             
             beforeEach {
-                address = Address()
+                address = TestHelper.fullAddress
             }
             
             context("if address did add") {
@@ -85,7 +85,7 @@ class AccountAddressFormViewControllerSpec: QuickSpec {
                 it("should add address") {
                     viewModelMock.addCustomerAddress(with: address)
                     
-                    expect(viewControllerDelegateMock.addedAddress) === address
+                    expect(viewControllerDelegateMock.addedAddress) == address
                 }
             }
             
@@ -98,7 +98,7 @@ class AccountAddressFormViewControllerSpec: QuickSpec {
                 it("should update address") {
                     viewModelMock.updateCustomerAddress(with: address)
                     
-                    expect(viewControllerDelegateMock.updatedAddress) === address
+                    expect(viewControllerDelegateMock.updatedAddress) == address
                 }
             }
         }

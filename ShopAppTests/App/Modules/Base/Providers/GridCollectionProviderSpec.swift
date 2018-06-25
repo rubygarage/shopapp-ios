@@ -37,12 +37,8 @@ class GridCollectionProviderSpec: QuickSpec {
         }
         
         describe("when products updated") {
-            var product: Product!
-            
             beforeEach {
-                product = Product()
-                product.currency = "UDS"
-                collectionProvider.products = [product]
+                collectionProvider.products = [TestHelper.productWithoutAlternativePrice]
             }
             
             it("should have correct number of items") {
@@ -70,8 +66,7 @@ class GridCollectionProviderSpec: QuickSpec {
             var delegateMock: GridCollectionProviderDelegateMock!
             
             beforeEach {
-                product = Product()
-                product.currency = "UDS"
+                product = TestHelper.productWithoutAlternativePrice
                 collectionProvider.products = [product]
                 
                 delegateMock = GridCollectionProviderDelegateMock()
@@ -83,18 +78,15 @@ class GridCollectionProviderSpec: QuickSpec {
                 collectionProvider.collectionView(collectionView, didSelectItemAt: indexPath)
                 
                 expect(delegateMock.provider) === collectionProvider
-                expect(delegateMock.product) === product
+                expect(delegateMock.product) == product
             }
         }
         
         describe("when view scrolled") {
-            var product: Product!
             var delegateMock: GridCollectionProviderDelegateMock!
             
             beforeEach {
-                product = Product()
-                product.currency = "UDS"
-                collectionProvider.products = [product]
+                collectionProvider.products = [TestHelper.productWithoutAlternativePrice]
                 
                 delegateMock = GridCollectionProviderDelegateMock()
                 collectionProvider.delegate = delegateMock

@@ -102,17 +102,7 @@ class AddressFormViewModelSpec: QuickSpec {
             beforeEach {
                 disposeBag = DisposeBag()
                 
-                address = Address()
-                address.id = "Address ID"
-                address.firstName = "First name"
-                address.lastName = "Last name"
-                address.address = "Address"
-                address.secondAddress = "Second address"
-                address.city = "City"
-                address.country = "Country"
-                address.state = "State"
-                address.zip = "Zip"
-                address.phone = "Phone"
+                address = TestHelper.fullAddress
             }
             
             it("should return address with correct fields") {
@@ -124,8 +114,8 @@ class AddressFormViewModelSpec: QuickSpec {
                         expect(filledAddress.id) == address.id
                         expect(filledAddress.firstName) == address.firstName
                         expect(filledAddress.lastName) == address.lastName
-                        expect(filledAddress.address) == address.address
-                        expect(filledAddress.secondAddress) == address.secondAddress
+                        expect(filledAddress.street) == address.street
+                        expect(filledAddress.secondStreet) == address.secondStreet
                         expect(filledAddress.city) == address.city
                         expect(filledAddress.country) == address.country
                         expect(filledAddress.state) == address.state
@@ -149,7 +139,7 @@ class AddressFormViewModelSpec: QuickSpec {
                 var invalidAddress: Address!
                 
                 beforeEach {
-                    invalidAddress = Address()
+                    invalidAddress = TestHelper.partialAddress
                 }
                 
                 it("should change address valid state to false") {
@@ -168,14 +158,7 @@ class AddressFormViewModelSpec: QuickSpec {
                 var validAddress: Address!
                 
                 beforeEach {
-                    validAddress = Address()
-                    validAddress.firstName = "First name"
-                    validAddress.lastName = "Last name"
-                    validAddress.address = "Address"
-                    validAddress.city = "City"
-                    validAddress.country = "Country"
-                    validAddress.zip = "Zip"
-                    validAddress.phone = "Phone"
+                    validAddress = TestHelper.fullAddress
                 }
                 
                 it("should change address valid state to false") {

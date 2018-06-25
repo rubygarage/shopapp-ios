@@ -12,7 +12,7 @@ import RxSwift
 @testable import ShopApp
 
 class SignUpViewModelMock: SignUpViewModel {
-    private let policy = Policy()
+    private let policy = TestHelper.policy
     
     var isNeedToReturnPolicies = false
     var isSignUpButtonEnabled = Variable<Bool>(true)

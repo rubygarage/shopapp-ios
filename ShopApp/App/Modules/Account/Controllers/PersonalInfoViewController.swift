@@ -44,8 +44,6 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel>, Und
     }
     
     private func setupViewModel() {
-        viewModel.canChangeEmail = false
-        
         viewModel.customer.asObservable()
             .subscribe(onNext: { [weak self] customer in
                 guard let strongSelf = self, let customer = customer else {
@@ -59,25 +57,12 @@ class PersonalInfoViewController: BaseViewController<PersonalInfoViewModel>, Und
             .bind(to: viewModel.firstNameText)
             .disposed(by: disposeBag)
         
-        emailTextFieldView.textField.rx.text.map({ $0 ?? "" })
-            .bind(to: viewModel.emailText)
-            .disposed(by: disposeBag)
-        
         lastNameTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.lastNameText)
             .disposed(by: disposeBag)
         
         phoneTextFieldView.textField.rx.text.map({ $0 ?? "" })
             .bind(to: viewModel.phoneText)
-            .disposed(by: disposeBag)
-        
-        viewModel.emailErrorMessage
-            .subscribe(onNext: { [weak self] errorMessage in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.emailTextFieldView.errorMessage = errorMessage
-            })
             .disposed(by: disposeBag)
         
         changePasswordButton.rx.tap

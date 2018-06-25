@@ -11,9 +11,7 @@ import ShopApp_Gateway
 @testable import ShopApp
 
 class OrderUseCaseMock: OrderUseCase {    
-    override func getOrder(id: String, _ callback: @escaping RepoCallback<Order>) {
-        let order = Order()
-        order.id = "order id"
-        callback(order, nil)
+    override func getOrder(id: String, _ callback: @escaping ApiCallback<Order>) {
+        callback(TestHelper.orderWithProducts, nil)
     }
 }

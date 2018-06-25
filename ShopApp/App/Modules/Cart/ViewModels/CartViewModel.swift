@@ -43,13 +43,13 @@ class CartViewModel: BaseViewModel {
         state.onNext(ViewState.make.loading(showHud: false))
 
         let cartProduct = data.value[index]
-        deleteCartProductUseCase.deleteCartProduct(cartItemId: cartProduct.cartItemId) { [weak self] (success, error) in
+        deleteCartProductUseCase.deleteCartProduct(cartItemId: cartProduct.id) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if let success = success, success {
+            } else {
                 strongSelf.removeFromData(with: cartProduct)
                 strongSelf.data.value.isEmpty ? strongSelf.state.onNext(.empty) : strongSelf.state.onNext(.content)
             }
@@ -59,7 +59,7 @@ class CartViewModel: BaseViewModel {
     func update(cartProduct: CartProduct, quantity: Int) {
         state.onNext(ViewState.make.loading(showHud: false))
 
-        changeCartProductUseCase.changeCartProductQuantity(cartItemId: cartProduct.cartItemId, quantity: quantity) { [weak self] (_, error) in
+        changeCartProductUseCase.changeCartProductQuantity(cartItemId: cartProduct.id, quantity: quantity) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }
@@ -77,7 +77,7 @@ class CartViewModel: BaseViewModel {
     }
     
     private func removeFromData(with item: CartProduct) {
-        guard let index = data.value.index(where: { $0.productId == item.productId }) else {
+        guard let index = data.value.index(where: { $0.id == item.id }) else {
             return
         }
         data.value.remove(at: index)

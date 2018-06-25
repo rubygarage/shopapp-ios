@@ -8,10 +8,17 @@
 
 import Foundation
 
-public class Image {
-    public var id = ""
-    public var src: String?
-    public var imageDescription: String?
+public struct Image: Equatable {
+    public let id: String
+    public let src: String
 
-    public init() {}
+    public init(id: String, src: String) {
+        self.id = id
+        self.src = src
+    }
+    
+    public static func == (lhs: Image, rhs: Image) -> Bool {
+        return lhs.id == rhs.id
+            && lhs.src == rhs.src
+    }
 }

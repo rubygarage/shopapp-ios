@@ -45,7 +45,7 @@ class LastArrivalsTableViewCellSpec: QuickSpec {
             var products: [Product]!
             
             beforeEach {
-                products = [Product()]
+                products = [TestHelper.productWithoutAlternativePrice]
                 cell.configure(with: products)
             }
             
@@ -55,7 +55,7 @@ class LastArrivalsTableViewCellSpec: QuickSpec {
         }
         
         describe("when collection item did select") {
-            let product = Product()
+            let product = TestHelper.productWithoutAlternativePrice
             
             beforeEach {
                 cell.configure(with: [product])
@@ -68,7 +68,7 @@ class LastArrivalsTableViewCellSpec: QuickSpec {
                 collectionView.delegate?.collectionView?(collectionView, didSelectItemAt: indexPath)
                 
                 expect(delegateMock.tableViewCell) === cell
-                expect(delegateMock.product) === product
+                expect(delegateMock.product) == product
             }
         }
     }

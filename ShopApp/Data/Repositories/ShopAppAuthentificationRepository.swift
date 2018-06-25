@@ -15,23 +15,23 @@ class ShopAppAuthentificationRepository: AuthentificationRepository {
         self.api = api
     }
     
-    func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, callback: @escaping RepoCallback<Void>) {
+    func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, callback: @escaping ApiCallback<Void>) {
         api.signUp(firstName: firstName, lastName: lastName, email: email, password: password, phone: phone, callback: callback)
     }
     
-    func signIn(email: String, password: String, callback: @escaping RepoCallback<Void>) {
+    func signIn(email: String, password: String, callback: @escaping ApiCallback<Void>) {
         api.signIn(email: email, password: password, callback: callback)
     }
     
-    func signOut(callback: @escaping RepoCallback<Void>) {
+    func signOut(callback: @escaping ApiCallback<Void>) {
         api.signOut(callback: callback)
     }
     
-    func isSignedIn(callback: @escaping RepoCallback<Bool>) {
+    func isSignedIn(callback: @escaping ApiCallback<Bool>) {
         api.isSignedIn(callback: callback)
     }
     
-    func resetPassword(email: String, callback: @escaping RepoCallback<Void>) {
+    func resetPassword(email: String, callback: @escaping ApiCallback<Void>) {
         api.resetPassword(email: email, callback: callback)
     }
 }

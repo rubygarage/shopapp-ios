@@ -50,9 +50,9 @@ class CheckoutViewModelSpec: QuickSpec {
             var states: [ViewState]!
             
             beforeEach {
-                viewModel.checkout.value = Checkout()
-                viewModel.creditCard.value = CreditCard()
-                viewModel.billingAddress.value = Address()
+                viewModel.checkout.value = TestHelper.checkoutWithShippingAddress
+                viewModel.creditCard.value = TestHelper.card
+                viewModel.billingAddress.value = TestHelper.fullAddress
                 
                 disposeBag = DisposeBag()
                 states = []
@@ -71,7 +71,7 @@ class CheckoutViewModelSpec: QuickSpec {
                 
                 context("and response success") {
                     it("should start pay by credit card") {
-                        let order = Order()
+                        let order = TestHelper.orderWithProducts
                         checkoutUseCaseMock.returnedOrder = order
                         checkoutUseCaseMock.isNeedToReturnError = false
                         
@@ -84,7 +84,7 @@ class CheckoutViewModelSpec: QuickSpec {
                         viewModel.placeOrderPressed.onNext()
                         
                         expect(checkoutUseCaseMock.isPayWithCreditCardStarted) == true
-                        expect(viewModel.order) === order
+                        expect(viewModel.order) == order
                         
                         expect(states.count) == 2
                         expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -121,7 +121,7 @@ class CheckoutViewModelSpec: QuickSpec {
                 
                 context("and response success") {
                     it("should start setup apple pay") {
-                        let order = Order()
+                        let order = TestHelper.orderWithProducts
                         checkoutUseCaseMock.returnedOrder = order
                         checkoutUseCaseMock.isNeedToReturnError = false
                         
@@ -134,7 +134,7 @@ class CheckoutViewModelSpec: QuickSpec {
                         viewModel.placeOrderPressed.onNext()
                         
                         expect(checkoutUseCaseMock.isSetupApplePayStarted) == true
-                        expect(viewModel.order) === order
+                        expect(viewModel.order) == order
                         
                         expect(states.count) == 2
                         expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -196,12 +196,9 @@ class CheckoutViewModelSpec: QuickSpec {
             
             context("if credit card condition success") {
                 it("should return true") {
-                    let checkout = Checkout()
-                    let shippingLine = ShippingRate()
-                    checkout.shippingLine = shippingLine
-                    viewModel.checkout.value = checkout
-                    viewModel.creditCard.value = CreditCard()
-                    viewModel.billingAddress.value = Address()
+                    viewModel.checkout.value = TestHelper.checkoutWithShippingAddress
+                    viewModel.creditCard.value = TestHelper.card
+                    viewModel.billingAddress.value = TestHelper.fullAddress
                     viewModel.customerEmail.value = "customer@mail.com"
                     viewModel.selectedType.value = .creditCard
                     
@@ -270,7 +267,7 @@ class CheckoutViewModelSpec: QuickSpec {
                         
                         beforeEach {
                             checkoutUseCaseMock.isNeedToReturnError = false
-                            checkout = Checkout()
+                            checkout = TestHelper.checkoutWithShippingAddress
                             checkoutUseCaseMock.returnedCheckout = checkout
                         }
                         
@@ -292,7 +289,7 @@ class CheckoutViewModelSpec: QuickSpec {
                                         
                                         expect(viewModel.customerLogged.value) == true
                                         expect(viewModel.cartItems.value.isEmpty) == false
-                                        expect(viewModel.checkout.value) === checkout
+                                        expect(viewModel.checkout.value) == checkout
                                         
                                         expect(states.count) == 4
                                         expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -310,7 +307,7 @@ class CheckoutViewModelSpec: QuickSpec {
                                         
                                         expect(viewModel.customerLogged.value) == true
                                         expect(viewModel.cartItems.value.isEmpty) == false
-                                        expect(viewModel.checkout.value) === checkout
+                                        expect(viewModel.checkout.value) == checkout
                                         
                                         expect(states.count) == 4
                                         expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -329,7 +326,7 @@ class CheckoutViewModelSpec: QuickSpec {
                                     
                                     expect(viewModel.customerLogged.value) == true
                                     expect(viewModel.cartItems.value.isEmpty) == false
-                                    expect(viewModel.checkout.value) === checkout
+                                    expect(viewModel.checkout.value) == checkout
                                     
                                     expect(states.count) == 3
                                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -347,7 +344,7 @@ class CheckoutViewModelSpec: QuickSpec {
                                 
                                 expect(viewModel.customerLogged.value) == true
                                 expect(viewModel.cartItems.value.isEmpty) == false
-                                expect(viewModel.checkout.value) === checkout
+                                expect(viewModel.checkout.value) == checkout
                                 
                                 expect(states.count) == 2
                                 expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -389,18 +386,16 @@ class CheckoutViewModelSpec: QuickSpec {
         }
         
         describe("when 'product variant' called") {
-            let variantId = "Variant id"
+            var cartProduct: CartProduct!
             
             beforeEach {
-                let cartProduct = CartProduct()
-                let productVariant = ProductVariant()
-                cartProduct.productVariant = productVariant
-                productVariant.id = variantId
+                cartProduct = TestHelper.cartProductWithQuantityOne
                 viewModel.cartItems.value = [cartProduct]
             }
+            
             context("and product variant id exist") {
                 it("should return product variant") {
-                    let result = viewModel.productVariant(with: variantId)
+                    let result = viewModel.productVariant(with: cartProduct.productVariant!.id)
                     expect(result).toNot(beNil())
                 }
             }
@@ -428,8 +423,7 @@ class CheckoutViewModelSpec: QuickSpec {
                     })
                     .disposed(by: disposeBag)
                 
-                checkout = Checkout()
-                checkout.id = "Checkout id"
+                checkout = TestHelper.checkoutWithShippingAddress
                 viewModel.checkout.value = checkout
             }
             
@@ -438,9 +432,9 @@ class CheckoutViewModelSpec: QuickSpec {
                     checkoutUseCaseMock.returnedCheckout = checkout
                     checkoutUseCaseMock.isNeedToReturnError = false
                     
-                    viewModel.updateShippingRate(with: ShippingRate())
+                    viewModel.updateShippingRate(with: TestHelper.shippingRate)
                     
-                    expect(viewModel.checkout.value) === checkout
+                    expect(viewModel.checkout.value) == checkout
                     
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -452,7 +446,7 @@ class CheckoutViewModelSpec: QuickSpec {
                 it("should return error") {
                     checkoutUseCaseMock.isNeedToReturnError = true
                     
-                    viewModel.updateShippingRate(with: ShippingRate())
+                    viewModel.updateShippingRate(with: TestHelper.shippingRate)
                     
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)

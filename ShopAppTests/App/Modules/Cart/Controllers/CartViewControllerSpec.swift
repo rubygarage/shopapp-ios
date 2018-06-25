@@ -116,8 +116,8 @@ class CartViewControllerSpec: QuickSpec {
                 
                 it("should have table view with data") {
                     expect(tableProvider.cartProducts.count) == 1
-                    expect(tableProvider.totalPrice) == 50
-                    expect(tableProvider.currency) == "Currency"
+                    expect(tableProvider.totalPrice) == Float(TestHelper.cartProductWithQuantityOne.productVariant!.price as NSNumber)
+                    expect(tableProvider.currency) == TestHelper.cartProductWithQuantityOne.currency
                 }
                 
                 it("should have header view height") {
@@ -128,7 +128,7 @@ class CartViewControllerSpec: QuickSpec {
         
         describe("when cart product quantity updated") {
             it("should update cart product quantity") {
-                let cartProduct = CartProduct()
+                let cartProduct = TestHelper.cartProductWithQuantityOne
                 viewController.viewModel.data.value = [cartProduct]
                 
                 let indexPath = IndexPath(row: 0, section: 0)

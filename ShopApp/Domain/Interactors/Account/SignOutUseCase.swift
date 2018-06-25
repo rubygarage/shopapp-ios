@@ -15,7 +15,7 @@ class SignOutUseCase {
         self.repository = repository
     }
 
-    func signOut(_ callback: @escaping RepoCallback<Void>) {
+    func signOut(_ callback: @escaping ApiCallback<Void>) {
         repository.signOut(callback: callback)
     }
 }

@@ -79,18 +79,15 @@ class CheckoutTableProviderSpec: QuickSpec {
                 var checkout: Checkout!
                 
                 beforeEach {
-                    checkout = Checkout()
+                    checkout = TestHelper.checkoutWithShippingAddress
                 }
                 
                 context("and checkout has available shipping rates") {
                     it("should return a correct rows count") {
-                        let shippingRate = ShippingRate()
-                        let availableShipingRates = [shippingRate, shippingRate]
-                        checkout.availableShippingRates = availableShipingRates
                         tableProvider.checkout = checkout
                         
                         let rowsCount = tableProvider.tableView(tableView, numberOfRowsInSection: CheckoutSection.shippingOptions.rawValue)
-                        expect(rowsCount) == availableShipingRates.count
+                        expect(rowsCount) == checkout.availableShippingRates.count
                     }
                 }
                 
@@ -162,14 +159,11 @@ class CheckoutTableProviderSpec: QuickSpec {
                 var checkout: Checkout!
                 
                 beforeEach {
-                    checkout = Checkout()
+                    checkout = TestHelper.checkoutWithShippingAddress
                 }
                 
                 context("and checkout has shipping address") {
                     it("should return correct cell type") {
-                        let shippingAddress = Address()
-                        shippingAddress.address = "Address"
-                        checkout.shippingAddress = shippingAddress
                         tableProvider.checkout = checkout
                         
                         let indexPath = IndexPath(row: 0, section: CheckoutSection.shippingAddress.rawValue)
@@ -181,6 +175,7 @@ class CheckoutTableProviderSpec: QuickSpec {
                 
                 context("or checkout hasn't shipping address") {
                     it("should return correct cell type") {
+                        checkout = TestHelper.checkoutWithoutShippingAddress
                         tableProvider.checkout = checkout
                         
                         let indexPath = IndexPath(row: 0, section: CheckoutSection.shippingAddress.rawValue)
@@ -226,7 +221,7 @@ class CheckoutTableProviderSpec: QuickSpec {
                 context("and row is 'card'") {
                     context("and credit card exist") {
                         it("should return correct cell type") {
-                            tableProvider.creditCard = CreditCard()
+                            tableProvider.creditCard = TestHelper.card
                             
                             let indexPath = IndexPath(row: PaymentAddCellType.card.rawValue, section: CheckoutSection.payment.rawValue)
                             
@@ -248,9 +243,7 @@ class CheckoutTableProviderSpec: QuickSpec {
                 context("if row is 'billingAddress'") {
                     context("and billing address exist") {
                         it("should return correct cell type") {
-                            let billingAddress = Address()
-                            billingAddress.address = "Address"
-                            tableProvider.billingAddress = billingAddress
+                            tableProvider.billingAddress = TestHelper.fullAddress
                             
                             let indexPath = IndexPath(row: PaymentAddCellType.billingAddress.rawValue, section: CheckoutSection.payment.rawValue)
                             
@@ -283,11 +276,7 @@ class CheckoutTableProviderSpec: QuickSpec {
             context("if section is shipping options") {
                 context("and checkout has shipping address, available shipping rates and currency code") {
                     it("should return corect cell type") {
-                        let checkout = Checkout()
-                        checkout.shippingAddress = Address()
-                        checkout.availableShippingRates = [ShippingRate()]
-                        checkout.currencyCode = "USD"
-                        tableProvider.checkout = checkout
+                        tableProvider.checkout = TestHelper.checkoutWithShippingAddress
                         
                         let indexPath = IndexPath(row: 0, section: CheckoutSection.shippingOptions.rawValue)
                         
@@ -358,8 +347,7 @@ class CheckoutTableProviderSpec: QuickSpec {
         describe("when height for footer called") {
             context("if checkout exist and section is shipping options") {
                 it("should return correct footer height") {
-                    let checkout = Checkout()
-                    tableProvider.checkout = checkout
+                    tableProvider.checkout = TestHelper.checkoutWithShippingAddress
                     
                     let section = CheckoutSection.shippingOptions.rawValue
                     let footerHeight = tableProvider.tableView(tableView, heightForFooterInSection: section)
@@ -436,11 +424,7 @@ class CheckoutTableProviderSpec: QuickSpec {
         describe("when view for footer called") {
             context("if checkout exist and section is shipping options") {
                 it("should return correct footer view type") {
-                    let checkout = Checkout()
-                    checkout.currencyCode = "USD"
-                    checkout.subtotalPrice = 20
-                    checkout.totalPrice = 22
-                    tableProvider.checkout = checkout
+                    tableProvider.checkout = TestHelper.checkoutWithShippingAddress
                     
                     let footerView = tableProvider.tableView(tableView, viewForFooterInSection: CheckoutSection.shippingOptions.rawValue)
                     expect(footerView).to(beAnInstanceOf(PaymentDetailsFooterView.self))

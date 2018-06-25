@@ -14,9 +14,9 @@ class SetupProviderRepositoryMock: SetupProviderRepository {
     var isNeedToReturnError = false
     var isSetupProviderStarted = false
     
-    func setupProvider(callback: @escaping RepoCallback<Void>) {
+    func setupProvider(callback: @escaping ApiCallback<Void>) {
         isSetupProviderStarted = true
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(nil, nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(nil, nil)
     }
 }

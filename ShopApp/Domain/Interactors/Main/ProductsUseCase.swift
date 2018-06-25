@@ -16,19 +16,19 @@ class ProductsUseCase {
         self.repository = repository
     }
 
-    func getLastArrivalProducts(_ callback: @escaping RepoCallback<[Product]>) {
-        repository.getProducts(perPage: kItemsPerPage, paginationValue: nil, sortBy: .createdAt, keyword: nil, excludeKeyword: nil, callback: callback)
+    func getLastArrivalProducts(_ callback: @escaping ApiCallback<[Product]>) {
+        repository.getProducts(perPage: kItemsPerPage, paginationValue: nil, sortBy: .recent, keyword: nil, excludeKeyword: nil, callback: callback)
     }
     
-    func getPopularProducts(_ callback: @escaping RepoCallback<[Product]>) {
-        repository.getProducts(perPage: popuarSectionItemsMaxCount, paginationValue: nil, sortBy: .popular, keyword: nil, excludeKeyword: nil, callback: callback)
+    func getPopularProducts(_ callback: @escaping ApiCallback<[Product]>) {
+        repository.getProducts(perPage: popuarSectionItemsMaxCount, paginationValue: nil, sortBy: .relevant, keyword: nil, excludeKeyword: nil, callback: callback)
     }
     
-    func getProducts(paginationValue: Any?, sortBy: SortType, keyword: String? = nil, excludeKeyword: String? = nil, _ callback: @escaping RepoCallback<[Product]>) {
+    func getProducts(paginationValue: Any?, sortBy: SortType, keyword: String? = nil, excludeKeyword: String? = nil, _ callback: @escaping ApiCallback<[Product]>) {
         repository.getProducts(perPage: kItemsPerPage, paginationValue: paginationValue, sortBy: sortBy, keyword: keyword, excludeKeyword: excludeKeyword, callback: callback)
     }
     
-    func getProducts(paginationValue: Any?, searchPhrase: String, _ callback: @escaping RepoCallback<[Product]>) {
+    func getProducts(paginationValue: Any?, searchPhrase: String, _ callback: @escaping ApiCallback<[Product]>) {
         repository.searchProducts(perPage: kItemsPerPage, paginationValue: paginationValue, query: searchPhrase, callback: callback)
     }
 }

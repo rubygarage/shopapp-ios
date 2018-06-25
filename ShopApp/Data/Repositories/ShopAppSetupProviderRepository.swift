@@ -15,7 +15,7 @@ class ShopAppSetupProviderRepository: SetupProviderRepository {
         self.api = api
     }
     
-    func setupProvider(callback: @escaping RepoCallback<Void>) {
+    func setupProvider(callback: @escaping ApiCallback<Void>) {
         api.setupProvider(callback: callback)
     }
 }

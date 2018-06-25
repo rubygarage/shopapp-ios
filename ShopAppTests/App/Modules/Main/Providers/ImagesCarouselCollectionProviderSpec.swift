@@ -48,7 +48,7 @@ class ImagesCarouselCollectionProviderSpec: QuickSpec {
         }
         
         describe("when images did set") {
-            let images = [Image()]
+            let images = [Image(id: "", src: "")]
             
             beforeEach {
                 collectionProvider.images = images

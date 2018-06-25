@@ -15,11 +15,11 @@ class ShopAppArticleRepository: ArticleRepository {
         self.api = api
     }
     
-    func getArticles(perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping RepoCallback<[Article]>) {
+    func getArticles(perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping ApiCallback<[Article]>) {
         api.getArticles(perPage: perPage, paginationValue: paginationValue, sortBy: sortBy, callback: callback)
     }
     
-    func getArticle(id: String, callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>) {
+    func getArticle(id: String, callback: @escaping ApiCallback<(article: Article, baseUrl: URL)>) {
         api.getArticle(id: id, callback: callback)
     }
 }

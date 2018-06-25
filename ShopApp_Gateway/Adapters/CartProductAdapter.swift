@@ -14,13 +14,6 @@ public struct CartProductAdapter {
             return nil
         }
         
-        let cartProduct = CartProduct()
-        cartProduct.productId = product.id
-        cartProduct.productTitle = product.title
-        cartProduct.productVariant = variant
-        cartProduct.currency = product.currency
-        cartProduct.quantity = productQuantity
-        
-        return cartProduct
+        return CartProduct(id: product.id, productVariant: variant, title: product.title, currency: product.currency, quantity: productQuantity)
     }
 }

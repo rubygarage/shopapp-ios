@@ -17,8 +17,8 @@ class CreditCardViewModel: BaseViewModel {
     var securityCodeText = Variable<String>("")
     var holderNameErrorMessage = PublishSubject<String>()
     var cardNumberErrorMessage = PublishSubject<String>()
-    var filledCard = PublishSubject<CreditCard>()
-    var card: CreditCard?
+    var filledCard = PublishSubject<Card>()
+    var card: Card?
     
     var isCardDataValid: Observable<Bool> {
         return Observable.combineLatest(holderNameText.asObservable(), cardNumberText.asObservable(), monthExpirationText.asObservable(), yearExpirationText.asObservable(), securityCodeText.asObservable()) { holderName, cardNumber, monthExpiration, yearExpiration, securityCode in
@@ -70,16 +70,15 @@ class CreditCardViewModel: BaseViewModel {
         }
     }
     
-    private func generateCreditCard() -> CreditCard {
-        let card = CreditCard()
+    private func generateCreditCard() -> Card {
         let names = holderNameText.value.split(separator: " ", maxSplits: 1)
-        card.firstName = String(describing: names.first!)
-        card.lastName = String(describing: names.last!)
-        card.cardNumber = cardNumberText.value.asCardDefaultNumber()
-        card.expireMonth = monthExpirationText.value
-        card.expireYear = yearExpirationText.value
-        card.verificationCode = securityCodeText.value
+        let firstName = String(describing: names.first!)
+        let lastName = String(describing: names.last!)
+        let cardNumber = cardNumberText.value.asCardDefaultNumber()
+        let expireMonth = monthExpirationText.value
+        let expireYear = yearExpirationText.value
+        let verificationCode = securityCodeText.value
         
-        return card
+        return Card(firstName: firstName, lastName: lastName, cardNumber: cardNumber, expireMonth: expireMonth, expireYear: expireYear, verificationCode: verificationCode)
     }
 }

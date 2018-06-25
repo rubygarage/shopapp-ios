@@ -148,9 +148,9 @@ class CategoryViewControllerSpec: QuickSpec {
         describe("when sort variant selected") {
             it("needs to reload data with selected sort type") {
                 let sortVariantsViewController = SortVariantsViewController()
-                viewController.viewController(sortVariantsViewController, didSelect: .createdAt)
+                viewController.viewController(sortVariantsViewController, didSelect: .recent)
                 
-                expect(viewModelMock.selectedSortType.rawValue) == SortType.createdAt.rawValue
+                expect(viewModelMock.selectedSortType.rawValue) == SortType.recent.rawValue
                 expect(viewModelMock.isResultCleared) == true
                 expect(viewModelMock.isReloadDataStarted) == true
             }

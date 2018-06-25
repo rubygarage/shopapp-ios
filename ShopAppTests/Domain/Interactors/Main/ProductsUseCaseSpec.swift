@@ -31,7 +31,7 @@ class ProductsUseCaseSpec: QuickSpec {
                         expect(repositoryMock.isGetProductListStarted) == true
                         
                         expect(repositoryMock.perPage) == kItemsPerPage
-                        expect(repositoryMock.sortBy?.rawValue) == SortType.createdAt.rawValue
+                        expect(repositoryMock.sortBy?.rawValue) == SortType.recent.rawValue
 
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -47,7 +47,7 @@ class ProductsUseCaseSpec: QuickSpec {
                         expect(repositoryMock.isGetProductListStarted) == true
                         
                         expect(repositoryMock.perPage) == kItemsPerPage
-                        expect(repositoryMock.sortBy?.rawValue) == SortType.createdAt.rawValue
+                        expect(repositoryMock.sortBy?.rawValue) == SortType.recent.rawValue
 
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())
@@ -65,7 +65,7 @@ class ProductsUseCaseSpec: QuickSpec {
                         expect(repositoryMock.isGetProductListStarted) == true
                         
                         expect(repositoryMock.perPage) == 4
-                        expect(repositoryMock.sortBy?.rawValue) == SortType.popular.rawValue
+                        expect(repositoryMock.sortBy?.rawValue) == SortType.relevant.rawValue
 
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -81,7 +81,7 @@ class ProductsUseCaseSpec: QuickSpec {
                         expect(repositoryMock.isGetProductListStarted) == true
                         
                         expect(repositoryMock.perPage) == 4
-                        expect(repositoryMock.sortBy?.rawValue) == SortType.popular.rawValue
+                        expect(repositoryMock.sortBy?.rawValue) == SortType.relevant.rawValue
 
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())

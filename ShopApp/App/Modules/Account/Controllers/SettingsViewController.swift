@@ -46,7 +46,7 @@ class SettingsViewController: BaseViewController<SettingsViewModel>, SwitchTable
                     return
                 }
                 if let customer = customer {
-                    strongSelf.tableProvider.promo = ("Label.Promo".localizable, customer.promo)
+                    strongSelf.tableProvider.promo = ("Label.Promo".localizable, customer.isAcceptsMarketing)
                 } else {
                     strongSelf.tableProvider.promo = nil
                 }

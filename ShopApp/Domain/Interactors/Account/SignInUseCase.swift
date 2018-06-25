@@ -15,11 +15,11 @@ class SignInUseCase {
         self.repository = repository
     }
 
-    func signIn(email: String, password: String, _ callback: @escaping RepoCallback<Void>) {
+    func signIn(email: String, password: String, _ callback: @escaping ApiCallback<Void>) {
         repository.signIn(email: email, password: password, callback: callback)
     }
     
-    func isSignedIn(_ callback: @escaping RepoCallback<Bool>) {
+    func isSignedIn(_ callback: @escaping ApiCallback<Bool>) {
         repository.isSignedIn(callback: callback)
     }
 }

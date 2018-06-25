@@ -26,7 +26,7 @@ class UpdateAddressUseCaseSpec: QuickSpec {
             var address: Address!
             
             beforeEach {
-                address = Address()
+                address = TestHelper.fullAddress
             }
             
             context("if callback has result") {
@@ -36,7 +36,7 @@ class UpdateAddressUseCaseSpec: QuickSpec {
                     useCase.updateCustomerAddress(address: address) { (_, error) in
                         expect(repositoryMock.isUpdateCustomerAddressStarted) == true
                         
-                        expect(repositoryMock.address) === address
+                        expect(repositoryMock.address) == address
                         
                         expect(error).to(beNil())
                     }
@@ -50,7 +50,7 @@ class UpdateAddressUseCaseSpec: QuickSpec {
                     useCase.updateCustomerAddress(address: address) { (_, error) in
                         expect(repositoryMock.isUpdateCustomerAddressStarted) == true
                         
-                        expect(repositoryMock.address) === address
+                        expect(repositoryMock.address) == address
                         
                         expect(error).toNot(beNil())
                     }

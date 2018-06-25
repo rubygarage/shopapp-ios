@@ -31,9 +31,7 @@ class UIImageView_NetworkSpec: QuickSpec {
  
             context("if image exist and content mode did set") {
                 beforeEach {
-                    image = Image()
-                    image.src = "https://via.placeholder.com/1000x1000"
-                    
+                    image = Image(id: "", src: "https://via.placeholder.com/1000x1000")
                     imageView.set(image: image, initialContentMode: .left)
                 }
                 
@@ -77,8 +75,7 @@ class UIImageView_NetworkSpec: QuickSpec {
             
             context("if error did occured") {
                 it("should keep placeholder image") {
-                    let image = Image()
-                    image.src = "wrong source"
+                    let image = Image(id: "", src: "wrong source")
                     imageView.set(image: image)
                     
                     waitUntil(timeout: 2) { done in

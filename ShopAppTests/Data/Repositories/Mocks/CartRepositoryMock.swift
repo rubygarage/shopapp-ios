@@ -23,48 +23,48 @@ class CartRepositoryMock: CartRepository {
     var cartItemIds: [String?]?
     var quantity: Int?
     
-    func getCartProducts(callback: @escaping ([CartProduct]?, RepoError?) -> Void) {
+    func getCartProducts(callback: @escaping ApiCallback<[CartProduct]>) {
         isGetCartProductListStarted = true
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback([], nil)
     }
     
-    func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<Bool>) {
+    func addCartProduct(cartProduct: CartProduct, callback: @escaping ApiCallback<Void>) {
         isAddCartProductStarted = true
         
         self.cartProduct = cartProduct
         
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
-    func deleteCartProduct(cartItemId: String, callback: @escaping RepoCallback<Bool>) {
+    func deleteCartProduct(cartItemId: String, callback: @escaping ApiCallback<Void>) {
         isDeleteProductFromCartStarted = true
         
         self.cartItemId = cartItemId
         
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
-    func deleteCartProducts(cartItemIds: [String], callback: @escaping RepoCallback<Bool>) {
+    func deleteCartProducts(cartItemIds: [String], callback: @escaping ApiCallback<Void>) {
         isDeleteProductsFromCartStarted = true
         
         self.cartItemIds = cartItemIds
         
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
-    func deleteAllCartProducts(callback: @escaping RepoCallback<Bool>) {
+    func deleteAllCartProducts(callback: @escaping ApiCallback<Void>) {
         isDeleteAllProductsFromCartStarted = true
         
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
-    func changeCartProductQuantity(cartItemId: String, quantity: Int, callback: @escaping RepoCallback<Bool>) {
+    func changeCartProductQuantity(cartItemId: String, quantity: Int, callback: @escaping ApiCallback<Void>) {
         isChangeCartProductQuantityStarted = true
         
         self.cartItemId = cartItemId
         self.quantity = quantity
         
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
 }

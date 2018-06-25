@@ -39,13 +39,9 @@ class OrderListTableProvider: NSObject, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CheckoutCartTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
-        var images: [Image] = []
-        var productVariantIds: [String] = []
         let order = orders[indexPath.section]
-        if let items = order.items {
-            images = items.map { $0.productVariant?.image ?? Image() }
-            productVariantIds = items.map { $0.productVariant?.id ?? "" }
-        }
+        let images = order.orderProducts.map { $0.productVariant?.image }
+        let productVariantIds = order.orderProducts.map { $0.productVariant?.id ?? "" }
         cell.configure(with: images, productVariantIds: productVariantIds, index: indexPath.section)
         cell.delegate = delegate
         return cell

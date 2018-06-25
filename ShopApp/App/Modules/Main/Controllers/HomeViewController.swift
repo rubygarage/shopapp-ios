@@ -122,7 +122,7 @@ class HomeViewController: BaseTableViewController<HomeViewModel>, HomeTableProvi
         switch type {
         case .latestArrivals:
             destinationTitle = "ControllerTitle.LatestArrivals".localizable
-            sortType = .createdAt
+            sortType = .recent
             performSegue(withIdentifier: SegueIdentifiers.toProductList, sender: self)
         case .blogPosts:
             performSegue(withIdentifier: SegueIdentifiers.toArticlesList, sender: self)

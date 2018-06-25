@@ -15,7 +15,7 @@ class ArticlesUseCase {
         self.repository = repository
     }
 
-    func getArticles(paginationValue: Any?, _ callback: @escaping RepoCallback<[Article]>) {
-        repository.getArticles(perPage: kItemsPerPage, paginationValue: paginationValue, sortBy: .createdAt, callback: callback)
+    func getArticles(paginationValue: Any?, _ callback: @escaping ApiCallback<[Article]>) {
+        repository.getArticles(perPage: kItemsPerPage, paginationValue: paginationValue, sortBy: .recent, callback: callback)
     }
 }

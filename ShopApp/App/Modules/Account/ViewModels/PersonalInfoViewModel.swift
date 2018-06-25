@@ -14,26 +14,21 @@ class PersonalInfoViewModel: BaseViewModel {
     private let signInUseCase: SignInUseCase
     private let customerUseCase: CustomerUseCase
     
-    var canChangeEmail = true
     var customer = Variable<Customer?>(nil)
     var firstNameText = Variable<String>("")
     var lastNameText = Variable<String>("")
-    var emailText = Variable<String>("")
     var phoneText = Variable<String>("")
-    var emailErrorMessage = PublishSubject<String>()
     var saveChangesSuccess = PublishSubject<Bool>()
     
     var saveChangesButtonEnabled: Observable<Bool> {
-        let observable = Observable.combineLatest(firstNameText.asObservable(), lastNameText.asObservable(), emailText.asObservable(), phoneText.asObservable()) { [weak self] (firstName, lastName, email, phone) -> Bool in
+        let observable = Observable.combineLatest(firstNameText.asObservable(), lastNameText.asObservable(), phoneText.asObservable()) { [weak self] (firstName, lastName, phone) -> Bool in
             guard let strongSelf = self, let customer = strongSelf.customer.value else {
                 return false
             }
-            let firstNameIsDifferent = customer.firstName ?? "" != firstName
-            let lastNameIsDifferent = customer.lastName ?? "" != lastName
-            let emailIsDifferent = customer.email != email
-            let emailIsValid = email.hasAtLeastOneSymbol()
+            let firstNameIsDifferent = customer.firstName != firstName
+            let lastNameIsDifferent = customer.lastName != lastName
             let phoneIsDifferent = customer.phone ?? "" != phone
-            return firstNameIsDifferent || lastNameIsDifferent || (strongSelf.canChangeEmail && emailIsDifferent && emailIsValid) || phoneIsDifferent
+            return firstNameIsDifferent || lastNameIsDifferent || phoneIsDifferent
         }
         return observable
     }
@@ -44,7 +39,7 @@ class PersonalInfoViewModel: BaseViewModel {
                 guard let strongSelf = self else {
                     return
                 }
-                strongSelf.checkValidation()
+                strongSelf.saveChanges()
             default:
                 break
             }
@@ -85,22 +80,6 @@ class PersonalInfoViewModel: BaseViewModel {
         }
     }
     
-    private func checkValidation() {
-        if emailText.value.isValidAsEmail() {
-            saveChanges()
-        } else {
-            processErrorsIfNeeded()
-        }
-    }
-    
-    private func processErrorsIfNeeded() {
-        guard emailText.value.isValidAsEmail() == false else {
-            return
-        }
-        let errorMessage = "Error.InvalidEmail".localizable
-        emailErrorMessage.onNext(errorMessage)
-    }
-    
     private func saveChanges() {
         state.onNext(ViewState.make.loading(isTranslucent: true))
         updateCustomerUseCase.updateCustomer(firstName: firstNameText.value, lastName: lastNameText.value, phone: phoneText.value) { [weak self] (customer, error) in
@@ -121,15 +100,14 @@ class PersonalInfoViewModel: BaseViewModel {
         guard let customer = customer.value else {
             return
         }
-        firstNameText.value = customer.firstName ?? ""
-        lastNameText.value = customer.lastName ?? ""
-        emailText.value = customer.email
+        firstNameText.value = customer.firstName
+        lastNameText.value = customer.lastName
         phoneText.value = customer.phone ?? ""
     }
     
     // MARK: - BaseViewModel
     
     override func tryAgain() {
-        checkValidation()
+        saveChanges()
     }
 }

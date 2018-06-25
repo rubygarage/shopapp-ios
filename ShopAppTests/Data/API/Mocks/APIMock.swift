@@ -68,7 +68,7 @@ class APIMock: API {
     var cartProducts: [CartProduct]?
     var checkoutId: String?
     var shippingRate: ShippingRate?
-    var card: CreditCard?
+    var card: Card?
     var checkout: Checkout?
     var billingAddress: Address?
     var ids: [String]?
@@ -79,23 +79,23 @@ class APIMock: API {
     
     // MARK: - Setup
     
-    func setupProvider(callback: @escaping RepoCallback<Void>) {
+    func setupProvider(callback: @escaping ApiCallback<Void>) {
         isSetupProviderStarted = true
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(nil, nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(nil, nil)
     }
 
     // MARK: - Shop
     
-    func getShop(callback: @escaping RepoCallback<Shop>) {
+    func getShop(callback: @escaping ApiCallback<Shop>) {
         isGetShopInfoStarted = true
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Shop(), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(TestHelper.shop, nil)
     }
     
     // MARK: - Products
     
-    func getProducts(perPage: Int, paginationValue: Any?, sortBy: SortType?, keyword: String?, excludeKeyword: String?, callback: @escaping RepoCallback<[Product]>) {
+    func getProducts(perPage: Int, paginationValue: Any?, sortBy: SortType?, keyword: String?, excludeKeyword: String?, callback: @escaping ApiCallback<[Product]>) {
         isGetProductListStarted = true
         
         self.perPage = perPage
@@ -104,47 +104,47 @@ class APIMock: API {
         self.keyword = keyword
         self.excludeKeyword = excludeKeyword
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback([], nil)
     }
     
-    func getProduct(id: String, callback: @escaping RepoCallback<Product>) {
+    func getProduct(id: String, callback: @escaping ApiCallback<Product>) {
         isGetProductStarted = true
         
         self.id = id
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Product(), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(TestHelper.productWithoutAlternativePrice, nil)
     }
     
-    func searchProducts(perPage: Int, paginationValue: Any?, query: String, callback: @escaping RepoCallback<[Product]>) {
+    func searchProducts(perPage: Int, paginationValue: Any?, query: String, callback: @escaping ApiCallback<[Product]>) {
         isSearchProductsStarted = true
         
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
         self.query = query
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback([], nil)
     }
     
-    func getProductVariants(ids: [String], callback: @escaping RepoCallback<[ProductVariant]>) {
+    func getProductVariants(ids: [String], callback: @escaping ApiCallback<[ProductVariant]>) {
         isGetProductVariantListStarted = true
         
         self.ids = ids
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback([], nil)
     }
     
     // MARK: - Categories
     
-    func getCategories(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[ShopApp_Gateway.Category]>) {
+    func getCategories(perPage: Int, paginationValue: Any?, callback: @escaping ApiCallback<[ShopApp_Gateway.Category]>) {
         isGetCategoryListStarted = true
         
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
 
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback([], nil)
     }
     
-    func getCategory(id: String, perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping RepoCallback<ShopApp_Gateway.Category>) {
+    func getCategory(id: String, perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping ApiCallback<ShopApp_Gateway.Category>) {
         isGetCategoryStarted = true
         
         self.id = id
@@ -152,32 +152,31 @@ class APIMock: API {
         self.paginationValue = paginationValue as? String
         self.sortBy = sortBy
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Category(), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(TestHelper.categoryWithFiveProducts, nil)
     }
     
     // MARK: - Articles
     
-    func getArticles(perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping RepoCallback<[Article]>) {
+    func getArticles(perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping ApiCallback<[Article]>) {
         isGetArticleListStarted = true
         
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
         self.sortBy = sortBy
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback([], nil)
     }
     
-    func getArticle(id: String, callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>) {
+    func getArticle(id: String, callback: @escaping ApiCallback<(article: Article, baseUrl: URL)>) {
         isGetArticleStarted = true
         
         self.id = id
         
         if isNeedToReturnError {
-            callback(nil, RepoError())
+            callback(nil, ShopAppError.content(isNetworkError: false))
         } else {
-            let article = Article()
             let baseUrl = URL(string: "https://www.google.com")!
-            let result = (article: article, baseUrl: baseUrl)
+            let result = (article: TestHelper.fullArticle, baseUrl: baseUrl)
             
             callback(result, nil)
         }
@@ -185,7 +184,7 @@ class APIMock: API {
     
     // MARK: - Authentification
     
-    func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, callback: @escaping RepoCallback<Void>) {
+    func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, callback: @escaping ApiCallback<Void>) {
         isSignUpStarter = true
         
         self.email = email
@@ -194,145 +193,147 @@ class APIMock: API {
         self.password = password
         self.phone = phone
         
-        callback((), isNeedToReturnError ? RepoError() : nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
-    func signIn(email: String, password: String, callback: @escaping RepoCallback<Void>) {
+    func signIn(email: String, password: String, callback: @escaping ApiCallback<Void>) {
         isLoginStarted = true
         
         self.email = email
         self.password = password
         
-        callback((), isNeedToReturnError ? RepoError() : nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
-    func signOut(callback: @escaping RepoCallback<Void>) {
+    func signOut(callback: @escaping ApiCallback<Void>) {
         isLogoutStarted = true
         
-        callback((), isNeedToReturnError ? RepoError() : nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
-    func isSignedIn(callback: @escaping RepoCallback<Bool>) {
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+    func isSignedIn(callback: @escaping ApiCallback<Bool>) {
+        isNeedToReturnError ? callback(false, ShopAppError.content(isNetworkError: false)) : callback(true, nil)
     }
     
-    func resetPassword(email: String, callback: @escaping RepoCallback<Void>) {
+    func resetPassword(email: String, callback: @escaping ApiCallback<Void>) {
         isResetPasswordStarted = true
         
         self.email = email
         
-        callback((), isNeedToReturnError ? RepoError() : nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
     // MARK: - Customer
     
-    func getCustomer(callback: @escaping RepoCallback<Customer>) {
+    func getCustomer(callback: @escaping ApiCallback<Customer>) {
         isGetCustomerStarted = true
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Customer(), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(TestHelper.customerWithoutAcceptsMarketing, nil)
     }
     
-    func updateCustomer(firstName: String, lastName: String, phone: String, callback: @escaping RepoCallback<Customer>) {
+    func updateCustomer(firstName: String, lastName: String, phone: String, callback: @escaping ApiCallback<Customer>) {
         isUpdateCustomerInfoStarted = true
         
         self.firstName = firstName
         self.lastName = lastName
         self.phone = phone
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Customer(), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(TestHelper.customerWithoutAcceptsMarketing, nil)
     }
     
-    func updateCustomerSettings(isAcceptMarketing: Bool, callback: @escaping RepoCallback<Void>) {
+    func updateCustomerSettings(isAcceptMarketing: Bool, callback: @escaping ApiCallback<Void>) {
         isUpdateCustomerPromoStarted = true
         
         self.isAcceptMarketing = isAcceptMarketing
         
-        callback((), isNeedToReturnError ? RepoError() : nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback((), nil)
     }
     
-    func updatePassword(password: String, callback: @escaping RepoCallback<Void>) {
+    func updatePassword(password: String, callback: @escaping ApiCallback<Void>) {
         isUpdateCustomerPasswordStarted = true
         
         self.password = password
         
-        callback((), isNeedToReturnError ? RepoError() : nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback((), nil)
     }
     
-    func addCustomerAddress(address: Address, callback: @escaping RepoCallback<Void>) {
+    func addCustomerAddress(address: Address, callback: @escaping ApiCallback<Void>) {
         isAddCustomerAddressStarted = true
         
         self.address = address
         
-        callback((), isNeedToReturnError ? RepoError() : nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
-    func updateCustomerAddress(address: Address, callback: @escaping RepoCallback<Void>) {
+    func updateCustomerAddress(address: Address, callback: @escaping ApiCallback<Void>) {
         isUpdateCustomerAddressStarted = true
         
         self.address = address
         
-        callback((), isNeedToReturnError ? RepoError() : nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
-    func setDefaultShippingAddress(id: String, callback: @escaping RepoCallback<Void>) {
+    func setDefaultShippingAddress(id: String, callback: @escaping ApiCallback<Void>) {
         isUpdateCustomerDefaultAddressStarted = true
-        addressId = id
         
-        callback((), isNeedToReturnError ? RepoError() : nil)
+        self.addressId = id
+        
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback((), nil)
     }
     
-    func deleteCustomerAddress(id: String, callback: @escaping RepoCallback<Void>) {
+    func deleteCustomerAddress(id: String, callback: @escaping ApiCallback<Void>) {
         isDeleteCustomerAddressStarted = true
+        
         addressId = id
         
-        callback((), isNeedToReturnError ? RepoError() : nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
     // MARK: - Payments
     
-    func createCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
+    func createCheckout(cartProducts: [CartProduct], callback: @escaping ApiCallback<Checkout>) {
         isCreateCheckoutStarted = true
         
         self.cartProducts = cartProducts
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Checkout(), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(TestHelper.checkoutWithShippingAddress, nil)
     }
     
-    func getCheckout(id: String, callback: @escaping RepoCallback<Checkout>) {
+    func getCheckout(id: String, callback: @escaping ApiCallback<Checkout>) {
         isGetCheckoutStarted = true
         
         checkoutId = id
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Checkout(), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(TestHelper.checkoutWithShippingAddress, nil)
     }
     
-    func setShippingAddress(checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>) {
+    func setShippingAddress(checkoutId: String, address: Address, callback: @escaping ApiCallback<Bool>) {
         isUpdateShippingAddressStarted = true
         
         self.checkoutId = checkoutId
         self.address = address
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(true, nil)
     }
     
-    func getShippingRates(checkoutId: String, callback: @escaping RepoCallback<[ShippingRate]>) {
+    func getShippingRates(checkoutId: String, callback: @escaping ApiCallback<[ShippingRate]>) {
         isGetShippingRatesStarted = true
         
         self.checkoutId = checkoutId
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback([], nil)
     }
     
-    func setShippingRate(checkoutId: String, shippingRate: ShippingRate, callback: @escaping RepoCallback<Checkout>) {
+    func setShippingRate(checkoutId: String, shippingRate: ShippingRate, callback: @escaping ApiCallback<Checkout>) {
         isUpdateCheckoutStarted = true
         
         self.shippingRate = shippingRate
         self.checkoutId = checkoutId
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Checkout(), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(TestHelper.checkoutWithShippingAddress, nil)
     }
     
-    func completeCheckout(checkout: Checkout, email: String, address: Address, card: CreditCard,  callback: @escaping RepoCallback<Order>) {
+    func completeCheckout(checkout: Checkout, email: String, address: Address, card: Card,  callback: @escaping ApiCallback<Order>) {
         isPayStarted = true
         
         self.card = card
@@ -340,77 +341,77 @@ class APIMock: API {
         self.billingAddress = address
         self.email = email
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Order(), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(TestHelper.orderWithProducts, nil)
     }
     
-    func setupApplePay(checkout: Checkout, email: String, callback: @escaping RepoCallback<Order>) {
+    func setupApplePay(checkout: Checkout, email: String, callback: @escaping ApiCallback<Order>) {
         isSetupApplePayStarted = true
         
         self.checkout = checkout
         self.email = email
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Order(), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(TestHelper.orderWithProducts, nil)
     }
     
-    func getCountries(callback: @escaping RepoCallback<[Country]>) {
+    func getCountries(callback: @escaping ApiCallback<[Country]>) {
         isGetCountriesStarted = true
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback([], nil)
     }
     
     // MARK: - Orders
     
-    func getOrders(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
+    func getOrders(perPage: Int, paginationValue: Any?, callback: @escaping ApiCallback<[Order]>) {
         isGetOrderListStarted = true
         
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback([], nil)
     }
     
-    func getOrder(id: String, callback: @escaping RepoCallback<Order>) {
+    func getOrder(id: String, callback: @escaping ApiCallback<Order>) {
         isGetOrderStarted = true
         
         self.id = id
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Order(), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(TestHelper.orderWithProducts, nil)
     }
     
     // MARK: - Cart
     
-    func getCartProducts(callback: @escaping ([CartProduct]?, RepoError?) -> Void) {
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+    func getCartProducts(callback: @escaping ApiCallback<[CartProduct]>) {
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback([], nil)
     }
     
-    func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<Bool>) {
+    func addCartProduct(cartProduct: CartProduct, callback: @escaping ApiCallback<Void>) {
         isAddCartProductStarted = true
         
         self.cartProduct = cartProduct
         
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
-    func deleteCartProduct(cartItemId: String, callback: @escaping RepoCallback<Bool>) {
+    func deleteCartProduct(cartItemId: String, callback: @escaping ApiCallback<Void>) {
         isDeleteProductFromCartStarted = true
         
         self.cartItemId = cartItemId
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
-    func deleteAllCartProducts(callback: @escaping RepoCallback<Bool>) {
+    func deleteAllCartProducts(callback: @escaping ApiCallback<Void>) {
         isDeleteAllProductsFromCartStarted = true
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
-    func changeCartProductQuantity(cartItemId: String, quantity: Int, callback: @escaping RepoCallback<Bool>) {
+    func changeCartProductQuantity(cartItemId: String, quantity: Int, callback: @escaping ApiCallback<Void>) {
         isChangeCartProductQuantityStarted = true
         
         self.cartItemId = cartItemId
         self.quantity = quantity
         
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
 }

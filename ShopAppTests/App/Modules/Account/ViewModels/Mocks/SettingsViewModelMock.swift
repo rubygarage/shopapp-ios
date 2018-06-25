@@ -20,7 +20,7 @@ class SettingsViewModelMock: SettingsViewModel {
         isCustomerLoadingStarted = true
         
         if isNeedToReturnData {
-            customer.value = Customer()
+            customer.value = TestHelper.customerWithoutAcceptsMarketing
         } else {
             customer.value = nil
         }

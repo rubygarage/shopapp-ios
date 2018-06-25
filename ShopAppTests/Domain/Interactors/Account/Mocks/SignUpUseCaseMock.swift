@@ -11,15 +11,15 @@ import ShopApp_Gateway
 @testable import ShopApp
 
 class SignUpUseCaseMock: SignUpUseCase {
-    private let error = ContentError()
+    private let error = ShopAppError.content(isNetworkError: false)
     
     var isNeedToReturnError = false
     
-    override func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, _ callback: @escaping RepoCallback<Void>) {
+    override func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, _ callback: @escaping ApiCallback<Void>) {
         execute(callback: callback)
     }
     
-    private func execute(callback: @escaping RepoCallback<Void>) {
+    private func execute(callback: @escaping ApiCallback<Void>) {
         callback((), isNeedToReturnError ? error : nil)
     }
 }

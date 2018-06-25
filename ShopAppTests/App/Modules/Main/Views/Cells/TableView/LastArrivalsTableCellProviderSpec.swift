@@ -41,9 +41,7 @@ class LastArrivalsTableCellProviderSpec: QuickSpec {
             var products: [Product]!
             
             beforeEach {
-                let product = Product()
-                product.currency = "Currency"
-                products = [product]
+                products = [TestHelper.productWithoutAlternativePrice]
                 collectionProvider.products = products
                 
                 collectionView.reloadData()
@@ -76,7 +74,7 @@ class LastArrivalsTableCellProviderSpec: QuickSpec {
             var delegateMock: LastArrivalsTableCellProviderDelegateMock!
             
             beforeEach {
-                product = Product()
+                product = TestHelper.productWithoutAlternativePrice
                 collectionProvider.products = [product]
                 
                 delegateMock = LastArrivalsTableCellProviderDelegateMock()
@@ -91,7 +89,7 @@ class LastArrivalsTableCellProviderSpec: QuickSpec {
                     collectionProvider.collectionView(collectionView, didSelectItemAt: indexPath)
                     
                     expect(delegateMock.provider) === collectionProvider
-                    expect(delegateMock.product) === product
+                    expect(delegateMock.product) == product
                 }
             }
             

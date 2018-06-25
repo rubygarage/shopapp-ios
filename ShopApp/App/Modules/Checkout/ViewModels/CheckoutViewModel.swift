@@ -38,7 +38,7 @@ class CheckoutViewModel: BaseViewModel {
     private let signInUseCase: SignInUseCase
     
     var checkout = Variable<Checkout?>(nil)
-    var creditCard = Variable<CreditCard?>(nil)
+    var creditCard = Variable<Card?>(nil)
     var billingAddress = Variable<Address?>(nil)
     var selectedType = Variable<PaymentType?>(nil)
     var cartItems = Variable<[CartProduct]>([])
@@ -65,7 +65,7 @@ class CheckoutViewModel: BaseViewModel {
     var isCheckoutValid: Observable<Bool> {
         return Observable.combineLatest(selectedType.asObservable(), checkout.asObservable(), creditCard.asObservable(), billingAddress.asObservable(), customerEmail.asObservable()) { (type, checkout, card, address, customerEmail) in
             let applePayCondition = type == .applePay && customerEmail.isValidAsEmail()
-            let creditCardCondition = type == .creditCard && checkout != nil && card != nil && address != nil && checkout?.shippingLine != nil && customerEmail.isValidAsEmail()
+            let creditCardCondition = type == .creditCard && checkout != nil && card != nil && address != nil && checkout?.shippingRate != nil && customerEmail.isValidAsEmail()
             return applePayCondition || creditCardCondition
         }
     }
@@ -110,16 +110,14 @@ class CheckoutViewModel: BaseViewModel {
     func updateCheckoutShippingAddress(with address: Address) {
         state.onNext(ViewState.make.loading())
         let checkoutId = checkout.value?.id ?? ""
-        checkoutUseCase.setShippingAddress(checkoutId: checkoutId, address: address) { [weak self] (success, error) in
+        checkoutUseCase.setShippingAddress(checkoutId: checkoutId, address: address) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if let success = success, success == true {
-                strongSelf.getCheckout()
             } else {
-                strongSelf.state.onNext(.error(error: RepoError()))
+                strongSelf.getCheckout()
             }
         }
     }
@@ -221,7 +219,7 @@ class CheckoutViewModel: BaseViewModel {
         }
     }
     
-    private func paymentCallback() -> RepoCallback<Order> {
+    private func paymentCallback() -> ApiCallback<Order> {
         return { [weak self] (response, error) in
             guard let strongSelf = self else {
                 return

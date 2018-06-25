@@ -21,7 +21,7 @@ class CheckoutCartCollectionCell: UICollectionViewCell {
     
     // MARK: - Setup
     
-    func configure(with item: Image, productVariantId: String) {
+    func configure(with item: Image?, productVariantId: String) {
         cartItemImageView.set(image: item)
         self.productVariantId = productVariantId
     }

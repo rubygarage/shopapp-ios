@@ -9,7 +9,7 @@
 import RxSwift
 import ShopApp_Gateway
 
-typealias SelectedVariant = (variant: ProductVariant?, allOptions: [ProductOption], selectedOptions: [SelectedOption], currency: String)
+typealias SelectedVariant = (variant: ProductVariant?, allOptions: [ProductOption], selectedOptions: [VariantOption], currency: String)
 
 class ProductDetailsViewModel: BaseViewModel {
     private let addCartProductUseCase: AddCartProductUseCase
@@ -17,7 +17,7 @@ class ProductDetailsViewModel: BaseViewModel {
     private let productsUseCase: ProductsUseCase
     
     private var productOptions: [ProductOption] = []
-    private var selectedOptions: [SelectedOption] = []
+    private var selectedOptions: [VariantOption] = []
     private var selectedProductVariant: ProductVariant?
     
     var productId: String!
@@ -45,8 +45,8 @@ class ProductDetailsViewModel: BaseViewModel {
                 event.onNext(false)
                 return Disposables.create()
             }
-            strongSelf.addCartProductUseCase.addCartProduct(cartProduct) { (success, _) in
-                event.onNext(success ?? false)
+            strongSelf.addCartProductUseCase.addCartProduct(cartProduct) { (_, error) in
+                event.onNext(error == nil)
             }
             return Disposables.create()
         })
@@ -69,18 +69,18 @@ class ProductDetailsViewModel: BaseViewModel {
             } else if let product = product {
                 strongSelf.setupData(product: product)
                 strongSelf.product.value = product
-                if let productVariant = strongSelf.productVariant, let selectedOptions = productVariant.selectedOptions {
-                    selectedOptions.forEach { strongSelf.selectOption(with: $0.name, value: $0.value) }
+                if let selectedOptions = strongSelf.productVariant?.selectedOptions {
+                    selectedOptions.forEach { strongSelf.selectOption($0) }
                 }
                 strongSelf.loadRelatedItems()
             }
         }
     }
     
-    func selectOption(with name: String, value: String) {
+    func selectOption(_ option: VariantOption) {
         let selectedOptionsNames = selectedOptions.map({ $0.name })
-        if let index = selectedOptionsNames.index(of: name) {
-            selectedOptions[index].value = value
+        if let index = selectedOptionsNames.index(of: option.name) {
+            selectedOptions[index] = option
         }
         if let variants = product.value?.variants {
             findVariant(variants: variants)
@@ -92,34 +92,31 @@ class ProductDetailsViewModel: BaseViewModel {
             setupSelectedOptions(product: product)
         }
         if selectedProductVariant == nil {
-            selectedProductVariant = product.variants?.first
+            selectedProductVariant = product.variants.first
         }
         currency = product.currency
-        guard let variant = product.variants?.first, let allOptions = product.options, let currency = product.currency else {
+        guard let variant = product.variants.first else {
             return
         }
-        let result = SelectedVariant(variant: variant, allOptions: allOptions, selectedOptions: selectedOptions, currency: currency)
+        let result = SelectedVariant(variant: variant, allOptions: product.options, selectedOptions: selectedOptions, currency: product.currency)
         selectedVariant.onNext(result)
     }
     
     private func setupSelectedOptions(product: Product) {
-        guard let options = product.options else {
-            return
-        }
-        for option in options {
-            selectedOptions.append((name: option.name ?? "", value: option.values?.first ?? ""))
+        for option in product.options {
+            selectedOptions.append(VariantOption(name: option.name, value: option.values.first ?? ""))
         }
     }
     
     private func findVariant(variants: [ProductVariant]) {
         let selectedOptionsNames = selectedOptions.map({ $0.name })
-        let selectedOptionsNValues = selectedOptions.map({ $0.value })
+        let selectedOptionsValues = selectedOptions.map({ $0.value })
         
         for variant in variants {
-            let variantNames = variant.selectedOptions?.map({ $0.name }) ?? []
-            let variantValues = variant.selectedOptions?.map({ $0.value }) ?? []
+            let variantNames = variant.selectedOptions.map({ $0.name })
+            let variantValues = variant.selectedOptions.map({ $0.value })
             
-            if selectedOptionsNames == variantNames && selectedOptionsNValues == variantValues {
+            if selectedOptionsNames == variantNames && selectedOptionsValues == variantValues {
                 updateSelectedVariant(variant: variant)
                 return
             }

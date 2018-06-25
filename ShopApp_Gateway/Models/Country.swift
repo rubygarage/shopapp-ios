@@ -8,9 +8,14 @@
 
 import Foundation
 
-public class Country {
-    public var name = ""
-    public var states: [State] = []
+public struct Country {
+    public let id: String
+    public let name: String
+    public let states: [State]?
 
-    public init() {}
+    public init(id: String, name: String, states: [State]? = nil) {
+        self.id = id
+        self.name = name
+        self.states = states
+    }
 }

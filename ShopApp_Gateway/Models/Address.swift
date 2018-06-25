@@ -8,17 +8,41 @@
 
 import Foundation
 
-public class Address {
-    public var id = ""
-    public var firstName: String?
-    public var lastName: String?
-    public var address: String?
-    public var secondAddress: String?
-    public var city: String?
-    public var country: String?
-    public var state: String?
-    public var zip: String?
-    public var phone: String?
-
-    public init() {}
+public struct Address: Equatable {
+    public let id: String
+    public let street: String
+    public let secondStreet: String?
+    public let city: String
+    public let country: String
+    public let state: String?
+    public let firstName: String
+    public let lastName: String
+    public let zip: String
+    public let phone: String?
+    
+    public init(id: String, firstName: String, lastName: String, street: String, secondStreet: String? = nil, city: String, country: String, state: String? = nil, zip: String, phone: String? = nil) {
+        self.id = id
+        self.firstName = firstName
+        self.lastName = lastName
+        self.street = street
+        self.secondStreet = secondStreet
+        self.city = city
+        self.country = country
+        self.state = state
+        self.zip = zip
+        self.phone = phone
+    }
+    
+    public static func == (lhs: Address, rhs: Address) -> Bool {
+        return lhs.id == rhs.id
+            && lhs.firstName == rhs.firstName
+            && lhs.lastName == rhs.lastName
+            && lhs.street == rhs.street
+            && lhs.secondStreet == rhs.secondStreet
+            && lhs.city == rhs.city
+            && lhs.country == rhs.country
+            && lhs.state == rhs.state
+            && lhs.zip == rhs.zip
+            && lhs.phone == rhs.phone
+    }
 }

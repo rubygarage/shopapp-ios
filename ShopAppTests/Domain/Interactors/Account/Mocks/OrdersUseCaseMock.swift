@@ -15,9 +15,9 @@ class OrdersUseCaseMock: OrdersUseCase {
     var isNeedToReturnOrderWithVariant = false
     var isNeedToReturnError = false
     
-    override func getOrders(paginationValue: Any?, _ callback: @escaping RepoCallback<[Order]>) {
+    override func getOrders(paginationValue: Any?, _ callback: @escaping ApiCallback<[Order]>) {
         if isNeedToReturnError {
-            callback(nil, RepoError())
+            callback(nil, ShopAppError.content(isNetworkError: false))
         } else {
             let ordersCount = isOrderCountLessThenConstant ? 5 : 10
             var orders: [Order] = []
@@ -30,19 +30,6 @@ class OrdersUseCaseMock: OrdersUseCase {
     }
     
     private func generatedOrder(with index: Int) -> Order {
-        let order = Order()
-        order.paginationValue = "pagination value"
-        
-        if isNeedToReturnOrderWithVariant && index == 1 {
-            let productVariant = ProductVariant()
-            productVariant.id = "product variant id"
-            
-            let orderItem = OrderItem()
-            orderItem.productVariant = productVariant
-            
-            order.items = [orderItem]
-        }
-        
-        return order
+        return isNeedToReturnOrderWithVariant && index == 1 ? TestHelper.orderWithProducts : TestHelper.orderWithoutProducts
     }
 }

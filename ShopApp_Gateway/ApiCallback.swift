@@ -1,5 +1,5 @@
 //
-//  RepoCallback.swift
+//  ApiCallback.swift
 //  ShopApp_Gateway
 //
 //  Created by Mykola Voronin on 2/15/18.
@@ -8,4 +8,4 @@
 
 import Foundation
 
-public typealias RepoCallback<T> = (_ result: T?, _ error: RepoError?) -> Void
+public typealias ApiCallback<T> = (_ result: T?, _ error: ShopAppError?) -> Void

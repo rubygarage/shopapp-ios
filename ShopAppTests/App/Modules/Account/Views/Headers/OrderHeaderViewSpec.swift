@@ -20,16 +20,7 @@ class OrderHeaderViewSpec: QuickSpec {
         var dateLabel: UILabel!
         
         beforeEach {
-            let dateString = "2018-03-02"
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            
-            let date = dateFormatter.date(from: dateString)
-            let order = Order()
-            order.number = 1
-            order.createdAt = date
-            
-            view = OrderHeaderView(section: 0, order: order)
+            view = OrderHeaderView(section: 0, order: TestHelper.orderWithProducts)
             
             numberLabel = self.findView(withAccessibilityLabel: "number", in: view) as! UILabel
             dateLabel = self.findView(withAccessibilityLabel: "date", in: view) as! UILabel
@@ -48,8 +39,11 @@ class OrderHeaderViewSpec: QuickSpec {
             
             it("should have correct date label text") {
                 let dateFormat = "Label.Order.Date".localizable
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+                let dateString = dateFormatter.string(from: Date())
                 
-                expect(dateLabel.text) == String(format: dateFormat, "Friday, Mar 2, 2018")
+                expect(dateLabel.text) == String(format: dateFormat, dateString)
             }
         }
         

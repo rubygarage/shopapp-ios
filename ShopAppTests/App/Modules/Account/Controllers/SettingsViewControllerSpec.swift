@@ -72,7 +72,7 @@ class SettingsViewControllerSpec: QuickSpec {
                     let customer = viewModelMock.customer.value!
                     
                     expect(tableProvider.promo?.description) == "Label.Promo".localizable
-                    expect(tableProvider.promo?.state) == customer.promo
+                    expect(tableProvider.promo?.state) == customer.isAcceptsMarketing
                     expect(tableView.numberOfSections) == 1
                 }
             }

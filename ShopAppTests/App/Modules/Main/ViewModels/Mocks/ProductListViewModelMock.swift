@@ -23,7 +23,7 @@ class ProductListViewModelMock: ProductListViewModel {
         if isNeedToReturnData {
             paginationValue = nil
             products.value.removeAll()
-            products.value.append(Product())
+            products.value.append(TestHelper.productWithoutAlternativePrice)
         }
     }
     

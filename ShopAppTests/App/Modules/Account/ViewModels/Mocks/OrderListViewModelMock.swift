@@ -18,7 +18,7 @@ class OrderListViewModelMock: OrderListViewModel {
     
     override func reloadData() {
         if isNeedToReturnData {
-            items.value = [Order()]
+            items.value = [TestHelper.orderWithProducts]
         }
         isReloadDataStarted = true
     }

@@ -15,12 +15,11 @@ class CartProductsUseCaseMock: CartProductsUseCase {
     var isNeedToReturnEmptyData = false
     var isNeedToReturnQuantity = false
     
-    override func getCartProducts(_ callback: @escaping RepoCallback<[CartProduct]>) {
+    override func getCartProducts(_ callback: @escaping ApiCallback<[CartProduct]>) {
         if isNeedToReturnError {
-            callback(nil, RepoError())
+            callback(nil, ShopAppError.content(isNetworkError: false))
         } else {
-            let cartProduct = CartProduct()
-            cartProduct.quantity = isNeedToReturnQuantity ? 5 : 0
+            let cartProduct = isNeedToReturnQuantity ? TestHelper.cartProductWithQuantityTwo : TestHelper.cartProductWithQuantityZero
             let response = isNeedToReturnEmptyData ? [] : [cartProduct]
             callback(response, nil)
         }

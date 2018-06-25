@@ -38,11 +38,10 @@ class AccountTableViewCellSpec: QuickSpec {
         
         describe("when cell configured") {
             it("needs to setup policy title") {
-                let policy = Policy()
-                policy.title = "Title"
+                let policy = TestHelper.policy
                 cell.configure(with: policy)
                 
-                expect(policyTitleLabel.text) == "Title"
+                expect(policyTitleLabel.text) == policy.title
             }
         }
     }

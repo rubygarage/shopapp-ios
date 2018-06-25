@@ -33,12 +33,11 @@ class DeleteCartProductUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.deleteCartProduct(cartItemId: productVariantId) { (result, error) in
+                    useCase.deleteCartProduct(cartItemId: productVariantId) { (_, error) in
                         expect(repositoryMock.isDeleteProductFromCartStarted) == true
                         
                         expect(repositoryMock.cartItemId) == productVariantId
                         
-                        expect(result) == true
                         expect(error).to(beNil())
                     }
                 }
@@ -48,12 +47,11 @@ class DeleteCartProductUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.deleteCartProduct(cartItemId: productVariantId) { (result, error) in
+                    useCase.deleteCartProduct(cartItemId: productVariantId) { (_, error) in
                         expect(repositoryMock.isDeleteProductFromCartStarted) == true
                         
                         expect(repositoryMock.cartItemId) == productVariantId
                         
-                        expect(result) == false
                         expect(error).toNot(beNil())
                     }
                 }

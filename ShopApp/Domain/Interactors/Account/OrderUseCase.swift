@@ -15,7 +15,7 @@ class OrderUseCase {
         self.repository = repository
     }
 
-    func getOrder(id: String, _ callback: @escaping RepoCallback<Order>) {
+    func getOrder(id: String, _ callback: @escaping ApiCallback<Order>) {
         repository.getOrder(id: id, callback: callback)
     }
 }

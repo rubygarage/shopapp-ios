@@ -88,7 +88,7 @@ class HomeViewModel: BasePaginationViewModel {
                     guard let strongSelf = self else {
                         return
                     }
-                    let castedError = error as? RepoError
+                    let castedError = error as? ShopAppError
                     strongSelf.state.onNext(.error(error: castedError))
             })
             .disposed(by: disposeBag)

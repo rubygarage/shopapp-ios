@@ -46,9 +46,9 @@ class OrderDetailsTableProvider: NSObject, UITableViewDataSource, UITableViewDel
         
         switch section {
         case OrderDetailsSection.paymentInformation.rawValue:
-            numberOfRows = order.items?.count ?? 0
+            numberOfRows = order.orderProducts.count
         case OrderDetailsSection.shippingAddress.rawValue:
-            numberOfRows = order.shippingAddress != nil ? 1 : 0
+            numberOfRows = 1
         default:
             break
         }
@@ -73,8 +73,8 @@ class OrderDetailsTableProvider: NSObject, UITableViewDataSource, UITableViewDel
     
     private func orderItemCell(with tableView: UITableView, indexPath: IndexPath) -> OrderItemTableViewCell {
         let cell: OrderItemTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
-        if let order = order, let item = order.items?[indexPath.row], let currencyCode = order.currencyCode {
-            cell.configure(with: item, currencyCode: currencyCode)
+        if let order = order {
+            cell.configure(with: order.orderProducts[indexPath.row], currencyCode: order.currencyCode)
         }
         return cell
     }
@@ -91,7 +91,7 @@ class OrderDetailsTableProvider: NSObject, UITableViewDataSource, UITableViewDel
     // MARK: - UITableViewDelegate
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let delegate = delegate, indexPath.section == OrderDetailsSection.paymentInformation.rawValue, let order = order, let item = order.items?[indexPath.row], let productVariant = item.productVariant else {
+        guard let delegate = delegate, indexPath.section == OrderDetailsSection.paymentInformation.rawValue, let order = order, let productVariant = order.orderProducts[indexPath.row].productVariant else {
             return
         }
         delegate.provider(self, didSelect: productVariant)

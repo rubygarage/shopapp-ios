@@ -34,7 +34,7 @@ class CheckoutShippingOptionsEnabledTableViewCell: UITableViewCell {
     public func configure(with rate: ShippingRate, currencyCode: String, selected: Bool) {
         selectRateButton.isSelected = selected
         let formatter = NumberFormatter.formatter(with: currencyCode)
-        let price = NSDecimalNumber(string: rate.price ?? "")
+        let price = NSDecimalNumber(decimal: rate.price)
         priceLabel.text = formatter.string(from: price)
         titleLabel.text = rate.title
         self.rate = rate

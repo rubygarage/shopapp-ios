@@ -15,7 +15,7 @@ class ShopAppCountryRepository: CountryRepository {
         self.api = api
     }
 
-    func getCountries(callback: @escaping RepoCallback<[Country]>) {
+    func getCountries(callback: @escaping ApiCallback<[Country]>) {
         api.getCountries(callback: callback)
     }
 }

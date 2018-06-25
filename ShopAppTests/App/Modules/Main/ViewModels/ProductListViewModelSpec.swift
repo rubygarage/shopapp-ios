@@ -41,7 +41,7 @@ class ProductListViewModelSpec: QuickSpec {
             var states: [ViewState]!
             
             beforeEach {
-                viewModel.sortType = .createdAt
+                viewModel.sortType = .recent
                 
                 disposeBag = DisposeBag()
                 states = []
@@ -93,11 +93,8 @@ class ProductListViewModelSpec: QuickSpec {
             var states: [ViewState]!
             
             beforeEach {
-                viewModel.sortType = .createdAt
-                
-                let product = Product()
-                product.paginationValue = "Pagination value"
-                viewModel.products.value = [product]
+                viewModel.sortType = .recent
+                viewModel.products.value = [TestHelper.productWithoutAlternativePrice]
                 
                 disposeBag = DisposeBag()
                 states = []
@@ -118,7 +115,7 @@ class ProductListViewModelSpec: QuickSpec {
                     viewModel.loadNextPage()
                     
                     expect(viewModel.products.value.isEmpty) == false
-                    expect(viewModel.paginationValue as? String) == "Pagination value"
+                    expect(viewModel.paginationValue as? String) == TestHelper.productWithoutAlternativePrice.paginationValue
                     expect(viewModel.canLoadMore) == false
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -135,7 +132,7 @@ class ProductListViewModelSpec: QuickSpec {
                     viewModel.loadNextPage()
                     
                     expect(viewModel.products.value.count) == 1
-                    expect(viewModel.paginationValue as? String) == "Pagination value"
+                    expect(viewModel.paginationValue as? String) == TestHelper.productWithoutAlternativePrice.paginationValue
                     expect(viewModel.canLoadMore) == false
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -149,7 +146,7 @@ class ProductListViewModelSpec: QuickSpec {
             var states: [ViewState]!
             
             beforeEach {
-                viewModel.sortType = .createdAt
+                viewModel.sortType = .recent
                 
                 disposeBag = DisposeBag()
                 states = []

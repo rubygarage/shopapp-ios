@@ -28,18 +28,18 @@ class ErrorViewSpec: QuickSpec {
         }
         
         describe("when error set") {
-            context("with type network") {
+            context("if it isn't network error") {
                 it("needs to hide image and setup text") {
-                    view.error = NetworkError()
-                    expect(errorImageView.isHidden) == false
+                    view.isNetworkError = false
+                    expect(errorImageView.isHidden) == true
                     expect(errorTextLabel.text) == "Error.Unknown".localizable
                 }
             }
             
-            context("with type not network") {
+            context("if it's network erro") {
                 it("needs to show image and setup text") {
-                    view.error = RepoError()
-                    expect(errorImageView.isHidden) == true
+                    view.isNetworkError = true
+                    expect(errorImageView.isHidden) == false
                     expect(errorTextLabel.text) == "Error.NoConnection".localizable
                 }
             }

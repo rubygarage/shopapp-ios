@@ -15,7 +15,7 @@ class DeleteAddressUseCase {
         self.repository = repository
     }
 
-    func deleteCustomerAddress(id: String, callback: @escaping RepoCallback<Void>) {
+    func deleteCustomerAddress(id: String, callback: @escaping ApiCallback<Void>) {
         repository.deleteCustomerAddress(id: id, callback: callback)
     }
 }

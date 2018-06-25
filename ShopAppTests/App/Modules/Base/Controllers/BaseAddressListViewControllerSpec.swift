@@ -48,11 +48,11 @@ class BaseAddressListViewControllerSpec: QuickSpec {
             }
             
             it("should have a correct view model type") {
-                viewController.selectedAddress = Address()
+                viewController.selectedAddress = TestHelper.fullAddress
                 _ = viewController.view
                 
                 expect(viewController.viewModel).to(beAKindOf(BaseAddressListViewModel.self))
-                expect(viewController.viewModel.selectedAddress) === viewController.selectedAddress
+                expect(viewController.viewModel.selectedAddress) == viewController.selectedAddress
                 expect(viewController.tableProvider.showSelectionButton) == false
             }
             
@@ -127,22 +127,22 @@ class BaseAddressListViewControllerSpec: QuickSpec {
         
         describe("when new shipping address selected") {
             it("should start loading customer addresses") {
-                viewController.update(shippingAddress: Address(), isSelectedAddress: false)
+                viewController.update(shippingAddress: TestHelper.fullAddress, isSelectedAddress: false)
                 
                 expect(viewModelMock.isLoadCustomerAddressesStarted) == true
             }
         }
         
         describe("when new billing address selected") {
-            let address = Address()
+            let address = TestHelper.fullAddress
             
             context("if address selected") {
                 it("should set selected address and start loading customer addresses") {
                     viewController.update(billingAddress: address, isSelectedAddress: true)
                     
-                    expect(viewController.selectedAddress) === address
-                    expect(viewController.viewModel.selectedAddress) === address
-                    expect(delegateMock.selectedAddress) === address
+                    expect(viewController.selectedAddress) == address
+                    expect(viewController.viewModel.selectedAddress) == address
+                    expect(delegateMock.selectedAddress) == address
                     expect(viewModelMock.isLoadCustomerAddressesStarted) == true
                 }
             }
@@ -160,19 +160,19 @@ class BaseAddressListViewControllerSpec: QuickSpec {
         }
         
         describe("when billing address selected") {
-            let address = Address()
+            let address = TestHelper.fullAddress
             
             it("should notify delegate about selection billing address") {
                 viewController.addressListType = .billing
                 _ = viewController.view
                 viewModelMock.makeSelectedAddress(address: address)
                 
-                expect(delegateMock.selectedAddress) === address
+                expect(delegateMock.selectedAddress) == address
             }
         }
         
         describe("when delete address did press") {
-            let address = Address()
+            let address = TestHelper.fullAddress
             
             beforeEach {
                 _ = viewController.view
@@ -190,7 +190,7 @@ class BaseAddressListViewControllerSpec: QuickSpec {
         }
         
         describe("when address set as default did press") {
-            let address = Address()
+            let address = TestHelper.fullAddress
             
             beforeEach {
                 _ = viewController.view
@@ -208,7 +208,7 @@ class BaseAddressListViewControllerSpec: QuickSpec {
         }
         
         describe("when address form submit button did press") {
-            let address = Address()
+            let address = TestHelper.fullAddress
             var accountAddressFormController: AccountAddressFormViewController!
             
             beforeEach {
@@ -271,8 +271,8 @@ class BaseAddressListViewControllerSpec: QuickSpec {
                         viewController.addressListType = .billing
                         viewController.viewController(accountAddressFormController, didUpdate: address, isSelectedAddress: true)
                         
-                        expect(viewController.selectedAddress) === address
-                        expect(viewController.viewModel.selectedAddress) === address
+                        expect(viewController.selectedAddress) == address
+                        expect(viewController.viewModel.selectedAddress) == address
                         expect(viewModelMock.isLoadCustomerAddressesStarted) == true
                     }
                 }

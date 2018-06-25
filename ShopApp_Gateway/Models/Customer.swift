@@ -8,14 +8,24 @@
 
 import Foundation
 
-public class Customer {
-    public var email = ""
-    public var firstName: String?
-    public var lastName: String?
-    public var phone: String?
-    public var promo: Bool = false
-    public var defaultAddress: Address?
-    public var addresses: [Address]?
+public struct Customer {
+    public let id: String
+    public let email: String
+    public let firstName: String
+    public let lastName: String
+    public let phone: String?
+    public let isAcceptsMarketing: Bool
+    public let addresses: [Address]
+    public let defaultAddress: Address?
 
-    public init() {}
+    public init(id: String, email: String, firstName: String, lastName: String, phone: String? = nil, isAcceptsMarketing: Bool, defaultAddress: Address? = nil, addresses: [Address]) {
+        self.id = id
+        self.email = email
+        self.firstName = firstName
+        self.lastName = lastName
+        self.phone = phone
+        self.isAcceptsMarketing = isAcceptsMarketing
+        self.defaultAddress = defaultAddress
+        self.addresses = addresses
+    }
 }

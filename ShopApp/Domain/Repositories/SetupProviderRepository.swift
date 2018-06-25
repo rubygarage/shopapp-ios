@@ -9,5 +9,5 @@
 import ShopApp_Gateway
 
 protocol SetupProviderRepository {
-    func setupProvider(callback: @escaping RepoCallback<Void>)
+    func setupProvider(callback: @escaping ApiCallback<Void>)
 }

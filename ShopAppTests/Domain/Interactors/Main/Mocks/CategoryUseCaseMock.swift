@@ -11,34 +11,23 @@ import ShopApp_Gateway
 @testable import ShopApp
 
 class CategoryUseCaseMock: CategoryUseCase {
-    private let error = ContentError()
+    private let error = ShopAppError.content(isNetworkError: false)
     
     var isProductCountLessThenConstant = true
     var isNeedToReturnError = false
     
-    override func getCategory(id: String, paginationValue: Any?, sortType: SortType, _ callback: @escaping RepoCallback<Category>) {
+    override func getCategory(id: String, paginationValue: Any?, sortType: SortType, _ callback: @escaping ApiCallback<Category>) {
         guard !isNeedToReturnError else {
             execute(callback: callback)
             
             return
         }
         
-        let productCount = isProductCountLessThenConstant ? 5 : 10
-        var products: [Product] = []
-        
-        for _ in 1...productCount {
-            let product = Product()
-            product.paginationValue = "pagination value"
-            products.append(product)
-        }
-        
-        let category = Category()
-        category.products = products
-        
+        let category = isProductCountLessThenConstant ? TestHelper.categoryWithFiveProducts : TestHelper.categoryWithTenProducts
         execute(with: category, callback: callback)
     }
     
-    private func execute(with category: Category? = nil, callback: @escaping RepoCallback<Category>) {
+    private func execute(with category: Category? = nil, callback: @escaping ApiCallback<Category>) {
         isNeedToReturnError ? callback(nil, error) : callback(category, nil)
     }
 }

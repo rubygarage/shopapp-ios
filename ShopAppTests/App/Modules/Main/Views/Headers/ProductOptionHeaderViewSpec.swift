@@ -25,9 +25,7 @@ class ProductOptionHeaderViewSpec: QuickSpec {
             collectionView.registerNibForSupplementaryView(ProductOptionHeaderView.self, of: UICollectionElementKindSectionHeader)
             collectionView.dataSource = provider
             
-            let option = ProductOption()
-            option.values = ["Value 1", "Value 2"]
-            provider.options = [option]
+            provider.options = [TestHelper.productOptionWithOneValue]
             collectionView.reloadData()
             
             _ = collectionView.numberOfSections

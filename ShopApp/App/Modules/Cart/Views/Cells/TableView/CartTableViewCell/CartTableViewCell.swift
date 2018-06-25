@@ -67,7 +67,7 @@ class CartTableViewCell: SwipeTableViewCell, QuantityDropDownViewDelegate {
             variantTitleLabel.text = nil
             return
         }
-        let productTitle = item.productTitle ?? ""
+        let productTitle = item.title
         let variantTitle = item.productVariant?.title ?? ""
         variantTitleLabel.text = "\(productTitle) \(variantTitle)"
     }
@@ -82,7 +82,7 @@ class CartTableViewCell: SwipeTableViewCell, QuantityDropDownViewDelegate {
             totalPriceLabel.text = nil
             return
         }
-        let currency = item.currency ?? ""
+        let currency = item.currency
         let formatter = NumberFormatter.formatter(with: currency)
         let price = NSDecimalNumber(decimal: item.productVariant?.price ?? Decimal())
         let quantity = Double(item.quantity)
@@ -96,7 +96,7 @@ class CartTableViewCell: SwipeTableViewCell, QuantityDropDownViewDelegate {
             pricePerOneItemLabel.isHidden = true
             return
         }
-        let currency = item.currency ?? ""
+        let currency = item.currency
         let formatter = NumberFormatter.formatter(with: currency)
         let price = NSDecimalNumber(decimal: item.productVariant?.price ?? Decimal())
         let localizedString = "Label.PriceEach".localizable

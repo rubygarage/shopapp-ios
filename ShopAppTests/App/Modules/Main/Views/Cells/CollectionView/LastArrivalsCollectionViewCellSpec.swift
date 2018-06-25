@@ -28,7 +28,7 @@ class LastArrivalsCollectionViewCellSpec: QuickSpec {
             collectionView.dataSource = provider
             collectionView.delegate = provider
             
-            provider.products = [Product()]
+            provider.products = [TestHelper.productWithoutAlternativePrice]
             collectionView.reloadData()
             
             let indexPath = IndexPath(row: 0, section: 0)
@@ -41,11 +41,10 @@ class LastArrivalsCollectionViewCellSpec: QuickSpec {
         }
         
         describe("when cell configured") {
-            let product = Product()
+            var product: Product!
             
             beforeEach {
-                product.title = "Product title"
-                product.currency = "USD"
+                product = TestHelper.productWithoutAlternativePrice
             }
             
             it("should have image") {
@@ -57,34 +56,15 @@ class LastArrivalsCollectionViewCellSpec: QuickSpec {
             it("should have correct title label text") {
                 cell.configure(with: product)
                 
-                expect(titleLabel.text) == "Product title"
-            }
-            
-            context("if price is empty") {
-                beforeEach {
-                    product.hasAlternativePrice = false
-                    cell.configure(with: product)
-                }
-                
-                it("should have correct price label text") {
-                    let formatter = NumberFormatter.formatter(with: product.currency!)
-                    let price = NSDecimalNumber(decimal: product.price ?? Decimal())
-                    let formattedPrice = formatter.string(from: price)!
-                    
-                    expect(priceLabel.text) == formattedPrice
-                }
+                expect(titleLabel.text) == product.title
             }
             
             context("if product hasn't alternative price") {
-                beforeEach {
-                    product.price = Decimal(floatLiteral: 25)
-                    product.hasAlternativePrice = false
-                    cell.configure(with: product)
-                }
-                
                 it("should have correct price label text") {
-                    let formatter = NumberFormatter.formatter(with: product.currency!)
-                    let price = NSDecimalNumber(decimal: product.price ?? Decimal())
+                    cell.configure(with: product)
+                    
+                    let formatter = NumberFormatter.formatter(with: product.currency)
+                    let price = NSDecimalNumber(decimal: product.price)
                     let formattedPrice = formatter.string(from: price)!
                     
                     expect(priceLabel.text) == formattedPrice
@@ -92,16 +72,13 @@ class LastArrivalsCollectionViewCellSpec: QuickSpec {
             }
             
             context("if product has alternative price") {
-                beforeEach {
-                    product.price = Decimal(floatLiteral: 25)
-                    product.hasAlternativePrice = true
-                    cell.configure(with: product)
-                }
-                
                 it("should have correct price label text") {
-                    let formatter = NumberFormatter.formatter(with: product.currency!)
+                    product = TestHelper.productWithAlternativePrice
+                    cell.configure(with: product)
+                    
+                    let formatter = NumberFormatter.formatter(with: product.currency)
                     let localizedString = "Label.PriceFrom".localizable
-                    let price = NSDecimalNumber(decimal: product.price ?? Decimal())
+                    let price = NSDecimalNumber(decimal: product.price)
                     let formattedPrice = formatter.string(from: price)!
                     let formattedLocalizedPrice = String.localizedStringWithFormat(localizedString, formattedPrice)
                     

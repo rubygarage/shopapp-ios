@@ -15,7 +15,7 @@ class ShopUseCase {
         self.repository = repository
     }
 
-    func getShop(_ callback: @escaping RepoCallback<Shop>) {
+    func getShop(_ callback: @escaping ApiCallback<Shop>) {
         repository.getShop(callback: callback)
     }
 }

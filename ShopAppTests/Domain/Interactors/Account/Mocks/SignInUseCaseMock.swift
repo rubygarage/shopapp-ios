@@ -11,16 +11,16 @@ import ShopApp_Gateway
 @testable import ShopApp
 
 class SignInUseCaseMock: SignInUseCase {
-    private let error = ContentError()
+    private let error = ShopAppError.content(isNetworkError: false)
     
     var isNeedToReturnError = false
     var isGetLoginStatusStarted = false
     
-    override func signIn(email: String, password: String, _ callback: @escaping RepoCallback<Void>) {
+    override func signIn(email: String, password: String, _ callback: @escaping ApiCallback<Void>) {
         callback((), isNeedToReturnError ? error : nil)
     }
     
-    override func isSignedIn(_ callback: @escaping RepoCallback<Bool>) {
+    override func isSignedIn(_ callback: @escaping ApiCallback<Bool>) {
         isGetLoginStatusStarted = true
         
         isNeedToReturnError ? callback(nil, error) : callback(true, nil)

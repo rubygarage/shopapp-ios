@@ -14,7 +14,7 @@ class ProductUseCaseMock: ProductUseCase {
     var returnedValue: Product?
     var isNeedToReturnError = false
     
-    override func getProduct(id: String, _ callback: @escaping RepoCallback<Product>) {
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(returnedValue, nil)
+    override func getProduct(id: String, _ callback: @escaping ApiCallback<Product>) {
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(returnedValue, nil)
     }
 }

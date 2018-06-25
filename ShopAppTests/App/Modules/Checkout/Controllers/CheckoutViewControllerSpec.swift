@@ -98,16 +98,12 @@ class CheckoutViewControllerSpec: QuickSpec {
             it("should pass checkout to table provider and reload table") {
                 tableProvider.selectedPaymentType = .creditCard
                 
-                let checkout = Checkout()
-                let shippingRate = ShippingRate()
-                let shippingRates = [shippingRate, shippingRate]
-                checkout.availableShippingRates = shippingRates
-                
+                let checkout = TestHelper.checkoutWithShippingAddress
                 viewModelMock.generateCheckout(checkout)
                 
                 let section = CheckoutSection.shippingOptions.rawValue
-                expect(viewController.tableProvider.checkout) === checkout
-                expect(tableView.numberOfRows(inSection: section)) == shippingRates.count
+                expect(viewController.tableProvider.checkout) == checkout
+                expect(tableView.numberOfRows(inSection: section)) == checkout.availableShippingRates.count
             }
         }
         
@@ -135,10 +131,10 @@ class CheckoutViewControllerSpec: QuickSpec {
         
         describe("when cart items updated") {
             it("should pass data to table provider") {
-                let cartItems = [CartProduct()]
+                let cartItems = [TestHelper.cartProductWithQuantityOne]
                 viewModelMock.generateCartItems(cartItems)
                 
-                expect(viewController.tableProvider.cartProducts) === cartItems
+                expect(viewController.tableProvider.cartProducts) == cartItems
             }
         }
         
@@ -165,7 +161,7 @@ class CheckoutViewControllerSpec: QuickSpec {
         
         describe("when place order button did press") {
             it("should start setup apple pay") {
-                viewController.viewModel.checkout.value = Checkout()
+                viewController.viewModel.checkout.value = TestHelper.checkoutWithShippingAddress
                 viewController.viewModel.selectedType.value = .applePay
                 placeOrderButton.sendActions(for: .touchUpInside)
                 
@@ -186,31 +182,24 @@ class CheckoutViewControllerSpec: QuickSpec {
         
         describe("when product variant did select") {
             it("should set variant to view model") {
-                let variantId = "Selected variant id"
-                
-                let productVariant = ProductVariant()
-                productVariant.id = variantId
-                
-                let cartItem = CartProduct()
-                cartItem.productVariant = productVariant
+                let cartItem = TestHelper.cartProductWithQuantityOne
                 
                 viewController.viewModel.cartItems.value = [cartItem]
                 
                 let cell = CheckoutCartTableViewCell()
                 let index = 0
                 
-                viewController.tableViewCell(cell, didSelect: variantId, at: index)
+                viewController.tableViewCell(cell, didSelect: cartItem.productVariant!.id, at: index)
                 
-                expect(viewController.viewModel.selectedProductVariant) === productVariant
+                expect(viewController.viewModel.selectedProductVariant) == cartItem.productVariant
             }
         }
         
         describe("when shipping rate did select") {
             it("should start updating shipping rate") {
                 let cell = CheckoutShippingOptionsEnabledTableViewCell()
-                let shippingRate = ShippingRate()
-                
-                viewController.tableViewCell(cell, didSelect: shippingRate)
+
+                viewController.tableViewCell(cell, didSelect: TestHelper.shippingRate)
                 
                 expect(viewModelMock.isUpdateShippingRateStarted) == true
             }
@@ -242,13 +231,12 @@ class CheckoutViewControllerSpec: QuickSpec {
         describe("when billing address did fill") {
             it("should set billing address to view model, table provider and reload data") {
                 let controller = CheckoutAddressFormViewController()
-                let address = Address()
-                address.address = "Address"
+                let address = TestHelper.fullAddress
                 
                 viewController.viewController(controller, didFill: address)
                 
-                expect(viewController.viewModel.billingAddress.value) === address
-                expect(viewController.tableProvider.billingAddress) === address
+                expect(viewController.viewModel.billingAddress.value) == address
+                expect(viewController.tableProvider.billingAddress) == address
                 
                 let row = PaymentAddCellType.billingAddress.rawValue
                 let section = CheckoutSection.payment.rawValue
@@ -260,13 +248,12 @@ class CheckoutViewControllerSpec: QuickSpec {
         
         describe("when billing address did select") {
             it("should set billing address to view model, table provider and reload data") {
-                let address = Address()
-                address.address = "Address"
+                let address = TestHelper.fullAddress
                 
                 viewController.viewController(didSelectBillingAddress: address)
                 
-                expect(viewController.viewModel.billingAddress.value) === address
-                expect(viewController.tableProvider.billingAddress) === address
+                expect(viewController.viewModel.billingAddress.value) == address
+                expect(viewController.tableProvider.billingAddress) == address
                 
                 let row = PaymentAddCellType.billingAddress.rawValue
                 let section = CheckoutSection.payment.rawValue
@@ -279,12 +266,12 @@ class CheckoutViewControllerSpec: QuickSpec {
         describe("when credit card did fill") {
             it("should set card to view model, table provider and reload data") {
                 let controller = CreditCardViewController()
-                let creditCard = CreditCard()
+                let creditCard = TestHelper.card
                 
                 viewController.viewController(controller, didFilled: creditCard)
                 
-                expect(viewController.viewModel.creditCard.value) === creditCard
-                expect(viewController.tableProvider.creditCard) === creditCard
+                expect(viewController.viewModel.creditCard.value) == creditCard
+                expect(viewController.tableProvider.creditCard) == creditCard
                 
                 let row = PaymentAddCellType.card.rawValue
                 let section = CheckoutSection.payment.rawValue
@@ -297,7 +284,7 @@ class CheckoutViewControllerSpec: QuickSpec {
         
         describe("when try again on failure view controller did press") {
             it("should start place order action") {
-                viewController.viewModel.checkout.value = Checkout()
+                viewController.viewModel.checkout.value = TestHelper.checkoutWithShippingAddress
                 viewController.viewModel.selectedType.value = .applePay
                 
                 let controller = CheckoutFailureViewController()

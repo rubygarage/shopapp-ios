@@ -91,7 +91,7 @@ class CartViewModelSpec: QuickSpec {
         describe("when card product removed") {
             var disposeBag: DisposeBag!
             var states: [ViewState]!
-            let cartProduct = getCartProductMock(productVariantId: "1")
+            let cartProduct = TestHelper.cartProductWithQuantityOne
             
             beforeEach {
                 disposeBag = DisposeBag()
@@ -106,12 +106,12 @@ class CartViewModelSpec: QuickSpec {
             
             context("if cart product removed successfully") {
                 it("should remove cart product") {
-                    let secondCartProduct = self.getCartProductMock(productVariantId: "2")
+                    let secondCartProduct = TestHelper.cartProductWithQuantityTwo
                     viewModel.data.value = [cartProduct, secondCartProduct]
                     deleteCartProductUseCaseMock.isNeedToReturnError = false
                     viewModel.removeCardProduct(at: 0)
                     
-                    let isContains = viewModel.data.value.contains(where: { $0 === cartProduct })
+                    let isContains = viewModel.data.value.contains(where: { $0 == cartProduct })
                     expect(isContains) == false
                     expect(viewModel.data.value.count) == 1
                     expect(states.count) == 2
@@ -126,7 +126,7 @@ class CartViewModelSpec: QuickSpec {
                     deleteCartProductUseCaseMock.isNeedToReturnError = false
                     viewModel.removeCardProduct(at: 0)
                     
-                    let isContains = viewModel.data.value.contains(where: { $0 === cartProduct })
+                    let isContains = viewModel.data.value.contains(where: { $0 == cartProduct })
                     expect(isContains) == false
                     expect(viewModel.data.value.count) == 0
                     expect(states.count) == 2
@@ -137,11 +137,11 @@ class CartViewModelSpec: QuickSpec {
             
             context("if cart product removing failed") {
                 it("should have error") {
-                    viewModel.data.value = [cartProduct, CartProduct()]
+                    viewModel.data.value = [cartProduct, cartProduct]
                     deleteCartProductUseCaseMock.isNeedToReturnError = true
                     viewModel.removeCardProduct(at: 0)
                     
-                    let isContains = viewModel.data.value.contains(where: { $0 === cartProduct })
+                    let isContains = viewModel.data.value.contains(where: { $0 == cartProduct })
                     expect(isContains) == true
                     expect(viewModel.data.value.count) == 2
                     expect(states.count) == 2
@@ -154,7 +154,7 @@ class CartViewModelSpec: QuickSpec {
         describe("when cart product updated") {
             var disposeBag: DisposeBag!
             var states: [ViewState]!
-            let cartProduct = getCartProductMock(productVariantId: "1")
+            let cartProduct = TestHelper.cartProductWithQuantityOne
             
             beforeEach {
                 viewModel.data.value = [cartProduct]
@@ -176,7 +176,7 @@ class CartViewModelSpec: QuickSpec {
                     viewModel.update(cartProduct: cartProduct, quantity: 5)
                     
                     expect(viewModel.data.value.count) == 1
-                    expect(viewModel.data.value.first?.quantity) == 5
+                    expect(viewModel.data.value.first?.quantity) == TestHelper.cartProductWithQuantityTwo.quantity
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.content
@@ -192,7 +192,7 @@ class CartViewModelSpec: QuickSpec {
                     viewModel.update(cartProduct: cartProduct, quantity: 5)
                     
                     expect(viewModel.data.value.count) == 1
-                    expect(viewModel.data.value.first?.quantity) == 0
+                    expect(viewModel.data.value.first?.quantity) == cartProduct.quantity
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.error(error: nil)
@@ -208,7 +208,7 @@ class CartViewModelSpec: QuickSpec {
                     viewModel.update(cartProduct: cartProduct, quantity: 5)
                     
                     expect(viewModel.data.value.count) == 1
-                    expect(viewModel.data.value.first?.quantity) == 0
+                    expect(viewModel.data.value.first?.quantity) == cartProduct.quantity
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.error(error: nil)
@@ -217,30 +217,14 @@ class CartViewModelSpec: QuickSpec {
         }
         
         describe("when total price calculated") {
-            var cartProductFirst: CartProduct!
-            var cartProductSecond: CartProduct!
-            
-            beforeEach {
-                cartProductFirst = CartProduct()
-                cartProductFirst.quantity = 5
-                
-                let productVariantFirst = ProductVariant()
-                productVariantFirst.price = Decimal(floatLiteral: 10)
-                cartProductFirst.productVariant = productVariantFirst
-                
-                cartProductSecond = CartProduct()
-                cartProductSecond.quantity = 10
-                
-                let productVariantSecond = ProductVariant()
-                productVariantSecond.price = Decimal(floatLiteral: 15)
-                cartProductSecond.productVariant = productVariantSecond
-            }
-            
             it("should calculate total price") {
+                let cartProductFirst = TestHelper.cartProductWithQuantityOne
+                let cartProductSecond = TestHelper.cartProductWithQuantityTwo
+                
                 viewModel.data.value = [cartProductFirst, cartProductSecond]
                 let totalPrice = viewModel.calculateTotalPrice()
                 
-                expect(totalPrice) == 200 // 5 * 10 + 10 * 15
+                expect(totalPrice) == 30 // 1 * 10 + 2 * 10
             }
         }
         
@@ -269,14 +253,5 @@ class CartViewModelSpec: QuickSpec {
                 expect(states.last) == ViewState.content
             }
         }
-    }
-
-    private func getCartProductMock(productVariantId: String) -> CartProduct {
-        let productVariant = ProductVariant()
-        productVariant.id = productVariantId
-
-        let cartProduct = CartProduct()
-        cartProduct.productVariant = productVariant
-        return cartProduct
     }
 }

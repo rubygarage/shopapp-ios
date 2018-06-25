@@ -21,7 +21,7 @@ class ErrorView: UIView {
     
     weak var delegate: ErrorViewDelegate?
     
-    var error: RepoError? {
+    var isNetworkError: Bool = false {
         didSet {
             updateUI()
         }
@@ -48,8 +48,8 @@ class ErrorView: UIView {
     }
     
     private func updateUI() {
-        errorImageView.isHidden = error is NetworkError == false
-        errorTextLabel.text = error is NetworkError ? error?.localizedMessage : "Error.NoConnection".localizable
+        errorImageView.isHidden = !isNetworkError
+        errorTextLabel.text = isNetworkError ? "Error.NoConnection".localizable : "Error.Unknown".localizable
         tryAgainButton.setTitle("Button.TryAgain".localizable.uppercased(), for: .normal)
     }
     

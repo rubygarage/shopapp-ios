@@ -38,7 +38,7 @@ class ArticlesUseCaseSpec: QuickSpec {
                         
                         expect(repositoryMock.perPage) == kItemsPerPage
                         expect(repositoryMock.paginationValue) == paginationValue
-                        expect(repositoryMock.sortBy?.rawValue) == SortType.createdAt.rawValue
+                        expect(repositoryMock.sortBy?.rawValue) == SortType.recent.rawValue
 
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -55,7 +55,7 @@ class ArticlesUseCaseSpec: QuickSpec {
                         
                         expect(repositoryMock.perPage) == kItemsPerPage
                         expect(repositoryMock.paginationValue) == paginationValue
-                        expect(repositoryMock.sortBy?.rawValue) == SortType.createdAt.rawValue
+                        expect(repositoryMock.sortBy?.rawValue) == SortType.recent.rawValue
                         
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())

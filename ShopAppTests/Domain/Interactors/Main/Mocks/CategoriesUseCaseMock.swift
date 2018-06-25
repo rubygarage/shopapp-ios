@@ -11,12 +11,12 @@ import ShopApp_Gateway
 @testable import ShopApp
 
 class CategoriesUseCaseMock: CategoriesUseCase {
-    private let error = ContentError()
+    private let error = ShopAppError.content(isNetworkError: false)
     
     var isCategoryCountLessThenConstant = true
     var isNeedToReturnError = false
     
-    override func getCategoryList(paginationValue: Any?, _ callback: @escaping RepoCallback<[Category]>) {
+    override func getCategoryList(paginationValue: Any?, _ callback: @escaping ApiCallback<[Category]>) {
         guard !isNeedToReturnError else {
             execute(callback: callback)
             
@@ -27,15 +27,13 @@ class CategoriesUseCaseMock: CategoriesUseCase {
         var categories: [Category] = []
         
         for _ in 1...categoriesCount {
-            let category = Category()
-            category.paginationValue = "pagination value"
-            categories.append(category)
+            categories.append(TestHelper.categoryWithFiveProducts)
         }
         
         execute(with: categories, callback: callback)
     }
     
-    private func execute(with categories: [Category] = [], callback: @escaping RepoCallback<[Category]>) {
+    private func execute(with categories: [Category] = [], callback: @escaping ApiCallback<[Category]>) {
         isNeedToReturnError ? callback(nil, error) : callback(categories, nil)
     }
 }

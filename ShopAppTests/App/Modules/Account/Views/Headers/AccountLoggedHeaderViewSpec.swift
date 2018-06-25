@@ -15,6 +15,8 @@ import ShopApp_Gateway
 
 class AccountLoggedHeaderViewSpec: QuickSpec {
     override func spec() {
+        let customer = TestHelper.customerWithoutAcceptsMarketing
+        
         var view: AccountLoggedHeaderView!
         var delegateMock: AccountLoggedHeaderDelegateMock!
         var myOrdersButton: UIButton!
@@ -25,11 +27,7 @@ class AccountLoggedHeaderViewSpec: QuickSpec {
         var customerImageView: AvatarImageView!
         
         beforeEach {
-            let customer = Customer()
-            customer.firstName = "First"
-            customer.lastName = "Last"
-            
-            view = AccountLoggedHeaderView(frame: CGRect.zero, customer: customer)
+            view = AccountLoggedHeaderView(frame: CGRect.zero, customer: TestHelper.customerWithoutAcceptsMarketing)
             
             myOrdersButton = self.findView(withAccessibilityLabel: "myOrders", in: view) as! UIButton
             personalInfoButton = self.findView(withAccessibilityLabel: "perosnalInfo", in: view) as! UIButton
@@ -51,7 +49,7 @@ class AccountLoggedHeaderViewSpec: QuickSpec {
             }
             
             it("should have correct customer name label text") {
-                expect(customerNameLabel.text) == "First Last"
+                expect(customerNameLabel.text) == customer.fullName
             }
             
             it("should have correct customer image configuration") {
@@ -60,7 +58,7 @@ class AccountLoggedHeaderViewSpec: QuickSpec {
             }
             
             it("should have correct customer image data source") {
-                expect(customerImageView.dataSource?.name) == "First Last"
+                expect(customerImageView.dataSource?.name) == customer.fullName
             }
         }
         

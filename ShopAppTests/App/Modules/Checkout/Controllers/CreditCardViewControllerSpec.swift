@@ -26,7 +26,7 @@ class CreditCardViewControllerSpec: QuickSpec {
         var submitButton: BlackButton!
         var acceptedCardTypesLabel: UILabel!
         var cardTypeImageView: UIImageView!
-        var card: CreditCard!
+        var card: Card!
         
         beforeEach {
             viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.creditCard) as! CreditCardViewController
@@ -34,13 +34,7 @@ class CreditCardViewControllerSpec: QuickSpec {
             viewModelMock = CreditCardViewModelMock()
             viewController.viewModel = viewModelMock
             
-            card = CreditCard()
-            card.firstName = "Holder"
-            card.lastName = "Name"
-            card.cardNumber = "4111 1111 1111 1111"
-            card.verificationCode = "555"
-            card.expireMonth = "12"
-            card.expireYear = "20"
+            card = TestHelper.card
             viewController.card = card
             
             holderNameTextFieldView = self.findView(withAccessibilityLabel: "holderNameTextFieldView", in: viewController.view) as! InputTextFieldView
@@ -92,7 +86,7 @@ class CreditCardViewControllerSpec: QuickSpec {
             }
             
             it("should pass correct properties to view model") {
-                expect(viewController.viewModel.card) === viewController.card
+                expect(viewController.viewModel.card) == viewController.card
             }
         }
         
@@ -206,11 +200,11 @@ class CreditCardViewControllerSpec: QuickSpec {
                 let delegateMock = CreditCardControllerDelegateMock()
                 viewController.delegate = delegateMock
                 
-                let card = CreditCard()
+                let card = TestHelper.card
                 viewModelMock.generateFilledCard(card)
                 
                 expect(delegateMock.controller) == viewController
-                expect(delegateMock.card) === card
+                expect(delegateMock.card) == card
             }
         }
         

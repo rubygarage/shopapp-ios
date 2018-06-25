@@ -11,16 +11,16 @@ import ShopApp_Gateway
 @testable import ShopApp
 
 class ArticlesUseCaseMock: ArticlesUseCase {
-    private let error = ContentError()
+    private let error = ShopAppError.content(isNetworkError: false)
     
     var isArticleCountLessThenConstant = true
     var isNeedToReturnError = false
 
-    override func getArticles(paginationValue: Any?, _ callback: @escaping RepoCallback<[Article]>) {
+    override func getArticles(paginationValue: Any?, _ callback: @escaping ApiCallback<[Article]>) {
         execute(with: callback)
     }
     
-    private func execute(with callback: @escaping RepoCallback<[Article]>) {
+    private func execute(with callback: @escaping ApiCallback<[Article]>) {
         if isNeedToReturnError {
             callback(nil, error)
         } else {
@@ -28,9 +28,7 @@ class ArticlesUseCaseMock: ArticlesUseCase {
             var articles: [Article] = []
             
             for _ in 1...articlesCount {
-                let article = Article()
-                article.paginationValue = "pagination value"
-                articles.append(article)
+                articles.append(TestHelper.fullArticle)
             }
             
             callback(articles, nil)

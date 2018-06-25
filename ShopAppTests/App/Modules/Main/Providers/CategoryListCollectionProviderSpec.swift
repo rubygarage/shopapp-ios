@@ -44,8 +44,7 @@ class CategoryListCollectionProviderSpec: QuickSpec {
         
         describe("when categories did set") {
             beforeEach {
-                let category = Category()
-                collectionProvider.categories = [category]
+                collectionProvider.categories = [TestHelper.categoryWithFiveProducts]
             }
             
             it("should return correct rows count") {
@@ -66,7 +65,7 @@ class CategoryListCollectionProviderSpec: QuickSpec {
             var category: ShopApp_Gateway.Category!
             
             beforeEach {
-                category = Category()
+                category = TestHelper.categoryWithFiveProducts
                 collectionProvider.categories = [category]
             }
             
@@ -78,7 +77,7 @@ class CategoryListCollectionProviderSpec: QuickSpec {
                 collectionProvider.collectionView(collectionView, didSelectItemAt: indexPath)
                 
                 expect(providerDelegateMock.provider) === collectionProvider
-                expect(providerDelegateMock.category) === category
+                expect(providerDelegateMock.category) == category
             }
         }
     }

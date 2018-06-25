@@ -43,13 +43,7 @@ class CheckoutAddressListViewControllerSpec: QuickSpec {
             
             viewController.checkoutId = "Checkout id"
             
-            address = Address()
-            address.id = "Customer address id"
-            address.address = "Address"
-            address.secondAddress = "Second address"
-            address.city = "City"
-            address.zip = "Zip"
-            address.country = "Country"
+            address = TestHelper.fullAddress
             
             _ = viewController.view
         }
@@ -86,7 +80,7 @@ class CheckoutAddressListViewControllerSpec: QuickSpec {
                     
                     viewController.update(shippingAddress: address, isSelectedAddress: isSelectedAddress)
                     
-                    expect(viewController.selectedAddress) === address
+                    expect(viewController.selectedAddress) == address
                 }
             }
             
@@ -110,7 +104,7 @@ class CheckoutAddressListViewControllerSpec: QuickSpec {
                     
                     viewController.tableViewCell(cell, didSelect: address)
                     
-                    expect(viewController.selectedAddress) === address
+                    expect(viewController.selectedAddress) == address
                 }
             }
             
@@ -120,8 +114,8 @@ class CheckoutAddressListViewControllerSpec: QuickSpec {
                     
                     viewController.tableViewCell(cell, didSelect: address)
                     
-                    expect(viewController.selectedAddress) === address
-                    expect(viewController.viewModel.selectedAddress) === address
+                    expect(viewController.selectedAddress) == address
+                    expect(viewController.viewModel.selectedAddress) == address
                 }
             }
         }
@@ -130,8 +124,8 @@ class CheckoutAddressListViewControllerSpec: QuickSpec {
             it("should update selected address") {
                 viewModelMock.updateBillingAddress(address: address)
                 
-                expect(viewController.selectedAddress) === address
-                expect(viewController.viewModel.selectedAddress) === address
+                expect(viewController.selectedAddress) == address
+                expect(viewController.viewModel.selectedAddress) == address
             }
         }
     }

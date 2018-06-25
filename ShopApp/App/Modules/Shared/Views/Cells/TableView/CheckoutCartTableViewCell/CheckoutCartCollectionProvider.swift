@@ -15,7 +15,7 @@ protocol CheckoutCartCollectionProviderDelegate: class {
 }
 
 class CheckoutCartCollectionProvider: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    var images: [Image] = []
+    var images: [Image?] = []
     var productVariantIds: [String] = []
     
     weak var delegate: CheckoutCartCollectionProviderDelegate?

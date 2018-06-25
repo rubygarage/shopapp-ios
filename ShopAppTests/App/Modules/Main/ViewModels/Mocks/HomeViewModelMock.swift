@@ -20,7 +20,7 @@ class HomeViewModelMock: HomeViewModel {
     override func loadData() {
         isDataLoadingStarted = true
         if !isNeedsToReturnError {
-            data.value = ([Product()], [Product()], [Article()])
+            data.value = ([TestHelper.productWithoutAlternativePrice], [TestHelper.productWithoutAlternativePrice], [TestHelper.fullArticle])
         }
     }
 }

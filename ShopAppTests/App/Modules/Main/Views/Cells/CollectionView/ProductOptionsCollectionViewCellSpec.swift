@@ -26,10 +26,7 @@ class ProductOptionsCollectionViewCellSpec: QuickSpec {
             controllerCollectionView.dataSource = provider
             controllerCollectionView.delegate = provider
             
-            let option = ProductOption()
-            option.name = "Option name"
-            option.values = ["Option value 1", "Option value 2"]
-            provider.options = [option]
+            provider.options = [TestHelper.productOptionWithFewValues]
             controllerCollectionView.reloadData()
             
             let indexPath = IndexPath(row: 0, section: 0)

@@ -18,20 +18,20 @@ class OrderRepositoryMock: OrderRepository {
     var paginationValue: String?
     var id: String?
     
-    func getOrders(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
+    func getOrders(perPage: Int, paginationValue: Any?, callback: @escaping ApiCallback<[Order]>) {
         isGetOrderListStarted = true
         
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback([], nil)
     }
     
-    func getOrder(id: String, callback: @escaping RepoCallback<Order>) {
+    func getOrder(id: String, callback: @escaping ApiCallback<Order>) {
         isGetOrderStarted = true
         
         self.id = id
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Order(), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(TestHelper.orderWithProducts, nil)
     }
 }

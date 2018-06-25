@@ -16,7 +16,7 @@ import Toaster
 enum ViewState: Equatable {
     case loading(showHud: Bool, isTranslucent: Bool)
     case content
-    case error(error: RepoError?)
+    case error(error: ShopAppError?)
     case empty
     
     enum Builder {
@@ -138,17 +138,20 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewDelegate,
         emptyDataView.removeFromSuperview()
     }
     
-    private func setErrorState(with error: RepoError?) {
-        if error is CriticalError {
-            process(criticalError: error as? CriticalError)
-        } else if error is NonCriticalError {
-            process(nonCriticalError: error as? NonCriticalError)
-        } else if error is ContentError {
-            process(contentError: error as? ContentError)
-        } else if error is NetworkError {
-            process(networkError: error as? NetworkError)
-        } else {
-            process(defaultError: error)
+    private func setErrorState(with error: ShopAppError?) {
+        guard let error = error else {
+            processDefaultError()
+            
+            return
+        }
+        
+        switch error {
+        case .critical:
+            processCriticalError()
+        case .nonCritical(let message):
+            processNonCriticalError(with: message)
+        case .content(let isNetworkError):
+            processContentError(isNetworkError)
         }
     }
     
@@ -159,33 +162,26 @@ class BaseViewController<T: BaseViewModel>: UIViewController, ErrorViewDelegate,
         addSubviewAndConstraints(subview: emptyDataView)
     }
     
-    private func process(criticalError: CriticalError?) {
+    private func processCriticalError() {
         errorView.removeFromSuperview()
         loadingView.removeFromSuperview()
         emptyDataView.removeFromSuperview()
         addSubviewAndConstraints(subview: criticalErrorView)
     }
-    
-    private func process(nonCriticalError: NonCriticalError?) {
+
+    private func processNonCriticalError(with message: String) {
         loadingView.removeFromSuperview()
-        showToast(with: nonCriticalError?.localizedMessage)
+        showToast(with: message)
     }
     
-    private func process(contentError: ContentError?) {
+    private func processContentError(_ isNetworkError: Bool) {
         loadingView.removeFromSuperview()
         criticalErrorView.removeFromSuperview()
-        errorView.error = contentError
+        errorView.isNetworkError = isNetworkError
         addSubviewAndConstraints(subview: errorView)
     }
-    
-    private func process(networkError: NetworkError?) {
-        loadingView.removeFromSuperview()
-        errorView.error = networkError
-        criticalErrorView.removeFromSuperview()
-        addSubviewAndConstraints(subview: errorView)
-    }
-    
-    private func process(defaultError: RepoError?) {
+
+    private func processDefaultError() {
         loadingView.removeFromSuperview()
     }
 

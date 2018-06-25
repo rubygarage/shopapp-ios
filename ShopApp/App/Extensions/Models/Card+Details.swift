@@ -1,5 +1,5 @@
 //
-//  CreditCard+Details.swift
+//  Card+Details.swift
 //  ShopApp
 //
 //  Created by Mykola Voronin on 2/14/18.
@@ -13,7 +13,7 @@ typealias CreditCardValidationType = (name: String, regex: String, imageName: St
 private let kMaskedNumberCountMax = 4
 private let kExpireYearShortCountMax = 2
 
-extension CreditCard {
+extension Card {
     var maskedNumber: String {
         let maskedNumber = String(cardNumber.suffix(kMaskedNumberCountMax))
         let maskedNumberLocalized = "Label.CreditCard.MaskedNumber".localizable

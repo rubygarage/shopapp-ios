@@ -25,11 +25,6 @@ class OrderDetailsViewModelMock: OrderDetailsViewModel {
     }
     
     func makeNotEmptyData() {
-        order = Order()
-        order.id = "order id"
-        
-        let orderItem = OrderItem()
-        orderItem.quantity = 1
-        order.items = [orderItem]
+        order = TestHelper.orderWithProducts
     }
 }

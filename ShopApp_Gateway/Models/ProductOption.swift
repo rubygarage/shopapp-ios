@@ -8,10 +8,20 @@
 
 import Foundation
 
-public class ProductOption {
-    public var id = ""
-    public var name: String?
-    public var values: [String]?
+public struct ProductOption: Equatable {
+    public let id: String
+    public let name: String
+    public let values: [String]
 
-    public init() {}
+    public init(id: String, name: String, values: [String]) {
+        self.id = id
+        self.name = name
+        self.values = values
+    }
+    
+    public static func == (lhs: ProductOption, rhs: ProductOption) -> Bool {
+        return lhs.id == rhs.id
+            && lhs.name == rhs.name
+            && lhs.values == rhs.values
+    }
 }

@@ -9,5 +9,5 @@
 import ShopApp_Gateway
 
 protocol ShopRepository {
-    func getShop(callback: @escaping RepoCallback<Shop>)
+    func getShop(callback: @escaping ApiCallback<Shop>)
 }

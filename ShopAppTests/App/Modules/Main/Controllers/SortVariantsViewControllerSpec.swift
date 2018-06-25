@@ -67,7 +67,7 @@ class SortVariantsViewControllerSpec: QuickSpec {
                     tableView.delegate!.tableView!(tableView, didSelectRowAt: indexPath)
                     
                     expect(delegateMock.viewController) === viewController
-                    expect(delegateMock.sortType?.rawValue) == SortType.createdAt.rawValue
+                    expect(delegateMock.sortType?.rawValue) == SortType.recent.rawValue
                 }
             }
             

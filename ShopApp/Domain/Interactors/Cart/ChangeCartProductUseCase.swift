@@ -15,7 +15,7 @@ class ChangeCartProductUseCase {
         self.repository = repository
     }
 
-    func changeCartProductQuantity(cartItemId: String, quantity: Int, _ callback: @escaping RepoCallback<Bool>) {
+    func changeCartProductQuantity(cartItemId: String, quantity: Int, _ callback: @escaping ApiCallback<Void>) {
         repository.changeCartProductQuantity(cartItemId: cartItemId, quantity: quantity, callback: callback)
     }
 }

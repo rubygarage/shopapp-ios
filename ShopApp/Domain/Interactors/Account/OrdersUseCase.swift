@@ -15,7 +15,7 @@ class OrdersUseCase {
         self.repository = repository
     }
 
-    func getOrders(paginationValue: Any?, _ callback: @escaping RepoCallback<[Order]>) {
+    func getOrders(paginationValue: Any?, _ callback: @escaping ApiCallback<[Order]>) {
         repository.getOrders(perPage: kItemsPerPage, paginationValue: paginationValue, callback: callback)
     }
 }

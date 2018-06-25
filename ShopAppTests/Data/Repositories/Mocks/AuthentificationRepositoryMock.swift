@@ -23,7 +23,7 @@ class AuthentificationRepositoryMock: AuthentificationRepository {
     var password: String?
     var phone: String?
     
-    func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, callback: @escaping RepoCallback<Void>) {
+    func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, callback: @escaping ApiCallback<Void>) {
         isSignUpStarted = true
         
         self.email = email
@@ -32,35 +32,35 @@ class AuthentificationRepositoryMock: AuthentificationRepository {
         self.password = password
         self.phone = phone
         
-        callback((), isNeedToReturnError ? RepoError() : nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
-    func signIn(email: String, password: String, callback: @escaping RepoCallback<Void>) {
+    func signIn(email: String, password: String, callback: @escaping ApiCallback<Void>) {
         isLoginStarted = true
         
         self.email = email
         self.password = password
         
-        callback((), isNeedToReturnError ? RepoError() : nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
-    func signOut(callback: @escaping RepoCallback<Void>) {
+    func signOut(callback: @escaping ApiCallback<Void>) {
         isLogoutStarted = true
         
-        callback((), isNeedToReturnError ? RepoError() : nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
     
-    func isSignedIn(callback: @escaping RepoCallback<Bool>) {
+    func isSignedIn(callback: @escaping ApiCallback<Bool>) {
         isGetLoginStatusStarted = true
         
-        return isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+        return isNeedToReturnError ? callback(false, ShopAppError.content(isNetworkError: false)) : callback(true, nil)
     }
     
-    func resetPassword(email: String, callback: @escaping RepoCallback<Void>) {
+    func resetPassword(email: String, callback: @escaping ApiCallback<Void>) {
         isResetPasswordStarted = true
         
         self.email = email
         
-        callback((), isNeedToReturnError ? RepoError() : nil)
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
 }

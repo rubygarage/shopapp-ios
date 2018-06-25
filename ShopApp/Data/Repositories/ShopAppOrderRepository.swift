@@ -15,11 +15,11 @@ public class ShopAppOrderRepository: OrderRepository {
         self.api = api
     }
     
-    public func getOrders(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
+    public func getOrders(perPage: Int, paginationValue: Any?, callback: @escaping ApiCallback<[Order]>) {
         api.getOrders(perPage: perPage, paginationValue: paginationValue, callback: callback)
     }
     
-    public func getOrder(id: String, callback: @escaping RepoCallback<Order>) {
+    public func getOrder(id: String, callback: @escaping ApiCallback<Order>) {
         api.getOrder(id: id, callback: callback)
     }
 }

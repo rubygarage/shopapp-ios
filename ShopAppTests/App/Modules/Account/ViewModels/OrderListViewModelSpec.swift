@@ -117,7 +117,7 @@ class OrderListViewModelSpec: QuickSpec {
                     viewModel.loadNextPage()
                     
                     expect(viewModel.items.value.count) == kItemsPerPage * 2
-                    expect(viewModel.paginationValue as? String) == "pagination value"
+                    expect(viewModel.paginationValue as? String) == TestHelper.orderWithProducts.paginationValue
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.content
@@ -158,7 +158,7 @@ class OrderListViewModelSpec: QuickSpec {
                     viewModel.loadNextPage()
                     
                     expect(viewModel.items.value.count) == kItemsPerPage
-                    expect(viewModel.paginationValue as? String) == "pagination value"
+                    expect(viewModel.paginationValue as? String) == TestHelper.orderWithProducts.paginationValue
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.error(error: nil)
@@ -229,7 +229,7 @@ class OrderListViewModelSpec: QuickSpec {
                     ordersUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
-                    let variant = viewModel.productVariant(with: "product variant id", at: 0)
+                    let variant = viewModel.productVariant(with: TestHelper.productVariantWithoutSelectedOptions.id, at: 0)
                     expect(variant).toNot(beNil())
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)

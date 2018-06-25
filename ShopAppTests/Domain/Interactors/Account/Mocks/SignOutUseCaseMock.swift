@@ -13,7 +13,7 @@ import ShopApp_Gateway
 class SignOutUseCaseMock: SignOutUseCase {
     var isNeedToReturnError = false
     
-    override func signOut(_ callback: @escaping RepoCallback<Void>) {
-        callback((), isNeedToReturnError ? RepoError() : nil)
+    override func signOut(_ callback: @escaping ApiCallback<Void>) {
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
 }

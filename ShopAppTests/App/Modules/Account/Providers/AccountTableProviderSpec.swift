@@ -62,7 +62,7 @@ class AccountTableProviderSpec: QuickSpec {
             var policies: [Policy]!
             
             beforeEach {
-                policies = [Policy()]
+                policies = [TestHelper.policy]
                 tableProvider.policies = policies
             }
             
@@ -82,7 +82,7 @@ class AccountTableProviderSpec: QuickSpec {
         
         describe("when customer did set") {
             beforeEach {
-                tableProvider.customer = Customer()
+                tableProvider.customer = TestHelper.customerWithoutAcceptsMarketing
             }
             
             it("should return correct header height") {
@@ -112,7 +112,7 @@ class AccountTableProviderSpec: QuickSpec {
         
         describe("when cell selected") {
             it("needs to show policy") {
-                let policy = Policy()
+                let policy = TestHelper.policy
                 let policies = [policy]
                 tableProvider.policies = policies
                 
@@ -123,7 +123,7 @@ class AccountTableProviderSpec: QuickSpec {
                 tableProvider.tableView(tableView, didSelectRowAt: indexPath)
                 
                 expect(delegateMock.provider) === tableProvider
-                expect(delegateMock.policy) === policy
+                expect(delegateMock.policy) == policy
             }
         }
     }

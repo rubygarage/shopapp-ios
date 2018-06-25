@@ -26,17 +26,7 @@ class ProductDetailsViewModelMock: ProductDetailsViewModel {
         isLoadDataStarted = true
         currency = "USD"
         
-        let item = Product()
-        
-        if isNeedToFillProduct {
-            let image = Image()
-            item.images = [image]
-            
-            item.title = "Product title"
-            item.productDescription = "Product description"
-        }
-        
-        product.value = item
+        product.value = isNeedToFillProduct ? TestHelper.productWithoutAlternativePrice : TestHelper.productWithoutImages
         loadRelatedItems()
     }
     
@@ -50,25 +40,19 @@ class ProductDetailsViewModelMock: ProductDetailsViewModel {
         })
     }
     
-    override func selectOption(with name: String, value: String) {
-        selectedOptionName = name
-        selectedOptionValue = value
+    override func selectOption(_ option: VariantOption) {
+        selectedOptionName = option.name
+        selectedOptionValue = option.value
     }
     
     func makeSelectedVariant(filled: Bool) {
         var variant: ProductVariant?
         if filled {
-            variant = ProductVariant()
-            variant?.price = Decimal(floatLiteral: 10)
+            variant = TestHelper.productVariantWithoutSelectedOptions
         }
-        let productOption = ProductOption()
-        productOption.id = "Product option id"
-        productOption.name = "Product option name"
-        productOption.values = ["Product option value"]
-        let allOptions = [productOption]
-        
-        let selectedOption = SelectedOption(name: "Product option name", value: "Product option value")
-        let selectedOptions = [selectedOption]
+
+        let allOptions = [TestHelper.productOptionWithOneValue]
+        let selectedOptions = [TestHelper.variantOption]
         
         let selectedVariantTuple = SelectedVariant(variant: variant, allOptions: allOptions, selectedOptions: selectedOptions, currency: currency!)
         
@@ -81,9 +65,7 @@ class ProductDetailsViewModelMock: ProductDetailsViewModel {
         var items: [Product] = []
         let itemsCount = isRelatedItemsCountMoreThenConstant ? 15 : 5
         for _ in 1...itemsCount {
-            let product = Product()
-            product.currency = "USD"
-            items.append(product)
+            items.append(TestHelper.productWithoutAlternativePrice)
         }
         relatedItems.value = items
     }

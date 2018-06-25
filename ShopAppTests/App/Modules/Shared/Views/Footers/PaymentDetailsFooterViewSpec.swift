@@ -35,33 +35,9 @@ class PaymentDetailsFooterViewSpec: QuickSpec {
             totalValueLabel = self.findView(withAccessibilityLabel: "totalValue", in: view) as! UILabel
         }
         
-        func generateOrder() -> Order {
-            let order = Order()
-            order.currencyCode = "USD"
-            order.subtotalPrice = 20
-            order.totalShippingPrice = 2
-            order.totalPrice = 22
-            
-            return order
-        }
-        
-        func generateCheckout() -> Checkout {
-            let checkout = Checkout()
-            checkout.currencyCode = "USD"
-            checkout.subtotalPrice = 20
-            checkout.totalPrice = 22
-            
-            let rate = ShippingRate()
-            rate.price = "2"
-            checkout.shippingLine = rate
-            
-            return checkout
-        }
-        
         describe("when view initialized") {
             it("should have label with corrext texts") {
-                let order = generateOrder()
-                view = PaymentDetailsFooterView(order: order)
+                view = PaymentDetailsFooterView(order: TestHelper.orderWithProducts)
                 setupViews()
                 
                 expect(subtotalLabel.text) == "Label.Order.Subtotal".localizable
@@ -72,15 +48,15 @@ class PaymentDetailsFooterViewSpec: QuickSpec {
             
             context("if view was init with order") {
                 it("needs to setup value labels with order's data") {
-                    let order = generateOrder()
+                    let order = TestHelper.orderWithProducts
                     view = PaymentDetailsFooterView(order: order)
                     setupViews()
                     
-                    let formatter = NumberFormatter.formatter(with: order.currencyCode!)
+                    let formatter = NumberFormatter.formatter(with: order.currencyCode)
                     let subtotalPrice = NSDecimalNumber(decimal: order.subtotalPrice!)
                     let discountPrice = NSDecimalNumber(value: 0)
                     let totalShippingPrice = NSDecimalNumber(decimal: order.totalShippingPrice!)
-                    let totalPrice = NSDecimalNumber(decimal: order.totalPrice!)
+                    let totalPrice = NSDecimalNumber(decimal: order.totalPrice)
                     
                     expect(subtotalValueLabel.text) == formatter.string(from: subtotalPrice)
                     expect(discountValueLabel.text) == formatter.string(from: discountPrice)
@@ -91,15 +67,15 @@ class PaymentDetailsFooterViewSpec: QuickSpec {
             
             context("if view was init with checkout") {
                 it("needs to setup value labels with checkout's data") {
-                    let checkout = generateCheckout()
+                    let checkout = TestHelper.checkoutWithShippingAddress
                     view = PaymentDetailsFooterView(checkout: checkout)
                     setupViews()
                     
-                    let formatter = NumberFormatter.formatter(with: checkout.currencyCode!)
-                    let subtotalPrice = NSDecimalNumber(decimal: checkout.subtotalPrice!)
+                    let formatter = NumberFormatter.formatter(with: checkout.currency)
+                    let subtotalPrice = NSDecimalNumber(decimal: checkout.subtotalPrice)
                     let discountPrice = NSDecimalNumber(value: 0)
-                    let totalShippingPrice = NSDecimalNumber(string: checkout.shippingLine!.price!)
-                    let totalPrice = NSDecimalNumber(decimal: checkout.totalPrice!)
+                    let totalShippingPrice = NSDecimalNumber(decimal: checkout.shippingRate!.price)
+                    let totalPrice = NSDecimalNumber(decimal: checkout.totalPrice)
                     
                     expect(subtotalValueLabel.text) == formatter.string(from: subtotalPrice)
                     expect(discountValueLabel.text) == formatter.string(from: discountPrice)
