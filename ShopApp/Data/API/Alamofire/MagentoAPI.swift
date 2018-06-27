@@ -23,7 +23,9 @@ public class MagentoAPI: BaseAPI, API {
     private let priceField = "price"
     private let unauthorizedStatusCode = 401
     private let sessionService = SessionService()
-
+    
+    private var cartId: String?
+    
     private lazy var config: Config = {
         return Config(isPopularEnabled: false, isBlogEnabled: false, isOrdersEnabled: false)
     }()
@@ -302,13 +304,19 @@ public class MagentoAPI: BaseAPI, API {
     }
 
     public func signIn(email: String, password: String, callback: @escaping RepoCallback<Bool>) {
-        getToken(with: email, password: password) { (token, error) in
+        getToken(with: email, password: password) { [weak self] (token, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            
+            strongSelf.cartId = nil
             callback(token != nil, error)
         }
     }
 
     public func signOut(callback: @escaping RepoCallback<Bool>) {
         sessionService.removeData()
+        cartId = nil
 
         callback(true, nil)
     }
@@ -333,7 +341,7 @@ public class MagentoAPI: BaseAPI, API {
         }
     }
 
-    // Customer
+    // MARK: - Customer
 
     public func getCustomer(callback: @escaping RepoCallback<Customer>) {
         guard let token = sessionService.data.token else {
@@ -714,29 +722,149 @@ public class MagentoAPI: BaseAPI, API {
     }
 
     // MARK: - Cart
+
     public func getCartProducts(callback: @escaping RepoCallback<[CartProduct]>) {
-        // TODO: Implement api method
-        callback([], nil)
+        getStoreConfigs { [weak self] (сurrency, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            
+            guard error == nil, let сurrency = сurrency else {
+                callback(nil, error ?? ContentError())
+                
+                return
+            }
+            
+            strongSelf.getQuoteId { [weak self] (quoteId, error) in
+                guard let strongSelf = self else {
+                    return
+                }
+                
+                guard error == nil, let quoteId = quoteId else {
+                    callback(nil, error ?? ContentError())
+                    
+                    return
+                }
+                
+                let token = strongSelf.sessionService.data.token
+                let route = token == nil ? MagentoCartRoute.getCartProductsUnauthorized(quoteId: quoteId) : MagentoCartRoute.getCartProductsAuthorized(token: token!)
+                let request = MagentoCartRouter(route: route)
+                
+                strongSelf.execute(request) { [weak self] (response, error) in
+                    guard let strongSelf = self, error == nil, let json = response as? [Any], let response = CartProductResponse.objects(from: json) else {
+                        callback(nil, error ?? ContentError())
+                        
+                        return
+                    }
+                    
+                    let group = DispatchGroup()
+                    let cartProducts = response.map({ MagentoCartProductAdapter.adapt($0, currency: сurrency) })
+                    cartProducts.forEach { cartItem in
+                        group.enter()
+                        
+                        let id = cartItem.productId ?? ""
+                        strongSelf.getProduct(id: id) { (response, error) in
+                            guard let product = response else {
+                                callback(nil, error)
+                                
+                                return
+                            }
+                            
+                            cartItem.productVariant?.image = product.images?.first
+                            
+                            group.leave()
+                        }
+                    }
+                    
+                    group.notify(queue: .main) {
+                        callback(cartProducts, nil)
+                    }
+                }
+            }
+        }
     }
-
+    
     public func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<Bool>) {
-        // TODO: Implement api method
+        getQuoteId { [weak self] (quoteId, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            
+            guard error == nil, let quoteId = quoteId else {
+                callback(nil, error ?? ContentError())
+                
+                return
+            }
+            
+            let id = cartProduct.productId ?? ""
+            let quantity = String(cartProduct.quantity)
+            let addCartProduct = AddCartProductRequestBody(id: id, quantity: quantity, quoteId: quoteId)
+            let token = strongSelf.sessionService.data.token
+            let route = token == nil ? MagentoCartRoute.addCartProductUnauthorized(quoteId: quoteId, body: addCartProduct) : MagentoCartRoute.addCartProductAuthorized(token: token!, body: addCartProduct)
+            let request = MagentoCartRouter(route: route)
+            
+            strongSelf.execute(request) { (response, error) in
+                let success = response != nil
+                callback(success, error)
+            }
+        }
+    }
+    
+    public func deleteCartProduct(cartItemId: String, callback: @escaping RepoCallback<Bool>) {
+        getQuoteId { [weak self] (quoteId, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            
+            guard error == nil, let quoteId = quoteId else {
+                callback(nil, error ?? ContentError())
+                
+                return
+            }
+            
+            let token = strongSelf.sessionService.data.token
+            let route = token == nil ? MagentoCartRoute.deleteCartProductUnauthorized(quoteId: quoteId, itemId: cartItemId) : MagentoCartRoute.deleteCartProductAuthorized(token: token!, quoteId: quoteId, itemId: cartItemId)
+            let request = MagentoCartRouter(route: route)
+            
+            strongSelf.execute(request) { (response, error) in
+                let success = response != nil
+                callback(success, error)
+            }
+        }
     }
 
-    public func deleteCartProduct(productVariantId: String, callback: @escaping RepoCallback<Bool>) {
-        // TODO: Implement api method
-    }
-
-    public func deleteCartProducts(productVariantIds: [String], callback: @escaping RepoCallback<Bool>) {
-        // TODO: Implement api method
+    public func deleteCartProducts(cartItemIds: [String], callback: @escaping RepoCallback<Bool>) {
+        callback(true, nil)
     }
 
     public func deleteAllCartProducts(callback: @escaping RepoCallback<Bool>) {
-        // TODO: Implement api method
+        cartId = nil
+        callback(true, nil)
     }
 
-    public func changeCartProductQuantity(productVariantId: String, quantity: Int, callback: @escaping RepoCallback<Bool>) {
-        // TODO: Implement api method
+    public func changeCartProductQuantity(cartItemId: String, quantity: Int, callback: @escaping RepoCallback<Bool>) {
+        getQuoteId { [weak self] (quoteId, error) in
+            guard let strongSelf = self else {
+                return
+            }
+            
+            guard error == nil, let quoteId = quoteId else {
+                callback(nil, error ?? ContentError())
+                
+                return
+            }
+            
+            let token = strongSelf.sessionService.data.token
+            let quantity = String(quantity)
+            let changeCartProductQuantity = ChangeCartProductQuantityRequestBody(quantity: quantity, quoteId: quoteId)
+            let route = token == nil ? MagentoCartRoute.changeCartProductQuantityUnauthorized(quoteId: quoteId, itemId: cartItemId, body: changeCartProductQuantity) : MagentoCartRoute.changeCartProductQuantityAuthorized(token: token!, itemId: cartItemId, body: changeCartProductQuantity)
+            let request = MagentoCartRouter(route: route)
+            
+            strongSelf.execute(request) { (response, error) in
+                let success = response != nil
+                callback(success, error)
+            }
+        }
     }
 
     // MARK: - Private
@@ -833,6 +961,31 @@ public class MagentoAPI: BaseAPI, API {
             }
             
             callback(response, nil)
+        }
+    }
+    
+    private func getQuoteId(callback: @escaping RepoCallback<String>) {
+        if let quoteId = cartId {
+            callback(quoteId, nil)
+        } else {
+            createCustomerCart(callback: callback)
+        }
+    }
+    
+    private func createCustomerCart(callback: @escaping RepoCallback<String>) {
+        let token = sessionService.data.token
+        let route = token == nil ? MagentoCartRoute.createQuoteUnauthorized : MagentoCartRoute.createQuoteAuthorized(token: token!)
+        let request = MagentoCartRouter(route: route)
+        
+        execute(request) { [weak self] (response, error) in
+            guard let strongSelf = self, error == nil, let quoteId = response as? String else {
+                callback(nil, error ?? ContentError())
+                
+                return
+            }
+            
+            strongSelf.cartId = quoteId
+            callback(quoteId, nil)
         }
     }
 }

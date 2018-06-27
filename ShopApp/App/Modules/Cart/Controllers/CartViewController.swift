@@ -15,7 +15,7 @@ class CartViewController: BaseViewController<CartViewModel>, EmptyDataViewDelega
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var checkoutButton: BlackButton!
     
-    fileprivate var selectedProductVariant: ProductVariant!
+    private var selectedProductVariant: ProductVariant!
     
     var tableProvider: CartTableProvider!
     

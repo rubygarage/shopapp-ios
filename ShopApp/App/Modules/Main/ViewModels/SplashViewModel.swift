@@ -53,7 +53,7 @@ class SplashViewModel: BaseViewModel {
     
     private func filterProductVariants(localIds: [String], remoteIds: [String]) {
         let excludedIds = localIds.filter({ !remoteIds.contains($0) })
-        deleteCartProductUseCase.deleteCartProducts(productVariantIds: excludedIds) { [weak self] (_, _) in
+        deleteCartProductUseCase.deleteCartProducts(cartItemIds: excludedIds) { [weak self] (_, _) in
             guard let strongSelf = self else {
                 return
             }

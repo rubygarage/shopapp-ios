@@ -13,7 +13,7 @@ import ShopApp_Gateway
 class ChangeCartProductUseCaseMock: ChangeCartProductUseCase {
     var isNeedToReturnError = false
     
-    override func changeCartProductQuantity(productVariantId: String?, quantity: Int, _ callback: @escaping RepoCallback<Bool>) {
+    override func changeCartProductQuantity(cartItemId: String?, quantity: Int, _ callback: @escaping RepoCallback<Bool>) {
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
 }

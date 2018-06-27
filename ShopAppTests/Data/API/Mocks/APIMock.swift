@@ -72,8 +72,8 @@ class APIMock: API {
     var billingAddress: Address?
     var ids: [String]?
     var cartProduct: CartProduct?
-    var productVariantId: String?
-    var productVariantIds: [String?]?
+    var cartItemId: String?
+    var cartItemIds: [String?]?
     var quantity: Int?
 
     // MARK: - Shop
@@ -388,18 +388,18 @@ class APIMock: API {
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
     }
     
-    func deleteCartProduct(productVariantId: String, callback: @escaping RepoCallback<Bool>) {
+    func deleteCartProduct(cartItemId: String, callback: @escaping RepoCallback<Bool>) {
         isDeleteProductFromCartStarted = true
         
-        self.productVariantId = productVariantId
+        self.cartItemId = cartItemId
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
     }
     
-    func deleteCartProducts(productVariantIds: [String], callback: @escaping RepoCallback<Bool>) {
+    func deleteCartProducts(cartItemIds: [String], callback: @escaping RepoCallback<Bool>) {
         isDeleteProductsFromCartStarted = true
         
-        self.productVariantIds = productVariantIds
+        self.cartItemIds = cartItemIds
         
         isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
     }
@@ -410,10 +410,10 @@ class APIMock: API {
         isNeedToReturnError ? callback(nil, RepoError()) : callback(true, nil)
     }
     
-    func changeCartProductQuantity(productVariantId: String, quantity: Int, callback: @escaping RepoCallback<Bool>) {
+    func changeCartProductQuantity(cartItemId: String, quantity: Int, callback: @escaping RepoCallback<Bool>) {
         isChangeCartProductQuantityStarted = true
         
-        self.productVariantId = productVariantId
+        self.cartItemId = cartItemId
         self.quantity = quantity
         
         isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)

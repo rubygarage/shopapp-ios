@@ -14,6 +14,7 @@ public class CartProduct {
     public var productTitle: String?
     public var currency: String?
     public var quantity: Int = 0
+    public var cartItemId = ""
 
     public init() {}
 }

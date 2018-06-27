@@ -85,20 +85,20 @@ class ShopAppCartRepositorySpec: QuickSpec {
         }
         
         describe("when cart product should be delete") {
-            var productVariantId: String!
+            var cartItemId: String!
             
             beforeEach {
-                productVariantId = "id"
+                cartItemId = "id"
             }
             
             context("if callback has result") {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.deleteCartProduct(productVariantId: productVariantId) { (result, error) in
+                    repository.deleteCartProduct(cartItemId: cartItemId) { (result, error) in
                         expect(apiMock.isDeleteProductFromCartStarted) == true
                         
-                        expect(apiMock.productVariantId) == productVariantId
+                        expect(apiMock.cartItemId) == cartItemId
                         
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -110,10 +110,10 @@ class ShopAppCartRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.deleteCartProduct(productVariantId: productVariantId) { (result, error) in
+                    repository.deleteCartProduct(cartItemId: cartItemId) { (result, error) in
                         expect(apiMock.isDeleteProductFromCartStarted) == true
                         
-                        expect(apiMock.productVariantId) == productVariantId
+                        expect(apiMock.cartItemId) == cartItemId
                         
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())
@@ -123,20 +123,20 @@ class ShopAppCartRepositorySpec: QuickSpec {
         }
         
         describe("when selected cart products should be delete") {
-            var productVariantIds: [String]!
+            var cartItemIds: [String]!
             
             beforeEach {
-                productVariantIds = ["id"]
+                cartItemIds = ["id"]
             }
             
             context("if callback has result") {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.deleteCartProducts(productVariantIds: productVariantIds) { (result, error) in
+                    repository.deleteCartProducts(cartItemIds: cartItemIds) { (result, error) in
                         expect(apiMock.isDeleteProductsFromCartStarted) == true
                         
-                        expect(apiMock.productVariantIds).to(equal(productVariantIds))
+                        expect(apiMock.cartItemIds).to(equal(cartItemIds))
                         
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -148,10 +148,10 @@ class ShopAppCartRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.deleteCartProducts(productVariantIds: productVariantIds) { (result, error) in
+                    repository.deleteCartProducts(cartItemIds: cartItemIds) { (result, error) in
                         expect(apiMock.isDeleteProductsFromCartStarted) == true
                         
-                        expect(apiMock.productVariantIds).to(equal(productVariantIds))
+                        expect(apiMock.cartItemIds).to(equal(cartItemIds))
                         
                         expect(result).to(beNil())
                         expect(error).toNot(beNil())
@@ -189,11 +189,11 @@ class ShopAppCartRepositorySpec: QuickSpec {
         }
         
         describe("when cart product should be change") {
-            var productVariantId: String!
+            var cartItemId: String!
             var quantity: Int!
             
             beforeEach {
-                productVariantId = "id"
+                cartItemId = "id"
                 quantity = 5
             }
             
@@ -201,10 +201,10 @@ class ShopAppCartRepositorySpec: QuickSpec {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.changeCartProductQuantity(productVariantId: productVariantId, quantity: quantity) { (result, error) in
+                    repository.changeCartProductQuantity(cartItemId: cartItemId, quantity: quantity) { (result, error) in
                         expect(apiMock.isChangeCartProductQuantityStarted) == true
                         
-                        expect(apiMock.productVariantId) == productVariantId
+                        expect(apiMock.cartItemId) == cartItemId
                         expect(apiMock.quantity) == quantity
                         
                         expect(result) == true
@@ -217,10 +217,10 @@ class ShopAppCartRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.changeCartProductQuantity(productVariantId: productVariantId, quantity: quantity) { (result, error) in
+                    repository.changeCartProductQuantity(cartItemId: cartItemId, quantity: quantity) { (result, error) in
                         expect(apiMock.isChangeCartProductQuantityStarted) == true
                         
-                        expect(apiMock.productVariantId) == productVariantId
+                        expect(apiMock.cartItemId) == cartItemId
                         expect(apiMock.quantity) == quantity
                         
                         expect(result) == false

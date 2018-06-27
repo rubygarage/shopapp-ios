@@ -13,11 +13,11 @@ protocol CartRepository {
 
     func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<Bool>)
 
-    func deleteCartProduct(productVariantId: String, callback: @escaping RepoCallback<Bool>)
+    func deleteCartProduct(cartItemId: String, callback: @escaping RepoCallback<Bool>)
 
-    func deleteCartProducts(productVariantIds: [String], callback: @escaping RepoCallback<Bool>)
+    func deleteCartProducts(cartItemIds: [String], callback: @escaping RepoCallback<Bool>)
 
     func deleteAllCartProducts(callback: @escaping RepoCallback<Bool>)
 
-    func changeCartProductQuantity(productVariantId: String, quantity: Int, callback: @escaping RepoCallback<Bool>)
+    func changeCartProductQuantity(cartItemId: String, quantity: Int, callback: @escaping RepoCallback<Bool>)
 }

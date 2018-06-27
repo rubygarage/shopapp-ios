@@ -23,11 +23,11 @@ class ChangeCartProductUseCaseSpec: QuickSpec {
         }
         
         describe("when product's quantity should be change") {
-            var productVariantId: String!
+            var cartItemId: String!
             var quantity: Int!
             
             beforeEach {
-                productVariantId = "id"
+                cartItemId = "id"
                 quantity = 5
             }
             
@@ -35,10 +35,10 @@ class ChangeCartProductUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.changeCartProductQuantity(productVariantId: productVariantId, quantity: quantity) { (result, error) in
+                    useCase.changeCartProductQuantity(cartItemId: cartItemId, quantity: quantity) { (result, error) in
                         expect(repositoryMock.isChangeCartProductQuantityStarted) == true
                         
-                        expect(repositoryMock.productVariantId) == productVariantId
+                        expect(repositoryMock.cartItemId) == cartItemId
                         expect(repositoryMock.quantity) == quantity
                         
                         expect(result) == true
@@ -51,10 +51,10 @@ class ChangeCartProductUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.changeCartProductQuantity(productVariantId: productVariantId, quantity: quantity) { (result, error) in
+                    useCase.changeCartProductQuantity(cartItemId: cartItemId, quantity: quantity) { (result, error) in
                         expect(repositoryMock.isChangeCartProductQuantityStarted) == true
                         
-                        expect(repositoryMock.productVariantId) == productVariantId
+                        expect(repositoryMock.cartItemId) == cartItemId
                         expect(repositoryMock.quantity) == quantity
                         
                         expect(result) == false
