@@ -43,7 +43,7 @@ class ProductOptionsCollectionProviderSpec: QuickSpec {
             it("should return correct items count") {
                 let itemsCount = collectionProvider.collectionView(collectionView, numberOfItemsInSection: 0)
                 
-                expect(itemsCount) == 0
+                expect(itemsCount) == 1
             }
             
             it("should return correct header size") {
@@ -79,12 +79,6 @@ class ProductOptionsCollectionProviderSpec: QuickSpec {
                     expect(sectionsCount) == options.count
                 }
                 
-                it("should return correct items count") {
-                    let itemsCount = collectionProvider.collectionView(collectionView, numberOfItemsInSection: 0)
-                    
-                    expect(itemsCount) == 0
-                }
-                
                 it("should have correct header class type") {
                     _ = collectionView.numberOfSections
                     
@@ -105,12 +99,6 @@ class ProductOptionsCollectionProviderSpec: QuickSpec {
                     let sectionsCount = collectionProvider.numberOfSections(in: collectionView)
                     
                     expect(sectionsCount) == options.count
-                }
-                
-                it("should return correct items count") {
-                    let itemsCount = collectionProvider.collectionView(collectionView, numberOfItemsInSection: 0)
-                    
-                    expect(itemsCount) == 1
                 }
                 
                 it("should have correct cell class type") {

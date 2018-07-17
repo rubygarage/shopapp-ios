@@ -86,19 +86,6 @@ class ProductOptionsViewControllerSpec: QuickSpec {
                 viewController.delegate = delegateMock
             }
             
-            context("if controller has only 1 option and 1 option value") {
-                beforeEach {
-                    viewController.options = [TestHelper.productOptionWithOneValue]
-                }
-                
-                it("should pass zero height to delegate") {
-                    viewController.selectedOptions = [TestHelper.variantOption]
-                    
-                    expect(delegateMock.viewController) === viewController
-                    expect(delegateMock.height) == 0
-                }
-            }
-            
             context("if selected options count more than 1") {
                 beforeEach {
                     viewController.options = [TestHelper.productOptionWithFewValues]

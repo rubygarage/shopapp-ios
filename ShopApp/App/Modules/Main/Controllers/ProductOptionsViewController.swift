@@ -29,10 +29,6 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionCe
     
     var selectedOptions: [VariantOption] = [] {
         didSet {
-            if options.count == 1 && options.first!.values.count == 1 {
-                delegate?.viewController(self, didCalculate: 0.0)
-                return
-            }
             let collectionViewHeight = (kOptionCollectionViewHeaderHeight + kOptionCollectionViewCellHeight) * CGFloat(options.count)
             let additionalHeight = !options.isEmpty ? optionCollectionViewAdditionalHeight : 0.0
             delegate?.viewController(self, didCalculate: collectionViewHeight + additionalHeight)

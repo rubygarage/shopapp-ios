@@ -25,9 +25,6 @@ class ProductOptionsCollectionProvider: NSObject, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard section < options.count, options[section].values.count > 1 else {
-            return 0
-        }
         return 1
     }
     
