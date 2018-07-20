@@ -16,8 +16,8 @@ class SortType_DetailsSpec: QuickSpec {
     override func spec() {
         describe("when all values used") {
             it("needs to return localizable strings in correct order") {
-                expect(SortType.allValues) == ["SortType.CreatedAt".localizable,
-                                               "SortType.Name".localizable,
+                expect(SortType.allValues) == ["SortType.Name".localizable,
+                                               "SortType.CreatedAt".localizable,
                                                "SortType.Popular".localizable,
                                                "SortType.Type".localizable,
                                                "SortType.PriceHighToLow".localizable,

@@ -43,7 +43,7 @@ class ProductOptionsCollectionProviderSpec: QuickSpec {
             it("should return correct items count") {
                 let itemsCount = collectionProvider.collectionView(collectionView, numberOfItemsInSection: 0)
                 
-                expect(itemsCount) == 0
+                expect(itemsCount) == 1
             }
             
             it("should return correct header size") {
@@ -61,40 +61,15 @@ class ProductOptionsCollectionProviderSpec: QuickSpec {
         }
         
         describe("when data did set") {
-            var option: ProductOption!
             var options: [ProductOption]!
             
             beforeEach {
-                option = ProductOption()
-                option.id = "Option id"
-                
-                let selectedOption = SelectedOption(name: "Name", value: "Value")
-                collectionProvider.selectedOptions = [selectedOption]
-            }
-            
-            context("if product option hasn't values") {
-                beforeEach {
-                    options = [option]
-                    collectionProvider.options = options
-                }
-                
-                it("should have correct sections count") {
-                    let sectionsCount = collectionProvider.numberOfSections(in: collectionView)
-                    
-                    expect(sectionsCount) == options.count
-                }
-                
-                it("should return correct items count") {
-                    let itemsCount = collectionProvider.collectionView(collectionView, numberOfItemsInSection: 0)
-                    
-                    expect(itemsCount) == 0
-                }
+                collectionProvider.selectedOptions = [TestHelper.variantOption]
             }
             
             context("if product option has single value") {
                 beforeEach {
-                    option.values = ["Option value"]
-                    options = [option]
+                    options = [TestHelper.productOptionWithOneValue]
                     collectionProvider.options = options
                 }
                 
@@ -102,12 +77,6 @@ class ProductOptionsCollectionProviderSpec: QuickSpec {
                     let sectionsCount = collectionProvider.numberOfSections(in: collectionView)
                     
                     expect(sectionsCount) == options.count
-                }
-                
-                it("should return correct items count") {
-                    let itemsCount = collectionProvider.collectionView(collectionView, numberOfItemsInSection: 0)
-                    
-                    expect(itemsCount) == 0
                 }
                 
                 it("should have correct header class type") {
@@ -122,9 +91,7 @@ class ProductOptionsCollectionProviderSpec: QuickSpec {
             
             context("if product option has multiple values") {
                 beforeEach {
-                    option.name = "Option name"
-                    option.values = ["Option value 1", "Option value 2"]
-                    options = [option]
+                    options = [TestHelper.productOptionWithFewValues]
                     collectionProvider.options = options
                 }
                 
@@ -132,12 +99,6 @@ class ProductOptionsCollectionProviderSpec: QuickSpec {
                     let sectionsCount = collectionProvider.numberOfSections(in: collectionView)
                     
                     expect(sectionsCount) == options.count
-                }
-                
-                it("should return correct items count") {
-                    let itemsCount = collectionProvider.collectionView(collectionView, numberOfItemsInSection: 0)
-                    
-                    expect(itemsCount) == 1
                 }
                 
                 it("should have correct cell class type") {

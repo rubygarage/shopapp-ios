@@ -60,7 +60,7 @@ class ShopAppAuthentificationRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.signUp(firstName: firstName, lastName: lastName, email: email, password: password, phone: phone) { (result, error) in
+                    repository.signUp(firstName: firstName, lastName: lastName, email: email, password: password, phone: phone) { (_, error) in
                         expect(apiMock.isSignUpStarter) == true
                         
                         expect(apiMock.email) == email
@@ -69,7 +69,6 @@ class ShopAppAuthentificationRepositorySpec: QuickSpec {
                         expect(apiMock.password) == password
                         expect(apiMock.phone) == phone
                         
-                        expect(result).to(beNil())
                         expect(error).toNot(beNil())
                     }
                 }
@@ -105,13 +104,12 @@ class ShopAppAuthentificationRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.signIn(email: email, password: password) { (result, error) in
+                    repository.signIn(email: email, password: password) { (_, error) in
                         expect(apiMock.isLoginStarted) == true
                         
                         expect(apiMock.email) == email
                         expect(apiMock.password) == password
                         
-                        expect(result).to(beNil())
                         expect(error).toNot(beNil())
                     }
                 }
@@ -136,10 +134,9 @@ class ShopAppAuthentificationRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.signOut() { (result, error) in
+                    repository.signOut() { (_, error) in
                         expect(apiMock.isLogoutStarted) == true
                         
-                        expect(result).to(beNil())
                         expect(error).toNot(beNil())
                     }
                 }
@@ -194,12 +191,11 @@ class ShopAppAuthentificationRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.resetPassword(email: email) { (result, error) in
+                    repository.resetPassword(email: email) { (_, error) in
                         expect(apiMock.isResetPasswordStarted) == true
                         
                         expect(apiMock.email) == email
                         
-                        expect(result).to(beNil())
                         expect(error).toNot(beNil())
                     }
                 }

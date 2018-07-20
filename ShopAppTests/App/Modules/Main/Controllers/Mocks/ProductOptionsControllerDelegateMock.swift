@@ -15,14 +15,14 @@ import ShopApp_Gateway
 class ProductOptionsControllerDelegateMock: ProductOptionsControllerDelegate {
     var viewController: ProductOptionsViewController?
     var height: CGFloat?
-    var option: SelectedOption?
+    var option: VariantOption?
     
     func viewController(_ viewController: ProductOptionsViewController, didCalculate height: CGFloat) {
         self.viewController = viewController
         self.height = height
     }
     
-    func viewController(_ viewController: ProductOptionsViewController, didSelect option: SelectedOption) {
+    func viewController(_ viewController: ProductOptionsViewController, didSelect option: VariantOption) {
         self.viewController = viewController
         self.option = option
     }

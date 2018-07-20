@@ -59,7 +59,7 @@ class CheckoutAddressFormViewModelSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
-                        viewModel.updateAddress(with: Address())
+                        viewModel.updateAddress(with: TestHelper.fullAddress)
                         
                         expect(states.count) == 1
                         expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -70,7 +70,7 @@ class CheckoutAddressFormViewModelSpec: QuickSpec {
                     it("should return error") {
                         checkoutUseCaseMock.isUpdateCheckoutShippingAddressNeedToReturnError = true
                         
-                        viewModel.updateAddress(with: Address())
+                        viewModel.updateAddress(with: TestHelper.fullAddress)
                         
                         expect(states.count) == 2
                         expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -82,12 +82,12 @@ class CheckoutAddressFormViewModelSpec: QuickSpec {
             context("if address type is billing") {
                 it("should return success response") {
                     viewModel.addressType = .billing
-                    let address = Address()
+                    let address = TestHelper.fullAddress
                     checkoutUseCaseMock.isNeedToReturnError = false
                     
                     viewModel.filledBillingAddress
                         .subscribe(onNext: { result in
-                            expect(result) === address
+                            expect(result) == address
                         })
                         .disposed(by: disposeBag)
                     

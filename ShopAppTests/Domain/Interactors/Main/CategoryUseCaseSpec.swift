@@ -37,7 +37,7 @@ class CategoryUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getCategory(with: id, paginationValue: paginationValue, sortType: sortType) { (result, error) in
+                    useCase.getCategory(id: id, paginationValue: paginationValue, sortType: sortType) { (result, error) in
                         expect(repositoryMock.isGetCategoryDetailsStarted) == true
                         
                         expect(repositoryMock.id) == id
@@ -55,7 +55,7 @@ class CategoryUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.getCategory(with: id, paginationValue: paginationValue, sortType: sortType) { (result, error) in
+                    useCase.getCategory(id: id, paginationValue: paginationValue, sortType: sortType) { (result, error) in
                         expect(repositoryMock.isGetCategoryDetailsStarted) == true
                         
                         expect(repositoryMock.id) == id

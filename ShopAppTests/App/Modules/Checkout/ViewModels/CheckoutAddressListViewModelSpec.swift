@@ -25,7 +25,7 @@ class CheckoutAddressListViewModelSpec: QuickSpec {
         
         let viewModel = CheckoutAddressListViewModel(customerUseCase: customerUseCaseMock, updateDefaultAddressUseCase: updateDefaultAddressUseCaseMock, deleteAddressUseCase: deleteAddressUseCaseMock, checkoutUseCase: checkoutUseCaseMock)
         
-        let address = Address()
+        let address = TestHelper.fullAddress
         
         beforeEach {
             viewModel.checkoutId = "Checkout id"
@@ -58,7 +58,7 @@ class CheckoutAddressListViewModelSpec: QuickSpec {
                     
                     viewModel.didSelectAddress
                         .subscribe(onNext: { result in
-                            expect(result) === address
+                            expect(result) == address
                         })
                         .disposed(by: disposeBag)
                     
@@ -69,7 +69,7 @@ class CheckoutAddressListViewModelSpec: QuickSpec {
                     expect(states[1]) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.content
                     
-                    expect(viewModel.selectedAddress) === address
+                    expect(viewModel.selectedAddress) == address
                     
                     expect(customerUseCaseMock.isGetCustomerStarted) == true
                 }
@@ -123,7 +123,7 @@ class CheckoutAddressListViewModelSpec: QuickSpec {
                         expect(states[1]) == ViewState.loading(showHud: true, isTranslucent: false)
                         expect(states.last) == ViewState.content
                         
-                        expect(viewModel.selectedAddress) === address
+                        expect(viewModel.selectedAddress) == address
                         
                         expect(customerUseCaseMock.isGetCustomerStarted) == true
                     }
@@ -135,7 +135,7 @@ class CheckoutAddressListViewModelSpec: QuickSpec {
                         
                         viewModel.didSelectBillingAddress
                             .subscribe(onNext: { result in
-                                expect(result) === address
+                                expect(result) == address
                             })
                             .disposed(by: disposeBag)
                         

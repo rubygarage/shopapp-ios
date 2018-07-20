@@ -10,12 +10,12 @@ import RxSwift
 import ShopApp_Gateway
 
 class ArticleListViewModel: BasePaginationViewModel {
-    private let articleListUseCase: ArticleListUseCase
+    private let articlesUseCase: ArticlesUseCase
     
     var items = Variable<[Article]>([])
 
-    init(articleListUseCase: ArticleListUseCase) {
-        self.articleListUseCase = articleListUseCase
+    init(articlesUseCase: ArticlesUseCase) {
+        self.articlesUseCase = articlesUseCase
     }
     
     func reloadData() {
@@ -31,7 +31,7 @@ class ArticleListViewModel: BasePaginationViewModel {
     private func loadRemoteData() {
         let showHud = items.value.isEmpty
         state.onNext(ViewState.make.loading(showHud: showHud))
-        articleListUseCase.getArticles(with: paginationValue) { [weak self] (articles, error) in
+        articlesUseCase.getArticles(paginationValue: paginationValue) { [weak self] (articles, error) in
             guard let strongSelf = self else {
                 return
             }

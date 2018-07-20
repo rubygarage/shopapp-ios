@@ -8,6 +8,7 @@
 
 import Foundation
 
+<<<<<<< HEAD
 public class Category {
     public var id = ""
     public var title: String?
@@ -18,6 +19,28 @@ public class Category {
     public var childrenCategories: [Category]?
     public var products: [Product]?
     public var additionalDescription: String?
+=======
+public struct Category: Equatable {
+    public let id: String
+    public let title: String
+    public let image: Image?
+    public let products: [Product]
+    public let paginationValue: String?
+>>>>>>> develop
 
-    public init() {}
+    public init(id: String, title: String, image: Image? = nil, products: [Product], paginationValue: String?) {
+        self.id = id
+        self.title = title
+        self.image = image
+        self.products = products
+        self.paginationValue = paginationValue
+    }
+    
+    public static func == (lhs: Category, rhs: Category) -> Bool {
+        return lhs.id == rhs.id
+            && lhs.title == rhs.title
+            && lhs.image == rhs.image
+            && lhs.products == rhs.products
+            && lhs.paginationValue == rhs.paginationValue
+    }
 }

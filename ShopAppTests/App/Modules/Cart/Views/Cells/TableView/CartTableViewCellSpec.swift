@@ -93,19 +93,7 @@ class CartTableViewCellSpec: QuickSpec {
             
             context("and if not nil and quantity more than 1") {
                 beforeEach {
-                    cartProduct = CartProduct()
-                    cartProduct.productTitle = "Product title"
-                    cartProduct.quantity = 10
-                    cartProduct.currency = "USD"
-                    
-                    let productVariant = ProductVariant()
-                    productVariant.title = "Variant title"
-                    productVariant.price = Decimal(floatLiteral: 15)
-                    
-                    let image = Image()
-                    image.src = "https://via.placeholder.com/100x100"
-                    
-                    cartProduct.productVariant = productVariant
+                    cartProduct = TestHelper.cartProductWithQuantityTwo
                     
                     cell.configure(with: cartProduct)
                 }
@@ -115,16 +103,16 @@ class CartTableViewCellSpec: QuickSpec {
                 }
                 
                 it("should have correct variant title label text") {
-                    expect(variantTitleLabel.text) == "Product title Variant title"
+                    expect(variantTitleLabel.text) == "title title"
                 }
                 
                 it("should have correct quantity label text") {
-                    expect(quantityDropDownView.text) == "10"
+                    expect(quantityDropDownView.text) == String(cartProduct.quantity)
                 }
                 
                 it("should have correct total price label text") {
-                    let formatter = NumberFormatter.formatter(with: cartProduct.currency!)
-                    let price = NSDecimalNumber(decimal: cartProduct.productVariant!.price!)
+                    let formatter = NumberFormatter.formatter(with: cartProduct.currency)
+                    let price = NSDecimalNumber(decimal: cartProduct.productVariant!.price)
                     let quantity = Double(cartProduct.quantity)
                     let totalPrice = NSDecimalNumber(value: price.doubleValue * quantity)
                     let expectedTotalPriceText = formatter.string(from: totalPrice)
@@ -137,8 +125,8 @@ class CartTableViewCellSpec: QuickSpec {
                 }
                 
                 it("should have correct price per one label text") {
-                    let formatter = NumberFormatter.formatter(with: cartProduct.currency!)
-                    let price = NSDecimalNumber(decimal: cartProduct.productVariant!.price!)
+                    let formatter = NumberFormatter.formatter(with: cartProduct.currency)
+                    let price = NSDecimalNumber(decimal: cartProduct.productVariant!.price)
                     let localizedString = "Label.PriceEach".localizable
                     let formattedPrice = formatter.string(from: price)!
                     let expectedPricePerOneText = String.localizedStringWithFormat(localizedString, formattedPrice)
@@ -149,8 +137,7 @@ class CartTableViewCellSpec: QuickSpec {
             
             context("if not nil and quantity is 1") {
                 beforeEach {
-                    cartProduct = CartProduct()
-                    cartProduct.quantity = 1
+                    cartProduct = TestHelper.cartProductWithQuantityOne
                     
                     cell.configure(with: cartProduct)
                 }
@@ -159,33 +146,13 @@ class CartTableViewCellSpec: QuickSpec {
                     expect(pricePerOneItemLabel.isHidden) == true
                 }
             }
-            
-            context("if it hasn't currency and price") {
-                beforeEach {
-                    cartProduct = CartProduct()
-                    cartProduct.quantity = 5
-                    
-                    cell.configure(with: cartProduct)
-                }
-                
-                it("should show zero price") {
-                    let currency = cartProduct.currency ?? ""
-                    let formatter = NumberFormatter.formatter(with: currency)
-                    let price = NSDecimalNumber(decimal: cartProduct.productVariant?.price ?? Decimal())
-                    let localizedString = "Label.PriceEach".localizable
-                    let formattedPrice = formatter.string(from: price)!
-                    let expectedPricePerOneText = String.localizedStringWithFormat(localizedString, formattedPrice)
-                    
-                    expect(pricePerOneItemLabel.text) == expectedPricePerOneText
-                }
-            }
         }
         
         describe("when quantity updated") {
             var cartProduct: CartProduct!
             
             beforeEach {
-                cartProduct = CartProduct()
+                cartProduct = TestHelper.cartProductWithQuantityOne
                 cell.configure(with: cartProduct)
             }
             
@@ -195,7 +162,7 @@ class CartTableViewCellSpec: QuickSpec {
                     quantityDropDownView.textField.sendActions(for: .editingDidEnd)
                     
                     expect(delegateMock.cell) == cell
-                    expect(delegateMock.updatedCartProduct) === cartProduct
+                    expect(delegateMock.updatedCartProduct) == cartProduct
                     expect(delegateMock.updatedQuantity) == 3
                 }
             }
@@ -207,7 +174,7 @@ class CartTableViewCellSpec: QuickSpec {
                     cell.quantityDropDownView(view, didSelectMoreWith: count)
                     
                     expect(delegateMock.cell) == cell
-                    expect(delegateMock.updatedCartProduct) === cartProduct
+                    expect(delegateMock.updatedCartProduct) == cartProduct
                     expect(delegateMock.updatedQuantity) == count
                 }
             }

@@ -19,24 +19,7 @@ class BaseAddressListViewModelMock: BaseAddressListViewModel {
     
     override func loadCustomerAddresses(isTranslucentHud: Bool = false, continueLoading: Bool = false) {
         if isNeedsToReturnAddresses {
-            let address = Address()
-            address.firstName = "first name"
-            address.lastName = "last name"
-            address.address = "address"
-            address.secondAddress = "second address"
-            address.city = "city"
-            address.zip = "zip"
-            address.phone = "phone"
-            
-            let country = Country()
-            country.name = "country"
-            address.country = country
-            
-            let state = State()
-            state.name = "state"
-            address.state = state
-            
-            customerAddresses.value = [address]
+            customerAddresses.value = [TestHelper.fullAddress]
         } else {
             customerAddresses.value = []
         }

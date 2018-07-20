@@ -50,7 +50,7 @@ class SortVariantsViewController: UIViewController, SortVariantsTableProviderDel
     
     private func loadData() {
         let allValues = SortType.allValues
-        let createdAt = allValues[SortType.createdAt.rawValue]
+        let createdAt = allValues[SortType.recent.rawValue]
         let priceHighToLow = allValues[SortType.priceHighToLow.rawValue]
         let priceLowToHigh = allValues[SortType.priceLowToHigh.rawValue]
         tableProvider.variants = [createdAt, priceHighToLow, priceLowToHigh]

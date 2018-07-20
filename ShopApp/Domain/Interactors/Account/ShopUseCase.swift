@@ -15,11 +15,7 @@ class ShopUseCase {
         self.repository = repository
     }
 
-    func getShop(_ callback: @escaping (_ shop: Shop) -> Void) {
-        repository.getShop { (shop, _) in
-            if let shop = shop {
-                callback(shop)
-            }
-        }
+    func getShop(_ callback: @escaping ApiCallback<Shop>) {
+        repository.getShop(callback: callback)
     }
 }

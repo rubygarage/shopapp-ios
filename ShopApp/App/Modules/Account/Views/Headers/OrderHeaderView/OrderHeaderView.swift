@@ -56,12 +56,12 @@ class OrderHeaderView: UIView {
     
     private func populateViews(order: Order) {
         let numberFormat = "Label.Order.Number".localizable.uppercased()
-        numberLabel.text = String(format: numberFormat, String(order.number!))
+        numberLabel.text = String(format: numberFormat, String(order.orderNumber))
         
         let dateFormat = "Label.Order.Date".localizable
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = orderHeaderViewDateFormat
-        let dateString = dateFormatter.string(from: order.createdAt!)
+        let dateString = dateFormatter.string(from: order.createdAt)
         dateLabel.text = String(format: dateFormat, dateString)
     }
     

@@ -25,32 +25,31 @@ class BaseViewModelMock: BaseViewModel {
         self.state.onNext(state)
     }
     
-    func setRepoErrorState() {
-        let error = RepoError()
-        let state = ViewState.error(error: error)
+    func setEmptyErrorState() {
+        let state = ViewState.error(error: nil)
         self.state.onNext(state)
     }
     
     func setContentErrorState() {
-        let error = ContentError()
+        let error = ShopAppError.content(isNetworkError: false)
         let state = ViewState.error(error: error)
         self.state.onNext(state)
     }
     
     func setNetworkErrorState() {
-        let error = NetworkError()
+        let error = ShopAppError.content(isNetworkError: true)
         let state = ViewState.error(error: error)
         self.state.onNext(state)
     }
     
     func setNonCriticalErrorState() {
-        let error = NonCriticalError()
+        let error = ShopAppError.nonCritical(message: "message")
         let state = ViewState.error(error: error)
         self.state.onNext(state)
     }
     
     func setCriticalErrorState() {
-        let error = CriticalError(with: nil, message: "")
+        let error = ShopAppError.critical
         let state = ViewState.error(error: error)
         self.state.onNext(state)
     }

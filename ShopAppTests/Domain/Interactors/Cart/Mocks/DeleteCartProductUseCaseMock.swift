@@ -13,11 +13,7 @@ import ShopApp_Gateway
 class DeleteCartProductUseCaseMock: DeleteCartProductUseCase {
     var isNeedToReturnError = false
     
-    override func deleteCartProduct(cartItemId: String, _ callback: @escaping RepoCallback<Bool>) {
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
-    }
-    
-    override func deleteCartProducts(cartItemIds: [String], callback: @escaping RepoCallback<Bool>) {
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+    override func deleteCartProduct(cartItemId: String, _ callback: @escaping ApiCallback<Void>) {
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
 }

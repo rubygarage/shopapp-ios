@@ -18,11 +18,11 @@ class LastArrivalsCollectionViewCell: UICollectionViewCell {
     // MARK: - Setup
     
     func configure(with item: Product) {
-        productImageView.set(image: item.images?.first)
+        productImageView.set(image: item.images.first)
         titleLabel.text = item.title
-        let formatter = NumberFormatter.formatter(with: item.currency!)
+        let formatter = NumberFormatter.formatter(with: item.currency)
         let localizedString = "Label.PriceFrom".localizable
-        let price = NSDecimalNumber(decimal: item.price ?? Decimal())
+        let price = NSDecimalNumber(decimal: item.price)
         let formattedPrice = formatter.string(from: price)!
         priceLabel.text = item.hasAlternativePrice ? String.localizedStringWithFormat(localizedString, formattedPrice) : formattedPrice
     }

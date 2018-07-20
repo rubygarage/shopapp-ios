@@ -15,7 +15,7 @@ class CountriesUseCase {
         self.repository = repository
     }
 
-    func getCountries(_ callback: @escaping RepoCallback<[Country]>) {
+    func getCountries(_ callback: @escaping ApiCallback<[Country]>) {
         repository.getCountries(callback: callback)
     }
 }

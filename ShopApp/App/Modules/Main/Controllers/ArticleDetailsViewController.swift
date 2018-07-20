@@ -67,11 +67,8 @@ class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel>,
         }
         articleImageView.isHidden = article.image == nil
         articleTitleLabel.text = article.title
-        authorNameLabel.text = article.author?.fullName
-        guard let htmlString = article.contentHtml else {
-            return
-        }
-        let html = HtmlStringMultimediaCompressor.compress(htmlString, withMultimediaWidth: articleTitleLabel.frame.size.width)
+        authorNameLabel.text = article.author.fullName
+        let html = HtmlStringMultimediaCompressor.compress(article.contentHtml, withMultimediaWidth: articleTitleLabel.frame.size.width)
         articleContentWebView.loadHTMLString(html, baseURL: baseUrl)
     }
 

@@ -69,9 +69,9 @@ class ProductDetailsViewControllerSpec: QuickSpec {
             
             let productRepositoryMock = ProductRepositoryMock()
             let productUseCaseMock = ProductUseCaseMock(repository: productRepositoryMock)
-            let productListUseCaseMock = ProductListUseCaseMock(repository: productRepositoryMock)
+            let productListUseCaseMock = ProductsUseCaseMock(repository: productRepositoryMock)
             
-            viewModelMock = ProductDetailsViewModelMock(addCartProductUseCase: addCartProductUseCaseMock, productUseCase: productUseCaseMock, productListUseCase: productListUseCaseMock)
+            viewModelMock = ProductDetailsViewModelMock(addCartProductUseCase: addCartProductUseCaseMock, productUseCase: productUseCaseMock, productsUseCase: productListUseCaseMock)
             viewController.viewModel = viewModelMock
         }
         
@@ -140,8 +140,7 @@ class ProductDetailsViewControllerSpec: QuickSpec {
                 var productVariant: ProductVariant!
                 
                 beforeEach {
-                    productVariant = ProductVariant()
-                    productVariant.productId = "Product id"
+                    productVariant = TestHelper.productVariantWithoutSelectedOptions
                     viewController.productVariant = productVariant
                 }
                 
@@ -149,7 +148,7 @@ class ProductDetailsViewControllerSpec: QuickSpec {
                     setupViews()
                     
                     expect(viewController.viewModel.productId) == productVariant.productId
-                    expect(viewController.viewModel.productVariant) === viewController.productVariant
+                    expect(viewController.viewModel.productVariant) == viewController.productVariant
                 }
             }
         }
@@ -186,7 +185,7 @@ class ProductDetailsViewControllerSpec: QuickSpec {
                 setupViews()
             }
             
-            context("if product not filled") {
+            context("if product's images not filled") {
                 beforeEach {
                     viewModelMock.isNeedToFillProduct = false
                 }
@@ -195,12 +194,12 @@ class ProductDetailsViewControllerSpec: QuickSpec {
                     viewController.viewModel.loadData()
                     
                     expect(detailImagesContainer.isHidden) == true
-                    expect(titleLabel.text).to(beNil())
-                    expect(descriptionLabel.text).to(beNil())
+                    expect(titleLabel.text) == TestHelper.productWithoutAlternativePrice.title
+                    expect(descriptionLabel.text) == TestHelper.productWithoutAlternativePrice.productDescription
                 }
             }
             
-            context("if product filled") {
+            context("if product's images filled") {
                 beforeEach {
                     viewModelMock.isNeedToFillProduct = true
                 }
@@ -209,8 +208,8 @@ class ProductDetailsViewControllerSpec: QuickSpec {
                     viewController.viewModel.loadData()
                     
                     expect(detailImagesContainer.isHidden) == false
-                    expect(titleLabel.text) == "Product title"
-                    expect(descriptionLabel.text) == "Product description"
+                    expect(titleLabel.text) == TestHelper.productWithoutAlternativePrice.title
+                    expect(descriptionLabel.text) == TestHelper.productWithoutAlternativePrice.productDescription
                 }
             }
         }
@@ -368,7 +367,7 @@ class ProductDetailsViewControllerSpec: QuickSpec {
             
             it("should start option selection") {
                 let controller = ProductOptionsViewController()
-                let  option = (name: "Option name", value: "Option value")
+                let  option = TestHelper.variantOption
                 viewController.viewController(controller, didSelect: option)
                 
                 expect(viewModelMock.selectedOptionName) == option.name

@@ -26,10 +26,10 @@ class AccountViewControllerSpec: QuickSpec {
             let customerRepositoryMock = CustomerRepositoryMock()
             let shopRepositoryMock = ShopRepositoryMock()
             let customerUseCaseMock = CustomerUseCaseMock(repository: customerRepositoryMock)
-            let loginUseCaseMock = LoginUseCaseMock(repository: authentificationRepositoryMock)
-            let logoutUseCaseMock = LogoutUseCaseMock(repository: authentificationRepositoryMock)
+            let loginUseCaseMock = SignInUseCaseMock(repository: authentificationRepositoryMock)
+            let logoutUseCaseMock = SignOutUseCaseMock(repository: authentificationRepositoryMock)
             let shopUseCaseMock = ShopUseCaseMock(repository: shopRepositoryMock)
-            viewModelMock = AccountViewModelMock(customerUseCase: customerUseCaseMock, loginUseCase: loginUseCaseMock, logoutUseCase: logoutUseCaseMock, shopUseCase: shopUseCaseMock)
+            viewModelMock = AccountViewModelMock(customerUseCase: customerUseCaseMock, signInUseCase: loginUseCaseMock, signOutUseCase: logoutUseCaseMock, shopUseCase: shopUseCaseMock)
             viewController.viewModel = viewModelMock
             
             tableProvider = AccountTableProvider(isOrdersEnabled: false)

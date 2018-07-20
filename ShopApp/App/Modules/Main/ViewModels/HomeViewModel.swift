@@ -10,8 +10,8 @@ import RxSwift
 import ShopApp_Gateway
 
 class HomeViewModel: BasePaginationViewModel {
-    private let articleListUseCase: ArticleListUseCase
-    private let productListUseCase: ProductListUseCase
+    private let articlesUseCase: ArticlesUseCase
+    private let productsUseCase: ProductsUseCase
     private let disposeBag = DisposeBag()
 
     private var productsSingle: Single<[Product]?> {
@@ -19,7 +19,7 @@ class HomeViewModel: BasePaginationViewModel {
             guard let strongSelf = self else {
                 return Disposables.create()
             }
-            strongSelf.productListUseCase.getLastArrivalProducts { (products, error) in
+            strongSelf.productsUseCase.getLastArrivalProducts { (products, error) in
                 if let error = error {
                     single(.error(error))
                 } else if let products = products {
@@ -34,7 +34,7 @@ class HomeViewModel: BasePaginationViewModel {
             guard let strongSelf = self else {
                 return Disposables.create()
             }
-            strongSelf.productListUseCase.getPopularProducts { (products, error) in
+            strongSelf.productsUseCase.getPopularProducts { (products, error) in
                 if let error = error {
                     single(.error(error))
                 } else if let products = products {
@@ -50,7 +50,7 @@ class HomeViewModel: BasePaginationViewModel {
                 return Disposables.create()
             }
 
-            strongSelf.articleListUseCase.getArticles(with: nil) { (articles, error) in
+            strongSelf.articlesUseCase.getArticles(paginationValue: nil) { (articles, error) in
                 if let error = error {
                     single(.error(error))
                 } else if let articles = articles {
@@ -63,9 +63,9 @@ class HomeViewModel: BasePaginationViewModel {
     
     var data = Variable<(latestProducts: [Product], popularProducts: [Product], articles: [Article])>(latestProducts: [], popularProducts: [], articles: [])
     
-    init(articleListUseCase: ArticleListUseCase, productListUseCase: ProductListUseCase) {
-        self.articleListUseCase = articleListUseCase
-        self.productListUseCase = productListUseCase
+    init(articlesUseCase: ArticlesUseCase, productsUseCase: ProductsUseCase) {
+        self.articlesUseCase = articlesUseCase
+        self.productsUseCase = productsUseCase
 
         super.init()
         
@@ -88,7 +88,7 @@ class HomeViewModel: BasePaginationViewModel {
                     guard let strongSelf = self else {
                         return
                     }
-                    let castedError = error as? RepoError
+                    let castedError = error as? ShopAppError
                     strongSelf.state.onNext(.error(error: castedError))
             })
             .disposed(by: disposeBag)

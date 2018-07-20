@@ -8,12 +8,14 @@
 
 import Foundation
 
-public class Shop {
-    public var name = ""
-    public var shopDescription: String?
-    public var privacyPolicy: Policy?
-    public var refundPolicy: Policy?
-    public var termsOfService: Policy?
+public struct Shop {
+    public let privacyPolicy: Policy?
+    public let refundPolicy: Policy?
+    public let termsOfService: Policy?
 
-    public init() {}
+    public init(privacyPolicy: Policy? = nil, refundPolicy: Policy? = nil, termsOfService: Policy?) {
+        self.privacyPolicy = privacyPolicy
+        self.refundPolicy = refundPolicy
+        self.termsOfService = termsOfService
+    }
 }

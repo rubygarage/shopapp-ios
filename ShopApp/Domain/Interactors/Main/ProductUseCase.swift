@@ -15,7 +15,7 @@ class ProductUseCase {
         self.repository = repository
     }
 
-    func getProduct(with id: String, _ callback: @escaping RepoCallback<Product>) {
+    func getProduct(id: String, _ callback: @escaping ApiCallback<Product>) {
         repository.getProduct(id: id, callback: callback)
     }
 }

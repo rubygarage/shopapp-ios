@@ -25,7 +25,7 @@ class ProductRepositoryMock: ProductRepository {
     var query: String?
     var ids: [String]?
     
-    func getProducts(perPage: Int, paginationValue: Any?, sortBy: SortType?, keyword: String?, excludeKeyword: String?, callback: @escaping RepoCallback<[Product]>) {
+    func getProducts(perPage: Int, paginationValue: Any?, sortBy: SortType?, keyword: String?, excludeKeyword: String?, callback: @escaping ApiCallback<[Product]>) {
         isGetProductListStarted = true
         
         self.perPage = perPage
@@ -34,32 +34,32 @@ class ProductRepositoryMock: ProductRepository {
         self.keyword = keyword
         self.excludeKeyword = excludeKeyword
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback([], nil)
     }
     
-    func getProduct(id: String, callback: @escaping RepoCallback<Product>) {
+    func getProduct(id: String, callback: @escaping ApiCallback<Product>) {
         isGetProductStarted = true
         
         self.id = id
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Product(), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(TestHelper.productWithoutAlternativePrice, nil)
     }
     
-    func searchProducts(perPage: Int, paginationValue: Any?, query: String, callback: @escaping RepoCallback<[Product]>) {
+    func searchProducts(perPage: Int, paginationValue: Any?, query: String, callback: @escaping ApiCallback<[Product]>) {
         isSearchProductsStarted = true
         
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
         self.query = query
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback([], nil)
     }
     
-    func getProductVariants(ids: [String], callback: @escaping RepoCallback<[ProductVariant]>) {
+    func getProductVariants(ids: [String], callback: @escaping ApiCallback<[ProductVariant]>) {
         isGetProductVariantListStarted = true
         
         self.ids = ids
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback([], nil)
     }
 }

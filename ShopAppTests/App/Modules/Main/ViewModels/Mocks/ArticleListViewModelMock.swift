@@ -20,7 +20,7 @@ class ArticleListViewModelMock: ArticleListViewModel {
         isReloadDataStarted = true
         
         if isNeedToReturnData {
-            items.value = [Article()]
+            items.value = [TestHelper.fullArticle]
         }
     }
     

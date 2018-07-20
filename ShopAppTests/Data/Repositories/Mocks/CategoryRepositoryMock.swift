@@ -19,16 +19,16 @@ class CategoryRepositoryMock: CategoryRepository {
     var sortBy: SortType?
     var id: String?
     
-    func getCategories(perPage: Int, paginationValue: Any?, parentCategoryId: String?, callback: @escaping RepoCallback<[Category]>) {
+    func getCategories(perPage: Int, paginationValue: Any?, callback: @escaping ApiCallback<[Category]>) {
         isGetCategoryListStarted = true
         
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
 
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback([], nil)
     }
     
-    func getCategory(id: String, perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping RepoCallback<Category>) {
+    func getCategory(id: String, perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping ApiCallback<Category>) {
         isGetCategoryDetailsStarted = true
         
         self.id = id
@@ -36,6 +36,6 @@ class CategoryRepositoryMock: CategoryRepository {
         self.paginationValue = paginationValue as? String
         self.sortBy = sortBy
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Category(), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(TestHelper.categoryWithFiveProducts, nil)
     }
 }

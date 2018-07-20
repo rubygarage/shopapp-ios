@@ -10,14 +10,14 @@ import RxSwift
 import ShopApp_Gateway
 
 class CartViewModel: BaseViewModel {
-    private let cartProductListUseCase: CartProductListUseCase
+    private let cartProductsUseCase: CartProductsUseCase
     private let deleteCartProductUseCase: DeleteCartProductUseCase
     private let changeCartProductUseCase: ChangeCartProductUseCase
     
     var data = Variable<[CartProduct]>([])
 
-    init(cartProductListUseCase: CartProductListUseCase, deleteCartProductUseCase: DeleteCartProductUseCase, changeCartProductUseCase: ChangeCartProductUseCase) {
-        self.cartProductListUseCase = cartProductListUseCase
+    init(cartProductsUseCase: CartProductsUseCase, deleteCartProductUseCase: DeleteCartProductUseCase, changeCartProductUseCase: ChangeCartProductUseCase) {
+        self.cartProductsUseCase = cartProductsUseCase
         self.deleteCartProductUseCase = deleteCartProductUseCase
         self.changeCartProductUseCase = changeCartProductUseCase
     }
@@ -26,7 +26,7 @@ class CartViewModel: BaseViewModel {
         if showLoading {
             state.onNext(ViewState.make.loading())
         }
-        cartProductListUseCase.getCartProducts { [weak self] (cartProducts, error) in
+        cartProductsUseCase.getCartProducts { [weak self] (cartProducts, error) in
             guard let strongSelf = self else {
                 return
             }
@@ -40,16 +40,16 @@ class CartViewModel: BaseViewModel {
     }
     
     func removeCardProduct(at index: Int) {
-        let cartProduct = data.value[index]
         state.onNext(ViewState.make.loading(showHud: false))
 
-        deleteCartProductUseCase.deleteCartProduct(cartItemId: cartProduct.cartItemId) { [weak self] (success, error) in
+        let cartProduct = data.value[index]
+        deleteCartProductUseCase.deleteCartProduct(cartItemId: cartProduct.id) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if let success = success, success {
+            } else {
                 strongSelf.removeFromData(with: cartProduct)
                 strongSelf.data.value.isEmpty ? strongSelf.state.onNext(.empty) : strongSelf.state.onNext(.content)
             }
@@ -59,7 +59,7 @@ class CartViewModel: BaseViewModel {
     func update(cartProduct: CartProduct, quantity: Int) {
         state.onNext(ViewState.make.loading(showHud: false))
 
-        changeCartProductUseCase.changeCartProductQuantity(cartItemId: cartProduct.cartItemId, quantity: quantity) { [weak self] (_, error) in
+        changeCartProductUseCase.changeCartProductQuantity(cartItemId: cartProduct.id, quantity: quantity) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }
@@ -77,7 +77,7 @@ class CartViewModel: BaseViewModel {
     }
     
     private func removeFromData(with item: CartProduct) {
-        guard let index = data.value.index(where: { $0.productId == item.productId }) else {
+        guard let index = data.value.index(where: { $0.id == item.id }) else {
             return
         }
         data.value.remove(at: index)

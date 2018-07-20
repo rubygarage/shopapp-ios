@@ -59,11 +59,11 @@ class PaymentDetailsFooterView: UIView {
     }
     
     private func populateViews(order: Order) {
-        let formatter = NumberFormatter.formatter(with: order.currencyCode!)
+        let formatter = NumberFormatter.formatter(with: order.currencyCode)
         let subtotalPrice = NSDecimalNumber(decimal: order.subtotalPrice!)
         let discountPrice = NSDecimalNumber(value: 0)
         let totalShippingPrice = NSDecimalNumber(decimal: order.totalShippingPrice!)
-        let totalPrice = NSDecimalNumber(decimal: order.totalPrice!)
+        let totalPrice = NSDecimalNumber(decimal: order.totalPrice)
         
         subtotalValueLabel.text = formatter.string(from: subtotalPrice)
         discountValueLabel.text = formatter.string(from: discountPrice)
@@ -72,11 +72,11 @@ class PaymentDetailsFooterView: UIView {
     }
     
     private func populateViews(checkout: Checkout) {
-        let formatter = NumberFormatter.formatter(with: checkout.currencyCode!)
-        let subtotalPrice = NSDecimalNumber(decimal: checkout.subtotalPrice!)
+        let formatter = NumberFormatter.formatter(with: checkout.currency)
+        let subtotalPrice = NSDecimalNumber(decimal: checkout.subtotalPrice)
         let discountPrice = NSDecimalNumber(value: 0)
-        let totalShippingPrice = checkout.shippingLine == nil ? NSDecimalNumber(value: 0) : NSDecimalNumber(string: checkout.shippingLine?.price)
-        let totalPrice = NSDecimalNumber(decimal: checkout.totalPrice!)
+        let totalShippingPrice = checkout.shippingRate == nil ? NSDecimalNumber(value: 0) : NSDecimalNumber(decimal: checkout.shippingRate!.price)
+        let totalPrice = NSDecimalNumber(decimal: checkout.totalPrice)
         
         subtotalValueLabel.text = formatter.string(from: subtotalPrice)
         discountValueLabel.text = formatter.string(from: discountPrice)

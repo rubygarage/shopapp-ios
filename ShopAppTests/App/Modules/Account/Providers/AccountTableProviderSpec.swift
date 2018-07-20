@@ -84,7 +84,7 @@ class AccountTableProviderSpec: QuickSpec {
             var policies: [Policy]!
             
             beforeEach {
-                policies = [Policy()]
+                policies = [TestHelper.policy]
                 tableProvider.policies = policies
             }
             
@@ -104,7 +104,7 @@ class AccountTableProviderSpec: QuickSpec {
         
         describe("when customer did set") {
             beforeEach {
-                tableProvider.customer = Customer()
+                tableProvider.customer = TestHelper.customerWithoutAcceptsMarketing
             }
             
             it("should return correct header height") {
@@ -153,39 +153,19 @@ class AccountTableProviderSpec: QuickSpec {
         }
 
         describe("when cell selected") {
-            var delegateMock: AccountTableProviderDelegateMock!
-            
-            beforeEach {
-                tableProvider.customer = Customer()
+            it("needs to show policy") {
+                let policy = TestHelper.policy
+                let policies = [policy]
+                tableProvider.policies = policies
                 
                 delegateMock = AccountTableProviderDelegateMock()
                 tableProvider.delegate = delegateMock
-            }
-            
-            context("if user select customer item") {
-                it("needs to open selected screen") {
-                    tableProvider.isOrdersEnabled = true
-                    
-                    let indexPath = IndexPath(row: 0, section: 0)
-                    tableProvider.tableView(tableView, didSelectRowAt: indexPath)
-                    
-                    expect(delegateMock.provider) === tableProvider
-                    expect(delegateMock.type?.rawValue) === AccountCustomerSection.orders.rawValue
-                }
-            }
-            
-            context("if user select policies item") {
-                it("needs to show policy") {
-                    let policy = Policy()
-                    let policies = [policy]
-                    tableProvider.policies = policies
-                    
-                    let indexPath = IndexPath(row: 0, section: 1)
-                    tableProvider.tableView(tableView, didSelectRowAt: indexPath)
-                    
-                    expect(delegateMock.provider) === tableProvider
-                    expect(delegateMock.policy) === policy
-                }
+                
+                let indexPath = IndexPath(row: 0, section: 0)
+                tableProvider.tableView(tableView, didSelectRowAt: indexPath)
+                
+                expect(delegateMock.provider) === tableProvider
+                expect(delegateMock.policy) == policy
             }
         }
     }

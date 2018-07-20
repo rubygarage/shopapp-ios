@@ -10,14 +10,14 @@ import RxSwift
 import ShopApp_Gateway
 
 class ProductListViewModel: GridCollectionViewModel {
-    private let productListUseCase: ProductListUseCase
+    private let productsUseCase: ProductsUseCase
     
     var sortType: SortType!
     var keyword: String?
     var excludeKeyword: String?
 
-    init(productListUseCase: ProductListUseCase) {
-        self.productListUseCase = productListUseCase
+    init(productsUseCase: ProductsUseCase) {
+        self.productsUseCase = productsUseCase
     }
     
     func reloadData() {
@@ -33,7 +33,7 @@ class ProductListViewModel: GridCollectionViewModel {
     private func loadRemoteData() {
         let showHud = products.value.isEmpty
         state.onNext(ViewState.make.loading(showHud: showHud))
-        productListUseCase.getProducts(with: paginationValue, sortBy: sortType, keyword: keyword, excludeKeyword: excludeKeyword) { [weak self] (products, error) in
+        productsUseCase.getProducts(paginationValue: paginationValue, sortBy: sortType, keyword: keyword, excludeKeyword: excludeKeyword) { [weak self] (products, error) in
             guard let strongSelf = self else {
                 return
             }

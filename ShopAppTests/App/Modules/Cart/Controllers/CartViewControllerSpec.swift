@@ -25,10 +25,10 @@ class CartViewControllerSpec: QuickSpec {
             viewController = UIStoryboard(name: StoryboardNames.cart, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.cart) as! CartViewController
             
             let repositoryMock = CartRepositoryMock()
-            let cartProductListUseCaseMock = CartProductListUseCaseMock(repository: repositoryMock)
+            let cartProductsUseCaseMock = CartProductsUseCaseMock(repository: repositoryMock)
             let deleteCartProductUseCaseMock = DeleteCartProductUseCaseMock(repository: repositoryMock)
             let changeCartProductUseCaseMock = ChangeCartProductUseCaseMock(repository: repositoryMock)
-            viewModelMock = CartViewModelMock(cartProductListUseCase: cartProductListUseCaseMock, deleteCartProductUseCase: deleteCartProductUseCaseMock, changeCartProductUseCase: changeCartProductUseCaseMock)
+            viewModelMock = CartViewModelMock(cartProductsUseCase: cartProductsUseCaseMock, deleteCartProductUseCase: deleteCartProductUseCaseMock, changeCartProductUseCase: changeCartProductUseCaseMock)
             viewController.viewModel = viewModelMock
             
             tableProvider = CartTableProvider()
@@ -123,8 +123,8 @@ class CartViewControllerSpec: QuickSpec {
                 
                 it("should have table view with data") {
                     expect(tableProvider.cartProducts.count) == 1
-                    expect(tableProvider.totalPrice) == 50
-                    expect(tableProvider.currency) == "Currency"
+                    expect(tableProvider.totalPrice) == Float(TestHelper.cartProductWithQuantityOne.productVariant!.price as NSNumber)
+                    expect(tableProvider.currency) == TestHelper.cartProductWithQuantityOne.currency
                 }
                 
                 it("should have header view height") {
@@ -135,7 +135,7 @@ class CartViewControllerSpec: QuickSpec {
         
         describe("when cart product quantity updated") {
             it("should update cart product quantity") {
-                let cartProduct = CartProduct()
+                let cartProduct = TestHelper.cartProductWithQuantityOne
                 viewController.viewModel.data.value = [cartProduct]
                 
                 let indexPath = IndexPath(row: 0, section: 0)

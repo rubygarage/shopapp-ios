@@ -30,9 +30,9 @@ class PersonalInfoViewControllerSpec: QuickSpec {
             let authentificationRepositoryMock = AuthentificationRepositoryMock()
             let customerRepositoryMock = CustomerRepositoryMock()
             let updateCustomerUseCaseMock = UpdateCustomerUseCaseMock(repository: customerRepositoryMock)
-            let loginUseCaseMock = LoginUseCaseMock(repository: authentificationRepositoryMock)
+            let loginUseCaseMock = SignInUseCaseMock(repository: authentificationRepositoryMock)
             let customerUseCaseMock = CustomerUseCaseMock(repository: customerRepositoryMock)
-            viewModelMock = PersonalInfoViewModelMock(updateCustomerUseCase: updateCustomerUseCaseMock, loginUseCase: loginUseCaseMock, customerUseCase: customerUseCaseMock)
+            viewModelMock = PersonalInfoViewModelMock(updateCustomerUseCase: updateCustomerUseCaseMock, signInUseCase: loginUseCaseMock, customerUseCase: customerUseCaseMock)
             viewModelMock.isCustomerLoadingStarted = false
             viewController.viewModel = viewModelMock
             
@@ -78,22 +78,8 @@ class PersonalInfoViewControllerSpec: QuickSpec {
                 expect(changePasswordButton.delegate) === viewController
             }
             
-            it("should have correct setup view model") {
-                expect(viewModelMock.canChangeEmail) == false
-            }
-            
             it("should load customer") {
                 expect(viewModelMock.isCustomerLoadingStarted) == true
-            }
-        }
-        
-        describe("when email text changed") {
-            it("needs to update variable of view model") {
-                viewModelMock.canChangeEmail = true
-                emailTextFieldView.textField.text = "user@gmail.com"
-                emailTextFieldView.textField.sendActions(for: .editingChanged)
-                
-                expect(viewModelMock.emailText.value) == "user@gmail.com"
             }
         }
         
@@ -140,14 +126,6 @@ class PersonalInfoViewControllerSpec: QuickSpec {
             }
         }
         
-        describe("when email text is not valid") {
-            it("needs to show error messages about not valid email text") {
-                viewModelMock.makeNotValidEmailText()
-                
-                expect(emailTextFieldView.errorMessage) == "Error.InvalidEmail".localizable
-            }
-        }
-        
         describe("when email text is valid") {
             context("if save changes successed") {
                 it("needs to show success toast and disable save changes button") {
@@ -188,10 +166,12 @@ class PersonalInfoViewControllerSpec: QuickSpec {
         
         describe("when customer loaded") {
             it("needs to populate text filed views with customer's data") {
-                expect(nameTextFieldView.textField.text) == "First"
-                expect(lastNameTextFieldView.textField.text) == "Last"
-                expect(emailTextFieldView.textField.text) == "user@mail.com"
-                expect(phoneTextFieldView.textField.text) == "+380990000000"
+                let customer = TestHelper.customerWithoutAcceptsMarketing
+                
+                expect(nameTextFieldView.textField.text) == customer.firstName
+                expect(lastNameTextFieldView.textField.text) == customer.lastName
+                expect(emailTextFieldView.textField.text) == customer.email
+                expect(phoneTextFieldView.textField.text) == customer.phone
             }
         }
     }

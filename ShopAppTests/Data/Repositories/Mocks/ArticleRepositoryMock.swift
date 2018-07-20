@@ -21,27 +21,26 @@ class ArticleRepositoryMock: ArticleRepository {
     var sortBy: SortType?
     var id: String?
     
-    func getArticles(perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping RepoCallback<[Article]>) {
+    func getArticles(perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping ApiCallback<[Article]>) {
         isGetArticleListStarted = true
         
         self.perPage = perPage
         self.paginationValue = paginationValue as? String
         self.sortBy = sortBy
 
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback([], nil)
     }
     
-    func getArticle(id: String, callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>) {
+    func getArticle(id: String, callback: @escaping ApiCallback<(article: Article, baseUrl: URL)>) {
         isGetArticleStarted = true
         
         self.id = id
         
         if isNeedToReturnError {
-            callback(nil, RepoError())
+            callback(nil, ShopAppError.content(isNetworkError: false))
         } else {
-            let article = Article()
             let baseUrl = URL(string: "https://www.google.com")!
-            let result = (article: article, baseUrl: baseUrl)
+            let result = (article: TestHelper.fullArticle, baseUrl: baseUrl)
             
             callback(result, nil)
         }

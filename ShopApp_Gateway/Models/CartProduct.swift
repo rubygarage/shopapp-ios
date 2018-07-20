@@ -8,13 +8,26 @@
 
 import Foundation
 
-public class CartProduct {
-    public var productVariant: ProductVariant?
-    public var productId: String?
-    public var productTitle: String?
-    public var currency: String?
-    public var quantity: Int = 0
-    public var cartItemId = ""
+public struct CartProduct: Equatable {
+    public let id: String
+    public let productVariant: ProductVariant?
+    public let title: String
+    public let currency: String
+    public let quantity: Int
 
-    public init() {}
+    public init(id: String, productVariant: ProductVariant? = nil, title: String, currency: String, quantity: Int) {
+        self.productVariant = productVariant
+        self.title = title
+        self.currency = currency
+        self.quantity = quantity
+        self.id = id
+    }
+    
+    public static func == (lhs: CartProduct, rhs: CartProduct) -> Bool {
+        return lhs.productVariant == rhs.productVariant
+            && lhs.title == rhs.title
+            && lhs.currency == rhs.currency
+            && lhs.quantity == rhs.quantity
+            && lhs.id == rhs.id
+    }
 }

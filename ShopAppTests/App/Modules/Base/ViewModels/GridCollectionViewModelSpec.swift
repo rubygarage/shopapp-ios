@@ -31,7 +31,7 @@ class GridCollectionViewModelSpec: QuickSpec {
         }
         
         describe("when products updated") {
-            let products = [Product()]
+            let products = [TestHelper.productWithoutAlternativePrice]
             
             context("if it haven't pagination value") {
                 it("needs to remove all products and append with new items") {

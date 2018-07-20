@@ -48,8 +48,8 @@ class SignUpViewModel: BaseViewModel {
     }
     
     func loadPolicies() {
-        shopUseCase.getShop { [weak self] shop in
-            guard let strongSelf = self, let privacyPolicy = shop.privacyPolicy, privacyPolicy.body?.isEmpty == false, let termsOfService = shop.termsOfService, termsOfService.body?.isEmpty == false else {
+        shopUseCase.getShop { [weak self] (shop, _) in
+            guard let strongSelf = self, let shop = shop, let privacyPolicy = shop.privacyPolicy, privacyPolicy.body.isEmpty == false, let termsOfService = shop.termsOfService, termsOfService.body.isEmpty == false else {
                 return
             }
             strongSelf.policies.value = (shop.privacyPolicy, shop.termsOfService)
@@ -77,15 +77,15 @@ class SignUpViewModel: BaseViewModel {
     
     private func signUp() {
         state.onNext(ViewState.make.loading(isTranslucent: true))
-        signUpUseCase.signUp(firstName: firstNameText.value, lastName: lastNameText.value, email: emailText.value, password: passwordText.value, phone: phoneText.value) { [weak self] (success, error) in
+        signUpUseCase.signUp(firstName: firstNameText.value, lastName: lastNameText.value, email: emailText.value, password: passwordText.value, phone: phoneText.value) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if let success = success {
+            } else {
                 strongSelf.state.onNext(.content)
-                strongSelf.signUpSuccess.onNext(success)
+                strongSelf.signUpSuccess.onNext(true)
             }
         }
     }

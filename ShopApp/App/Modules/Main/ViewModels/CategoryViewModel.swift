@@ -37,25 +37,18 @@ class CategoryViewModel: GridCollectionViewModel {
         let showHud = products.value.isEmpty
         state.onNext(ViewState.make.loading(showHud: showHud))
 
-        categoryUseCase.getCategory(with: categoryId, paginationValue: paginationValue, sortType: selectedSortType) { [weak self] (result, error) in
+        categoryUseCase.getCategory(id: categoryId, paginationValue: paginationValue, sortType: selectedSortType) { [weak self] (result, error) in
             guard let strongSelf = self else {
                 return
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
             } else if let category = result {
-                strongSelf.updateData(category: category)
+                strongSelf.updateProducts(products: category.products)
                 strongSelf.products.value.isEmpty ? strongSelf.state.onNext(.empty) : strongSelf.state.onNext(.content)
             }
-            strongSelf.canLoadMore = result?.products?.count ?? 0 == kItemsPerPage
+            strongSelf.canLoadMore = result?.products.count ?? 0 == kItemsPerPage
         }
-    }
-    
-    private func updateData(category: ShopApp_Gateway.Category) {
-        guard let items = category.products else {
-            return
-        }
-        updateProducts(products: items)
     }
     
     // MARK: - BaseViewModel

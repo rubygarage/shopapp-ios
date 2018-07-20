@@ -38,15 +38,7 @@ class CheckoutBillingAddressEditTableViewCellSpec: QuickSpec {
             phoneLabel = self.findView(withAccessibilityLabel: "phoneLabel", in: cell) as! UILabel
             editButton = self.findView(withAccessibilityLabel: "editButton", in: cell) as! UIButton
             
-            address = Address()
-            address.address = "Address"
-            address.secondAddress = "Second address"
-            address.city = "City"
-            address.zip = "Zip"
-            
-            let country = Country()
-            country.name = "Country"
-            address.country = country
+            address = TestHelper.fullAddress
         }
         
         describe("when cell initialized") {
@@ -62,8 +54,6 @@ class CheckoutBillingAddressEditTableViewCellSpec: QuickSpec {
         describe("when cell configured") {
             context("if phone exist") {
                 beforeEach {
-                    address.phone = "12345"
-                    
                     cell.configure(with: address)
                 }
                 
@@ -86,7 +76,7 @@ class CheckoutBillingAddressEditTableViewCellSpec: QuickSpec {
             
             context("if phone doesn't exist") {
                 it("shouldn't have phone label text") {
-                    address.phone = nil
+                    address = TestHelper.partialAddress
                     
                     cell.configure(with: address)
                     

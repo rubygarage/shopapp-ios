@@ -20,7 +20,7 @@ class CategoryListViewModelMock: CategoryListViewModel {
         isReloadDataStarted = true
         
         if isNeedToReturnData {
-            items.value = [Category()]
+            items.value = [TestHelper.categoryWithFiveProducts]
         }
     }
     

@@ -39,7 +39,7 @@ class ArticleTableViewCell: UITableViewCell {
         titleLabelTrailingLayoutConstraint.constant = item.image == nil ? titleLabelTrailingWide : titleLabelTrailingDefault
         titleLabel.text = item.title
         descriptionLabel.text = item.content
-        authorLabel.text = item.author?.fullName
+        authorLabel.text = item.author.fullName
         separatorView.isHidden = separatorHidden
     }
 }

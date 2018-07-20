@@ -19,31 +19,31 @@ class CheckoutUseCaseMock: CheckoutUseCase {
     var returnedOrder: Order?
     var returnedCheckout: Checkout?
     
-    override func getCheckout(checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
-        isGetCheckoutNeedToReturnError ? callback(nil, RepoError()) : callback(returnedCheckout, nil)
+    override func getCheckout(id: String, callback: @escaping ApiCallback<Checkout>) {
+        isGetCheckoutNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(returnedCheckout, nil)
     }
     
-    override func setShippingAddress(checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>) {
-        isUpdateCheckoutShippingAddressNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+    override func setShippingAddress(checkoutId: String, address: Address, callback: @escaping ApiCallback<Bool>) {
+        isUpdateCheckoutShippingAddressNeedToReturnError ? callback(false, ShopAppError.content(isNetworkError: false)) : callback(true, nil)
     }
     
-    override func createCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(returnedCheckout, nil)
+    override func createCheckout(cartProducts: [CartProduct], callback: @escaping ApiCallback<Checkout>) {
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(returnedCheckout, nil)
     }
     
-    override func completeCheckout(checkout: Checkout, email: String, address: Address, card: CreditCard, callback: @escaping RepoCallback<Order>) {
+    override func completeCheckout(checkout: Checkout, email: String, address: Address, card: Card, callback: @escaping ApiCallback<Order>) {
         isPayWithCreditCardStarted = true
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(returnedOrder, nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(returnedOrder, nil)
     }
     
-    override func setupApplePay(checkout: Checkout, email: String, callback: @escaping RepoCallback<Order>) {
+    override func setupApplePay(checkout: Checkout, email: String, callback: @escaping ApiCallback<Order>) {
         isSetupApplePayStarted = true
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(returnedOrder, nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(returnedOrder, nil)
     }
     
-    override func setShippingRate(checkoutId: String, shippingRate: ShippingRate, callback: @escaping RepoCallback<Checkout>) {
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(returnedCheckout, nil)
+    override func setShippingRate(checkoutId: String, shippingRate: ShippingRate, callback: @escaping ApiCallback<Checkout>) {
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(returnedCheckout, nil)
     }
 }

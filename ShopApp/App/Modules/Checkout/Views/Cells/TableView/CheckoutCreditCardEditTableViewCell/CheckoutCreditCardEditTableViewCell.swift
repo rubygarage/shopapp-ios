@@ -32,7 +32,7 @@ class CheckoutCreditCardEditTableViewCell: UITableViewCell {
         editButton?.setTitle("Button.Edit".localizable.uppercased(), for: .normal)
     }
     
-    func configure(with creditCard: CreditCard) {
+    func configure(with creditCard: Card) {
         cardNumberLabel.text = creditCard.maskedNumber
         expirationDateLabel.text = creditCard.expirationDateLocalized
         holderNameLabel.text = creditCard.holderName

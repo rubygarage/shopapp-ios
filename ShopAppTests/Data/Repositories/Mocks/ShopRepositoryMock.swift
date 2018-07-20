@@ -14,9 +14,9 @@ class ShopRepositoryMock: ShopRepository {
     var isNeedToReturnError = false
     var isGetShopStarted = false
     
-    func getShop(callback: @escaping RepoCallback<Shop>) {
+    func getShop(callback: @escaping ApiCallback<Shop>) {
         isGetShopStarted = true
         
-        isNeedToReturnError ? callback(nil, RepoError()) : callback(Shop(), nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback(TestHelper.shop, nil)
     }
 }

@@ -49,13 +49,7 @@ class ArticleTableViewCellSpec: QuickSpec {
             var article: Article!
             
             beforeEach {
-                let author = Author()
-                author.fullName = "First Last"
-                
-                article = Article()
-                article.title = "Title"
-                article.content = "Description"
-                article.author = author
+                article = TestHelper.fullArticle
             }
             
             it("needs to setup labels with article") {
@@ -63,12 +57,11 @@ class ArticleTableViewCellSpec: QuickSpec {
                 
                 expect(titleLabel.text) == article.title
                 expect(descriptionLabel.text) == article.content
-                expect(authorLabel.text) == article.author!.fullName
+                expect(authorLabel.text) == article.author.fullName
             }
             
             context("when article has image") {
                 it("needs to show image view") {
-                    article.image = Image()
                     cell.configure(with: article, separatorHidden: false)
                         
                     expect(articleImageView.isHidden) == false
@@ -77,7 +70,7 @@ class ArticleTableViewCellSpec: QuickSpec {
                 
             context("when article hasn't image") {
                 it("needs to hide image view") {
-                    article.image = nil
+                    article = TestHelper.partialArticle
                     cell.configure(with: article, separatorHidden: false)
                         
                     expect(articleImageView.isHidden) == true

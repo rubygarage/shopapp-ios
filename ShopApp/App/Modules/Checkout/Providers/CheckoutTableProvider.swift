@@ -14,7 +14,7 @@ class CheckoutTableProvider: NSObject, UITableViewDataSource, UITableViewDelegat
     var checkout: Checkout?
     var cartProducts: [CartProduct] = []
     var billingAddress: Address?
-    var creditCard: CreditCard?
+    var creditCard: Card?
     var selectedPaymentType: PaymentType?
     var customerHasEmail = false
     var customerEmail = ""
@@ -31,7 +31,7 @@ class CheckoutTableProvider: NSObject, UITableViewDataSource, UITableViewDelegat
         if section == CheckoutSection.customerEmail.rawValue {
             return customerHasEmail ? 0 : 1
         } else if section == CheckoutSection.shippingOptions.rawValue {
-            return checkout?.availableShippingRates?.count ?? 1
+            return checkout?.availableShippingRates.count ?? 1
         } else if section == CheckoutSection.payment.rawValue {
             return selectedPaymentType == .creditCard ? PaymentAddCellType.allValues.count : 1
         }
@@ -57,7 +57,7 @@ class CheckoutTableProvider: NSObject, UITableViewDataSource, UITableViewDelegat
     
     private func cartCell(with tableView: UITableView, indexPath: IndexPath) -> CheckoutCartTableViewCell {
         let cell: CheckoutCartTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
-        let images = cartProducts.map({ $0.productVariant?.image ?? Image() })
+        let images = cartProducts.map({ $0.productVariant?.image })
         let productVariantIds = cartProducts.map({ $0.productVariant?.id ?? "" })
         cell.configure(with: images, productVariantIds: productVariantIds)
         cell.delegate = delegate
@@ -135,7 +135,7 @@ class CheckoutTableProvider: NSObject, UITableViewDataSource, UITableViewDelegat
         }
     }
     
-    private func paymentCardEditCell(with tableView: UITableView, indexPath: IndexPath, creditCard: CreditCard) -> CheckoutCreditCardEditTableViewCell {
+    private func paymentCardEditCell(with tableView: UITableView, indexPath: IndexPath, creditCard: Card) -> CheckoutCreditCardEditTableViewCell {
         let cell: CheckoutCreditCardEditTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
         cell.delegate = delegate
         cell.configure(with: creditCard)
@@ -158,9 +158,9 @@ class CheckoutTableProvider: NSObject, UITableViewDataSource, UITableViewDelegat
     }
     
     private func shippingOptionsCell(with tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        if checkout?.shippingAddress != nil, let rates = checkout?.availableShippingRates, let currencyCode = checkout?.currencyCode {
+        if checkout?.shippingAddress != nil, let rates = checkout?.availableShippingRates, let currencyCode = checkout?.currency {
             let rate = rates[indexPath.row]
-            let selected = checkout?.shippingLine?.handle == rate.handle
+            let selected = checkout?.shippingRate?.handle == rate.handle
             return shippingOptionsEnabledCell(with: tableView, indexPath: indexPath, rate: rate, currencyCode: currencyCode, selected: selected)
         } else {
             return shippingOptionsDisabledCell(with: tableView, indexPath: indexPath)

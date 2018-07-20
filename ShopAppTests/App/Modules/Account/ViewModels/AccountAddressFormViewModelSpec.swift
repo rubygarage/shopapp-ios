@@ -33,8 +33,7 @@ class AccountAddressFormViewModelSpec: QuickSpec {
             
             beforeEach {
                 disposeBag = DisposeBag()
-                address = Address()
-                address.id = "address id"
+                address = TestHelper.fullAddress
                 states = []
                 
                 viewModel.state

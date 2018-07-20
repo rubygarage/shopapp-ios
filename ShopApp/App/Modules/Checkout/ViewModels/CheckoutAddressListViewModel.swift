@@ -30,18 +30,16 @@ class CheckoutAddressListViewModel: BaseAddressListViewModel {
     
     func updateCheckoutShippingAddress(with address: Address) {
         state.onNext(ViewState.make.loading())
-        checkoutUseCase.setShippingAddress(checkoutId: checkoutId, address: address) { [weak self] (success, error) in
+        checkoutUseCase.setShippingAddress(checkoutId: checkoutId, address: address) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if let success = success, success == true {
+            } else {
                 strongSelf.selectedAddress = address
                 strongSelf.didSelectAddress.onNext(address)
                 strongSelf.loadCustomerAddresses(isTranslucentHud: true)
-            } else {
-                strongSelf.state.onNext(.error(error: RepoError()))
             }
         }
     }

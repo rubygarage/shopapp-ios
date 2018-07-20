@@ -24,9 +24,9 @@ class SearchViewControllerSpec: QuickSpec {
             _ = NavigationController(rootViewController: viewController)
             
             let repositoryMock = ProductRepositoryMock()
-            let productListUseCaseMock = ProductListUseCaseMock(repository: repositoryMock)
+            let productListUseCaseMock = ProductsUseCaseMock(repository: repositoryMock)
             
-            viewModelMock = SearchViewModelMock(productListUseCase: productListUseCaseMock)
+            viewModelMock = SearchViewModelMock(productsUseCase: productListUseCaseMock)
             viewController.viewModel = viewModelMock
           
             categoryListContainerView = self.findView(withAccessibilityLabel: "categoryList", in: viewController.view)
@@ -190,8 +190,8 @@ class SearchViewControllerSpec: QuickSpec {
                 categoryListViewController.collectionView.delegate = categoryListViewController.collectionProvider
                 
                 let repositoryMock = CategoryRepositoryMock()
-                let categoryListUseCaseMock = CategoryListUseCaseMock(repository: repositoryMock)
-                let viewModelMock = CategoryListViewModelMock(categoryListUseCase: categoryListUseCaseMock)
+                let categoryListUseCaseMock = CategoriesUseCaseMock(repository: repositoryMock)
+                let viewModelMock = CategoryListViewModelMock(categoriesUseCase: categoryListUseCaseMock)
                 categoryListViewController.viewModel = viewModelMock
                 viewModelMock.isNeedToReturnData = true
                 viewModelMock.reloadData()

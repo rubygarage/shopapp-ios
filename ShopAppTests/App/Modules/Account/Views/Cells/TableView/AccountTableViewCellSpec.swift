@@ -37,37 +37,11 @@ class AccountTableViewCellSpec: QuickSpec {
         }
         
         describe("when cell configured") {
-            context("with type") {
-                it("needs to setup type title") {
-                    let types: [AccountCustomerSection] = [.orders, .info, .addresses]
-                    
-                    (0..<types.count).forEach {
-                        var text: String!
-                        let type = types[$0]
-                        cell.configure(with: type)
-                        
-                        switch type {
-                        case .orders:
-                            text = "Button.MyOrders".localizable
-                        case .info:
-                            text = "Button.PersonalInfo".localizable
-                        default:
-                            text = "Button.ShippingAddress".localizable
-                        }
-                        
-                        expect(policyTitleLabel.text) == text
-                    }
-                }
-            }
-            
-            context("with policy") {
-                it("needs to setup policy title") {
-                    let policy = Policy()
-                    policy.title = "Title"
-                    cell.configure(with: policy)
-                    
-                    expect(policyTitleLabel.text) == "Title"
-                }
+            it("needs to setup policy title") {
+                let policy = TestHelper.policy
+                cell.configure(with: policy)
+                
+                expect(policyTitleLabel.text) == policy.title
             }
         }
     }

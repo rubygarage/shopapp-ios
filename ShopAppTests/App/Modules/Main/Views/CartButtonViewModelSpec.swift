@@ -15,12 +15,12 @@ import RxSwift
 class CartButtonViewModelSpec: QuickSpec {
     override func spec() {
         let repositoryMock = CartRepositoryMock()
-        let cartProductListUseCaseMock = CartProductListUseCaseMock(repository: repositoryMock)
+        let cartProductsUseCaseMock = CartProductsUseCaseMock(repository: repositoryMock)
         
         var viewModel: CartButtonViewModel!
         
         beforeEach {
-            viewModel = CartButtonViewModel(cartProductListUseCase: cartProductListUseCaseMock)
+            viewModel = CartButtonViewModel(cartProductsUseCase: cartProductsUseCaseMock)
         }
         
         describe("when cart item count got") {

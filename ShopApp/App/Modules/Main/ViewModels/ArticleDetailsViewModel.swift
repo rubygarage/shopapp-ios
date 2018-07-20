@@ -21,7 +21,7 @@ class ArticleDetailsViewModel: BaseViewModel {
 
     func loadData() {
         state.onNext(ViewState.make.loading())
-        articleUseCase.getArticle(with: articleId) { [weak self] (result, error) in
+        articleUseCase.getArticle(id: articleId) { [weak self] (result, error) in
             guard let strongSelf = self else {
                 return
             }

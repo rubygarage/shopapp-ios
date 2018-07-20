@@ -19,33 +19,12 @@ class Address_DetailsSpec: QuickSpec {
             var addressNameLocalized: String!
             
             beforeEach {
-                address = Address()
+                address = TestHelper.fullAddress
                 addressNameLocalized = "Label.FullName".localizable
             }
             
-            context("if address has first and last names") {
-                it("needs to return correct formatted string") {
-                    address.firstName = "First"
-                    address.lastName = "Last"
-                    
-                    expect(address.fullName) == String.localizedStringWithFormat(addressNameLocalized, address.firstName!, address.lastName!)
-                }
-            }
-            
-            context("if address has first name only") {
-                it("needs to return correct formatted string") {
-                    address.firstName = "First"
-                    
-                    expect(address.fullName) == String.localizedStringWithFormat(addressNameLocalized, address.firstName!, "")
-                }
-            }
-            
-            context("if address has last name only") {
-                it("needs to return correct formatted string") {
-                    address.lastName = "Last"
-                    
-                    expect(address.fullName) == String.localizedStringWithFormat(addressNameLocalized, "", address.lastName!)
-                }
+            it("needs to return correct formatted string") {
+                expect(address.fullName) == String.localizedStringWithFormat(addressNameLocalized, address.firstName, address.lastName)
             }
         }
         
@@ -53,39 +32,11 @@ class Address_DetailsSpec: QuickSpec {
             var address: Address!
             
             beforeEach {
-                address = Address()
+                address = TestHelper.fullAddress
             }
             
-            context("if address has first address only") {
-                it("needs to return correct formatted string") {
-                    address.address = "Address"
-                    
-                    expect(address.fullAddress) == address.address
-                }
-            }
-            
-            context("if address has first and second addresses") {
-                it("needs to return correct formatted string") {
-                    address.address = "Address"
-                    address.secondAddress = "Second address"
-                    
-                    expect(address.fullAddress) == [address.address!, address.secondAddress!].joined(separator: ", ")
-                }
-            }
-            
-            context("if address has first, second addresses, city, zip and country") {
-                it("needs to return correct formatted string") {
-                    address.address = "Address"
-                    address.secondAddress = "Second address"
-                    address.city = "City"
-                    address.zip = "Zip"
-                    
-                    let country = Country()
-                    country.name = "Country"
-                    address.country = country
-                    
-                    expect(address.fullAddress) == [address.address!, address.secondAddress!, address.city!, address.zip!, address.country!.name].joined(separator: ", ")
-                }
+            it("needs to return correct formatted string") {
+                expect(address.fullAddress) == [address.street, address.secondStreet!, address.city, address.zip, address.country].joined(separator: ", ")
             }
         }
     }

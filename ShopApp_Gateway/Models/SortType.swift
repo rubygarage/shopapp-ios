@@ -9,9 +9,9 @@
 import Foundation
 
 public enum SortType: Int {
-    case createdAt
     case name
-    case popular
+    case recent
+    case relevant
     case type
     case priceHighToLow
     case priceLowToHigh

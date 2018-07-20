@@ -122,12 +122,11 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.updateCustomerSettings(isAcceptMarketing: isAcceptMarketing) { (result, error) in
+                    repository.updateCustomerSettings(isAcceptMarketing: isAcceptMarketing) { (_, error) in
                         expect(apiMock.isUpdateCustomerPromoStarted) == true
                         
                         expect(apiMock.isAcceptMarketing) == isAcceptMarketing
                         
-                        expect(result).to(beNil())
                         expect(error).toNot(beNil())
                     }
                 }
@@ -160,12 +159,11 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.updatePassword(password: password) { (result, error) in
+                    repository.updatePassword(password: password) { (_, error) in
                         expect(apiMock.isUpdateCustomerPasswordStarted) == true
                         
                         expect(apiMock.password) == password
                         
-                        expect(result).to(beNil())
                         expect(error).toNot(beNil())
                     }
                 }
@@ -176,7 +174,7 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
             var address: Address!
             
             beforeEach {
-                address = Address()
+                address = TestHelper.fullAddress
             }
             
             context("if callback has result") {
@@ -186,7 +184,7 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
                     repository.addCustomerAddress(address: address) { (result, error) in
                         expect(apiMock.isAddCustomerAddressStarted) == true
                         
-                        expect(apiMock.address) === address
+                        expect(apiMock.address) == address
                         
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -198,12 +196,11 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.addCustomerAddress(address: address) { (result, error) in
+                    repository.addCustomerAddress(address: address) { (_, error) in
                         expect(apiMock.isAddCustomerAddressStarted) == true
                         
-                        expect(apiMock.address) === address
+                        expect(apiMock.address) == address
                         
-                        expect(result).to(beNil())
                         expect(error).toNot(beNil())
                     }
                 }
@@ -214,7 +211,7 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
             var address: Address!
             
             beforeEach {
-                address = Address()
+                address = TestHelper.fullAddress
             }
             
             context("if callback has result") {
@@ -224,7 +221,7 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
                     repository.updateCustomerAddress(address: address) { (result, error) in
                         expect(apiMock.isUpdateCustomerAddressStarted) == true
                         
-                        expect(apiMock.address) === address
+                        expect(apiMock.address) == address
                         
                         expect(result).toNot(beNil())
                         expect(error).to(beNil())
@@ -236,12 +233,11 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.updateCustomerAddress(address: address) { (result, error) in
+                    repository.updateCustomerAddress(address: address) { (_, error) in
                         expect(apiMock.isUpdateCustomerAddressStarted) == true
                         
-                        expect(apiMock.address) === address
+                        expect(apiMock.address) == address
                         
-                        expect(result).to(beNil())
                         expect(error).toNot(beNil())
                     }
                 }
@@ -259,7 +255,7 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.setDefaultShippingAddress(addressId: addressId) { (result, error) in
+                    repository.setDefaultShippingAddress(id: addressId) { (result, error) in
                         expect(apiMock.isUpdateCustomerDefaultAddressStarted) == true
                         
                         expect(apiMock.addressId) == addressId
@@ -273,13 +269,10 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
             context("if callback has error") {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
-                    
-                    repository.setDefaultShippingAddress(addressId: addressId) { (result, error) in
+
+                    repository.setDefaultShippingAddress(id: addressId) { (_, error) in
                         expect(apiMock.isUpdateCustomerDefaultAddressStarted) == true
-                        
                         expect(apiMock.addressId) == addressId
-                        
-                        expect(result).to(beNil())
                         expect(error).toNot(beNil())
                     }
                 }
@@ -297,7 +290,7 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
                 it("needs to handle result") {
                     apiMock.isNeedToReturnError = false
                     
-                    repository.deleteCustomerAddress(addressId: addressId) { (result, error) in
+                    repository.deleteCustomerAddress(id: addressId) { (result, error) in
                         expect(apiMock.isDeleteCustomerAddressStarted) == true
                         
                         expect(apiMock.addressId) == addressId
@@ -312,12 +305,9 @@ class ShopAppCustomerRepositorySpec: QuickSpec {
                 it("needs to handle error") {
                     apiMock.isNeedToReturnError = true
                     
-                    repository.deleteCustomerAddress(addressId: addressId) { (result, error) in
+                    repository.deleteCustomerAddress(id: addressId) { (_, error) in
                         expect(apiMock.isDeleteCustomerAddressStarted) == true
-                        
                         expect(apiMock.addressId) == addressId
-                        
-                        expect(result).to(beNil())
                         expect(error).toNot(beNil())
                     }
                 }

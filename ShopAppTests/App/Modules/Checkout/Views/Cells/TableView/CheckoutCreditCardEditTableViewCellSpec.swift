@@ -49,17 +49,9 @@ class CheckoutCreditCardEditTableViewCellSpec: QuickSpec {
         }
         
         describe("when cell configured") {
-            var creditCard: CreditCard!
+            let creditCard = TestHelper.card
             
             beforeEach {
-                creditCard = CreditCard()
-                creditCard.firstName = "First name"
-                creditCard.lastName = "Last name"
-                creditCard.cardNumber = "4111111111111111"
-                creditCard.expireMonth = "12"
-                creditCard.expireYear = "20"
-                creditCard.verificationCode = "123"
-                
                 cell.configure(with: creditCard)
             }
             

@@ -20,19 +20,11 @@ class OrderFooterViewMock: QuickSpec {
         var countLabel: UILabel!
         var totalLabel: UILabel!
         var priceLabel: UILabel!
+        var order: Order!
         
         beforeEach {
-            let firstOrderItem = OrderItem()
-            firstOrderItem.quantity = 1
-            
-            let secondOrderItem = OrderItem()
-            secondOrderItem.quantity = 2
-            
-            let order = Order()
-            order.currencyCode = "UAH"
-            order.totalPrice = 29.99
-            order.items = [firstOrderItem, secondOrderItem]
-            
+            order = TestHelper.orderWithProducts
+        
             view = OrderFooterView(section: 0, order: order)
             
             itemsLabel = self.findView(withAccessibilityLabel: "items", in: view) as! UILabel
@@ -55,11 +47,11 @@ class OrderFooterViewMock: QuickSpec {
             }
             
             it("should have correct count label text") {
-                expect(countLabel.text) == "3"
+                expect(countLabel.text) == String(order.orderProducts.map({ $0.quantity }).reduce(0, +))
             }
             
             it("should have correct price label text") {
-                expect(priceLabel.text) == "UAH29.99"
+                expect(priceLabel.text) == "UAH15.00"
             }
         }
         

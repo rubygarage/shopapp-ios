@@ -33,7 +33,7 @@ class ArticleUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.getArticle(with: id) { (result, error) in
+                    useCase.getArticle(id: id) { (result, error) in
                         expect(repositoryMock.isGetArticleStarted) == true
                         
                         expect(repositoryMock.id) == id
@@ -48,7 +48,7 @@ class ArticleUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.getArticle(with: id) { (result, error) in
+                    useCase.getArticle(id: id) { (result, error) in
                         expect(repositoryMock.isGetArticleStarted) == true
                         
                         expect(repositoryMock.id) == id

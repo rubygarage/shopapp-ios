@@ -11,7 +11,7 @@ import UIKit
 import ShopApp_Gateway
 
 protocol CreditCardControllerDelegate: class {
-    func viewController(_ controller: CreditCardViewController, didFilled card: CreditCard)
+    func viewController(_ controller: CreditCardViewController, didFilled card: Card)
 }
 
 class CreditCardViewController: BaseViewController<CreditCardViewModel>, InputTextFieldViewDelegate {
@@ -25,7 +25,7 @@ class CreditCardViewController: BaseViewController<CreditCardViewModel>, InputTe
     @IBOutlet private weak var acceptedCardTypesLabel: UILabel!
     @IBOutlet private weak var cardTypeImageView: UIImageView!
     
-    var card: CreditCard?
+    var card: Card?
     
     weak var delegate: CreditCardControllerDelegate?
     

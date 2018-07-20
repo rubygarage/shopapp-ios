@@ -15,7 +15,7 @@ class AddCartProductUseCase {
         self.repository = repository
     }
 
-    func addCartProduct(_ cartProduct: CartProduct, _ callback: @escaping RepoCallback<Bool>) {
+    func addCartProduct(_ cartProduct: CartProduct, _ callback: @escaping ApiCallback<Void>) {
         repository.addCartProduct(cartProduct: cartProduct, callback: callback)
     }
 }

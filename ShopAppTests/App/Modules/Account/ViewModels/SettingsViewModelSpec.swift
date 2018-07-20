@@ -17,13 +17,13 @@ class SettingsViewModelSpec: QuickSpec {
         let authentificationRepositoryMock = AuthentificationRepositoryMock()
         let customerRepositoryMock = CustomerRepositoryMock()
         let updateCustomerUseCaseMock = UpdateCustomerUseCaseMock(repository: customerRepositoryMock)
-        let loginUseCaseMock = LoginUseCaseMock(repository: authentificationRepositoryMock)
+        let signInUseCaseMock = SignInUseCaseMock(repository: authentificationRepositoryMock)
         let customerUseCaseMock = CustomerUseCaseMock(repository: customerRepositoryMock)
         
         var viewModel: SettingsViewModel!
         
         beforeEach {
-            viewModel = SettingsViewModel(updateCustomerUseCase: updateCustomerUseCaseMock, loginUseCase: loginUseCaseMock, customerUseCase: customerUseCaseMock)
+            viewModel = SettingsViewModel(updateCustomerUseCase: updateCustomerUseCaseMock, signInUseCase: signInUseCaseMock, customerUseCase: customerUseCaseMock)
         }
         
         describe("when view model initialized") {
@@ -93,25 +93,26 @@ class SettingsViewModelSpec: QuickSpec {
                     })
                     .disposed(by: disposeBag)
             }
-            
-            context("and it successed") {
-                it("needs to show content of screen") {
+            context("and it failed") {
+                it("needs to show error") {
                     updateCustomerUseCaseMock.isNeedToReturnError = true
+                    updateCustomerUseCaseMock.isNeedToReturnCustomerWithAcceptsMarketing = false
                     viewModel.setPromo(true)
                     
-                    expect(viewModel.customer.value?.promo) == true
+                    expect(viewModel.customer.value?.isAcceptsMarketing) == false
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.error(error: nil)
                 }
             }
             
-            context("and it failed") {
-                it("needs to show error") {
+            context("and it successed") {
+                it("needs to show content of screen") {
                     updateCustomerUseCaseMock.isNeedToReturnError = false
+                    updateCustomerUseCaseMock.isNeedToReturnCustomerWithAcceptsMarketing = true
                     viewModel.setPromo(true)
                     
-                    expect(viewModel.customer.value?.promo) == true
+                    expect(viewModel.customer.value?.isAcceptsMarketing) == false
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.content

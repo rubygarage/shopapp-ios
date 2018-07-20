@@ -20,14 +20,14 @@ class AccountViewModelMock: AccountViewModel {
         isCustomerLoadingStarted = true
         
         if isNeedToReturnCustomer {
-            customer.value = Customer()
+            customer.value = TestHelper.customerWithoutAcceptsMarketing
         }
     }
     
     override func loadPolicies() {
         isPoliciesLoadingStarted = true
         
-        policies.value = [Policy()]
+        policies.value = [TestHelper.policy]
     }
     
     override func logout() {

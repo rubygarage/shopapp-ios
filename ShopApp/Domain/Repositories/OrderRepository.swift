@@ -9,7 +9,7 @@
 import ShopApp_Gateway
 
 protocol OrderRepository {
-    func getOrders(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>)
+    func getOrders(perPage: Int, paginationValue: Any?, callback: @escaping ApiCallback<[Order]>)
     
-    func getOrder(id: String, callback: @escaping RepoCallback<Order>)
+    func getOrder(id: String, callback: @escaping ApiCallback<Order>)
 }

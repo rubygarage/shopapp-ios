@@ -27,14 +27,8 @@ class BaseAddressListTableProviderSpec: QuickSpec {
             tableView.delegate = tableProvider
             
             addresses = []
-            for index in 1...2 {
-                let address = Address()
-                address.id = "Address id \(index)"
-                address.firstName = "Address first name \(index)"
-                address.lastName = "Address last name \(index)"
-                address.address = "Address \(index)"
-                address.phone = "Address phone \(index)"
-                
+            (1...2).forEach { _ in
+                let address = TestHelper.fullAddress
                 let addressTuple = AddressTuple(address, true, true)
                 addresses.append(addressTuple)
             }

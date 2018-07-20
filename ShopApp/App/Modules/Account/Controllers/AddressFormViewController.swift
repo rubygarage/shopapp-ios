@@ -180,8 +180,8 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
             countryPicker.text = address.country?.name
             nameTextFieldView.text = address.firstName
             lastNameTextFieldView.text = address.lastName
-            addressTextFieldView.text = address.address
-            addressOptionalTextFieldView.text = address.secondAddress
+            addressTextFieldView.text = address.street
+            addressOptionalTextFieldView.text = address.secondStreet
             cityTextFieldView.text = address.city
             statePicker.text = address.state?.name
             zipCodeTextFieldView.text = address.zip

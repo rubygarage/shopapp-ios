@@ -36,16 +36,7 @@ class PersonalInfoViewModelMock: PersonalInfoViewModel {
     override func loadCustomer() {
         isCustomerLoadingStarted = true
         
-        let customer = Customer()
-        customer.email = "user@mail.com"
-        customer.firstName = "First"
-        customer.lastName = "Last"
-        customer.phone = "+380990000000"
-        self.customer.value = customer
-    }
-
-    func makeNotValidEmailText() {
-        emailErrorMessage.onNext("Error.InvalidEmail".localizable)
+        self.customer.value = TestHelper.customerWithoutAcceptsMarketing
     }
     
     func makeSaveChangesSuccess(_ success: Bool = true) {

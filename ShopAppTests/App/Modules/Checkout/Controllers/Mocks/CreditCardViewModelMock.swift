@@ -39,7 +39,7 @@ class CreditCardViewModelMock: CreditCardViewModel {
         cardNumberErrorMessage.onNext(message)
     }
     
-    func generateFilledCard(_ card: CreditCard) {
+    func generateFilledCard(_ card: Card) {
         filledCard.onNext(card)
     }
 }

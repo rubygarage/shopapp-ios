@@ -48,7 +48,7 @@ class PopularTableViewCellSpec: QuickSpec {
             
             context("if data has 1 item") {
                 beforeEach {
-                    products.append(Product())
+                    products.append(TestHelper.productWithoutAlternativePrice)
                     cell.configure(with: products)
                 }
                 
@@ -64,7 +64,7 @@ class PopularTableViewCellSpec: QuickSpec {
             context("if data has few items") {
                 beforeEach {
                     for _ in 1...4 {
-                        products.append(Product())
+                        products.append(TestHelper.productWithoutAlternativePrice)
                     }
                     cell.configure(with: products)
                 }
@@ -81,7 +81,7 @@ class PopularTableViewCellSpec: QuickSpec {
         }
         
         describe("when collection item did select") {
-            let product = Product()
+            let product = TestHelper.productWithoutAlternativePrice
             
             beforeEach {
                 cell.configure(with: [product])
@@ -94,7 +94,7 @@ class PopularTableViewCellSpec: QuickSpec {
                 collectionView.delegate?.collectionView?(collectionView, didSelectItemAt: indexPath)
                 
                 expect(delegateMock.tableViewCell) === cell
-                expect(delegateMock.product) === product
+                expect(delegateMock.product) == product
             }
         }
     }

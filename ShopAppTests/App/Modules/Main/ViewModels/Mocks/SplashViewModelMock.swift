@@ -15,7 +15,7 @@ import RxSwift
 class SplashViewModelMock: SplashViewModel {
     var isLoadDataStarted = false
     
-    override func loadData() {
+    override func setupProvider() {
         isLoadDataStarted = true
     }
 }

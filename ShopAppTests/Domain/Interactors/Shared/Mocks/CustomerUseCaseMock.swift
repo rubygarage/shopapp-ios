@@ -11,35 +11,17 @@ import ShopApp_Gateway
 @testable import ShopApp
 
 class CustomerUseCaseMock: CustomerUseCase {
-    private let customer = Customer()
-    private let error = ContentError()
+    private let customer = TestHelper.customerWithoutAcceptsMarketing
+    private let error = ShopAppError.content(isNetworkError: false)
     
     var isNeedToReturnError = false
     var isGetCustomerStarted = false
     
-    override func getCustomer(_ callback: @escaping RepoCallback<Customer>) {
-        customer.email = "user@mail.com"
-        customer.firstName = "First"
-        customer.lastName = "Last"
-        customer.phone = "+380990000000"
-        
-        let customerAddress = Address()
-        customerAddress.id = "Customer address id"
-        customerAddress.address = "Address"
-        customerAddress.secondAddress = "Second address"
-        customerAddress.city = "City"
-        customerAddress.zip = "Zip"
-        
-        let country = Country()
-        country.name = "Country"
-        customerAddress.country = country
-        customer.addresses = [customerAddress]
-        customer.defaultAddress = customerAddress
-        
+    override func getCustomer(_ callback: @escaping ApiCallback<Customer>) {
         execute(callback: callback)
     }
     
-    private func execute(callback: @escaping RepoCallback<Customer>) {
+    private func execute(callback: @escaping ApiCallback<Customer>) {
         isNeedToReturnError ? callback(nil, error) : callback(customer, nil)
         isGetCustomerStarted = true
     }

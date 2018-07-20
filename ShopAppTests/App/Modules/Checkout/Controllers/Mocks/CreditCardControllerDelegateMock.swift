@@ -12,11 +12,11 @@ import ShopApp_Gateway
 
 class CreditCardControllerDelegateMock: CreditCardControllerDelegate {
     var controller: CreditCardViewController?
-    var card: CreditCard?
+    var card: Card?
     
     // MARK: - CreditCardControllerDelegate
     
-    func viewController(_ controller: CreditCardViewController, didFilled card: CreditCard) {
+    func viewController(_ controller: CreditCardViewController, didFilled card: Card) {
         self.controller = controller
         self.card = card
     }

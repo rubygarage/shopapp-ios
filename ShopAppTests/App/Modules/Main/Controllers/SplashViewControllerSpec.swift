@@ -21,14 +21,10 @@ class SplashViewControllerSpec: QuickSpec {
         beforeEach {
             viewController = UIStoryboard(name: StoryboardNames.navigation, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.splash) as! SplashViewController
             
-            let cartRepositoryMock = CartRepositoryMock()
-            let cartProductListUseCaseMock = CartProductListUseCaseMock(repository: cartRepositoryMock)
-            let deleteCartProductUseCaseMock = DeleteCartProductUseCaseMock(repository: cartRepositoryMock)
+            let repository = SetupProviderRepositoryMock()
+            let setupProviderUseCaseMock = SetupProviderUseCaseMock(repository: repository)
+            viewModelMock = SplashViewModelMock(setupProviderUseCase: setupProviderUseCaseMock)
             
-            let productRepositoryMock = ProductRepositoryMock()
-            let cartValidationUseCaseMock = CartValidationUseCaseMock(repository: productRepositoryMock)
-            
-            viewModelMock = SplashViewModelMock(cartProductListUseCase: cartProductListUseCaseMock, cartValidationUseCase: cartValidationUseCaseMock, deleteCartProductUseCase: deleteCartProductUseCaseMock)
             viewController.viewModel = viewModelMock
             
             titleLabel = self.findView(withAccessibilityLabel: "titleLabel", in: viewController.view) as! UILabel

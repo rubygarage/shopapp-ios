@@ -68,10 +68,12 @@ class ArticleDetailsViewControllerSpec: QuickSpec {
         
         describe("when data loaded") {
             it("needs to setup text of labels") {
+                let article = TestHelper.fullArticle
+                
                 viewModelMock.loadData()
                 
-                expect(articleTitleLabel.text) == "Title"
-                expect(authorNameLabel.text) == "First Last"
+                expect(articleTitleLabel.text) == article.title
+                expect(authorNameLabel.text) == article.author.fullName
             }
             
             it("needs to setup web view size after content loading") {

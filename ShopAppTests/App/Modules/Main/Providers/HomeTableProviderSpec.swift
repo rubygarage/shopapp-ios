@@ -79,9 +79,9 @@ class HomeTableProviderSpec: QuickSpec {
             var articles: [Article]!
             
             beforeEach {
-                lastArrivalsProducts = [Product()]
-                popularProducts = [Product()]
-                articles = [Article()]
+                lastArrivalsProducts = [TestHelper.productWithoutAlternativePrice]
+                popularProducts = [TestHelper.productWithoutAlternativePrice]
+                articles = [TestHelper.fullArticle]
                 
                 tableProvider.lastArrivalsProducts = lastArrivalsProducts
                 tableProvider.popularProducts = popularProducts
@@ -130,7 +130,7 @@ class HomeTableProviderSpec: QuickSpec {
             var article: Article!
             
             beforeEach {
-                article = Article()
+                article = TestHelper.fullArticle
                 tableProvider.articles = [article]
                 tableView.reloadData()
             }
@@ -142,7 +142,7 @@ class HomeTableProviderSpec: QuickSpec {
                 tableProvider.tableView(tableView, didSelectRowAt: indexPath)
                 
                 expect(delegateMock.provider) === tableProvider
-                expect(delegateMock.article) === article
+                expect(delegateMock.article) == article
             }
             
             it("shouldn't select article") {

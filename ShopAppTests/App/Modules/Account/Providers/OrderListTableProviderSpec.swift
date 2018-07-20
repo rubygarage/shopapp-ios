@@ -48,15 +48,8 @@ class OrderListTableProviderSpec: QuickSpec {
         }
         
         describe("when orders did set") {
-            var order: Order!
-            
             beforeEach {
-                order = Order()
-                order.id = "order id"
-                order.number = 1000
-                order.createdAt = Date()
-                order.currencyCode = "USD"
-                order.totalPrice = Decimal(floatLiteral: 10)
+                let order = TestHelper.orderWithProducts
                 tableProvider.orders = [order, order, order]
             }
             
@@ -97,12 +90,7 @@ class OrderListTableProviderSpec: QuickSpec {
             
             beforeEach {
                 for _ in 1...2 {
-                    let order = Order()
-                    order.number = 1000
-                    order.createdAt = Date()
-                    order.currencyCode = "USD"
-                    order.totalPrice = Decimal(floatLiteral: 10)
-                    orders.append(order)
+                    orders.append(TestHelper.orderWithProducts)
                 }
                 tableProvider.orders = orders
             }
@@ -113,20 +101,13 @@ class OrderListTableProviderSpec: QuickSpec {
                 
                 let header = tableProvider.tableView(tableView, viewForHeaderInSection: 0) as! OrderHeaderView
                 header.delegate?.headerView(header, didTapWith: 0)
-                expect(providerDelegateMock.selectedOrder) === orders.first
+                expect(providerDelegateMock.selectedOrder) == orders.first
             }
         }
         
         describe("when product variant selected") {
-            var order: Order!
-            
             beforeEach {
-                order = Order()
-                order.id = "order id"
-                order.number = 1000
-                order.createdAt = Date()
-                order.currencyCode = "USD"
-                order.totalPrice = Decimal(floatLiteral: 10)
+                let order = TestHelper.orderWithProducts
                 tableProvider.orders = [order, order, order]
             }
             

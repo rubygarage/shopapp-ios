@@ -15,17 +15,15 @@ import ShopApp_Gateway
 
 class AccountLoggedHeaderViewSpec: QuickSpec {
     override func spec() {
+        let customer = TestHelper.customerWithoutAcceptsMarketing
+        
         var view: AccountLoggedHeaderView!
         var welcomeLabel: UILabel!
         var customerNameLabel: UILabel!
         var customerImageView: AvatarImageView!
         
         beforeEach {
-            let customer = Customer()
-            customer.firstName = "First"
-            customer.lastName = "Last"
-            
-            view = AccountLoggedHeaderView(frame: CGRect.zero, customer: customer)
+            view = AccountLoggedHeaderView(frame: CGRect.zero, customer: TestHelper.customerWithoutAcceptsMarketing)
             
             welcomeLabel = self.findView(withAccessibilityLabel: "welcome", in: view) as! UILabel
             customerNameLabel = self.findView(withAccessibilityLabel: "customerName", in: view) as! UILabel
@@ -38,7 +36,7 @@ class AccountLoggedHeaderViewSpec: QuickSpec {
             }
             
             it("should have correct customer name label text") {
-                expect(customerNameLabel.text) == "First Last"
+                expect(customerNameLabel.text) == customer.fullName
             }
             
             it("should have correct customer image configuration") {
@@ -47,7 +45,7 @@ class AccountLoggedHeaderViewSpec: QuickSpec {
             }
             
             it("should have correct customer image data source") {
-                expect(customerImageView.dataSource?.name) == "First Last"
+                expect(customerImageView.dataSource?.name) == customer.fullName
             }
         }
     }

@@ -9,5 +9,5 @@
 import ShopApp_Gateway
 
 protocol CountryRepository {
-    func getCountries(callback: @escaping RepoCallback<[Country]>)
+    func getCountries(callback: @escaping ApiCallback<[Country]>)
 }

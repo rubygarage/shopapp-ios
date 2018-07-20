@@ -57,7 +57,7 @@ class ImagesCarouselViewControllerSpec: QuickSpec {
             var images: [Image]!
             
             beforeEach {
-                images = [Image()]
+                images = [Image(id: "", src: "")]
                 viewController.images = images
             }
             
@@ -70,7 +70,7 @@ class ImagesCarouselViewControllerSpec: QuickSpec {
             }
             
             it("should set collection provider images") {
-                expect(viewController.collectionProvider.images) === viewController.images
+                expect(viewController.collectionProvider.images) == viewController.images
             }
             
             it("should set cell size to provider") {
@@ -98,7 +98,7 @@ class ImagesCarouselViewControllerSpec: QuickSpec {
             var images: [Image]!
             
             beforeEach {
-                images = [Image()]
+                images = [Image(id: "", src: "")]
                 viewController.images = images
             }
             
@@ -113,7 +113,7 @@ class ImagesCarouselViewControllerSpec: QuickSpec {
             var images: [Image]!
             
             beforeEach {
-                images = [Image(), Image()]
+                images = [Image(id: "", src: ""), Image(id: "", src: "")]
                 viewController.images = images
             }
             

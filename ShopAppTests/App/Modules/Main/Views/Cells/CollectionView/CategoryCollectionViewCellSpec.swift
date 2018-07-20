@@ -26,7 +26,7 @@ class CategoryCollectionViewCellSpec: QuickSpec {
             collectionView.delegate = provider
             collectionView.registerNibForCell(CategoryCollectionViewCell.self)
             
-            provider.categories = [Category()]
+            provider.categories = [TestHelper.categoryWithFiveProducts]
             collectionView.reloadData()
             
             let indexPath = IndexPath(item: 0, section: 0)
@@ -48,9 +48,7 @@ class CategoryCollectionViewCellSpec: QuickSpec {
         
         describe("when cell configured") {
             it("needs to setup title and image") {
-                let category = Category()
-                category.title = "Title"
-                category.image = Image()
+                let category = TestHelper.categoryWithFiveProducts
                 cell.configure(with: category)
                 
                 expect(categoryTitleLabel.text) == category.title

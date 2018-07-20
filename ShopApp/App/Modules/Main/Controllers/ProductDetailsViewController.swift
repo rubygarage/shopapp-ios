@@ -15,8 +15,6 @@ import SKPhotoBrowser
 import SwinjectStoryboard
 import TPKeyboardAvoiding
 
-typealias SelectedOption = (name: String, value: String)
-
 class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>, ImagesCarouselViewControllerDelegate, ProductOptionsControllerDelegate, SeeAllHeaderViewDelegate, LastArrivalsTableCellDelegate, QuantityDropDownViewDelegate {
     @IBOutlet private weak var contentView: TPKeyboardAvoidingScrollView!
     @IBOutlet private weak var detailImagesContainer: UIView!
@@ -146,11 +144,11 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     }
     
     private func populateImages(with product: Product) {
-        guard let images = product.images, !images.isEmpty else {
+        guard !product.images.isEmpty else {
             detailImagesContainer.isHidden = true
             return
         }
-        detailImagesController.images = images
+        detailImagesController.images = product.images
         detailImagesContainer.isHidden = false
     }
     
@@ -181,7 +179,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
             return
         }
         let formatter = NumberFormatter.formatter(with: viewModel.currency!)
-        let price = NSDecimalNumber(decimal: variant.price ?? Decimal())
+        let price = NSDecimalNumber(decimal: variant.price)
         priceLabel.text = formatter.string(from: price)
     }
     
@@ -193,7 +191,7 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         })
     }
     
-    private func populateOptionsView(allOptions: [ProductOption], selectedOptions: [SelectedOption]) {
+    private func populateOptionsView(allOptions: [ProductOption], selectedOptions: [VariantOption]) {
         productOptionsViewController.options = allOptions
         productOptionsViewController.selectedOptions = selectedOptions
     }
@@ -244,11 +242,11 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
     // MARK: - ImagesCarouselViewControllerDelegate
     
     func viewController(_ viewController: ImagesCarouselViewController, didTapImageAt index: Int) {
-        guard let product = viewModel.product.value, let items = product.images else {
+        guard let product = viewModel.product.value else {
             return
         }
         var images: [SKPhoto] = []
-        items.forEach { images.append(SKPhoto.photoWithImageURL($0.src ?? "")) }
+        product.images.forEach { images.append(SKPhoto.photoWithImageURL($0.src)) }
         let browser = SKPhotoBrowser(photos: images)
         browser.initializePageIndex(index)
         present(browser, animated: true)
@@ -260,8 +258,8 @@ class ProductDetailsViewController: BaseViewController<ProductDetailsViewModel>,
         optionsContainerViewHeightConstraint.constant = height
     }
     
-    func viewController(_ viewController: ProductOptionsViewController, didSelect option: SelectedOption) {
-        viewModel.selectOption(with: option.name, value: option.value)
+    func viewController(_ viewController: ProductOptionsViewController, didSelect option: VariantOption) {
+        viewModel.selectOption(option)
     }
     
     // MARK: - SeeAllHeaderViewDelegate

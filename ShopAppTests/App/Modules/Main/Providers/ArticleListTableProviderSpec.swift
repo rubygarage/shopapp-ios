@@ -47,8 +47,7 @@ class ArticleListTableProviderSpec: QuickSpec {
         
         describe("when articles did set") {
             beforeEach {
-                let article = Article()
-                tableProvider.articles = [article]
+                tableProvider.articles = [TestHelper.fullArticle]
             }
             
             it("should return correct rows count") {
@@ -69,7 +68,7 @@ class ArticleListTableProviderSpec: QuickSpec {
             var article: Article!
             
             beforeEach {
-                article = Article()
+                article = TestHelper.fullArticle
                 tableProvider.articles = [article]
             }
             
@@ -81,7 +80,7 @@ class ArticleListTableProviderSpec: QuickSpec {
                 tableProvider.tableView(tableView, didSelectRowAt: indexPath)
                 
                 expect(providerDelegateMock.provider) === tableProvider
-                expect(providerDelegateMock.article) === article
+                expect(providerDelegateMock.article) == article
             }
         }
     }

@@ -18,18 +18,7 @@ class ArticleDetailsViewModelMock: ArticleDetailsViewModel {
     override func loadData() {
         isLoadDataStarted = true
         
-        let author = Author()
-        author.fullName = "First Last"
-        
-        let article = Article()
-        article.title = "Title"
-        article.author = author
-        article.contentHtml = "<b>This text is bold</b>"
-        
-        if isNeedToReturnImageOfArticle {
-            article.image = Image()
-        }
-        
+        let article = isNeedToReturnImageOfArticle ? TestHelper.fullArticle : TestHelper.partialArticle
         let url = URL(string: "www.google.com")!
         let result = (article: article, baseUrl: url)
         

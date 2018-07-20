@@ -15,15 +15,15 @@ class UpdateCustomerUseCase {
         self.repository = repository
     }
 
-    func updateCustomerSettings(isAcceptMarketing: Bool, _ callback: @escaping RepoCallback<Customer>) {
+    func updateCustomerSettings(isAcceptMarketing: Bool, _ callback: @escaping ApiCallback<Void>) {
         repository.updateCustomerSettings(isAcceptMarketing: isAcceptMarketing, callback: callback)
     }
     
-    func updateCustomer(firstName: String, lastName: String, phone: String, _ callback: @escaping RepoCallback<Customer>) {
+    func updateCustomer(firstName: String, lastName: String, phone: String, _ callback: @escaping ApiCallback<Customer>) {
         repository.updateCustomer(firstName: firstName, lastName: lastName, phone: phone, callback: callback)
     }
     
-    func updatePassword(password: String, _ callback: @escaping RepoCallback<Customer>) {
+    func updatePassword(password: String, _ callback: @escaping ApiCallback<Void>) {
         repository.updatePassword(password: password, callback: callback)
     }
 }

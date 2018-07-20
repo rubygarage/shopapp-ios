@@ -67,16 +67,16 @@ class ChangePasswordViewModel: BaseViewModel {
     
     private func update() {
         state.onNext(ViewState.make.loading(isTranslucent: true))
-        updateCustomerUseCase.updatePassword(password: newPasswordText.value) { [weak self] (customer, error) in
+        updateCustomerUseCase.updatePassword(password: newPasswordText.value) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if customer != nil {
+            } else {
                 strongSelf.state.onNext(.content)
             }
-            strongSelf.updateSuccess.onNext(error == nil && customer != nil)
+            strongSelf.updateSuccess.onNext(error == nil)
         }
     }
     

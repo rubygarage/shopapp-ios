@@ -15,12 +15,12 @@ import RxSwift
 class ArticleListViewModelSpec: QuickSpec {
     override func spec() {
         let repositoryMock = ArticleRepositoryMock()
-        let articleListUseCaseMock = ArticleListUseCaseMock(repository: repositoryMock)
+        let articlesUseCaseMock = ArticlesUseCaseMock(repository: repositoryMock)
         
         var viewModel: ArticleListViewModel!
         
         beforeEach {
-            viewModel = ArticleListViewModel(articleListUseCase: articleListUseCaseMock)
+            viewModel = ArticleListViewModel(articlesUseCase: articlesUseCaseMock)
         }
         
         describe("when view model initialized") {
@@ -50,8 +50,8 @@ class ArticleListViewModelSpec: QuickSpec {
             
             context("if not full page loaded") {
                 it("should present loaded items") {
-                    articleListUseCaseMock.isArticleCountLessThenConstant = true
-                    articleListUseCaseMock.isNeedToReturnError = false
+                    articlesUseCaseMock.isArticleCountLessThenConstant = true
+                    articlesUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
                     expect(viewModel.items.value.count) != kItemsPerPage
@@ -65,8 +65,8 @@ class ArticleListViewModelSpec: QuickSpec {
             
             context("if full page loaded") {
                 it("should present loaded items") {
-                    articleListUseCaseMock.isArticleCountLessThenConstant = false
-                    articleListUseCaseMock.isNeedToReturnError = false
+                    articlesUseCaseMock.isArticleCountLessThenConstant = false
+                    articlesUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
                     expect(viewModel.items.value.count) == kItemsPerPage
@@ -80,7 +80,7 @@ class ArticleListViewModelSpec: QuickSpec {
             
             context("if error did occured") {
                 it("should not present items") {
-                    articleListUseCaseMock.isNeedToReturnError = true
+                    articlesUseCaseMock.isNeedToReturnError = true
                     viewModel.reloadData()
                     
                     expect(viewModel.items.value.count) == 0
@@ -94,6 +94,7 @@ class ArticleListViewModelSpec: QuickSpec {
         }
         
         describe("when next page loaded") {
+            let article = TestHelper.fullArticle
             var disposeBag: DisposeBag!
             var states: [ViewState]!
             
@@ -104,8 +105,8 @@ class ArticleListViewModelSpec: QuickSpec {
             
             context("if data loaded successfully") {
                 it("should present loaded items") {
-                    articleListUseCaseMock.isArticleCountLessThenConstant = false
-                    articleListUseCaseMock.isNeedToReturnError = false
+                    articlesUseCaseMock.isArticleCountLessThenConstant = false
+                    articlesUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
                     viewModel.state
@@ -117,7 +118,7 @@ class ArticleListViewModelSpec: QuickSpec {
                     viewModel.loadNextPage()
                     
                     expect(viewModel.items.value.count) == kItemsPerPage * 2
-                    expect(viewModel.paginationValue as? String) == "pagination value"
+                    expect(viewModel.paginationValue as? String) == article.paginationValue
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.content
@@ -126,8 +127,8 @@ class ArticleListViewModelSpec: QuickSpec {
             
             context("if error did occured") {
                 it("should load first page and have error during loading next page") {
-                    articleListUseCaseMock.isArticleCountLessThenConstant = false
-                    articleListUseCaseMock.isNeedToReturnError = false
+                    articlesUseCaseMock.isArticleCountLessThenConstant = false
+                    articlesUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
                     viewModel.state
@@ -136,11 +137,11 @@ class ArticleListViewModelSpec: QuickSpec {
                         })
                         .disposed(by: disposeBag)
                     
-                    articleListUseCaseMock.isNeedToReturnError = true
+                    articlesUseCaseMock.isNeedToReturnError = true
                     viewModel.loadNextPage()
                     
                     expect(viewModel.items.value.count) == kItemsPerPage
-                    expect(viewModel.paginationValue as? String) == "pagination value"
+                    expect(viewModel.paginationValue as? String) == article.paginationValue
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.error(error: nil)
@@ -165,8 +166,8 @@ class ArticleListViewModelSpec: QuickSpec {
             
             context("if data loaded successfully") {
                 it("should present loaded items") {
-                    articleListUseCaseMock.isArticleCountLessThenConstant = true
-                    articleListUseCaseMock.isNeedToReturnError = false
+                    articlesUseCaseMock.isArticleCountLessThenConstant = true
+                    articlesUseCaseMock.isNeedToReturnError = false
                     viewModel.tryAgain()
                     
                     expect(viewModel.items.value.count) != kItemsPerPage
@@ -180,7 +181,7 @@ class ArticleListViewModelSpec: QuickSpec {
             
             context("if error did occured") {
                 it("should not present items") {
-                    articleListUseCaseMock.isNeedToReturnError = true
+                    articlesUseCaseMock.isNeedToReturnError = true
                     
                     viewModel.tryAgain()
                     

@@ -15,12 +15,12 @@ import RxSwift
 class OrderListViewModelSpec: QuickSpec {
     override func spec() {
         let repository = OrderRepositoryMock()
-        let orderListUseCaseMock = OrderListUseCaseMock(repository: repository)
+        let ordersUseCaseMock = OrdersUseCaseMock(repository: repository)
         
         var viewModel: OrderListViewModel!
         
         beforeEach {
-            viewModel = OrderListViewModel(orderListUseCase: orderListUseCaseMock)
+            viewModel = OrderListViewModel(ordersUseCase: ordersUseCaseMock)
         }
         
         describe("when view model initialized") {
@@ -50,8 +50,8 @@ class OrderListViewModelSpec: QuickSpec {
             
             context("if not full page loaded") {
                 it("should present loaded items") {
-                    orderListUseCaseMock.isOrderCountLessThenConstant = true
-                    orderListUseCaseMock.isNeedToReturnError = false
+                    ordersUseCaseMock.isOrderCountLessThenConstant = true
+                    ordersUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
                     expect(viewModel.items.value.count) != kItemsPerPage
@@ -65,8 +65,8 @@ class OrderListViewModelSpec: QuickSpec {
             
             context("if full page loaded") {
                 it("should present loaded items") {
-                    orderListUseCaseMock.isOrderCountLessThenConstant = false
-                    orderListUseCaseMock.isNeedToReturnError = false
+                    ordersUseCaseMock.isOrderCountLessThenConstant = false
+                    ordersUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
                     expect(viewModel.items.value.count) == kItemsPerPage
@@ -80,7 +80,7 @@ class OrderListViewModelSpec: QuickSpec {
             
             context("but error did occured") {
                 it("should not load items") {
-                    orderListUseCaseMock.isNeedToReturnError = true
+                    ordersUseCaseMock.isNeedToReturnError = true
                     viewModel.reloadData()
                     
                     expect(viewModel.items.value.count) == 0
@@ -104,8 +104,8 @@ class OrderListViewModelSpec: QuickSpec {
             
             context("if data loaded successfully") {
                 it("should present loaded items") {
-                    orderListUseCaseMock.isOrderCountLessThenConstant = false
-                    orderListUseCaseMock.isNeedToReturnError = false
+                    ordersUseCaseMock.isOrderCountLessThenConstant = false
+                    ordersUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
                     viewModel.state
@@ -117,7 +117,7 @@ class OrderListViewModelSpec: QuickSpec {
                     viewModel.loadNextPage()
                     
                     expect(viewModel.items.value.count) == kItemsPerPage * 2
-                    expect(viewModel.paginationValue as? String) == "pagination value"
+                    expect(viewModel.paginationValue as? String) == TestHelper.orderWithProducts.paginationValue
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.content
@@ -126,7 +126,7 @@ class OrderListViewModelSpec: QuickSpec {
             
             context("if error did occured") {
                 it("should not load any items") {
-                    orderListUseCaseMock.isNeedToReturnError = true
+                    ordersUseCaseMock.isNeedToReturnError = true
                     viewModel.reloadData()
                     
                     viewModel.state
@@ -145,7 +145,7 @@ class OrderListViewModelSpec: QuickSpec {
                 }
                 
                 it("should load first page and have error during loading next page") {
-                    orderListUseCaseMock.isNeedToReturnError = false
+                    ordersUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
                     viewModel.state
@@ -154,11 +154,11 @@ class OrderListViewModelSpec: QuickSpec {
                         })
                         .disposed(by: disposeBag)
                     
-                    orderListUseCaseMock.isNeedToReturnError = true
+                    ordersUseCaseMock.isNeedToReturnError = true
                     viewModel.loadNextPage()
                     
                     expect(viewModel.items.value.count) == kItemsPerPage
-                    expect(viewModel.paginationValue as? String) == "pagination value"
+                    expect(viewModel.paginationValue as? String) == TestHelper.orderWithProducts.paginationValue
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                     expect(states.last) == ViewState.error(error: nil)
@@ -182,8 +182,8 @@ class OrderListViewModelSpec: QuickSpec {
             }
             
             it("should present loaded items") {
-                orderListUseCaseMock.isOrderCountLessThenConstant = true
-                orderListUseCaseMock.isNeedToReturnError = false
+                ordersUseCaseMock.isOrderCountLessThenConstant = true
+                ordersUseCaseMock.isNeedToReturnError = false
                 viewModel.tryAgain()
                 
                 expect(viewModel.items.value.count) != kItemsPerPage
@@ -195,7 +195,7 @@ class OrderListViewModelSpec: QuickSpec {
             }
             
             it("should error did occured") {
-                orderListUseCaseMock.isNeedToReturnError = true
+                ordersUseCaseMock.isNeedToReturnError = true
                 
                 viewModel.tryAgain()
                 
@@ -225,11 +225,11 @@ class OrderListViewModelSpec: QuickSpec {
             
             context("if product variant found") {
                 it("should find correct product variant") {
-                    orderListUseCaseMock.isNeedToReturnOrderWithVariant = true
-                    orderListUseCaseMock.isNeedToReturnError = false
+                    ordersUseCaseMock.isNeedToReturnOrderWithVariant = true
+                    ordersUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
-                    let variant = viewModel.productVariant(with: "product variant id", at: 0)
+                    let variant = viewModel.productVariant(with: TestHelper.productVariantWithoutSelectedOptions.id, at: 0)
                     expect(variant).toNot(beNil())
                     expect(states.count) == 2
                     expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -239,8 +239,8 @@ class OrderListViewModelSpec: QuickSpec {
             
             context("if product variant not found") {
                 it("should not find correct product variant") {
-                    orderListUseCaseMock.isNeedToReturnOrderWithVariant = false
-                    orderListUseCaseMock.isNeedToReturnError = false
+                    ordersUseCaseMock.isNeedToReturnOrderWithVariant = false
+                    ordersUseCaseMock.isNeedToReturnError = false
                     viewModel.reloadData()
                     
                     let variant = viewModel.productVariant(with: "product variant id", at: 0)
@@ -253,7 +253,7 @@ class OrderListViewModelSpec: QuickSpec {
             
             context("but error did occured") {
                 it("should have error") {
-                    orderListUseCaseMock.isNeedToReturnError = true
+                    ordersUseCaseMock.isNeedToReturnError = true
                     viewModel.reloadData()
                     
                     expect(viewModel.items.value.count) == 0

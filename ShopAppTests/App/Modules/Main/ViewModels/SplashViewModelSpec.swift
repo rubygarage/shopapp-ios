@@ -15,19 +15,13 @@ import RxSwift
 class SplashViewModelSpec: QuickSpec {
     override func spec() {
         var viewModel: SplashViewModel!
-        var cartProductListUseCaseMock: CartProductListUseCaseMock!
-        var cartValidationUseCaseMock: CartValidationUseCaseMock!
-        var deleteCartProductUseCaseMock: DeleteCartProductUseCaseMock!
+        var setupProviderUseCaseMock: SetupProviderUseCaseMock!
         
         beforeEach {
-            let cartRepositoryMock = CartRepositoryMock()
-            cartProductListUseCaseMock = CartProductListUseCaseMock(repository: cartRepositoryMock)
-            deleteCartProductUseCaseMock = DeleteCartProductUseCaseMock(repository: cartRepositoryMock)
+            let setupProviderRepositoryMock = SetupProviderRepositoryMock()
+            setupProviderUseCaseMock = SetupProviderUseCaseMock(repository: setupProviderRepositoryMock)
             
-            let productRepositoryMock = ProductRepositoryMock()
-            cartValidationUseCaseMock = CartValidationUseCaseMock(repository: productRepositoryMock)
-            
-            viewModel = SplashViewModel(cartProductListUseCase: cartProductListUseCaseMock, cartValidationUseCase: cartValidationUseCaseMock, deleteCartProductUseCase: deleteCartProductUseCaseMock)
+            viewModel = SplashViewModel(setupProviderUseCase: setupProviderUseCaseMock)
         }
         
         describe("when view model initialized") {
@@ -45,67 +39,29 @@ class SplashViewModelSpec: QuickSpec {
             
             context("if data loaded succesfully") {
                 it("should notify about finish loading") {
-                    cartProductListUseCaseMock.isNeedToReturnError = false
-                    cartValidationUseCaseMock.isNeedToReturnError = false
-                    deleteCartProductUseCaseMock.isNeedToReturnError = false
+                    setupProviderUseCaseMock.isNeedToReturnError = false
                     
-                    viewModel.dataLoaded
+                    viewModel.providerDidSetup
                         .subscribe(onNext: { event in
                             expect(event).toNotEventually(beNil())
                         })
                         .disposed(by: disposeBag)
                     
-                    viewModel.loadData()
+                    viewModel.setupProvider()
                 }
             }
             
             context("if error occured") {
-                context("during 'get cart product list' step") {
-                    it("should notify about finish loading") {
-                        cartProductListUseCaseMock.isNeedToReturnError = true
-                        cartValidationUseCaseMock.isNeedToReturnError = false
-                        deleteCartProductUseCaseMock.isNeedToReturnError = false
-                        
-                        viewModel.dataLoaded
-                            .subscribe(onNext: { event in
-                                expect(event).toNotEventually(beNil())
-                            })
-                            .disposed(by: disposeBag)
-                        
-                        viewModel.loadData()
-                    }
-                }
-                
-                context("during 'get product variant list' step") {
-                    it("should notify about finish loading") {
-                        cartProductListUseCaseMock.isNeedToReturnError = false
-                        cartValidationUseCaseMock.isNeedToReturnError = true
-                        deleteCartProductUseCaseMock.isNeedToReturnError = false
-                        
-                        viewModel.dataLoaded
-                            .subscribe(onNext: { event in
-                                expect(event).toNotEventually(beNil())
-                            })
-                            .disposed(by: disposeBag)
-                        
-                        viewModel.loadData()
-                    }
-                }
-                
-                context("during 'delete products from cart' step ") {
-                    it("should notify about finish loading") {
-                        cartProductListUseCaseMock.isNeedToReturnError = false
-                        cartValidationUseCaseMock.isNeedToReturnError = false
-                        deleteCartProductUseCaseMock.isNeedToReturnError = true
-                        
-                        viewModel.dataLoaded
-                            .subscribe(onNext: { event in
-                                expect(event).toNotEventually(beNil())
-                            })
-                            .disposed(by: disposeBag)
-                        
-                        viewModel.loadData()
-                    }
+                it("should notify about finish loading") {
+                    setupProviderUseCaseMock.isNeedToReturnError = true
+                    
+                    viewModel.providerDidSetup
+                        .subscribe(onNext: { event in
+                            expect(event).toNotEventually(beNil())
+                        })
+                        .disposed(by: disposeBag)
+                    
+                    viewModel.setupProvider()
                 }
             }
         }
@@ -114,11 +70,9 @@ class SplashViewModelSpec: QuickSpec {
             it("should start data loading") {
                 let disposeBag = DisposeBag()
                 
-                cartProductListUseCaseMock.isNeedToReturnError = false
-                cartValidationUseCaseMock.isNeedToReturnError = false
-                deleteCartProductUseCaseMock.isNeedToReturnError = false
+                setupProviderUseCaseMock.isNeedToReturnError = false
                 
-                viewModel.dataLoaded
+                viewModel.providerDidSetup
                     .subscribe(onNext: { event in
                         expect(event).toNotEventually(beNil())
                     })

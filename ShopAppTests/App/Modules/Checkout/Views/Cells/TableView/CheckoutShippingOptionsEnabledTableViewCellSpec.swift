@@ -36,9 +36,7 @@ class CheckoutShippingOptionsEnabledTableViewCellSpec: QuickSpec {
             priceLabel = self.findView(withAccessibilityLabel: "priceLabel", in: cell) as! UILabel
             titleLabel = self.findView(withAccessibilityLabel: "titleLabel", in: cell) as! UILabel
             
-            shippingRate = ShippingRate()
-            shippingRate.title = "Rate title"
-            shippingRate.price = "100"
+            shippingRate = TestHelper.shippingRate
             currencyCode = "USD"
         }
         
@@ -62,7 +60,7 @@ class CheckoutShippingOptionsEnabledTableViewCellSpec: QuickSpec {
                 
                 it("should have have correct price label text") {
                     let formatter = NumberFormatter.formatter(with: currencyCode)
-                    let price = NSDecimalNumber(string: shippingRate.price ?? "")
+                    let price = NSDecimalNumber(decimal: shippingRate.price)
                     let expectedText = formatter.string(from: price)
                     expect(priceLabel.text) == expectedText
                 }
@@ -93,7 +91,7 @@ class CheckoutShippingOptionsEnabledTableViewCellSpec: QuickSpec {
                 selectRateButton.sendActions(for: .touchUpInside)
                 
                 expect(delegateMock.cell) === cell
-                expect(delegateMock.shippingRate) === shippingRate
+                expect(delegateMock.shippingRate) == shippingRate
             }
         }
     }

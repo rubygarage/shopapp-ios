@@ -155,7 +155,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
             paymentTypeViewController.delegate = self
             paymentTypeViewController.selectedType = viewModel.selectedType.value
         } else if let navigationController = segue.destination as? NavigationController {
-            if let checkoutSuccessViewController = navigationController.viewControllers.first as? CheckoutSuccessViewController, let orderId = viewModel.order?.id, let orderNumber = viewModel.order?.number {
+            if let checkoutSuccessViewController = navigationController.viewControllers.first as? CheckoutSuccessViewController, let orderId = viewModel.order?.id, let orderNumber = viewModel.order?.orderNumber {
                 checkoutSuccessViewController.orderId = orderId
                 checkoutSuccessViewController.orderNumber = orderNumber
             } else if let checkoutFailureViewController = navigationController.viewControllers.first as? CheckoutFailureViewController {
@@ -276,7 +276,7 @@ class CheckoutViewController: BaseViewController<CheckoutViewModel>, CheckoutCom
     
     // MARK: - CreditCardControllerDelegate
     
-    func viewController(_ controller: CreditCardViewController, didFilled card: CreditCard) {
+    func viewController(_ controller: CreditCardViewController, didFilled card: Card) {
         viewModel.creditCard.value = card
         tableProvider.creditCard = card
         tableView?.reloadData()

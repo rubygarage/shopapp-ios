@@ -14,9 +14,9 @@ class CountryRepositoryMock: CountryRepository {
     var isNeedToReturnError = false
     var isGetCountriesStarted = false
     
-    func getCountries(callback: @escaping RepoCallback<[Country]>) {
+    func getCountries(callback: @escaping ApiCallback<[Country]>) {
         isGetCountriesStarted = true
 
-        isNeedToReturnError ? callback(nil, RepoError()) : callback([], nil)
+        isNeedToReturnError ? callback(nil, ShopAppError.content(isNetworkError: false)) : callback([], nil)
     }
 }

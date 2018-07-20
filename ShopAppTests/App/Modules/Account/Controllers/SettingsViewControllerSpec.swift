@@ -24,9 +24,9 @@ class SettingsViewControllerSpec: QuickSpec {
             let authentificationRepositoryMock = AuthentificationRepositoryMock()
             let customerRepositoryMock = CustomerRepositoryMock()
             let updateCustomerUseCaseMock = UpdateCustomerUseCaseMock(repository: customerRepositoryMock)
-            let loginUseCaseMock = LoginUseCaseMock(repository: authentificationRepositoryMock)
+            let loginUseCaseMock = SignInUseCaseMock(repository: authentificationRepositoryMock)
             let customerUseCaseMock = CustomerUseCaseMock(repository: customerRepositoryMock)
-            viewModelMock = SettingsViewModelMock(updateCustomerUseCase: updateCustomerUseCaseMock, loginUseCase: loginUseCaseMock, customerUseCase: customerUseCaseMock)
+            viewModelMock = SettingsViewModelMock(updateCustomerUseCase: updateCustomerUseCaseMock, signInUseCase: loginUseCaseMock, customerUseCase: customerUseCaseMock)
             viewModelMock.isCustomerLoadingStarted = false
             viewController.viewModel = viewModelMock
             
@@ -72,7 +72,7 @@ class SettingsViewControllerSpec: QuickSpec {
                     let customer = viewModelMock.customer.value!
                     
                     expect(tableProvider.promo?.description) == "Label.Promo".localizable
-                    expect(tableProvider.promo?.state) == customer.promo
+                    expect(tableProvider.promo?.state) == customer.isAcceptsMarketing
                     expect(tableView.numberOfSections) == 1
                 }
             }

@@ -24,9 +24,7 @@ class CategoryViewModelMock: CategoryViewModel {
             var products: [Product] = []
             
             for _ in 1...20 {
-                let product = Product()
-                product.currency = "USD"
-                products.append(product)
+                products.append(TestHelper.productWithoutAlternativePrice)
             }
             
             self.products.value = products

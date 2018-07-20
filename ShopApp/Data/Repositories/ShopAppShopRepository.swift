@@ -15,7 +15,7 @@ public class ShopAppShopRepository: ShopRepository {
         self.api = api
     }
     
-    public func getShop(callback: @escaping RepoCallback<Shop>) {
+    public func getShop(callback: @escaping ApiCallback<Shop>) {
         api.getShop(callback: callback)
     }
 }

@@ -36,13 +36,13 @@ class OrderItemTableViewCell: UITableViewCell {
     
     // MARK: - Setup
     
-    func configure(with orderItem: OrderItem, currencyCode: String) {
-        itemImageView.set(image: orderItem.productVariant?.image)
+    func configure(with orderProduct: OrderProduct, currencyCode: String) {
+        itemImageView.set(image: orderProduct.productVariant?.image)
         
-        titleLabel.text = orderItem.title
-        quantityValueLabel.text = String(orderItem.quantity!)
+        titleLabel.text = orderProduct.title
+        quantityValueLabel.text = String(orderProduct.quantity)
         
-        guard let productVariant = orderItem.productVariant else {
+        guard let productVariant = orderProduct.productVariant else {
             totalPriceLabel.text = "Label.N/A".localizable
             subtitleLabel.text = nil
             itemPriceLabel.isHidden = true
@@ -50,28 +50,29 @@ class OrderItemTableViewCell: UITableViewCell {
         }
         
         let formatter = NumberFormatter.formatter(with: currencyCode)
-        let price = NSDecimalNumber(decimal: productVariant.price ?? Decimal())
-        let totalPrice = NSDecimalNumber(value: price.doubleValue * Double(orderItem.quantity!))
+        let price = NSDecimalNumber(decimal: productVariant.price)
+        let totalPrice = NSDecimalNumber(value: price.doubleValue * Double(orderProduct.quantity))
         
         totalPriceLabel.text = formatter.string(from: totalPrice)
-        itemPriceLabel.isHidden = !(orderItem.quantity! > 1)
+        itemPriceLabel.isHidden = !(orderProduct.quantity > 1)
         
-        if orderItem.quantity! > 1 {
+        if orderProduct.quantity > 1 {
             itemPriceLabel.text = String.localizedStringWithFormat("Label.PriceEach".localizable, formatter.string(from: price)!)
         }
         
-        guard let options = productVariant.selectedOptions else {
+        guard !productVariant.selectedOptions.isEmpty else {
             subtitleLabel.text = nil
             return
         }
         
         var subtitle = ""
         
-        options.forEach {
-            let text = String.localizedStringWithFormat("Label.Order.Option".localizable, $0.name, $0.value)
+        for index in 0..<productVariant.selectedOptions.count {
+            let selectedOption = productVariant.selectedOptions[index]
+            let text = String.localizedStringWithFormat("Label.Order.Option".localizable, selectedOption.name, selectedOption.value)
             subtitle.append(text)
 
-            if options.last?.value != $0.value {
+            if index < productVariant.selectedOptions.count - 1 {
                 subtitle.append("\n")
             }
         }

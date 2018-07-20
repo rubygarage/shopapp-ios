@@ -13,7 +13,7 @@ import ShopApp_Gateway
 class DeleteAddressUseCaseMock: DeleteAddressUseCase {
     var isNeedToReturnError = false
     
-    override func deleteCustomerAddress(addressId: String, callback: @escaping RepoCallback<Bool>) {
-        isNeedToReturnError ? callback(false, RepoError()) : callback(true, nil)
+    override func deleteCustomerAddress(id: String, callback: @escaping ApiCallback<Void>) {
+        callback((), isNeedToReturnError ? ShopAppError.content(isNetworkError: false) : nil)
     }
 }

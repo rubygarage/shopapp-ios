@@ -10,12 +10,12 @@ import RxSwift
 import ShopApp_Gateway
 
 class OrderListViewModel: BasePaginationViewModel {
-    private let orderListUseCase: OrderListUseCase
+    private let ordersUseCase: OrdersUseCase
     
     var items = Variable<[Order]>([])
 
-    init(orderListUseCase: OrderListUseCase) {
-        self.orderListUseCase = orderListUseCase
+    init(ordersUseCase: OrdersUseCase) {
+        self.ordersUseCase = ordersUseCase
     }
     
     func reloadData() {
@@ -32,11 +32,9 @@ class OrderListViewModel: BasePaginationViewModel {
         var variant: ProductVariant?
         let order = items.value[index]
         
-        if let items = order.items {
-            items.forEach {
-                if let productVariant = $0.productVariant, productVariant.id == productVariantId {
-                    variant = productVariant
-                }
+        order.orderProducts.forEach {
+            if let productVariant = $0.productVariant, productVariant.id == productVariantId {
+                variant = productVariant
             }
         }
         
@@ -46,17 +44,17 @@ class OrderListViewModel: BasePaginationViewModel {
     private func loadRemoteData() {
         let showHud = items.value.isEmpty
         state.onNext(ViewState.make.loading(showHud: showHud))
-        orderListUseCase.getOrders(with: paginationValue) { [weak self] (order, error) in
+        ordersUseCase.getOrders(paginationValue: paginationValue) { [weak self] (orders, error) in
             guard let strongSelf = self else {
                 return
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if let order = order {
+            } else if let order = orders {
                 strongSelf.updateOrders(with: order)
                 order.isEmpty ? strongSelf.state.onNext(.empty) : strongSelf.state.onNext(.content)
             }
-            strongSelf.canLoadMore = order?.count ?? 0 == kItemsPerPage
+            strongSelf.canLoadMore = orders?.count ?? 0 == kItemsPerPage
         }
     }
     

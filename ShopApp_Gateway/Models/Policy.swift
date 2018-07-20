@@ -8,10 +8,20 @@
 
 import Foundation
 
-public class Policy {
-    public var title: String?
-    public var body: String?
-    public var url: String?
+public struct Policy: Equatable {
+    public let title: String
+    public let body: String
+    public let url: String
 
-    public init() {}
+    public init(title: String, body: String, url: String) {
+        self.title = title
+        self.body = body
+        self.url = url
+    }
+    
+    public static func == (lhs: Policy, rhs: Policy) -> Bool {
+        return lhs.title == rhs.title
+            && lhs.body == rhs.body
+            && lhs.url == rhs.url
+    }
 }

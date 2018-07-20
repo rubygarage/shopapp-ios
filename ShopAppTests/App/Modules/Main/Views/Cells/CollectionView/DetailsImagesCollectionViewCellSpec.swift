@@ -24,7 +24,7 @@ class DetailsImagesCollectionViewCellSpec: QuickSpec {
             collectionView.dataSource = provider
             collectionView.registerNibForCell(DetailsImagesCollectionViewCell.self)
             
-            provider.images = [Image()]
+            provider.images = [Image(id: "", src: "")]
             collectionView.reloadData()
             
             let indexPath = IndexPath(item: 0, section: 0)
@@ -38,8 +38,7 @@ class DetailsImagesCollectionViewCellSpec: QuickSpec {
             var image: Image!
             
             beforeEach {
-                image = Image()
-                image.src = "https://via.placeholder.com/100x100"
+                image = Image(id: "", src: "https://via.placeholder.com/100x100")
             }
             
             it("needs to set image") {

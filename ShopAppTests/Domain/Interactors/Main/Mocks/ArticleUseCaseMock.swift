@@ -13,16 +13,16 @@ import ShopApp_Gateway
 @testable import ShopApp
 
 class ArticleUseCaseMock: ArticleUseCase {
-    private let response = (article: Article(), baseUrl: URL(string: "www.google.com")!)
-    private let error = ContentError()
+    private let response = (article: TestHelper.fullArticle, baseUrl: URL(string: "www.google.com")!)
+    private let error = ShopAppError.content(isNetworkError: false)
     
     var isNeedToReturnError = false
     
-    override func getArticle(with id: String, _ callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>) {
+    override func getArticle(id: String, _ callback: @escaping ApiCallback<(article: Article, baseUrl: URL)>) {
         execute(callback: callback)
     }
     
-    private func execute(callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>) {
+    private func execute(callback: @escaping ApiCallback<(article: Article, baseUrl: URL)>) {
         isNeedToReturnError ? callback(nil, error) : callback(response, nil)
     }
 }

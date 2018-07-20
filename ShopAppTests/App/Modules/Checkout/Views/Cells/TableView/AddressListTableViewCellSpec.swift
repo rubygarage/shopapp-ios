@@ -42,15 +42,7 @@ class AddressListTableViewCellSpec: QuickSpec {
             deleteButton = self.findView(withAccessibilityLabel: "deleteButton", in: cell) as! UIButton
             defaultAddressButton = self.findView(withAccessibilityLabel: "defaultAddressButton", in: cell) as! UIButton
             
-            address = Address()
-            address.address = "Address"
-            address.secondAddress = "Second address"
-            address.city = "City"
-            address.zip = "Zip"
-            
-            let country = Country()
-            country.name = "Country"
-            address.country = country
+            address = TestHelper.fullAddress
         }
         
         describe("when cell initialized") {
@@ -83,8 +75,6 @@ class AddressListTableViewCellSpec: QuickSpec {
                 
                 context("if phone exist") {
                     beforeEach {
-                        address.phone = "12345"
-                        
                         cell.configure(with: address, isSelected: isSelected, isDefault: isDefault, showSelectionButton: showSelectionButton)
                     }
                     
@@ -103,6 +93,8 @@ class AddressListTableViewCellSpec: QuickSpec {
                 
                 context("if phone doesn't exist") {
                     it("should have correct phone label text") {
+                        address = TestHelper.partialAddress
+                        
                         cell.configure(with: address, isSelected: isSelected, isDefault: isDefault, showSelectionButton: showSelectionButton)
                         
                         expect(phoneLabel.text).to(beNil())
@@ -181,7 +173,7 @@ class AddressListTableViewCellSpec: QuickSpec {
                     
                     expect(delegateMock.selectAddressDidPress) == true
                     expect(delegateMock.cell) === cell
-                    expect(delegateMock.address) === address
+                    expect(delegateMock.address) == address
                 }
             }
             
@@ -191,7 +183,7 @@ class AddressListTableViewCellSpec: QuickSpec {
                     
                     expect(delegateMock.editAddressDidPress) == true
                     expect(delegateMock.cell) === cell
-                    expect(delegateMock.address) === address
+                    expect(delegateMock.address) == address
                 }
             }
             
@@ -201,7 +193,7 @@ class AddressListTableViewCellSpec: QuickSpec {
                     
                     expect(delegateMock.deleteAddressDidPress) == true
                     expect(delegateMock.cell) === cell
-                    expect(delegateMock.address) === address
+                    expect(delegateMock.address) == address
                 }
             }
             
@@ -211,7 +203,7 @@ class AddressListTableViewCellSpec: QuickSpec {
                     
                     expect(delegateMock.defaultAddressDidPress) == true
                     expect(delegateMock.cell) === cell
-                    expect(delegateMock.address) === address
+                    expect(delegateMock.address) == address
                 }
             }
         }

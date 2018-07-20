@@ -43,33 +43,31 @@ class BaseAddressListViewModel: BaseViewModel {
     
     func deleteCustomerAddress(with address: Address, type: AddressListType) {
         state.onNext(ViewState.make.loading(isTranslucent: true))
-        deleteAddressUseCase.deleteCustomerAddress(addressId: address.id) { [weak self] (success, error) in
+        deleteAddressUseCase.deleteCustomerAddress(id: address.id) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if let success = success, success {
+            } else {
                 let selected = strongSelf.selectedAddress?.isEqual(to: address) ?? false
                 strongSelf.processDeleteAddressResponse(with: selected, type: type)
-            } else {
-                strongSelf.state.onNext(.content)
             }
         }
     }
     
     func updateCustomerDefaultAddress(with address: Address) {
         state.onNext(ViewState.make.loading(isTranslucent: true))
-        updateDefaultAddressUseCase.updateDefaultAddress(with: address.id) { [weak self] (customer, error) in
+        updateDefaultAddressUseCase.updateDefaultAddress(id: address.id) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }
-            if let addresses = customer?.addresses, let defaultAddress = customer?.defaultAddress {
-                strongSelf.customerDefaultAddress.value = defaultAddress
-                strongSelf.customerAddresses.value = addresses
-                strongSelf.state.onNext(.content)
-            } else {
+            if let error = error {
                 strongSelf.state.onNext(.error(error: error))
+            } else {
+                strongSelf.customerDefaultAddress.value = address
+                strongSelf.customerAddresses.value = strongSelf.customerAddresses.value
+                strongSelf.state.onNext(.content)
             }
         }
     }

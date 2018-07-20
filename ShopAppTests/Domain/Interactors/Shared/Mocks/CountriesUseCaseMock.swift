@@ -13,17 +13,16 @@ import ShopApp_Gateway
 class CountriesUseCaseMock: CountriesUseCase {
     var returnStates = false
     
-    override func getCountries(_ callback: @escaping RepoCallback<[Country]>) {
+    override func getCountries(_ callback: @escaping ApiCallback<[Country]>) {
         var countries: [Country] = []
         for index in 1...2 {
-            let country = Country()
-            country.name = "Country\(index)"
+            var stateName: String?
+            let countryName = "Country\(index)"
             if returnStates && index == 1 {
-                let state = State()
-                state.name = "State1"
-                country.states = [state]
+                stateName = "State1"
             }
-            countries.append(country)
+            let states = stateName != nil ? [State(id: "id", name: stateName!)] : nil
+            countries.append(Country(id: "id", name: countryName, states: states))
         }
         callback(countries, nil)
     }

@@ -15,7 +15,7 @@ class UpdateAddressUseCase {
         self.repository = repository
     }
 
-    func updateCustomerAddress(address: Address, callback: @escaping RepoCallback<Bool>) {
+    func updateCustomerAddress(address: Address, callback: @escaping ApiCallback<Void>) {
         repository.updateCustomerAddress(address: address, callback: callback)
     }
 }

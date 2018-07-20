@@ -35,13 +35,12 @@ class ChangeCartProductUseCaseSpec: QuickSpec {
                 it("needs to handle result") {
                     repositoryMock.isNeedToReturnError = false
                     
-                    useCase.changeCartProductQuantity(cartItemId: cartItemId, quantity: quantity) { (result, error) in
+                    useCase.changeCartProductQuantity(cartItemId: productVariantId, quantity: quantity) { (_, error) in
                         expect(repositoryMock.isChangeCartProductQuantityStarted) == true
                         
-                        expect(repositoryMock.cartItemId) == cartItemId
+                        expect(repositoryMock.cartItemId) == productVariantId
                         expect(repositoryMock.quantity) == quantity
-                        
-                        expect(result) == true
+
                         expect(error).to(beNil())
                     }
                 }
@@ -51,13 +50,12 @@ class ChangeCartProductUseCaseSpec: QuickSpec {
                 it("needs to handle error") {
                     repositoryMock.isNeedToReturnError = true
                     
-                    useCase.changeCartProductQuantity(cartItemId: cartItemId, quantity: quantity) { (result, error) in
+                    useCase.changeCartProductQuantity(cartItemId: productVariantId, quantity: quantity) { (_, error) in
                         expect(repositoryMock.isChangeCartProductQuantityStarted) == true
                         
-                        expect(repositoryMock.cartItemId) == cartItemId
+                        expect(repositoryMock.cartItemId) == productVariantId
                         expect(repositoryMock.quantity) == quantity
-                        
-                        expect(result) == false
+
                         expect(error).toNot(beNil())
                     }
                 }

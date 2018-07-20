@@ -56,26 +56,23 @@ class OrderItemTableViewCellSpec: QuickSpec {
         describe("when cell configured") {
             let currencyCode = "UAH"
             
-            var orderItem: OrderItem!
-            var productVariant: ProductVariant!
+            var orderProduct: OrderProduct!
             
             beforeEach {
-                orderItem = OrderItem()
-                orderItem.title = "Order title"
-                orderItem.quantity = 2
+                orderProduct = TestHelper.orderProductWithoutProductVariant
             }
             
             it("should have correct image, title and quantity texts") {
-                cell.configure(with: orderItem, currencyCode: currencyCode)
+                cell.configure(with: orderProduct, currencyCode: currencyCode)
                 
                 expect(itemImageView.image).toNot(beNil())
-                expect(titleLabel.text) == "Order title"
-                expect(quantityValueLabel.text) == "2"
+                expect(titleLabel.text) == orderProduct.title
+                expect(quantityValueLabel.text) == String(orderProduct.quantity)
             }
             
             context("when order item hasn't product variant") {
                 it("should have correct total price and submit texts, hidden item price") {
-                    cell.configure(with: orderItem, currencyCode: currencyCode)
+                    cell.configure(with: orderProduct, currencyCode: currencyCode)
                     
                     expect(totalPriceLabel.text) == "Label.N/A".localizable
                     expect(subtitleLabel.text).to(beNil())
@@ -85,46 +82,38 @@ class OrderItemTableViewCellSpec: QuickSpec {
             
             context("when order item has product variant") {
                 beforeEach {
-                    productVariant = ProductVariant()
-                    productVariant.title = "Product variant title"
-                    productVariant.price = 29.99
-                    
-                    orderItem.productVariant = productVariant
+                    orderProduct = TestHelper.orderProductWithoutSelectedOptions
                 }
                 
                 it("should have correct total price and item price texts") {
-                    cell.configure(with: orderItem, currencyCode: currencyCode)
+                    cell.configure(with: orderProduct, currencyCode: currencyCode)
                     
-                    expect(totalPriceLabel.text) == "UAH59.98"
+                    expect(totalPriceLabel.text) == "UAH20.00"
                     expect(itemPriceLabel.isHidden) == false
-                    expect(itemPriceLabel.text) == String.localizedStringWithFormat("Label.PriceEach".localizable, "UAH29.99")
+                    expect(itemPriceLabel.text) == String.localizedStringWithFormat("Label.PriceEach".localizable, "UAH10.00")
                 }
                 
                 context("if it haven't selected option of product variant") {
                     it("shouldn't have subtitle text") {
-                        cell.configure(with: orderItem, currencyCode: currencyCode)
+                        cell.configure(with: orderProduct, currencyCode: currencyCode)
                         
                         expect(subtitleLabel.text).to(beNil())
                     }
                 }
-                
+
                 context("if it have selected option of product variant") {
                     it("should have correct subtitle text") {
-                        let firstVariantOption = VariantOption()
-                        firstVariantOption.name = "First name"
-                        firstVariantOption.value = "First value"
+                        orderProduct = TestHelper.orderProductWithSelectedOptions
                         
-                        let secondVariantOption = VariantOption()
-                        secondVariantOption.name = "Second name"
-                        secondVariantOption.value = "Second value"
+                        let firstSelectedOption = orderProduct.productVariant!.selectedOptions.first!
+                        let firstPartOfSubtitle = String.localizedStringWithFormat("Label.Order.Option".localizable, firstSelectedOption.name, firstSelectedOption.value)
                         
-                        productVariant.selectedOptions = [firstVariantOption, secondVariantOption]
+                        let secondSelectedOption = orderProduct.productVariant!.selectedOptions.last!
+                        let secondPartOfSubtitle = String.localizedStringWithFormat("Label.Order.Option".localizable, secondSelectedOption.name, secondSelectedOption.value)
                         
-                        let firstPartOfSubtitle = String.localizedStringWithFormat("Label.Order.Option".localizable, "First name", "First value")
-                        let secondPartOfSubtitle = String.localizedStringWithFormat("Label.Order.Option".localizable, "Second name", "Second value")
                         let subtitle = firstPartOfSubtitle + "\n" + secondPartOfSubtitle
-                        
-                        cell.configure(with: orderItem, currencyCode: currencyCode)
+
+                        cell.configure(with: orderProduct, currencyCode: currencyCode)
                         
                         expect(subtitleLabel.text) == subtitle
                     }

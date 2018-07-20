@@ -15,7 +15,7 @@ class CustomerUseCase {
         self.repository = repository
     }
 
-    func getCustomer(_ callback: @escaping RepoCallback<Customer>) {
+    func getCustomer(_ callback: @escaping ApiCallback<Customer>) {
         repository.getCustomer(callback: callback)
     }
 }

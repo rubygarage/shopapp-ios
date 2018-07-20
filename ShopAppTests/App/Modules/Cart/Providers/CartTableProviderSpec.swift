@@ -50,7 +50,7 @@ class CartTableProviderSpec: QuickSpec {
             var items: [CartProduct]!
             
             beforeEach {
-                items = [CartProduct()]
+                items = [TestHelper.cartProductWithQuantityOne]
                 tableProvider.cartProducts = items
             }
             
@@ -78,34 +78,30 @@ class CartTableProviderSpec: QuickSpec {
         
         describe("when product did select") {
             var cartProduct: CartProduct!
-            var productVariant: ProductVariant!
             var providerDelegateMock: CartTableProviderDelegateMock!
             
             beforeEach {
-                cartProduct = CartProduct()
                 providerDelegateMock = CartTableProviderDelegateMock()
                 tableProvider.delegate = providerDelegateMock
             }
             
             context("if product variant contains in cart products") {
                 beforeEach {
-                    productVariant = ProductVariant()
-                    cartProduct.productVariant = productVariant
-                    
-                    tableProvider.cartProducts = [cartProduct]
+                    cartProduct = TestHelper.cartProductWithQuantityOne
+                    tableProvider.cartProducts = [TestHelper.cartProductWithQuantityOne]
                 }
                 
                 it("should select cart product") {
                     let indexPath = IndexPath(row: 0, section: 0)
                     tableProvider.tableView(tableView, didSelectRowAt: indexPath)
                     
-                    expect(providerDelegateMock.selectedProductVariant) === productVariant
+                    expect(providerDelegateMock.selectedProductVariant) == cartProduct.productVariant
                 }
             }
             
             context("if product variant doesn't contains in cart products") {
                 beforeEach {
-                    tableProvider.cartProducts = [cartProduct]
+                    tableProvider.cartProducts = [TestHelper.cartProductWithoutProductVariant]
                 }
                 
                 it("should not select cart product") {

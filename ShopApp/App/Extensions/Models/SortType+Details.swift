@@ -9,8 +9,8 @@
 import ShopApp_Gateway
 
 extension SortType {
-    static let allValues = ["SortType.CreatedAt".localizable,
-                            "SortType.Name".localizable,
+    static let allValues = ["SortType.Name".localizable,
+                            "SortType.CreatedAt".localizable,
                             "SortType.Popular".localizable,
                             "SortType.Type".localizable,
                             "SortType.PriceHighToLow".localizable,

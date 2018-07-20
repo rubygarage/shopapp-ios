@@ -11,15 +11,15 @@ import ShopApp_Gateway
 @testable import ShopApp
 
 class ResetPasswordUseCaseMock: ResetPasswordUseCase {
-    private let error = ContentError()
+    private let error = ShopAppError.content(isNetworkError: false)
     
     var isNeedToReturnError = false
     
-    override func resetPassword(with email: String, _ callback: @escaping RepoCallback<Bool>) {
+    override func resetPassword(email: String, _ callback: @escaping ApiCallback<Void>) {
         execute(callback: callback)
     }
     
-    private func execute(callback: @escaping RepoCallback<Bool>) {
-        isNeedToReturnError ? callback(nil, error) : callback(true, nil)
+    private func execute(callback: @escaping ApiCallback<Void>) {
+        callback((), isNeedToReturnError ? error: nil)
     }
 }

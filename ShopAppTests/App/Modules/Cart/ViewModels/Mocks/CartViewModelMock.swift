@@ -18,26 +18,15 @@ class CartViewModelMock: CartViewModel {
     
     override func loadData(showLoading: Bool) {
         if isNeedToReturnData {
-            data.value = [generatedCartProduct]
+            data.value = [TestHelper.cartProductWithQuantityOne]
         }
         isLoadDataStarted = true
     }
     
     override func update(cartProduct: CartProduct, quantity: Int) {
-        cartProduct.quantity = quantity
-        data.value = [cartProduct]
+        let product = CartProduct(id: cartProduct.id, productVariant: cartProduct.productVariant, title: cartProduct.title, currency: cartProduct.currency, quantity: quantity)
+        
+        data.value = [product]
         isUpdateCartProductStarted = true
-    }
-    
-    private var generatedCartProduct: CartProduct {
-        let cartProduct = CartProduct()
-        cartProduct.currency = "Currency"
-        cartProduct.quantity = 10
-        
-        let productVariant = ProductVariant()
-        productVariant.price = Decimal(integerLiteral: 5)
-        cartProduct.productVariant = productVariant
-        
-        return cartProduct
     }
 }

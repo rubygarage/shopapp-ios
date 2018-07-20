@@ -10,13 +10,12 @@ import RxSwift
 import ShopApp_Gateway
 
 class CategoryListViewModel: BasePaginationViewModel {
-    private let categoryListUseCase: CategoryListUseCase
+    private let categoriesUseCase: CategoriesUseCase
     
     var items = Variable<[ShopApp_Gateway.Category]>([])
-    var parentCategoryId: String?
-    
-    init(categoryListUseCase: CategoryListUseCase) {
-        self.categoryListUseCase = categoryListUseCase
+
+    init(categoriesUseCase: CategoriesUseCase) {
+        self.categoriesUseCase = categoriesUseCase
     }
     
     func reloadData() {
@@ -32,7 +31,7 @@ class CategoryListViewModel: BasePaginationViewModel {
     private func loadRemoteData() {
         let showHud = items.value.isEmpty
         state.onNext(ViewState.make.loading(showHud: showHud))
-        categoryListUseCase.getCategoryList(paginationValue: paginationValue, parentCategoryId: parentCategoryId) { [weak self] (catogories, error) in
+        categoriesUseCase.getCategoryList(paginationValue: paginationValue) { [weak self] (catogories, error) in
             guard let strongSelf = self else {
                 return
             }

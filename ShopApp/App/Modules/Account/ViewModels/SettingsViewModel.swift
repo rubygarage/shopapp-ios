@@ -11,19 +11,19 @@ import ShopApp_Gateway
 
 class SettingsViewModel: BaseViewModel {
     private var updateCustomerUseCase: UpdateCustomerUseCase
-    private let loginUseCase: LoginUseCase
+    private let signInUseCase: SignInUseCase
     private let customerUseCase: CustomerUseCase
     
     var customer = Variable<Customer?>(nil)
     
-    init(updateCustomerUseCase: UpdateCustomerUseCase, loginUseCase: LoginUseCase, customerUseCase: CustomerUseCase) {
+    init(updateCustomerUseCase: UpdateCustomerUseCase, signInUseCase: SignInUseCase, customerUseCase: CustomerUseCase) {
         self.updateCustomerUseCase = updateCustomerUseCase
-        self.loginUseCase = loginUseCase
+        self.signInUseCase = signInUseCase
         self.customerUseCase = customerUseCase
     }
     
     func loadCustomer() {
-        loginUseCase.isSignedIn { [weak self] (isSignedIn, _) in
+        signInUseCase.isSignedIn { [weak self] (isSignedIn, _) in
             guard let strongSelf = self else {
                 return
             }
@@ -35,12 +35,11 @@ class SettingsViewModel: BaseViewModel {
     }
     
     func setPromo(_ value: Bool) {
-        guard let customer = customer.value else {
+        guard customer.value != nil else {
             return
         }
         
-        customer.promo = value
-        update(customer)
+        update(value)
     }
     
     private func getCustomer() {
@@ -58,15 +57,15 @@ class SettingsViewModel: BaseViewModel {
         }
     }
     
-    private func update(_ customer: Customer) {
+    private func update(_ promo: Bool) {
         state.onNext(ViewState.make.loading(showHud: false))
-        updateCustomerUseCase.updateCustomerSettings(isAcceptMarketing: customer.promo) { [weak self] (customer, error) in
+        updateCustomerUseCase.updateCustomerSettings(isAcceptMarketing: promo) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
-            } else if customer != nil {
+            } else {
                 strongSelf.state.onNext(.content)
             }
         }

@@ -79,8 +79,8 @@ class AddressFormViewModel: BaseViewModel {
     }
     
     func updateStates(with nameOfCountry: String) {
-        if let country = countries.filter({ $0.name == nameOfCountry }).first, !country.states.isEmpty {
-            namesOfStates.onNext(country.states.map { $0.name })
+        if let country = countries.filter({ $0.name == nameOfCountry }).first, let states = country.states, !states.isEmpty {
+            namesOfStates.onNext(states.map { $0.name })
         } else {
             stateText.value = ""
             namesOfStates.onNext([])
@@ -91,14 +91,14 @@ class AddressFormViewModel: BaseViewModel {
         guard let address = address else {
             return
         }
-        countryText.value = address.country?.name ?? ""
-        firstNameText.value = address.firstName ?? ""
-        lastNameText.value = address.lastName ?? ""
-        addressText.value = address.address ?? ""
-        addressOptionalText.value = address.secondAddress ?? ""
-        cityText.value = address.city ?? ""
-        stateText.value = address.state?.name ?? ""
-        zipText.value = address.zip ?? ""
+        countryText.value = address.country
+        firstNameText.value = address.firstName
+        lastNameText.value = address.lastName
+        addressText.value = address.street
+        addressOptionalText.value = address.secondStreet ?? ""
+        cityText.value = address.city
+        stateText.value = address.state ?? ""
+        zipText.value = address.zip
         phoneText.value = address.phone ?? ""
     }
         
@@ -107,24 +107,17 @@ class AddressFormViewModel: BaseViewModel {
     }
  
     private func getAddress() -> Address {
-        let address = Address()
-        address.id = self.address?.id ?? ""
-        address.firstName = firstNameText.value.trimmingCharacters(in: .whitespaces)
-        address.lastName = lastNameText.value.trimmingCharacters(in: .whitespaces)
-        address.address = addressText.value.trimmingCharacters(in: .whitespaces)
-        address.secondAddress = addressOptionalText.value.trimmingCharacters(in: .whitespaces)
-        address.city = cityText.value.trimmingCharacters(in: .whitespaces)
-        address.zip = zipText.value.trimmingCharacters(in: .whitespaces)
-        address.phone = phoneText.value.trimmingCharacters(in: .whitespaces)
-        
-        let country = Country()
-        country.name = countryText.value.trimmingCharacters(in: .whitespaces)
-        address.country = country
-        
-        let state = State()
-        state.name = stateText.value.trimmingCharacters(in: .whitespaces)
-        address.state = state
+        let id = self.address?.id ?? ""
+        let country = countryText.value.trimmingCharacters(in: .whitespaces)
+        let firstName = firstNameText.value.trimmingCharacters(in: .whitespaces)
+        let lastName = lastNameText.value.trimmingCharacters(in: .whitespaces)
+        let street = addressText.value.trimmingCharacters(in: .whitespaces)
+        let secondStreet = addressOptionalText.value.trimmingCharacters(in: .whitespaces)
+        let city = cityText.value.trimmingCharacters(in: .whitespaces)
+        let state = stateText.value.trimmingCharacters(in: .whitespaces)
+        let zip = zipText.value.trimmingCharacters(in: .whitespaces)
+        let phone = phoneText.value.trimmingCharacters(in: .whitespaces)
 
-        return address
+        return Address(id: id, firstName: firstName, lastName: lastName, street: street, secondStreet: secondStreet, city: city, country: country, state: state, zip: zip, phone: phone)
     }
 }

@@ -9,19 +9,19 @@
 import ShopApp_Gateway
 
 protocol CustomerRepository {
-    func getCustomer(callback: @escaping RepoCallback<Customer>)
+    func getCustomer(callback: @escaping ApiCallback<Customer>)
 
-    func updateCustomer(firstName: String, lastName: String, phone: String, callback: @escaping RepoCallback<Customer>)
+    func updateCustomer(firstName: String, lastName: String, phone: String, callback: @escaping ApiCallback<Customer>)
 
-    func updateCustomerSettings(isAcceptMarketing: Bool, callback: @escaping RepoCallback<Customer>)
+    func updateCustomerSettings(isAcceptMarketing: Bool, callback: @escaping ApiCallback<Void>)
 
-    func updatePassword(password: String, callback: @escaping RepoCallback<Customer>)
+    func updatePassword(password: String, callback: @escaping ApiCallback<Void>)
 
-    func addCustomerAddress(address: Address, callback: @escaping RepoCallback<String>)
+    func addCustomerAddress(address: Address, callback: @escaping ApiCallback<Void>)
 
-    func updateCustomerAddress(address: Address, callback: @escaping RepoCallback<Bool>)
+    func updateCustomerAddress(address: Address, callback: @escaping ApiCallback<Void>)
 
-    func setDefaultShippingAddress(addressId: String, callback: @escaping RepoCallback<Customer>)
+    func setDefaultShippingAddress(id: String, callback: @escaping ApiCallback<Void>)
 
-    func deleteCustomerAddress(addressId: String, callback: @escaping RepoCallback<Bool>)
+    func deleteCustomerAddress(id: String, callback: @escaping ApiCallback<Void>)
 }

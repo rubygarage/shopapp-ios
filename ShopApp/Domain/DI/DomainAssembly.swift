@@ -13,20 +13,20 @@ class DomainAssembly: Assembly {
 
         // MARK: - Account
 
-        container.register(LoginUseCase.self) { r in
-            return LoginUseCase(repository: r.resolve(AuthentificationRepository.self)!)
+        container.register(SignInUseCase.self) { r in
+            return SignInUseCase(repository: r.resolve(AuthentificationRepository.self)!)
         }
 
-        container.register(LogoutUseCase.self) { r in
-            return LogoutUseCase(repository: r.resolve(AuthentificationRepository.self)!)
+        container.register(SignOutUseCase.self) { r in
+            return SignOutUseCase(repository: r.resolve(AuthentificationRepository.self)!)
         }
 
         container.register(OrderUseCase.self) { r in
             return OrderUseCase(repository: r.resolve(OrderRepository.self)!)
         }
 
-        container.register(OrderListUseCase.self) { r in
-            return OrderListUseCase(repository: r.resolve(OrderRepository.self)!)
+        container.register(OrdersUseCase.self) { r in
+            return OrdersUseCase(repository: r.resolve(OrderRepository.self)!)
         }
 
         container.register(ResetPasswordUseCase.self) { r in
@@ -71,32 +71,32 @@ class DomainAssembly: Assembly {
             return AddCartProductUseCase(repository: r.resolve(CartRepository.self)!)
         }
 
-        container.register(ArticleListUseCase.self) { r in
-            return ArticleListUseCase(repository: r.resolve(ArticleRepository.self)!)
+        container.register(ArticlesUseCase.self) { r in
+            return ArticlesUseCase(repository: r.resolve(ArticleRepository.self)!)
         }
 
         container.register(ArticleUseCase.self) { r in
             return ArticleUseCase(repository: r.resolve(ArticleRepository.self)!)
         }
 
-        container.register(CategoryListUseCase.self) { r in
-            return CategoryListUseCase(repository: r.resolve(CategoryRepository.self)!)
+        container.register(CategoriesUseCase.self) { r in
+            return CategoriesUseCase(repository: r.resolve(CategoryRepository.self)!)
         }
 
         container.register(CategoryUseCase.self) { r in
             return CategoryUseCase(repository: r.resolve(CategoryRepository.self)!)
         }
 
-        container.register(ProductListUseCase.self) { r in
-            return ProductListUseCase(repository: r.resolve(ProductRepository.self)!)
+        container.register(ProductsUseCase.self) { r in
+            return ProductsUseCase(repository: r.resolve(ProductRepository.self)!)
         }
 
         container.register(ProductUseCase.self) { r in
             return ProductUseCase(repository: r.resolve(ProductRepository.self)!)
         }
         
-        container.register(CartValidationUseCase.self) { r in
-            return CartValidationUseCase(repository: r.resolve(ProductRepository.self)!)
+        container.register(SetupProviderUseCase.self) { r in
+            return SetupProviderUseCase(repository: r.resolve(SetupProviderRepository.self)!)
         }
 
         // MARK: - Shared
@@ -105,8 +105,8 @@ class DomainAssembly: Assembly {
             return AddAddressUseCase(repository: r.resolve(CustomerRepository.self)!)
         }
 
-        container.register(CartProductListUseCase.self) { r in
-            return CartProductListUseCase(repository: r.resolve(CartRepository.self)!)
+        container.register(CartProductsUseCase.self) { r in
+            return CartProductsUseCase(repository: r.resolve(CartRepository.self)!)
         }
 
         container.register(CountriesUseCase.self) { r in

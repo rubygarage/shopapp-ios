@@ -18,7 +18,7 @@ class ProductDetailsViewModelSpec: QuickSpec {
         var viewModel: ProductDetailsViewModel!
         var addCartProductUseCaseMock: AddCartProductUseCaseMock!
         var productUseCaseMock: ProductUseCaseMock!
-        var productListUseCaseMock: ProductListUseCaseMock!
+        var productsUseCaseMock: ProductsUseCaseMock!
         
         beforeEach {
             let cartRepositoryMock = CartRepositoryMock()
@@ -26,9 +26,9 @@ class ProductDetailsViewModelSpec: QuickSpec {
             
             let productRepositoryMock = ProductRepositoryMock()
             productUseCaseMock = ProductUseCaseMock(repository: productRepositoryMock)
-            productListUseCaseMock = ProductListUseCaseMock(repository: productRepositoryMock)
+            productsUseCaseMock = ProductsUseCaseMock(repository: productRepositoryMock)
             
-            viewModel = ProductDetailsViewModel(addCartProductUseCase: addCartProductUseCaseMock, productUseCase: productUseCaseMock, productListUseCase: productListUseCaseMock)
+            viewModel = ProductDetailsViewModel(addCartProductUseCase: addCartProductUseCaseMock, productUseCase: productUseCaseMock, productsUseCase: productsUseCaseMock)
         }
         
         describe("when view model initialized") {
@@ -65,15 +65,14 @@ class ProductDetailsViewModelSpec: QuickSpec {
             
             context("if data loaded successfully") {
                 beforeEach {
-                    product = Product()
-                    product.currency = "Currency"
+                    product = TestHelper.productWithoutAlternativePrice
                 }
                 
                 context("and products hasn't options and variants") {
                     beforeEach {
                         productUseCaseMock.returnedValue = product
                         productUseCaseMock.isNeedToReturnError = false
-                        productListUseCaseMock.isNeedToReturnError = false
+                        productsUseCaseMock.isNeedToReturnError = false
                     }
                     
                     it("should load product and related products") {
@@ -90,17 +89,11 @@ class ProductDetailsViewModelSpec: QuickSpec {
                 
                 context("if product has options and variants and selected options") {
                     beforeEach {
-                        let productVariant = ProductVariant()
-                        let variantOption = VariantOption()
-                        variantOption.name = "Option name"
-                        variantOption.value = "Option value"
-                        productVariant.selectedOptions = [variantOption]
-                        product.variants = [productVariant]
-                        viewModel.productVariant = productVariant
+                        viewModel.productVariant = TestHelper.productVariantWithoutSelectedOptions
                         
                         productUseCaseMock.returnedValue = product
                         productUseCaseMock.isNeedToReturnError = false
-                        productListUseCaseMock.isNeedToReturnError = false
+                        productsUseCaseMock.isNeedToReturnError = false
                     }
                     
                     it("should load product and related products") {
@@ -117,23 +110,11 @@ class ProductDetailsViewModelSpec: QuickSpec {
                 
                 context("if product has options and variants without selected options") {
                     beforeEach {
-                        let productVariant = ProductVariant()
-                        let selectedOption = VariantOption()
-                        selectedOption.name = "Option name"
-                        selectedOption.value = "Option value"
-                        productVariant.selectedOptions = [selectedOption]
-                        product.variants = [productVariant]
-                        
-                        let viewModelVariant = ProductVariant()
-                        let viewModelSelectedOption = VariantOption()
-                        viewModelSelectedOption.name = "View model option name"
-                        viewModelSelectedOption.value = "View model option value"
-                        viewModelVariant.selectedOptions = [viewModelSelectedOption]
-                        viewModel.productVariant = productVariant
+                        viewModel.productVariant = TestHelper.productVariantWithoutSelectedOptions
 
                         productUseCaseMock.returnedValue = product
                         productUseCaseMock.isNeedToReturnError = false
-                        productListUseCaseMock.isNeedToReturnError = false
+                        productsUseCaseMock.isNeedToReturnError = false
                     }
                     
                     it("should load product and related products") {
@@ -154,13 +135,13 @@ class ProductDetailsViewModelSpec: QuickSpec {
                     beforeEach {
                         productUseCaseMock.returnedValue = product
                         productUseCaseMock.isNeedToReturnError = false
-                        productListUseCaseMock.isNeedToReturnError = true
+                        productsUseCaseMock.isNeedToReturnError = true
                     }
                     
                     it("should load product but shouldn't load related items") {
                         viewModel.loadData()
                         
-                        expect(viewModel.currency) == "Currency"
+                        expect(viewModel.currency) == product.currency
                         expect(viewModel.product.value).toNot(beNil())
                         expect(viewModel.relatedItems.value.isEmpty) == true
                         expect(states.count) == 2
@@ -172,7 +153,7 @@ class ProductDetailsViewModelSpec: QuickSpec {
                 context("and if product loaded with error") {
                     beforeEach {
                         productUseCaseMock.isNeedToReturnError = true
-                        productListUseCaseMock.isNeedToReturnError = false
+                        productsUseCaseMock.isNeedToReturnError = false
                     }
                     
                     it("shouldn't load product and related items") {
@@ -214,14 +195,11 @@ class ProductDetailsViewModelSpec: QuickSpec {
                 var product: Product!
                 
                 beforeEach {
-                    viewModel.productId = "Product id"
-                    viewModel.product.value = Product()
+                    product = TestHelper.productWithoutAlternativePrice
+                    
+                    viewModel.productId = product.id
+                    viewModel.product.value = product
                     viewModel.quantity.value = 5
-                    
-                    product = Product()
-                    
-                    let variant = ProductVariant()
-                    product.variants = [variant]
                 }
                 
                 context("and added successfully") {
@@ -265,22 +243,11 @@ class ProductDetailsViewModelSpec: QuickSpec {
             var disposeBag: DisposeBag!
             
             beforeEach {
-                viewModel.productId = "Product id"
+                product = TestHelper.productWithoutAlternativePrice
+                productOption = product.options.first!
+                
+                viewModel.productId = product.id
                 viewModel.quantity.value = 5
-                
-                product = Product()
-                product.currency = "Currency"
-                
-                let variant = ProductVariant()
-                let option = VariantOption()
-                option.name = "Option name"
-                option.value = "Option value"
-                variant.selectedOptions = [option]
-                product.variants = [variant]
-                
-                productOption = ProductOption()
-                product.options = [productOption]
-                
                 viewModel.product.value = product
                 
                 productUseCaseMock.isNeedToReturnError = false
@@ -289,38 +256,17 @@ class ProductDetailsViewModelSpec: QuickSpec {
                 disposeBag = DisposeBag()
             }
             
-            context("if selected options exist") {
-                beforeEach {
-                    productOption.name = "Option name"
-                    productOption.values = ["Option value"]
-                }
+            it("should select option") {
+                viewModel.loadData()
                 
-                it("should select option") {
-                    viewModel.loadData()
-                    
-                    viewModel.selectedVariant
-                        .subscribe(onNext: { variant in
-                            expect(variant.selectedOptions.first?.name) == productOption.name
-                            expect(variant.selectedOptions.first?.value) == productOption.values?.first
-                        })
+                viewModel.selectedVariant
+                    .subscribe(onNext: { variant in
+                        expect(variant.selectedOptions.first?.name) == productOption.name
+                        expect(variant.selectedOptions.first?.value) == productOption.values.first
+                    })
                     .disposed(by: disposeBag)
-                    
-                    viewModel.selectOption(with: "Option name", value: "Option value")
-                }
-            }
-            
-            context("if selected options doesn't exist") {
-                it("should select option") {
-                    viewModel.loadData()
-                    
-                    viewModel.selectedVariant
-                        .subscribe(onNext: { variant in
-                            expect(variant).toNotEventually(beNil())
-                        })
-                        .disposed(by: disposeBag)
-                    
-                    viewModel.selectOption(with: "Option name", value: "Option value")
-                }
+                
+                viewModel.selectOption(TestHelper.variantOption)
             }
         }
         
@@ -341,7 +287,7 @@ class ProductDetailsViewModelSpec: QuickSpec {
                 
                 viewModel.productId = "Product id"
                 
-                product = Product()
+                product = TestHelper.productWithoutAlternativePrice
                 
                 productUseCaseMock.isNeedToReturnError = false
                 productUseCaseMock.returnedValue = product
@@ -350,7 +296,7 @@ class ProductDetailsViewModelSpec: QuickSpec {
             it("should start load data") {
                 viewModel.tryAgain()
                 
-                expect(viewModel.product.value) === product
+                expect(viewModel.product.value) == product
                 expect(states.count) == 2
                 expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
                 expect(states.last) == ViewState.content
