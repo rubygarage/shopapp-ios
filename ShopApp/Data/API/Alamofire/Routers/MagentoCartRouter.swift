@@ -13,10 +13,10 @@ enum MagentoCartRoute {
     case createQuoteUnauthorized
     case getCartProductsAuthorized(token: String)
     case getCartProductsUnauthorized(quoteId: String)
-    case addCartProductAuthorized(token: String, body: RequestBody)
-    case addCartProductUnauthorized(quoteId: String, body: RequestBody)
-    case changeCartProductQuantityAuthorized(token: String, itemId: String, body: RequestBody)
-    case changeCartProductQuantityUnauthorized(quoteId: String, itemId: String, body: RequestBody)
+    case addCartProductAuthorized(token: String, body: Request)
+    case addCartProductUnauthorized(quoteId: String, body: Request)
+    case changeCartProductQuantityAuthorized(token: String, itemId: String, body: Request)
+    case changeCartProductQuantityUnauthorized(quoteId: String, itemId: String, body: Request)
     case deleteCartProductAuthorized(token: String, quoteId: String, itemId: String)
     case deleteCartProductUnauthorized(quoteId: String, itemId: String)
 }

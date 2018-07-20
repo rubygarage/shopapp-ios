@@ -9,9 +9,9 @@
 import Foundation
 
 struct AddCartProductRequest: Request {
-    var id: String
-    var quantity: String
-    var quoteId: String
+    let id: String
+    let quantity: String
+    let quoteId: String
     
     enum CodingKeys: String, CodingKey {
         case id = "sku"

@@ -44,15 +44,13 @@ class SearchViewModel: GridCollectionViewModel {
         workItem?.cancel()
         
         workItem = DispatchWorkItem { [weak self] in
-        state.onNext(ViewState.make.loading(showHud: false))
-        productsUseCase.getProducts(paginationValue: paginationValue, searchPhrase: searchPhrase.value) { [weak self] (products, error) in
             guard let strongSelf = self else {
                 return
             }
             
             strongSelf.state.onNext(ViewState.make.loading(showHud: false))
             
-            strongSelf.productListUseCase.getProducts(with: strongSelf.paginationValue, searchPhrase: strongSelf.searchPhrase.value) { [weak self] (products, error) in
+            strongSelf.productsUseCase.getProducts(paginationValue: strongSelf.paginationValue, searchPhrase: strongSelf.searchPhrase.value) { [weak self] (products, error) in
                 guard let strongSelf = self else {
                     return
                 }

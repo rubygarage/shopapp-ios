@@ -9,16 +9,16 @@
 import Foundation
 
 struct AddressResponse: Response {
-    var id: Int
-    var countryId: String
-    var firstName: String
-    var lastName: String
-    var streets: [String]
-    var city: String
-    var regionId: Int?
-    var postcode: String
-    var telephone: String
-    var isDefaultAddress: Bool?
+    let id: Int
+    let countryId: String
+    let firstName: String
+    let lastName: String
+    let streets: [String]
+    let city: String
+    let regionId: Int?
+    let postcode: String
+    let telephone: String
+    let isDefaultAddress: Bool?
     
     enum CodingKeys: String, CodingKey {
         case id

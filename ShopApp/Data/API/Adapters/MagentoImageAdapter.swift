@@ -16,12 +16,8 @@ struct MagentoImageAdapter {
         guard imagePath != imagePathNoSelection, let src = buildSrc(with: BaseRouter.hostUrl, catalogPath: catalogPath, imagePath: imagePath) else {
             return nil
         }
-        
-        let image = Image()
-        image.id = src
-        image.src = src
-        
-        return image
+
+        return Image(id: src, src: src)
     }
     
     static func adapt(_ response: GalleryEntryResponse, catalogPath: String) -> Image? {
@@ -29,12 +25,9 @@ struct MagentoImageAdapter {
             return nil
         }
         
-        let image = Image()
-        image.id = String(response.id)
-        image.src = src
-        image.imageDescription = response.label
+        let id = String(response.id)
         
-        return image
+        return Image(id: id, src: src)
     }
     
     static func buildSrc(with hostUrl: String?, catalogPath: String, imagePath: String) -> String? {

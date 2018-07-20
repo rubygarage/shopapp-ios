@@ -10,19 +10,19 @@ import ShopApp_Gateway
 
 struct MagentoCartProductAdapter {
     static func adapt(_ response: CartProductResponse, currency: String) -> CartProduct {
-        let cartProduct = CartProduct()
-        cartProduct.productId = response.id
-        cartProduct.productTitle = response.title
-        cartProduct.currency = currency
-        cartProduct.quantity = response.quantity
-        cartProduct.cartItemId = String(response.cartProductId)
+        let price = Decimal(response.price)
+        let productVariant = ProductVariant(id: response.id, title: "", price: price, isAvailable: true, selectedOptions: [], productId: response.id)
         
-        let productVariant = ProductVariant()
-        productVariant.id = response.id
-        productVariant.productId = response.id
-        productVariant.price = Decimal(response.price)
-        cartProduct.productVariant = productVariant
+        return CartProduct(id: response.id, productVariant: productVariant, title: response.title, currency: currency, quantity: response.quantity)
+    }
+    
+    static func update(_ cartProduct: CartProduct, with image: Image?) -> CartProduct {
+        guard let productVariant = cartProduct.productVariant else {
+            return cartProduct
+        }
         
-        return cartProduct
+        let updatedProductVariant = ProductVariant(id: productVariant.id, title: productVariant.title, price: productVariant.price, isAvailable: productVariant.isAvailable, image: image, selectedOptions: productVariant.selectedOptions, productId: productVariant.productId)
+        
+        return CartProduct(id: cartProduct.id, productVariant: updatedProductVariant, title: cartProduct.title, currency: cartProduct.currency, quantity: cartProduct.quantity)
     }
 }

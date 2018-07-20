@@ -9,6 +9,6 @@
 import Foundation
 
 struct UpdatePasswordRequest: Request {
-    var currentPassword: String
-    var newPassword: String
+    let currentPassword: String
+    let newPassword: String
 }

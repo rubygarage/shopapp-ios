@@ -9,15 +9,15 @@
 import Foundation
 
 struct GetProductResponse: Response {
-    var id: Int
-    var sku: String
-    var name: String
-    var attributeSetId: Int
-    var price: Double
-    var createdAt: Date
-    var updatedAt: Date
-    var customAttributes: [CustomAttributeResponse]
-    var mediaGalleryEntries: [GalleryEntryResponse]?
+    let id: Int
+    let sku: String
+    let name: String
+    let attributeSetId: Int
+    let price: Double
+    let createdAt: Date
+    let updatedAt: Date
+    let customAttributes: [CustomAttributeResponse]
+    let mediaGalleryEntries: [GalleryEntryResponse]?
     
     enum CodingKeys: String, CodingKey {
         case id

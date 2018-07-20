@@ -9,10 +9,10 @@
 import Foundation
 
 struct GetCustomerResponse: Response {
-    var email: String
-    var firstName: String
-    var lastName: String
-    var addresses: [AddressResponse]
+    let email: String
+    let firstName: String
+    let lastName: String
+    let addresses: [AddressResponse]
     
     enum CodingKeys: String, CodingKey {
         case email

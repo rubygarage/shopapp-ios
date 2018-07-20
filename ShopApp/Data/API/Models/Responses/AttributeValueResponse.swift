@@ -9,6 +9,6 @@
 import Foundation
 
 struct AttributeValueResponse {
-    var data: String?
-    var dataList: [String]?
+    let data: String?
+    let dataList: [String]?
 }

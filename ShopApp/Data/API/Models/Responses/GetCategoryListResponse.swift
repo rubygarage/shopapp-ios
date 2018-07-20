@@ -9,9 +9,9 @@
 import Foundation
 
 struct GetCategoryListResponse: Response {
-    var id: Int
-    var name: String
-    var childrenData: [GetCategoryListResponse]
+    let id: Int
+    let name: String
+    let childrenData: [GetCategoryListResponse]
     
     enum CodingKeys: String, CodingKey {
         case id

@@ -8,32 +8,21 @@
 
 import Foundation
 
-<<<<<<< HEAD
-public class Category {
-    public var id = ""
-    public var title: String?
-    public var categoryDescription: String?
-    public var image: Image?
-    public var updatedAt: Date?
-    public var paginationValue: Any?
-    public var childrenCategories: [Category]?
-    public var products: [Product]?
-    public var additionalDescription: String?
-=======
 public struct Category: Equatable {
     public let id: String
     public let title: String
     public let image: Image?
     public let products: [Product]
     public let paginationValue: String?
->>>>>>> develop
+    public let childrenCategories: [Category]
 
-    public init(id: String, title: String, image: Image? = nil, products: [Product], paginationValue: String?) {
+    public init(id: String, title: String, image: Image? = nil, products: [Product], paginationValue: String?, childrenCategories: [Category]) {
         self.id = id
         self.title = title
         self.image = image
         self.products = products
         self.paginationValue = paginationValue
+        self.childrenCategories = childrenCategories
     }
     
     public static func == (lhs: Category, rhs: Category) -> Bool {
@@ -42,5 +31,6 @@ public struct Category: Equatable {
             && lhs.image == rhs.image
             && lhs.products == rhs.products
             && lhs.paginationValue == rhs.paginationValue
+            && lhs.childrenCategories == rhs.childrenCategories
     }
 }

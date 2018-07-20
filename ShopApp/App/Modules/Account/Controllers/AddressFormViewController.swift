@@ -177,7 +177,7 @@ class AddressFormViewController: BaseViewController<AddressFormViewModel> {
     
     private func populateViewsIfNeeded() {
         if let address = viewModel?.address {
-            countryPicker.text = address.country?.name
+            countryPicker.text = address.country.name
             nameTextFieldView.text = address.firstName
             lastNameTextFieldView.text = address.lastName
             addressTextFieldView.text = address.street

@@ -19,7 +19,7 @@ extension Address {
         if let secondAddress = secondStreet, !secondAddress.isEmpty {
             result.append(secondAddress)
         }
-        result.append(contentsOf: [city, zip, country])
+        result.append(contentsOf: [city, zip, country.name])
         return result.joined(separator: ", ")
     }
 }

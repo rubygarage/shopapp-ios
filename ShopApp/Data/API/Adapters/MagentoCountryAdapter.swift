@@ -10,14 +10,8 @@ import ShopApp_Gateway
 
 struct MagentoCountryAdapter {
     static func adapt(_ response: CountryResponse) -> Country {
-        let country = Country()
-        country.id = response.id
-        country.name = response.name
+        let states = response.regions?.map { MagentoStateAdapter.adapt($0) }
         
-        if let regions = response.regions {
-            country.states = regions.map { MagentoStateAdapter.adapt($0) }
-        }
-        
-        return country
+        return Country(id: response.id, name: response.name, states: states)
     }
 }

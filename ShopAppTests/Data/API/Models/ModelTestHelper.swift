@@ -11,11 +11,11 @@ import Foundation
 @testable import ShopApp
 
 struct ModelTestHelper {
-    struct SimpleModelTest: RequestBody, Response {
+    struct SimpleModelTest: Request, Response {
         var date: Date
     }
     
-    struct ComplexModelTest: RequestBody, Response {
+    struct ComplexModelTest: Request, Response {
         var string: String
         var array: [String]
         var simpleRequestBody: SimpleModelTest

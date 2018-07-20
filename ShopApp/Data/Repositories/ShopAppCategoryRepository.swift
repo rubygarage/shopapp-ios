@@ -15,8 +15,8 @@ class ShopAppCategoryRepository: CategoryRepository {
         self.api = api
     }
     
-    func getCategories(perPage: Int, paginationValue: Any?, callback: @escaping ApiCallback<[Category]>) {
-        api.getCategories(perPage: perPage, paginationValue: paginationValue, callback: callback)
+    func getCategories(perPage: Int, paginationValue: Any?, parentCategoryId: String?, callback: @escaping ApiCallback<[Category]>) {
+        api.getCategories(perPage: perPage, paginationValue: paginationValue, parentCategoryId: parentCategoryId, callback: callback)
     }
     
     func getCategory(id: String, perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping ApiCallback<Category>) {

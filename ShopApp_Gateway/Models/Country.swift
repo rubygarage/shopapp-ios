@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Country {
+public struct Country: Equatable {
     public let id: String
     public let name: String
     public let states: [State]?
@@ -17,5 +17,10 @@ public struct Country {
         self.id = id
         self.name = name
         self.states = states
+    }
+    
+    public static func == (lhs: Country, rhs: Country) -> Bool {
+        return lhs.id == rhs.id
+            && lhs.name == rhs.name
     }
 }

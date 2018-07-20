@@ -8,12 +8,17 @@
 
 import Foundation
 
-public struct State {
+public struct State: Equatable {
     public let id: String
     public let name: String
 
     public init(id: String, name: String) {
         self.id = id
         self.name = name
+    }
+    
+    public static func == (lhs: State, rhs: State) -> Bool {
+        return lhs.id == rhs.id
+            && lhs.name == rhs.name
     }
 }

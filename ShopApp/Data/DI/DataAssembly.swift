@@ -15,7 +15,7 @@ class DataAssembly: Assembly {
         // MARK: - Data
         
         container.register(API.self) { _ in
-            return MagentoAPI(shopDomain: "http://10.14.14.187/")
+            return MagentoAPI(shopDomain: "http://10.14.14.102/")
             }
             .inObjectScope(.container)
         

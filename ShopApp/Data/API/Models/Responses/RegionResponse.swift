@@ -9,6 +9,6 @@
 import Foundation
 
 struct RegionResponse: Response {
-    var id: String
-    var name: String
+    let id: String
+    let name: String
 }

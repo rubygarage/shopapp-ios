@@ -11,8 +11,8 @@ import Foundation
 @testable import ShopApp
 
 struct RequestBodiesTestHelper {
-    static var addressRequestBody: AddressRequestBody {
-        return AddressRequestBody(id: 0, countryId: "id", firstName: "first", lastName: "last", streets: ["street"], city: "city", regionId: 1, postcode: "postcode", telephone: "telephone", isDefaultAddress: true)
+    static var addressRequestBody: AddressRequest {
+        return AddressRequest(id: 0, countryId: "id", firstName: "first", lastName: "last", streets: ["street"], city: "city", regionId: 1, postcode: "postcode", telephone: "telephone", isDefaultAddress: true)
     }
     
     static var customerRequestBody: CustomerRequestBody {
@@ -23,7 +23,7 @@ struct RequestBodiesTestHelper {
         return ResetPasswordRequestBody(email: "user@mail.com")
     }
     
-    static var updateCustomerRequestBody: UpdateCustomerRequestBody {
-        return UpdateCustomerRequestBody(customer: customerRequestBody)
+    static var updateCustomerRequestBody: UpdateCustomerRequest {
+        return UpdateCustomerRequest(customer: customerRequestBody)
     }
 }

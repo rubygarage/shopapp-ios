@@ -160,7 +160,7 @@ class SearchViewController: GridCollectionViewController<SearchViewModel>, Categ
     func viewController(_ viewController: CategoryListViewController, didSelect category: ShopApp_Gateway.Category) {
         selectedCategory = category
         
-        if let childrenCategories = category.childrenCategories, !childrenCategories.isEmpty {
+        if !category.childrenCategories.isEmpty {
             performSegue(withIdentifier: SegueIdentifiers.toCategoryList, sender: self)
         } else {
             performSegue(withIdentifier: SegueIdentifiers.toCategory, sender: self)

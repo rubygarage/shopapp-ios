@@ -1,5 +1,5 @@
 //
-//  GetTokenRequestBody.swift
+//  GetTokenRequest.swift
 //  ShopApp
 //
 //  Created by Radyslav Krechet on 4/19/18.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct GetTokenRequestBody: Request {
-    var email: String
-    var password: String
+struct GetTokenRequest: Request {
+    let email: String
+    let password: String
     
     enum CodingKeys: String, CodingKey {
         case email = "username"

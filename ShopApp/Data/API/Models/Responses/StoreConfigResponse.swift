@@ -9,7 +9,7 @@
 import Foundation
 
 struct StoreConfigResponse: Response {
-    var сurrencyСode: String
+    let сurrencyСode: String
     
     enum CodingKeys: String, CodingKey {
         case сurrencyСode = "base_currency_code"

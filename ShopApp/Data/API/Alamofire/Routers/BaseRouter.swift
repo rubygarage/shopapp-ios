@@ -30,7 +30,7 @@ class BaseRouter: URLRequestConvertible {
     
     func asURLRequest() throws -> URLRequest {
         guard let hostUrl = BaseRouter.hostUrl, let baseUrl = BaseRouter.baseUrl, let url = URL(string: hostUrl + baseUrl) else {
-            throw ContentError()
+            throw ShopAppError.content(isNetworkError: false)
         }
         
         return try buildRequest(with: url)

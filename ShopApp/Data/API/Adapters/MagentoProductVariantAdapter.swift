@@ -10,15 +10,6 @@ import ShopApp_Gateway
 
 struct MagentoProductVariantAdapter {
     static func adapt(_ product: Product) -> ProductVariant {
-        let productVariant = ProductVariant()
-        productVariant.id = product.id
-        productVariant.title = product.title
-        productVariant.price = product.price
-        productVariant.available = true
-        productVariant.image = product.images?.first
-        productVariant.selectedOptions = []
-        productVariant.productId = product.id
-        
-        return productVariant
+        return ProductVariant(id: product.id, title: product.title, price: product.price, isAvailable: true, image: product.images.first, selectedOptions: [], productId: product.id)
     }
 }

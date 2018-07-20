@@ -1,5 +1,5 @@
 //
-//  ChangeCartProductQuantityRequestBody.swift
+//  ChangeCartProductQuantityRequest.swift
 //  ShopApp
 //
 //  Created by Evgeniy Antonov on 6/12/18.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct ChangeCartProductQuantityRequestBody: Request {
-    var quantity: String
-    var quoteId: String
+struct ChangeCartProductQuantityRequest: Request {
+    let quantity: String
+    let quoteId: String
     
     enum CodingKeys: String, CodingKey {
         case quantity = "qty"

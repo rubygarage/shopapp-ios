@@ -14,40 +14,29 @@ struct MagentoCategoryAdapter {
     private static let imageCatalogPath = "pub/media/catalog/category/"
     
     static func adapt(_ response: GetCategoryListResponse) -> Category {
-        let category = Category()
-        category.id = String(response.id)
-        category.title = response.name
-        category.categoryDescription = ""
-        category.updatedAt = Date()
-        category.childrenCategories = response.childrenData.map { MagentoCategoryAdapter.adapt($0) }
-        category.products = []
-        category.additionalDescription = ""
+        let id = String(response.id)
+        let childrenCategories = response.childrenData.map { MagentoCategoryAdapter.adapt($0) }
         
-        return category
+        return Category(id: id, title: response.name, products: [], paginationValue: nil, childrenCategories: childrenCategories)
     }
     
-    static func update(_ category: Category, with childrenCategories: [Category]) {
-        category.childrenCategories?.forEach { childrenCategory in
-            childrenCategory.image = childrenCategories.filter({ $0.id == childrenCategory.id }).first?.image
+    static func update(_ category: Category, with childrenCategories: [Category]) -> Category {
+        let updatedChildrenCategories: [Category] = category.childrenCategories.map { childrenCategory in
+            let image = childrenCategories.filter({ $0.id == childrenCategory.id }).first?.image
+            return Category(id: childrenCategory.id, title: childrenCategory.title, image: image, products: childrenCategory.products, paginationValue: nil, childrenCategories: childrenCategory.childrenCategories)
         }
+        
+        return Category(id: category.id, title: category.title, products: category.products, paginationValue: nil, childrenCategories: updatedChildrenCategories)
     }
     
     static func adapt(_ response: GetCategoryDetailsResponse, products: [Product]) -> Category {
-        let descriptionValue = response.customAttributes.filter({ $0.attributeCode == customAttributeDescriptionCode }).first?.value.data ?? ""
+        let id = String(response.id)
         
-        let category = Category()
-        category.id = String(response.id)
-        category.title = response.name
-        category.categoryDescription = descriptionValue.htmlToString
-        category.updatedAt = response.updatedAt
-        category.childrenCategories = []
-        category.products = products
-        category.additionalDescription = descriptionValue
-        
-        if let imageValue = response.customAttributes.filter({ $0.attributeCode == customAttributeImageCode }).first?.value.data, let image = MagentoImageAdapter.adapt(imageValue, catalogPath: imageCatalogPath) {
-            category.image = image
+        var image: Image?
+        if let imageValue = response.customAttributes.filter({ $0.attributeCode == customAttributeImageCode }).first?.value.data, let adaptedImage = MagentoImageAdapter.adapt(imageValue, catalogPath: imageCatalogPath) {
+            image = adaptedImage
         }
         
-        return category
+        return Category(id: id, title: response.name, image: image, products: products, paginationValue: nil, childrenCategories: [])
     }
 }

@@ -10,10 +10,6 @@ import ShopApp_Gateway
 
 struct MagentoStateAdapter {
     static func adapt(_ response: RegionResponse) -> State {
-        let state = State()
-        state.id = response.id
-        state.name = response.name
-        
-        return state
+        return State(id: response.id, name: response.name)
     }
 }

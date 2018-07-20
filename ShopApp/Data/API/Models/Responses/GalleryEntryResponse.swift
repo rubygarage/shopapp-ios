@@ -9,10 +9,10 @@
 import Foundation
 
 struct GalleryEntryResponse: Response {
-    var id: Int
-    var mediaType: String
-    var label: String?
-    var file: String
+    let id: Int
+    let mediaType: String
+    let label: String?
+    let file: String
     
     enum CodingKeys: String, CodingKey {
         case id

@@ -9,12 +9,12 @@
 import Alamofire
 
 enum MagentoCustomerRoute {
-    case signUp(body: RequestBody)
-    case getToken(body: RequestBody)
+    case signUp(body: Request)
+    case getToken(body: Request)
     case getCustomer(token: String)
-    case updatePassword(token: String, body: RequestBody)
-    case resetPassword(body: RequestBody)
-    case updateCustomer(token: String, body: RequestBody)
+    case updatePassword(token: String, body: Request)
+    case resetPassword(body: Request)
+    case updateCustomer(token: String, body: Request)
 }
 
 class MagentoCustomerRouter: BaseRouter {

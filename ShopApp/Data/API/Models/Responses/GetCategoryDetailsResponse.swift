@@ -9,10 +9,10 @@
 import Foundation
 
 struct GetCategoryDetailsResponse: Response {
-    var id: Int
-    var name: String
-    var customAttributes: [CustomAttributeResponse]
-    var updatedAt: Date
+    let id: Int
+    let name: String
+    let customAttributes: [CustomAttributeResponse]
+    let updatedAt: Date
     
     enum CodingKeys: String, CodingKey {
         case id

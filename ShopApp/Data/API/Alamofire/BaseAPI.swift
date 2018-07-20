@@ -25,16 +25,16 @@ public class BaseAPI {
         self.cacheService = cacheService
     }
     
-    func execute(_ request: URLRequestConvertible, callback: @escaping RepoCallback<Any>) {
+    func execute(_ request: URLRequestConvertible, callback: @escaping ApiCallback<Any>) {
         if reachabilityManager?.isReachable ?? false == true {
             let dataRequest = sessionManager.request(request)
             response(with: dataRequest, callback: callback)
         } else {
-            callback(nil, NetworkError())
+            callback(nil, ShopAppError.content(isNetworkError: true))
         }
     }
     
-    private func response(with request: DataRequest, callback: @escaping RepoCallback<Any>) {
+    private func response(with request: DataRequest, callback: @escaping ApiCallback<Any>) {
         let value = cachedResponse(ofRequest: request)
         
         guard value == nil else {
@@ -74,18 +74,15 @@ public class BaseAPI {
         return cacheService.object(forKey: key)
     }
     
-    private func buildError(with response: DataResponse<Any>, callback: @escaping RepoCallback<Any>) {
+    private func buildError(with response: DataResponse<Any>, callback: @escaping ApiCallback<Any>) {
         guard let json = response.value as? [String: AnyObject], let message = json[errorMessageKey] as? String else {
-            callback(nil, ContentError())
+            callback(nil, ShopAppError.content(isNetworkError: false))
             
             return
         }
         
         // TODO: Build message with parameters from error json
         
-        let error = NonCriticalError(with: message)
-        error.statusCode = response.response?.statusCode ?? 0
-        
-        callback(nil, error)
+        callback(nil, ShopAppError.nonCritical(message: message))
     }
 }

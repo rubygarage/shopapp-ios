@@ -91,13 +91,13 @@ class AddressFormViewModel: BaseViewModel {
         guard let address = address else {
             return
         }
-        countryText.value = address.country
+        countryText.value = address.country.name
         firstNameText.value = address.firstName
         lastNameText.value = address.lastName
         addressText.value = address.street
         addressOptionalText.value = address.secondStreet ?? ""
         cityText.value = address.city
-        stateText.value = address.state ?? ""
+        stateText.value = address.state?.name ?? ""
         zipText.value = address.zip
         phoneText.value = address.phone ?? ""
     }
@@ -108,13 +108,13 @@ class AddressFormViewModel: BaseViewModel {
  
     private func getAddress() -> Address {
         let id = self.address?.id ?? ""
-        let country = countryText.value.trimmingCharacters(in: .whitespaces)
+        let country = Country(id: "", name: countryText.value.trimmingCharacters(in: .whitespaces))
         let firstName = firstNameText.value.trimmingCharacters(in: .whitespaces)
         let lastName = lastNameText.value.trimmingCharacters(in: .whitespaces)
         let street = addressText.value.trimmingCharacters(in: .whitespaces)
         let secondStreet = addressOptionalText.value.trimmingCharacters(in: .whitespaces)
         let city = cityText.value.trimmingCharacters(in: .whitespaces)
-        let state = stateText.value.trimmingCharacters(in: .whitespaces)
+        let state = State(id: "", name: stateText.value.trimmingCharacters(in: .whitespaces))
         let zip = zipText.value.trimmingCharacters(in: .whitespaces)
         let phone = phoneText.value.trimmingCharacters(in: .whitespaces)
 

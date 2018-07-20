@@ -9,16 +9,16 @@
 import Foundation
 
 struct AddressRequest: Request {
-    var id: Int?
-    var countryId: String
-    var firstName: String
-    var lastName: String
-    var streets: [String]
-    var city: String
-    var regionId: Int?
-    var postcode: String
-    var telephone: String
-    var isDefaultAddress: Bool
+    let id: Int?
+    let countryId: String
+    let firstName: String
+    let lastName: String
+    let streets: [String]
+    let city: String
+    let regionId: Int?
+    let postcode: String
+    let telephone: String
+    let isDefaultAddress: Bool
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -34,21 +34,19 @@ struct AddressRequest: Request {
     }
     
     init(id: Int? = nil, countryId: String, firstName: String, lastName: String, streets: [String], city: String, regionId: Int? = nil, postcode: String, telephone: String, isDefaultAddress: Bool = false) {
+        self.id = id
         self.countryId = countryId
         self.firstName = firstName
         self.lastName = lastName
         self.streets = streets
         self.city = city
+        self.regionId = regionId
         self.postcode = postcode
         self.telephone = telephone
         self.isDefaultAddress = isDefaultAddress
-        
-        if let id = id {
-            self.id = id
-        }
-        
-        if let regionId = regionId {
-            self.regionId = regionId
-        }
+    }
+    
+    static func update(_ request: AddressRequest, isDefaultAddress: Bool) -> AddressRequest {
+        return AddressRequest(id: request.id, countryId: request.countryId, firstName: request.firstName, lastName: request.lastName, streets: request.streets, city: request.city, regionId: request.regionId, postcode: request.postcode, telephone: request.telephone, isDefaultAddress: isDefaultAddress)
     }
 }

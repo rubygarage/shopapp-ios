@@ -41,6 +41,13 @@ public class MagentoAPI: BaseAPI, API {
 
         super.init()
     }
+    
+    // MARK: - Setup
+    
+    public func setupProvider(callback: @escaping ApiCallback<Void>) {
+        // There is no setup
+        callback(nil, nil)
+    }
 
     // MARK: - Config
     public func getConfig() -> Config {
@@ -49,15 +56,15 @@ public class MagentoAPI: BaseAPI, API {
 
     // MARK: - Shop info
 
-    public func getShop(callback: @escaping RepoCallback<Shop>) {
+    public func getShop(callback: @escaping ApiCallback<Shop>) {
         // There is no api to fetch terms
         callback(nil, nil)
     }
 
     // MARK: - Products
 
-    public func getProducts(perPage: Int, paginationValue: Any?, sortBy: SortType?, keyword: String?, excludeKeyword: String?, callback: @escaping RepoCallback<[Product]>) {
-        guard let sortBy = sortBy, sortBy.rawValue != SortType.popular.rawValue else {
+    public func getProducts(perPage: Int, paginationValue: Any?, sortBy: SortType?, keyword: String?, excludeKeyword: String?, callback: @escaping ApiCallback<[Product]>) {
+        guard let sortBy = sortBy, sortBy.rawValue != SortType.relevant.rawValue else {
             callback([], nil)
 
             return
@@ -66,7 +73,7 @@ public class MagentoAPI: BaseAPI, API {
         var currentPaginationValue = defaultPaginationValue
         let builder = ProductsParametersBuilder()
 
-        if sortBy.rawValue == SortType.createdAt.rawValue {
+        if sortBy.rawValue == SortType.recent.rawValue {
             _ = builder.addSortOrderParameters(field: createdAtField, isRevers: true)
         } else if sortBy.rawValue == SortType.type.rawValue, let keyword = keyword {
             let attributeSetIdPair = (attributeSetIdField, keyword)
@@ -85,14 +92,14 @@ public class MagentoAPI: BaseAPI, API {
         getProductList(perPage: perPage, paginationValue: currentPaginationValue, builder: builder, callback: callback)
     }
 
-    public func getProduct(id: String, callback: @escaping RepoCallback<Product>) {
+    public func getProduct(id: String, callback: @escaping ApiCallback<Product>) {
         getStoreConfigs { [weak self] (сurrency, error) in
             guard let strongSelf = self else {
                 return
             }
 
             guard error == nil, let сurrency = сurrency else {
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                 return
             }
@@ -102,7 +109,7 @@ public class MagentoAPI: BaseAPI, API {
 
             strongSelf.execute(request) { (response, error) in
                 guard error == nil, let json = response as? [String: Any], let response = GetProductResponse.object(from: json) else {
-                    callback(nil, error ?? ContentError())
+                    callback(nil, error ?? ShopAppError.critical)
 
                     return
                 }
@@ -112,7 +119,7 @@ public class MagentoAPI: BaseAPI, API {
         }
     }
 
-    public func searchProducts(perPage: Int, paginationValue: Any?, query: String, callback: @escaping RepoCallback<[Product]>) {
+    public func searchProducts(perPage: Int, paginationValue: Any?, query: String, callback: @escaping ApiCallback<[Product]>) {
         var currentPaginationValue = defaultPaginationValue
         let nameValue = String(format: searchValueFormat, arguments: [query])
         let namePair = (nameField, nameValue)
@@ -127,14 +134,14 @@ public class MagentoAPI: BaseAPI, API {
         getProductList(perPage: perPage, paginationValue: currentPaginationValue, builder: builder, callback: callback)
     }
 
-    public func getProductVariants(ids: [String], callback: @escaping RepoCallback<[ProductVariant]>) {
+    public func getProductVariants(ids: [String], callback: @escaping ApiCallback<[ProductVariant]>) {
         getStoreConfigs { [weak self] (сurrency, error) in
             guard let strongSelf = self else {
                 return
             }
 
             guard error == nil, let сurrency = сurrency else {
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                 return
             }
@@ -152,7 +159,7 @@ public class MagentoAPI: BaseAPI, API {
 
             strongSelf.execute(request) { (response, error) in
                 guard error == nil, let json = response as? [String: Any], let response = GetProductListResponse.object(from: json) else {
-                    callback(nil, error ?? ContentError())
+                    callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                     return
                 }
@@ -167,7 +174,7 @@ public class MagentoAPI: BaseAPI, API {
 
     // MARK: - Categories
 
-    public func getCategories(perPage: Int, paginationValue: Any?, parentCategoryId: String?, callback: @escaping RepoCallback<[ShopApp_Gateway.Category]>) {
+    public func getCategories(perPage: Int, paginationValue: Any?, parentCategoryId: String?, callback: @escaping ApiCallback<[ShopApp_Gateway.Category]>) {
         var parameters = Parameters()
 
         if let parentCategoryId = parentCategoryId {
@@ -179,7 +186,7 @@ public class MagentoAPI: BaseAPI, API {
         
         execute(request) { [weak self] (response, error) in
             guard let strongSelf = self, error == nil, let json = response as? [String: Any], let response = GetCategoryListResponse.object(from: json) else {
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                 return
             }
@@ -188,12 +195,12 @@ public class MagentoAPI: BaseAPI, API {
             let category = MagentoCategoryAdapter.adapt(response)
             var childrenCategories: [ShopApp_Gateway.Category] = []
             
-            category.childrenCategories?.forEach {
+            category.childrenCategories.forEach {
                 group.enter()
 
                 strongSelf.getCategory(id: $0.id) { (response, error) in
                     guard error == nil, let response = response else {
-                        callback(nil, error ?? ContentError())
+                        callback(nil, error ?? ShopAppError.content(isNetworkError: false))
                         
                         return
                     }
@@ -205,14 +212,14 @@ public class MagentoAPI: BaseAPI, API {
             }
             
             group.notify(queue: .main) {
-                MagentoCategoryAdapter.update(category, with: childrenCategories)
+                let updatedCategory = MagentoCategoryAdapter.update(category, with: childrenCategories)
                 
-                callback(category.childrenCategories, nil)
+                callback(updatedCategory.childrenCategories, nil)
             }
         }
     }
 
-    public func getCategory(id: String, perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping RepoCallback<ShopApp_Gateway.Category>) {
+    public func getCategory(id: String, perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping ApiCallback<ShopApp_Gateway.Category>) {
         var currentPaginationValue = defaultPaginationValue
         let categoryIdPair = (categoryIdField, id)
         var fieldName: String?
@@ -225,7 +232,7 @@ public class MagentoAPI: BaseAPI, API {
             switch sortBy {
             case .name:
                 fieldName = nameField
-            case .createdAt:
+            case .recent:
                 fieldName = createdAtField
                 reverse = true
             case .priceHighToLow:
@@ -248,14 +255,14 @@ public class MagentoAPI: BaseAPI, API {
 
         getProductList(perPage: perPage, paginationValue: currentPaginationValue, builder: builder) { [weak self] (products, error) in
             guard let strongSelf = self, let products = products, error == nil else {
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                 return
             }
 
             strongSelf.getCategory(id: id) { (response, error) in
                 guard error == nil, let response = response else {
-                    callback(nil, error ?? ContentError())
+                    callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                     return
                 }
@@ -267,22 +274,22 @@ public class MagentoAPI: BaseAPI, API {
 
     // MARK: - Articles
 
-    public func getArticles(perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping RepoCallback<[Article]>) {
+    public func getArticles(perPage: Int, paginationValue: Any?, sortBy: SortType?, callback: @escaping ApiCallback<[Article]>) {
         // There is no api to fetch articles
         callback([], nil)
     }
 
-    public func getArticle(id: String, callback: @escaping RepoCallback<(article: Article, baseUrl: URL)>) {
+    public func getArticle(id: String, callback: @escaping ApiCallback<(article: Article, baseUrl: URL)>) {
         // There is no api to fetch article
         callback(nil, nil)
     }
 
     // MARK: - Authorization
 
-    public func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, callback: @escaping RepoCallback<Bool>) {
+    public func signUp(firstName: String, lastName: String, email: String, password: String, phone: String, callback: @escaping ApiCallback<Void>) {
 
-        let customer = CustomerRequestBody(email: email, firstName: firstName, lastName: lastName)
-        let signUp = SignUpRequestBody(customer: customer, password: password)
+        let customer = CustomerRequest(email: email, firstName: firstName, lastName: lastName)
+        let signUp = SignUpRequest(customer: customer, password: password)
         let route = MagentoCustomerRoute.signUp(body: signUp)
         let request = MagentoCustomerRouter(route: route)
 
@@ -292,60 +299,60 @@ public class MagentoAPI: BaseAPI, API {
             }
 
             guard error == nil, response != nil else {
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                 return
             }
 
-            strongSelf.getToken(with: email, password: password) { (token, error) in
-                callback(token != nil, error)
+            strongSelf.getToken(with: email, password: password) { (_, error) in
+                callback(nil, error)
             }
         }
     }
 
-    public func signIn(email: String, password: String, callback: @escaping RepoCallback<Bool>) {
-        getToken(with: email, password: password) { [weak self] (token, error) in
+    public func signIn(email: String, password: String, callback: @escaping ApiCallback<Void>) {
+        getToken(with: email, password: password) { [weak self] (_, error) in
             guard let strongSelf = self else {
                 return
             }
             
             strongSelf.cartId = nil
-            callback(token != nil, error)
+            callback(nil, error)
         }
     }
 
-    public func signOut(callback: @escaping RepoCallback<Bool>) {
+    public func signOut(callback: @escaping ApiCallback<Void>) {
         sessionService.removeData()
         cartId = nil
 
-        callback(true, nil)
+        callback(nil, nil)
     }
 
-    public func isSignedIn(callback: @escaping RepoCallback<Bool>) {
+    public func isSignedIn(callback: @escaping ApiCallback<Bool>) {
         callback(sessionService.isSignedIn, nil)
     }
 
-    public func resetPassword(email: String, callback: @escaping RepoCallback<Bool>) {
-        let resetPassword = ResetPasswordRequestBody(email: email)
+    public func resetPassword(email: String, callback: @escaping ApiCallback<Void>) {
+        let resetPassword = ResetPasswordRequest(email: email)
         let route = MagentoCustomerRoute.resetPassword(body: resetPassword)
         let request = MagentoCustomerRouter(route: route)
 
         execute(request) { (response, error) in
             guard error == nil, response as? Bool != nil else {
-                callback(false, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                 return
             }
 
-            callback(true, nil)
+            callback(nil, nil)
         }
     }
 
     // MARK: - Customer
 
-    public func getCustomer(callback: @escaping RepoCallback<Customer>) {
+    public func getCustomer(callback: @escaping ApiCallback<Customer>) {
         guard let token = sessionService.data.token else {
-            callback(nil, ContentError())
+            callback(nil, ShopAppError.content(isNetworkError: false))
 
             return
         }
@@ -359,8 +366,7 @@ public class MagentoAPI: BaseAPI, API {
             }
 
             guard error == nil, let json = response as? [String: Any], let response = GetCustomerResponse.object(from: json) else {
-                strongSelf.removeSessionDataIfNeeded(error)
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                 return
             }
@@ -369,38 +375,33 @@ public class MagentoAPI: BaseAPI, API {
 
             strongSelf.getCountries { (countries, error) in
                 guard let countries = countries, error == nil else {
-                    callback(nil, error ?? ContentError())
+                    callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                     return
                 }
 
-                MagentoCustomerAdapter.update(customer, with: countries)
+                let updatedCustomer = MagentoCustomerAdapter.update(customer, with: countries)
 
-                callback(customer, nil)
+                callback(updatedCustomer, nil)
             }
         }
     }
 
-    public func updateCustomer(firstName: String, lastName: String, phone: String, callback: @escaping RepoCallback<Customer>) {
+    public func updateCustomer(firstName: String, lastName: String, phone: String, callback: @escaping ApiCallback<Customer>) {
         guard let token = sessionService.data.token, let email = sessionService.data.email else {
-            callback(nil, ContentError())
+            callback(nil, ShopAppError.content(isNetworkError: false))
 
             return
         }
 
-        let customer = CustomerRequestBody(email: email, firstName: firstName, lastName: lastName)
-        let updateCustomer = UpdateCustomerRequestBody(customer: customer)
+        let customer = CustomerRequest(email: email, firstName: firstName, lastName: lastName)
+        let updateCustomer = UpdateCustomerRequest(customer: customer)
         let route = MagentoCustomerRoute.updateCustomer(token: token, body: updateCustomer)
         let request = MagentoCustomerRouter(route: route)
 
-        execute(request) { [weak self] (response, error) in
-            guard let strongSelf = self else {
-                return
-            }
-
+        execute(request) { (response, error) in
             guard error == nil, let json = response as? [String: Any], let response = GetCustomerResponse.object(from: json) else {
-                strongSelf.removeSessionDataIfNeeded(error)
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                 return
             }
@@ -409,135 +410,123 @@ public class MagentoAPI: BaseAPI, API {
         }
     }
 
-    public func updateCustomerSettings(isAcceptMarketing: Bool, callback: @escaping RepoCallback<Customer>) {
+    public func updateCustomerSettings(isAcceptMarketing: Bool, callback: @escaping ApiCallback<Void>) {
         // There is no api to fetch newsletter subscription
         callback(nil, nil)
     }
 
-    public func updatePassword(password: String, callback: @escaping RepoCallback<Customer>) {
+    public func updatePassword(password: String, callback: @escaping ApiCallback<Void>) {
         let sessionData = sessionService.data
 
         guard let token = sessionData.token, let currentPassword = sessionData.password else {
-            callback(nil, ContentError())
+            callback(nil, ShopAppError.content(isNetworkError: false))
 
             return
         }
 
-        let updatePassword = UpdatePasswordRequestBody(currentPassword: currentPassword, newPassword: password)
+        let updatePassword = UpdatePasswordRequest(currentPassword: currentPassword, newPassword: password)
         let route = MagentoCustomerRoute.updatePassword(token: token, body: updatePassword)
         let request = MagentoCustomerRouter(route: route)
 
-        execute(request) { [weak self] (response, error) in
-            guard let strongSelf = self else {
-                return
-            }
-
+        execute(request) { (response, error) in
             guard error == nil, response as? Bool != nil else {
-                strongSelf.removeSessionDataIfNeeded(error)
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                 return
             }
 
-            strongSelf.getCustomer(callback: callback)
+            callback(nil, nil)
         }
     }
 
-    public func addCustomerAddress(address: Address, callback: @escaping RepoCallback<String>) {
+    public func addCustomerAddress(address: Address, callback: @escaping ApiCallback<Void>) {
         getCustomer { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return
             }
 
-            guard error == nil, let customer = customer, let firstName = customer.firstName, let lastName = customer.lastName, let token = strongSelf.sessionService.data.token else {
-                callback(nil, error ?? ContentError())
+            guard error == nil, let customer = customer, let token = strongSelf.sessionService.data.token else {
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                 return
             }
 
             strongSelf.getCountries { (countries, error) in
                 guard error == nil, let countries = countries else {
-                    callback(nil, error ?? ContentError())
+                    callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                     return
                 }
 
-                MagentoAddressAdapter.update(address, with: countries)
+                let updatedAddress = MagentoAddressAdapter.update(address, with: countries)
 
-                guard let adaptedAddress = MagentoAddressAdapter.adapt(address) else {
-                    callback(nil, ContentError())
+                guard let adaptedAddress = MagentoAddressAdapter.adapt(updatedAddress) else {
+                    callback(nil, ShopAppError.content(isNetworkError: false))
 
                     return
                 }
 
-                var adaptedAddresses: [AddressRequestBody] = []
+                var adaptedAddresses: [AddressRequest] = []
                 var addressBody = adaptedAddress
 
-                if let customerAddresses = customer.addresses, !customerAddresses.isEmpty {
-                    adaptedAddresses = customerAddresses.flatMap { MagentoAddressAdapter.adapt($0, defaultAddress: customer.defaultAddress) }
+                if !customer.addresses.isEmpty {
+                    adaptedAddresses = customer.addresses.flatMap { MagentoAddressAdapter.adapt($0, defaultAddress: customer.defaultAddress) }
 
-                    guard adaptedAddresses.count == customerAddresses.count else {
-                        callback(nil, ContentError())
+                    guard adaptedAddresses.count == customer.addresses.count else {
+                        callback(nil, ShopAppError.content(isNetworkError: false))
 
                         return
                     }
 
                     adaptedAddresses.append(addressBody)
                 } else {
-                    addressBody.isDefaultAddress = true
+                    addressBody = AddressRequest.update(addressBody, isDefaultAddress: true)
                     adaptedAddresses = [addressBody]
                 }
 
-                let customerBody = CustomerRequestBody(email: customer.email, firstName: firstName, lastName: lastName, addresses: adaptedAddresses)
-                let updateCustomer = UpdateCustomerRequestBody(customer: customerBody)
+                let customerBody = CustomerRequest(email: customer.email, firstName: customer.firstName, lastName: customer.lastName, addresses: adaptedAddresses)
+                let updateCustomer = UpdateCustomerRequest(customer: customerBody)
                 let route = MagentoCustomerRoute.updateCustomer(token: token, body: updateCustomer)
                 let request = MagentoCustomerRouter(route: route)
 
-                strongSelf.execute(request) { [weak self] (response, error) in
-                    guard let strongSelf = self else {
-                        return
-                    }
-
-                    guard error == nil, let json = response as? [String: Any], let response = GetCustomerResponse.object(from: json) else {
-                        strongSelf.removeSessionDataIfNeeded(error)
-                        callback(nil, error ?? ContentError())
+                strongSelf.execute(request) { (_, error) in
+                    guard let error = error else {
+                        callback(nil, nil)
 
                         return
                     }
 
-                    let id = MagentoAddressAdapter.idOfAddedAddress(customerAddresses: customer.addresses, responseAddresses: response.addresses)
-
-                    callback(id, nil)
+                    callback(nil, error)
                 }
             }
         }
     }
 
-    public func updateCustomerAddress(address: Address, callback: @escaping RepoCallback<Bool>) {
+    public func updateCustomerAddress(address: Address, callback: @escaping ApiCallback<Void>) {
         getCustomer { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return
             }
 
-            guard error == nil, let customer = customer, let firstName = customer.firstName, let lastName = customer.lastName, let customerAddresses = customer.addresses, let token = strongSelf.sessionService.data.token else {
-                callback(nil, error ?? ContentError())
+            guard error == nil, let customer = customer, let token = strongSelf.sessionService.data.token else {
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                 return
             }
 
             strongSelf.getCountries { (countries, error) in
                 guard error == nil, let countries = countries else {
-                    callback(nil, error ?? ContentError())
+                    callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                     return
                 }
 
-                MagentoAddressAdapter.update(address, with: countries)
+                let updatedAddress = MagentoAddressAdapter.update(address, with: countries)
 
-                var adaptedAddresses = customerAddresses.flatMap { MagentoAddressAdapter.adapt($0, defaultAddress: customer.defaultAddress) }
+                var adaptedAddresses = customer.addresses.flatMap { MagentoAddressAdapter.adapt($0, defaultAddress: customer.defaultAddress) }
 
-                guard let adaptedAddress = MagentoAddressAdapter.adapt(address), adaptedAddresses.count == customerAddresses.count, let index = adaptedAddresses.index(where: { $0.id == adaptedAddress.id }) else {
-                    callback(nil, ContentError())
+                guard let adaptedAddress = MagentoAddressAdapter.adapt(updatedAddress), adaptedAddresses.count == customer.addresses.count, let index = adaptedAddresses.index(where: { $0.id == adaptedAddress.id }) else {
+                    callback(nil, ShopAppError.content(isNetworkError: false))
 
                     return
                 }
@@ -545,160 +534,147 @@ public class MagentoAPI: BaseAPI, API {
                 adaptedAddresses.remove(at: index)
                 adaptedAddresses.insert(adaptedAddress, at: index)
 
-                let customerBody = CustomerRequestBody(email: customer.email, firstName: firstName, lastName: lastName, addresses: adaptedAddresses)
-                let updateCustomer = UpdateCustomerRequestBody(customer: customerBody)
+                let customerBody = CustomerRequest(email: customer.email, firstName: customer.firstName, lastName: customer.lastName, addresses: adaptedAddresses)
+                let updateCustomer = UpdateCustomerRequest(customer: customerBody)
                 let route = MagentoCustomerRoute.updateCustomer(token: token, body: updateCustomer)
                 let request = MagentoCustomerRouter(route: route)
 
-                strongSelf.execute(request) { [weak self] (response, error) in
-                    guard let strongSelf = self else {
-                        return
-                    }
-
+                strongSelf.execute(request) { (response, error) in
                     guard error == nil, response as? [String: Any] != nil else {
-                        strongSelf.removeSessionDataIfNeeded(error)
-                        callback(false, error ?? ContentError())
+                        callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                         return
                     }
 
-                    callback(true, nil)
+                    callback(nil, nil)
                 }
             }
         }
     }
 
-    public func setDefaultShippingAddress(addressId: String, callback: @escaping RepoCallback<Customer>) {
+    public func setDefaultShippingAddress(id addressId: String, callback: @escaping ApiCallback<Void>) {
         getCustomer { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return
             }
 
-            guard error == nil, let customer = customer, let firstName = customer.firstName, let lastName = customer.lastName, let customerAddresses = customer.addresses, let token = strongSelf.sessionService.data.token else {
-                callback(nil, error ?? ContentError())
+            guard error == nil, let customer = customer, let token = strongSelf.sessionService.data.token else {
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                 return
             }
 
-            var adaptedAddresses = customerAddresses.flatMap { MagentoAddressAdapter.adapt($0, defaultAddress: customer.defaultAddress) }
+            var adaptedAddresses = customer.addresses.flatMap { MagentoAddressAdapter.adapt($0, defaultAddress: customer.defaultAddress) }
 
-            guard adaptedAddresses.count == customerAddresses.count, let newDefaultIndex = adaptedAddresses.index(where: { $0.id == Int(addressId) }), let oldDefaultIndex = adaptedAddresses.index(where: { $0.isDefaultAddress == true }) else {
-                callback(nil, ContentError())
+            guard adaptedAddresses.count == customer.addresses.count, let newDefaultIndex = adaptedAddresses.index(where: { $0.id == Int(addressId) }), let oldDefaultIndex = adaptedAddresses.index(where: { $0.isDefaultAddress == true }) else {
+                callback(nil, ShopAppError.content(isNetworkError: false))
 
                 return
             }
 
             var newDefaultAddress = adaptedAddresses[newDefaultIndex]
-            newDefaultAddress.isDefaultAddress = true
+            newDefaultAddress = AddressRequest.update(newDefaultAddress, isDefaultAddress: true)
             adaptedAddresses[newDefaultIndex] = newDefaultAddress
 
             var oldDefaultAddress = adaptedAddresses[oldDefaultIndex]
-            oldDefaultAddress.isDefaultAddress = false
+            oldDefaultAddress = AddressRequest.update(oldDefaultAddress, isDefaultAddress: false)
             adaptedAddresses[oldDefaultIndex] = oldDefaultAddress
 
-            let customerBody = CustomerRequestBody(email: customer.email, firstName: firstName, lastName: lastName, addresses: adaptedAddresses)
-            let updateCustomer = UpdateCustomerRequestBody(customer: customerBody)
+            let customerBody = CustomerRequest(email: customer.email, firstName: customer.firstName, lastName: customer.lastName, addresses: adaptedAddresses)
+            let updateCustomer = UpdateCustomerRequest(customer: customerBody)
             let route = MagentoCustomerRoute.updateCustomer(token: token, body: updateCustomer)
             let request = MagentoCustomerRouter(route: route)
 
-            strongSelf.execute(request) { [weak self] (response, error) in
-                guard let strongSelf = self else {
-                    return
-                }
-
-                guard error == nil, let json = response as? [String: Any], let response = GetCustomerResponse.object(from: json) else {
-                    strongSelf.removeSessionDataIfNeeded(error)
-                    callback(nil, error ?? ContentError())
+            strongSelf.execute(request) { (_, error) in
+                guard let error = error else {
+                    callback(nil, nil)
 
                     return
                 }
 
-                callback(MagentoCustomerAdapter.adapt(response), nil)
+                callback(nil, error)
             }
         }
     }
 
-    public func deleteCustomerAddress(addressId: String, callback: @escaping RepoCallback<Bool>) {
+    public func deleteCustomerAddress(id addressId: String, callback: @escaping ApiCallback<Void>) {
         getCustomer { [weak self] (customer, error) in
             guard let strongSelf = self else {
                 return
             }
 
-            guard error == nil, let customer = customer, let firstName = customer.firstName, let lastName = customer.lastName, let customerAddresses = customer.addresses, let token = strongSelf.sessionService.data.token else {
-                callback(nil, error ?? ContentError())
+            guard error == nil, let customer = customer, let token = strongSelf.sessionService.data.token else {
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                 return
             }
 
-            var adaptedAddresses = customerAddresses.flatMap { MagentoAddressAdapter.adapt($0, defaultAddress: customer.defaultAddress) }
+            var adaptedAddresses = customer.addresses.flatMap { MagentoAddressAdapter.adapt($0, defaultAddress: customer.defaultAddress) }
 
-            guard adaptedAddresses.count == customerAddresses.count, let index = adaptedAddresses.index(where: { $0.id == Int(addressId) }) else {
-                callback(nil, ContentError())
+            guard adaptedAddresses.count == customer.addresses.count, let index = adaptedAddresses.index(where: { $0.id == Int(addressId) }) else {
+                callback(nil, ShopAppError.content(isNetworkError: false))
 
                 return
             }
 
             adaptedAddresses.remove(at: index)
 
-            let customerBody = CustomerRequestBody(email: customer.email, firstName: firstName, lastName: lastName, addresses: adaptedAddresses)
-            let updateCustomer = UpdateCustomerRequestBody(customer: customerBody)
+            let customerBody = CustomerRequest(email: customer.email, firstName: customer.firstName, lastName: customer.lastName, addresses: adaptedAddresses)
+            let updateCustomer = UpdateCustomerRequest(customer: customerBody)
             let route = MagentoCustomerRoute.updateCustomer(token: token, body: updateCustomer)
             let request = MagentoCustomerRouter(route: route)
 
-            strongSelf.execute(request) { [weak self] (response, error) in
-                guard let strongSelf = self else {
-                    return
-                }
-
+            strongSelf.execute(request) { (response, error) in
                 guard error == nil, response as? [String: Any] != nil else {
-                    strongSelf.removeSessionDataIfNeeded(error)
-                    callback(false, error ?? ContentError())
+                    callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                     return
                 }
 
-                callback(true, nil)
+                callback(nil, nil)
             }
         }
     }
 
     // MARK: - Payments
 
-    public func createCheckout(cartProducts: [CartProduct], callback: @escaping RepoCallback<Checkout>) {
+    public func createCheckout(cartProducts: [CartProduct], callback: @escaping ApiCallback<Checkout>) {
         // TODO: Implement api method
     }
 
-    public func getCheckout(checkoutId: String, callback: @escaping RepoCallback<Checkout>) {
+    public func getCheckout(id checkoutId: String, callback: @escaping ApiCallback<Checkout>) {
         // TODO: Implement api method
     }
 
-    public func setShippingAddress(checkoutId: String, address: Address, callback: @escaping RepoCallback<Bool>) {
+    public func setShippingAddress(checkoutId: String, address: Address, callback: @escaping ApiCallback<Bool>) {
         // TODO: Implement api method
     }
 
-    public func getShippingRates(checkoutId: String, callback: @escaping RepoCallback<[ShippingRate]>) {
+    public func getShippingRates(checkoutId: String, callback: @escaping ApiCallback<[ShippingRate]>) {
         // TODO: Implement api method
     }
 
-    public func setShippingRate(checkoutId: String, shippingRate: ShippingRate, callback: @escaping RepoCallback<Checkout>) {
+    public func setShippingRate(checkoutId: String, shippingRate: ShippingRate, callback: @escaping ApiCallback<Checkout>) {
         // TODO: Implement api method
     }
 
-    public func completeCheckout(checkout: Checkout, email: String, address: Address, card: CreditCard, callback: @escaping RepoCallback<Order>) {
+    public func completeCheckout(checkout: Checkout, email: String, address: Address, card: Card, callback: @escaping ApiCallback<Order>) {
         // TODO: Implement api method
     }
 
-    public func setupApplePay(checkout: Checkout, email: String, callback: @escaping RepoCallback<Order>) {
+    public func setupApplePay(checkout: Checkout, email: String, callback: @escaping ApiCallback<Order>) {
         // TODO: Implement api method
     }
+    
+    // MARK: - Countries
 
-    public func getCountries(callback: @escaping RepoCallback<[Country]>) {
+    public func getCountries(callback: @escaping ApiCallback<[Country]>) {
         let route = MagentoPaymentsRoute.getCountries
         let request = MagentoPaymentsRouter(route: route)
 
         execute(request) { (response, error) in
             guard error == nil, let json = response as? [Any], let response = CountryResponse.objects(from: json) else {
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                 return
             }
@@ -711,26 +687,26 @@ public class MagentoAPI: BaseAPI, API {
 
     // MARK: - Orders
 
-    public func getOrders(perPage: Int, paginationValue: Any?, callback: @escaping RepoCallback<[Order]>) {
+    public func getOrders(perPage: Int, paginationValue: Any?, callback: @escaping ApiCallback<[Order]>) {
         // There is no api to fetch orders
         callback([], nil)
     }
 
-    public func getOrder(id: String, callback: @escaping RepoCallback<Order>) {
+    public func getOrder(id: String, callback: @escaping ApiCallback<Order>) {
         // There is no api to fetch order
         callback(nil, nil)
     }
 
     // MARK: - Cart
 
-    public func getCartProducts(callback: @escaping RepoCallback<[CartProduct]>) {
+    public func getCartProducts(callback: @escaping ApiCallback<[CartProduct]>) {
         getStoreConfigs { [weak self] (сurrency, error) in
             guard let strongSelf = self else {
                 return
             }
             
             guard error == nil, let сurrency = сurrency else {
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
                 
                 return
             }
@@ -741,7 +717,7 @@ public class MagentoAPI: BaseAPI, API {
                 }
                 
                 guard error == nil, let quoteId = quoteId else {
-                    callback(nil, error ?? ContentError())
+                    callback(nil, error ?? ShopAppError.content(isNetworkError: false))
                     
                     return
                 }
@@ -752,25 +728,25 @@ public class MagentoAPI: BaseAPI, API {
                 
                 strongSelf.execute(request) { [weak self] (response, error) in
                     guard let strongSelf = self, error == nil, let json = response as? [Any], let response = CartProductResponse.objects(from: json) else {
-                        callback(nil, error ?? ContentError())
+                        callback(nil, error ?? ShopAppError.content(isNetworkError: false))
                         
                         return
                     }
                     
                     let group = DispatchGroup()
-                    let cartProducts = response.map({ MagentoCartProductAdapter.adapt($0, currency: сurrency) })
-                    cartProducts.forEach { cartItem in
+                    var cartProducts = response.map({ MagentoCartProductAdapter.adapt($0, currency: сurrency) })
+                    for index in 0..<cartProducts.count {
                         group.enter()
                         
-                        let id = cartItem.productId ?? ""
-                        strongSelf.getProduct(id: id) { (response, error) in
+                        let cartItem = cartProducts[index]
+                        strongSelf.getProduct(id: cartItem.id) { (response, error) in
                             guard let product = response else {
                                 callback(nil, error)
                                 
                                 return
                             }
                             
-                            cartItem.productVariant?.image = product.images?.first
+                            cartProducts[index] = MagentoCartProductAdapter.update(cartItem, with: product.images.first)
                             
                             group.leave()
                         }
@@ -784,40 +760,38 @@ public class MagentoAPI: BaseAPI, API {
         }
     }
     
-    public func addCartProduct(cartProduct: CartProduct, callback: @escaping RepoCallback<Bool>) {
+    public func addCartProduct(cartProduct: CartProduct, callback: @escaping ApiCallback<Void>) {
         getQuoteId { [weak self] (quoteId, error) in
             guard let strongSelf = self else {
                 return
             }
             
             guard error == nil, let quoteId = quoteId else {
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
                 
                 return
             }
             
-            let id = cartProduct.productId ?? ""
             let quantity = String(cartProduct.quantity)
-            let addCartProduct = AddCartProductRequestBody(id: id, quantity: quantity, quoteId: quoteId)
+            let addCartProduct = AddCartProductRequest(id: cartProduct.id, quantity: quantity, quoteId: quoteId)
             let token = strongSelf.sessionService.data.token
             let route = token == nil ? MagentoCartRoute.addCartProductUnauthorized(quoteId: quoteId, body: addCartProduct) : MagentoCartRoute.addCartProductAuthorized(token: token!, body: addCartProduct)
             let request = MagentoCartRouter(route: route)
             
-            strongSelf.execute(request) { (response, error) in
-                let success = response != nil
-                callback(success, error)
+            strongSelf.execute(request) { (_, error) in
+                callback(nil, error)
             }
         }
     }
     
-    public func deleteCartProduct(cartItemId: String, callback: @escaping RepoCallback<Bool>) {
+    public func deleteCartProduct(cartItemId: String, callback: @escaping ApiCallback<Void>) {
         getQuoteId { [weak self] (quoteId, error) in
             guard let strongSelf = self else {
                 return
             }
             
             guard error == nil, let quoteId = quoteId else {
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
                 
                 return
             }
@@ -826,51 +800,51 @@ public class MagentoAPI: BaseAPI, API {
             let route = token == nil ? MagentoCartRoute.deleteCartProductUnauthorized(quoteId: quoteId, itemId: cartItemId) : MagentoCartRoute.deleteCartProductAuthorized(token: token!, quoteId: quoteId, itemId: cartItemId)
             let request = MagentoCartRouter(route: route)
             
-            strongSelf.execute(request) { (response, error) in
-                let success = response != nil
-                callback(success, error)
+            strongSelf.execute(request) { (_, error) in
+                callback(nil, error)
             }
         }
     }
 
-    public func deleteCartProducts(cartItemIds: [String], callback: @escaping RepoCallback<Bool>) {
-        callback(true, nil)
+    public func deleteCartProducts(cartItemIds: [String], callback: @escaping ApiCallback<Void>) {
+        // There is no reason to delete cart products
+        callback(nil, nil)
     }
 
-    public func deleteAllCartProducts(callback: @escaping RepoCallback<Bool>) {
+    public func deleteAllCartProducts(callback: @escaping ApiCallback<Void>) {
+        // There is no reason to delete all cart products
         cartId = nil
-        callback(true, nil)
+        callback(nil, nil)
     }
 
-    public func changeCartProductQuantity(cartItemId: String, quantity: Int, callback: @escaping RepoCallback<Bool>) {
+    public func changeCartProductQuantity(cartItemId: String, quantity: Int, callback: @escaping ApiCallback<Void>) {
         getQuoteId { [weak self] (quoteId, error) in
             guard let strongSelf = self else {
                 return
             }
             
             guard error == nil, let quoteId = quoteId else {
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
                 
                 return
             }
             
             let token = strongSelf.sessionService.data.token
             let quantity = String(quantity)
-            let changeCartProductQuantity = ChangeCartProductQuantityRequestBody(quantity: quantity, quoteId: quoteId)
+            let changeCartProductQuantity = ChangeCartProductQuantityRequest(quantity: quantity, quoteId: quoteId)
             let route = token == nil ? MagentoCartRoute.changeCartProductQuantityUnauthorized(quoteId: quoteId, itemId: cartItemId, body: changeCartProductQuantity) : MagentoCartRoute.changeCartProductQuantityAuthorized(token: token!, itemId: cartItemId, body: changeCartProductQuantity)
             let request = MagentoCartRouter(route: route)
             
-            strongSelf.execute(request) { (response, error) in
-                let success = response != nil
-                callback(success, error)
+            strongSelf.execute(request) { (_, error) in
+                callback(nil, error)
             }
         }
     }
 
     // MARK: - Private
 
-    private func getToken(with email: String, password: String, callback: @escaping RepoCallback<String>) {
-        let getToken = GetTokenRequestBody(email: email, password: password)
+    private func getToken(with email: String, password: String, callback: @escaping ApiCallback<String>) {
+        let getToken = GetTokenRequest(email: email, password: password)
         let route = MagentoCustomerRoute.getToken(body: getToken)
         let request = MagentoCustomerRouter(route: route)
 
@@ -880,7 +854,7 @@ public class MagentoAPI: BaseAPI, API {
             }
 
             guard error == nil, let token = response as? String else {
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                 return
             }
@@ -891,20 +865,14 @@ public class MagentoAPI: BaseAPI, API {
         }
     }
 
-    private func removeSessionDataIfNeeded(_ error: RepoError?) {
-        if let error = error, error.statusCode == unauthorizedStatusCode {
-            sessionService.removeData()
-        }
-    }
-
-    private func getProductList(perPage: Int, paginationValue: Int, builder: ProductsParametersBuilder, callback: @escaping RepoCallback<[Product]>) {
+    private func getProductList(perPage: Int, paginationValue: Int, builder: ProductsParametersBuilder, callback: @escaping ApiCallback<[Product]>) {
         getStoreConfigs { [weak self] (сurrency, error) in
             guard let strongSelf = self else {
                 return
             }
 
             guard error == nil, let сurrency = сurrency else {
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                 return
             }
@@ -921,7 +889,7 @@ public class MagentoAPI: BaseAPI, API {
 
             strongSelf.execute(request) { (response, error) in
                 guard error == nil, let json = response as? [String: Any], let response = GetProductListResponse.object(from: json) else {
-                    callback(nil, error ?? ContentError())
+                    callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                     return
                 }
@@ -934,13 +902,13 @@ public class MagentoAPI: BaseAPI, API {
         }
     }
 
-    private func getStoreConfigs(callback: @escaping RepoCallback<String>) {
+    private func getStoreConfigs(callback: @escaping ApiCallback<String>) {
         let route = MagentoStoreRoute.getConfigs
         let request = MagentoStoreRouter(route: route)
 
         execute(request) { (response, error) in
             guard error == nil, let json = response as? [Any], let response = StoreConfigResponse.objects(from: json) else {
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
 
                 return
             }
@@ -949,13 +917,13 @@ public class MagentoAPI: BaseAPI, API {
         }
     }
     
-    private func getCategory(id: String, callback: @escaping RepoCallback<GetCategoryDetailsResponse>) {
+    private func getCategory(id: String, callback: @escaping ApiCallback<GetCategoryDetailsResponse>) {
         let route = MagentoCategoriesRoute.getCategory(id: id)
         let request = MagentoCategoriesRouter(route: route)
         
         execute(request) { (response, error) in
             guard error == nil, let json = response as? [String: Any], let response = GetCategoryDetailsResponse.object(from: json) else {
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.critical)
                 
                 return
             }
@@ -964,7 +932,7 @@ public class MagentoAPI: BaseAPI, API {
         }
     }
     
-    private func getQuoteId(callback: @escaping RepoCallback<String>) {
+    private func getQuoteId(callback: @escaping ApiCallback<String>) {
         if let quoteId = cartId {
             callback(quoteId, nil)
         } else {
@@ -972,14 +940,14 @@ public class MagentoAPI: BaseAPI, API {
         }
     }
     
-    private func createCustomerCart(callback: @escaping RepoCallback<String>) {
+    private func createCustomerCart(callback: @escaping ApiCallback<String>) {
         let token = sessionService.data.token
         let route = token == nil ? MagentoCartRoute.createQuoteUnauthorized : MagentoCartRoute.createQuoteAuthorized(token: token!)
         let request = MagentoCartRouter(route: route)
         
         execute(request) { [weak self] (response, error) in
             guard let strongSelf = self, error == nil, let quoteId = response as? String else {
-                callback(nil, error ?? ContentError())
+                callback(nil, error ?? ShopAppError.content(isNetworkError: false))
                 
                 return
             }

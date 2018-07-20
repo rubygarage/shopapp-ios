@@ -9,11 +9,11 @@
 import Foundation
 
 struct CartProductResponse: Response {
-    var id: String
-    var title: String
-    var price: Int
-    var quantity: Int
-    var cartProductId: Int
+    let id: String
+    let title: String
+    let price: Int
+    let quantity: Int
+    let cartProductId: Int
     
     enum CodingKeys: String, CodingKey {
         case id = "sku"

@@ -13,7 +13,8 @@ class CategoryListViewModel: BasePaginationViewModel {
     private let categoriesUseCase: CategoriesUseCase
     
     var items = Variable<[ShopApp_Gateway.Category]>([])
-
+    var parentCategoryId: String?
+    
     init(categoriesUseCase: CategoriesUseCase) {
         self.categoriesUseCase = categoriesUseCase
     }
@@ -31,7 +32,7 @@ class CategoryListViewModel: BasePaginationViewModel {
     private func loadRemoteData() {
         let showHud = items.value.isEmpty
         state.onNext(ViewState.make.loading(showHud: showHud))
-        categoriesUseCase.getCategoryList(paginationValue: paginationValue) { [weak self] (catogories, error) in
+        categoriesUseCase.getCategoryList(paginationValue: paginationValue, parentCategoryId: parentCategoryId) { [weak self] (catogories, error) in
             guard let strongSelf = self else {
                 return
             }

@@ -28,6 +28,6 @@ struct RouterTestHelper {
     }
 }
 
-struct RequestBodyTest: RequestBody {
+struct RequestBodyTest: Request {
     var key: String
 }

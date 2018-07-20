@@ -11,10 +11,9 @@ import Foundation
 struct UpdateCustomerRequest: Request {
     private let defaultWebsiteId = 1
     
-    var customer: CustomerRequestBody
+    let customer: CustomerRequest
     
-    init(customer: CustomerRequestBody) {
-        self.customer = customer
-        self.customer.websiteId = defaultWebsiteId
+    init(customer: CustomerRequest) {
+        self.customer = CustomerRequest(email: customer.email, firstName: customer.firstName, lastName: customer.lastName, addresses: customer.addresses, websiteId: defaultWebsiteId)
     }
 }

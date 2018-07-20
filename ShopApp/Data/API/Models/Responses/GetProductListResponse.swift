@@ -9,8 +9,8 @@
 import Foundation
 
 struct GetProductListResponse: PaginationResponse {
-    var items: [GetProductResponse]
-    var totalCount: Int
+    let items: [GetProductResponse]
+    let totalCount: Int
     
     enum CodingKeys: String, CodingKey {
         case items

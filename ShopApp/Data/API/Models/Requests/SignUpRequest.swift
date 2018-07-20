@@ -9,6 +9,6 @@
 import Foundation
 
 struct SignUpRequest: Request {
-    var customer: CustomerRequestBody
-    var password: String
+    let customer: CustomerRequest
+    let password: String
 }

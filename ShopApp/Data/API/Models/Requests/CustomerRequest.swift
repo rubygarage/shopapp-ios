@@ -1,5 +1,5 @@
 //
-//  CustomerRequestBody.swift
+//  CustomerRequest.swift
 //  ShopApp
 //
 //  Created by Radyslav Krechet on 4/19/18.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct CustomerRequestBody: Request {
-    var email: String
-    var firstName: String
-    var lastName: String
-    var websiteId: Int?
-    var addresses: [AddressRequest] = []
+struct CustomerRequest: Request {
+    let email: String
+    let firstName: String
+    let lastName: String
+    let websiteId: Int?
+    let addresses: [AddressRequest]
     
     enum CodingKeys: String, CodingKey {
         case email
@@ -23,13 +23,11 @@ struct CustomerRequestBody: Request {
         case addresses
     }
     
-    init(email: String, firstName: String, lastName: String, addresses: [AddressRequest]? = nil) {
+    init(email: String, firstName: String, lastName: String, addresses: [AddressRequest]? = nil, websiteId: Int? = nil) {
         self.email = email
         self.firstName = firstName
         self.lastName = lastName
-        
-        if let addresses = addresses {
-            self.addresses = addresses
-        }
+        self.websiteId = websiteId
+        self.addresses = addresses ?? []
     }
 }

@@ -9,9 +9,9 @@
 import Foundation
 
 struct CountryResponse: Response {
-    var id: String
-    var name: String
-    var regions: [RegionResponse]?
+    let id: String
+    let name: String
+    let regions: [RegionResponse]?
     
     enum CodingKeys: String, CodingKey {
         case id

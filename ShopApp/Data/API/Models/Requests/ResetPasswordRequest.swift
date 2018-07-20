@@ -1,5 +1,5 @@
 //
-//  ResetPasswordRequestBody.swift
+//  ResetPasswordRequest.swift
 //  ShopApp
 //
 //  Created by Radyslav Krechet on 4/20/18.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct ResetPasswordRequestBody: Request {
-    var email: String
-    var template = "email_reset"
+struct ResetPasswordRequest: Request {
+    let email: String
+    let template = "email_reset"
     
     init(email: String) {
         self.email = email

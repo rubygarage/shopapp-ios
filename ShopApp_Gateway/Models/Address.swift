@@ -13,14 +13,14 @@ public struct Address: Equatable {
     public let street: String
     public let secondStreet: String?
     public let city: String
-    public let country: String
-    public let state: String?
+    public let country: Country
+    public let state: State?
     public let firstName: String
     public let lastName: String
     public let zip: String
     public let phone: String?
     
-    public init(id: String, firstName: String, lastName: String, street: String, secondStreet: String? = nil, city: String, country: String, state: String? = nil, zip: String, phone: String? = nil) {
+    public init(id: String, firstName: String, lastName: String, street: String, secondStreet: String? = nil, city: String, country: Country, state: State? = nil, zip: String, phone: String? = nil) {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
