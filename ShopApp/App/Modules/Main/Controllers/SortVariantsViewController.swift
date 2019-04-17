@@ -60,7 +60,7 @@ class SortVariantsViewController: UIViewController, SortVariantsTableProviderDel
     
     // MARK: - Actions
     
-    func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
+    @objc func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
         dismiss(animated: true)
     }
 

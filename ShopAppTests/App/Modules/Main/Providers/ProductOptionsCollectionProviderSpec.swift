@@ -23,7 +23,7 @@ class ProductOptionsCollectionProviderSpec: QuickSpec {
             collectionViewLayout = UICollectionViewLayout()
             collectionView = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: collectionViewLayout)
             collectionView.registerNibForCell(ProductOptionsCollectionViewCell.self)
-            collectionView.registerNibForSupplementaryView(ProductOptionHeaderView.self, of: UICollectionElementKindSectionHeader)
+            collectionView.registerNibForSupplementaryView(ProductOptionHeaderView.self, of: UICollectionView.elementKindSectionHeader)
             collectionView.dataSource = collectionProvider
             collectionView.delegate = collectionProvider
         }
@@ -114,7 +114,7 @@ class ProductOptionsCollectionProviderSpec: QuickSpec {
                     _ = collectionView.numberOfSections
                     
                     let indexPath = IndexPath(row: 0, section: 0)
-                    let headerView = collectionProvider.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader, at: indexPath)
+                    let headerView = collectionProvider.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath)
                     
                     expect(headerView).to(beAnInstanceOf(ProductOptionHeaderView.self))
                 }

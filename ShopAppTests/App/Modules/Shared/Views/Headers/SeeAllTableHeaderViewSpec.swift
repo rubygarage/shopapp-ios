@@ -20,8 +20,8 @@ class SeeAllTableHeaderViewSpec: QuickSpec {
         var separatorHeightConstraint: NSLayoutConstraint!
         
         func setupViews() {
-            sectionTitleLabel = self.findView(withAccessibilityLabel: "title", in: view) as! UILabel
-            seeAllButton = self.findView(withAccessibilityLabel: "seeAllButton", in: view) as! UIButton
+            sectionTitleLabel = self.findView(withAccessibilityLabel: "title", in: view) as? UILabel
+            seeAllButton = self.findView(withAccessibilityLabel: "seeAllButton", in: view) as? UIButton
             separatorView = self.findView(withAccessibilityLabel: "separator", in: view)
             separatorHeightConstraint = separatorView.constraints.filter({ $0.accessibilityLabel == "separatorHeight" }).first
         }

@@ -61,9 +61,9 @@ class ProductOptionsCollectionCellProviderSpec: QuickSpec {
             it("should return correct cell size") {
                 let text = values.first!
                 let font = UIFont.systemFont(ofSize: UIFont.labelFontSize)
-                let attributes = [NSFontAttributeName: font]
+                let attributes = [NSAttributedString.Key.font: font]
                 let optionCollectionViewCellAdditionalWidth: CGFloat = 24
-                let width = (text as NSString).size(attributes: attributes).width + optionCollectionViewCellAdditionalWidth
+                let width = (text as NSString).size(withAttributes: attributes).width + optionCollectionViewCellAdditionalWidth
                 let expectedSize = CGSize(width: width, height: kOptionCollectionViewCellHeight)
                 
                 let indexPath = IndexPath(item: 0, section: 0)

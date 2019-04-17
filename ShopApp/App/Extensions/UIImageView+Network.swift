@@ -12,7 +12,7 @@ import SDWebImage
 import ShopApp_Gateway
 
 extension UIImageView {
-    func set(image remoteImage: Image?, initialContentMode: UIViewContentMode = .center) {
+    func set(image remoteImage: Image?, initialContentMode: UIView.ContentMode = .center) {
         let imageUrl = URL(string: remoteImage?.src ?? "")
         let placeholderImage = #imageLiteral(resourceName: "placeholder")
         contentMode = initialContentMode

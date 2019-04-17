@@ -18,7 +18,7 @@ class ArticleListViewControllerSpec: QuickSpec {
         var viewModelMock: ArticleListViewModelMock!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.articleList) as! ArticleListViewController
+            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.articleList) as? ArticleListViewController
             
             let repository = ArticleRepositoryMock()
             let articleListUseCaseMock = ArticleListUseCaseMock(repository: repository)

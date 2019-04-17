@@ -238,7 +238,7 @@ class CheckoutViewModel: BaseViewModel {
     }
     
     private func clearCart(with order: Order) {
-        deleteCartProductsUseCase.clearCart { [weak self] _ in
+        deleteCartProductsUseCase.clearCart { [weak self] (_, _)  in
             guard let strongSelf = self else {
                 return
             }

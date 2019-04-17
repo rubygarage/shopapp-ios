@@ -14,11 +14,8 @@ class CoreDataDAO: DAO {
         var cartProducts: [CartProduct] = []
         
         CoreStore.perform(asynchronous: { transaction in
-            let items = transaction.fetchAll(From<CartProductEntity>())
-                
-            if let items = items {
-                cartProducts = items.map({ CoreDataCartProductAdapter.adapt(item: $0)! })
-            }
+            let items = try transaction.fetchAll(From<CartProductEntity>())
+            cartProducts = items.map({ CoreDataCartProductAdapter.adapt(item: $0)! })
         }, completion: { result in
             switch result {
             case .success:
@@ -33,7 +30,7 @@ class CoreDataDAO: DAO {
         let predicate = getPredicate(with: cartProduct.productVariant?.id)
         
         CoreStore.perform(asynchronous: { transaction in
-            var item = transaction.fetchOne(From<CartProductEntity>(), Where(predicate))
+            var item = try transaction.fetchOne(From<CartProductEntity>(), Where<CartProductEntity>(predicate))
             
             if item != nil {
                 let newQuantity = Int(item?.quantity ?? 0) + cartProduct.quantity
@@ -56,7 +53,7 @@ class CoreDataDAO: DAO {
         let predicate = getPredicate(with: productVariantId)
         
         CoreStore.perform(asynchronous: { transaction in
-            let item = transaction.fetchOne(From<CartProductEntity>(), Where(predicate))
+            let item = try transaction.fetchOne(From<CartProductEntity>(), Where<CartProductEntity>(predicate))
             transaction.delete(item)
         }, completion: { result in
             switch result {
@@ -73,9 +70,8 @@ class CoreDataDAO: DAO {
         let predicate = getPredicate(with: ids)
         
         CoreStore.perform(asynchronous: { transaction in
-            if let items = transaction.fetchAll(From<CartProductEntity>(), Where(predicate)) {
-                transaction.delete(items)
-            }
+            let items = try transaction.fetchAll(From<CartProductEntity>(), Where<CartProductEntity>(predicate))
+            transaction.delete(items)
         }, completion: { result in
             switch result {
             case .success:
@@ -88,7 +84,7 @@ class CoreDataDAO: DAO {
     
     func deleteAllProductsFromCart(with callback: @escaping RepoCallback<Bool>) {
         CoreStore.perform(asynchronous: { transaction in
-            transaction.deleteAll(From<CartProductEntity>())
+            try transaction.deleteAll(From<CartProductEntity>())
         }, completion: { result in
             switch result {
             case .success:

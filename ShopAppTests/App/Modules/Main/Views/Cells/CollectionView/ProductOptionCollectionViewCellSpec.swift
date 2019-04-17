@@ -35,7 +35,7 @@ class ProductOptionCollectionViewCellSpec: QuickSpec {
             let dequeuedCell: ProductOptionCollectionViewCell = collectionView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            optionTitleLabel = self.findView(withAccessibilityLabel: "label", in: cell) as! UILabel
+            optionTitleLabel = self.findView(withAccessibilityLabel: "label", in: cell) as? UILabel
         }
         
         describe("when cell configured") {

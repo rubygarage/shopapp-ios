@@ -84,7 +84,7 @@ class ForgotPasswordViewModelSpec: QuickSpec {
                         })
                         .disposed(by: disposeBag)
                     
-                    viewModel.resetPasswordPressed.onNext()
+                    viewModel.resetPasswordPressed.onNext(())
                 }
             }
             
@@ -110,7 +110,7 @@ class ForgotPasswordViewModelSpec: QuickSpec {
                             .disposed(by: disposeBag)
                         
                         resetPasswordUseCaseMock.isNeedToReturnError = false
-                        viewModel.resetPasswordPressed.onNext()
+                        viewModel.resetPasswordPressed.onNext(())
                         
                         expect(states.count) == 2
                         expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -126,7 +126,7 @@ class ForgotPasswordViewModelSpec: QuickSpec {
                                 .disposed(by: disposeBag)
                             
                             resetPasswordUseCaseMock.isNeedToReturnError = true
-                            viewModel.resetPasswordPressed.onNext()
+                            viewModel.resetPasswordPressed.onNext(())
                             
                             expect(states.count) == 2
                             expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)

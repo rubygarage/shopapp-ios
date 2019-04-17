@@ -21,15 +21,15 @@ class CheckoutSuccessViewControllerSpec: QuickSpec {
         var continueShoppingUnderlineView: UIView!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.checkoutSuccess) as! CheckoutSuccessViewController
+            viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.checkoutSuccess) as? CheckoutSuccessViewController
             
             viewController.orderId = "Order id"
             viewController.orderNumber = 5
             
-            thanksForShoppingLabel = self.findView(withAccessibilityLabel: "thanksForShoppingLabel", in: viewController.view) as! UILabel
-            orderNumberLabel = self.findView(withAccessibilityLabel: "orderNumberLabel", in: viewController.view) as! UILabel
-            viewOrderDetailsButton = self.findView(withAccessibilityLabel: "viewOrderDetailsButton", in: viewController.view) as! BlackButton
-            continueShoppingButton = self.findView(withAccessibilityLabel: "continueShoppingButton", in: viewController.view) as! UnderlinedButton
+            thanksForShoppingLabel = self.findView(withAccessibilityLabel: "thanksForShoppingLabel", in: viewController.view) as? UILabel
+            orderNumberLabel = self.findView(withAccessibilityLabel: "orderNumberLabel", in: viewController.view) as? UILabel
+            viewOrderDetailsButton = self.findView(withAccessibilityLabel: "viewOrderDetailsButton", in: viewController.view) as? BlackButton
+            continueShoppingButton = self.findView(withAccessibilityLabel: "continueShoppingButton", in: viewController.view) as? UnderlinedButton
             continueShoppingUnderlineView = self.findView(withAccessibilityLabel: "continueShoppingUnderlineView", in: viewController.view)
         }
         
@@ -49,7 +49,7 @@ class CheckoutSuccessViewControllerSpec: QuickSpec {
                 let attributed = NSMutableAttributedString(string: orderNumberLocalized)
                 let highlightedText = String(orderNumber)
                 let range = (orderNumberLocalized as NSString).range(of: highlightedText)
-                attributed.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 0, green: 0.48, blue: 1, alpha: 1), range: range)
+                attributed.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(red: 0, green: 0.48, blue: 1, alpha: 1), range: range)
                 
                 expect(orderNumberLabel.attributedText) == attributed
             }

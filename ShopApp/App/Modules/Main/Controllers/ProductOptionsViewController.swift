@@ -54,7 +54,7 @@ class ProductOptionsViewController: UIViewController, ProductOptionsCollectionCe
     
     private func setupCollectionView() {
         collectionView.registerNibForCell(ProductOptionsCollectionViewCell.self)
-        collectionView.registerNibForSupplementaryView(ProductOptionHeaderView.self, of: UICollectionElementKindSectionHeader)
+        collectionView.registerNibForSupplementaryView(ProductOptionHeaderView.self, of: UICollectionView.elementKindSectionHeader)
 
         collectionProvider?.delegate = self
         collectionView.dataSource = collectionProvider

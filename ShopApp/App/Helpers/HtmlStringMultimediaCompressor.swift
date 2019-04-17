@@ -36,12 +36,12 @@ struct HtmlStringMultimediaCompressor {
         var temp = string
         while let range = temp.range(of: kHtmlImageTag) {
             if result.isEmpty {
-                result = temp.substring(to: range.upperBound)
+                result = String(temp[..<range.upperBound])
             }
-            let tail = temp.substring(from: range.upperBound)
+            let tail = String(temp[range.upperBound...])
             if let subrange = tail.range(of: kHtmlImageTag) {
-                result += style + tail.substring(to: subrange.upperBound)
-                temp = tail.substring(from: subrange.lowerBound)
+                result += style + String(tail[..<subrange.upperBound])
+                temp = String(tail[subrange.lowerBound...])
             } else {
                 result += style + tail
                 break
@@ -55,11 +55,11 @@ struct HtmlStringMultimediaCompressor {
         var temp = string
         while let startRange = temp.range(of: kHtmlIframeOpenTag) {
             if result.isEmpty {
-                result = temp.substring(to: startRange.upperBound)
+                result = String(temp[..<startRange.upperBound])
             }
-            let tail = temp.substring(from: startRange.upperBound)
+            let tail = String(temp[startRange.upperBound...])
             let endRange = tail.range(of: kHtmlIframeCloseTag)!
-            let iframe = tail.substring(to: endRange.lowerBound)
+            let iframe = String(tail[..<endRange.lowerBound])
             var iframeParts = iframe.split(separator: " ")
             if let width = iframeParts.first(where: { $0.hasPrefix(kHtmlWidthPrefix) }), let index = iframeParts.index(of: width) {
                 iframeParts.remove(at: index)
@@ -70,10 +70,10 @@ struct HtmlStringMultimediaCompressor {
             }
             iframeParts.insert(Substring(String(format: kHtmlHeightFormat, width / kHtmlIframeAspectRation)), at: 0)
             if let subrange = tail.range(of: kHtmlIframeOpenTag) {
-                result += iframeParts.joined(separator: " ") + tail.substring(to: subrange.upperBound).substring(from: endRange.lowerBound)
-                temp = tail.substring(from: subrange.lowerBound)
+                result += iframeParts.joined(separator: " ") + String(String(tail[..<subrange.upperBound])[endRange.lowerBound...])
+                temp = String(tail[subrange.lowerBound...])
             } else {
-                result += iframeParts.joined(separator: " ") + tail.substring(from: endRange.lowerBound)
+                result += iframeParts.joined(separator: " ") + String(tail[endRange.lowerBound...])
                 break
             }
         }

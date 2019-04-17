@@ -96,7 +96,7 @@ class ChangePasswordViewModelSpec: QuickSpec {
                         })
                         .disposed(by: disposeBag)
                     
-                    viewModel.updatePressed.onNext()
+                    viewModel.updatePressed.onNext(())
                 }
             }
             
@@ -110,7 +110,7 @@ class ChangePasswordViewModelSpec: QuickSpec {
                         })
                         .disposed(by: disposeBag)
                     
-                    viewModel.updatePressed.onNext()
+                    viewModel.updatePressed.onNext(())
                     
                     viewModel.state
                         .subscribe(onNext: { state in
@@ -142,7 +142,7 @@ class ChangePasswordViewModelSpec: QuickSpec {
                             .disposed(by: disposeBag)
                         
                         updateCustomerUseCaseMock.isNeedToReturnError = false
-                        viewModel.updatePressed.onNext()
+                        viewModel.updatePressed.onNext(())
                         
                         expect(states.count) == 2
                         expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -159,7 +159,7 @@ class ChangePasswordViewModelSpec: QuickSpec {
                             .disposed(by: disposeBag)
                         
                         updateCustomerUseCaseMock.isNeedToReturnError = true
-                        viewModel.updatePressed.onNext()
+                        viewModel.updatePressed.onNext(())
                         
                         expect(states.count) == 2
                         expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)

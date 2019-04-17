@@ -26,12 +26,12 @@ class CustomerEmailTableViewCellSpec: QuickSpec {
             let dequeuedCell: CustomerEmailTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            emailTextFieldView = self.findView(withAccessibilityLabel: "emailTextFieldView", in: cell) as! InputTextFieldView
+            emailTextFieldView = self.findView(withAccessibilityLabel: "emailTextFieldView", in: cell) as? InputTextFieldView
         }
         
         describe("when cell initialized") {
             it("should have correct selection style") {
-                expect(cell.selectionStyle.rawValue) == UITableViewCellSelectionStyle.none.rawValue
+                expect(cell.selectionStyle.rawValue) == UITableViewCell.SelectionStyle.none.rawValue
             }
             
             it("should have correct email textfield view placeholder") {

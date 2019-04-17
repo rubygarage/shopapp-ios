@@ -25,14 +25,14 @@ class PaymentDetailsFooterViewSpec: QuickSpec {
         var totalValueLabel: UILabel!
 
         func setupViews() {
-            subtotalLabel = self.findView(withAccessibilityLabel: "subtotal", in: view) as! UILabel
-            discountLabel = self.findView(withAccessibilityLabel: "discount", in: view) as! UILabel
-            shippingLabel = self.findView(withAccessibilityLabel: "shipping", in: view) as! UILabel
-            totalLabel = self.findView(withAccessibilityLabel: "total", in: view) as! UILabel
-            subtotalValueLabel = self.findView(withAccessibilityLabel: "subtotalValue", in: view) as! UILabel
-            discountValueLabel = self.findView(withAccessibilityLabel: "discountValue", in: view) as! UILabel
-            shippingValueLabel = self.findView(withAccessibilityLabel: "shippingValue", in: view) as! UILabel
-            totalValueLabel = self.findView(withAccessibilityLabel: "totalValue", in: view) as! UILabel
+            subtotalLabel = self.findView(withAccessibilityLabel: "subtotal", in: view) as? UILabel
+            discountLabel = self.findView(withAccessibilityLabel: "discount", in: view) as? UILabel
+            shippingLabel = self.findView(withAccessibilityLabel: "shipping", in: view) as? UILabel
+            totalLabel = self.findView(withAccessibilityLabel: "total", in: view) as? UILabel
+            subtotalValueLabel = self.findView(withAccessibilityLabel: "subtotalValue", in: view) as? UILabel
+            discountValueLabel = self.findView(withAccessibilityLabel: "discountValue", in: view) as? UILabel
+            shippingValueLabel = self.findView(withAccessibilityLabel: "shippingValue", in: view) as? UILabel
+            totalValueLabel = self.findView(withAccessibilityLabel: "totalValue", in: view) as? UILabel
         }
         
         func generateOrder() -> Order {

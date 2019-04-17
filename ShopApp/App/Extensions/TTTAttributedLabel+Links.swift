@@ -19,15 +19,15 @@ extension TTTAttributedLabel {
     
     private func setupDefaultAttributes(with text: String) {
         let paragraphStyle = NSMutableParagraphStyle()
-        let attributedString = NSAttributedString(string: text, attributes: [NSFontAttributeName: kFontDefault,
-                                                                             NSParagraphStyleAttributeName: paragraphStyle,
-                                                                             NSForegroundColorAttributeName: textColor.cgColor])
+        let attributedString = NSAttributedString(string: text, attributes: [NSAttributedString.Key.font: kFontDefault,
+                                                                             NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                                                                             NSAttributedString.Key.foregroundColor: textColor.cgColor])
         attributedText = attributedString
     }
     
     private func setupLinkAttributes(with links: [String]) {
-        let linkAttributes: [String: Any] = [NSForegroundColorAttributeName: UIColor.black,
-                              NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+        let linkAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor: UIColor.black,
+                                                             NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
         self.linkAttributes = linkAttributes
         self.activeLinkAttributes = linkAttributes
         

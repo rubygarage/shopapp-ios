@@ -32,9 +32,9 @@ class CheckoutShippingOptionsEnabledTableViewCellSpec: QuickSpec {
             let dequeuedCell: CheckoutShippingOptionsEnabledTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            selectRateButton = self.findView(withAccessibilityLabel: "selectRateButton", in: cell) as! UIButton
-            priceLabel = self.findView(withAccessibilityLabel: "priceLabel", in: cell) as! UILabel
-            titleLabel = self.findView(withAccessibilityLabel: "titleLabel", in: cell) as! UILabel
+            selectRateButton = self.findView(withAccessibilityLabel: "selectRateButton", in: cell) as? UIButton
+            priceLabel = self.findView(withAccessibilityLabel: "priceLabel", in: cell) as? UILabel
+            titleLabel = self.findView(withAccessibilityLabel: "titleLabel", in: cell) as? UILabel
             
             shippingRate = ShippingRate()
             shippingRate.title = "Rate title"
@@ -44,7 +44,7 @@ class CheckoutShippingOptionsEnabledTableViewCellSpec: QuickSpec {
         
         describe("when cell initialized") {
             it("should have correct selection style") {
-                expect(cell.selectionStyle.rawValue) == UITableViewCellSelectionStyle.none.rawValue
+                expect(cell.selectionStyle.rawValue) == UITableViewCell.SelectionStyle.none.rawValue
             }
         }
         

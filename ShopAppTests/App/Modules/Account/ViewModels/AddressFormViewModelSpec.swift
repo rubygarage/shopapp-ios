@@ -134,7 +134,7 @@ class AddressFormViewModelSpec: QuickSpec {
                     })
                     .disposed(by: disposeBag)
                 
-                viewModel.submitTapped.onNext()
+                viewModel.submitTapped.onNext(())
             }
         }
         

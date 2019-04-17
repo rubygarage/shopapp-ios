@@ -10,7 +10,10 @@ import CoreStore
 
 extension AsynchronousDataTransaction {
     func fetchOrCreate<T: DynamicObject>(predicate: NSPredicate) -> T? {
-        var item = fetchOne(From<T>(), Where(predicate))
+        var item: T?
+        do {
+            item = try fetchOne(From<T>(), Where<T>(predicate))
+        } catch {}
         if item == nil {
             item = create(Into<T>())
         }

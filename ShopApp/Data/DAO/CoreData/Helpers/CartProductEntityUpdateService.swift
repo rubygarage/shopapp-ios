@@ -21,7 +21,10 @@ struct CartProductEntityUpdateService {
         entity.currency = item.currency
         
         let predicate = NSPredicate(format: "id = %@", item.productVariant?.id ?? "")
-        var variant = transaction.fetchOne(From<ProductVariantEntity>(), Where(predicate))
+        var variant: ProductVariantEntity?
+        do {
+            variant = try transaction.fetchOne(From<ProductVariantEntity>(), Where<ProductVariantEntity>(predicate))
+        } catch {}
         if variant == nil {
             variant = transaction.create(Into<ProductVariantEntity>())
         }

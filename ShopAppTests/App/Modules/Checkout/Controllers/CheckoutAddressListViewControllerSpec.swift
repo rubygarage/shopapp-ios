@@ -24,7 +24,7 @@ class CheckoutAddressListViewControllerSpec: QuickSpec {
         var address: Address!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.checkoutAddressList) as! CheckoutAddressListViewController
+            viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.checkoutAddressList) as? CheckoutAddressListViewController
             
             customerRepositoryMock = CustomerRepositoryMock()
             customerUseCaseMock = CustomerUseCaseMock(repository: customerRepositoryMock)

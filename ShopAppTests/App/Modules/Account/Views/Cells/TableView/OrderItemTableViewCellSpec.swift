@@ -34,18 +34,18 @@ class OrderItemTableViewCellSpec: QuickSpec {
             let dequeuedCell: OrderItemTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            itemImageView = self.findView(withAccessibilityLabel: "image", in: cell) as! UIImageView
-            totalPriceLabel = self.findView(withAccessibilityLabel: "totalPrice", in: cell) as! UILabel
-            titleLabel = self.findView(withAccessibilityLabel: "title", in: cell) as! UILabel
-            subtitleLabel = self.findView(withAccessibilityLabel: "subtitle", in: cell) as! UILabel
-            quantityLabel = self.findView(withAccessibilityLabel: "quantity", in: cell) as! UILabel
-            quantityValueLabel = self.findView(withAccessibilityLabel: "quantityValue", in: cell) as! UILabel
-            itemPriceLabel = self.findView(withAccessibilityLabel: "itemPrice", in: cell) as! UILabel
+            itemImageView = self.findView(withAccessibilityLabel: "image", in: cell) as? UIImageView
+            totalPriceLabel = self.findView(withAccessibilityLabel: "totalPrice", in: cell) as? UILabel
+            titleLabel = self.findView(withAccessibilityLabel: "title", in: cell) as? UILabel
+            subtitleLabel = self.findView(withAccessibilityLabel: "subtitle", in: cell) as? UILabel
+            quantityLabel = self.findView(withAccessibilityLabel: "quantity", in: cell) as? UILabel
+            quantityValueLabel = self.findView(withAccessibilityLabel: "quantityValue", in: cell) as? UILabel
+            itemPriceLabel = self.findView(withAccessibilityLabel: "itemPrice", in: cell) as? UILabel
         }
         
         describe("when cell initialized") {
             it("should have correct selection style") {
-                expect(cell.selectionStyle.rawValue) == UITableViewCellSelectionStyle.none.rawValue
+                expect(cell.selectionStyle.rawValue) == UITableViewCell.SelectionStyle.none.rawValue
             }
             
             it("should have correct quantity text") {

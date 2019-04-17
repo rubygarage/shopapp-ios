@@ -22,17 +22,17 @@ class SignInViewControllerSpec: QuickSpec {
         var signInButton: BlackButton!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.signIn) as! SignInViewController
+            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.signIn) as? SignInViewController
             
             let repositoryMock = AuthentificationRepositoryMock()
             let loginUseCaseMock = LoginUseCaseMock(repository: repositoryMock)
             viewModelMock = SignInViewModelMock(loginUseCase: loginUseCaseMock)
             viewController.viewModel = viewModelMock
             
-            emailTextFieldView = self.findView(withAccessibilityLabel: "email", in: viewController.view) as! InputTextFieldView
-            passwordTextFieldView = self.findView(withAccessibilityLabel: "password", in: viewController.view) as! InputTextFieldView
-            forgotButton = self.findView(withAccessibilityLabel: "forgot", in: viewController.view) as! UIButton
-            signInButton = self.findView(withAccessibilityLabel: "signIn", in: viewController.view) as! BlackButton
+            emailTextFieldView = self.findView(withAccessibilityLabel: "email", in: viewController.view) as? InputTextFieldView
+            passwordTextFieldView = self.findView(withAccessibilityLabel: "password", in: viewController.view) as? InputTextFieldView
+            forgotButton = self.findView(withAccessibilityLabel: "forgot", in: viewController.view) as? UIButton
+            signInButton = self.findView(withAccessibilityLabel: "signIn", in: viewController.view) as? BlackButton
         }
         
         describe("when view loaded") {

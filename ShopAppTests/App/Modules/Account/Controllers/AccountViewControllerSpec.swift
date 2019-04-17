@@ -20,7 +20,7 @@ class AccountViewControllerSpec: QuickSpec {
         var tableView: UITableView!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.account) as! AccountViewController
+            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.account) as? AccountViewController
             
             let authentificationRepositoryMock = AuthentificationRepositoryMock()
             let customerRepositoryMock = CustomerRepositoryMock()
@@ -35,7 +35,7 @@ class AccountViewControllerSpec: QuickSpec {
             tableProvider = AccountTableProvider()
             viewController.tableProvider = tableProvider
             
-            tableView = self.findView(withAccessibilityLabel: "tableView", in: viewController.view) as! UITableView
+            tableView = self.findView(withAccessibilityLabel: "tableView", in: viewController.view) as? UITableView
         }
         
         describe("when view loaded") {

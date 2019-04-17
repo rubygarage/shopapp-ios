@@ -80,7 +80,7 @@ class CreditCardViewModelSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
-                        viewModel.submitTapped.onNext()
+                        viewModel.submitTapped.onNext(())
                     }
                 }
                 
@@ -95,7 +95,7 @@ class CreditCardViewModelSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
-                        viewModel.submitTapped.onNext()
+                        viewModel.submitTapped.onNext(())
                     }
                 }
             }
@@ -126,7 +126,7 @@ class CreditCardViewModelSpec: QuickSpec {
                         })
                     .disposed(by: disposeBag)
                     
-                    viewModel.submitTapped.onNext()
+                    viewModel.submitTapped.onNext(())
                 }
             }
         }

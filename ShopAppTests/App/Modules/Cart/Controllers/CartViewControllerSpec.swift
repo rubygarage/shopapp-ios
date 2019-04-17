@@ -22,7 +22,7 @@ class CartViewControllerSpec: QuickSpec {
         var checkoutButton: BlackButton!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.cart, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.cart) as! CartViewController
+            viewController = UIStoryboard(name: StoryboardNames.cart, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.cart) as? CartViewController
             
             let repositoryMock = CartRepositoryMock()
             let cartProductListUseCaseMock = CartProductListUseCaseMock(repository: repositoryMock)
@@ -34,9 +34,9 @@ class CartViewControllerSpec: QuickSpec {
             tableProvider = CartTableProvider()
             viewController.tableProvider = tableProvider
             
-            tableView = self.findView(withAccessibilityLabel: "tableView", in: viewController.view) as! UITableView
+            tableView = self.findView(withAccessibilityLabel: "tableView", in: viewController.view) as? UITableView
             
-            checkoutButton = self.findView(withAccessibilityLabel: "checkoutButton", in: viewController.view) as! BlackButton
+            checkoutButton = self.findView(withAccessibilityLabel: "checkoutButton", in: viewController.view) as? BlackButton
         }
         
         describe("when view loaded") {

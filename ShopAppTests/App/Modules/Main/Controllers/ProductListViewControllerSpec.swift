@@ -18,14 +18,14 @@ class ProductListViewViewControllerSpec: QuickSpec {
         var collectionView: UICollectionView!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.productList) as! ProductListViewController
+            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.productList) as? ProductListViewController
             
             let productRepositoryMock = ProductRepositoryMock()
             let productListUseCase = ProductListUseCaseMock(repository: productRepositoryMock)
             viewModelMock = ProductListViewModelMock(productListUseCase: productListUseCase)
             viewController.viewModel = viewModelMock
             
-            collectionView = self.findView(withAccessibilityLabel: "collectionView", in: viewController.view) as! UICollectionView            
+            collectionView = self.findView(withAccessibilityLabel: "collectionView", in: viewController.view) as? UICollectionView            
         }
         
         describe("when view loaded") {

@@ -20,7 +20,7 @@ class AccountAddressFormViewControllerSpec: QuickSpec {
         var viewControllerDelegateMock: AccountAddressFormControllerDelegateMock!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.accountAddressForm) as! AccountAddressFormViewController
+            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.accountAddressForm) as? AccountAddressFormViewController
             
             let repositoryMock = CustomerRepositoryMock()
             let addAddressUseCaseMock = AddAddressUseCaseMock(repository: repositoryMock)
@@ -51,7 +51,7 @@ class AccountAddressFormViewControllerSpec: QuickSpec {
                 }
                 
                 it("should have correct child controller properties") {
-                    let childController = viewController.childViewControllers.first as? AddressFormViewController
+                    let childController = viewController.children.first as? AddressFormViewController
                     expect(childController?.address).to(beNil())
                 }
             }
@@ -63,7 +63,7 @@ class AccountAddressFormViewControllerSpec: QuickSpec {
                 }
                 
                 it("should have correct child controller properties") {
-                    let childController = viewController.childViewControllers.first as? AddressFormViewController
+                    let childController = viewController.children.first as? AddressFormViewController
                     expect(childController?.address) === viewController.selectedAddress
                 }
             }

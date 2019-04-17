@@ -34,13 +34,13 @@ class AddressListTableViewCellSpec: QuickSpec {
             let dequeuedCell: AddressListTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            customerNameLabel = self.findView(withAccessibilityLabel: "customerNameLabel", in: cell) as! UILabel
-            addressLabel = self.findView(withAccessibilityLabel: "addressLabel", in: cell) as! UILabel
-            phoneLabel = self.findView(withAccessibilityLabel: "phoneLabel", in: cell) as! UILabel
-            selectButton = self.findView(withAccessibilityLabel: "selectButton", in: cell) as! UIButton
-            editButton = self.findView(withAccessibilityLabel: "editButton", in: cell) as! UIButton
-            deleteButton = self.findView(withAccessibilityLabel: "deleteButton", in: cell) as! UIButton
-            defaultAddressButton = self.findView(withAccessibilityLabel: "defaultAddressButton", in: cell) as! UIButton
+            customerNameLabel = self.findView(withAccessibilityLabel: "customerNameLabel", in: cell) as? UILabel
+            addressLabel = self.findView(withAccessibilityLabel: "addressLabel", in: cell) as? UILabel
+            phoneLabel = self.findView(withAccessibilityLabel: "phoneLabel", in: cell) as? UILabel
+            selectButton = self.findView(withAccessibilityLabel: "selectButton", in: cell) as? UIButton
+            editButton = self.findView(withAccessibilityLabel: "editButton", in: cell) as? UIButton
+            deleteButton = self.findView(withAccessibilityLabel: "deleteButton", in: cell) as? UIButton
+            defaultAddressButton = self.findView(withAccessibilityLabel: "defaultAddressButton", in: cell) as? UIButton
             
             address = Address()
             address.address = "Address"
@@ -52,7 +52,7 @@ class AddressListTableViewCellSpec: QuickSpec {
         
         describe("when cell initialized") {
             it("should have correct selection style") {
-                expect(cell.selectionStyle.rawValue) == UITableViewCellSelectionStyle.none.rawValue
+                expect(cell.selectionStyle.rawValue) == UITableViewCell.SelectionStyle.none.rawValue
             }
             
             it("should have correct button images") {

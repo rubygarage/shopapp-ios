@@ -28,7 +28,7 @@ class LastArrivalsTableViewCellSpec: QuickSpec {
             let dequeuedCell: LastArrivalsTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            collectionView = self.findView(withAccessibilityLabel: "collectionView", in: cell) as! UICollectionView
+            collectionView = self.findView(withAccessibilityLabel: "collectionView", in: cell) as? UICollectionView
         }
         
         describe("when cell initialized") {

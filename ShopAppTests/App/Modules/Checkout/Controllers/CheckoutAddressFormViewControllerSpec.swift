@@ -19,7 +19,7 @@ class CheckoutAddressFormViewControllerSpec: QuickSpec {
         var viewModelMock: CheckoutAddressFormViewModelMock!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.checkoutAddressForm) as! CheckoutAddressFormViewController
+            viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.checkoutAddressForm) as? CheckoutAddressFormViewController
             
             repositoryMock = PaymentsRepositoryMock()
             let checkoutUseCaseMock = CheckoutUseCaseMock(repository: repositoryMock)
@@ -44,7 +44,7 @@ class CheckoutAddressFormViewControllerSpec: QuickSpec {
             }
             
             it("should have correct child controller properties") {
-                let childController = viewController.childViewControllers.first as? AddressFormViewController
+                let childController = viewController.children.first as? AddressFormViewController
                 expect(childController?.address) === viewController.selectedAddress
             }
         }
@@ -80,7 +80,7 @@ class CheckoutAddressFormViewControllerSpec: QuickSpec {
                 let delegateMock = CheckoutAddressFormControllerDelegateMock()
                 viewController.delegate = delegateMock
                 
-                let addressFormViewController = viewController.childViewControllers.first as! AddressFormViewController//AddressFormViewController()
+                let addressFormViewController = viewController.children.first as! AddressFormViewController
                 let address = Address()
                 
                 viewController.viewController(addressFormViewController, didFill: address)

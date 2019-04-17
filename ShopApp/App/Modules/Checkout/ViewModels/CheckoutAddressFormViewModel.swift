@@ -38,7 +38,7 @@ class CheckoutAddressFormViewModel: BaseViewModel {
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
             } else if let success = success, success == true {
-                strongSelf.updatedShippingAddress.onNext()
+                strongSelf.updatedShippingAddress.onNext(())
             } else {
                 strongSelf.state.onNext(.error(error: RepoError()))
             }

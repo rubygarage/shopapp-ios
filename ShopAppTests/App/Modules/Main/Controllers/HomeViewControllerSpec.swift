@@ -19,7 +19,7 @@ class HomeViewControllerSpec: QuickSpec {
         var tableView: UITableView!
 
         beforeEach {
-            viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.home) as! HomeViewController
+            viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.home) as? HomeViewController
             
             let articleRepositoryMock = ArticleRepositoryMock()
             let articleListUseCaseMock = ArticleListUseCaseMock(repository: articleRepositoryMock)
@@ -31,7 +31,7 @@ class HomeViewControllerSpec: QuickSpec {
             tableProvider = HomeTableProvider()
             viewController.tableProvider = tableProvider
             
-            tableView = self.findView(withAccessibilityLabel: "tableView", in: viewController.view) as! UITableView
+            tableView = self.findView(withAccessibilityLabel: "tableView", in: viewController.view) as? UITableView
         }
         
         describe("when view loaded") {

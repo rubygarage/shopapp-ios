@@ -69,7 +69,7 @@ fileprivate extension UILabel {
         let attributed = NSMutableAttributedString(string: orderNumberLocalized)
         let highlightedText = String(orderNumber)
         let range = (orderNumberLocalized as NSString).range(of: highlightedText)
-        attributed.addAttribute(NSForegroundColorAttributeName, value: kOrderNumberColor, range: range)
+        attributed.addAttribute(NSAttributedString.Key.foregroundColor, value: kOrderNumberColor, range: range)
         attributedText = attributed
     }
 }
