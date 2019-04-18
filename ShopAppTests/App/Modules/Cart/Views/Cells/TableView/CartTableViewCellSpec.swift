@@ -36,12 +36,12 @@ class CartTableViewCellSpec: QuickSpec {
             delegateMock = CartTableCellDelegateMock()
             cell.cellDelegate = delegateMock
             
-            quantityLabel = self.findView(withAccessibilityLabel: "quantityLabel", in: cell) as! UILabel
-            quantityDropDownView = self.findView(withAccessibilityLabel: "quantityDropDownView", in: cell) as! QuantityDropDownView
-            variantImageView = self.findView(withAccessibilityLabel: "variantImageView", in: cell) as! UIImageView
-            variantTitleLabel = self.findView(withAccessibilityLabel: "variantTitleLabel", in: cell) as! UILabel
-            totalPriceLabel = self.findView(withAccessibilityLabel: "totalPriceLabel", in: cell) as! UILabel
-            pricePerOneItemLabel = self.findView(withAccessibilityLabel: "pricePerOneItemLabel", in: cell) as! UILabel
+            quantityLabel = self.findView(withAccessibilityLabel: "quantityLabel", in: cell) as? UILabel
+            quantityDropDownView = self.findView(withAccessibilityLabel: "quantityDropDownView", in: cell) as? QuantityDropDownView
+            variantImageView = self.findView(withAccessibilityLabel: "variantImageView", in: cell) as? UIImageView
+            variantTitleLabel = self.findView(withAccessibilityLabel: "variantTitleLabel", in: cell) as? UILabel
+            totalPriceLabel = self.findView(withAccessibilityLabel: "totalPriceLabel", in: cell) as? UILabel
+            pricePerOneItemLabel = self.findView(withAccessibilityLabel: "pricePerOneItemLabel", in: cell) as? UILabel
         }
         
         describe("when cell initialized") {

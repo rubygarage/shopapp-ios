@@ -8,9 +8,6 @@ target 'ShopApp' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'ShopApp_Shopify', :path => '../ShopAppShopify'
-  pod 'ShopApp_Gateway', :path => '.'
-
   # DI
   pod 'Swinject', '~> 2.6'
   pod 'SwinjectStoryboard', '~> 2.2'

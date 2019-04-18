@@ -61,11 +61,11 @@ struct HtmlStringMultimediaCompressor {
             let endRange = tail.range(of: kHtmlIframeCloseTag)!
             let iframe = String(tail[..<endRange.lowerBound])
             var iframeParts = iframe.split(separator: " ")
-            if let width = iframeParts.first(where: { $0.hasPrefix(kHtmlWidthPrefix) }), let index = iframeParts.index(of: width) {
+            if let width = iframeParts.first(where: { $0.hasPrefix(kHtmlWidthPrefix) }), let index = iframeParts.firstIndex(of: width) {
                 iframeParts.remove(at: index)
             }
             iframeParts.insert(Substring(String(format: kHtmlWidthFormat, width - kHtmlMarging)), at: 0)
-            if let height = iframeParts.first(where: { $0.hasPrefix(kHtmlHeightPrefix) }), let index = iframeParts.index(of: height) {
+            if let height = iframeParts.first(where: { $0.hasPrefix(kHtmlHeightPrefix) }), let index = iframeParts.firstIndex(of: height) {
                 iframeParts.remove(at: index)
             }
             iframeParts.insert(Substring(String(format: kHtmlHeightFormat, width / kHtmlIframeAspectRation)), at: 0)

@@ -27,7 +27,7 @@ class AccountTableViewCellSpec: QuickSpec {
             let dequeuedCell: AccountTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            policyTitleLabel = self.findView(withAccessibilityLabel: "policy", in: cell) as! UILabel
+            policyTitleLabel = self.findView(withAccessibilityLabel: "policy", in: cell) as? UILabel
         }
         
         describe("when cell initialized") {

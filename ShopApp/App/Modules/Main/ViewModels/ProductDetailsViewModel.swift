@@ -79,7 +79,7 @@ class ProductDetailsViewModel: BaseViewModel {
     
     func selectOption(with name: String, value: String) {
         let selectedOptionsNames = selectedOptions.map({ $0.name })
-        if let index = selectedOptionsNames.index(of: name) {
+        if let index = selectedOptionsNames.firstIndex(of: name) {
             selectedOptions[index].value = value
         }
         if let variants = product.value?.variants {

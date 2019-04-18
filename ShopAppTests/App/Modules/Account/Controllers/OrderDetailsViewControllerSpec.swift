@@ -19,7 +19,7 @@ class OrderDetailsViewControllerSpec: QuickSpec {
         var tableView: UITableView!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.orderDetails) as! OrderDetailsViewController
+            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.orderDetails) as? OrderDetailsViewController
             viewController.orderId = "order id"
             let repository = OrderRepositoryMock()
             let orderUseCaseMock = OrderUseCaseMock(repository: repository)
@@ -27,7 +27,7 @@ class OrderDetailsViewControllerSpec: QuickSpec {
             viewController.viewModel = viewModelMock
             tableProvider = OrderDetailsTableProvider()
             viewController.tableProvider = tableProvider
-            tableView = self.findView(withAccessibilityLabel: "orderDetailTableView", in: viewController.view) as! UITableView            
+            tableView = self.findView(withAccessibilityLabel: "orderDetailTableView", in: viewController.view) as? UITableView            
         }
         
         describe("when view loaded") {

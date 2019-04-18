@@ -73,7 +73,7 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel>, Ord
     // MARK: - Actions
     
     @objc override func backButtonDidPress() {
-        guard let index = navigationController?.viewControllers.index(of: self), navigationController?.viewControllers[index - 1] is CheckoutSuccessViewController else {
+        guard let index = navigationController?.viewControllers.firstIndex(of: self), navigationController?.viewControllers[index - 1] is CheckoutSuccessViewController else {
             navigationController?.popViewController(animated: true)
             return
         }

@@ -32,10 +32,10 @@ class ArticleTableViewCellSpec: QuickSpec {
             let dequeuedCell: ArticleTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            articleImageView = self.findView(withAccessibilityLabel: "image", in: cell) as! UIImageView
-            titleLabel = self.findView(withAccessibilityLabel: "title", in: cell) as! UILabel
-            descriptionLabel = self.findView(withAccessibilityLabel: "description", in: cell) as! UILabel
-            authorLabel = self.findView(withAccessibilityLabel: "author", in: cell) as! UILabel
+            articleImageView = self.findView(withAccessibilityLabel: "image", in: cell) as? UIImageView
+            titleLabel = self.findView(withAccessibilityLabel: "title", in: cell) as? UILabel
+            descriptionLabel = self.findView(withAccessibilityLabel: "description", in: cell) as? UILabel
+            authorLabel = self.findView(withAccessibilityLabel: "author", in: cell) as? UILabel
             separatorView = self.findView(withAccessibilityLabel: "separator", in: cell)
         }
         

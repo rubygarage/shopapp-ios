@@ -75,7 +75,7 @@ class CartViewModel: BaseViewModel {
     }
     
     private func removeFromData(with item: CartProduct) {
-        guard let index = data.value.index(where: { $0.productId == item.productId }) else {
+        guard let index = data.value.firstIndex(where: { $0.productId == item.productId }) else {
             return
         }
         data.value.remove(at: index)

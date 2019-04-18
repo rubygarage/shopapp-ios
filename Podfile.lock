@@ -1,14 +1,11 @@
 PODS:
-  - Alamofire (4.8.2)
   - AvatarImageView (2.2.0)
   - CoreStore (6.3.1)
   - Crashlytics (3.12.0):
     - Fabric (~> 1.9.0)
   - DropDown (2.3.13)
   - Fabric (1.9.0)
-  - KeychainSwift (14.0.0)
   - MBProgressHUD (1.1.0)
-  - Mobile-Buy-SDK (3.1.5)
   - Nimble (8.0.1)
   - Quick (2.0.0)
   - RxCocoa (4.5.0):
@@ -17,12 +14,6 @@ PODS:
   - SDWebImage (5.0.1):
     - SDWebImage/Core (= 5.0.1)
   - SDWebImage/Core (5.0.1)
-  - ShopApp_Gateway (1.0.5)
-  - ShopApp_Shopify (1.0.5):
-    - Alamofire (~> 4.8)
-    - KeychainSwift (~> 14.0)
-    - Mobile-Buy-SDK (= 3.1.5)
-    - ShopApp_Gateway (~> 1.0)
   - SKPhotoBrowser (6.1.0)
   - SwiftLint (0.31.0)
   - Swinject (2.6.0)
@@ -47,8 +38,6 @@ DEPENDENCIES:
   - RxCocoa (~> 4.5)
   - RxSwift (~> 4.5)
   - SDWebImage (~> 5.0)
-  - ShopApp_Gateway (from `.`)
-  - ShopApp_Shopify (from `../ShopAppShopify`)
   - SKPhotoBrowser (~> 6.1)
   - SwiftLint (~> 0.31)
   - Swinject (~> 2.6)
@@ -62,15 +51,12 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Alamofire
     - AvatarImageView
     - CoreStore
     - Crashlytics
     - DropDown
     - Fabric
-    - KeychainSwift
     - MBProgressHUD
-    - Mobile-Buy-SDK
     - Nimble
     - Quick
     - RxCocoa
@@ -87,29 +73,18 @@ SPEC REPOS:
     - "UIImage+Additions"
     - UIScrollView-InfiniteScroll
 
-EXTERNAL SOURCES:
-  ShopApp_Gateway:
-    :path: "."
-  ShopApp_Shopify:
-    :path: "../ShopAppShopify"
-
 SPEC CHECKSUMS:
-  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   AvatarImageView: afe8e7eb50181ca3f095e21034f245676b535c55
   CoreStore: 1ce7b77a95f0939d90b2d1e04e66a4a5bc1614d7
   Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   Fabric: f988e33c97f08930a413e08123064d2e5f68d655
-  KeychainSwift: d3cce449feb5198907aa3c50ae7409fdbd9d3e20
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  Mobile-Buy-SDK: ea84d7635b110fddffe37a445c020fc0c5e5a8d3
   Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
   Quick: ce1276c7c27ba2da3cb2fd0cde053c3648b3b22d
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SDWebImage: 27dd2c9ea07a2252f94557c9fbb6105ee94b74c9
-  ShopApp_Gateway: 2a12ae778507160df36272e69c2d9db2b27b1ec5
-  ShopApp_Shopify: d1b0cd328df8ee5aabce22bfcf04f1959cd3c7e7
   SKPhotoBrowser: 343de95d89dc7913763c5dda243cc6e606e4a168
   SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
   Swinject: 48a96cda93633cf2860697b4ce76ab5db9ebaca2
@@ -121,6 +96,6 @@ SPEC CHECKSUMS:
   "UIImage+Additions": da531911c34e298b46b567a28df03bb098af1389
   UIScrollView-InfiniteScroll: 3ef456bcbe759c19f510a383cff96e6647c98c98
 
-PODFILE CHECKSUM: 9ba3f9a2a4e496b4cf04d83e7e58c38718f55ce4
+PODFILE CHECKSUM: cd48f962b8e674f6e6f890a410a36d880aa28fb0
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.7.0.beta.3
