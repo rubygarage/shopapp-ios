@@ -35,9 +35,9 @@ class LastArrivalsCollectionViewCellSpec: QuickSpec {
             let dequeuedCell: LastArrivalsCollectionViewCell = collectionView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            productImageView = self.findView(withAccessibilityLabel: "imageView", in: cell) as! UIImageView
-            titleLabel = self.findView(withAccessibilityLabel: "titleLabel", in: cell) as! UILabel
-            priceLabel = self.findView(withAccessibilityLabel: "priceLabel", in: cell) as! UILabel
+            productImageView = self.findView(withAccessibilityLabel: "imageView", in: cell) as? UIImageView
+            titleLabel = self.findView(withAccessibilityLabel: "titleLabel", in: cell) as? UILabel
+            priceLabel = self.findView(withAccessibilityLabel: "priceLabel", in: cell) as? UILabel
         }
         
         describe("when cell configured") {

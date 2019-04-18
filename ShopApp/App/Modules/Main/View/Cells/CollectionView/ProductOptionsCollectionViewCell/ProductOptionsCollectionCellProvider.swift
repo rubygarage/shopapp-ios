@@ -39,8 +39,8 @@ class ProductOptionsCollectionCellProvider: NSObject, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let text = values[indexPath.row]
         let font = UIFont.systemFont(ofSize: UIFont.labelFontSize)
-        let attributes = [NSFontAttributeName: font]
-        let width = (text as NSString).size(attributes: attributes).width + optionCollectionViewCellAdditionalWidth
+        let attributes = [NSAttributedString.Key.font: font]
+        let width = (text as NSString).size(withAttributes: attributes).width + optionCollectionViewCellAdditionalWidth
         return CGSize(width: width, height: kOptionCollectionViewCellHeight)
     }
     

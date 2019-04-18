@@ -67,7 +67,7 @@ class OrderHeaderView: UIView {
     
     // MARK: - Actions
     
-    func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
+    @objc func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
         delegate?.headerView(self, didTapWith: section)
     }
 }

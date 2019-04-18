@@ -38,28 +38,28 @@ class ProductDetailsViewControllerSpec: QuickSpec {
         var descriptionContainerDidTapRecognizer: UITapGestureRecognizer!
         
         func setupViews() {
-            contentView = self.findView(withAccessibilityLabel: "contentView", in: viewController.view) as! TPKeyboardAvoidingScrollView
+            contentView = self.findView(withAccessibilityLabel: "contentView", in: viewController.view) as? TPKeyboardAvoidingScrollView
             detailImagesContainer = self.findView(withAccessibilityLabel: "detailImagesContainer", in: viewController.view)
-            titleLabel = self.findView(withAccessibilityLabel: "titleLabel", in: viewController.view) as! UILabel
-            descriptionStateImageView = self.findView(withAccessibilityLabel: "descriptionStateImageView", in: viewController.view) as! UIImageView
-            descriptionLabel = self.findView(withAccessibilityLabel: "descriptionLabel", in: viewController.view) as! UILabel
-            priceLabel = self.findView(withAccessibilityLabel: "priceLabel", in: viewController.view) as! UILabel
-            quantityTitleLabel = self.findView(withAccessibilityLabel: "quantityTitleLabel", in: viewController.view) as! UILabel
-            quantityDropDownView = self.findView(withAccessibilityLabel: "quantityDropDownView", in: viewController.view) as! QuantityDropDownView
-            addToCartButton = self.findView(withAccessibilityLabel: "addToCartButton", in: viewController.view) as! UIButton
+            titleLabel = self.findView(withAccessibilityLabel: "titleLabel", in: viewController.view) as? UILabel
+            descriptionStateImageView = self.findView(withAccessibilityLabel: "descriptionStateImageView", in: viewController.view) as? UIImageView
+            descriptionLabel = self.findView(withAccessibilityLabel: "descriptionLabel", in: viewController.view) as? UILabel
+            priceLabel = self.findView(withAccessibilityLabel: "priceLabel", in: viewController.view) as? UILabel
+            quantityTitleLabel = self.findView(withAccessibilityLabel: "quantityTitleLabel", in: viewController.view) as? UILabel
+            quantityDropDownView = self.findView(withAccessibilityLabel: "quantityDropDownView", in: viewController.view) as? QuantityDropDownView
+            addToCartButton = self.findView(withAccessibilityLabel: "addToCartButton", in: viewController.view) as? UIButton
             bottomView = self.findView(withAccessibilityLabel: "bottomView", in: viewController.view)
-            relatedItemsHeaderView = self.findView(withAccessibilityLabel: "relatedItemsHeaderView", in: viewController.view) as! SeeAllTableHeaderView
-            relatedItemsView = self.findView(withAccessibilityLabel: "relatedItemsView", in: viewController.view) as! LastArrivalsTableViewCell
-            collectionView = self.findView(withAccessibilityLabel: "collectionView", in: viewController.view) as! UICollectionView
+            relatedItemsHeaderView = self.findView(withAccessibilityLabel: "relatedItemsHeaderView", in: viewController.view) as? SeeAllTableHeaderView
+            relatedItemsView = self.findView(withAccessibilityLabel: "relatedItemsView", in: viewController.view) as? LastArrivalsTableViewCell
+            collectionView = self.findView(withAccessibilityLabel: "collectionView", in: viewController.view) as? UICollectionView
             descriptionView = self.findView(withAccessibilityLabel: "descriptionView", in: viewController.view)
             descriptionContainerViewHeightConstraint = descriptionLabel.superview?.constraints.filter({ $0.accessibilityLabel == "descriptionContainerViewHeightConstraint" }).first
             let containerView = self.findView(withAccessibilityLabel: "containerView", in: viewController.view)
             optionsContainerViewHeightConstraint = containerView?.constraints.filter({ $0.accessibilityLabel == "optionsContainerViewHeightConstraint" }).first
-            descriptionContainerDidTapRecognizer = descriptionView?.gestureRecognizers?.filter({ $0.accessibilityLabel == "descriptionContainerDidTap" }).first as! UITapGestureRecognizer
+            descriptionContainerDidTapRecognizer = descriptionView?.gestureRecognizers?.filter({ $0.accessibilityLabel == "descriptionContainerDidTap" }).first as? UITapGestureRecognizer
         }
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.productDetails) as! ProductDetailsViewController
+            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.productDetails) as? ProductDetailsViewController
             
             let navigationController = NavigationController(rootViewController: UIViewController())
             navigationController.pushViewController(viewController, animated: false)
@@ -339,7 +339,7 @@ class ProductDetailsViewControllerSpec: QuickSpec {
                 viewController.descriptionContainerDidTap(descriptionContainerDidTapRecognizer)
                 
                 expect(descriptionStateImageView.image) == #imageLiteral(resourceName: "minus")
-                expect(descriptionContainerViewHeightConstraint.constant) == descriptionLabel.frame.size.height + 40 // 40 is a productDescriptionAdditionalHeight constant
+                expect(descriptionContainerViewHeightConstraint.constant) == (descriptionLabel.frame.size.height + 40).rounded() // 40 is a productDescriptionAdditionalHeight constant
                 
                 viewController.descriptionContainerDidTap(descriptionContainerDidTapRecognizer)
                 

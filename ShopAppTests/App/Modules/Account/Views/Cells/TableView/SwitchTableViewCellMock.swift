@@ -28,13 +28,13 @@ class SwitchTableViewCellMock: QuickSpec {
             let dequeuedCell: SwitchTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            swicthDescriptionlabel = self.findView(withAccessibilityLabel: "description", in: cell) as! UILabel
-            switchControl = self.findView(withAccessibilityLabel: "switch", in: cell) as! UISwitch
+            swicthDescriptionlabel = self.findView(withAccessibilityLabel: "description", in: cell) as? UILabel
+            switchControl = self.findView(withAccessibilityLabel: "switch", in: cell) as? UISwitch
         }
         
         describe("when cell initialized") {
             it("should have correct selection style") {
-                expect(cell.selectionStyle.rawValue) == UITableViewCellSelectionStyle.none.rawValue
+                expect(cell.selectionStyle.rawValue) == UITableViewCell.SelectionStyle.none.rawValue
             }
         }
 

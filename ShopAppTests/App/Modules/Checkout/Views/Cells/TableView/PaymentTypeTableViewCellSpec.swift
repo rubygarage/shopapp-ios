@@ -28,14 +28,14 @@ class PaymentTypeTableViewCellSpec: QuickSpec {
             let dequeuedCell: PaymentTypeTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            paymentTypeLabel = self.findView(withAccessibilityLabel: "paymentTypeLabel", in: cell) as! UILabel
-            paymentTypeImage = self.findView(withAccessibilityLabel: "paymentTypeImage", in: cell) as! UIImageView
-            selectedImageView = self.findView(withAccessibilityLabel: "selectedImageView", in: cell) as! UIImageView
+            paymentTypeLabel = self.findView(withAccessibilityLabel: "paymentTypeLabel", in: cell) as? UILabel
+            paymentTypeImage = self.findView(withAccessibilityLabel: "paymentTypeImage", in: cell) as? UIImageView
+            selectedImageView = self.findView(withAccessibilityLabel: "selectedImageView", in: cell) as? UIImageView
         }
         
         describe("when cell initialized") {
             it("should have correct selection style") {
-                expect(cell.selectionStyle.rawValue) == UITableViewCellSelectionStyle.none.rawValue
+                expect(cell.selectionStyle.rawValue) == UITableViewCell.SelectionStyle.none.rawValue
             }
             
             it("should have correct payment type label text") {

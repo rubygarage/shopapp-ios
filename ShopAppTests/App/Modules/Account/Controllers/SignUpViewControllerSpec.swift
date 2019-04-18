@@ -26,7 +26,7 @@ class SignUpViewControllerSpec: QuickSpec {
         var acceptPoliciesLabel: TTTAttributedLabel!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.signUp) as! SignUpViewController
+            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.signUp) as? SignUpViewController
             
             let shopRepositoryMock = ShopRepositoryMock()
             let authentificationRepositoryMock = AuthentificationRepositoryMock()
@@ -36,13 +36,13 @@ class SignUpViewControllerSpec: QuickSpec {
             viewModelMock.isPoliciesLoadingStarted = false
             viewController.viewModel = viewModelMock
             
-            emailTextFieldView = self.findView(withAccessibilityLabel: "email", in: viewController.view) as! InputTextFieldView
-            nameTextFieldView = self.findView(withAccessibilityLabel: "name", in: viewController.view) as! InputTextFieldView
-            lastNameTextFieldView = self.findView(withAccessibilityLabel: "lastName", in: viewController.view) as! InputTextFieldView
-            phoneTextFieldView = self.findView(withAccessibilityLabel: "phone", in: viewController.view) as! InputTextFieldView
-            passwordTextFieldView = self.findView(withAccessibilityLabel: "password", in: viewController.view) as! InputTextFieldView
-            signUpButton = self.findView(withAccessibilityLabel: "signUp", in: viewController.view) as! BlackButton
-            acceptPoliciesLabel = self.findView(withAccessibilityLabel: "acceptPolicies", in: viewController.view) as! TTTAttributedLabel
+            emailTextFieldView = self.findView(withAccessibilityLabel: "email", in: viewController.view) as? InputTextFieldView
+            nameTextFieldView = self.findView(withAccessibilityLabel: "name", in: viewController.view) as? InputTextFieldView
+            lastNameTextFieldView = self.findView(withAccessibilityLabel: "lastName", in: viewController.view) as? InputTextFieldView
+            phoneTextFieldView = self.findView(withAccessibilityLabel: "phone", in: viewController.view) as? InputTextFieldView
+            passwordTextFieldView = self.findView(withAccessibilityLabel: "password", in: viewController.view) as? InputTextFieldView
+            signUpButton = self.findView(withAccessibilityLabel: "signUp", in: viewController.view) as? BlackButton
+            acceptPoliciesLabel = self.findView(withAccessibilityLabel: "acceptPolicies", in: viewController.view) as? TTTAttributedLabel
         }
         
         describe("when view loaded") {
@@ -75,7 +75,7 @@ class SignUpViewControllerSpec: QuickSpec {
             }
             
             it("should have accept policies label with correct text and delegate") {
-                expect(acceptPoliciesLabel.text) == "Label.AcceptPoliciesAttributed".localizable
+                expect(acceptPoliciesLabel.text) === "Label.AcceptPoliciesAttributed".localizable
                 expect(acceptPoliciesLabel.delegate) === viewController
             }
             

@@ -26,7 +26,7 @@ class CartButtonViewSpec: QuickSpec {
             viewModelMock = CartButtonViewModelMock(cartProductListUseCase: cartProductListUseCaseMock)
             view.viewModel = viewModelMock
             
-            itemsCountLabel = self.findView(withAccessibilityLabel: "count", in: view) as! UILabel
+            itemsCountLabel = self.findView(withAccessibilityLabel: "count", in: view) as? UILabel
             itemsCountBackgroundView = self.findView(withAccessibilityLabel: "background", in: view)
         }
         

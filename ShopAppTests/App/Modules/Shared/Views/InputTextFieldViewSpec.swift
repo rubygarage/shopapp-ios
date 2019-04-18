@@ -23,9 +23,9 @@ class InputTextFieldViewSpec: QuickSpec {
         beforeEach {
             view = InputTextFieldView()
             
-            textField = self.findView(withAccessibilityLabel: "textField", in: view) as! UITextField
-            errorMessageLabel = self.findView(withAccessibilityLabel: "errorMessage", in: view) as! UILabel
-            showPasswordButton = self.findView(withAccessibilityLabel: "showPassword", in: view) as! UIButton
+            textField = self.findView(withAccessibilityLabel: "textField", in: view) as? UITextField
+            errorMessageLabel = self.findView(withAccessibilityLabel: "errorMessage", in: view) as? UILabel
+            showPasswordButton = self.findView(withAccessibilityLabel: "showPassword", in: view) as? UIButton
             underlineView = self.findView(withAccessibilityLabel: "underline", in: view)
             underlineViewHeightConstraint = underlineView.constraints.filter({ $0.accessibilityLabel == "underlineHeight" }).first
         }

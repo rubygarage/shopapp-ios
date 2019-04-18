@@ -19,13 +19,13 @@ class SortVariantsViewControllerSpec: QuickSpec {
         var tableView: UITableView!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.sortModal) as! SortVariantsViewController
+            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.sortModal) as? SortVariantsViewController
             
             tableProvider = SortVariantsTableProvider()
             viewController.tableProvider = tableProvider
             viewController.selectedSortingValue = .name
             
-            tableView = self.findView(withAccessibilityLabel: "tableView", in: viewController.view) as! UITableView
+            tableView = self.findView(withAccessibilityLabel: "tableView", in: viewController.view) as? UITableView
         }
         
         describe("when view loaded") {

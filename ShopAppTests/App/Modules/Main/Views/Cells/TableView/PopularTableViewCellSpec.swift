@@ -29,7 +29,7 @@ class PopularTableViewCellSpec: QuickSpec {
             let dequeuedCell: PopularTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            collectionView = self.findView(withAccessibilityLabel: "collectionView", in: cell) as! UICollectionView
+            collectionView = self.findView(withAccessibilityLabel: "collectionView", in: cell) as? UICollectionView
             collectionViewHeightConstraint = collectionView.constraints.filter({ $0.accessibilityLabel == "collectionViewHeightConstraint" }).first
         }
         

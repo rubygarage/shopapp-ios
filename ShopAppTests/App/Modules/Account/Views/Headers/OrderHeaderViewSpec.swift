@@ -31,8 +31,8 @@ class OrderHeaderViewSpec: QuickSpec {
             
             view = OrderHeaderView(section: 0, order: order)
             
-            numberLabel = self.findView(withAccessibilityLabel: "number", in: view) as! UILabel
-            dateLabel = self.findView(withAccessibilityLabel: "date", in: view) as! UILabel
+            numberLabel = self.findView(withAccessibilityLabel: "number", in: view) as? UILabel
+            dateLabel = self.findView(withAccessibilityLabel: "date", in: view) as? UILabel
         }
         
         describe("when view initialized") {

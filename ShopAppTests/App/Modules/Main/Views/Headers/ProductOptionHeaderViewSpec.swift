@@ -22,7 +22,7 @@ class ProductOptionHeaderViewSpec: QuickSpec {
             let provider = ProductOptionsCollectionProvider()
             
             collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-            collectionView.registerNibForSupplementaryView(ProductOptionHeaderView.self, of: UICollectionElementKindSectionHeader)
+            collectionView.registerNibForSupplementaryView(ProductOptionHeaderView.self, of: UICollectionView.elementKindSectionHeader)
             collectionView.dataSource = provider
             
             let option = ProductOption()
@@ -33,9 +33,9 @@ class ProductOptionHeaderViewSpec: QuickSpec {
             _ = collectionView.numberOfSections
             
             let indexPath = IndexPath(row: 0, section: 0)
-            headerView = provider.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader, at: indexPath) as! ProductOptionHeaderView
+            headerView = provider.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as? ProductOptionHeaderView
             
-            optionNameLabel = self.findView(withAccessibilityLabel: "label", in: headerView) as! UILabel
+            optionNameLabel = self.findView(withAccessibilityLabel: "label", in: headerView) as? UILabel
         }
         
         describe("when header view configured") {

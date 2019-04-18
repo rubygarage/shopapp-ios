@@ -26,7 +26,7 @@ class CheckoutViewControllerSpec: QuickSpec {
         var placeOrderButton: UIButton!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.checkout) as! CheckoutViewController
+            viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.checkout) as? CheckoutViewController
             
             let paymentsRepositoryMock = PaymentsRepositoryMock()
             checkoutUseCaseMock = CheckoutUseCaseMock(repository: paymentsRepositoryMock)
@@ -47,8 +47,8 @@ class CheckoutViewControllerSpec: QuickSpec {
             tableProvider = CheckoutTableProvider()
             viewController.tableProvider = tableProvider
             
-            tableView = self.findView(withAccessibilityLabel: "tableView", in: viewController.view) as! UITableView
-            placeOrderButton = self.findView(withAccessibilityLabel: "placeOrderButton", in: viewController.view) as! UIButton
+            tableView = self.findView(withAccessibilityLabel: "tableView", in: viewController.view) as? UITableView
+            placeOrderButton = self.findView(withAccessibilityLabel: "placeOrderButton", in: viewController.view) as? UIButton
         }
         
         describe("when view loaded") {

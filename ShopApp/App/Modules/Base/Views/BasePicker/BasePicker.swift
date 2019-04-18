@@ -23,7 +23,7 @@ class BasePicker: PlaceholderedTextField, UIPickerViewDataSource, UIPickerViewDe
         didSet {
             pickerView.reloadAllComponents()
             if let customData = customData, let text = text {
-                pickerView.selectRow(customData.index(of: text) ?? 0, inComponent: 0, animated: false)
+                pickerView.selectRow(customData.firstIndex(of: text) ?? 0, inComponent: 0, animated: false)
             }
         }
     }
@@ -41,7 +41,7 @@ class BasePicker: PlaceholderedTextField, UIPickerViewDataSource, UIPickerViewDe
                 return
             }
             setPlaceholderPosition()
-            pickerView.selectRow(data.index(of: text) ?? 0, inComponent: 0, animated: false)
+            pickerView.selectRow(data.firstIndex(of: text) ?? 0, inComponent: 0, animated: false)
         }
     }
     

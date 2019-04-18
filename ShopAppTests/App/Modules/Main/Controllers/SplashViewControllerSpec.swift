@@ -19,7 +19,7 @@ class SplashViewControllerSpec: QuickSpec {
         var loadingLabel: UILabel!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.navigation, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.splash) as! SplashViewController
+            viewController = UIStoryboard(name: StoryboardNames.navigation, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.splash) as? SplashViewController
             
             let cartRepositoryMock = CartRepositoryMock()
             let cartProductListUseCaseMock = CartProductListUseCaseMock(repository: cartRepositoryMock)
@@ -31,8 +31,8 @@ class SplashViewControllerSpec: QuickSpec {
             viewModelMock = SplashViewModelMock(cartProductListUseCase: cartProductListUseCaseMock, cartValidationUseCase: cartValidationUseCaseMock, deleteCartProductUseCase: deleteCartProductUseCaseMock)
             viewController.viewModel = viewModelMock
             
-            titleLabel = self.findView(withAccessibilityLabel: "titleLabel", in: viewController.view) as! UILabel
-            loadingLabel = self.findView(withAccessibilityLabel: "loadingLabel", in: viewController.view) as! UILabel
+            titleLabel = self.findView(withAccessibilityLabel: "titleLabel", in: viewController.view) as? UILabel
+            loadingLabel = self.findView(withAccessibilityLabel: "loadingLabel", in: viewController.view) as? UILabel
         }
         
         describe("when view loaded") {

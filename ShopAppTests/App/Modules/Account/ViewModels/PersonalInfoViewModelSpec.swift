@@ -161,7 +161,7 @@ class PersonalInfoViewModelSpec: QuickSpec {
                         })
                         .disposed(by: disposeBag)
                     
-                    viewModel.saveChangesPressed.onNext()
+                    viewModel.saveChangesPressed.onNext(())
                 }
             }
             
@@ -190,7 +190,7 @@ class PersonalInfoViewModelSpec: QuickSpec {
                             .disposed(by: disposeBag)
                         
                         updateCustomerUseCaseMock.isNeedToReturnError = false
-                        viewModel.saveChangesPressed.onNext()
+                        viewModel.saveChangesPressed.onNext(())
                         
                         expect(states.count) == 2
                         expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -208,7 +208,7 @@ class PersonalInfoViewModelSpec: QuickSpec {
                             .disposed(by: disposeBag)
                         
                         updateCustomerUseCaseMock.isNeedToReturnError = true
-                        viewModel.saveChangesPressed.onNext()
+                        viewModel.saveChangesPressed.onNext(())
                         
                         expect(states.count) == 2
                         expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)

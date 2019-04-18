@@ -24,19 +24,19 @@ class LinkViewControllerSpec: QuickSpec {
         var resendUnderlineView: UIView!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.link) as! LinkViewController
+            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.link) as? LinkViewController
             
             let repositoryMock = AuthentificationRepositoryMock()
             let resetPasswordUseCaseMock = ResetPasswordUseCaseMock(repository: repositoryMock)
             viewModelMock = ForgotPasswordViewModelMock(resetPasswordUseCase: resetPasswordUseCaseMock)
             viewController.viewModel = viewModelMock
             
-            titleLabel = self.findView(withAccessibilityLabel: "title", in: viewController.view) as! UILabel
-            emailLabel = self.findView(withAccessibilityLabel: "email", in: viewController.view) as! UILabel
-            descriptionLabel = self.findView(withAccessibilityLabel: "description", in: viewController.view) as! UILabel
-            additionalTitleLabel = self.findView(withAccessibilityLabel: "additionalTitle", in: viewController.view) as! UILabel
-            additionalDescriptionLabel = self.findView(withAccessibilityLabel: "additionalDescription", in: viewController.view) as! UILabel
-            resendButton = self.findView(withAccessibilityLabel: "resend", in: viewController.view) as! UnderlinedButton
+            titleLabel = self.findView(withAccessibilityLabel: "title", in: viewController.view) as? UILabel
+            emailLabel = self.findView(withAccessibilityLabel: "email", in: viewController.view) as? UILabel
+            descriptionLabel = self.findView(withAccessibilityLabel: "description", in: viewController.view) as? UILabel
+            additionalTitleLabel = self.findView(withAccessibilityLabel: "additionalTitle", in: viewController.view) as? UILabel
+            additionalDescriptionLabel = self.findView(withAccessibilityLabel: "additionalDescription", in: viewController.view) as? UILabel
+            resendButton = self.findView(withAccessibilityLabel: "resend", in: viewController.view) as? UnderlinedButton
             resendUnderlineView = self.findView(withAccessibilityLabel: "resendUnderlineView", in: viewController.view)
         }
         

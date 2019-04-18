@@ -19,8 +19,8 @@ class CriticalErrorViewSpec: QuickSpec {
         
         beforeEach {
             view = CriticalErrorView()
-            errorTitleLabel = self.findView(withAccessibilityLabel: "errorTitleLabel", in: view) as! UILabel
-            backButton = self.findView(withAccessibilityLabel: "backButton", in: view) as! UIButton
+            errorTitleLabel = self.findView(withAccessibilityLabel: "errorTitleLabel", in: view) as? UILabel
+            backButton = self.findView(withAccessibilityLabel: "backButton", in: view) as? UIButton
         }
         
         describe("when view created") {

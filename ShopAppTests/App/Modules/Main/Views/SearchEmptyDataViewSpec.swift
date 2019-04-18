@@ -19,7 +19,7 @@ class SearchEmptyDataViewSpec: QuickSpec {
         beforeEach {
             view = SearchEmptyDataView()
             
-            emptySearchLabel = self.findView(withAccessibilityLabel: "emptySearch", in: view) as! UILabel
+            emptySearchLabel = self.findView(withAccessibilityLabel: "emptySearch", in: view) as? UILabel
         }
         
         describe("when view initialized") {

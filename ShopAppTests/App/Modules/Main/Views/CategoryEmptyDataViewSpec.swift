@@ -19,7 +19,7 @@ class CategoryEmptyDataViewSpec: QuickSpec {
         beforeEach {
             view = CategoryEmptyDataView()
             
-            emptyCategoryLabel = self.findView(withAccessibilityLabel: "emptyCategory", in: view) as! UILabel
+            emptyCategoryLabel = self.findView(withAccessibilityLabel: "emptyCategory", in: view) as? UILabel
         }
         
         describe("when view initialized") {

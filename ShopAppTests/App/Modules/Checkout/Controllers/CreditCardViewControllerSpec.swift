@@ -29,7 +29,7 @@ class CreditCardViewControllerSpec: QuickSpec {
         var card: CreditCard!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.creditCard) as! CreditCardViewController
+            viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.creditCard) as? CreditCardViewController
             
             viewModelMock = CreditCardViewModelMock()
             viewController.viewModel = viewModelMock
@@ -43,15 +43,15 @@ class CreditCardViewControllerSpec: QuickSpec {
             card.expireYear = "20"
             viewController.card = card
             
-            holderNameTextFieldView = self.findView(withAccessibilityLabel: "holderNameTextFieldView", in: viewController.view) as! InputTextFieldView
-            cardNumberTextFieldView = self.findView(withAccessibilityLabel: "cardNumberTextFieldView", in: viewController.view) as! InputTextFieldView
-            securityCodeTextFieldView = self.findView(withAccessibilityLabel: "securityCodeTextFieldView", in: viewController.view) as! InputTextFieldView
-            expirationDateLabel = self.findView(withAccessibilityLabel: "expirationDateLabel", in: viewController.view) as! UILabel
-            monthExpirationView = self.findView(withAccessibilityLabel: "monthExpirationView", in: viewController.view) as! MonthExpiryDatePicker
-            yearExpirationView = self.findView(withAccessibilityLabel: "yearExpirationView", in: viewController.view) as! YearExpiryDatePicker
-            submitButton = self.findView(withAccessibilityLabel: "submitButton", in: viewController.view) as! BlackButton
-            acceptedCardTypesLabel = self.findView(withAccessibilityLabel: "acceptedCardTypesLabel", in: viewController.view) as! UILabel
-            cardTypeImageView = self.findView(withAccessibilityLabel: "cardTypeImageView", in: viewController.view) as! UIImageView
+            holderNameTextFieldView = self.findView(withAccessibilityLabel: "holderNameTextFieldView", in: viewController.view) as? InputTextFieldView
+            cardNumberTextFieldView = self.findView(withAccessibilityLabel: "cardNumberTextFieldView", in: viewController.view) as? InputTextFieldView
+            securityCodeTextFieldView = self.findView(withAccessibilityLabel: "securityCodeTextFieldView", in: viewController.view) as? InputTextFieldView
+            expirationDateLabel = self.findView(withAccessibilityLabel: "expirationDateLabel", in: viewController.view) as? UILabel
+            monthExpirationView = self.findView(withAccessibilityLabel: "monthExpirationView", in: viewController.view) as? MonthExpiryDatePicker
+            yearExpirationView = self.findView(withAccessibilityLabel: "yearExpirationView", in: viewController.view) as? YearExpiryDatePicker
+            submitButton = self.findView(withAccessibilityLabel: "submitButton", in: viewController.view) as? BlackButton
+            acceptedCardTypesLabel = self.findView(withAccessibilityLabel: "acceptedCardTypesLabel", in: viewController.view) as? UILabel
+            cardTypeImageView = self.findView(withAccessibilityLabel: "cardTypeImageView", in: viewController.view) as? UIImageView
         }
         
         describe("when view loaded") {

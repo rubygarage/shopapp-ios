@@ -22,13 +22,13 @@ class PolicyViewControllerSpec: QuickSpec {
             policy.title = "Title"
             policy.body = "Body"
             
-            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.policy) as! PolicyViewController
+            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.policy) as? PolicyViewController
             viewController.policy = policy
             
             let navigationController = NavigationController(rootViewController: UIViewController())
             navigationController.pushViewController(viewController, animated: false)
             
-            policyTextView = self.findView(withAccessibilityLabel: "policy", in: viewController.view) as! UITextView
+            policyTextView = self.findView(withAccessibilityLabel: "policy", in: viewController.view) as? UITextView
         }
         
         describe("when view loaded") {

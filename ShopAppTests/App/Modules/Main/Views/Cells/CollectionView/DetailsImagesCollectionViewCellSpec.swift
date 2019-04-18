@@ -31,7 +31,7 @@ class DetailsImagesCollectionViewCellSpec: QuickSpec {
             let dequeuedCell: DetailsImagesCollectionViewCell = collectionView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            productImageView = self.findView(withAccessibilityLabel: "productImageView", in: cell) as! UIImageView
+            productImageView = self.findView(withAccessibilityLabel: "productImageView", in: cell) as? UIImageView
         }
         
         describe("when cell configured") {

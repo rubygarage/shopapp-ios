@@ -81,7 +81,7 @@ class CheckoutViewModelSpec: QuickSpec {
                             })
                         .disposed(by: disposeBag)
                         
-                        viewModel.placeOrderPressed.onNext()
+                        viewModel.placeOrderPressed.onNext(())
                         
                         expect(checkoutUseCaseMock.isPayWithCreditCardStarted) == true
                         expect(viewModel.order) === order
@@ -102,7 +102,7 @@ class CheckoutViewModelSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
-                        viewModel.placeOrderPressed.onNext()
+                        viewModel.placeOrderPressed.onNext(())
                         
                         expect(checkoutUseCaseMock.isPayWithCreditCardStarted) == true
                         expect(viewModel.order).to(beNil())
@@ -131,7 +131,7 @@ class CheckoutViewModelSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
-                        viewModel.placeOrderPressed.onNext()
+                        viewModel.placeOrderPressed.onNext(())
                         
                         expect(checkoutUseCaseMock.isSetupApplePayStarted) == true
                         expect(viewModel.order) === order
@@ -152,7 +152,7 @@ class CheckoutViewModelSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
-                        viewModel.placeOrderPressed.onNext()
+                        viewModel.placeOrderPressed.onNext(())
                         
                         expect(checkoutUseCaseMock.isSetupApplePayStarted) == true
                         expect(viewModel.order).to(beNil())

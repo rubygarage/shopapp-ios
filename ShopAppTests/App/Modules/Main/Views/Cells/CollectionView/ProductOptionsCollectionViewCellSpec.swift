@@ -36,7 +36,7 @@ class ProductOptionsCollectionViewCellSpec: QuickSpec {
             let dequeuedCell: ProductOptionsCollectionViewCell = controllerCollectionView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            collectionView = self.findView(withAccessibilityLabel: "collectionView", in: cell) as! UICollectionView
+            collectionView = self.findView(withAccessibilityLabel: "collectionView", in: cell) as? UICollectionView
         }
         
         describe("when cell configured") {

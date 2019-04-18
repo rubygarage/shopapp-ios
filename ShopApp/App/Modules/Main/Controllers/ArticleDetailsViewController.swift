@@ -81,8 +81,8 @@ class ArticleDetailsViewController: BaseViewController<ArticleDetailsViewModel>,
     
     // MARK: - UIWebViewDelegate
     
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        guard navigationType.rawValue == UIWebViewNavigationType.linkClicked.rawValue else {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
+        guard navigationType.rawValue == UIWebView.NavigationType.linkClicked.rawValue else {
             return true
         }
         if let url = request.url {

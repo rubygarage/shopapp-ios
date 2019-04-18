@@ -21,8 +21,8 @@ class OrderListEmptyDataViewSpec: QuickSpec {
         beforeEach {
             view = OrderListEmptyDataView()
             
-            emptyOrderListLabel = self.findView(withAccessibilityLabel: "emptyOrderList", in: view) as! UILabel
-            startShoppingButton = self.findView(withAccessibilityLabel: "startShopping", in: view) as! UIButton
+            emptyOrderListLabel = self.findView(withAccessibilityLabel: "emptyOrderList", in: view) as? UILabel
+            startShoppingButton = self.findView(withAccessibilityLabel: "startShopping", in: view) as? UIButton
         }
         
         describe("when view initialized") {

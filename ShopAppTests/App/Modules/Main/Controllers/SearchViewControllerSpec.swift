@@ -19,7 +19,7 @@ class SearchViewControllerSpec: QuickSpec {
         var categoryListContainerView: UIView!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.search) as! SearchViewController
+            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.search) as? SearchViewController
             
             _ = NavigationController(rootViewController: viewController)
             
@@ -50,7 +50,7 @@ class SearchViewControllerSpec: QuickSpec {
             }
             
             it("should have correct content keyboard dismiss mode of collection viwe") {
-                expect(viewController.collectionView.keyboardDismissMode.rawValue) == UIScrollViewKeyboardDismissMode.onDrag.rawValue
+                expect(viewController.collectionView.keyboardDismissMode.rawValue) == UIScrollView.KeyboardDismissMode.onDrag.rawValue
             }
         }
         
@@ -60,7 +60,7 @@ class SearchViewControllerSpec: QuickSpec {
             beforeEach {
                 viewController.viewWillAppear(false)
                 
-                titleView = viewController.navigationController!.navigationBar.subviews.last! as! SearchTitleView
+                titleView = viewController.navigationController!.navigationBar.subviews.last! as? SearchTitleView
             }
             
             it("needs to setup title view's delegate") {
@@ -151,7 +151,7 @@ class SearchViewControllerSpec: QuickSpec {
                 viewModelMock.isNeedToReturnData = true
                 viewModelMock.reloadData()
                 
-                titleView = viewController.navigationController!.navigationBar.subviews.last! as! SearchTitleView
+                titleView = viewController.navigationController!.navigationBar.subviews.last! as? SearchTitleView
                 titleView.textField.sendActions(for: .editingDidBegin)
                 
                 let indexPath = IndexPath(item: 0, section: 0)
@@ -178,7 +178,7 @@ class SearchViewControllerSpec: QuickSpec {
             it("needs to setup title view's alpha") {
                 viewController.viewWillAppear(false)
                 
-                let categoryListViewController = viewController.childViewControllers.first! as! CategoryListViewController
+                let categoryListViewController = viewController.children.first! as! CategoryListViewController
                 categoryListViewController.collectionProvider = CategoryListCollectionProvider()
                 categoryListViewController.collectionProvider.delegate = categoryListViewController
                 categoryListViewController.collectionView.dataSource = categoryListViewController.collectionProvider

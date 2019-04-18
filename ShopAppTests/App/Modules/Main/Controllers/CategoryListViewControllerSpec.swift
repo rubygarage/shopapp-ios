@@ -18,7 +18,7 @@ class CategoryListViewControllerSpec: QuickSpec {
         var viewModelMock: CategoryListViewModelMock!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.categoryList) as! CategoryListViewController
+            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.categoryList) as? CategoryListViewController
             
             let repository = CategoryRepositoryMock()
             let categoryListUseCaseMock = CategoryListUseCaseMock(repository: repository)

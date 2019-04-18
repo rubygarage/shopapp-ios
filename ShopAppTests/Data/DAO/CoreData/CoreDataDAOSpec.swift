@@ -62,7 +62,7 @@ class CoreDataDAOSpec: QuickSpec {
                             var numberOfEntities: Int?
                             
                             CoreStore.perform(asynchronous: { transaction in
-                                numberOfEntities = transaction.fetchCount(From<CartProductEntity>())
+                                numberOfEntities = try transaction.fetchCount(From<CartProductEntity>())
                             }, completion: { _ in
                                 expect(numberOfEntities) == 1
                                 
@@ -81,7 +81,7 @@ class CoreDataDAOSpec: QuickSpec {
                                 var entities: [CartProductEntity]?
                                 
                                 CoreStore.perform(asynchronous: { transaction in
-                                    entities = transaction.fetchAll(From<CartProductEntity>())
+                                    entities = try transaction.fetchAll(From<CartProductEntity>())
                                 }, completion: { _ in
                                     expect(entities?.count) == 1
                                     expect(entities?.first?.quantity) == 2
@@ -109,7 +109,7 @@ class CoreDataDAOSpec: QuickSpec {
                             var numberOfEntities: Int?
                             
                             CoreStore.perform(asynchronous: { transaction in
-                                numberOfEntities = transaction.fetchCount(From<CartProductEntity>())
+                                numberOfEntities = try transaction.fetchCount(From<CartProductEntity>())
                             }, completion: { _ in
                                 expect(numberOfEntities) == 0
                                 
@@ -140,9 +140,9 @@ class CoreDataDAOSpec: QuickSpec {
                             var existProductVariantIds: [String?]?
                             
                             CoreStore.perform(asynchronous: { transaction in
-                                numberOfEntities = transaction.fetchCount(From<CartProductEntity>())
-                                let all = transaction.fetchAll(From<CartProductEntity>())
-                                existProductVariantIds = all?.map({ $0.productVariant?.id })
+                                numberOfEntities = try transaction.fetchCount(From<CartProductEntity>())
+                                let all = try transaction.fetchAll(From<CartProductEntity>())
+                                existProductVariantIds = all.map({ $0.productVariant?.id })
                             }, completion: { _ in
                                 expect(numberOfEntities) == 1
                                 expect(existProductVariantIds).to(equal([productVariantId]))
@@ -166,7 +166,7 @@ class CoreDataDAOSpec: QuickSpec {
                             var numberOfEntities: Int?
                             
                             CoreStore.perform(asynchronous: { transaction in
-                                numberOfEntities = transaction.fetchCount(From<CartProductEntity>())
+                                numberOfEntities = try transaction.fetchCount(From<CartProductEntity>())
                             }, completion: { _ in
                                 expect(numberOfEntities) == 0
 
@@ -194,7 +194,7 @@ class CoreDataDAOSpec: QuickSpec {
                             var entity: CartProductEntity?
                             
                             CoreStore.perform(asynchronous: { transaction in
-                                entity = transaction.fetchOne(From<CartProductEntity>())
+                                entity = try transaction.fetchOne(From<CartProductEntity>())
                             }, completion: { _ in
                                 expect(entity?.quantity) == Int64(quantity)
                                 

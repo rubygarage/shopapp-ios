@@ -9,48 +9,38 @@ target 'ShopApp' do
   use_frameworks!
 
   # DI
-  pod 'Swinject', '~> 2.2'
-  pod 'SwinjectStoryboard', '~> 1.1'
+  pod 'Swinject', '~> 2.6'
+  pod 'SwinjectStoryboard', '~> 2.2'
 
   # UI
-  pod 'SDWebImage', '~> 4.1'
-  pod 'MBProgressHUD', '~> 1.0'
-  pod 'UIScrollView-InfiniteScroll', '~> 1.0'
-  pod 'SKPhotoBrowser', '~> 5.0'
+  pod 'SDWebImage', '~> 5.0'
+  pod 'MBProgressHUD', '~> 1.1'
+  pod 'UIScrollView-InfiniteScroll', '~> 1.1'
+  pod 'SKPhotoBrowser', '~> 6.1'
   pod 'TPKeyboardAvoiding', '~> 1.3'
-  pod 'Toaster', '~> 2.1'
-  pod 'AvatarImageView', '~> 2.1'
-  pod 'SwipeCellKit', '~> 2.0'
+  pod 'Toaster', '~> 2.2'
+  pod 'AvatarImageView', '~> 2.2'
+  pod 'SwipeCellKit', '~> 2.6'
   pod 'UIImage+Additions', '~> 2.1'
   pod 'TTTAttributedLabel', '~> 2.0'
-  pod 'DropDown', '~> 2.0'
+  pod 'DropDown', '~> 2.3'
 
   # Database
-  pod 'CoreStore', '~> 4.2'
+  pod 'CoreStore', '~> 6.3'
 
   # Architecture
-  pod 'RxSwift', '~> 4.1'
-  pod 'RxCocoa', '~> 4.1'
+  pod 'RxSwift', '~> 4.5'
+  pod 'RxCocoa', '~> 4.5'
 
   # Crash&Beta
-  pod 'Fabric', '~> 1.7'
-  pod 'Crashlytics', '~> 3.9'
+  pod 'Fabric', '~> 1.9'
+  pod 'Crashlytics', '~> 3.12'
 
   # Developer tools
-  pod 'SwiftLint', '~> 0.24'
-
-  post_install do |installer|
-    installer.pods_project.targets.each do |target|
-      if ['AvatarImageView', 'SKPhotoBrowser', 'SwipeCellKit'].include? target.name
-        target.build_configurations.each do |config|
-          config.build_settings['SWIFT_VERSION'] = '4.0'
-        end
-      end
-    end
-  end
+  pod 'SwiftLint', '~> 0.31'
 
   target 'ShopAppTests' do
-    pod 'Quick', '~> 1.2'
-    pod 'Nimble', '~> 7.0'
+    pod 'Quick', '~> 2.0'
+    pod 'Nimble', '~> 8.0'
   end
 end

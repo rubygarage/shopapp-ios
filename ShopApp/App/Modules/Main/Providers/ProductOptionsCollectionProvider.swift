@@ -40,7 +40,7 @@ class ProductOptionsCollectionProvider: NSObject, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView: ProductOptionHeaderView = collectionView.dequeueReusableSupplementaryViewForIndexPath(indexPath, of: UICollectionElementKindSectionHeader)
+        let headerView: ProductOptionHeaderView = collectionView.dequeueReusableSupplementaryViewForIndexPath(indexPath, of: UICollectionView.elementKindSectionHeader)
         let text = options[indexPath.section].name ?? ""
         headerView.configure(with: text)
         return headerView

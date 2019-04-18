@@ -20,16 +20,16 @@ class ChangePasswordViewControllerSpec: QuickSpec {
         var updateButton: BlackButton!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.changePassword) as! ChangePasswordViewController
+            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.changePassword) as? ChangePasswordViewController
             
             let repositoryMock = CustomerRepositoryMock()
             let updateCustomerUseCaseMock = UpdateCustomerUseCaseMock(repository: repositoryMock)
             viewModelMock = ChangePasswordViewModelMock(updateCustomerUseCase: updateCustomerUseCaseMock)
             viewController.viewModel = viewModelMock
             
-            newPasswordTextFieldView = self.findView(withAccessibilityLabel: "newPassword", in: viewController.view) as! InputTextFieldView
-            confirmPasswordTextFieldView = self.findView(withAccessibilityLabel: "confirmPassword", in: viewController.view) as! InputTextFieldView
-            updateButton = self.findView(withAccessibilityLabel: "update", in: viewController.view) as! BlackButton
+            newPasswordTextFieldView = self.findView(withAccessibilityLabel: "newPassword", in: viewController.view) as? InputTextFieldView
+            confirmPasswordTextFieldView = self.findView(withAccessibilityLabel: "confirmPassword", in: viewController.view) as? InputTextFieldView
+            updateButton = self.findView(withAccessibilityLabel: "update", in: viewController.view) as? BlackButton
         }
         
         describe("when view loaded") {

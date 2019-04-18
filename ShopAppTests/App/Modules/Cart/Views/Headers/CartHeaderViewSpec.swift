@@ -19,8 +19,8 @@ class CartHeaderViewSpec: QuickSpec {
         
         beforeEach {
             view = CartHeaderView(productsCounts: 5, totalPrice: 100, currency: "USD")
-            totalItemsCountLabel = self.findView(withAccessibilityLabel: "totalItemsCountLabel", in: view) as! UILabel
-            totalPriceLabel = self.findView(withAccessibilityLabel: "totalPriceLabel", in: view) as! UILabel
+            totalItemsCountLabel = self.findView(withAccessibilityLabel: "totalItemsCountLabel", in: view) as? UILabel
+            totalPriceLabel = self.findView(withAccessibilityLabel: "totalPriceLabel", in: view) as? UILabel
         }
         
         describe("when view initialized") {

@@ -60,7 +60,7 @@ class SortVariantsViewController: UIViewController, SortVariantsTableProviderDel
     
     // MARK: - Actions
     
-    func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
+    @objc func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
         dismiss(animated: true)
     }
 
@@ -71,7 +71,7 @@ class SortVariantsViewController: UIViewController, SortVariantsTableProviderDel
             return
         }
         let sortingValue: SortingValue!
-        if let variant = variant, let index = SortingValue.allValues.index(of: variant) {
+        if let variant = variant, let index = SortingValue.allValues.firstIndex(of: variant) {
             sortingValue = SortingValue(rawValue: index) ?? .name
         } else {
             sortingValue = .name

@@ -38,7 +38,7 @@ class UIImageView_NetworkSpec: QuickSpec {
                 }
                 
                 it("should have correct content mode") {
-                    expect(imageView.contentMode.rawValue) == UIViewContentMode.left.rawValue
+                    expect(imageView.contentMode.rawValue) == UIView.ContentMode.left.rawValue
                 }
                 
                 it("should load image and change content mode") {
@@ -50,7 +50,7 @@ class UIImageView_NetworkSpec: QuickSpec {
                     
                     expect(imageView.image) != #imageLiteral(resourceName: "placeholder")
                     expect(imageView.image).toNot(beNil())
-                    expect(imageView.contentMode.rawValue) == UIViewContentMode.scaleAspectFit.rawValue
+                    expect(imageView.contentMode.rawValue) == UIView.ContentMode.scaleAspectFit.rawValue
                 }
             }
             
@@ -60,7 +60,7 @@ class UIImageView_NetworkSpec: QuickSpec {
                 }
                 
                 it("should have correct content mode") {
-                    expect(imageView.contentMode.rawValue) == UIViewContentMode.center.rawValue
+                    expect(imageView.contentMode.rawValue) == UIView.ContentMode.center.rawValue
                 }
                 
                 it("should load image and change content mode") {
@@ -71,7 +71,7 @@ class UIImageView_NetworkSpec: QuickSpec {
                     }
                     
                     expect(imageView.image) == #imageLiteral(resourceName: "placeholder")
-                    expect(imageView.contentMode.rawValue) == UIViewContentMode.center.rawValue
+                    expect(imageView.contentMode.rawValue) == UIView.ContentMode.center.rawValue
                 }
             }
             
@@ -88,7 +88,7 @@ class UIImageView_NetworkSpec: QuickSpec {
                     }
                     
                     expect(imageView.image) == #imageLiteral(resourceName: "placeholder")
-                    expect(imageView.contentMode.rawValue) == UIViewContentMode.center.rawValue
+                    expect(imageView.contentMode.rawValue) == UIView.ContentMode.center.rawValue
                 }
             }
         }

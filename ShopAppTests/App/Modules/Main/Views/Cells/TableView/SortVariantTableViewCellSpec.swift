@@ -28,13 +28,13 @@ class SortVariantTableViewCellSpec: QuickSpec {
             let dequeuedCell: SortVariantTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            variantTitleLabel = self.findView(withAccessibilityLabel: "title", in: cell) as! UILabel
-            checkImageView = self.findView(withAccessibilityLabel: "image", in: cell) as! UIImageView
+            variantTitleLabel = self.findView(withAccessibilityLabel: "title", in: cell) as? UILabel
+            checkImageView = self.findView(withAccessibilityLabel: "image", in: cell) as? UIImageView
         }
         
         describe("when cell initialized") {
             it("should have correct selection style") {
-                expect(cell.selectionStyle.rawValue) == UITableViewCellSelectionStyle.none.rawValue
+                expect(cell.selectionStyle.rawValue) == UITableViewCell.SelectionStyle.none.rawValue
             }
         }
         

@@ -22,9 +22,9 @@ class ErrorViewSpec: QuickSpec {
         beforeEach {
             view = ErrorView()
             
-            errorTextLabel = self.findView(withAccessibilityLabel: "errorText", in: view) as! UILabel
-            errorImageView = self.findView(withAccessibilityLabel: "errorImage", in: view) as! UIImageView
-            tryAgainButton = self.findView(withAccessibilityLabel: "tryAgain", in: view) as! UIButton
+            errorTextLabel = self.findView(withAccessibilityLabel: "errorText", in: view) as? UILabel
+            errorImageView = self.findView(withAccessibilityLabel: "errorImage", in: view) as? UIImageView
+            tryAgainButton = self.findView(withAccessibilityLabel: "tryAgain", in: view) as? UIButton
         }
         
         describe("when error set") {

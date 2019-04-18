@@ -35,10 +35,10 @@ class OrderFooterViewMock: QuickSpec {
             
             view = OrderFooterView(section: 0, order: order)
             
-            itemsLabel = self.findView(withAccessibilityLabel: "items", in: view) as! UILabel
-            countLabel = self.findView(withAccessibilityLabel: "count", in: view) as! UILabel
-            totalLabel = self.findView(withAccessibilityLabel: "total", in: view) as! UILabel
-            priceLabel = self.findView(withAccessibilityLabel: "price", in: view) as! UILabel
+            itemsLabel = self.findView(withAccessibilityLabel: "items", in: view) as? UILabel
+            countLabel = self.findView(withAccessibilityLabel: "count", in: view) as? UILabel
+            totalLabel = self.findView(withAccessibilityLabel: "total", in: view) as? UILabel
+            priceLabel = self.findView(withAccessibilityLabel: "price", in: view) as? UILabel
         }
         
         describe("when view initialized") {

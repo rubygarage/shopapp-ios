@@ -32,7 +32,7 @@ class SplashViewModel: BaseViewModel {
             if let ids = filteredProducts?.map({ $0.productVariant!.id}), !ids.isEmpty, error == nil {
                 strongSelf.loadProductVariants(ids: ids)
             } else {
-                strongSelf.dataLoaded.onNext()
+                strongSelf.dataLoaded.onNext(())
             }
         }
     }
@@ -46,7 +46,7 @@ class SplashViewModel: BaseViewModel {
             if let remoteIds = productVariants?.map({ $0.id }), error == nil {
                 strongSelf.filterProductVariants(localIds: ids, remoteIds: remoteIds)
             } else {
-                strongSelf.dataLoaded.onNext()
+                strongSelf.dataLoaded.onNext(())
             }
         }
     }
@@ -58,7 +58,7 @@ class SplashViewModel: BaseViewModel {
                 return
             }
             
-            strongSelf.dataLoaded.onNext()
+            strongSelf.dataLoaded.onNext(())
         }
     }
     

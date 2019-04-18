@@ -214,7 +214,7 @@ class BaseAddressListViewControllerSpec: QuickSpec {
             beforeEach {
                 _ = viewController.view
 
-                accountAddressFormController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.accountAddressForm) as! AccountAddressFormViewController
+                accountAddressFormController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.accountAddressForm) as? AccountAddressFormViewController
                 accountAddressFormController.delegate = viewController
             }
             

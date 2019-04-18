@@ -20,7 +20,7 @@ class QuantityDropDownViewSpec: QuickSpec {
         beforeEach {
             view = QuantityDropDownView()
             
-            textField = self.findView(withAccessibilityLabel: "textField", in: view) as! UITextField
+            textField = self.findView(withAccessibilityLabel: "textField", in: view) as? UITextField
             underlineView = self.findView(withAccessibilityLabel: "underlineView", in: view)
         }
         

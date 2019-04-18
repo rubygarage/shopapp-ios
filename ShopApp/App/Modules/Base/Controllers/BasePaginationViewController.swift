@@ -13,7 +13,7 @@ class BasePaginationViewController<T: BasePaginationViewModel>: BaseViewControll
     
     // MARK: - Methods to override
     
-    func pullToRefreshHandler() {
+    @objc func pullToRefreshHandler() {
         assert(false, "'pulltoRefreshHandler' method not implemented")
     }
     

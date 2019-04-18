@@ -61,13 +61,13 @@ class OrderFooterView: UIView {
         let formatter = NumberFormatter.formatter(with: order.currencyCode!)
         let totalPrice = NSDecimalNumber(decimal: order.totalPrice!)
         
-        countLabel.text = order.items != nil ? String(order.items!.flatMap { $0.quantity }.reduce(0, +)) : String(0)
+        countLabel.text = order.items != nil ? String(order.items!.compactMap { $0.quantity }.reduce(0, +)) : String(0)
         priceLabel.text = formatter.string(from: totalPrice)
     }
     
     // MARK: - Actions
     
-    func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
+    @objc func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
         delegate?.footerView(self, didTapWith: section)
     }
 }

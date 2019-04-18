@@ -269,7 +269,7 @@ class AddressFormViewControllerSpec: QuickSpec {
         }
         
         func initData(addressNeeded: Bool) {
-            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.addressForm) as! AddressFormViewController
+            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.addressForm) as? AddressFormViewController
             
             let repositoryMock = PaymentsRepositoryMock()
             let countriesUseCaseMock = CountriesUseCaseMock(repository: repositoryMock)
@@ -293,16 +293,16 @@ class AddressFormViewControllerSpec: QuickSpec {
                 viewController.address = address
             }
             
-            countryPicker = self.findView(withAccessibilityLabel: "addressFormCountryPicker", in: viewController.view) as! BasePicker
-            nameTextFieldView = self.findView(withAccessibilityLabel: "addressFormName", in: viewController.view) as! InputTextFieldView
-            lastNameTextFieldView = self.findView(withAccessibilityLabel: "addressFormLastName", in: viewController.view) as! InputTextFieldView
-            addressTextFieldView = self.findView(withAccessibilityLabel: "addressFormAddress", in: viewController.view) as! InputTextFieldView
-            addressOptionalTextFieldView = self.findView(withAccessibilityLabel: "addressFormAddressOptional", in: viewController.view) as! InputTextFieldView
-            cityTextFieldView = self.findView(withAccessibilityLabel: "addressFormCity", in: viewController.view) as! InputTextFieldView
-            statePicker = self.findView(withAccessibilityLabel: "addressFormState", in: viewController.view) as! BasePicker
-            zipCodeTextFieldView = self.findView(withAccessibilityLabel: "addressFormZipCode", in: viewController.view) as! InputTextFieldView
-            phoneTextFieldView = self.findView(withAccessibilityLabel: "addressFormPhone", in: viewController.view) as! InputTextFieldView
-            submitButton = self.findView(withAccessibilityLabel: "addressFormSubmitButton", in: viewController.view) as! BlackButton
+            countryPicker = self.findView(withAccessibilityLabel: "addressFormCountryPicker", in: viewController.view) as? BasePicker
+            nameTextFieldView = self.findView(withAccessibilityLabel: "addressFormName", in: viewController.view) as? InputTextFieldView
+            lastNameTextFieldView = self.findView(withAccessibilityLabel: "addressFormLastName", in: viewController.view) as? InputTextFieldView
+            addressTextFieldView = self.findView(withAccessibilityLabel: "addressFormAddress", in: viewController.view) as? InputTextFieldView
+            addressOptionalTextFieldView = self.findView(withAccessibilityLabel: "addressFormAddressOptional", in: viewController.view) as? InputTextFieldView
+            cityTextFieldView = self.findView(withAccessibilityLabel: "addressFormCity", in: viewController.view) as? InputTextFieldView
+            statePicker = self.findView(withAccessibilityLabel: "addressFormState", in: viewController.view) as? BasePicker
+            zipCodeTextFieldView = self.findView(withAccessibilityLabel: "addressFormZipCode", in: viewController.view) as? InputTextFieldView
+            phoneTextFieldView = self.findView(withAccessibilityLabel: "addressFormPhone", in: viewController.view) as? InputTextFieldView
+            submitButton = self.findView(withAccessibilityLabel: "addressFormSubmitButton", in: viewController.view) as? BlackButton
         }
     }
 }
