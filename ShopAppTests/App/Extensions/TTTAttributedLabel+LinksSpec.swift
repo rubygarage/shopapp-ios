@@ -37,7 +37,7 @@ class TTTAttributedLabel_LinksSpec: QuickSpec {
             
             describe("when text attributes did set") {
                 var attributedString: NSAttributedString!
-                var attributes: [String: Any]!
+                var attributes: [NSAttributedString.Key: Any]!
                 
                 beforeEach {
                     attributedString = label.attributedText
@@ -49,19 +49,19 @@ class TTTAttributedLabel_LinksSpec: QuickSpec {
                 }
                 
                 it("should have correct text color") {
-                    let colorAttribute = attributes?.filter({ $0.key == "NSColor" }).first
+                    let colorAttribute = attributes?.filter({ $0.key.rawValue == "NSColor" }).first
                     
                     expect(colorAttribute?.value) === label.textColor.cgColor
                 }
                 
                 it("should have correct paragraph attribute class type") {
-                    let paragraphAttribute = attributes?.filter({ $0.key == "NSParagraphStyle" }).first
+                    let paragraphAttribute = attributes?.filter({ $0.key.rawValue == "NSParagraphStyle" }).first
                     
                     expect(paragraphAttribute?.value).to(beAnInstanceOf(NSMutableParagraphStyle.self))
                 }
                 
                 it("should have correct font") {
-                    let fontAttribute = attributes?.filter({ $0.key == "NSFont" }).first
+                    let fontAttribute = attributes?.filter({ $0.key.rawValue == "NSFont" }).first
                     
                     expect(fontAttribute?.value) === UIFont.systemFont(ofSize: 11)
                 }
@@ -77,7 +77,7 @@ class TTTAttributedLabel_LinksSpec: QuickSpec {
                 it("should have correct underline style attribute") {
                     let underlineAttribute = label.linkAttributes.filter({ $0.key == AnyHashable("NSUnderline") }).first
                     
-                    expect(underlineAttribute?.value) === NSUnderlineStyle.styleSingle.rawValue
+                    expect(underlineAttribute?.value) === NSUnderlineStyle.single.rawValue
                 }
             }
             
@@ -86,7 +86,7 @@ class TTTAttributedLabel_LinksSpec: QuickSpec {
                 var urlString: String!
                 
                 beforeEach {
-                    textResult = label.links.first as! NSTextCheckingResult
+                    textResult = label.links.first as? NSTextCheckingResult
                     urlString = textResult.url!.absoluteString
                 }
                 

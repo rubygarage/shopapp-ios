@@ -18,13 +18,17 @@ class PolicyViewControllerSpec: QuickSpec {
         var policyTextView: UITextView!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.policy) as! PolicyViewController
-            viewController.policy = TestHelper.policy
+            let policy = Policy()
+            policy.title = "Title"
+            policy.body = "Body"
+            
+            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.policy) as? PolicyViewController
+            viewController.policy = policy
             
             let navigationController = NavigationController(rootViewController: UIViewController())
             navigationController.pushViewController(viewController, animated: false)
             
-            policyTextView = self.findView(withAccessibilityLabel: "policy", in: viewController.view) as! UITextView
+            policyTextView = self.findView(withAccessibilityLabel: "policy", in: viewController.view) as? UITextView
         }
         
         describe("when view loaded") {
@@ -37,8 +41,8 @@ class PolicyViewControllerSpec: QuickSpec {
             }
             
             it("needs to set title and present body in text view") {
-                expect(viewController.title) == viewController.policy?.title
-                expect(policyTextView.text) == viewController.policy?.body
+                expect(viewController.title) == "Title"
+                expect(policyTextView.text) == "Body"
             }
         }
         

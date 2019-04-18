@@ -19,7 +19,7 @@ class SettingsViewControllerSpec: QuickSpec {
         var tableView: UITableView!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.settings) as! SettingsViewController
+            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.settings) as? SettingsViewController
             
             let authentificationRepositoryMock = AuthentificationRepositoryMock()
             let customerRepositoryMock = CustomerRepositoryMock()
@@ -33,7 +33,7 @@ class SettingsViewControllerSpec: QuickSpec {
             tableProvider = SettingsTableProvider()
             viewController.tableProvider = tableProvider
             
-            tableView = self.findView(withAccessibilityLabel: "tableView", in: viewController.view) as! UITableView
+            tableView = self.findView(withAccessibilityLabel: "tableView", in: viewController.view) as? UITableView
         }
         
         describe("when view loaded") {

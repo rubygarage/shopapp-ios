@@ -28,14 +28,14 @@ class CheckoutSelectedTypeTableViewCellSpec: QuickSpec {
             let dequeuedCell: CheckoutSelectedTypeTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            paymentTypeImage = self.findView(withAccessibilityLabel: "paymentTypeImage", in: cell) as! UIImageView
-            paymentTypeLabel = self.findView(withAccessibilityLabel: "paymentTypeLabel", in: cell) as! UILabel
-            editButton = self.findView(withAccessibilityLabel: "editButton", in: cell) as! UIButton
+            paymentTypeImage = self.findView(withAccessibilityLabel: "paymentTypeImage", in: cell) as? UIImageView
+            paymentTypeLabel = self.findView(withAccessibilityLabel: "paymentTypeLabel", in: cell) as? UILabel
+            editButton = self.findView(withAccessibilityLabel: "editButton", in: cell) as? UIButton
         }
         
         describe("when cell initialized") {
             it("should have correct selection style") {
-                expect(cell.selectionStyle.rawValue) == UITableViewCellSelectionStyle.none.rawValue
+                expect(cell.selectionStyle.rawValue) == UITableViewCell.SelectionStyle.none.rawValue
             }
             
             it("should have correct edit button title") {

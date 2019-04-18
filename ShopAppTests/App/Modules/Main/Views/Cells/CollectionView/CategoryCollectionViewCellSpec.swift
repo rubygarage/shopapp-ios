@@ -33,8 +33,8 @@ class CategoryCollectionViewCellSpec: QuickSpec {
             let dequeuedCell: CategoryCollectionViewCell = collectionView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            categoryTitleLabel = self.findView(withAccessibilityLabel: "title", in: cell) as! UILabel
-            categoryImageView = self.findView(withAccessibilityLabel: "image", in: cell) as! UIImageView
+            categoryTitleLabel = self.findView(withAccessibilityLabel: "title", in: cell) as? UILabel
+            categoryImageView = self.findView(withAccessibilityLabel: "image", in: cell) as? UIImageView
         }
         
         it("should have correct class variables") {

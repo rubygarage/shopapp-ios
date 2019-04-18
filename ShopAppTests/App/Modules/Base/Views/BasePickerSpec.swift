@@ -21,8 +21,8 @@ class BasePickerSpec: QuickSpec {
         beforeEach {
             view = BasePicker()
             
-            textField = self.findView(withAccessibilityLabel: "text", in: view) as! UITextField
-            placeholderLabel = self.findView(withAccessibilityLabel: "placeholder", in: view) as! UILabel
+            textField = self.findView(withAccessibilityLabel: "text", in: view) as? UITextField
+            placeholderLabel = self.findView(withAccessibilityLabel: "placeholder", in: view) as? UILabel
             underlineView = self.findView(withAccessibilityLabel: "underline", in: view)
         }
         

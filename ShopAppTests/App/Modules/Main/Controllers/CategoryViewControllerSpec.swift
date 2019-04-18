@@ -21,7 +21,7 @@ class CategoryViewControllerSpec: QuickSpec {
         var sortByViewTopLayoutConstraint: NSLayoutConstraint!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.category) as! CategoryViewController
+            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.category) as? CategoryViewController
             viewController.categoryId = "id"
             
             let repository = CategoryRepositoryMock()
@@ -30,7 +30,7 @@ class CategoryViewControllerSpec: QuickSpec {
             viewModelMock = CategoryViewModelMock(categoryUseCase: categoryUseCaseMock)
             viewController.viewModel = viewModelMock
             
-            sortByLabel = self.findView(withAccessibilityLabel: "sortByLabel", in: viewController.view) as! UILabel
+            sortByLabel = self.findView(withAccessibilityLabel: "sortByLabel", in: viewController.view) as? UILabel
             sortByView = self.findView(withAccessibilityLabel: "sortByView", in: viewController.view)
             sortByViewTopLayoutConstraint = sortByView.superview!.constraints.filter({ $0.accessibilityLabel == "sortByViewTop" }).first
         }

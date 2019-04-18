@@ -18,7 +18,7 @@ class PaymentTypeViewControllerSpec: QuickSpec {
         var selectedPaymentType: PaymentType!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.paymentType) as! PaymentTypeViewController
+            viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.paymentType) as? PaymentTypeViewController
             
             tableProvider = PaymentTypeProvider()
             viewController.tableProvider = tableProvider

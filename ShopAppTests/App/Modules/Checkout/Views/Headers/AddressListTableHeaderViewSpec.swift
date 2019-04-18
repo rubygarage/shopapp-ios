@@ -18,7 +18,7 @@ class AddressListTableHeaderViewSpec: QuickSpec {
         
         beforeEach {
             header = AddressListTableHeaderView(frame: CGRect.zero)
-            addNewAddressButton = self.findView(withAccessibilityLabel: "addNewAddressButton", in: header) as! BlackButton
+            addNewAddressButton = self.findView(withAccessibilityLabel: "addNewAddressButton", in: header) as? BlackButton
         }
         
         describe("when header initialized") {

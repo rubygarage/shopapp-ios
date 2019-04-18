@@ -25,18 +25,18 @@ class SearchTitleViewSpec: QuickSpec {
         beforeEach {
             view = SearchTitleView()
             
-            textField = self.findView(withAccessibilityLabel: "textField", in: view) as! UITextField
+            textField = self.findView(withAccessibilityLabel: "textField", in: view) as? UITextField
             underLineView = self.findView(withAccessibilityLabel: "underline", in: view)
-            backButton = self.findView(withAccessibilityLabel: "back", in: view) as! UIButton
+            backButton = self.findView(withAccessibilityLabel: "back", in: view) as? UIButton
             cartButtonView = self.findView(withAccessibilityLabel: "cart", in: view)
-            clearButton = self.findView(withAccessibilityLabel: "clear", in: view) as! UIButton
+            clearButton = self.findView(withAccessibilityLabel: "clear", in: view) as? UIButton
             underlineLeftMargin = underLineView.superview!.constraints.filter({ $0.accessibilityLabel == "underlineLeft" }).first
             underlineRightMargin = underLineView.superview!.constraints.filter({ $0.accessibilityLabel == "underlineRight" }).first
         }
         
         describe("when view initialized") {
             it("should have correct intrinsic content size") {
-                expect(view.intrinsicContentSize) == UILayoutFittingExpandedSize
+                expect(view.intrinsicContentSize) == UIView.layoutFittingExpandedSize
             }
             
             it("should have correct title of clear button") {

@@ -25,7 +25,7 @@ class PersonalInfoViewControllerSpec: QuickSpec {
         var changePasswordUnderlineView: UIView!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.personalInfo) as! PersonalInfoViewController
+            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.personalInfo) as? PersonalInfoViewController
             
             let authentificationRepositoryMock = AuthentificationRepositoryMock()
             let customerRepositoryMock = CustomerRepositoryMock()
@@ -36,12 +36,12 @@ class PersonalInfoViewControllerSpec: QuickSpec {
             viewModelMock.isCustomerLoadingStarted = false
             viewController.viewModel = viewModelMock
             
-            emailTextFieldView = self.findView(withAccessibilityLabel: "email", in: viewController.view) as! InputTextFieldView
-            nameTextFieldView = self.findView(withAccessibilityLabel: "name", in: viewController.view) as! InputTextFieldView
-            lastNameTextFieldView = self.findView(withAccessibilityLabel: "lastName", in: viewController.view) as! InputTextFieldView
-            phoneTextFieldView = self.findView(withAccessibilityLabel: "phone", in: viewController.view) as! InputTextFieldView
-            changePasswordButton = self.findView(withAccessibilityLabel: "changePassword", in: viewController.view) as! UnderlinedButton
-            saveChangesButton = self.findView(withAccessibilityLabel: "saveChanges", in: viewController.view) as! BlackButton
+            emailTextFieldView = self.findView(withAccessibilityLabel: "email", in: viewController.view) as? InputTextFieldView
+            nameTextFieldView = self.findView(withAccessibilityLabel: "name", in: viewController.view) as? InputTextFieldView
+            lastNameTextFieldView = self.findView(withAccessibilityLabel: "lastName", in: viewController.view) as? InputTextFieldView
+            phoneTextFieldView = self.findView(withAccessibilityLabel: "phone", in: viewController.view) as? InputTextFieldView
+            changePasswordButton = self.findView(withAccessibilityLabel: "changePassword", in: viewController.view) as? UnderlinedButton
+            saveChangesButton = self.findView(withAccessibilityLabel: "saveChanges", in: viewController.view) as? BlackButton
             changePasswordUnderlineView = self.findView(withAccessibilityLabel: "resendUnderlineView", in: viewController.view)
         }
         

@@ -27,12 +27,12 @@ class AccountTableViewCellSpec: QuickSpec {
             let dequeuedCell: AccountTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            policyTitleLabel = self.findView(withAccessibilityLabel: "policy", in: cell) as! UILabel
+            policyTitleLabel = self.findView(withAccessibilityLabel: "policy", in: cell) as? UILabel
         }
         
         describe("when cell initialized") {
             it("should have correct selection style") {
-                expect(cell.selectionStyle.rawValue) == UITableViewCellSelectionStyle.none.rawValue
+                expect(cell.selectionStyle.rawValue) == UITableViewCell.SelectionStyle.none.rawValue
             }
         }
         

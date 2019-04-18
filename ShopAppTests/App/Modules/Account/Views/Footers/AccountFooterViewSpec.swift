@@ -29,7 +29,7 @@ class AccountFooterViewSpec: QuickSpec {
             let dequeuedView: AccountFooterView = tableView.dequeueReusableHeaderFooterView()
             view = dequeuedView
             
-            logoutButton = self.findView(withAccessibilityLabel: "logout", in: view) as! UnderlinedButton
+            logoutButton = self.findView(withAccessibilityLabel: "logout", in: view) as? UnderlinedButton
             logoutUnderlineView = self.findView(withAccessibilityLabel: "underline", in: view)
         }
         

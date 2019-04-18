@@ -21,7 +21,7 @@ class ArticleDetailsViewControllerSpec: QuickSpec {
         var articleContentWebView: UIWebView!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.articleDetails) as! ArticleDetailsViewController
+            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.articleDetails) as? ArticleDetailsViewController
             viewController.articleId = "id"
             
             let repository = ArticleRepositoryMock()
@@ -30,10 +30,10 @@ class ArticleDetailsViewControllerSpec: QuickSpec {
             viewModelMock = ArticleDetailsViewModelMock(articleUseCase: articleUseCaseMock)
             viewController.viewModel = viewModelMock
             
-            articleImageView = self.findView(withAccessibilityLabel: "image", in: viewController.view) as! UIImageView
-            articleTitleLabel = self.findView(withAccessibilityLabel: "title", in: viewController.view) as! UILabel
-            authorNameLabel = self.findView(withAccessibilityLabel: "author", in: viewController.view) as! UILabel
-            articleContentWebView = self.findView(withAccessibilityLabel: "webView", in: viewController.view) as! UIWebView
+            articleImageView = self.findView(withAccessibilityLabel: "image", in: viewController.view) as? UIImageView
+            articleTitleLabel = self.findView(withAccessibilityLabel: "title", in: viewController.view) as? UILabel
+            authorNameLabel = self.findView(withAccessibilityLabel: "author", in: viewController.view) as? UILabel
+            articleContentWebView = self.findView(withAccessibilityLabel: "webView", in: viewController.view) as? UIWebView
         }
         
         describe("when view loaded") {

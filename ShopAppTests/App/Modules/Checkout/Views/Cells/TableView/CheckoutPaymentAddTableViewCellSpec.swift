@@ -27,12 +27,12 @@ class CheckoutPaymentAddTableViewCellSpec: QuickSpec {
             let dequeuedCell: CheckoutPaymentAddTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            addPaymentButton = self.findView(withAccessibilityLabel: "addPaymentButton", in: cell) as! BlackButton
+            addPaymentButton = self.findView(withAccessibilityLabel: "addPaymentButton", in: cell) as? BlackButton
         }
         
         describe("when cell initialized") {
             it("should have correct selection style") {
-                expect(cell.selectionStyle.rawValue) == UITableViewCellSelectionStyle.none.rawValue
+                expect(cell.selectionStyle.rawValue) == UITableViewCell.SelectionStyle.none.rawValue
             }
         }
         

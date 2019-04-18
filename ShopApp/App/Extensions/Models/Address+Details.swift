@@ -11,15 +11,19 @@ import ShopApp_Gateway
 extension Address {
     var fullName: String {
         let addressNameLocalized = "Label.FullName".localizable
-        return String.localizedStringWithFormat(addressNameLocalized, firstName, lastName)
+        return String.localizedStringWithFormat(addressNameLocalized, firstName ?? "", lastName ?? "")
     }
 
     var fullAddress: String {
-        var result = [street]
-        if let secondAddress = secondStreet, !secondAddress.isEmpty {
-            result.append(secondAddress)
+        var result = address!
+        if let secondAddress = secondAddress, !secondAddress.isEmpty {
+            result = [result, secondAddress].joined(separator: ", ")
         }
-        result.append(contentsOf: [city, zip, country])
-        return result.joined(separator: ", ")
+        let adressParts = [city, zip, country].compactMap { $0 }
+        if !adressParts.isEmpty {
+            let subresult = adressParts.joined(separator: ", ")
+            result = [result, subresult].joined(separator: ", ")
+        }
+        return result
     }
 }

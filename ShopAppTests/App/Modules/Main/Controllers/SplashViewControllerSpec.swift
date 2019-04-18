@@ -19,7 +19,7 @@ class SplashViewControllerSpec: QuickSpec {
         var loadingLabel: UILabel!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.navigation, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.splash) as! SplashViewController
+            viewController = UIStoryboard(name: StoryboardNames.navigation, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.splash) as? SplashViewController
             
             let repository = SetupProviderRepositoryMock()
             let setupProviderUseCaseMock = SetupProviderUseCaseMock(repository: repository)
@@ -27,8 +27,8 @@ class SplashViewControllerSpec: QuickSpec {
             
             viewController.viewModel = viewModelMock
             
-            titleLabel = self.findView(withAccessibilityLabel: "titleLabel", in: viewController.view) as! UILabel
-            loadingLabel = self.findView(withAccessibilityLabel: "loadingLabel", in: viewController.view) as! UILabel
+            titleLabel = self.findView(withAccessibilityLabel: "titleLabel", in: viewController.view) as? UILabel
+            loadingLabel = self.findView(withAccessibilityLabel: "loadingLabel", in: viewController.view) as? UILabel
         }
         
         describe("when view loaded") {

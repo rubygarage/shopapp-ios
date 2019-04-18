@@ -21,7 +21,7 @@ class SignUpViewModel: BaseViewModel {
     var emailErrorMessage = PublishSubject<String>()
     var passwordErrorMessage = PublishSubject<String>()
     var signUpSuccess = PublishSubject<Bool>()
-    var policies = Variable<(privacyPolicy: Policy?, termsOfService: Policy?)>(privacyPolicy: nil, termsOfService: nil)
+    var policies = Variable<(privacyPolicy: Policy?, termsOfService: Policy?)>((privacyPolicy: nil, termsOfService: nil))
     
     var signUpButtonEnabled: Observable<Bool> {
         return Observable.combineLatest(emailText.asObservable(), passwordText.asObservable()) { (email, password) in

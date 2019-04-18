@@ -107,25 +107,25 @@ class AddressFormViewControllerSpec: QuickSpec {
                 }
                 
                 it("should have not empty text fields") {
-                    expect(nameTextFieldView.text) == address.firstName
-                    expect(lastNameTextFieldView.text) == address.lastName
-                    expect(addressTextFieldView.text) == address.street
-                    expect(addressOptionalTextFieldView.text) == address.secondStreet
-                    expect(cityTextFieldView.text) == address.city
-                    expect(zipCodeTextFieldView.text) == address.zip
-                    expect(phoneTextFieldView.text) == address.phone
+                    expect(nameTextFieldView.text) == "first name"
+                    expect(lastNameTextFieldView.text) == "last name"
+                    expect(addressTextFieldView.text) == "address"
+                    expect(addressOptionalTextFieldView.text) == "second address"
+                    expect(cityTextFieldView.text) == "city"
+                    expect(zipCodeTextFieldView.text) == "zip"
+                    expect(phoneTextFieldView.text) == "phone"
                 }
                 
                 it("should have correct view model properties") {
-                    expect(viewController.viewModel.countryText.value) == address.country
-                    expect(viewController.viewModel.firstNameText.value) == address.firstName
-                    expect(viewController.viewModel.lastNameText.value) == address.lastName
-                    expect(viewController.viewModel.addressText.value) == address.street
-                    expect(viewController.viewModel.addressOptionalText.value) == address.secondStreet
-                    expect(viewController.viewModel.cityText.value) ==  address.city
-                    expect(viewController.viewModel.stateText.value) == address.state
-                    expect(viewController.viewModel.zipText.value) == address.zip
-                    expect(viewController.viewModel.phoneText.value) == address.phone
+                    expect(viewController.viewModel.countryText.value) == "country"
+                    expect(viewController.viewModel.firstNameText.value) == "first name"
+                    expect(viewController.viewModel.lastNameText.value) == "last name"
+                    expect(viewController.viewModel.addressText.value) == "address"
+                    expect(viewController.viewModel.addressOptionalText.value) == "second address"
+                    expect(viewController.viewModel.cityText.value) == "city"
+                    expect(viewController.viewModel.stateText.value) == "state"
+                    expect(viewController.viewModel.zipText.value) == "zip"
+                    expect(viewController.viewModel.phoneText.value) == "phone"
                 }
                 
                 it("should have correct view model initial properties") {
@@ -269,9 +269,9 @@ class AddressFormViewControllerSpec: QuickSpec {
         }
         
         func initData(addressNeeded: Bool) {
-            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.addressForm) as! AddressFormViewController
+            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.addressForm) as? AddressFormViewController
             
-            let repositoryMock = CountryRepositoryMock()
+            let repositoryMock = PaymentsRepositoryMock()
             let countriesUseCaseMock = CountriesUseCaseMock(repository: repositoryMock)
             viewModelMock = AddressFormViewModelMock(countriesUseCase: countriesUseCaseMock)
             viewController.viewModel = viewModelMock
@@ -280,20 +280,29 @@ class AddressFormViewControllerSpec: QuickSpec {
             viewController.delegate = delegateMock
             
             if addressNeeded {
-                address = TestHelper.fullAddress
+                address = Address()
+                address.firstName = "first name"
+                address.lastName = "last name"
+                address.address = "address"
+                address.secondAddress = "second address"
+                address.city = "city"
+                address.country = "country"
+                address.state = "state"
+                address.zip = "zip"
+                address.phone = "phone"
                 viewController.address = address
             }
-        
-            countryPicker = self.findView(withAccessibilityLabel: "addressFormCountryPicker", in: viewController.view) as! BasePicker
-            nameTextFieldView = self.findView(withAccessibilityLabel: "addressFormName", in: viewController.view) as! InputTextFieldView
-            lastNameTextFieldView = self.findView(withAccessibilityLabel: "addressFormLastName", in: viewController.view) as! InputTextFieldView
-            addressTextFieldView = self.findView(withAccessibilityLabel: "addressFormAddress", in: viewController.view) as! InputTextFieldView
-            addressOptionalTextFieldView = self.findView(withAccessibilityLabel: "addressFormAddressOptional", in: viewController.view) as! InputTextFieldView
-            cityTextFieldView = self.findView(withAccessibilityLabel: "addressFormCity", in: viewController.view) as! InputTextFieldView
-            statePicker = self.findView(withAccessibilityLabel: "addressFormState", in: viewController.view) as! BasePicker
-            zipCodeTextFieldView = self.findView(withAccessibilityLabel: "addressFormZipCode", in: viewController.view) as! InputTextFieldView
-            phoneTextFieldView = self.findView(withAccessibilityLabel: "addressFormPhone", in: viewController.view) as! InputTextFieldView
-            submitButton = self.findView(withAccessibilityLabel: "addressFormSubmitButton", in: viewController.view) as! BlackButton
+            
+            countryPicker = self.findView(withAccessibilityLabel: "addressFormCountryPicker", in: viewController.view) as? BasePicker
+            nameTextFieldView = self.findView(withAccessibilityLabel: "addressFormName", in: viewController.view) as? InputTextFieldView
+            lastNameTextFieldView = self.findView(withAccessibilityLabel: "addressFormLastName", in: viewController.view) as? InputTextFieldView
+            addressTextFieldView = self.findView(withAccessibilityLabel: "addressFormAddress", in: viewController.view) as? InputTextFieldView
+            addressOptionalTextFieldView = self.findView(withAccessibilityLabel: "addressFormAddressOptional", in: viewController.view) as? InputTextFieldView
+            cityTextFieldView = self.findView(withAccessibilityLabel: "addressFormCity", in: viewController.view) as? InputTextFieldView
+            statePicker = self.findView(withAccessibilityLabel: "addressFormState", in: viewController.view) as? BasePicker
+            zipCodeTextFieldView = self.findView(withAccessibilityLabel: "addressFormZipCode", in: viewController.view) as? InputTextFieldView
+            phoneTextFieldView = self.findView(withAccessibilityLabel: "addressFormPhone", in: viewController.view) as? InputTextFieldView
+            submitButton = self.findView(withAccessibilityLabel: "addressFormSubmitButton", in: viewController.view) as? BlackButton
         }
     }
 }

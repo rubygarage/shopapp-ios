@@ -14,7 +14,7 @@ class ProductOptionsCollectionProvider: NSObject, UICollectionViewDataSource, UI
     private let optionsHeaderViewSize = CGSize(width: 0, height: kOptionCollectionViewHeaderHeight)
     
     var options: [ProductOption] = []
-    var selectedOptions: [VariantOption] = []
+    var selectedOptions: [SelectedOption] = []
     
     weak var delegate: ProductOptionsCollectionCellDelegate?
     
@@ -25,20 +25,23 @@ class ProductOptionsCollectionProvider: NSObject, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard section < options.count, let values = options[section].values, values.count > 1 else {
+            return 0
+        }
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: ProductOptionsCollectionViewCell = collectionView.dequeueReusableCellForIndexPath(indexPath)
-        let values = options[indexPath.section].values
+        let values = options[indexPath.section].values ?? []
         let selectedValue = selectedOptions[indexPath.section].value
         cell.configure(with: values, selectedValue: selectedValue, delegate: delegate)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView: ProductOptionHeaderView = collectionView.dequeueReusableSupplementaryViewForIndexPath(indexPath, of: UICollectionElementKindSectionHeader)
-        let text = options[indexPath.section].name
+        let headerView: ProductOptionHeaderView = collectionView.dequeueReusableSupplementaryViewForIndexPath(indexPath, of: UICollectionView.elementKindSectionHeader)
+        let text = options[indexPath.section].name ?? ""
         headerView.configure(with: text)
         return headerView
     }

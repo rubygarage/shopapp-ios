@@ -39,7 +39,7 @@ extension UIViewController {
 }
 
 extension UIAlertController {
-    func textDidChange() {
+    @objc func textDidChange() {
         if let text = textFields?.first?.text, let action = actions.first {
             action.isEnabled = text.count <= kQuantityCountMax && !text.isEmpty
         }

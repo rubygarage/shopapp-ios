@@ -52,7 +52,7 @@ class SearchTitleView: TextFieldWrapper {
     weak var delegate: SearchTitleViewDelegate?
     
     override var intrinsicContentSize: CGSize {
-        return UILayoutFittingExpandedSize
+        return UIView.layoutFittingExpandedSize
     }
     
     // MARK: - View lifecycle
@@ -124,7 +124,7 @@ class SearchTitleView: TextFieldWrapper {
     
     private func attributedPlaceholderDefault() -> NSAttributedString {
         let placeholder = "Placeholder.Search".localizable
-        let attributedPlaceholder = NSMutableAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: UIColor.black])
+        let attributedPlaceholder = NSMutableAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         let textAttachment = NSTextAttachment()
         textAttachment.image = #imageLiteral(resourceName: "search")
         let deltaY = (textField.font!.capHeight - #imageLiteral(resourceName: "search").size.height).rounded() / 2
@@ -136,7 +136,7 @@ class SearchTitleView: TextFieldWrapper {
     
     private func attributedPlaceholderSelected() -> NSAttributedString {
         let placeholder = "Placeholder.Search".localizable
-        return NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: placeholderColorDefault])
+        return NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeholderColorDefault])
     }
     
     private func updateClearButtonIfNeeded() {

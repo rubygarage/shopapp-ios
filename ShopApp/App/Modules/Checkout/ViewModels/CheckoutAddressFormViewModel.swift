@@ -31,14 +31,16 @@ class CheckoutAddressFormViewModel: BaseViewModel {
     
     private func updateCheckoutShippingAddress(with address: Address) {
         state.onNext(ViewState.make.loading(isTranslucent: true))
-        checkoutUseCase.setShippingAddress(checkoutId: checkoutId, address: address) { [weak self] (_, error) in
+        checkoutUseCase.updateCheckoutShippingAddress(with: checkoutId, address: address) { [weak self] (success, error) in
             guard let strongSelf = self else {
                 return
             }
             if let error = error {
                 strongSelf.state.onNext(.error(error: error))
+            } else if let success = success, success == true {
+                strongSelf.updatedShippingAddress.onNext(())
             } else {
-                strongSelf.updatedShippingAddress.onNext()
+                strongSelf.state.onNext(.error(error: RepoError()))
             }
         }
     }

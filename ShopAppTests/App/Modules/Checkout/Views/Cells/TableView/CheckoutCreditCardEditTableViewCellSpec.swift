@@ -31,16 +31,16 @@ class CheckoutCreditCardEditTableViewCellSpec: QuickSpec {
             let dequeuedCell: CheckoutCreditCardEditTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
             cell = dequeuedCell
             
-            cardTypeImageView = self.findView(withAccessibilityLabel: "cardTypeImageView", in: cell) as! UIImageView
-            cardNumberLabel = self.findView(withAccessibilityLabel: "cardNumberLabel", in: cell) as! UILabel
-            expirationDateLabel = self.findView(withAccessibilityLabel: "expirationDateLabel", in: cell) as! UILabel
-            holderNameLabel = self.findView(withAccessibilityLabel: "holderNameLabel", in: cell) as! UILabel
-            editButton = self.findView(withAccessibilityLabel: "editButton", in: cell) as! UIButton
+            cardTypeImageView = self.findView(withAccessibilityLabel: "cardTypeImageView", in: cell) as? UIImageView
+            cardNumberLabel = self.findView(withAccessibilityLabel: "cardNumberLabel", in: cell) as? UILabel
+            expirationDateLabel = self.findView(withAccessibilityLabel: "expirationDateLabel", in: cell) as? UILabel
+            holderNameLabel = self.findView(withAccessibilityLabel: "holderNameLabel", in: cell) as? UILabel
+            editButton = self.findView(withAccessibilityLabel: "editButton", in: cell) as? UIButton
         }
         
         describe("when cell initialized") {
             it("should have correct selection style") {
-                expect(cell.selectionStyle.rawValue) == UITableViewCellSelectionStyle.none.rawValue
+                expect(cell.selectionStyle.rawValue) == UITableViewCell.SelectionStyle.none.rawValue
             }
             
             it("should have correct edit button title") {

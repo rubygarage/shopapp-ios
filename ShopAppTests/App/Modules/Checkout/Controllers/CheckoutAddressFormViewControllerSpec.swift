@@ -15,18 +15,18 @@ import ShopApp_Gateway
 class CheckoutAddressFormViewControllerSpec: QuickSpec {
     override func spec() {
         var viewController: CheckoutAddressFormViewController!
-        var repositoryMock: PaymentRepositoryMock!
+        var repositoryMock: PaymentsRepositoryMock!
         var viewModelMock: CheckoutAddressFormViewModelMock!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.checkoutAddressForm) as! CheckoutAddressFormViewController
+            viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.checkoutAddressForm) as? CheckoutAddressFormViewController
             
-            repositoryMock = PaymentRepositoryMock()
+            repositoryMock = PaymentsRepositoryMock()
             let checkoutUseCaseMock = CheckoutUseCaseMock(repository: repositoryMock)
             viewModelMock = CheckoutAddressFormViewModelMock(checkoutUseCase: checkoutUseCaseMock)
             viewController.viewModel = viewModelMock
             
-            viewController.selectedAddress = TestHelper.fullAddress
+            viewController.selectedAddress = Address()
             viewController.checkoutId = "Checkout id"
             viewController.addressType = .shipping
             
@@ -44,8 +44,8 @@ class CheckoutAddressFormViewControllerSpec: QuickSpec {
             }
             
             it("should have correct child controller properties") {
-                let childController = viewController.childViewControllers.first as? AddressFormViewController
-                expect(childController?.address) == viewController.selectedAddress
+                let childController = viewController.children.first as? AddressFormViewController
+                expect(childController?.address) === viewController.selectedAddress
             }
         }
         
@@ -65,13 +65,13 @@ class CheckoutAddressFormViewControllerSpec: QuickSpec {
                 let delegateMock = CheckoutAddressFormControllerDelegateMock()
                 viewController.delegate = delegateMock
                 
-                let address = TestHelper.fullAddress
+                let address = Address()
                 viewModelMock.returnedAddress = address
                 
                 viewModelMock.updateBillingAddress()
                 
                 expect(delegateMock.controller) == viewController
-                expect(delegateMock.billingAddress) == address
+                expect(delegateMock.billingAddress) === address
             }
         }
         
@@ -80,8 +80,11 @@ class CheckoutAddressFormViewControllerSpec: QuickSpec {
                 let delegateMock = CheckoutAddressFormControllerDelegateMock()
                 viewController.delegate = delegateMock
                 
-                let addressFormViewController = viewController.childViewControllers.first as! AddressFormViewController
-                viewController.viewController(addressFormViewController, didFill: TestHelper.fullAddress)
+                let addressFormViewController = viewController.children.first as! AddressFormViewController
+                let address = Address()
+                
+                viewController.viewController(addressFormViewController, didFill: address)
+                
                 
                 expect(delegateMock.controller) == viewController
             }

@@ -15,12 +15,12 @@ import RxSwift
 class SignInViewModelSpec: QuickSpec {
     override func spec() {
         let repositoryMock = AuthentificationRepositoryMock()
-        let signInUseCaseMock = SignInUseCaseMock(repository: repositoryMock)
+        let loginUseCaseMock = LoginUseCaseMock(repository: repositoryMock)
         
         var viewModel: SignInViewModel!
         
         beforeEach {
-            viewModel = SignInViewModel(signInUseCase: signInUseCaseMock)
+            viewModel = SignInViewModel(loginUseCase: loginUseCaseMock)
         }
         
         describe("when view model initialized") {
@@ -93,7 +93,7 @@ class SignInViewModelSpec: QuickSpec {
                         })
                         .disposed(by: disposeBag)
                     
-                    viewModel.loginPressed.onNext()
+                    viewModel.loginPressed.onNext(())
                 }
             }
             
@@ -121,8 +121,8 @@ class SignInViewModelSpec: QuickSpec {
                             })
                             .disposed(by: disposeBag)
                         
-                        signInUseCaseMock.isNeedToReturnError = false
-                        viewModel.loginPressed.onNext()
+                        loginUseCaseMock.isNeedToReturnError = false
+                        viewModel.loginPressed.onNext(())
                         
                         expect(states.count) == 2
                         expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -132,8 +132,8 @@ class SignInViewModelSpec: QuickSpec {
                 
                 context("but sign in failed") {
                     it("needs to show error") {
-                        signInUseCaseMock.isNeedToReturnError = true
-                        viewModel.loginPressed.onNext()
+                        loginUseCaseMock.isNeedToReturnError = true
+                        viewModel.loginPressed.onNext(())
                         
                         expect(states.count) == 2
                         expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -146,7 +146,7 @@ class SignInViewModelSpec: QuickSpec {
         describe("when try again and it have valid email and password texts and success sign in") {
             it("needs to dismiss view controller and show success toast") {
                 let disposeBag = DisposeBag()
-                signInUseCaseMock.isNeedToReturnError = false
+                loginUseCaseMock.isNeedToReturnError = false
                 viewModel.emailText.value = "user@mail.com"
                 viewModel.passwordText.value = "password"
                 

@@ -19,12 +19,12 @@ class ProductOptionsViewControllerSpec: QuickSpec {
         var collectionView: UICollectionView!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.productOptions) as! ProductOptionsViewController
+            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.productOptions) as? ProductOptionsViewController
             
             collectionProvider = ProductOptionsCollectionProvider()
             viewController.collectionProvider = collectionProvider
             
-            collectionView = self.findView(withAccessibilityLabel: "productOptionsCollectionView", in: viewController.view) as! UICollectionView
+            collectionView = self.findView(withAccessibilityLabel: "productOptionsCollectionView", in: viewController.view) as? UICollectionView
         }
         
         describe("when view loaded") {

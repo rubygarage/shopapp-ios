@@ -61,7 +61,7 @@ class HomeViewModel: BasePaginationViewModel {
         })
     }
     
-    var data = Variable<(latestProducts: [Product], popularProducts: [Product], articles: [Article])>(latestProducts: [], popularProducts: [], articles: [])
+    var data = Variable<(latestProducts: [Product], popularProducts: [Product], articles: [Article])>((latestProducts: [], popularProducts: [], articles: []))
     
     init(articlesUseCase: ArticlesUseCase, productsUseCase: ProductsUseCase) {
         self.articlesUseCase = articlesUseCase

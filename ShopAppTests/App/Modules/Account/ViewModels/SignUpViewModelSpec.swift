@@ -100,7 +100,7 @@ class SignUpViewModelSpec: QuickSpec {
                         })
                         .disposed(by: disposeBag)
                     
-                    viewModel.signUpPressed.onNext()
+                    viewModel.signUpPressed.onNext(())
                 }
             }
             
@@ -129,7 +129,7 @@ class SignUpViewModelSpec: QuickSpec {
                             .disposed(by: disposeBag)
                         
                         signUpUseCaseMock.isNeedToReturnError = false
-                        viewModel.signUpPressed.onNext()
+                        viewModel.signUpPressed.onNext(())
                         
                         expect(states.count) == 2
                         expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)
@@ -140,7 +140,7 @@ class SignUpViewModelSpec: QuickSpec {
                 context("but sign in failed") {
                     it("needs to show error") {
                         signUpUseCaseMock.isNeedToReturnError = true
-                        viewModel.signUpPressed.onNext()
+                        viewModel.signUpPressed.onNext(())
                         
                         expect(states.count) == 2
                         expect(states.first) == ViewState.loading(showHud: true, isTranslucent: false)

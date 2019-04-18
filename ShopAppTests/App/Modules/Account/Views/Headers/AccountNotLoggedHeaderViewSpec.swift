@@ -23,9 +23,9 @@ class AccountNotLoggedHeaderViewSpec: QuickSpec {
         beforeEach {
             view = AccountNotLoggedHeaderView(frame: CGRect.zero)
             
-            signInButton = self.findView(withAccessibilityLabel: "signInButton", in: view) as! BlackButton
-            signInLabel = self.findView(withAccessibilityLabel: "signInLabel", in: view) as! UILabel
-            createNewAccountButton = self.findView(withAccessibilityLabel: "createNewAccountButton", in: view) as! UnderlinedButton
+            signInButton = self.findView(withAccessibilityLabel: "signInButton", in: view) as? BlackButton
+            signInLabel = self.findView(withAccessibilityLabel: "signInLabel", in: view) as? UILabel
+            createNewAccountButton = self.findView(withAccessibilityLabel: "createNewAccountButton", in: view) as? UnderlinedButton
             createAccountUnderlinedView = self.findView(withAccessibilityLabel: "createAccountUnderline", in: view)
         }
         

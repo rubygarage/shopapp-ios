@@ -20,8 +20,8 @@ class CartEmptyDataViewSpec: QuickSpec {
         
         beforeEach {
             view = CartEmptyDataView()
-            emptyCartLabel = self.findView(withAccessibilityLabel: "emptyCartLabel", in: view) as! UILabel
-            startShoppingButton = self.findView(withAccessibilityLabel: "startShoppingButton", in: view) as! UIButton
+            emptyCartLabel = self.findView(withAccessibilityLabel: "emptyCartLabel", in: view) as? UILabel
+            startShoppingButton = self.findView(withAccessibilityLabel: "startShoppingButton", in: view) as? UIButton
         }
         
         describe("when view loaded") {

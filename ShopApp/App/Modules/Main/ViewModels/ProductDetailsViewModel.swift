@@ -9,15 +9,15 @@
 import RxSwift
 import ShopApp_Gateway
 
-typealias SelectedVariant = (variant: ProductVariant?, allOptions: [ProductOption], selectedOptions: [VariantOption], currency: String)
+typealias SelectedVariant = (variant: ProductVariant?, allOptions: [ProductOption], selectedOptions: [SelectedOption], currency: String)
 
 class ProductDetailsViewModel: BaseViewModel {
     private let addCartProductUseCase: AddCartProductUseCase
     private let productUseCase: ProductUseCase
-    private let productsUseCase: ProductsUseCase
+    private let productListUseCase: ProductListUseCase
     
     private var productOptions: [ProductOption] = []
-    private var selectedOptions: [VariantOption] = []
+    private var selectedOptions: [SelectedOption] = []
     private var selectedProductVariant: ProductVariant?
     
     var productId: String!
@@ -41,26 +41,26 @@ class ProductDetailsViewModel: BaseViewModel {
                 return Disposables.create()
             }
             let productQuantity = strongSelf.quantity.value
-            guard let cartProduct = CartProductAdapter.adapt(product: strongSelf.product.value, productQuantity: productQuantity, variant: strongSelf.selectedProductVariant) else {
+            guard let cartProduct = CoreDataCartProductAdapter.adapt(product: strongSelf.product.value, productQuantity: productQuantity, variant: strongSelf.selectedProductVariant) else {
                 event.onNext(false)
                 return Disposables.create()
             }
-            strongSelf.addCartProductUseCase.addCartProduct(cartProduct) { (_, error) in
-                event.onNext(error == nil)
+            strongSelf.addCartProductUseCase.addCartProduct(cartProduct) { (success, _) in
+                event.onNext(success ?? false)
             }
             return Disposables.create()
         })
     }
 
-    init(addCartProductUseCase: AddCartProductUseCase, productUseCase: ProductUseCase, productsUseCase: ProductsUseCase) {
+    init(addCartProductUseCase: AddCartProductUseCase, productUseCase: ProductUseCase, productListUseCase: ProductListUseCase) {
         self.addCartProductUseCase = addCartProductUseCase
         self.productUseCase = productUseCase
-        self.productsUseCase = productsUseCase
+        self.productListUseCase = productListUseCase
     }
 
     func loadData() {
         state.onNext(ViewState.make.loading())
-        productUseCase.getProduct(id: productId) { [weak self] (product, error) in
+        productUseCase.getProduct(with: productId) { [weak self] (product, error) in
             guard let strongSelf = self else {
                 return
             }
@@ -69,18 +69,18 @@ class ProductDetailsViewModel: BaseViewModel {
             } else if let product = product {
                 strongSelf.setupData(product: product)
                 strongSelf.product.value = product
-                if let selectedOptions = strongSelf.productVariant?.selectedOptions {
-                    selectedOptions.forEach { strongSelf.selectOption($0) }
+                if let productVariant = strongSelf.productVariant, let selectedOptions = productVariant.selectedOptions {
+                    selectedOptions.forEach { strongSelf.selectOption(with: $0.name, value: $0.value) }
                 }
                 strongSelf.loadRelatedItems()
             }
         }
     }
     
-    func selectOption(_ option: VariantOption) {
+    func selectOption(with name: String, value: String) {
         let selectedOptionsNames = selectedOptions.map({ $0.name })
-        if let index = selectedOptionsNames.index(of: option.name) {
-            selectedOptions[index] = option
+        if let index = selectedOptionsNames.firstIndex(of: name) {
+            selectedOptions[index].value = value
         }
         if let variants = product.value?.variants {
             findVariant(variants: variants)
@@ -92,31 +92,34 @@ class ProductDetailsViewModel: BaseViewModel {
             setupSelectedOptions(product: product)
         }
         if selectedProductVariant == nil {
-            selectedProductVariant = product.variants.first
+            selectedProductVariant = product.variants?.first
         }
         currency = product.currency
-        guard let variant = product.variants.first else {
+        guard let variant = product.variants?.first, let allOptions = product.options, let currency = product.currency else {
             return
         }
-        let result = SelectedVariant(variant: variant, allOptions: product.options, selectedOptions: selectedOptions, currency: product.currency)
+        let result = SelectedVariant(variant: variant, allOptions: allOptions, selectedOptions: selectedOptions, currency: currency)
         selectedVariant.onNext(result)
     }
     
     private func setupSelectedOptions(product: Product) {
-        for option in product.options {
-            selectedOptions.append(VariantOption(name: option.name, value: option.values.first ?? ""))
+        guard let options = product.options else {
+            return
+        }
+        for option in options {
+            selectedOptions.append((name: option.name ?? "", value: option.values?.first ?? ""))
         }
     }
     
     private func findVariant(variants: [ProductVariant]) {
         let selectedOptionsNames = selectedOptions.map({ $0.name })
-        let selectedOptionsValues = selectedOptions.map({ $0.value })
+        let selectedOptionsNValues = selectedOptions.map({ $0.value })
         
         for variant in variants {
-            let variantNames = variant.selectedOptions.map({ $0.name })
-            let variantValues = variant.selectedOptions.map({ $0.value })
+            let variantNames = variant.selectedOptions?.map({ $0.name }) ?? []
+            let variantValues = variant.selectedOptions?.map({ $0.value }) ?? []
             
-            if selectedOptionsNames == variantNames && selectedOptionsValues == variantValues {
+            if selectedOptionsNames == variantNames && selectedOptionsNValues == variantValues {
                 updateSelectedVariant(variant: variant)
                 return
             }
@@ -134,7 +137,7 @@ class ProductDetailsViewModel: BaseViewModel {
     }
     
     private func loadRelatedItems() {
-        productsUseCase.getProducts(paginationValue: nil, sortBy: .type, keyword: product.value?.type, excludeKeyword: product.value?.title) { [weak self] (products, error) in
+        productListUseCase.getProductList(with: nil, sortingValue: SortingValue.type, keyPhrase: product.value?.type, excludePhrase: product.value?.title, reverse: false) { [weak self] (products, error) in
             guard let strongSelf = self else {
                 return
             }

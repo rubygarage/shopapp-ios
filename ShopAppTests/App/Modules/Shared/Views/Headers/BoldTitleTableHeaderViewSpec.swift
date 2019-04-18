@@ -19,7 +19,7 @@ class BoldTitleTableHeaderViewSpec: QuickSpec {
         var topMarginConstraint: NSLayoutConstraint!
         
         func setupViews() {
-            headerTitleLabel = self.findView(withAccessibilityLabel: "title", in: view) as! UILabel
+            headerTitleLabel = self.findView(withAccessibilityLabel: "title", in: view) as? UILabel
             topView = self.findView(withAccessibilityLabel: "top", in: view)
             topMarginConstraint = topView.constraints.filter({ $0.accessibilityLabel == "topMargin" }).first
         }

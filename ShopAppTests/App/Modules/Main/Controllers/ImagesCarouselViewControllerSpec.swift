@@ -20,13 +20,13 @@ class ImagesCarouselViewControllerSpec: QuickSpec {
         var pageControl: UIPageControl!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.imagesCarousel) as! ImagesCarouselViewController
+            viewController = UIStoryboard(name: StoryboardNames.main, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.imagesCarousel) as? ImagesCarouselViewController
             
             collectionProvider = ImagesCarouselCollectionProvider()
             viewController.collectionProvider = collectionProvider
             
-            collectionView = self.findView(withAccessibilityLabel: "carouselCollectionView", in: viewController.view) as! UICollectionView
-            pageControl = self.findView(withAccessibilityLabel: "pageControl", in: viewController.view) as! UIPageControl
+            collectionView = self.findView(withAccessibilityLabel: "carouselCollectionView", in: viewController.view) as? UICollectionView
+            pageControl = self.findView(withAccessibilityLabel: "pageControl", in: viewController.view) as? UIPageControl
         }
         
         describe("when view loaded") {

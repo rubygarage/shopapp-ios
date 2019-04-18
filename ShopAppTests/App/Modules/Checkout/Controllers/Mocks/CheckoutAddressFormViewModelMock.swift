@@ -14,7 +14,7 @@ class CheckoutAddressFormViewModelMock: CheckoutAddressFormViewModel {
     var returnedAddress: Address!
     
     func updateShippingAddress() {
-        updatedShippingAddress.onNext()
+        updatedShippingAddress.onNext(())
     }
     
     func updateBillingAddress() {

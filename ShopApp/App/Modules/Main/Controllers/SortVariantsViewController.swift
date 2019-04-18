@@ -11,14 +11,14 @@ import UIKit
 import ShopApp_Gateway
 
 protocol SortVariantsControllerDelegate: class {
-    func viewController(_ viewController: SortVariantsViewController, didSelect sortType: SortType)
+    func viewController(_ viewController: SortVariantsViewController, didSelect sortingValue: SortingValue)
 }
 
 class SortVariantsViewController: UIViewController, SortVariantsTableProviderDelegate, UIGestureRecognizerDelegate {
     @IBOutlet private weak var tableView: UITableView!
     
     var tableProvider: SortVariantsTableProvider!
-    var selectedSortType: SortType!
+    var selectedSortingValue: SortingValue!
     
     weak var delegate: SortVariantsControllerDelegate?
 
@@ -49,18 +49,18 @@ class SortVariantsViewController: UIViewController, SortVariantsTableProviderDel
     }
     
     private func loadData() {
-        let allValues = SortType.allValues
-        let createdAt = allValues[SortType.recent.rawValue]
-        let priceHighToLow = allValues[SortType.priceHighToLow.rawValue]
-        let priceLowToHigh = allValues[SortType.priceLowToHigh.rawValue]
+        let allValues = SortingValue.allValues
+        let createdAt = allValues[SortingValue.createdAt.rawValue]
+        let priceHighToLow = allValues[SortingValue.priceHighToLow.rawValue]
+        let priceLowToHigh = allValues[SortingValue.priceLowToHigh.rawValue]
         tableProvider.variants = [createdAt, priceHighToLow, priceLowToHigh]
-        tableProvider.selectedVariant = allValues[selectedSortType.rawValue]
+        tableProvider.selectedVariant = allValues[selectedSortingValue.rawValue]
         tableView.reloadData()
     }
     
     // MARK: - Actions
     
-    func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
+    @objc func viewDidTap(gestureRecognizer: UIGestureRecognizer) {
         dismiss(animated: true)
     }
 
@@ -70,13 +70,13 @@ class SortVariantsViewController: UIViewController, SortVariantsTableProviderDel
         guard let delegate = delegate else {
             return
         }
-        let sortType: SortType!
-        if let variant = variant, let index = SortType.allValues.index(of: variant) {
-            sortType = SortType(rawValue: index) ?? .name
+        let sortingValue: SortingValue!
+        if let variant = variant, let index = SortingValue.allValues.firstIndex(of: variant) {
+            sortingValue = SortingValue(rawValue: index) ?? .name
         } else {
-            sortType = .name
+            sortingValue = .name
         }
-        delegate.viewController(self, didSelect: sortType)
+        delegate.viewController(self, didSelect: sortingValue)
         dismiss(animated: true)
     }
 

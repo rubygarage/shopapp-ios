@@ -22,17 +22,17 @@ class ForgotPasswordViewControllerSpec: QuickSpec {
         var linkView: UIView!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.forgotPassword) as! ForgotPasswordViewController
+            viewController = UIStoryboard(name: StoryboardNames.account, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.forgotPassword) as? ForgotPasswordViewController
             
             let repositoryMock = AuthentificationRepositoryMock()
             let resetPasswordUseCaseMock = ResetPasswordUseCaseMock(repository: repositoryMock)
             viewModelMock = ForgotPasswordViewModelMock(resetPasswordUseCase: resetPasswordUseCaseMock)
             viewController.viewModel = viewModelMock
             
-            titleLabel = self.findView(withAccessibilityLabel: "title", in: viewController.view) as! UILabel
-            descriptionLabel = self.findView(withAccessibilityLabel: "description", in: viewController.view) as! UILabel
-            emailTextFieldView = self.findView(withAccessibilityLabel: "email", in: viewController.view) as! InputTextFieldView
-            forgotPasswordButton = self.findView(withAccessibilityLabel: "forgotPassword", in: viewController.view) as! BlackButton
+            titleLabel = self.findView(withAccessibilityLabel: "title", in: viewController.view) as? UILabel
+            descriptionLabel = self.findView(withAccessibilityLabel: "description", in: viewController.view) as? UILabel
+            emailTextFieldView = self.findView(withAccessibilityLabel: "email", in: viewController.view) as? InputTextFieldView
+            forgotPasswordButton = self.findView(withAccessibilityLabel: "forgotPassword", in: viewController.view) as? BlackButton
             linkView = self.findView(withAccessibilityLabel: "link", in: viewController.view)
         }
         

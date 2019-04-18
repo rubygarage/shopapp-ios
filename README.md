@@ -48,7 +48,7 @@ to the file **ShopApp/Data/DI/DataAssembly.swift**.
 
 To create a client for another SaaS, you'll have to add the following pod:
 ```
-pod 'ShopApp_Gateway', '~> 1.0.4'
+pod 'ShopApp_Gateway', '~> 1.0.5'
 ```
 to the dependencies. 
 
@@ -66,4 +66,4 @@ The ShopApp for iOS is licensed under the [Apache 2.0 license](https://www.apach
 ***
 <a href="https://rubygarage.org/"><img src="https://github.com/rubygarage/shopapp-shopify-ios/blob/master/assets/rubygarage.png?raw=true" alt="RubyGarage Logo" width="415" height="128"></a>
 
-RubyGarage is a leading software development and consulting company in Eastern Europe. Our main expertise includes Ruby and Ruby on Rails, but we successfuly employ other technologies to deliver the best results to our clients. [Check out our portoflio](https://rubygarage.org/portfolio) for even more exciting works!
+RubyGarage is a leading software development and consulting company in Eastern Europe. Our main expertise includes Ruby and Ruby on Rails, but we successfully employ other technologies to deliver the best results to our clients. [Check out our portfolio](https://rubygarage.org/portfolio) for even more exciting works!

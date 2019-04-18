@@ -21,12 +21,12 @@ class CheckoutFailureViewControllerSpec: QuickSpec {
         var backToShopUnderlineView: UIView!
         
         beforeEach {
-            viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.checkoutFailure) as! CheckoutFailureViewController
+            viewController = UIStoryboard(name: StoryboardNames.checkout, bundle: nil).instantiateViewController(withIdentifier: ControllerIdentifiers.checkoutFailure) as? CheckoutFailureViewController
             
-            somethingHappendLabel = self.findView(withAccessibilityLabel: "somethingHappendLabel", in: viewController.view) as! UILabel
-            purchaseErrorLabel = self.findView(withAccessibilityLabel: "purchaseErrorLabel", in: viewController.view) as! UILabel
-            tryAgainButton = self.findView(withAccessibilityLabel: "tryAgainButton", in: viewController.view) as! BlackButton
-            backToShopButton = self.findView(withAccessibilityLabel: "backToShopButton", in: viewController.view) as! UnderlinedButton
+            somethingHappendLabel = self.findView(withAccessibilityLabel: "somethingHappendLabel", in: viewController.view) as? UILabel
+            purchaseErrorLabel = self.findView(withAccessibilityLabel: "purchaseErrorLabel", in: viewController.view) as? UILabel
+            tryAgainButton = self.findView(withAccessibilityLabel: "tryAgainButton", in: viewController.view) as? BlackButton
+            backToShopButton = self.findView(withAccessibilityLabel: "backToShopButton", in: viewController.view) as? UnderlinedButton
             backToShopUnderlineView = self.findView(withAccessibilityLabel: "backToShopUnderlineView", in: viewController.view)
         }
         
