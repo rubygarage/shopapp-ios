@@ -8,8 +8,7 @@
 
 import UIKit
 
-import Fabric
-import Crashlytics
+import CoreStore
 import Swinject
 import SwinjectStoryboard
 
@@ -26,10 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
             return false
         }
-        
-        #if !DEV
-            Fabric.with([Crashlytics.self])
-        #endif
+
+        do {
+            try CoreStore.addStorageAndWait()
+        } catch {
+            print(error)
+        }
 
         // Disabled logging due errors with Swift 3
         // https://github.com/Swinject/Swinject/issues/218
