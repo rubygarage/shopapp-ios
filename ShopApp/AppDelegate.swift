@@ -9,8 +9,6 @@
 import UIKit
 
 import CoreStore
-import Fabric
-import Crashlytics
 import Swinject
 import SwinjectStoryboard
 
@@ -27,10 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
             return false
         }
-        
-        #if !DEV
-            Fabric.with([Crashlytics.self])
-        #endif
         
         do {
             try CoreStore.addStorageAndWait()
