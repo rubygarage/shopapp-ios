@@ -32,10 +32,6 @@ target 'ShopApp' do
   pod 'RxSwift', '~> 4.5'
   pod 'RxCocoa', '~> 4.5'
 
-  # Crash&Beta
-  pod 'Fabric', '~> 1.9'
-  pod 'Crashlytics', '~> 3.12'
-
   # Developer tools
   pod 'SwiftLint', '~> 0.31'
 
